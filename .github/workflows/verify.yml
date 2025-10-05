@@ -1,0 +1,71 @@
+name: verify-pxl
+on: [push, pull_request]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install Python dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install pytest
+    
+    - name: Coq deps
+      run: |
+        sudo apt-get update && sudo apt-get install -y opam m4 jq curl
+        opam init -y --disable-sandboxing
+        opam switch create 4.14.2 -y
+        eval $(opam env)
+        opam repo add coq-released https://coq.inria.fr/opam/released
+        opam install -y coq.8.20.1 coq-serapi
+    
+    - name: Build PXL and pin hash
+      run: |
+        chmod +x ci/verify_pxl.sh
+        bash ci/verify_pxl.sh
+    
+    - name: Boot prover server (smoke test)
+      run: |
+        eval $(opam env)
+        cd pxl-prover
+        python3 serve_pxl.py &
+        PID=$!
+        echo $PID > /tmp/server.pid
+        sleep 3
+        
+        # Test health endpoint
+        curl -s http://127.0.0.1:8088/health | tee /tmp/health.json
+        
+        # Test proof endpoint
+        curl -s -X POST -H 'Content-Type: application/json' \
+          -d '{"goal":"BOX(TrueP(prop) and Coherent(state) and Good(action))"}' \
+          http://127.0.0.1:8088/prove | tee /tmp/prove.json
+        
+        # Check proof response
+        chmod +x ci/test_proof_endpoint.py
+        python3 ci/test_proof_endpoint.py
+        
+        # Cleanup
+        kill $PID || true
+    
+    - name: Check audit path writeable
+      run: |
+        python3 ci/test_audit.py
+    
+    - name: Run alignment tests
+      run: |
+        if [ -f "tests/test_alignment.py" ]; then
+          python3 -m pytest tests/test_alignment.py -v
+        else
+          echo "No alignment tests found, skipping"
+        fi
