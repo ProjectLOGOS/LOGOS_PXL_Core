@@ -1,11 +1,18 @@
-﻿from fastapi import FastAPI
-import os, json, asyncio, aio_pika
+﻿from fastapi import FastAPIfrom fastapi import FastAPI
 
-RABBIT = os.getenv("RABBIT_URL","amqp://guest:guest@rabbitmq/")
-SUBSYS = os.getenv("SUBSYS","worker")
-ROUTE  = os.getenv("ROUTE","")
+import asyncio, osimport os, json, asyncio, aio_pika
 
-app = FastAPI()
+from services.workers.common.runner import main
+
+app = FastAPI()RABBIT = os.getenv("RABBIT_URL","amqp://guest:guest@rabbitmq/")
+
+@app.get("/health")SUBSYS = os.getenv("SUBSYS","worker")
+
+def health(): return {"ok": True, "subsystem":"TELOS"}ROUTE  = os.getenv("ROUTE","")
+
+@app.on_event("startup")
+
+async def _startup(): app.state.conn = await main()app = FastAPI()
 @app.get("/health")
 def health(): return {"ok": True, "subsystem": SUBSYS}
 

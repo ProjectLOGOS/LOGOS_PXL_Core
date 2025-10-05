@@ -1,12 +1,35 @@
-﻿from fastapi import FastAPI, HTTPException
+﻿from fastapi import FastAPI, HTTPException, APIRouter
 from pydantic import BaseModel
-import os, json, asyncio, aio_pika, requests
+import os, json, asyncio, aio_pika, requests, pathlib
 
 RABBIT = os.getenv("RABBIT_URL","amqp://guest:guest@rabbitmq/")
 LOGOS  = os.getenv("LOGOS_API_URL","http://logos-api:8090")
 MAP    = json.load(open("/app/task_mappings.json","r",encoding="utf-8"))
 
 app = FastAPI()
+
+# GUI Status API
+gui_router = APIRouter()
+
+def _cfg():
+    try:
+        p = pathlib.Path("/app/configs/config.json")
+        return json.loads(p.read_text(encoding="utf-8"))
+    except:
+        return {"expected_kernel_hash": "unknown", "pxl_prover_url": "unknown", "audit_path": "unknown"}
+
+@gui_router.get("/gui/status")
+def gui_status():
+    cfg = _cfg()
+    return {
+        "kernel_hash_expected": cfg.get("expected_kernel_hash"),
+        "prover_url": cfg.get("pxl_prover_url"),
+        "audit_path": cfg.get("audit_path"),
+        "rabbit_url": RABBIT,
+        "logos_api": LOGOS,
+    }
+
+app.include_router(gui_router)
 
 class DispatchIn(BaseModel):
     task_type: str
