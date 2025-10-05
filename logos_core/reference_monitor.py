@@ -1,4 +1,4 @@
-"""
+﻿"""
 Reference Monitor - Enforces proof-gated authorization
 All actuator calls and planner edges must pass through here
 """
@@ -64,7 +64,7 @@ class ReferenceMonitor:
         timestamp = int(start_time)
         
         # Strict provenance validation
-        if not provenance or (isinstance(provenance, dict) and not provenance):
+        if not provenance or not isinstance(provenance, dict):\n            raise PermissionError("missing provenance")
             raise ProofGateError("missing provenance")
         
         # Convert string provenance to dict
