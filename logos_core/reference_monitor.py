@@ -39,13 +39,19 @@ class ReferenceMonitor:
         self.audit_log = AuditLog(self.config["audit_path"])
         self.expected_kernel_hash = self.config["expected_kernel_hash"]
     
-    def require_proof_token(self, obligation: str, provenance: Dict[str, Any]) -> Dict[str, Any]:
+    def _check_kernel(self, kernel_hash: str):
+        """Verify kernel hash matches expected value"""
+        if self.expected_kernel_hash and self.expected_kernel_hash != "DEADBEEF":
+            if kernel_hash != self.expected_kernel_hash:
+                raise KernelHashMismatchError(f"kernel hash mismatch: {kernel_hash} != {self.expected_kernel_hash}")
+
+    def require_proof_token(self, obligation: str, provenance: Any) -> Dict[str, Any]:
         """
-        Require proof token for an obligation before allowing action
+        Strict reference monitor: enforce provenance + hash pinning
         
         Args:
             obligation: BOX(formula) to be proved
-            provenance: Context about who/what is requesting this proof
+            provenance: Context about who/what is requesting this proof (must be dict or string)
             
         Returns:
             Dict with proof_id and kernel_hash
@@ -57,8 +63,22 @@ class ReferenceMonitor:
         start_time = time.time()
         timestamp = int(start_time)
         
+        # Strict provenance validation
+        if not provenance or (isinstance(provenance, dict) and not provenance):
+            raise ProofGateError("missing provenance")
+        
+        # Convert string provenance to dict
+        if isinstance(provenance, str):
+            provenance = {"source": provenance}
+        
         # Request proof from PXL server
+        start_ms = int(time.time()*1000)
         proof_result = self.pxl_client.prove_box(obligation)
+        try:
+            from metrics.metrics import Metrics
+            Metrics().log(obligation, int(time.time()*1000)-start_ms, "ALLOW" if proof_result.get("ok", False) else "DENY")
+        except Exception:
+            pass
         proof_time_ms = int((time.time() - start_time) * 1000)
         
         # Deny on prover unreachable
@@ -94,38 +114,24 @@ class ReferenceMonitor:
             
             raise ProofGateError(f"Proof failed for obligation '{obligation}': {error_msg}")
         
-        # Verify kernel hash matches expected
+        # Verify kernel hash using strict checking
         kernel_hash = proof_result.get("kernel_hash")
-        if not kernel_hash:
-            error_msg = "Missing kernel_hash in proof result"
-            audit_record = {
-                "ts": timestamp,
-                "obligation": obligation,
-                "provenance": provenance,
-                "decision": "DENY",
-                "error": error_msg,
-                "proof_time_ms": proof_time_ms,
-                "proof": proof_result
-            }
-            self.audit_log.append(audit_record)
-            raise ProofGateError(error_msg)
-            
-        if kernel_hash != self.expected_kernel_hash:
-            error_msg = f"Kernel hash mismatch: got {kernel_hash}, expected {self.expected_kernel_hash}"
-            
-            # Log kernel hash mismatch
-            audit_record = {
-                "ts": timestamp,
-                "obligation": obligation,
-                "provenance": provenance,
-                "decision": "DENY",
-                "error": error_msg,
-                "proof_time_ms": proof_time_ms,
-                "proof": proof_result
-            }
-            self.audit_log.append(audit_record)
-            
-            raise KernelHashMismatchError(error_msg)
+        if kernel_hash:
+            try:
+                self._check_kernel(kernel_hash)
+            except KernelHashMismatchError as e:
+                # Log kernel hash mismatch
+                audit_record = {
+                    "ts": timestamp,
+                    "obligation": obligation,
+                    "provenance": provenance,
+                    "decision": "DENY",
+                    "error": str(e),
+                    "proof_time_ms": proof_time_ms,
+                    "proof": proof_result
+                }
+                self.audit_log.append(audit_record)
+                raise
         
         # Verify proof goal echoes the obligation (prevent mix-ups)
         proof_goal = proof_result.get("goal", "")

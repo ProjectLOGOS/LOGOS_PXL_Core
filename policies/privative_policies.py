@@ -1,9 +1,57 @@
 """
 Privative Policies - Define obligations and invariant preservation requirements
-Maps actions to their required proof obligations
+Maps actions to their required proof obligations with explicit policy hooks
 """
 
 from typing import Dict, Any, List
+
+# Core privative predicates with explicit policy hooks
+def Good(action: Any, ctx: Dict = None) -> bool:
+    """Privative predicate: Good(action) - determines if action is permissible"""
+    ctx = ctx or {}
+    
+    # Example: deny raw filesystem write outside allowlist
+    if action == "fs_write" and not ctx.get("allow_fs_write", False):
+        return False
+    
+    # Block system-level dangerous operations
+    dangerous_actions = [
+        "delete_all", "bypass_security", "unauthorized_access",
+        "system_shutdown", "privilege_escalation", "data_exfiltration"
+    ]
+    if str(action).lower() in dangerous_actions:
+        return False
+    
+    return True
+
+def TrueP(prop: Any, ctx: Dict = None) -> bool:
+    """Privative predicate: TrueP(prop) - determines if proposition is true"""
+    ctx = ctx or {}
+    
+    # Example: require attested input for high-stakes claims
+    if ctx.get("high_stakes", False):
+        return bool(ctx.get("attested", False))
+    
+    # Low-stakes operations can proceed without attestation
+    return bool(ctx.get("low_stakes", False)) or bool(prop)
+
+def Coherent(state: Any, ctx: Dict = None) -> bool:
+    """Privative predicate: Coherent(state) - determines if state is coherent"""
+    ctx = ctx or {}
+    
+    # Example: forbid contradictory flags
+    if isinstance(state, dict):
+        return not (state.get("is_deleted") and state.get("is_active"))
+    
+    return True
+
+def obligation_for(action: str, state: str, props: str, ctx: Dict = None) -> str:
+    """PXL-side encoding; enrich as you formalize"""
+    return f"Good({action}) and TrueP({props}) and Coherent({state})"
+
+def preserves_invariants(step: str) -> str:
+    """Generate preservation obligation for workflow steps"""
+    return f"preserves_invariants({step})"
 
 class PrivativePolicies:
     def __init__(self):

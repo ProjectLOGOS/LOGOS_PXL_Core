@@ -1,0 +1,2 @@
+timestamp,obligation,duration_ms,result
+1759699552,BOX(Good(test_action)),43,ALLOW
