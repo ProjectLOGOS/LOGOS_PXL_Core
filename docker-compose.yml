@@ -216,6 +216,30 @@ services:
       retries: 3
     restart: unless-stopped
 
+  # Probe Console - Interactive web UI for testing proof-gated operations
+  probe-console:
+    build:
+      context: ./services/probe_console
+      dockerfile: Dockerfile
+    container_name: probe-console
+    ports:
+      - "8081:8000"
+    environment:
+      - ARCHON_URL=http://archon:8000
+      - LOGOS_URL=http://logos-api:8090
+      - EXEC_URL=http://executor:8000
+    networks:
+      - default
+    depends_on:
+      - archon
+      - logos-core
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
 volumes:
   rabbitmq_data:
     driver: local
