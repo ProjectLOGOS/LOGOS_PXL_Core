@@ -1,0 +1,29 @@
+DIGEST 4c23978c1c905f90eba4c7354db7e317
+FPXLs.coq.PXL_Completeness_Truth_WF
+R24:27 Coq.Lists.List <> <> lib
+R37:49 Coq.Lists.List ListNotations <> mod
+R77:81 PXLs.coq.PXLv3 <> <> lib
+def 185:187 <> set
+R196:199 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R192:195 PXLs.coq.PXLv3 <> form ind
+def 217:222 <> In_set
+R227:229 PXLs.coq.PXL_Completeness_Truth_WF <> set def
+binder 225:225 <> G:1
+R235:238 PXLs.coq.PXLv3 <> form ind
+binder 233:233 <> p:2
+R251:251 PXLs.coq.PXL_Completeness_Truth_WF <> G:1 var
+R253:253 PXLs.coq.PXL_Completeness_Truth_WF <> p:2 var
+def 267:276 <> consistent
+R281:283 PXLs.coq.PXL_Completeness_Truth_WF <> set def
+binder 279:279 <> G:3
+R296:298 Coq.Init.Logic <> ::type_scope:'~'_x not
+R325:325 Coq.Init.Logic <> ::type_scope:'~'_x not
+R299:305 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R307:308 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 306:306 <> p:4
+R312:315 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R309:309 PXLs.coq.PXL_Completeness_Truth_WF <> G:3 var
+R311:311 PXLs.coq.PXL_Completeness_Truth_WF <> p:4 var
+R316:316 PXLs.coq.PXL_Completeness_Truth_WF <> G:3 var
+R319:321 PXLs.coq.PXLv3 <> Neg constr
+R323:323 PXLs.coq.PXL_Completeness_Truth_WF <> p:4 var
