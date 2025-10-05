@@ -1,0 +1,131 @@
+version: '3.8'
+
+services:
+  # PXL Proof Server - Core verification service
+  pxl-prover:
+    build:
+      context: ./pxl-prover
+      dockerfile: Dockerfile
+    container_name: logos-pxl-prover
+    ports:
+      - "8088:8088"
+    volumes:
+      - ./configs/config.json:/app/configs/config.json:ro
+      - ./pxl-minimal-kernel-main:/app/pxl-minimal-kernel-main:ro
+    environment:
+      - FLASK_ENV=production
+      - EXPECTED_KERNEL_HASH=${EXPECTED_KERNEL_HASH:-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8088/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+
+  # LOGOS Core Services - Main AGI runtime
+  logos-core:
+    build:
+      context: .
+      dockerfile: Dockerfile.logos-core
+    container_name: logos-core
+    ports:
+      - "5000:5000"  # Keryx API Gateway
+      - "5001:5001"  # Logos Nexus
+      - "5002:5002"  # Archon Nexus
+    volumes:
+      - ./configs/config.json:/app/configs/config.json:ro
+      - ./audit:/app/audit
+      - ./logs:/app/logs
+    environment:
+      - PXL_PROVER_URL=http://pxl-prover:8088
+      - EXPECTED_KERNEL_HASH=${EXPECTED_KERNEL_HASH:-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855}
+      - AUDIT_PATH=/app/audit/decisions.jsonl
+      - PYTHONPATH=/app
+    depends_on:
+      pxl-prover:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    restart: unless-stopped
+
+  # RabbitMQ Message Broker
+  rabbitmq:
+    image: rabbitmq:3.12-management
+    container_name: logos-rabbitmq
+    ports:
+      - "5672:5672"   # AMQP port
+      - "15672:15672" # Management UI
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=logos
+      - RABBITMQ_DEFAULT_PASS=trinity
+      - RABBITMQ_DEFAULT_VHOST=logos
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+
+  # Redis for caching and session management
+  redis:
+    image: redis:7.2-alpine
+    container_name: logos-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # PostgreSQL Database (optional - for persistent storage)
+  postgres:
+    image: postgres:15-alpine
+    container_name: logos-postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db-init:/docker-entrypoint-initdb.d:ro
+    environment:
+      - POSTGRES_DB=logos_agi
+      - POSTGRES_USER=logos
+      - POSTGRES_PASSWORD=trinity_grounded
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U logos -d logos_agi"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+volumes:
+  rabbitmq_data:
+    driver: local
+  redis_data:
+    driver: local
+  postgres_data:
+    driver: local
+
+networks:
+  default:
+    name: logos-network
+    driver: bridge
+
+# Development override with docker-compose.override.yml:
+# - Add volume mounts for live code reload
+# - Enable debug logging
+# - Expose additional ports for debugging

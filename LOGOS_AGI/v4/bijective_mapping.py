@@ -20,12 +20,37 @@ import json
 import time
 import logging
 import hashlib
+import os
+import sys
 from typing import Dict, List, Tuple, Any, Optional, Callable, Set
 from dataclasses import dataclass, field
 from enum import Enum
 from abc import ABC, abstractmethod
 
-from core.data_structures import TrinityVector
+# ALIGNMENT CORE: Replace direct mapping with OBDC kernel
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+from obdc.kernel import OBDCKernel
+from logos_core.reference_monitor import ReferenceMonitor
+
+def load_alignment_config():
+    """Load alignment core configuration."""
+    config_path = os.path.join(os.path.dirname(__file__), '..', '..', 'configs', 'config.json')
+    with open(config_path, 'r') as f:
+        return json.load(f)
+
+try:
+    from core.data_structures import TrinityVector
+except ImportError:
+    @dataclass
+    class TrinityVector:
+        logos: float
+        pneuma: float
+        sarx: float
+        
+        def __init__(self, logos: float = 1/3, pneuma: float = 1/3, sarx: float = 1/3):
+            self.logos = logos
+            self.pneuma = pneuma
+            self.sarx = sarx
 
 # =========================================================================
 # I. DOMAIN DEFINITIONS
@@ -88,10 +113,29 @@ class BijectiveMapping:
     created_at: float = field(default_factory=time.time)
     
     def map_forward(self, source_element: Any) -> Optional[Any]:
-        """Map element from source to target domain"""
+        """Map element from source to target domain.
+        
+        ALIGNMENT CORE: All mappings now go through OBDC kernel with proofs.
+        """
         
         # Check if element is in source domain
         if not self.source_domain.validate_element(source_element):
+            return None
+        
+        # ALIGNMENT CORE: Use OBDC kernel for structure-preserving mapping
+        alignment_config = load_alignment_config()
+        obdc_kernel = OBDCKernel(alignment_config)
+        reference_monitor = ReferenceMonitor(alignment_config)
+        
+        # Require proof for mapping operation
+        action = f"bijective_map({self.source_domain.domain_type.value}→{self.target_domain.domain_type.value})"
+        provenance = f"bijective_mapping:{self.mapping_id}"
+        
+        try:
+            proof_token = reference_monitor.require_proof_token(action, provenance)
+            logging.info(f"Mapping {self.mapping_id} authorized with proof {proof_token}")
+        except PermissionError as e:
+            logging.error(f"Mapping {self.mapping_id} denied: {e}")
             return None
         
         # Use explicit mapping if available

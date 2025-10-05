@@ -36,20 +36,33 @@ import pika.exceptions
 # Graph processing for workflow DAGs
 import networkx as nx
 
-# Core LOGOS imports
+# Core LOGOS imports - ALIGNMENT CORE INTEGRATION
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+from logos_core.unified_formalisms import UnifiedFormalismValidator
+from logos_core.reference_monitor import ReferenceMonitor
+
+def load_alignment_config():
+    """Load alignment core configuration."""
+    config_path = os.path.join(os.path.dirname(__file__), '..', '..', 'configs', 'config.json')
+    with open(config_path, 'r') as f:
+        return json.load(f)
+
 try:
-    from core.unified_formalisms import UnifiedFormalismValidator
-    from core.principles import PrincipleEngine, validate_with_principles
     from core.data_structures import TaskDescriptor, OperationResult
     from shared.worker_config import WorkerType, TASK_TYPE_MAPPINGS, RABBITMQ_CONFIG
 except ImportError:
     # Fallback implementations if core modules aren't available
-    class UnifiedFormalismValidator:
-        def validate_agi_operation(self, request): 
-            return {"status": "authorized", "authorized": True, "token": f"avt_{uuid.uuid4().hex}"}
-    
-    def validate_with_principles(func):
-        return func
+    @dataclass
+    class TaskDescriptor:
+        task_id: str
+        task_type: str
+        parameters: Dict[str, Any]
+        
+    @dataclass 
+    class OperationResult:
+        success: bool
+        message: str
+        data: Optional[Dict[str, Any]] = None
     
     def generate_task_id(): 
         return f"task_{uuid.uuid4().hex[:8]}"
@@ -322,9 +335,27 @@ class AgentOrchestrator:
         return ready_tasks
     
     def _execute_task(self, task: TaskNode, workflow: WorkflowExecution):
-        """Execute a single task by publishing to the appropriate queue."""
+        """Execute a single task by publishing to the appropriate queue.
+        
+        ALIGNMENT CORE: All task execution requires proof tokens.
+        """
         
         self.logger.info(f"Executing task {task.task_id} on {task.subsystem}")
+        
+        # ALIGNMENT CORE: Require proof for task execution
+        action = f"execute_task({task.task_type})"
+        state = {"task_id": task.task_id, "subsystem": task.subsystem}
+        props = {"type": task.task_type, "workflow_id": workflow.workflow_id}
+        provenance = f"archon_nexus:{workflow.workflow_id}:{task.task_id}"
+        
+        try:
+            proof_token = self.reference_monitor.require_proof_token(action, provenance)
+            self.logger.info(f"Task {task.task_id} authorized with proof {proof_token}")
+        except PermissionError as e:
+            self.logger.error(f"Task {task.task_id} denied authorization: {e}")
+            task.status = TaskStatus.FAILED
+            task.error_message = f"Authorization denied: {str(e)}"
+            return
         
         task.status = TaskStatus.EXECUTING
         task.start_time = datetime.utcnow()
@@ -332,13 +363,14 @@ class AgentOrchestrator:
         # Map task to workflow for result tracking
         self.task_to_workflow[task.task_id] = workflow.workflow_id
         
-        # Prepare task message
+        # Prepare task message with proof token
         task_message = {
             "task_id": task.task_id,
             "task_type": task.task_type,
             "payload": task.payload,
             "workflow_id": workflow.workflow_id,
-            "timestamp": task.start_time.isoformat()
+            "timestamp": task.start_time.isoformat(),
+            "proof_token": proof_token  # ALIGNMENT CORE: Attach proof token
         }
         
         # Determine target queue based on subsystem
@@ -491,7 +523,12 @@ class ArchonNexus:
         self.logger = logging.getLogger("ARCHON_NEXUS")
         self.connection = None
         self.channel = None
-        self.validator = UnifiedFormalismValidator()
+        
+        # ALIGNMENT CORE: Initialize proof-backed validation
+        self.alignment_config = load_alignment_config()
+        self.validator = UnifiedFormalismValidator(self.alignment_config)
+        self.reference_monitor = ReferenceMonitor(self.alignment_config)
+        
         self.workflow_architect = WorkflowArchitect(self.validator)
         self.agent_orchestrator = None
         self.shutdown_event = threading.Event()

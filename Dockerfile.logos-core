@@ -1,0 +1,38 @@
+# LOGOS Core Services Dockerfile
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements and install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy source code
+COPY logos_core/ ./logos_core/
+COPY obdc/ ./obdc/
+COPY policies/ ./policies/
+COPY persistence/ ./persistence/
+COPY LOGOS_AGI/v4/ ./services/
+COPY examples/ ./examples/
+COPY tests/ ./tests/
+
+# Create directories for runtime data
+RUN mkdir -p /app/audit /app/logs
+
+# Set Python path
+ENV PYTHONPATH=/app
+
+# Expose service ports
+EXPOSE 5000 5001 5002
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost:5000/health || exit 1
+
+# Default command runs all services (use docker-compose to override)
+CMD ["python", "-m", "services.keryx_api_gateway"]

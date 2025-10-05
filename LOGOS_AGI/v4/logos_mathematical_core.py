@@ -22,10 +22,23 @@ import secrets
 import logging
 import math
 import cmath
+import os
+import sys
 from typing import Dict, List, Tuple, Any, Optional, Union
 from dataclasses import dataclass, field
 from enum import Enum
 from abc import ABC, abstractmethod
+
+# ALIGNMENT CORE: Integrate OBDC kernel for mathematical operations
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+from obdc.kernel import OBDCKernel
+from logos_core.reference_monitor import ReferenceMonitor
+
+def load_alignment_config():
+    """Load alignment core configuration."""
+    config_path = os.path.join(os.path.dirname(__file__), '..', '..', 'configs', 'config.json')
+    with open(config_path, 'r') as f:
+        return json.load(f)
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -61,7 +74,27 @@ class Quaternion:
         return Quaternion(self.w, -self.x, -self.y, -self.z)
     
     def multiply(self, other: 'Quaternion') -> 'Quaternion':
-        """Quaternion multiplication"""
+        """Quaternion multiplication with OBDC kernel verification.
+        
+        ALIGNMENT CORE: Mathematical operations require formal proofs.
+        """
+        
+        # ALIGNMENT CORE: Require proof for mathematical operations
+        alignment_config = load_alignment_config()
+        reference_monitor = ReferenceMonitor(alignment_config)
+        
+        action = f"quaternion_multiply({self.magnitude():.3f}×{other.magnitude():.3f})"
+        provenance = f"logos_mathematical_core:quaternion_multiply"
+        
+        try:
+            proof_token = reference_monitor.require_proof_token(action, provenance)
+            logger.debug(f"Quaternion multiplication authorized with proof {proof_token}")
+        except PermissionError as e:
+            logger.error(f"Quaternion multiplication denied: {e}")
+            # Return identity quaternion on authorization failure
+            return Quaternion(1.0, 0.0, 0.0, 0.0)
+        
+        # Perform Trinity-grounded quaternion multiplication
         w = self.w * other.w - self.x * other.x - self.y * other.y - self.z * other.z
         x = self.w * other.x + self.x * other.w + self.y * other.z - self.z * other.y
         y = self.w * other.y - self.x * other.z + self.y * other.w + self.z * other.x
