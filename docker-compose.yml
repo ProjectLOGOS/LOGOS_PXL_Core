@@ -112,6 +112,90 @@ services:
       retries: 3
     restart: unless-stopped
 
+  # ARCHON Gateway - HTTP API gateway with proof-gated dispatch
+  archon:
+    build:
+      context: ./services/archon
+      dockerfile: Dockerfile
+    container_name: logos-archon
+    ports:
+      - "8075:8075"
+    volumes:
+      - ./services:/app/services
+      - ../LOGOS_AGI/v4:/v4
+    environment:
+      - RABBIT_URL=amqp://logos:trinity@rabbitmq:5672/logos
+      - LOGOS_API_URL=http://logos-core:5000
+      - V4PATH=/v4
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      logos-core:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8075/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # TELOS Worker - Causal prediction and intervention analysis
+  telos:
+    build:
+      context: ./services/workers/telos
+      dockerfile: Dockerfile
+    container_name: logos-telos
+    volumes:
+      - ./services:/app/services
+      - ../LOGOS_AGI/v4:/v4
+    environment:
+      - RABBIT_URL=amqp://logos:trinity@rabbitmq:5672/logos
+      - SUBSYS=TELOS
+      - ROUTE=telos
+      - V4PATH=/v4
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # TETRAGNOS Worker - NLP and semantic analysis
+  tetragnos:
+    build:
+      context: ./services/workers/tetragnos
+      dockerfile: Dockerfile
+    container_name: logos-tetragnos
+    volumes:
+      - ./services:/app/services
+      - ../LOGOS_AGI/v4:/v4
+    environment:
+      - RABBIT_URL=amqp://logos:trinity@rabbitmq:5672/logos
+      - SUBSYS=TETRAGNOS
+      - ROUTE=tetragnos
+      - V4PATH=/v4
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # THONOC Worker - Logical reasoning and theorem proving
+  thonoc:
+    build:
+      context: ./services/workers/thonoc
+      dockerfile: Dockerfile
+    container_name: logos-thonoc
+    volumes:
+      - ./services:/app/services
+      - ../LOGOS_AGI/v4:/v4
+    environment:
+      - RABBIT_URL=amqp://logos:trinity@rabbitmq:5672/logos
+      - SUBSYS=THONOC
+      - ROUTE=thonoc
+      - V4PATH=/v4
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    restart: unless-stopped
+
 volumes:
   rabbitmq_data:
     driver: local
