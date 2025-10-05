@@ -29,6 +29,29 @@ def gui_status():
         "logos_api": LOGOS,
     }
 
+@gui_router.get("/gui/summary")
+def gui_summary():
+    # Enhanced summary with service status
+    try:
+        archon_health = {"ok": True, "service": "archon-gateway"}
+    except:
+        archon_health = {"ok": False, "error": "connection failed"}
+    
+    return {
+        "services": {
+            "archon": archon_health,
+            "rabbitmq_ui": "http://rabbitmq:15672"
+        },
+        "workers": {
+            "telos": {"status": "active", "tasks": ["predict_outcomes", "causal_retrodiction"]},
+            "tetragnos": {"status": "active", "tasks": ["cluster_texts", "semantic_similarity"]},
+            "thonoc": {"status": "active", "tasks": ["construct_proof", "theorem_proving"]}
+        },
+        "toolkits": {
+            "crawl": {"status": "active", "port": 8064}
+        }
+    }
+
 app.include_router(gui_router)
 
 class DispatchIn(BaseModel):

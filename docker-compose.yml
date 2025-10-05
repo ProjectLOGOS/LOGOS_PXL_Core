@@ -148,6 +148,7 @@ services:
     volumes:
       - ./services:/app/services
       - ../LOGOS_AGI/v4:/v4
+      - model_cache:/root/.cache
     environment:
       - RABBIT_URL=amqp://logos:trinity@rabbitmq:5672/logos
       - SUBSYS=TELOS
@@ -167,6 +168,7 @@ services:
     volumes:
       - ./services:/app/services
       - ../LOGOS_AGI/v4:/v4
+      - model_cache:/root/.cache
     environment:
       - RABBIT_URL=amqp://logos:trinity@rabbitmq:5672/logos
       - SUBSYS=TETRAGNOS
@@ -186,6 +188,7 @@ services:
     volumes:
       - ./services:/app/services
       - ../LOGOS_AGI/v4:/v4
+      - model_cache:/root/.cache
     environment:
       - RABBIT_URL=amqp://logos:trinity@rabbitmq:5672/logos
       - SUBSYS=THONOC
@@ -196,12 +199,31 @@ services:
         condition: service_healthy
     restart: unless-stopped
 
+  # Web Crawl Toolkit - Proof-gated web content fetching
+  toolkit-crawl:
+    build:
+      context: ./services/toolkits/crawl
+      dockerfile: Dockerfile
+    container_name: toolkit-crawl
+    ports:
+      - "8064:8000"
+    networks:
+      - default
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
 volumes:
   rabbitmq_data:
     driver: local
   redis_data:
     driver: local
   postgres_data:
+    driver: local
+  model_cache:
     driver: local
 
 networks:
