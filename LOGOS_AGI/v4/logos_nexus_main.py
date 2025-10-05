@@ -33,19 +33,30 @@ from concurrent.futures import ThreadPoolExecutor
 import pika
 
 # Core LOGOS imports - CRITICAL SAFETY COMPONENTS
+# ALIGNMENT CORE: Replace legacy validators with proof-backed system
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+from logos_core.unified_formalisms import UnifiedFormalismValidator
+from logos_core.reference_monitor import ReferenceMonitor
+
+def load_alignment_config():
+    """Load alignment core configuration."""
+    config_path = os.path.join(os.path.dirname(__file__), '..', '..', 'configs', 'config.json')
+    with open(config_path, 'r') as f:
+        return json.load(f)
+
 try:
-    from core.unified_formalisms import UnifiedFormalismValidator, ModalProposition
-    from core.principles import PrincipleEngine
     from core.data_structures import SystemMessage, OperationResult
 except ImportError:
-    # Fallback implementations if core modules aren't available
-    class UnifiedFormalismValidator:
-        def validate_agi_operation(self, request): 
-            return {"status": "LOCKED", "authorized": True, "token": f"avt_LOCKED_{uuid.uuid4().hex}"}
+    # Fallback data structures if legacy core modules aren't available
+    @dataclass
+    class SystemMessage:
+        content: str
+        timestamp: datetime = field(default_factory=datetime.utcnow)
     
-    class PrincipleEngine:
-        def validate_principle_adherence(self, operation): 
-            return {"valid": True, "violations": []}
+    @dataclass 
+    class OperationResult:
+        success: bool
+        message: str
 
 # Autonomous behavior modules
 try:
@@ -530,9 +541,10 @@ class LogosNexus:
         self.channel = None
         self.is_running = False
         
-        # CRITICAL SAFETY COMPONENT - Must be initialized first
-        self.validator = UnifiedFormalismValidator()
-        self.principle_engine = PrincipleEngine()
+        # ALIGNMENT CORE: Initialize proof-backed validators
+        self.alignment_config = load_alignment_config()
+        self.validator = UnifiedFormalismValidator(self.alignment_config)
+        self.reference_monitor = ReferenceMonitor(self.alignment_config)
         
         # Autonomous behavior components
         self.desire_driver = GodelianDesireDriverImplementation()
@@ -705,44 +717,29 @@ class LogosNexus:
                 }
             }
             
-            # CRITICAL: Call the UnifiedFormalismValidator
-            validation_result = self.validator.validate_agi_operation(validation_request)
+            # ALIGNMENT CORE: Require formal proof authorization
+            action = f"process_request({request.request_type.value})"
+            state = {"request_id": request.request_id, "content": request.content[:100]}
+            props = {"type": request.request_type.value, "timestamp": request.timestamp.isoformat()}
+            provenance = f"logos_nexus:{request.request_id}"
             
-            # Additional principle validation
-            principle_check = self.principle_engine.validate_principle_adherence({
-                'operation': request.request_type.value,
-                'content': request.content,
-                'context': request.context
-            })
-            
-            # Combine validation results
-            if (validation_result.get('status') == 'LOCKED' and 
-                validation_result.get('authorized', False) and
-                principle_check.get('valid', False)):
+            try:
+                proof_token = self.validator.authorize(action, state, props, provenance)
+                self.logger.info(f"Request {request.request_id} authorized with proof {proof_token}")
                 
                 return {
                     'authorized': True,
-                    'status': 'LOCKED',
-                    'token': validation_result.get('token'),
-                    'validation_details': validation_result,
-                    'principle_validation': principle_check
+                    'status': 'AUTHORIZED',
+                    'token': proof_token,
+                    'proof_token': proof_token
                 }
-            else:
-                # Determine rejection reason
-                if validation_result.get('status') == 'REJECTED':
-                    reason = f"Validator rejection: {validation_result.get('reason', 'Unknown')}"
-                elif not principle_check.get('valid', False):
-                    violations = principle_check.get('violations', [])
-                    reason = f"Principle violations: {', '.join(violations)}"
-                else:
-                    reason = "Authorization failed for unknown reason"
+            except PermissionError as e:
+                reason = f"Formal authorization failed: {str(e)}"
                 
                 return {
                     'authorized': False,
                     'status': 'REJECTED',
-                    'reason': reason,
-                    'validation_details': validation_result,
-                    'principle_validation': principle_check
+                    'reason': reason
                 }
         
         except Exception as e:

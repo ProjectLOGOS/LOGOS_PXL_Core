@@ -12,6 +12,16 @@ import signal
 import sys
 from persistence_manager import PersistenceManager
 
+# ALIGNMENT CORE: Add proof-before-act for database operations
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+from logos_core.reference_monitor import ReferenceMonitor
+
+def load_alignment_config():
+    """Load alignment core configuration."""
+    config_path = os.path.join(os.path.dirname(__file__), '..', '..', 'configs', 'config.json')
+    with open(config_path, 'r') as f:
+        return json.load(f)
+
 # --- Configuration ---
 logging.basicConfig(
     level=logging.INFO, 
@@ -43,6 +53,10 @@ class DatabaseService:
         self.connection = None
         self.channel = None
         self.is_running = False
+        
+        # ALIGNMENT CORE: Initialize reference monitor for database operations
+        self.alignment_config = load_alignment_config()
+        self.reference_monitor = ReferenceMonitor(self.alignment_config)
         
         # Setup graceful shutdown handling
         signal.signal(signal.SIGINT, self._signal_handler)
@@ -145,6 +159,18 @@ class DatabaseService:
             operation = message.get('operation', 'save')
             
             logging.info(f"Processing write request {request_id} for table '{table}', operation: {operation}")
+            
+            # ALIGNMENT CORE: Require proof for database write operations
+            action = f"database_write({operation}:{table})"
+            provenance = f"database_service:{request_id}"
+            
+            try:
+                proof_token = self.reference_monitor.require_proof_token(action, provenance)
+                logging.info(f"Database write {request_id} authorized with proof {proof_token}")
+            except PermissionError as e:
+                logging.error(f"Database write {request_id} denied authorization: {e}")
+                ch.basic_nack(delivery_tag=method.delivery_tag, requeue=False)
+                return
             
             # Validate required fields
             if not table:

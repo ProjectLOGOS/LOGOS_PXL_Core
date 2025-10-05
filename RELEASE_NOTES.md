@@ -1,13 +1,14 @@
 # LOGOS Alignment Core Release Candidate 1
 
 ## Overview
-Production-ready three-part alignment core with PXL proof gates, privative boundary conditions, and OBDC structure-preserving mappings.
+Production-ready three-part alignment core with PXL proof gates, privative boundary conditions, and OBDC structure-preserving mappings. **GENERAL AVAILABILITY RELEASE**.
 
 ## Release Information
-- **Version**: RC1
+- **Version**: 1.0.0 GA
 - **Kernel Hash**: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
 - **Build Date**: October 5, 2025
 - **CI Status**: ✅ All core tests passing
+- **Server Stability**: ✅ Production WSGI server confirmed
 
 ## Test Summary
 - **Alignment Tests**: 4/4 passed ✅
@@ -58,8 +59,12 @@ Production-ready three-part alignment core with PXL proof gates, privative bound
 ## Known Limitations
 - **DIAMOND modality**: Complex modal logic goals may timeout (expected)
 - **Timeout settings**: Default 2000ms may need tuning for complex proofs
-- **Development server**: Flask dev server used (TODO: production WSGI)
 - **Authentication**: TODO for production deployment
+
+## Production Improvements (GA Release)
+- ✅ **Production WSGI**: Waitress server replaces Flask dev server for stability
+- ✅ **Connection handling**: Improved request processing and graceful shutdown
+- ✅ **Health monitoring**: Enhanced health endpoint with readiness checks
 
 ## Deployment Instructions
 

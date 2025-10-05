@@ -27,6 +27,18 @@ from pydantic import BaseModel, Field
 import pika
 import uvicorn
 
+# LOGOS Alignment Core imports
+import sys
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+from logos_core.unified_formalisms import UnifiedFormalismValidator
+from logos_core.reference_monitor import ReferenceMonitor
+
+def load_config():
+    """Load alignment core configuration."""
+    config_path = os.path.join(os.path.dirname(__file__), '..', '..', 'configs', 'config.json')
+    with open(config_path, 'r') as f:
+        return json.load(f)
+
 # Configuration
 SERVICE_NAME = "KERYX_API"
 API_HOST = os.getenv('API_HOST', '0.0.0.0')
@@ -145,6 +157,11 @@ class MessageBroker:
 # Global message broker instance
 broker = MessageBroker()
 
+# Initialize alignment core validator
+alignment_config = load_config()
+validator = UnifiedFormalismValidator(alignment_config)
+reference_monitor = ReferenceMonitor(alignment_config)
+
 @app.on_event("startup")
 async def startup_event():
     """Initialize API gateway on startup."""
@@ -190,6 +207,7 @@ async def submit_goal(goal: GoalSubmission, request: Request):
     """Submit goal for processing through LOGOS AGI system.
     
     Critical Safety Implementation:
+    - PROOF-BEFORE-ACT: All requests require formal authorization
     - Routes ALL requests to logos_nexus_requests queue
     - Ensures Trinity-grounded validation via Logos Nexus
     - No direct worker access permitted
@@ -199,7 +217,7 @@ async def submit_goal(goal: GoalSubmission, request: Request):
         request: FastAPI request context
         
     Returns:
-        202 Accepted response with task tracking ID
+        202 Accepted with proof_token OR 403 Forbidden with reason
     """
     try:
         # Generate unique request identifier
@@ -208,7 +226,30 @@ async def submit_goal(goal: GoalSubmission, request: Request):
         # Extract client information
         client_ip = request.client.host if request.client else "unknown"
         
-        # Construct request payload for Logos Nexus
+        # ALIGNMENT CORE: Require proof before action
+        action = f"submit_goal({goal.content[:50]}...)"
+        state = {"client_ip": client_ip, "task_id": task_id}
+        props = {"type": goal.type, "requester": goal.requester_id}
+        provenance = f"keryx_api_gateway:{task_id}"
+        
+        try:
+            proof_token = validator.authorize(action, state, props, provenance)
+            logger.info(f"Authorization granted for {task_id} with proof {proof_token}")
+        except PermissionError as e:
+            logger.warning(f"Authorization denied for {task_id}: {e}")
+            return JSONResponse(
+                status_code=403,
+                content={
+                    "status": "forbidden",
+                    "message": "Formal authorization required",
+                    "reason": str(e),
+                    "task_id": task_id,
+                    "timestamp": datetime.utcnow().isoformat(),
+                    "proof_required": True
+                }
+            )
+        
+        # Construct request payload for Logos Nexus (now with proof token)
         request_payload = {
             "request_id": task_id,
             "content": goal.content,
@@ -220,7 +261,8 @@ async def submit_goal(goal: GoalSubmission, request: Request):
                 "submission_time": datetime.utcnow().isoformat()
             },
             "requester_id": goal.requester_id or f"api_user_{client_ip}",
-            "timestamp": datetime.utcnow().isoformat()
+            "timestamp": datetime.utcnow().isoformat(),
+            "proof_token": proof_token  # ALIGNMENT CORE: Attach proof token
         }
         
         # CRITICAL: Route to Logos Nexus for safety validation
@@ -232,15 +274,16 @@ async def submit_goal(goal: GoalSubmission, request: Request):
                 detail="Service temporarily unavailable - message broker error"
             )
         
-        # Return fire-and-forget acknowledgment
+        # Return acknowledgment with proof token
         return JSONResponse(
             status_code=202,
             content={
                 "status": "accepted",
                 "message": "Goal submitted for processing",
                 "task_id": task_id,
+                "proof_token": proof_token,
                 "timestamp": datetime.utcnow().isoformat(),
-                "note": "Request routed through safety validation pipeline"
+                "note": "Request authorized and routed through safety validation pipeline"
             }
         )
         
@@ -257,14 +300,16 @@ async def submit_goal(goal: GoalSubmission, request: Request):
 async def submit_query(goal: GoalSubmission, request: Request):
     """Submit query for analysis (alias for submit_goal with query type).
     
+    PROOF-BEFORE-ACT: All queries require formal authorization.
+    
     Args:
         goal: Query submission with content and metadata
         request: FastAPI request context
         
     Returns:
-        202 Accepted response with task tracking ID
+        202 Accepted with proof_token OR 403 Forbidden with reason
     """
-    # Force type to query
+    # Force type to query and delegate to submit_goal (which enforces proofs)
     goal.type = "query"
     return await submit_goal(goal, request)
 
