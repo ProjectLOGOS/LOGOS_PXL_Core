@@ -24,7 +24,7 @@ class OBDCKernel:
     
     def apply_bijection(self, name: str, f: Callable, x: Any, provenance: Dict[str, Any]) -> Any:
         """
-        Apply a bijection with proof that it preserves Good and Coherence
+        Apply a bijection with explicit preservation obligations
         
         Args:
             name: Name/identifier of the bijection
@@ -38,10 +38,11 @@ class OBDCKernel:
         Raises:
             ProofGateError: If proof requirements are not met
         """
-        # Require proof that bijection preserves Good and Coherence
-        obligation = f"BOX(preserves_good({name},x) and preserves_coherence({name}))"
+        # Explicit preservation obligations as specified
+        phi = f"bijective({name}) and preserves_good({name},{x}) and preserves_coherence({name})"
+        obligation = f"BOX({phi})"
         
-        proof_token = self.reference_monitor.require_proof_token(obligation, provenance)
+        proof_token = self.reference_monitor.require_proof_token(obligation, dict(provenance, map=name))
         
         # Apply the bijection
         try:
@@ -79,10 +80,11 @@ class OBDCKernel:
         Raises:
             ProofGateError: If proof requirements are not met
         """
-        # Require proof of commutativity and coherence preservation
-        obligation = f"BOX(commutes({g_name},{h_name}) and preserves_coherence_chain({g_name},{h_name}))"
+        # Explicit commutation and preservation obligations as specified
+        phi = f"commutes({g_name},{h_name}) and preserves_coherence_chain({g_name},{h_name})"
+        obligation = f"BOX({phi})"
         
-        proof_token = self.reference_monitor.require_proof_token(obligation, provenance)
+        proof_token = self.reference_monitor.require_proof_token(obligation, dict(provenance, g=g_name, h=h_name))
         
         # Apply the commuting operations
         try:

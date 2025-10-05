@@ -1,0 +1,4833 @@
+{
+  "summary": {
+    "total_files_analyzed": 45,
+    "total_components_found": 319,
+    "high_priority_components": 33,
+    "integration_candidates": 82
+  },
+  "components": [
+    {
+      "name": "TetragnosCoreEngine",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\tetragnos_worker.py",
+      "lines": "71-507",
+      "complexity": 65,
+      "dependencies": [
+        "all",
+        "Any",
+        "hasattr",
+        "Exception",
+        "min",
+        "dict",
+        "sum",
+        "KMeans",
+        "PCA",
+        "SENTENCE_TRANSFORMERS_AVAILABLE"
+      ],
+      "description": "Core logic engine for TETRAGNOS subsystem.\nEncapsulates pattern recognition, feature extraction, and ML operations."
+    },
+    {
+      "name": "TelosCoreEngine",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\telos_worker.py",
+      "lines": "186-771",
+      "complexity": 62,
+      "dependencies": [
+        "Any",
+        "SCMImplementation",
+        "hasattr",
+        "max",
+        "min",
+        "Exception",
+        "sum",
+        "any",
+        "str",
+        "List"
+      ],
+      "description": "Core logic engine for TELOS subsystem.\nEncapsulates causal reasoning, prediction, and scientific analysis."
+    },
+    {
+      "name": "AdvancedWorkflowArchitect",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\upgraded_workflow_architect.py",
+      "lines": "82-632",
+      "complexity": 57,
+      "dependencies": [
+        "WorkflowTemplate",
+        "TaskType",
+        "ValueError",
+        "len",
+        "Optional",
+        "TaskNode",
+        "set",
+        "Any",
+        "any",
+        "Dict"
+      ],
+      "description": "Advanced workflow design engine using NetworkX for DAG construction."
+    },
+    {
+      "name": "LogosNexus",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "532-1144",
+      "complexity": 42,
+      "dependencies": [
+        "GodelianDesireDriverImplementation",
+        "GoalManagerImplementation",
+        "Any",
+        "Exception",
+        "UnifiedFormalismValidator",
+        "RABBITMQ_HOST",
+        "KeyboardInterrupt",
+        "RABBITMQ_PORT",
+        "str",
+        "Request"
+      ],
+      "description": "Main Logos Nexus service class.\nServes as the executive will and consciousness of the AGI system."
+    },
+    {
+      "name": "WorkerTestSuite",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\worker_test_suite.py",
+      "lines": "53-563",
+      "complexity": 40,
+      "dependencies": [
+        "ThreadPoolExecutor",
+        "len",
+        "TestResult",
+        "Optional",
+        "__import__",
+        "Any",
+        "TEST_CONFIG",
+        "Dict",
+        "PIKA_AVAILABLE",
+        "as_completed"
+      ],
+      "description": "Comprehensive test suite for worker subsystems."
+    },
+    {
+      "name": "LambdaReducer",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\lambda_calculus.py",
+      "lines": "297-499",
+      "complexity": 39,
+      "dependencies": [
+        "Application",
+        "len",
+        "Optional",
+        "Constant",
+        "TrinityCombinator",
+        "set",
+        "ReductionStep",
+        "LambdaExpression",
+        "Tuple",
+        "isinstance"
+      ],
+      "description": "Lambda calculus reduction engine"
+    },
+    {
+      "name": "ThonocCoreEngine",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\thonoc_worker.py",
+      "lines": "930-1268",
+      "complexity": 36,
+      "dependencies": [
+        "len",
+        "hash",
+        "set",
+        "Any",
+        "AxiomaticProofEngineImplementation",
+        "Dict",
+        "ModalInferenceEngineImplementation",
+        "enumerate",
+        "str",
+        "range"
+      ],
+      "description": "Core logic engine for THONOC subsystem.\nOrchestrates formal reasoning, proof construction, and modal logic operations."
+    },
+    {
+      "name": "ModalInferenceEngineImplementation",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\thonoc_worker.py",
+      "lines": "681-928",
+      "complexity": 35,
+      "dependencies": [
+        "len",
+        "set",
+        "Any",
+        "any",
+        "Dict",
+        "str",
+        "LogicalConnective",
+        "abs",
+        "isinstance",
+        "Exception"
+      ],
+      "description": "Modal inference engine for reasoning about necessity, possibility,\nknowledge, and belief using modal logic."
+    },
+    {
+      "name": "DatabaseService",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\database_service.py",
+      "lines": "45-393",
+      "complexity": 29,
+      "dependencies": [
+        "int",
+        "Exception",
+        "RABBITMQ_PASS",
+        "ValueError",
+        "RABBITMQ_USER",
+        "PersistenceManager",
+        "RABBITMQ_HOST",
+        "KeyboardInterrupt",
+        "RABBITMQ_PORT",
+        "str"
+      ],
+      "description": "Main database service that consumes messages from RabbitMQ queues\nand handles database operations through the PersistenceManager."
+    },
+    {
+      "name": "TelosCore",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\upgraded_telos_worker.py",
+      "lines": "555-755",
+      "complexity": 25,
+      "dependencies": [
+        "X",
+        "DEFAULT_FORECAST_PERIODS",
+        "ValueError",
+        "len",
+        "Any",
+        "str",
+        "Dict",
+        "AdvancedCausalEngine",
+        "range",
+        "Exception"
+      ],
+      "description": "Advanced TELOS reasoning core with statistical and causal libraries."
+    },
+    {
+      "name": "PersistenceManager",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\database_persistence_manager.py",
+      "lines": "14-341",
+      "complexity": 23,
+      "dependencies": [
+        "len",
+        "Optional",
+        "Any",
+        "Tuple",
+        "Dict",
+        "list",
+        "isinstance",
+        "Exception",
+        "DB_FILE",
+        "dict"
+      ],
+      "description": "Consolidated database persistence layer for the LOGOS AGI system.\nHandles all low-level SQLite operations with thread-safety.\nSupports ontological nodes, goals, system logs, semantic glyphs, and relat..."
+    },
+    {
+      "name": "ThonocCore",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\upgraded_thonoc_worker.py",
+      "lines": "610-839",
+      "complexity": 23,
+      "dependencies": [
+        "ValueError",
+        "len",
+        "Any",
+        "str",
+        "Dict",
+        "list",
+        "Exception",
+        "AdvancedModalEngine",
+        "sum",
+        "AdvancedTheoremProver"
+      ],
+      "description": "Advanced THONOC reasoning core with symbolic and modal capabilities."
+    },
+    {
+      "name": "AdvancedCausalEngine",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\upgraded_telos_worker.py",
+      "lines": "249-430",
+      "complexity": 22,
+      "dependencies": [
+        "X",
+        "ValueError",
+        "len",
+        "Optional",
+        "Record",
+        "ges",
+        "Any",
+        "str",
+        "Dict",
+        "LinearRegression"
+      ],
+      "description": "Sophisticated causal discovery and inference using causal-learn."
+    },
+    {
+      "name": "BijectiveMapping",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\bijective_mapping.py",
+      "lines": "102-220",
+      "complexity": 20,
+      "dependencies": [
+        "len",
+        "Optional",
+        "ReferenceMonitor",
+        "field",
+        "set",
+        "Any",
+        "Dict",
+        "list",
+        "Domain",
+        "Exception"
+      ],
+      "description": "Bijective mapping between two domains"
+    },
+    {
+      "name": "AgentOrchestrator",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\archon_nexus_complete.py",
+      "lines": "293-514",
+      "complexity": 19,
+      "dependencies": [
+        "WorkflowExecution",
+        "len",
+        "TaskNode",
+        "WorkflowStatus",
+        "all",
+        "Any",
+        "Dict",
+        "TaskStatus",
+        "str",
+        "Exception"
+      ],
+      "description": "Orchestrates the execution of workflow tasks across subsystems."
+    },
+    {
+      "name": "SemanticGlyphDatabase",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\cognitive_transducer_math.py",
+      "lines": "298-506",
+      "complexity": 17,
+      "dependencies": [
+        "len",
+        "FractalSemanticGlyph",
+        "Optional",
+        "Any",
+        "Dict",
+        "int",
+        "Tuple",
+        "range",
+        "Exception",
+        "dict"
+      ],
+      "description": "Persistent storage and retrieval for semantic glyphs"
+    },
+    {
+      "name": "AxiomSystem",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\mathematical_axioms.py",
+      "lines": "53-298",
+      "complexity": 17,
+      "dependencies": [
+        "Axiom",
+        "len",
+        "Optional",
+        "AxiomType",
+        "all",
+        "enumerate",
+        "Any",
+        "Dict",
+        "List"
+      ],
+      "description": "Complete axiom system for Trinity-grounded mathematics"
+    },
+    {
+      "name": "SCMImplementation",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\telos_worker.py",
+      "lines": "76-183",
+      "complexity": 16,
+      "dependencies": [
+        "all",
+        "Any",
+        "SCMImplementation",
+        "Dict",
+        "defaultdict",
+        "max",
+        "Exception",
+        "sum",
+        "List",
+        "tuple"
+      ],
+      "description": "Structural Causal Model implementation for causal reasoning.\nProvides causal inference, intervention analysis, and counterfactual reasoning."
+    },
+    {
+      "name": "TelosWorker",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\telos_worker.py",
+      "lines": "774-967",
+      "complexity": 16,
+      "dependencies": [
+        "TASK_QUEUE",
+        "KeyboardInterrupt",
+        "TelosCoreEngine",
+        "RABBITMQ_HOST",
+        "str",
+        "RABBITMQ_PORT",
+        "int",
+        "range",
+        "Exception",
+        "RESULT_QUEUE"
+      ],
+      "description": "Main TELOS worker class that handles RabbitMQ communication\nand orchestrates the core scientific reasoning operations."
+    },
+    {
+      "name": "TetragnosWorker",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\tetragnos_worker.py",
+      "lines": "510-703",
+      "complexity": 16,
+      "dependencies": [
+        "TASK_QUEUE",
+        "KeyboardInterrupt",
+        "RABBITMQ_HOST",
+        "RABBITMQ_PORT",
+        "str",
+        "int",
+        "TetragnosCoreEngine",
+        "range",
+        "Exception",
+        "RESULT_QUEUE"
+      ],
+      "description": "Main TETRAGNOS worker class that handles RabbitMQ communication\nand orchestrates the core engine operations."
+    },
+    {
+      "name": "ThonocWorker",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\thonoc_worker.py",
+      "lines": "1270-1463",
+      "complexity": 16,
+      "dependencies": [
+        "TASK_QUEUE",
+        "KeyboardInterrupt",
+        "RABBITMQ_HOST",
+        "RABBITMQ_PORT",
+        "ThonocCoreEngine",
+        "str",
+        "int",
+        "range",
+        "Exception",
+        "RESULT_QUEUE"
+      ],
+      "description": "Main THONOC worker class that handles RabbitMQ communication\nand orchestrates the core logical reasoning operations."
+    },
+    {
+      "name": "TetragnosCore",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\upgraded_tetragnos_worker.py",
+      "lines": "403-603",
+      "complexity": 16,
+      "dependencies": [
+        "ValueError",
+        "len",
+        "AdvancedFeatureExtractor",
+        "AdvancedClusteringEngine",
+        "enumerate",
+        "AdvancedSemanticEngine",
+        "Any",
+        "Dict",
+        "str",
+        "Exception"
+      ],
+      "description": "Advanced TETRAGNOS reasoning core with external library integration."
+    },
+    {
+      "name": "ArchonNexus",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\archon_nexus_main.py",
+      "lines": "71-289",
+      "complexity": 15,
+      "dependencies": [
+        "Any",
+        "Exception",
+        "TELOS_QUEUE",
+        "dict",
+        "UnifiedFormalismValidator",
+        "RABBITMQ_HOST",
+        "KeyboardInterrupt",
+        "SERVICE_NAME",
+        "RABBITMQ_PORT",
+        "Tuple"
+      ],
+      "description": "Primary planning service for distributed goal execution.\n\nOrchestrates workflow design and task execution through integrated\narchitecture and orchestration modules for complex goal achievement.\n\nCore ..."
+    },
+    {
+      "name": "ArchonNexus",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\archon_nexus_complete.py",
+      "lines": "519-715",
+      "complexity": 14,
+      "dependencies": [
+        "Exception",
+        "TELOS_QUEUE",
+        "UnifiedFormalismValidator",
+        "RABBITMQ_HOST",
+        "KeyboardInterrupt",
+        "SERVICE_NAME",
+        "RABBITMQ_PORT",
+        "Tuple",
+        "THONOC_QUEUE",
+        "TETRAGNOS_QUEUE"
+      ],
+      "description": "Main Archon Nexus service class."
+    },
+    {
+      "name": "_cluster_texts",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\tetragnos_worker.py",
+      "lines": "167-231",
+      "complexity": 13,
+      "dependencies": [
+        "KMeans",
+        "len",
+        "SENTENCE_TRANSFORMERS_AVAILABLE",
+        "enumerate",
+        "Any",
+        "str",
+        "Dict",
+        "hasattr",
+        "range",
+        "Exception"
+      ],
+      "description": "Perform text clustering analysis."
+    },
+    {
+      "name": "LogosIntegratedSystem",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\integration_harmonizer.py",
+      "lines": "325-501",
+      "complexity": 12,
+      "dependencies": [
+        "FractalSemanticGlyph",
+        "Optional",
+        "TrinityOptimizationEngine",
+        "UniversalLanguagePlaneProjector",
+        "Empty",
+        "Any",
+        "Dict",
+        "TrinityFractalValidator",
+        "max",
+        "Exception"
+      ],
+      "description": "Complete integration system combining semantic and Trinity fractals"
+    },
+    {
+      "name": "ASILiftoffControllerImplementation",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "321-416",
+      "complexity": 12,
+      "dependencies": [
+        "Any",
+        "any",
+        "Dict",
+        "Exception",
+        "List"
+      ],
+      "description": "Controls the autonomous system improvement processes with safety constraints.\nMonitors system capabilities and manages self-improvement goals."
+    },
+    {
+      "name": "_RelationalSetValidator",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\unified_formalisms.py",
+      "lines": "202-242",
+      "complexity": 12,
+      "dependencies": [
+        "len",
+        "ValidationResult",
+        "enumerate",
+        "Any",
+        "Dict"
+      ],
+      "description": "Validates relational consistency of operations"
+    },
+    {
+      "name": "get_mapping_path",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\bijective_mapping.py",
+      "lines": "498-534",
+      "complexity": 11,
+      "dependencies": [
+        "deque",
+        "Optional",
+        "set",
+        "List"
+      ],
+      "description": "Find bijective mapping path between domains"
+    },
+    {
+      "name": "fit",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\telos_worker.py",
+      "lines": "87-126",
+      "complexity": 11,
+      "dependencies": [
+        "all",
+        "Any",
+        "defaultdict",
+        "Dict",
+        "Exception",
+        "sum",
+        "List",
+        "tuple"
+      ],
+      "description": "Fit the structural equations to observational data.\nLearn conditional probability distributions for each variable."
+    },
+    {
+      "name": "_test_correlation_hypothesis",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\telos_worker.py",
+      "lines": "667-721",
+      "complexity": 11,
+      "dependencies": [
+        "len",
+        "Any",
+        "any",
+        "Dict",
+        "list",
+        "isinstance",
+        "abs",
+        "range",
+        "min",
+        "sum"
+      ],
+      "description": "Test correlation hypothesis between variables."
+    },
+    {
+      "name": "AdvancedClusteringEngine",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\upgraded_tetragnos_worker.py",
+      "lines": "149-301",
+      "complexity": 11,
+      "dependencies": [
+        "KMeans",
+        "len",
+        "ValueError",
+        "set",
+        "Any",
+        "NearestNeighbors",
+        "Dict",
+        "int",
+        "max",
+        "range"
+      ],
+      "description": "Sophisticated clustering engine with multiple algorithms and optimization."
+    },
+    {
+      "name": "AdvancedModalEngine",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\upgraded_thonoc_worker.py",
+      "lines": "499-608",
+      "complexity": 11,
+      "dependencies": [
+        "len",
+        "all",
+        "Any",
+        "any",
+        "Dict",
+        "str",
+        "range",
+        "Exception"
+      ],
+      "description": "Modal logic reasoning and model checking."
+    },
+    {
+      "name": "_shutdown",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\database_service.py",
+      "lines": "354-393",
+      "complexity": 10,
+      "dependencies": [
+        "Exception"
+      ],
+      "description": "Gracefully shutdown the database service."
+    },
+    {
+      "name": "WorkflowArchitect",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\archon_nexus_complete.py",
+      "lines": "154-291",
+      "complexity": 9,
+      "dependencies": [
+        "WorkflowExecution",
+        "ValueError",
+        "len",
+        "UnifiedFormalismValidator",
+        "TaskNode",
+        "WorkflowStatus",
+        "Any",
+        "any",
+        "Dict",
+        "list"
+      ],
+      "description": "Designs workflow DAGs for complex goals."
+    },
+    {
+      "name": "MetaBijectiveCommutator",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\integration_harmonizer.py",
+      "lines": "238-319",
+      "complexity": 9,
+      "dependencies": [
+        "FractalSemanticGlyph",
+        "OrbitAnalysis",
+        "abs"
+      ],
+      "description": "Forces commutation between semantic fractals and Trinity fractals"
+    },
+    {
+      "name": "SelfImprovementManagerImplementation",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "418-530",
+      "complexity": 9,
+      "dependencies": [
+        "len",
+        "Optional",
+        "Any",
+        "str",
+        "Dict",
+        "Exception",
+        "List"
+      ],
+      "description": "Manages self-improvement cycles and meta-learning processes.\nCoordinates with ASI controller to implement safe system improvements."
+    },
+    {
+      "name": "_compute_semantic_similarity",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\tetragnos_worker.py",
+      "lines": "429-484",
+      "complexity": 9,
+      "dependencies": [
+        "len",
+        "cosine_similarity",
+        "Any",
+        "enumerate",
+        "Dict",
+        "set",
+        "hasattr",
+        "str",
+        "Exception"
+      ],
+      "description": "Compute semantic similarity between texts."
+    },
+    {
+      "name": "validate",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\unified_formalisms.py",
+      "lines": "101-133",
+      "complexity": 9,
+      "dependencies": [
+        "Any",
+        "ValidationResult",
+        "Dict"
+      ],
+      "description": "Validate operation against reality constraints"
+    },
+    {
+      "name": "TelosWorker",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\upgraded_telos_worker.py",
+      "lines": "757-874",
+      "complexity": 9,
+      "dependencies": [
+        "TASK_QUEUE",
+        "KeyboardInterrupt",
+        "RABBITMQ_HOST",
+        "RABBITMQ_PORT",
+        "str",
+        "Dict",
+        "Any",
+        "Exception",
+        "RESULT_QUEUE",
+        "TelosCore"
+      ],
+      "description": "Advanced TELOS worker with statistical and causal libraries."
+    },
+    {
+      "name": "ThonocWorker",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\upgraded_thonoc_worker.py",
+      "lines": "841-958",
+      "complexity": 9,
+      "dependencies": [
+        "ThonocCore",
+        "TASK_QUEUE",
+        "KeyboardInterrupt",
+        "RABBITMQ_HOST",
+        "RABBITMQ_PORT",
+        "str",
+        "Dict",
+        "Any",
+        "Exception",
+        "RESULT_QUEUE"
+      ],
+      "description": "Advanced THONOC worker with symbolic and modal reasoning."
+    },
+    {
+      "name": "TrinityOptimizer",
+      "type": "class",
+      "file": "LOGOS_AGI\\code base\\framework_deployment.py",
+      "lines": "373-457",
+      "complexity": 8,
+      "dependencies": [
+        "K1",
+        "Any",
+        "Dict",
+        "R",
+        "range",
+        "min",
+        "float",
+        "K0"
+      ],
+      "description": "T₃ Operator: Trinity cost function optimization"
+    },
+    {
+      "name": "TrinityConfluence",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\bijective_mapping.py",
+      "lines": "226-312",
+      "complexity": 8,
+      "dependencies": [
+        "len",
+        "enumerate",
+        "Any",
+        "Dict",
+        "abs",
+        "TrinityVector",
+        "BijectiveMapping",
+        "List"
+      ],
+      "description": "Ensures Trinity structure is preserved across bijective mappings"
+    },
+    {
+      "name": "TLMManager",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\logos_mathematical_core.py",
+      "lines": "397-467",
+      "complexity": 8,
+      "dependencies": [
+        "Any",
+        "Dict",
+        "TLMToken"
+      ],
+      "description": "Trinity-Locked-Mathematical token management system"
+    },
+    {
+      "name": "execute",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\telos_worker.py",
+      "lines": "220-256",
+      "complexity": 8,
+      "dependencies": [
+        "str",
+        "Any",
+        "Exception",
+        "Dict"
+      ],
+      "description": "Main execution entry point for TELOS tasks.\nRoutes tasks to appropriate scientific reasoning methods."
+    },
+    {
+      "name": "_predict_outcomes",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\telos_worker.py",
+      "lines": "258-321",
+      "complexity": 8,
+      "dependencies": [
+        "len",
+        "Any",
+        "str",
+        "Dict",
+        "hasattr",
+        "abs",
+        "isinstance",
+        "Exception",
+        "sum"
+      ],
+      "description": "Predict outcomes based on current state and interventions."
+    },
+    {
+      "name": "_causal_retrodiction",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\telos_worker.py",
+      "lines": "323-388",
+      "complexity": 8,
+      "dependencies": [
+        "len",
+        "Any",
+        "str",
+        "Dict",
+        "abs",
+        "isinstance",
+        "max",
+        "Exception",
+        "sorted"
+      ],
+      "description": "Infer likely causes from observed effects (retrodiction)."
+    },
+    {
+      "name": "_analyze_intervention",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\telos_worker.py",
+      "lines": "390-440",
+      "complexity": 8,
+      "dependencies": [
+        "Any",
+        "str",
+        "Dict",
+        "max",
+        "Exception",
+        "min"
+      ],
+      "description": "Analyze the causal effects of a proposed intervention."
+    },
+    {
+      "name": "_analyze_patterns",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\tetragnos_worker.py",
+      "lines": "370-427",
+      "complexity": 8,
+      "dependencies": [
+        "len",
+        "sum",
+        "all",
+        "Any",
+        "str",
+        "Dict",
+        "isinstance",
+        "Exception",
+        "sorted",
+        "dict"
+      ],
+      "description": "Analyze patterns in data using various techniques."
+    },
+    {
+      "name": "execute",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\thonoc_worker.py",
+      "lines": "951-987",
+      "complexity": 8,
+      "dependencies": [
+        "str",
+        "Any",
+        "Exception",
+        "Dict"
+      ],
+      "description": "Main execution entry point for THONOC tasks.\nRoutes tasks to appropriate logical reasoning methods."
+    },
+    {
+      "name": "AdvancedSemanticEngine",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\upgraded_tetragnos_worker.py",
+      "lines": "65-147",
+      "complexity": 8,
+      "dependencies": [
+        "DEFAULT_MODEL",
+        "hash",
+        "len",
+        "SentenceTransformer",
+        "enumerate",
+        "cosine_similarity",
+        "EMBEDDING_CACHE_SIZE",
+        "List",
+        "list",
+        "zip"
+      ],
+      "description": "High-performance semantic analysis engine using SentenceTransformers."
+    },
+    {
+      "name": "execute",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_thonoc_worker.py",
+      "lines": "620-670",
+      "complexity": 8,
+      "dependencies": [
+        "ValueError",
+        "Any",
+        "str",
+        "Dict",
+        "Exception"
+      ],
+      "description": "Execute THONOC task with advanced reasoning capabilities.\n\nArgs:\n    task_type: Specific task identifier\n    payload: Task parameters and data\n    \nReturns:\n    Comprehensive reasoning results"
+    },
+    {
+      "name": "add_mapping_pair",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\bijective_mapping.py",
+      "lines": "174-193",
+      "complexity": 7,
+      "dependencies": [
+        "Any"
+      ],
+      "description": "Add bijective mapping pair"
+    },
+    {
+      "name": "compose_mappings",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\bijective_mapping.py",
+      "lines": "437-468",
+      "complexity": 7,
+      "dependencies": [
+        "BijectiveMapping",
+        "Optional"
+      ],
+      "description": "Compose two bijective mappings"
+    },
+    {
+      "name": "find_similar_glyphs",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\cognitive_transducer_math.py",
+      "lines": "394-420",
+      "complexity": 7,
+      "dependencies": [
+        "range",
+        "FractalSemanticGlyph",
+        "int",
+        "List"
+      ],
+      "description": "Find semantically similar glyphs using geometric proximity"
+    },
+    {
+      "name": "TrinityFractalSystem",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\logos_mathematical_core.py",
+      "lines": "206-276",
+      "complexity": 7,
+      "dependencies": [
+        "len",
+        "Optional",
+        "Quaternion",
+        "abs",
+        "List",
+        "range",
+        "min",
+        "max",
+        "sum",
+        "OrbitAnalysis"
+      ],
+      "description": "Trinity-grounded fractal mathematics"
+    },
+    {
+      "name": "LOGOSMathematicalCore",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\logos_mathematical_core.py",
+      "lines": "473-566",
+      "complexity": 7,
+      "dependencies": [
+        "TrinityOptimizer",
+        "TrinityFractalSystem",
+        "Any",
+        "TLMManager",
+        "Quaternion",
+        "Dict",
+        "Exception",
+        "OBDCKernel"
+      ],
+      "description": "Integrated mathematical core for LOGOS AGI system"
+    },
+    {
+      "name": "GodelianDesireDriverImplementation",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "142-233",
+      "complexity": 7,
+      "dependencies": [
+        "hash",
+        "set",
+        "Set",
+        "any",
+        "Dict",
+        "Any",
+        "int",
+        "list",
+        "str",
+        "Exception"
+      ],
+      "description": "Generates the AGI's autonomous drive by detecting incompleteness in its\nown formal system and formulating targets to resolve those gaps."
+    },
+    {
+      "name": "generate_improvement_goals",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "377-396",
+      "complexity": 7,
+      "dependencies": [
+        "List"
+      ],
+      "description": "Generate specific goals for system improvement."
+    },
+    {
+      "name": "_process_authorized_request",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "753-771",
+      "complexity": 7,
+      "dependencies": [
+        "Any",
+        "str",
+        "Dict",
+        "Request",
+        "RequestType",
+        "Exception"
+      ],
+      "description": "Process an authorized request based on its type."
+    },
+    {
+      "name": "_forecast_time_series",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\telos_worker.py",
+      "lines": "495-545",
+      "complexity": 7,
+      "dependencies": [
+        "len",
+        "Any",
+        "str",
+        "Dict",
+        "list",
+        "Exception",
+        "min",
+        "float"
+      ],
+      "description": "Forecast future values of time series data."
+    },
+    {
+      "name": "execute",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\tetragnos_worker.py",
+      "lines": "134-165",
+      "complexity": 7,
+      "dependencies": [
+        "str",
+        "Any",
+        "Exception",
+        "Dict"
+      ],
+      "description": "Main execution entry point for TETRAGNOS tasks.\nRoutes tasks to appropriate processing methods."
+    },
+    {
+      "name": "_extract_features",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\tetragnos_worker.py",
+      "lines": "324-368",
+      "complexity": 7,
+      "dependencies": [
+        "len",
+        "all",
+        "set",
+        "Any",
+        "str",
+        "Dict",
+        "hasattr",
+        "isinstance",
+        "range",
+        "Exception"
+      ],
+      "description": "Extract semantic features from text or data."
+    },
+    {
+      "name": "_evaluate_modal_operation",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\thonoc_worker.py",
+      "lines": "296-314",
+      "complexity": 7,
+      "dependencies": [
+        "Any",
+        "Dict",
+        "Optional"
+      ],
+      "description": "Evaluate modal operations."
+    },
+    {
+      "name": "validate",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\unified_formalisms.py",
+      "lines": "205-222",
+      "complexity": 7,
+      "dependencies": [
+        "len",
+        "ValidationResult",
+        "enumerate",
+        "Any",
+        "Dict"
+      ],
+      "description": "Validate relational consistency"
+    },
+    {
+      "name": "_build_causal_model",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_telos_worker.py",
+      "lines": "723-755",
+      "complexity": 7,
+      "dependencies": [
+        "X",
+        "ValueError",
+        "len",
+        "Any",
+        "Dict",
+        "range"
+      ],
+      "description": "Build comprehensive causal model."
+    },
+    {
+      "name": "encode_texts",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_tetragnos_worker.py",
+      "lines": "88-136",
+      "complexity": 7,
+      "dependencies": [
+        "len",
+        "hash",
+        "enumerate",
+        "EMBEDDING_CACHE_SIZE",
+        "List",
+        "list",
+        "zip",
+        "MAX_BATCH_SIZE"
+      ],
+      "description": "Generate semantic embeddings for text collection.\n\nArgs:\n    texts: Collection of text strings for encoding\n    batch_size: Processing batch size for memory optimization\n    \nReturns:\n    Dense embedd..."
+    },
+    {
+      "name": "solve_equation_system",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_thonoc_worker.py",
+      "lines": "405-453",
+      "complexity": 7,
+      "dependencies": [
+        "Any",
+        "str",
+        "Dict",
+        "isinstance",
+        "Exception",
+        "type",
+        "List"
+      ],
+      "description": "Solve system of symbolic equations.\n\nArgs:\n    equations: List of equation strings\n    variables: Variables to solve for\n    \nReturns:\n    Solution set with analysis"
+    },
+    {
+      "name": "_analyze_goal_requirements",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_workflow_architect.py",
+      "lines": "128-170",
+      "complexity": 7,
+      "dependencies": [
+        "set",
+        "Any",
+        "any",
+        "Dict",
+        "min",
+        "sum"
+      ],
+      "description": "Analyze goal to determine required capabilities and workflow structure."
+    },
+    {
+      "name": "_create_reasoning_tasks",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_workflow_architect.py",
+      "lines": "248-316",
+      "complexity": 7,
+      "dependencies": [
+        "TaskType",
+        "TaskNode",
+        "Subsystem",
+        "Any",
+        "Dict",
+        "List"
+      ],
+      "description": "Create specialized reasoning tasks based on capabilities."
+    },
+    {
+      "name": "map_forward",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\bijective_mapping.py",
+      "lines": "115-152",
+      "complexity": 6,
+      "dependencies": [
+        "load_alignment_config",
+        "Optional",
+        "ReferenceMonitor",
+        "Any",
+        "Exception",
+        "PermissionError",
+        "OBDCKernel"
+      ],
+      "description": "Map element from source to target domain.\n\nALIGNMENT CORE: All mappings now go through OBDC kernel with proofs."
+    },
+    {
+      "name": "UniversalLanguagePlaneProjector",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\cognitive_transducer_math.py",
+      "lines": "144-242",
+      "complexity": 6,
+      "dependencies": [
+        "len",
+        "FractalSemanticGlyph",
+        "set",
+        "Tuple",
+        "int",
+        "list",
+        "max",
+        "range",
+        "min",
+        "CognitiveColor"
+      ],
+      "description": "Projects semantic content onto the Universal Language Plane"
+    },
+    {
+      "name": "TrinityFractalValidator",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\integration_harmonizer.py",
+      "lines": "83-232",
+      "complexity": 6,
+      "dependencies": [
+        "TrinityQuaternion",
+        "FractalSemanticGlyph",
+        "len",
+        "abs",
+        "List",
+        "range",
+        "min",
+        "max",
+        "sum",
+        "OrbitAnalysis"
+      ],
+      "description": "The Map of Truth - validates semantic understanding against axiomatic Trinity fractals"
+    },
+    {
+      "name": "_attempt_derivation",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\thonoc_worker.py",
+      "lines": "525-583",
+      "complexity": 6,
+      "dependencies": [
+        "Any",
+        "str",
+        "Dict"
+      ],
+      "description": "Attempt to derive the claim from axioms using inference rules."
+    },
+    {
+      "name": "_analyze_modal_properties",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\thonoc_worker.py",
+      "lines": "759-790",
+      "complexity": 6,
+      "dependencies": [
+        "Any",
+        "Dict",
+        "LogicalConnective",
+        "ModalOperator"
+      ],
+      "description": "Analyze modal properties (necessity, possibility) of an outcome."
+    },
+    {
+      "name": "UnifiedFormalismValidator",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\unified_formalisms.py",
+      "lines": "300-485",
+      "complexity": 6,
+      "dependencies": [
+        "_RealitySetValidator",
+        "len",
+        "_ExistenceSetValidator",
+        "locals",
+        "_BijectiveEngine",
+        "Proposition",
+        "_BoundarySetValidator",
+        "Any",
+        "Dict",
+        "_CoherenceFormalismValidator"
+      ],
+      "description": "The central safety system that validates ALL operations against Trinity-grounded axioms.\n\nThis is the critical safety feature that ensures no operation can proceed without\nproper validation against ex..."
+    },
+    {
+      "name": "_are_contradictory_relations",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\unified_formalisms.py",
+      "lines": "224-242",
+      "complexity": 6,
+      "dependencies": [],
+      "description": "Check if two relations are contradictory"
+    },
+    {
+      "name": "AdvancedBayesianEngine",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\upgraded_telos_worker.py",
+      "lines": "432-553",
+      "complexity": 6,
+      "dependencies": [
+        "X",
+        "Any",
+        "str",
+        "Dict",
+        "range",
+        "Exception",
+        "float"
+      ],
+      "description": "Bayesian inference and uncertainty quantification using PyMC."
+    },
+    {
+      "name": "discover_causal_structure",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_telos_worker.py",
+      "lines": "255-280",
+      "complexity": 6,
+      "dependencies": [
+        "ValueError",
+        "Optional",
+        "Any",
+        "Dict",
+        "MAX_CAUSAL_VARIABLES",
+        "range",
+        "List"
+      ],
+      "description": "Discover causal structure from observational data.\n\nArgs:\n    data: Observational data matrix (n_samples, n_variables)\n    variable_names: Optional variable names\n    method: Causal discovery algorith..."
+    },
+    {
+      "name": "_add_intra_stage_dependencies",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_workflow_architect.py",
+      "lines": "358-372",
+      "complexity": 6,
+      "dependencies": [
+        "TaskType",
+        "List",
+        "TaskNode"
+      ],
+      "description": "Add dependencies within reasoning stage where logical."
+    },
+    {
+      "name": "_find_critical_path",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_workflow_architect.py",
+      "lines": "410-431",
+      "complexity": 6,
+      "dependencies": [
+        "List",
+        "sum"
+      ],
+      "description": "Find the critical path (longest path) through the workflow."
+    },
+    {
+      "name": "_validate_workflow_dag",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_workflow_architect.py",
+      "lines": "442-459",
+      "complexity": 6,
+      "dependencies": [
+        "ValueError"
+      ],
+      "description": "Validate that the workflow DAG meets requirements."
+    },
+    {
+      "name": "_is_transitive",
+      "type": "function",
+      "file": "LOGOS_AGI\\code base\\framework_deployment.py",
+      "lines": "137-143",
+      "complexity": 5,
+      "dependencies": [
+        "Tuple",
+        "List"
+      ],
+      "description": "Check transitivity of accessibility relation"
+    },
+    {
+      "name": "_continue_workflow_execution",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\archon_nexus_complete.py",
+      "lines": "458-484",
+      "complexity": 5,
+      "dependencies": [
+        "WorkflowExecution",
+        "len",
+        "all",
+        "WorkflowStatus",
+        "TaskStatus"
+      ],
+      "description": "Continue workflow execution by starting ready tasks."
+    },
+    {
+      "name": "map_inverse",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\bijective_mapping.py",
+      "lines": "154-172",
+      "complexity": 5,
+      "dependencies": [
+        "Any",
+        "Exception",
+        "Optional"
+      ],
+      "description": "Map element from target to source domain"
+    },
+    {
+      "name": "verify_bijection",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\bijective_mapping.py",
+      "lines": "195-220",
+      "complexity": 5,
+      "dependencies": [
+        "len",
+        "set",
+        "Any",
+        "Dict",
+        "list"
+      ],
+      "description": "Verify that mapping is truly bijective"
+    },
+    {
+      "name": "map_across_domains",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\bijective_mapping.py",
+      "lines": "536-559",
+      "complexity": 5,
+      "dependencies": [
+        "Any",
+        "Optional"
+      ],
+      "description": "Map element across multiple domains using bijective path"
+    },
+    {
+      "name": "reduce",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\lambda_calculus.py",
+      "lines": "310-345",
+      "complexity": 5,
+      "dependencies": [
+        "len",
+        "set",
+        "ReductionStep",
+        "LambdaExpression",
+        "Tuple",
+        "List"
+      ],
+      "description": "Reduce lambda expression to normal form"
+    },
+    {
+      "name": "bootstrap",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\logos_mathematical_core.py",
+      "lines": "485-524",
+      "complexity": 5,
+      "dependencies": [
+        "Exception",
+        "Quaternion"
+      ],
+      "description": "Bootstrap and verify complete mathematical system"
+    },
+    {
+      "name": "_formulate_target_from_gap",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "198-213",
+      "complexity": 5,
+      "dependencies": [
+        "any"
+      ],
+      "description": "Converts an explanation of a knowledge gap into a research query/goal."
+    },
+    {
+      "name": "_pc_algorithm",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_telos_worker.py",
+      "lines": "282-314",
+      "complexity": 5,
+      "dependencies": [
+        "len",
+        "Any",
+        "str",
+        "Dict",
+        "range",
+        "Exception",
+        "pc",
+        "List"
+      ],
+      "description": "PC algorithm for causal discovery."
+    },
+    {
+      "name": "_ges_algorithm",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_telos_worker.py",
+      "lines": "316-348",
+      "complexity": 5,
+      "dependencies": [
+        "len",
+        "Record",
+        "ges",
+        "Any",
+        "str",
+        "Dict",
+        "range",
+        "Exception",
+        "List"
+      ],
+      "description": "GES algorithm for causal discovery."
+    },
+    {
+      "name": "_lingam_algorithm",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_telos_worker.py",
+      "lines": "350-384",
+      "complexity": 5,
+      "dependencies": [
+        "len",
+        "Any",
+        "str",
+        "Dict",
+        "hasattr",
+        "range",
+        "Exception",
+        "float",
+        "List"
+      ],
+      "description": "LiNGAM algorithm for linear causal discovery."
+    },
+    {
+      "name": "adaptive_clustering",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_tetragnos_worker.py",
+      "lines": "156-179",
+      "complexity": 5,
+      "dependencies": [
+        "Any",
+        "ValueError",
+        "Dict"
+      ],
+      "description": "Perform adaptive clustering with automatic algorithm selection.\n\nArgs:\n    embeddings: Dense feature matrix for clustering\n    method: Clustering algorithm ('auto', 'dbscan', 'hierarchical', 'kmeans')..."
+    },
+    {
+      "name": "_generate_cluster_summaries",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_tetragnos_worker.py",
+      "lines": "567-591",
+      "complexity": 5,
+      "dependencies": [
+        "len",
+        "enumerate",
+        "Any",
+        "Dict",
+        "List"
+      ],
+      "description": "Generate interpretable summaries for each cluster."
+    },
+    {
+      "name": "construct_proof",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_thonoc_worker.py",
+      "lines": "69-97",
+      "complexity": 5,
+      "dependencies": [
+        "ValueError",
+        "Any",
+        "str",
+        "Dict",
+        "Exception",
+        "List"
+      ],
+      "description": "Construct formal proof from premises to conclusion.\n\nArgs:\n    premises: List of logical premises\n    conclusion: Target conclusion to prove\n    logic_type: Type of logic ('propositional', 'predicate'..."
+    },
+    {
+      "name": "_build_from_template",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_workflow_architect.py",
+      "lines": "172-191",
+      "complexity": 5,
+      "dependencies": [
+        "Any",
+        "Dict"
+      ],
+      "description": "Build workflow from matching template."
+    },
+    {
+      "name": "_add_stage_dependencies",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_workflow_architect.py",
+      "lines": "345-356",
+      "complexity": 5,
+      "dependencies": [
+        "List",
+        "TaskNode"
+      ],
+      "description": "Add dependencies between workflow stages."
+    },
+    {
+      "name": "test_tetragnos_cluster_texts",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\worker_test_suite.py",
+      "lines": "145-211",
+      "complexity": 5,
+      "dependencies": [
+        "str",
+        "Exception",
+        "TestResult",
+        "TEST_CONFIG"
+      ],
+      "description": "Test TETRAGNOS text clustering functionality."
+    },
+    {
+      "name": "test_telos_predict_outcomes",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\worker_test_suite.py",
+      "lines": "213-283",
+      "complexity": 5,
+      "dependencies": [
+        "str",
+        "Exception",
+        "TestResult",
+        "TEST_CONFIG"
+      ],
+      "description": "Test TELOS outcome prediction functionality."
+    },
+    {
+      "name": "mandelbrot_dynamics",
+      "type": "function",
+      "file": "LOGOS_AGI\\code base\\framework_deployment.py",
+      "lines": "304-329",
+      "complexity": 4,
+      "dependencies": [
+        "len",
+        "Any",
+        "Dict",
+        "abs",
+        "complex"
+      ],
+      "description": "Analyze Mandelbrot dynamics for complex parameter c"
+    },
+    {
+      "name": "_interpret_relational_completeness",
+      "type": "function",
+      "file": "LOGOS_AGI\\code base\\framework_deployment.py",
+      "lines": "448-457",
+      "complexity": 4,
+      "dependencies": [],
+      "description": "Interpret relational completeness value"
+    },
+    {
+      "name": "design_workflow",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\archon_nexus_complete.py",
+      "lines": "162-202",
+      "complexity": 4,
+      "dependencies": [
+        "WorkflowExecution",
+        "ValueError",
+        "len",
+        "WorkflowStatus",
+        "Any",
+        "Dict"
+      ],
+      "description": "Design a DAG workflow for achieving the given goal."
+    },
+    {
+      "name": "start",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\archon_nexus_complete.py",
+      "lines": "666-702",
+      "complexity": 4,
+      "dependencies": [
+        "AgentOrchestrator",
+        "Exception",
+        "KeyboardInterrupt"
+      ],
+      "description": "Start the Archon Nexus service."
+    },
+    {
+      "name": "_handle_goal_message",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\archon_nexus_main.py",
+      "lines": "175-205",
+      "complexity": 4,
+      "dependencies": [
+        "Exception"
+      ],
+      "description": "Process incoming goal for workflow design and execution."
+    },
+    {
+      "name": "start",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\archon_nexus_main.py",
+      "lines": "241-276",
+      "complexity": 4,
+      "dependencies": [
+        "AgentOrchestrator",
+        "Exception",
+        "KeyboardInterrupt"
+      ],
+      "description": "Initialize and start Archon Nexus service."
+    },
+    {
+      "name": "enforce_trinity_confluence",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\bijective_mapping.py",
+      "lines": "265-285",
+      "complexity": 4,
+      "dependencies": [
+        "len",
+        "enumerate",
+        "Any",
+        "Dict",
+        "BijectiveMapping",
+        "List"
+      ],
+      "description": "Enforce confluence across multiple bijective mappings"
+    },
+    {
+      "name": "_check_composition_confluence",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\bijective_mapping.py",
+      "lines": "298-312",
+      "complexity": 4,
+      "dependencies": [
+        "BijectiveMapping",
+        "Any",
+        "Dict"
+      ],
+      "description": "Check confluence for composable mappings"
+    },
+    {
+      "name": "_check_commutation",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\integration_harmonizer.py",
+      "lines": "266-283",
+      "complexity": 4,
+      "dependencies": [
+        "FractalSemanticGlyph",
+        "OrbitAnalysis",
+        "abs"
+      ],
+      "description": "Check if semantic and Trinity fractals commute"
+    },
+    {
+      "name": "_perform_alignment",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\integration_harmonizer.py",
+      "lines": "285-319",
+      "complexity": 4,
+      "dependencies": [
+        "FractalSemanticGlyph",
+        "OrbitAnalysis"
+      ],
+      "description": "Perform corrective alignment between semantic and Trinity fractals"
+    },
+    {
+      "name": "publish_request",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\keryx_api_gateway.py",
+      "lines": "122-150",
+      "complexity": 4,
+      "dependencies": [
+        "Any",
+        "Exception",
+        "Dict",
+        "LOGOS_NEXUS_REQUESTS"
+      ],
+      "description": "Publish request to Logos Nexus for safety validation.\n\nArgs:\n    request_data: Request payload for processing\n    \nReturns:\n    True if publication successful, False otherwise"
+    },
+    {
+      "name": "_generate_improvement_strategies",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "492-512",
+      "complexity": 4,
+      "dependencies": [
+        "Any",
+        "Dict",
+        "List"
+      ],
+      "description": "Generate specific improvement strategies."
+    },
+    {
+      "name": "_validate_strategies",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "514-522",
+      "complexity": 4,
+      "dependencies": [
+        "Any",
+        "Dict",
+        "List"
+      ],
+      "description": "Validate improvement strategies for safety and feasibility."
+    },
+    {
+      "name": "_process_system_command",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "840-853",
+      "complexity": 4,
+      "dependencies": [
+        "Any",
+        "Dict",
+        "Request"
+      ],
+      "description": "Process system-level commands."
+    },
+    {
+      "name": "_check_contradictions",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\mathematical_axioms.py",
+      "lines": "225-238",
+      "complexity": 4,
+      "dependencies": [
+        "enumerate"
+      ],
+      "description": "Check for contradictions in axiom system"
+    },
+    {
+      "name": "verify",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\mathematical_axioms.py",
+      "lines": "403-413",
+      "complexity": 4,
+      "dependencies": [
+        "len",
+        "AxiomSystem"
+      ],
+      "description": "Verify proof against axiom system"
+    },
+    {
+      "name": "counterfactual",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\telos_worker.py",
+      "lines": "138-165",
+      "complexity": 4,
+      "dependencies": [
+        "max",
+        "Any",
+        "Dict",
+        "tuple"
+      ],
+      "description": "Evaluate a counterfactual query: P(target | do(intervention), context)."
+    },
+    {
+      "name": "_moving_average_forecast",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\telos_worker.py",
+      "lines": "584-613",
+      "complexity": 4,
+      "dependencies": [
+        "len",
+        "Any",
+        "Dict",
+        "range",
+        "sum",
+        "List"
+      ],
+      "description": "Moving average forecasting."
+    },
+    {
+      "name": "_build_causal_model",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\telos_worker.py",
+      "lines": "723-771",
+      "complexity": 4,
+      "dependencies": [
+        "len",
+        "Any",
+        "SCMImplementation",
+        "Dict",
+        "str",
+        "Exception",
+        "sum"
+      ],
+      "description": "Build a structural causal model from data."
+    },
+    {
+      "name": "_initialize_ml_components",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\tetragnos_worker.py",
+      "lines": "90-111",
+      "complexity": 4,
+      "dependencies": [
+        "KMeans",
+        "PCA",
+        "SentenceTransformer",
+        "SENTENCE_TRANSFORMERS_AVAILABLE",
+        "Exception",
+        "DBSCAN",
+        "SKLEARN_AVAILABLE",
+        "TfidfVectorizer"
+      ],
+      "description": "Initialize machine learning and NLP components."
+    },
+    {
+      "name": "_perform_modal_reasoning",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\thonoc_worker.py",
+      "lines": "1104-1148",
+      "complexity": 4,
+      "dependencies": [
+        "len",
+        "enumerate",
+        "Any",
+        "str",
+        "Dict",
+        "Exception",
+        "ModalOperator"
+      ],
+      "description": "Perform modal logic reasoning about necessity and possibility."
+    },
+    {
+      "name": "_detect_circular_reasoning",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\unified_formalisms.py",
+      "lines": "275-284",
+      "complexity": 4,
+      "dependencies": [
+        "List",
+        "Proposition"
+      ],
+      "description": "Detect circular reasoning patterns"
+    },
+    {
+      "name": "validate_agi_operation",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\unified_formalisms.py",
+      "lines": "325-422",
+      "complexity": 4,
+      "dependencies": [
+        "locals",
+        "Proposition",
+        "Any",
+        "str",
+        "Dict"
+      ],
+      "description": "Validate any AGI operation request against all formalisms.\n\nThis is the single point of validation that ALL operations must pass through.\nNo operation should ever proceed without calling this method.\n..."
+    },
+    {
+      "name": "forecast_series_advanced",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_telos_worker.py",
+      "lines": "85-119",
+      "complexity": 4,
+      "dependencies": [
+        "DEFAULT_FORECAST_PERIODS",
+        "ValueError",
+        "len",
+        "Any",
+        "Dict",
+        "Union",
+        "MIN_SERIES_LENGTH",
+        "List"
+      ],
+      "description": "Advanced time series forecasting with ARIMA and GARCH models.\n\nArgs:\n    data: Historical time series data\n    periods: Number of periods to forecast\n    include_volatility: Whether to model condition..."
+    },
+    {
+      "name": "_predict_outcomes_advanced",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_telos_worker.py",
+      "lines": "680-693",
+      "complexity": 4,
+      "dependencies": [
+        "X",
+        "ValueError",
+        "len",
+        "Any",
+        "Dict"
+      ],
+      "description": "Advanced outcome prediction using Bayesian methods."
+    },
+    {
+      "name": "_prove_modal",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_thonoc_worker.py",
+      "lines": "243-276",
+      "complexity": 4,
+      "dependencies": [
+        "Any",
+        "str",
+        "Dict",
+        "list",
+        "range",
+        "Exception",
+        "List"
+      ],
+      "description": "Modal logic proof using custom modal reasoning."
+    },
+    {
+      "name": "_evaluate_modal_formula",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_thonoc_worker.py",
+      "lines": "562-582",
+      "complexity": 4,
+      "dependencies": [
+        "Any",
+        "any",
+        "Dict",
+        "all"
+      ],
+      "description": "Evaluate modal formula in worlds model."
+    },
+    {
+      "name": "_design_custom_workflow",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_workflow_architect.py",
+      "lines": "193-220",
+      "complexity": 4,
+      "dependencies": [
+        "Any",
+        "Dict"
+      ],
+      "description": "Design custom workflow based on goal analysis."
+    },
+    {
+      "name": "EmpiricalPredictor",
+      "type": "class",
+      "file": "LOGOS_AGI\\code base\\framework_deployment.py",
+      "lines": "580-694",
+      "complexity": 3,
+      "dependencies": [
+        "len",
+        "sum",
+        "Any",
+        "Dict",
+        "zip",
+        "dict"
+      ],
+      "description": "Generate and test empirical predictions from Trinity framework"
+    },
+    {
+      "name": "validate_modal_necessity",
+      "type": "function",
+      "file": "LOGOS_AGI\\code base\\framework_deployment.py",
+      "lines": "96-101",
+      "complexity": 3,
+      "dependencies": [
+        "Dict",
+        "List",
+        "Tuple"
+      ],
+      "description": "Validate MN axiom: S5 modal logic with equivalence relation"
+    },
+    {
+      "name": "run_statistical_validation",
+      "type": "function",
+      "file": "LOGOS_AGI\\code base\\framework_deployment.py",
+      "lines": "660-694",
+      "complexity": 3,
+      "dependencies": [
+        "len",
+        "sum",
+        "Any",
+        "Dict",
+        "zip",
+        "dict"
+      ],
+      "description": "Run statistical validation of predictions against observations"
+    },
+    {
+      "name": "ArchonPlannerGate",
+      "type": "class",
+      "file": "LOGOS_AGI\\logos_alignment_core\\logos_core\\archon_planner.py",
+      "lines": "5-23",
+      "complexity": 3,
+      "dependencies": [
+        "preserves_invariants",
+        "ValueError",
+        "ReferenceMonitor",
+        "dict"
+      ],
+      "description": "ClassDef ArchonPlannerGate"
+    },
+    {
+      "name": "authorize_plan",
+      "type": "function",
+      "file": "LOGOS_AGI\\logos_alignment_core\\logos_core\\archon_planner.py",
+      "lines": "18-23",
+      "complexity": 3,
+      "dependencies": [
+        "ValueError"
+      ],
+      "description": "FunctionDef authorize_plan"
+    },
+    {
+      "name": "_complete_workflow",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\archon_nexus_complete.py",
+      "lines": "486-514",
+      "complexity": 3,
+      "dependencies": [
+        "WorkflowExecution",
+        "len",
+        "WorkflowStatus"
+      ],
+      "description": "Complete workflow execution."
+    },
+    {
+      "name": "stop",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\archon_nexus_complete.py",
+      "lines": "704-715",
+      "complexity": 3,
+      "dependencies": [],
+      "description": "Stop the Archon Nexus service."
+    },
+    {
+      "name": "_handle_result_message",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\archon_nexus_main.py",
+      "lines": "207-225",
+      "complexity": 3,
+      "dependencies": [
+        "Exception"
+      ],
+      "description": "Process task result from worker subsystems."
+    },
+    {
+      "name": "stop",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\archon_nexus_main.py",
+      "lines": "278-289",
+      "complexity": 3,
+      "dependencies": [],
+      "description": "Terminate Archon Nexus service with cleanup."
+    },
+    {
+      "name": "Domain",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\bijective_mapping.py",
+      "lines": "69-95",
+      "complexity": 3,
+      "dependencies": [
+        "field",
+        "Set",
+        "Any",
+        "DomainType",
+        "Dict",
+        "TrinityVector",
+        "Callable"
+      ],
+      "description": "Mathematical domain for bijective mappings"
+    },
+    {
+      "name": "add_mapping",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\bijective_mapping.py",
+      "lines": "385-399",
+      "complexity": 3,
+      "dependencies": [
+        "BijectiveMapping"
+      ],
+      "description": "Add bijective mapping to kernel"
+    },
+    {
+      "name": "KnowledgeItem",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\core_data_structures.py",
+      "lines": "283-300",
+      "complexity": 3,
+      "dependencies": [
+        "str",
+        "Dict",
+        "List",
+        "field"
+      ],
+      "description": "Structured knowledge item"
+    },
+    {
+      "name": "add_relationship",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\core_data_structures.py",
+      "lines": "295-300",
+      "complexity": 3,
+      "dependencies": [],
+      "description": "Add relationship to another knowledge item"
+    },
+    {
+      "name": "demonstration_example",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\integration_harmonizer.py",
+      "lines": "515-548",
+      "complexity": 3,
+      "dependencies": [
+        "UniversalLanguagePlaneProjector",
+        "create_integrated_logos_system",
+        "CognitiveColor",
+        "print",
+        "SemanticDomain"
+      ],
+      "description": "Demonstration of LOGOS harmonization system"
+    },
+    {
+      "name": "enforce_commutation",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\integration_harmonizer.py",
+      "lines": "246-264",
+      "complexity": 3,
+      "dependencies": [
+        "FractalSemanticGlyph",
+        "OrbitAnalysis"
+      ],
+      "description": "Enforce commutation between semantic and Trinity fractals"
+    },
+    {
+      "name": "validate_semantic_understanding",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\integration_harmonizer.py",
+      "lines": "430-457",
+      "complexity": 3,
+      "dependencies": [
+        "UniversalLanguagePlaneProjector",
+        "Any",
+        "Dict",
+        "CognitiveColor",
+        "SemanticDomain"
+      ],
+      "description": "Validate semantic understanding against Trinity axioms"
+    },
+    {
+      "name": "verify_commutation",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\logos_mathematical_core.py",
+      "lines": "307-335",
+      "complexity": 3,
+      "dependencies": [
+        "Any",
+        "Dict"
+      ],
+      "description": "Verify OBDC commutation relationships"
+    },
+    {
+      "name": "detect_gap",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "158-196",
+      "complexity": 3,
+      "dependencies": [
+        "hash",
+        "Any",
+        "str",
+        "Dict",
+        "int",
+        "Exception"
+      ],
+      "description": "The primary entry point for generating desire. Called when modules\nencounter concepts they cannot fully process or fulfill."
+    },
+    {
+      "name": "identify_improvement_opportunities",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "358-375",
+      "complexity": 3,
+      "dependencies": [
+        "Any",
+        "Dict",
+        "List"
+      ],
+      "description": "Identify areas where the system can be improved."
+    },
+    {
+      "name": "validate_improvement_safety",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "398-416",
+      "complexity": 3,
+      "dependencies": [
+        "any"
+      ],
+      "description": "Validate that an improvement goal meets safety constraints."
+    },
+    {
+      "name": "process_external_request",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "636-697",
+      "complexity": 3,
+      "dependencies": [
+        "RequestType",
+        "Exception",
+        "Request"
+      ],
+      "description": "Process external requests with MANDATORY authorization via UnifiedFormalismValidator.\nThis is the PRIMARY SAFETY GATE - NO request proceeds without validation."
+    },
+    {
+      "name": "_authorize_request",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "699-751",
+      "complexity": 3,
+      "dependencies": [
+        "Any",
+        "str",
+        "Dict",
+        "Request",
+        "Exception",
+        "PermissionError"
+      ],
+      "description": "CRITICAL SAFETY FUNCTION: Authorize request via UnifiedFormalismValidator.\n\nThis is the PRIMARY SAFETY GATE of the entire AGI system.\nNO operation should proceed without passing this validation."
+    },
+    {
+      "name": "_check_logical_completeness",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\mathematical_axioms.py",
+      "lines": "284-294",
+      "complexity": 3,
+      "dependencies": [],
+      "description": "Check logical completeness of axiom system"
+    },
+    {
+      "name": "_initialize_analysis_tools",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\telos_worker.py",
+      "lines": "206-218",
+      "complexity": 3,
+      "dependencies": [
+        "SKLEARN_AVAILABLE",
+        "Exception",
+        "LinearRegression",
+        "RandomForestRegressor"
+      ],
+      "description": "Initialize scientific analysis and forecasting tools."
+    },
+    {
+      "name": "_linear_trend_forecast",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\telos_worker.py",
+      "lines": "547-582",
+      "complexity": 3,
+      "dependencies": [
+        "len",
+        "float",
+        "Any",
+        "Dict",
+        "list",
+        "range",
+        "sum",
+        "List"
+      ],
+      "description": "Simple linear trend forecasting."
+    },
+    {
+      "name": "_exponential_smoothing_forecast",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\telos_worker.py",
+      "lines": "615-640",
+      "complexity": 3,
+      "dependencies": [
+        "len",
+        "float",
+        "Any",
+        "Dict",
+        "range",
+        "sum",
+        "List"
+      ],
+      "description": "Exponential smoothing forecasting."
+    },
+    {
+      "name": "process_task",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\telos_worker.py",
+      "lines": "843-899",
+      "complexity": 3,
+      "dependencies": [
+        "str",
+        "int",
+        "Exception",
+        "RESULT_QUEUE",
+        "SUBSYSTEM_NAME"
+      ],
+      "description": "Process incoming task messages."
+    },
+    {
+      "name": "_create_fallback_components",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\tetragnos_worker.py",
+      "lines": "113-132",
+      "complexity": 3,
+      "dependencies": [
+        "set",
+        "FallbackVectorizer",
+        "list"
+      ],
+      "description": "Create simple fallback implementations when ML libraries aren't available."
+    },
+    {
+      "name": "process_task",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\tetragnos_worker.py",
+      "lines": "579-635",
+      "complexity": 3,
+      "dependencies": [
+        "str",
+        "int",
+        "Exception",
+        "RESULT_QUEUE",
+        "SUBSYSTEM_NAME"
+      ],
+      "description": "Process incoming task messages."
+    },
+    {
+      "name": "fit_transform",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\tetragnos_worker.py",
+      "lines": "118-130",
+      "complexity": 3,
+      "dependencies": [
+        "set",
+        "list"
+      ],
+      "description": "FunctionDef fit_transform"
+    },
+    {
+      "name": "assign_consequence",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\thonoc_worker.py",
+      "lines": "718-757",
+      "complexity": 3,
+      "dependencies": [
+        "str",
+        "Any",
+        "Exception",
+        "Dict"
+      ],
+      "description": "Assign modal consequences to outcomes based on their properties.\nDetermines necessity, possibility, and moral implications."
+    },
+    {
+      "name": "_assign_consequence",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\thonoc_worker.py",
+      "lines": "1039-1063",
+      "complexity": 3,
+      "dependencies": [
+        "str",
+        "Any",
+        "Exception",
+        "Dict"
+      ],
+      "description": "Assign modal consequences to outcomes."
+    },
+    {
+      "name": "process_task",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\thonoc_worker.py",
+      "lines": "1339-1395",
+      "complexity": 3,
+      "dependencies": [
+        "str",
+        "int",
+        "Exception",
+        "RESULT_QUEUE",
+        "SUBSYSTEM_NAME"
+      ],
+      "description": "Process incoming task messages."
+    },
+    {
+      "name": "_discover_causal_structure",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_telos_worker.py",
+      "lines": "634-650",
+      "complexity": 3,
+      "dependencies": [
+        "Any",
+        "ValueError",
+        "Dict",
+        "len"
+      ],
+      "description": "Causal structure discovery from data."
+    },
+    {
+      "name": "start",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_telos_worker.py",
+      "lines": "776-785",
+      "complexity": 3,
+      "dependencies": [
+        "Exception"
+      ],
+      "description": "Start the TELOS worker service."
+    },
+    {
+      "name": "AdvancedFeatureExtractor",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\upgraded_tetragnos_worker.py",
+      "lines": "303-401",
+      "complexity": 3,
+      "dependencies": [
+        "len",
+        "set",
+        "Any",
+        "str",
+        "Dict",
+        "List",
+        "Exception",
+        "TfidfVectorizer"
+      ],
+      "description": "Multi-modal feature extraction with dimensionality reduction."
+    },
+    {
+      "name": "_select_optimal_method",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_tetragnos_worker.py",
+      "lines": "181-197",
+      "complexity": 3,
+      "dependencies": [],
+      "description": "Select optimal clustering algorithm based on data characteristics.\n\nArgs:\n    embeddings: Feature matrix for analysis\n    \nReturns:\n    Recommended clustering algorithm identifier"
+    },
+    {
+      "name": "_find_optimal_k",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_tetragnos_worker.py",
+      "lines": "273-289",
+      "complexity": 3,
+      "dependencies": [
+        "KMeans",
+        "range",
+        "len"
+      ],
+      "description": "Find optimal number of clusters using elbow method."
+    },
+    {
+      "name": "_compute_silhouette_score",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_tetragnos_worker.py",
+      "lines": "291-301",
+      "complexity": 3,
+      "dependencies": [
+        "set",
+        "silhouette_score",
+        "len"
+      ],
+      "description": "Compute silhouette score for clustering quality assessment."
+    },
+    {
+      "name": "_extract_features_advanced",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_tetragnos_worker.py",
+      "lines": "490-509",
+      "complexity": 3,
+      "dependencies": [
+        "Any",
+        "ValueError",
+        "Dict"
+      ],
+      "description": "Advanced feature extraction with multiple modalities."
+    },
+    {
+      "name": "start",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_tetragnos_worker.py",
+      "lines": "624-633",
+      "complexity": 3,
+      "dependencies": [
+        "Exception"
+      ],
+      "description": "Start the TETRAGNOS worker service."
+    },
+    {
+      "name": "_create_worlds_model",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_thonoc_worker.py",
+      "lines": "537-560",
+      "complexity": 3,
+      "dependencies": [
+        "range",
+        "len",
+        "Dict",
+        "Any"
+      ],
+      "description": "Create Kripke model for modal evaluation."
+    },
+    {
+      "name": "_evaluate_necessity",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_thonoc_worker.py",
+      "lines": "584-592",
+      "complexity": 3,
+      "dependencies": [
+        "Any",
+        "Dict"
+      ],
+      "description": "Evaluate necessity operator."
+    },
+    {
+      "name": "_evaluate_possibility",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_thonoc_worker.py",
+      "lines": "594-602",
+      "complexity": 3,
+      "dependencies": [
+        "Any",
+        "Dict"
+      ],
+      "description": "Evaluate possibility operator."
+    },
+    {
+      "name": "start",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_thonoc_worker.py",
+      "lines": "860-869",
+      "complexity": 3,
+      "dependencies": [
+        "Exception"
+      ],
+      "description": "Start the THONOC worker service."
+    },
+    {
+      "name": "_find_matching_template",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_workflow_architect.py",
+      "lines": "565-570",
+      "complexity": 3,
+      "dependencies": [
+        "WorkflowTemplate",
+        "len",
+        "Set",
+        "Optional"
+      ],
+      "description": "Find workflow template that matches required capabilities."
+    },
+    {
+      "name": "ThreePillarsSystem",
+      "type": "class",
+      "file": "LOGOS_AGI\\code base\\framework_deployment.py",
+      "lines": "774-918",
+      "complexity": 2,
+      "dependencies": [
+        "MESHIntegrator",
+        "AxiomValidator",
+        "TrinityOptimizer",
+        "LogosOperator",
+        "MandelbrotOperator",
+        "all",
+        "Any",
+        "Dict",
+        "range",
+        "OBDCKernel"
+      ],
+      "description": "Complete Three Pillars of Divine Necessity implementation"
+    },
+    {
+      "name": "relational_completeness_analysis",
+      "type": "function",
+      "file": "LOGOS_AGI\\code base\\framework_deployment.py",
+      "lines": "429-446",
+      "complexity": 2,
+      "dependencies": [
+        "range",
+        "Any",
+        "Dict",
+        "R"
+      ],
+      "description": "Analyze R(n) = n(n-1)/2 relational completeness function"
+    },
+    {
+      "name": "execute_workflow",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\archon_nexus_complete.py",
+      "lines": "303-316",
+      "complexity": 2,
+      "dependencies": [
+        "WorkflowExecution",
+        "WorkflowStatus"
+      ],
+      "description": "Execute a designed workflow."
+    },
+    {
+      "name": "main",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\archon_nexus_main.py",
+      "lines": "291-301",
+      "complexity": 2,
+      "dependencies": [
+        "Exception",
+        "ArchonNexus",
+        "KeyboardInterrupt"
+      ],
+      "description": "Service entry point."
+    },
+    {
+      "name": "_check_mapping_confluence",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\bijective_mapping.py",
+      "lines": "287-296",
+      "complexity": 2,
+      "dependencies": [
+        "BijectiveMapping",
+        "Any",
+        "Dict"
+      ],
+      "description": "Check confluence between two mappings"
+    },
+    {
+      "name": "UniversalCognitiveInterface",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\cognitive_transducer_math.py",
+      "lines": "573-642",
+      "complexity": 2,
+      "dependencies": [
+        "TrinityOptimizationEngine",
+        "UniversalLanguagePlaneProjector",
+        "Any",
+        "Dict",
+        "CognitiveForger",
+        "list",
+        "CognitiveColor",
+        "SemanticGlyphDatabase",
+        "List",
+        "SemanticDomain"
+      ],
+      "description": "Complete cognitive processing system interface"
+    },
+    {
+      "name": "store_glyph",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\cognitive_transducer_math.py",
+      "lines": "345-380",
+      "complexity": 2,
+      "dependencies": [
+        "Exception",
+        "FractalSemanticGlyph"
+      ],
+      "description": "Store semantic glyph in database"
+    },
+    {
+      "name": "forge_multi_perspective_synthesis",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\cognitive_transducer_math.py",
+      "lines": "519-567",
+      "complexity": 2,
+      "dependencies": [
+        "FractalSemanticGlyph",
+        "UniversalLanguagePlaneProjector",
+        "Any",
+        "Dict",
+        "CognitiveColor",
+        "SemanticDomain"
+      ],
+      "description": "Forge synthesis from multiple subsystem outputs"
+    },
+    {
+      "name": "semantic_search",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\cognitive_transducer_math.py",
+      "lines": "611-629",
+      "complexity": 2,
+      "dependencies": [
+        "Any",
+        "Dict",
+        "list",
+        "CognitiveColor",
+        "List",
+        "SemanticDomain"
+      ],
+      "description": "Perform semantic search across the knowledge base"
+    },
+    {
+      "name": "SubsystemStatus",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\core_data_structures.py",
+      "lines": "259-280",
+      "complexity": 2,
+      "dependencies": [
+        "SubsystemType",
+        "Optional",
+        "SystemMetrics",
+        "field",
+        "SystemState",
+        "List"
+      ],
+      "description": "Status information for a subsystem"
+    },
+    {
+      "name": "is_healthy",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\core_data_structures.py",
+      "lines": "270-276",
+      "complexity": 2,
+      "dependencies": [
+        "SystemState"
+      ],
+      "description": "Check if subsystem is healthy"
+    },
+    {
+      "name": "TrinityOptimalityPrinciple",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\core_principles.py",
+      "lines": "295-327",
+      "complexity": 2,
+      "dependencies": [
+        "len",
+        "Optional",
+        "Any",
+        "str",
+        "Tuple",
+        "Dict",
+        "Principle",
+        "super",
+        "sum",
+        "PrincipleScope"
+      ],
+      "description": "Principle that operations should optimize for Trinity (n=3)"
+    },
+    {
+      "name": "get_violations",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\core_principles.py",
+      "lines": "433-437",
+      "complexity": 2,
+      "dependencies": [
+        "PrincipleViolation",
+        "List",
+        "Optional"
+      ],
+      "description": "Get violations, optionally filtered by severity"
+    },
+    {
+      "name": "main",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\database_service.py",
+      "lines": "395-406",
+      "complexity": 2,
+      "dependencies": [
+        "Exception",
+        "DatabaseService"
+      ],
+      "description": "Main entry point for the database service."
+    },
+    {
+      "name": "TrinityQuaternion",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\integration_harmonizer.py",
+      "lines": "43-81",
+      "complexity": 2,
+      "dependencies": [
+        "TrinityQuaternion",
+        "Tuple",
+        "complex",
+        "abs"
+      ],
+      "description": "Quaternion representation for Trinity fractal coordinates"
+    },
+    {
+      "name": "start_harmonization_service",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\integration_harmonizer.py",
+      "lines": "349-355",
+      "complexity": 2,
+      "dependencies": [],
+      "description": "Start background harmonization service"
+    },
+    {
+      "name": "stop_harmonization_service",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\integration_harmonizer.py",
+      "lines": "357-362",
+      "complexity": 2,
+      "dependencies": [],
+      "description": "Stop background harmonization service"
+    },
+    {
+      "name": "harmonize_semantic_glyph",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\integration_harmonizer.py",
+      "lines": "382-392",
+      "complexity": 2,
+      "dependencies": [
+        "FractalSemanticGlyph",
+        "Optional"
+      ],
+      "description": "Harmonize semantic glyph with Trinity fractals"
+    },
+    {
+      "name": "search_harmonized_knowledge",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\integration_harmonizer.py",
+      "lines": "459-483",
+      "complexity": 2,
+      "dependencies": [
+        "Any",
+        "Dict",
+        "List"
+      ],
+      "description": "Search for harmonized semantic knowledge"
+    },
+    {
+      "name": "TrinityOptimizer",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\logos_mathematical_core.py",
+      "lines": "120-179",
+      "complexity": 2,
+      "dependencies": [
+        "range",
+        "min",
+        "Dict",
+        "Any"
+      ],
+      "description": "Implements the Trinity Optimization Theorem: O(n) minimized at n=3"
+    },
+    {
+      "name": "main",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "1146-1153",
+      "complexity": 2,
+      "dependencies": [
+        "Exception",
+        "LogosNexus"
+      ],
+      "description": "Main entry point for the Logos Nexus service."
+    },
+    {
+      "name": "assess_system_capabilities",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "338-356",
+      "complexity": 2,
+      "dependencies": [
+        "Exception",
+        "Dict"
+      ],
+      "description": "Assess current system capabilities across key dimensions."
+    },
+    {
+      "name": "run_improvement_cycle",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "430-471",
+      "complexity": 2,
+      "dependencies": [
+        "len",
+        "Any",
+        "str",
+        "Dict",
+        "Exception"
+      ],
+      "description": "Execute a complete self-improvement cycle."
+    },
+    {
+      "name": "_implement_strategy",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "524-530",
+      "complexity": 2,
+      "dependencies": [
+        "Any",
+        "Dict",
+        "Optional"
+      ],
+      "description": "Implement an improvement strategy."
+    },
+    {
+      "name": "OntologicalProofSystem",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\mathematical_axioms.py",
+      "lines": "415-483",
+      "complexity": 2,
+      "dependencies": [
+        "TrinityMathematics",
+        "AxiomSystem",
+        "OntologicalProof"
+      ],
+      "description": "System for generating and verifying ontological proofs"
+    },
+    {
+      "name": "get_global_axiom_system",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\mathematical_axioms.py",
+      "lines": "501-506",
+      "complexity": 2,
+      "dependencies": [
+        "AxiomSystem"
+      ],
+      "description": "Get the global axiom system instance"
+    },
+    {
+      "name": "add_axiom",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\mathematical_axioms.py",
+      "lines": "194-201",
+      "complexity": 2,
+      "dependencies": [
+        "Axiom"
+      ],
+      "description": "Add axiom to the system"
+    },
+    {
+      "name": "predict_intervention_effect",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\telos_worker.py",
+      "lines": "167-183",
+      "complexity": 2,
+      "dependencies": [
+        "Any",
+        "Dict",
+        "List"
+      ],
+      "description": "Predict the effect of an intervention on target variables."
+    },
+    {
+      "name": "analyze_intervention",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_telos_worker.py",
+      "lines": "397-430",
+      "complexity": 2,
+      "dependencies": [
+        "X",
+        "Any",
+        "str",
+        "Dict",
+        "Exception",
+        "float",
+        "LinearRegression"
+      ],
+      "description": "Analyze causal intervention effects."
+    },
+    {
+      "name": "_forecast_series_advanced",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_telos_worker.py",
+      "lines": "619-632",
+      "complexity": 2,
+      "dependencies": [
+        "Any",
+        "DEFAULT_FORECAST_PERIODS",
+        "Dict",
+        "ValueError"
+      ],
+      "description": "Advanced time series forecasting."
+    },
+    {
+      "name": "_analyze_intervention",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_telos_worker.py",
+      "lines": "652-666",
+      "complexity": 2,
+      "dependencies": [
+        "Any",
+        "ValueError",
+        "Dict"
+      ],
+      "description": "Causal intervention analysis."
+    },
+    {
+      "name": "_causal_retrodiction",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_telos_worker.py",
+      "lines": "695-721",
+      "complexity": 2,
+      "dependencies": [
+        "Any",
+        "Dict",
+        "float"
+      ],
+      "description": "Infer likely causes from observed effects."
+    },
+    {
+      "name": "_process_task",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_telos_worker.py",
+      "lines": "827-862",
+      "complexity": 2,
+      "dependencies": [
+        "str",
+        "Exception"
+      ],
+      "description": "Process incoming task with advanced statistical methods."
+    },
+    {
+      "name": "_ensure_model_loaded",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_tetragnos_worker.py",
+      "lines": "81-86",
+      "complexity": 2,
+      "dependencies": [
+        "SentenceTransformer"
+      ],
+      "description": "Lazy loading of SentenceTransformer model for memory efficiency."
+    },
+    {
+      "name": "_cluster_texts_advanced",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_tetragnos_worker.py",
+      "lines": "463-488",
+      "complexity": 2,
+      "dependencies": [
+        "Any",
+        "ValueError",
+        "Dict"
+      ],
+      "description": "Advanced text clustering using SentenceTransformers and multiple algorithms."
+    },
+    {
+      "name": "_compute_semantic_similarity",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_tetragnos_worker.py",
+      "lines": "511-527",
+      "complexity": 2,
+      "dependencies": [
+        "Any",
+        "ValueError",
+        "Dict",
+        "float"
+      ],
+      "description": "Compute semantic similarity matrix using transformer embeddings."
+    },
+    {
+      "name": "_analyze_patterns_advanced",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_tetragnos_worker.py",
+      "lines": "529-548",
+      "complexity": 2,
+      "dependencies": [
+        "Any",
+        "ValueError",
+        "Dict"
+      ],
+      "description": "Advanced pattern analysis combining multiple techniques."
+    },
+    {
+      "name": "_process_task",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_tetragnos_worker.py",
+      "lines": "676-711",
+      "complexity": 2,
+      "dependencies": [
+        "str",
+        "Exception"
+      ],
+      "description": "Process incoming task with advanced ML capabilities."
+    },
+    {
+      "name": "modal_reasoning",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_thonoc_worker.py",
+      "lines": "505-535",
+      "complexity": 2,
+      "dependencies": [
+        "str",
+        "Any",
+        "Exception",
+        "Dict"
+      ],
+      "description": "Perform modal logic reasoning.\n\nArgs:\n    formula: Modal formula to analyze\n    modality: Type of modality ('necessity', 'possibility', 'knowledge', 'belief')\n    \nReturns:\n    Modal analysis results"
+    },
+    {
+      "name": "_modal_reasoning_advanced",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_thonoc_worker.py",
+      "lines": "710-720",
+      "complexity": 2,
+      "dependencies": [
+        "Any",
+        "ValueError",
+        "Dict"
+      ],
+      "description": "Advanced modal logic reasoning."
+    },
+    {
+      "name": "_process_task",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_thonoc_worker.py",
+      "lines": "911-946",
+      "complexity": 2,
+      "dependencies": [
+        "str",
+        "Exception"
+      ],
+      "description": "Process incoming task with advanced reasoning capabilities."
+    },
+    {
+      "name": "TaskNode",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\upgraded_workflow_architect.py",
+      "lines": "60-72",
+      "complexity": 2,
+      "dependencies": [
+        "Subsystem",
+        "Any",
+        "Dict",
+        "TaskType"
+      ],
+      "description": "Represents a single task node in the workflow DAG."
+    },
+    {
+      "name": "design_workflow",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_workflow_architect.py",
+      "lines": "91-126",
+      "complexity": 2,
+      "dependencies": [
+        "Any",
+        "Dict"
+      ],
+      "description": "Design optimal workflow DAG for achieving the specified goal.\n\nArgs:\n    goal_description: Natural language description of the goal\n    goal_context: Additional context and constraints\n    \nReturns:\n ..."
+    },
+    {
+      "name": "_optimize_critical_path",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_workflow_architect.py",
+      "lines": "433-440",
+      "complexity": 2,
+      "dependencies": [
+        "min",
+        "List"
+      ],
+      "description": "Optimize tasks on the critical path for faster execution."
+    },
+    {
+      "name": "get_execution_order",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_workflow_architect.py",
+      "lines": "481-494",
+      "complexity": 2,
+      "dependencies": [
+        "List",
+        "list"
+      ],
+      "description": "Get optimal execution order using topological sort.\n\nArgs:\n    dag: Workflow DAG\n    \nReturns:\n    List of task IDs in optimal execution order"
+    },
+    {
+      "name": "MeshDomain",
+      "type": "class",
+      "file": "LOGOS_AGI\\code base\\framework_deployment.py",
+      "lines": "24-28",
+      "complexity": 1,
+      "dependencies": [
+        "Enum"
+      ],
+      "description": "MESH (Multi-Constraint Entangled Synchronous Hyperstructure) domains"
+    },
+    {
+      "name": "_is_reflexive",
+      "type": "function",
+      "file": "LOGOS_AGI\\code base\\framework_deployment.py",
+      "lines": "127-131",
+      "complexity": 1,
+      "dependencies": [
+        "len",
+        "set",
+        "Dict",
+        "Tuple",
+        "range",
+        "List"
+      ],
+      "description": "Check reflexivity of accessibility relation"
+    },
+    {
+      "name": "_is_symmetric",
+      "type": "function",
+      "file": "LOGOS_AGI\\code base\\framework_deployment.py",
+      "lines": "133-135",
+      "complexity": 1,
+      "dependencies": [
+        "Tuple",
+        "List",
+        "all"
+      ],
+      "description": "Check symmetry of accessibility relation"
+    },
+    {
+      "name": "_validate_sign_domain",
+      "type": "function",
+      "file": "LOGOS_AGI\\code base\\framework_deployment.py",
+      "lines": "499-503",
+      "complexity": 1,
+      "dependencies": [
+        "Dict",
+        "all"
+      ],
+      "description": "Validate physical domain constraints"
+    },
+    {
+      "name": "_validate_bridge_domain",
+      "type": "function",
+      "file": "LOGOS_AGI\\code base\\framework_deployment.py",
+      "lines": "505-508",
+      "complexity": 1,
+      "dependencies": [
+        "Dict"
+      ],
+      "description": "Validate logical domain constraints"
+    },
+    {
+      "name": "_verify_bijective_mappings",
+      "type": "function",
+      "file": "LOGOS_AGI\\code base\\framework_deployment.py",
+      "lines": "515-521",
+      "complexity": 1,
+      "dependencies": [
+        "Dict"
+      ],
+      "description": "Verify transcendental-logic bijection properties"
+    },
+    {
+      "name": "predict_fine_tuning_relationships",
+      "type": "function",
+      "file": "LOGOS_AGI\\code base\\framework_deployment.py",
+      "lines": "591-609",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "Dict"
+      ],
+      "description": "Predict specific fine-tuning relationships from Trinity optimization"
+    },
+    {
+      "name": "_predict_cosmological_constant",
+      "type": "function",
+      "file": "LOGOS_AGI\\code base\\framework_deployment.py",
+      "lines": "611-625",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "Dict"
+      ],
+      "description": "Predict cosmological constant relationships"
+    },
+    {
+      "name": "_predict_coupling_relationships",
+      "type": "function",
+      "file": "LOGOS_AGI\\code base\\framework_deployment.py",
+      "lines": "627-641",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "Dict"
+      ],
+      "description": "Predict coupling constant triadic relationships"
+    },
+    {
+      "name": "_predict_information_optimization",
+      "type": "function",
+      "file": "LOGOS_AGI\\code base\\framework_deployment.py",
+      "lines": "643-658",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "Dict"
+      ],
+      "description": "Predict information processing optimizations"
+    },
+    {
+      "name": "resolve_problem_of_evil",
+      "type": "function",
+      "file": "LOGOS_AGI\\code base\\framework_deployment.py",
+      "lines": "710-722",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "Dict"
+      ],
+      "description": "Resolve Problem of Evil through relational Trinity"
+    },
+    {
+      "name": "complete_system_validation",
+      "type": "function",
+      "file": "LOGOS_AGI\\code base\\framework_deployment.py",
+      "lines": "791-843",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "Dict",
+        "all"
+      ],
+      "description": "Run complete system validation across all components"
+    },
+    {
+      "name": "check_plan_reachability",
+      "type": "function",
+      "file": "LOGOS_AGI\\logos_alignment_core\\logos_core\\archon_planner.py",
+      "lines": "14-16",
+      "complexity": 1,
+      "dependencies": [],
+      "description": "FunctionDef check_plan_reachability"
+    },
+    {
+      "name": "WorkflowStatus",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\archon_nexus_complete.py",
+      "lines": "106-113",
+      "complexity": 1,
+      "dependencies": [
+        "Enum"
+      ],
+      "description": "Workflow execution status."
+    },
+    {
+      "name": "TaskNode",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\archon_nexus_complete.py",
+      "lines": "125-138",
+      "complexity": 1,
+      "dependencies": [
+        "Optional",
+        "field",
+        "Set",
+        "Any",
+        "TaskStatus",
+        "Dict"
+      ],
+      "description": "Represents a single task in a workflow DAG."
+    },
+    {
+      "name": "WorkflowExecution",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\archon_nexus_complete.py",
+      "lines": "141-152",
+      "complexity": 1,
+      "dependencies": [
+        "Optional",
+        "TaskNode",
+        "WorkflowStatus",
+        "field",
+        "Any",
+        "Dict"
+      ],
+      "description": "Represents a complete workflow execution."
+    },
+    {
+      "name": "_signal_handler",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\archon_nexus_main.py",
+      "lines": "113-116",
+      "complexity": 1,
+      "dependencies": [],
+      "description": "Handle system shutdown signals."
+    },
+    {
+      "name": "_setup_consumers",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\archon_nexus_main.py",
+      "lines": "156-173",
+      "complexity": 1,
+      "dependencies": [
+        "ARCHON_GOALS_QUEUE",
+        "TASK_RESULT_QUEUE"
+      ],
+      "description": "Configure message consumers for goal and result processing."
+    },
+    {
+      "name": "get_system_status",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\archon_nexus_main.py",
+      "lines": "227-239",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "Dict",
+        "dict"
+      ],
+      "description": "Generate comprehensive system status report."
+    },
+    {
+      "name": "DomainType",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\bijective_mapping.py",
+      "lines": "59-66",
+      "complexity": 1,
+      "dependencies": [
+        "Enum"
+      ],
+      "description": "Types of domains in bijective mappings"
+    },
+    {
+      "name": "verify_obdc_system",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\bijective_mapping.py",
+      "lines": "584-593",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "get_global_obdc_kernel",
+        "Dict"
+      ],
+      "description": "Verify the complete OBDC system"
+    },
+    {
+      "name": "verify_trinity_preservation",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\bijective_mapping.py",
+      "lines": "232-254",
+      "complexity": 1,
+      "dependencies": [
+        "BijectiveMapping",
+        "Any",
+        "Dict",
+        "abs"
+      ],
+      "description": "Verify that bijective mapping preserves Trinity structure"
+    },
+    {
+      "name": "_initialize_fundamental_domains",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\bijective_mapping.py",
+      "lines": "330-373",
+      "complexity": 1,
+      "dependencies": [
+        "DomainType",
+        "TrinityVector",
+        "Domain"
+      ],
+      "description": "Initialize fundamental domains for LOGOS system"
+    },
+    {
+      "name": "create_fundamental_mappings",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\bijective_mapping.py",
+      "lines": "401-435",
+      "complexity": 1,
+      "dependencies": [
+        "BijectiveMapping"
+      ],
+      "description": "Create fundamental bijective mappings between core domains"
+    },
+    {
+      "name": "CognitiveColor",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\cognitive_transducer_math.py",
+      "lines": "33-38",
+      "complexity": 1,
+      "dependencies": [
+        "Enum"
+      ],
+      "description": "Color coding for different cognitive subsystems"
+    },
+    {
+      "name": "SemanticDomain",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\cognitive_transducer_math.py",
+      "lines": "40-49",
+      "complexity": 1,
+      "dependencies": [
+        "Enum"
+      ],
+      "description": "Semantic domains for knowledge classification"
+    },
+    {
+      "name": "FractalSemanticGlyph",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\cognitive_transducer_math.py",
+      "lines": "56-138",
+      "complexity": 1,
+      "dependencies": [
+        "field",
+        "Any",
+        "str",
+        "Tuple",
+        "Dict",
+        "abs",
+        "CognitiveColor",
+        "cls",
+        "SemanticDomain"
+      ],
+      "description": "Fractal representation of semantic content"
+    },
+    {
+      "name": "TrinityOptimizationEngine",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\cognitive_transducer_math.py",
+      "lines": "248-292",
+      "complexity": 1,
+      "dependencies": [
+        "FractalSemanticGlyph",
+        "abs",
+        "SemanticDomain"
+      ],
+      "description": "Optimizes semantic glyphs for Trinity alignment (E×G×T maximization)"
+    },
+    {
+      "name": "project_text_to_ulp",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\cognitive_transducer_math.py",
+      "lines": "155-169",
+      "complexity": 1,
+      "dependencies": [
+        "Tuple",
+        "int"
+      ],
+      "description": "Project text content to Universal Language Plane coordinates"
+    },
+    {
+      "name": "project_to_glyph",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\cognitive_transducer_math.py",
+      "lines": "212-242",
+      "complexity": 1,
+      "dependencies": [
+        "len",
+        "FractalSemanticGlyph",
+        "set",
+        "CognitiveColor",
+        "SemanticDomain"
+      ],
+      "description": "Complete projection of content to semantic glyph"
+    },
+    {
+      "name": "optimize_trinity_weights",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\cognitive_transducer_math.py",
+      "lines": "254-281",
+      "complexity": 1,
+      "dependencies": [
+        "FractalSemanticGlyph",
+        "SemanticDomain"
+      ],
+      "description": "Optimize Trinity weights for specific semantic domain"
+    },
+    {
+      "name": "process_query",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\cognitive_transducer_math.py",
+      "lines": "585-609",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "Dict",
+        "CognitiveColor",
+        "SemanticDomain"
+      ],
+      "description": "Complete cognitive processing of a query"
+    },
+    {
+      "name": "get_system_statistics",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\cognitive_transducer_math.py",
+      "lines": "631-642",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "Dict"
+      ],
+      "description": "Get comprehensive system statistics"
+    },
+    {
+      "name": "SystemState",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\core_data_structures.py",
+      "lines": "26-32",
+      "complexity": 1,
+      "dependencies": [
+        "Enum"
+      ],
+      "description": "Overall system operational states"
+    },
+    {
+      "name": "ProcessingPriority",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\core_data_structures.py",
+      "lines": "34-40",
+      "complexity": 1,
+      "dependencies": [
+        "Enum"
+      ],
+      "description": "Processing priority levels"
+    },
+    {
+      "name": "SubsystemType",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\core_data_structures.py",
+      "lines": "49-54",
+      "complexity": 1,
+      "dependencies": [
+        "Enum"
+      ],
+      "description": "Types of subsystems in LOGOS architecture"
+    },
+    {
+      "name": "QueryType",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\core_data_structures.py",
+      "lines": "56-64",
+      "complexity": 1,
+      "dependencies": [
+        "Enum"
+      ],
+      "description": "Types of queries that can be processed"
+    },
+    {
+      "name": "SystemMessage",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\core_data_structures.py",
+      "lines": "71-107",
+      "complexity": 1,
+      "dependencies": [
+        "Optional",
+        "field",
+        "ProcessingPriority",
+        "Any",
+        "str",
+        "Dict",
+        "cls"
+      ],
+      "description": "Base message structure for inter-service communication"
+    },
+    {
+      "name": "OperationResult",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\core_data_structures.py",
+      "lines": "110-130",
+      "complexity": 1,
+      "dependencies": [
+        "Optional",
+        "field",
+        "Any",
+        "str",
+        "Dict"
+      ],
+      "description": "Result of a system operation"
+    },
+    {
+      "name": "SystemMetrics",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\core_data_structures.py",
+      "lines": "179-210",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "Dict",
+        "field"
+      ],
+      "description": "System performance and health metrics"
+    },
+    {
+      "name": "LogosQuery",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\core_data_structures.py",
+      "lines": "217-256",
+      "complexity": 1,
+      "dependencies": [
+        "QueryType",
+        "field",
+        "ProcessingPriority",
+        "Any",
+        "str",
+        "Dict",
+        "cls"
+      ],
+      "description": "Standard query format for LOGOS system"
+    },
+    {
+      "name": "WorkflowStep",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\core_data_structures.py",
+      "lines": "363-377",
+      "complexity": 1,
+      "dependencies": [
+        "SubsystemType",
+        "Optional",
+        "field",
+        "all",
+        "Any",
+        "str",
+        "Dict",
+        "List"
+      ],
+      "description": "Single step in a workflow"
+    },
+    {
+      "name": "Workflow",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\core_data_structures.py",
+      "lines": "380-396",
+      "complexity": 1,
+      "dependencies": [
+        "str",
+        "WorkflowStep",
+        "List",
+        "field"
+      ],
+      "description": "Complete workflow definition"
+    },
+    {
+      "name": "EventNotification",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\core_data_structures.py",
+      "lines": "399-407",
+      "complexity": 1,
+      "dependencies": [
+        "field",
+        "Any",
+        "str",
+        "Dict",
+        "List"
+      ],
+      "description": "System event notification"
+    },
+    {
+      "name": "create_correlation_id",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\core_data_structures.py",
+      "lines": "422-424",
+      "complexity": 1,
+      "dependencies": [
+        "str",
+        "int"
+      ],
+      "description": "Create correlation ID for tracking related operations"
+    },
+    {
+      "name": "add_step",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\core_data_structures.py",
+      "lines": "390-392",
+      "complexity": 1,
+      "dependencies": [
+        "WorkflowStep"
+      ],
+      "description": "Add step to workflow"
+    },
+    {
+      "name": "evaluate",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\core_principles.py",
+      "lines": "69-76",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "Tuple",
+        "Optional",
+        "Dict"
+      ],
+      "description": "Evaluate if operation complies with this principle\n\nReturns:\n    Tuple[bool, Optional[str]]: (complies, violation_reason)"
+    },
+    {
+      "name": "get_goals_by_status",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\database_persistence_manager.py",
+      "lines": "285-287",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "Dict",
+        "List"
+      ],
+      "description": "Retrieve goals filtered by status."
+    },
+    {
+      "name": "log_system_event",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\database_persistence_manager.py",
+      "lines": "289-297",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "Dict"
+      ],
+      "description": "Convenience method to log system events."
+    },
+    {
+      "name": "update_glyph_usage",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\database_persistence_manager.py",
+      "lines": "299-304",
+      "complexity": 1,
+      "dependencies": [],
+      "description": "Update usage statistics for a semantic glyph."
+    },
+    {
+      "name": "_signal_handler",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\database_service.py",
+      "lines": "349-352",
+      "complexity": 1,
+      "dependencies": [],
+      "description": "Handle system signals for graceful shutdown."
+    },
+    {
+      "name": "create_integrated_logos_system",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\integration_harmonizer.py",
+      "lines": "507-513",
+      "complexity": 1,
+      "dependencies": [
+        "LogosIntegratedSystem"
+      ],
+      "description": "Factory function to create complete LOGOS integrated system"
+    },
+    {
+      "name": "validate_semantic_glyph",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\integration_harmonizer.py",
+      "lines": "99-113",
+      "complexity": 1,
+      "dependencies": [
+        "FractalSemanticGlyph",
+        "OrbitAnalysis"
+      ],
+      "description": "Validate semantic glyph against Trinity fractal space"
+    },
+    {
+      "name": "_glyph_to_trinity_quaternion",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\integration_harmonizer.py",
+      "lines": "115-134",
+      "complexity": 1,
+      "dependencies": [
+        "TrinityQuaternion",
+        "FractalSemanticGlyph",
+        "complex",
+        "abs"
+      ],
+      "description": "Convert semantic glyph to Trinity quaternion coordinates"
+    },
+    {
+      "name": "get_harmonization_statistics",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\integration_harmonizer.py",
+      "lines": "485-501",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "Dict",
+        "max"
+      ],
+      "description": "Get system harmonization statistics"
+    },
+    {
+      "name": "main",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\keryx_api_gateway.py",
+      "lines": "371-381",
+      "complexity": 1,
+      "dependencies": [
+        "API_PORT",
+        "API_HOST"
+      ],
+      "description": "Start Keryx API Gateway service."
+    },
+    {
+      "name": "get_new_targets",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "215-219",
+      "complexity": 1,
+      "dependencies": [
+        "List",
+        "list"
+      ],
+      "description": "Returns the list of new learning targets and clears the queue."
+    },
+    {
+      "name": "simulate_knowledge_gaps",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "221-233",
+      "complexity": 1,
+      "dependencies": [
+        "List"
+      ],
+      "description": "Simulate detection of knowledge gaps for autonomous behavior."
+    },
+    {
+      "name": "_assess_performance",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "473-481",
+      "complexity": 1,
+      "dependencies": [
+        "Dict"
+      ],
+      "description": "Assess current system performance."
+    },
+    {
+      "name": "_identify_improvement_areas",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "483-490",
+      "complexity": 1,
+      "dependencies": [
+        "List"
+      ],
+      "description": "Identify specific areas for improvement."
+    },
+    {
+      "name": "_process_query_request",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "773-804",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "Dict",
+        "Request",
+        "ARCHON_GOALS_QUEUE"
+      ],
+      "description": "Process a query request by submitting it as a goal to Archon."
+    },
+    {
+      "name": "_process_goal_submission",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "806-838",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "Dict",
+        "Request",
+        "ARCHON_GOALS_QUEUE"
+      ],
+      "description": "Process an external goal submission."
+    },
+    {
+      "name": "_process_knowledge_request",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "855-884",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "Dict",
+        "Request",
+        "ARCHON_GOALS_QUEUE"
+      ],
+      "description": "Process knowledge acquisition requests."
+    },
+    {
+      "name": "_process_status_request",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "886-888",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "Dict",
+        "Request"
+      ],
+      "description": "Process status information requests."
+    },
+    {
+      "name": "_get_system_status",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "890-903",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "len",
+        "Dict"
+      ],
+      "description": "Get comprehensive system status."
+    },
+    {
+      "name": "_signal_handler",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "1109-1112",
+      "complexity": 1,
+      "dependencies": [],
+      "description": "Handle system signals for graceful shutdown."
+    },
+    {
+      "name": "SystemMessage",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\logos_nexus_main.py",
+      "lines": "52-54",
+      "complexity": 1,
+      "dependencies": [
+        "field"
+      ],
+      "description": "ClassDef SystemMessage"
+    },
+    {
+      "name": "verify_mathematical_foundations",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\mathematical_axioms.py",
+      "lines": "508-540",
+      "complexity": 1,
+      "dependencies": [
+        "len",
+        "all",
+        "get_global_axiom_system",
+        "TrinityMathematics",
+        "Any",
+        "Dict",
+        "OntologicalProofSystem"
+      ],
+      "description": "Verify the complete mathematical foundation system"
+    },
+    {
+      "name": "_initialize_foundational_axioms",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\mathematical_axioms.py",
+      "lines": "61-192",
+      "complexity": 1,
+      "dependencies": [
+        "Axiom",
+        "AxiomType",
+        "len"
+      ],
+      "description": "Initialize the foundational axiom system"
+    },
+    {
+      "name": "verify_consistency",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\mathematical_axioms.py",
+      "lines": "207-223",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "len",
+        "Dict",
+        "all"
+      ],
+      "description": "Verify axiom system consistency"
+    },
+    {
+      "name": "prove_privation_impossibility",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\mathematical_axioms.py",
+      "lines": "466-483",
+      "complexity": 1,
+      "dependencies": [
+        "OntologicalProof"
+      ],
+      "description": "Prove that evil (privation of good) cannot be optimized"
+    },
+    {
+      "name": "do",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\telos_worker.py",
+      "lines": "128-136",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "SCMImplementation",
+        "Dict"
+      ],
+      "description": "Create a new SCM with the specified intervention (do-calculus).\nReturns a new SCM instance with the intervention applied."
+    },
+    {
+      "name": "_evaluate_intervention_effectiveness",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\telos_worker.py",
+      "lines": "442-457",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "Dict",
+        "abs",
+        "isinstance",
+        "min",
+        "sum"
+      ],
+      "description": "Evaluate how effective an intervention would be."
+    },
+    {
+      "name": "_predict_side_effects",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\telos_worker.py",
+      "lines": "459-475",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "len",
+        "min",
+        "Dict"
+      ],
+      "description": "Predict potential side effects of an intervention."
+    },
+    {
+      "name": "_assess_intervention_risks",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\telos_worker.py",
+      "lines": "477-493",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "Dict",
+        "abs",
+        "isinstance",
+        "min",
+        "sum"
+      ],
+      "description": "Assess risks associated with an intervention."
+    },
+    {
+      "name": "_signal_handler",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\telos_worker.py",
+      "lines": "941-944",
+      "complexity": 1,
+      "dependencies": [],
+      "description": "Handle system signals for graceful shutdown."
+    },
+    {
+      "name": "_signal_handler",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\tetragnos_worker.py",
+      "lines": "677-680",
+      "complexity": 1,
+      "dependencies": [],
+      "description": "Handle system signals for graceful shutdown."
+    },
+    {
+      "name": "ModalOperator",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\thonoc_worker.py",
+      "lines": "59-64",
+      "complexity": 1,
+      "dependencies": [
+        "Enum"
+      ],
+      "description": "Modal logic operators."
+    },
+    {
+      "name": "_initialize_axiom_base",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\thonoc_worker.py",
+      "lines": "95-107",
+      "complexity": 1,
+      "dependencies": [
+        "Dict"
+      ],
+      "description": "Initialize the foundational axiom base for logical reasoning."
+    },
+    {
+      "name": "_initialize_possible_worlds",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\thonoc_worker.py",
+      "lines": "693-708",
+      "complexity": 1,
+      "dependencies": [
+        "set",
+        "Any",
+        "Dict"
+      ],
+      "description": "Initialize possible worlds for modal reasoning."
+    },
+    {
+      "name": "_initialize_accessibility",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\thonoc_worker.py",
+      "lines": "710-716",
+      "complexity": 1,
+      "dependencies": [
+        "Dict",
+        "List"
+      ],
+      "description": "Initialize accessibility relations between worlds."
+    },
+    {
+      "name": "_signal_handler",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\thonoc_worker.py",
+      "lines": "1437-1440",
+      "complexity": 1,
+      "dependencies": [],
+      "description": "Handle system signals for graceful shutdown."
+    },
+    {
+      "name": "__init__",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_tetragnos_worker.py",
+      "lines": "68-79",
+      "complexity": 1,
+      "dependencies": [
+        "DEFAULT_MODEL"
+      ],
+      "description": "Initialize semantic engine with specified transformer model.\n\nArgs:\n    model_name: HuggingFace model identifier for SentenceTransformer"
+    },
+    {
+      "name": "_dbscan_clustering",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_tetragnos_worker.py",
+      "lines": "199-215",
+      "complexity": 1,
+      "dependencies": [
+        "len",
+        "set",
+        "Any",
+        "Dict",
+        "int",
+        "max",
+        "DBSCAN"
+      ],
+      "description": "DBSCAN clustering with automatic parameter tuning."
+    },
+    {
+      "name": "_hierarchical_clustering",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_tetragnos_worker.py",
+      "lines": "217-235",
+      "complexity": 1,
+      "dependencies": [
+        "len",
+        "Any",
+        "Dict",
+        "min",
+        "AgglomerativeClustering"
+      ],
+      "description": "Agglomerative hierarchical clustering with linkage optimization."
+    },
+    {
+      "name": "_kmeans_clustering",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_tetragnos_worker.py",
+      "lines": "237-257",
+      "complexity": 1,
+      "dependencies": [
+        "KMeans",
+        "len",
+        "Any",
+        "Dict",
+        "min"
+      ],
+      "description": "K-means clustering with automatic K selection."
+    },
+    {
+      "name": "extract_comprehensive_features",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_tetragnos_worker.py",
+      "lines": "314-331",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "len",
+        "Dict",
+        "List"
+      ],
+      "description": "Extract comprehensive feature set from text collection.\n\nArgs:\n    texts: Collection of text documents\n    \nReturns:\n    Multi-modal feature analysis results"
+    },
+    {
+      "name": "_translate_text_advanced",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_tetragnos_worker.py",
+      "lines": "550-565",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "Dict"
+      ],
+      "description": "Advanced text translation with semantic preservation analysis."
+    },
+    {
+      "name": "_evaluate_modal_formulas",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_thonoc_worker.py",
+      "lines": "347-356",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "Dict",
+        "List"
+      ],
+      "description": "Evaluate modal formulas in possible worlds model."
+    },
+    {
+      "name": "TaskType",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\upgraded_workflow_architect.py",
+      "lines": "27-51",
+      "complexity": 1,
+      "dependencies": [
+        "Enum"
+      ],
+      "description": "Enumeration of available task types across subsystems."
+    },
+    {
+      "name": "Subsystem",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\upgraded_workflow_architect.py",
+      "lines": "53-57",
+      "complexity": 1,
+      "dependencies": [
+        "Enum"
+      ],
+      "description": "Enumeration of reasoning subsystems."
+    },
+    {
+      "name": "WorkflowTemplate",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\upgraded_workflow_architect.py",
+      "lines": "75-80",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "Dict",
+        "List",
+        "Tuple"
+      ],
+      "description": "Template for common workflow patterns."
+    },
+    {
+      "name": "_optimize_workflow",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_workflow_architect.py",
+      "lines": "374-388",
+      "complexity": 1,
+      "dependencies": [
+        "Any",
+        "Dict"
+      ],
+      "description": "Optimize workflow structure for efficiency and resource utilization."
+    },
+    {
+      "name": "_add_workflow_metadata",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_workflow_architect.py",
+      "lines": "461-479",
+      "complexity": 1,
+      "dependencies": [
+        "len",
+        "Any",
+        "Dict",
+        "list",
+        "sum"
+      ],
+      "description": "Add metadata to the workflow DAG."
+    },
+    {
+      "name": "get_parallel_execution_stages",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_workflow_architect.py",
+      "lines": "496-505",
+      "complexity": 1,
+      "dependencies": [
+        "List",
+        "list"
+      ],
+      "description": "Get stages of tasks that can be executed in parallel.\n\nArgs:\n    dag: Workflow DAG\n    \nReturns:\n    List of stages, each containing task IDs that can run in parallel"
+    },
+    {
+      "name": "_initialize_workflow_templates",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_workflow_architect.py",
+      "lines": "527-546",
+      "complexity": 1,
+      "dependencies": [
+        "WorkflowTemplate",
+        "Dict"
+      ],
+      "description": "Initialize predefined workflow templates."
+    },
+    {
+      "name": "_initialize_subsystem_capabilities",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_workflow_architect.py",
+      "lines": "548-563",
+      "complexity": 1,
+      "dependencies": [
+        "Subsystem",
+        "Dict",
+        "Set"
+      ],
+      "description": "Initialize mapping of subsystems to their capabilities."
+    },
+    {
+      "name": "_estimate_resource_requirements",
+      "type": "function",
+      "file": "LOGOS_AGI\\v4\\upgraded_workflow_architect.py",
+      "lines": "587-598",
+      "complexity": 1,
+      "dependencies": [
+        "Set",
+        "len",
+        "Dict"
+      ],
+      "description": "Estimate total resource requirements for the workflow."
+    },
+    {
+      "name": "WorkerType",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\worker_config.py",
+      "lines": "13-17",
+      "complexity": 1,
+      "dependencies": [
+        "Enum"
+      ],
+      "description": "Enumeration of worker subsystem types."
+    },
+    {
+      "name": "WorkerConfig",
+      "type": "class",
+      "file": "LOGOS_AGI\\v4\\worker_config.py",
+      "lines": "36-44",
+      "complexity": 1,
+      "dependencies": [
+        "QueueConfig",
+        "WorkerType"
+      ],
+      "description": "Base configuration for worker subsystems."
+    }
+  ],
+  "categories": {
+    "high_complexity": 33,
+    "medium_complexity": 67,
+    "low_complexity": 219,
+    "classes": 85,
+    "functions": 234
+  },
+  "file_stats": {
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\code base\\fractal_neural_custom.py": {
+      "components_found": 0,
+      "file_size": 2484,
+      "relative_path": "LOGOS_AGI\\code base\\fractal_neural_custom.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\code base\\framework_deployment.py": {
+      "components_found": 21,
+      "file_size": 39399,
+      "relative_path": "LOGOS_AGI\\code base\\framework_deployment.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\code base\\logos_agi_v2_monolith.py": {
+      "components_found": 0,
+      "file_size": 1110759,
+      "relative_path": "LOGOS_AGI\\code base\\logos_agi_v2_monolith.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\code base\\logos_python_implementation.py": {
+      "components_found": 0,
+      "file_size": 28313,
+      "relative_path": "LOGOS_AGI\\code base\\logos_python_implementation.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\logos_alignment_core\\main_demo.py": {
+      "components_found": 0,
+      "file_size": 673,
+      "relative_path": "LOGOS_AGI\\logos_alignment_core\\main_demo.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\logos_alignment_core\\logos_core\\archon_planner.py": {
+      "components_found": 3,
+      "file_size": 863,
+      "relative_path": "LOGOS_AGI\\logos_alignment_core\\logos_core\\archon_planner.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\logos_alignment_core\\logos_core\\integration_harmonizer.py": {
+      "components_found": 0,
+      "file_size": 537,
+      "relative_path": "LOGOS_AGI\\logos_alignment_core\\logos_core\\integration_harmonizer.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\logos_alignment_core\\logos_core\\logos_nexus.py": {
+      "components_found": 0,
+      "file_size": 417,
+      "relative_path": "LOGOS_AGI\\logos_alignment_core\\logos_core\\logos_nexus.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\logos_alignment_core\\logos_core\\pxl_client.py": {
+      "components_found": 0,
+      "file_size": 868,
+      "relative_path": "LOGOS_AGI\\logos_alignment_core\\logos_core\\pxl_client.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\logos_alignment_core\\logos_core\\reference_monitor.py": {
+      "components_found": 0,
+      "file_size": 1173,
+      "relative_path": "LOGOS_AGI\\logos_alignment_core\\logos_core\\reference_monitor.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\logos_alignment_core\\logos_core\\unified_formalisms.py": {
+      "components_found": 0,
+      "file_size": 440,
+      "relative_path": "LOGOS_AGI\\logos_alignment_core\\logos_core\\unified_formalisms.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\logos_alignment_core\\logos_core\\utils.py": {
+      "components_found": 0,
+      "file_size": 66,
+      "relative_path": "LOGOS_AGI\\logos_alignment_core\\logos_core\\utils.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\logos_alignment_core\\obdc\\kernel.py": {
+      "components_found": 0,
+      "file_size": 665,
+      "relative_path": "LOGOS_AGI\\logos_alignment_core\\obdc\\kernel.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\logos_alignment_core\\persistence\\persistence.py": {
+      "components_found": 0,
+      "file_size": 383,
+      "relative_path": "LOGOS_AGI\\logos_alignment_core\\persistence\\persistence.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\logos_alignment_core\\policies\\privative_policies.py": {
+      "components_found": 0,
+      "file_size": 229,
+      "relative_path": "LOGOS_AGI\\logos_alignment_core\\policies\\privative_policies.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\logos_alignment_core\\pxl_prover\\serve_pxl.py": {
+      "components_found": 0,
+      "file_size": 1366,
+      "relative_path": "LOGOS_AGI\\logos_alignment_core\\pxl_prover\\serve_pxl.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\archon_nexus_complete.py": {
+      "components_found": 12,
+      "file_size": 27893,
+      "relative_path": "LOGOS_AGI\\v4\\archon_nexus_complete.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\archon_nexus_main.py": {
+      "components_found": 9,
+      "file_size": 11229,
+      "relative_path": "LOGOS_AGI\\v4\\archon_nexus_main.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\bijective_mapping.py": {
+      "components_found": 19,
+      "file_size": 24032,
+      "relative_path": "LOGOS_AGI\\v4\\bijective_mapping.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\cognitive_transducer_math.py": {
+      "components_found": 16,
+      "file_size": 27633,
+      "relative_path": "LOGOS_AGI\\v4\\cognitive_transducer_math.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\core_data_structures.py": {
+      "components_found": 17,
+      "file_size": 17986,
+      "relative_path": "LOGOS_AGI\\v4\\core_data_structures.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\core_principles.py": {
+      "components_found": 3,
+      "file_size": 20093,
+      "relative_path": "LOGOS_AGI\\v4\\core_principles.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\database_init.py": {
+      "components_found": 0,
+      "file_size": 1175,
+      "relative_path": "LOGOS_AGI\\v4\\database_init.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\database_persistence_manager.py": {
+      "components_found": 4,
+      "file_size": 14888,
+      "relative_path": "LOGOS_AGI\\v4\\database_persistence_manager.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\database_service.py": {
+      "components_found": 4,
+      "file_size": 16405,
+      "relative_path": "LOGOS_AGI\\v4\\database_service.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\init_files.py": {
+      "components_found": 0,
+      "file_size": 4471,
+      "relative_path": "LOGOS_AGI\\v4\\init_files.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\integration_harmonizer.py": {
+      "components_found": 17,
+      "file_size": 24717,
+      "relative_path": "LOGOS_AGI\\v4\\integration_harmonizer.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\keryx_api_gateway.py": {
+      "components_found": 2,
+      "file_size": 13198,
+      "relative_path": "LOGOS_AGI\\v4\\keryx_api_gateway.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\lambda_calculus.py": {
+      "components_found": 2,
+      "file_size": 28786,
+      "relative_path": "LOGOS_AGI\\v4\\lambda_calculus.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\logos_mathematical_core.py": {
+      "components_found": 6,
+      "file_size": 23365,
+      "relative_path": "LOGOS_AGI\\v4\\logos_mathematical_core.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\logos_nexus_main.py": {
+      "components_found": 30,
+      "file_size": 49314,
+      "relative_path": "LOGOS_AGI\\v4\\logos_nexus_main.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\mathematical_axioms.py": {
+      "components_found": 11,
+      "file_size": 20841,
+      "relative_path": "LOGOS_AGI\\v4\\mathematical_axioms.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\telos_init.py": {
+      "components_found": 0,
+      "file_size": 1498,
+      "relative_path": "LOGOS_AGI\\v4\\telos_init.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\telos_worker.py": {
+      "components_found": 23,
+      "file_size": 41158,
+      "relative_path": "LOGOS_AGI\\v4\\telos_worker.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\tetragnos_init.py": {
+      "components_found": 0,
+      "file_size": 1481,
+      "relative_path": "LOGOS_AGI\\v4\\tetragnos_init.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\tetragnos_worker.py": {
+      "components_found": 12,
+      "file_size": 29904,
+      "relative_path": "LOGOS_AGI\\v4\\tetragnos_worker.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\thonoc_init.py": {
+      "components_found": 0,
+      "file_size": 1496,
+      "relative_path": "LOGOS_AGI\\v4\\thonoc_init.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\thonoc_worker.py": {
+      "components_found": 16,
+      "file_size": 61023,
+      "relative_path": "LOGOS_AGI\\v4\\thonoc_worker.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\unified_formalisms.py": {
+      "components_found": 7,
+      "file_size": 21223,
+      "relative_path": "LOGOS_AGI\\v4\\unified_formalisms.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\upgraded_telos_worker.py": {
+      "components_found": 18,
+      "file_size": 34838,
+      "relative_path": "LOGOS_AGI\\v4\\upgraded_telos_worker.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\upgraded_tetragnos_worker.py": {
+      "components_found": 23,
+      "file_size": 29227,
+      "relative_path": "LOGOS_AGI\\v4\\upgraded_tetragnos_worker.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\upgraded_thonoc_worker.py": {
+      "components_found": 16,
+      "file_size": 37013,
+      "relative_path": "LOGOS_AGI\\v4\\upgraded_thonoc_worker.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\upgraded_workflow_architect.py": {
+      "components_found": 23,
+      "file_size": 27690,
+      "relative_path": "LOGOS_AGI\\v4\\upgraded_workflow_architect.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\worker_config.py": {
+      "components_found": 2,
+      "file_size": 9112,
+      "relative_path": "LOGOS_AGI\\v4\\worker_config.py"
+    },
+    "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\LOGOS_AGI\\v4\\worker_test_suite.py": {
+      "components_found": 3,
+      "file_size": 22000,
+      "relative_path": "LOGOS_AGI\\v4\\worker_test_suite.py"
+    }
+  },
+  "integration_plan": {
+    "phase_1_critical": [
+      "AgentOrchestrator",
+      "ArchonNexus",
+      "ArchonNexus",
+      "BijectiveMapping",
+      "get_mapping_path",
+      "SemanticGlyphDatabase",
+      "PersistenceManager",
+      "DatabaseService",
+      "LogosIntegratedSystem",
+      "LambdaReducer"
+    ],
+    "phase_2_classes": [
+      "TrinityOptimizer",
+      "EmpiricalPredictor",
+      "ThreePillarsSystem",
+      "TaskNode",
+      "WorkflowExecution",
+      "WorkflowArchitect",
+      "AgentOrchestrator",
+      "ArchonNexus",
+      "ArchonNexus",
+      "Domain"
+    ],
+    "phase_3_actions": [
+      "run_statistical_validation",
+      "execute_workflow",
+      "create_fundamental_mappings",
+      "process_query",
+      "ProcessingPriority",
+      "create_correlation_id",
+      "update_glyph_usage",
+      "create_integrated_logos_system",
+      "_perform_alignment",
+      "run_improvement_cycle"
+    ],
+    "integration_strategy": {
+      "wrapper_pattern": "reference_monitor.require_proof_token()",
+      "audit_logging": "Full provenance tracking required",
+      "fallback_behavior": "Fail-closed on authorization failure"
+    }
+  }
+}
