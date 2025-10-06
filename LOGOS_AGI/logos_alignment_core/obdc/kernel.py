@@ -1,5 +1,5 @@
-
 from logos_core.reference_monitor import ReferenceMonitor
+
 
 class OBDCKernel:
     def __init__(self, config: dict):

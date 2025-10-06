@@ -1,27 +1,31 @@
-from fastapi import FastAPI, HTTPException
+import requests
+from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
-import requests, json
 
 # Working services only
 ARCHON = "http://localhost:8075"
 
 app = FastAPI()
 
+
 class AskIn(BaseModel):
     text: str
 
+
 @app.get("/status")
 def status():
-    try: 
+    try:
         a = requests.get(f"{ARCHON}/health", timeout=3).ok
-    except: 
+    except:
         a = False
     return {"archon_ok": a, "service": "probe_console_working"}
 
+
 @app.get("/")
 def index():
-    return HTMLResponse("""
+    return HTMLResponse(
+        """
     <!doctype html><html><head><title>LOGOS Console - Working</title></head>
     <body>
     <h1>LOGOS Console - ARCHON Test</h1>
@@ -58,32 +62,36 @@ def index():
     }
     </script>
     </body></html>
-    """)
+    """
+    )
+
 
 @app.post("/ask")
 def ask(inp: AskIn):
     cmd = inp.text.strip()
-    
+
     try:
         # Send directly to ARCHON dispatch
         payload = {
             "task_type": cmd,
             "payload": {"command": cmd},
-            "provenance": {"src": "probe_working", "timestamp": "now"}
+            "provenance": {"src": "probe_working", "timestamp": "now"},
         }
-        
+
         r = requests.post(f"{ARCHON}/dispatch", json=payload, timeout=15)
-        
+
         if r.ok:
             return {"success": True, "archon_response": r.json()}
         else:
             return {"success": False, "error": f"ARCHON returned {r.status_code}: {r.text}"}
-            
+
     except Exception as e:
         return {"success": False, "error": str(e)}
 
+
 if __name__ == "__main__":
     import uvicorn
+
     print("Starting Working LOGOS Probe Console")
     print(f"ARCHON: {ARCHON}")
     uvicorn.run(app, host="127.0.0.1", port=8083)

@@ -1,0 +1,67 @@
+[project]
+name = "logos-pxl-core"
+version = "0.1.0"
+requires-python = ">=3.11"
+description = "LOGOS PXL Core monorepo tooling, tests, and CI config"
+readme = "README.md"
+authors = [{name="ProjectLOGOS"}]
+dependencies = [
+  "fastapi>=0.115.0",
+  "uvicorn>=0.30.6",
+  "pydantic>=2.8.2",
+  "requests>=2.32.3",
+  "openai>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.1",
+  "pytest-asyncio>=0.23.8",
+  "httpx>=0.27.2",
+  "respx>=0.21.1",
+  "coverage>=7.6.1",
+  "ruff>=0.6.8",
+  "black>=24.8.0",
+  "mypy>=1.11.2",
+  "types-requests>=2.32.0.20240914",
+  "pre-commit>=3.8.0",
+]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-q"
+testpaths = ["tests"]
+markers = [
+  "smoke: very fast checks for CI smoke stage",
+]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+select = ["E","F","I","UP","B","A","C4","SIM","PIE","T20"]
+ignore = ["E203","E501"]  # keep with black compatibility
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unused_ignores = true
+warn_return_any = true
+disallow_any_generics = true
+exclude = ["^\\.venv/","^build/","^dist/","^node_modules/"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["logos_core*", "services*", "audit*", "policies*"]
+exclude = ["tests*", "gui*", "pxl-minimal-kernel-main*", "LOGOS_AGI*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.json", "*.yaml", "*.yml", "*.txt", "*.md"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"

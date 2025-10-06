@@ -22,12 +22,9 @@ __version__ = "1.0.0"
 __author__ = "LOGOS AGI Development Team"
 __subsystem__ = "TETRAGNOS"
 
-from .tetragnos_worker import TetragnosWorker, TetragnosCoreEngine
+from .tetragnos_worker import TetragnosCoreEngine, TetragnosWorker
 
-__all__ = [
-    "TetragnosWorker",
-    "TetragnosCoreEngine"
-]
+__all__ = ["TetragnosWorker", "TetragnosCoreEngine"]
 
 # Subsystem metadata
 SUBSYSTEM_INFO = {
@@ -36,18 +33,13 @@ SUBSYSTEM_INFO = {
     "description": "Pattern Recognition and Natural Language Processing",
     "capabilities": [
         "text_clustering",
-        "feature_extraction", 
+        "feature_extraction",
         "semantic_analysis",
         "pattern_recognition",
         "language_translation",
-        "similarity_computation"
+        "similarity_computation",
     ],
     "input_queues": ["tetragnos_task_queue"],
     "output_queues": ["task_result_queue"],
-    "dependencies": [
-        "scikit-learn",
-        "sentence-transformers", 
-        "numpy",
-        "nltk"
-    ]
+    "dependencies": ["scikit-learn", "sentence-transformers", "numpy", "nltk"],
 }

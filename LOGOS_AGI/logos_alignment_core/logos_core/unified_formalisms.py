@@ -1,6 +1,6 @@
-
-from policies.privative_policies import obligation_for
 from logos_core.reference_monitor import ReferenceMonitor
+from policies.privative_policies import obligation_for
+
 
 class UnifiedFormalismValidator:
     def __init__(self, config: dict):

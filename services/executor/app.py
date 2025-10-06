@@ -1,16 +1,24 @@
-﻿from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-import os, requests
+﻿import os
 
-ROUTER = os.getenv("TOOL_ROUTER_URL","http://127.0.0.1:8071")
+import requests
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+
+ROUTER = os.getenv("TOOL_ROUTER_URL", "http://127.0.0.1:8071")
 
 app = FastAPI()
 
+
 class ExecReq(BaseModel):
-    action:str; args:dict; proof_token:dict
+    action: str
+    args: dict
+    proof_token: dict
+
 
 @app.get("/health")
-def health(): return {"ok": True}
+def health():
+    return {"ok": True}
+
 
 @app.post("/execute")
 def execute(x: ExecReq):
@@ -32,6 +40,11 @@ def execute(x: ExecReq):
         tool = "fs"
     else:
         tool = "db"
-    r = requests.post(f"{ROUTER}/route", json={"tool": tool, "args": x.args, "proof_token": x.proof_token}, timeout=15)
-    if not r.ok: raise HTTPException(r.status_code, r.text)
-    return {"status":"OK","result": r.json()}
+    r = requests.post(
+        f"{ROUTER}/route",
+        json={"tool": tool, "args": x.args, "proof_token": x.proof_token},
+        timeout=15,
+    )
+    if not r.ok:
+        raise HTTPException(r.status_code, r.text)
+    return {"status": "OK", "result": r.json()}

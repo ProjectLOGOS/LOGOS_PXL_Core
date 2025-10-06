@@ -1,6 +1,6 @@
-
-from policies.privative_policies import preserves_invariants
 from logos_core.reference_monitor import ReferenceMonitor
+from policies.privative_policies import preserves_invariants
+
 
 class ArchonPlannerGate:
     def __init__(self, config: dict):
