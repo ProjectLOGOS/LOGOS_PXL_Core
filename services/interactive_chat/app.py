@@ -10,6 +10,9 @@ import logging
 from datetime import datetime
 import uuid
 
+# Import our new GPT engine
+from gpt_engine import GPTLOGOSEngine
+
 app = FastAPI(title="LOGOS Interactive Chat Service")
 
 # Connection manager for WebSocket connections
@@ -71,9 +74,11 @@ LOGOS_API_URL = "http://127.0.0.1:8090"
 TOOL_ROUTER_URL = "http://127.0.0.1:8071"
 EXECUTOR_URL = "http://127.0.0.1:8072"
 
-# AI Chat Engine
+# AI Chat Engine with GPT Integration
 class LOGOSChatEngine:
     def __init__(self):
+        # Initialize GPT engine
+        self.gpt_engine = GPTLOGOSEngine()
         self.conversation_context = {}
         self.system_capabilities = {
             "text_processing": "TETRAGNOS for semantic analysis and clustering",
@@ -117,13 +122,143 @@ class LOGOSChatEngine:
             }
     
     async def process_message(self, message: str, session_id: str) -> str:
-        """Process user message through LOGOS capabilities"""
+        """Process user message through GPT-enhanced LOGOS capabilities"""
         
-        # Check for system commands
+        # Check for system commands first (keep existing functionality)
         if message.startswith("/"):
             return await self.handle_command(message, session_id)
         
-        # Check for toolkit requests - improved keyword detection
+        # Use GPT for intelligent processing
+        try:
+            response_text, tool_request = await self.gpt_engine.process_message(message, session_id)
+            
+            # If GPT wants to use a tool, execute it
+            if tool_request:
+                tool_result = await self.execute_gpt_tool_request(tool_request, session_id)
+                return f"{response_text}\n\n{tool_result}"
+            
+            return response_text
+            
+        except Exception as e:
+            # Fallback to original logic if GPT fails
+            print(f"GPT processing failed: {e}")
+            return await self.fallback_process_message(message, session_id)
+    
+    async def execute_gpt_tool_request(self, tool_request: dict, session_id: str) -> str:
+        """Execute tool request from GPT"""
+        tool = tool_request.get("tool")
+        operation = tool_request.get("operation")
+        data = tool_request.get("data", {})
+        
+        try:
+            if tool == "tetragnos":
+                return await self.handle_text_analysis_gpt(data, session_id)
+            elif tool == "telos":
+                return await self.handle_forecasting_gpt(data, session_id)
+            elif tool == "thonoc":
+                return await self.handle_theorem_proving_gpt(data, session_id)
+            else:
+                return f"❌ Unknown tool: {tool}"
+        except Exception as e:
+            return f"⚠️ Tool execution failed: {str(e)}"
+    
+    async def handle_text_analysis_gpt(self, data: dict, session_id: str) -> str:
+        """Handle GPT-routed text analysis"""
+        try:
+            auth = await self.authorize_chat_action("text_analysis", session_id)
+            texts = data.get("texts", [])
+            k = data.get("k", min(2, len(texts)))
+            
+            request_data = {
+                "tool": "tetragnos",
+                "args": {"op": "cluster_texts", "texts": texts, "k": k},
+                "proof_token": auth["proof_token"]
+            }
+            
+            response = requests.post(f"{TOOL_ROUTER_URL}/route", json=request_data, timeout=10)
+            
+            if response.status_code == 200:
+                result = response.json()
+                analysis_result = result['result']
+                clusters = analysis_result.get('k', 1)
+                items = analysis_result.get('items', [])
+                
+                return f"""📊 Text Analysis Results:
+
+**Processed {len(texts)} text segments**
+**Organized into {clusters} semantic clusters**
+
+**Analysis Details:**
+{chr(10).join([f"• Cluster {item['cluster']}: {item['text'][:100]}{'...' if len(item['text']) > 100 else ''}" for item in items[:5]])}
+
+✅ Analysis completed successfully through TETRAGNOS toolkit."""
+            else:
+                return "❌ Text analysis failed. Please try again."
+        except Exception as e:
+            return f"⚠️ Error in text analysis: {str(e)}"
+    
+    async def handle_forecasting_gpt(self, data: dict, session_id: str) -> str:
+        """Handle GPT-routed forecasting"""
+        try:
+            auth = await self.authorize_chat_action("forecasting", session_id)
+            series = data.get("series", [])
+            horizon = data.get("horizon", 4)
+            
+            request_data = {
+                "tool": "telos",
+                "args": {"op": "forecast_series", "series": series, "horizon": horizon},
+                "proof_token": auth["proof_token"]
+            }
+            
+            response = requests.post(f"{TOOL_ROUTER_URL}/route", json=request_data, timeout=10)
+            
+            if response.status_code == 200:
+                result = response.json()
+                forecast = result['result']['forecast']
+                return f"""📈 Forecasting Results:
+
+**Input Data:** {', '.join(map(str, series))}
+**{horizon}-Step Forecast:** {', '.join(map(str, [round(f, 2) for f in forecast]))}
+
+The trend analysis shows the data progression and predicts the next {horizon} values based on linear extrapolation.
+
+✅ Forecast completed successfully through TELOS toolkit."""
+            else:
+                return "❌ Forecasting failed. Please try again."
+        except Exception as e:
+            return f"⚠️ Error in forecasting: {str(e)}"
+    
+    async def handle_theorem_proving_gpt(self, data: dict, session_id: str) -> str:
+        """Handle GPT-routed theorem proving"""
+        try:
+            auth = await self.authorize_chat_action("theorem_proving", session_id)
+            formula = data.get("formula", "")
+            
+            request_data = {
+                "tool": "thonoc",
+                "args": {"op": "construct_proof", "formula": formula},
+                "proof_token": auth["proof_token"]
+            }
+            
+            response = requests.post(f"{TOOL_ROUTER_URL}/route", json=request_data, timeout=10)
+            
+            if response.status_code == 200:
+                result = response.json()
+                return f"""🔬 Theorem Proving Results:
+
+**Statement:** {formula}
+**Proof Status:** {"✅ PROVED" if result.get('result', {}).get('proved') else "❌ COULD NOT PROVE"}
+
+The logical statement has been processed using automated theorem proving.
+
+✅ Proof attempt completed through THONOC toolkit."""
+            else:
+                return "❌ Theorem proving failed. Please try again."
+        except Exception as e:
+            return f"⚠️ Error in theorem proving: {str(e)}"
+    
+    async def fallback_process_message(self, message: str, session_id: str) -> str:
+        """Fallback to original pattern matching if GPT fails"""
         if any(keyword in message.lower() for keyword in ["analyze", "cluster", "semantic", "text analysis"]):
             return await self.handle_text_analysis(message, session_id)
         elif any(keyword in message.lower() for keyword in ["predict", "forecast", "trend"]):
