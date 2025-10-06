@@ -199,6 +199,25 @@ services:
         condition: service_healthy
     restart: unless-stopped
 
+  # TETRAGNOS Toolkit - Pattern recognition and text clustering
+  toolkit-tetragnos:
+    build:
+      context: ./services/toolkits/tetragnos
+      dockerfile: Dockerfile
+    container_name: toolkit-tetragnos
+    ports:
+      - "8065:8000"
+    networks:
+      - default
+    volumes:
+      - ./model_cache:/root/.cache
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
   # Web Crawl Toolkit - Proof-gated web content fetching
   toolkit-crawl:
     build:
@@ -238,6 +257,43 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+    restart: unless-stopped
+
+  # Tool Router - Routes toolkit requests
+  tool-router:
+    build:
+      context: ./services/tool_router
+      dockerfile: ../executor/Dockerfile  # Reuse simple dockerfile
+    container_name: tool-router
+    ports:
+      - "8071:8071"
+    environment:
+      - TETRAGNOS_URL=http://toolkit-tetragnos:8000
+      - CRAWL_URL=http://toolkit-crawl:8000
+      - WEB_URL=http://127.0.0.1:8061
+      - DB_URL=http://127.0.0.1:8062
+      - FS_URL=http://127.0.0.1:8063
+    networks:
+      - default
+    command: ["python", "-m", "uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8071"]
+    restart: unless-stopped
+
+  # Executor - Proof-gated task execution
+  executor:
+    build:
+      context: ./services/executor
+      dockerfile: Dockerfile
+    container_name: executor
+    ports:
+      - "8072:8072"
+    environment:
+      - TOOL_ROUTER_URL=http://tool-router:8071
+    networks:
+      - default
+    command: ["python", "-m", "uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8072"]
+    depends_on:
+      - tool-router
+      - toolkit-tetragnos
     restart: unless-stopped
 
 volumes:
