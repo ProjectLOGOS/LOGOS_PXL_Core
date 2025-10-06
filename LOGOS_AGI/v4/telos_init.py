@@ -23,12 +23,9 @@ __version__ = "1.0.0"
 __author__ = "LOGOS AGI Development Team"
 __subsystem__ = "TELOS"
 
-from .telos_worker import TelosWorker, TelosCoreEngine
+from .telos_worker import TelosCoreEngine, TelosWorker
 
-__all__ = [
-    "TelosWorker",
-    "TelosCoreEngine"
-]
+__all__ = ["TelosWorker", "TelosCoreEngine"]
 
 # Subsystem metadata
 SUBSYSTEM_INFO = {
@@ -38,19 +35,13 @@ SUBSYSTEM_INFO = {
     "capabilities": [
         "causal_modeling",
         "outcome_prediction",
-        "causal_retrodiction", 
+        "causal_retrodiction",
         "intervention_analysis",
         "time_series_forecasting",
         "hypothesis_testing",
-        "counterfactual_reasoning"
+        "counterfactual_reasoning",
     ],
     "input_queues": ["telos_task_queue"],
     "output_queues": ["task_result_queue"],
-    "dependencies": [
-        "scikit-learn",
-        "causal-learn",
-        "scipy",
-        "numpy",
-        "statsmodels"
-    ]
+    "dependencies": ["scikit-learn", "causal-learn", "scipy", "numpy", "statsmodels"],
 }

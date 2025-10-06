@@ -28,10 +28,7 @@ Database Schema:
 __version__ = "1.0.0"
 __author__ = "LOGOS AGI Development Team"
 
-from .persistence_manager import PersistenceManager
 from .db_service import DatabaseService
+from .persistence_manager import PersistenceManager
 
-__all__ = [
-    "PersistenceManager",
-    "DatabaseService"
-]
+__all__ = ["PersistenceManager", "DatabaseService"]

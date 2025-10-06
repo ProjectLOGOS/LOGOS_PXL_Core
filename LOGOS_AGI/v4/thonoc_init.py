@@ -23,12 +23,9 @@ __version__ = "1.0.0"
 __author__ = "LOGOS AGI Development Team"
 __subsystem__ = "THONOC"
 
-from .thonoc_worker import ThonocWorker, ThonocCoreEngine
+from .thonoc_worker import ThonocCoreEngine, ThonocWorker
 
-__all__ = [
-    "ThonocWorker", 
-    "ThonocCoreEngine"
-]
+__all__ = ["ThonocWorker", "ThonocCoreEngine"]
 
 # Subsystem metadata
 SUBSYSTEM_INFO = {
@@ -42,15 +39,9 @@ SUBSYSTEM_INFO = {
         "consistency_checking",
         "theorem_proving",
         "consequence_assignment",
-        "axiomatic_validation"
+        "axiomatic_validation",
     ],
     "input_queues": ["thonoc_task_queue"],
     "output_queues": ["task_result_queue"],
-    "dependencies": [
-        "z3-solver",
-        "sympy",
-        "lark",
-        "networkx",
-        "pysmt"
-    ]
+    "dependencies": ["z3-solver", "sympy", "lark", "networkx", "pysmt"],
 }

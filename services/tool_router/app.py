@@ -1,6 +1,8 @@
+import os
+
+import requests
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-import os, requests
 
 # Service URLs
 WEB_URL = os.getenv("WEB_URL", "http://web:8000")
@@ -13,23 +15,26 @@ THONOC_URL = os.getenv("THONOC_URL", "http://thonoc:8000")
 
 app = FastAPI()
 
+
 class RouteRequest(BaseModel):
     tool: str
     args: dict
     proof_token: dict
 
+
 @app.get("/health")
 def health():
     return {"ok": True, "service": "tool-router"}
 
+
 @app.post("/route")
 def route_tool(req: RouteRequest):
     """Route tool requests to appropriate service"""
-    
+
     # Validate proof token
     if not req.proof_token or "kernel_hash" not in req.proof_token:
         raise HTTPException(403, "Missing proof token")
-    
+
     # Route based on tool type
     if req.tool == "tetragnos":
         service_url = TETRAGNOS_URL
@@ -44,7 +49,7 @@ def route_tool(req: RouteRequest):
         service_url = CRAWL_URL
         endpoint = "/invoke"
     elif req.tool == "db":
-        service_url = DB_URL  
+        service_url = DB_URL
         endpoint = "/query"
     elif req.tool == "fs":
         service_url = FS_URL
@@ -52,35 +57,30 @@ def route_tool(req: RouteRequest):
     else:
         service_url = WEB_URL
         endpoint = "/process"
-    
+
     try:
         # Forward request to appropriate service
         if req.tool in ["tetragnos", "telos", "thonoc", "crawl", "web"]:
             # Services with structured invoke format
-            payload = {
-                "tool": req.tool,
-                "args": req.args,
-                "proof_token": req.proof_token
-            }
+            payload = {"tool": req.tool, "args": req.args, "proof_token": req.proof_token}
         else:
-            payload = {
-                "args": req.args,
-                "proof_token": req.proof_token
-            }
-        
+            payload = {"args": req.args, "proof_token": req.proof_token}
+
         response = requests.post(f"{service_url}{endpoint}", json=payload, timeout=15)
-        
+
         if response.ok:
             return {"status": "success", "tool": req.tool, "result": response.json()}
         else:
             raise HTTPException(response.status_code, f"Tool service error: {response.text}")
-            
+
     except requests.exceptions.RequestException as e:
         raise HTTPException(500, f"Tool routing failed: {str(e)}")
 
+
 if __name__ == "__main__":
     import uvicorn
-    print(f"🔧 Starting Tool Router")
+
+    print("🔧 Starting Tool Router")
     print(f"   WEB:        {WEB_URL}")
     print(f"   DB:         {DB_URL}")
     print(f"   FS:         {FS_URL}")

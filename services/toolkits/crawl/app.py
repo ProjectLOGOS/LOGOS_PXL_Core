@@ -1,32 +1,47 @@
+import hashlib
+import time
+import urllib.robotparser as rp
+from urllib.parse import urlparse
+
+import requests
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from urllib.parse import urlparse
-import requests, hashlib, time, urllib.robotparser as rp
 
-ALLOWED = {"example.org","arxiv.org","acm.org"}  # edit allowlist
+ALLOWED = {"example.org", "arxiv.org", "acm.org"}  # edit allowlist
 
 app = FastAPI()
+
+
 @app.get("/health")
-def health(): return {"ok":True}
+def health():
+    return {"ok": True}
+
 
 class T(BaseModel):
-    tool:str; args:dict; proof_token:dict
+    tool: str
+    args: dict
+    proof_token: dict
 
-def _ok(url:str)->bool:
+
+def _ok(url: str) -> bool:
     try:
         u = urlparse(url)
-        if u.scheme not in ("http","https"): return False
-        if u.hostname not in ALLOWED: return False
+        if u.scheme not in ("http", "https"):
+            return False
+        if u.hostname not in ALLOWED:
+            return False
         rob = rp.RobotFileParser()
         rob.set_url(f"{u.scheme}://{u.hostname}/robots.txt")
         try:
             rob.read()
-            if not rob.can_fetch("*", url): return False
+            if not rob.can_fetch("*", url):
+                return False
         except Exception:
             return False
         return True
     except Exception:
         return False
+
 
 @app.post("/invoke")
 def invoke(t: T):
@@ -44,5 +59,5 @@ def invoke(t: T):
         "status": r.status_code,
         "sha256": h,
         "snippet": body,
-        "fetched_at": int(time.time()*1000)
+        "fetched_at": int(time.time() * 1000),
     }

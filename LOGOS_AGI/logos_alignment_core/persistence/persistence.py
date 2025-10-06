@@ -1,8 +1,10 @@
+import json
+import os
 
-import json, os
 
 def ensure_parent(path: str):
     os.makedirs(os.path.dirname(path), exist_ok=True)
+
 
 class AuditLog:
     def __init__(self, path: str):

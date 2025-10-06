@@ -2,8 +2,12 @@
 LOGOS Probe Console - Local Test Version
 Run this locally for immediate testing without Docker
 """
-from http.server import HTTPServer, BaseHTTPRequestHandler
-import json, urllib.parse, urllib.request, pathlib, os, sys
+
+import json
+import pathlib
+import urllib.parse
+import urllib.request
+from http.server import BaseHTTPRequestHandler, HTTPServer
 
 # Configuration
 ARCHON_URL = "http://127.0.0.1:8075"
@@ -120,91 +124,88 @@ input_field.addEventListener('keypress', (e) => {
 </body></html>
 """
 
+
 class ProbeHandler(BaseHTTPRequestHandler):
     def do_GET(self):
-        if self.path == '/':
+        if self.path == "/":
             self.send_response(200)
-            self.send_header('Content-Type', 'text/html')
+            self.send_header("Content-Type", "text/html")
             self.end_headers()
             self.wfile.write(HTML_TEMPLATE.encode())
-            
-        elif self.path == '/status':
+
+        elif self.path == "/status":
             try:
                 # Check ARCHON
                 req = urllib.request.Request(f"{ARCHON_URL}/health")
                 archon_ok = urllib.request.urlopen(req, timeout=3).getcode() == 200
             except:
                 archon_ok = False
-                
+
             try:
                 # Check LOGOS
                 req = urllib.request.Request(f"{LOGOS_URL}/health")
                 logos_ok = urllib.request.urlopen(req, timeout=3).getcode() == 200
             except:
                 logos_ok = False
-            
-            response = {
-                "kernel_hash": KERNEL_HASH,
-                "archon_ok": archon_ok,
-                "logos_ok": logos_ok
-            }
-            
+
+            response = {"kernel_hash": KERNEL_HASH, "archon_ok": archon_ok, "logos_ok": logos_ok}
+
             self.send_response(200)
-            self.send_header('Content-Type', 'application/json')
-            self.send_header('Access-Control-Allow-Origin', '*')
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Access-Control-Allow-Origin", "*")
             self.end_headers()
             self.wfile.write(json.dumps(response).encode())
         else:
             self.send_response(404)
             self.end_headers()
-    
+
     def do_POST(self):
-        if self.path == '/ask':
-            content_length = int(self.headers['Content-Length'])
+        if self.path == "/ask":
+            content_length = int(self.headers["Content-Length"])
             post_data = self.rfile.read(content_length)
-            
+
             try:
                 data = json.loads(post_data.decode())
-                text = data.get('text', '').strip()
-                
+                text = data.get("text", "").strip()
+
                 result = self.process_command(text)
-                
+
                 self.send_response(200)
-                self.send_header('Content-Type', 'application/json')
-                self.send_header('Access-Control-Allow-Origin', '*')
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
                 self.end_headers()
                 self.wfile.write(json.dumps(result).encode())
-                
+
             except Exception as e:
                 error_response = {"error": str(e)}
                 self.send_response(500)
-                self.send_header('Content-Type', 'application/json')
-                self.send_header('Access-Control-Allow-Origin', '*')
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
                 self.end_headers()
                 self.wfile.write(json.dumps(error_response).encode())
         else:
             self.send_response(404)
             self.end_headers()
-    
+
     def process_command(self, text):
         """Process different types of commands"""
         provenance = {"src": "probe_console_local"}
-        
+
         # Crawl command
         if text.lower().startswith("crawl "):
             url = text.split(None, 1)[1]
             body = {
                 "action": "web_crawl",
                 "args": {"url": url},
-                "proof_token": {"kernel_hash": KERNEL_HASH}
+                "proof_token": {"kernel_hash": KERNEL_HASH},
             }
             return self.make_request(f"{EXEC_URL}/execute", body)
-        
+
         # Subsystem tasks: "telos:task {json}", etc.
         for subsys in ("telos", "tetragnos", "thonoc"):
             prefix = subsys + ":"
             if text.lower().startswith(prefix):
-                rest = text[len(prefix):].strip()
+                rest = text[len(prefix) :].strip()
                 if " " in rest:
                     task, arg = rest.split(" ", 1)
                     try:
@@ -213,30 +214,24 @@ class ProbeHandler(BaseHTTPRequestHandler):
                         payload = {}
                 else:
                     task, payload = rest, {}
-                
-                dispatch_data = {
-                    "task_type": task,
-                    "payload": payload,
-                    "provenance": provenance
-                }
+
+                dispatch_data = {"task_type": task, "payload": payload, "provenance": provenance}
                 return self.make_request(f"{ARCHON_URL}/dispatch", dispatch_data)
-        
+
         # Fallback: authorization test
         auth_data = {
             "action": f"task:{text}",
             "state": "queued",
             "props": "payload",
-            "provenance": provenance
+            "provenance": provenance,
         }
         return self.make_request(f"{LOGOS_URL}/authorize_action", auth_data)
-    
+
     def make_request(self, url, data):
         """Make HTTP request to backend services"""
         try:
             req = urllib.request.Request(
-                url,
-                data=json.dumps(data).encode(),
-                headers={'Content-Type': 'application/json'}
+                url, data=json.dumps(data).encode(), headers={"Content-Type": "application/json"}
             )
             with urllib.request.urlopen(req, timeout=15) as response:
                 return json.loads(response.read().decode())
@@ -245,6 +240,7 @@ class ProbeHandler(BaseHTTPRequestHandler):
         except Exception as e:
             raise Exception(f"Request failed: {str(e)}")
 
+
 if __name__ == "__main__":
     print(f"🚀 Starting LOGOS Probe Console on http://localhost:{PORT}")
     print(f"📊 Kernel Hash: {KERNEL_HASH[:16]}...")
@@ -252,8 +248,8 @@ if __name__ == "__main__":
     print(f"🔗 LOGOS: {LOGOS_URL}")
     print(f"🔗 EXECUTOR: {EXEC_URL}")
     print()
-    
-    server = HTTPServer(('localhost', PORT), ProbeHandler)
+
+    server = HTTPServer(("localhost", PORT), ProbeHandler)
     try:
         server.serve_forever()
     except KeyboardInterrupt:

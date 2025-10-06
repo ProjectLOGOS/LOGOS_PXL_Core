@@ -64,7 +64,7 @@ class ReferenceMonitor:
         timestamp = int(start_time)
         
         # Strict provenance validation
-        if not provenance or not isinstance(provenance, dict):\n            raise PermissionError("missing provenance")
+        if not provenance or not isinstance(provenance, dict):
             raise ProofGateError("missing provenance")
         
         # Convert string provenance to dict

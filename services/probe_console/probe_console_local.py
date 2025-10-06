@@ -1,16 +1,23 @@
-from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import HTMLResponse, JSONResponse
+import json
+import pathlib
+
+import requests
+from fastapi import FastAPI, HTTPException
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
-import os, json, requests, pathlib
 
 # Use localhost for local testing
 ARCHON = "http://localhost:8075"
-LOGOS  = "http://localhost:8090"
-EXEC   = "http://localhost:8072"
+LOGOS = "http://localhost:8090"
+EXEC = "http://localhost:8072"
 
 try:
-    CFG = json.loads((pathlib.Path(__file__).resolve().parents[2] / "configs" / "config.json").read_text(encoding="utf-8"))
-    PIN  = CFG.get("expected_kernel_hash","")
+    CFG = json.loads(
+        (pathlib.Path(__file__).resolve().parents[2] / "configs" / "config.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    PIN = CFG.get("expected_kernel_hash", "")
 except:
     PIN = "test_hash"
 
@@ -55,64 +62,86 @@ async function send(){
 </body></html>
 """
 
+
 class AskIn(BaseModel):
     text: str
 
+
 @app.get("/status")
 def status():
-    try: a = requests.get(f"{ARCHON}/health", timeout=3).ok
-    except: a = False
-    try: l = requests.get(f"{LOGOS}/health", timeout=3).ok
-    except: l = False
-    try: e = requests.get(f"{EXEC}/health", timeout=3).ok
-    except: e = False
+    try:
+        a = requests.get(f"{ARCHON}/health", timeout=3).ok
+    except:
+        a = False
+    try:
+        l = requests.get(f"{LOGOS}/health", timeout=3).ok
+    except:
+        l = False
+    try:
+        e = requests.get(f"{EXEC}/health", timeout=3).ok
+    except:
+        e = False
     return {"kernel_hash": PIN, "archon_ok": a, "logos_ok": l, "exec_ok": e}
 
+
 @app.get("/", response_class=HTMLResponse)
-def index(): return INDEX
+def index():
+    return INDEX
+
 
 @app.post("/ask")
 def ask(inp: AskIn):
     t = inp.text.strip()
-    prov = {"src":"probe_console_local"}
+    prov = {"src": "probe_console_local"}
     try:
         # crawl: "crawl https://site"
         if t.lower().startswith("crawl "):
-            url = t.split(None,1)[1]
-            body = {"action":"web_crawl","args":{"url":url},"proof_token":{"kernel_hash":PIN}}
+            url = t.split(None, 1)[1]
+            body = {
+                "action": "web_crawl",
+                "args": {"url": url},
+                "proof_token": {"kernel_hash": PIN},
+            }
             r = requests.post(f"{EXEC}/execute", json=body, timeout=15)
-            if not r.ok: raise HTTPException(r.status_code, f"Executor error: {r.text}")
+            if not r.ok:
+                raise HTTPException(r.status_code, f"Executor error: {r.text}")
             return r.json()
 
         # prefixed tasks: "telos:task {json}", "tetragnos:task {json}", "thonoc:task {json}"
-        for subsys in ("telos","tetragnos","thonoc"):
+        for subsys in ("telos", "tetragnos", "thonoc"):
             pre = subsys + ":"
             if t.lower().startswith(pre):
-                rest = t[len(pre):].strip()
+                rest = t[len(pre) :].strip()
                 if " " in rest:
-                    task, arg = rest.split(" ",1)
-                    try: payload = json.loads(arg)
-                    except: payload = {}
+                    task, arg = rest.split(" ", 1)
+                    try:
+                        payload = json.loads(arg)
+                    except:
+                        payload = {}
                 else:
                     task, payload = rest, {}
                 d = {"task_type": task, "payload": payload, "provenance": prov}
                 r = requests.post(f"{ARCHON}/dispatch", json=d, timeout=15)
-                if not r.ok: raise HTTPException(r.status_code, f"ARCHON error: {r.text}")
+                if not r.ok:
+                    raise HTTPException(r.status_code, f"ARCHON error: {r.text}")
                 return r.json()
 
         # fallback: authorize only (shows proof gating)
         auth = {"action": f"task:{t}", "state": "queued", "props": "payload", "provenance": prov}
         r = requests.post(f"{LOGOS}/authorize_action", json=auth, timeout=10)
-        if not r.ok: raise HTTPException(403, f"LOGOS auth error: {r.text}")
-        return {"authorized": True, "proof_token": r.json().get("proof_token",{})}
+        if not r.ok:
+            raise HTTPException(403, f"LOGOS auth error: {r.text}")
+        return {"authorized": True, "proof_token": r.json().get("proof_token", {})}
     except HTTPException as e:
         raise e
     except Exception as e:
         raise HTTPException(500, str(e))
 
+
 if __name__ == "__main__":
     import uvicorn
-    print(f"Starting LOGOS Probe Console Local")
+
+    print("Starting LOGOS Probe Console Local")
     print(f"ARCHON: {ARCHON}")
     print(f"LOGOS:  {LOGOS}")
     print(f"EXEC:   {EXEC}")
