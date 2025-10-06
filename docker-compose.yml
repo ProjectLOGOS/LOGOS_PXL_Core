@@ -55,6 +55,27 @@ services:
       start_period: 60s
     restart: unless-stopped
 
+  # LOGOS API Service - Core authorization and proof-gating endpoint
+  logos-api:
+    build:
+      context: .
+      dockerfile: services/logos_api/Dockerfile
+    container_name: logos-api
+    ports:
+      - "8090:8090"
+    volumes:
+      - ./configs/config.json:/app/configs/config.json:ro
+      - ./logos_core:/app/logos_core:ro
+      - ./audit:/app/audit
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8090/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    networks: [default]
+    restart: unless-stopped
+
   # RabbitMQ Message Broker
   rabbitmq:
     image: rabbitmq:3.12-management
@@ -125,7 +146,7 @@ services:
       - ../LOGOS_AGI/v4:/v4
     environment:
       - RABBIT_URL=amqp://logos:trinity@rabbitmq:5672/logos
-      - LOGOS_API_URL=http://logos-core:5000
+      - LOGOS_API_URL=http://logos-api:8090
       - V4PATH=/v4
     depends_on:
       rabbitmq:
@@ -268,11 +289,13 @@ services:
     ports:
       - "8071:8071"
     environment:
-      - TETRAGNOS_URL=http://toolkit-tetragnos:8000
+      - WEB_URL=http://web:8000
+      - DB_URL=http://db:8000
+      - FS_URL=http://fs:8000
       - CRAWL_URL=http://toolkit-crawl:8000
-      - WEB_URL=http://127.0.0.1:8061
-      - DB_URL=http://127.0.0.1:8062
-      - FS_URL=http://127.0.0.1:8063
+      - TETRAGNOS_URL=http://toolkit-tetragnos:8000
+      - TELOS_URL=http://telos:8000
+      - THONOC_URL=http://thonoc:8000
     networks:
       - default
     command: ["python", "-m", "uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8071"]
@@ -294,6 +317,25 @@ services:
     depends_on:
       - tool-router
       - toolkit-tetragnos
+    restart: unless-stopped
+
+  # Interactive Chat - GPT-enhanced conversational interface
+  interactive-chat:
+    build:
+      context: ./services/interactive_chat
+      dockerfile: ../executor/Dockerfile  # Reuse simple dockerfile
+    container_name: interactive-chat
+    ports:
+      - "8080:8080"
+    environment:
+      - LOGOS_API_URL=http://logos-api:8090
+      - TOOL_ROUTER_URL=http://tool-router:8071
+    networks:
+      - default
+    command: ["python", "-m", "uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8080"]
+    depends_on:
+      - logos-api
+      - tool-router
     restart: unless-stopped
 
 volumes:

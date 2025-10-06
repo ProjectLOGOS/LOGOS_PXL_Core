@@ -9,6 +9,7 @@ import requests
 import logging
 from datetime import datetime
 import uuid
+import os
 
 # Import our new GPT engine
 from gpt_engine import GPTLOGOSEngine
@@ -70,9 +71,9 @@ class VoiceMessage(BaseModel):
     sample_rate: int = 16000
 
 # Configuration
-LOGOS_API_URL = "http://127.0.0.1:8090"
-TOOL_ROUTER_URL = "http://127.0.0.1:8071"
-EXECUTOR_URL = "http://127.0.0.1:8072"
+LOGOS_API_URL = os.getenv("LOGOS_API_URL", "http://logos-api:8090")
+TOOL_ROUTER_URL = os.getenv("TOOL_ROUTER_URL", "http://tool-router:8071")
+EXECUTOR_URL = os.getenv("EXECUTOR_URL", "http://executor:8072")
 
 # AI Chat Engine with GPT Integration
 class LOGOSChatEngine:

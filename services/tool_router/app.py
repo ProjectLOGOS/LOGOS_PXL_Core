@@ -3,13 +3,13 @@ from pydantic import BaseModel
 import os, requests
 
 # Service URLs
-WEB_URL = os.getenv("WEB_URL", "http://127.0.0.1:8061")
-DB_URL = os.getenv("DB_URL", "http://127.0.0.1:8062") 
-FS_URL = os.getenv("FS_URL", "http://127.0.0.1:8063")
-CRAWL_URL = os.getenv("CRAWL_URL", "http://127.0.0.1:8064")
-TETRAGNOS_URL = os.getenv("TETRAGNOS_URL", "http://127.0.0.1:8065")
-TELOS_URL = os.getenv("TELOS_URL", "http://127.0.0.1:8066")
-THONOC_URL = os.getenv("THONOC_URL", "http://127.0.0.1:8067")
+WEB_URL = os.getenv("WEB_URL", "http://web:8000")
+DB_URL = os.getenv("DB_URL", "http://db:8000")
+FS_URL = os.getenv("FS_URL", "http://fs:8000")
+CRAWL_URL = os.getenv("CRAWL_URL", "http://toolkit-crawl:8000")
+TETRAGNOS_URL = os.getenv("TETRAGNOS_URL", "http://toolkit-tetragnos:8000")
+TELOS_URL = os.getenv("TELOS_URL", "http://telos:8000")
+THONOC_URL = os.getenv("THONOC_URL", "http://thonoc:8000")
 
 app = FastAPI()
 

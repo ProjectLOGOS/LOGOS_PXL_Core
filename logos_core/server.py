@@ -80,3 +80,7 @@ def authorize_action(inp: AuthIn):
         print(f"Audit logging error: {e}")
     
     return {"authorized": True, "proof_token": proof_token}
+
+@app.get("/health")
+def health():
+    return {"ok": True}
