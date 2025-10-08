@@ -1,0 +1,81 @@
+DIGEST f1b30f1c5354f1e1ab7a2980d8299889
+FSmokeTests
+R90:101 ChronoAxioms <> <> lib
+R119:127 Bijection <> <> lib
+R145:158 ChronoMappings <> <> lib
+R176:187 ChronoProofs <> <> lib
+abbrev 225:226 <> PA
+R232:249 ChronoAxioms ChronoAxioms P_chi defax
+R251:268 ChronoAxioms ChronoAxioms chi_A constr
+abbrev 281:282 <> PB
+R288:305 ChronoAxioms ChronoAxioms P_chi defax
+R307:324 ChronoAxioms ChronoAxioms chi_B constr
+abbrev 337:338 <> PC
+R344:361 ChronoAxioms ChronoAxioms P_chi defax
+R363:380 ChronoAxioms ChronoAxioms chi_C constr
+sec 393:402 <> SmokeTests
+var 414:415 SmokeTests pA
+R419:420 SmokeTests <> PA abbrev
+var 432:433 SmokeTests pB
+R437:438 SmokeTests <> PB abbrev
+var 450:451 SmokeTests pC
+R455:456 SmokeTests <> PC abbrev
+prf 513:527 <> test_collapse_A
+R579:581 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R531:551 ChronoMappings ChronoMappings B_to_A def
+R554:574 ChronoMappings ChronoMappings A_to_B def
+R576:577 SmokeTests <> SmokeTests.pA var
+R582:583 SmokeTests <> SmokeTests.pA var
+R603:623 ChronoMappings ChronoMappings B_to_A def
+R626:646 ChronoMappings ChronoMappings A_to_B def
+R658:665 Bijection <> backward def
+R668:674 Bijection <> forward def
+R686:687 Bijection <> fg proj
+R689:709 ChronoMappings ChronoMappings map_AB def
+R686:687 Bijection <> fg proj
+R689:709 ChronoMappings ChronoMappings map_AB def
+prf 725:739 <> test_collapse_B
+R791:793 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R743:763 ChronoMappings ChronoMappings A_to_B def
+R766:786 ChronoMappings ChronoMappings B_to_A def
+R788:789 SmokeTests <> SmokeTests.pB var
+R794:795 SmokeTests <> SmokeTests.pB var
+R815:835 ChronoMappings ChronoMappings A_to_B def
+R838:858 ChronoMappings ChronoMappings B_to_A def
+R870:876 Bijection <> forward def
+R879:886 Bijection <> backward def
+R898:899 Bijection <> gf proj
+R901:921 ChronoMappings ChronoMappings map_AB def
+R898:899 Bijection <> gf proj
+R901:921 ChronoMappings ChronoMappings map_AB def
+prf 937:951 <> test_collapse_C
+R1003:1005 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R955:975 ChronoMappings ChronoMappings B_to_C def
+R978:998 ChronoMappings ChronoMappings C_to_B def
+R1000:1001 SmokeTests <> SmokeTests.pC var
+R1006:1007 SmokeTests <> SmokeTests.pC var
+R1027:1047 ChronoMappings ChronoMappings B_to_C def
+R1050:1070 ChronoMappings ChronoMappings C_to_B def
+R1082:1088 Bijection <> forward def
+R1091:1098 Bijection <> backward def
+R1110:1111 Bijection <> gf proj
+R1113:1133 ChronoMappings ChronoMappings map_BC def
+R1110:1111 Bijection <> gf proj
+R1113:1133 ChronoMappings ChronoMappings map_BC def
+prf 1224:1258 <> test_temporal_convergence_available
+R1310:1312 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1262:1282 ChronoMappings ChronoMappings C_to_A def
+R1285:1305 ChronoMappings ChronoMappings A_to_C def
+R1307:1308 SmokeTests <> SmokeTests.pA var
+R1313:1314 SmokeTests <> SmokeTests.pA var
+R1330:1349 ChronoProofs <> temporal_convergence thm
+R1330:1349 ChronoProofs <> temporal_convergence thm
+prf 1364:1400 <> test_chronological_collapse_available
+R1452:1454 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1404:1424 ChronoMappings ChronoMappings B_to_A def
+R1427:1447 ChronoMappings ChronoMappings A_to_B def
+R1449:1450 SmokeTests <> SmokeTests.pA var
+R1455:1456 SmokeTests <> SmokeTests.pA var
+R1472:1495 ChronoProofs <> chronological_collapse_A thm
+R1472:1495 ChronoProofs <> chronological_collapse_A thm
+R1508:1517 SmokeTests SmokeTests <> sec

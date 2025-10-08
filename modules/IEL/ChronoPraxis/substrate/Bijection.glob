@@ -1,0 +1,211 @@
+DIGEST 90ed1a7bb765b5a1cae6f90fbe9e6375
+Fmodules.chronopraxis.substrate.Bijection
+rec 158:166 <> Bijection
+proj 188:188 <> f
+proj 202:202 <> g
+proj 216:217 <> fg
+proj 250:251 <> gf
+binder 169:169 <> X:1
+binder 171:171 <> Y:2
+R193:196 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R192:192 modules.chronopraxis.substrate.Bijection <> X:1 var
+R197:197 modules.chronopraxis.substrate.Bijection <> Y:2 var
+R207:210 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R206:206 modules.chronopraxis.substrate.Bijection <> Y:2 var
+R211:211 modules.chronopraxis.substrate.Bijection <> X:1 var
+R232:232 modules.chronopraxis.substrate.Bijection <> X:1 var
+binder 228:228 <> x:6
+R242:244 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R235:235 modules.chronopraxis.substrate.Bijection <> g:5 meth
+R238:238 modules.chronopraxis.substrate.Bijection <> f:4 meth
+R240:240 modules.chronopraxis.substrate.Bijection <> x:6 var
+R245:245 modules.chronopraxis.substrate.Bijection <> x:6 var
+R266:266 modules.chronopraxis.substrate.Bijection <> Y:2 var
+binder 262:262 <> y:8
+R276:278 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R269:269 modules.chronopraxis.substrate.Bijection <> f:4 meth
+R272:272 modules.chronopraxis.substrate.Bijection <> g:5 meth
+R274:274 modules.chronopraxis.substrate.Bijection <> y:8 var
+R279:279 modules.chronopraxis.substrate.Bijection <> y:8 var
+def 330:335 <> id_bij
+binder 338:338 <> X:10
+R350:358 modules.chronopraxis.substrate.Bijection <> Bijection rec
+R362:362 modules.chronopraxis.substrate.Bijection <> X:10 var
+R360:360 modules.chronopraxis.substrate.Bijection <> X:10 var
+R372:372 modules.chronopraxis.substrate.Bijection <> f proj
+R372:372 modules.chronopraxis.substrate.Bijection <> f proj
+R372:372 modules.chronopraxis.substrate.Bijection <> f proj
+R391:391 modules.chronopraxis.substrate.Bijection <> g proj
+R391:391 modules.chronopraxis.substrate.Bijection <> g proj
+R410:411 modules.chronopraxis.substrate.Bijection <> fg proj
+R410:411 modules.chronopraxis.substrate.Bijection <> fg proj
+R436:437 modules.chronopraxis.substrate.Bijection <> gf proj
+R436:437 modules.chronopraxis.substrate.Bijection <> gf proj
+binder 381:381 <> x:11
+R386:386 modules.chronopraxis.substrate.Bijection <> x:11 var
+binder 400:400 <> x:12
+R405:405 modules.chronopraxis.substrate.Bijection <> x:12 var
+binder 420:420 <> x:13
+R425:431 Coq.Init.Logic <> eq_refl constr
+binder 446:446 <> x:14
+R451:457 Coq.Init.Logic <> eq_refl constr
+def 508:518 <> inverse_bij
+binder 521:521 <> X:15
+binder 523:523 <> Y:16
+R540:548 modules.chronopraxis.substrate.Bijection <> Bijection rec
+R552:552 modules.chronopraxis.substrate.Bijection <> Y:16 var
+R550:550 modules.chronopraxis.substrate.Bijection <> X:15 var
+binder 534:536 <> bij:17
+R557:565 modules.chronopraxis.substrate.Bijection <> Bijection rec
+R569:569 modules.chronopraxis.substrate.Bijection <> X:15 var
+R567:567 modules.chronopraxis.substrate.Bijection <> Y:16 var
+R579:579 modules.chronopraxis.substrate.Bijection <> f proj
+R579:579 modules.chronopraxis.substrate.Bijection <> f proj
+R579:579 modules.chronopraxis.substrate.Bijection <> f proj
+R593:593 modules.chronopraxis.substrate.Bijection <> g proj
+R593:593 modules.chronopraxis.substrate.Bijection <> g proj
+R607:608 modules.chronopraxis.substrate.Bijection <> fg proj
+R607:608 modules.chronopraxis.substrate.Bijection <> fg proj
+R623:624 modules.chronopraxis.substrate.Bijection <> gf proj
+R623:624 modules.chronopraxis.substrate.Bijection <> gf proj
+R584:584 modules.chronopraxis.substrate.Bijection <> g proj
+R586:588 modules.chronopraxis.substrate.Bijection <> bij:17 var
+R598:598 modules.chronopraxis.substrate.Bijection <> f proj
+R600:602 modules.chronopraxis.substrate.Bijection <> bij:17 var
+R613:614 modules.chronopraxis.substrate.Bijection <> gf proj
+R616:618 modules.chronopraxis.substrate.Bijection <> bij:17 var
+R629:630 modules.chronopraxis.substrate.Bijection <> fg proj
+R632:634 modules.chronopraxis.substrate.Bijection <> bij:17 var
+prf 688:702 <> bij_injective_f
+binder 705:705 <> X:18
+binder 707:707 <> Y:19
+R724:732 modules.chronopraxis.substrate.Bijection <> Bijection rec
+R736:736 modules.chronopraxis.substrate.Bijection <> Y:19 var
+R734:734 modules.chronopraxis.substrate.Bijection <> X:18 var
+binder 718:720 <> bij:20
+R758:758 modules.chronopraxis.substrate.Bijection <> X:18 var
+binder 750:751 <> x1:21
+binder 753:754 <> x2:22
+R780:783 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R769:771 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R761:761 modules.chronopraxis.substrate.Bijection <> f proj
+R767:768 modules.chronopraxis.substrate.Bijection <> x1:21 var
+R763:765 modules.chronopraxis.substrate.Bijection <> bij:20 var
+R772:772 modules.chronopraxis.substrate.Bijection <> f proj
+R778:779 modules.chronopraxis.substrate.Bijection <> x2:22 var
+R774:776 modules.chronopraxis.substrate.Bijection <> bij:20 var
+R786:788 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R784:785 modules.chronopraxis.substrate.Bijection <> x1:21 var
+R789:790 modules.chronopraxis.substrate.Bijection <> x2:22 var
+R832:833 modules.chronopraxis.substrate.Bijection <> fg proj
+R832:833 modules.chronopraxis.substrate.Bijection <> fg proj
+R832:833 modules.chronopraxis.substrate.Bijection <> fg proj
+R858:859 modules.chronopraxis.substrate.Bijection <> fg proj
+R858:859 modules.chronopraxis.substrate.Bijection <> fg proj
+R858:859 modules.chronopraxis.substrate.Bijection <> fg proj
+prf 910:924 <> bij_injective_g
+binder 927:927 <> X:23
+binder 929:929 <> Y:24
+R946:954 modules.chronopraxis.substrate.Bijection <> Bijection rec
+R958:958 modules.chronopraxis.substrate.Bijection <> Y:24 var
+R956:956 modules.chronopraxis.substrate.Bijection <> X:23 var
+binder 940:942 <> bij:25
+R980:980 modules.chronopraxis.substrate.Bijection <> Y:24 var
+binder 972:973 <> y1:26
+binder 975:976 <> y2:27
+R1002:1005 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R991:993 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R983:983 modules.chronopraxis.substrate.Bijection <> g proj
+R989:990 modules.chronopraxis.substrate.Bijection <> y1:26 var
+R985:987 modules.chronopraxis.substrate.Bijection <> bij:25 var
+R994:994 modules.chronopraxis.substrate.Bijection <> g proj
+R1000:1001 modules.chronopraxis.substrate.Bijection <> y2:27 var
+R996:998 modules.chronopraxis.substrate.Bijection <> bij:25 var
+R1008:1010 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1006:1007 modules.chronopraxis.substrate.Bijection <> y1:26 var
+R1011:1012 modules.chronopraxis.substrate.Bijection <> y2:27 var
+R1054:1055 modules.chronopraxis.substrate.Bijection <> gf proj
+R1054:1055 modules.chronopraxis.substrate.Bijection <> gf proj
+R1054:1055 modules.chronopraxis.substrate.Bijection <> gf proj
+R1080:1081 modules.chronopraxis.substrate.Bijection <> gf proj
+R1080:1081 modules.chronopraxis.substrate.Bijection <> gf proj
+R1080:1081 modules.chronopraxis.substrate.Bijection <> gf proj
+ax 1247:1257 <> compose_bij
+binder 1269:1269 <> X:28
+binder 1271:1271 <> Y:29
+binder 1273:1273 <> Z:30
+R1297:1300 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1284:1292 modules.chronopraxis.substrate.Bijection <> Bijection rec
+R1296:1296 modules.chronopraxis.substrate.Bijection <> Y:29 var
+R1294:1294 modules.chronopraxis.substrate.Bijection <> X:28 var
+R1314:1317 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1301:1309 modules.chronopraxis.substrate.Bijection <> Bijection rec
+R1313:1313 modules.chronopraxis.substrate.Bijection <> Z:30 var
+R1311:1311 modules.chronopraxis.substrate.Bijection <> Y:29 var
+R1318:1326 modules.chronopraxis.substrate.Bijection <> Bijection rec
+R1330:1330 modules.chronopraxis.substrate.Bijection <> Z:30 var
+R1328:1328 modules.chronopraxis.substrate.Bijection <> X:28 var
+def 1391:1397 <> forward
+binder 1400:1400 <> X:33
+binder 1402:1402 <> Y:34
+R1419:1427 modules.chronopraxis.substrate.Bijection <> Bijection rec
+R1431:1431 modules.chronopraxis.substrate.Bijection <> Y:34 var
+R1429:1429 modules.chronopraxis.substrate.Bijection <> X:33 var
+binder 1413:1415 <> bij:35
+R1437:1440 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1436:1436 modules.chronopraxis.substrate.Bijection <> X:33 var
+R1441:1441 modules.chronopraxis.substrate.Bijection <> Y:34 var
+R1446:1446 modules.chronopraxis.substrate.Bijection <> f proj
+R1448:1450 modules.chronopraxis.substrate.Bijection <> bij:35 var
+def 1464:1471 <> backward
+binder 1474:1474 <> X:36
+binder 1476:1476 <> Y:37
+R1493:1501 modules.chronopraxis.substrate.Bijection <> Bijection rec
+R1505:1505 modules.chronopraxis.substrate.Bijection <> Y:37 var
+R1503:1503 modules.chronopraxis.substrate.Bijection <> X:36 var
+binder 1487:1489 <> bij:38
+R1511:1514 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1510:1510 modules.chronopraxis.substrate.Bijection <> Y:37 var
+R1515:1515 modules.chronopraxis.substrate.Bijection <> X:36 var
+R1520:1520 modules.chronopraxis.substrate.Bijection <> g proj
+R1522:1524 modules.chronopraxis.substrate.Bijection <> bij:38 var
+prf 1564:1573 <> fg_rewrite
+binder 1576:1576 <> X:39
+binder 1578:1578 <> Y:40
+R1595:1603 modules.chronopraxis.substrate.Bijection <> Bijection rec
+R1607:1607 modules.chronopraxis.substrate.Bijection <> Y:40 var
+R1605:1605 modules.chronopraxis.substrate.Bijection <> X:39 var
+binder 1589:1591 <> bij:41
+R1626:1626 modules.chronopraxis.substrate.Bijection <> X:39 var
+binder 1622:1622 <> x:42
+R1657:1659 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1629:1636 modules.chronopraxis.substrate.Bijection <> backward def
+R1643:1649 modules.chronopraxis.substrate.Bijection <> forward def
+R1655:1655 modules.chronopraxis.substrate.Bijection <> x:42 var
+R1651:1653 modules.chronopraxis.substrate.Bijection <> bij:41 var
+R1638:1640 modules.chronopraxis.substrate.Bijection <> bij:41 var
+R1660:1660 modules.chronopraxis.substrate.Bijection <> x:42 var
+R1686:1693 modules.chronopraxis.substrate.Bijection <> backward def
+R1696:1702 modules.chronopraxis.substrate.Bijection <> forward def
+R1711:1712 modules.chronopraxis.substrate.Bijection <> fg proj
+R1711:1712 modules.chronopraxis.substrate.Bijection <> fg proj
+prf 1727:1736 <> gf_rewrite
+binder 1739:1739 <> X:43
+binder 1741:1741 <> Y:44
+R1758:1766 modules.chronopraxis.substrate.Bijection <> Bijection rec
+R1770:1770 modules.chronopraxis.substrate.Bijection <> Y:44 var
+R1768:1768 modules.chronopraxis.substrate.Bijection <> X:43 var
+binder 1752:1754 <> bij:45
+R1789:1789 modules.chronopraxis.substrate.Bijection <> Y:44 var
+binder 1785:1785 <> y:46
+R1820:1822 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1792:1798 modules.chronopraxis.substrate.Bijection <> forward def
+R1805:1812 modules.chronopraxis.substrate.Bijection <> backward def
+R1818:1818 modules.chronopraxis.substrate.Bijection <> y:46 var
+R1814:1816 modules.chronopraxis.substrate.Bijection <> bij:45 var
+R1800:1802 modules.chronopraxis.substrate.Bijection <> bij:45 var
+R1823:1823 modules.chronopraxis.substrate.Bijection <> y:46 var
+R1849:1855 modules.chronopraxis.substrate.Bijection <> forward def
+R1858:1865 modules.chronopraxis.substrate.Bijection <> backward def
+R1874:1875 modules.chronopraxis.substrate.Bijection <> gf proj
+R1874:1875 modules.chronopraxis.substrate.Bijection <> gf proj
