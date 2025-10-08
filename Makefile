@@ -19,7 +19,8 @@ VFILES := \
   tests/CompatibilismTests.v \
   tests/EmpiricismTests.v \
   tests/ModalOntologyTests.v \
-  tests/DomainProperties.v
+  tests/DomainProperties.v \
+  pxl-minimal-kernel-main/coq/Constructive_Lindenbaum_Simple.v
 
 COQMF := _CoqProject
 
