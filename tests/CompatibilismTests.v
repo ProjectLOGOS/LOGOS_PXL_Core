@@ -1,16 +1,19 @@
-(* CompatibilismTests.v - Smoke tests for Compatibilism domain *)
+(* CompatibilismTests.v - Tests for Compatibilism domain constructive semantics *)
 
 From Coq Require Import Program.
 
-(* Basic smoke test - verifies file compiles *)
+(* Basic compilation test *)
 Goal True. exact I. Qed.
 
-(* Verify basic types and operations are accessible *)
-(* TODO: Add proper imports once module path resolution is fixed *)
+(* TODO: Restore proper imports once module path resolution fixed *)
+(* Require Import modules.chronopraxis.domains.Compatibilism.CompatibilismTheory. *)
 
-(* Quick behavior checks - simplified until imports work *)
-(* Check Free. *) (* TODO: Enable once module imports resolved *)
+(* Type accessibility tests - will be enabled when imports work *)
+(* Check CompatibilismTheory.Free. *)
+(* Check CompatibilismTheory.freedom_preserved_via_ABA. *)
 
-(* Placeholder for future domain tests *)
-(* TODO: Test compatibilist consistency theorems *)
-(* TODO: Test temporal freedom preservation *)
+(* Placeholder for constructive freedom semantics tests *)
+(* TODO: Test alt relation properties *)
+(* TODO: Test Free predicate with concrete examples *)
+(* TODO: Test freedom_preserved_via_ABA with specific instances *)
+(* TODO: Verify constructive proofs maintain no admits *)

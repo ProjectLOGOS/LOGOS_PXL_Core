@@ -71,11 +71,31 @@ Check freedom_necessity_compatible.
 - **Modal Logic**: Connections to possible worlds through temporal accessibility
 - **Physics Integration**: Causal necessity will relate to physical determinism
 
+## Semantics v1: Constructive Freedom
+
+### Core Insight
+**Free(a, pA)** means: there exists pA' different in χ_A that becomes the same eternal content in χ_C.
+
+**Practical Reading**: The agent has at least two χ_A-realizations (lived temporal experiences) that collapse to one timeless truth in χ_C (cosmic time). Freedom is the existence of such an alternative - multiple ways to experience time that lead to the same eternal outcome.
+
+### Constructive Definition
+```coq
+Definition alt (pA pA' : PA) : Prop :=
+  pA <> pA' /\ A_to_C pA = A_to_C pA'.
+
+Definition Free (_:Agent) (pA:PA) : Prop :=
+  exists pA', alt pA pA'.
+```
+
+### First Proven Theorem
+**`freedom_preserved_via_ABA`**: Freedom survives temporal coordinate transformations (A→B→A round trips). This uses the bijection properties of ChronoPraxis temporal mappings to show that alternatives remain alternatives under coordinate changes.
+
 ## Development Status
 
 - ✅ Basic type structure defined
-- ✅ Trivial constructive stubs in place
+- ✅ **Constructive freedom semantics implemented**
+- ✅ **First non-trivial theorem proven constructively**
 - 🔄 Integration with ChronoPraxis substrate in progress
-- ⏳ Constructive theorem proofs pending
+- 🔄 Temporal mapping properties (placeholders → ChronoPraxis imports)
 - ⏳ Comprehensive test coverage needed
 - ⏳ Real-world compatibility examples needed
