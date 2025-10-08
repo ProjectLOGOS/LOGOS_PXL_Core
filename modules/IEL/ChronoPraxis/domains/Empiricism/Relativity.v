@@ -79,9 +79,12 @@ Module Relativity.
       = B_to_C (forward (iso T) (A_to_B pA)).
   Proof.
     intro pA.
+    (* Rewrite using ABC coherence: A→C = B→C ∘ A→B *)
     rewrite (ABC_coherence pA).
-    symmetry. apply frame_independence_isometry.
-  Admitted. (* TODO: Complete proof when ChronoPraxis integration is restored *)
+    (* Apply frame independence for the specific point A→B pA *)
+    symmetry.
+    apply (@frame_independence_isometry M Hpc T (A_to_B pA)).
+  Qed.
 
   (**
     Bridge to existing Lorentz: if your Empiricism.lorentz is an Inv-preserving bijection,
@@ -106,6 +109,6 @@ Module Relativity.
     Theorem frame_independence_Lorentz_general :
       forall pA, A_to_C pA
         = B_to_C (lor_fwd (A_to_B pA)).
-    Proof. apply AC_equals_ABC_isometry with (T:=L_iso). Admitted.
+    Proof. apply (@AC_equals_ABC_isometry M Hpc L_iso). Qed.
   End LorentzAsIsometry.
 End Relativity.
