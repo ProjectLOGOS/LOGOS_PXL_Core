@@ -96,11 +96,34 @@ Proof. reflexivity. Qed.
 - **Cosmology**: Eternal frames provide universal temporal reference
 - **ChronoPraxis**: Direct mapping to χ_A, χ_B, χ_C temporal propositions
 
+## Constructive Frame Morphisms v1
+
+### Core Insight
+**Observational coherence**: measuring A then projecting to C matches going A→C directly. This means local clocks and shared coordinates agree about timeless content.
+
+### Constructive Measurement Functions
+```coq
+(* Observer measures proper time and projects to coordinate time *)
+Definition measure_AB (_:ObserverFrame) (pA:PA) : PB := A_to_B pA.
+
+(* Coordinate frame projects to cosmic/eternal time reference *)
+Definition project_BC (_:CoordinateFrame) (pB:PB) : PC := B_to_C pB.
+
+(* Direct measurement from observer to cosmic time *)
+Definition measure_AC (_:ObserverFrame) (pA:PA) : PC := A_to_C pA.
+```
+
+### First Proven Theorem
+**`observational_coherence_frames`**: For any observer and coordinate frame, indirect measurement (A→B→C) equals direct measurement (A→C). This uses the functoriality property of temporal mappings.
+
+**Physical Interpretation**: Your local clock measurement, when translated through coordinate systems to cosmic time, gives the same result as directly embedding your measurement in eternal time. Different measurement paths converge to the same universal truth.
+
 ## Development Status
 
 - ✅ Basic frame structure defined
-- ✅ Temporal type placeholders in place
-- 🔄 Transformation operations defined but not implemented
-- ⏳ Observational coherence theorem needs constructive proof
+- ✅ Temporal type placeholders in place  
+- ✅ **Constructive measurement functions implemented**
+- ✅ **Observational coherence theorem proven constructively**
+- 🔄 Transformation operations integrated with temporal mappings
 - ⏳ Physics integration examples needed
 - ⏳ Relativity connection documentation needed
