@@ -1,16 +1,20 @@
-(* ModalOntologyTests.v - Smoke tests for Modal Ontology domain *)
+(* ModalOntologyTests.v - Tests for Modal Ontology constructive accessibility *)
 
 From Coq Require Import Program.
 
-(* Basic smoke test - verifies file compiles *)
+(* Basic compilation test *)
 Goal True. exact I. Qed.
 
-(* Verify modal types and operations are accessible *)
-(* TODO: Add proper imports once module path resolution is fixed *)
+(* TODO: Restore proper imports once module path resolution fixed *)
+(* Require Import modules.chronopraxis.domains.ModalOntology.ModalCollapse. *)
 
-(* Quick behavior checks - simplified until imports work *)
-(* Check ModalCollapse.Access. *) (* TODO: Enable once module imports resolved *)
+(* Type and theorem accessibility tests - will be enabled when imports work *)
+(* Check ModalCollapse.Access. *)
+(* Check ModalCollapse.path_insensitive_collapse. *)
+(* Check ModalCollapse.access_iff_eq. *)
 
-(* Placeholder for future domain tests *)
-(* TODO: Test temporal modal collapse theorems *)
-(* TODO: Test modal accessibility relations *)
+(* Placeholder for constructive modal accessibility tests *)
+(* TODO: Test Access relation with concrete examples *)
+(* TODO: Test path_insensitive_collapse with specific instances *)
+(* TODO: Test access_iff_eq bidirectional equivalence *)
+(* TODO: Verify modal collapse theorems maintain constructive proofs *)
