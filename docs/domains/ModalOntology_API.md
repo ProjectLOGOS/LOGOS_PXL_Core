@@ -111,12 +111,33 @@ Qed.
 - **Empiricism**: Physical worlds as possible worlds with temporal instantiation
 - **Metaphysics**: Formal treatment of necessity and possibility through time
 
+## Constructive Modal Accessibility v1
+
+### Core Insight
+**Accessibility (v1)**: Two "timeless" propositions are related if a single lived-time witness maps to both; this collapses to equality in timeless view. Practically: different temporal routes don't produce new eternal truths.
+
+### Constructive Definition
+```coq
+(* Two eternal propositions are accessible if some agent-time witness maps to both *)
+Definition Access (pC qC : PC) : Prop :=
+  exists pA, A_to_C pA = pC /\ A_to_C pA = qC.
+```
+
+### Proven Theorems
+
+**`path_insensitive_collapse`**: Any B-path realization equals direct A→C mapping, proving accessibility when paths converge.
+
+**`access_iff_eq`**: Accessibility coincides with equality in χ_C - constructive extensionality showing modal collapse to identity in eternal time.
+
+**Philosophical Significance**: In eternal time, modal accessibility reduces to identity. Different temporal routes of experience don't create new eternal truths - they all collapse to the same cosmic reality.
+
 ## Development Status
 
 - ✅ Basic modal types defined
-- ✅ Trivial Access relation in place
-- ✅ Temporal path framework established
+- ✅ **Constructive Access relation implemented**
+- ✅ **Path-insensitive collapse theorem proven**
+- ✅ **Modal accessibility extensionality theorem proven**
+- ✅ Temporal path framework established  
 - 🔄 Temporal modal collapse theorem scaffolded
-- ⏳ Real modal accessibility relation needed
-- ⏳ Constructive convergence proofs needed
 - ⏳ Integration with possible worlds semantics needed
+- ⏳ Cross-domain modal compatibility proofs needed
