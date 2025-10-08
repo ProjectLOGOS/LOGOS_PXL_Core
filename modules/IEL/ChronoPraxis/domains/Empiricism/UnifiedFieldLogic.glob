@@ -1,0 +1,41 @@
+DIGEST e7d257c0ce24ce64f510f82540e5390c
+FUnifiedFieldLogic
+mod 76:92 <> UnifiedFieldLogic
+rec 352:364 UnifiedFieldLogic ObserverFrame
+proj 371:379 UnifiedFieldLogic obs_clock
+R383:385 Coq.Init.Datatypes <> nat ind
+rec 488:502 UnifiedFieldLogic CoordinateFrame
+proj 509:519 UnifiedFieldLogic coord_scale
+R523:525 Coq.Init.Datatypes <> nat ind
+ax 632:643 UnifiedFieldLogic EternalFrame
+ax 733:741 UnifiedFieldLogic LocalTime
+ax 799:812 UnifiedFieldLogic CoordinateTime
+ax 867:876 UnifiedFieldLogic CosmicTime
+ax 971:989 UnifiedFieldLogic local_to_coordinate
+R1002:1005 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R993:1001 UnifiedFieldLogic UnifiedFieldLogic LocalTime defax
+R1006:1019 UnifiedFieldLogic UnifiedFieldLogic CoordinateTime defax
+ax 1032:1051 UnifiedFieldLogic coordinate_to_cosmic
+R1069:1072 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1055:1068 UnifiedFieldLogic UnifiedFieldLogic CoordinateTime defax
+R1073:1082 UnifiedFieldLogic UnifiedFieldLogic CosmicTime defax
+ax 1095:1109 UnifiedFieldLogic local_to_cosmic
+R1122:1125 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1113:1121 UnifiedFieldLogic UnifiedFieldLogic LocalTime defax
+R1126:1135 UnifiedFieldLogic UnifiedFieldLogic CosmicTime defax
+ax 1333:1355 UnifiedFieldLogic observational_coherence
+R1374:1382 UnifiedFieldLogic UnifiedFieldLogic LocalTime defax
+binder 1369:1370 <> lt:19
+R1408:1410 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1390:1404 UnifiedFieldLogic UnifiedFieldLogic local_to_cosmic defax
+R1406:1407 UnifiedFieldLogic <> lt:19 var
+R1411:1430 UnifiedFieldLogic UnifiedFieldLogic coordinate_to_cosmic defax
+R1433:1451 UnifiedFieldLogic UnifiedFieldLogic local_to_coordinate defax
+R1453:1454 UnifiedFieldLogic <> lt:19 var
+ax 1511:1539 UnifiedFieldLogic physical_temporal_consistency
+R1559:1571 UnifiedFieldLogic UnifiedFieldLogic ObserverFrame rec
+binder 1553:1555 <> obs:22
+R1583:1597 UnifiedFieldLogic UnifiedFieldLogic CoordinateFrame rec
+binder 1575:1579 <> coord:23
+R1605:1608 Coq.Init.Logic <> True ind
+R1950:1966 UnifiedFieldLogic UnifiedFieldLogic <> mod

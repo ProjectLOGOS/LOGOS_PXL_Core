@@ -9,7 +9,13 @@ VFILES := \
   modules/IEL/ChronoPraxis/theorems/ChronoProofs.v \
   modules/IEL/ChronoPraxis/theorems/MetaTheorems.v \
   modules/IEL/ChronoPraxis/interfaces/ChronoPraxis.v \
-  tests/ConstructiveCoreTests.v
+  modules/IEL/ChronoPraxis/domains/Compatibilism/CompatibilismTheory.v \
+  modules/IEL/ChronoPraxis/domains/Empiricism/UnifiedFieldLogic.v \
+  modules/IEL/ChronoPraxis/domains/ModalOntology/ModalCollapse.v \
+  tests/ConstructiveCoreTests.v \
+  tests/CompatibilismTests.v \
+  tests/EmpiricismTests.v \
+  tests/ModalOntologyTests.v
 
 COQMF := _CoqProject
 
@@ -30,4 +36,16 @@ prove:
 	@echo "=== ChronoPraxis IEL Proof Verification ==="
 	@bash scripts/check_policy.sh && echo "✅ All proofs constructive, zero admits"
 
-.PHONY: all clean status prove
+domain-compatibilism:
+	coqc modules/IEL/ChronoPraxis/domains/Compatibilism/CompatibilismTheory.v
+	coqc tests/CompatibilismTests.v
+
+domain-empiricism:
+	coqc modules/IEL/ChronoPraxis/domains/Empiricism/UnifiedFieldLogic.v
+	coqc tests/EmpiricismTests.v
+
+domain-modal-ontology:
+	coqc modules/IEL/ChronoPraxis/domains/ModalOntology/ModalCollapse.v
+	coqc tests/ModalOntologyTests.v
+
+.PHONY: all clean status prove domain-compatibilism domain-empiricism domain-modal-ontology

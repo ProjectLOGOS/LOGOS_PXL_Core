@@ -1,0 +1,7 @@
+DIGEST c7e1196c36b721ddc74e8bcfd4342247
+FCompatibilismTests
+R91:97 Coq.Program.Program <> <> lib
+def 149:157 <> Unnamed_thm
+R154:157 Coq.Init.Logic <> True ind
+R166:166 Coq.Init.Logic <> I constr
+R166:166 Coq.Init.Logic <> I constr
