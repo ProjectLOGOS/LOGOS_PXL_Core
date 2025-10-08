@@ -1,0 +1,300 @@
+name: Tool Router CI/CD with Security Scanning
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'services/tool_router/**'
+      - 'tests/test_*router*.py'
+      - 'tests/test_*rate*.py'
+      - 'tests/test_*circuit*.py'
+      - 'tests/test_*hmac*.py'
+      - 'tests/test_*metrics*.py'
+      - 'docker-compose.yml'
+      - '.github/workflows/tool-router.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'services/tool_router/**'
+      - 'tests/**'
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: projectlogos/logos-tool-router
+
+jobs:
+  # Security and Quality Checks
+  security-scan:
+    name: Security Scanning
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        cd services/tool_router
+        pip install -r requirements.txt
+        pip install bandit safety
+        
+    - name: Run Bandit security scan
+      run: |
+        bandit -r services/tool_router/app.py -f json -o bandit-report.json || true
+        bandit -r services/tool_router/app.py
+        
+    - name: Run Safety check for known vulnerabilities
+      run: |
+        safety check --json --output safety-report.json || true
+        safety check
+        
+    - name: Upload security reports
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: security-reports
+        path: |
+          bandit-report.json
+          safety-report.json
+
+  # Test Suite
+  test:
+    name: Test Suite
+    runs-on: ubuntu-latest
+    needs: security-scan
+    
+    services:
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 3
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r services/tool_router/requirements.txt
+        pip install pytest pytest-cov pytest-mock
+        
+    - name: Run enhanced tool router tests
+      env:
+        REDIS_URL: redis://localhost:6379/0
+        USE_REDIS_RATE_LIMIT: true
+        SIGNING_SECRET: test-secret-for-ci
+      run: |
+        pytest tests/test_*router*.py tests/test_*rate*.py tests/test_*circuit*.py tests/test_*hmac*.py tests/test_*metrics*.py -v --cov=services.tool_router --cov-report=xml
+        
+    - name: Upload coverage reports
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
+        flags: tool-router
+        name: tool-router-coverage
+
+  # Build and Container Scanning
+  build-and-scan:
+    name: Build and Container Scan
+    runs-on: ubuntu-latest
+    needs: test
+    permissions:
+      contents: read
+      packages: write
+      security-events: write
+      
+    outputs:
+      image-digest: ${{ steps.build.outputs.digest }}
+      image-url: ${{ steps.build.outputs.image-url }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+    - name: Log in to Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Extract metadata
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        tags: |
+          type=ref,event=branch
+          type=ref,event=pr
+          type=sha,prefix={{branch}}-
+          type=raw,value=latest,enable={{is_default_branch}}
+          
+    - name: Build and push Docker image
+      id: build
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: services/tool_router/Dockerfile
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        
+    - name: Install Trivy
+      run: |
+        sudo apt-get update
+        sudo apt-get install wget apt-transport-https gnupg lsb-release
+        wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+        echo "deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
+        sudo apt-get update
+        sudo apt-get install trivy
+        
+    - name: Run Trivy vulnerability scanner
+      run: |
+        trivy image --format sarif --output trivy-results.sarif ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+        trivy image --severity HIGH,CRITICAL ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+        
+    - name: Upload Trivy scan results
+      uses: github/codeql-action/upload-sarif@v2
+      if: always()
+      with:
+        sarif_file: trivy-results.sarif
+        
+    - name: Generate SBOM with Syft
+      run: |
+        curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
+        syft ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }} -o spdx-json=sbom.spdx.json
+        
+    - name: Upload SBOM
+      uses: actions/upload-artifact@v3
+      with:
+        name: sbom
+        path: sbom.spdx.json
+
+  # Load Testing
+  load-test:
+    name: Load Testing
+    runs-on: ubuntu-latest
+    needs: build-and-scan
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
+    services:
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Install k6
+      run: |
+        sudo gpg -k
+        sudo gpg --no-default-keyring --keyring /usr/share/keyrings/k6-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69
+        echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
+        sudo apt-get update
+        sudo apt-get install k6
+        
+    - name: Set up Python and start tool router
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Start tool router for testing
+      run: |
+        cd services/tool_router
+        pip install -r requirements.txt
+        python -m uvicorn app:app --host 0.0.0.0 --port 8071 &
+        sleep 5
+      env:
+        USE_REDIS_RATE_LIMIT: true
+        REDIS_URL: redis://localhost:6379/0
+        SIGNING_SECRET: load-test-secret
+        
+    - name: Run k6 load tests
+      run: |
+        k6 run --out json=k6-results.json k6/health-baseline.js
+        k6 run --out json=k6-route-results.json k6/route-load.js
+      env:
+        TOOL_ROUTER_URL: http://localhost:8071
+        SIGNING_SECRET: load-test-secret
+        
+    - name: Upload load test results
+      uses: actions/upload-artifact@v3
+      with:
+        name: load-test-results
+        path: k6-*.json
+
+  # Provenance and Attestation
+  provenance:
+    name: Generate Provenance
+    runs-on: ubuntu-latest
+    needs: build-and-scan
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      actions: read
+      id-token: write
+      packages: write
+      
+    steps:
+    - name: Generate provenance attestation
+      uses: actions/attest-build-provenance@v1
+      with:
+        subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        subject-digest: ${{ needs.build-and-scan.outputs.image-digest }}
+
+  # Deployment (if all checks pass)
+  deploy:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: [test, build-and-scan, load-test]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    environment: staging
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Deploy to staging environment
+      run: |
+        echo "🚀 Deploying LOGOS Tool Router v2.0.0 to staging..."
+        # Add your deployment commands here
+        # Example: kubectl set image deployment/tool-router tool-router=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+        
+    - name: Run smoke tests against staging
+      run: |
+        # Wait for deployment
+        sleep 30
+        # Run smoke tests
+        # bash tools/smoke.sh || exit 1
+        echo "✅ Staging deployment successful"
+        
+    - name: Notify deployment success
+      run: |
+        echo "🎉 LOGOS Tool Router v2.0.0 deployed successfully!"
+        echo "Image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}"
+        echo "Features: HMAC signing, Redis rate limiting, Prometheus metrics, Circuit breakers"

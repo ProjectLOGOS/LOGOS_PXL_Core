@@ -1,0 +1,376 @@
+DIGEST 1576e9714385a52d03cbad2494bf369e
+Fmodules.chronopraxis.theorems.PXL_Completeness_Truth_WF
+R24:27 Coq.Lists.List <> <> lib
+R29:38 Coq.Program.Wf <> <> lib
+R40:44 Coq.Arith.Arith <> <> lib
+R46:48 Coq.micromega.Lia <> <> lib
+R76:80 PXLs.PXLv3 <> <> lib
+R82:99 PXLs.PXL_Deep_Soundness <> <> lib
+R109:121 Coq.Lists.List ListNotations <> mod
+R131:135 PXLs.PXLv3 <> <> mod
+def 329:331 <> set
+R340:343 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R336:339 PXLs.PXLv3 <> form ind
+def 361:366 <> In_set
+R371:373 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> set def
+binder 369:369 <> G:1
+R379:382 PXLs.PXLv3 <> form ind
+binder 377:377 <> p:2
+R395:395 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> G:1 var
+R397:397 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> p:2 var
+def 412:421 <> consistent
+R426:428 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> set def
+binder 424:424 <> G:3
+R444:446 Coq.Init.Logic <> ::type_scope:'~'_x not
+R473:473 Coq.Init.Logic <> ::type_scope:'~'_x not
+R447:453 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R455:456 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 454:454 <> p:4
+R460:463 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R457:457 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> G:3 var
+R459:459 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> p:4 var
+R464:464 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> G:3 var
+R467:469 PXLs.PXLv3 <> Neg constr
+R471:471 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> p:4 var
+rec 484:486 <> mct
+proj 512:519 <> mct_cons
+proj 539:547 <> mct_total
+proj 598:604 <> mct_thm
+proj 645:650 <> mct_mp
+R493:495 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> set def
+binder 489:489 <> G:5
+R523:532 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> consistent def
+R534:534 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> G:5 var
+binder 558:559 <> φ:8
+R573:576 Coq.Init.Logic <> ::type_scope:x_'\/'_x not
+R562:567 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> In_set def
+R571:572 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> φ:8 var
+R569:569 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> G:5 var
+R577:582 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> In_set def
+R587:589 PXLs.PXLv3 <> Neg constr
+R591:592 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> φ:8 var
+R584:584 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> G:5 var
+binder 615:616 <> φ:10
+R626:629 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R619:622 PXLs.PXLv3 <> Prov ind
+R624:625 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> φ:10 var
+R630:635 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> In_set def
+R639:640 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> φ:10 var
+R637:637 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> G:5 var
+binder 661:662 <> φ:12
+binder 664:665 <> ψ:13
+R689:692 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R668:673 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> In_set def
+R678:681 PXLs.PXLv3 <> Impl constr
+R686:687 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> ψ:13 var
+R683:684 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> φ:12 var
+R675:675 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> G:5 var
+R704:707 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R693:698 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> In_set def
+R702:703 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> φ:12 var
+R700:700 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> G:5 var
+R708:713 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> In_set def
+R717:718 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> ψ:13 var
+R715:715 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> G:5 var
+def 871:879 <> can_world
+R884:885 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R887:889 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R893:895 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R901:902 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R890:892 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> set def
+binder 886:886 <> G:15
+R896:898 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> mct rec
+R900:900 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> G:15 var
+def 917:921 <> can_R
+R928:936 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> can_world def
+binder 924:924 <> w:16
+binder 926:926 <> u:17
+binder 958:958 <> p:18
+R989:992 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R961:966 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> In_set def
+R983:985 PXLs.PXLv3 <> Box constr
+R987:987 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> p:18 var
+R969:977 Coq.Init.Specif <> proj1_sig def
+R979:979 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> w:16 var
+R993:998 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> In_set def
+R1014:1014 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> p:18 var
+R1001:1009 Coq.Init.Specif <> proj1_sig def
+R1011:1011 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> u:17 var
+def 1027:1032 <> forces
+R1037:1045 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> can_world def
+binder 1035:1035 <> w:19
+R1051:1054 PXLs.PXLv3 <> form ind
+binder 1049:1049 <> p:20
+R1075:1075 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> p:20 var
+R1086:1088 PXLs.PXLv3 <> Bot constr
+R1093:1097 Coq.Init.Logic <> False ind
+R1103:1106 PXLs.PXLv3 <> Atom constr
+R1113:1118 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> In_set def
+R1135:1138 PXLs.PXLv3 <> Atom constr
+R1121:1129 Coq.Init.Specif <> proj1_sig def
+R1131:1131 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> w:19 var
+R1147:1150 PXLs.PXLv3 <> Impl constr
+R1169:1172 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1159:1164 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> forces:21 def
+R1168:1168 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> p:20 var
+R1166:1166 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> w:19 var
+R1173:1178 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> forces:21 def
+R1180:1180 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> w:19 var
+R1188:1191 PXLs.PXLv3 <> Conj constr
+R1210:1213 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R1200:1205 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> forces:21 def
+R1209:1209 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> p:20 var
+R1207:1207 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> w:19 var
+R1214:1219 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> forces:21 def
+R1221:1221 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> w:19 var
+R1229:1232 PXLs.PXLv3 <> Disj constr
+R1251:1254 Coq.Init.Logic <> ::type_scope:x_'\/'_x not
+R1241:1246 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> forces:21 def
+R1250:1250 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> p:20 var
+R1248:1248 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> w:19 var
+R1255:1260 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> forces:21 def
+R1262:1262 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> w:19 var
+R1270:1272 PXLs.PXLv3 <> Neg constr
+R1279:1280 Coq.Init.Logic <> ::type_scope:'~'_x not
+R1281:1286 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> forces:21 def
+R1290:1290 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> p:20 var
+R1288:1288 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> w:19 var
+R1296:1298 PXLs.PXLv3 <> Box constr
+binder 1312:1312 <> u:23
+R1324:1327 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1315:1319 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> can_R def
+R1323:1323 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> u:23 var
+R1321:1321 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> w:19 var
+R1328:1333 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> forces:21 def
+R1337:1337 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> p:20 var
+R1335:1335 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> u:23 var
+R1343:1345 PXLs.PXLv3 <> Dia constr
+R1352:1358 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R1360:1361 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 1359:1359 <> u:24
+R1371:1374 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R1362:1366 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> can_R def
+R1370:1370 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> u:24 var
+R1368:1368 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> w:19 var
+R1375:1380 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> forces:21 def
+R1384:1384 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> p:20 var
+R1382:1382 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> u:24 var
+prf 1534:1548 <> prov_imp_weaken
+R1557:1560 PXLs.PXLv3 <> form ind
+binder 1551:1551 <> a:25
+binder 1553:1553 <> b:26
+R1565:1568 PXLs.PXLv3 <> Prov ind
+R1571:1574 PXLs.PXLv3 <> Impl constr
+R1579:1582 PXLs.PXLv3 <> Impl constr
+R1586:1586 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> b:26 var
+R1584:1584 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> a:25 var
+R1576:1576 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> b:26 var
+R1605:1611 PXLs.PXLv3 <> ax_PL_k constr
+R1605:1611 PXLs.PXLv3 <> ax_PL_k constr
+prf 1631:1644 <> prov_and_elimL
+R1653:1656 PXLs.PXLv3 <> form ind
+binder 1647:1647 <> a:27
+binder 1649:1649 <> b:28
+R1661:1664 PXLs.PXLv3 <> Prov ind
+R1667:1670 PXLs.PXLv3 <> Impl constr
+R1683:1683 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> a:27 var
+R1673:1676 PXLs.PXLv3 <> Conj constr
+R1680:1680 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> b:28 var
+R1678:1678 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> a:27 var
+R1701:1710 PXLs.PXLv3 <> ax_PL_and1 constr
+R1701:1710 PXLs.PXLv3 <> ax_PL_and1 constr
+prf 1730:1743 <> prov_and_elimR
+R1752:1755 PXLs.PXLv3 <> form ind
+binder 1746:1746 <> a:29
+binder 1748:1748 <> b:30
+R1760:1763 PXLs.PXLv3 <> Prov ind
+R1766:1769 PXLs.PXLv3 <> Impl constr
+R1782:1782 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> b:30 var
+R1772:1775 PXLs.PXLv3 <> Conj constr
+R1779:1779 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> b:30 var
+R1777:1777 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> a:29 var
+R1800:1809 PXLs.PXLv3 <> ax_PL_and2 constr
+R1800:1809 PXLs.PXLv3 <> ax_PL_and2 constr
+prf 1829:1842 <> prov_or_introL
+R1851:1854 PXLs.PXLv3 <> form ind
+binder 1845:1845 <> a:31
+binder 1847:1847 <> b:32
+R1859:1862 PXLs.PXLv3 <> Prov ind
+R1865:1868 PXLs.PXLv3 <> Impl constr
+R1873:1876 PXLs.PXLv3 <> Disj constr
+R1880:1880 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> b:32 var
+R1878:1878 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> a:31 var
+R1870:1870 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> a:31 var
+R1899:1908 PXLs.PXLv3 <> ax_PL_orI1 constr
+R1899:1908 PXLs.PXLv3 <> ax_PL_orI1 constr
+prf 1928:1941 <> prov_or_introR
+R1950:1953 PXLs.PXLv3 <> form ind
+binder 1944:1944 <> a:33
+binder 1946:1946 <> b:34
+R1958:1961 PXLs.PXLv3 <> Prov ind
+R1964:1967 PXLs.PXLv3 <> Impl constr
+R1972:1975 PXLs.PXLv3 <> Disj constr
+R1979:1979 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> b:34 var
+R1977:1977 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> a:33 var
+R1969:1969 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> b:34 var
+R1998:2007 PXLs.PXLv3 <> ax_PL_orI2 constr
+R1998:2007 PXLs.PXLv3 <> ax_PL_orI2 constr
+prf 2027:2042 <> prov_neg_is_impl
+R2049:2052 PXLs.PXLv3 <> form ind
+binder 2045:2045 <> a:35
+R2057:2060 PXLs.PXLv3 <> Prov ind
+R2063:2066 PXLs.PXLv3 <> Impl constr
+R2077:2080 PXLs.PXLv3 <> Impl constr
+R2084:2086 PXLs.PXLv3 <> Bot constr
+R2082:2082 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> a:35 var
+R2069:2071 PXLs.PXLv3 <> Neg constr
+R2073:2073 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> a:35 var
+R2105:2118 PXLs.PXLv3 <> ax_PL_neg_elim constr
+R2105:2118 PXLs.PXLv3 <> ax_PL_neg_elim constr
+prf 2136:2147 <> prov_exfalso
+R2154:2157 PXLs.PXLv3 <> form ind
+binder 2150:2150 <> b:36
+R2162:2165 PXLs.PXLv3 <> Prov ind
+R2168:2171 PXLs.PXLv3 <> Impl constr
+R2177:2177 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> b:36 var
+R2173:2175 PXLs.PXLv3 <> Bot constr
+R2195:2204 PXLs.PXLv3 <> ax_PL_botE constr
+R2195:2204 PXLs.PXLv3 <> ax_PL_botE constr
+prf 2369:2382 <> can_R_box_elim
+binder 2393:2394 <> Γ:37
+binder 2396:2397 <> Δ:38
+R2404:2406 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> mct rec
+R2408:2409 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> Γ:37 var
+binder 2400:2402 <> HΓ:39
+R2417:2419 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> mct rec
+R2421:2422 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> Δ:38 var
+binder 2413:2415 <> HΔ:40
+binder 2425:2426 <> φ:41
+R2470:2476 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2431:2435 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> can_R def
+R2455:2459 Coq.Init.Specif <> exist constr
+R2466:2468 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> HΔ:40 var
+R2463:2464 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> Δ:38 var
+R2438:2442 Coq.Init.Specif <> exist constr
+R2449:2451 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> HΓ:39 var
+R2446:2447 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> Γ:37 var
+R2495:2501 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2477:2482 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> In_set def
+R2488:2490 PXLs.PXLv3 <> Box constr
+R2492:2493 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> φ:41 var
+R2484:2485 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> Γ:37 var
+R2502:2507 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> In_set def
+R2512:2513 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> φ:41 var
+R2509:2510 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> Δ:38 var
+R2533:2537 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> can_R def
+prf 2588:2613 <> explosion_from_neg_and_pos
+binder 2624:2625 <> Δ:42
+R2632:2634 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> mct rec
+R2636:2637 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> Δ:42 var
+binder 2628:2630 <> HΔ:43
+binder 2640:2641 <> φ:44
+R2664:2667 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2646:2651 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> In_set def
+R2657:2659 PXLs.PXLv3 <> Neg constr
+R2661:2662 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> φ:44 var
+R2653:2654 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> Δ:42 var
+R2680:2683 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2668:2673 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> In_set def
+R2678:2679 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> φ:44 var
+R2675:2676 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> Δ:42 var
+R2684:2688 Coq.Init.Logic <> False ind
+R2738:2745 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> mct_cons proj
+R2738:2745 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> mct_cons proj
+ax 2956:2978 <> constructive_lindenbaum
+binder 2991:2992 <> Γ:45
+binder 2994:2995 <> φ:46
+R3004:3006 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> mct rec
+R3008:3009 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> Γ:45 var
+binder 2998:3000 <> HΓ:47
+R3036:3041 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3016:3017 Coq.Init.Logic <> ::type_scope:'~'_x not
+R3018:3023 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> In_set def
+R3029:3031 PXLs.PXLv3 <> Box constr
+R3033:3034 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> φ:46 var
+R3025:3026 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> Γ:45 var
+R3042:3048 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R3063:3070 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 3049:3050 <> Δ:48
+R3057:3059 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> mct rec
+R3061:3062 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> Δ:48 var
+binder 3053:3055 <> HΔ:49
+R3110:3113 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R3071:3075 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> can_R def
+R3095:3099 Coq.Init.Specif <> exist constr
+R3106:3108 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> HΔ:49 var
+R3103:3104 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> Δ:48 var
+R3078:3082 Coq.Init.Specif <> exist constr
+R3089:3091 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> HΓ:47 var
+R3086:3087 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> Γ:45 var
+R3114:3119 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> In_set def
+R3125:3127 PXLs.PXLv3 <> Neg constr
+R3129:3130 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> φ:46 var
+R3121:3122 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> Δ:48 var
+prf 3278:3286 <> dia_intro
+binder 3297:3298 <> Γ:52
+R3305:3307 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> mct rec
+R3309:3310 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> Γ:52 var
+binder 3301:3303 <> HΓ:53
+binder 3313:3314 <> φ:54
+R3319:3319 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3405:3411 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3320:3326 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R3341:3349 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 3327:3328 <> Δ:55
+R3335:3337 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> mct rec
+R3339:3340 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> Δ:55 var
+binder 3331:3333 <> HΔ:56
+R3389:3392 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R3350:3354 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> can_R def
+R3374:3378 Coq.Init.Specif <> exist constr
+R3385:3387 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> HΔ:56 var
+R3382:3383 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> Δ:55 var
+R3357:3361 Coq.Init.Specif <> exist constr
+R3368:3370 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> HΓ:53 var
+R3365:3366 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> Γ:52 var
+R3393:3398 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> In_set def
+R3403:3404 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> φ:54 var
+R3400:3401 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> Δ:55 var
+R3412:3417 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> In_set def
+R3423:3425 PXLs.PXLv3 <> Dia constr
+R3427:3428 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> φ:54 var
+R3419:3420 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> Γ:52 var
+R3491:3499 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> mct_total proj
+R3506:3508 PXLs.PXLv3 <> Dia constr
+R3491:3499 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> mct_total proj
+R3506:3508 PXLs.PXLv3 <> Dia constr
+R3557:3578 PXLs.PXLv3 <> ax_modal_dual_dia_box1 constr
+R3557:3578 PXLs.PXLv3 <> ax_modal_dual_dia_box1 constr
+R3609:3615 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> mct_thm proj
+R3625:3628 PXLs.PXLv3 <> Impl constr
+R3646:3648 PXLs.PXLv3 <> Box constr
+R3651:3653 PXLs.PXLv3 <> Neg constr
+R3631:3633 PXLs.PXLv3 <> Neg constr
+R3636:3638 PXLs.PXLv3 <> Dia constr
+R3609:3615 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> mct_thm proj
+R3625:3628 PXLs.PXLv3 <> Impl constr
+R3646:3648 PXLs.PXLv3 <> Box constr
+R3651:3653 PXLs.PXLv3 <> Neg constr
+R3631:3633 PXLs.PXLv3 <> Neg constr
+R3636:3638 PXLs.PXLv3 <> Dia constr
+R3691:3696 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> mct_mp proj
+R3718:3720 PXLs.PXLv3 <> Box constr
+R3723:3725 PXLs.PXLv3 <> Neg constr
+R3703:3705 PXLs.PXLv3 <> Neg constr
+R3708:3710 PXLs.PXLv3 <> Dia constr
+R3691:3696 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> mct_mp proj
+R3718:3720 PXLs.PXLv3 <> Box constr
+R3723:3725 PXLs.PXLv3 <> Neg constr
+R3703:3705 PXLs.PXLv3 <> Neg constr
+R3708:3710 PXLs.PXLv3 <> Dia constr
+R3776:3781 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> In_set def
+R3787:3789 PXLs.PXLv3 <> Neg constr
+R3776:3781 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> In_set def
+R3787:3789 PXLs.PXLv3 <> Neg constr
+R3808:3821 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> can_R_box_elim thm
+R3808:3821 modules.chronopraxis.theorems.PXL_Completeness_Truth_WF <> can_R_box_elim thm

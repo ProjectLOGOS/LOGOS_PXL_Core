@@ -61,18 +61,17 @@ services:
       context: .
       dockerfile: services/logos_api/Dockerfile
     container_name: logos-api
+    environment:
+      - API_SIGNING_SECRET=${API_SIGNING_SECRET:-}
+      - TOKEN_TTL_SECS=${TOKEN_TTL_SECS:-300}
+      - KERNEL_HASH=${KERNEL_HASH:-}
     ports:
       - "8090:8090"
-    volumes:
-      - ./configs/config.json:/app/configs/config.json:ro
-      - ./logos_core:/app/logos_core:ro
-      - ./audit:/app/audit
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8090/health"]
+      test: ["CMD","curl","-fsS","http://localhost:8090/health"]
       interval: 15s
       timeout: 5s
       retries: 5
-      start_period: 20s
     networks: [default]
     restart: unless-stopped
 
@@ -283,8 +282,8 @@ services:
   # Tool Router - Routes toolkit requests
   tool-router:
     build:
-      context: ./services/tool_router
-      dockerfile: ../executor/Dockerfile  # Reuse simple dockerfile
+      context: .
+      dockerfile: services/tool_router/Dockerfile
     container_name: tool-router
     ports:
       - "8071:8071"
@@ -296,9 +295,24 @@ services:
       - TETRAGNOS_URL=http://toolkit-tetragnos:8000
       - TELOS_URL=http://telos:8000
       - THONOC_URL=http://thonoc:8000
+      - USE_REDIS_RATE_LIMIT=${USE_REDIS_RATE_LIMIT:-false}
+      - REDIS_URL=${REDIS_URL:-redis://redis:6379/0}
+      - SIGNING_SECRET=${SIGNING_SECRET:-}
+      - SIGNING_MAX_SKEW_SECS=${SIGNING_MAX_SKEW_SECS:-300}
+      - RETRY_MAX_ATTEMPTS=${RETRY_MAX_ATTEMPTS:-3}
+      - RETRY_BASE_SECS=${RETRY_BASE_SECS:-0.2}
+      - RETRY_JITTER_SECS=${RETRY_JITTER_SECS:-0.2}
+      - CB_FAIL_THRESHOLD=${CB_FAIL_THRESHOLD:-5}
+      - CB_COOLDOWN_SECS=${CB_COOLDOWN_SECS:-30}
     networks:
       - default
-    command: ["python", "-m", "uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8071"]
+    depends_on:
+      - redis
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8071/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
     restart: unless-stopped
 
   # Executor - Proof-gated task execution

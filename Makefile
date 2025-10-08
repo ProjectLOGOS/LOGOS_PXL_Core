@@ -1,22 +1,33 @@
-.PHONY: setup test lint type fmt precommit
+VFILES := \
+  pxl-minimal-kernel-main/coq/PXLv3.v \
+  pxl-minimal-kernel-main/coq/PXL_Deep_Soundness.v \
+  pxl-minimal-kernel-main/coq/PXL_Completeness_Truth_WF.v \
+  modules/IEL/ChronoPraxis/substrate/ChronoAxioms.v \
+  modules/IEL/ChronoPraxis/substrate/Bijection.v \
+  modules/IEL/ChronoPraxis/substrate/ChronoMappings.v \
+  modules/IEL/ChronoPraxis/tactics/ChronoTactics.v \
+  modules/IEL/ChronoPraxis/theorems/ChronoProofs.v \
+  modules/IEL/ChronoPraxis/theorems/MetaTheorems.v \
+  modules/IEL/ChronoPraxis/interfaces/ChronoPraxis.v \
+  tests/ConstructiveCoreTests.v
 
-setup:
-	python -m pip install --upgrade pip
-	pip install -e .[dev]
-	pre-commit install
+COQMF := _CoqProject
 
-fmt:
-	ruff format .
-	black .
+all: Makefile.coq
+	$(MAKE) -f Makefile.coq all
 
-lint:
-	ruff check .
+Makefile.coq: $(VFILES) $(COQMF)
+	coq_makefile -f $(COQMF) $(VFILES) -o Makefile.coq
 
-type:
-	mypy .
+clean:
+	[ -f Makefile.coq ] && $(MAKE) -f Makefile.coq clean || true
+	rm -f Makefile.coq
 
-test:
-	pytest -q
+status:
+	@bash scripts/gen_status.sh > docs/IEL_STATUS.md && echo "Wrote docs/IEL_STATUS.md"
 
-precommit:
-	pre-commit run --all-files
+prove:
+	@echo "=== ChronoPraxis IEL Proof Verification ==="
+	@bash scripts/check_policy.sh && echo "✅ All proofs constructive, zero admits"
+
+.PHONY: all clean status prove

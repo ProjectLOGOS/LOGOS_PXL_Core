@@ -1,0 +1,263 @@
+# LOGOS PXL Core Helm Chart Values
+# Production-ready configuration for Kubernetes deployment
+
+# Global configuration
+global:
+  imageRegistry: ghcr.io/projectlogos
+  imagePullPolicy: IfNotPresent
+  # Security configuration
+  signingSecret: ""  # Set via --set or secrets
+  apiSigningSecret: ""  # Set via --set or secrets
+  useRedisLimiter: false
+  # Networking
+  domain: "logos.local"
+  # Resource limits
+  defaultResources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+# Enhanced Tool Router v2.0.0
+toolRouter:
+  enabled: true
+  name: tool-router
+  image: logos-tool-router
+  tag: latest
+  replicas: 2
+  
+  service:
+    type: ClusterIP
+    port: 8071
+    targetPort: 8071
+  
+  ingress:
+    enabled: false
+    className: nginx
+    annotations:
+      nginx.ingress.kubernetes.io/rate-limit: "100"
+      nginx.ingress.kubernetes.io/rate-limit-window: "1m"
+    hosts:
+      - host: tool-router.logos.local
+        paths:
+          - path: /
+            pathType: Prefix
+  
+  # Enhanced Tool Router Configuration
+  config:
+    rateLimit:
+      requests: 100
+      windowSecs: 60
+    retry:
+      maxAttempts: 3
+      baseSecs: 0.2
+      jitterSecs: 0.2
+    circuitBreaker:
+      failThreshold: 5
+      cooldownSecs: 30
+    upstream:
+      tetragnos: http://tetragnos:8000
+      thonoc: http://thonoc:8000
+      telos: http://telos:8000
+  
+  # Prometheus monitoring
+  metrics:
+    enabled: true
+    port: 8071
+    path: /metrics
+  
+  # Pod Security Context
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    fsGroup: 2000
+  
+  resources:
+    requests:
+      cpu: 200m
+      memory: 256Mi
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+
+# LOGOS Core API
+logosApi:
+  enabled: true
+  name: logos-api
+  image: logos-api
+  tag: latest
+  replicas: 2
+  
+  service:
+    type: ClusterIP
+    port: 8090
+    targetPort: 8090
+  
+  ingress:
+    enabled: false
+    className: nginx
+    hosts:
+      - host: api.logos.local
+        paths:
+          - path: /
+            pathType: Prefix
+  
+  config:
+    tokenTtlSecs: 300
+    kernelHash: ""
+  
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    fsGroup: 2000
+  
+  resources: {}  # Use global defaults
+
+# Interactive Chat Interface
+interactiveChat:
+  enabled: true
+  name: interactive-chat
+  image: interactive-chat
+  tag: latest
+  replicas: 1
+  
+  service:
+    type: ClusterIP
+    port: 8080
+    targetPort: 8080
+  
+  ingress:
+    enabled: true
+    className: nginx
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+    hosts:
+      - host: chat.logos.local
+        paths:
+          - path: /
+            pathType: Prefix
+  
+  config:
+    openaiApiKey: ""  # Set via secrets if needed
+  
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    fsGroup: 2000
+  
+  resources: {}  # Use global defaults
+
+# Redis (for distributed rate limiting)
+redis:
+  enabled: false  # Only when global.useRedisLimiter is true
+  image: redis:7-alpine
+  
+  service:
+    type: ClusterIP
+    port: 6379
+    targetPort: 6379
+  
+  persistence:
+    enabled: false
+    storageClass: ""
+    size: 1Gi
+  
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+
+# PostgreSQL (future use)
+postgresql:
+  enabled: false
+  image: postgres:15-alpine
+  
+  service:
+    type: ClusterIP
+    port: 5432
+    targetPort: 5432
+  
+  config:
+    database: logos_agi
+    username: logos
+    password: ""  # Set via secrets
+  
+  persistence:
+    enabled: true
+    storageClass: ""
+    size: 10Gi
+
+# RabbitMQ (future use)
+rabbitmq:
+  enabled: false
+  image: rabbitmq:3.12-management
+  
+  service:
+    type: ClusterIP
+    port: 5672
+    targetPort: 5672
+    management:
+      port: 15672
+      targetPort: 15672
+  
+  config:
+    username: logos
+    password: ""  # Set via secrets
+    vhost: logos
+
+# ServiceMonitor for Prometheus
+serviceMonitor:
+  enabled: false
+  namespace: monitoring
+  labels:
+    app: logos
+    component: tool-router
+  interval: 30s
+  scrapeTimeout: 10s
+
+# Network Policies
+networkPolicy:
+  enabled: false  # Enable for production security
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: ingress-nginx
+      ports:
+        - protocol: TCP
+          port: 8080  # Interactive Chat
+        - protocol: TCP
+          port: 8071  # Tool Router (if exposed)
+        - protocol: TCP
+          port: 8090  # LOGOS API (if exposed)
+  egress:
+    - {}  # Allow all egress (customize as needed)
+
+# Pod Disruption Budgets
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
+# Horizontal Pod Autoscaler
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
+  targetMemoryUtilizationPercentage: 80
+
+# Additional labels and annotations
+commonLabels:
+  app.kubernetes.io/name: logos
+  app.kubernetes.io/part-of: logos-agi
+  app.kubernetes.io/version: "2.0.0"
+
+commonAnnotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/port: "8071"
+  prometheus.io/path: "/metrics"

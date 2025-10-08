@@ -1,0 +1,3 @@
+-Q pxl-minimal-kernel-main/coq PXLs
+-Q modules/IEL/ChronoPraxis modules.chronopraxis
+-Q tests tests
