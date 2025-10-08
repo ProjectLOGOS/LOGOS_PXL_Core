@@ -23,6 +23,12 @@ jobs:
           make clean
           make -j
 
+      - name: Domain builds
+        run: |
+          make domain-compatibilism
+          make domain-empiricism
+          make domain-modal-ontology
+
       - name: Generate status report
         run: |
           bash scripts/gen_status.sh > docs/IEL_STATUS.md

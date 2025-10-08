@@ -1,0 +1,7 @@
+DIGEST ba3addd2207e00677c32dfdfacd9803f
+FModalOntologyTests
+R92:98 Coq.Program.Program <> <> lib
+def 150:158 <> Unnamed_thm
+R155:158 Coq.Init.Logic <> True ind
+R167:167 Coq.Init.Logic <> I constr
+R167:167 Coq.Init.Logic <> I constr

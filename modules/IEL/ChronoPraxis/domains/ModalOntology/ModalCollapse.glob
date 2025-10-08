@@ -1,0 +1,56 @@
+DIGEST 9e5cb7ce9876a1121f0d6de03c788291
+FModalCollapse
+mod 74:86 <> ModalCollapse
+ax 266:270 ModalCollapse World
+ax 290:300 ModalCollapse Proposition
+ax 320:324 ModalCollapse Agent
+ax 414:422 ModalCollapse AgentTime
+ax 487:500 ModalCollapse CoordinateTime
+ax 566:575 ModalCollapse CosmicTime
+def 881:886 ModalCollapse Access
+R893:897 ModalCollapse ModalCollapse World defax
+R910:913 Coq.Init.Logic <> True ind
+ax 1027:1038 ModalCollapse TemporalPath
+R1051:1054 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1042:1050 ModalCollapse ModalCollapse AgentTime defax
+R1065:1068 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1055:1064 ModalCollapse ModalCollapse CosmicTime defax
+ax 1270:1292 ModalCollapse temporal_modal_collapse
+R1310:1318 ModalCollapse ModalCollapse AgentTime defax
+binder 1306:1306 <> a:15
+R1326:1335 ModalCollapse ModalCollapse CosmicTime defax
+binder 1322:1322 <> c:16
+R1359:1362 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1343:1354 ModalCollapse ModalCollapse TemporalPath defax
+R1356:1356 ModalCollapse <> a:15 var
+R1358:1358 ModalCollapse <> c:16 var
+R1363:1374 ModalCollapse ModalCollapse TemporalPath defax
+R1376:1376 ModalCollapse <> a:15 var
+R1378:1378 ModalCollapse <> c:16 var
+ax 1474:1501 ModalCollapse modal_temporal_accessibility
+R1523:1527 ModalCollapse ModalCollapse World defax
+binder 1515:1516 <> w1:19
+binder 1518:1519 <> w2:20
+R1535:1543 ModalCollapse ModalCollapse AgentTime defax
+binder 1531:1531 <> a:21
+R1563:1566 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1551:1556 ModalCollapse ModalCollapse Access def
+R1558:1559 ModalCollapse <> w1:19 var
+R1561:1562 ModalCollapse <> w2:20 var
+R1567:1570 Coq.Init.Logic <> True ind
+ax 1712:1727 ModalCollapse path_convergence
+R1749:1757 ModalCollapse ModalCollapse AgentTime defax
+binder 1741:1742 <> a1:24
+binder 1744:1745 <> a2:25
+R1765:1774 ModalCollapse ModalCollapse CosmicTime defax
+binder 1761:1761 <> c:26
+R1799:1802 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1782:1793 ModalCollapse ModalCollapse TemporalPath defax
+R1795:1796 ModalCollapse <> a1:24 var
+R1798:1798 ModalCollapse <> c:26 var
+R1820:1823 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1803:1814 ModalCollapse ModalCollapse TemporalPath defax
+R1816:1817 ModalCollapse <> a2:25 var
+R1819:1819 ModalCollapse <> c:26 var
+R1824:1827 Coq.Init.Logic <> True ind
+R2144:2156 ModalCollapse ModalCollapse <> mod

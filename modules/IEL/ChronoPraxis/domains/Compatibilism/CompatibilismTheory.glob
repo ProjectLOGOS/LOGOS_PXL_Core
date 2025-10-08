@@ -1,0 +1,43 @@
+DIGEST 0ea3ea5f51266ccd054659a11382e249
+FCompatibilismTheory
+mod 81:99 <> CompatibilismTheory
+rec 364:368 CompatibilismTheory Agent
+proj 375:382 CompatibilismTheory agent_id
+R386:388 Coq.Init.Datatypes <> nat ind
+ax 469:474 CompatibilismTheory Action
+ax 570:583 CompatibilismTheory TemporalChoice
+def 762:765 CompatibilismTheory Free
+R770:774 CompatibilismTheory CompatibilismTheory Agent rec
+R780:785 CompatibilismTheory CompatibilismTheory Action defax
+R798:801 Coq.Init.Logic <> True ind
+ax 898:906 CompatibilismTheory Necessary
+R916:919 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R910:915 CompatibilismTheory CompatibilismTheory Action defax
+ax 1127:1151 CompatibilismTheory compatibilist_consistency
+R1169:1173 CompatibilismTheory CompatibilismTheory Agent rec
+binder 1165:1165 <> a:9
+R1183:1188 CompatibilismTheory CompatibilismTheory Action defax
+binder 1177:1179 <> act:10
+R1206:1209 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1196:1199 CompatibilismTheory CompatibilismTheory Free def
+R1201:1201 CompatibilismTheory <> a:9 var
+R1203:1205 CompatibilismTheory <> act:10 var
+R1223:1226 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1210:1218 CompatibilismTheory CompatibilismTheory Necessary defax
+R1220:1222 CompatibilismTheory <> act:10 var
+R1227:1230 CompatibilismTheory CompatibilismTheory Free def
+R1232:1232 CompatibilismTheory <> a:9 var
+R1234:1236 CompatibilismTheory <> act:10 var
+ax 1294:1322 CompatibilismTheory temporal_freedom_preservation
+R1340:1344 CompatibilismTheory CompatibilismTheory Agent rec
+binder 1336:1336 <> a:13
+R1354:1359 CompatibilismTheory CompatibilismTheory Action defax
+binder 1348:1350 <> act:14
+R1377:1380 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1367:1370 CompatibilismTheory CompatibilismTheory Free def
+R1372:1372 CompatibilismTheory <> a:13 var
+R1374:1376 CompatibilismTheory <> act:14 var
+R1381:1384 CompatibilismTheory CompatibilismTheory Free def
+R1386:1386 CompatibilismTheory <> a:13 var
+R1388:1390 CompatibilismTheory <> act:14 var
+R1694:1712 CompatibilismTheory CompatibilismTheory <> mod

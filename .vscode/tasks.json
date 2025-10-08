@@ -3,6 +3,8 @@
   "tasks": [
     { "label": "coq: build all", "type": "shell", "command": "bash -lc 'make -j'", "problemMatcher": [], "group": { "kind": "build", "isDefault": true } },
     { "label": "coq: clean", "type": "shell", "command": "bash -lc 'make clean'", "problemMatcher": [] },
-    { "label": "coq: regen makefile", "type": "shell", "command": "bash -lc 'coq_makefile -f _CoqProject $(git ls-files \"*.v\") -o Makefile.coq'", "problemMatcher": [] }
+    { "label": "coq: compatibilism", "type": "shell", "command": "bash -lc 'make domain-compatibilism'", "problemMatcher": [] },
+    { "label": "coq: empiricism", "type": "shell", "command": "bash -lc 'make domain-empiricism'", "problemMatcher": [] },
+    { "label": "coq: modal-ontology", "type": "shell", "command": "bash -lc 'make domain-modal-ontology'", "problemMatcher": [] }
   ]
 }
