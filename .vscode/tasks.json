@@ -9,6 +9,7 @@
     { "label": "coq: examples", "type": "shell", "command": "bash -lc 'make examples'", "problemMatcher": [] },
     { "label": "coq: docs-html", "type": "shell", "command": "bash -lc 'make docs-html'", "problemMatcher": [] },
     { "label": "coq: properties", "type": "shell", "command": "bash -lc 'coqc tests/DomainProperties.v'", "problemMatcher": [] },
-    { "label": "coq: constructive-lindenbaum", "type": "shell", "command": "bash -lc 'coqc pxl-minimal-kernel-main/coq/Constructive_Lindenbaum_Simple.v'", "problemMatcher": [] }
+    { "label": "coq: constructive-lindenbaum", "type": "shell", "command": "bash -lc 'coqc pxl-minimal-kernel-main/coq/Constructive_Lindenbaum_Simple.v'", "problemMatcher": [] },
+    { "label": "coq: relativity", "type": "shell", "command": "coqc modules/IEL/ChronoPraxis/domains/Empiricism/Relativity.v; coqc -I modules/IEL/ChronoPraxis/domains/Empiricism tests/RelativityTests.v", "problemMatcher": [] }
   ]
 }

@@ -11,6 +11,7 @@ VFILES := \
   modules/IEL/ChronoPraxis/interfaces/ChronoPraxis.v \
   modules/IEL/ChronoPraxis/domains/Compatibilism/CompatibilismTheory.v \
   modules/IEL/ChronoPraxis/domains/Empiricism/UnifiedFieldLogic.v \
+  modules/IEL/ChronoPraxis/domains/Empiricism/Relativity.v \
   modules/IEL/ChronoPraxis/domains/ModalOntology/ModalCollapse.v \
   examples/Compatibilism_CoffeeTea.v \
   examples/Empiricism_LabClock.v \
@@ -19,6 +20,7 @@ VFILES := \
   tests/CompatibilismTests.v \
   tests/EmpiricismTests.v \
   tests/EmpiricismLorentzTests.v \
+  tests/RelativityTests.v \
   tests/ModalOntologyTests.v \
   tests/DomainProperties.v \
   pxl-minimal-kernel-main/coq/Constructive_Lindenbaum_Simple.v
@@ -48,6 +50,7 @@ domain-compatibilism:
 
 domain-empiricism:
 	coqc modules/IEL/ChronoPraxis/domains/Empiricism/UnifiedFieldLogic.v
+	coqc modules/IEL/ChronoPraxis/domains/Empiricism/Relativity.v
 	coqc tests/EmpiricismTests.v
 
 domain-modal-ontology:
