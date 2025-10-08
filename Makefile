@@ -18,6 +18,7 @@ VFILES := \
   tests/ConstructiveCoreTests.v \
   tests/CompatibilismTests.v \
   tests/EmpiricismTests.v \
+  tests/EmpiricismLorentzTests.v \
   tests/ModalOntologyTests.v \
   tests/DomainProperties.v \
   pxl-minimal-kernel-main/coq/Constructive_Lindenbaum_Simple.v

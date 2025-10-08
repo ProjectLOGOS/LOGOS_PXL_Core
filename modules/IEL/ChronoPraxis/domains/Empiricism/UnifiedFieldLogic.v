@@ -34,6 +34,27 @@ Parameter A_to_B : PA -> PB.
 Parameter B_to_C : PB -> PC.
 Parameter A_to_C : PA -> PC.
 
+(* === Bijection Structure (simplified for standalone use) === *)
+Record Bijection (X Y : Type) := {
+  forward : X -> Y;
+  backward : Y -> X;
+  fb : forall x : X, backward (forward x) = x;
+  bf : forall y : Y, forward (backward y) = y
+}.
+
+(* Lorentz semantics: a χ_B↔χ_B bijection that leaves χ_C projection invariant. *)
+Definition BC_invariant (bij : Bijection PB PB) : Prop :=
+  forall (pB:PB), B_to_C ((forward _ _ bij) pB) = B_to_C pB.
+
+Record Lorentz := {
+  lorentz_bij : Bijection PB PB;
+  lorentz_BC_invariant : BC_invariant lorentz_bij
+}.
+
+(* Convenience wrappers *)
+Definition lorentz_apply (L:Lorentz) (pB:PB) : PB := (forward _ _ (lorentz_bij L)) pB.
+Definition lorentz_unapply (L:Lorentz) (pB:PB) : PB := (backward _ _ (lorentz_bij L)) pB.
+
 (* === Constructive Measurement Functions === *)
 
 (* measure_AB: Observer measures proper time and projects to coordinate time *)
@@ -47,6 +68,10 @@ Definition project_BC (_:CoordinateFrame) (pB:PB) : PC := B_to_C pB.
 (* measure_AC: Direct measurement from observer to cosmic time *)
 (* Physical interpretation: local proper time directly embedded in eternal reference *)
 Definition measure_AC (_:ObserverFrame) (pA:PA) : PC := A_to_C pA.
+
+(* Apply Lorentz in χ_B then project to χ_C *)
+Definition project_BC_lorentz (L:Lorentz) (pB:PB) : PC :=
+  B_to_C (lorentz_apply L pB).
 
 (* === Temporal Coherence Properties === *)
 (* These will be imported from ChronoPraxis when module resolution is fixed *)
@@ -67,6 +92,20 @@ Proof.
   unfold measure_AC, project_BC, measure_AB.
   (* Use functoriality: A→C = B→C ∘ A→B *)
   exact (ABC_coherence pA).
+Qed.
+
+(* Frame-independence: A→B (Lorentz) →C equals A→C *)
+Theorem frame_independence_Lorentz :
+  forall (L:Lorentz) (o:ObserverFrame) (pA:PA),
+    measure_AC o pA = project_BC_lorentz L (measure_AB o pA).
+Proof.
+  intros L o pA. unfold measure_AC, project_BC_lorentz, measure_AB, lorentz_apply.
+  (* Goal: A_to_C pA = B_to_C ((forward _ _ (lorentz_bij L)) (A_to_B pA)) *)
+  (* Apply functoriality A→C = B→C ∘ A→B *)
+  rewrite (ABC_coherence pA).
+  (* Goal: B_to_C (A_to_B pA) = B_to_C ((forward _ _ (lorentz_bij L)) (A_to_B pA)) *)
+  (* Use the invariance law with specific argument *)
+  symmetry. apply (lorentz_BC_invariant L (A_to_B pA)).
 Qed.
 
 (* Placeholder theorems for future development *)
