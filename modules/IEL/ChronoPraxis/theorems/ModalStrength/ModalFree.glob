@@ -1,0 +1,121 @@
+DIGEST 52cffeb0e157cface4026a0862134a10
+FModalFree
+R24:30 Coq.Program.Program <> <> lib
+ind 328:331 <> form
+constr 345:347 <> Bot
+constr 358:361 <> Atom
+constr 379:382 <> Impl
+constr 409:412 <> Conj
+constr 439:442 <> Disj
+constr 469:471 <> Neg
+constr 490:492 <> Box
+constr 511:513 <> Dia
+R351:354 ModalFree <> form:1 ind
+R368:371 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R365:367 Coq.Init.Datatypes <> nat ind
+R372:375 ModalFree <> form:1 ind
+R390:393 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R386:389 ModalFree <> form:1 ind
+R398:401 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R394:397 ModalFree <> form:1 ind
+R402:405 ModalFree <> form:1 ind
+R420:423 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R416:419 ModalFree <> form:1 ind
+R428:431 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R424:427 ModalFree <> form:1 ind
+R432:435 ModalFree <> form:1 ind
+R450:453 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R446:449 ModalFree <> form:1 ind
+R458:461 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R454:457 ModalFree <> form:1 ind
+R462:465 ModalFree <> form:1 ind
+R479:482 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R475:478 ModalFree <> form:1 ind
+R483:486 ModalFree <> form:1 ind
+R500:503 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R496:499 ModalFree <> form:1 ind
+R504:507 ModalFree <> form:1 ind
+R521:524 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R517:520 ModalFree <> form:1 ind
+R525:528 ModalFree <> form:1 ind
+scheme 328:331 <> form_rect
+scheme 328:331 <> form_ind
+scheme 328:331 <> form_rec
+scheme 328:331 <> form_sind
+ax 542:546 <> Gamma
+def 567:575 <> can_world
+R580:580 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R586:588 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R594:596 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R601:601 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R589:593 ModalFree <> Gamma defax
+binder 581:585 <> gamma:5
+R597:600 Coq.Init.Logic <> True ind
+ax 614:619 <> forces
+R632:635 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R623:631 ModalFree <> can_world def
+R640:643 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R636:639 ModalFree <> form ind
+ax 660:665 <> In_set
+R674:677 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R669:673 ModalFree <> Gamma defax
+R682:685 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R678:681 ModalFree <> form ind
+def 775:784 <> modal_free
+R791:794 ModalFree <> form ind
+binder 787:788 <> φ:10
+R815:816 ModalFree <> φ:10 var
+R827:829 ModalFree <> Bot constr
+R833:836 ModalFree <> Atom constr
+R843:846 Coq.Init.Logic <> True ind
+R843:846 Coq.Init.Logic <> True ind
+R852:855 ModalFree <> Impl constr
+R863:866 ModalFree <> Conj constr
+R874:877 ModalFree <> Disj constr
+R898:901 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R886:895 ModalFree <> modal_free:11 def
+R902:911 ModalFree <> modal_free:11 def
+R898:901 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R886:895 ModalFree <> modal_free:11 def
+R902:911 ModalFree <> modal_free:11 def
+R898:901 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R886:895 ModalFree <> modal_free:11 def
+R902:911 ModalFree <> modal_free:11 def
+R919:921 ModalFree <> Neg constr
+R928:937 ModalFree <> modal_free:11 def
+R945:947 ModalFree <> Box constr
+R953:955 ModalFree <> Dia constr
+R962:966 Coq.Init.Logic <> False ind
+R962:966 Coq.Init.Logic <> False ind
+ax 1059:1069 <> truth_lemma
+R1084:1092 ModalFree <> can_world def
+binder 1081:1081 <> w:13
+R1100:1103 ModalFree <> form ind
+binder 1096:1097 <> φ:14
+R1121:1125 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R1110:1115 ModalFree <> forces defax
+R1117:1117 ModalFree <> w:13 var
+R1119:1120 ModalFree <> φ:14 var
+R1126:1131 ModalFree <> In_set defax
+R1134:1142 Coq.Init.Specif <> proj1_sig def
+R1144:1144 ModalFree <> w:13 var
+R1147:1148 ModalFree <> φ:14 var
+prf 1249:1279 <> forces_modal_free_eq_membership
+R1296:1304 ModalFree <> can_world def
+binder 1293:1293 <> w:17
+R1312:1315 ModalFree <> form ind
+binder 1308:1309 <> φ:18
+R1336:1344 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1384:1384 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1323:1332 ModalFree <> modal_free def
+R1334:1335 ModalFree <> φ:18 var
+R1356:1360 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R1345:1350 ModalFree <> forces defax
+R1352:1352 ModalFree <> w:17 var
+R1354:1355 ModalFree <> φ:18 var
+R1361:1366 ModalFree <> In_set defax
+R1369:1377 Coq.Init.Specif <> proj1_sig def
+R1379:1379 ModalFree <> w:17 var
+R1382:1383 ModalFree <> φ:18 var
+R1587:1597 ModalFree <> truth_lemma defax
+R1587:1597 ModalFree <> truth_lemma defax

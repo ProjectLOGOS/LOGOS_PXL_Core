@@ -1,0 +1,282 @@
+DIGEST b69d7d8fc3a300c26586c18e5bca3a9a
+FS5Overlay
+R24:30 Coq.Program.Program <> <> lib
+ind 403:406 <> form
+constr 420:422 <> Bot
+constr 433:436 <> Atom
+constr 454:457 <> Impl
+constr 484:487 <> Conj
+constr 514:517 <> Disj
+constr 544:546 <> Neg
+constr 565:567 <> Box
+constr 586:588 <> Dia
+R426:429 S5Overlay <> form:1 ind
+R443:446 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R440:442 Coq.Init.Datatypes <> nat ind
+R447:450 S5Overlay <> form:1 ind
+R465:468 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R461:464 S5Overlay <> form:1 ind
+R473:476 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R469:472 S5Overlay <> form:1 ind
+R477:480 S5Overlay <> form:1 ind
+R495:498 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R491:494 S5Overlay <> form:1 ind
+R503:506 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R499:502 S5Overlay <> form:1 ind
+R507:510 S5Overlay <> form:1 ind
+R525:528 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R521:524 S5Overlay <> form:1 ind
+R533:536 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R529:532 S5Overlay <> form:1 ind
+R537:540 S5Overlay <> form:1 ind
+R554:557 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R550:553 S5Overlay <> form:1 ind
+R558:561 S5Overlay <> form:1 ind
+R575:578 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R571:574 S5Overlay <> form:1 ind
+R579:582 S5Overlay <> form:1 ind
+R596:599 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R592:595 S5Overlay <> form:1 ind
+R600:603 S5Overlay <> form:1 ind
+scheme 403:406 <> form_rect
+scheme 403:406 <> form_ind
+scheme 403:406 <> form_rec
+scheme 403:406 <> form_sind
+ax 617:621 <> Gamma
+def 642:650 <> can_world
+R655:655 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R661:663 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R669:671 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R676:676 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R664:668 S5Overlay <> Gamma defax
+binder 656:660 <> gamma:5
+R672:675 Coq.Init.Logic <> True ind
+ax 689:694 <> forces
+R707:710 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R698:706 S5Overlay <> can_world def
+R715:718 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R711:714 S5Overlay <> form ind
+ax 735:740 <> In_set
+R749:752 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R744:748 S5Overlay <> Gamma defax
+R757:760 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R753:756 S5Overlay <> form ind
+ax 777:781 <> can_R
+R794:797 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R785:793 S5Overlay <> can_world def
+R807:810 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R798:806 S5Overlay <> can_world def
+ax 827:830 <> Prov
+R838:841 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R834:837 S5Overlay <> form ind
+def 906:915 <> modal_free
+R922:925 S5Overlay <> form ind
+binder 918:919 <> φ:14
+R946:947 S5Overlay <> φ:14 var
+R958:960 S5Overlay <> Bot constr
+R964:967 S5Overlay <> Atom constr
+R974:977 Coq.Init.Logic <> True ind
+R974:977 Coq.Init.Logic <> True ind
+R983:986 S5Overlay <> Impl constr
+R994:997 S5Overlay <> Conj constr
+R1005:1008 S5Overlay <> Disj constr
+R1029:1032 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R1017:1026 S5Overlay <> modal_free:15 def
+R1033:1042 S5Overlay <> modal_free:15 def
+R1029:1032 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R1017:1026 S5Overlay <> modal_free:15 def
+R1033:1042 S5Overlay <> modal_free:15 def
+R1029:1032 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R1017:1026 S5Overlay <> modal_free:15 def
+R1033:1042 S5Overlay <> modal_free:15 def
+R1050:1052 S5Overlay <> Neg constr
+R1059:1068 S5Overlay <> modal_free:15 def
+R1076:1078 S5Overlay <> Box constr
+R1084:1086 S5Overlay <> Dia constr
+R1093:1097 Coq.Init.Logic <> False ind
+R1093:1097 Coq.Init.Logic <> False ind
+ax 1117:1127 <> truth_lemma
+R1142:1150 S5Overlay <> can_world def
+binder 1139:1139 <> w:17
+R1158:1161 S5Overlay <> form ind
+binder 1154:1155 <> φ:18
+R1179:1183 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R1168:1173 S5Overlay <> forces defax
+R1175:1175 S5Overlay <> w:17 var
+R1177:1178 S5Overlay <> φ:18 var
+R1184:1189 S5Overlay <> In_set defax
+R1192:1200 Coq.Init.Specif <> proj1_sig def
+R1202:1202 S5Overlay <> w:17 var
+R1205:1206 S5Overlay <> φ:18 var
+prf 1216:1246 <> forces_modal_free_eq_membership
+R1263:1271 S5Overlay <> can_world def
+binder 1260:1260 <> w:21
+R1279:1282 S5Overlay <> form ind
+binder 1275:1276 <> φ:22
+R1303:1311 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1351:1351 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1290:1299 S5Overlay <> modal_free def
+R1301:1302 S5Overlay <> φ:22 var
+R1323:1327 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R1312:1317 S5Overlay <> forces defax
+R1319:1319 S5Overlay <> w:21 var
+R1321:1322 S5Overlay <> φ:22 var
+R1328:1333 S5Overlay <> In_set defax
+R1336:1344 Coq.Init.Specif <> proj1_sig def
+R1346:1346 S5Overlay <> w:21 var
+R1349:1350 S5Overlay <> φ:22 var
+R1384:1394 S5Overlay <> truth_lemma defax
+R1384:1394 S5Overlay <> truth_lemma defax
+ax 1413:1435 <> completeness_from_truth
+binder 1446:1447 <> φ:23
+R1450:1450 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1472:1476 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 1458:1458 <> w:24
+R1461:1466 S5Overlay <> forces defax
+R1468:1468 S5Overlay <> w:24 var
+R1470:1471 S5Overlay <> φ:23 var
+R1477:1480 S5Overlay <> Prov defax
+R1482:1483 S5Overlay <> φ:23 var
+mod 1519:1520 <> S5
+ind 1531:1539 S5 Reflexive
+constr 1551:1561 S5 reflexive_R
+rec 1531:1539 S5 Reflexive
+proj 1551:1561 S5 reflexive_R
+R1582:1590 S5Overlay <> can_world def
+binder 1577:1577 <> w:28
+binder 1579:1579 <> u:29
+R1623:1626 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1594:1594 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1606:1610 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1622:1622 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1595:1603 Coq.Init.Specif <> proj1_sig def
+R1605:1605 S5Overlay <> w:28 var
+R1611:1619 Coq.Init.Specif <> proj1_sig def
+R1621:1621 S5Overlay <> u:29 var
+R1627:1631 S5Overlay <> can_R defax
+R1633:1633 S5Overlay <> w:28 var
+R1635:1635 S5Overlay <> u:29 var
+ind 1646:1654 S5 Symmetric
+constr 1666:1676 S5 symmetric_R
+rec 1646:1654 S5 Symmetric
+proj 1666:1676 S5 symmetric_R
+R1697:1705 S5Overlay <> can_world def
+binder 1692:1692 <> w:32
+binder 1694:1694 <> u:33
+R1718:1721 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1709:1713 S5Overlay <> can_R defax
+R1715:1715 S5Overlay <> w:32 var
+R1717:1717 S5Overlay <> u:33 var
+R1722:1726 S5Overlay <> can_R defax
+R1728:1728 S5Overlay <> u:33 var
+R1730:1730 S5Overlay <> w:32 var
+ind 1741:1750 S5 Transitive
+constr 1762:1773 S5 transitive_R
+rec 1741:1750 S5 Transitive
+proj 1762:1773 S5 transitive_R
+R1796:1804 S5Overlay <> can_world def
+binder 1789:1789 <> w:36
+binder 1791:1791 <> u:37
+binder 1793:1793 <> v:38
+R1817:1820 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1808:1812 S5Overlay <> can_R defax
+R1814:1814 S5Overlay <> w:36 var
+R1816:1816 S5Overlay <> u:37 var
+R1830:1833 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1821:1825 S5Overlay <> can_R defax
+R1827:1827 S5Overlay <> u:37 var
+R1829:1829 S5Overlay <> v:38 var
+R1834:1838 S5Overlay <> can_R defax
+R1840:1840 S5Overlay <> w:36 var
+R1842:1842 S5Overlay <> v:38 var
+prf 1856:1876 S5 conservative_nonmodal
+R1890:1898 S5Overlay S5 Reflexive class
+binder 1883:1887 <> Hrefl:40
+R1908:1916 S5Overlay S5 Symmetric class
+binder 1902:1905 <> Hsym:41
+R1927:1936 S5Overlay S5 Transitive class
+binder 1920:1924 <> Htran:42
+binder 1952:1953 <> φ:43
+R1969:1978 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1956:1965 S5Overlay <> modal_free def
+R1967:1968 S5Overlay <> φ:43 var
+R1979:1979 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2001:2011 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 1987:1987 <> w:44
+R1990:1995 S5Overlay <> forces defax
+R1997:1997 S5Overlay <> w:44 var
+R1999:2000 S5Overlay <> φ:43 var
+R2012:2015 S5Overlay <> Prov defax
+R2017:2018 S5Overlay <> φ:43 var
+binder 2074:2074 <> w:45
+R2079:2083 Coq.Init.Logic <> proj1 thm
+R2134:2134 S5Overlay <> w:45 var
+R2086:2116 S5Overlay <> forces_modal_free_eq_membership thm
+R2118:2118 S5Overlay <> w:45 var
+binder 2074:2074 <> w:46
+R2079:2083 Coq.Init.Logic <> proj1 thm
+R2134:2134 S5Overlay <> w:46 var
+R2086:2116 S5Overlay <> forces_modal_free_eq_membership thm
+R2118:2118 S5Overlay <> w:46 var
+R2149:2171 S5Overlay <> completeness_from_truth defax
+R2149:2171 S5Overlay <> completeness_from_truth defax
+prf 2276:2304 S5 S5_conservative_propositional
+binder 2319:2320 <> φ:47
+R2336:2392 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2323:2332 S5Overlay <> modal_free def
+R2334:2335 S5Overlay <> φ:47 var
+R2393:2393 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2480:2545 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2394:2401 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R2456:2458 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R2409:2417 S5Overlay S5 Reflexive class
+binder 2402:2406 <> Hrefl:48
+R2427:2435 S5Overlay S5 Symmetric class
+binder 2421:2424 <> Hsym:49
+R2446:2455 S5Overlay S5 Transitive class
+binder 2439:2443 <> Htran:50
+binder 2466:2466 <> w:51
+R2469:2474 S5Overlay <> forces defax
+R2476:2476 S5Overlay <> w:51 var
+R2478:2479 S5Overlay <> φ:47 var
+R2546:2549 S5Overlay <> Prov defax
+R2551:2552 S5Overlay <> φ:47 var
+R2683:2703 S5Overlay S5 conservative_nonmodal thm
+R2683:2703 S5Overlay S5 conservative_nonmodal thm
+prf 2867:2890 S5 modal_strength_isolation
+binder 2905:2906 <> φ:52
+binder 2908:2909 <> ψ:53
+R2925:2928 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2912:2921 S5Overlay <> modal_free def
+R2923:2924 S5Overlay <> φ:52 var
+R2942:2997 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2929:2938 S5Overlay <> modal_free def
+R2940:2941 S5Overlay <> ψ:53 var
+R2998:2998 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3108:3185 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3222:3222 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2999:3006 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R3061:3071 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R3014:3022 S5Overlay S5 Reflexive class
+binder 3007:3011 <> Hrefl:54
+R3032:3040 S5Overlay S5 Symmetric class
+binder 3026:3029 <> Hsym:55
+R3051:3060 S5Overlay S5 Transitive class
+binder 3044:3048 <> Htran:56
+binder 3079:3079 <> w:57
+R3093:3096 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3082:3087 S5Overlay <> forces defax
+R3089:3089 S5Overlay <> w:57 var
+R3091:3092 S5Overlay <> φ:52 var
+R3097:3102 S5Overlay <> forces defax
+R3104:3104 S5Overlay <> w:57 var
+R3106:3107 S5Overlay <> ψ:53 var
+binder 3193:3193 <> w:58
+R3207:3210 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3196:3201 S5Overlay <> forces defax
+R3203:3203 S5Overlay <> w:58 var
+R3205:3206 S5Overlay <> φ:52 var
+R3211:3216 S5Overlay <> forces defax
+R3218:3218 S5Overlay <> w:58 var
+R3220:3221 S5Overlay <> ψ:53 var
+R3398:3399 S5Overlay S5 <> mod

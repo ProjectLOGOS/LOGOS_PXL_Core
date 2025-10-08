@@ -8,6 +8,9 @@ VFILES := \
   modules/IEL/ChronoPraxis/tactics/ChronoTactics.v \
   modules/IEL/ChronoPraxis/theorems/ChronoProofs.v \
   modules/IEL/ChronoPraxis/theorems/MetaTheorems.v \
+  modules/IEL/ChronoPraxis/theorems/ModalStrength/ModalFree.v \
+  modules/IEL/ChronoPraxis/theorems/ModalStrength/S4Overlay.v \
+  modules/IEL/ChronoPraxis/theorems/ModalStrength/S5Overlay.v \
   modules/IEL/ChronoPraxis/interfaces/ChronoPraxis.v \
   modules/IEL/ChronoPraxis/domains/Compatibilism/CompatibilismTheory.v \
   modules/IEL/ChronoPraxis/domains/Empiricism/UnifiedFieldLogic.v \
@@ -21,6 +24,7 @@ VFILES := \
   tests/EmpiricismTests.v \
   tests/EmpiricismLorentzTests.v \
   tests/RelativityTests.v \
+  tests/ModalStrengthTests.v \
   tests/ModalOntologyTests.v \
   tests/DomainProperties.v \
   pxl-minimal-kernel-main/coq/Constructive_Lindenbaum_Simple.v
