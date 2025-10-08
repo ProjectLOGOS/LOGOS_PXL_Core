@@ -1,17 +1,20 @@
-(* EmpiricismTests.v - Smoke tests for Empiricism domain *)
+(* EmpiricismTests.v - Tests for Empiricism domain constructive frame morphisms *)
 
 From Coq Require Import Program.
 
-(* Basic smoke test - verifies file compiles *)
+(* Basic compilation test *)
 Goal True. exact I. Qed.
 
-(* Verify frame types are accessible *)
-(* TODO: Add proper imports once module path resolution is fixed *)
+(* TODO: Restore proper imports once module path resolution fixed *)
+(* Require Import modules.chronopraxis.domains.Empiricism.UnifiedFieldLogic. *)
 
-(* Quick behavior checks - simplified until imports work *)
+(* Type and theorem accessibility tests - will be enabled when imports work *)
 (* Check UnifiedFieldLogic.ObserverFrame. *)
-(* Check UnifiedFieldLogic.CoordinateFrame. *) (* TODO: Enable once module imports resolved *)
+(* Check UnifiedFieldLogic.CoordinateFrame. *)
+(* Check UnifiedFieldLogic.observational_coherence_frames. *)
 
-(* Placeholder for future domain tests *)
-(* TODO: Test observational coherence theorems *)
-(* TODO: Test physics-temporal mappings *)
+(* Placeholder for constructive frame morphism tests *)
+(* TODO: Test measure_AB, project_BC, measure_AC functions *)
+(* TODO: Test observational_coherence_frames with concrete examples *)
+(* TODO: Test frame independence properties *)
+(* TODO: Verify no admits in constructive coherence proofs *)

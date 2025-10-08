@@ -1,41 +1,101 @@
-DIGEST e7d257c0ce24ce64f510f82540e5390c
+DIGEST 6ad9c209e1d0e0e9adee06d802cca4ec
 FUnifiedFieldLogic
-mod 76:92 <> UnifiedFieldLogic
-rec 352:364 UnifiedFieldLogic ObserverFrame
-proj 371:379 UnifiedFieldLogic obs_clock
-R383:385 Coq.Init.Datatypes <> nat ind
-rec 488:502 UnifiedFieldLogic CoordinateFrame
-proj 509:519 UnifiedFieldLogic coord_scale
-R523:525 Coq.Init.Datatypes <> nat ind
-ax 632:643 UnifiedFieldLogic EternalFrame
-ax 733:741 UnifiedFieldLogic LocalTime
-ax 799:812 UnifiedFieldLogic CoordinateTime
-ax 867:876 UnifiedFieldLogic CosmicTime
-ax 971:989 UnifiedFieldLogic local_to_coordinate
-R1002:1005 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R993:1001 UnifiedFieldLogic UnifiedFieldLogic LocalTime defax
-R1006:1019 UnifiedFieldLogic UnifiedFieldLogic CoordinateTime defax
-ax 1032:1051 UnifiedFieldLogic coordinate_to_cosmic
-R1069:1072 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1055:1068 UnifiedFieldLogic UnifiedFieldLogic CoordinateTime defax
-R1073:1082 UnifiedFieldLogic UnifiedFieldLogic CosmicTime defax
-ax 1095:1109 UnifiedFieldLogic local_to_cosmic
-R1122:1125 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1113:1121 UnifiedFieldLogic UnifiedFieldLogic LocalTime defax
-R1126:1135 UnifiedFieldLogic UnifiedFieldLogic CosmicTime defax
-ax 1333:1355 UnifiedFieldLogic observational_coherence
-R1374:1382 UnifiedFieldLogic UnifiedFieldLogic LocalTime defax
-binder 1369:1370 <> lt:19
-R1408:1410 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R1390:1404 UnifiedFieldLogic UnifiedFieldLogic local_to_cosmic defax
-R1406:1407 UnifiedFieldLogic <> lt:19 var
-R1411:1430 UnifiedFieldLogic UnifiedFieldLogic coordinate_to_cosmic defax
-R1433:1451 UnifiedFieldLogic UnifiedFieldLogic local_to_coordinate defax
-R1453:1454 UnifiedFieldLogic <> lt:19 var
-ax 1511:1539 UnifiedFieldLogic physical_temporal_consistency
-R1559:1571 UnifiedFieldLogic UnifiedFieldLogic ObserverFrame rec
-binder 1553:1555 <> obs:22
-R1583:1597 UnifiedFieldLogic UnifiedFieldLogic CoordinateFrame rec
-binder 1575:1579 <> coord:23
-R1605:1608 Coq.Init.Logic <> True ind
-R1950:1966 UnifiedFieldLogic UnifiedFieldLogic <> mod
+mod 352:368 <> UnifiedFieldLogic
+rec 577:589 UnifiedFieldLogic ObserverFrame
+proj 596:604 UnifiedFieldLogic obs_clock
+R608:610 Coq.Init.Datatypes <> nat ind
+rec 770:784 UnifiedFieldLogic CoordinateFrame
+proj 791:801 UnifiedFieldLogic coord_scale
+R805:807 Coq.Init.Datatypes <> nat ind
+ax 1034:1035 UnifiedFieldLogic PA
+ax 1139:1140 UnifiedFieldLogic PB
+ax 1234:1235 UnifiedFieldLogic PC
+ax 1326:1331 UnifiedFieldLogic A_to_B
+R1337:1340 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1335:1336 UnifiedFieldLogic UnifiedFieldLogic PA defax
+R1341:1342 UnifiedFieldLogic UnifiedFieldLogic PB defax
+ax 1355:1360 UnifiedFieldLogic B_to_C
+R1366:1369 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1364:1365 UnifiedFieldLogic UnifiedFieldLogic PB defax
+R1370:1371 UnifiedFieldLogic UnifiedFieldLogic PC defax
+ax 1384:1389 UnifiedFieldLogic A_to_C
+R1395:1398 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1393:1394 UnifiedFieldLogic UnifiedFieldLogic PA defax
+R1399:1400 UnifiedFieldLogic UnifiedFieldLogic PC defax
+def 1628:1637 UnifiedFieldLogic measure_AB
+R1642:1654 UnifiedFieldLogic UnifiedFieldLogic ObserverFrame rec
+R1661:1662 UnifiedFieldLogic UnifiedFieldLogic PA defax
+binder 1658:1659 <> pA:17
+R1667:1668 UnifiedFieldLogic UnifiedFieldLogic PB defax
+R1673:1678 UnifiedFieldLogic UnifiedFieldLogic A_to_B defax
+R1680:1681 UnifiedFieldLogic <> pA:17 var
+def 1860:1869 UnifiedFieldLogic project_BC
+R1874:1888 UnifiedFieldLogic UnifiedFieldLogic CoordinateFrame rec
+R1895:1896 UnifiedFieldLogic UnifiedFieldLogic PB defax
+binder 1892:1893 <> pB:18
+R1901:1902 UnifiedFieldLogic UnifiedFieldLogic PC defax
+R1907:1912 UnifiedFieldLogic UnifiedFieldLogic B_to_C defax
+R1914:1915 UnifiedFieldLogic <> pB:18 var
+def 2084:2093 UnifiedFieldLogic measure_AC
+R2098:2110 UnifiedFieldLogic UnifiedFieldLogic ObserverFrame rec
+R2117:2118 UnifiedFieldLogic UnifiedFieldLogic PA defax
+binder 2114:2115 <> pA:19
+R2123:2124 UnifiedFieldLogic UnifiedFieldLogic PC defax
+R2129:2134 UnifiedFieldLogic UnifiedFieldLogic A_to_C defax
+R2136:2137 UnifiedFieldLogic <> pA:19 var
+ax 2342:2354 UnifiedFieldLogic ABC_coherence
+binder 2365:2366 <> pA:20
+R2378:2380 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2369:2374 UnifiedFieldLogic UnifiedFieldLogic A_to_C defax
+R2376:2377 UnifiedFieldLogic <> pA:20 var
+R2381:2386 UnifiedFieldLogic UnifiedFieldLogic B_to_C defax
+R2389:2394 UnifiedFieldLogic UnifiedFieldLogic A_to_B defax
+R2396:2397 UnifiedFieldLogic <> pA:20 var
+prf 2678:2707 UnifiedFieldLogic observational_coherence_frames
+R2723:2735 UnifiedFieldLogic UnifiedFieldLogic ObserverFrame rec
+binder 2721:2721 <> o:23
+R2741:2755 UnifiedFieldLogic UnifiedFieldLogic CoordinateFrame rec
+binder 2739:2739 <> c:24
+R2762:2763 UnifiedFieldLogic UnifiedFieldLogic PA defax
+binder 2759:2760 <> pA:25
+R2786:2788 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2771:2780 UnifiedFieldLogic UnifiedFieldLogic measure_AC def
+R2782:2782 UnifiedFieldLogic <> o:23 var
+R2784:2785 UnifiedFieldLogic <> pA:25 var
+R2789:2798 UnifiedFieldLogic UnifiedFieldLogic project_BC def
+R2800:2800 UnifiedFieldLogic <> c:24 var
+R2803:2812 UnifiedFieldLogic UnifiedFieldLogic measure_AB def
+R2814:2814 UnifiedFieldLogic <> o:23 var
+R2816:2817 UnifiedFieldLogic <> pA:25 var
+R2854:2863 UnifiedFieldLogic UnifiedFieldLogic measure_AC def
+R2866:2875 UnifiedFieldLogic UnifiedFieldLogic project_BC def
+R2878:2887 UnifiedFieldLogic UnifiedFieldLogic measure_AB def
+R2950:2962 UnifiedFieldLogic UnifiedFieldLogic ABC_coherence defax
+R2950:2962 UnifiedFieldLogic UnifiedFieldLogic ABC_coherence defax
+ax 3127:3144 UnifiedFieldLogic frame_independence
+R3166:3178 UnifiedFieldLogic UnifiedFieldLogic ObserverFrame rec
+binder 3158:3159 <> o1:26
+binder 3161:3162 <> o2:27
+R3187:3188 UnifiedFieldLogic UnifiedFieldLogic PA defax
+binder 3182:3183 <> pA:28
+R3212:3214 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3196:3205 UnifiedFieldLogic UnifiedFieldLogic measure_AC def
+R3207:3208 UnifiedFieldLogic <> o1:26 var
+R3210:3211 UnifiedFieldLogic <> pA:28 var
+R3215:3224 UnifiedFieldLogic UnifiedFieldLogic measure_AC def
+R3226:3227 UnifiedFieldLogic <> o2:27 var
+R3229:3230 UnifiedFieldLogic <> pA:28 var
+ax 3324:3344 UnifiedFieldLogic coordinate_invariance
+R3366:3380 UnifiedFieldLogic UnifiedFieldLogic CoordinateFrame rec
+binder 3358:3359 <> c1:31
+binder 3361:3362 <> c2:32
+R3389:3390 UnifiedFieldLogic UnifiedFieldLogic PB defax
+binder 3384:3385 <> pB:33
+R3414:3416 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3398:3407 UnifiedFieldLogic UnifiedFieldLogic project_BC def
+R3409:3410 UnifiedFieldLogic <> c1:31 var
+R3412:3413 UnifiedFieldLogic <> pB:33 var
+R3417:3426 UnifiedFieldLogic UnifiedFieldLogic project_BC def
+R3428:3429 UnifiedFieldLogic <> c2:32 var
+R3431:3432 UnifiedFieldLogic <> pB:33 var
+R3704:3720 UnifiedFieldLogic UnifiedFieldLogic <> mod
