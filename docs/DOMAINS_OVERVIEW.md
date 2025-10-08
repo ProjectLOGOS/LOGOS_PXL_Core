@@ -131,6 +131,13 @@ make prove                   # Verify no admits, constructive proofs only
 - **Physics Integration**: Full relativistic temporal logic
 - **AI Applications**: Temporal reasoning for artificial intelligence systems
 
+## Documentation
+
+- **Auto-generated API docs**: see `docs/html/toc.html` (built by `coq: docs-html` task or CI artifact)
+- **Property tests**: `tests/DomainProperties.v` - Core invariant validation
+- **Plain-English glossary**: `docs/GLOSSARY.md` - Non-technical explanations
+- **Examples**: `examples/` directory - Concrete demonstrations of A→B→C flows
+
 ---
 
 *This overview provides the foundation for Phase 2 development. Each domain is ready for intensive theorem development while maintaining constructive proof standards and cross-domain compatibility.*

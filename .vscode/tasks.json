@@ -5,6 +5,9 @@
     { "label": "coq: clean", "type": "shell", "command": "bash -lc 'make clean'", "problemMatcher": [] },
     { "label": "coq: compatibilism", "type": "shell", "command": "bash -lc 'make domain-compatibilism'", "problemMatcher": [] },
     { "label": "coq: empiricism", "type": "shell", "command": "bash -lc 'make domain-empiricism'", "problemMatcher": [] },
-    { "label": "coq: modal-ontology", "type": "shell", "command": "bash -lc 'make domain-modal-ontology'", "problemMatcher": [] }
+    { "label": "coq: modal-ontology", "type": "shell", "command": "bash -lc 'make domain-modal-ontology'", "problemMatcher": [] },
+    { "label": "coq: examples", "type": "shell", "command": "bash -lc 'make examples'", "problemMatcher": [] },
+    { "label": "coq: docs-html", "type": "shell", "command": "bash -lc 'make docs-html'", "problemMatcher": [] },
+    { "label": "coq: properties", "type": "shell", "command": "bash -lc 'coqc tests/DomainProperties.v'", "problemMatcher": [] }
   ]
 }

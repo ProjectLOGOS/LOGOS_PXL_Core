@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>Empiricism_LabClock</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Empiricism_LabClock</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Program.Program.html#"><span class="id" title="library">Program</span></a>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Module</span> <a id="LabClock" class="idref" href="#LabClock"><span class="id" title="module">LabClock</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Parameter</span> <a id="LabClock.PA" class="idref" href="#LabClock.PA"><span class="id" title="axiom">PA</span></a> : <span class="id" title="keyword">Type</span>. <span class="id" title="keyword">Parameter</span> <a id="LabClock.PB" class="idref" href="#LabClock.PB"><span class="id" title="axiom">PB</span></a> : <span class="id" title="keyword">Type</span>. <span class="id" title="keyword">Parameter</span> <a id="LabClock.PC" class="idref" href="#LabClock.PC"><span class="id" title="axiom">PC</span></a> : <span class="id" title="keyword">Type</span>. <span class="id" title="keyword">Parameter</span> <a id="LabClock.A_to_B" class="idref" href="#LabClock.A_to_B"><span class="id" title="axiom">A_to_B</span></a> : <a class="idref" href="Empiricism_LabClock.html#LabClock.PA"><span class="id" title="axiom">PA</span></a> <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Empiricism_LabClock.html#LabClock.PB"><span class="id" title="axiom">PB</span></a>.<br/>
+<span class="id" title="keyword">Parameter</span> <a id="LabClock.B_to_A" class="idref" href="#LabClock.B_to_A"><span class="id" title="axiom">B_to_A</span></a> : <a class="idref" href="Empiricism_LabClock.html#LabClock.PB"><span class="id" title="axiom">PB</span></a> <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Empiricism_LabClock.html#LabClock.PA"><span class="id" title="axiom">PA</span></a>.<br/>
+<span class="id" title="keyword">Parameter</span> <a id="LabClock.A_to_C" class="idref" href="#LabClock.A_to_C"><span class="id" title="axiom">A_to_C</span></a> : <a class="idref" href="Empiricism_LabClock.html#LabClock.PA"><span class="id" title="axiom">PA</span></a> <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Empiricism_LabClock.html#LabClock.PC"><span class="id" title="axiom">PC</span></a>.<br/>
+<span class="id" title="keyword">Parameter</span> <a id="LabClock.B_to_C" class="idref" href="#LabClock.B_to_C"><span class="id" title="axiom">B_to_C</span></a> : <a class="idref" href="Empiricism_LabClock.html#LabClock.PB"><span class="id" title="axiom">PB</span></a> <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Empiricism_LabClock.html#LabClock.PC"><span class="id" title="axiom">PC</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Record</span> <a id="LabClock.Frame" class="idref" href="#LabClock.Frame"><span class="id" title="record">Frame</span></a> := { <br/>
+&nbsp;&nbsp;<a id="LabClock.location" class="idref" href="#LabClock.location"><span class="id" title="projection">location</span></a> : <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>;  <br/>
+&nbsp;&nbsp;<a id="LabClock.observer" class="idref" href="#LabClock.observer"><span class="id" title="projection">observer</span></a> : <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>   <br/>
+}.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="LabClock.lab_frame" class="idref" href="#LabClock.lab_frame"><span class="id" title="definition">lab_frame</span></a> := {| <a class="idref" href="Empiricism_LabClock.html#LabClock.location"><span class="id" title="projection">location</span></a> := 101; <a class="idref" href="Empiricism_LabClock.html#LabClock.observer"><span class="id" title="projection">observer</span></a> := 42 |}.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="LabClock.m" class="idref" href="#LabClock.m"><span class="id" title="definition">m</span></a> (<a id="f:18" class="idref" href="#f:18"><span class="id" title="binder">f</span></a>:<a class="idref" href="Empiricism_LabClock.html#LabClock.Frame"><span class="id" title="record">Frame</span></a>) (<a id="pA:19" class="idref" href="#pA:19"><span class="id" title="binder">pA</span></a>:<a class="idref" href="Empiricism_LabClock.html#LabClock.PA"><span class="id" title="axiom">PA</span></a>) : <a class="idref" href="Empiricism_LabClock.html#LabClock.PB"><span class="id" title="axiom">PB</span></a> := <a class="idref" href="Empiricism_LabClock.html#LabClock.A_to_B"><span class="id" title="axiom">A_to_B</span></a> <a class="idref" href="Empiricism_LabClock.html#pA:19"><span class="id" title="variable">pA</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Parameter</span> <a id="LabClock.pA_slow" class="idref" href="#LabClock.pA_slow"><span class="id" title="axiom">pA_slow</span></a> : <a class="idref" href="Empiricism_LabClock.html#LabClock.PA"><span class="id" title="axiom">PA</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Parameter</span> <a id="LabClock.pB_measured" class="idref" href="#LabClock.pB_measured"><span class="id" title="axiom">pB_measured</span></a> : <a class="idref" href="Empiricism_LabClock.html#LabClock.PB"><span class="id" title="axiom">PB</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Parameter</span> <a id="LabClock.measurement_correspondence" class="idref" href="#LabClock.measurement_correspondence"><span class="id" title="axiom">measurement_correspondence</span></a> : <a class="idref" href="Empiricism_LabClock.html#LabClock.m"><span class="id" title="definition">m</span></a> <a class="idref" href="Empiricism_LabClock.html#LabClock.lab_frame"><span class="id" title="definition">lab_frame</span></a> <a class="idref" href="Empiricism_LabClock.html#LabClock.pA_slow"><span class="id" title="axiom">pA_slow</span></a> <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Empiricism_LabClock.html#LabClock.pB_measured"><span class="id" title="axiom">pB_measured</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Parameter</span> <a id="LabClock.consistent_eternal_mapping" class="idref" href="#LabClock.consistent_eternal_mapping"><span class="id" title="axiom">consistent_eternal_mapping</span></a> : <a class="idref" href="Empiricism_LabClock.html#LabClock.A_to_C"><span class="id" title="axiom">A_to_C</span></a> <a class="idref" href="Empiricism_LabClock.html#LabClock.pA_slow"><span class="id" title="axiom">pA_slow</span></a> <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Empiricism_LabClock.html#LabClock.B_to_C"><span class="id" title="axiom">B_to_C</span></a> <a class="idref" href="Empiricism_LabClock.html#LabClock.pB_measured"><span class="id" title="axiom">pB_measured</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a id="LabClock.observational_coherence_labclock" class="idref" href="#LabClock.observational_coherence_labclock"><span class="id" title="lemma">observational_coherence_labclock</span></a> : <br/>
+&nbsp;&nbsp;<a class="idref" href="Empiricism_LabClock.html#LabClock.A_to_C"><span class="id" title="axiom">A_to_C</span></a> <a class="idref" href="Empiricism_LabClock.html#LabClock.pA_slow"><span class="id" title="axiom">pA_slow</span></a> <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Empiricism_LabClock.html#LabClock.B_to_C"><span class="id" title="axiom">B_to_C</span></a> (<a class="idref" href="Empiricism_LabClock.html#LabClock.m"><span class="id" title="definition">m</span></a> <a class="idref" href="Empiricism_LabClock.html#LabClock.lab_frame"><span class="id" title="definition">lab_frame</span></a> <a class="idref" href="Empiricism_LabClock.html#LabClock.pA_slow"><span class="id" title="axiom">pA_slow</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="Empiricism_LabClock.html#LabClock.measurement_correspondence"><span class="id" title="axiom">measurement_correspondence</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">exact</span> <a class="idref" href="Empiricism_LabClock.html#LabClock.consistent_eternal_mapping"><span class="id" title="axiom">consistent_eternal_mapping</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="LabClock.coherent_frame" class="idref" href="#LabClock.coherent_frame"><span class="id" title="definition">coherent_frame</span></a> (<a id="f:28" class="idref" href="#f:28"><span class="id" title="binder">f</span></a>:<a class="idref" href="Empiricism_LabClock.html#LabClock.Frame"><span class="id" title="record">Frame</span></a>) : <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="pA:29" class="idref" href="#pA:29"><span class="id" title="binder">pA</span></a>, <a class="idref" href="Empiricism_LabClock.html#LabClock.A_to_C"><span class="id" title="axiom">A_to_C</span></a> <a class="idref" href="Empiricism_LabClock.html#pA:29"><span class="id" title="variable">pA</span></a> <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Empiricism_LabClock.html#LabClock.B_to_C"><span class="id" title="axiom">B_to_C</span></a> (<a class="idref" href="Empiricism_LabClock.html#LabClock.m"><span class="id" title="definition">m</span></a> <a class="idref" href="Empiricism_LabClock.html#f:28"><span class="id" title="variable">f</span></a> <a class="idref" href="Empiricism_LabClock.html#pA:29"><span class="id" title="variable">pA</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Parameter</span> <a id="LabClock.lab_frame_coherent" class="idref" href="#LabClock.lab_frame_coherent"><span class="id" title="axiom">lab_frame_coherent</span></a> : <a class="idref" href="Empiricism_LabClock.html#LabClock.coherent_frame"><span class="id" title="definition">coherent_frame</span></a> <a class="idref" href="Empiricism_LabClock.html#LabClock.lab_frame"><span class="id" title="definition">lab_frame</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a id="LabClock.specific_coherence" class="idref" href="#LabClock.specific_coherence"><span class="id" title="lemma">specific_coherence</span></a> : <a class="idref" href="Empiricism_LabClock.html#LabClock.A_to_C"><span class="id" title="axiom">A_to_C</span></a> <a class="idref" href="Empiricism_LabClock.html#LabClock.pA_slow"><span class="id" title="axiom">pA_slow</span></a> <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Empiricism_LabClock.html#LabClock.B_to_C"><span class="id" title="axiom">B_to_C</span></a> <a class="idref" href="Empiricism_LabClock.html#LabClock.pB_measured"><span class="id" title="axiom">pB_measured</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">pose</span> <span class="id" title="var">proof</span> (<a class="idref" href="Empiricism_LabClock.html#LabClock.lab_frame_coherent"><span class="id" title="axiom">lab_frame_coherent</span></a> <a class="idref" href="Empiricism_LabClock.html#LabClock.pA_slow"><span class="id" title="axiom">pA_slow</span></a>) <span class="id" title="keyword">as</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="Empiricism_LabClock.html#LabClock.measurement_correspondence"><span class="id" title="axiom">measurement_correspondence</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">exact</span> <span class="id" title="var">H</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="Empiricism_LabClock.html#LabClock"><span class="id" title="module">LabClock</span></a>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="examples/Compatibilism_CoffeeTea.v.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
