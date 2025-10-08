@@ -8,6 +8,7 @@
     { "label": "coq: modal-ontology", "type": "shell", "command": "bash -lc 'make domain-modal-ontology'", "problemMatcher": [] },
     { "label": "coq: examples", "type": "shell", "command": "bash -lc 'make examples'", "problemMatcher": [] },
     { "label": "coq: docs-html", "type": "shell", "command": "bash -lc 'make docs-html'", "problemMatcher": [] },
-    { "label": "coq: properties", "type": "shell", "command": "bash -lc 'coqc tests/DomainProperties.v'", "problemMatcher": [] }
+    { "label": "coq: properties", "type": "shell", "command": "bash -lc 'coqc tests/DomainProperties.v'", "problemMatcher": [] },
+    { "label": "coq: constructive-lindenbaum", "type": "shell", "command": "bash -lc 'coqc pxl-minimal-kernel-main/coq/Constructive_Lindenbaum_Simple.v'", "problemMatcher": [] }
   ]
 }
