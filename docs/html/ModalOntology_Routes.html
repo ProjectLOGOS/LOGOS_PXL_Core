@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>ModalOntology_Routes</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library ModalOntology_Routes</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Program.Program.html#"><span class="id" title="library">Program</span></a>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Module</span> <a id="Routes" class="idref" href="#Routes"><span class="id" title="module">Routes</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Parameter</span> <a id="Routes.PA" class="idref" href="#Routes.PA"><span class="id" title="axiom">PA</span></a> : <span class="id" title="keyword">Type</span>. <span class="id" title="keyword">Parameter</span> <a id="Routes.PC" class="idref" href="#Routes.PC"><span class="id" title="axiom">PC</span></a> : <span class="id" title="keyword">Type</span>. <span class="id" title="keyword">Parameter</span> <a id="Routes.A_to_C" class="idref" href="#Routes.A_to_C"><span class="id" title="axiom">A_to_C</span></a> : <a class="idref" href="ModalOntology_Routes.html#Routes.PA"><span class="id" title="axiom">PA</span></a> <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="ModalOntology_Routes.html#Routes.PC"><span class="id" title="axiom">PC</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="Routes.Access" class="idref" href="#Routes.Access"><span class="id" title="definition">Access</span></a> (<a id="pC:7" class="idref" href="#pC:7"><span class="id" title="binder">pC</span></a> <a id="qC:8" class="idref" href="#qC:8"><span class="id" title="binder">qC</span></a> : <a class="idref" href="ModalOntology_Routes.html#Routes.PC"><span class="id" title="axiom">PC</span></a>) : <span class="id" title="keyword">Prop</span> := <br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="pA:9" class="idref" href="#pA:9"><span class="id" title="binder">pA</span></a><a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a> <a class="idref" href="ModalOntology_Routes.html#Routes.A_to_C"><span class="id" title="axiom">A_to_C</span></a> <a class="idref" href="ModalOntology_Routes.html#pA:9"><span class="id" title="variable">pA</span></a> <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="ModalOntology_Routes.html#pC:7"><span class="id" title="variable">pC</span></a> <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="ModalOntology_Routes.html#Routes.A_to_C"><span class="id" title="axiom">A_to_C</span></a> <a class="idref" href="ModalOntology_Routes.html#pA:9"><span class="id" title="variable">pA</span></a> <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="ModalOntology_Routes.html#qC:8"><span class="id" title="variable">qC</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Parameter</span> <a id="Routes.pA_highway" class="idref" href="#Routes.pA_highway"><span class="id" title="axiom">pA_highway</span></a> : <a class="idref" href="ModalOntology_Routes.html#Routes.PA"><span class="id" title="axiom">PA</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Parameter</span> <a id="Routes.pA_streets" class="idref" href="#Routes.pA_streets"><span class="id" title="axiom">pA_streets</span></a> : <a class="idref" href="ModalOntology_Routes.html#Routes.PA"><span class="id" title="axiom">PA</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Parameter</span> <a id="Routes.pC_work" class="idref" href="#Routes.pC_work"><span class="id" title="axiom">pC_work</span></a> : <a class="idref" href="ModalOntology_Routes.html#Routes.PC"><span class="id" title="axiom">PC</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Parameter</span> <a id="Routes.highway_arrives" class="idref" href="#Routes.highway_arrives"><span class="id" title="axiom">highway_arrives</span></a> : <a class="idref" href="ModalOntology_Routes.html#Routes.A_to_C"><span class="id" title="axiom">A_to_C</span></a> <a class="idref" href="ModalOntology_Routes.html#Routes.pA_highway"><span class="id" title="axiom">pA_highway</span></a> <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="ModalOntology_Routes.html#Routes.pC_work"><span class="id" title="axiom">pC_work</span></a>.<br/>
+<span class="id" title="keyword">Parameter</span> <a id="Routes.streets_arrive" class="idref" href="#Routes.streets_arrive"><span class="id" title="axiom">streets_arrive</span></a> : <a class="idref" href="ModalOntology_Routes.html#Routes.A_to_C"><span class="id" title="axiom">A_to_C</span></a> <a class="idref" href="ModalOntology_Routes.html#Routes.pA_streets"><span class="id" title="axiom">pA_streets</span></a> <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="ModalOntology_Routes.html#Routes.pC_work"><span class="id" title="axiom">pC_work</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a id="Routes.route_accessibility" class="idref" href="#Routes.route_accessibility"><span class="id" title="lemma">route_accessibility</span></a> : <a class="idref" href="ModalOntology_Routes.html#Routes.Access"><span class="id" title="definition">Access</span></a> <a class="idref" href="ModalOntology_Routes.html#Routes.pC_work"><span class="id" title="axiom">pC_work</span></a> <a class="idref" href="ModalOntology_Routes.html#Routes.pC_work"><span class="id" title="axiom">pC_work</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <a class="idref" href="ModalOntology_Routes.html#Routes.pA_highway"><span class="id" title="axiom">pA_highway</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <a class="idref" href="ModalOntology_Routes.html#Routes.highway_arrives"><span class="id" title="axiom">highway_arrives</span></a>. &nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <a class="idref" href="ModalOntology_Routes.html#Routes.highway_arrives"><span class="id" title="axiom">highway_arrives</span></a>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a id="Routes.route_accessibility_alt" class="idref" href="#Routes.route_accessibility_alt"><span class="id" title="lemma">route_accessibility_alt</span></a> : <a class="idref" href="ModalOntology_Routes.html#Routes.Access"><span class="id" title="definition">Access</span></a> <a class="idref" href="ModalOntology_Routes.html#Routes.pC_work"><span class="id" title="axiom">pC_work</span></a> <a class="idref" href="ModalOntology_Routes.html#Routes.pC_work"><span class="id" title="axiom">pC_work</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <a class="idref" href="ModalOntology_Routes.html#Routes.pA_streets"><span class="id" title="axiom">pA_streets</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <a class="idref" href="ModalOntology_Routes.html#Routes.streets_arrive"><span class="id" title="axiom">streets_arrive</span></a>. &nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <a class="idref" href="ModalOntology_Routes.html#Routes.streets_arrive"><span class="id" title="axiom">streets_arrive</span></a>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Parameter</span> <a id="Routes.pC_home" class="idref" href="#Routes.pC_home"><span class="id" title="axiom">pC_home</span></a> <a id="Routes.pC_store" class="idref" href="#Routes.pC_store"><span class="id" title="axiom">pC_store</span></a> : <a class="idref" href="ModalOntology_Routes.html#Routes.PC"><span class="id" title="axiom">PC</span></a>.<br/>
+<span class="id" title="keyword">Parameter</span> <a id="Routes.pA_home_direct" class="idref" href="#Routes.pA_home_direct"><span class="id" title="axiom">pA_home_direct</span></a> <a id="Routes.pA_store_via_home" class="idref" href="#Routes.pA_store_via_home"><span class="id" title="axiom">pA_store_via_home</span></a> : <a class="idref" href="ModalOntology_Routes.html#Routes.PA"><span class="id" title="axiom">PA</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Parameter</span> <a id="Routes.home_direct" class="idref" href="#Routes.home_direct"><span class="id" title="axiom">home_direct</span></a> : <a class="idref" href="ModalOntology_Routes.html#Routes.A_to_C"><span class="id" title="axiom">A_to_C</span></a> <a class="idref" href="ModalOntology_Routes.html#Routes.pA_home_direct"><span class="id" title="axiom">pA_home_direct</span></a> <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="ModalOntology_Routes.html#Routes.pC_home"><span class="id" title="axiom">pC_home</span></a>.<br/>
+<span class="id" title="keyword">Parameter</span> <a id="Routes.store_detour" class="idref" href="#Routes.store_detour"><span class="id" title="axiom">store_detour</span></a> : <a class="idref" href="ModalOntology_Routes.html#Routes.A_to_C"><span class="id" title="axiom">A_to_C</span></a> <a class="idref" href="ModalOntology_Routes.html#Routes.pA_store_via_home"><span class="id" title="axiom">pA_store_via_home</span></a> <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="ModalOntology_Routes.html#Routes.pC_store"><span class="id" title="axiom">pC_store</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Parameter</span> <a id="Routes.distinct_outcomes" class="idref" href="#Routes.distinct_outcomes"><span class="id" title="axiom">distinct_outcomes</span></a> : <a class="idref" href="ModalOntology_Routes.html#Routes.pC_home"><span class="id" title="axiom">pC_home</span></a> <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">≠</span></a> <a class="idref" href="ModalOntology_Routes.html#Routes.pC_store"><span class="id" title="axiom">pC_store</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a id="Routes.home_self_accessible" class="idref" href="#Routes.home_self_accessible"><span class="id" title="lemma">home_self_accessible</span></a> : <a class="idref" href="ModalOntology_Routes.html#Routes.Access"><span class="id" title="definition">Access</span></a> <a class="idref" href="ModalOntology_Routes.html#Routes.pC_home"><span class="id" title="axiom">pC_home</span></a> <a class="idref" href="ModalOntology_Routes.html#Routes.pC_home"><span class="id" title="axiom">pC_home</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <a class="idref" href="ModalOntology_Routes.html#Routes.pA_home_direct"><span class="id" title="axiom">pA_home_direct</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">split</span>; <span class="id" title="tactic">exact</span> <a class="idref" href="ModalOntology_Routes.html#Routes.home_direct"><span class="id" title="axiom">home_direct</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a id="Routes.home_store_not_accessible" class="idref" href="#Routes.home_store_not_accessible"><span class="id" title="lemma">home_store_not_accessible</span></a> : <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">¬</span></a> <a class="idref" href="ModalOntology_Routes.html#Routes.Access"><span class="id" title="definition">Access</span></a> <a class="idref" href="ModalOntology_Routes.html#Routes.pC_home"><span class="id" title="axiom">pC_home</span></a> <a class="idref" href="ModalOntology_Routes.html#Routes.pC_store"><span class="id" title="axiom">pC_store</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">pA</span> [<span class="id" title="var">H1</span> <span class="id" title="var">H2</span>]].<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H1</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H2</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="ModalOntology_Routes.html#Routes.distinct_outcomes"><span class="id" title="axiom">distinct_outcomes</span></a> <span class="id" title="var">H2</span>).<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="ModalOntology_Routes.html#Routes"><span class="id" title="module">Routes</span></a>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="examples/Compatibilism_CoffeeTea.v.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

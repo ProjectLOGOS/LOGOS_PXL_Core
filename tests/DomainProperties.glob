@@ -1,0 +1,253 @@
+DIGEST e3de7e18aaa67cf6d6200067deaff618
+FDomainProperties
+R97:103 Coq.Program.Program <> <> lib
+ax 734:735 <> PA
+ax 793:794 <> PB
+ax 854:855 <> PC
+ax 945:950 <> A_to_B
+R956:959 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R954:955 DomainProperties <> PA defax
+R960:961 DomainProperties <> PB defax
+ax 974:979 <> B_to_A
+R985:988 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R983:984 DomainProperties <> PB defax
+R989:990 DomainProperties <> PA defax
+ax 1003:1008 <> A_to_C
+R1014:1017 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1012:1013 DomainProperties <> PA defax
+R1018:1019 DomainProperties <> PC defax
+ax 1032:1037 <> B_to_C
+R1043:1046 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1041:1042 DomainProperties <> PB defax
+R1047:1048 DomainProperties <> PC defax
+mod 1087:1099 <> Compatibilism
+rec 1111:1115 Compatibilism Agent
+proj 1122:1129 Compatibilism agent_id
+R1133:1135 Coq.Init.Datatypes <> nat ind
+def 1153:1155 Compatibilism alt
+R1167:1168 DomainProperties <> PA defax
+binder 1158:1159 <> pA:17
+binder 1161:1163 <> pA':18
+R1190:1193 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R1183:1186 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R1181:1182 DomainProperties <> pA:17 var
+R1187:1189 DomainProperties <> pA':18 var
+R1203:1205 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1194:1199 DomainProperties <> A_to_C defax
+R1201:1202 DomainProperties <> pA:17 var
+R1206:1211 DomainProperties <> A_to_C defax
+R1213:1215 DomainProperties <> pA':18 var
+def 1231:1234 Compatibilism Free
+R1239:1243 DomainProperties Compatibilism Agent rec
+R1250:1251 DomainProperties <> PA defax
+binder 1247:1248 <> pA:19
+R1264:1270 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R1274:1275 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 1271:1273 <> pA':20
+R1276:1278 DomainProperties Compatibilism alt def
+R1280:1281 DomainProperties <> pA:19 var
+R1283:1285 DomainProperties <> pA':20 var
+R1292:1304 DomainProperties Compatibilism <> mod
+mod 1315:1324 <> Empiricism
+rec 1336:1343 Empiricism ObsFrame
+proj 1350:1355 Empiricism obs_id
+R1359:1361 Coq.Init.Datatypes <> nat ind
+rec 1375:1384 Empiricism CoordFrame
+proj 1391:1398 Empiricism coord_id
+R1402:1404 Coq.Init.Datatypes <> nat ind
+def 1422:1431 Empiricism measure_AB
+R1436:1443 DomainProperties Empiricism ObsFrame rec
+binder 1434:1434 <> o:25
+R1450:1451 DomainProperties <> PA defax
+binder 1447:1448 <> pA:26
+R1456:1457 DomainProperties <> PB defax
+R1462:1467 DomainProperties <> A_to_B defax
+R1469:1470 DomainProperties <> pA:26 var
+def 1486:1495 Empiricism measure_AC
+R1500:1507 DomainProperties Empiricism ObsFrame rec
+binder 1498:1498 <> o:27
+R1514:1515 DomainProperties <> PA defax
+binder 1511:1512 <> pA:28
+R1520:1521 DomainProperties <> PC defax
+R1526:1531 DomainProperties <> A_to_C defax
+R1533:1534 DomainProperties <> pA:28 var
+def 1550:1559 Empiricism project_BC
+R1564:1573 DomainProperties Empiricism CoordFrame rec
+binder 1562:1562 <> c:29
+R1580:1581 DomainProperties <> PB defax
+binder 1577:1578 <> pB:30
+R1586:1587 DomainProperties <> PC defax
+R1592:1597 DomainProperties <> B_to_C defax
+R1599:1600 DomainProperties <> pB:30 var
+R1607:1616 DomainProperties Empiricism <> mod
+mod 1627:1639 <> ModalOntology
+def 1655:1660 ModalOntology Access
+R1671:1672 DomainProperties <> PC defax
+binder 1663:1664 <> pC:31
+binder 1666:1667 <> qC:32
+R1690:1696 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R1699:1700 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 1697:1698 <> pA:33
+R1715:1718 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R1710:1712 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1701:1706 DomainProperties <> A_to_C defax
+R1708:1709 DomainProperties <> pA:33 var
+R1713:1714 DomainProperties <> pC:31 var
+R1728:1730 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1719:1724 DomainProperties <> A_to_C defax
+R1726:1727 DomainProperties <> pA:33 var
+R1731:1732 DomainProperties <> qC:32 var
+R1739:1751 DomainProperties ModalOntology <> mod
+ax 1797:1808 <> AB_roundtrip
+R1822:1823 DomainProperties <> PA defax
+binder 1819:1820 <> pA:34
+R1844:1846 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1826:1831 DomainProperties <> B_to_A defax
+R1834:1839 DomainProperties <> A_to_B defax
+R1841:1842 DomainProperties <> pA:34 var
+R1847:1848 DomainProperties <> pA:34 var
+ax 1861:1872 <> BA_roundtrip
+R1886:1887 DomainProperties <> PB defax
+binder 1883:1884 <> pB:37
+R1908:1910 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1890:1895 DomainProperties <> A_to_B defax
+R1898:1903 DomainProperties <> B_to_A defax
+R1905:1906 DomainProperties <> pB:37 var
+R1911:1912 DomainProperties <> pB:37 var
+ax 1925:1932 <> AC_via_B
+R1946:1947 DomainProperties <> PA defax
+binder 1943:1944 <> pA:40
+R1959:1961 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1950:1955 DomainProperties <> A_to_C defax
+R1957:1958 DomainProperties <> pA:40 var
+R1962:1967 DomainProperties <> B_to_C defax
+R1970:1975 DomainProperties <> A_to_B defax
+R1977:1978 DomainProperties <> pA:40 var
+prf 2082:2098 <> prop_AB_roundtrip
+R2104:2105 DomainProperties <> PA defax
+binder 2101:2102 <> pA:43
+R2128:2130 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2110:2115 DomainProperties <> B_to_A defax
+R2118:2123 DomainProperties <> A_to_B defax
+R2125:2126 DomainProperties <> pA:43 var
+R2131:2132 DomainProperties <> pA:43 var
+R2149:2160 DomainProperties <> AB_roundtrip defax
+R2149:2160 DomainProperties <> AB_roundtrip defax
+prf 2240:2253 <> prop_AC_eq_ABC
+R2259:2260 DomainProperties <> PA defax
+binder 2256:2257 <> pA:44
+R2274:2276 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2265:2270 DomainProperties <> A_to_C defax
+R2272:2273 DomainProperties <> pA:44 var
+R2277:2282 DomainProperties <> B_to_C defax
+R2285:2290 DomainProperties <> A_to_B defax
+R2292:2293 DomainProperties <> pA:44 var
+R2311:2318 DomainProperties <> AC_via_B defax
+R2311:2318 DomainProperties <> AC_via_B defax
+prf 2391:2418 <> prop_empiricism_matches_core
+R2423:2441 DomainProperties <> ObsFrame rec
+binder 2421:2421 <> o:45
+R2447:2467 DomainProperties <> CoordFrame rec
+binder 2445:2445 <> c:46
+R2474:2475 DomainProperties <> PA defax
+binder 2471:2472 <> pA:47
+R2508:2510 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2482:2502 DomainProperties <> measure_AC def
+R2504:2504 DomainProperties <> o:45 var
+R2506:2507 DomainProperties <> pA:47 var
+R2511:2531 DomainProperties <> project_BC def
+R2533:2533 DomainProperties <> c:46 var
+R2536:2556 DomainProperties <> measure_AB def
+R2558:2558 DomainProperties <> o:45 var
+R2560:2561 DomainProperties <> pA:47 var
+R2581:2601 DomainProperties <> measure_AC def
+R2604:2624 DomainProperties <> project_BC def
+R2627:2647 DomainProperties <> measure_AB def
+R2659:2666 DomainProperties <> AC_via_B defax
+R2659:2666 DomainProperties <> AC_via_B defax
+ax 2762:2772 <> A_to_C_surj
+R2786:2787 DomainProperties <> PC defax
+binder 2783:2784 <> pC:48
+R2790:2796 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R2802:2803 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R2800:2801 DomainProperties <> PA defax
+binder 2797:2798 <> pA:49
+R2813:2815 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2804:2809 DomainProperties <> A_to_C defax
+R2811:2812 DomainProperties <> pA:49 var
+R2816:2817 DomainProperties <> pC:48 var
+prf 2887:2904 <> prop_access_iff_eq
+R2910:2911 DomainProperties <> PC defax
+binder 2907:2908 <> pC:52
+R2944:2948 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R2918:2937 DomainProperties <> Access def
+R2939:2940 DomainProperties <> pC:52 var
+R2942:2943 DomainProperties <> pC:52 var
+R2951:2953 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2949:2950 DomainProperties <> pC:52 var
+R2954:2955 DomainProperties <> pC:52 var
+R3100:3110 DomainProperties <> A_to_C_surj defax
+R3100:3110 DomainProperties <> A_to_C_surj defax
+prf 3257:3279 <> prop_free_ABA_preserved
+R3284:3302 DomainProperties <> Agent rec
+binder 3282:3282 <> a:53
+R3309:3310 DomainProperties <> PA defax
+binder 3306:3307 <> pA:54
+R3340:3345 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3317:3334 DomainProperties <> Free def
+R3336:3336 DomainProperties <> a:53 var
+R3338:3339 DomainProperties <> pA:54 var
+R3346:3363 DomainProperties <> Free def
+R3365:3365 DomainProperties <> a:53 var
+R3368:3373 DomainProperties <> B_to_A defax
+R3376:3381 DomainProperties <> A_to_B defax
+R3383:3384 DomainProperties <> pA:54 var
+R3422:3438 DomainProperties <> prop_AB_roundtrip thm
+R3422:3438 DomainProperties <> prop_AB_roundtrip thm
+R3422:3438 DomainProperties <> prop_AB_roundtrip thm
+prf 3570:3595 <> prop_bijection_consistency
+R3602:3602 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R3637:3642 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R3677:3677 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+binder 3610:3611 <> pA:55
+R3632:3634 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3614:3619 DomainProperties <> B_to_A defax
+R3622:3627 DomainProperties <> A_to_B defax
+R3629:3630 DomainProperties <> pA:55 var
+R3635:3636 DomainProperties <> pA:55 var
+binder 3650:3651 <> pB:56
+R3672:3674 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3654:3659 DomainProperties <> A_to_B defax
+R3662:3667 DomainProperties <> B_to_A defax
+R3669:3670 DomainProperties <> pB:56 var
+R3675:3676 DomainProperties <> pB:56 var
+R3706:3717 DomainProperties <> AB_roundtrip defax
+R3706:3717 DomainProperties <> AB_roundtrip defax
+R3730:3741 DomainProperties <> BA_roundtrip defax
+R3730:3741 DomainProperties <> BA_roundtrip defax
+prf 3805:3827 <> prop_temporal_coherence
+R3833:3834 DomainProperties <> PA defax
+binder 3830:3831 <> pA:57
+R3851:3856 DomainProperties <> A_to_B defax
+R3858:3859 DomainProperties <> pA:57 var
+binder 3845:3846 <> pB:58
+R3883:3888 DomainProperties <> A_to_C defax
+R3890:3891 DomainProperties <> pA:57 var
+binder 3870:3878 <> pC_direct:59
+R3914:3919 DomainProperties <> B_to_C defax
+R3921:3922 DomainProperties <> pB:58 var
+binder 3902:3909 <> pC_via_B:60
+R3938:3940 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3929:3937 DomainProperties <> pC_direct:59 var
+R3941:3948 DomainProperties <> pC_via_B:60 var
+R3974:3981 DomainProperties <> AC_via_B defax
+R3974:3981 DomainProperties <> AC_via_B defax
+prf 4064:4083 <> prop_modal_reflexive
+R4089:4090 DomainProperties <> PA defax
+binder 4086:4087 <> pA:61
+R4107:4112 DomainProperties <> A_to_C defax
+R4114:4115 DomainProperties <> pA:61 var
+binder 4101:4102 <> pC:62
+R4122:4141 DomainProperties <> Access def
+R4143:4144 DomainProperties <> pC:62 var
+R4146:4147 DomainProperties <> pC:62 var

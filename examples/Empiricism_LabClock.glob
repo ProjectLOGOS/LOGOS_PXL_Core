@@ -1,0 +1,99 @@
+DIGEST ebb9198959dd65773bbd2a10fc4dfebc
+FEmpiricism_LabClock
+R99:105 Coq.Program.Program <> <> lib
+mod 399:406 <> LabClock
+ax 468:469 LabClock PA
+ax 527:528 LabClock PB
+ax 588:589 LabClock PC
+ax 649:654 LabClock A_to_B
+R660:663 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R658:659 Empiricism_LabClock LabClock PA defax
+R664:665 Empiricism_LabClock LabClock PB defax
+ax 678:683 LabClock B_to_A
+R689:692 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R687:688 Empiricism_LabClock LabClock PB defax
+R693:694 Empiricism_LabClock LabClock PA defax
+ax 707:712 LabClock A_to_C
+R718:721 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R716:717 Empiricism_LabClock LabClock PA defax
+R722:723 Empiricism_LabClock LabClock PC defax
+ax 736:741 LabClock B_to_C
+R747:750 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R745:746 Empiricism_LabClock LabClock PB defax
+R751:752 Empiricism_LabClock LabClock PC defax
+rec 793:797 LabClock Frame
+proj 807:814 LabClock location
+proj 844:851 LabClock observer
+R818:820 Coq.Init.Datatypes <> nat ind
+R855:857 Coq.Init.Datatypes <> nat ind
+def 896:904 LabClock lab_frame
+R912:919 Empiricism_LabClock LabClock location proj
+R912:919 Empiricism_LabClock LabClock location proj
+R912:919 Empiricism_LabClock LabClock location proj
+R929:936 Empiricism_LabClock LabClock observer proj
+R929:936 Empiricism_LabClock LabClock observer proj
+def 998:998 LabClock m
+R1003:1007 Empiricism_LabClock LabClock Frame rec
+binder 1001:1001 <> f:18
+R1014:1015 Empiricism_LabClock LabClock PA defax
+binder 1011:1012 <> pA:19
+R1020:1021 Empiricism_LabClock LabClock PB defax
+R1026:1031 Empiricism_LabClock LabClock A_to_B defax
+R1033:1034 Empiricism_LabClock <> pA:19 var
+ax 1148:1154 LabClock pA_slow
+R1158:1159 Empiricism_LabClock LabClock PA defax
+ax 1215:1225 LabClock pB_measured
+R1229:1230 Empiricism_LabClock LabClock PB defax
+ax 1297:1322 LabClock measurement_correspondence
+R1345:1347 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1326:1326 Empiricism_LabClock LabClock m def
+R1328:1336 Empiricism_LabClock LabClock lab_frame def
+R1338:1344 Empiricism_LabClock LabClock pA_slow defax
+R1348:1358 Empiricism_LabClock LabClock pB_measured defax
+ax 1422:1447 LabClock consistent_eternal_mapping
+R1465:1467 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1451:1456 Empiricism_LabClock LabClock A_to_C defax
+R1458:1464 Empiricism_LabClock LabClock pA_slow defax
+R1468:1473 Empiricism_LabClock LabClock B_to_C defax
+R1475:1485 Empiricism_LabClock LabClock pB_measured defax
+prf 1610:1641 LabClock observational_coherence_labclock
+R1662:1664 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1648:1653 Empiricism_LabClock LabClock A_to_C defax
+R1655:1661 Empiricism_LabClock LabClock pA_slow defax
+R1665:1670 Empiricism_LabClock LabClock B_to_C defax
+R1673:1673 Empiricism_LabClock LabClock m def
+R1675:1683 Empiricism_LabClock LabClock lab_frame def
+R1685:1691 Empiricism_LabClock LabClock pA_slow defax
+R1712:1737 Empiricism_LabClock LabClock measurement_correspondence defax
+R1712:1737 Empiricism_LabClock LabClock measurement_correspondence defax
+R1712:1737 Empiricism_LabClock LabClock measurement_correspondence defax
+R1748:1773 Empiricism_LabClock LabClock consistent_eternal_mapping defax
+R1748:1773 Empiricism_LabClock LabClock consistent_eternal_mapping defax
+def 2030:2043 LabClock coherent_frame
+R2048:2052 Empiricism_LabClock LabClock Frame rec
+binder 2046:2046 <> f:28
+binder 2074:2075 <> pA:29
+R2087:2089 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2078:2083 Empiricism_LabClock LabClock A_to_C defax
+R2085:2086 Empiricism_LabClock <> pA:29 var
+R2090:2095 Empiricism_LabClock LabClock B_to_C defax
+R2098:2098 Empiricism_LabClock LabClock m def
+R2100:2100 Empiricism_LabClock <> f:28 var
+R2102:2103 Empiricism_LabClock <> pA:29 var
+ax 2150:2167 LabClock lab_frame_coherent
+R2171:2184 Empiricism_LabClock LabClock coherent_frame def
+R2186:2194 Empiricism_LabClock LabClock lab_frame def
+prf 2206:2223 LabClock specific_coherence
+R2241:2243 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2227:2232 Empiricism_LabClock LabClock A_to_C defax
+R2234:2240 Empiricism_LabClock LabClock pA_slow defax
+R2244:2249 Empiricism_LabClock LabClock B_to_C defax
+R2251:2261 Empiricism_LabClock LabClock pB_measured defax
+R2285:2302 Empiricism_LabClock LabClock lab_frame_coherent defax
+R2304:2310 Empiricism_LabClock LabClock pA_slow defax
+R2285:2302 Empiricism_LabClock LabClock lab_frame_coherent defax
+R2304:2310 Empiricism_LabClock LabClock pA_slow defax
+R2329:2354 Empiricism_LabClock LabClock measurement_correspondence defax
+R2329:2354 Empiricism_LabClock LabClock measurement_correspondence defax
+R2329:2354 Empiricism_LabClock LabClock measurement_correspondence defax
+R2383:2390 Empiricism_LabClock LabClock <> mod

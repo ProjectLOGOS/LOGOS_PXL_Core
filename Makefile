@@ -12,10 +12,14 @@ VFILES := \
   modules/IEL/ChronoPraxis/domains/Compatibilism/CompatibilismTheory.v \
   modules/IEL/ChronoPraxis/domains/Empiricism/UnifiedFieldLogic.v \
   modules/IEL/ChronoPraxis/domains/ModalOntology/ModalCollapse.v \
+  examples/Compatibilism_CoffeeTea.v \
+  examples/Empiricism_LabClock.v \
+  examples/ModalOntology_Routes.v \
   tests/ConstructiveCoreTests.v \
   tests/CompatibilismTests.v \
   tests/EmpiricismTests.v \
-  tests/ModalOntologyTests.v
+  tests/ModalOntologyTests.v \
+  tests/DomainProperties.v
 
 COQMF := _CoqProject
 
@@ -47,5 +51,20 @@ domain-empiricism:
 domain-modal-ontology:
 	coqc modules/IEL/ChronoPraxis/domains/ModalOntology/ModalCollapse.v
 	coqc tests/ModalOntologyTests.v
+
+examples:
+	@echo "=== Building ChronoPraxis Examples ==="
+	coqc examples/Compatibilism_CoffeeTea.v
+	coqc examples/Empiricism_LabClock.v
+	coqc examples/ModalOntology_Routes.v
+	@echo "✅ All examples compile successfully"
+
+docs-html:
+	@echo "Generating HTML docs for examples and tests..."
+	coqdoc --utf8 --toc --index examples/Compatibilism_CoffeeTea.v examples/Empiricism_LabClock.v examples/ModalOntology_Routes.v tests/DomainProperties.v
+	@echo "Moving HTML files to docs/html/"
+	@if not exist docs\\html mkdir docs\\html
+	@move *.html docs\\html\\ 2>nul || echo "HTML files moved"
+	@echo "✅ Generated HTML documentation in docs/html/"
 
 .PHONY: all clean status prove domain-compatibilism domain-empiricism domain-modal-ontology
