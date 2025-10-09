@@ -105,10 +105,9 @@ IEL_FILES := \
   modules/IEL/GnosiPraxis/systems/Systems.v \
   tests/GnosiPraxis/GnosiPraxis_Smoke.v \
   tests/GnosiPraxis/GnosiPraxis_AgentTests.v \
-  modules/IEL/ThemiPraxis/modal/FrameSpec.v \
-  modules/IEL/ThemiPraxis/theorems/NormalBase.v \
-  modules/IEL/ThemiPraxis/theorems/Systems.v \
+  modules/IEL/ThemiPraxis/modal/NormFrames.v \
   modules/IEL/ThemiPraxis/theorems/Conservativity.v \
+  modules/IEL/ThemiPraxis/systems/Systems.v \
   tests/ThemiPraxis/ThemiPraxis_Smoke.v \
   modules/IEL/DynaPraxis/modal/FrameSpec.v \
   modules/IEL/DynaPraxis/theorems/NormalBase.v \

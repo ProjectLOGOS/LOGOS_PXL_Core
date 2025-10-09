@@ -1,4 +1,10 @@
-﻿From Coq Require Import Program Setoids.Setoid.
+From Coq Require Import Program Setoids.Setoid.
+
+(* TODO: Restore full imports once module path resolution is fixed *)
+(* From PXLs Require Import PXLv3. *)
+(* Require Import modules.IEL.ModalPraxis.modal.FrameSpec
+               modules.IEL.ModalPraxis.theorems.NormalBase
+               modules.IEL.ModalPraxis.theorems.DerivedAxioms. *)
 
 (* Standalone definitions for compilation - using PXL canonical model types *)
 Parameter form : Type.
@@ -22,6 +28,8 @@ Parameter provable_necessitation : forall φ, (forall w, forces w φ) -> Prov (B
 Parameter provable_D : Serial -> forall φ, Prov (Impl (Box φ) (Dia φ)).
 Parameter provable_4 : Transitive -> forall φ, Prov (Impl (Box φ) (Box (Box φ))).
 Parameter provable_5 : Euclidean -> forall φ, Prov (Impl (Dia φ) (Box (Dia φ))).
+
+Set Implicit Arguments.
 
 Module ThemiPraxis.
 
@@ -53,15 +61,3 @@ Module ThemiPraxis.
   Proof. intros H φ; destruct H as [Hs Ht He]; change (Prov (Impl (Dia φ) (Box (Dia φ)))); eapply provable_5; eauto. Qed.
 
 End ThemiPraxis.
-
-Module T.
-  Import ThemiPraxis.
-  Lemma k_ok  : K_Frame  -> forall φ ψ, Prov (Impl (O (Impl φ ψ)) (Impl (O φ) (O ψ))).
-  Proof. apply K_axiom. Qed.
-  Lemma d_ok  : KD_Frame -> forall φ, Prov (Impl (O φ) (P φ)).
-  Proof. apply D_axiom. Qed.
-  Lemma d45_4_ok : KD45_Frame -> forall φ, Prov (Impl (O φ) (O (O φ))).
-  Proof. apply Four_axiom. Qed.
-  Lemma d45_5_ok : KD45_Frame -> forall φ, Prov (Impl (P φ) (O (P φ))).
-  Proof. apply Five_axiom. Qed.
-End T.
