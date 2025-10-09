@@ -1,0 +1,36 @@
+{
+  "pillars": {
+    "Teleology": {
+      "iel": "TeloPraxis",
+      "members": [
+        "Will"
+      ]
+    },
+    "Cosmology": {
+      "iel": "CosmoPraxis",
+      "members": [
+        "Immanence"
+      ]
+    },
+    "Theology": {
+      "iel": "TheoPraxis",
+      "members": [
+        "Unity"
+      ]
+    },
+    "Epistemology": {
+      "iel": "GnosiPraxis",
+      "members": [
+        "Truth"
+      ]
+    },
+    "Axiology": {
+      "iel": "Axiopraxis",
+      "members": [
+        "Beauty",
+        "Goodness"
+      ]
+    }
+  },
+  "policy": "Group/First-Order => TheoPraxis; Second-Order => pillar IEL"
+}
