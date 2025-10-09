@@ -7,6 +7,8 @@ Require Import modules.chronopraxis.substrate.ChronoAxioms
                modules.chronopraxis.substrate.ChronoMappings
                modules.chronopraxis.tactics.ChronoTactics.
 
+From PXLs.IEL.Infra.ChronoPraxis Require Import Core.
+
 Module ChronoProofs.
 
 Import ChronoAxioms.
@@ -15,10 +17,10 @@ Import ChronoMappings.
 (* === Core Identity Preservation === *)
 
 (* Temporal mode identity is reflexive *)
-Theorem chi_identity_preservation : forall m : ChronoAxioms.chi, m = m.
+Theorem chi_identity_preservation `{Cap_ChiReflexive ChronoAxioms.chi (@eq ChronoAxioms.chi)} : forall m : ChronoAxioms.chi, m = m.
 Proof.
   intro m.
-  apply ChronoAxioms.ChronoAxioms.chi_reflexivity.
+  apply chi_refl.
 Qed.
 
 (* Proposition identity within temporal modes *)
