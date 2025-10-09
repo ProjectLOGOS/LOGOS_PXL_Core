@@ -20,10 +20,29 @@ Definition can_world := { G : set | mct G }.
 Parameter can_R : can_world -> can_world -> Prop.
 Parameter forces : can_world -> form -> Prop.
 
-(* Forcing relation parameters *)
-Parameter forces_Box : forall w φ, forces w (Box φ) <-> (forall u, can_R w u -> forces u φ).
-Parameter forces_Dia : forall w φ, forces w (Dia φ) <-> (exists u, can_R w u /\ forces u φ).
-Parameter forces_Impl : forall w φ ψ, forces w (Impl φ ψ) <-> (forces w φ -> forces w ψ).
+(* Modal operator capabilities *)
+Class Cap_ForcesBox (W:Type) (R:W->W->Prop) (forces: W->Prop->Prop) : Prop :=
+  { forces_box : forall w φ, forces w (Box φ) <-> (forall u, R w u -> forces u φ) }.
+
+Class Cap_ForcesDia (W:Type) (R:W->W->Prop) (forces: W->Prop->Prop) : Prop :=
+  { forces_dia : forall w φ, forces w (Dia φ) <-> (exists u, R w u /\ forces u φ) }.
+
+Class Cap_ForcesImpl (W:Type) (R:W->W->Prop) (forces: W->Prop->Prop) : Prop :=
+  { forces_impl : forall w φ ψ, forces w (Impl φ ψ) <-> (forces w φ -> forces w ψ) }.
+
+(* Forcing relation parameters - replaced by instances *)
+Global Instance CapForcesBox_param : Cap_ForcesBox can_world can_R forces :=
+  { forces_box := fun w φ => forces_Box w φ }.
+
+Global Instance CapForcesDia_param : Cap_ForcesDia can_world can_R forces :=
+  { forces_dia := fun w φ => forces_Dia w φ }.
+
+Global Instance CapForcesImpl_param : Cap_ForcesImpl can_world can_R forces :=
+  { forces_impl := fun w φ ψ => forces_Impl w φ ψ }.
+
+(* Parameter forces_Box : forall w φ, forces w (Box φ) <-> (forall u, can_R w u -> forces u φ). *)
+(* Parameter forces_Dia : forall w φ, forces w (Dia φ) <-> (exists u, can_R w u /\ forces u φ). *)
+(* Parameter forces_Impl : forall w φ ψ, forces w (Impl φ ψ) <-> (forces w φ -> forces w ψ). *)
 
 (* Flags for frame laws - each can be toggled independently *)
 Class Serial     : Prop := serial_R     : forall w, exists u, can_R w u.
