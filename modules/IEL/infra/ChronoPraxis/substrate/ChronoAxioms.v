@@ -13,7 +13,7 @@ Inductive chi : Type :=
 (* === Temporal Mode Properties === *)
 
 (* Mode reflexivity - each temporal mode is self-identical *)
-Axiom chi_reflexivity : forall m : chi, m = m.
+(* Removed: Axiom chi_reflexivity : forall m : chi, m = m. *)
 
 (* Mode distinction - temporal modes are ontologically distinct *)
 Axiom chi_distinction : chi_A <> chi_B /\ chi_B <> chi_C /\ chi_A <> chi_C.
