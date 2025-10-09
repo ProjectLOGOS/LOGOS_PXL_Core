@@ -1,0 +1,1034 @@
+DIGEST 2b1f70bf1147e8e9dd72af5de455cc7b
+FOverlayEquivalenceTests
+R24:30 Coq.Program.Program <> <> lib
+R32:45 Coq.Setoids.Setoid <> <> lib
+ax 117:120 <> form
+ax 140:143 <> Prov
+R151:154 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R147:150 OverlayEquivalenceTests <> form defax
+ax 171:173 <> Box
+R181:184 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R177:180 OverlayEquivalenceTests <> form defax
+R185:188 OverlayEquivalenceTests <> form defax
+ax 201:203 <> Dia
+R211:214 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R207:210 OverlayEquivalenceTests <> form defax
+R215:218 OverlayEquivalenceTests <> form defax
+ax 231:234 <> Impl
+R242:245 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R238:241 OverlayEquivalenceTests <> form defax
+R250:253 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R246:249 OverlayEquivalenceTests <> form defax
+R254:257 OverlayEquivalenceTests <> form defax
+ax 270:273 <> Atom
+R280:283 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R277:279 Coq.Init.Datatypes <> nat ind
+R284:287 OverlayEquivalenceTests <> form defax
+def 302:304 <> set
+R313:316 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R309:312 OverlayEquivalenceTests <> form defax
+ax 333:335 <> mct
+R342:345 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R339:341 OverlayEquivalenceTests <> set def
+def 363:371 <> can_world
+R376:377 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R379:381 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R385:387 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R393:394 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R382:384 OverlayEquivalenceTests <> set def
+binder 378:378 <> G:15
+R388:390 OverlayEquivalenceTests <> mct defax
+R392:392 OverlayEquivalenceTests <> G:15 var
+ax 407:411 <> can_R
+R424:427 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R415:423 OverlayEquivalenceTests <> can_world def
+R437:440 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R428:436 OverlayEquivalenceTests <> can_world def
+ax 457:462 <> forces
+R475:478 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R466:474 OverlayEquivalenceTests <> can_world def
+R483:486 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R479:482 OverlayEquivalenceTests <> form defax
+mod 540:541 <> S4
+ind 552:560 S4 Reflexive
+constr 572:582 S4 reflexive_R
+rec 552:560 S4 Reflexive
+proj 572:582 S4 reflexive_R
+binder 593:593 <> w:21
+R596:600 OverlayEquivalenceTests <> can_R defax
+R602:602 OverlayEquivalenceTests <> w:21 var
+R604:604 OverlayEquivalenceTests <> w:21 var
+ind 615:624 S4 Transitive
+constr 636:647 S4 transitive_R
+rec 615:624 S4 Transitive
+proj 636:647 S4 transitive_R
+binder 658:658 <> w:24
+binder 660:660 <> u:25
+binder 662:662 <> v:26
+R674:677 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R665:669 OverlayEquivalenceTests <> can_R defax
+R671:671 OverlayEquivalenceTests <> w:24 var
+R673:673 OverlayEquivalenceTests <> u:25 var
+R687:690 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R678:682 OverlayEquivalenceTests <> can_R defax
+R684:684 OverlayEquivalenceTests <> u:25 var
+R686:686 OverlayEquivalenceTests <> v:26 var
+R691:695 OverlayEquivalenceTests <> can_R defax
+R697:697 OverlayEquivalenceTests <> w:24 var
+R699:699 OverlayEquivalenceTests <> v:26 var
+R706:707 OverlayEquivalenceTests S4 <> mod
+mod 718:719 <> S5
+ind 730:738 S5 Reflexive
+constr 750:760 S5 reflexive_R
+rec 730:738 S5 Reflexive
+proj 750:760 S5 reflexive_R
+binder 771:771 <> w:29
+R774:778 OverlayEquivalenceTests <> can_R defax
+R780:780 OverlayEquivalenceTests <> w:29 var
+R782:782 OverlayEquivalenceTests <> w:29 var
+ind 793:801 S5 Symmetric
+constr 813:823 S5 symmetric_R
+rec 793:801 S5 Symmetric
+proj 813:823 S5 symmetric_R
+binder 834:834 <> w:32
+binder 836:836 <> u:33
+R848:851 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R839:843 OverlayEquivalenceTests <> can_R defax
+R845:845 OverlayEquivalenceTests <> w:32 var
+R847:847 OverlayEquivalenceTests <> u:33 var
+R852:856 OverlayEquivalenceTests <> can_R defax
+R858:858 OverlayEquivalenceTests <> u:33 var
+R860:860 OverlayEquivalenceTests <> w:32 var
+ind 871:880 S5 Transitive
+constr 892:903 S5 transitive_R
+rec 871:880 S5 Transitive
+proj 892:903 S5 transitive_R
+binder 914:914 <> w:36
+binder 916:916 <> u:37
+binder 918:918 <> v:38
+R930:933 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R921:925 OverlayEquivalenceTests <> can_R defax
+R927:927 OverlayEquivalenceTests <> w:36 var
+R929:929 OverlayEquivalenceTests <> u:37 var
+R943:946 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R934:938 OverlayEquivalenceTests <> can_R defax
+R940:940 OverlayEquivalenceTests <> u:37 var
+R942:942 OverlayEquivalenceTests <> v:38 var
+R947:951 OverlayEquivalenceTests <> can_R defax
+R953:953 OverlayEquivalenceTests <> w:36 var
+R955:955 OverlayEquivalenceTests <> v:38 var
+R962:963 OverlayEquivalenceTests S5 <> mod
+ind 1005:1013 <> Reflexive
+constr 1026:1036 <> reflexive_R
+rec 1005:1013 <> Reflexive
+proj 1026:1036 <> reflexive_R
+binder 1048:1048 <> w:41
+R1051:1055 OverlayEquivalenceTests <> can_R defax
+R1057:1057 OverlayEquivalenceTests <> w:41 var
+R1059:1059 OverlayEquivalenceTests <> w:41 var
+ind 1068:1076 <> Symmetric
+constr 1089:1099 <> symmetric_R
+rec 1068:1076 <> Symmetric
+proj 1089:1099 <> symmetric_R
+binder 1111:1111 <> w:44
+binder 1113:1113 <> u:45
+R1125:1128 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1116:1120 OverlayEquivalenceTests <> can_R defax
+R1122:1122 OverlayEquivalenceTests <> w:44 var
+R1124:1124 OverlayEquivalenceTests <> u:45 var
+R1129:1133 OverlayEquivalenceTests <> can_R defax
+R1135:1135 OverlayEquivalenceTests <> u:45 var
+R1137:1137 OverlayEquivalenceTests <> w:44 var
+ind 1146:1155 <> Transitive
+constr 1167:1178 <> transitive_R
+rec 1146:1155 <> Transitive
+proj 1167:1178 <> transitive_R
+binder 1189:1189 <> w:48
+binder 1191:1191 <> u:49
+binder 1193:1193 <> v:50
+R1205:1208 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1196:1200 OverlayEquivalenceTests <> can_R defax
+R1202:1202 OverlayEquivalenceTests <> w:48 var
+R1204:1204 OverlayEquivalenceTests <> u:49 var
+R1218:1221 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1209:1213 OverlayEquivalenceTests <> can_R defax
+R1215:1215 OverlayEquivalenceTests <> u:49 var
+R1217:1217 OverlayEquivalenceTests <> v:50 var
+R1222:1226 OverlayEquivalenceTests <> can_R defax
+R1228:1228 OverlayEquivalenceTests <> w:48 var
+R1230:1230 OverlayEquivalenceTests <> v:50 var
+ax 1271:1280 <> provable_K
+binder 1291:1292 <> φ:52
+binder 1294:1295 <> ψ:53
+R1298:1301 OverlayEquivalenceTests <> Prov defax
+R1304:1307 OverlayEquivalenceTests <> Impl defax
+R1310:1312 OverlayEquivalenceTests <> Box defax
+R1315:1318 OverlayEquivalenceTests <> Impl defax
+R1320:1321 OverlayEquivalenceTests <> φ:52 var
+R1323:1324 OverlayEquivalenceTests <> ψ:53 var
+R1329:1332 OverlayEquivalenceTests <> Impl defax
+R1335:1337 OverlayEquivalenceTests <> Box defax
+R1339:1340 OverlayEquivalenceTests <> φ:52 var
+R1344:1346 OverlayEquivalenceTests <> Box defax
+R1348:1349 OverlayEquivalenceTests <> ψ:53 var
+ax 1365:1386 <> provable_necessitation
+binder 1397:1398 <> φ:56
+R1401:1401 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1423:1427 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 1409:1409 <> w:57
+R1412:1417 OverlayEquivalenceTests <> forces defax
+R1419:1419 OverlayEquivalenceTests <> w:57 var
+R1421:1422 OverlayEquivalenceTests <> φ:56 var
+R1428:1431 OverlayEquivalenceTests <> Prov defax
+R1434:1436 OverlayEquivalenceTests <> Box defax
+R1438:1439 OverlayEquivalenceTests <> φ:56 var
+ax 1453:1462 <> provable_T
+R1481:1489 OverlayEquivalenceTests <> Reflexive class
+binder 1474:1478 <> Hrefl:60
+R1500:1509 OverlayEquivalenceTests <> Transitive class
+binder 1493:1497 <> Htran:61
+binder 1512:1513 <> φ:62
+R1516:1519 OverlayEquivalenceTests <> Prov defax
+R1522:1525 OverlayEquivalenceTests <> Impl defax
+R1528:1530 OverlayEquivalenceTests <> Box defax
+R1532:1533 OverlayEquivalenceTests <> φ:62 var
+R1536:1537 OverlayEquivalenceTests <> φ:62 var
+ax 1551:1560 <> provable_4
+R1579:1587 OverlayEquivalenceTests <> Reflexive class
+binder 1572:1576 <> Hrefl:65
+R1598:1607 OverlayEquivalenceTests <> Transitive class
+binder 1591:1595 <> Htran:66
+binder 1610:1611 <> φ:67
+R1614:1617 OverlayEquivalenceTests <> Prov defax
+R1620:1623 OverlayEquivalenceTests <> Impl defax
+R1626:1628 OverlayEquivalenceTests <> Box defax
+R1630:1631 OverlayEquivalenceTests <> φ:67 var
+R1635:1637 OverlayEquivalenceTests <> Box defax
+R1640:1642 OverlayEquivalenceTests <> Box defax
+R1644:1645 OverlayEquivalenceTests <> φ:67 var
+ax 1661:1670 <> provable_B
+R1688:1696 OverlayEquivalenceTests <> Symmetric class
+binder 1682:1685 <> Hsym:70
+R1707:1716 OverlayEquivalenceTests <> Transitive class
+binder 1700:1704 <> Htran:71
+R1727:1735 OverlayEquivalenceTests <> Reflexive class
+binder 1720:1724 <> Hrefl:72
+binder 1738:1739 <> φ:73
+R1742:1745 OverlayEquivalenceTests <> Prov defax
+R1748:1751 OverlayEquivalenceTests <> Impl defax
+R1753:1754 OverlayEquivalenceTests <> φ:73 var
+R1757:1759 OverlayEquivalenceTests <> Box defax
+R1762:1764 OverlayEquivalenceTests <> Dia defax
+R1766:1767 OverlayEquivalenceTests <> φ:73 var
+ax 1783:1792 <> provable_5
+R1810:1818 OverlayEquivalenceTests <> Symmetric class
+binder 1804:1807 <> Hsym:76
+R1829:1838 OverlayEquivalenceTests <> Transitive class
+binder 1822:1826 <> Htran:77
+R1849:1857 OverlayEquivalenceTests <> Reflexive class
+binder 1842:1846 <> Hrefl:78
+binder 1860:1861 <> φ:79
+R1864:1867 OverlayEquivalenceTests <> Prov defax
+R1870:1873 OverlayEquivalenceTests <> Impl defax
+R1876:1878 OverlayEquivalenceTests <> Dia defax
+R1880:1881 OverlayEquivalenceTests <> φ:79 var
+R1885:1887 OverlayEquivalenceTests <> Box defax
+R1890:1892 OverlayEquivalenceTests <> Dia defax
+R1894:1895 OverlayEquivalenceTests <> φ:79 var
+ax 1965:1985 <> S4_T_from_ModalPraxis
+R2005:2016 OverlayEquivalenceTests <> Reflexive class
+binder 1997:2001 <> Hrefl:82
+R2028:2040 OverlayEquivalenceTests <> Transitive class
+binder 2020:2024 <> Htran:83
+binder 2043:2044 <> φ:84
+R2047:2050 OverlayEquivalenceTests <> Prov defax
+R2053:2056 OverlayEquivalenceTests <> Impl defax
+R2059:2061 OverlayEquivalenceTests <> Box defax
+R2063:2064 OverlayEquivalenceTests <> φ:84 var
+R2067:2068 OverlayEquivalenceTests <> φ:84 var
+ax 2082:2102 <> S4_4_from_ModalPraxis
+R2122:2133 OverlayEquivalenceTests <> Reflexive class
+binder 2114:2118 <> Hrefl:87
+R2145:2157 OverlayEquivalenceTests <> Transitive class
+binder 2137:2141 <> Htran:88
+binder 2160:2161 <> φ:89
+R2164:2167 OverlayEquivalenceTests <> Prov defax
+R2170:2173 OverlayEquivalenceTests <> Impl defax
+R2176:2178 OverlayEquivalenceTests <> Box defax
+R2180:2181 OverlayEquivalenceTests <> φ:89 var
+R2185:2187 OverlayEquivalenceTests <> Box defax
+R2190:2192 OverlayEquivalenceTests <> Box defax
+R2194:2195 OverlayEquivalenceTests <> φ:89 var
+ax 2211:2231 <> S4_K_from_ModalPraxis
+R2251:2262 OverlayEquivalenceTests <> Reflexive class
+binder 2243:2247 <> Hrefl:92
+R2274:2286 OverlayEquivalenceTests <> Transitive class
+binder 2266:2270 <> Htran:93
+binder 2289:2290 <> φ:94
+binder 2292:2293 <> ψ:95
+R2296:2299 OverlayEquivalenceTests <> Prov defax
+R2302:2305 OverlayEquivalenceTests <> Impl defax
+R2308:2310 OverlayEquivalenceTests <> Box defax
+R2313:2316 OverlayEquivalenceTests <> Impl defax
+R2318:2319 OverlayEquivalenceTests <> φ:94 var
+R2321:2322 OverlayEquivalenceTests <> ψ:95 var
+R2327:2330 OverlayEquivalenceTests <> Impl defax
+R2333:2335 OverlayEquivalenceTests <> Box defax
+R2337:2338 OverlayEquivalenceTests <> φ:94 var
+R2342:2344 OverlayEquivalenceTests <> Box defax
+R2346:2347 OverlayEquivalenceTests <> ψ:95 var
+ax 2363:2385 <> S4_Nec_from_ModalPraxis
+R2405:2416 OverlayEquivalenceTests <> Reflexive class
+binder 2397:2401 <> Hrefl:98
+R2428:2440 OverlayEquivalenceTests <> Transitive class
+binder 2420:2424 <> Htran:99
+binder 2443:2444 <> φ:100
+R2447:2447 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2469:2473 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 2455:2455 <> w:101
+R2458:2463 OverlayEquivalenceTests <> forces defax
+R2465:2465 OverlayEquivalenceTests <> w:101 var
+R2467:2468 OverlayEquivalenceTests <> φ:100 var
+R2474:2477 OverlayEquivalenceTests <> Prov defax
+R2480:2482 OverlayEquivalenceTests <> Box defax
+R2484:2485 OverlayEquivalenceTests <> φ:100 var
+ax 2500:2520 <> S5_B_from_ModalPraxis
+R2540:2551 OverlayEquivalenceTests <> Reflexive class
+binder 2532:2536 <> Hrefl:104
+R2562:2573 OverlayEquivalenceTests <> Symmetric class
+binder 2555:2558 <> Hsym:105
+R2585:2597 OverlayEquivalenceTests <> Transitive class
+binder 2577:2581 <> Htran:106
+binder 2600:2601 <> φ:107
+R2604:2607 OverlayEquivalenceTests <> Prov defax
+R2610:2613 OverlayEquivalenceTests <> Impl defax
+R2615:2616 OverlayEquivalenceTests <> φ:107 var
+R2619:2621 OverlayEquivalenceTests <> Box defax
+R2624:2626 OverlayEquivalenceTests <> Dia defax
+R2628:2629 OverlayEquivalenceTests <> φ:107 var
+ax 2645:2665 <> S5_5_from_ModalPraxis
+R2685:2696 OverlayEquivalenceTests <> Reflexive class
+binder 2677:2681 <> Hrefl:110
+R2707:2718 OverlayEquivalenceTests <> Symmetric class
+binder 2700:2703 <> Hsym:111
+R2730:2742 OverlayEquivalenceTests <> Transitive class
+binder 2722:2726 <> Htran:112
+binder 2745:2746 <> φ:113
+R2749:2752 OverlayEquivalenceTests <> Prov defax
+R2755:2758 OverlayEquivalenceTests <> Impl defax
+R2761:2763 OverlayEquivalenceTests <> Dia defax
+R2765:2766 OverlayEquivalenceTests <> φ:113 var
+R2770:2772 OverlayEquivalenceTests <> Box defax
+R2775:2777 OverlayEquivalenceTests <> Dia defax
+R2779:2780 OverlayEquivalenceTests <> φ:113 var
+ax 2796:2816 <> S5_T_from_ModalPraxis
+R2836:2847 OverlayEquivalenceTests <> Reflexive class
+binder 2828:2832 <> Hrefl:116
+R2858:2869 OverlayEquivalenceTests <> Symmetric class
+binder 2851:2854 <> Hsym:117
+R2881:2893 OverlayEquivalenceTests <> Transitive class
+binder 2873:2877 <> Htran:118
+binder 2896:2897 <> φ:119
+R2900:2903 OverlayEquivalenceTests <> Prov defax
+R2906:2909 OverlayEquivalenceTests <> Impl defax
+R2912:2914 OverlayEquivalenceTests <> Box defax
+R2916:2917 OverlayEquivalenceTests <> φ:119 var
+R2920:2921 OverlayEquivalenceTests <> φ:119 var
+ax 2935:2955 <> S5_4_from_ModalPraxis
+R2975:2986 OverlayEquivalenceTests <> Reflexive class
+binder 2967:2971 <> Hrefl:122
+R2997:3008 OverlayEquivalenceTests <> Symmetric class
+binder 2990:2993 <> Hsym:123
+R3020:3032 OverlayEquivalenceTests <> Transitive class
+binder 3012:3016 <> Htran:124
+binder 3035:3036 <> φ:125
+R3039:3042 OverlayEquivalenceTests <> Prov defax
+R3045:3048 OverlayEquivalenceTests <> Impl defax
+R3051:3053 OverlayEquivalenceTests <> Box defax
+R3055:3056 OverlayEquivalenceTests <> φ:125 var
+R3060:3062 OverlayEquivalenceTests <> Box defax
+R3065:3067 OverlayEquivalenceTests <> Box defax
+R3069:3070 OverlayEquivalenceTests <> φ:125 var
+ax 3086:3106 <> S5_K_from_ModalPraxis
+R3126:3137 OverlayEquivalenceTests <> Reflexive class
+binder 3118:3122 <> Hrefl:128
+R3148:3159 OverlayEquivalenceTests <> Symmetric class
+binder 3141:3144 <> Hsym:129
+R3171:3183 OverlayEquivalenceTests <> Transitive class
+binder 3163:3167 <> Htran:130
+binder 3186:3187 <> φ:131
+binder 3189:3190 <> ψ:132
+R3193:3196 OverlayEquivalenceTests <> Prov defax
+R3199:3202 OverlayEquivalenceTests <> Impl defax
+R3205:3207 OverlayEquivalenceTests <> Box defax
+R3210:3213 OverlayEquivalenceTests <> Impl defax
+R3215:3216 OverlayEquivalenceTests <> φ:131 var
+R3218:3219 OverlayEquivalenceTests <> ψ:132 var
+R3224:3227 OverlayEquivalenceTests <> Impl defax
+R3230:3232 OverlayEquivalenceTests <> Box defax
+R3234:3235 OverlayEquivalenceTests <> φ:131 var
+R3239:3241 OverlayEquivalenceTests <> Box defax
+R3243:3244 OverlayEquivalenceTests <> ψ:132 var
+ax 3260:3282 <> S5_Nec_from_ModalPraxis
+R3302:3313 OverlayEquivalenceTests <> Reflexive class
+binder 3294:3298 <> Hrefl:135
+R3324:3335 OverlayEquivalenceTests <> Symmetric class
+binder 3317:3320 <> Hsym:136
+R3347:3359 OverlayEquivalenceTests <> Transitive class
+binder 3339:3343 <> Htran:137
+binder 3362:3363 <> φ:138
+R3366:3366 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3388:3392 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 3374:3374 <> w:139
+R3377:3382 OverlayEquivalenceTests <> forces defax
+R3384:3384 OverlayEquivalenceTests <> w:139 var
+R3386:3387 OverlayEquivalenceTests <> φ:138 var
+R3393:3396 OverlayEquivalenceTests <> Prov defax
+R3399:3401 OverlayEquivalenceTests <> Box defax
+R3403:3404 OverlayEquivalenceTests <> φ:138 var
+sec 3918:3937 <> S4_Integration_Tests
+var  3951:3955 S4_Integration_Tests Hrefl
+var  3974:3978 S4_Integration_Tests Htran
+R3959:3970 OverlayEquivalenceTests <> Reflexive class
+R3982:3994 OverlayEquivalenceTests <> Transitive class
+def 4057:4076 <> test_S4_T_derivation
+binder 4087:4088 <> φ:144
+R4091:4094 OverlayEquivalenceTests <> Prov defax
+R4097:4100 OverlayEquivalenceTests <> Impl defax
+R4103:4105 OverlayEquivalenceTests <> Box defax
+R4107:4108 OverlayEquivalenceTests <> φ:144 var
+R4111:4112 OverlayEquivalenceTests <> φ:144 var
+R4142:4162 OverlayEquivalenceTests <> S4_T_from_ModalPraxis defax
+R4164:4168 OverlayEquivalenceTests <> S4_Integration_Tests.Hrefl var
+R4170:4174 OverlayEquivalenceTests <> S4_Integration_Tests.Htran var
+R4142:4162 OverlayEquivalenceTests <> S4_T_from_ModalPraxis defax
+R4164:4168 OverlayEquivalenceTests <> S4_Integration_Tests.Hrefl var
+R4170:4174 OverlayEquivalenceTests <> S4_Integration_Tests.Htran var
+def 4242:4261 <> test_S4_4_derivation
+binder 4272:4273 <> φ:145
+R4276:4279 OverlayEquivalenceTests <> Prov defax
+R4282:4285 OverlayEquivalenceTests <> Impl defax
+R4288:4290 OverlayEquivalenceTests <> Box defax
+R4292:4293 OverlayEquivalenceTests <> φ:145 var
+R4297:4299 OverlayEquivalenceTests <> Box defax
+R4302:4304 OverlayEquivalenceTests <> Box defax
+R4306:4307 OverlayEquivalenceTests <> φ:145 var
+R4339:4359 OverlayEquivalenceTests <> S4_4_from_ModalPraxis defax
+R4361:4365 OverlayEquivalenceTests <> S4_Integration_Tests.Hrefl var
+R4367:4371 OverlayEquivalenceTests <> S4_Integration_Tests.Htran var
+R4339:4359 OverlayEquivalenceTests <> S4_4_from_ModalPraxis defax
+R4361:4365 OverlayEquivalenceTests <> S4_Integration_Tests.Hrefl var
+R4367:4371 OverlayEquivalenceTests <> S4_Integration_Tests.Htran var
+def 4439:4458 <> test_S4_K_derivation
+binder 4469:4470 <> φ:146
+binder 4472:4473 <> ψ:147
+R4476:4479 OverlayEquivalenceTests <> Prov defax
+R4482:4485 OverlayEquivalenceTests <> Impl defax
+R4488:4490 OverlayEquivalenceTests <> Box defax
+R4493:4496 OverlayEquivalenceTests <> Impl defax
+R4498:4499 OverlayEquivalenceTests <> φ:146 var
+R4501:4502 OverlayEquivalenceTests <> ψ:147 var
+R4507:4510 OverlayEquivalenceTests <> Impl defax
+R4513:4515 OverlayEquivalenceTests <> Box defax
+R4517:4518 OverlayEquivalenceTests <> φ:146 var
+R4522:4524 OverlayEquivalenceTests <> Box defax
+R4526:4527 OverlayEquivalenceTests <> ψ:147 var
+R4563:4583 OverlayEquivalenceTests <> S4_K_from_ModalPraxis defax
+R4585:4589 OverlayEquivalenceTests <> S4_Integration_Tests.Hrefl var
+R4591:4595 OverlayEquivalenceTests <> S4_Integration_Tests.Htran var
+R4563:4583 OverlayEquivalenceTests <> S4_K_from_ModalPraxis defax
+R4585:4589 OverlayEquivalenceTests <> S4_Integration_Tests.Hrefl var
+R4591:4595 OverlayEquivalenceTests <> S4_Integration_Tests.Htran var
+def 4669:4690 <> test_S4_Nec_derivation
+binder 4701:4702 <> φ:148
+R4705:4705 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4727:4731 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 4713:4713 <> w:149
+R4716:4721 OverlayEquivalenceTests <> forces defax
+R4723:4723 OverlayEquivalenceTests <> w:149 var
+R4725:4726 OverlayEquivalenceTests <> φ:148 var
+R4732:4735 OverlayEquivalenceTests <> Prov defax
+R4738:4740 OverlayEquivalenceTests <> Box defax
+R4742:4743 OverlayEquivalenceTests <> φ:148 var
+R4776:4798 OverlayEquivalenceTests <> S4_Nec_from_ModalPraxis defax
+R4800:4804 OverlayEquivalenceTests <> S4_Integration_Tests.Hrefl var
+R4806:4810 OverlayEquivalenceTests <> S4_Integration_Tests.Htran var
+R4776:4798 OverlayEquivalenceTests <> S4_Nec_from_ModalPraxis defax
+R4800:4804 OverlayEquivalenceTests <> S4_Integration_Tests.Hrefl var
+R4806:4810 OverlayEquivalenceTests <> S4_Integration_Tests.Htran var
+def 4901:4925 <> test_S4_frame_consistency
+binder 4941:4941 <> w:150
+R4953:4956 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4944:4948 OverlayEquivalenceTests <> can_R defax
+R4950:4950 OverlayEquivalenceTests <> w:150 var
+R4952:4952 OverlayEquivalenceTests <> w:150 var
+R4957:4962 OverlayEquivalenceTests <> forces defax
+R4964:4964 OverlayEquivalenceTests <> w:150 var
+R4967:4970 OverlayEquivalenceTests <> Impl defax
+R4973:4975 OverlayEquivalenceTests <> Box defax
+R4978:4981 OverlayEquivalenceTests <> Atom defax
+R4988:4991 OverlayEquivalenceTests <> Atom defax
+R5180:5199 OverlayEquivalenceTests S4_Integration_Tests <> sec
+sec 5255:5274 <> S5_Integration_Tests
+var  5288:5292 S5_Integration_Tests Hrefl
+var  5311:5314 S5_Integration_Tests Hsym
+var  5333:5337 S5_Integration_Tests Htran
+R5296:5307 OverlayEquivalenceTests <> Reflexive class
+R5318:5329 OverlayEquivalenceTests <> Symmetric class
+R5341:5353 OverlayEquivalenceTests <> Transitive class
+def 5416:5435 <> test_S5_B_derivation
+binder 5446:5447 <> φ:154
+R5450:5453 OverlayEquivalenceTests <> Prov defax
+R5456:5459 OverlayEquivalenceTests <> Impl defax
+R5461:5462 OverlayEquivalenceTests <> φ:154 var
+R5465:5467 OverlayEquivalenceTests <> Box defax
+R5470:5472 OverlayEquivalenceTests <> Dia defax
+R5474:5475 OverlayEquivalenceTests <> φ:154 var
+R5507:5527 OverlayEquivalenceTests <> S5_B_from_ModalPraxis defax
+R5529:5533 OverlayEquivalenceTests <> S5_Integration_Tests.Hrefl var
+R5535:5538 OverlayEquivalenceTests <> S5_Integration_Tests.Hsym var
+R5540:5544 OverlayEquivalenceTests <> S5_Integration_Tests.Htran var
+R5507:5527 OverlayEquivalenceTests <> S5_B_from_ModalPraxis defax
+R5529:5533 OverlayEquivalenceTests <> S5_Integration_Tests.Hrefl var
+R5535:5538 OverlayEquivalenceTests <> S5_Integration_Tests.Hsym var
+R5540:5544 OverlayEquivalenceTests <> S5_Integration_Tests.Htran var
+def 5612:5631 <> test_S5_5_derivation
+binder 5642:5643 <> φ:155
+R5646:5649 OverlayEquivalenceTests <> Prov defax
+R5652:5655 OverlayEquivalenceTests <> Impl defax
+R5658:5660 OverlayEquivalenceTests <> Dia defax
+R5662:5663 OverlayEquivalenceTests <> φ:155 var
+R5667:5669 OverlayEquivalenceTests <> Box defax
+R5672:5674 OverlayEquivalenceTests <> Dia defax
+R5676:5677 OverlayEquivalenceTests <> φ:155 var
+R5709:5729 OverlayEquivalenceTests <> S5_5_from_ModalPraxis defax
+R5731:5735 OverlayEquivalenceTests <> S5_Integration_Tests.Hrefl var
+R5737:5740 OverlayEquivalenceTests <> S5_Integration_Tests.Hsym var
+R5742:5746 OverlayEquivalenceTests <> S5_Integration_Tests.Htran var
+R5709:5729 OverlayEquivalenceTests <> S5_5_from_ModalPraxis defax
+R5731:5735 OverlayEquivalenceTests <> S5_Integration_Tests.Hrefl var
+R5737:5740 OverlayEquivalenceTests <> S5_Integration_Tests.Hsym var
+R5742:5746 OverlayEquivalenceTests <> S5_Integration_Tests.Htran var
+def 5814:5833 <> test_S5_T_derivation
+binder 5844:5845 <> φ:156
+R5848:5851 OverlayEquivalenceTests <> Prov defax
+R5854:5857 OverlayEquivalenceTests <> Impl defax
+R5860:5862 OverlayEquivalenceTests <> Box defax
+R5864:5865 OverlayEquivalenceTests <> φ:156 var
+R5868:5869 OverlayEquivalenceTests <> φ:156 var
+R5899:5919 OverlayEquivalenceTests <> S5_T_from_ModalPraxis defax
+R5921:5925 OverlayEquivalenceTests <> S5_Integration_Tests.Hrefl var
+R5927:5930 OverlayEquivalenceTests <> S5_Integration_Tests.Hsym var
+R5932:5936 OverlayEquivalenceTests <> S5_Integration_Tests.Htran var
+R5899:5919 OverlayEquivalenceTests <> S5_T_from_ModalPraxis defax
+R5921:5925 OverlayEquivalenceTests <> S5_Integration_Tests.Hrefl var
+R5927:5930 OverlayEquivalenceTests <> S5_Integration_Tests.Hsym var
+R5932:5936 OverlayEquivalenceTests <> S5_Integration_Tests.Htran var
+def 6004:6023 <> test_S5_4_derivation
+binder 6034:6035 <> φ:157
+R6038:6041 OverlayEquivalenceTests <> Prov defax
+R6044:6047 OverlayEquivalenceTests <> Impl defax
+R6050:6052 OverlayEquivalenceTests <> Box defax
+R6054:6055 OverlayEquivalenceTests <> φ:157 var
+R6059:6061 OverlayEquivalenceTests <> Box defax
+R6064:6066 OverlayEquivalenceTests <> Box defax
+R6068:6069 OverlayEquivalenceTests <> φ:157 var
+R6101:6121 OverlayEquivalenceTests <> S5_4_from_ModalPraxis defax
+R6123:6127 OverlayEquivalenceTests <> S5_Integration_Tests.Hrefl var
+R6129:6132 OverlayEquivalenceTests <> S5_Integration_Tests.Hsym var
+R6134:6138 OverlayEquivalenceTests <> S5_Integration_Tests.Htran var
+R6101:6121 OverlayEquivalenceTests <> S5_4_from_ModalPraxis defax
+R6123:6127 OverlayEquivalenceTests <> S5_Integration_Tests.Hrefl var
+R6129:6132 OverlayEquivalenceTests <> S5_Integration_Tests.Hsym var
+R6134:6138 OverlayEquivalenceTests <> S5_Integration_Tests.Htran var
+def 6206:6225 <> test_S5_K_derivation
+binder 6236:6237 <> φ:158
+binder 6239:6240 <> ψ:159
+R6243:6246 OverlayEquivalenceTests <> Prov defax
+R6249:6252 OverlayEquivalenceTests <> Impl defax
+R6255:6257 OverlayEquivalenceTests <> Box defax
+R6260:6263 OverlayEquivalenceTests <> Impl defax
+R6265:6266 OverlayEquivalenceTests <> φ:158 var
+R6268:6269 OverlayEquivalenceTests <> ψ:159 var
+R6274:6277 OverlayEquivalenceTests <> Impl defax
+R6280:6282 OverlayEquivalenceTests <> Box defax
+R6284:6285 OverlayEquivalenceTests <> φ:158 var
+R6289:6291 OverlayEquivalenceTests <> Box defax
+R6293:6294 OverlayEquivalenceTests <> ψ:159 var
+R6330:6350 OverlayEquivalenceTests <> S5_K_from_ModalPraxis defax
+R6352:6356 OverlayEquivalenceTests <> S5_Integration_Tests.Hrefl var
+R6358:6361 OverlayEquivalenceTests <> S5_Integration_Tests.Hsym var
+R6363:6367 OverlayEquivalenceTests <> S5_Integration_Tests.Htran var
+R6330:6350 OverlayEquivalenceTests <> S5_K_from_ModalPraxis defax
+R6352:6356 OverlayEquivalenceTests <> S5_Integration_Tests.Hrefl var
+R6358:6361 OverlayEquivalenceTests <> S5_Integration_Tests.Hsym var
+R6363:6367 OverlayEquivalenceTests <> S5_Integration_Tests.Htran var
+def 6441:6462 <> test_S5_Nec_derivation
+binder 6473:6474 <> φ:160
+R6477:6477 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6499:6503 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 6485:6485 <> w:161
+R6488:6493 OverlayEquivalenceTests <> forces defax
+R6495:6495 OverlayEquivalenceTests <> w:161 var
+R6497:6498 OverlayEquivalenceTests <> φ:160 var
+R6504:6507 OverlayEquivalenceTests <> Prov defax
+R6510:6512 OverlayEquivalenceTests <> Box defax
+R6514:6515 OverlayEquivalenceTests <> φ:160 var
+R6548:6570 OverlayEquivalenceTests <> S5_Nec_from_ModalPraxis defax
+R6572:6576 OverlayEquivalenceTests <> S5_Integration_Tests.Hrefl var
+R6578:6581 OverlayEquivalenceTests <> S5_Integration_Tests.Hsym var
+R6583:6587 OverlayEquivalenceTests <> S5_Integration_Tests.Htran var
+R6548:6570 OverlayEquivalenceTests <> S5_Nec_from_ModalPraxis defax
+R6572:6576 OverlayEquivalenceTests <> S5_Integration_Tests.Hrefl var
+R6578:6581 OverlayEquivalenceTests <> S5_Integration_Tests.Hsym var
+R6583:6587 OverlayEquivalenceTests <> S5_Integration_Tests.Htran var
+def 6678:6702 <> test_S5_frame_consistency
+binder 6718:6718 <> w:162
+binder 6720:6720 <> u:163
+R6732:6735 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6723:6727 OverlayEquivalenceTests <> can_R defax
+R6729:6729 OverlayEquivalenceTests <> w:162 var
+R6731:6731 OverlayEquivalenceTests <> u:163 var
+R6745:6748 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6736:6740 OverlayEquivalenceTests <> can_R defax
+R6742:6742 OverlayEquivalenceTests <> u:163 var
+R6744:6744 OverlayEquivalenceTests <> w:162 var
+R6749:6754 OverlayEquivalenceTests <> forces defax
+R6756:6756 OverlayEquivalenceTests <> w:162 var
+R6759:6762 OverlayEquivalenceTests <> Impl defax
+R6765:6768 OverlayEquivalenceTests <> Atom defax
+R6774:6776 OverlayEquivalenceTests <> Box defax
+R6779:6781 OverlayEquivalenceTests <> Dia defax
+R6784:6787 OverlayEquivalenceTests <> Atom defax
+R6983:7002 OverlayEquivalenceTests S5_Integration_Tests <> sec
+sec 7063:7080 <> Cross_System_Tests
+def 7149:7173 <> test_K_axiom_universality
+R7198:7209 OverlayEquivalenceTests <> Reflexive class
+binder 7189:7194 <> Hrefl4:164
+R7222:7234 OverlayEquivalenceTests <> Transitive class
+binder 7213:7218 <> Htran4:165
+R7258:7269 OverlayEquivalenceTests <> Reflexive class
+binder 7249:7254 <> Hrefl5:166
+R7281:7292 OverlayEquivalenceTests <> Symmetric class
+binder 7273:7277 <> Hsym5:167
+R7305:7317 OverlayEquivalenceTests <> Transitive class
+binder 7296:7301 <> Htran5:168
+binder 7331:7332 <> φ:169
+binder 7334:7335 <> ψ:170
+R7342:7345 OverlayEquivalenceTests <> Prov defax
+R7348:7351 OverlayEquivalenceTests <> Impl defax
+R7354:7356 OverlayEquivalenceTests <> Box defax
+R7359:7362 OverlayEquivalenceTests <> Impl defax
+R7364:7365 OverlayEquivalenceTests <> φ:169 var
+R7367:7368 OverlayEquivalenceTests <> ψ:170 var
+R7373:7376 OverlayEquivalenceTests <> Impl defax
+R7379:7381 OverlayEquivalenceTests <> Box defax
+R7383:7384 OverlayEquivalenceTests <> φ:169 var
+R7388:7390 OverlayEquivalenceTests <> Box defax
+R7392:7393 OverlayEquivalenceTests <> ψ:170 var
+R7498:7518 OverlayEquivalenceTests <> S4_K_from_ModalPraxis defax
+R7498:7518 OverlayEquivalenceTests <> S4_K_from_ModalPraxis defax
+def 7620:7645 <> test_Nec_rule_universality
+R7670:7681 OverlayEquivalenceTests <> Reflexive class
+binder 7661:7666 <> Hrefl4:171
+R7694:7706 OverlayEquivalenceTests <> Transitive class
+binder 7685:7690 <> Htran4:172
+R7730:7741 OverlayEquivalenceTests <> Reflexive class
+binder 7721:7726 <> Hrefl5:173
+R7753:7764 OverlayEquivalenceTests <> Symmetric class
+binder 7745:7749 <> Hsym5:174
+R7777:7789 OverlayEquivalenceTests <> Transitive class
+binder 7768:7773 <> Htran5:175
+binder 7803:7804 <> φ:176
+binder 7818:7818 <> w:177
+R7821:7826 OverlayEquivalenceTests <> forces defax
+R7828:7828 OverlayEquivalenceTests <> w:177 var
+R7830:7831 OverlayEquivalenceTests <> φ:176 var
+binder 7807:7807 <> H:178
+R7839:7842 OverlayEquivalenceTests <> Prov defax
+R7845:7847 OverlayEquivalenceTests <> Box defax
+R7849:7850 OverlayEquivalenceTests <> φ:176 var
+R7963:7985 OverlayEquivalenceTests <> S4_Nec_from_ModalPraxis defax
+R7963:7985 OverlayEquivalenceTests <> S4_Nec_from_ModalPraxis defax
+def 8082:8102 <> test_S4_in_S5_T_axiom
+R8127:8138 OverlayEquivalenceTests <> Reflexive class
+binder 8118:8123 <> Hrefl5:179
+R8150:8161 OverlayEquivalenceTests <> Symmetric class
+binder 8142:8146 <> Hsym5:180
+R8174:8186 OverlayEquivalenceTests <> Transitive class
+binder 8165:8170 <> Htran5:181
+binder 8200:8201 <> φ:182
+R8208:8211 OverlayEquivalenceTests <> Prov defax
+R8214:8217 OverlayEquivalenceTests <> Impl defax
+R8220:8222 OverlayEquivalenceTests <> Box defax
+R8224:8225 OverlayEquivalenceTests <> φ:182 var
+R8228:8229 OverlayEquivalenceTests <> φ:182 var
+R8327:8347 OverlayEquivalenceTests <> S5_T_from_ModalPraxis defax
+R8327:8347 OverlayEquivalenceTests <> S5_T_from_ModalPraxis defax
+def 8441:8461 <> test_S4_in_S5_4_axiom
+R8486:8497 OverlayEquivalenceTests <> Reflexive class
+binder 8477:8482 <> Hrefl5:183
+R8509:8520 OverlayEquivalenceTests <> Symmetric class
+binder 8501:8505 <> Hsym5:184
+R8533:8545 OverlayEquivalenceTests <> Transitive class
+binder 8524:8529 <> Htran5:185
+binder 8559:8560 <> φ:186
+R8567:8570 OverlayEquivalenceTests <> Prov defax
+R8573:8576 OverlayEquivalenceTests <> Impl defax
+R8579:8581 OverlayEquivalenceTests <> Box defax
+R8583:8584 OverlayEquivalenceTests <> φ:186 var
+R8588:8590 OverlayEquivalenceTests <> Box defax
+R8593:8595 OverlayEquivalenceTests <> Box defax
+R8597:8598 OverlayEquivalenceTests <> φ:186 var
+R8698:8718 OverlayEquivalenceTests <> S5_4_from_ModalPraxis defax
+R8698:8718 OverlayEquivalenceTests <> S5_4_from_ModalPraxis defax
+R8756:8773 OverlayEquivalenceTests Cross_System_Tests <> sec
+sec 8832:8855 <> Zero_Admits_Verification
+def 8924:8942 <> test_S4_zero_admits
+R8966:8977 OverlayEquivalenceTests <> Reflexive class
+binder 8958:8962 <> Hrefl:187
+R8989:9001 OverlayEquivalenceTests <> Transitive class
+binder 8981:8985 <> Htran:188
+R9052:9052 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R9087:9095 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+binder 9060:9061 <> φ:189
+R9064:9067 OverlayEquivalenceTests <> Prov defax
+R9070:9073 OverlayEquivalenceTests <> Impl defax
+R9076:9078 OverlayEquivalenceTests <> Box defax
+R9080:9081 OverlayEquivalenceTests <> φ:189 var
+R9084:9085 OverlayEquivalenceTests <> φ:189 var
+R9096:9096 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R9143:9151 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+binder 9104:9105 <> φ:190
+R9108:9111 OverlayEquivalenceTests <> Prov defax
+R9114:9117 OverlayEquivalenceTests <> Impl defax
+R9120:9122 OverlayEquivalenceTests <> Box defax
+R9124:9125 OverlayEquivalenceTests <> φ:190 var
+R9129:9131 OverlayEquivalenceTests <> Box defax
+R9134:9136 OverlayEquivalenceTests <> Box defax
+R9138:9139 OverlayEquivalenceTests <> φ:190 var
+R9152:9152 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R9222:9231 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R9283:9283 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+binder 9160:9161 <> φ:191
+binder 9163:9164 <> ψ:192
+R9167:9170 OverlayEquivalenceTests <> Prov defax
+R9173:9176 OverlayEquivalenceTests <> Impl defax
+R9179:9181 OverlayEquivalenceTests <> Box defax
+R9184:9187 OverlayEquivalenceTests <> Impl defax
+R9189:9190 OverlayEquivalenceTests <> φ:191 var
+R9192:9193 OverlayEquivalenceTests <> ψ:192 var
+R9198:9201 OverlayEquivalenceTests <> Impl defax
+R9204:9206 OverlayEquivalenceTests <> Box defax
+R9208:9209 OverlayEquivalenceTests <> φ:191 var
+R9213:9215 OverlayEquivalenceTests <> Box defax
+R9217:9218 OverlayEquivalenceTests <> ψ:192 var
+binder 9239:9240 <> φ:193
+R9243:9243 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R9265:9269 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 9251:9251 <> w:194
+R9254:9259 OverlayEquivalenceTests <> forces defax
+R9261:9261 OverlayEquivalenceTests <> w:194 var
+R9263:9264 OverlayEquivalenceTests <> φ:193 var
+R9270:9273 OverlayEquivalenceTests <> Prov defax
+R9276:9278 OverlayEquivalenceTests <> Box defax
+R9280:9281 OverlayEquivalenceTests <> φ:193 var
+R9360:9380 OverlayEquivalenceTests <> S4_T_from_ModalPraxis defax
+R9360:9380 OverlayEquivalenceTests <> S4_T_from_ModalPraxis defax
+R9419:9439 OverlayEquivalenceTests <> S4_4_from_ModalPraxis defax
+R9419:9439 OverlayEquivalenceTests <> S4_4_from_ModalPraxis defax
+R9482:9502 OverlayEquivalenceTests <> S4_K_from_ModalPraxis defax
+R9482:9502 OverlayEquivalenceTests <> S4_K_from_ModalPraxis defax
+R9544:9566 OverlayEquivalenceTests <> S4_Nec_from_ModalPraxis defax
+R9544:9566 OverlayEquivalenceTests <> S4_Nec_from_ModalPraxis defax
+def 9664:9682 <> test_S5_zero_admits
+R9706:9717 OverlayEquivalenceTests <> Reflexive class
+binder 9698:9702 <> Hrefl:195
+R9728:9739 OverlayEquivalenceTests <> Symmetric class
+binder 9721:9724 <> Hsym:196
+R9751:9763 OverlayEquivalenceTests <> Transitive class
+binder 9743:9747 <> Htran:197
+R9814:9814 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R9855:9863 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+binder 9822:9823 <> φ:198
+R9826:9829 OverlayEquivalenceTests <> Prov defax
+R9832:9835 OverlayEquivalenceTests <> Impl defax
+R9837:9838 OverlayEquivalenceTests <> φ:198 var
+R9841:9843 OverlayEquivalenceTests <> Box defax
+R9846:9848 OverlayEquivalenceTests <> Dia defax
+R9850:9851 OverlayEquivalenceTests <> φ:198 var
+R9864:9864 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R9911:9919 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+binder 9872:9873 <> φ:199
+R9876:9879 OverlayEquivalenceTests <> Prov defax
+R9882:9885 OverlayEquivalenceTests <> Impl defax
+R9888:9890 OverlayEquivalenceTests <> Dia defax
+R9892:9893 OverlayEquivalenceTests <> φ:199 var
+R9897:9899 OverlayEquivalenceTests <> Box defax
+R9902:9904 OverlayEquivalenceTests <> Dia defax
+R9906:9907 OverlayEquivalenceTests <> φ:199 var
+R9920:9920 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R9955:9963 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+binder 9928:9929 <> φ:200
+R9932:9935 OverlayEquivalenceTests <> Prov defax
+R9938:9941 OverlayEquivalenceTests <> Impl defax
+R9944:9946 OverlayEquivalenceTests <> Box defax
+R9948:9949 OverlayEquivalenceTests <> φ:200 var
+R9952:9953 OverlayEquivalenceTests <> φ:200 var
+R9964:9964 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R10011:10019 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+binder 9972:9973 <> φ:201
+R9976:9979 OverlayEquivalenceTests <> Prov defax
+R9982:9985 OverlayEquivalenceTests <> Impl defax
+R9988:9990 OverlayEquivalenceTests <> Box defax
+R9992:9993 OverlayEquivalenceTests <> φ:201 var
+R9997:9999 OverlayEquivalenceTests <> Box defax
+R10002:10004 OverlayEquivalenceTests <> Box defax
+R10006:10007 OverlayEquivalenceTests <> φ:201 var
+R10020:10020 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R10090:10099 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R10151:10151 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+binder 10028:10029 <> φ:202
+binder 10031:10032 <> ψ:203
+R10035:10038 OverlayEquivalenceTests <> Prov defax
+R10041:10044 OverlayEquivalenceTests <> Impl defax
+R10047:10049 OverlayEquivalenceTests <> Box defax
+R10052:10055 OverlayEquivalenceTests <> Impl defax
+R10057:10058 OverlayEquivalenceTests <> φ:202 var
+R10060:10061 OverlayEquivalenceTests <> ψ:203 var
+R10066:10069 OverlayEquivalenceTests <> Impl defax
+R10072:10074 OverlayEquivalenceTests <> Box defax
+R10076:10077 OverlayEquivalenceTests <> φ:202 var
+R10081:10083 OverlayEquivalenceTests <> Box defax
+R10085:10086 OverlayEquivalenceTests <> ψ:203 var
+binder 10107:10108 <> φ:204
+R10111:10111 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R10133:10137 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 10119:10119 <> w:205
+R10122:10127 OverlayEquivalenceTests <> forces defax
+R10129:10129 OverlayEquivalenceTests <> w:205 var
+R10131:10132 OverlayEquivalenceTests <> φ:204 var
+R10138:10141 OverlayEquivalenceTests <> Prov defax
+R10144:10146 OverlayEquivalenceTests <> Box defax
+R10148:10149 OverlayEquivalenceTests <> φ:204 var
+R10233:10253 OverlayEquivalenceTests <> S5_B_from_ModalPraxis defax
+R10233:10253 OverlayEquivalenceTests <> S5_B_from_ModalPraxis defax
+R10297:10317 OverlayEquivalenceTests <> S5_5_from_ModalPraxis defax
+R10297:10317 OverlayEquivalenceTests <> S5_5_from_ModalPraxis defax
+R10361:10381 OverlayEquivalenceTests <> S5_T_from_ModalPraxis defax
+R10361:10381 OverlayEquivalenceTests <> S5_T_from_ModalPraxis defax
+R10425:10445 OverlayEquivalenceTests <> S5_4_from_ModalPraxis defax
+R10425:10445 OverlayEquivalenceTests <> S5_4_from_ModalPraxis defax
+R10493:10513 OverlayEquivalenceTests <> S5_K_from_ModalPraxis defax
+R10493:10513 OverlayEquivalenceTests <> S5_K_from_ModalPraxis defax
+R10560:10582 OverlayEquivalenceTests <> S5_Nec_from_ModalPraxis defax
+R10560:10582 OverlayEquivalenceTests <> S5_Nec_from_ModalPraxis defax
+R10626:10649 OverlayEquivalenceTests Zero_Admits_Verification <> sec
+sec 10708:10737 <> Integration_Completeness_Tests
+def 10803:10822 <> test_S4_completeness
+R10846:10857 OverlayEquivalenceTests <> Reflexive class
+binder 10838:10842 <> Hrefl:206
+R10869:10881 OverlayEquivalenceTests <> Transitive class
+binder 10861:10865 <> Htran:207
+R10946:10946 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R11016:11033 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+binder 10954:10955 <> φ:208
+binder 10957:10958 <> ψ:209
+R10961:10964 OverlayEquivalenceTests <> Prov defax
+R10967:10970 OverlayEquivalenceTests <> Impl defax
+R10973:10975 OverlayEquivalenceTests <> Box defax
+R10978:10981 OverlayEquivalenceTests <> Impl defax
+R10983:10984 OverlayEquivalenceTests <> φ:208 var
+R10986:10987 OverlayEquivalenceTests <> ψ:209 var
+R10992:10995 OverlayEquivalenceTests <> Impl defax
+R10998:11000 OverlayEquivalenceTests <> Box defax
+R11002:11003 OverlayEquivalenceTests <> φ:208 var
+R11007:11009 OverlayEquivalenceTests <> Box defax
+R11011:11012 OverlayEquivalenceTests <> ψ:209 var
+R11034:11034 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R11069:11121 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R11168:11168 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+binder 11042:11043 <> φ:210
+R11046:11049 OverlayEquivalenceTests <> Prov defax
+R11052:11055 OverlayEquivalenceTests <> Impl defax
+R11058:11060 OverlayEquivalenceTests <> Box defax
+R11062:11063 OverlayEquivalenceTests <> φ:210 var
+R11066:11067 OverlayEquivalenceTests <> φ:210 var
+binder 11129:11130 <> φ:211
+R11133:11136 OverlayEquivalenceTests <> Prov defax
+R11139:11142 OverlayEquivalenceTests <> Impl defax
+R11145:11147 OverlayEquivalenceTests <> Box defax
+R11149:11150 OverlayEquivalenceTests <> φ:211 var
+R11154:11156 OverlayEquivalenceTests <> Box defax
+R11159:11161 OverlayEquivalenceTests <> Box defax
+R11163:11164 OverlayEquivalenceTests <> φ:211 var
+R11281:11301 OverlayEquivalenceTests <> S4_K_from_ModalPraxis defax
+R11281:11301 OverlayEquivalenceTests <> S4_K_from_ModalPraxis defax
+R11340:11360 OverlayEquivalenceTests <> S4_T_from_ModalPraxis defax
+R11340:11360 OverlayEquivalenceTests <> S4_T_from_ModalPraxis defax
+R11399:11419 OverlayEquivalenceTests <> S4_4_from_ModalPraxis defax
+R11399:11419 OverlayEquivalenceTests <> S4_4_from_ModalPraxis defax
+def 11505:11524 <> test_S5_completeness
+R11548:11559 OverlayEquivalenceTests <> Reflexive class
+binder 11540:11544 <> Hrefl:212
+R11570:11581 OverlayEquivalenceTests <> Symmetric class
+binder 11563:11566 <> Hsym:213
+R11593:11605 OverlayEquivalenceTests <> Transitive class
+binder 11585:11589 <> Htran:214
+R11678:11678 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R11748:11765 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+binder 11686:11687 <> φ:215
+binder 11689:11690 <> ψ:216
+R11693:11696 OverlayEquivalenceTests <> Prov defax
+R11699:11702 OverlayEquivalenceTests <> Impl defax
+R11705:11707 OverlayEquivalenceTests <> Box defax
+R11710:11713 OverlayEquivalenceTests <> Impl defax
+R11715:11716 OverlayEquivalenceTests <> φ:215 var
+R11718:11719 OverlayEquivalenceTests <> ψ:216 var
+R11724:11727 OverlayEquivalenceTests <> Impl defax
+R11730:11732 OverlayEquivalenceTests <> Box defax
+R11734:11735 OverlayEquivalenceTests <> φ:215 var
+R11739:11741 OverlayEquivalenceTests <> Box defax
+R11743:11744 OverlayEquivalenceTests <> ψ:216 var
+R11766:11766 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R11801:11852 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+binder 11774:11775 <> φ:217
+R11778:11781 OverlayEquivalenceTests <> Prov defax
+R11784:11787 OverlayEquivalenceTests <> Impl defax
+R11790:11792 OverlayEquivalenceTests <> Box defax
+R11794:11795 OverlayEquivalenceTests <> φ:217 var
+R11798:11799 OverlayEquivalenceTests <> φ:217 var
+R11853:11853 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R11900:11938 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+binder 11861:11862 <> φ:218
+R11865:11868 OverlayEquivalenceTests <> Prov defax
+R11871:11874 OverlayEquivalenceTests <> Impl defax
+R11877:11879 OverlayEquivalenceTests <> Box defax
+R11881:11882 OverlayEquivalenceTests <> φ:218 var
+R11886:11888 OverlayEquivalenceTests <> Box defax
+R11891:11893 OverlayEquivalenceTests <> Box defax
+R11895:11896 OverlayEquivalenceTests <> φ:218 var
+R11939:11939 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R11980:12025 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R12072:12072 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+binder 11947:11948 <> φ:219
+R11951:11954 OverlayEquivalenceTests <> Prov defax
+R11957:11960 OverlayEquivalenceTests <> Impl defax
+R11962:11963 OverlayEquivalenceTests <> φ:219 var
+R11966:11968 OverlayEquivalenceTests <> Box defax
+R11971:11973 OverlayEquivalenceTests <> Dia defax
+R11975:11976 OverlayEquivalenceTests <> φ:219 var
+binder 12033:12034 <> φ:220
+R12037:12040 OverlayEquivalenceTests <> Prov defax
+R12043:12046 OverlayEquivalenceTests <> Impl defax
+R12049:12051 OverlayEquivalenceTests <> Dia defax
+R12053:12054 OverlayEquivalenceTests <> φ:220 var
+R12058:12060 OverlayEquivalenceTests <> Box defax
+R12063:12065 OverlayEquivalenceTests <> Dia defax
+R12067:12068 OverlayEquivalenceTests <> φ:220 var
+R12190:12210 OverlayEquivalenceTests <> S5_K_from_ModalPraxis defax
+R12190:12210 OverlayEquivalenceTests <> S5_K_from_ModalPraxis defax
+R12254:12274 OverlayEquivalenceTests <> S5_T_from_ModalPraxis defax
+R12254:12274 OverlayEquivalenceTests <> S5_T_from_ModalPraxis defax
+R12318:12338 OverlayEquivalenceTests <> S5_4_from_ModalPraxis defax
+R12318:12338 OverlayEquivalenceTests <> S5_4_from_ModalPraxis defax
+R12382:12402 OverlayEquivalenceTests <> S5_B_from_ModalPraxis defax
+R12382:12402 OverlayEquivalenceTests <> S5_B_from_ModalPraxis defax
+R12446:12466 OverlayEquivalenceTests <> S5_5_from_ModalPraxis defax
+R12446:12466 OverlayEquivalenceTests <> S5_5_from_ModalPraxis defax
+R12501:12530 OverlayEquivalenceTests Integration_Completeness_Tests <> sec
+sec 12568:12579 <> Test_Summary
+def 12639:12662 <> integration_test_results
+R12733:12733 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R12868:12931 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R12750:12761 OverlayEquivalenceTests <> Reflexive class
+binder 12742:12746 <> Hrefl:221
+R12773:12785 OverlayEquivalenceTests <> Transitive class
+binder 12765:12769 <> Htran:222
+binder 12788:12789 <> φ:223
+R12822:12832 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R12799:12802 OverlayEquivalenceTests <> Prov defax
+R12805:12808 OverlayEquivalenceTests <> Impl defax
+R12811:12813 OverlayEquivalenceTests <> Box defax
+R12815:12816 OverlayEquivalenceTests <> φ:223 var
+R12819:12820 OverlayEquivalenceTests <> φ:223 var
+R12833:12836 OverlayEquivalenceTests <> Prov defax
+R12839:12842 OverlayEquivalenceTests <> Impl defax
+R12845:12847 OverlayEquivalenceTests <> Box defax
+R12849:12850 OverlayEquivalenceTests <> φ:223 var
+R12854:12856 OverlayEquivalenceTests <> Box defax
+R12859:12861 OverlayEquivalenceTests <> Box defax
+R12863:12864 OverlayEquivalenceTests <> φ:223 var
+R12932:12932 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R13173:13231 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R12949:12960 OverlayEquivalenceTests <> Reflexive class
+binder 12941:12945 <> Hrefl:224
+R12971:12982 OverlayEquivalenceTests <> Symmetric class
+binder 12964:12967 <> Hsym:225
+R12994:13006 OverlayEquivalenceTests <> Transitive class
+binder 12986:12990 <> Htran:226
+binder 13009:13010 <> φ:227
+R13048:13058 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R13019:13022 OverlayEquivalenceTests <> Prov defax
+R13025:13028 OverlayEquivalenceTests <> Impl defax
+R13030:13031 OverlayEquivalenceTests <> φ:227 var
+R13034:13036 OverlayEquivalenceTests <> Box defax
+R13039:13041 OverlayEquivalenceTests <> Dia defax
+R13043:13044 OverlayEquivalenceTests <> φ:227 var
+R13094:13103 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R13059:13062 OverlayEquivalenceTests <> Prov defax
+R13065:13068 OverlayEquivalenceTests <> Impl defax
+R13071:13073 OverlayEquivalenceTests <> Dia defax
+R13075:13076 OverlayEquivalenceTests <> φ:227 var
+R13080:13082 OverlayEquivalenceTests <> Box defax
+R13085:13087 OverlayEquivalenceTests <> Dia defax
+R13089:13090 OverlayEquivalenceTests <> φ:227 var
+R13127:13137 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R13104:13107 OverlayEquivalenceTests <> Prov defax
+R13110:13113 OverlayEquivalenceTests <> Impl defax
+R13116:13118 OverlayEquivalenceTests <> Box defax
+R13120:13121 OverlayEquivalenceTests <> φ:227 var
+R13124:13125 OverlayEquivalenceTests <> φ:227 var
+R13138:13141 OverlayEquivalenceTests <> Prov defax
+R13144:13147 OverlayEquivalenceTests <> Impl defax
+R13150:13152 OverlayEquivalenceTests <> Box defax
+R13154:13155 OverlayEquivalenceTests <> φ:227 var
+R13159:13161 OverlayEquivalenceTests <> Box defax
+R13164:13166 OverlayEquivalenceTests <> Box defax
+R13168:13169 OverlayEquivalenceTests <> φ:227 var
+R13232:13232 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R13302:13354 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+binder 13240:13241 <> φ:228
+binder 13243:13244 <> ψ:229
+R13247:13250 OverlayEquivalenceTests <> Prov defax
+R13253:13256 OverlayEquivalenceTests <> Impl defax
+R13259:13261 OverlayEquivalenceTests <> Box defax
+R13264:13267 OverlayEquivalenceTests <> Impl defax
+R13269:13270 OverlayEquivalenceTests <> φ:228 var
+R13272:13273 OverlayEquivalenceTests <> ψ:229 var
+R13278:13281 OverlayEquivalenceTests <> Impl defax
+R13284:13286 OverlayEquivalenceTests <> Box defax
+R13288:13289 OverlayEquivalenceTests <> φ:228 var
+R13293:13295 OverlayEquivalenceTests <> Box defax
+R13297:13298 OverlayEquivalenceTests <> ψ:229 var
+R13355:13358 Coq.Init.Logic <> True ind
+prf 13420:13441 <> integration_tests_pass
+R13445:13468 OverlayEquivalenceTests <> integration_test_results def
+R13491:13514 OverlayEquivalenceTests <> integration_test_results def
+R13578:13598 OverlayEquivalenceTests <> S4_T_from_ModalPraxis defax
+R13578:13598 OverlayEquivalenceTests <> S4_T_from_ModalPraxis defax
+R13627:13647 OverlayEquivalenceTests <> S4_4_from_ModalPraxis defax
+R13627:13647 OverlayEquivalenceTests <> S4_4_from_ModalPraxis defax
+R13737:13757 OverlayEquivalenceTests <> S5_B_from_ModalPraxis defax
+R13737:13757 OverlayEquivalenceTests <> S5_B_from_ModalPraxis defax
+R13791:13811 OverlayEquivalenceTests <> S5_5_from_ModalPraxis defax
+R13791:13811 OverlayEquivalenceTests <> S5_5_from_ModalPraxis defax
+R13845:13865 OverlayEquivalenceTests <> S5_T_from_ModalPraxis defax
+R13845:13865 OverlayEquivalenceTests <> S5_T_from_ModalPraxis defax
+R13899:13919 OverlayEquivalenceTests <> S5_4_from_ModalPraxis defax
+R13899:13919 OverlayEquivalenceTests <> S5_4_from_ModalPraxis defax
+R13979:13988 OverlayEquivalenceTests <> provable_K defax
+R13979:13988 OverlayEquivalenceTests <> provable_K defax
+R14003:14003 Coq.Init.Logic <> I constr
+R14003:14003 Coq.Init.Logic <> I constr
+R14020:14031 OverlayEquivalenceTests Test_Summary <> sec

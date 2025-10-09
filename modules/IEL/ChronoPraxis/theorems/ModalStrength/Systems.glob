@@ -1,0 +1,193 @@
+DIGEST 43aa6dcec8c6add2e6a7330766b95107
+FSystems
+R24:30 Coq.Program.Program <> <> lib
+ax 352:355 <> form
+ax 375:378 <> Prov
+R386:389 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R382:385 Systems <> form defax
+ax 406:408 <> Box
+R416:419 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R412:415 Systems <> form defax
+R420:423 Systems <> form defax
+ax 436:438 <> Dia
+R446:449 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R442:445 Systems <> form defax
+R450:453 Systems <> form defax
+ax 466:469 <> Impl
+R477:480 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R473:476 Systems <> form defax
+R485:488 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R481:484 Systems <> form defax
+R489:492 Systems <> form defax
+ax 542:551 <> provable_K
+binder 562:563 <> φ:11
+binder 565:566 <> ψ:12
+R569:572 Systems <> Prov defax
+R575:578 Systems <> Impl defax
+R581:583 Systems <> Box defax
+R586:589 Systems <> Impl defax
+R591:592 Systems <> φ:11 var
+R594:595 Systems <> ψ:12 var
+R600:603 Systems <> Impl defax
+R606:608 Systems <> Box defax
+R610:611 Systems <> φ:11 var
+R615:617 Systems <> Box defax
+R619:620 Systems <> ψ:12 var
+ax 636:657 <> provable_necessitation
+binder 668:669 <> φ:15
+R679:682 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R672:675 Systems <> Prov defax
+R677:678 Systems <> φ:15 var
+R683:686 Systems <> Prov defax
+R689:691 Systems <> Box defax
+R693:694 Systems <> φ:15 var
+ax 708:712 <> world
+ax 732:753 <> semantic_necessitation
+binder 764:765 <> φ:20
+R768:768 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R791:795 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R779:783 Systems <> world defax
+binder 777:777 <> w:21
+R787:790 Coq.Init.Logic <> True ind
+R796:799 Systems <> Prov defax
+R802:804 Systems <> Box defax
+R806:807 Systems <> φ:20 var
+ax 865:874 <> provable_T
+binder 885:886 <> φ:24
+R889:892 Systems <> Prov defax
+R895:898 Systems <> Impl defax
+R901:903 Systems <> Box defax
+R905:906 Systems <> φ:24 var
+R909:910 Systems <> φ:24 var
+ax 924:933 <> provable_4
+binder 944:945 <> φ:27
+R948:951 Systems <> Prov defax
+R954:957 Systems <> Impl defax
+R960:962 Systems <> Box defax
+R964:965 Systems <> φ:27 var
+R969:971 Systems <> Box defax
+R974:976 Systems <> Box defax
+R978:979 Systems <> φ:27 var
+ax 995:1004 <> provable_5
+binder 1015:1016 <> φ:30
+R1019:1022 Systems <> Prov defax
+R1025:1028 Systems <> Impl defax
+R1031:1033 Systems <> Dia defax
+R1035:1036 Systems <> φ:30 var
+R1040:1042 Systems <> Box defax
+R1045:1047 Systems <> Dia defax
+R1049:1050 Systems <> φ:30 var
+ax 1066:1075 <> provable_B
+binder 1086:1087 <> φ:33
+R1090:1093 Systems <> Prov defax
+R1096:1099 Systems <> Impl defax
+R1101:1102 Systems <> φ:33 var
+R1105:1107 Systems <> Box defax
+R1110:1112 Systems <> Dia defax
+R1114:1115 Systems <> φ:33 var
+mod 1129:1135 <> KSystem
+def 1219:1225 KSystem K_axiom
+R1230:1239 Systems <> provable_K defax
+def 1255:1267 KSystem Necessitation
+R1272:1293 Systems <> provable_necessitation defax
+prf 1363:1379 KSystem K_system_complete
+binder 1390:1391 <> φ:36
+binder 1393:1394 <> ψ:37
+R1401:1404 Systems <> Prov defax
+R1407:1410 Systems <> Impl defax
+R1413:1415 Systems <> Box defax
+R1418:1421 Systems <> Impl defax
+R1423:1424 Systems <> φ:36 var
+R1426:1427 Systems <> ψ:37 var
+R1432:1435 Systems <> Impl defax
+R1438:1440 Systems <> Box defax
+R1442:1443 Systems <> φ:36 var
+R1447:1449 Systems <> Box defax
+R1451:1452 Systems <> ψ:37 var
+R1487:1496 Systems <> provable_K defax
+R1487:1496 Systems <> provable_K defax
+R1511:1517 Systems KSystem <> mod
+mod 1528:1535 <> S4System
+R1585:1591 Systems KSystem <> modtype
+def 1610:1616 S4System T_axiom
+R1621:1630 Systems <> provable_T defax
+def 1646:1655 S4System Four_axiom
+R1660:1669 Systems <> provable_4 defax
+prf 1744:1757 S4System S4_T_available
+binder 1768:1769 <> φ:38
+R1772:1775 Systems <> Prov defax
+R1778:1781 Systems <> Impl defax
+R1784:1786 Systems <> Box defax
+R1788:1789 Systems <> φ:38 var
+R1792:1793 Systems <> φ:38 var
+R1822:1831 Systems <> provable_T defax
+R1822:1831 Systems <> provable_T defax
+prf 1850:1863 S4System S4_4_available
+binder 1874:1875 <> φ:39
+R1878:1881 Systems <> Prov defax
+R1884:1887 Systems <> Impl defax
+R1890:1892 Systems <> Box defax
+R1894:1895 Systems <> φ:39 var
+R1899:1901 Systems <> Box defax
+R1904:1906 Systems <> Box defax
+R1908:1909 Systems <> φ:39 var
+R1940:1949 Systems <> provable_4 defax
+R1940:1949 Systems <> provable_4 defax
+R1964:1971 Systems S4System <> mod
+mod 1982:1989 <> S5System
+R2067:2073 Systems KSystem <> modtype
+def 2092:2098 S5System T_axiom
+R2103:2112 Systems <> provable_T defax
+def 2128:2137 S5System Five_axiom
+R2142:2151 Systems <> provable_5 defax
+def 2167:2173 S5System B_axiom
+R2178:2187 Systems <> provable_B defax
+prf 2260:2273 S5System S5_T_available
+binder 2284:2285 <> φ:40
+R2288:2291 Systems <> Prov defax
+R2294:2297 Systems <> Impl defax
+R2300:2302 Systems <> Box defax
+R2304:2305 Systems <> φ:40 var
+R2308:2309 Systems <> φ:40 var
+R2338:2347 Systems <> provable_T defax
+R2338:2347 Systems <> provable_T defax
+prf 2366:2379 S5System S5_5_available
+binder 2390:2391 <> φ:41
+R2394:2397 Systems <> Prov defax
+R2400:2403 Systems <> Impl defax
+R2406:2408 Systems <> Dia defax
+R2410:2411 Systems <> φ:41 var
+R2415:2417 Systems <> Box defax
+R2420:2422 Systems <> Dia defax
+R2424:2425 Systems <> φ:41 var
+R2456:2465 Systems <> provable_5 defax
+R2456:2465 Systems <> provable_5 defax
+prf 2484:2497 S5System S5_B_available
+binder 2508:2509 <> φ:42
+R2512:2515 Systems <> Prov defax
+R2518:2521 Systems <> Impl defax
+R2523:2524 Systems <> φ:42 var
+R2527:2529 Systems <> Box defax
+R2532:2534 Systems <> Dia defax
+R2536:2537 Systems <> φ:42 var
+R2568:2577 Systems <> provable_B defax
+R2568:2577 Systems <> provable_B defax
+prf 2656:2672 S5System S5_Brouwer_system
+binder 2683:2684 <> φ:43
+R2714:2736 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R2691:2694 Systems <> Prov defax
+R2697:2700 Systems <> Impl defax
+R2703:2705 Systems <> Box defax
+R2707:2708 Systems <> φ:43 var
+R2711:2712 Systems <> φ:43 var
+R2737:2740 Systems <> Prov defax
+R2743:2746 Systems <> Impl defax
+R2748:2749 Systems <> φ:43 var
+R2752:2754 Systems <> Box defax
+R2757:2759 Systems <> Dia defax
+R2761:2762 Systems <> φ:43 var
+R2822:2831 Systems <> provable_T defax
+R2822:2831 Systems <> provable_T defax
+R2846:2855 Systems <> provable_B defax
+R2846:2855 Systems <> provable_B defax
+R2872:2879 Systems S5System <> mod

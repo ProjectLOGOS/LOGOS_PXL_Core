@@ -95,6 +95,17 @@ Categories: `SUBSTRATE`, `TACTICS`, `THEOREMS`, `META-THEOREMS`, `INTERFACES`, `
 ## Module Status
 
 - ChronoPraxis status: **Stable (v1.0)** — constructive, zero admits
+- ModalPraxis status: **Stable (v1.0)** — unified modal framework, zero admits
+
+### Registry (Greek naming)
+- TropoPraxis (TPX) — unified modal systems.
+- GnosiPraxis (GPX) — epistemic/knowledge.
+- ThemiPraxis (ThPX) — deontic/obligation.
+- DynaPraxis (DyPX) — dynamic programs.
+- HexiPraxis (HxPX) — agency/STIT.
+- ChremaPraxis (ChPX) — resources/linear.
+- MuPraxis (MuPX) — μ-calculus.
+- TychePraxis (TyPX) — probabilistic (finite).
 
 ---
 

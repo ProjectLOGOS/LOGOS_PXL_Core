@@ -131,6 +131,24 @@ make prove                   # Verify no admits, constructive proofs only
 - **Physics Integration**: Full relativistic temporal logic
 - **AI Applications**: Temporal reasoning for artificial intelligence systems
 
+## Modal Logic Foundation
+
+**Files**: `modules/IEL/ChronoPraxis/theorems/ModalStrength/`
+
+**Modal base (normal systems):** K axiom and Necessitation are proven semantically and lifted to proofs. S4/S5 add T/4/5/B under the corresponding frame conditions; propositional conservativity holds constructively.
+
+**Key Components**:
+- **ModalRules.v**: K axiom (□(φ→ψ) → (□φ → □ψ)) and Necessitation rule with semantic soundness
+- **ModalAxiomsSound.v**: T, 4, 5, B axiom schemata proven valid under frame classes (reflexive, transitive, symmetric)  
+- **Systems.v**: Bundled K, S4, S5 modal systems with complete axiomatizations
+- **Frame Correspondence**: Each modal axiom corresponds to its standard frame condition with constructive proofs
+
+**Theoretical Foundation**:
+- Semantic validity proofs using Kripke frame semantics
+- Completeness bridge from semantic validity to syntactic provability
+- Conservative extension over non-modal propositional fragment
+- Full constructive proofs maintaining zero admits policy
+
 ## Documentation
 
 - **Auto-generated API docs**: see `docs/html/toc.html` (built by `coq: docs-html` task or CI artifact)
