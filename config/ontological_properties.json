@@ -1,0 +1,22 @@
+{
+  "properties": {
+    "Will": {
+      "group": "Causal",
+      "description": "Attribute of will and choice"
+    },
+    "Immanence": {
+      "group": "Spatial",
+      "description": "Presence within space"
+    }
+  },
+  "group_classifications": {
+    "Causal": {
+      "properties": ["Will"],
+      "description": "Causal attributes"
+    },
+    "Spatial": {
+      "properties": ["Immanence"],
+      "description": "Spatial attributes"
+    }
+  }
+}
