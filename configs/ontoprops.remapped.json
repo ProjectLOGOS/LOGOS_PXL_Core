@@ -1,0 +1,31 @@
+{
+  "properties": {
+    "Will": {
+      "group": "Volitional",
+      "description": "Attribute of will and choice"
+    },
+    "Immanence": {
+      "group": "Spatial",
+      "description": "Presence within space"
+    }
+  },
+  "group_classifications": {
+    "Causal": {
+      "properties": [],
+      "description": "Causal attributes"
+    },
+    "Spatial": {
+      "properties": [
+        "Immanence"
+      ],
+      "description": "Spatial attributes"
+    },
+    "Volitional": {
+      "description": "Attributes related to will, choice, and freedom",
+      "properties": [
+        "Will"
+      ],
+      "characteristic_goodness_weight": "high"
+    }
+  }
+}

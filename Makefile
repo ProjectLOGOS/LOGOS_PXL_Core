@@ -186,4 +186,7 @@ VFILES += $(IEL_FILES)
 iels-all: $(IEL_FILES)
 	@echo "IELs built."
 
-.PHONY: all clean status prove domain-compatibilism domain-empiricism domain-modal-ontology iels-all
+.PHONY: all clean status prove domain-compatibilism domain-empiricism domain-modal-ontology iels-all  modules/IEL/OntoPraxis/modal/FrameSpec.v \\
+  modules/IEL/OntoPraxis/theorems/NormalBase.v \\
+  modules/IEL/OntoPraxis/systems/Systems.v \\
+  modules/IEL/OntoPraxis/tests/OntoPraxis_Smoke.v
