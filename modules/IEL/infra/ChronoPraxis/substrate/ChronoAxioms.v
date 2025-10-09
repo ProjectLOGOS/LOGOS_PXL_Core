@@ -48,7 +48,7 @@ Parameter tau_le : tau -> tau -> Prop.  (* Temporal ordering *)
 Notation "t1 <= t2" := (tau_le t1 t2).
 
 (* Temporal ordering axioms *)
-Axiom tau_reflexive : forall t : tau, t <= t.
+(* Removed: Axiom tau_reflexive : forall t : tau, t <= t. *)
 Axiom tau_antisymmetric : forall t1 t2 : tau, t1 <= t2 -> t2 <= t1 -> t1 = t2.
 Axiom tau_transitive : forall t1 t2 t3 : tau, t1 <= t2 -> t2 <= t3 -> t1 <= t3.
 
