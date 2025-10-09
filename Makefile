@@ -1,4 +1,38 @@
 VFILES := \
+  modules/IEL/Axiopraxis/modal/FrameSpec.v \
+  modules/IEL/Axiopraxis/theorems/NormalBase.v \
+  modules/IEL/Axiopraxis/theorems/Conservativity.v \
+  modules/IEL/Axiopraxis/systems/Systems.v \
+  modules/IEL/Axiopraxis/tests/Axiopraxis_Smoke.v \
+  modules/IEL/ErgoPraxis/modal/FrameSpec.v \
+  modules/IEL/ErgoPraxis/theorems/NormalBase.v \
+  modules/IEL/ErgoPraxis/theorems/Conservativity.v \
+  modules/IEL/ErgoPraxis/systems/Systems.v \
+  modules/IEL/ErgoPraxis/tests/ErgoPraxis_Smoke.v \
+  modules/IEL/AnthroPraxis/modal/FrameSpec.v \
+  modules/IEL/AnthroPraxis/theorems/NormalBase.v \
+  modules/IEL/AnthroPraxis/theorems/Conservativity.v \
+  modules/IEL/AnthroPraxis/systems/Systems.v \
+  modules/IEL/AnthroPraxis/tests/AnthroPraxis_Smoke.v \
+  modules/IEL/AnthroPraxis/subdomains/BioPraxis/modal/FrameSpec.v \
+  modules/IEL/AnthroPraxis/subdomains/BioPraxis/theorems/NormalBase.v \
+  modules/IEL/AnthroPraxis/subdomains/BioPraxis/systems/Systems.v \
+  modules/IEL/AnthroPraxis/subdomains/BioPraxis/tests/BioPraxis_Smoke.v \
+  modules/IEL/TeloPraxis/modal/FrameSpec.v \
+  modules/IEL/TeloPraxis/theorems/NormalBase.v \
+  modules/IEL/TeloPraxis/theorems/Conservativity.v \
+  modules/IEL/TeloPraxis/systems/Systems.v \
+  modules/IEL/TeloPraxis/tests/TeloPraxis_Smoke.v \
+  modules/IEL/TopoPraxis/modal/FrameSpec.v \
+  modules/IEL/TopoPraxis/theorems/NormalBase.v \
+  modules/IEL/TopoPraxis/theorems/Conservativity.v \
+  modules/IEL/TopoPraxis/systems/Systems.v \
+  modules/IEL/TopoPraxis/tests/TopoPraxis_Smoke.v \
+  modules/IEL/CosmoPraxis/modal/FrameSpec.v \
+  modules/IEL/CosmoPraxis/theorems/NormalBase.v \
+  modules/IEL/CosmoPraxis/theorems/Conservativity.v \
+  modules/IEL/CosmoPraxis/systems/Systems.v \
+  modules/IEL/CosmoPraxis/tests/CosmoPraxis_Smoke.v
   pxl-minimal-kernel-main/coq/PXLv3.v \
   pxl-minimal-kernel-main/coq/PXL_Deep_Soundness.v \
   pxl-minimal-  modules/IE  modules/IEL/MuPraxis/systems/Systems.v \
