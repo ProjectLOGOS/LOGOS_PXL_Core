@@ -4,3 +4,4 @@
 -Q modules/IEL/pillars PXLs.IEL.Pillars
 -Q modules/IEL/experimental PXLs.IEL.Experimental
 -Q tests tests
+-Q api PXLs.API
