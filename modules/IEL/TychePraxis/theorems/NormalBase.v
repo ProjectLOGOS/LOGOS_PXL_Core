@@ -1,3 +1,8 @@
-﻿From Coq Require Import Program Setoids.Setoid.
+﻿From Coq Require Import QArith Program.
+(* From PXLs Require Import PXLv3.
+Require Import modules.IEL.TychePraxis.modal.ProbSpec. *)
 Set Implicit Arguments.
-(* TychePraxis NormalBase  core rules placeholder; keep constructive. *)
+
+Module TycheRules.
+  Definition ok := True. Lemma compiles : ok. exact I. Qed.
+End TycheRules.

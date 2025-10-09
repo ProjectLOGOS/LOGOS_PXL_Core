@@ -96,6 +96,29 @@ Categories: `SUBSTRATE`, `TACTICS`, `THEOREMS`, `META-THEOREMS`, `INTERFACES`, `
 
 - ChronoPraxis status: **Stable (v1.0)** — constructive, zero admits
 
+## IEL Registry
+
+### Core IEL Implementations
+
+- **TropoPraxis (TPX)** — unified normal modal systems (K/T/S4/S5/KD/… via frame flags)
+- **GnosiPraxis (GPX)** — Epistemic IEL (knowledge/belief modalities)
+- **ThemiPraxis (ThPX)** — Deontic IEL (obligation/permission modalities)  
+- **DynaPraxis (DyPX)** — Dynamic IEL (program execution modalities)
+- **HexiPraxis (HxPX)** — Agency IEL (agent capability modalities)
+- **ChremaPraxis (ChPX)** — Resource/Linear IEL (phase semantics)
+- **MuPraxis (MuPX)** — Fixpoint IEL (μ-calculus over finite frames)
+- **TychePraxis (TyPX)** — Probabilistic IEL (finite rational kernels)
+
+### Status
+- ✅ TropoPraxis: v0.1 stub (interfaces only)
+- ✅ GnosiPraxis: v0.1 complete (epistemic axioms via ModalPraxis)
+- ✅ ThemiPraxis: v0.1 complete (deontic axioms via ModalPraxis)
+- ✅ DynaPraxis: v0.1 complete (dynamic axioms via ModalPraxis)
+- ✅ HexiPraxis: v0.1 complete (agency axioms via ModalPraxis)
+- 🔄 ChremaPraxis: v0.1 stub (interfaces only)
+- 🔄 MuPraxis: v0.1 stub (interfaces only)
+- 🔄 TychePraxis: v0.1 stub (interfaces only)
+
 ---
 
-*For detailed IEL specifications, see `IELS_SPEC.md`*
+*For detailed IEL specifications, see `IELS_SPEC.md`
