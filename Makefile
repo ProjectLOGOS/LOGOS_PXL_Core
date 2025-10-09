@@ -11,6 +11,16 @@ VFILES := \
   modules/IEL/ChronoPraxis/theorems/ModalStrength/ModalFree.v \
   modules/IEL/ChronoPraxis/theorems/ModalStrength/S4Overlay.v \
   modules/IEL/ChronoPraxis/theorems/ModalStrength/S5Overlay.v \
+  modules/IEL/ChronoPraxis/theorems/ModalStrength/ModalAxiomsSound.v \
+  modules/IEL/ChronoPraxis/theorems/ModalStrength/ModalRules.v \
+  modules/IEL/ChronoPraxis/theorems/ModalStrength/Systems.v \
+  modules/IEL/ChronoPraxis/theorems/ModalStrength/UMAdapters.v \
+  modules/IEL/ChronoPraxis/theorems/ModalStrength/OverlayEquivalence.v \
+  modules/IEL/ModalPraxis/modal/FrameSpec.v \
+  modules/IEL/ModalPraxis/theorems/NormalBase.v \
+  modules/IEL/ModalPraxis/theorems/DerivedAxioms.v \
+  modules/IEL/ModalPraxis/theorems/Systems.v \
+  modules/IEL/ModalPraxis/theorems/Conservativity.v \
   modules/IEL/ChronoPraxis/interfaces/ChronoPraxis.v \
   modules/IEL/ChronoPraxis/domains/Compatibilism/CompatibilismTheory.v \
   modules/IEL/ChronoPraxis/domains/Empiricism/UnifiedFieldLogic.v \
@@ -25,6 +35,10 @@ VFILES := \
   tests/EmpiricismLorentzTests.v \
   tests/RelativityTests.v \
   tests/ModalStrengthTests.v \
+  tests/ModalAxiomsSoundTests.v \
+  tests/ModalRulesTests.v \
+  tests/UMIEL_Tests.v \
+  tests/OverlayEquivalenceTests.v \
   tests/ModalOntologyTests.v \
   tests/DomainProperties.v \
   pxl-minimal-kernel-main/coq/Constructive_Lindenbaum_Simple.v
@@ -76,4 +90,53 @@ docs-html:
 	@move *.html docs\\html\\ 2>nul || echo "HTML files moved"
 	@echo "✅ Generated HTML documentation in docs/html/"
 
-.PHONY: all clean status prove domain-compatibilism domain-empiricism domain-modal-ontology
+# IEL groups (stubs for wiring; replace as implementations land)
+IEL_FILES := \
+  modules/IEL/TropoPraxis/modal/FrameSpec.v \
+  modules/IEL/TropoPraxis/theorems/NormalBase.v \
+  modules/IEL/TropoPraxis/theorems/Systems.v \
+  modules/IEL/TropoPraxis/theorems/Conservativity.v \
+  tests/TropoPraxis/TropoPraxis_Smoke.v \
+  modules/IEL/GnosiPraxis/modal/FrameSpec.v \
+  modules/IEL/GnosiPraxis/theorems/NormalBase.v \
+  modules/IEL/GnosiPraxis/theorems/Systems.v \
+  modules/IEL/GnosiPraxis/theorems/Conservativity.v \
+  tests/GnosiPraxis/GnosiPraxis_Smoke.v \
+  modules/IEL/ThemiPraxis/modal/FrameSpec.v \
+  modules/IEL/ThemiPraxis/theorems/NormalBase.v \
+  modules/IEL/ThemiPraxis/theorems/Systems.v \
+  modules/IEL/ThemiPraxis/theorems/Conservativity.v \
+  tests/ThemiPraxis/ThemiPraxis_Smoke.v \
+  modules/IEL/DynaPraxis/modal/FrameSpec.v \
+  modules/IEL/DynaPraxis/theorems/NormalBase.v \
+  modules/IEL/DynaPraxis/theorems/Systems.v \
+  modules/IEL/DynaPraxis/theorems/Conservativity.v \
+  tests/DynaPraxis/DynaPraxis_Smoke.v \
+  modules/IEL/HexiPraxis/modal/FrameSpec.v \
+  modules/IEL/HexiPraxis/theorems/NormalBase.v \
+  modules/IEL/HexiPraxis/theorems/Systems.v \
+  modules/IEL/HexiPraxis/theorems/Conservativity.v \
+  tests/HexiPraxis/HexiPraxis_Smoke.v \
+  modules/IEL/ChremaPraxis/modal/FrameSpec.v \
+  modules/IEL/ChremaPraxis/theorems/NormalBase.v \
+  modules/IEL/ChremaPraxis/theorems/Systems.v \
+  modules/IEL/ChremaPraxis/theorems/Conservativity.v \
+  tests/ChremaPraxis/ChremaPraxis_Smoke.v \
+  modules/IEL/MuPraxis/modal/FrameSpec.v \
+  modules/IEL/MuPraxis/theorems/NormalBase.v \
+  modules/IEL/MuPraxis/theorems/Systems.v \
+  modules/IEL/MuPraxis/theorems/Conservativity.v \
+  tests/MuPraxis/MuPraxis_Smoke.v \
+  modules/IEL/TychePraxis/modal/FrameSpec.v \
+  modules/IEL/TychePraxis/theorems/NormalBase.v \
+  modules/IEL/TychePraxis/theorems/Systems.v \
+  modules/IEL/TychePraxis/theorems/Conservativity.v \
+  tests/TychePraxis/TychePraxis_Smoke.v
+
+VFILES += $(IEL_FILES)
+
+.PHONY: iels-all
+iels-all: $(IEL_FILES)
+	@echo "IELs built."
+
+.PHONY: all clean status prove domain-compatibilism domain-empiricism domain-modal-ontology iels-all

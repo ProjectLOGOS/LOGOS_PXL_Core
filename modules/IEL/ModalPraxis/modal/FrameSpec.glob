@@ -1,0 +1,186 @@
+DIGEST bf8300f9968fe673aef742ba150a04d6
+FFrameSpec
+R24:30 Coq.Program.Program <> <> lib
+R32:45 Coq.Setoids.Setoid <> <> lib
+ax 377:380 <> form
+ax 400:403 <> Prov
+R411:414 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R407:410 FrameSpec <> form defax
+ax 431:433 <> Box
+R441:444 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R437:440 FrameSpec <> form defax
+R445:448 FrameSpec <> form defax
+ax 461:463 <> Dia
+R471:474 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R467:470 FrameSpec <> form defax
+R475:478 FrameSpec <> form defax
+ax 491:494 <> Impl
+R502:505 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R498:501 FrameSpec <> form defax
+R510:513 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R506:509 FrameSpec <> form defax
+R514:517 FrameSpec <> form defax
+def 573:575 <> set
+R584:587 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R580:583 FrameSpec <> form defax
+ax 604:606 <> mct
+R613:616 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R610:612 FrameSpec <> set def
+def 677:682 <> In_set
+R687:689 FrameSpec <> set def
+binder 685:685 <> G:13
+R695:698 FrameSpec <> form defax
+binder 693:693 <> p:14
+R711:711 FrameSpec <> G:13 var
+R713:713 FrameSpec <> p:14 var
+def 727:735 <> can_world
+R740:741 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R743:745 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R749:751 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R757:758 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R746:748 FrameSpec <> set def
+binder 742:742 <> G:15
+R752:754 FrameSpec <> mct defax
+R756:756 FrameSpec <> G:15 var
+ax 771:775 <> can_R
+R788:791 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R779:787 FrameSpec <> can_world def
+R801:804 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R792:800 FrameSpec <> can_world def
+ax 821:826 <> forces
+R839:842 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R830:838 FrameSpec <> can_world def
+R847:850 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R843:846 FrameSpec <> form defax
+ax 902:911 <> forces_Box
+binder 922:922 <> w:20
+binder 924:925 <> φ:21
+R945:950 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R985:985 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R928:933 FrameSpec <> forces defax
+R935:935 FrameSpec <> w:20 var
+R938:940 FrameSpec <> Box defax
+R942:943 FrameSpec <> φ:21 var
+binder 958:958 <> u:22
+R970:973 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R961:965 FrameSpec <> can_R defax
+R967:967 FrameSpec <> w:20 var
+R969:969 FrameSpec <> u:22 var
+R974:979 FrameSpec <> forces defax
+R981:981 FrameSpec <> u:22 var
+R983:984 FrameSpec <> φ:21 var
+ax 998:1007 <> forces_Dia
+binder 1018:1018 <> w:25
+binder 1020:1021 <> φ:26
+R1041:1046 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R1081:1081 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R1024:1029 FrameSpec <> forces defax
+R1031:1031 FrameSpec <> w:25 var
+R1034:1036 FrameSpec <> Dia defax
+R1038:1039 FrameSpec <> φ:26 var
+R1047:1053 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R1055:1056 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 1054:1054 <> u:27
+R1066:1069 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R1057:1061 FrameSpec <> can_R defax
+R1063:1063 FrameSpec <> w:25 var
+R1065:1065 FrameSpec <> u:27 var
+R1070:1075 FrameSpec <> forces defax
+R1077:1077 FrameSpec <> u:27 var
+R1079:1080 FrameSpec <> φ:26 var
+ax 1094:1104 <> forces_Impl
+binder 1115:1115 <> w:30
+binder 1117:1118 <> φ:31
+binder 1120:1121 <> ψ:32
+R1145:1150 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R1177:1177 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R1124:1129 FrameSpec <> forces defax
+R1131:1131 FrameSpec <> w:30 var
+R1134:1137 FrameSpec <> Impl defax
+R1139:1140 FrameSpec <> φ:31 var
+R1142:1143 FrameSpec <> ψ:32 var
+R1162:1165 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1151:1156 FrameSpec <> forces defax
+R1158:1158 FrameSpec <> w:30 var
+R1160:1161 FrameSpec <> φ:31 var
+R1166:1171 FrameSpec <> forces defax
+R1173:1173 FrameSpec <> w:30 var
+R1175:1176 FrameSpec <> ψ:32 var
+ind 1250:1255 <> Serial
+constr 1271:1278 <> serial_R
+rec 1250:1255 <> Serial
+proj 1271:1278 <> serial_R
+binder 1293:1293 <> w:36
+R1296:1302 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R1304:1305 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 1303:1303 <> u:37
+R1306:1310 FrameSpec <> can_R defax
+R1312:1312 FrameSpec <> w:36 var
+R1314:1314 FrameSpec <> u:37 var
+ind 1323:1331 <> Reflexive
+constr 1344:1354 <> reflexive_R
+rec 1323:1331 <> Reflexive
+proj 1344:1354 <> reflexive_R
+binder 1366:1366 <> w:40
+R1369:1373 FrameSpec <> can_R defax
+R1375:1375 FrameSpec <> w:40 var
+R1377:1377 FrameSpec <> w:40 var
+ind 1386:1394 <> Symmetric
+constr 1407:1417 <> symmetric_R
+rec 1386:1394 <> Symmetric
+proj 1407:1417 <> symmetric_R
+binder 1429:1429 <> w:43
+binder 1431:1431 <> u:44
+R1443:1446 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1434:1438 FrameSpec <> can_R defax
+R1440:1440 FrameSpec <> w:43 var
+R1442:1442 FrameSpec <> u:44 var
+R1447:1451 FrameSpec <> can_R defax
+R1453:1453 FrameSpec <> u:44 var
+R1455:1455 FrameSpec <> w:43 var
+ind 1464:1473 <> Transitive
+constr 1485:1496 <> transitive_R
+rec 1464:1473 <> Transitive
+proj 1485:1496 <> transitive_R
+binder 1507:1507 <> w:47
+binder 1509:1509 <> u:48
+binder 1511:1511 <> v:49
+R1523:1526 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1514:1518 FrameSpec <> can_R defax
+R1520:1520 FrameSpec <> w:47 var
+R1522:1522 FrameSpec <> u:48 var
+R1536:1539 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1527:1531 FrameSpec <> can_R defax
+R1533:1533 FrameSpec <> u:48 var
+R1535:1535 FrameSpec <> v:49 var
+R1540:1544 FrameSpec <> can_R defax
+R1546:1546 FrameSpec <> w:47 var
+R1548:1548 FrameSpec <> v:49 var
+ind 1557:1565 <> Euclidean
+constr 1578:1585 <> euclid_R
+rec 1557:1565 <> Euclidean
+proj 1578:1585 <> euclid_R
+binder 1600:1600 <> w:52
+binder 1602:1602 <> u:53
+binder 1604:1604 <> v:54
+R1616:1619 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1607:1611 FrameSpec <> can_R defax
+R1613:1613 FrameSpec <> w:52 var
+R1615:1615 FrameSpec <> u:53 var
+R1629:1632 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1620:1624 FrameSpec <> can_R defax
+R1626:1626 FrameSpec <> w:52 var
+R1628:1628 FrameSpec <> v:54 var
+R1633:1637 FrameSpec <> can_R defax
+R1639:1639 FrameSpec <> u:53 var
+R1641:1641 FrameSpec <> v:54 var
+ax 1720:1742 <> completeness_from_truth
+binder 1753:1754 <> φ:56
+R1757:1757 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1779:1783 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 1765:1765 <> w:57
+R1768:1773 FrameSpec <> forces defax
+R1775:1775 FrameSpec <> w:57 var
+R1777:1778 FrameSpec <> φ:56 var
+R1784:1787 FrameSpec <> Prov defax
+R1789:1790 FrameSpec <> φ:56 var

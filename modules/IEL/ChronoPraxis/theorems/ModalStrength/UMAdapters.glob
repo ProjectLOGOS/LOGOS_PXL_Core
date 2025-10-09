@@ -1,0 +1,462 @@
+DIGEST 6028e811dfa2d559c8cb40796f0d72e7
+FUMAdapters
+R24:30 Coq.Program.Program <> <> lib
+R32:45 Coq.Setoids.Setoid <> <> lib
+ax 439:442 <> form
+ax 462:465 <> Prov
+R473:476 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R469:472 UMAdapters <> form defax
+ax 493:495 <> Box
+R503:506 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R499:502 UMAdapters <> form defax
+R507:510 UMAdapters <> form defax
+ax 523:525 <> Dia
+R533:536 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R529:532 UMAdapters <> form defax
+R537:540 UMAdapters <> form defax
+ax 553:556 <> Impl
+R564:567 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R560:563 UMAdapters <> form defax
+R572:575 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R568:571 UMAdapters <> form defax
+R576:579 UMAdapters <> form defax
+def 594:596 <> set
+R605:608 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R601:604 UMAdapters <> form defax
+ax 625:627 <> mct
+R634:637 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R631:633 UMAdapters <> set def
+def 655:663 <> can_world
+R668:669 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R671:673 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R677:679 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R685:686 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R674:676 UMAdapters <> set def
+binder 670:670 <> G:13
+R680:682 UMAdapters <> mct defax
+R684:684 UMAdapters <> G:13 var
+ax 699:703 <> can_R
+R716:719 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R707:715 UMAdapters <> can_world def
+R729:732 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R720:728 UMAdapters <> can_world def
+ax 749:754 <> forces
+R767:770 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R758:766 UMAdapters <> can_world def
+R775:778 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R771:774 UMAdapters <> form defax
+mod 832:833 <> S4
+ind 844:852 S4 Reflexive
+constr 864:874 S4 reflexive_R
+rec 844:852 S4 Reflexive
+proj 864:874 S4 reflexive_R
+binder 885:885 <> w:19
+R888:892 UMAdapters <> can_R defax
+R894:894 UMAdapters <> w:19 var
+R896:896 UMAdapters <> w:19 var
+ind 907:916 S4 Transitive
+constr 928:939 S4 transitive_R
+rec 907:916 S4 Transitive
+proj 928:939 S4 transitive_R
+binder 950:950 <> w:22
+binder 952:952 <> u:23
+binder 954:954 <> v:24
+R966:969 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R957:961 UMAdapters <> can_R defax
+R963:963 UMAdapters <> w:22 var
+R965:965 UMAdapters <> u:23 var
+R979:982 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R970:974 UMAdapters <> can_R defax
+R976:976 UMAdapters <> u:23 var
+R978:978 UMAdapters <> v:24 var
+R983:987 UMAdapters <> can_R defax
+R989:989 UMAdapters <> w:22 var
+R991:991 UMAdapters <> v:24 var
+R998:999 UMAdapters S4 <> mod
+mod 1010:1011 <> S5
+ind 1022:1030 S5 Reflexive
+constr 1042:1052 S5 reflexive_R
+rec 1022:1030 S5 Reflexive
+proj 1042:1052 S5 reflexive_R
+binder 1063:1063 <> w:27
+R1066:1070 UMAdapters <> can_R defax
+R1072:1072 UMAdapters <> w:27 var
+R1074:1074 UMAdapters <> w:27 var
+ind 1085:1093 S5 Symmetric
+constr 1105:1115 S5 symmetric_R
+rec 1085:1093 S5 Symmetric
+proj 1105:1115 S5 symmetric_R
+binder 1126:1126 <> w:30
+binder 1128:1128 <> u:31
+R1140:1143 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1131:1135 UMAdapters <> can_R defax
+R1137:1137 UMAdapters <> w:30 var
+R1139:1139 UMAdapters <> u:31 var
+R1144:1148 UMAdapters <> can_R defax
+R1150:1150 UMAdapters <> u:31 var
+R1152:1152 UMAdapters <> w:30 var
+ind 1163:1172 S5 Transitive
+constr 1184:1195 S5 transitive_R
+rec 1163:1172 S5 Transitive
+proj 1184:1195 S5 transitive_R
+binder 1206:1206 <> w:34
+binder 1208:1208 <> u:35
+binder 1210:1210 <> v:36
+R1222:1225 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1213:1217 UMAdapters <> can_R defax
+R1219:1219 UMAdapters <> w:34 var
+R1221:1221 UMAdapters <> u:35 var
+R1235:1238 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1226:1230 UMAdapters <> can_R defax
+R1232:1232 UMAdapters <> u:35 var
+R1234:1234 UMAdapters <> v:36 var
+R1239:1243 UMAdapters <> can_R defax
+R1245:1245 UMAdapters <> w:34 var
+R1247:1247 UMAdapters <> v:36 var
+R1254:1255 UMAdapters S5 <> mod
+ind 1292:1297 <> Serial
+constr 1313:1320 <> serial_R
+rec 1292:1297 <> Serial
+proj 1313:1320 <> serial_R
+binder 1335:1335 <> w:39
+R1338:1344 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R1346:1347 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 1345:1345 <> u:40
+R1348:1352 UMAdapters <> can_R defax
+R1354:1354 UMAdapters <> w:39 var
+R1356:1356 UMAdapters <> u:40 var
+ind 1365:1373 <> Reflexive
+constr 1386:1396 <> reflexive_R
+rec 1365:1373 <> Reflexive
+proj 1386:1396 <> reflexive_R
+binder 1408:1408 <> w:43
+R1411:1415 UMAdapters <> can_R defax
+R1417:1417 UMAdapters <> w:43 var
+R1419:1419 UMAdapters <> w:43 var
+ind 1428:1436 <> Symmetric
+constr 1449:1459 <> symmetric_R
+rec 1428:1436 <> Symmetric
+proj 1449:1459 <> symmetric_R
+binder 1471:1471 <> w:46
+binder 1473:1473 <> u:47
+R1485:1488 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1476:1480 UMAdapters <> can_R defax
+R1482:1482 UMAdapters <> w:46 var
+R1484:1484 UMAdapters <> u:47 var
+R1489:1493 UMAdapters <> can_R defax
+R1495:1495 UMAdapters <> u:47 var
+R1497:1497 UMAdapters <> w:46 var
+ind 1506:1515 <> Transitive
+constr 1527:1538 <> transitive_R
+rec 1506:1515 <> Transitive
+proj 1527:1538 <> transitive_R
+binder 1549:1549 <> w:50
+binder 1551:1551 <> u:51
+binder 1553:1553 <> v:52
+R1565:1568 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1556:1560 UMAdapters <> can_R defax
+R1562:1562 UMAdapters <> w:50 var
+R1564:1564 UMAdapters <> u:51 var
+R1578:1581 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1569:1573 UMAdapters <> can_R defax
+R1575:1575 UMAdapters <> u:51 var
+R1577:1577 UMAdapters <> v:52 var
+R1582:1586 UMAdapters <> can_R defax
+R1588:1588 UMAdapters <> w:50 var
+R1590:1590 UMAdapters <> v:52 var
+ind 1599:1607 <> Euclidean
+constr 1620:1627 <> euclid_R
+rec 1599:1607 <> Euclidean
+proj 1620:1627 <> euclid_R
+binder 1642:1642 <> w:55
+binder 1644:1644 <> u:56
+binder 1646:1646 <> v:57
+R1658:1661 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1649:1653 UMAdapters <> can_R defax
+R1655:1655 UMAdapters <> w:55 var
+R1657:1657 UMAdapters <> u:56 var
+R1671:1674 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1662:1666 UMAdapters <> can_R defax
+R1668:1668 UMAdapters <> w:55 var
+R1670:1670 UMAdapters <> v:57 var
+R1675:1679 UMAdapters <> can_R defax
+R1681:1681 UMAdapters <> u:56 var
+R1683:1683 UMAdapters <> v:57 var
+ax 1719:1728 <> provable_K
+binder 1739:1740 <> φ:59
+binder 1742:1743 <> ψ:60
+R1746:1749 UMAdapters <> Prov defax
+R1752:1755 UMAdapters <> Impl defax
+R1758:1760 UMAdapters <> Box defax
+R1763:1766 UMAdapters <> Impl defax
+R1768:1769 UMAdapters <> φ:59 var
+R1771:1772 UMAdapters <> ψ:60 var
+R1777:1780 UMAdapters <> Impl defax
+R1783:1785 UMAdapters <> Box defax
+R1787:1788 UMAdapters <> φ:59 var
+R1792:1794 UMAdapters <> Box defax
+R1796:1797 UMAdapters <> ψ:60 var
+ax 1813:1834 <> provable_necessitation
+binder 1845:1846 <> φ:63
+R1849:1849 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1871:1875 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 1857:1857 <> w:64
+R1860:1865 UMAdapters <> forces defax
+R1867:1867 UMAdapters <> w:64 var
+R1869:1870 UMAdapters <> φ:63 var
+R1876:1879 UMAdapters <> Prov defax
+R1882:1884 UMAdapters <> Box defax
+R1886:1887 UMAdapters <> φ:63 var
+ax 1901:1910 <> provable_T
+R1929:1937 UMAdapters <> Reflexive class
+binder 1922:1926 <> Hrefl:67
+R1948:1957 UMAdapters <> Transitive class
+binder 1941:1945 <> Htran:68
+binder 1960:1961 <> φ:69
+R1964:1967 UMAdapters <> Prov defax
+R1970:1973 UMAdapters <> Impl defax
+R1976:1978 UMAdapters <> Box defax
+R1980:1981 UMAdapters <> φ:69 var
+R1984:1985 UMAdapters <> φ:69 var
+ax 1999:2008 <> provable_4
+R2027:2035 UMAdapters <> Reflexive class
+binder 2020:2024 <> Hrefl:72
+R2046:2055 UMAdapters <> Transitive class
+binder 2039:2043 <> Htran:73
+binder 2058:2059 <> φ:74
+R2062:2065 UMAdapters <> Prov defax
+R2068:2071 UMAdapters <> Impl defax
+R2074:2076 UMAdapters <> Box defax
+R2078:2079 UMAdapters <> φ:74 var
+R2083:2085 UMAdapters <> Box defax
+R2088:2090 UMAdapters <> Box defax
+R2092:2093 UMAdapters <> φ:74 var
+ax 2109:2118 <> provable_B
+R2136:2144 UMAdapters <> Symmetric class
+binder 2130:2133 <> Hsym:77
+R2155:2164 UMAdapters <> Transitive class
+binder 2148:2152 <> Htran:78
+R2175:2183 UMAdapters <> Reflexive class
+binder 2168:2172 <> Hrefl:79
+binder 2186:2187 <> φ:80
+R2190:2193 UMAdapters <> Prov defax
+R2196:2199 UMAdapters <> Impl defax
+R2201:2202 UMAdapters <> φ:80 var
+R2205:2207 UMAdapters <> Box defax
+R2210:2212 UMAdapters <> Dia defax
+R2214:2215 UMAdapters <> φ:80 var
+ax 2231:2240 <> provable_5
+R2258:2266 UMAdapters <> Symmetric class
+binder 2252:2255 <> Hsym:83
+R2277:2286 UMAdapters <> Transitive class
+binder 2270:2274 <> Htran:84
+R2297:2305 UMAdapters <> Reflexive class
+binder 2290:2294 <> Hrefl:85
+binder 2308:2309 <> φ:86
+R2312:2315 UMAdapters <> Prov defax
+R2318:2321 UMAdapters <> Impl defax
+R2324:2326 UMAdapters <> Dia defax
+R2328:2329 UMAdapters <> φ:86 var
+R2333:2335 UMAdapters <> Box defax
+R2338:2340 UMAdapters <> Dia defax
+R2342:2343 UMAdapters <> φ:86 var
+mod 2382:2389 <> S4_As_UM
+sec 2402:2405 S4_As_UM Inst
+var  2421:2425 S4_As_UM.Inst Hrefl
+var  2444:2448 S4_As_UM.Inst Htran
+R2429:2440 UMAdapters S4 Reflexive class
+R2452:2464 UMAdapters S4 Transitive class
+def 2543:2554 S4_As_UM UM_Reflexive
+R2558:2566 UMAdapters <> Reflexive class
+binder 2575:2575 <> w:91
+R2580:2593 UMAdapters S4 reflexive_R def
+R2595:2595 UMAdapters <> w:91 var
+def 2613:2625 S4_As_UM UM_Transitive
+R2629:2638 UMAdapters <> Transitive class
+binder 2647:2647 <> w:92
+binder 2649:2649 <> u:93
+binder 2651:2651 <> v:94
+R2656:2670 UMAdapters S4 transitive_R def
+R2676:2676 UMAdapters <> v:94 var
+R2674:2674 UMAdapters <> u:93 var
+R2672:2672 UMAdapters <> w:92 var
+prf 2767:2770 S4_As_UM T_eq
+binder 2781:2782 <> φ:95
+R2785:2788 UMAdapters <> Prov defax
+R2791:2794 UMAdapters <> Impl defax
+R2797:2799 UMAdapters <> Box defax
+R2801:2802 UMAdapters <> φ:95 var
+R2805:2806 UMAdapters <> φ:95 var
+R2838:2847 UMAdapters <> provable_T defax
+R2849:2860 UMAdapters S4_As_UM UM_Reflexive def
+R2862:2874 UMAdapters S4_As_UM UM_Transitive def
+R2838:2847 UMAdapters <> provable_T defax
+R2849:2860 UMAdapters S4_As_UM UM_Reflexive def
+R2862:2874 UMAdapters S4_As_UM UM_Transitive def
+prf 2903:2909 S4_As_UM Four_eq
+binder 2920:2921 <> φ:96
+R2924:2927 UMAdapters <> Prov defax
+R2930:2933 UMAdapters <> Impl defax
+R2936:2938 UMAdapters <> Box defax
+R2940:2941 UMAdapters <> φ:96 var
+R2945:2947 UMAdapters <> Box defax
+R2950:2952 UMAdapters <> Box defax
+R2954:2955 UMAdapters <> φ:96 var
+R2989:2998 UMAdapters <> provable_4 defax
+R3000:3011 UMAdapters S4_As_UM UM_Reflexive def
+R3013:3025 UMAdapters S4_As_UM UM_Transitive def
+R2989:2998 UMAdapters <> provable_4 defax
+R3000:3011 UMAdapters S4_As_UM UM_Reflexive def
+R3013:3025 UMAdapters S4_As_UM UM_Transitive def
+prf 3054:3057 S4_As_UM K_eq
+binder 3068:3069 <> φ:97
+binder 3071:3072 <> ψ:98
+R3075:3078 UMAdapters <> Prov defax
+R3081:3084 UMAdapters <> Impl defax
+R3087:3089 UMAdapters <> Box defax
+R3092:3095 UMAdapters <> Impl defax
+R3097:3098 UMAdapters <> φ:97 var
+R3100:3101 UMAdapters <> ψ:98 var
+R3106:3109 UMAdapters <> Impl defax
+R3112:3114 UMAdapters <> Box defax
+R3116:3117 UMAdapters <> φ:97 var
+R3121:3123 UMAdapters <> Box defax
+R3125:3126 UMAdapters <> ψ:98 var
+R3163:3172 UMAdapters <> provable_K defax
+R3163:3172 UMAdapters <> provable_K defax
+prf 3197:3202 S4_As_UM Nec_eq
+binder 3213:3214 <> φ:99
+R3217:3217 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3239:3243 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 3225:3225 <> w:100
+R3228:3233 UMAdapters <> forces defax
+R3235:3235 UMAdapters <> w:100 var
+R3237:3238 UMAdapters <> φ:99 var
+R3244:3247 UMAdapters <> Prov defax
+R3250:3252 UMAdapters <> Box defax
+R3254:3255 UMAdapters <> φ:99 var
+R3289:3310 UMAdapters <> provable_necessitation defax
+R3289:3310 UMAdapters <> provable_necessitation defax
+R3333:3336 UMAdapters S4_As_UM.Inst <> sec
+R3343:3350 UMAdapters S4_As_UM <> mod
+mod 3361:3368 <> S5_As_UM
+sec 3381:3384 S5_As_UM Inst
+var  3400:3404 S5_As_UM.Inst Hrefl
+var  3423:3426 S5_As_UM.Inst Hsym
+var  3445:3449 S5_As_UM.Inst Htran
+R3408:3419 UMAdapters S5 Reflexive class
+R3430:3441 UMAdapters S5 Symmetric class
+R3453:3465 UMAdapters S5 Transitive class
+def 3489:3500 S5_As_UM UM_Reflexive
+R3504:3512 UMAdapters <> Reflexive class
+binder 3521:3521 <> w:104
+R3526:3539 UMAdapters S5 reflexive_R def
+R3541:3541 UMAdapters <> w:104 var
+def 3559:3570 S5_As_UM UM_Symmetric
+R3574:3582 UMAdapters <> Symmetric class
+binder 3591:3591 <> w:105
+binder 3593:3593 <> u:106
+R3598:3611 UMAdapters S5 symmetric_R def
+R3615:3615 UMAdapters <> u:106 var
+R3613:3613 UMAdapters <> w:105 var
+def 3633:3645 S5_As_UM UM_Transitive
+R3649:3658 UMAdapters <> Transitive class
+binder 3667:3667 <> w:107
+binder 3669:3669 <> u:108
+binder 3671:3671 <> v:109
+R3676:3690 UMAdapters S5 transitive_R def
+R3696:3696 UMAdapters <> v:109 var
+R3694:3694 UMAdapters <> u:108 var
+R3692:3692 UMAdapters <> w:107 var
+prf 3716:3719 S5_As_UM B_eq
+binder 3730:3731 <> φ:110
+R3734:3737 UMAdapters <> Prov defax
+R3740:3743 UMAdapters <> Impl defax
+R3745:3746 UMAdapters <> φ:110 var
+R3749:3751 UMAdapters <> Box defax
+R3754:3756 UMAdapters <> Dia defax
+R3758:3759 UMAdapters <> φ:110 var
+R3793:3802 UMAdapters <> provable_B defax
+R3804:3815 UMAdapters S5_As_UM UM_Symmetric def
+R3817:3829 UMAdapters S5_As_UM UM_Transitive def
+R3831:3842 UMAdapters S5_As_UM UM_Reflexive def
+R3793:3802 UMAdapters <> provable_B defax
+R3804:3815 UMAdapters S5_As_UM UM_Symmetric def
+R3817:3829 UMAdapters S5_As_UM UM_Transitive def
+R3831:3842 UMAdapters S5_As_UM UM_Reflexive def
+prf 3871:3877 S5_As_UM Five_eq
+binder 3888:3889 <> φ:111
+R3892:3895 UMAdapters <> Prov defax
+R3898:3901 UMAdapters <> Impl defax
+R3904:3906 UMAdapters <> Dia defax
+R3908:3909 UMAdapters <> φ:111 var
+R3913:3915 UMAdapters <> Box defax
+R3918:3920 UMAdapters <> Dia defax
+R3922:3923 UMAdapters <> φ:111 var
+R3957:3966 UMAdapters <> provable_5 defax
+R3968:3979 UMAdapters S5_As_UM UM_Symmetric def
+R3981:3993 UMAdapters S5_As_UM UM_Transitive def
+R3995:4006 UMAdapters S5_As_UM UM_Reflexive def
+R3957:3966 UMAdapters <> provable_5 defax
+R3968:3979 UMAdapters S5_As_UM UM_Symmetric def
+R3981:3993 UMAdapters S5_As_UM UM_Transitive def
+R3995:4006 UMAdapters S5_As_UM UM_Reflexive def
+prf 4035:4038 S5_As_UM T_eq
+binder 4049:4050 <> φ:112
+R4053:4056 UMAdapters <> Prov defax
+R4059:4062 UMAdapters <> Impl defax
+R4065:4067 UMAdapters <> Box defax
+R4069:4070 UMAdapters <> φ:112 var
+R4073:4074 UMAdapters <> φ:112 var
+R4106:4115 UMAdapters <> provable_T defax
+R4117:4128 UMAdapters S5_As_UM UM_Reflexive def
+R4130:4142 UMAdapters S5_As_UM UM_Transitive def
+R4106:4115 UMAdapters <> provable_T defax
+R4117:4128 UMAdapters S5_As_UM UM_Reflexive def
+R4130:4142 UMAdapters S5_As_UM UM_Transitive def
+prf 4171:4177 S5_As_UM Four_eq
+binder 4188:4189 <> φ:113
+R4192:4195 UMAdapters <> Prov defax
+R4198:4201 UMAdapters <> Impl defax
+R4204:4206 UMAdapters <> Box defax
+R4208:4209 UMAdapters <> φ:113 var
+R4213:4215 UMAdapters <> Box defax
+R4218:4220 UMAdapters <> Box defax
+R4222:4223 UMAdapters <> φ:113 var
+R4257:4266 UMAdapters <> provable_4 defax
+R4268:4279 UMAdapters S5_As_UM UM_Reflexive def
+R4281:4293 UMAdapters S5_As_UM UM_Transitive def
+R4257:4266 UMAdapters <> provable_4 defax
+R4268:4279 UMAdapters S5_As_UM UM_Reflexive def
+R4281:4293 UMAdapters S5_As_UM UM_Transitive def
+prf 4322:4325 S5_As_UM K_eq
+binder 4336:4337 <> φ:114
+binder 4339:4340 <> ψ:115
+R4343:4346 UMAdapters <> Prov defax
+R4349:4352 UMAdapters <> Impl defax
+R4355:4357 UMAdapters <> Box defax
+R4360:4363 UMAdapters <> Impl defax
+R4365:4366 UMAdapters <> φ:114 var
+R4368:4369 UMAdapters <> ψ:115 var
+R4374:4377 UMAdapters <> Impl defax
+R4380:4382 UMAdapters <> Box defax
+R4384:4385 UMAdapters <> φ:114 var
+R4389:4391 UMAdapters <> Box defax
+R4393:4394 UMAdapters <> ψ:115 var
+R4431:4440 UMAdapters <> provable_K defax
+R4431:4440 UMAdapters <> provable_K defax
+prf 4465:4470 S5_As_UM Nec_eq
+binder 4481:4482 <> φ:116
+R4485:4485 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4507:4511 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 4493:4493 <> w:117
+R4496:4501 UMAdapters <> forces defax
+R4503:4503 UMAdapters <> w:117 var
+R4505:4506 UMAdapters <> φ:116 var
+R4512:4515 UMAdapters <> Prov defax
+R4518:4520 UMAdapters <> Box defax
+R4522:4523 UMAdapters <> φ:116 var
+R4557:4578 UMAdapters <> provable_necessitation defax
+R4557:4578 UMAdapters <> provable_necessitation defax
+R4601:4604 UMAdapters S5_As_UM.Inst <> sec
+R4611:4618 UMAdapters S5_As_UM <> mod

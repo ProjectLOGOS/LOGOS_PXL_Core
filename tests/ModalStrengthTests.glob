@@ -1,0 +1,318 @@
+DIGEST 8068028f6713b004f5abaea8d27bfa45
+FModalStrengthTests
+R24:30 Coq.Program.Program <> <> lib
+ind 451:454 <> form
+constr 468:470 <> Bot
+constr 481:484 <> Atom
+constr 502:505 <> Impl
+constr 532:535 <> Conj
+constr 562:565 <> Disj
+constr 592:594 <> Neg
+constr 613:615 <> Box
+constr 634:636 <> Dia
+R474:477 ModalStrengthTests <> form:1 ind
+R491:494 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R488:490 Coq.Init.Datatypes <> nat ind
+R495:498 ModalStrengthTests <> form:1 ind
+R513:516 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R509:512 ModalStrengthTests <> form:1 ind
+R521:524 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R517:520 ModalStrengthTests <> form:1 ind
+R525:528 ModalStrengthTests <> form:1 ind
+R543:546 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R539:542 ModalStrengthTests <> form:1 ind
+R551:554 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R547:550 ModalStrengthTests <> form:1 ind
+R555:558 ModalStrengthTests <> form:1 ind
+R573:576 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R569:572 ModalStrengthTests <> form:1 ind
+R581:584 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R577:580 ModalStrengthTests <> form:1 ind
+R585:588 ModalStrengthTests <> form:1 ind
+R602:605 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R598:601 ModalStrengthTests <> form:1 ind
+R606:609 ModalStrengthTests <> form:1 ind
+R623:626 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R619:622 ModalStrengthTests <> form:1 ind
+R627:630 ModalStrengthTests <> form:1 ind
+R644:647 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R640:643 ModalStrengthTests <> form:1 ind
+R648:651 ModalStrengthTests <> form:1 ind
+scheme 451:454 <> form_rect
+scheme 451:454 <> form_ind
+scheme 451:454 <> form_rec
+scheme 451:454 <> form_sind
+ax 665:669 <> Gamma
+def 690:698 <> can_world
+R703:703 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R709:711 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R717:719 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R724:724 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R712:716 ModalStrengthTests <> Gamma defax
+binder 704:708 <> gamma:5
+R720:723 Coq.Init.Logic <> True ind
+ax 737:742 <> forces
+R755:758 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R746:754 ModalStrengthTests <> can_world def
+R763:766 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R759:762 ModalStrengthTests <> form ind
+ax 783:788 <> In_set
+R797:800 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R792:796 ModalStrengthTests <> Gamma defax
+R805:808 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R801:804 ModalStrengthTests <> form ind
+ax 825:829 <> can_R
+R842:845 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R833:841 ModalStrengthTests <> can_world def
+R855:858 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R846:854 ModalStrengthTests <> can_world def
+ax 875:878 <> Prov
+R886:889 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R882:885 ModalStrengthTests <> form ind
+def 906:915 <> modal_free
+R922:925 ModalStrengthTests <> form ind
+binder 918:919 <> φ:14
+R946:947 ModalStrengthTests <> φ:14 var
+R958:960 ModalStrengthTests <> Bot constr
+R964:967 ModalStrengthTests <> Atom constr
+R974:977 Coq.Init.Logic <> True ind
+R974:977 Coq.Init.Logic <> True ind
+R983:986 ModalStrengthTests <> Impl constr
+R994:997 ModalStrengthTests <> Conj constr
+R1005:1008 ModalStrengthTests <> Disj constr
+R1029:1032 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R1017:1026 ModalStrengthTests <> modal_free:15 def
+R1033:1042 ModalStrengthTests <> modal_free:15 def
+R1029:1032 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R1017:1026 ModalStrengthTests <> modal_free:15 def
+R1033:1042 ModalStrengthTests <> modal_free:15 def
+R1029:1032 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R1017:1026 ModalStrengthTests <> modal_free:15 def
+R1033:1042 ModalStrengthTests <> modal_free:15 def
+R1050:1052 ModalStrengthTests <> Neg constr
+R1059:1068 ModalStrengthTests <> modal_free:15 def
+R1076:1078 ModalStrengthTests <> Box constr
+R1084:1086 ModalStrengthTests <> Dia constr
+R1093:1097 Coq.Init.Logic <> False ind
+R1093:1097 Coq.Init.Logic <> False ind
+mod 1114:1115 <> S4
+ind 1126:1134 S4 Reflexive
+constr 1146:1156 S4 reflexive_R
+rec 1126:1134 S4 Reflexive
+proj 1146:1156 S4 reflexive_R
+R1177:1185 ModalStrengthTests <> can_world def
+binder 1172:1172 <> w:18
+binder 1174:1174 <> u:19
+R1218:1221 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1189:1189 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1201:1205 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1217:1217 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1190:1198 Coq.Init.Specif <> proj1_sig def
+R1200:1200 ModalStrengthTests <> w:18 var
+R1206:1214 Coq.Init.Specif <> proj1_sig def
+R1216:1216 ModalStrengthTests <> u:19 var
+R1222:1226 ModalStrengthTests <> can_R defax
+R1228:1228 ModalStrengthTests <> w:18 var
+R1230:1230 ModalStrengthTests <> u:19 var
+ind 1241:1250 S4 Transitive
+constr 1262:1273 S4 transitive_R
+rec 1241:1250 S4 Transitive
+proj 1262:1273 S4 transitive_R
+R1296:1304 ModalStrengthTests <> can_world def
+binder 1289:1289 <> w:22
+binder 1291:1291 <> u:23
+binder 1293:1293 <> v:24
+R1317:1320 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1308:1312 ModalStrengthTests <> can_R defax
+R1314:1314 ModalStrengthTests <> w:22 var
+R1316:1316 ModalStrengthTests <> u:23 var
+R1330:1333 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1321:1325 ModalStrengthTests <> can_R defax
+R1327:1327 ModalStrengthTests <> u:23 var
+R1329:1329 ModalStrengthTests <> v:24 var
+R1334:1338 ModalStrengthTests <> can_R defax
+R1340:1340 ModalStrengthTests <> w:22 var
+R1342:1342 ModalStrengthTests <> v:24 var
+ax 1360:1380 S4 conservative_nonmodal
+R1403:1411 ModalStrengthTests S4 Reflexive class
+binder 1396:1400 <> Hrefl:26
+R1422:1431 ModalStrengthTests S4 Transitive class
+binder 1415:1419 <> Htran:27
+binder 1434:1435 <> φ:28
+R1451:1460 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1438:1447 ModalStrengthTests <> modal_free def
+R1449:1450 ModalStrengthTests <> φ:28 var
+R1461:1461 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1483:1487 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 1469:1469 <> w:29
+R1472:1477 ModalStrengthTests <> forces defax
+R1479:1479 ModalStrengthTests <> w:29 var
+R1481:1482 ModalStrengthTests <> φ:28 var
+R1488:1491 ModalStrengthTests <> Prov defax
+R1493:1494 ModalStrengthTests <> φ:28 var
+R1501:1502 ModalStrengthTests S4 <> mod
+mod 1513:1514 <> S5
+ind 1525:1533 S5 Reflexive
+constr 1545:1555 S5 reflexive_R
+rec 1525:1533 S5 Reflexive
+proj 1545:1555 S5 reflexive_R
+R1576:1584 ModalStrengthTests <> can_world def
+binder 1571:1571 <> w:33
+binder 1573:1573 <> u:34
+R1617:1620 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1588:1588 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1600:1604 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1616:1616 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1589:1597 Coq.Init.Specif <> proj1_sig def
+R1599:1599 ModalStrengthTests <> w:33 var
+R1605:1613 Coq.Init.Specif <> proj1_sig def
+R1615:1615 ModalStrengthTests <> u:34 var
+R1621:1625 ModalStrengthTests <> can_R defax
+R1627:1627 ModalStrengthTests <> w:33 var
+R1629:1629 ModalStrengthTests <> u:34 var
+ind 1640:1648 S5 Symmetric
+constr 1660:1670 S5 symmetric_R
+rec 1640:1648 S5 Symmetric
+proj 1660:1670 S5 symmetric_R
+R1691:1699 ModalStrengthTests <> can_world def
+binder 1686:1686 <> w:37
+binder 1688:1688 <> u:38
+R1712:1715 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1703:1707 ModalStrengthTests <> can_R defax
+R1709:1709 ModalStrengthTests <> w:37 var
+R1711:1711 ModalStrengthTests <> u:38 var
+R1716:1720 ModalStrengthTests <> can_R defax
+R1722:1722 ModalStrengthTests <> u:38 var
+R1724:1724 ModalStrengthTests <> w:37 var
+ind 1735:1744 S5 Transitive
+constr 1756:1767 S5 transitive_R
+rec 1735:1744 S5 Transitive
+proj 1756:1767 S5 transitive_R
+R1790:1798 ModalStrengthTests <> can_world def
+binder 1783:1783 <> w:41
+binder 1785:1785 <> u:42
+binder 1787:1787 <> v:43
+R1811:1814 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1802:1806 ModalStrengthTests <> can_R defax
+R1808:1808 ModalStrengthTests <> w:41 var
+R1810:1810 ModalStrengthTests <> u:42 var
+R1824:1827 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1815:1819 ModalStrengthTests <> can_R defax
+R1821:1821 ModalStrengthTests <> u:42 var
+R1823:1823 ModalStrengthTests <> v:43 var
+R1828:1832 ModalStrengthTests <> can_R defax
+R1834:1834 ModalStrengthTests <> w:41 var
+R1836:1836 ModalStrengthTests <> v:43 var
+ax 1854:1874 S5 conservative_nonmodal
+R1897:1905 ModalStrengthTests S5 Reflexive class
+binder 1890:1894 <> Hrefl:45
+R1915:1923 ModalStrengthTests S5 Symmetric class
+binder 1909:1912 <> Hsym:46
+R1934:1943 ModalStrengthTests S5 Transitive class
+binder 1927:1931 <> Htran:47
+binder 1946:1947 <> φ:48
+R1963:1972 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1950:1959 ModalStrengthTests <> modal_free def
+R1961:1962 ModalStrengthTests <> φ:48 var
+R1973:1973 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1995:1999 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 1981:1981 <> w:49
+R1984:1989 ModalStrengthTests <> forces defax
+R1991:1991 ModalStrengthTests <> w:49 var
+R1993:1994 ModalStrengthTests <> φ:48 var
+R2000:2003 ModalStrengthTests <> Prov defax
+R2005:2006 ModalStrengthTests <> φ:48 var
+R2013:2014 ModalStrengthTests S5 <> mod
+def 2018:2026 <> Unnamed_thm
+R2023:2026 Coq.Init.Logic <> True ind
+R2035:2035 Coq.Init.Logic <> I constr
+R2035:2035 Coq.Init.Logic <> I constr
+ax 2123:2124 <> φ
+R2128:2131 ModalStrengthTests <> form ind
+ax 2144:2146 <> Hmf
+R2150:2159 ModalStrengthTests <> modal_free def
+R2161:2162 ModalStrengthTests <> φ defax
+ax 2175:2180 <> Hvalid
+binder 2191:2191 <> w:56
+R2194:2199 ModalStrengthTests <> forces defax
+R2201:2201 ModalStrengthTests <> w:56 var
+R2203:2204 ModalStrengthTests <> φ defax
+R2214:2237 ModalStrengthTests <> conservative_nonmodal defax
+R2246:2269 ModalStrengthTests <> conservative_nonmodal defax
+ax 2344:2344 <> A
+R2348:2350 Coq.Init.Datatypes <> nat ind
+def 2364:2377 <> prop_tautology
+R2382:2385 ModalStrengthTests <> Impl constr
+R2388:2391 ModalStrengthTests <> Atom constr
+R2393:2393 ModalStrengthTests <> A defax
+R2397:2400 ModalStrengthTests <> Atom constr
+R2402:2402 ModalStrengthTests <> A defax
+prf 2413:2437 <> prop_tautology_modal_free
+R2441:2450 ModalStrengthTests <> modal_free def
+R2452:2465 ModalStrengthTests <> prop_tautology def
+R2484:2497 ModalStrengthTests <> prop_tautology def
+R2500:2509 ModalStrengthTests <> modal_free def
+R2525:2525 Coq.Init.Logic <> I constr
+R2525:2525 Coq.Init.Logic <> I constr
+R2525:2525 Coq.Init.Logic <> I constr
+prf 2605:2631 <> S4_conserves_prop_tautology
+R2652:2663 ModalStrengthTests <> Reflexive class
+binder 2645:2649 <> Hrefl:61
+R2674:2686 ModalStrengthTests <> Transitive class
+binder 2667:2671 <> Htran:62
+R2694:2694 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2728:2732 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 2702:2702 <> w:63
+R2705:2710 ModalStrengthTests <> forces defax
+R2712:2712 ModalStrengthTests <> w:63 var
+R2714:2727 ModalStrengthTests <> prop_tautology def
+R2733:2736 ModalStrengthTests <> Prov defax
+R2738:2751 ModalStrengthTests <> prop_tautology def
+R2799:2822 ModalStrengthTests <> conservative_nonmodal defax
+R2799:2822 ModalStrengthTests <> conservative_nonmodal defax
+R2848:2872 ModalStrengthTests <> prop_tautology_modal_free thm
+R2848:2872 ModalStrengthTests <> prop_tautology_modal_free thm
+prf 2905:2931 <> S5_conserves_prop_tautology
+R2952:2963 ModalStrengthTests <> Reflexive class
+binder 2945:2949 <> Hrefl:64
+R2973:2984 ModalStrengthTests <> Symmetric class
+binder 2967:2970 <> Hsym:65
+R2995:3007 ModalStrengthTests <> Transitive class
+binder 2988:2992 <> Htran:66
+R3015:3015 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3049:3053 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 3023:3023 <> w:67
+R3026:3031 ModalStrengthTests <> forces defax
+R3033:3033 ModalStrengthTests <> w:67 var
+R3035:3048 ModalStrengthTests <> prop_tautology def
+R3054:3057 ModalStrengthTests <> Prov defax
+R3059:3072 ModalStrengthTests <> prop_tautology def
+R3125:3148 ModalStrengthTests <> conservative_nonmodal defax
+R3125:3148 ModalStrengthTests <> conservative_nonmodal defax
+R3179:3203 ModalStrengthTests <> prop_tautology_modal_free thm
+R3179:3203 ModalStrengthTests <> prop_tautology_modal_free thm
+ax 3295:3295 <> B
+R3299:3301 Coq.Init.Datatypes <> nat ind
+def 3315:3327 <> modal_formula
+R3332:3334 ModalStrengthTests <> Box constr
+R3337:3340 ModalStrengthTests <> Atom constr
+R3342:3342 ModalStrengthTests <> B defax
+def 3357:3369 <> mixed_formula
+R3374:3377 ModalStrengthTests <> Impl constr
+R3379:3391 ModalStrengthTests <> modal_formula def
+R3394:3397 ModalStrengthTests <> Atom constr
+R3399:3399 ModalStrengthTests <> A defax
+prf 3410:3437 <> modal_formula_not_modal_free
+R3441:3442 Coq.Init.Logic <> ::type_scope:'~'_x not
+R3443:3452 ModalStrengthTests <> modal_free def
+R3454:3466 ModalStrengthTests <> modal_formula def
+R3485:3497 ModalStrengthTests <> modal_formula def
+R3500:3509 ModalStrengthTests <> modal_free def
+prf 3542:3569 <> mixed_formula_not_modal_free
+R3573:3574 Coq.Init.Logic <> ::type_scope:'~'_x not
+R3575:3584 ModalStrengthTests <> modal_free def
+R3586:3598 ModalStrengthTests <> mixed_formula def
+R3617:3629 ModalStrengthTests <> mixed_formula def
+R3632:3641 ModalStrengthTests <> modal_free def
+R3681:3708 ModalStrengthTests <> modal_formula_not_modal_free thm
+R3681:3708 ModalStrengthTests <> modal_formula_not_modal_free thm

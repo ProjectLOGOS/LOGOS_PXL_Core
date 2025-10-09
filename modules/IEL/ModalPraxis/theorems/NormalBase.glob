@@ -1,0 +1,198 @@
+DIGEST 3f4d68b173976b5d311cce9c20e2ac6d
+FNormalBase
+R24:30 Coq.Program.Program <> <> lib
+R32:45 Coq.Setoids.Setoid <> <> lib
+ax 280:283 <> form
+ax 303:306 <> Prov
+R314:317 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R310:313 NormalBase <> form defax
+ax 334:336 <> Box
+R344:347 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R340:343 NormalBase <> form defax
+R348:351 NormalBase <> form defax
+ax 364:366 <> Dia
+R374:377 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R370:373 NormalBase <> form defax
+R378:381 NormalBase <> form defax
+ax 394:397 <> Impl
+R405:408 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R401:404 NormalBase <> form defax
+R413:416 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R409:412 NormalBase <> form defax
+R417:420 NormalBase <> form defax
+def 435:437 <> set
+R446:449 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R442:445 NormalBase <> form defax
+ax 466:468 <> mct
+R475:478 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R472:474 NormalBase <> set def
+def 496:504 <> can_world
+R509:510 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R512:514 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R518:520 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R526:527 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R515:517 NormalBase <> set def
+binder 511:511 <> G:13
+R521:523 NormalBase <> mct defax
+R525:525 NormalBase <> G:13 var
+ax 540:544 <> can_R
+R557:560 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R548:556 NormalBase <> can_world def
+R570:573 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R561:569 NormalBase <> can_world def
+ax 590:595 <> forces
+R608:611 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R599:607 NormalBase <> can_world def
+R616:619 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R612:615 NormalBase <> form defax
+ax 637:646 <> forces_Box
+binder 657:657 <> w:18
+binder 659:660 <> φ:19
+R680:685 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R720:720 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R663:668 NormalBase <> forces defax
+R670:670 NormalBase <> w:18 var
+R673:675 NormalBase <> Box defax
+R677:678 NormalBase <> φ:19 var
+binder 693:693 <> u:20
+R705:708 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R696:700 NormalBase <> can_R defax
+R702:702 NormalBase <> w:18 var
+R704:704 NormalBase <> u:20 var
+R709:714 NormalBase <> forces defax
+R716:716 NormalBase <> u:20 var
+R718:719 NormalBase <> φ:19 var
+ax 733:742 <> forces_Dia
+binder 753:753 <> w:23
+binder 755:756 <> φ:24
+R776:781 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R816:816 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R759:764 NormalBase <> forces defax
+R766:766 NormalBase <> w:23 var
+R769:771 NormalBase <> Dia defax
+R773:774 NormalBase <> φ:24 var
+R782:788 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R790:791 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 789:789 <> u:25
+R801:804 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R792:796 NormalBase <> can_R defax
+R798:798 NormalBase <> w:23 var
+R800:800 NormalBase <> u:25 var
+R805:810 NormalBase <> forces defax
+R812:812 NormalBase <> u:25 var
+R814:815 NormalBase <> φ:24 var
+ax 829:839 <> forces_Impl
+binder 850:850 <> w:28
+binder 852:853 <> φ:29
+binder 855:856 <> ψ:30
+R880:885 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R912:912 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R859:864 NormalBase <> forces defax
+R866:866 NormalBase <> w:28 var
+R869:872 NormalBase <> Impl defax
+R874:875 NormalBase <> φ:29 var
+R877:878 NormalBase <> ψ:30 var
+R897:900 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R886:891 NormalBase <> forces defax
+R893:893 NormalBase <> w:28 var
+R895:896 NormalBase <> φ:29 var
+R901:906 NormalBase <> forces defax
+R908:908 NormalBase <> w:28 var
+R910:911 NormalBase <> ψ:30 var
+ax 926:948 <> completeness_from_truth
+binder 959:960 <> φ:33
+R963:963 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R985:989 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 971:971 <> w:34
+R974:979 NormalBase <> forces defax
+R981:981 NormalBase <> w:34 var
+R983:984 NormalBase <> φ:33 var
+R990:993 NormalBase <> Prov defax
+R995:996 NormalBase <> φ:33 var
+prf 1101:1119 <> valid_necessitation
+R1134:1137 NormalBase <> form defax
+binder 1131:1132 <> φ:37
+R1143:1151 NormalBase <> can_world def
+binder 1141:1141 <> w:38
+R1157:1157 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1179:1183 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 1165:1165 <> u:39
+R1168:1173 NormalBase <> forces defax
+R1175:1175 NormalBase <> u:39 var
+R1177:1178 NormalBase <> φ:37 var
+R1184:1189 NormalBase <> forces defax
+R1191:1191 NormalBase <> w:38 var
+R1194:1196 NormalBase <> Box defax
+R1198:1199 NormalBase <> φ:37 var
+R1236:1245 NormalBase <> forces_Box defax
+R1236:1245 NormalBase <> forces_Box defax
+R1236:1245 NormalBase <> forces_Box defax
+prf 1290:1311 <> provable_necessitation
+binder 1322:1323 <> φ:40
+R1328:1328 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1350:1354 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 1336:1336 <> w:41
+R1339:1344 NormalBase <> forces defax
+R1346:1346 NormalBase <> w:41 var
+R1348:1349 NormalBase <> φ:40 var
+R1355:1358 NormalBase <> Prov defax
+R1361:1363 NormalBase <> Box defax
+R1365:1366 NormalBase <> φ:40 var
+R1408:1430 NormalBase <> completeness_from_truth defax
+R1408:1430 NormalBase <> completeness_from_truth defax
+R1455:1473 NormalBase <> valid_necessitation thm
+R1455:1473 NormalBase <> valid_necessitation thm
+prf 1559:1565 <> valid_K
+R1583:1586 NormalBase <> form defax
+binder 1577:1578 <> φ:42
+binder 1580:1581 <> ψ:43
+R1592:1600 NormalBase <> can_world def
+binder 1590:1590 <> w:44
+R1606:1611 NormalBase <> forces defax
+R1613:1613 NormalBase <> w:44 var
+R1616:1619 NormalBase <> Impl defax
+R1622:1624 NormalBase <> Box defax
+R1627:1630 NormalBase <> Impl defax
+R1632:1633 NormalBase <> φ:42 var
+R1635:1636 NormalBase <> ψ:43 var
+R1641:1644 NormalBase <> Impl defax
+R1647:1649 NormalBase <> Box defax
+R1651:1652 NormalBase <> φ:42 var
+R1656:1658 NormalBase <> Box defax
+R1660:1661 NormalBase <> ψ:43 var
+R1701:1711 NormalBase <> forces_Impl defax
+R1701:1711 NormalBase <> forces_Impl defax
+R1701:1711 NormalBase <> forces_Impl defax
+R1739:1749 NormalBase <> forces_Impl defax
+R1739:1749 NormalBase <> forces_Impl defax
+R1739:1749 NormalBase <> forces_Impl defax
+R1776:1785 NormalBase <> forces_Box defax
+R1776:1785 NormalBase <> forces_Box defax
+R1776:1785 NormalBase <> forces_Box defax
+R1807:1816 NormalBase <> forces_Box defax
+R1807:1816 NormalBase <> forces_Box defax
+R1807:1816 NormalBase <> forces_Box defax
+R1837:1846 NormalBase <> forces_Box defax
+R1837:1846 NormalBase <> forces_Box defax
+R1837:1846 NormalBase <> forces_Box defax
+R1903:1913 NormalBase <> forces_Impl defax
+R1903:1913 NormalBase <> forces_Impl defax
+R1903:1913 NormalBase <> forces_Impl defax
+prf 1997:2006 <> provable_K
+binder 2017:2018 <> φ:45
+binder 2020:2021 <> ψ:46
+R2024:2027 NormalBase <> Prov defax
+R2030:2033 NormalBase <> Impl defax
+R2036:2038 NormalBase <> Box defax
+R2041:2044 NormalBase <> Impl defax
+R2046:2047 NormalBase <> φ:45 var
+R2049:2050 NormalBase <> ψ:46 var
+R2055:2058 NormalBase <> Impl defax
+R2061:2063 NormalBase <> Box defax
+R2065:2066 NormalBase <> φ:45 var
+R2070:2072 NormalBase <> Box defax
+R2074:2075 NormalBase <> ψ:46 var
+R2111:2133 NormalBase <> completeness_from_truth defax
+R2111:2133 NormalBase <> completeness_from_truth defax
+R2154:2160 NormalBase <> valid_K thm
+R2154:2160 NormalBase <> valid_K thm

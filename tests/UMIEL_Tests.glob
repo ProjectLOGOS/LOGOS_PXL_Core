@@ -1,0 +1,340 @@
+DIGEST 8f85cfe3aa1fd014b080f381e3a7c04c
+FUMIEL_Tests
+R24:30 Coq.Program.Program <> <> lib
+ax 423:426 <> form
+ax 446:449 <> Prov
+R457:460 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R453:456 UMIEL_Tests <> form defax
+ax 477:479 <> Box
+R487:490 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R483:486 UMIEL_Tests <> form defax
+R491:494 UMIEL_Tests <> form defax
+ax 507:509 <> Dia
+R517:520 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R513:516 UMIEL_Tests <> form defax
+R521:524 UMIEL_Tests <> form defax
+ax 537:540 <> Impl
+R548:551 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R544:547 UMIEL_Tests <> form defax
+R556:559 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R552:555 UMIEL_Tests <> form defax
+R560:563 UMIEL_Tests <> form defax
+ax 604:613 <> provable_K
+binder 624:625 <> φ:11
+binder 627:628 <> ψ:12
+R631:634 UMIEL_Tests <> Prov defax
+R637:640 UMIEL_Tests <> Impl defax
+R643:645 UMIEL_Tests <> Box defax
+R648:651 UMIEL_Tests <> Impl defax
+R653:654 UMIEL_Tests <> φ:11 var
+R656:657 UMIEL_Tests <> ψ:12 var
+R662:665 UMIEL_Tests <> Impl defax
+R668:670 UMIEL_Tests <> Box defax
+R672:673 UMIEL_Tests <> φ:11 var
+R677:679 UMIEL_Tests <> Box defax
+R681:682 UMIEL_Tests <> ψ:12 var
+ax 698:702 <> world
+ax 722:743 <> provable_necessitation
+binder 754:755 <> φ:17
+R758:758 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R781:785 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R769:773 UMIEL_Tests <> world defax
+binder 767:767 <> w:18
+R777:780 Coq.Init.Logic <> True ind
+R786:789 UMIEL_Tests <> Prov defax
+R792:794 UMIEL_Tests <> Box defax
+R796:797 UMIEL_Tests <> φ:17 var
+ax 833:842 <> provable_T
+binder 853:854 <> φ:21
+R857:860 UMIEL_Tests <> Prov defax
+R863:866 UMIEL_Tests <> Impl defax
+R869:871 UMIEL_Tests <> Box defax
+R873:874 UMIEL_Tests <> φ:21 var
+R877:878 UMIEL_Tests <> φ:21 var
+ax 892:901 <> provable_4
+binder 912:913 <> φ:24
+R916:919 UMIEL_Tests <> Prov defax
+R922:925 UMIEL_Tests <> Impl defax
+R928:930 UMIEL_Tests <> Box defax
+R932:933 UMIEL_Tests <> φ:24 var
+R937:939 UMIEL_Tests <> Box defax
+R942:944 UMIEL_Tests <> Box defax
+R946:947 UMIEL_Tests <> φ:24 var
+ax 963:972 <> provable_5
+binder 983:984 <> φ:27
+R987:990 UMIEL_Tests <> Prov defax
+R993:996 UMIEL_Tests <> Impl defax
+R999:1001 UMIEL_Tests <> Dia defax
+R1003:1004 UMIEL_Tests <> φ:27 var
+R1008:1010 UMIEL_Tests <> Box defax
+R1013:1015 UMIEL_Tests <> Dia defax
+R1017:1018 UMIEL_Tests <> φ:27 var
+ax 1034:1043 <> provable_B
+binder 1054:1055 <> φ:30
+R1058:1061 UMIEL_Tests <> Prov defax
+R1064:1067 UMIEL_Tests <> Impl defax
+R1069:1070 UMIEL_Tests <> φ:30 var
+R1073:1075 UMIEL_Tests <> Box defax
+R1078:1080 UMIEL_Tests <> Dia defax
+R1082:1083 UMIEL_Tests <> φ:30 var
+ax 1099:1108 <> provable_D
+binder 1119:1120 <> φ:33
+R1123:1126 UMIEL_Tests <> Prov defax
+R1129:1132 UMIEL_Tests <> Impl defax
+R1135:1137 UMIEL_Tests <> Box defax
+R1139:1140 UMIEL_Tests <> φ:33 var
+R1144:1146 UMIEL_Tests <> Dia defax
+R1148:1149 UMIEL_Tests <> φ:33 var
+ax 1192:1210 <> KSystem_K_available
+binder 1221:1222 <> φ:36
+binder 1224:1225 <> ψ:37
+R1228:1231 UMIEL_Tests <> Prov defax
+R1234:1237 UMIEL_Tests <> Impl defax
+R1240:1242 UMIEL_Tests <> Box defax
+R1245:1248 UMIEL_Tests <> Impl defax
+R1250:1251 UMIEL_Tests <> φ:36 var
+R1253:1254 UMIEL_Tests <> ψ:37 var
+R1259:1262 UMIEL_Tests <> Impl defax
+R1265:1267 UMIEL_Tests <> Box defax
+R1269:1270 UMIEL_Tests <> φ:36 var
+R1274:1276 UMIEL_Tests <> Box defax
+R1278:1279 UMIEL_Tests <> ψ:37 var
+ax 1295:1314 <> S4System_T_available
+binder 1325:1326 <> φ:40
+R1329:1332 UMIEL_Tests <> Prov defax
+R1335:1338 UMIEL_Tests <> Impl defax
+R1341:1343 UMIEL_Tests <> Box defax
+R1345:1346 UMIEL_Tests <> φ:40 var
+R1349:1350 UMIEL_Tests <> φ:40 var
+ax 1364:1383 <> S4System_4_available
+binder 1394:1395 <> φ:43
+R1398:1401 UMIEL_Tests <> Prov defax
+R1404:1407 UMIEL_Tests <> Impl defax
+R1410:1412 UMIEL_Tests <> Box defax
+R1414:1415 UMIEL_Tests <> φ:43 var
+R1419:1421 UMIEL_Tests <> Box defax
+R1424:1426 UMIEL_Tests <> Box defax
+R1428:1429 UMIEL_Tests <> φ:43 var
+ax 1445:1464 <> S5System_5_available
+binder 1475:1476 <> φ:46
+R1479:1482 UMIEL_Tests <> Prov defax
+R1485:1488 UMIEL_Tests <> Impl defax
+R1491:1493 UMIEL_Tests <> Dia defax
+R1495:1496 UMIEL_Tests <> φ:46 var
+R1500:1502 UMIEL_Tests <> Box defax
+R1505:1507 UMIEL_Tests <> Dia defax
+R1509:1510 UMIEL_Tests <> φ:46 var
+ax 1526:1545 <> KDSystem_D_available
+binder 1556:1557 <> φ:49
+R1560:1563 UMIEL_Tests <> Prov defax
+R1566:1569 UMIEL_Tests <> Impl defax
+R1572:1574 UMIEL_Tests <> Box defax
+R1576:1577 UMIEL_Tests <> φ:49 var
+R1581:1583 UMIEL_Tests <> Dia defax
+R1585:1586 UMIEL_Tests <> φ:49 var
+ax 1601:1620 <> KBSystem_B_available
+binder 1631:1632 <> φ:52
+R1635:1638 UMIEL_Tests <> Prov defax
+R1641:1644 UMIEL_Tests <> Impl defax
+R1646:1647 UMIEL_Tests <> φ:52 var
+R1650:1652 UMIEL_Tests <> Box defax
+R1655:1657 UMIEL_Tests <> Dia defax
+R1659:1660 UMIEL_Tests <> φ:52 var
+ax 1698:1707 <> modal_free
+R1715:1718 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1711:1714 UMIEL_Tests <> form defax
+ax 1735:1755 <> conservative_nonmodal
+binder 1766:1767 <> φ:57
+R1783:1786 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1770:1779 UMIEL_Tests <> modal_free defax
+R1781:1782 UMIEL_Tests <> φ:57 var
+R1787:1787 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1810:1814 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1798:1802 UMIEL_Tests <> world defax
+binder 1796:1796 <> w:58
+R1806:1809 Coq.Init.Logic <> True ind
+R1815:1818 UMIEL_Tests <> Prov defax
+R1820:1821 UMIEL_Tests <> φ:57 var
+def 1825:1833 <> Unnamed_thm
+R1830:1833 Coq.Init.Logic <> True ind
+R1842:1842 Coq.Init.Logic <> I constr
+R1842:1842 Coq.Init.Logic <> I constr
+R1909:1918 UMIEL_Tests <> provable_K defax
+R1953:1974 UMIEL_Tests <> provable_necessitation defax
+R2008:2017 UMIEL_Tests <> provable_T defax
+R2052:2061 UMIEL_Tests <> provable_4 defax
+R2096:2105 UMIEL_Tests <> provable_5 defax
+R2140:2149 UMIEL_Tests <> provable_B defax
+R2184:2193 UMIEL_Tests <> provable_D defax
+R2282:2300 UMIEL_Tests <> KSystem_K_available defax
+R2327:2346 UMIEL_Tests <> S4System_T_available defax
+R2375:2394 UMIEL_Tests <> S4System_4_available defax
+R2425:2444 UMIEL_Tests <> S5System_5_available defax
+R2473:2492 UMIEL_Tests <> KDSystem_D_available defax
+R2521:2540 UMIEL_Tests <> KBSystem_B_available defax
+ax 2624:2625 <> φ
+R2629:2632 UMIEL_Tests <> form defax
+ax 2646:2648 <> Hmf
+R2652:2661 UMIEL_Tests <> modal_free defax
+R2663:2664 UMIEL_Tests <> φ defax
+R2674:2694 UMIEL_Tests <> conservative_nonmodal defax
+R2696:2697 UMIEL_Tests <> φ defax
+R2699:2701 UMIEL_Tests <> Hmf defax
+def 2773:2789 <> modal_hierarchy_K
+binder 2800:2801 <> ψ:65
+binder 2803:2804 <> χ:66
+R2807:2810 UMIEL_Tests <> Prov defax
+R2813:2816 UMIEL_Tests <> Impl defax
+R2819:2821 UMIEL_Tests <> Box defax
+R2824:2827 UMIEL_Tests <> Impl defax
+R2829:2830 UMIEL_Tests <> ψ:65 var
+R2832:2833 UMIEL_Tests <> χ:66 var
+R2838:2841 UMIEL_Tests <> Impl defax
+R2844:2846 UMIEL_Tests <> Box defax
+R2848:2849 UMIEL_Tests <> ψ:65 var
+R2853:2855 UMIEL_Tests <> Box defax
+R2857:2858 UMIEL_Tests <> χ:66 var
+R2891:2900 UMIEL_Tests <> provable_K defax
+R2891:2900 UMIEL_Tests <> provable_K defax
+def 2917:2934 <> modal_hierarchy_S4
+binder 2945:2946 <> ψ:67
+R3006:3020 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R2951:2954 UMIEL_Tests <> Prov defax
+R2957:2960 UMIEL_Tests <> Impl defax
+R2963:2965 UMIEL_Tests <> Box defax
+R2968:2971 UMIEL_Tests <> Impl defax
+R2973:2974 UMIEL_Tests <> ψ:67 var
+R2976:2977 UMIEL_Tests <> ψ:67 var
+R2982:2985 UMIEL_Tests <> Impl defax
+R2988:2990 UMIEL_Tests <> Box defax
+R2992:2993 UMIEL_Tests <> ψ:67 var
+R2997:2999 UMIEL_Tests <> Box defax
+R3001:3002 UMIEL_Tests <> ψ:67 var
+R3044:3090 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R3021:3024 UMIEL_Tests <> Prov defax
+R3027:3030 UMIEL_Tests <> Impl defax
+R3033:3035 UMIEL_Tests <> Box defax
+R3037:3038 UMIEL_Tests <> ψ:67 var
+R3041:3042 UMIEL_Tests <> ψ:67 var
+R3091:3094 UMIEL_Tests <> Prov defax
+R3097:3100 UMIEL_Tests <> Impl defax
+R3103:3105 UMIEL_Tests <> Box defax
+R3107:3108 UMIEL_Tests <> ψ:67 var
+R3112:3114 UMIEL_Tests <> Box defax
+R3117:3119 UMIEL_Tests <> Box defax
+R3121:3122 UMIEL_Tests <> ψ:67 var
+R3206:3215 UMIEL_Tests <> provable_K defax
+R3206:3215 UMIEL_Tests <> provable_K defax
+R3228:3237 UMIEL_Tests <> provable_T defax
+R3228:3237 UMIEL_Tests <> provable_T defax
+R3250:3259 UMIEL_Tests <> provable_4 defax
+R3250:3259 UMIEL_Tests <> provable_4 defax
+def 3276:3293 <> modal_hierarchy_S5
+binder 3304:3305 <> ψ:68
+R3333:3379 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R3310:3313 UMIEL_Tests <> Prov defax
+R3316:3319 UMIEL_Tests <> Impl defax
+R3322:3324 UMIEL_Tests <> Box defax
+R3326:3327 UMIEL_Tests <> ψ:68 var
+R3330:3331 UMIEL_Tests <> ψ:68 var
+R3415:3449 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R3380:3383 UMIEL_Tests <> Prov defax
+R3386:3389 UMIEL_Tests <> Impl defax
+R3392:3394 UMIEL_Tests <> Dia defax
+R3396:3397 UMIEL_Tests <> ψ:68 var
+R3401:3403 UMIEL_Tests <> Box defax
+R3406:3408 UMIEL_Tests <> Dia defax
+R3410:3411 UMIEL_Tests <> ψ:68 var
+R3450:3453 UMIEL_Tests <> Prov defax
+R3456:3459 UMIEL_Tests <> Impl defax
+R3461:3462 UMIEL_Tests <> ψ:68 var
+R3465:3467 UMIEL_Tests <> Box defax
+R3470:3472 UMIEL_Tests <> Dia defax
+R3474:3475 UMIEL_Tests <> ψ:68 var
+R3565:3574 UMIEL_Tests <> provable_T defax
+R3565:3574 UMIEL_Tests <> provable_T defax
+R3587:3596 UMIEL_Tests <> provable_5 defax
+R3587:3596 UMIEL_Tests <> provable_5 defax
+R3609:3618 UMIEL_Tests <> provable_B defax
+R3609:3618 UMIEL_Tests <> provable_B defax
+def 3675:3689 <> serial_axiom_KD
+binder 3700:3701 <> ψ:69
+R3704:3707 UMIEL_Tests <> Prov defax
+R3710:3713 UMIEL_Tests <> Impl defax
+R3716:3718 UMIEL_Tests <> Box defax
+R3720:3721 UMIEL_Tests <> ψ:69 var
+R3725:3727 UMIEL_Tests <> Dia defax
+R3729:3730 UMIEL_Tests <> ψ:69 var
+R3758:3767 UMIEL_Tests <> provable_D defax
+R3758:3767 UMIEL_Tests <> provable_D defax
+def 3784:3801 <> symmetric_axiom_KB
+binder 3812:3813 <> ψ:70
+R3816:3819 UMIEL_Tests <> Prov defax
+R3822:3825 UMIEL_Tests <> Impl defax
+R3827:3828 UMIEL_Tests <> ψ:70 var
+R3831:3833 UMIEL_Tests <> Box defax
+R3836:3838 UMIEL_Tests <> Dia defax
+R3840:3841 UMIEL_Tests <> ψ:70 var
+R3870:3879 UMIEL_Tests <> provable_B defax
+R3870:3879 UMIEL_Tests <> provable_B defax
+prf 3941:3960 <> unified_modal_access
+binder 3971:3972 <> ψ:71
+R4070:4127 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R4015:4018 UMIEL_Tests <> Prov defax
+R4021:4024 UMIEL_Tests <> Impl defax
+R4027:4029 UMIEL_Tests <> Box defax
+R4032:4035 UMIEL_Tests <> Impl defax
+R4037:4038 UMIEL_Tests <> ψ:71 var
+R4040:4041 UMIEL_Tests <> ψ:71 var
+R4046:4049 UMIEL_Tests <> Impl defax
+R4052:4054 UMIEL_Tests <> Box defax
+R4056:4057 UMIEL_Tests <> ψ:71 var
+R4061:4063 UMIEL_Tests <> Box defax
+R4065:4066 UMIEL_Tests <> ψ:71 var
+R4151:4154 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R4128:4131 UMIEL_Tests <> Prov defax
+R4134:4137 UMIEL_Tests <> Impl defax
+R4140:4142 UMIEL_Tests <> Box defax
+R4144:4145 UMIEL_Tests <> ψ:71 var
+R4148:4149 UMIEL_Tests <> ψ:71 var
+R4190:4239 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R4155:4158 UMIEL_Tests <> Prov defax
+R4161:4164 UMIEL_Tests <> Impl defax
+R4167:4169 UMIEL_Tests <> Box defax
+R4171:4172 UMIEL_Tests <> ψ:71 var
+R4176:4178 UMIEL_Tests <> Box defax
+R4181:4183 UMIEL_Tests <> Box defax
+R4185:4186 UMIEL_Tests <> ψ:71 var
+R4275:4313 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R4240:4243 UMIEL_Tests <> Prov defax
+R4246:4249 UMIEL_Tests <> Impl defax
+R4252:4254 UMIEL_Tests <> Dia defax
+R4256:4257 UMIEL_Tests <> ψ:71 var
+R4261:4263 UMIEL_Tests <> Box defax
+R4266:4268 UMIEL_Tests <> Dia defax
+R4270:4271 UMIEL_Tests <> ψ:71 var
+R4343:4392 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R4314:4317 UMIEL_Tests <> Prov defax
+R4320:4323 UMIEL_Tests <> Impl defax
+R4326:4328 UMIEL_Tests <> Box defax
+R4330:4331 UMIEL_Tests <> ψ:71 var
+R4335:4337 UMIEL_Tests <> Dia defax
+R4339:4340 UMIEL_Tests <> ψ:71 var
+R4393:4396 UMIEL_Tests <> Prov defax
+R4399:4402 UMIEL_Tests <> Impl defax
+R4404:4405 UMIEL_Tests <> ψ:71 var
+R4408:4410 UMIEL_Tests <> Box defax
+R4413:4415 UMIEL_Tests <> Dia defax
+R4417:4418 UMIEL_Tests <> ψ:71 var
+R4504:4513 UMIEL_Tests <> provable_K defax
+R4504:4513 UMIEL_Tests <> provable_K defax
+R4526:4535 UMIEL_Tests <> provable_T defax
+R4526:4535 UMIEL_Tests <> provable_T defax
+R4548:4557 UMIEL_Tests <> provable_4 defax
+R4548:4557 UMIEL_Tests <> provable_4 defax
+R4570:4579 UMIEL_Tests <> provable_5 defax
+R4570:4579 UMIEL_Tests <> provable_5 defax
+R4592:4601 UMIEL_Tests <> provable_D defax
+R4592:4601 UMIEL_Tests <> provable_D defax
+R4614:4623 UMIEL_Tests <> provable_B defax
+R4614:4623 UMIEL_Tests <> provable_B defax

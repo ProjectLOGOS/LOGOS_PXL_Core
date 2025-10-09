@@ -1,0 +1,4 @@
+DIGEST bf01bb37772394ed835a44569d10a565
+FFrameSpec
+R24:30 Coq.Program.Program <> <> lib
+R32:45 Coq.Setoids.Setoid <> <> lib

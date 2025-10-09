@@ -1,0 +1,205 @@
+DIGEST df62a3f2b97facfae5c3081fb843bc98
+FModalRulesTests
+R24:30 Coq.Program.Program <> <> lib
+ax 279:282 <> form
+ax 302:305 <> Prov
+R313:316 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R309:312 ModalRulesTests <> form defax
+ax 333:335 <> Box
+R343:346 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R339:342 ModalRulesTests <> form defax
+R347:350 ModalRulesTests <> form defax
+ax 363:365 <> Dia
+R373:376 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R369:372 ModalRulesTests <> form defax
+R377:380 ModalRulesTests <> form defax
+ax 393:396 <> Impl
+R404:407 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R400:403 ModalRulesTests <> form defax
+R412:415 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R408:411 ModalRulesTests <> form defax
+R416:419 ModalRulesTests <> form defax
+ax 492:501 <> provable_K
+binder 512:513 <> φ:11
+binder 515:516 <> ψ:12
+R519:522 ModalRulesTests <> Prov defax
+R525:528 ModalRulesTests <> Impl defax
+R531:533 ModalRulesTests <> Box defax
+R536:539 ModalRulesTests <> Impl defax
+R541:542 ModalRulesTests <> φ:11 var
+R544:545 ModalRulesTests <> ψ:12 var
+R550:553 ModalRulesTests <> Impl defax
+R556:558 ModalRulesTests <> Box defax
+R560:561 ModalRulesTests <> φ:11 var
+R565:567 ModalRulesTests <> Box defax
+R569:570 ModalRulesTests <> ψ:12 var
+ax 586:607 <> provable_necessitation
+binder 618:619 <> φ:15
+R629:632 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R622:625 ModalRulesTests <> Prov defax
+R627:628 ModalRulesTests <> φ:15 var
+R633:636 ModalRulesTests <> Prov defax
+R639:641 ModalRulesTests <> Box defax
+R643:644 ModalRulesTests <> φ:15 var
+ax 658:662 <> world
+ax 682:703 <> semantic_necessitation
+binder 714:715 <> φ:20
+R718:718 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R741:745 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R729:733 ModalRulesTests <> world defax
+binder 727:727 <> w:21
+R737:740 Coq.Init.Logic <> True ind
+R746:749 ModalRulesTests <> Prov defax
+R752:754 ModalRulesTests <> Box defax
+R756:757 ModalRulesTests <> φ:20 var
+ax 823:837 <> KSystem_K_axiom
+binder 848:849 <> φ:24
+binder 851:852 <> ψ:25
+R855:858 ModalRulesTests <> Prov defax
+R861:864 ModalRulesTests <> Impl defax
+R867:869 ModalRulesTests <> Box defax
+R872:875 ModalRulesTests <> Impl defax
+R877:878 ModalRulesTests <> φ:24 var
+R880:881 ModalRulesTests <> ψ:25 var
+R886:889 ModalRulesTests <> Impl defax
+R892:894 ModalRulesTests <> Box defax
+R896:897 ModalRulesTests <> φ:24 var
+R901:903 ModalRulesTests <> Box defax
+R905:906 ModalRulesTests <> ψ:25 var
+ax 922:941 <> S4System_T_available
+binder 952:953 <> φ:28
+R956:959 ModalRulesTests <> Prov defax
+R962:965 ModalRulesTests <> Impl defax
+R968:970 ModalRulesTests <> Box defax
+R972:973 ModalRulesTests <> φ:28 var
+R976:977 ModalRulesTests <> φ:28 var
+ax 991:1010 <> S5System_5_available
+binder 1021:1022 <> φ:31
+R1025:1028 ModalRulesTests <> Prov defax
+R1031:1034 ModalRulesTests <> Impl defax
+R1037:1039 ModalRulesTests <> Dia defax
+R1041:1042 ModalRulesTests <> φ:31 var
+R1046:1048 ModalRulesTests <> Box defax
+R1051:1053 ModalRulesTests <> Dia defax
+R1055:1056 ModalRulesTests <> φ:31 var
+def 1063:1071 <> Unnamed_thm
+R1068:1071 Coq.Init.Logic <> True ind
+R1080:1080 Coq.Init.Logic <> I constr
+R1080:1080 Coq.Init.Logic <> I constr
+R1139:1148 ModalRulesTests <> provable_K defax
+R1219:1240 ModalRulesTests <> provable_necessitation defax
+R1334:1348 ModalRulesTests <> KSystem_K_axiom defax
+R1391:1410 ModalRulesTests <> S4System_T_available defax
+R1449:1468 ModalRulesTests <> S5System_5_available defax
+ax 1574:1574 <> A
+ax 1576:1576 <> B
+R1580:1582 Coq.Init.Datatypes <> nat ind
+ax 1595:1598 <> Atom
+R1605:1608 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1602:1604 Coq.Init.Datatypes <> nat ind
+R1609:1612 ModalRulesTests <> form defax
+def 1626:1634 <> example_A
+R1639:1642 ModalRulesTests <> Atom defax
+R1644:1644 ModalRulesTests <> A defax
+def 1658:1666 <> example_B
+R1671:1674 ModalRulesTests <> Atom defax
+R1676:1676 ModalRulesTests <> B defax
+def 1754:1763 <> K_instance
+R1767:1770 ModalRulesTests <> Prov defax
+R1773:1776 ModalRulesTests <> Impl defax
+R1779:1781 ModalRulesTests <> Box defax
+R1784:1787 ModalRulesTests <> Impl defax
+R1789:1797 ModalRulesTests <> example_A def
+R1799:1807 ModalRulesTests <> example_B def
+R1812:1815 ModalRulesTests <> Impl defax
+R1818:1820 ModalRulesTests <> Box defax
+R1822:1830 ModalRulesTests <> example_A def
+R1834:1836 ModalRulesTests <> Box defax
+R1838:1846 ModalRulesTests <> example_B def
+R1865:1874 ModalRulesTests <> provable_K defax
+R1865:1874 ModalRulesTests <> provable_K defax
+def 1969:1998 <> semantic_necessitation_example
+R2002:2002 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2025:2029 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2013:2017 ModalRulesTests <> world defax
+binder 2011:2011 <> w:40
+R2021:2024 Coq.Init.Logic <> True ind
+R2030:2033 ModalRulesTests <> Prov defax
+R2036:2038 ModalRulesTests <> Box defax
+R2040:2048 ModalRulesTests <> example_A def
+R2074:2095 ModalRulesTests <> semantic_necessitation defax
+R2074:2095 ModalRulesTests <> semantic_necessitation defax
+ax 2201:2218 <> example_A_provable
+R2222:2225 ModalRulesTests <> Prov defax
+R2227:2235 ModalRulesTests <> example_A def
+def 2246:2266 <> necessitation_example
+R2270:2273 ModalRulesTests <> Prov defax
+R2276:2278 ModalRulesTests <> Box defax
+R2280:2288 ModalRulesTests <> example_A def
+R2305:2326 ModalRulesTests <> provable_necessitation defax
+R2305:2326 ModalRulesTests <> provable_necessitation defax
+R2335:2352 ModalRulesTests <> example_A_provable defax
+R2335:2352 ModalRulesTests <> example_A_provable defax
+prf 2415:2433 <> K_system_properties
+binder 2444:2445 <> φ:43
+binder 2447:2448 <> ψ:44
+binder 2450:2451 <> χ:45
+R2511:2535 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R2577:2577 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R2456:2459 ModalRulesTests <> Prov defax
+R2462:2465 ModalRulesTests <> Impl defax
+R2468:2470 ModalRulesTests <> Box defax
+R2473:2476 ModalRulesTests <> Impl defax
+R2478:2479 ModalRulesTests <> φ:43 var
+R2481:2482 ModalRulesTests <> ψ:44 var
+R2487:2490 ModalRulesTests <> Impl defax
+R2493:2495 ModalRulesTests <> Box defax
+R2497:2498 ModalRulesTests <> φ:43 var
+R2502:2504 ModalRulesTests <> Box defax
+R2506:2507 ModalRulesTests <> ψ:44 var
+R2536:2536 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2559:2563 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2547:2551 ModalRulesTests <> world defax
+binder 2545:2545 <> w:46
+R2555:2558 Coq.Init.Logic <> True ind
+R2564:2567 ModalRulesTests <> Prov defax
+R2570:2572 ModalRulesTests <> Box defax
+R2574:2575 ModalRulesTests <> χ:45 var
+R2668:2677 ModalRulesTests <> provable_K defax
+R2668:2677 ModalRulesTests <> provable_K defax
+R2699:2720 ModalRulesTests <> semantic_necessitation defax
+R2699:2720 ModalRulesTests <> semantic_necessitation defax
+prf 2791:2805 <> modal_hierarchy
+binder 2816:2817 <> φ:47
+binder 2819:2820 <> ψ:48
+R2914:2952 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R2859:2862 ModalRulesTests <> Prov defax
+R2865:2868 ModalRulesTests <> Impl defax
+R2871:2873 ModalRulesTests <> Box defax
+R2876:2879 ModalRulesTests <> Impl defax
+R2881:2882 ModalRulesTests <> φ:47 var
+R2884:2885 ModalRulesTests <> ψ:48 var
+R2890:2893 ModalRulesTests <> Impl defax
+R2896:2898 ModalRulesTests <> Box defax
+R2900:2901 ModalRulesTests <> φ:47 var
+R2905:2907 ModalRulesTests <> Box defax
+R2909:2910 ModalRulesTests <> ψ:48 var
+R2976:3018 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R2953:2956 ModalRulesTests <> Prov defax
+R2959:2962 ModalRulesTests <> Impl defax
+R2965:2967 ModalRulesTests <> Box defax
+R2969:2970 ModalRulesTests <> φ:47 var
+R2973:2974 ModalRulesTests <> φ:47 var
+R3019:3022 ModalRulesTests <> Prov defax
+R3025:3028 ModalRulesTests <> Impl defax
+R3031:3033 ModalRulesTests <> Dia defax
+R3035:3036 ModalRulesTests <> φ:47 var
+R3040:3042 ModalRulesTests <> Box defax
+R3045:3047 ModalRulesTests <> Dia defax
+R3049:3050 ModalRulesTests <> φ:47 var
+R3107:3121 ModalRulesTests <> KSystem_K_axiom defax
+R3107:3121 ModalRulesTests <> KSystem_K_axiom defax
+R3134:3153 ModalRulesTests <> S4System_T_available defax
+R3134:3153 ModalRulesTests <> S4System_T_available defax
+R3166:3185 ModalRulesTests <> S5System_5_available defax
+R3166:3185 ModalRulesTests <> S5System_5_available defax
