@@ -145,6 +145,11 @@
       "label": "coq: cosmopraxis",
       "type": "shell",
       "command": "bash -lc 'make -j && echo built cosmopraxis'"
+    },
+    {
+      "label": "Coq: build (Windows-safe)",
+      "type": "shell",
+      "command": "pwsh -NoProfile -File scripts/build.ps1"
     }
   ]
 }
