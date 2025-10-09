@@ -3,11 +3,11 @@ $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 Set-Location (Resolve-Path "$root\..")
 
-# Collect .v files under modules/IEL and api
-$files = Get-ChildItem -Recurse modules\IEL, api -Filter *.v | % { $_.FullName }
+# Collect .v files under modules/IEL, api, pxl-minimal-kernel-main/coq, tests, examples
+$files = Get-ChildItem -Recurse -Filter *.v | Where-Object { $_.FullName -notlike "*\node_modules\*" -and $_.FullName -notlike "*\.git\*" } | % { $_.FullName }
 
 # Produce dependencies with coqdep (Windows-safe)
-$coqargs = "-Q . PXLs"
+$coqargs = @("-Q", "pxl-minimal-kernel-main/coq", "PXLs", "-Q", "modules/IEL/source", "PXLs.IEL.Source", "-Q", "modules/IEL/infra", "PXLs.IEL.Infra", "-Q", "modules/IEL/pillars", "PXLs.IEL.Pillars", "-Q", "modules/IEL/experimental", "PXLs.IEL.Experimental", "-Q", "tests", "tests", "-Q", "api", "PXLs.API")
 $dep = & coqdep $coqargs $files 2>$null
 
 # Parse coqdep format: "path\file.vo: dep1.vo dep2.vo ..."
@@ -47,7 +47,7 @@ foreach ($vo in $order) {
   $v = ($vo -replace '\.vo$','.v')
   $src = Get-ChildItem -Recurse -Filter (Split-Path $v -Leaf) | Select-Object -First 1
   if ($null -ne $src) {
-    & coqc -q -Q . PXLs $src.FullName
+    & coqc -q $coqargs $src.FullName
   }
 }
 
