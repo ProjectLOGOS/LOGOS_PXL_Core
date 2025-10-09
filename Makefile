@@ -1,7 +1,20 @@
 VFILES := \
   pxl-minimal-kernel-main/coq/PXLv3.v \
   pxl-minimal-kernel-main/coq/PXL_Deep_Soundness.v \
-  pxl-minimal-kernel-main/coq/PXL_Completeness_Truth_WF.v \
+  pxl-minimal-  modules/IE  modules/IEL/MuPraxis/systems/Systems.v \
+  tests/MuPraxis/MuPraxis_Smoke.v \
+  modules/IEL/TychePraxis/modal/ProbSpec.v \
+  modules/IEL/TychePraxis/theorems/NormalBase.v \
+  modules/IEL/TychePraxis/theorems/Conservativity.v \
+  modules/IEL/TychePraxis/systems/Systems.v \
+  tests/TychePraxis/TychePraxis_Smoke.vaPraxis/systems/Systems.v \
+  tests/ChremaPraxis/ChremaPraxis_Smoke.v \
+  modules/IEL/MuPraxis/modal/FixSpec.v \
+  modules/IEL/MuPraxis/theorems/NormalBase.v \
+  modules/IEL/MuPraxis/theorems/Conservativity.v \
+  modules/IEL/MuPraxis/systems/Systems.v \
+  tests/MuPraxis/MuPraxis_Smoke.v \
+  modules/IEL/TychePraxis/modal/ProbSpec.v \ain/coq/PXL_Completeness_Truth_WF.v \
   modules/IEL/ChronoPraxis/substrate/ChronoAxioms.v \
   modules/IEL/ChronoPraxis/substrate/Bijection.v \
   modules/IEL/ChronoPraxis/substrate/ChronoMappings.v \
@@ -117,12 +130,12 @@ IEL_FILES := \
   modules/IEL/HexiPraxis/theorems/Conservativity.v \
   modules/IEL/HexiPraxis/systems/Systems.v \
   tests/HexiPraxis/HexiPraxis_Smoke.v \
-  modules/IEL/ChremaPraxis/modal/FrameSpec.v \
+  modules/IEL/ChremaPraxis/modal/PhaseSpec.v \
   modules/IEL/ChremaPraxis/theorems/NormalBase.v \
-  modules/IEL/ChremaPraxis/theorems/Systems.v \
   modules/IEL/ChremaPraxis/theorems/Conservativity.v \
+  modules/IEL/ChremaPraxis/systems/Systems.v \
   tests/ChremaPraxis/ChremaPraxis_Smoke.v \
-  modules/IEL/MuPraxis/modal/FrameSpec.v \
+  modules/IEL/MuPraxis/modal/FixSpec.v \
   modules/IEL/MuPraxis/theorems/NormalBase.v \
   modules/IEL/MuPraxis/theorems/Systems.v \
   modules/IEL/MuPraxis/theorems/Conservativity.v \
