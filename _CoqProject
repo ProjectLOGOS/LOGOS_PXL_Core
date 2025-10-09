@@ -1,3 +1,6 @@
 -Q pxl-minimal-kernel-main/coq PXLs
--Q modules/IEL/ChronoPraxis modules.chronopraxis
+-Q modules/IEL/source PXLs.IEL.Source
+-Q modules/IEL/infra PXLs.IEL.Infra
+-Q modules/IEL/pillars PXLs.IEL.Pillars
+-Q modules/IEL/experimental PXLs.IEL.Experimental
 -Q tests tests

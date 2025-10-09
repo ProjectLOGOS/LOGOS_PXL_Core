@@ -1,78 +1,78 @@
 VFILES := \
-  modules/IEL/Axiopraxis/modal/FrameSpec.v \
-  modules/IEL/Axiopraxis/theorems/NormalBase.v \
-  modules/IEL/Axiopraxis/theorems/Conservativity.v \
-  modules/IEL/Axiopraxis/systems/Systems.v \
-  modules/IEL/Axiopraxis/tests/Axiopraxis_Smoke.v \
-  modules/IEL/ErgoPraxis/modal/FrameSpec.v \
-  modules/IEL/ErgoPraxis/theorems/NormalBase.v \
-  modules/IEL/ErgoPraxis/theorems/Conservativity.v \
-  modules/IEL/ErgoPraxis/systems/Systems.v \
-  modules/IEL/ErgoPraxis/tests/ErgoPraxis_Smoke.v \
-  modules/IEL/AnthroPraxis/modal/FrameSpec.v \
-  modules/IEL/AnthroPraxis/theorems/NormalBase.v \
-  modules/IEL/AnthroPraxis/theorems/Conservativity.v \
-  modules/IEL/AnthroPraxis/systems/Systems.v \
-  modules/IEL/AnthroPraxis/tests/AnthroPraxis_Smoke.v \
-  modules/IEL/AnthroPraxis/subdomains/BioPraxis/modal/FrameSpec.v \
-  modules/IEL/AnthroPraxis/subdomains/BioPraxis/theorems/NormalBase.v \
-  modules/IEL/AnthroPraxis/subdomains/BioPraxis/systems/Systems.v \
-  modules/IEL/AnthroPraxis/subdomains/BioPraxis/tests/BioPraxis_Smoke.v \
-  modules/IEL/TeloPraxis/modal/FrameSpec.v \
-  modules/IEL/TeloPraxis/theorems/NormalBase.v \
-  modules/IEL/TeloPraxis/theorems/Conservativity.v \
-  modules/IEL/TeloPraxis/systems/Systems.v \
-  modules/IEL/TeloPraxis/tests/TeloPraxis_Smoke.v \
-  modules/IEL/TopoPraxis/modal/FrameSpec.v \
-  modules/IEL/TopoPraxis/theorems/NormalBase.v \
-  modules/IEL/TopoPraxis/theorems/Conservativity.v \
-  modules/IEL/TopoPraxis/systems/Systems.v \
-  modules/IEL/TopoPraxis/tests/TopoPraxis_Smoke.v \
-  modules/IEL/CosmoPraxis/modal/FrameSpec.v \
-  modules/IEL/CosmoPraxis/theorems/NormalBase.v \
-  modules/IEL/CosmoPraxis/theorems/Conservativity.v \
-  modules/IEL/CosmoPraxis/systems/Systems.v \
-  modules/IEL/CosmoPraxis/tests/CosmoPraxis_Smoke.v
+  modules/IEL/pillars/Axiopraxis/modal/FrameSpec.v \
+  modules/IEL/pillars/Axiopraxis/theorems/NormalBase.v \
+  modules/IEL/pillars/Axiopraxis/theorems/Conservativity.v \
+  modules/IEL/pillars/Axiopraxis/systems/Systems.v \
+  modules/IEL/pillars/Axiopraxis/tests/Axiopraxis_Smoke.v \
+  modules/IEL/pillars/ErgoPraxis/modal/FrameSpec.v \
+  modules/IEL/pillars/ErgoPraxis/theorems/NormalBase.v \
+  modules/IEL/pillars/ErgoPraxis/theorems/Conservativity.v \
+  modules/IEL/pillars/ErgoPraxis/systems/Systems.v \
+  modules/IEL/pillars/ErgoPraxis/tests/ErgoPraxis_Smoke.v \
+  modules/IEL/pillars/AnthroPraxis/modal/FrameSpec.v \
+  modules/IEL/pillars/AnthroPraxis/theorems/NormalBase.v \
+  modules/IEL/pillars/AnthroPraxis/theorems/Conservativity.v \
+  modules/IEL/pillars/AnthroPraxis/systems/Systems.v \
+  modules/IEL/pillars/AnthroPraxis/tests/AnthroPraxis_Smoke.v \
+  modules/IEL/pillars/AnthroPraxis/subdomains/BioPraxis/modal/FrameSpec.v \
+  modules/IEL/pillars/AnthroPraxis/subdomains/BioPraxis/theorems/NormalBase.v \
+  modules/IEL/pillars/AnthroPraxis/subdomains/BioPraxis/systems/Systems.v \
+  modules/IEL/pillars/AnthroPraxis/subdomains/BioPraxis/tests/BioPraxis_Smoke.v \
+  modules/IEL/pillars/TeloPraxis/modal/FrameSpec.v \
+  modules/IEL/pillars/TeloPraxis/theorems/NormalBase.v \
+  modules/IEL/pillars/TeloPraxis/theorems/Conservativity.v \
+  modules/IEL/pillars/TeloPraxis/systems/Systems.v \
+  modules/IEL/pillars/TeloPraxis/tests/TeloPraxis_Smoke.v \
+  modules/IEL/infra/TopoPraxis/modal/FrameSpec.v \
+  modules/IEL/infra/TopoPraxis/theorems/NormalBase.v \
+  modules/IEL/infra/TopoPraxis/theorems/Conservativity.v \
+  modules/IEL/infra/TopoPraxis/systems/Systems.v \
+  modules/IEL/infra/TopoPraxis/tests/TopoPraxis_Smoke.v \
+  modules/IEL/pillars/CosmoPraxis/modal/FrameSpec.v \
+  modules/IEL/pillars/CosmoPraxis/theorems/NormalBase.v \
+  modules/IEL/pillars/CosmoPraxis/theorems/Conservativity.v \
+  modules/IEL/pillars/CosmoPraxis/systems/Systems.v \
+  modules/IEL/pillars/CosmoPraxis/tests/CosmoPraxis_Smoke.v
   pxl-minimal-kernel-main/coq/PXLv3.v \
   pxl-minimal-kernel-main/coq/PXL_Deep_Soundness.v \
-  pxl-minimal-  modules/IE  modules/IEL/MuPraxis/systems/Systems.v \
+  pxl-minimal-  modules/IE  modules/IEL/experimental/MuPraxis/systems/Systems.v \
   tests/MuPraxis/MuPraxis_Smoke.v \
-  modules/IEL/TychePraxis/modal/ProbSpec.v \
-  modules/IEL/TychePraxis/theorems/NormalBase.v \
-  modules/IEL/TychePraxis/theorems/Conservativity.v \
-  modules/IEL/TychePraxis/systems/Systems.v \
+  modules/IEL/experimental/TychePraxis/modal/ProbSpec.v \
+  modules/IEL/experimental/TychePraxis/theorems/NormalBase.v \
+  modules/IEL/experimental/TychePraxis/theorems/Conservativity.v \
+  modules/IEL/experimental/TychePraxis/systems/Systems.v \
   tests/TychePraxis/TychePraxis_Smoke.vaPraxis/systems/Systems.v \
   tests/ChremaPraxis/ChremaPraxis_Smoke.v \
-  modules/IEL/MuPraxis/modal/FixSpec.v \
-  modules/IEL/MuPraxis/theorems/NormalBase.v \
-  modules/IEL/MuPraxis/theorems/Conservativity.v \
-  modules/IEL/MuPraxis/systems/Systems.v \
+  modules/IEL/experimental/MuPraxis/modal/FixSpec.v \
+  modules/IEL/experimental/MuPraxis/theorems/NormalBase.v \
+  modules/IEL/experimental/MuPraxis/theorems/Conservativity.v \
+  modules/IEL/experimental/MuPraxis/systems/Systems.v \
   tests/MuPraxis/MuPraxis_Smoke.v \
-  modules/IEL/TychePraxis/modal/ProbSpec.v \ain/coq/PXL_Completeness_Truth_WF.v \
-  modules/IEL/ChronoPraxis/substrate/ChronoAxioms.v \
-  modules/IEL/ChronoPraxis/substrate/Bijection.v \
-  modules/IEL/ChronoPraxis/substrate/ChronoMappings.v \
-  modules/IEL/ChronoPraxis/tactics/ChronoTactics.v \
-  modules/IEL/ChronoPraxis/theorems/ChronoProofs.v \
-  modules/IEL/ChronoPraxis/theorems/MetaTheorems.v \
-  modules/IEL/ChronoPraxis/theorems/ModalStrength/ModalFree.v \
-  modules/IEL/ChronoPraxis/theorems/ModalStrength/S4Overlay.v \
-  modules/IEL/ChronoPraxis/theorems/ModalStrength/S5Overlay.v \
-  modules/IEL/ChronoPraxis/theorems/ModalStrength/ModalAxiomsSound.v \
-  modules/IEL/ChronoPraxis/theorems/ModalStrength/ModalRules.v \
-  modules/IEL/ChronoPraxis/theorems/ModalStrength/Systems.v \
-  modules/IEL/ChronoPraxis/theorems/ModalStrength/UMAdapters.v \
-  modules/IEL/ChronoPraxis/theorems/ModalStrength/OverlayEquivalence.v \
-  modules/IEL/ModalPraxis/modal/FrameSpec.v \
-  modules/IEL/ModalPraxis/theorems/NormalBase.v \
-  modules/IEL/ModalPraxis/theorems/DerivedAxioms.v \
-  modules/IEL/ModalPraxis/theorems/Systems.v \
-  modules/IEL/ModalPraxis/theorems/Conservativity.v \
-  modules/IEL/ChronoPraxis/interfaces/ChronoPraxis.v \
-  modules/IEL/ChronoPraxis/domains/Compatibilism/CompatibilismTheory.v \
-  modules/IEL/ChronoPraxis/domains/Empiricism/UnifiedFieldLogic.v \
-  modules/IEL/ChronoPraxis/domains/Empiricism/Relativity.v \
-  modules/IEL/ChronoPraxis/domains/ModalOntology/ModalCollapse.v \
+  modules/IEL/experimental/TychePraxis/modal/ProbSpec.v \ain/coq/PXL_Completeness_Truth_WF.v \
+  modules/IEL/infra/ChronoPraxis/substrate/ChronoAxioms.v \
+  modules/IEL/infra/ChronoPraxis/substrate/Bijection.v \
+  modules/IEL/infra/ChronoPraxis/substrate/ChronoMappings.v \
+  modules/IEL/infra/ChronoPraxis/tactics/ChronoTactics.v \
+  modules/IEL/infra/ChronoPraxis/theorems/ChronoProofs.v \
+  modules/IEL/infra/ChronoPraxis/theorems/MetaTheorems.v \
+  modules/IEL/infra/ChronoPraxis/theorems/ModalStrength/ModalFree.v \
+  modules/IEL/infra/ChronoPraxis/theorems/ModalStrength/S4Overlay.v \
+  modules/IEL/infra/ChronoPraxis/theorems/ModalStrength/S5Overlay.v \
+  modules/IEL/infra/ChronoPraxis/theorems/ModalStrength/ModalAxiomsSound.v \
+  modules/IEL/infra/ChronoPraxis/theorems/ModalStrength/ModalRules.v \
+  modules/IEL/infra/ChronoPraxis/theorems/ModalStrength/Systems.v \
+  modules/IEL/infra/ChronoPraxis/theorems/ModalStrength/UMAdapters.v \
+  modules/IEL/infra/ChronoPraxis/theorems/ModalStrength/OverlayEquivalence.v \
+  modules/IEL/infra/ModalPraxis/modal/FrameSpec.v \
+  modules/IEL/infra/ModalPraxis/theorems/NormalBase.v \
+  modules/IEL/infra/ModalPraxis/theorems/DerivedAxioms.v \
+  modules/IEL/infra/ModalPraxis/theorems/Systems.v \
+  modules/IEL/infra/ModalPraxis/theorems/Conservativity.v \
+  modules/IEL/infra/ChronoPraxis/interfaces/ChronoPraxis.v \
+  modules/IEL/infra/ChronoPraxis/domains/Compatibilism/CompatibilismTheory.v \
+  modules/IEL/infra/ChronoPraxis/domains/Empiricism/UnifiedFieldLogic.v \
+  modules/IEL/infra/ChronoPraxis/domains/Empiricism/Relativity.v \
+  modules/IEL/infra/ChronoPraxis/domains/ModalOntology/ModalCollapse.v \
   examples/Compatibilism_CoffeeTea.v \
   examples/Empiricism_LabClock.v \
   examples/ModalOntology_Routes.v \
@@ -110,16 +110,16 @@ prove:
 	@bash scripts/check_policy.sh && echo "✅ All proofs constructive, zero admits"
 
 domain-compatibilism:
-	coqc modules/IEL/ChronoPraxis/domains/Compatibilism/CompatibilismTheory.v
+	coqc modules/IEL/infra/ChronoPraxis/domains/Compatibilism/CompatibilismTheory.v
 	coqc tests/CompatibilismTests.v
 
 domain-empiricism:
-	coqc modules/IEL/ChronoPraxis/domains/Empiricism/UnifiedFieldLogic.v
-	coqc modules/IEL/ChronoPraxis/domains/Empiricism/Relativity.v
+	coqc modules/IEL/infra/ChronoPraxis/domains/Empiricism/UnifiedFieldLogic.v
+	coqc modules/IEL/infra/ChronoPraxis/domains/Empiricism/Relativity.v
 	coqc tests/EmpiricismTests.v
 
 domain-modal-ontology:
-	coqc modules/IEL/ChronoPraxis/domains/ModalOntology/ModalCollapse.v
+	coqc modules/IEL/infra/ChronoPraxis/domains/ModalOntology/ModalCollapse.v
 	coqc tests/ModalOntologyTests.v
 
 examples:
@@ -139,46 +139,64 @@ docs-html:
 
 # IEL groups (stubs for wiring; replace as implementations land)
 IEL_FILES := \
-  modules/IEL/TropoPraxis/modal/FrameSpec.v \
-  modules/IEL/TropoPraxis/theorems/NormalBase.v \
-  modules/IEL/TropoPraxis/theorems/Systems.v \
-  modules/IEL/TropoPraxis/theorems/Conservativity.v \
+  modules/IEL/infra/TropoPraxis/modal/FrameSpec.v \
+  modules/IEL/infra/TropoPraxis/theorems/NormalBase.v \
+  modules/IEL/infra/TropoPraxis/theorems/Systems.v \
+  modules/IEL/infra/TropoPraxis/theorems/Conservativity.v \
   tests/TropoPraxis/TropoPraxis_Smoke.v \
-  modules/IEL/GnosiPraxis/modal/FrameSpec.v \
-  modules/IEL/GnosiPraxis/modal/AgentFrames.v \
-  modules/IEL/GnosiPraxis/theorems/NormalBase.v \
-  modules/IEL/GnosiPraxis/theorems/Systems.v \
-  modules/IEL/GnosiPraxis/theorems/Conservativity.v \
-  modules/IEL/GnosiPraxis/systems/Systems.v \
+  modules/IEL/pillars/GnosiPraxis/modal/FrameSpec.v \
+  modules/IEL/pillars/GnosiPraxis/modal/AgentFrames.v \
+  modules/IEL/pillars/GnosiPraxis/theorems/NormalBase.v \
+  modules/IEL/pillars/GnosiPraxis/theorems/Systems.v \
+  modules/IEL/pillars/GnosiPraxis/theorems/Conservativity.v \
+  modules/IEL/pillars/GnosiPraxis/systems/Systems.v \
   tests/GnosiPraxis/GnosiPraxis_Smoke.v \
   tests/GnosiPraxis/GnosiPraxis_AgentTests.v \
-  modules/IEL/ThemiPraxis/modal/NormFrames.v \
-  modules/IEL/ThemiPraxis/theorems/Conservativity.v \
-  modules/IEL/ThemiPraxis/systems/Systems.v \
+  modules/IEL/pillars/ThemiPraxis/modal/NormFrames.v \
+  modules/IEL/pillars/ThemiPraxis/theorems/Conservativity.v \
+  modules/IEL/pillars/ThemiPraxis/systems/Systems.v \
   tests/ThemiPraxis/ThemiPraxis_Smoke.v \
-  modules/IEL/DynaPraxis/modal/FrameSpec.v \
-  modules/IEL/DynaPraxis/theorems/Conservativity.v \
-  modules/IEL/DynaPraxis/systems/Systems.v \
+  modules/IEL/experimental/DynaPraxis/modal/FrameSpec.v \
+  modules/IEL/experimental/DynaPraxis/theorems/Conservativity.v \
+  modules/IEL/experimental/DynaPraxis/systems/Systems.v \
   tests/DynaPraxis/DynaPraxis_Smoke.v \
-  modules/IEL/HexiPraxis/modal/FrameSpec.v \
-  modules/IEL/HexiPraxis/theorems/Conservativity.v \
-  modules/IEL/HexiPraxis/systems/Systems.v \
+  modules/IEL/experimental/HexiPraxis/modal/FrameSpec.v \
+  modules/IEL/experimental/HexiPraxis/theorems/Conservativity.v \
+  modules/IEL/experimental/HexiPraxis/systems/Systems.v \
   tests/HexiPraxis/HexiPraxis_Smoke.v \
-  modules/IEL/ChremaPraxis/modal/PhaseSpec.v \
-  modules/IEL/ChremaPraxis/theorems/NormalBase.v \
-  modules/IEL/ChremaPraxis/theorems/Conservativity.v \
-  modules/IEL/ChremaPraxis/systems/Systems.v \
+  modules/IEL/experimental/ChremaPraxis/modal/PhaseSpec.v \
+  modules/IEL/experimental/ChremaPraxis/theorems/NormalBase.v \
+  modules/IEL/experimental/ChremaPraxis/theorems/Conservativity.v \
+  modules/IEL/experimental/ChremaPraxis/systems/Systems.v \
   tests/ChremaPraxis/ChremaPraxis_Smoke.v \
-  modules/IEL/MuPraxis/modal/FixSpec.v \
-  modules/IEL/MuPraxis/theorems/NormalBase.v \
-  modules/IEL/MuPraxis/theorems/Systems.v \
-  modules/IEL/MuPraxis/theorems/Conservativity.v \
+  modules/IEL/experimental/MuPraxis/modal/FixSpec.v \
+  modules/IEL/experimental/MuPraxis/theorems/NormalBase.v \
+  modules/IEL/experimental/MuPraxis/theorems/Systems.v \
+  modules/IEL/experimental/MuPraxis/theorems/Conservativity.v \
   tests/MuPraxis/MuPraxis_Smoke.v \
-  modules/IEL/TychePraxis/modal/FrameSpec.v \
-  modules/IEL/TychePraxis/theorems/NormalBase.v \
-  modules/IEL/TychePraxis/theorems/Systems.v \
-  modules/IEL/TychePraxis/theorems/Conservativity.v \
-  tests/TychePraxis/TychePraxis_Smoke.v
+  modules/IEL/experimental/TychePraxis/modal/FrameSpec.v \
+  modules/IEL/experimental/TychePraxis/theorems/NormalBase.v \
+  modules/IEL/experimental/TychePraxis/theorems/Systems.v \
+  modules/IEL/experimental/TychePraxis/theorems/Conservativity.v \
+  tests/TychePraxis/TychePraxis_Smoke.v \
+  modules/IEL/TheoPraxis/Props.v \
+  modules/IEL/pillars/Axiopraxis/Core.v \
+  modules/IEL/pillars/Axiopraxis/subdomains/Truth/Spec.v \
+  modules/IEL/pillars/Axiopraxis/subdomains/Beauty/Spec.v \
+  modules/IEL/pillars/GnosiPraxis/subdomains/Truth/Spec.v \
+  modules/IEL/pillars/ErgoPraxis/Core.v \
+  modules/IEL/pillars/ErgoPraxis/subdomains/Truth/Spec.v \
+  modules/IEL/pillars/TeloPraxis/subdomains/Will/Spec.v \
+  modules/IEL/pillars/AnthroPraxis/subdomains/Life/Spec.v \
+  modules/IEL/pillars/CosmoPraxis/subdomains/Space/Spec.v \
+  modules/IEL/pillars/ThemiPraxis/subdomains/Truth/Spec.v \
+  modules/IEL/pillars/GnosiPraxis/Core.v \
+  modules/IEL/pillars/ThemiPraxis/Core.v \
+  modules/IEL/pillars/TeloPraxis/Core.v \
+  modules/IEL/pillars/AnthroPraxis/Core.v \
+  modules/IEL/pillars/CosmoPraxis/Core.v \
+  modules/IEL/pillars/ErgoPraxis/Core.v \
+  modules/IEL/infra/TropoPraxis/Tropo.v
 
 VFILES += $(IEL_FILES)
 
@@ -189,4 +207,4 @@ iels-all: $(IEL_FILES)
 .PHONY: all clean status prove domain-compatibilism domain-empiricism domain-modal-ontology iels-all  modules/IEL/OntoPraxis/modal/FrameSpec.v \\
   modules/IEL/OntoPraxis/theorems/NormalBase.v \\
   modules/IEL/OntoPraxis/systems/Systems.v \\
-  modules/IEL/OntoPraxis/tests/OntoPraxis_Smoke.vmodules/IEL/TeloPraxis/subdomains/Will/Spec.v\nmodules/IEL/TeloPraxis/subdomains/Will/Theorems.v\nmodules/IEL/TeloPraxis/subdomains/Will/Smoke.v\nmodules/IEL/CosmoPraxis/subdomains/Immanence/Spec.v\nmodules/IEL/CosmoPraxis/subdomains/Immanence/Theorems.v\nmodules/IEL/CosmoPraxis/subdomains/Immanence/Smoke.v\nmodules/IEL/TheoPraxis/subdomains/Unity/Spec.v\nmodules/IEL/TheoPraxis/subdomains/Unity/Theorems.v\nmodules/IEL/TheoPraxis/subdomains/Unity/Smoke.v\nmodules/IEL/GnosiPraxis/subdomains/Truth/Spec.v\nmodules/IEL/GnosiPraxis/subdomains/Truth/Theorems.v\nmodules/IEL/GnosiPraxis/subdomains/Truth/Smoke.v\nmodules/IEL/Axiopraxis/subdomains/Goodness/Spec.v\nmodules/IEL/Axiopraxis/subdomains/Goodness/Theorems.v\nmodules/IEL/Axiopraxis/subdomains/Goodness/Smoke.v\nmodules/IEL/Axiopraxis/subdomains/Beauty/Spec.v\nmodules/IEL/Axiopraxis/subdomains/Beauty/Theorems.v\nmodules/IEL/Axiopraxis/subdomains/Beauty/Smoke.v\nmodules/IEL/TeloPraxis/subdomains/Registry.v\nmodules/IEL/CosmoPraxis/subdomains/Registry.v\nmodules/IEL/TheoPraxis/subdomains/Registry.v\nmodules/IEL/GnosiPraxis/subdomains/Registry.v\nmodules/IEL/Axiopraxis/subdomains/Registry.v
+  modules/IEL/OntoPraxis/tests/OntoPraxis_Smoke.vmodules/IEL/pillars/TeloPraxis/subdomains/Will/Spec.v\nmodules/IEL/pillars/TeloPraxis/subdomains/Will/Theorems.v\nmodules/IEL/pillars/TeloPraxis/subdomains/Will/Smoke.v\nmodules/IEL/pillars/CosmoPraxis/subdomains/Immanence/Spec.v\nmodules/IEL/pillars/CosmoPraxis/subdomains/Immanence/Theorems.v\nmodules/IEL/pillars/CosmoPraxis/subdomains/Immanence/Smoke.v\nmodules/IEL/TheoPraxis/subdomains/Unity/Spec.v\nmodules/IEL/TheoPraxis/subdomains/Unity/Theorems.v\nmodules/IEL/TheoPraxis/subdomains/Unity/Smoke.v\nmodules/IEL/pillars/GnosiPraxis/subdomains/Truth/Spec.v\nmodules/IEL/pillars/GnosiPraxis/subdomains/Truth/Theorems.v\nmodules/IEL/pillars/GnosiPraxis/subdomains/Truth/Smoke.v\nmodules/IEL/pillars/Axiopraxis/subdomains/Goodness/Spec.v\nmodules/IEL/pillars/Axiopraxis/subdomains/Goodness/Theorems.v\nmodules/IEL/pillars/Axiopraxis/subdomains/Goodness/Smoke.v\nmodules/IEL/pillars/Axiopraxis/subdomains/Beauty/Spec.v\nmodules/IEL/pillars/Axiopraxis/subdomains/Beauty/Theorems.v\nmodules/IEL/pillars/Axiopraxis/subdomains/Beauty/Smoke.v\nmodules/IEL/pillars/TeloPraxis/subdomains/Registry.v\nmodules/IEL/pillars/CosmoPraxis/subdomains/Registry.v\nmodules/IEL/TheoPraxis/subdomains/Registry.v\nmodules/IEL/pillars/GnosiPraxis/subdomains/Registry.v\nmodules/IEL/pillars/Axiopraxis/subdomains/Registry.v

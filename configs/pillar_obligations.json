@@ -1,0 +1,10 @@
+{
+  "Axiopraxis": ["ValueMonotone", "ConjElim", "NonExplosion"],
+  "GnosiPraxis": ["K_sound", "Monotone", "ClosureUnderMP"],
+  "ErgoPraxis": ["SeqComp", "HoareTriples"],
+  "TeloPraxis": ["EndMonotone", "VolitionalLift"],
+  "AnthroPraxis": ["AgentCapability", "AgencyComp"],
+  "OntoPraxis": ["NecPossLaws"],
+  "CosmoPraxis": ["ChronoTopoInterface"],
+  "ThemiPraxis": ["DeonticDetachmentSafe"]
+}
