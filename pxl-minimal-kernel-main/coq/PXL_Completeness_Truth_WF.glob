@@ -1,6 +1,0 @@
-DIGEST 6a95b635259cca09d5fda8c2643cce4f
-FPXL_Completeness_Truth_WF
-R24:27 Coq.Lists.List <> <> lib
-R29:38 Coq.Program.Wf <> <> lib
-R40:44 Coq.Arith.Arith <> <> lib
-R46:48 Coq.micromega.Lia <> <> lib

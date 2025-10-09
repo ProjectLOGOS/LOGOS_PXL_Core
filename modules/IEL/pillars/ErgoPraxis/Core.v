@@ -7,3 +7,8 @@ Module ErgoPraxis.
   Theorem HoareTriples : forall p q, Valid p -> Valid (p -> q) -> Valid q.
   Proof. apply TruthSub.hoare_triples. Qed.
 End ErgoPraxis.
+
+(* Exported capabilities *)
+Class Cap_HoareStable : Prop := { hoare_stable : forall p q, ErgoPraxis.Valid p -> ErgoPraxis.Valid (p -> q) -> ErgoPraxis.Valid q }.
+Global Instance Cap_HoareStable_inst : Cap_HoareStable := {| hoare_stable := ErgoPraxis.HoareTriples |}.
+Export Cap_HoareStable.

@@ -1,0 +1,15 @@
+DIGEST 8c8f6b0edcbe7440d4ca7f2eb110c998
+FSpec
+R25:29 PXLs.PXLv3 <> <> lib
+R47:78 PXLs.IEL.Source.TheoPraxis.Props <> <> lib
+mod 88:96 <> BeautySub
+R108:116 PXLs.IEL.Source.TheoPraxis.Props TheoProps <> mod
+def 132:132 BeautySub V
+R137:142 PXLs.IEL.Source.TheoPraxis.Props TheoProps Beauty def
+prf 155:166 BeautySub conservative
+binder 177:178 <> φ:1
+R185:188 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R181:181 Spec BeautySub V def
+R183:184 Spec <> φ:1 var
+R189:190 Spec <> φ:1 var
+R320:328 Spec BeautySub <> mod

@@ -30,3 +30,9 @@ timestamp,obligation,duration_ms,result
 1759786507,BOX(Good(test_action) and TrueP(prop) and Coherent(state)),2022,DENY
 1759786509,BOX(Good(DENY_action) and not TrueP(prop) and Coherent(state)),2015,DENY
 1759786511,BOX(Good(test_action)),2018,DENY
+1759988475,BOX(Good(test_action) and TrueP(prop) and Coherent(state)),2021,DENY
+1759988477,BOX(Good(DENY_action) and not TrueP(prop) and Coherent(state)),2005,DENY
+1759988479,BOX(Good(test_action)),2003,DENY
+1759988509,BOX(Good(test_action) and TrueP(prop) and Coherent(state)),2008,DENY
+1759988511,BOX(Good(DENY_action) and not TrueP(prop) and Coherent(state)),2016,DENY
+1759988513,BOX(Good(test_action)),2006,DENY

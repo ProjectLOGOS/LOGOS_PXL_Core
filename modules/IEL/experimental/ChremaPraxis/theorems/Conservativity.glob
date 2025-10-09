@@ -1,0 +1,7 @@
+DIGEST be85ee9897444168dc23a2a93eff822e
+FPXLs.IEL.Experimental.ChremaPraxis.theorems.Conservativity
+R24:30 Coq.Program.Program <> <> lib
+def 71:79 <> Unnamed_thm
+R76:79 Coq.Init.Logic <> True ind
+R88:88 Coq.Init.Logic <> I constr
+R88:88 Coq.Init.Logic <> I constr

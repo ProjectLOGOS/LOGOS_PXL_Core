@@ -1,0 +1,6 @@
+DIGEST 0bed79fe3d5ddb1ae89b81a86e156e84
+FPXLs.IEL.Experimental.DynaPraxis.theorems.Systems
+R24:30 Coq.Program.Program <> <> lib
+R32:45 Coq.Setoids.Setoid <> <> lib
+mod 55:70 <> DynaPraxisSystem
+R77:92 PXLs.IEL.Experimental.DynaPraxis.theorems.Systems DynaPraxisSystem <> mod

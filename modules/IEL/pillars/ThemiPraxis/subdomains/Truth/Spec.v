@@ -1,5 +1,5 @@
 From PXLs Require Import PXLv3.
-From PXLs.IEL.Source.TheoPraxis Require Import Props.
+Require Import PXLs.IEL.Source.TheoPraxis.Props.
 Module TruthSub.
   Import TheoProps.
 

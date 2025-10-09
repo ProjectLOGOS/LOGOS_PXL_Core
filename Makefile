@@ -32,16 +32,16 @@ VFILES := \
   modules/IEL/pillars/CosmoPraxis/theorems/NormalBase.v \
   modules/IEL/pillars/CosmoPraxis/theorems/Conservativity.v \
   modules/IEL/pillars/CosmoPraxis/systems/Systems.v \
-  modules/IEL/pillars/CosmoPraxis/tests/CosmoPraxis_Smoke.v
+  modules/IEL/pillars/CosmoPraxis/tests/CosmoPraxis_Smoke.v \
   pxl-minimal-kernel-main/coq/PXLv3.v \
   pxl-minimal-kernel-main/coq/PXL_Deep_Soundness.v \
-  pxl-minimal-  modules/IE  modules/IEL/experimental/MuPraxis/systems/Systems.v \
+  pxl-minimal-kernel-main/coq/PXL_TriuneNecessity.v \
   tests/MuPraxis/MuPraxis_Smoke.v \
   modules/IEL/experimental/TychePraxis/modal/ProbSpec.v \
   modules/IEL/experimental/TychePraxis/theorems/NormalBase.v \
   modules/IEL/experimental/TychePraxis/theorems/Conservativity.v \
   modules/IEL/experimental/TychePraxis/systems/Systems.v \
-  tests/TychePraxis/TychePraxis_Smoke.vaPraxis/systems/Systems.v \
+  tests/TychePraxis/TychePraxis_Smoke.v \
   tests/ChremaPraxis/ChremaPraxis_Smoke.v \
   modules/IEL/experimental/MuPraxis/modal/FixSpec.v \
   modules/IEL/experimental/MuPraxis/theorems/NormalBase.v \
@@ -179,7 +179,7 @@ IEL_FILES := \
   modules/IEL/experimental/TychePraxis/theorems/Systems.v \
   modules/IEL/experimental/TychePraxis/theorems/Conservativity.v \
   tests/TychePraxis/TychePraxis_Smoke.v \
-  modules/IEL/TheoPraxis/Props.v \
+  modules/IEL/source/TheoPraxis/Props.v \
   modules/IEL/pillars/Axiopraxis/Core.v \
   modules/IEL/pillars/Axiopraxis/subdomains/Truth/Spec.v \
   modules/IEL/pillars/Axiopraxis/subdomains/Beauty/Spec.v \
@@ -196,7 +196,8 @@ IEL_FILES := \
   modules/IEL/pillars/AnthroPraxis/Core.v \
   modules/IEL/pillars/CosmoPraxis/Core.v \
   modules/IEL/pillars/ErgoPraxis/Core.v \
-  modules/IEL/infra/TropoPraxis/Tropo.v
+  modules/IEL/infra/TropoPraxis/Tropo.v \
+  modules/IEL/infra/TopoPraxis/Core.v
 
 VFILES += $(IEL_FILES)
 
@@ -204,7 +205,4 @@ VFILES += $(IEL_FILES)
 iels-all: $(IEL_FILES)
 	@echo "IELs built."
 
-.PHONY: all clean status prove domain-compatibilism domain-empiricism domain-modal-ontology iels-all  modules/IEL/OntoPraxis/modal/FrameSpec.v \\
-  modules/IEL/OntoPraxis/theorems/NormalBase.v \\
-  modules/IEL/OntoPraxis/systems/Systems.v \\
-  modules/IEL/OntoPraxis/tests/OntoPraxis_Smoke.vmodules/IEL/pillars/TeloPraxis/subdomains/Will/Spec.v\nmodules/IEL/pillars/TeloPraxis/subdomains/Will/Theorems.v\nmodules/IEL/pillars/TeloPraxis/subdomains/Will/Smoke.v\nmodules/IEL/pillars/CosmoPraxis/subdomains/Immanence/Spec.v\nmodules/IEL/pillars/CosmoPraxis/subdomains/Immanence/Theorems.v\nmodules/IEL/pillars/CosmoPraxis/subdomains/Immanence/Smoke.v\nmodules/IEL/TheoPraxis/subdomains/Unity/Spec.v\nmodules/IEL/TheoPraxis/subdomains/Unity/Theorems.v\nmodules/IEL/TheoPraxis/subdomains/Unity/Smoke.v\nmodules/IEL/pillars/GnosiPraxis/subdomains/Truth/Spec.v\nmodules/IEL/pillars/GnosiPraxis/subdomains/Truth/Theorems.v\nmodules/IEL/pillars/GnosiPraxis/subdomains/Truth/Smoke.v\nmodules/IEL/pillars/Axiopraxis/subdomains/Goodness/Spec.v\nmodules/IEL/pillars/Axiopraxis/subdomains/Goodness/Theorems.v\nmodules/IEL/pillars/Axiopraxis/subdomains/Goodness/Smoke.v\nmodules/IEL/pillars/Axiopraxis/subdomains/Beauty/Spec.v\nmodules/IEL/pillars/Axiopraxis/subdomains/Beauty/Theorems.v\nmodules/IEL/pillars/Axiopraxis/subdomains/Beauty/Smoke.v\nmodules/IEL/pillars/TeloPraxis/subdomains/Registry.v\nmodules/IEL/pillars/CosmoPraxis/subdomains/Registry.v\nmodules/IEL/TheoPraxis/subdomains/Registry.v\nmodules/IEL/pillars/GnosiPraxis/subdomains/Registry.v\nmodules/IEL/pillars/Axiopraxis/subdomains/Registry.v
+.PHONY: all clean status prove domain-compatibilism domain-empiricism domain-modal-ontology iels-all

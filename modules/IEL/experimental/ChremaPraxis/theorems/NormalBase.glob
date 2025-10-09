@@ -1,0 +1,11 @@
+DIGEST 5fe5fd9b537623d9d57c16607214f86e
+FPXLs.IEL.Experimental.ChremaPraxis.theorems.NormalBase
+R24:30 Coq.Program.Program <> <> lib
+mod 160:176 <> ChremaPraxisRules
+def 192:193 ChremaPraxisRules ok
+R198:201 Coq.Init.Logic <> True ind
+prf 210:217 ChremaPraxisRules compiles
+R221:222 PXLs.IEL.Experimental.ChremaPraxis.theorems.NormalBase ChremaPraxisRules ok def
+R231:231 Coq.Init.Logic <> I constr
+R231:231 Coq.Init.Logic <> I constr
+R243:259 PXLs.IEL.Experimental.ChremaPraxis.theorems.NormalBase ChremaPraxisRules <> mod

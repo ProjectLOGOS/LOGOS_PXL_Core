@@ -1,4 +1,4 @@
-﻿From Coq Require Import Program Setoids.Setoid.
+From Coq Require Import Program Setoids.Setoid.
 
 (* TODO: Restore full imports once module path resolution is fixed *)
 (* Require Import modules.chronopraxis.theorems.ModalStrength.ModalFree
@@ -9,8 +9,8 @@ Parameter form : Type.
 Parameter Prov : form -> Prop.
 Parameter forces : Type -> form -> Prop.
 Parameter modal_free : form -> Prop.
-Parameter completeness_from_truth : forall φ, (forall w, forces w φ) -> Prov φ.
+Parameter completeness_from_truth : forall f, (forall w, forces w f) -> Prov f.
 
 Theorem epistemic_conservative_nonmodal :
-  forall φ, modal_free φ -> (forall w, forces w φ) -> Prov φ.
-Proof. intros φ Hmf Hval; apply completeness_from_truth; exact Hval. Qed.
+  forall f, modal_free f -> (forall w, forces w f) -> Prov f.
+Proof. intros f Hmf Hval; apply completeness_from_truth; exact Hval. Qed.

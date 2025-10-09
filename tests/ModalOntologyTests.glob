@@ -1,7 +1,0 @@
-DIGEST 83f0f247252738eef5d44f996dac9352
-FModalOntologyTests
-R106:112 Coq.Program.Program <> <> lib
-def 145:153 <> Unnamed_thm
-R150:153 Coq.Init.Logic <> True ind
-R162:162 Coq.Init.Logic <> I constr
-R162:162 Coq.Init.Logic <> I constr
