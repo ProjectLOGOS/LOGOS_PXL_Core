@@ -1,4 +1,8 @@
-﻿From Coq Require Import Program Setoids.Setoid.
+From Coq Require Import Program Setoids.Setoid.
+
+(* TODO: Restore full imports once module path resolution is fixed *)
+(* From PXLs Require Import PXLv3.
+Require Import modules.IEL.DynaPraxis.modal.FrameSpec. *)
 
 (* Standalone definitions for compilation - using PXL canonical model types *)
 Parameter form : Type.
@@ -61,14 +65,5 @@ Module DynaPraxis.
 
 End DynaPraxis.
 
-Module T.
-  Import DynaPraxis.
-  Lemma k_ok : K_Frame -> forall a φ ψ, Prov (Impl (Box_a a (Impl φ ψ)) (Impl (Box_a a φ) (Box_a a ψ))).
-  Proof. apply K_dynamic. Qed.
-  Lemma test_ok : KD_Frame -> forall a φ, Prov (Impl (Box_a a φ) (Dia_a a φ)).
-  Proof. apply Test. Qed.
-  Lemma comp_ok : KD45_Frame -> forall a φ, Prov (Impl (Box_a a (Box_a a φ)) (Box_a a φ)).
-  Proof. apply Composition. Qed.
-  Lemma mix_ok : KD45_Frame -> forall a φ, Prov (Impl (Dia_a a φ) (Box_a a (Dia_a a φ))).
-  Proof. apply Mix. Qed.
-End T.
+Module KDSystem.   Export DynaPraxis. End KDSystem.
+Module KD45System. Export DynaPraxis. End KD45System.

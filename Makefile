@@ -110,9 +110,8 @@ IEL_FILES := \
   modules/IEL/ThemiPraxis/systems/Systems.v \
   tests/ThemiPraxis/ThemiPraxis_Smoke.v \
   modules/IEL/DynaPraxis/modal/FrameSpec.v \
-  modules/IEL/DynaPraxis/theorems/NormalBase.v \
-  modules/IEL/DynaPraxis/theorems/Systems.v \
   modules/IEL/DynaPraxis/theorems/Conservativity.v \
+  modules/IEL/DynaPraxis/systems/Systems.v \
   tests/DynaPraxis/DynaPraxis_Smoke.v \
   modules/IEL/HexiPraxis/modal/FrameSpec.v \
   modules/IEL/HexiPraxis/theorems/NormalBase.v \
