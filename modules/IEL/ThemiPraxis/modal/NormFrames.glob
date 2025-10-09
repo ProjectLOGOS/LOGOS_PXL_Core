@@ -1,0 +1,278 @@
+DIGEST 6cde85c83bdd3e92078a557ef1ce63d2
+FNormFrames
+R24:30 Coq.Program.Program <> <> lib
+R32:45 Coq.Setoids.Setoid <> <> lib
+ax 430:433 <> form
+ax 453:456 <> Prov
+R464:467 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R460:463 NormFrames <> form defax
+ax 484:486 <> Box
+R494:497 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R490:493 NormFrames <> form defax
+R498:501 NormFrames <> form defax
+ax 514:516 <> Dia
+R524:527 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R520:523 NormFrames <> form defax
+R528:531 NormFrames <> form defax
+ax 544:547 <> Impl
+R555:558 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R551:554 NormFrames <> form defax
+R563:566 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R559:562 NormFrames <> form defax
+R567:570 NormFrames <> form defax
+ax 583:588 <> forces
+R596:599 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R604:607 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R600:603 NormFrames <> form defax
+ax 624:632 <> can_world
+ax 652:656 <> can_R
+R669:672 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R660:668 NormFrames <> can_world defax
+R682:685 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R673:681 NormFrames <> can_world defax
+rec 736:744 <> Reflexive
+proj 758:768 <> reflexive_R
+binder 779:779 <> w:18
+R782:786 NormFrames <> can_R defax
+R788:788 NormFrames <> w:18 var
+R790:790 NormFrames <> w:18 var
+rec 801:810 <> Transitive
+proj 824:835 <> transitive_R
+binder 846:846 <> w:21
+binder 848:848 <> u:22
+binder 850:850 <> v:23
+R862:865 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R853:857 NormFrames <> can_R defax
+R859:859 NormFrames <> w:21 var
+R861:861 NormFrames <> u:22 var
+R875:878 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R866:870 NormFrames <> can_R defax
+R872:872 NormFrames <> u:22 var
+R874:874 NormFrames <> v:23 var
+R879:883 NormFrames <> can_R defax
+R885:885 NormFrames <> w:21 var
+R887:887 NormFrames <> v:23 var
+rec 898:906 <> Euclidean
+proj 920:930 <> euclidean_R
+binder 941:941 <> w:26
+binder 943:943 <> u:27
+binder 945:945 <> v:28
+R957:960 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R948:952 NormFrames <> can_R defax
+R954:954 NormFrames <> w:26 var
+R956:956 NormFrames <> u:27 var
+R970:973 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R961:965 NormFrames <> can_R defax
+R967:967 NormFrames <> w:26 var
+R969:969 NormFrames <> v:28 var
+R974:978 NormFrames <> can_R defax
+R980:980 NormFrames <> u:27 var
+R982:982 NormFrames <> v:28 var
+rec 993:998 <> Serial
+proj 1012:1019 <> serial_R
+binder 1030:1030 <> w:31
+R1033:1039 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R1041:1042 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 1040:1040 <> v:32
+R1043:1047 NormFrames <> can_R defax
+R1049:1049 NormFrames <> w:31 var
+R1051:1051 NormFrames <> v:32 var
+ax 1099:1108 <> provable_K
+binder 1119:1120 <> φ:34
+binder 1122:1123 <> ψ:35
+R1126:1129 NormFrames <> Prov defax
+R1132:1135 NormFrames <> Impl defax
+R1138:1140 NormFrames <> Box defax
+R1143:1146 NormFrames <> Impl defax
+R1148:1149 NormFrames <> φ:34 var
+R1151:1152 NormFrames <> ψ:35 var
+R1157:1160 NormFrames <> Impl defax
+R1163:1165 NormFrames <> Box defax
+R1167:1168 NormFrames <> φ:34 var
+R1172:1174 NormFrames <> Box defax
+R1176:1177 NormFrames <> ψ:35 var
+ax 1193:1214 <> provable_necessitation
+binder 1225:1226 <> φ:38
+R1229:1229 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1251:1255 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 1237:1237 <> w:39
+R1240:1245 NormFrames <> forces defax
+R1247:1247 NormFrames <> w:39 var
+R1249:1250 NormFrames <> φ:38 var
+R1256:1259 NormFrames <> Prov defax
+R1262:1264 NormFrames <> Box defax
+R1266:1267 NormFrames <> φ:38 var
+ax 1281:1290 <> provable_D
+R1300:1303 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1294:1299 NormFrames <> Serial class
+binder 1311:1312 <> φ:42
+R1315:1318 NormFrames <> Prov defax
+R1321:1324 NormFrames <> Impl defax
+R1327:1329 NormFrames <> Box defax
+R1331:1332 NormFrames <> φ:42 var
+R1336:1338 NormFrames <> Dia defax
+R1340:1341 NormFrames <> φ:42 var
+ax 1356:1365 <> provable_4
+R1379:1382 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1369:1378 NormFrames <> Transitive class
+binder 1390:1391 <> φ:45
+R1394:1397 NormFrames <> Prov defax
+R1400:1403 NormFrames <> Impl defax
+R1406:1408 NormFrames <> Box defax
+R1410:1411 NormFrames <> φ:45 var
+R1415:1417 NormFrames <> Box defax
+R1420:1422 NormFrames <> Box defax
+R1424:1425 NormFrames <> φ:45 var
+ax 1441:1450 <> provable_5
+R1463:1466 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1454:1462 NormFrames <> Euclidean class
+binder 1474:1475 <> φ:48
+R1478:1481 NormFrames <> Prov defax
+R1484:1487 NormFrames <> Impl defax
+R1490:1492 NormFrames <> Dia defax
+R1494:1495 NormFrames <> φ:48 var
+R1499:1501 NormFrames <> Box defax
+R1504:1506 NormFrames <> Dia defax
+R1508:1509 NormFrames <> φ:48 var
+mod 1548:1558 <> ThemiPraxis
+def 1652:1652 ThemiPraxis O
+R1658:1661 NormFrames <> form defax
+binder 1655:1656 <> φ:51
+R1666:1669 NormFrames <> form defax
+R1674:1676 NormFrames <> Box defax
+R1678:1679 NormFrames <> φ:51 var
+def 1695:1695 ThemiPraxis P
+R1701:1704 NormFrames <> form defax
+binder 1698:1699 <> φ:52
+R1709:1712 NormFrames <> form defax
+R1717:1719 NormFrames <> Dia defax
+R1721:1722 NormFrames <> φ:52 var
+rec 1793:1799 ThemiPraxis K_Frame
+rec 1866:1873 ThemiPraxis KD_Frame
+proj 1887:1895 ThemiPraxis kd_serial
+R1899:1904 NormFrames <> Serial class
+rec 1942:1951 ThemiPraxis KD45_Frame
+proj 1965:1974 ThemiPraxis kd_serial'
+proj 1986:1993 ThemiPraxis kd_trans
+proj 2009:2015 ThemiPraxis kd_eucl
+R1978:1983 NormFrames <> Serial class
+R1997:2006 NormFrames <> Transitive class
+R2019:2027 NormFrames <> Euclidean class
+prf 2069:2075 ThemiPraxis K_axiom
+R2086:2089 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2079:2085 NormFrames ThemiPraxis K_Frame class
+binder 2097:2098 <> φ:60
+binder 2100:2101 <> ψ:61
+R2104:2107 NormFrames <> Prov defax
+R2110:2113 NormFrames <> Impl defax
+R2116:2116 NormFrames ThemiPraxis O def
+R2119:2122 NormFrames <> Impl defax
+R2124:2125 NormFrames <> φ:60 var
+R2127:2128 NormFrames <> ψ:61 var
+R2133:2136 NormFrames <> Impl defax
+R2139:2139 NormFrames ThemiPraxis O def
+R2141:2142 NormFrames <> φ:60 var
+R2146:2146 NormFrames ThemiPraxis O def
+R2148:2149 NormFrames <> ψ:61 var
+R2188:2191 NormFrames <> Prov defax
+R2194:2197 NormFrames <> Impl defax
+R2200:2202 NormFrames <> Box defax
+R2205:2208 NormFrames <> Impl defax
+R2219:2222 NormFrames <> Impl defax
+R2225:2227 NormFrames <> Box defax
+R2234:2236 NormFrames <> Box defax
+R2252:2261 NormFrames <> provable_K defax
+R2188:2191 NormFrames <> Prov defax
+R2194:2197 NormFrames <> Impl defax
+R2200:2202 NormFrames <> Box defax
+R2205:2208 NormFrames <> Impl defax
+R2219:2222 NormFrames <> Impl defax
+R2225:2227 NormFrames <> Box defax
+R2234:2236 NormFrames <> Box defax
+R2252:2261 NormFrames <> provable_K defax
+prf 2280:2292 ThemiPraxis Necessitation
+R2303:2306 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2296:2302 NormFrames ThemiPraxis K_Frame class
+binder 2314:2315 <> φ:62
+R2318:2318 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2340:2344 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 2326:2326 <> w:63
+R2329:2334 NormFrames <> forces defax
+R2336:2336 NormFrames <> w:63 var
+R2338:2339 NormFrames <> φ:62 var
+R2345:2348 NormFrames <> Prov defax
+R2351:2351 NormFrames ThemiPraxis O def
+R2353:2354 NormFrames <> φ:62 var
+R2390:2393 NormFrames <> Prov defax
+R2396:2398 NormFrames <> Box defax
+R2412:2433 NormFrames <> provable_necessitation defax
+R2390:2393 NormFrames <> Prov defax
+R2396:2398 NormFrames <> Box defax
+R2412:2433 NormFrames <> provable_necessitation defax
+prf 2482:2488 ThemiPraxis D_axiom
+R2500:2503 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2492:2499 NormFrames ThemiPraxis KD_Frame class
+binder 2511:2512 <> φ:64
+R2515:2518 NormFrames <> Prov defax
+R2521:2524 NormFrames <> Impl defax
+R2527:2527 NormFrames ThemiPraxis O def
+R2529:2530 NormFrames <> φ:64 var
+R2534:2534 NormFrames ThemiPraxis P def
+R2536:2537 NormFrames <> φ:64 var
+R2594:2597 NormFrames <> Prov defax
+R2600:2603 NormFrames <> Impl defax
+R2606:2608 NormFrames <> Box defax
+R2615:2617 NormFrames <> Dia defax
+R2633:2642 NormFrames <> provable_D defax
+R2594:2597 NormFrames <> Prov defax
+R2600:2603 NormFrames <> Impl defax
+R2606:2608 NormFrames <> Box defax
+R2615:2617 NormFrames <> Dia defax
+R2633:2642 NormFrames <> provable_D defax
+prf 2718:2727 ThemiPraxis Four_axiom
+R2741:2744 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2731:2740 NormFrames ThemiPraxis KD45_Frame class
+binder 2752:2753 <> φ:65
+R2756:2759 NormFrames <> Prov defax
+R2762:2765 NormFrames <> Impl defax
+R2768:2768 NormFrames ThemiPraxis O def
+R2770:2771 NormFrames <> φ:65 var
+R2775:2775 NormFrames ThemiPraxis O def
+R2778:2778 NormFrames ThemiPraxis O def
+R2780:2781 NormFrames <> φ:65 var
+R2843:2846 NormFrames <> Prov defax
+R2849:2852 NormFrames <> Impl defax
+R2855:2857 NormFrames <> Box defax
+R2864:2866 NormFrames <> Box defax
+R2869:2871 NormFrames <> Box defax
+R2888:2897 NormFrames <> provable_4 defax
+R2843:2846 NormFrames <> Prov defax
+R2849:2852 NormFrames <> Impl defax
+R2855:2857 NormFrames <> Box defax
+R2864:2866 NormFrames <> Box defax
+R2869:2871 NormFrames <> Box defax
+R2888:2897 NormFrames <> provable_4 defax
+prf 2923:2932 ThemiPraxis Five_axiom
+R2946:2949 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2936:2945 NormFrames ThemiPraxis KD45_Frame class
+binder 2957:2958 <> φ:66
+R2961:2964 NormFrames <> Prov defax
+R2967:2970 NormFrames <> Impl defax
+R2973:2973 NormFrames ThemiPraxis P def
+R2975:2976 NormFrames <> φ:66 var
+R2980:2980 NormFrames ThemiPraxis O def
+R2983:2983 NormFrames ThemiPraxis P def
+R2985:2986 NormFrames <> φ:66 var
+R3048:3051 NormFrames <> Prov defax
+R3054:3057 NormFrames <> Impl defax
+R3060:3062 NormFrames <> Dia defax
+R3069:3071 NormFrames <> Box defax
+R3074:3076 NormFrames <> Dia defax
+R3093:3102 NormFrames <> provable_5 defax
+R3048:3051 NormFrames <> Prov defax
+R3054:3057 NormFrames <> Impl defax
+R3060:3062 NormFrames <> Dia defax
+R3069:3071 NormFrames <> Box defax
+R3074:3076 NormFrames <> Dia defax
+R3093:3102 NormFrames <> provable_5 defax
+R3122:3132 NormFrames ThemiPraxis <> mod
