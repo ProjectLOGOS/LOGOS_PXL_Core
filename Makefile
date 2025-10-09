@@ -114,9 +114,8 @@ IEL_FILES := \
   modules/IEL/DynaPraxis/systems/Systems.v \
   tests/DynaPraxis/DynaPraxis_Smoke.v \
   modules/IEL/HexiPraxis/modal/FrameSpec.v \
-  modules/IEL/HexiPraxis/theorems/NormalBase.v \
-  modules/IEL/HexiPraxis/theorems/Systems.v \
   modules/IEL/HexiPraxis/theorems/Conservativity.v \
+  modules/IEL/HexiPraxis/systems/Systems.v \
   tests/HexiPraxis/HexiPraxis_Smoke.v \
   modules/IEL/ChremaPraxis/modal/FrameSpec.v \
   modules/IEL/ChremaPraxis/theorems/NormalBase.v \

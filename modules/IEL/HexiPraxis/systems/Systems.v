@@ -1,10 +1,8 @@
-﻿From Coq Require Import Program Setoids.Setoid.
+From Coq Require Import Program Setoids.Setoid.
 
 (* TODO: Restore full imports once module path resolution is fixed *)
-(* From PXLs Require Import PXLv3. *)
-(* Require Import modules.IEL.ModalPraxis.modal.FrameSpec
-               modules.IEL.ModalPraxis.theorems.NormalBase
-               modules.IEL.ModalPraxis.theorems.DerivedAxioms. *)
+(* From PXLs Require Import PXLv3.
+Require Import modules.IEL.HexiPraxis.modal.FrameSpec. *)
 
 (* Standalone definitions for compilation - using PXL canonical model types *)
 Parameter form : Type.
@@ -65,3 +63,6 @@ Module HexiPraxis.
   Proof. intros H i φ; unfold Brings_About, Can_Bring_About; destruct H as [Hs Ht He]; eapply provable_5; eauto. Qed.
 
 End HexiPraxis.
+
+Module KDSystem.   Export HexiPraxis. End KDSystem.
+Module KD45System. Export HexiPraxis. End KD45System.

@@ -15,6 +15,7 @@
     { "label": "coq: gnosipraxis", "type": "shell", "command": "bash -lc 'coqc modules/IEL/GnosiPraxis/modal/AgentFrames.v && coqc modules/IEL/GnosiPraxis/systems/Systems.v && coqc modules/IEL/GnosiPraxis/theorems/Conservativity.v && coqc tests/GnosiPraxis/GnosiPraxis_AgentTests.v'", "problemMatcher": [] },
     { "label": "coq: themipraxis", "type": "shell", "command": "bash -lc 'coqc modules/IEL/ThemiPraxis/modal/NormFrames.v && coqc modules/IEL/ThemiPraxis/theorems/Conservativity.v && coqc modules/IEL/ThemiPraxis/systems/Systems.v && coqc tests/ThemiPraxis/ThemiPraxis_Smoke.v'", "problemMatcher": [] },
     { "label": "coq: dynapraxis", "type": "shell", "command": "bash -lc 'coqc modules/IEL/DynaPraxis/modal/FrameSpec.v && coqc modules/IEL/DynaPraxis/theorems/Conservativity.v && coqc modules/IEL/DynaPraxis/systems/Systems.v && coqc tests/DynaPraxis/DynaPraxis_Smoke.v'", "problemMatcher": [] },
+    { "label": "coq: hexipraxis", "type": "shell", "command": "bash -lc 'coqc modules/IEL/HexiPraxis/modal/FrameSpec.v && coqc modules/IEL/HexiPraxis/theorems/Conservativity.v && coqc modules/IEL/HexiPraxis/systems/Systems.v && coqc tests/HexiPraxis/HexiPraxis_Smoke.v'", "problemMatcher": [] },
     { "label": "coq: iels-all", "type": "shell", "command": "bash -lc 'make iels-all'", "problemMatcher": [] }
   ]
 }
