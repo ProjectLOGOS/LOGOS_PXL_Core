@@ -1,47 +1,39 @@
-# PowerShell build script for ChronoPraxis constructive core
+# LOGOS PXL Core Build Script (Windows PowerShell)
+# Constructive axiom elimination and coqchk verification
 param([switch]$Clean)
-
-$chronoDir = "modules\chronopraxis"
 
 if ($Clean) {
     Write-Host "Cleaning build artifacts..."
-    Remove-Item "$chronoDir\*.vo" -ErrorAction SilentlyContinue
-    Remove-Item "$chronoDir\*.vos" -ErrorAction SilentlyContinue  
-    Remove-Item "$chronoDir\*.vok" -ErrorAction SilentlyContinue
-    Remove-Item "$chronoDir\*.glob" -ErrorAction SilentlyContinue
+    Get-ChildItem -Recurse -Include *.vo, *.vos, *.vok, *.glob | Remove-Item -ErrorAction SilentlyContinue
     Write-Host "Clean complete."
     return
 }
 
-Write-Host "Building ChronoPraxis constructive core..."
+Write-Host "Starting LOGOS PXL Core build..."
 
-# Set location to chronopraxis directory
-Push-Location $chronoDir
-
-try {
-    # Build in dependency order
-    $files = @(
-        "ChronoAxioms.v",
-        "Bijection.v", 
-        "ChronoMappings.v",
-        "ChronoTactics.v",
-        "ChronoProofs.v",
-        "ChronoPraxis.v",
-        "SmokeTests.v"
-    )
-    
-    foreach ($file in $files) {
-        Write-Host "Compiling $file..."
-        coqc $file
-        if ($LASTEXITCODE -ne 0) {
-            Write-Error "Failed to compile $file"
-            exit 1
-        }
-    }
-    
-    Write-Host "Build complete! All modules compiled successfully."
-    Write-Host "✅ ChronoPraxis constructive core is ready."
-    
-} finally {
-    Pop-Location
+# Activate virtual environment if exists
+if (Test-Path ".venv\Scripts\Activate.ps1") {
+    & .venv\Scripts\Activate.ps1
 }
+
+# Coq compile all .v files
+Write-Host "Compiling Coq files..."
+Get-ChildItem -Recurse -Filter *.v | Where-Object { $_.FullName -notlike "*\api\*" -and $_.FullName -notlike "*pxl-minimal-kernel-main*" } | ForEach-Object {
+    $coqcCmd = "coqc -Q pxl-minimal-kernel-main/coq PXLs -Q modules/IEL/source PXLs.IEL.Source -Q modules/IEL/infra PXLs.IEL.Infra -Q modules/IEL/infra/ChronoPraxis PXLs.IEL.Infra.ChronoPraxis -Q modules/IEL/infra/ChronoPraxis/substrate PXLs.IEL.Infra.ChronoPraxis.Substrate -Q modules/IEL/infra/ModalPraxis PXLs.IEL.Infra.ModalPraxis -Q modules/IEL/infra/TropoPraxis PXLs.IEL.Infra.TropoPraxis -Q modules/IEL/pillars PXLs.IEL.Pillars -Q modules/IEL/experimental PXLs.IEL.Experimental -Q tests tests $($_.FullName)"
+    Write-Host "Running: $coqcCmd"
+    Invoke-Expression $coqcCmd
+    if ($LASTEXITCODE -ne 0) {
+        Write-Error "Coq compilation failed for $($_.FullName)"
+        exit 1
+    }
+}
+
+# Coq kernel check
+Write-Host "Running coqchk..."
+coqchk -Q pxl-minimal-kernel-main/coq PXLs -Q modules/IEL/source PXLs.IEL.Source -Q modules/IEL/infra PXLs.IEL.Infra -Q modules/IEL/infra/ChronoPraxis PXLs.IEL.Infra.ChronoPraxis -Q modules/IEL/infra/ChronoPraxis/substrate PXLs.IEL.Infra.ChronoPraxis.Substrate -Q modules/IEL/infra/ModalPraxis PXLs.IEL.Infra.ModalPraxis -Q modules/IEL/infra/TropoPraxis PXLs.IEL.Infra.TropoPraxis -Q modules/IEL/pillars PXLs.IEL.Pillars -Q modules/IEL/experimental PXLs.IEL.Experimental -Q tests tests
+if ($LASTEXITCODE -ne 0) {
+    Write-Error "coqchk failed"
+    exit 1
+}
+
+Write-Host "Build successful!"

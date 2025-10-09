@@ -6,3 +6,8 @@ Module TeloPraxis.
   Theorem VolitionalLift : forall p, V p -> Box V p.
   Proof. apply WillSub.volitional_lift. Qed.
 End TeloPraxis.
+
+(* Exported capabilities *)
+Class Cap_EndMonotone : Prop := { end_monotone : forall p q, (p -> q) -> TeloPraxis.V p -> TeloPraxis.V q }.
+Global Instance Cap_EndMonotone_inst : Cap_EndMonotone := {| end_monotone := TeloPraxis.EndMonotone |}.
+Export Cap_EndMonotone.

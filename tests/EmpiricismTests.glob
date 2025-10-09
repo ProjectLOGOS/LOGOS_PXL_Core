@@ -1,7 +1,0 @@
-DIGEST ba185a89e757a63fcf47e6f0c3998513
-FEmpiricismTests
-R108:114 Coq.Program.Program <> <> lib
-def 147:155 <> Unnamed_thm
-R152:155 Coq.Init.Logic <> True ind
-R164:164 Coq.Init.Logic <> I constr
-R164:164 Coq.Init.Logic <> I constr

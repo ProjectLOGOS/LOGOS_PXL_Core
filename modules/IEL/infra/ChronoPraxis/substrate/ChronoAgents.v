@@ -26,9 +26,9 @@ Definition BeliefState (t : Time) := ChronoAgent t -> ChronoState t -> Prop.
 Parameter belief_update : forall (t1 t2 : Time), 
   t1 <= t2 -> ChronoAgent t1 -> ChronoState t2 -> ChronoAgent t2.
 
-(* Axiom: Belief updates preserve agent identity *)
-Axiom belief_update_preserves_identity : forall (t1 t2 : Time) (a : ChronoAgent t1) (s : ChronoState t2) (H : t1 <= t2),
-  agent_id (belief_update t1 t2 H a s) = agent_id a.
+(* Axiom: Belief updates preserve agent identity - REMOVED for constructive elimination *)
+(* Axiom belief_update_preserves_identity : forall (t1 t2 : Time) (a : ChronoAgent t1) (s : ChronoState t2) (H : t1 <= t2),
+  agent_id (belief_update t1 t2 H a s) = agent_id a. *)
 
 (* Epistemic consistency across time *)
 Definition epistemic_consistency (t1 t2 : Time) (a1 : ChronoAgent t1) (a2 : ChronoAgent t2) : Prop :=
@@ -46,12 +46,12 @@ Record TelicAgent (t : Time) := {
   forecast : forall t' : Time, t <= t' -> ChronoState t' -> Prop
 }.
 
-(* Forecasting coherence: predictions must be consistent with PXL mappings *)
-Axiom forecast_coherence : forall (t1 t2 : Time) (ta : TelicAgent t1) (H : t1 <= t2),
+(* Forecasting coherence: predictions must be consistent with PXL mappings - REMOVED for constructive elimination *)
+(* Axiom forecast_coherence : forall (t1 t2 : Time) (ta : TelicAgent t1) (H : t1 <= t2),
   forall s2 : ChronoState t2,
     forecast ta t2 H s2 -> 
     exists s1 : ChronoState t1, 
-      lift_being t1 s1 = lift_being t2 s2.
+      lift_being t1 s1 = lift_being t2 s2. *)
 
 (* Intention-belief-desire coherence *)
 Definition BDI_coherence (t : Time) (a : ChronoAgent t) : Prop :=

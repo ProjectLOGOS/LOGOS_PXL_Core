@@ -1,0 +1,40 @@
+DIGEST 1eb2fc6c0788e0a0b9d83278b3138bda
+FPXLs.IEL.Experimental.DynaPraxis.theorems.Conservativity
+R24:30 Coq.Program.Program <> <> lib
+R32:45 Coq.Setoids.Setoid <> <> lib
+ax 162:165 <> form
+ax 185:188 <> Prov
+R196:199 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R192:195 PXLs.IEL.Experimental.DynaPraxis.theorems.Conservativity <> form defax
+ax 216:221 <> forces
+R229:232 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R237:240 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R233:236 PXLs.IEL.Experimental.DynaPraxis.theorems.Conservativity <> form defax
+ax 257:266 <> modal_free
+R274:277 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R270:273 PXLs.IEL.Experimental.DynaPraxis.theorems.Conservativity <> form defax
+ax 294:316 <> completeness_from_truth
+binder 327:327 <> f:9
+R330:330 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R351:355 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 338:338 <> w:10
+R341:346 PXLs.IEL.Experimental.DynaPraxis.theorems.Conservativity <> forces defax
+R350:350 PXLs.IEL.Experimental.DynaPraxis.theorems.Conservativity <> f:9 var
+R348:348 PXLs.IEL.Experimental.DynaPraxis.theorems.Conservativity <> w:10 var
+R356:359 PXLs.IEL.Experimental.DynaPraxis.theorems.Conservativity <> Prov defax
+R361:361 PXLs.IEL.Experimental.DynaPraxis.theorems.Conservativity <> f:9 var
+prf 373:401 <> dynamic_conservative_nonmodal
+binder 414:414 <> f:13
+R429:432 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R417:426 PXLs.IEL.Experimental.DynaPraxis.theorems.Conservativity <> modal_free defax
+R428:428 PXLs.IEL.Experimental.DynaPraxis.theorems.Conservativity <> f:13 var
+R433:433 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R454:458 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 441:441 <> w:14
+R444:449 PXLs.IEL.Experimental.DynaPraxis.theorems.Conservativity <> forces defax
+R453:453 PXLs.IEL.Experimental.DynaPraxis.theorems.Conservativity <> f:13 var
+R451:451 PXLs.IEL.Experimental.DynaPraxis.theorems.Conservativity <> w:14 var
+R459:462 PXLs.IEL.Experimental.DynaPraxis.theorems.Conservativity <> Prov defax
+R464:464 PXLs.IEL.Experimental.DynaPraxis.theorems.Conservativity <> f:13 var
+R494:516 PXLs.IEL.Experimental.DynaPraxis.theorems.Conservativity <> completeness_from_truth defax
+R494:516 PXLs.IEL.Experimental.DynaPraxis.theorems.Conservativity <> completeness_from_truth defax

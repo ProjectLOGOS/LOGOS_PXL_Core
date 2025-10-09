@@ -70,9 +70,9 @@ Parameter interpret_temporal_state : ChronoState -> EternalProp.
 Parameter interpret_static_state : ChronoState -> EternalProp.  
 Parameter interpret_frozen_state : ChronoState -> EternalProp.
 
-(* === State Consistency Axioms === *)
+(* === State Consistency Axioms - REMOVED === *)
 
-Axiom temporal_state_consistency : forall (ctx : AgentContext) (base : BaseState) (t : nat),
+(* Axiom temporal_state_consistency : forall (ctx : AgentContext) (base : BaseState) (t : nat),
   interpret_temporal_state (TemporalState ctx base t) = 
   interpret_frozen_state (EternalState base).
 
@@ -82,7 +82,7 @@ Axiom atemporal_state_consistency : forall (base : BaseState) (b a : nat),
 
 Axiom eternal_state_identity : forall (base : BaseState),
   interpret_frozen_state (EternalState base) = 
-  interpret_frozen_state (EternalState base).
+  interpret_frozen_state (EternalState base). *)
 
 (* === State Transformation Theorems === *)
 

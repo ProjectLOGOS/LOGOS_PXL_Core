@@ -1,4 +1,4 @@
-﻿From Coq Require Import Program Setoids.Setoid.
+From Coq Require Import Program Setoids.Setoid.
 
 (* Standalone definitions for compilation - using PXL canonical model types *)
 Parameter form : Type.
@@ -17,21 +17,21 @@ Class Euclidean : Prop := { euclidean_R : forall w u v, can_R w u -> can_R w v -
 Class Serial : Prop := { serial_R : forall w, exists v, can_R w v }.
 
 (* Theorems from ModalPraxis *)
-Parameter provable_K : forall φ ψ, Prov (Impl (Box (Impl φ ψ)) (Impl (Box φ) (Box ψ))).
-Parameter provable_necessitation : forall φ, (forall w, forces w φ) -> Prov (Box φ).
-Parameter provable_D : Serial -> forall φ, Prov (Impl (Box φ) (Dia φ)).
-Parameter provable_4 : Transitive -> forall φ, Prov (Impl (Box φ) (Box (Box φ))).
-Parameter provable_5 : Euclidean -> forall φ, Prov (Impl (Dia φ) (Box (Dia φ))).
+Parameter provable_K : forall f g, Prov (Impl (Box (Impl f g)) (Impl (Box f) (Box g))).
+Parameter provable_necessitation : forall f, (forall w, forces w f) -> Prov (Box f).
+Parameter provable_D : Serial -> forall f, Prov (Impl (Box f) (Dia f)).
+Parameter provable_4 : Transitive -> forall f, Prov (Impl (Box f) (Box (Box f))).
+Parameter provable_5 : Euclidean -> forall f, Prov (Impl (Dia f) (Box (Dia f))).
 
 Module DynaPraxis.
 
-  (* Programs as parameters - dynamic logic [a]φ and <a>φ *)
+  (* Programs as parameters - dynamic logic [a]f and <a>f *)
   Parameter program : Type.  (* Programs a, b, ... *)
   Parameter exec : can_world -> program -> can_world -> Prop.  (* w -a-> v *)
 
-  (* Dynamic modalities: [a]φ means φ holds after all executions of a *)
-  Definition Box_a (a:program) (φ:form) : form := Box φ.  (* Simplified: assume deterministic *)
-  Definition Dia_a (a:program) (φ:form) : form := Dia φ.  (* <a>φ *)
+  (* Dynamic modalities: [a]f means f holds after all executions of a *)
+  Definition Box_a (a:program) (f:form) : form := Box f.  (* Simplified: assume deterministic *)
+  Definition Dia_a (a:program) (f:form) : form := Dia f.  (* <a>f *)
 
   (* Frame classes for dynamic systems *)
   Class K_Frame : Prop := {}.  (* Basic dynamic logic *)
@@ -41,34 +41,34 @@ Module DynaPraxis.
                                dyn_eucl : forall w a u v, exec w a u -> exec w a v -> exec u a v }.
 
   (* Basic dynamic axioms *)
-  Theorem K_dynamic : K_Frame -> forall a φ ψ, Prov (Impl (Box_a a (Impl φ ψ)) (Impl (Box_a a φ) (Box_a a ψ))).
-  Proof. intros _ a φ ψ; unfold Box_a; apply provable_K. Qed.
+  Theorem K_dynamic : K_Frame -> forall a f g, Prov (Impl (Box_a a (Impl f g)) (Impl (Box_a a f) (Box_a a g))).
+  Proof. intros _ a f g; unfold Box_a; apply provable_K. Qed.
 
-  Theorem Necessitation_dynamic : K_Frame -> forall a φ, (forall w, forces w φ) -> Prov (Box_a a φ).
-  Proof. intros _ a φ H; unfold Box_a; apply provable_necessitation; exact H. Qed.
+  Theorem Necessitation_dynamic : K_Frame -> forall a f, (forall w, forces w f) -> Prov (Box_a a f).
+  Proof. intros _ a f H; unfold Box_a; apply provable_necessitation; exact H. Qed.
 
-  (* Test axiom: [a]φ → <a>φ (if deterministic) *)
-  Theorem Test : KD_Frame -> forall a φ, Prov (Impl (Box_a a φ) (Dia_a a φ)).
-  Proof. intros H a φ; unfold Box_a, Dia_a; destruct H as [Hser]; eapply provable_D; eauto. Qed.
+  (* Test axiom: [a]f ? <a>f (if deterministic) *)
+  Theorem Test : KD_Frame -> forall a f, Prov (Impl (Box_a a f) (Dia_a a f)).
+  Proof. intros H a f; unfold Box_a, Dia_a; destruct H as [Hser]; eapply provable_D; eauto. Qed.
 
-  (* Composition axiom under KD45: [a][a]φ → [a]φ *)
-  Theorem Composition : KD45_Frame -> forall a φ, Prov (Impl (Box_a a (Box_a a φ)) (Box_a a φ)).
-  Proof. intros H a φ; unfold Box_a; destruct H as [Hs Ht He]; eapply provable_4; eauto. Qed.
+  (* Composition axiom under KD45: [a][a]f ? [a]f *)
+  Theorem Composition : KD45_Frame -> forall a f, Prov (Impl (Box_a a (Box_a a f)) (Box_a a f)).
+  Proof. intros H a f; unfold Box_a; destruct H as [Hs Ht He]; eapply provable_4; eauto. Qed.
 
-  (* Mix axiom under KD45: <a>φ → [a]<a>φ *)
-  Theorem Mix : KD45_Frame -> forall a φ, Prov (Impl (Dia_a a φ) (Box_a a (Dia_a a φ))).
-  Proof. intros H a φ; unfold Box_a, Dia_a; destruct H as [Hs Ht He]; eapply provable_5; eauto. Qed.
+  (* Mix axiom under KD45: <a>f ? [a]<a>f *)
+  Theorem Mix : KD45_Frame -> forall a f, Prov (Impl (Dia_a a f) (Box_a a (Dia_a a f))).
+  Proof. intros H a f; unfold Box_a, Dia_a; destruct H as [Hs Ht He]; eapply provable_5; eauto. Qed.
 
 End DynaPraxis.
 
 Module T.
   Import DynaPraxis.
-  Lemma k_ok : K_Frame -> forall a φ ψ, Prov (Impl (Box_a a (Impl φ ψ)) (Impl (Box_a a φ) (Box_a a ψ))).
+  Lemma k_ok : K_Frame -> forall a f g, Prov (Impl (Box_a a (Impl f g)) (Impl (Box_a a f) (Box_a a g))).
   Proof. apply K_dynamic. Qed.
-  Lemma test_ok : KD_Frame -> forall a φ, Prov (Impl (Box_a a φ) (Dia_a a φ)).
+  Lemma test_ok : KD_Frame -> forall a f, Prov (Impl (Box_a a f) (Dia_a a f)).
   Proof. apply Test. Qed.
-  Lemma comp_ok : KD45_Frame -> forall a φ, Prov (Impl (Box_a a (Box_a a φ)) (Box_a a φ)).
+  Lemma comp_ok : KD45_Frame -> forall a f, Prov (Impl (Box_a a (Box_a a f)) (Box_a a f)).
   Proof. apply Composition. Qed.
-  Lemma mix_ok : KD45_Frame -> forall a φ, Prov (Impl (Dia_a a φ) (Box_a a (Dia_a a φ))).
+  Lemma mix_ok : KD45_Frame -> forall a f, Prov (Impl (Dia_a a f) (Box_a a (Dia_a a f))).
   Proof. apply Mix. Qed.
 End T.

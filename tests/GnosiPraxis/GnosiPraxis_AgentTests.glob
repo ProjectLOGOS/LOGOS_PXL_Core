@@ -1,8 +1,0 @@
-DIGEST 6adff6bf4530b8c665d6d47f1731dc9b
-FGnosiPraxis_AgentTests
-R24:30 Coq.Program.Program <> <> lib
-R32:45 Coq.Setoids.Setoid <> <> lib
-def 132:140 <> Unnamed_thm
-R137:140 Coq.Init.Logic <> True ind
-R149:149 Coq.Init.Logic <> I constr
-R149:149 Coq.Init.Logic <> I constr

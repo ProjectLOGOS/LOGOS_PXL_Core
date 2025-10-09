@@ -1,0 +1,313 @@
+DIGEST 8792149214e2a803f2a289a09b19d9e9
+FPXLs.IEL.Experimental.DynaPraxis.systems.Systems
+R24:30 Coq.Program.Program <> <> lib
+R32:45 Coq.Setoids.Setoid <> <> lib
+ax 302:305 <> form
+ax 325:328 <> Prov
+R336:339 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R332:335 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> form defax
+ax 356:358 <> Box
+R366:369 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R362:365 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> form defax
+R370:373 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> form defax
+ax 386:388 <> Dia
+R396:399 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R392:395 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> form defax
+R400:403 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> form defax
+ax 416:419 <> Impl
+R427:430 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R423:426 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> form defax
+R435:438 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R431:434 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> form defax
+R439:442 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> form defax
+ax 455:460 <> forces
+R468:471 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R476:479 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R472:475 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> form defax
+ax 496:504 <> can_world
+ax 524:528 <> can_R
+R541:544 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R532:540 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> can_world defax
+R554:557 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R545:553 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> can_world defax
+rec 608:616 <> Reflexive
+proj 630:640 <> reflexive_R
+binder 651:651 <> w:18
+R654:658 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> can_R defax
+R660:660 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> w:18 var
+R662:662 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> w:18 var
+rec 673:682 <> Transitive
+proj 696:707 <> transitive_R
+binder 718:718 <> w:21
+binder 720:720 <> u:22
+binder 722:722 <> v:23
+R734:737 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R725:729 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> can_R defax
+R731:731 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> w:21 var
+R733:733 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> u:22 var
+R747:750 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R738:742 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> can_R defax
+R744:744 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> u:22 var
+R746:746 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> v:23 var
+R751:755 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> can_R defax
+R757:757 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> w:21 var
+R759:759 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> v:23 var
+rec 770:778 <> Euclidean
+proj 792:802 <> euclidean_R
+binder 813:813 <> w:26
+binder 815:815 <> u:27
+binder 817:817 <> v:28
+R829:832 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R820:824 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> can_R defax
+R826:826 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> w:26 var
+R828:828 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> u:27 var
+R842:845 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R833:837 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> can_R defax
+R839:839 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> w:26 var
+R841:841 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> v:28 var
+R846:850 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> can_R defax
+R852:852 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> u:27 var
+R854:854 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> v:28 var
+rec 865:870 <> Serial
+proj 884:891 <> serial_R
+binder 902:902 <> w:31
+R905:911 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R913:914 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 912:912 <> v:32
+R915:919 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> can_R defax
+R921:921 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> w:31 var
+R923:923 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> v:32 var
+ax 971:980 <> provable_K
+binder 991:992 <> φ:34
+binder 994:995 <> ψ:35
+R998:1001 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Prov defax
+R1004:1007 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Impl defax
+R1010:1012 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Box defax
+R1015:1018 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Impl defax
+R1020:1021 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> φ:34 var
+R1023:1024 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> ψ:35 var
+R1029:1032 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Impl defax
+R1035:1037 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Box defax
+R1039:1040 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> φ:34 var
+R1044:1046 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Box defax
+R1048:1049 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> ψ:35 var
+ax 1065:1086 <> provable_necessitation
+binder 1097:1098 <> φ:38
+R1101:1101 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1123:1127 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 1109:1109 <> w:39
+R1112:1117 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> forces defax
+R1119:1119 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> w:39 var
+R1121:1122 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> φ:38 var
+R1128:1131 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Prov defax
+R1134:1136 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Box defax
+R1138:1139 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> φ:38 var
+ax 1153:1162 <> provable_D
+R1172:1175 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1166:1171 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Serial class
+binder 1183:1184 <> φ:42
+R1187:1190 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Prov defax
+R1193:1196 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Impl defax
+R1199:1201 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Box defax
+R1203:1204 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> φ:42 var
+R1208:1210 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Dia defax
+R1212:1213 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> φ:42 var
+ax 1228:1237 <> provable_4
+R1251:1254 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1241:1250 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Transitive class
+binder 1262:1263 <> φ:45
+R1266:1269 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Prov defax
+R1272:1275 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Impl defax
+R1278:1280 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Box defax
+R1282:1283 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> φ:45 var
+R1287:1289 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Box defax
+R1292:1294 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Box defax
+R1296:1297 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> φ:45 var
+ax 1313:1322 <> provable_5
+R1335:1338 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1326:1334 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Euclidean class
+binder 1346:1347 <> φ:48
+R1350:1353 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Prov defax
+R1356:1359 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Impl defax
+R1362:1364 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Dia defax
+R1366:1367 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> φ:48 var
+R1371:1373 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Box defax
+R1376:1378 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Dia defax
+R1380:1381 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> φ:48 var
+mod 1395:1404 <> DynaPraxis
+ax 1483:1489 DynaPraxis program
+ax 1537:1540 DynaPraxis exec
+R1553:1556 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1544:1552 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> can_world defax
+R1564:1567 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1557:1563 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis program defax
+R1577:1580 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1568:1576 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> can_world defax
+def 1692:1696 DynaPraxis Box_a
+R1701:1707 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis program defax
+binder 1699:1699 <> a:55
+R1714:1717 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> form defax
+binder 1711:1712 <> φ:56
+R1722:1725 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> form defax
+R1730:1732 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Box defax
+R1734:1735 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> φ:56 var
+def 1791:1795 DynaPraxis Dia_a
+R1800:1806 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis program defax
+binder 1798:1798 <> a:57
+R1813:1816 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> form defax
+binder 1810:1811 <> φ:58
+R1821:1824 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> form defax
+R1829:1831 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Dia defax
+R1833:1834 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> φ:58 var
+rec 1901:1907 DynaPraxis K_Frame
+rec 1958:1965 DynaPraxis KD_Frame
+proj 1979:1988 DynaPraxis dyn_serial
+binder 1999:1999 <> w:61
+binder 2001:2001 <> a:62
+R2004:2010 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R2012:2013 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 2011:2011 <> v:63
+R2014:2017 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis exec defax
+R2019:2019 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> w:61 var
+R2021:2021 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> a:62 var
+R2023:2023 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> v:63 var
+rec 2055:2064 DynaPraxis KD45_Frame
+proj 2078:2088 DynaPraxis dyn_serial'
+proj 2157:2165 DynaPraxis dyn_trans
+proj 2256:2263 DynaPraxis dyn_eucl
+binder 2099:2099 <> w:66
+binder 2101:2101 <> a:67
+R2104:2110 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R2112:2113 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 2111:2111 <> v:68
+R2114:2117 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis exec defax
+R2119:2119 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> w:66 var
+R2121:2121 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> a:67 var
+R2123:2123 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> v:68 var
+binder 2176:2176 <> w:70
+binder 2178:2178 <> a:71
+binder 2180:2180 <> u:72
+binder 2182:2182 <> v:73
+R2195:2198 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2185:2188 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis exec defax
+R2190:2190 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> w:70 var
+R2192:2192 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> a:71 var
+R2194:2194 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> u:72 var
+R2209:2212 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2199:2202 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis exec defax
+R2204:2204 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> u:72 var
+R2206:2206 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> a:71 var
+R2208:2208 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> v:73 var
+R2213:2216 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis exec defax
+R2218:2218 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> w:70 var
+R2220:2220 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> a:71 var
+R2222:2222 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> v:73 var
+binder 2274:2274 <> w:75
+binder 2276:2276 <> a:76
+binder 2278:2278 <> u:77
+binder 2280:2280 <> v:78
+R2293:2296 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2283:2286 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis exec defax
+R2288:2288 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> w:75 var
+R2290:2290 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> a:76 var
+R2292:2292 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> u:77 var
+R2307:2310 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2297:2300 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis exec defax
+R2302:2302 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> w:75 var
+R2304:2304 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> a:76 var
+R2306:2306 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> v:78 var
+R2311:2314 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis exec defax
+R2316:2316 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> u:77 var
+R2318:2318 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> a:76 var
+R2320:2320 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> v:78 var
+prf 2365:2373 DynaPraxis K_dynamic
+R2384:2387 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2377:2383 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis K_Frame class
+binder 2395:2395 <> a:80
+binder 2397:2398 <> φ:81
+binder 2400:2401 <> ψ:82
+R2404:2407 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Prov defax
+R2410:2413 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Impl defax
+R2416:2420 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis Box_a def
+R2422:2422 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> a:80 var
+R2425:2428 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Impl defax
+R2430:2431 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> φ:81 var
+R2433:2434 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> ψ:82 var
+R2439:2442 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Impl defax
+R2445:2449 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis Box_a def
+R2451:2451 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> a:80 var
+R2453:2454 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> φ:81 var
+R2458:2462 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis Box_a def
+R2464:2464 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> a:80 var
+R2466:2467 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> ψ:82 var
+R2507:2511 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis Box_a def
+R2520:2529 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> provable_K defax
+R2520:2529 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> provable_K defax
+prf 2548:2568 DynaPraxis Necessitation_dynamic
+R2579:2582 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2572:2578 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis K_Frame class
+binder 2590:2590 <> a:83
+binder 2592:2593 <> φ:84
+R2596:2596 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2618:2622 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 2604:2604 <> w:85
+R2607:2612 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> forces defax
+R2614:2614 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> w:85 var
+R2616:2617 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> φ:84 var
+R2623:2626 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Prov defax
+R2629:2633 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis Box_a def
+R2635:2635 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> a:83 var
+R2637:2638 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> φ:84 var
+R2675:2679 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis Box_a def
+R2688:2709 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> provable_necessitation defax
+R2688:2709 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> provable_necessitation defax
+prf 2792:2795 DynaPraxis Test
+R2807:2810 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2799:2806 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis KD_Frame class
+binder 2818:2818 <> a:86
+binder 2820:2821 <> φ:87
+R2824:2827 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Prov defax
+R2830:2833 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Impl defax
+R2836:2840 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis Box_a def
+R2842:2842 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> a:86 var
+R2844:2845 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> φ:87 var
+R2849:2853 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis Dia_a def
+R2855:2855 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> a:86 var
+R2857:2858 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> φ:87 var
+prf 2950:2960 DynaPraxis Composition
+R2974:2977 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2964:2973 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis KD45_Frame class
+binder 2985:2985 <> a:88
+binder 2987:2988 <> φ:89
+R2991:2994 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Prov defax
+R2997:3000 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Impl defax
+R3003:3007 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis Box_a def
+R3009:3009 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> a:88 var
+R3012:3016 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis Box_a def
+R3018:3018 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> a:88 var
+R3020:3021 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> φ:89 var
+R3026:3030 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis Box_a def
+R3032:3032 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> a:88 var
+R3034:3035 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> φ:89 var
+prf 3119:3121 DynaPraxis Mix
+R3135:3138 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3125:3134 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis KD45_Frame class
+binder 3146:3146 <> a:90
+binder 3148:3149 <> φ:91
+R3152:3155 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Prov defax
+R3158:3161 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> Impl defax
+R3164:3168 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis Dia_a def
+R3170:3170 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> a:90 var
+R3172:3173 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> φ:91 var
+R3177:3181 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis Box_a def
+R3183:3183 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> a:90 var
+R3186:3190 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis Dia_a def
+R3192:3192 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> a:90 var
+R3194:3195 PXLs.IEL.Experimental.DynaPraxis.systems.Systems <> φ:91 var
+R3225:3234 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis <> mod
+mod 3245:3252 <> KDSystem
+R3264:3273 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis <> mod
+R3280:3287 PXLs.IEL.Experimental.DynaPraxis.systems.Systems KDSystem <> mod
+mod 3297:3306 <> KD45System
+R3316:3325 PXLs.IEL.Experimental.DynaPraxis.systems.Systems DynaPraxis <> mod
+R3332:3341 PXLs.IEL.Experimental.DynaPraxis.systems.Systems KD45System <> mod

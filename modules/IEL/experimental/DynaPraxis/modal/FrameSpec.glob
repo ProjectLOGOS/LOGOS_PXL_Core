@@ -1,0 +1,311 @@
+DIGEST 6d35dd2af2d210b8024ce41b5347e12b
+FPXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec
+R24:30 Coq.Program.Program <> <> lib
+R32:45 Coq.Setoids.Setoid <> <> lib
+ax 430:433 <> form
+ax 453:456 <> Prov
+R464:467 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R460:463 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> form defax
+ax 484:486 <> Box
+R494:497 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R490:493 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> form defax
+R498:501 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> form defax
+ax 514:516 <> Dia
+R524:527 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R520:523 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> form defax
+R528:531 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> form defax
+ax 544:547 <> Impl
+R555:558 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R551:554 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> form defax
+R563:566 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R559:562 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> form defax
+R567:570 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> form defax
+ax 583:588 <> forces
+R596:599 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R604:607 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R600:603 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> form defax
+ax 624:632 <> can_world
+ax 652:656 <> can_R
+R669:672 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R660:668 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> can_world defax
+R682:685 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R673:681 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> can_world defax
+rec 736:744 <> Reflexive
+proj 758:768 <> reflexive_R
+binder 779:779 <> w:18
+R782:786 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> can_R defax
+R788:788 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> w:18 var
+R790:790 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> w:18 var
+rec 801:810 <> Transitive
+proj 824:835 <> transitive_R
+binder 846:846 <> w:21
+binder 848:848 <> u:22
+binder 850:850 <> v:23
+R862:865 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R853:857 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> can_R defax
+R859:859 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> w:21 var
+R861:861 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> u:22 var
+R875:878 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R866:870 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> can_R defax
+R872:872 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> u:22 var
+R874:874 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> v:23 var
+R879:883 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> can_R defax
+R885:885 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> w:21 var
+R887:887 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> v:23 var
+rec 898:906 <> Euclidean
+proj 920:930 <> euclidean_R
+binder 941:941 <> w:26
+binder 943:943 <> u:27
+binder 945:945 <> v:28
+R957:960 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R948:952 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> can_R defax
+R954:954 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> w:26 var
+R956:956 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> u:27 var
+R970:973 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R961:965 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> can_R defax
+R967:967 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> w:26 var
+R969:969 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> v:28 var
+R974:978 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> can_R defax
+R980:980 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> u:27 var
+R982:982 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> v:28 var
+rec 993:998 <> Serial
+proj 1012:1019 <> serial_R
+binder 1030:1030 <> w:31
+R1033:1039 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R1041:1042 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 1040:1040 <> v:32
+R1043:1047 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> can_R defax
+R1049:1049 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> w:31 var
+R1051:1051 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> v:32 var
+ax 1099:1108 <> provable_K
+binder 1119:1119 <> f:34
+binder 1121:1121 <> g:35
+R1124:1127 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Prov defax
+R1130:1133 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Impl defax
+R1136:1138 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Box defax
+R1141:1144 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Impl defax
+R1146:1146 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> f:34 var
+R1148:1148 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> g:35 var
+R1153:1156 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Impl defax
+R1159:1161 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Box defax
+R1163:1163 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> f:34 var
+R1167:1169 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Box defax
+R1171:1171 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> g:35 var
+ax 1187:1208 <> provable_necessitation
+binder 1219:1219 <> f:38
+R1222:1222 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1243:1247 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 1230:1230 <> w:39
+R1233:1238 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> forces defax
+R1240:1240 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> w:39 var
+R1242:1242 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> f:38 var
+R1248:1251 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Prov defax
+R1254:1256 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Box defax
+R1258:1258 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> f:38 var
+ax 1272:1281 <> provable_D
+R1291:1294 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1285:1290 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Serial class
+binder 1302:1302 <> f:42
+R1305:1308 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Prov defax
+R1311:1314 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Impl defax
+R1317:1319 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Box defax
+R1321:1321 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> f:42 var
+R1325:1327 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Dia defax
+R1329:1329 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> f:42 var
+ax 1344:1353 <> provable_4
+R1367:1370 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1357:1366 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Transitive class
+binder 1378:1378 <> f:45
+R1381:1384 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Prov defax
+R1387:1390 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Impl defax
+R1393:1395 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Box defax
+R1397:1397 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> f:45 var
+R1401:1403 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Box defax
+R1406:1408 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Box defax
+R1410:1410 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> f:45 var
+ax 1426:1435 <> provable_5
+R1448:1451 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1439:1447 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Euclidean class
+binder 1459:1459 <> f:48
+R1462:1465 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Prov defax
+R1468:1471 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Impl defax
+R1474:1476 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Dia defax
+R1478:1478 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> f:48 var
+R1482:1484 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Box defax
+R1487:1489 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Dia defax
+R1491:1491 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> f:48 var
+mod 1505:1514 <> DynaPraxis
+ax 1591:1597 DynaPraxis program
+ax 1645:1648 DynaPraxis exec
+R1661:1664 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1652:1660 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> can_world defax
+R1672:1675 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1665:1671 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis program defax
+R1685:1688 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1676:1684 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> can_world defax
+def 1798:1802 DynaPraxis Box_a
+R1807:1813 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis program defax
+binder 1805:1805 <> a:55
+R1819:1822 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> form defax
+binder 1817:1817 <> f:56
+R1827:1830 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> form defax
+R1835:1837 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Box defax
+R1839:1839 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> f:56 var
+def 1895:1899 DynaPraxis Dia_a
+R1904:1910 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis program defax
+binder 1902:1902 <> a:57
+R1916:1919 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> form defax
+binder 1914:1914 <> f:58
+R1924:1927 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> form defax
+R1932:1934 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Dia defax
+R1936:1936 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> f:58 var
+rec 2002:2008 DynaPraxis K_Frame
+rec 2059:2066 DynaPraxis KD_Frame
+proj 2080:2089 DynaPraxis dyn_serial
+binder 2100:2100 <> w:61
+binder 2102:2102 <> a:62
+R2105:2111 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R2113:2114 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 2112:2112 <> v:63
+R2115:2118 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis exec defax
+R2120:2120 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> w:61 var
+R2122:2122 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> a:62 var
+R2124:2124 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> v:63 var
+rec 2156:2165 DynaPraxis KD45_Frame
+proj 2179:2189 DynaPraxis dyn_serial'
+proj 2258:2266 DynaPraxis dyn_trans
+proj 2357:2364 DynaPraxis dyn_eucl
+binder 2200:2200 <> w:66
+binder 2202:2202 <> a:67
+R2205:2211 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R2213:2214 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 2212:2212 <> v:68
+R2215:2218 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis exec defax
+R2220:2220 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> w:66 var
+R2222:2222 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> a:67 var
+R2224:2224 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> v:68 var
+binder 2277:2277 <> w:70
+binder 2279:2279 <> a:71
+binder 2281:2281 <> u:72
+binder 2283:2283 <> v:73
+R2296:2299 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2286:2289 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis exec defax
+R2291:2291 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> w:70 var
+R2293:2293 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> a:71 var
+R2295:2295 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> u:72 var
+R2310:2313 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2300:2303 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis exec defax
+R2305:2305 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> u:72 var
+R2307:2307 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> a:71 var
+R2309:2309 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> v:73 var
+R2314:2317 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis exec defax
+R2319:2319 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> w:70 var
+R2321:2321 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> a:71 var
+R2323:2323 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> v:73 var
+binder 2375:2375 <> w:75
+binder 2377:2377 <> a:76
+binder 2379:2379 <> u:77
+binder 2381:2381 <> v:78
+R2394:2397 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2384:2387 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis exec defax
+R2389:2389 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> w:75 var
+R2391:2391 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> a:76 var
+R2393:2393 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> u:77 var
+R2408:2411 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2398:2401 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis exec defax
+R2403:2403 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> w:75 var
+R2405:2405 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> a:76 var
+R2407:2407 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> v:78 var
+R2412:2415 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis exec defax
+R2417:2417 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> u:77 var
+R2419:2419 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> a:76 var
+R2421:2421 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> v:78 var
+prf 2466:2474 DynaPraxis K_dynamic
+R2485:2488 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2478:2484 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis K_Frame class
+binder 2496:2496 <> a:80
+binder 2498:2498 <> f:81
+binder 2500:2500 <> g:82
+R2503:2506 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Prov defax
+R2509:2512 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Impl defax
+R2515:2519 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis Box_a def
+R2521:2521 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> a:80 var
+R2524:2527 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Impl defax
+R2529:2529 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> f:81 var
+R2531:2531 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> g:82 var
+R2536:2539 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Impl defax
+R2542:2546 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis Box_a def
+R2548:2548 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> a:80 var
+R2550:2550 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> f:81 var
+R2554:2558 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis Box_a def
+R2560:2560 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> a:80 var
+R2562:2562 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> g:82 var
+R2600:2604 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis Box_a def
+R2613:2622 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> provable_K defax
+R2613:2622 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> provable_K defax
+prf 2641:2661 DynaPraxis Necessitation_dynamic
+R2672:2675 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2665:2671 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis K_Frame class
+binder 2683:2683 <> a:83
+binder 2685:2685 <> f:84
+R2688:2688 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2709:2713 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 2696:2696 <> w:85
+R2699:2704 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> forces defax
+R2706:2706 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> w:85 var
+R2708:2708 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> f:84 var
+R2714:2717 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Prov defax
+R2720:2724 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis Box_a def
+R2726:2726 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> a:83 var
+R2728:2728 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> f:84 var
+R2764:2768 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis Box_a def
+R2777:2798 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> provable_necessitation defax
+R2777:2798 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> provable_necessitation defax
+prf 2877:2880 DynaPraxis Test
+R2892:2895 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2884:2891 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis KD_Frame class
+binder 2903:2903 <> a:86
+binder 2905:2905 <> f:87
+R2908:2911 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Prov defax
+R2914:2917 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Impl defax
+R2920:2924 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis Box_a def
+R2926:2926 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> a:86 var
+R2928:2928 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> f:87 var
+R2932:2936 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis Dia_a def
+R2938:2938 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> a:86 var
+R2940:2940 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> f:87 var
+R2975:2979 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis Box_a def
+R2982:2986 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis Dia_a def
+R3018:3027 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> provable_D defax
+R3018:3027 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> provable_D defax
+prf 3111:3121 DynaPraxis Composition
+R3135:3138 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3125:3134 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis KD45_Frame class
+binder 3146:3146 <> a:88
+binder 3148:3148 <> f:89
+R3151:3154 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Prov defax
+R3157:3160 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Impl defax
+R3163:3167 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis Box_a def
+R3169:3169 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> a:88 var
+R3172:3176 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis Box_a def
+R3178:3178 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> a:88 var
+R3180:3180 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> f:89 var
+R3185:3189 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis Box_a def
+R3191:3191 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> a:88 var
+R3193:3193 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> f:89 var
+prf 3273:3275 DynaPraxis Mix
+R3289:3292 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3279:3288 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis KD45_Frame class
+binder 3300:3300 <> a:90
+binder 3302:3302 <> f:91
+R3305:3308 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Prov defax
+R3311:3314 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> Impl defax
+R3317:3321 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis Dia_a def
+R3323:3323 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> a:90 var
+R3325:3325 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> f:91 var
+R3329:3333 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis Box_a def
+R3335:3335 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> a:90 var
+R3338:3342 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis Dia_a def
+R3344:3344 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> a:90 var
+R3346:3346 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec <> f:91 var
+R3376:3385 PXLs.IEL.Experimental.DynaPraxis.modal.FrameSpec DynaPraxis <> mod

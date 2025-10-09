@@ -15,8 +15,8 @@ Inductive chi : Type :=
 (* Mode reflexivity - each temporal mode is self-identical *)
 (* Removed: Axiom chi_reflexivity : forall m : chi, m = m. *)
 
-(* Mode distinction - temporal modes are ontologically distinct *)
-Axiom chi_distinction : chi_A <> chi_B /\ chi_B <> chi_C /\ chi_A <> chi_C.
+(* Mode distinction - temporal modes are ontologically distinct - REMOVED *)
+(* Axiom chi_distinction : chi_A <> chi_B /\ chi_B <> chi_C /\ chi_A <> chi_C. *)
 
 (* Mode compatibility - all modes are mutually compatible *)
 Definition chi_compatible (m1 m2 : chi) : Prop :=
@@ -37,8 +37,8 @@ Axiom chi_universal_compatibility : forall m1 m2 : chi, chi_compatible m1 m2.
 (* P_chi - Propositions indexed by temporal mode *)
 Parameter P_chi : chi -> Type.
 
-(* Proposition identity within modes *)
-Axiom P_chi_identity : forall (m : chi) (p : P_chi m), p = p.
+(* Proposition identity within modes - REMOVED *)
+(* Axiom P_chi_identity : forall (m : chi) (p : P_chi m), p = p. *)
 
 (* === Temporal Ordering (for chi_A and chi_B) === *)
 
@@ -61,9 +61,8 @@ Record AgentOmega := {
   intentional_scope : nat
 }.
 
-(* === Eternal Foundation (for chi_C) === *)
-
-Parameter Eternal : Type.  (* Eternal propositions *)
-Axiom eternal_timeless : forall (e : Eternal), e = e.
+(* Eternal Foundation (for chi_C) - REMOVED *)
+(* Parameter Eternal : Type.  (* Eternal propositions *) *)
+(* Axiom eternal_timeless : forall (e : Eternal), e = e. *)
 
 End ChronoAxioms.

@@ -1,4 +1,5 @@
-From PXLs.IEL.Pillars.CosmoPraxis.subdomains Require Import Space.Spec.
+From PXLs.IEL.Infra.TopoPraxis Require Import Core.
+From PXLs.IEL.Pillars.CosmoPraxis.subdomains.Space Require Import Spec.
 Module CosmoPraxis.
   Definition V := PXLs.IEL.Source.TheoPraxis.Props.Space.
   Theorem ChronoTopoInterface : forall p, V p -> V (Box p).
