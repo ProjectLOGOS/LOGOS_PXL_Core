@@ -1,0 +1,12 @@
+DIGEST 1a9fd3e23ff1e07f30ce2f2616035bef
+FSystems
+R24:30 Coq.Program.Program <> <> lib
+R32:45 Coq.Setoids.Setoid <> <> lib
+mod 138:144 <> KSystem
+R179:185 Systems KSystem <> mod
+mod 196:203 <> S4System
+R238:245 Systems S4System <> mod
+mod 256:263 <> S5System
+R298:305 Systems S5System <> mod
+mod 316:323 <> KDSystem
+R358:365 Systems KDSystem <> mod

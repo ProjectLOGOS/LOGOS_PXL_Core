@@ -98,10 +98,13 @@ IEL_FILES := \
   modules/IEL/TropoPraxis/theorems/Conservativity.v \
   tests/TropoPraxis/TropoPraxis_Smoke.v \
   modules/IEL/GnosiPraxis/modal/FrameSpec.v \
+  modules/IEL/GnosiPraxis/modal/AgentFrames.v \
   modules/IEL/GnosiPraxis/theorems/NormalBase.v \
   modules/IEL/GnosiPraxis/theorems/Systems.v \
   modules/IEL/GnosiPraxis/theorems/Conservativity.v \
+  modules/IEL/GnosiPraxis/systems/Systems.v \
   tests/GnosiPraxis/GnosiPraxis_Smoke.v \
+  tests/GnosiPraxis/GnosiPraxis_AgentTests.v \
   modules/IEL/ThemiPraxis/modal/FrameSpec.v \
   modules/IEL/ThemiPraxis/theorems/NormalBase.v \
   modules/IEL/ThemiPraxis/theorems/Systems.v \

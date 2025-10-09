@@ -12,6 +12,7 @@
     { "label": "coq: constructive-lindenbaum", "type": "shell", "command": "bash -lc 'coqc pxl-minimal-kernel-main/coq/Constructive_Lindenbaum_Simple.v'", "problemMatcher": [] },
     { "label": "coq: relativity", "type": "shell", "command": "coqc modules/IEL/ChronoPraxis/domains/Empiricism/Relativity.v; coqc -I modules/IEL/ChronoPraxis/domains/Empiricism tests/RelativityTests.v", "problemMatcher": [] },
     { "label": "coq: modal-praxis", "type": "shell", "command": "bash -lc 'coqc modules/IEL/ModalPraxis/modal/FrameSpec.v && coqc modules/IEL/ModalPraxis/theorems/NormalBase.v && coqc modules/IEL/ModalPraxis/theorems/DerivedAxioms.v && coqc modules/IEL/ModalPraxis/theorems/Systems.v && coqc modules/IEL/ModalPraxis/theorems/Conservativity.v && coqc tests/UMIEL_Tests.v'", "problemMatcher": [] },
+    { "label": "coq: gnosipraxis", "type": "shell", "command": "bash -lc 'coqc modules/IEL/GnosiPraxis/modal/AgentFrames.v && coqc modules/IEL/GnosiPraxis/systems/Systems.v && coqc modules/IEL/GnosiPraxis/theorems/Conservativity.v && coqc tests/GnosiPraxis/GnosiPraxis_AgentTests.v'", "problemMatcher": [] },
     { "label": "coq: iels-all", "type": "shell", "command": "bash -lc 'make iels-all'", "problemMatcher": [] }
   ]
 }

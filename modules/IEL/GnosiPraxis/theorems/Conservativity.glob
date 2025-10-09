@@ -1,0 +1,40 @@
+DIGEST ba3edb5e9e9389f0e8281c2690a46cbc
+FConservativity
+R24:30 Coq.Program.Program <> <> lib
+R32:45 Coq.Setoids.Setoid <> <> lib
+ax 309:312 <> form
+ax 332:335 <> Prov
+R343:346 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R339:342 Conservativity <> form defax
+ax 363:368 <> forces
+R376:379 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R384:387 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R380:383 Conservativity <> form defax
+ax 404:413 <> modal_free
+R421:424 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R417:420 Conservativity <> form defax
+ax 441:463 <> completeness_from_truth
+binder 474:475 <> φ:9
+R478:478 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R500:504 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 486:486 <> w:10
+R489:494 Conservativity <> forces defax
+R496:496 Conservativity <> w:10 var
+R498:499 Conservativity <> φ:9 var
+R505:508 Conservativity <> Prov defax
+R510:511 Conservativity <> φ:9 var
+prf 523:553 <> epistemic_conservative_nonmodal
+binder 566:567 <> φ:13
+R583:586 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R570:579 Conservativity <> modal_free defax
+R581:582 Conservativity <> φ:13 var
+R587:587 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R609:613 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 595:595 <> w:14
+R598:603 Conservativity <> forces defax
+R605:605 Conservativity <> w:14 var
+R607:608 Conservativity <> φ:13 var
+R614:617 Conservativity <> Prov defax
+R619:620 Conservativity <> φ:13 var
+R656:678 Conservativity <> completeness_from_truth defax
+R656:678 Conservativity <> completeness_from_truth defax
