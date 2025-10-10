@@ -1,0 +1,18 @@
+DIGEST dd62a2cc769edec270bf7ba86f31419b
+FV4.Knowledge
+R73:79 Coq.Program.Program <> <> lib
+mod 90:91 <> V4
+def 136:140 V4 claim
+def 162:166 V4 world
+R171:174 Coq.Init.Datatypes <> unit ind
+def 220:225 V4 Forces
+R232:236 V4.Knowledge V4 world def
+binder 228:228 <> w:1
+R245:249 V4.Knowledge V4 claim def
+binder 240:241 <> φ:2
+R255:256 V4.Knowledge <> φ:2 var
+def 298:303 V4 proves
+R311:315 V4.Knowledge V4 claim def
+binder 306:307 <> φ:3
+R321:322 V4.Knowledge <> φ:3 var
+R330:331 V4.Knowledge V4 <> mod

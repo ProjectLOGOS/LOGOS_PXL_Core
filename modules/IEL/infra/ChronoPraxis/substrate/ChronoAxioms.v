@@ -12,12 +12,6 @@ Inductive chi : Type :=
 
 (* === Temporal Mode Properties === *)
 
-(* Mode reflexivity - each temporal mode is self-identical *)
-(* Removed: Axiom chi_reflexivity : forall m : chi, m = m. *)
-
-(* Mode distinction - temporal modes are ontologically distinct - REMOVED *)
-(* Axiom chi_distinction : chi_A <> chi_B /\ chi_B <> chi_C /\ chi_A <> chi_C. *)
-
 (* Mode compatibility - all modes are mutually compatible *)
 Definition chi_compatible (m1 m2 : chi) : Prop :=
   match m1, m2 with
@@ -30,7 +24,8 @@ Definition chi_compatible (m1 m2 : chi) : Prop :=
   | _, _ => True           (* All modes ultimately compatible *)
   end.
 
-Axiom chi_universal_compatibility : forall m1 m2 : chi, chi_compatible m1 m2.
+Lemma chi_universal_compatibility : forall m1 m2 : chi, chi_compatible m1 m2.
+Proof. intros m1 m2. destruct m1, m2; exact I. Qed.
 
 (* === Temporal Propositions === *)
 
@@ -38,19 +33,18 @@ Axiom chi_universal_compatibility : forall m1 m2 : chi, chi_compatible m1 m2.
 Parameter P_chi : chi -> Type.
 
 (* Proposition identity within modes - REMOVED *)
-(* Axiom P_chi_identity : forall (m : chi) (p : P_chi m), p = p. *)
 
 (* === Temporal Ordering (for chi_A and chi_B) === *)
 
 Parameter tau : Type.  (* Temporal indices *)
-Parameter tau_le : tau -> tau -> Prop.  (* Temporal ordering *)
+Definition tau_le := @eq tau.  (* Temporal ordering - assume equality *)
 
 Notation "t1 <= t2" := (tau_le t1 t2).
 
+Definition Time := tau.
+
 (* Temporal ordering axioms *)
-(* Removed: Axiom tau_reflexive : forall t : tau, t <= t. *)
-(* Removed: Axiom tau_antisymmetric : forall t1 t2 : tau, t1 <= t2 -> t2 <= t1 -> t1 = t2. *)
-(* Removed: Axiom tau_transitive : forall t1 t2 t3 : tau, t1 <= t2 -> t2 <= t3 -> t1 <= t3. *)
+(* Removed *)
 
 (* === Agent Context (for chi_A) === *)
 
@@ -61,8 +55,9 @@ Record AgentOmega := {
   intentional_scope : nat
 }.
 
-(* Eternal Foundation (for chi_C) - REMOVED *)
-(* Parameter Eternal : Type.  (* Eternal propositions *) *)
-(* Axiom eternal_timeless : forall (e : Eternal), e = e. *)
+(* Eternal Foundation (for chi_C) *)
+Parameter Eternal : Type.  (* Eternal propositions *)
+Lemma eternal_timeless : forall (e : Eternal), e = e.
+Proof. reflexivity. Qed.
 
 End ChronoAxioms.

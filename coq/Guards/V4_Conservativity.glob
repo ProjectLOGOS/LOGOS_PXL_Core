@@ -1,0 +1,162 @@
+DIGEST 858f2a4f6385e5efa84d411fce646b5c
+FPXLs.V4.Guards.V4_Conservativity
+R94:100 Coq.Program.Program <> <> lib
+mod 217:239 <> GnosiPraxis_Placeholder
+def 255:255 GnosiPraxis_Placeholder V
+def 279:284 GnosiPraxis_Placeholder Forces
+R291:294 Coq.Init.Datatypes <> unit ind
+binder 287:287 <> w:1
+binder 298:298 <> p:2
+R311:311 PXLs.V4.Guards.V4_Conservativity <> p:2 var
+ax 322:333 GnosiPraxis_Placeholder truth_forces
+binder 344:344 <> p:3
+R358:361 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R347:352 PXLs.V4.Guards.V4_Conservativity GnosiPraxis_Placeholder Forces def
+R354:355 Coq.Init.Datatypes <> tt constr
+R357:357 PXLs.V4.Guards.V4_Conservativity <> p:3 var
+R362:362 PXLs.V4.Guards.V4_Conservativity <> p:3 var
+R369:391 PXLs.V4.Guards.V4_Conservativity GnosiPraxis_Placeholder <> mod
+mod 442:463 <> ErgoPraxis_Placeholder
+def 479:483 ErgoPraxis_Placeholder hoare
+R492:495 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R500:503 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+def 523:530 ErgoPraxis_Placeholder id_hoare
+R534:538 PXLs.V4.Guards.V4_Conservativity ErgoPraxis_Placeholder hoare def
+binder 547:547 <> P:6
+binder 549:549 <> Q:7
+R555:558 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R554:554 PXLs.V4.Guards.V4_Conservativity <> P:6 var
+R559:559 PXLs.V4.Guards.V4_Conservativity <> Q:7 var
+def 575:585 ErgoPraxis_Placeholder valid_hoare
+R592:596 PXLs.V4.Guards.V4_Conservativity ErgoPraxis_Placeholder hoare def
+binder 588:588 <> h:8
+binder 609:609 <> P:9
+binder 611:611 <> Q:10
+R619:622 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R614:614 PXLs.V4.Guards.V4_Conservativity <> h:8 var
+R616:616 PXLs.V4.Guards.V4_Conservativity <> P:9 var
+R618:618 PXLs.V4.Guards.V4_Conservativity <> Q:10 var
+R624:627 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R623:623 PXLs.V4.Guards.V4_Conservativity <> P:9 var
+R628:628 PXLs.V4.Guards.V4_Conservativity <> Q:10 var
+ax 639:646 ErgoPraxis_Placeholder id_valid
+R650:660 PXLs.V4.Guards.V4_Conservativity ErgoPraxis_Placeholder valid_hoare def
+R662:669 PXLs.V4.Guards.V4_Conservativity ErgoPraxis_Placeholder id_hoare def
+R676:697 PXLs.V4.Guards.V4_Conservativity ErgoPraxis_Placeholder <> mod
+mod 748:769 <> Axiopraxis_Placeholder
+def 785:789 Axiopraxis_Placeholder value
+R794:796 Coq.Init.Datatypes <> nat ind
+def 812:818 Axiopraxis_Placeholder neutral
+R822:826 PXLs.V4.Guards.V4_Conservativity Axiopraxis_Placeholder value def
+def 847:854 Axiopraxis_Placeholder value_le
+R863:867 PXLs.V4.Guards.V4_Conservativity Axiopraxis_Placeholder value def
+binder 857:857 <> x:13
+binder 859:859 <> y:14
+R874:877 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
+R873:873 PXLs.V4.Guards.V4_Conservativity <> x:13 var
+R878:878 PXLs.V4.Guards.V4_Conservativity <> y:14 var
+ax 889:901 Axiopraxis_Placeholder refl_value_le
+binder 912:912 <> x:15
+R915:922 PXLs.V4.Guards.V4_Conservativity Axiopraxis_Placeholder value_le def
+R924:924 PXLs.V4.Guards.V4_Conservativity <> x:15 var
+R926:926 PXLs.V4.Guards.V4_Conservativity <> x:15 var
+R933:954 PXLs.V4.Guards.V4_Conservativity Axiopraxis_Placeholder <> mod
+mod 992:1011 <> V4_Knowledge_Adapter
+ax 1026:1037 V4_Knowledge_Adapter V4_Knowledge
+ax 1059:1067 V4_Knowledge_Adapter V4_Forces
+R1075:1078 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1071:1074 Coq.Init.Datatypes <> unit ind
+R1091:1094 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1079:1090 PXLs.V4.Guards.V4_Conservativity V4_Knowledge_Adapter V4_Knowledge defax
+def 1114:1134 V4_Knowledge_Adapter v4_knowledge_to_gnosi
+R1141:1152 PXLs.V4.Guards.V4_Conservativity V4_Knowledge_Adapter V4_Knowledge defax
+binder 1137:1137 <> k:22
+R1165:1168 Coq.Init.Logic <> True ind
+prf 1179:1192 V4_Knowledge_Adapter v4_knows_sound
+binder 1203:1203 <> w:23
+binder 1205:1207 <> phi:24
+R1229:1236 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1214:1222 PXLs.V4.Guards.V4_Conservativity V4_Knowledge_Adapter V4_Forces defax
+R1224:1224 PXLs.V4.Guards.V4_Conservativity <> w:23 var
+R1226:1228 PXLs.V4.Guards.V4_Conservativity <> phi:24 var
+R1237:1266 PXLs.V4.Guards.V4_Conservativity GnosiPraxis_Placeholder Forces def
+R1268:1268 PXLs.V4.Guards.V4_Conservativity <> w:23 var
+R1271:1291 PXLs.V4.Guards.V4_Conservativity V4_Knowledge_Adapter v4_knowledge_to_gnosi def
+R1293:1295 PXLs.V4.Guards.V4_Conservativity <> phi:24 var
+R1331:1351 PXLs.V4.Guards.V4_Conservativity V4_Knowledge_Adapter v4_knowledge_to_gnosi def
+R1367:1367 Coq.Init.Logic <> I constr
+R1367:1367 Coq.Init.Logic <> I constr
+R1379:1398 PXLs.V4.Guards.V4_Conservativity V4_Knowledge_Adapter <> mod
+mod 1433:1449 <> V4_Action_Adapter
+ax 1464:1472 V4_Action_Adapter V4_Action
+ax 1494:1501 V4_Action_Adapter V4_Hoare
+R1509:1512 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1522:1525 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1513:1521 PXLs.V4.Guards.V4_Conservativity V4_Action_Adapter V4_Action defax
+R1530:1533 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+def 1553:1570 V4_Action_Adapter v4_action_to_hoare
+R1577:1585 PXLs.V4.Guards.V4_Conservativity V4_Action_Adapter V4_Action defax
+binder 1573:1573 <> a:29
+R1590:1617 PXLs.V4.Guards.V4_Conservativity ErgoPraxis_Placeholder hoare def
+R1626:1656 PXLs.V4.Guards.V4_Conservativity ErgoPraxis_Placeholder id_hoare def
+prf 1667:1683 V4_Action_Adapter v4_hoare_reflects
+binder 1694:1694 <> a:30
+binder 1696:1696 <> P:31
+binder 1698:1698 <> Q:32
+R1719:1726 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1705:1712 PXLs.V4.Guards.V4_Conservativity V4_Action_Adapter V4_Hoare defax
+R1714:1714 PXLs.V4.Guards.V4_Conservativity <> P:31 var
+R1716:1716 PXLs.V4.Guards.V4_Conservativity <> a:30 var
+R1718:1718 PXLs.V4.Guards.V4_Conservativity <> Q:32 var
+R1727:1760 PXLs.V4.Guards.V4_Conservativity ErgoPraxis_Placeholder valid_hoare def
+R1763:1780 PXLs.V4.Guards.V4_Conservativity V4_Action_Adapter v4_action_to_hoare def
+R1782:1782 PXLs.V4.Guards.V4_Conservativity <> a:30 var
+R1817:1847 PXLs.V4.Guards.V4_Conservativity ErgoPraxis_Placeholder id_valid prfax
+R1817:1847 PXLs.V4.Guards.V4_Conservativity ErgoPraxis_Placeholder id_valid prfax
+R1859:1875 PXLs.V4.Guards.V4_Conservativity V4_Action_Adapter <> mod
+mod 1909:1924 <> V4_Value_Adapter
+ax 1939:1946 V4_Value_Adapter V4_Value
+ax 1968:1973 V4_Value_Adapter V4_vle
+R1985:1988 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1977:1984 PXLs.V4.Guards.V4_Conservativity V4_Value_Adapter V4_Value defax
+R1997:2000 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1989:1996 PXLs.V4.Guards.V4_Conservativity V4_Value_Adapter V4_Value defax
+def 2020:2035 V4_Value_Adapter v4_value_to_axio
+R2042:2049 PXLs.V4.Guards.V4_Conservativity V4_Value_Adapter V4_Value defax
+binder 2038:2038 <> v:37
+R2054:2081 PXLs.V4.Guards.V4_Conservativity Axiopraxis_Placeholder value def
+R2090:2119 PXLs.V4.Guards.V4_Conservativity Axiopraxis_Placeholder neutral def
+prf 2130:2142 V4_Value_Adapter v4_value_mono
+binder 2153:2153 <> x:38
+binder 2155:2155 <> y:39
+R2172:2179 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2162:2167 PXLs.V4.Guards.V4_Conservativity V4_Value_Adapter V4_vle defax
+R2169:2169 PXLs.V4.Guards.V4_Conservativity <> x:38 var
+R2171:2171 PXLs.V4.Guards.V4_Conservativity <> y:39 var
+R2180:2210 PXLs.V4.Guards.V4_Conservativity Axiopraxis_Placeholder value_le def
+R2213:2228 PXLs.V4.Guards.V4_Conservativity V4_Value_Adapter v4_value_to_axio def
+R2230:2230 PXLs.V4.Guards.V4_Conservativity <> x:38 var
+R2234:2249 PXLs.V4.Guards.V4_Conservativity V4_Value_Adapter v4_value_to_axio def
+R2251:2251 PXLs.V4.Guards.V4_Conservativity <> y:39 var
+R2284:2319 PXLs.V4.Guards.V4_Conservativity Axiopraxis_Placeholder refl_value_le prfax
+R2284:2319 PXLs.V4.Guards.V4_Conservativity Axiopraxis_Placeholder refl_value_le prfax
+R2331:2346 PXLs.V4.Guards.V4_Conservativity V4_Value_Adapter <> mod
+mod 2482:2498 <> V4_Conservativity
+ax 2747:2755 V4_Conservativity V4_Export
+ax 2775:2779 V4_Conservativity Embed
+R2792:2795 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2783:2791 PXLs.V4.Guards.V4_Conservativity V4_Conservativity V4_Export defax
+prf 2888:2902 V4_Conservativity v4_conservative
+R2919:2927 PXLs.V4.Guards.V4_Conservativity V4_Conservativity V4_Export defax
+binder 2913:2915 <> tau:44
+R2932:2936 PXLs.V4.Guards.V4_Conservativity V4_Conservativity Embed defax
+R2938:2940 PXLs.V4.Guards.V4_Conservativity <> tau:44 var
+prf 3480:3494 V4_Conservativity runtime_v4_safe
+R3498:3501 Coq.Init.Logic <> True ind
+R3517:3517 Coq.Init.Logic <> I constr
+R3517:3517 Coq.Init.Logic <> I constr
+prf 3578:3590 V4_Conservativity no_new_axioms
+R3594:3597 Coq.Init.Logic <> True ind
+R3613:3613 Coq.Init.Logic <> I constr
+R3613:3613 Coq.Init.Logic <> I constr
+R3626:3642 PXLs.V4.Guards.V4_Conservativity V4_Conservativity <> mod

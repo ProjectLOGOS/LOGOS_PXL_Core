@@ -1,6 +1,0 @@
--R . ChronoPraxis
--I .
-ChronoAxioms.v
-ChronoMappings.v
-ChronoProofs.v
-ChronoPraxis.v

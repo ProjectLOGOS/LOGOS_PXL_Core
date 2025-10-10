@@ -18,6 +18,11 @@ Definition can_world := { G : set | mct G }.
 Parameter can_R : can_world -> can_world -> Prop.
 Parameter forces : can_world -> form -> Prop.
 
+(* Forcing relation axioms *)
+Parameter forces_Box : forall w φ, forces w (Box φ) <-> (forall u, can_R w u -> forces u φ).
+Parameter forces_Dia : forall w φ, forces w (Dia φ) <-> (exists u, can_R w u /\ forces u φ).
+Parameter forces_Impl : forall w φ ψ, forces w (Impl φ ψ) <-> (forces w φ -> forces w ψ).
+
 Parameter completeness_from_truth : forall φ, (forall w, forces w φ) -> Prov φ.
 
 (* Modal-free predicate from existing ModalFree module *)

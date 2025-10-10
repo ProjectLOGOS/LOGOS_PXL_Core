@@ -36,3 +36,6 @@ timestamp,obligation,duration_ms,result
 1759988509,BOX(Good(test_action) and TrueP(prop) and Coherent(state)),2008,DENY
 1759988511,BOX(Good(DENY_action) and not TrueP(prop) and Coherent(state)),2016,DENY
 1759988513,BOX(Good(test_action)),2006,DENY
+1760122461,BOX(Good(test_action) and TrueP(prop) and Coherent(state)),7,ALLOW
+1760122461,BOX(Good(DENY_action) and not TrueP(prop) and Coherent(state)),4,DENY
+1760122461,BOX(Good(test_action)),4,ALLOW

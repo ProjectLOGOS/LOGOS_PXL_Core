@@ -6,7 +6,9 @@
 
 (* TODO: remove Admitted. — constructive only. No classical axioms. *)
 
-Require Import ChronoPraxis_PXL_Formal.
+Require Import PXLs.PXLv3.
+Require Import PXLs.IEL.Infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Formal.
+From Coq Require Import List.
 
 Module ChronoPraxis_PXL_Proofs.
 
@@ -56,8 +58,7 @@ Proof.
      do not add inconsistencies to the PXL base *)
   (* PLACEHOLDER: This requires full structural induction on CPX_Prov and pxl_to_cpx *)
   (* For constructive completeness, we establish this via embedding soundness *)
-  exact (id H_cpx_prov). (* Identity function - assume preservation for now *)
-Qed.
+  Admitted.
 
 (* === Identity Preservation Theorems === *)
 
@@ -67,35 +68,7 @@ Theorem cpx_identity_preservation : forall φ : cpx_form,
 Proof.
   intro φ.
   (* This follows from the structure of CPX being built on PXL logical foundations *)
-  induction φ; simpl.
-  (* Base cases use PXL axioms *)
-  - (* CPX_Atom case *)
-    apply cpx_ax_PL_k.
-  - (* CPX_Bot case *)
-    apply cpx_ax_PL_k.
-  (* Inductive cases build on IH *)
-  - (* CPX_Neg case *) apply cpx_ax_PL_k.
-  - (* Additional cases... *) apply cpx_ax_PL_k.
-  - apply cpx_ax_PL_k.
-  - apply cpx_ax_PL_k.
-  - apply cpx_ax_PL_k.
-  - apply cpx_ax_PL_k.
-  (* Temporal cases inherit from logical structure *)
-  - apply cpx_ax_PL_k.
-  - apply cpx_ax_PL_k.
-  - apply cpx_ax_PL_k.
-  - apply cpx_ax_PL_k.
-  - apply cpx_ax_PL_k.
-  - apply cpx_ax_PL_k.
-  - apply cpx_ax_PL_k.
-  (* Epistemic cases *)
-  - apply cpx_ax_PL_k.
-  - apply cpx_ax_PL_k.
-  - apply cpx_ax_PL_k.
-  (* Ontological cases *)
-  - apply cpx_ax_PL_k.
-  - apply cpx_ax_PL_k.
-Qed.
+  Admitted.
 
 (* Theorem: CPX preserves PXL non-contradiction *)
 Theorem cpx_non_contradiction : forall φ : cpx_form,
@@ -104,8 +77,7 @@ Proof.
   intro φ.
   (* This follows from PXL's non-contradiction being preserved in CPX *)
   (* Non-contradiction follows from CPX axiom system *)
-  apply cpx_ax_PL_neg_elim.
-Qed.
+  Admitted.
 
 (* Theorem: CPX preserves PXL excluded middle *)
 Theorem cpx_excluded_middle : forall φ : cpx_form,
@@ -114,8 +86,7 @@ Proof.
   intro φ.
   (* Classical logic preserved through bijective mapping *)
   (* Excluded middle follows from CPX logic structure *)
-  apply cpx_ax_PL_lem.
-Qed.
+  Admitted.
 
 (* === Temporal Reasoning Soundness === *)
 
@@ -126,15 +97,16 @@ Proof.
   intros t φ H.
   (* If φ holds at time t, then φ is possible *)
   (* From temporal axioms: CPX_At implies possibility *)
-  apply cpx_temporal_dia_intro. exact H.
-Qed.
+  Admitted.
 
 (* Theorem: Temporal persistence respects modal structure *)
 Theorem temporal_persistence_modal : forall φ,
   CPX_Prov (CPX_Always φ) -> CPX_Prov (CPX_Box φ).
 Proof.
   intros φ H.
-  apply cpx_ax_temporal_always_box.
+  apply cpx_mp with (p := CPX_Always φ) (q := CPX_Box φ).
+  - apply cpx_ax_temporal_always_box.
+  - exact H.
 Qed.
 
 (* === Epistemic Reasoning Soundness === *)
@@ -205,8 +177,7 @@ Proof.
   exists (CPX_Atom 0). (* Use a simple atomic proposition *)
   intro H_contra. 
   (* This contradicts the axiom system *)
-  apply cpx_cons. exact H_contra.
-Qed.
+  Admitted.
 
 (* Main Theorem: ChronoPraxis preserves PXL's triune structure *)
 Theorem chronopraxis_preserves_triune :

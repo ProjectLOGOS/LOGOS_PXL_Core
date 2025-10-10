@@ -1,0 +1,27 @@
+DIGEST 85312d871a0db3eb67109085efdbf47f
+FPXLs.IEL.Infra.ChronoPraxis.Theorems.ChronoProofs
+R73:122 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms <> <> lib
+R139:185 PXLs.IEL.Infra.ChronoPraxis.Substrate.Bijection <> <> lib
+R202:253 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoMappings <> <> lib
+R270:318 PXLs.IEL.Infra.ChronoPraxis.Tactics.ChronoTactics <> <> lib
+mod 329:340 <> ChronoProofs
+R351:362 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms <> mod
+R372:385 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoMappings ChronoMappings <> mod
+prf 446:472 ChronoProofs P_chi_identity_preservation
+R488:503 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms chi ind
+binder 484:484 <> m:1
+R511:528 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms P_chi defax
+R530:530 PXLs.IEL.Infra.ChronoPraxis.Theorems.ChronoProofs <> m:1 var
+binder 507:507 <> p:2
+R535:537 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R534:534 PXLs.IEL.Infra.ChronoPraxis.Theorems.ChronoProofs <> p:2 var
+R538:538 PXLs.IEL.Infra.ChronoPraxis.Theorems.ChronoProofs <> p:2 var
+prf 639:667 ChronoProofs eternal_identity_preservation
+R683:702 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms Eternal defax
+binder 679:679 <> e:3
+R707:709 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R706:706 PXLs.IEL.Infra.ChronoPraxis.Theorems.ChronoProofs <> e:3 var
+R710:710 PXLs.IEL.Infra.ChronoPraxis.Theorems.ChronoProofs <> e:3 var
+R739:767 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms eternal_timeless thm
+R739:767 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms eternal_timeless thm
+R780:791 PXLs.IEL.Infra.ChronoPraxis.Theorems.ChronoProofs ChronoProofs <> mod

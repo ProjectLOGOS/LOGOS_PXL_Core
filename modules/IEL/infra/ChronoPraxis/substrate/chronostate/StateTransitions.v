@@ -1,6 +1,6 @@
 (* StateTransitions.v - Temporal State Evolution *)
 
-Require Import ChronoModes.
+Require Import PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoModes.
 Require Import ChronoState.
 
 Module StateTransitions.

@@ -1,6 +1,0 @@
-DIGEST 041f543b642d4cde59245ca5ea330a7b
-FPXLs.IEL.Experimental.ChremaPraxis.theorems.Systems
-R24:30 Coq.Program.Program <> <> lib
-R32:45 Coq.Setoids.Setoid <> <> lib
-mod 55:72 <> ChremaPraxisSystem
-R79:96 PXLs.IEL.Experimental.ChremaPraxis.theorems.Systems ChremaPraxisSystem <> mod

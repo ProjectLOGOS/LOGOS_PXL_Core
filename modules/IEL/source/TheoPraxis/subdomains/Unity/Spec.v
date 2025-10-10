@@ -1,4 +1,4 @@
-From Coq Require Import Program.
+From Coq Require Import Program String.
 From PXLs Require Import PXLv3.
 Set Implicit Arguments.
 Module UnitySpec.
