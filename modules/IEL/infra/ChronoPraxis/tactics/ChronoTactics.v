@@ -1,7 +1,5 @@
-(* TODO: remove Admitted. — constructive only. No classical axioms. *)
-
-Require Import modules.chronopraxis.substrate.Bijection
-               modules.chronopraxis.substrate.ChronoMappings.
+﻿Require Import PXLs.IEL.Infra.ChronoPraxis.Substrate.Bijection
+               PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoMappings.
 
 (* Specialized rewrite lemmas for bijection normalization *)
 Lemma AB_back_fwd : forall x, ChronoMappings.B_to_A (ChronoMappings.A_to_B x) = x.
@@ -54,21 +52,23 @@ Ltac normalize_time :=
 (* Additional tactical support for composition reasoning *)
 Lemma AC_composition_unfold : forall x,
   ChronoMappings.A_to_C x = ChronoMappings.B_to_C (ChronoMappings.A_to_B x).
-Proof.
-  intro x. 
-  (* By definition since map_AC := compose_bij map_AB map_BC *)
+Proof. 
+  intros x. 
   unfold ChronoMappings.A_to_C, ChronoMappings.B_to_C, ChronoMappings.A_to_B.
-  unfold ChronoMappings.map_AC. 
+  unfold forward.
+  unfold ChronoMappings.map_AC, ChronoMappings.map_AB, ChronoMappings.map_BC.
+  unfold compose_bij.
   reflexivity.
 Qed.
 
 Lemma CA_composition_unfold : forall z,
   ChronoMappings.C_to_A z = ChronoMappings.B_to_A (ChronoMappings.C_to_B z).
-Proof.
-  intro z. 
-  (* By definition since map_AC := compose_bij map_AB map_BC and C_to_A := backward map_AC *)
+Proof. 
+  intros z. 
   unfold ChronoMappings.C_to_A, ChronoMappings.B_to_A, ChronoMappings.C_to_B.
-  unfold ChronoMappings.map_AC. 
+  unfold backward.
+  unfold ChronoMappings.map_AC, ChronoMappings.map_AB, ChronoMappings.map_BC.
+  unfold compose_bij.
   reflexivity.
 Qed.
 
@@ -77,3 +77,4 @@ Hint Rewrite AB_back_fwd AB_fwd_back : chrono_norm.
 Hint Rewrite BC_back_fwd BC_fwd_back : chrono_norm.
 Hint Rewrite AC_back_fwd AC_fwd_back : chrono_norm.
 Hint Rewrite AC_composition_unfold CA_composition_unfold : chrono_comp.
+

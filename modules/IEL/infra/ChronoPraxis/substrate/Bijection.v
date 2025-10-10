@@ -3,6 +3,8 @@
 Set Implicit Arguments.
 Set Primitive Projections.
 
+From Coq Require Import Program.
+
 (* === Constructive Bijection Record === *)
 
 Record Bijection (X Y : Type) := {
@@ -53,8 +55,17 @@ Proof.
 Qed.
 
 (* === Bijection Composition === *)
-(* Note: Simplified for now - full composition proof can be added later *)
-Parameter compose_bij : forall {X Y Z : Type}, Bijection X Y -> Bijection Y Z -> Bijection X Z.
+
+Definition compose_bij {X Y Z : Type} (bij1 : Bijection X Y) (bij2 : Bijection Y Z) : Bijection X Z := {|
+  f := fun x => f bij2 (f bij1 x);
+  g := fun z => g bij1 (g bij2 z);
+  fg := fun x =>
+    eq_trans (f_equal (g bij1) (fg bij2 (f bij1 x)))
+             (fg bij1 x);
+  gf := fun z =>
+    eq_trans (f_equal (f bij2) (gf bij1 (g bij2 z)))
+             (gf bij2 z)
+|}.
 
 (* === Forward and Backward Accessors === *)
 

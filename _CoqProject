@@ -1,10 +1,7 @@
--Q pxl-minimal-kernel-main/coq PXLs
--Q modules/IEL/source PXLs.IEL.Source
--Q modules/IEL/infra PXLs.IEL.Infra
--Q modules/IEL/infra/ChronoPraxis PXLs.IEL.Infra.ChronoPraxis
--Q modules/IEL/infra/ChronoPraxis/substrate PXLs.IEL.Infra.ChronoPraxis.Substrate
--Q modules/IEL/infra/ModalPraxis PXLs.IEL.Infra.ModalPraxis
--Q modules/IEL/infra/TropoPraxis PXLs.IEL.Infra.TropoPraxis
--Q modules/IEL/pillars PXLs.IEL.Pillars
--Q modules/IEL/experimental PXLs.IEL.Experimental
--Q tests tests
+﻿-Q pxl-minimal-kernel-main/coq                         PXLs
+-Q modules/IEL/source                                  PXLs.IEL.Source
+-Q modules/IEL/infra                                   PXLs.IEL.Infra
+-Q modules/IEL/pillars                                 PXLs.IEL.Pillars
+-Q coq/Guards                                          PXLs.V4.Guards
+-Q coq/V4Adapters                                      PXLs.V4.Adapters
+-Q third_party/logos_agi_v4/coq                        V4

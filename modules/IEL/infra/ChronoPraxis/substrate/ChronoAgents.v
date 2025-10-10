@@ -1,14 +1,14 @@
 (* ChronoAgents.v *)
 
-Require Import ChronoAxioms.
-Require Import ChronoMappings.
-Require Import ChronoProofs.
+Require Import PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms.
+Require Import PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoMappings.
+(* Require Import PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoProofs. *)
 
 Module ChronoAgents.
 
 Import ChronoAxioms.
 Import ChronoMappings.
-Import ChronoProofs.
+(* Import ChronoProofs. *)
 
 (* Agent definition: time-indexed epistemic entities *)
 Record ChronoAgent (t : Time) := {

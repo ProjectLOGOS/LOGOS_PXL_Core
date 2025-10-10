@@ -1,0 +1,128 @@
+version: '3.8'
+
+services:
+  # PXL Core - Main proof verification service
+  pxl-core:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.pxl-core
+    ports:
+      - "8080:8080"
+    environment:
+      - PROMETHEUS_MULTIPROC_DIR=/tmp
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/healthz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # Chrono Overlay - Constructive IEL operations
+  overlay-chrono:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.overlay-chrono
+    depends_on:
+      pxl-core:
+        condition: service_healthy
+    ports:
+      - "8081:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # V4 Overlay - Conservative integration
+  overlay-v4:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.overlay-v4
+    depends_on:
+      pxl-core:
+        condition: service_healthy
+    ports:
+      - "8082:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # API Gateway - Authentication, rate limiting, provenance
+  gateway:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.gateway
+    ports:
+      - "80:8080"
+    environment:
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+    volumes:
+      - ../gateway/config.yaml:/app/config.yaml:ro
+    depends_on:
+      - pxl-core
+      - overlay-chrono
+      - overlay-v4
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # Production GUI - React frontend
+  gui:
+    build:
+      context: ..
+      dockerfile: gui/Dockerfile
+    ports:
+      - "3000:80"
+    environment:
+      - VITE_API_BASE=http://localhost
+      - VITE_BUILD_SHA=${BUILD_SHA}
+      - VITE_SUBMODULE_LOCK=${SUBMODULE_LOCK}
+    depends_on:
+      - gateway
+    restart: unless-stopped
+
+  # Prometheus - Metrics collection
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ../monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    restart: unless-stopped
+
+  # Grafana - Dashboard and visualization
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-admin}
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ../monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ../monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    restart: unless-stopped
+
+volumes:
+  prometheus_data:
+  grafana_data:
+
+networks:
+  default:
+    name: logos-production
+    driver: bridge

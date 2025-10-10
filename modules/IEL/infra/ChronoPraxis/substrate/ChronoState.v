@@ -1,6 +1,6 @@
 (* ChronoState.v — State Structures for Temporal Modes *)
 
-Require Import ChronoModes.
+Require Import PXLs.IEL.Infra.ChronoPraxis.substrate.ChronoModes.
 
 Module ChronoState.
 

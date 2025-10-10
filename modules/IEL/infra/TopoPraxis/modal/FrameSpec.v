@@ -2,6 +2,10 @@ From Coq Require Import Program.
 From PXLs Require Import PXLv3.
 Set Implicit Arguments.
 
+Parameter form : Type.
+Parameter Box : form -> form.
+Parameter Dia : form -> form.
+
 Module TopoPraxis.
   Parameter Region : Type.
   Parameter inside : Region -> Region -> Prop.

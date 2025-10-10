@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  pxl-core:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.pxl-core
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/healthz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  overlay-v4:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.overlay-v4
+    depends_on:
+      pxl-core:
+        condition: service_healthy
+    ports:
+      - "8081:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  gateway:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - pxl-core
+      - overlay-v4
+
+  gui:
+    image: nginx:alpine
+    ports:
+      - "3000:80"
+    volumes:
+      - ../gui:/usr/share/nginx/html
+    depends_on:
+      - gateway

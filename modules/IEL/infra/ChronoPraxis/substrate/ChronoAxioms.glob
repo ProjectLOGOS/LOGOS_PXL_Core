@@ -1,0 +1,81 @@
+DIGEST c614007cd743aba3325b43ea418eca2c
+FPXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms
+mod 61:72 <> ChronoAxioms
+ind 199:201 ChronoAxioms chi
+constr 217:221 ChronoAxioms chi_A
+constr 277:281 ChronoAxioms chi_B
+constr 336:340 ChronoAxioms chi_C
+scheme 199:201 ChronoAxioms chi_rect
+scheme 199:201 ChronoAxioms chi_ind
+scheme 199:201 ChronoAxioms chi_rec
+scheme 199:201 ChronoAxioms chi_sind
+def 505:518 ChronoAxioms chi_compatible
+R529:531 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms chi ind
+binder 521:522 <> m1:3
+binder 524:525 <> m2:4
+R556:557 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms <> m2:4 var
+R552:553 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms <> m1:3 var
+R568:572 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms chi_A constr
+R575:579 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms chi_B constr
+R584:587 Coq.Init.Logic <> True ind
+R646:650 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms chi_B constr
+R653:657 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms chi_A constr
+R662:665 Coq.Init.Logic <> True ind
+R724:728 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms chi_A constr
+R731:735 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms chi_C constr
+R740:743 Coq.Init.Logic <> True ind
+R797:801 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms chi_C constr
+R804:808 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms chi_A constr
+R813:816 Coq.Init.Logic <> True ind
+R868:872 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms chi_B constr
+R875:879 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms chi_C constr
+R884:887 Coq.Init.Logic <> True ind
+R948:952 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms chi_C constr
+R955:959 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms chi_B constr
+R964:967 Coq.Init.Logic <> True ind
+R1031:1034 Coq.Init.Logic <> True ind
+prf 1098:1124 ChronoAxioms chi_universal_compatibility
+R1143:1145 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms chi ind
+binder 1135:1136 <> m1:7
+binder 1138:1139 <> m2:8
+R1148:1161 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms chi_compatible def
+R1163:1164 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms <> m1:7 var
+R1166:1167 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms <> m2:8 var
+R1214:1214 Coq.Init.Logic <> I constr
+R1214:1214 Coq.Init.Logic <> I constr
+R1214:1214 Coq.Init.Logic <> I constr
+R1214:1214 Coq.Init.Logic <> I constr
+R1214:1214 Coq.Init.Logic <> I constr
+R1214:1214 Coq.Init.Logic <> I constr
+R1214:1214 Coq.Init.Logic <> I constr
+R1214:1214 Coq.Init.Logic <> I constr
+R1214:1214 Coq.Init.Logic <> I constr
+R1214:1214 Coq.Init.Logic <> I constr
+ax 1322:1326 ChronoAxioms P_chi
+R1333:1336 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1330:1332 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms chi ind
+ax 1460:1462 ChronoAxioms tau
+def 1507:1512 ChronoAxioms tau_le
+R1518:1519 Coq.Init.Logic <> eq ind
+R1521:1523 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms tau defax
+R1594:1599 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms tau_le def
+not 1579:1579 ChronoAxioms :::x_'<='_x
+def 1621:1624 ChronoAxioms Time
+R1629:1631 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms tau defax
+rec 1729:1738 ChronoAxioms AgentOmega
+proj 1747:1754 ChronoAxioms agent_id
+proj 1765:1781 ChronoAxioms temporal_position
+proj 1792:1808 ChronoAxioms epistemic_horizon
+proj 1819:1835 ChronoAxioms intentional_scope
+R1758:1760 Coq.Init.Datatypes <> nat ind
+R1785:1787 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms tau defax
+R1812:1814 Coq.Init.Datatypes <> nat ind
+R1839:1841 Coq.Init.Datatypes <> nat ind
+ax 1894:1900 ChronoAxioms Eternal
+prf 1944:1959 ChronoAxioms eternal_timeless
+R1975:1981 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms Eternal defax
+binder 1971:1971 <> e:20
+R1986:1988 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1985:1985 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms <> e:20 var
+R1989:1989 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms <> e:20 var
+R2022:2033 PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms ChronoAxioms <> mod

@@ -13,7 +13,7 @@ Class Cap_TauAntisymmetric (T:Type) (τ:T->T->Prop) : Prop :=
   { tau_antisym : forall x y, τ x y -> τ y x -> x = y }.
 
 (* Import chi and tau definitions *)
-From PXLs.IEL.Infra.ChronoPraxis.Substrate Require Import ChronoAxioms.
+From PXLs.IEL.Infra.ChronoPraxis.substrate Require Import ChronoAxioms.
 
 (* Instance for chi eq *)
 Lemma chi_eq_refl : forall m : ChronoAxioms.chi, m = m.
@@ -43,13 +43,13 @@ Global Instance CapTauAntisym_tau : Cap_TauAntisymmetric ChronoAxioms.tau Chrono
 
 Section TauOrder.
   Context {T:Type} (tau_le : T -> T -> Prop).
-  Hypothesis tau_refl  : forall t, tau_le t t.
-  Hypothesis tau_trans : forall x y z, tau_le x y -> tau_le y z -> tau_le x z.
-  Hypothesis tau_antis : forall x y, tau_le x y -> tau_le y x -> x = y.
+  Hypothesis refl_hyp  : forall t, tau_le t t.
+  Hypothesis trans_hyp : forall x y z, tau_le x y -> tau_le y z -> tau_le x z.
+  Hypothesis antis_hyp : forall x y, tau_le x y -> tau_le y x -> x = y.
 
-  Global Instance CapTauRefl_inst : Cap_TauReflexive T tau_le := {| tau_refl := tau_refl |}.
-  Global Instance CapTauTrans_inst : Cap_TauTransitive T tau_le := {| tau_trans := tau_trans |}.
-  Global Instance CapTauAntis_inst : Cap_TauAntisymmetric T tau_le := {| tau_antisym := tau_antis |}.
+  Global Instance CapTauRefl_inst : Cap_TauReflexive T tau_le := {| tau_refl := refl_hyp |}.
+  Global Instance CapTauTrans_inst : Cap_TauTransitive T tau_le := {| tau_trans := trans_hyp |}.
+  Global Instance CapTauAntis_inst : Cap_TauAntisymmetric T tau_le := {| tau_antisym := antis_hyp |}.
 End TauOrder.
 
 Class Cap_CrossMapConsistent (A B:Type) (f:A->B) (g:B->A) (R_A:A->A->Prop) (R_B:B->B->Prop) :=
@@ -59,9 +59,11 @@ Class Cap_CrossMapConsistent (A B:Type) (f:A->B) (g:B->A) (R_A:A->A->Prop) (R_B:
   ; cross_consistent_BA_AB : forall x, g (f x) = x }.
 
 (* Instance for AB mapping *)
-From PXLs.IEL.Infra.ChronoPraxis.Substrate Require Import ChronoMappings.
+From PXLs.IEL.Infra.ChronoPraxis.substrate Require Import ChronoMappings.
 
 Global Instance CapCrossMap_AB : Cap_CrossMapConsistent
+  (ChronoAxioms.P_chi ChronoAxioms.chi_A)
+  (ChronoAxioms.P_chi ChronoAxioms.chi_B)
   (ChronoMappings.map_AB.(Bijection.f))
   (ChronoMappings.map_AB.(Bijection.g))
   (@eq (ChronoAxioms.P_chi ChronoAxioms.chi_A))
@@ -72,18 +74,18 @@ Global Instance CapCrossMap_AB : Cap_CrossMapConsistent
   ; cross_consistent_BA_AB := ChronoMappings.map_AB.(Bijection.fg) }.
 
 (* Instances for belief and forecast *)
-From PXLs.IEL.Infra.ChronoPraxis.Substrate Require Import ChronoAgents.
+From PXLs.IEL.Infra.ChronoPraxis.substrate Require Import ChronoZAgents.
 
-Global Instance Cap_BeliefUpdatePreservesId_inst : Cap_BeliefUpdatePreservesId
-  ChronoAxioms.tau ChronoAxioms.tau_le ChronoAgents.ChronoAgent ChronoAgents.ChronoState ChronoAgents.belief_update :=
-  {| belief_update_id := fun t1 t2 a s H => eq_refl (* TODO: prove from constructive agent theory *) |}.
+(* Global Instance Cap_BeliefUpdatePreservesId_inst : Cap_BeliefUpdatePreservesId
+  ChronoAxioms.tau ChronoAxioms.tau_le ChronoZAgents.ChronoAgent ChronoZAgents.ChronoState ChronoZAgents.belief_update :=
+  {| belief_update_id := fun t1 t2 a s H => eq_refl (* TODO: prove from constructive agent theory *) |}. *)
 
-Global Instance Cap_ForecastCoherence_inst : Cap_ForecastCoherence
-  ChronoAxioms.tau ChronoAxioms.tau_le ChronoAgents.ChronoState ChronoAgents.TelicAgent ChronoAgents.lift_being :=
-  {| forecast_coherent := fun t1 t2 ta H s2 => ex_intro _ s2 eq_refl (* TODO: prove from constructive forecast theory *) |}.
+(* Global Instance Cap_ForecastCoherence_inst : Cap_ForecastCoherence
+  ChronoAxioms.tau ChronoAxioms.tau_le ChronoZAgents.ChronoState ChronoZAgents.TelicAgent ChronoZAgents.lift_being :=
+  {| forecast_coherent := fun t1 t2 ta H s2 => ex_intro _ s2 eq_refl (* TODO: prove from constructive forecast theory *) |}. *)
 
-Class Cap_BeliefUpdatePreservesId (Time : Type) (tau_le : Time -> Time -> Prop) (ChronoAgent : Time -> Type) (ChronoState : Time -> Type) (belief_update : forall t1 t2, tau_le t1 t2 -> ChronoAgent t1 -> ChronoState t2 -> ChronoAgent t2) :=
+(* Class Cap_BeliefUpdatePreservesId (Time : Type) (tau_le : Time -> Time -> Prop) (ChronoAgent : Time -> Type) (ChronoState : Time -> Type) (belief_update : forall t1 t2, tau_le t1 t2 -> ChronoAgent t1 -> ChronoState t2 -> ChronoAgent t2) :=
   { belief_update_id : forall t1 t2 a s H, agent_id (belief_update t1 t2 H a s) = agent_id a }.
 
 Class Cap_ForecastCoherence (Time : Type) (tau_le : Time -> Time -> Prop) (ChronoState : Time -> Type) (TelicAgent : Time -> Type) (lift_being : forall t, ChronoState t -> Prop) :=
-  { forecast_coherent : forall t1 t2 ta H s2, forecast ta t2 H s2 -> exists s1, lift_being t1 s1 = lift_being t2 s2 }.
+  { forecast_coherent : forall t1 t2 ta H s2, forecast ta t2 H s2 -> exists s1, lift_being t1 s1 = lift_being t2 s2 }. *)

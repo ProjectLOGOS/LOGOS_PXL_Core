@@ -1,4 +1,4 @@
 From Coq Require Import Program.
 From PXLs Require Import PXLv3.
-Require Import modules.IEL.AnthroPraxis.subdomains.BioPraxis.modal.FrameSpec.
+From PXLs.IEL.Pillars.AnthroPraxis.subdomains.BioPraxis.modal Require Import FrameSpec.
 Goal True. exact I. Qed.

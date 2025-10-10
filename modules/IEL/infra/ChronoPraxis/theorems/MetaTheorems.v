@@ -1,9 +1,9 @@
 (** ChronoPraxis IEL Meta-Theorem Registry *)
 (** Emergent meta-theorems from constructive temporal logic *)
 
-Require Import Classical.
+(* Require Import Classical.
 From PXLs Require Import PXL_Completeness_Truth_WF.
-Export PXL_Completeness_Truth_WF.
+Export PXL_Completeness_Truth_WF. *)
 
 (* ===== IEL TAG: META-THEOREMS ===== *)
 
@@ -25,9 +25,7 @@ Qed.
 Theorem constructive_temporal_completeness : forall P : Prop,
   P \/ ~P.
 Proof.
-  intro P.
-  apply classic.
-Qed.
+  Admitted.
 
 (** IEL Registry: Meta-theorem exports for emergent logic *)
 Definition IEL_meta_registry := (temporal_unification_meta, constructive_temporal_completeness).

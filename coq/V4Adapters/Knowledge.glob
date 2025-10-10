@@ -1,0 +1,37 @@
+DIGEST 57964c50c7d8ed472e9a74a37d17c095
+FPXLs.V4.Adapters.Knowledge
+R92:98 Coq.Program.Program <> <> lib
+R124:132 V4.Knowledge <> <> lib
+mod 202:224 <> GnosiPraxis_Placeholder
+def 240:240 GnosiPraxis_Placeholder V
+def 287:292 GnosiPraxis_Placeholder Forces
+R299:302 Coq.Init.Datatypes <> unit ind
+binder 295:295 <> w:1
+binder 306:306 <> p:2
+R319:319 PXLs.V4.Adapters.Knowledge <> p:2 var
+ax 356:367 GnosiPraxis_Placeholder truth_forces
+binder 378:378 <> p:3
+R392:395 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R381:386 PXLs.V4.Adapters.Knowledge GnosiPraxis_Placeholder Forces def
+R388:389 Coq.Init.Datatypes <> tt constr
+R391:391 PXLs.V4.Adapters.Knowledge <> p:3 var
+R396:396 PXLs.V4.Adapters.Knowledge <> p:3 var
+R403:425 PXLs.V4.Adapters.Knowledge GnosiPraxis_Placeholder <> mod
+mod 436:455 <> V4_Knowledge_Adapter
+def 536:556 V4_Knowledge_Adapter v4_knowledge_to_gnosi
+R563:570 V4.Knowledge V4 claim def
+binder 559:559 <> k:6
+R656:656 PXLs.V4.Adapters.Knowledge <> k:6 var
+prf 771:784 V4_Knowledge_Adapter v4_knows_sound
+binder 795:795 <> w:7
+binder 797:799 <> phi:8
+R819:824 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R804:812 V4.Knowledge V4 Forces def
+R814:814 PXLs.V4.Adapters.Knowledge <> w:7 var
+R816:818 PXLs.V4.Adapters.Knowledge <> phi:8 var
+R825:854 PXLs.V4.Adapters.Knowledge GnosiPraxis_Placeholder Forces def
+R856:856 PXLs.V4.Adapters.Knowledge <> w:7 var
+R859:879 PXLs.V4.Adapters.Knowledge V4_Knowledge_Adapter v4_knowledge_to_gnosi def
+R881:883 PXLs.V4.Adapters.Knowledge <> phi:8 var
+R1032:1052 PXLs.V4.Adapters.Knowledge V4_Knowledge_Adapter v4_knowledge_to_gnosi def
+R1081:1100 PXLs.V4.Adapters.Knowledge V4_Knowledge_Adapter <> mod

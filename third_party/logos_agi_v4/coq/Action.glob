@@ -1,0 +1,23 @@
+DIGEST 56251e543ed7ce8267917d53937560a0
+FV4.Action
+R67:73 Coq.Program.Program <> <> lib
+mod 84:85 <> V4
+def 127:132 V4 action
+R141:144 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+def 189:193 V4 Hoare
+binder 196:196 <> P:1
+R211:216 V4.Action V4 action def
+binder 207:207 <> a:2
+binder 220:220 <> Q:3
+R233:233 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R242:247 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R256:256 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R235:238 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R234:234 V4.Action <> P:1 var
+R239:239 V4.Action <> a:2 var
+R241:241 V4.Action <> P:1 var
+R251:254 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R248:248 V4.Action <> a:2 var
+R250:250 V4.Action <> P:1 var
+R255:255 V4.Action <> Q:3 var
+R264:265 V4.Action V4 <> mod

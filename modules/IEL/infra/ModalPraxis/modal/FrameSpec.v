@@ -20,14 +20,19 @@ Definition can_world := { G : set | mct G }.
 Parameter can_R : can_world -> can_world -> Prop.
 Parameter forces : can_world -> form -> Prop.
 
+(* Forcing relation axioms *)
+Parameter forces_Box : forall w φ, forces w (Box φ) <-> (forall u, can_R w u -> forces u φ).
+Parameter forces_Dia : forall w φ, forces w (Dia φ) <-> (exists u, can_R w u /\ forces u φ).
+Parameter forces_Impl : forall w φ ψ, forces w (Impl φ ψ) <-> (forces w φ -> forces w ψ).
+
 (* Modal operator capabilities *)
-Class Cap_ForcesBox (W:Type) (R:W->W->Prop) (forces: W->Prop->Prop) : Prop :=
+Class Cap_ForcesBox (W:Type) (R:W->W->Prop) (forces: W->form->Prop) : Prop :=
   { forces_box : forall w φ, forces w (Box φ) <-> (forall u, R w u -> forces u φ) }.
 
-Class Cap_ForcesDia (W:Type) (R:W->W->Prop) (forces: W->Prop->Prop) : Prop :=
+Class Cap_ForcesDia (W:Type) (R:W->W->Prop) (forces: W->form->Prop) : Prop :=
   { forces_dia : forall w φ, forces w (Dia φ) <-> (exists u, R w u /\ forces u φ) }.
 
-Class Cap_ForcesImpl (W:Type) (R:W->W->Prop) (forces: W->Prop->Prop) : Prop :=
+Class Cap_ForcesImpl (W:Type) (R:W->W->Prop) (forces: W->form->Prop) : Prop :=
   { forces_impl : forall w φ ψ, forces w (Impl φ ψ) <-> (forces w φ -> forces w ψ) }.
 
 (* Forcing relation parameters - replaced by instances *)
