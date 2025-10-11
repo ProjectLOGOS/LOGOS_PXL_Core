@@ -150,6 +150,16 @@
       "label": "Coq: build (Windows-safe)",
       "type": "shell",
       "command": "pwsh -NoProfile -File scripts/build.ps1"
+    },
+    {
+      "label": "Scan V3 for targets",
+      "type": "shell",
+      "command": "pwsh",
+      "args": ["-NoLogo","-NoProfile","-Command",
+        "$root='C:\\\\Users\\\\proje\\\\OneDrive\\\\Desktop\\\\LOGOS SYSTEM\\\\v3'; $report='reports\\\\v3_scan_hits.tsv'; $pat=@('G(ö|o)delian.*Desire.*Driver','Trinitarian.*Axiom.*Choice','causal.*simulat','recursive.*goal','goal\\\\s*engine','planner','workflow','hyper[\\\\- ]node'); Get-ChildItem -Path $root -Recurse -File -Include *.v,*.ml,*.mli,*.py,*.ts,*.tsx,*.md,*.txt | Select-String -Pattern $pat -AllMatches -CaseSensitive:$false | Sort-Object Path,LineNumber | Select-Object @{n='Path';e={$_.Path}},@{n='Line';e={$_.LineNumber}},@{n='Text';e={$_.Line.Trim()}} | Tee-Object -FilePath $report | Format-Table -Auto"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
     }
   ]
 }
