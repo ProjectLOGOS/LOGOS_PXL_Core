@@ -2,13 +2,13 @@
 From Coq Require Import Program.
 
 (* TODO: Restore full imports once module path resolution is fixed *)
-(* Require Import modules.chronopraxis.substrate.ChronoAxioms *)
-(*                modules.chronopraxis.substrate.Bijection *)
-(*                modules.chronopraxis.substrate.ChronoMappings *)
-(*                modules.chronopraxis.tactics.ChronoTactics *)
-(*                modules.chronopraxis.domains.Compatibilism.CompatibilismTheory *)
-(*                modules.chronopraxis.domains.Empiricism.UnifiedFieldLogic *)
-(*                modules.chronopraxis.domains.ModalOntology.ModalCollapse. *)
+(* Require Import PXLs.IEL.Infra.substrate.ChronoAxioms *)
+(*                PXLs.IEL.Infra.substrate.Bijection *)
+(*                PXLs.IEL.Infra.substrate.ChronoMappings *)
+(*                PXLs.IEL.Infra.tactics.ChronoTactics *)
+(*                PXLs.IEL.Infra.domains.Compatibilism.CompatibilismTheory *)
+(*                PXLs.IEL.Infra.domains.Empiricism.UnifiedFieldLogic *)
+(*                PXLs.IEL.Infra.domains.ModalOntology.ModalCollapse. *)
 
 (* Simplified types for standalone testing *)
 Parameter PA : Type.  (* χ_A - lived time propositions *)

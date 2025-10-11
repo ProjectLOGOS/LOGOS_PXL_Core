@@ -4,7 +4,7 @@ From Coq Require Import Program.
 (* From PXLs Require Import PXLv3. *)
 (* Require Import modules.IEL.ModalPraxis.modal.FrameSpec *)
 (*                modules.IEL.ModalPraxis.theorems.{NormalBase,DerivedAxioms,Systems,Conservativity} *)
-(*                modules.chronopraxis.theorems.ModalStrength.ModalFree. *)
+(*                PXLs.IEL.Infra.theorems.ModalStrength.ModalFree. *)
 
 (* Standalone loading for compilation tests *)
 Parameter form : Type.

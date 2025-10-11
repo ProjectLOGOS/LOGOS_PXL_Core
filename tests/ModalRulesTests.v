@@ -1,7 +1,7 @@
 From Coq Require Import Program.
 
 (* TODO: Restore full imports once module path resolution is fixed *)
-(* Require Import modules.chronopraxis.theorems.ModalStrength.{ModalRules,Systems}. *)
+(* Require Import PXLs.IEL.Infra.theorems.ModalStrength.{ModalRules,Systems}. *)
 
 (* Standalone loading for compilation - using direct compilation approach *)
 Parameter form : Type.

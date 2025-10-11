@@ -1,4 +1,4 @@
-﻿(* ChronoMappings.v - PXL Canonical Bijective Mappings *)
+(* ChronoMappings.v - PXL Canonical Bijective Mappings *)
 
 From Coq Require Import Program.
 From PXLs.IEL.Infra.ChronoPraxis.Substrate Require Import ChronoAxioms.

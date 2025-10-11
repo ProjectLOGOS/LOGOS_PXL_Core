@@ -1,4 +1,4 @@
-﻿Require Import PXLs.IEL.Infra.ChronoPraxis.Substrate.Bijection
+Require Import PXLs.IEL.Infra.ChronoPraxis.Substrate.Bijection
                PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoMappings.
 
 (* Specialized rewrite lemmas for bijection normalization *)

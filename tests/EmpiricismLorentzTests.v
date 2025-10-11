@@ -3,10 +3,10 @@
 From Coq Require Import Program.
 
 (* TODO: Restore full imports once module path resolution is fixed *)
-(* Require Import modules.chronopraxis.substrate.ChronoAxioms *)
-(*                modules.chronopraxis.substrate.Bijection *)
-(*                modules.chronopraxis.substrate.ChronoMappings *)
-(*                modules.chronopraxis.domains.Empiricism.UnifiedFieldLogic. *)
+(* Require Import PXLs.IEL.Infra.substrate.ChronoAxioms *)
+(*                PXLs.IEL.Infra.substrate.Bijection *)
+(*                PXLs.IEL.Infra.substrate.ChronoMappings *)
+(*                PXLs.IEL.Infra.domains.Empiricism.UnifiedFieldLogic. *)
 
 (* Import the Empiricism module *)
 Load "../modules/IEL/ChronoPraxis/domains/Empiricism/UnifiedFieldLogic.v".

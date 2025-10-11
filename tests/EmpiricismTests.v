@@ -6,7 +6,7 @@ From Coq Require Import Program.
 Goal True. exact I. Qed.
 
 (* TODO: Restore proper imports once module path resolution fixed *)
-(* Require Import modules.chronopraxis.domains.Empiricism.UnifiedFieldLogic. *)
+(* Require Import PXLs.IEL.Infra.domains.Empiricism.UnifiedFieldLogic. *)
 
 (* Type and theorem accessibility tests - will be enabled when imports work *)
 (* Check UnifiedFieldLogic.ObserverFrame. *)

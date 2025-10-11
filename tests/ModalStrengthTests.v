@@ -1,10 +1,10 @@
 From Coq Require Import Program.
 
 (* TODO: Restore full imports once module path resolution is fixed *)
-(* Require Import modules.chronopraxis.theorems.ModalStrength.ModalFree *)
-(*                modules.chronopraxis.theorems.ModalStrength.S4Overlay *)
-(*                modules.chronopraxis.theorems.ModalStrength.S5Overlay *)
-(*                modules.chronopraxis.substrate.ChronoAxioms. *)
+(* Require Import PXLs.IEL.Infra.theorems.ModalStrength.ModalFree *)
+(*                PXLs.IEL.Infra.theorems.ModalStrength.S4Overlay *)
+(*                PXLs.IEL.Infra.theorems.ModalStrength.S5Overlay *)
+(*                PXLs.IEL.Infra.substrate.ChronoAxioms. *)
 
 (* Standalone definitions for compilation *)
 Inductive form : Type :=
