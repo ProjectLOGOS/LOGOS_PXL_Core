@@ -2,6 +2,14 @@
 -Q modules/IEL/source                                  PXLs.IEL.Source
 -Q modules/IEL/infra                                   PXLs.IEL.Infra
 -Q modules/IEL/pillars                                 PXLs.IEL.Pillars
+-Q modules/IEL/pillars/TeloPraxis                      PXLs.IEL.Pillars.TeloPraxis
+-Q modules/IEL/pillars/TeloPraxis/subdomains           PXLs.IEL.Pillars.TeloPraxis.subdomains
+-Q modules/IEL/pillars/AnthroPraxis                    PXLs.IEL.Pillars.AnthroPraxis
+-Q modules/IEL/pillars/Axiopraxis                      PXLs.IEL.Pillars.Axiopraxis
+-Q modules/IEL/pillars/CosmoPraxis                     PXLs.IEL.Pillars.CosmoPraxis
+-Q modules/IEL/pillars/ErgoPraxis                      PXLs.IEL.Pillars.ErgoPraxis
+-Q modules/IEL/pillars/GnosiPraxis                     PXLs.IEL.Pillars.GnosiPraxis
+-Q modules/IEL/pillars/ThemiPraxis                     PXLs.IEL.Pillars.ThemiPraxis
 -Q coq/Guards                                          PXLs.V4.Guards
 -Q coq/V4Adapters                                      PXLs.V4.Adapters
 -Q third_party/logos_agi_v4/coq                        V4
