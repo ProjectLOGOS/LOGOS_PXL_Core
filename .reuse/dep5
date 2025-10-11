@@ -1,0 +1,38 @@
+# SPDX-License-Identifier: MIT
+
+# LOGOS PXL Core License Configuration
+
+# Primary License: MIT
+# This project uses MIT license for all new code and verified extractions
+
+# License Allowlist for Dependencies
+# Only these licenses are permitted in the dependency tree
+ALLOWED_LICENSES = [
+    "MIT",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "Apache-2.0",
+    "ISC",
+    "CC0-1.0",
+    "CC-BY-4.0",
+    "CC-BY-SA-4.0"
+]
+
+# Disallowed Licenses (build will fail if detected)
+DISALLOWED_LICENSES = [
+    "GPL-2.0",
+    "GPL-3.0",
+    "LGPL-2.1",
+    "LGPL-3.0",
+    "AGPL-3.0",
+    "MS-PL",
+    "WTFPL",
+    "Beerware"
+]
+
+# License Compliance Rules
+# 1. All new code must be MIT licensed
+# 2. Dependencies must use only allowed licenses
+# 3. No GPL-family licenses permitted
+# 4. Commercial-friendly licenses only
+# 5. SPDX license identifiers required for all files

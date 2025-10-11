@@ -219,3 +219,79 @@ docker-compose up -d
 2. If degraded: Scale up resources
 3. If critical: Rollback to previous version
 4. Post-mortem: Analyze logs and metrics
+
+## Production Service URLs
+
+### Primary Production Environment
+- **GUI**: https://pxl-core.logos.org
+- **API Gateway**: https://api.pxl-core.logos.org
+- **Health Check**: https://api.pxl-core.logos.org/v1/health
+- **Grafana**: https://monitoring.pxl-core.logos.org
+- **Documentation**: https://docs.pxl-core.logos.org
+
+### Staging Environment
+- **GUI**: https://staging.pxl-core.logos.org
+- **API Gateway**: https://staging-api.pxl-core.logos.org
+- **Grafana**: https://staging-monitoring.pxl-core.logos.org
+
+### Development Environment
+- **GUI**: https://dev.pxl-core.logos.org
+- **API Gateway**: https://dev-api.pxl-core.logos.org
+- **Grafana**: https://dev-monitoring.pxl-core.logos.org
+
+## Contact Information & On-Call Rotation
+
+### Primary Contacts
+- **Production Issues**: prod-alerts@logos.org (PagerDuty integration)
+- **Security Issues**: security@logos.org (24/7 response)
+- **General Support**: support@logos.org
+
+### On-Call Rotation
+- **Weekdays 9AM-5PM PST**: Primary Engineer rotation
+- **Evenings/Weekends**: Secondary Engineer rotation
+- **Critical Issues**: All engineers on-call
+
+### Current On-Call Schedule
+```
+Week of 2025-01-13: Alice Johnson (alice@logos.org)
+Week of 2025-01-20: Bob Smith (bob@logos.org)
+Week of 2025-01-27: Carol Davis (carol@logos.org)
+```
+
+### Escalation Path
+1. **L1**: On-call engineer (15-minute response)
+2. **L2**: Engineering lead (30-minute response)
+3. **L3**: CTO/CEO (1-hour response for critical issues)
+
+### Communication Channels
+- **Slack**: #pxl-core-production
+- **Email**: pxl-core-team@logos.org
+- **PagerDuty**: Integrated with production alerts
+- **Status Page**: https://status.logos.org
+
+## Grafana Dashboard IDs
+
+### Production Dashboards
+- **PXL Core Overview**: `pxl-core-metrics` (ID: pxl-core-main)
+- **API Performance**: `api-gateway-metrics` (ID: gateway-perf)
+- **System Resources**: `system-resources` (ID: sys-resources)
+- **Security Events**: `security-monitoring` (ID: security-events)
+
+### Dashboard URLs
+- **Main Dashboard**: https://monitoring.pxl-core.logos.org/d/pxl-core-main
+- **API Dashboard**: https://monitoring.pxl-core.logos.org/d/gateway-perf
+- **Resources**: https://monitoring.pxl-core.logos.org/d/sys-resources
+- **Security**: https://monitoring.pxl-core.logos.org/d/security-events
+
+## Release Information
+
+### Current Version
+- **Version**: v2.2.0
+- **Release Date**: 2025-01-10
+- **Build SHA**: e6a0d37
+- **Coqchk Stamp**: verified-20250110_120000
+
+### Previous Versions
+- **v2.1.0**: IEL infrastructure integration (2024-12-15)
+- **v2.0.0**: V4 compatibility layer (2024-11-20)
+- **v1.5.0**: Core PXL extraction (2024-10-30)

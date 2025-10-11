@@ -1,1 +1,0 @@
-coqchk failed: Fatal Error: Unknown option -quiet
