@@ -43,7 +43,7 @@ $compileOrder = @(
 foreach ($dir in $compileOrder) {
     if (Test-Path $dir) {
         Get-ChildItem -Path $dir -Recurse -Filter *.v | Where-Object { $_.FullName -notlike "*\api\*" -and $_.FullName -notlike "*pxl-minimal-kernel-main*" } | Sort-Object { if ($_.Name -eq 'Spec.v') { 0 } else { -($_.FullName -split '\\').Count } }, FullName | ForEach-Object {
-            $coqcCmd = "coqc -Q pxl-minimal-kernel-main/coq PXLs -Q modules/IEL/source PXLs.IEL.Source -Q modules/IEL/pillars PXLs.IEL.Pillars -Q modules/IEL/infra/ModalPraxis PXLs.IEL.Infra.ModalPraxis -Q modules/IEL/infra/ChronoPraxis PXLs.IEL.Infra.ChronoPraxis -Q modules/IEL/infra/TopoPraxis PXLs.IEL.Infra.TopoPraxis `"$($_.FullName)`""
+            $coqcCmd = "coqc -Q pxl-minimal-kernel-main/coq PXLs -Q modules/IEL/infra/ChronoPraxis/Theorems/experimental PXLs.IEL.Infra.ChronoPraxis.Theorems.experimental -Q modules/IEL/infra/ChronoPraxis/Theorems/experimental ChronoState -Q modules/IEL/source PXLs.IEL.Source -Q modules/IEL/source/TheoPraxis/subdomains PXLs.IEL.Source.TheoPraxis.subdomains -Q modules/IEL/source/TheoPraxis/subdomains/Unity PXLs.IEL.Source.TheoPraxis.subdomains.Unity -Q modules/IEL/pillars PXLs.IEL.Pillars -Q modules/IEL/infra/ModalPraxis PXLs.IEL.Infra.ModalPraxis -Q modules/IEL/infra/ChronoPraxis PXLs.IEL.Infra.ChronoPraxis -Q modules/IEL/infra/TopoPraxis PXLs.IEL.Infra.TopoPraxis `"$($_.FullName)`""
             Write-Host "Running: $coqcCmd"
             Invoke-Expression $coqcCmd
             if ($LASTEXITCODE -ne 0) {
@@ -56,7 +56,7 @@ foreach ($dir in $compileOrder) {
 
 # Coq kernel check
 Write-Host "Running coqchk..."
-coqchk -Q pxl-minimal-kernel-main/coq PXLs -Q modules/IEL/source PXLs.IEL.Source -Q modules/IEL/infra PXLs.IEL.Infra -Q modules/IEL/infra/ChronoPraxis PXLs.IEL.Infra.ChronoPraxis -Q modules/IEL/infra/ChronoPraxis/substrate PXLs.IEL.Infra.ChronoPraxis.Substrate -Q modules/IEL/infra/ModalPraxis PXLs.IEL.Infra.ModalPraxis -Q modules/IEL/infra/TropoPraxis PXLs.IEL.Infra.TropoPraxis -Q modules/IEL/pillars PXLs.IEL.Pillars -Q modules/IEL/experimental PXLs.IEL.Experimental -Q tests tests
+coqchk -Q pxl-minimal-kernel-main/coq PXLs -Q modules/IEL/infra/ChronoPraxis/Theorems/experimental PXLs.IEL.Infra.ChronoPraxis.Theorems.experimental -Q modules/IEL/infra/ChronoPraxis/Theorems/experimental ChronoState -Q modules/IEL/source PXLs.IEL.Source -Q modules/IEL/source/TheoPraxis/subdomains PXLs.IEL.Source.TheoPraxis.subdomains -Q modules/IEL/source/TheoPraxis/subdomains/Unity PXLs.IEL.Source.TheoPraxis.subdomains.Unity -Q modules/IEL/infra PXLs.IEL.Infra -Q modules/IEL/infra/ChronoPraxis PXLs.IEL.Infra.ChronoPraxis -Q modules/IEL/infra/ChronoPraxis/substrate PXLs.IEL.Infra.ChronoPraxis.Substrate -Q modules/IEL/infra/ModalPraxis PXLs.IEL.Infra.ModalPraxis -Q modules/IEL/infra/TropoPraxis PXLs.IEL.Infra.TropoPraxis -Q modules/IEL/pillars PXLs.IEL.Pillars -Q modules/IEL/experimental PXLs.IEL.Experimental -Q tests tests
 if ($LASTEXITCODE -ne 0) {
     Write-Error "coqchk failed"
     exit 1

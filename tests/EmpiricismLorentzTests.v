@@ -9,7 +9,7 @@ From Coq Require Import Program.
 (*                PXLs.IEL.Infra.domains.Empiricism.UnifiedFieldLogic. *)
 
 (* Import the Empiricism module *)
-Load "../modules/IEL/ChronoPraxis/domains/Empiricism/UnifiedFieldLogic.v".
+Require Import PXLs.IEL.Infra.ChronoPraxis.domains.Empiricism.UnifiedFieldLogic.
 Import UnifiedFieldLogic.
 
 (* Identity bijection for PB *)

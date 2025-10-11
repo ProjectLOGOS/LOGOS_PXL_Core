@@ -23,6 +23,10 @@ jobs:
           make clean
           make -j
 
+      - name: Kernel verification
+        run: |
+          make check
+
       - name: Domain builds
         run: |
           make domain-compatibilism
