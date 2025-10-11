@@ -3,8 +3,10 @@
 
 ## Verification Status
 - **Verification Tool**: coqchk 8.20.1
-- **Verification Date**: $(Get-Date -Format "yyyy-MM-dd")
+- **Verification Date**: 2025-10-10
 - **Verification Result**: All modules pass formal verification
+- **Build SHA**: 40360dc
+- **Release Tag**: v3.0.0-verified
 
 ## Verified Components
 ### PXLs.PXLv3
@@ -27,16 +29,39 @@
 
 ## Runtime Artifacts
 - **OCaml Extraction**: pxl_core.ml, pxl_core.mli
+- **Runtime Server**: pxl_runtime.ml
+- **Build System**: dune-project
 - **Container**: Dockerfile.pxl-core
-- **Verification**: SHA256 checksums included
+- **Orchestration**: docker-compose.verified.yml
+- **Load Testing**: k6/verified-core-baseline.js
 
 ## Security Properties
 - **Formal Verification**: All runtime code derived from proven theorems
 - **Contamination Check**: No experimental dependencies
-- **Provenance**: Git tag v3.0.0-verified
+- **Provenance**: Git tag v3.0.0-verified, SHA 40360dc
 - **CI Guards**: Automated verification in .github/workflows/
+- **Container Security**: Non-root user, read-only filesystem, dropped capabilities
 
 ## Deployment
 - **Container Registry**: Ready for deployment behind gateway
-- **Health Checks**: Built-in runtime verification
+- **Health Checks**: HTTP endpoints at /health and /proof/ping
+- **Provenance Headers**: X-PXL-Coqchk, X-Build-SHA, X-Release-Tag
+- **Load Baseline**: k6 tests for performance monitoring
 - **SBOM**: SPDX format available
+
+## API Endpoints
+- `GET /health` - Health check with verification metadata
+- `GET /proof/ping` - Proof that verified core is loaded
+
+## Production Checklist
+- [x] Formal verification complete
+- [x] Contamination quarantine enforced
+- [x] OCaml extraction successful
+- [x] Container build configured
+- [x] Health checks implemented
+- [x] Load testing baseline created
+- [x] Security hardening applied
+- [x] CI/CD gates active
+- [ ] Container build tested
+- [ ] Load testing executed
+- [ ] Production deployment complete
