@@ -8,6 +8,11 @@ on:
       - 'pxl-minimal-kernel-main/**'
       - 'tools/verified_slice.lst'
       - '_CoqProject'
+      - 'ExtractCore.v'
+      - 'pxl_core.ml'
+      - 'pxl_core.mli'
+      - 'pxl_runtime.ml'
+      - 'Dockerfile.pxl-core'
   pull_request:
     branches: [ main, release/** ]
     paths:
@@ -15,6 +20,11 @@ on:
       - 'pxl-minimal-kernel-main/**'
       - 'tools/verified_slice.lst'
       - '_CoqProject'
+      - 'ExtractCore.v'
+      - 'pxl_core.ml'
+      - 'pxl_core.mli'
+      - 'pxl_runtime.ml'
+      - 'Dockerfile.pxl-core'
 
 jobs:
   verify-slice:
@@ -131,3 +141,160 @@ jobs:
       if: contains(github.ref, 'v3.0.0-verified')
       run: |
         echo "✅ Verified release tag detected: ${{ github.ref }}"
+
+  license-compliance:
+    runs-on: ubuntu-latest
+    needs: verify-slice
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install license tools
+      run: |
+        pip install reuse
+        # Install other tools if available
+        sudo apt-get update
+        sudo apt-get install -y jq || true
+
+    - name: Run license compliance check
+      run: |
+        chmod +x scripts/license-compliance.sh
+        ./scripts/license-compliance.sh
+
+    - name: Upload license reports
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: license-reports
+        path: |
+          verified_slice_sbom.json
+          licenses.trivy.txt
+
+  build-and-test:
+    runs-on: ubuntu-latest
+    needs: [verify-slice, license-compliance]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up OCaml
+      uses: ocaml/setup-ocaml@v2
+      with:
+        ocaml-compiler: 4.14
+        dune-cache: true
+
+    - name: Install OCaml dependencies
+      run: |
+        opam install -y dune cohttp-lwt-unix lwt yojson
+
+    - name: Build OCaml runtime
+      run: |
+        dune build
+
+    - name: Build container image
+      run: |
+        docker build -t logos-pxl-core:ci-test -f Dockerfile.pxl-core .
+
+    - name: Test container health
+      run: |
+        docker run -d --name test-pxl-core -p 8080:8080 logos-pxl-core:ci-test
+        sleep 10
+        curl -f http://localhost:8080/health
+        curl -f http://localhost:8080/proof/ping
+        docker stop test-pxl-core
+
+  security-scan:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Build container for scanning
+      run: |
+        docker build -t logos-pxl-core:security-scan -f Dockerfile.pxl-core .
+
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'image'
+        scan-ref: 'logos-pxl-core:security-scan'
+        format: 'sarif'
+        output: 'trivy-image-results.sarif'
+        exit-code: 1
+        severity: 'HIGH,CRITICAL'
+
+    - name: Run Trivy filesystem scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        format: 'sarif'
+        output: 'trivy-fs-results.sarif'
+
+    - name: Upload Trivy scan results
+      uses: github/codeql-action/upload-sarif@v2
+      if: always()
+      with:
+        sarif_file: 'trivy-image-results.sarif'
+
+    - name: Upload filesystem scan results
+      uses: github/codeql-action/upload-sarif@v2
+      if: always()
+      with:
+        sarif_file: 'trivy-fs-results.sarif'
+
+  provenance-signing:
+    runs-on: ubuntu-latest
+    needs: [build-and-test, security-scan]
+    if: github.ref == 'refs/tags/v3.0.0-verified'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Build and sign container image
+      run: |
+        docker build -t logos-pxl-core:v3.0.0-verified -f Dockerfile.pxl-core .
+
+    - name: Install Cosign
+      uses: sigstore/cosign-installer@main
+
+    - name: Sign container image
+      run: |
+        cosign sign --yes logos-pxl-core:v3.0.0-verified
+      env:
+        COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
+        COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+
+    - name: Generate and attest SBOM
+      run: |
+        # Generate SBOM if not exists
+        if [ ! -f verified_slice_sbom.json ]; then
+          syft packages . --output spdx-json=verified_slice_sbom.json
+        fi
+
+        # Attest with SBOM
+        cosign attest --predicate verified_slice_sbom.json --type spdx logos-pxl-core:v3.0.0-verified
+      env:
+        COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
+        COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+
+    - name: Verify signatures
+      run: |
+        cosign verify logos-pxl-core:v3.0.0-verified
+
+    - name: Upload signed artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: signed-artifacts
+        path: |
+          verified_slice_sbom.json
