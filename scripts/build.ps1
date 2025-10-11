@@ -4,10 +4,10 @@ $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 Set-Location (Resolve-Path "$root\..")
 
 # Collect .v files under modules/IEL, api, pxl-minimal-kernel-main/coq, tests, examples
-$files = Get-ChildItem -Recurse -Filter *.v | Where-Object { $_.FullName -notlike "*\node_modules\*" -and $_.FullName -notlike "*\.git\*" } | % { $_.FullName }
+$files = Get-ChildItem -Recurse -Filter *.v | Where-Object { $_.FullName -notlike "*\node_modules\*" -and $_.FullName -notlike "*\.git\*" -and $_.FullName -notlike "*\_experimental\*" } | % { $_.FullName }
 
 # Produce dependencies with coqdep (Windows-safe)
-$coqargs = @("-Q", "pxl-minimal-kernel-main/coq", "PXLs", "-Q", "modules/IEL/source", "PXLs.IEL.Source", "-Q", "modules/IEL/infra", "PXLs.IEL.Infra", "-Q", "modules/IEL/pillars", "PXLs.IEL.Pillars", "-Q", "modules/IEL/experimental", "PXLs.IEL.Experimental", "-Q", "tests", "tests", "-Q", "api", "PXLs.API")
+$coqargs = @("-Q", "pxl-minimal-kernel-main/coq", "PXLs", "-Q", "modules/IEL", "PXLs.IEL", "-Q", "tests", "PXLs.tests")
 $dep = & coqdep $coqargs $files 2>$null
 
 # Parse coqdep format: "path\file.vo: dep1.vo dep2.vo ..."

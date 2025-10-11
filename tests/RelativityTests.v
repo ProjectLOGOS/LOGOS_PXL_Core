@@ -6,7 +6,7 @@ From Coq Require Import Program.
 (*                PXLs.IEL.Infra.domains.Empiricism.UnifiedFieldLogic *)
 (*                PXLs.IEL.Infra.domains.Empiricism.Relativity. *)
 
-Load "../modules/IEL/ChronoPraxis/domains/Empiricism/Relativity.v".
+Require Import PXLs.IEL.Infra.ChronoPraxis.domains.Empiricism.Relativity.
 
 Module RelTests.
   (* Minimal model: take Inv = B_to_C (projection-only model). *)

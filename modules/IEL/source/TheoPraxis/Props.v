@@ -2,6 +2,7 @@ From PXLs Require Import PXLv3.
 Module TheoProps.
   Definition Truth   : Prop -> Prop := fun φ => φ.
   Definition Beauty  : Prop -> Prop := fun φ => φ.  (* adjust if you need a stricter carrier *)
+  Definition Goodness: Prop -> Prop := fun φ => φ.
   Definition Peace   : Prop -> Prop := fun φ => φ.
   Definition Freedom : Prop -> Prop := fun φ => φ.
   Definition Glory   : Prop -> Prop := fun φ => φ.
@@ -13,6 +14,8 @@ Module TheoProps.
   Definition Space   : Prop -> Prop := fun φ => φ.
   Definition Time    : Prop -> Prop := fun φ => φ.
   Definition Life    : Prop -> Prop := fun φ => φ.
+  Definition BioPraxis : Prop -> Prop := fun φ => φ.
+  Definition Immanence : Prop -> Prop := fun φ => φ.
 
   (* Modal operators over Prop for IEL *)
   Definition Box_Prop : Prop -> Prop := fun φ => φ.  (* identity placeholder *)
@@ -22,6 +25,8 @@ Module TheoProps.
   Instance truth_reflect : Cap_ReflectsPXL Truth.
   Proof. intros φ H; exact H. Qed.
   Instance beauty_reflect : Cap_ReflectsPXL Beauty.
+  Proof. intros φ H; exact H. Qed.
+  Instance goodness_reflect : Cap_ReflectsPXL Goodness.
   Proof. intros φ H; exact H. Qed.
   Instance peace_reflect : Cap_ReflectsPXL Peace.
   Proof. intros φ H; exact H. Qed.
@@ -44,6 +49,10 @@ Module TheoProps.
   Instance time_reflect : Cap_ReflectsPXL Time.
   Proof. intros φ H; exact H. Qed.
   Instance life_reflect : Cap_ReflectsPXL Life.
+  Proof. intros φ H; exact H. Qed.
+  Instance bioPraxis_reflect : Cap_ReflectsPXL BioPraxis.
+  Proof. intros φ H; exact H. Qed.
+  Instance immanence_reflect : Cap_ReflectsPXL Immanence.
   Proof. intros φ H; exact H. Qed.
 
   (* Capabilities as typeclasses for proof reuse *)
@@ -80,8 +89,12 @@ Module TheoProps.
   Class Cap_AgentCapability (P: (Prop->Prop)) := cap_ac : forall p, P p -> Dia_Prop (P p).
   Instance life_ac : Cap_AgentCapability Life.
   Proof. intros p Hp; exact Hp. Qed.
+  Instance bioPraxis_ac : Cap_AgentCapability BioPraxis.
+  Proof. intros p Hp; exact Hp. Qed.
   Class Cap_AgencyComp   (P: (Prop->Prop)) := cap_ag : forall p q, P p -> P q -> P (p /\ q).
   Instance life_ag : Cap_AgencyComp Life.
+  Proof. intros p q Hp Hq; split; assumption. Qed.
+  Instance bioPraxis_ag : Cap_AgencyComp BioPraxis.
   Proof. intros p q Hp Hq; split; assumption. Qed.
   Class Cap_ChronoTopoInterface (P: (Prop->Prop)) := cap_cti : forall p, P p -> P (Box_Prop p).
   Instance space_cti : Cap_ChronoTopoInterface Space.

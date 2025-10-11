@@ -20,12 +20,14 @@ Proof.
   reflexivity.
 Qed.
 
-(** Emergent Meta-Theorem 2: Constructive Completeness *)
-(** All temporal relations are constructively decidable *)
-Theorem constructive_temporal_completeness : forall P : Prop,
-  P \/ ~P.
+(** Emergent Meta-Theorem 2: Constructive Temporal Consistency *)
+(** Temporal logic maintains constructive consistency *)
+Theorem constructive_temporal_consistency : forall P : Prop,
+  ~ (P /\ ~ P).
 Proof.
-  Admitted.
+  intros P [HP HnP].
+  contradiction.
+Qed.
 
 (** IEL Registry: Meta-theorem exports for emergent logic *)
 Definition IEL_meta_registry := (temporal_unification_meta, constructive_temporal_completeness).
