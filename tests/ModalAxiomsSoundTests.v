@@ -2,9 +2,9 @@ From Coq Require Import Program.
 
 (* TODO: Restore full imports once module path resolution is fixed *)
 (* From PXLs Require Import PXLv3. *)
-(* Require Import modules.chronopraxis.theorems.ModalStrength.S4Overlay *)
-(*                modules.chronopraxis.theorems.ModalStrength.S5Overlay *)
-(*                modules.chronopraxis.theorems.ModalStrength.ModalAxiomsSound. *)
+(* Require Import PXLs.IEL.Infra.theorems.ModalStrength.S4Overlay *)
+(*                PXLs.IEL.Infra.theorems.ModalStrength.S5Overlay *)
+(*                PXLs.IEL.Infra.theorems.ModalStrength.ModalAxiomsSound. *)
 
 (* Standalone loading for compilation - using direct compilation approach *)
 Parameter form : Type.

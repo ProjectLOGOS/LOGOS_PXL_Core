@@ -2,7 +2,7 @@ From Coq Require Import Program.
 
 (* TODO: Restore full imports once module path resolution is fixed *)
 (* From PXLs Require Import PXLv3. *)
-(* Require Import modules.chronopraxis.theorems.ModalStrength.ModalFree *)
+(* Require Import PXLs.IEL.Infra.theorems.ModalStrength.ModalFree *)
 (*                modules.IEL.UM.modal.FrameSpec. *)
 
 (* Standalone loading - parameters from existing modules *)

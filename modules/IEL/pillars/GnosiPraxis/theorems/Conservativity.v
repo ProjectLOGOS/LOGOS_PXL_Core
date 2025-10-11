@@ -1,7 +1,7 @@
 From Coq Require Import Program Setoids.Setoid.
 
 (* TODO: Restore full imports once module path resolution is fixed *)
-(* Require Import modules.chronopraxis.theorems.ModalStrength.ModalFree
+(* Require Import PXLs.IEL.Infra.theorems.ModalStrength.ModalFree
                modules.IEL.ModalPraxis.modal.FrameSpec. *)
 
 (* Standalone definitions for conservativity *)

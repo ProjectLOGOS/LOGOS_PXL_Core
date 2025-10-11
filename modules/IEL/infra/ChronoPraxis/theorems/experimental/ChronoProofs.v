@@ -1,6 +1,6 @@
-﻿(* ChronoProofs.v - PXL Canonical Constructive Proofs *)
+(* ChronoProofs.v - PXL Canonical Constructive Proofs *)
 
-(* TODO: remove Admitted. â€” constructive oTheorem pairwise_convergence : 
+(* TODO: remove Admitted. — constructive oTheorem pairwise_convergence : 
   forall (e : ChronoAxioms.Eternal),
     ChronoMappings.lift_from_A (ChronoMappings.project_to_A e) = 
     ChronoMappings.lift_from_B (ChronoMappings.project_to_B e) /\
@@ -190,7 +190,7 @@ Theorem temporal_convergence :
     ChronoMappings.C_to_A (ChronoMappings.A_to_C pA) = pA.
 Proof. 
   intro pA. 
-  (* Round trip through Aâ†’Câ†’A should be identity by bijection property *)
+  (* Round trip through A→C→A should be identity by bijection property *)
   unfold ChronoMappings.A_to_C, ChronoMappings.C_to_A.
   unfold forward, backward.
   apply (fg ChronoMappings.map_AC).
@@ -218,7 +218,7 @@ Proof.
   apply (gf ChronoMappings.map_BC).
 Qed.
 
-(* 3) Causal bijection: composition Aâ†’Bâ†’C is a bijection with inverse Câ†’Bâ†’A *)
+(* 3) Causal bijection: composition A→B→C is a bijection with inverse C→B→A *)
 Definition bij_A_to_C : Bijection PA PC := ChronoMappings.map_AC.
 Definition bij_C_to_A : Bijection PC PA := sym_bij ChronoMappings.map_AC.
 
@@ -239,7 +239,7 @@ Proof.
   apply (gf ChronoMappings.map_AC).
 Qed.
 
-(* 4) Temporal consistency: any two Aâ†’C paths via B are equal *)
+(* 4) Temporal consistency: any two A→C paths via B are equal *)
 Theorem temporal_consistency :
   forall pA : PA,
     ChronoMappings.A_to_C pA = (ChronoMappings.B_to_C (ChronoMappings.A_to_B pA)) /\ 

@@ -1,7 +1,7 @@
 From Coq Require Import Program.
 
 (* TODO: Restore full imports once module path resolution is fixed *)
-(* Require Import modules.chronopraxis.theorems.ModalStrength.{S4Overlay,S5Overlay,OverlayEquivalence} *)
+(* Require Import PXLs.IEL.Infra.theorems.ModalStrength.{S4Overlay,S5Overlay,OverlayEquivalence} *)
 (*                modules.IEL.UM.modal.FrameSpec. *)
 
 (* Standalone loading for compilation tests *)

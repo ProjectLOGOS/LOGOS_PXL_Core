@@ -7,12 +7,12 @@
 (* TODO: remove Admitted. — constructive only. No classical axioms. *)
 
 Require Import PXLs.PXLv3.
-Require Import PXLs.IEL.Infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Formal.
+(* Require Import PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoPraxis_PXL_Formal. *)
 From Coq Require Import List.
 
 Module ChronoPraxis_PXL_Proofs.
 
-Import ChronoPraxis_PXL_Formal.
+(* Import ChronoPraxis_PXL_Formal. *)
 
 (* === Core Bijection Properties === *)
 

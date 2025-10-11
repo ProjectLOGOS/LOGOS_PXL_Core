@@ -2,7 +2,7 @@ From Coq Require Import Program Setoids.Setoid.
 
 (* TODO: Restore full imports once module path resolution is fixed *)
 (* From PXLs Require Import PXLv3. *)
-(* Require Import modules.chronopraxis.theorems.ModalStrength.{S4Overlay,S5Overlay} *)
+(* Require Import PXLs.IEL.Infra.theorems.ModalStrength.{S4Overlay,S5Overlay} *)
 (*                modules.IEL.ModalPraxis.modal.FrameSpec *)
 (*                modules.IEL.ModalPraxis.theorems.{NormalBase,DerivedAxioms}. *)
 

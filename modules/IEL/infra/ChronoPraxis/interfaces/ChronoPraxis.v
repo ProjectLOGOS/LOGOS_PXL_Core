@@ -2,9 +2,9 @@
 
 (* TODO: remove Admitted. — constructive only. No classical axioms. *)
 
-Require Import PXLs.IEL.Infra.ChronoPraxis.substrate.ChronoAxioms
-               PXLs.IEL.Infra.ChronoPraxis.substrate.Bijection
-               PXLs.IEL.Infra.ChronoPraxis.substrate.ChronoMappings.
+From PXLs.IEL.Infra.ChronoPraxis.Substrate Require Import ChronoAxioms.
+From PXLs.IEL.Infra.ChronoPraxis.Substrate Require Import Bijection.
+From PXLs.IEL.Infra.ChronoPraxis.Substrate Require Import ChronoMappings.
 
 Module ChronoPraxis.
 

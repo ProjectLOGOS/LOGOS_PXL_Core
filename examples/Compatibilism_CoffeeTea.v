@@ -3,9 +3,9 @@
 From Coq Require Import Program.
 
 (* TODO: Restore full imports once module path resolution is fixed *)
-(* Require Import modules.chronopraxis.substrate.ChronoAxioms *)
-(*                modules.chronopraxis.substrate.ChronoMappings *)
-(*                modules.chronopraxis.domains.Compatibilism.CompatibilismTheory. *)
+(* Require Import PXLs.IEL.Infra.substrate.ChronoAxioms *)
+(*                PXLs.IEL.Infra.substrate.ChronoMappings *)
+(*                PXLs.IEL.Infra.domains.Compatibilism.CompatibilismTheory. *)
 
 Module CoffeeTea.
 

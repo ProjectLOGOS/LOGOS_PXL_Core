@@ -2,9 +2,9 @@ From Coq Require Import Program.
 
 (* TODO: Restore full imports once module path resolution is fixed *)
 (* From PXLs Require Import PXLv3. *)
-(* Require Import modules.chronopraxis.substrate.ChronoAxioms *)
-(*                modules.chronopraxis.theorems.MetaTheorems *)
-(*                modules.chronopraxis.theorems.ModalStrength.ModalFree. *)
+(* Require Import PXLs.IEL.Infra.substrate.ChronoAxioms *)
+(*                PXLs.IEL.Infra.theorems.MetaTheorems *)
+(*                PXLs.IEL.Infra.theorems.ModalStrength.ModalFree. *)
 
 (* Standalone definitions for compilation *)
 Inductive form : Type :=
