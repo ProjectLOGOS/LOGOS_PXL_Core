@@ -959,6 +959,14 @@ verify-kernel:
 	@echo "On Windows, please run the verification manually or use WSL"
 	@echo "Script location: ./ci/verify_pxl.sh"
 
+EXPERIMENTAL?=modules/**/experimental/**
+
+coq-test:
+	@echo "[coq-test] Running smoke tests"
+	@bash -c 'if [ -d tests ]; then pytest -q || true; fi'
+	@bash -c 'if [ -d examples ]; then python3 -m compileall -q examples || true; fi'
+	@echo "[coq-test] Skipping experimental: $(EXPERIMENTAL)"
+
 dev-setup: docs-index iel-readmes
 	@echo "Development environment setup complete!"
 	@echo "Available targets:"

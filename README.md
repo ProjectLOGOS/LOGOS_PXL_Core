@@ -1,9 +1,11 @@
 # LOGOS PXL Core - Three-Part Alignment System
 
+[![verify](https://github.com/ProjectLOGOS/LOGOS_PXL_Core/actions/workflows/verify.yml/badge.svg)](.github/workflows/verify.yml)
+
 This implementation provides a fail-closed alignment core with three key components:
 
 1. **PXL Proof Gate** - Non-bypassable proof requirement for all actions
-2. **Privative Boundary Conditions** - Boxed invariants that must be preserved  
+2. **Privative Boundary Conditions** - Boxed invariants that must be preserved
 3. **OBDC Kernel** - Structure-preserving mappings with formal verification
 
 ## Architecture
@@ -57,7 +59,7 @@ chmod +x ci/verify_pxl.sh
 
 This will:
 - Build and verify the PXL kernel using Coq
-- Compute a deterministic kernel hash  
+- Compute a deterministic kernel hash
 - Update `configs/config.json` with the correct hash
 
 ### 3. Run the Demo
@@ -131,7 +133,7 @@ result = obdc_kernel.apply_bijection("increment", increment_fn, 42, provenance)
 step_validation = validator.validate_plan_step(step, provenance)
 # Requires proof: BOX(preserves_invariants(step_id))
 
-# Plan goals require reachability proof  
+# Plan goals require reachability proof
 plan_validation = validator.validate_plan_goal(plan_id, goal, provenance)
 # Requires proof: BOX(DIAMOND(Goal(plan_id)))
 ```
@@ -154,7 +156,7 @@ Edit `configs/config.json`:
 The system meets all specified acceptance criteria:
 
 1. ✅ **PXL server authorization**: Goals without "DENY" pattern are approved, others denied
-2. ✅ **Proof-required planning**: Removing `require_proof_token` calls causes demo failure  
+2. ✅ **Proof-required planning**: Removing `require_proof_token` calls causes demo failure
 3. ✅ **Audit logging**: JSONL file contains `{ts, obligation, provenance, decision, proof}`
 4. ✅ **Kernel hash enforcement**: Changing expected hash causes hard failure
 5. ✅ **CI verification**: `verify_pxl.sh` fails if coqchk fails or hash differs
@@ -203,7 +205,7 @@ The current implementation uses proof stubs for demonstration. To integrate with
 2. **Add SerAPI queries**:
    ```python
    import serapi_python
-   
+
    def prove_with_serapi(goal):
        sexp_goal = f"(Check {goal})"
        result = serapi_python.execute_sexp(sexp_goal)
@@ -229,7 +231,7 @@ cd pxl-prover
 python3 serve_pxl.py
 
 # Terminal 2: Run demo
-cd examples  
+cd examples
 python3 main_demo.py
 ```
 
@@ -274,7 +276,7 @@ curl http://127.0.0.1:8088/health
 cd pxl-prover && python3 serve_pxl.py
 ```
 
-**Kernel hash mismatch**: 
+**Kernel hash mismatch**:
 ```bash
 # Regenerate expected hash
 bash ci/verify_pxl.sh

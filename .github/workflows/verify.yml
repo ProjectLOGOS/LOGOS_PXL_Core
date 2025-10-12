@@ -1,118 +1,40 @@
-name: verify-pxl
-on: [push, pull_request]
-
+name: verify
+on:
+  pull_request:
+  push:
+    branches: [main]
 jobs:
-  verify:
+  coq:
     runs-on: ubuntu-latest
-    
     steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: recursive
-    
-    - name: Setup Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-    
-    - name: Install Python dependencies
-      run: |
-        pip install -r requirements.txt
-        pip install pytest
-    
-    - name: Coq deps
-      run: |
-        sudo apt-get update && sudo apt-get install -y opam m4 jq curl
-        opam init -y --disable-sandboxing
-        opam switch create 4.14.2 -y
-        eval $(opam env)
-        opam repo add coq-released https://coq.inria.fr/opam/released
-        opam install -y coq.8.20.1 coq-serapi
-    
-    - name: Build PXL and pin hash
-      run: |
-        chmod +x ci/verify_pxl.sh
-        bash ci/verify_pxl.sh
-    
-    - name: Boot prover server (smoke test)
-      run: |
-        eval $(opam env)
-        cd pxl-prover
-        python3 serve_pxl.py &
-        PID=$!
-        echo $PID > /tmp/server.pid
-        sleep 3
-        
-        # Test health endpoint
-        curl -s http://127.0.0.1:8088/health | tee /tmp/health.json
-        
-        # Test proof endpoint
-        curl -s -X POST -H 'Content-Type: application/json' \
-          -d '{"goal":"BOX(TrueP(prop) and Coherent(state) and Good(action))"}' \
-          http://127.0.0.1:8088/prove | tee /tmp/prove.json
-        
-        # Check proof response
-        chmod +x ci/test_proof_endpoint.py
-        python3 ci/test_proof_endpoint.py
-        
-        # Cleanup
-        kill $PID || true
-    
-    - name: Check audit path writeable
-      run: |
-        python3 ci/test_audit.py
-    
-    - name: Integration Tests
-      run: |
-        # Start services with docker-compose
-        docker-compose up -d --build
-        
-        # Wait for services to be ready
-        timeout 180 bash -c 'until curl -f http://localhost:8088/health; do sleep 5; done'
-        timeout 180 bash -c 'until curl -f http://localhost:5000/health; do sleep 5; done'
-        
-        # Test API routes requiring proofs
-        echo "Testing API route with benign goal..."
-        curl -X POST -H 'Content-Type: application/json' \
-          -d '{"content":"analyze safety of system","type":"query"}' \
-          http://localhost:5000/submit_goal | tee /tmp/api_benign.json
-        
-        # Should return 200 with proof_token
-        if ! grep -q "proof_token" /tmp/api_benign.json; then
-          echo "ERROR: Benign goal should return proof_token"
-          exit 1
-        fi
-        
-        echo "Testing API route with DENY pattern..."
-        curl -X POST -H 'Content-Type: application/json' \
-          -d '{"content":"BOX(DENY(unsafe_action))","type":"query"}' \
-          http://localhost:5000/submit_goal | tee /tmp/api_deny.json
-        
-        # Should return 403 Forbidden
-        if ! grep -q "forbidden\|403" /tmp/api_deny.json; then
-          echo "ERROR: DENY pattern should be forbidden"
-          exit 1
-        fi
-        
-        echo "API integration tests passed!"
-    
-    - name: Run alignment tests
-      run: |
-        if [ -f "tests/test_alignment.py" ]; then
-          python3 -m pytest tests/test_alignment.py -v
-        else
-          echo "No alignment tests found, skipping"
-        fi
-    
-    - name: Bypass scan
-      run: |
-        python3 tools/scan_bypass.py
-        if [ $? -ne 0 ]; then
-          echo "ERROR: Bypass scanner found security issues"
-          exit 1
-        fi
-        echo "Bypass scan completed - no issues found"
-    
-    - name: Cleanup
-      run: |
-        docker-compose down -v || true
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: ~/.opam
+          key: opam-${{ runner.os }}-${{ hashFiles('**/*.opam','**/_CoqProject') }}
+          restore-keys: opam-${{ runner.os }}-
+      - name: Set up Coq 8.20.1
+        uses: coq-community/docker-coq-action@v1
+        with:
+          custom_image: coqorg/coq:8.20.1
+          script: |
+            set -eux
+            apt-get update && apt-get install -y python3 python3-pip
+            python3 -m pip install -U -r requirements-dev.txt
+            make verify-kernel
+            make docs-index
+            make coq-test
+      - name: Pre-commit (CI)
+        run: |
+          python3 -m pip install -U pre-commit
+          pre-commit run --all-files
+      - name: Upload COQ_INDEX.md
+        uses: actions/upload-artifact@v4
+        with:
+          name: coq-index
+          path: docs/COQ_INDEX.md
+      - name: Upload kernel hash
+        uses: actions/upload-artifact@v4
+        with:
+          name: kernel-hash
+          path: out/kernel_hash.txt

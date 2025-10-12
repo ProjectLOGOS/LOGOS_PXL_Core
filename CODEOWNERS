@@ -1,0 +1,3 @@
+/pxl-minimal-kernel-main/coq/   @ProjectLOGOS/kernel
+/modules/**                      @ProjectLOGOS/iel
+/tools/**                        @ProjectLOGOS/tooling

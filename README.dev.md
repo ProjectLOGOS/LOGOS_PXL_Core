@@ -27,7 +27,7 @@ make precommit
 The continuous integration pipeline enforces:
 
 - **Ruff** → Style and static checks
-- **Black** → Code formatting gate  
+- **Black** → Code formatting gate
 - **Mypy** → Strict type checking
 - **Pytest** → Fast unit and smoke tests
 
@@ -85,6 +85,16 @@ make type
 - **Linting**: Ruff with comprehensive ruleset
 
 Quality gates will prevent commits that don't meet standards.
+
+## Windows notes
+Use WSL for best results.
+```
+# From repo root (WSL Ubuntu)
+python3 tools/gen_coq_index.py
+make docs-index
+make verify-kernel
+make coq-test
+```
 
 ## Suggested First PRs
 
