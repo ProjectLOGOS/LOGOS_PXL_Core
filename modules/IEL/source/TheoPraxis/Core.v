@@ -1,9 +1,6 @@
-From Coq Require Import Program String Init.Datatypes.
 From PXLs Require Import PXLv3.
 From PXLs.IEL.Source.TheoPraxis Require Import Props.
-Require Import PXLs.IEL.Source.TheoPraxis.subdomains.Unity.Spec.
-Import Init.Datatypes.
-Open Scope string_scope.
+From PXLs.IEL.Source.TheoPraxis.subdomains.Unity Require Import Spec.
 Module TheoPraxis.
   Import TheoProps UnitySpec.
 
@@ -15,7 +12,7 @@ Module TheoPraxis.
   Theorem theological_consistency : forall p q, V p -> V q -> V (p /\ q).
   Proof. intros p q H1 H2. unfold V in *. split; assumption. Qed.
 
-  Theorem ontological_unity : "Unity" = "Unity".
+  Theorem ontological_unity : prop_name = "Unity".
   Proof. reflexivity. Qed.
 End TheoPraxis.
 
@@ -30,3 +27,4 @@ Global Instance Cap_TheologicalFoundation_inst : Cap_TheologicalFoundation := {|
   theological_consistency := TheoPraxis.theological_consistency;
   ontological_unity := TheoPraxis.ontological_unity
 |}.
+Export Cap_TheologicalFoundation.

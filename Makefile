@@ -945,6 +945,30 @@ merlin-hook::
 	@# Extension point
 .PHONY: merlin-hook
 
+docs-index:
+	@echo "Generating COQ index documentation..."
+	@python3 tools/gen_coq_index.py
+
+iel-readmes:
+	@echo "Generating per-IEL README files..."
+	@python3 tools/gen_iel_readmes.py
+
+verify-kernel:
+	@echo "Verifying PXL kernel..."
+	@echo "PXL kernel verification requires bash (available on Linux/macOS)"
+	@echo "On Windows, please run the verification manually or use WSL"
+	@echo "Script location: ./ci/verify_pxl.sh"
+
+dev-setup: docs-index iel-readmes
+	@echo "Development environment setup complete!"
+	@echo "Available targets:"
+	@echo "  make coq-all     - Build all Coq files"
+	@echo "  make coq-test    - Run Coq validation tests"
+	@echo "  make verify-kernel - Verify PXL kernel"
+	@echo "  make docs-index  - Generate COQ documentation index"
+	@echo "  make iel-readmes - Generate per-IEL README files"
+.PHONY: coq-all coq-test verify-kernel docs-index iel-readmes dev-setup
+
 # prints all variables
 debug:
 	$(foreach v,\

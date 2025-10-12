@@ -85,3 +85,34 @@ make type
 - **Linting**: Ruff with comprehensive ruleset
 
 Quality gates will prevent commits that don't meet standards.
+
+## Suggested First PRs
+
+Welcome to the LOGOS PXL Core project! Here are some good starting points for your first contributions:
+
+### Documentation Improvements
+- **Improve error messages**: Add more descriptive error messages in validation functions
+- **Add docstrings**: Add comprehensive docstrings to public functions missing them
+- **Update comments**: Improve code comments for complex algorithms
+
+### Testing Enhancements
+- **Add unit tests**: Write tests for functions that lack coverage
+- **Improve test data**: Add more edge cases to existing test suites
+- **Add integration tests**: Test component interactions
+
+### Code Quality
+- **Performance optimizations**: Identify and optimize slow code paths
+- **Refactor complex functions**: Break down large functions into smaller, testable units
+- **Add type hints**: Improve type annotations where missing
+
+### Feature Additions
+- **New validation rules**: Add domain-specific validation logic
+- **Configuration options**: Add new configurable parameters
+- **Logging improvements**: Enhance logging and monitoring capabilities
+
+### Infrastructure
+- **CI/CD improvements**: Enhance the build pipeline
+- **Documentation generation**: Improve automated documentation tools
+- **Development tools**: Add helpful development utilities
+
+Start with issues labeled `good first issue` or `beginner-friendly` in the repository.
