@@ -1,7 +1,7 @@
 (* StateTransitions.v - Temporal State Evolution *)
 
-Require Import PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoModes.
-Require Import PXLs.IEL.Infra.ChronoPraxis.Theorems.experimental.ChronoState.
+Require Import PXLs.Internal Emergent Logics.Infra.ChronoPraxis.Substrate.ChronoModes.
+Require Import PXLs.Internal Emergent Logics.Infra.ChronoPraxis.Theorems.experimental.ChronoState.
 
 Module StateTransitions.
 

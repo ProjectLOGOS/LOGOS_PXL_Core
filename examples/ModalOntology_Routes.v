@@ -3,9 +3,9 @@
 From Coq Require Import Program.
 
 (* TODO: Restore full imports once module path resolution is fixed *)
-(* Require Import PXLs.IEL.Infra.substrate.ChronoAxioms *)
-(*                PXLs.IEL.Infra.substrate.ChronoMappings *)
-(*                PXLs.IEL.Infra.domains.ModalOntology.ModalCollapse. *)
+(* Require Import PXLs.Internal Emergent Logics.Infra.substrate.ChronoAxioms *)
+(*                PXLs.Internal Emergent Logics.Infra.substrate.ChronoMappings *)
+(*                PXLs.Internal Emergent Logics.Infra.domains.ModalOntology.ModalCollapse. *)
 
 Module Routes.
 
@@ -15,7 +15,7 @@ Parameter PC : Type.  (* χ_C - eternal time propositions *)
 Parameter A_to_C : PA -> PC.
 
 (* Simplified modal accessibility *)
-Definition Access (pC qC : PC) : Prop := 
+Definition Access (pC qC : PC) : Prop :=
   exists pA, A_to_C pA = pC /\ A_to_C pA = qC.
 
 (* Example scenario: different routes to work *)

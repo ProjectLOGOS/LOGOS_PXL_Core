@@ -2,11 +2,11 @@
 
 ## Overview
 
-This directory contains the GnosiPraxis implementation within the IEL (Integrated Experiential Logic) framework.
+This directory contains the GnosiPraxis implementation within the Internal Emergent Logics (Integrated Experiential Logic) framework.
 
 ## Files
 
-- `modules\IEL\GnosiPraxis\README.md`
+- `modules\Internal Emergent Logics\GnosiPraxis\README.md`
 
 ## Development
 

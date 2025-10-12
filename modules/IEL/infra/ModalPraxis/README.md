@@ -2,17 +2,17 @@
 
 ## Overview
 
-This directory contains the infra_ModalPraxis implementation within the IEL (Integrated Experiential Logic) framework.
+This directory contains the infra_ModalPraxis implementation within the Internal Emergent Logics (Integrated Experiential Logic) framework.
 
 ## Files
 
-- `modules\IEL\infra\ModalPraxis\Core.v`
-- `modules\IEL\infra\ModalPraxis\ForcesLemmas.v`
-- `modules\IEL\infra\ModalPraxis\modal\FrameSpec.v`
-- `modules\IEL\infra\ModalPraxis\README.md`
-- `modules\IEL\infra\ModalPraxis\Registry.v`
-- `modules\IEL\infra\ModalPraxis\theorems\Conservativity.v`
-- `modules\IEL\infra\ModalPraxis\theorems\NormalBase.v`
+- `modules\Internal Emergent Logics\infra\ModalPraxis\Core.v`
+- `modules\Internal Emergent Logics\infra\ModalPraxis\ForcesLemmas.v`
+- `modules\Internal Emergent Logics\infra\ModalPraxis\modal\FrameSpec.v`
+- `modules\Internal Emergent Logics\infra\ModalPraxis\README.md`
+- `modules\Internal Emergent Logics\infra\ModalPraxis\Registry.v`
+- `modules\Internal Emergent Logics\infra\ModalPraxis\theorems\Conservativity.v`
+- `modules\Internal Emergent Logics\infra\ModalPraxis\theorems\NormalBase.v`
 
 ## Development
 

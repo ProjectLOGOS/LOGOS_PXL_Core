@@ -10,14 +10,14 @@ Comprehensive test coverage for the LOGOS Core API service, including unit tests
 
 1. **`test_health_ok`** - Validates `/health` endpoint returns `{"ok": true}` with 200 status
 2. **`test_authorize_action_unsigned`** - Tests token generation without HMAC signing
-   - Validates proof token structure (token, exp, action_sha256, nonce)  
+   - Validates proof token structure (token, exp, action_sha256, nonce)
    - Verifies action hash computation
    - Confirms expiration timestamp is in future
 3. **`test_authorize_action_hmac_signed`** - Tests HMAC-signed token generation
    - Verifies deterministic HMAC signature generation
    - Validates payload construction: `nonce.exp.action_sha256`
 4. **`test_verify_kernel_match`** - Tests kernel hash verification (matching)
-5. **`test_verify_kernel_mismatch`** - Tests kernel hash verification (non-matching) 
+5. **`test_verify_kernel_mismatch`** - Tests kernel hash verification (non-matching)
 6. **`test_verify_kernel_missing_value`** - Tests error handling for empty kernel hash
 
 ### `tests/test_api_integration.py` (3 tests)
@@ -25,7 +25,7 @@ Comprehensive test coverage for the LOGOS Core API service, including unit tests
 
 1. **`test_api_router_integration`** - Full workflow test
    - Gets proof token from LOGOS API
-   - Uses token in Tool Router request  
+   - Uses token in Tool Router request
    - Validates response structure and data flow
 2. **`test_api_kernel_verification_integration`** - Kernel verification scenarios
    - Tests both matching and non-matching kernel hashes
@@ -74,7 +74,7 @@ Comprehensive test coverage for the LOGOS Core API service, including unit tests
 # Run all LOGOS API tests
 pytest tests/test_logos_api.py -v
 
-# Run integration tests  
+# Run integration tests
 pytest tests/test_api_integration.py -v
 
 # Run complete test suite

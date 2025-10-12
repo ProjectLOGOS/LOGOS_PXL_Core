@@ -1,6 +1,6 @@
 From PXLs Require Import PXLv3.
 Module TopoPraxis.
-  Definition V := PXLs.IEL.Source.TheoPraxis.Props.TopoPraxis.
+  Definition V := PXLs.Internal Emergent Logics.Source.TheoPraxis.Props.TopoPraxis.
 
   Theorem topological_continuity : forall p q, V p -> V q -> V (p /\ q).
   Proof. intros p q H1 H2. unfold V in *. tauto. Qed.

@@ -2,8 +2,8 @@ From Coq Require Import Program Setoids.Setoid.
 
 (* TODO: Restore full imports once module path resolution is fixed *)
 (* From PXLs Require Import PXLv3. *)
-(* Require Import modules.IEL.ModalPraxis.modal.FrameSpec
-               modules.IEL.ModalPraxis.theorems.{NormalBase,DerivedAxioms}. *)
+(* Require Import modules.Internal Emergent Logics.ModalPraxis.modal.FrameSpec
+               modules.Internal Emergent Logics.ModalPraxis.theorems.{NormalBase,DerivedAxioms}. *)
 
 (* Standalone definitions for compilation - using PXL canonical model types *)
 Parameter form : Type.

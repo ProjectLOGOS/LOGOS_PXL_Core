@@ -1,6 +1,6 @@
-(* From PXLs.IEL.Infra.TropoPraxis Require Import Tropo. *)
-From PXLs.IEL.Infra.ChronoPraxis Require Import Core.
-From PXLs.IEL.Infra.ModalPraxis.theorems Require Import NormalBase.
+(* From PXLs.Internal Emergent Logics.Infra.TropoPraxis Require Import Tropo. *)
+From PXLs.Internal Emergent Logics.Infra.ChronoPraxis Require Import Core.
+From PXLs.Internal Emergent Logics.Infra.ModalPraxis.theorems Require Import NormalBase.
 
 Section ForcesBindings.
   Context {W:Type} (R:W->W->Prop) (forces: W -> form -> Prop).

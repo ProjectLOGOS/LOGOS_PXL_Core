@@ -2,8 +2,8 @@ From Coq Require Import Program Setoids.Setoid.
 
 (* TODO: Restore full imports once module path resolution is fixed *)
 (* From PXLs Require Import PXLv3. *)
-(* Require Import PXLs.IEL.Infra.substrate.ChronoAxioms *)
-(*                PXLs.IEL.Infra.theorems.MetaTheorems. *)
+(* Require Import PXLs.Internal Emergent Logics.Infra.substrate.ChronoAxioms *)
+(*                PXLs.Internal Emergent Logics.Infra.theorems.MetaTheorems. *)
 
 (* Standalone definitions for compilation *)
 Parameter form : Type.

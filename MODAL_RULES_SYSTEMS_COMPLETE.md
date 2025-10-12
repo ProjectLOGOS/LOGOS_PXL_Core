@@ -5,7 +5,7 @@ Successfully implemented the foundational modal rules (K axiom and Necessitation
 
 ## Files Created
 
-### `modules/IEL/ChronoPraxis/theorems/ModalStrength/ModalRules.v`
+### `modules/Internal Emergent Logics/ChronoPraxis/theorems/ModalStrength/ModalRules.v`
 Core modal logic inference rules with semantic validity proofs:
 
 #### K Axiom Implementation
@@ -13,7 +13,7 @@ Core modal logic inference rules with semantic validity proofs:
 - **`provable_K`**: Lifts K axiom semantic validity to syntactic provability via completeness
 - **Semantic Argument**: Uses modal forcing: from □(φ→ψ) and □φ at world w, and accessibility R w u, we get (φ→ψ) and φ at world u, hence ψ at u
 
-#### Necessitation Rule Implementation  
+#### Necessitation Rule Implementation
 - **`valid_necessitation`**: If φ is valid at all worlds, then □φ is valid at all worlds
 - **`semantic_necessitation`**: If φ is semantically valid everywhere, then □φ is provable
 - **`provable_necessitation`**: Standard necessitation rule - if ⊢ φ then ⊢ □φ (using soundness parameter)
@@ -23,23 +23,23 @@ Core modal logic inference rules with semantic validity proofs:
 - **Frame Independence**: K axiom valid on all frames (no frame conditions required)
 - **Soundness Integration**: Uses soundness parameter to bridge syntactic provability to semantic validity
 
-### `modules/IEL/ChronoPraxis/theorems/ModalStrength/Systems.v`
+### `modules/Internal Emergent Logics/ChronoPraxis/theorems/ModalStrength/Systems.v`
 Bundled modal logic systems providing organized access to modal theorems:
 
 #### KSystem Module
 - **Basic Modal Logic**: Provides K axiom and Necessitation rule
 - **`K_axiom`**: Direct access to provable_K theorem
-- **`Necessitation`**: Direct access to provable_necessitation theorem  
+- **`Necessitation`**: Direct access to provable_necessitation theorem
 - **`K_system_complete`**: Demonstrates K system provides complete normal modal logic base
 
-#### S4System Module  
+#### S4System Module
 - **Extends KSystem**: Inherits K axiom and Necessitation
 - **`T_axiom`**: Access to provable_T (□φ → φ) from ModalAxiomsSound.v
 - **`Four_axiom`**: Access to provable_4 (□φ → □□φ) from ModalAxiomsSound.v
 - **S4 Completeness**: Provides reflexive + transitive modal logic
 
 #### S5System Module
-- **Extends KSystem**: Inherits K axiom and Necessitation  
+- **Extends KSystem**: Inherits K axiom and Necessitation
 - **`T_axiom`**: Access to provable_T theorem
 - **`Five_axiom`**: Access to provable_5 (◇φ → □◇φ) theorem
 - **`B_axiom`**: Access to provable_B (φ → □◇φ) theorem
@@ -63,7 +63,7 @@ Comprehensive test suite verifying modal rules and systems:
 
 ### Semantic Validity Approach
 - **Kripke Semantics**: Uses worlds and accessibility relations for modal interpretation
-- **Forcing Relations**: 
+- **Forcing Relations**:
   - `forces w (Box φ) ≔ ∀u. can_R w u → forces u φ`
   - `forces w (Dia φ) ≔ ∃u. can_R w u ∧ forces u φ`
 - **Validity Definition**: `valid φ ≔ ∀w. forces w φ`
@@ -77,7 +77,7 @@ Comprehensive test suite verifying modal rules and systems:
 ```
 K System: K axiom + Necessitation
     ↓
-S4 System: K + T (reflexivity) + 4 (transitivity)  
+S4 System: K + T (reflexivity) + 4 (transitivity)
     ↓
 S5 System: K + T + 5 (symmetry) or K + T + B (Brouwer)
 ```
@@ -89,7 +89,7 @@ The modal rules complete the modal logic foundation:
 1. **ModalFree.v**: Modal-free formula predicate
 2. **S4Overlay.v, S5Overlay.v**: Frame classes and conservativity
 3. **ModalAxiomsSound.v**: Axiom semantic soundness ← **Previous**
-4. **ModalRules.v**: K axiom and Necessitation ← **NEW**  
+4. **ModalRules.v**: K axiom and Necessitation ← **NEW**
 5. **Systems.v**: Bundled modal systems ← **NEW**
 
 ### Build System Integration
@@ -99,7 +99,7 @@ The modal rules complete the modal logic foundation:
 
 ### Documentation Updates
 - **DOMAINS_OVERVIEW.md**: Added modal logic foundation section
-- **System Descriptions**: Documented K, S4, S5 system capabilities  
+- **System Descriptions**: Documented K, S4, S5 system capabilities
 - **Frame Correspondence**: Explained axiom-to-frame-condition mappings
 
 ## Verification Results
@@ -122,7 +122,7 @@ semantic_necessitation : ∀φ. (∀w. forces w φ) → Prov (□φ)
 
 (* From Systems.v modules *)
 KSystem.K_axiom : ∀φ ψ. Prov (□(φ→ψ) → (□φ → □ψ))
-S4System.T_axiom : ∀φ. Prov (□φ → φ)  
+S4System.T_axiom : ∀φ. Prov (□φ → φ)
 S4System.Four_axiom : ∀φ. Prov (□φ → □□φ)
 S5System.Five_axiom : ∀φ. Prov (◇φ → □◇φ)
 S5System.B_axiom : ∀φ. Prov (φ → □◇φ)
@@ -151,7 +151,7 @@ S5System.B_axiom : ∀φ. Prov (φ → □◇φ)
 ChronoPraxis now provides:
 - ✅ Complete normal modal logic foundation (K + Necessitation)
 - ✅ S4/S5 extensions with proven frame correspondence
-- ✅ Semantic soundness for all major modal axioms  
+- ✅ Semantic soundness for all major modal axioms
 - ✅ Organized system modules for easy theorem access
 - ✅ Conservative extension guarantees over propositional logic
 - ✅ Full constructive proof development environment

@@ -1,5 +1,5 @@
 From PXLs Require Import PXLv3.
-Require Import PXLs.IEL.Source.TheoPraxis.Props.
+Require Import PXLs.Internal Emergent Logics.Source.TheoPraxis.Props.
 Module BeautySub.
   Import TheoProps.
   Context `{Cap_ConjElim Beauty} `{Cap_ReflectsPXL Beauty}.

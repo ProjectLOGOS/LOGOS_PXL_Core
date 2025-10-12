@@ -1,6 +1,6 @@
-From PXLs.IEL.Pillars.AnthroPraxis.subdomains Require Import Life.Spec.
+From PXLs.Internal Emergent Logics.Pillars.AnthroPraxis.subdomains Require Import Life.Spec.
 Module AnthroPraxis.
-  Definition V := PXLs.IEL.Source.TheoPraxis.Props.Life.
+  Definition V := PXLs.Internal Emergent Logics.Source.TheoPraxis.Props.Life.
   Theorem AgentCapability : forall p, V p -> Dia V p.
   Proof. apply LifeSub.agent_capability. Qed.
   Theorem AgencyComp : forall p q, V p -> V q -> V (p /\ q).

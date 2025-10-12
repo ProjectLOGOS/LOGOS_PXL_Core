@@ -1,6 +1,6 @@
 From PXLs Require Import PXLv3.
 Module ModalPraxis.
-  Definition V := PXLs.IEL.Source.TheoPraxis.Props.ModalPraxis.
+  Definition V := PXLs.Internal Emergent Logics.Source.TheoPraxis.Props.ModalPraxis.
 
   Theorem modal_consistency : forall p, V p -> ~ (V p /\ ~ p).
   Proof. intros p H. unfold V in H. tauto. Qed.

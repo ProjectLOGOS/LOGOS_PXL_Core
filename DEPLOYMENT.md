@@ -90,7 +90,7 @@ SIGNING_SECRET=your-secret k6 run k6/signed-requests.js
 ```yaml
 # Security scanning pipeline includes:
 - Bandit: Python security linting
-- Safety: Known vulnerability scanning  
+- Safety: Known vulnerability scanning
 - Trivy: Container image vulnerabilities
 - Syft: Software Bill of Materials (SBOM)
 - Provenance: Build attestations
@@ -121,7 +121,7 @@ SIGNING_SECRET=your-secret k6 run k6/signed-requests.js
 # Request Rate
 sum(rate(tool_router_requests_total[5m]))
 
-# Error Rate  
+# Error Rate
 sum(rate(tool_router_requests_total{status=~"5.."}[5m])) / sum(rate(tool_router_requests_total[5m]))
 
 # Latency Percentiles
@@ -155,7 +155,7 @@ rate(tool_router_rate_limited_total[5m]) / rate(tool_router_requests_total[5m])
 # Linux/macOS
 bash tools/deploy-enhanced-router.sh
 
-# Windows PowerShell  
+# Windows PowerShell
 ./tools/deploy-enhanced-router.ps1
 ```
 
@@ -163,7 +163,7 @@ bash tools/deploy-enhanced-router.sh
 ```bash
 # Environment-specific configs
 .env.development    # Local development
-.env.staging       # Staging environment  
+.env.staging       # Staging environment
 .env.production    # Production settings
 
 # Security: Never commit secrets to git
@@ -220,7 +220,7 @@ export RETRY_BASE_SECS=0.1
 - [ ] All circuit breakers remain closed
 - [ ] HMAC authentication working (if enabled)
 
-### Month 1 Goals  
+### Month 1 Goals
 - [ ] 99.9% availability SLO achieved
 - [ ] Load testing validates 10x current traffic capacity
 - [ ] Zero security incidents with HMAC enabled
@@ -234,7 +234,7 @@ export RETRY_BASE_SECS=0.1
 **LOGOS Tool Router v2.0.0** is fully implemented with all enterprise features:
 
 ✅ **HMAC Request Signing** - Production security ready
-✅ **Redis Rate Limiting** - Horizontal scaling support  
+✅ **Redis Rate Limiting** - Horizontal scaling support
 ✅ **Prometheus Metrics** - Full observability
 ✅ **Circuit Breakers** - Fault tolerance per tool
 ✅ **Retry Logic** - Resilient upstream calls

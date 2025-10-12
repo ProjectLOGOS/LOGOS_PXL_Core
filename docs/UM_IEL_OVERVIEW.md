@@ -1,10 +1,10 @@
 # ModalPraxis: Unified Modal Logic Framework
 
-**Formerly UM-IEL (Unified Modal - Intuitionistic Epistemic Logic)**
+**Formerly UM-Internal Emergent Logics (Unified Modal - Intuitionistic Epistemic Logic)**
 
 ## Overview
 
-**Idea:** One interface covers K/T/S4/S5/KD/KB by toggling frame laws (Serial, Reflexive, Symmetric, Transitive, Euclidean).  
+**Idea:** One interface covers K/T/S4/S5/KD/KB by toggling frame laws (Serial, Reflexive, Symmetric, Transitive, Euclidean).
 **Guarantees:** K + Necessitation always; T/4/5/B/D under flags; propositional conservativity holds.
 
 **Why constructive:** All validities are proved semantically and lifted via the kernel completeness theorem; no new axioms.
@@ -84,10 +84,10 @@ Check MyS4Logic.S4_4_available.  (* 4 axiom: □φ → □□φ *)
 ```coq
 Section MyCustomSystem.
   Context (Hrefl: Reflexive) (Hsym: Symmetric).
-  
+
   (* Gets T axiom from reflexivity *)
   Check provable_T.
-  (* Gets B axiom from symmetry *)  
+  (* Gets B axiom from symmetry *)
   Check provable_B.
 End MyCustomSystem.
 ```
@@ -95,7 +95,7 @@ End MyCustomSystem.
 ## File Organization
 
 ```
-modules/IEL/UM/
+modules/Internal Emergent Logics/UM/
 ├── modal/
 │   └── FrameSpec.v          # Core frame specifications and classes
 └── theorems/
@@ -112,11 +112,11 @@ tests/
 
 ### Complementary to Existing Modal Infrastructure
 - **ChronoPraxis Modal**: Domain-specific modal reasoning for temporal logic
-- **UM-IEL**: General-purpose modal logic foundation with frame parameterization
+- **UM-Internal Emergent Logics**: General-purpose modal logic foundation with frame parameterization
 - **Shared Foundation**: Both use PXL kernel completeness and constructive proof standards
 
 ### Unified Temporal-Modal Reasoning
-UM-IEL provides the logical foundation that ChronoPraxis domains can build upon:
+UM-Internal Emergent Logics provides the logical foundation that ChronoPraxis domains can build upon:
 - **Compatibilism**: Agent choice modalities with appropriate frame conditions
 - **Empiricism**: Observer-relative modal operators for measurement contexts
 - **Modal Ontology**: Possible world accessibility for temporal path analysis
@@ -125,7 +125,7 @@ UM-IEL provides the logical foundation that ChronoPraxis domains can build upon:
 
 ### Additional Modal Axioms
 - **G (Löb)**: □(□φ → φ) → □φ
-- **M**: □◇φ → ◇□φ  
+- **M**: □◇φ → ◇□φ
 - **H**: ◇□φ → □◇φ
 - **Grz**: □(□(φ → □φ) → φ) → φ
 
@@ -141,4 +141,4 @@ UM-IEL provides the logical foundation that ChronoPraxis domains can build upon:
 
 ---
 
-*UM-IEL provides a unified, constructive foundation for modal reasoning that complements ChronoPraxis while maintaining the project's commitment to rigorous formal verification.*
+*UM-Internal Emergent Logics provides a unified, constructive foundation for modal reasoning that complements ChronoPraxis while maintaining the project's commitment to rigorous formal verification.*

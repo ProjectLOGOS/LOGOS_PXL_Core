@@ -1,14 +1,14 @@
-# IEL Build Status
+# Internal Emergent Logics Build Status
 
-- Timestamp: 2025-10-08 19:45:00 UTC  
+- Timestamp: 2025-10-08 19:45:00 UTC
 - Admitted occurrences: 0
 - Add LoadPath occurrences: 0
 
 ✅ **Policy clean.**
 
 ## Checklist
-- [x] No `Admitted.` under `modules/IEL`
-- [x] No `Add LoadPath` under `modules/IEL`
+- [x] No `Admitted.` under `modules/Internal Emergent Logics`
+- [x] No `Add LoadPath` under `modules/Internal Emergent Logics`
 - [x] Build via Bash make
 
 ## Notes

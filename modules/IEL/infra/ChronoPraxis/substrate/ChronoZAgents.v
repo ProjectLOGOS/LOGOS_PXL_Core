@@ -1,8 +1,8 @@
 (* ChronoAgents.v *)
 
-Require Import PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms.
-Require Import PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoMappings.
-Require Import PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoState.
+Require Import PXLs.Internal Emergent Logics.Infra.ChronoPraxis.Substrate.ChronoAxioms.
+Require Import PXLs.Internal Emergent Logics.Infra.ChronoPraxis.Substrate.ChronoMappings.
+Require Import PXLs.Internal Emergent Logics.Infra.ChronoPraxis.Substrate.ChronoState.
 
 Module ChronoAgents.
 
@@ -14,7 +14,7 @@ Import ChronoState.
 Record ChronoAgent := {
   agent_id : nat;
   beliefs : ChronoState -> Prop;
-  desires : ChronoState -> Prop;  
+  desires : ChronoState -> Prop;
   intentions : ChronoState -> Prop;
   knowledge : ChronoState -> Prop
 }.
@@ -23,7 +23,7 @@ Record ChronoAgent := {
 Definition BeliefState := ChronoAgent -> ChronoState -> Prop.
 
 (* Belief revision function *)
-(* Parameter belief_update : forall (t1 t2 : Time), 
+(* Parameter belief_update : forall (t1 t2 : Time),
   t1 <= t2 -> ChronoAgent t1 -> ChronoState -> ChronoAgent t2. *)
 
 (* Axiom: Belief updates preserve agent identity - REMOVED for constructive elimination *)
@@ -54,7 +54,7 @@ Definition agent_evolution (a1 a2 : ChronoAgent) : Prop :=
 
 (* Proofs about agent reasoning *)
 
-(* Theorem agent_identity_temporal_persistence : 
+(* Theorem agent_identity_temporal_persistence :
   forall (a1 a2 : ChronoAgent),
     agent_evolution a1 a2 -> agent_id a1 = agent_id a2.
 Proof.

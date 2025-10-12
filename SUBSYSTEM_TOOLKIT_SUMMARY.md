@@ -14,19 +14,19 @@ Integration status: Production-ready with LOGOS Alignment Core
 - Toolkits: 4 specialized components
 - Key capability: Trinity-grounded validation with proof-gated execution
 
-### TELOS (The Scientist) 
+### TELOS (The Scientist)
 - Role: Causal reasoning and temporal analysis
 - Toolkits: 4 specialized components
 - Key capability: Structural causal model discovery and Bayesian inference
 
 ### TETRAGNOS (The Pattern Recognizer)
-- Role: Pattern recognition and semantic analysis  
+- Role: Pattern recognition and semantic analysis
 - Toolkits: 4 specialized components
 - Key capability: Advanced semantic embeddings and clustering
 
 ### THONOC (The Logician)
 - Role: Symbolic reasoning and theorem proving
-- Toolkits: 5 specialized components  
+- Toolkits: 5 specialized components
 - Key capability: Automated theorem proving with Z3 SMT solver
 
 ## Integration Status

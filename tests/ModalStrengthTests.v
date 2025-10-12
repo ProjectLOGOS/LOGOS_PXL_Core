@@ -1,10 +1,10 @@
 From Coq Require Import Program.
 
 (* TODO: Restore full imports once module path resolution is fixed *)
-(* Require Import PXLs.IEL.Infra.theorems.ModalStrength.ModalFree *)
-(*                PXLs.IEL.Infra.theorems.ModalStrength.S4Overlay *)
-(*                PXLs.IEL.Infra.theorems.ModalStrength.S5Overlay *)
-(*                PXLs.IEL.Infra.substrate.ChronoAxioms. *)
+(* Require Import PXLs.Internal Emergent Logics.Infra.theorems.ModalStrength.ModalFree *)
+(*                PXLs.Internal Emergent Logics.Infra.theorems.ModalStrength.S4Overlay *)
+(*                PXLs.Internal Emergent Logics.Infra.theorems.ModalStrength.S5Overlay *)
+(*                PXLs.Internal Emergent Logics.Infra.substrate.ChronoAxioms. *)
 
 (* Standalone definitions for compilation *)
 Inductive form : Type :=
@@ -37,7 +37,7 @@ Module S4.
     forall (w u: can_world), (proj1_sig w) = (proj1_sig u) -> can_R w u.
   Class Transitive : Prop := transitive_R :
     forall (w u v: can_world), can_R w u -> can_R u v -> can_R w v.
-  
+
   Parameter conservative_nonmodal :
     forall (Hrefl: Reflexive) (Htran: Transitive) φ, modal_free φ ->
       (forall w, forces w φ) -> Prov φ.
@@ -50,7 +50,7 @@ Module S5.
     forall (w u: can_world), can_R w u -> can_R u w.
   Class Transitive : Prop := transitive_R :
     forall (w u v: can_world), can_R w u -> can_R u v -> can_R w v.
-  
+
   Parameter conservative_nonmodal :
     forall (Hrefl: Reflexive) (Hsym: Symmetric) (Htran: Transitive) φ, modal_free φ ->
       (forall w, forces w φ) -> Prov φ.

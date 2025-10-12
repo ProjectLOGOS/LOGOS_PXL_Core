@@ -7,9 +7,9 @@ This document outlines the complete constructive replacement for the `constructi
 The original axiom was:
 ```coq
 Axiom constructive_lindenbaum :
-  forall Γ φ (HΓ : mct Γ), 
+  forall Γ φ (HΓ : mct Γ),
   ~ In_set Γ (Box φ) ->
-  exists Δ (HΔ:mct Δ), 
+  exists Δ (HΔ:mct Δ),
     can_R (exist _ Γ HΓ) (exist _ Δ HΔ) /\ In_set Δ (Neg φ).
 ```
 
@@ -93,9 +93,9 @@ Lemma limit_to_mct : forall base,
   (* + additional closure conditions *) ->
   mct (limit_set base)
 ```
-**Proof**: 
+**Proof**:
 - **Consistency**: Follows from `extension_consistent`
-- **Totality**: Follows from `extension_totality` and `enum_surjective`  
+- **Totality**: Follows from `extension_totality` and `enum_surjective`
 - **Theorem closure**: Built into the `extend` function via `provable_upto`
 - **Modus ponens**: Preserved at each stage
 
@@ -103,9 +103,9 @@ Lemma limit_to_mct : forall base,
 
 ```coq
 Theorem constructive_lindenbaum :
-  forall Γ φ (HΓ : mct Γ), 
+  forall Γ φ (HΓ : mct Γ),
   ~ In_set Γ (Box φ) ->
-  exists Δ (HΔ : mct Δ), 
+  exists Δ (HΔ : mct Δ),
     can_R (exist _ Γ HΓ) (exist _ Δ HΔ) ∧ In_set Δ (Neg φ)
 ```
 
@@ -132,7 +132,7 @@ destruct (mct_total HΓ (Box φ)) as [HBox | HnBox].
   exfalso. apply (mct_cons HΔ). exists φ. split; [IH result | HnφΔ].
 ```
 
-### Dia Case (membership → forces)  
+### Dia Case (membership → forces)
 ```coq
 (* ◇φ ∈ Γ → forces w (◇φ) *)
 (* Use modal duality: ◇φ ↔ ¬□¬φ *)
@@ -159,7 +159,7 @@ exists (exist _ Δ HΔ). split; [assumption |].
 ## Key Benefits
 
 1. **No Classical Axioms**: Entire approach is constructively valid
-2. **Explicit Algorithm**: Replaces axiom with concrete construction procedure  
+2. **Explicit Algorithm**: Replaces axiom with concrete construction procedure
 3. **Decidable Components**: All key operations (enumeration, proof search) are computable
 4. **Modular Design**: Can be integrated incrementally with existing codebase
 5. **Zero Admits Goal**: All lemmas can be proven constructively

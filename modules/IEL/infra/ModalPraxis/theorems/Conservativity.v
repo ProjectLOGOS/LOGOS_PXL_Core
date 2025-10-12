@@ -2,8 +2,8 @@ From Coq Require Import Program.
 
 (* TODO: Restore full imports once module path resolution is fixed *)
 (* From PXLs Require Import PXLv3. *)
-(* Require Import PXLs.IEL.Infra.theorems.ModalStrength.ModalFree *)
-(*                modules.IEL.UM.modal.FrameSpec. *)
+(* Require Import PXLs.Internal Emergent Logics.Infra.theorems.ModalStrength.ModalFree *)
+(*                modules.Internal Emergent Logics.UM.modal.FrameSpec. *)
 
 (* Standalone loading - parameters from existing modules *)
 Parameter form : Type.

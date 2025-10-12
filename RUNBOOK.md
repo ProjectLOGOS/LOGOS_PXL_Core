@@ -292,6 +292,6 @@ Week of 2025-01-27: Carol Davis (carol@logos.org)
 - **Coqchk Stamp**: verified-20250110_120000
 
 ### Previous Versions
-- **v2.1.0**: IEL infrastructure integration (2024-12-15)
+- **v2.1.0**: Internal Emergent Logics infrastructure integration (2024-12-15)
 - **v2.0.0**: V4 compatibility layer (2024-11-20)
 - **v1.5.0**: Core PXL extraction (2024-10-30)

@@ -70,7 +70,7 @@ Module V4_Conservativity.
 (* === Theorem Translation Framework === *)
 
 (* For any V4 theorem τ used by runtime, we require:
-   - A PXL/IEL translation ⌜τ⌝
+   - A PXL/Internal Emergent Logics translation ⌜τ⌝
    - A proof that PXL ⊢ ⌜τ⌝ *)
 
 (* Placeholder: V4 Export type (theorems used by runtime) *)

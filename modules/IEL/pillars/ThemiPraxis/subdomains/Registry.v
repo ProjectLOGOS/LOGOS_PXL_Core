@@ -1,6 +1,6 @@
 From Coq Require Import Program String.
 From PXLs Require Import PXLv3.
-Require Import PXLs.IEL.Pillars.ThemiPraxis.subdomains.Truth.Spec.
+Require Import PXLs.Internal Emergent Logics.Pillars.ThemiPraxis.subdomains.Truth.Spec.
 Module ThemiPraxis_Registry.
   (* Registry for ThemiPraxis subdomains *)
   Definition truth_available : Prop := True.

@@ -1,7 +1,7 @@
 {
   "axioms": [
     {
-      "file": "modules/IEL/infra/ChronoPraxis/theorems/ModalStrength/ModalAxiomsSound.v",
+      "file": "modules/Internal Emergent Logics/infra/ChronoPraxis/theorems/ModalStrength/ModalAxiomsSound.v",
       "line": 37,
       "name": "forces_Box",
       "statement": "forall w φ, forces w (Box φ) <-> (forall u, can_R w u -> forces u φ)",
@@ -9,7 +9,7 @@
       "downstream_references": []
     },
     {
-      "file": "modules/IEL/infra/ChronoPraxis/theorems/ModalStrength/ModalAxiomsSound.v",
+      "file": "modules/Internal Emergent Logics/infra/ChronoPraxis/theorems/ModalStrength/ModalAxiomsSound.v",
       "line": 38,
       "name": "forces_Dia",
       "statement": "forall w φ, forces w (Dia φ) <-> (exists u, can_R w u /\ forces u φ)",
@@ -17,7 +17,7 @@
       "downstream_references": []
     },
     {
-      "file": "modules/IEL/infra/ChronoPraxis/theorems/ModalStrength/ModalAxiomsSound.v",
+      "file": "modules/Internal Emergent Logics/infra/ChronoPraxis/theorems/ModalStrength/ModalAxiomsSound.v",
       "line": 39,
       "name": "forces_Impl",
       "statement": "forall w φ ψ, forces w (Impl φ ψ) <-> (forces w φ -> forces w ψ)",
@@ -25,7 +25,7 @@
       "downstream_references": []
     },
     {
-      "file": "modules/IEL/infra/ChronoPraxis/substrate/ChronoAgents.v",
+      "file": "modules/Internal Emergent Logics/infra/ChronoPraxis/substrate/ChronoAgents.v",
       "line": 30,
       "name": "belief_update_preserves_identity",
       "statement": "forall (t1 t2 : Time) (a : ChronoAgent t1) (s : ChronoState t2) (H : t1 <= t2), ...",
@@ -33,7 +33,7 @@
       "downstream_references": []
     },
     {
-      "file": "modules/IEL/infra/ChronoPraxis/substrate/ChronoAgents.v",
+      "file": "modules/Internal Emergent Logics/infra/ChronoPraxis/substrate/ChronoAgents.v",
       "line": 50,
       "name": "forecast_coherence",
       "statement": "forall (t1 t2 : Time) (ta : TelicAgent t1) (H : t1 <= t2), ...",
@@ -41,7 +41,7 @@
       "downstream_references": []
     },
     {
-      "file": "modules/IEL/infra/ChronoPraxis/substrate/ChronoAxioms.v",
+      "file": "modules/Internal Emergent Logics/infra/ChronoPraxis/substrate/ChronoAxioms.v",
       "line": 16,
       "name": "chi_reflexivity",
       "statement": "forall m : chi, m = m",
@@ -49,7 +49,7 @@
       "downstream_references": []
     },
     {
-      "file": "modules/IEL/infra/ChronoPraxis/substrate/ChronoAxioms.v",
+      "file": "modules/Internal Emergent Logics/infra/ChronoPraxis/substrate/ChronoAxioms.v",
       "line": 19,
       "name": "chi_distinction",
       "statement": "chi_A <> chi_B /\ chi_B <> chi_C /\ chi_A <> chi_C",
@@ -57,7 +57,7 @@
       "downstream_references": []
     },
     {
-      "file": "modules/IEL/infra/ChronoPraxis/substrate/ChronoAxioms.v",
+      "file": "modules/Internal Emergent Logics/infra/ChronoPraxis/substrate/ChronoAxioms.v",
       "line": 33,
       "name": "chi_universal_compatibility",
       "statement": "forall m1 m2 : chi, chi_compatible m1 m2",
@@ -65,7 +65,7 @@
       "downstream_references": []
     },
     {
-      "file": "modules/IEL/infra/ChronoPraxis/substrate/ChronoAxioms.v",
+      "file": "modules/Internal Emergent Logics/infra/ChronoPraxis/substrate/ChronoAxioms.v",
       "line": 41,
       "name": "P_chi_identity",
       "statement": "forall (m : chi) (p : P_chi m), p = p",
@@ -73,7 +73,7 @@
       "downstream_references": []
     },
     {
-      "file": "modules/IEL/infra/ChronoPraxis/substrate/ChronoAxioms.v",
+      "file": "modules/Internal Emergent Logics/infra/ChronoPraxis/substrate/ChronoAxioms.v",
       "line": 51,
       "name": "tau_reflexive",
       "statement": "forall t : tau, t <= t",
@@ -81,7 +81,7 @@
       "downstream_references": []
     },
     {
-      "file": "modules/IEL/infra/ChronoPraxis/substrate/ChronoAxioms.v",
+      "file": "modules/Internal Emergent Logics/infra/ChronoPraxis/substrate/ChronoAxioms.v",
       "line": 52,
       "name": "tau_antisymmetric",
       "statement": "forall t1 t2 : tau, t1 <= t2 -> t2 <= t1 -> t1 = t2",
@@ -89,7 +89,7 @@
       "downstream_references": []
     },
     {
-      "file": "modules/IEL/infra/ChronoPraxis/substrate/ChronoAxioms.v",
+      "file": "modules/Internal Emergent Logics/infra/ChronoPraxis/substrate/ChronoAxioms.v",
       "line": 53,
       "name": "tau_transitive",
       "statement": "forall t1 t2 t3 : tau, t1 <= t2 -> t2 <= t3 -> t1 <= t3",
@@ -97,7 +97,7 @@
       "downstream_references": []
     },
     {
-      "file": "modules/IEL/infra/ChronoPraxis/substrate/ChronoAxioms.v",
+      "file": "modules/Internal Emergent Logics/infra/ChronoPraxis/substrate/ChronoAxioms.v",
       "line": 67,
       "name": "eternal_timeless",
       "statement": "forall (e : Eternal), e = e",
@@ -105,7 +105,7 @@
       "downstream_references": []
     },
     {
-      "file": "modules/IEL/infra/ChronoPraxis/substrate/ChronoMappings.v",
+      "file": "modules/Internal Emergent Logics/infra/ChronoPraxis/substrate/ChronoMappings.v",
       "line": 23,
       "name": "cross_mapping_consistency_AB",
       "statement": "forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_A), ...",
@@ -113,7 +113,7 @@
       "downstream_references": []
     },
     {
-      "file": "modules/IEL/infra/ChronoPraxis/substrate/ChronoMappings.v",
+      "file": "modules/Internal Emergent Logics/infra/ChronoPraxis/substrate/ChronoMappings.v",
       "line": 26,
       "name": "cross_mapping_consistency_BA",
       "statement": "forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_B), ...",
@@ -121,7 +121,7 @@
       "downstream_references": []
     },
     {
-      "file": "modules/IEL/infra/ChronoPraxis/substrate/ChronoMappings.v",
+      "file": "modules/Internal Emergent Logics/infra/ChronoPraxis/substrate/ChronoMappings.v",
       "line": 29,
       "name": "cross_mapping_consistency_AC",
       "statement": "forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_A), ...",
@@ -129,7 +129,7 @@
       "downstream_references": []
     },
     {
-      "file": "modules/IEL/infra/ChronoPraxis/substrate/ChronoMappings.v",
+      "file": "modules/Internal Emergent Logics/infra/ChronoPraxis/substrate/ChronoMappings.v",
       "line": 32,
       "name": "cross_mapping_consistency_CA",
       "statement": "forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_C), ...",
@@ -137,7 +137,7 @@
       "downstream_references": []
     },
     {
-      "file": "modules/IEL/infra/ChronoPraxis/substrate/ChronoMappings.v",
+      "file": "modules/Internal Emergent Logics/infra/ChronoPraxis/substrate/ChronoMappings.v",
       "line": 35,
       "name": "cross_mapping_consistency_BC",
       "statement": "forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_B), ...",
@@ -145,7 +145,7 @@
       "downstream_references": []
     },
     {
-      "file": "modules/IEL/infra/ChronoPraxis/substrate/ChronoMappings.v",
+      "file": "modules/Internal Emergent Logics/infra/ChronoPraxis/substrate/ChronoMappings.v",
       "line": 38,
       "name": "cross_mapping_consistency_CB",
       "statement": "forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_C), ...",
@@ -153,7 +153,7 @@
       "downstream_references": []
     },
     {
-      "file": "modules/IEL/infra/ChronoPraxis/substrate/ChronoMappings.v",
+      "file": "modules/Internal Emergent Logics/infra/ChronoPraxis/substrate/ChronoMappings.v",
       "line": 86,
       "name": "eternal_projection_A",
       "statement": "forall (e : ChronoAxioms.Eternal), ...",
@@ -161,7 +161,7 @@
       "downstream_references": []
     },
     {
-      "file": "modules/IEL/infra/ChronoPraxis/substrate/ChronoMappings.v",
+      "file": "modules/Internal Emergent Logics/infra/ChronoPraxis/substrate/ChronoMappings.v",
       "line": 89,
       "name": "eternal_projection_B",
       "statement": "forall (e : ChronoAxioms.Eternal), ...",

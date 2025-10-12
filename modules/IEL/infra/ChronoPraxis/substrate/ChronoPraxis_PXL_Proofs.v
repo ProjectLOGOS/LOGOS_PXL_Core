@@ -1,5 +1,5 @@
 (* ChronoPraxis_PXL_Proofs.v *)
-(* 
+(*
    Soundness and Completeness Proofs for PXL↔CPX Bijective Mappings
    This module establishes that ChronoPraxis is a conservative extension of PXL
 *)
@@ -7,7 +7,7 @@
 (* TODO: remove Admitted. — constructive only. No classical axioms. *)
 
 Require Import PXLs.PXLv3.
-(* Require Import PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoPraxis_PXL_Formal. *)
+(* Require Import PXLs.Internal Emergent Logics.Infra.ChronoPraxis.Substrate.ChronoPraxis_PXL_Formal. *)
 From Coq Require Import List.
 
 Module ChronoPraxis_PXL_Proofs.
@@ -175,7 +175,7 @@ Proof.
   (* This establishes that the temporal extension does not introduce contradictions *)
   (* Consistency follows from conservative extension property *)
   exists (CPX_Atom 0). (* Use a simple atomic proposition *)
-  intro H_contra. 
+  intro H_contra.
   (* This contradicts the axiom system *)
   Admitted.
 

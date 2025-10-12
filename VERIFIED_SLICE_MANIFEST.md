@@ -15,8 +15,8 @@
 - **Content**: Core modal logic kernel (S5 axioms, natural deduction)
 - **Extracted**: pxl_core.ml (syntactic types)
 
-### PXLs.IEL.Source.TheoPraxis.Props
-- **Location**: modules/IEL/source/TheoPraxis/Props.v
+### PXLs.Internal Emergent Logics.Source.TheoPraxis.Props
+- **Location**: modules/Internal Emergent Logics/source/TheoPraxis/Props.v
 - **Verification**: ✓ coqchk verified
 - **Content**: Philosophical property classes and instances
 - **Extracted**: pxl_core.ml (property types)

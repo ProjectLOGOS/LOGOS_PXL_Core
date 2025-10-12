@@ -1,6 +1,6 @@
 From Coq Require Import Program String.
 From PXLs Require Import PXLv3.
-Require Import PXLs.IEL.Infra.ModalPraxis.Core.
+Require Import PXLs.Internal Emergent Logics.Infra.ModalPraxis.Core.
 Module ModalPraxis_Registry.
   (* Registry for ModalPraxis infrastructure *)
   Definition core_available : Prop := True.

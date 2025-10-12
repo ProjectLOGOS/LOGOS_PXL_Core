@@ -2,7 +2,7 @@ From Coq Require Import Program Setoids.Setoid.
 
 (* TODO: Restore full imports once module path resolution is fixed *)
 (* From PXLs Require Import PXLv3. *)
-(* Require Import modules.IEL.UM.modal.FrameSpec. *)
+(* Require Import modules.Internal Emergent Logics.UM.modal.FrameSpec. *)
 
 (* Standalone loading - reuse parameters from FrameSpec *)
 Parameter form : Type.
@@ -38,32 +38,32 @@ Section T_4.
 
   (* T: □φ → φ on reflexive frames *)
   Lemma valid_T : forall φ w, forces w (Impl (Box φ) φ).
-  Proof. 
+  Proof.
     intros φ w. rewrite forces_Impl. intro Hbox.
     rewrite forces_Box in Hbox.
     apply Hbox. apply reflexive_R.
   Qed.
-  
+
   Theorem provable_T : forall φ, Prov (Impl (Box φ) φ).
-  Proof. 
-    intro φ. apply completeness_from_truth. 
-    intro w. apply valid_T. 
+  Proof.
+    intro φ. apply completeness_from_truth.
+    intro w. apply valid_T.
   Qed.
 
   (* 4: □φ → □□φ on transitive frames *)
   Lemma valid_4 : forall φ w, forces w (Impl (Box φ) (Box (Box φ))).
-  Proof. 
+  Proof.
     intros φ w. rewrite forces_Impl. intro Hbox.
     rewrite forces_Box in Hbox. rewrite forces_Box.
     intros u Hwu. rewrite forces_Box.
     intros v Huv.
     apply Hbox. apply (transitive_R w u v Hwu Huv).
   Qed.
-  
+
   Theorem provable_4 : forall φ, Prov (Impl (Box φ) (Box (Box φ))).
-  Proof. 
-    intro φ. apply completeness_from_truth. 
-    intro w. apply valid_4. 
+  Proof.
+    intro φ. apply completeness_from_truth.
+    intro w. apply valid_4.
   Qed.
 End T_4.
 
@@ -81,11 +81,11 @@ Section B_5.
     - apply symmetric_R. exact Hwu.
     - exact Hφ.
   Qed.
-  
+
   Theorem provable_B : forall φ, Prov (Impl φ (Box (Dia φ))).
-  Proof. 
-    intro φ. apply completeness_from_truth. 
-    intro w. apply valid_B. 
+  Proof.
+    intro φ. apply completeness_from_truth.
+    intro w. apply valid_B.
   Qed.
 
   (* 5: ◇φ → □◇φ on equivalence frames (reflexive + symmetric + transitive) *)
@@ -101,11 +101,11 @@ Section B_5.
       + exact Hwu.
     - exact Hφu.
   Qed.
-  
+
   Theorem provable_5 : forall φ, Prov (Impl (Dia φ) (Box (Dia φ))).
-  Proof. 
-    intro φ. apply completeness_from_truth. 
-    intro w. apply valid_5. 
+  Proof.
+    intro φ. apply completeness_from_truth.
+    intro w. apply valid_5.
   Qed.
 End B_5.
 
@@ -115,7 +115,7 @@ Section D.
 
   (* D: □φ → ◇φ on serial frames *)
   Lemma valid_D : forall φ w, forces w (Impl (Box φ) (Dia φ)).
-  Proof. 
+  Proof.
     intros φ w. rewrite forces_Impl. intro Hbox.
     rewrite forces_Box in Hbox. rewrite forces_Dia.
     destruct (serial_R w) as [u Hwu].
@@ -123,10 +123,10 @@ Section D.
     - exact Hwu.
     - apply Hbox. exact Hwu.
   Qed.
-  
+
   Theorem provable_D : forall φ, Prov (Impl (Box φ) (Dia φ)).
-  Proof. 
-    intro φ. apply completeness_from_truth. 
-    intro w. apply valid_D. 
+  Proof.
+    intro φ. apply completeness_from_truth.
+    intro w. apply valid_D.
   Qed.
 End D.

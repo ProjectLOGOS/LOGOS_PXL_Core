@@ -2,7 +2,7 @@
 # ====================================
 
 # To enable GPT integration, set your OpenAI API key as an environment variable:
-# 
+#
 # Windows PowerShell:
 #   $env:OPENAI_API_KEY="your-api-key-here"
 #

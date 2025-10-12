@@ -1,8 +1,8 @@
 (* ChronoAgents.v *)
 
-Require Import PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms.
-Require Import PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoMappings.
-(* Require Import PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoProofs. *)
+Require Import PXLs.Internal Emergent Logics.Infra.ChronoPraxis.Substrate.ChronoAxioms.
+Require Import PXLs.Internal Emergent Logics.Infra.ChronoPraxis.Substrate.ChronoMappings.
+(* Require Import PXLs.Internal Emergent Logics.Infra.ChronoPraxis.Substrate.ChronoProofs. *)
 
 Module ChronoAgents.
 
@@ -14,7 +14,7 @@ Import ChronoMappings.
 Record ChronoAgent (t : Time) := {
   agent_id : nat;
   beliefs : ChronoState t -> Prop;
-  desires : ChronoState t -> Prop;  
+  desires : ChronoState t -> Prop;
   intentions : ChronoState t -> Prop;
   knowledge : ChronoState t -> Prop
 }.
@@ -23,7 +23,7 @@ Record ChronoAgent (t : Time) := {
 Definition BeliefState (t : Time) := ChronoAgent t -> ChronoState t -> Prop.
 
 (* Belief revision function *)
-Parameter belief_update : forall (t1 t2 : Time), 
+Parameter belief_update : forall (t1 t2 : Time),
   t1 <= t2 -> ChronoAgent t1 -> ChronoState t2 -> ChronoAgent t2.
 
 (* Axiom: Belief updates preserve agent identity - REMOVED for constructive elimination *)
@@ -49,8 +49,8 @@ Record TelicAgent (t : Time) := {
 (* Forecasting coherence: predictions must be consistent with PXL mappings - REMOVED for constructive elimination *)
 (* Axiom forecast_coherence : forall (t1 t2 : Time) (ta : TelicAgent t1) (H : t1 <= t2),
   forall s2 : ChronoState t2,
-    forecast ta t2 H s2 -> 
-    exists s1 : ChronoState t1, 
+    forecast ta t2 H s2 ->
+    exists s1 : ChronoState t1,
       lift_being t1 s1 = lift_being t2 s2. *)
 
 (* Intention-belief-desire coherence *)
@@ -63,12 +63,12 @@ Definition BDI_coherence (t : Time) (a : ChronoAgent t) : Prop :=
 Definition agent_evolution (t1 t2 : Time) (a1 : ChronoAgent t1) (a2 : ChronoAgent t2) : Prop :=
   t1 <= t2 /\
   agent_id a1 = agent_id a2 /\
-  (forall s1 : ChronoState t1, knowledge a1 s1 -> 
+  (forall s1 : ChronoState t1, knowledge a1 s1 ->
    exists s2 : ChronoState t2, knowledge a2 s2).
 
 (* Proofs about agent reasoning *)
 
-Theorem agent_identity_temporal_persistence : 
+Theorem agent_identity_temporal_persistence :
   forall (t1 t2 : Time) (a1 : ChronoAgent t1) (a2 : ChronoAgent t2),
     agent_evolution t1 t2 a1 a2 -> agent_id a1 = agent_id a2.
 Proof.

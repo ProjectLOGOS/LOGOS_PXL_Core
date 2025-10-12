@@ -304,3 +304,7 @@ opam install coq-serapi
 # Test SerAPI directly
 sertop --help
 ```
+
+## Support and Release
+
+See [SUPPORT_LETTER.md](./SUPPORT_LETTER.md) and [RELEASE_LETTER.md](./RELEASE_LETTER.md) for full details.

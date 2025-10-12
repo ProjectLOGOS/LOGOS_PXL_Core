@@ -62,53 +62,53 @@
     {
       "label": "coq: relativity",
       "type": "shell",
-      "command": "coqc modules/IEL/ChronoPraxis/domains/Empiricism/Relativity.v; coqc -I modules/IEL/ChronoPraxis/domains/Empiricism tests/RelativityTests.v",
+      "command": "coqc modules/Internal Emergent Logics/ChronoPraxis/domains/Empiricism/Relativity.v; coqc -I modules/Internal Emergent Logics/ChronoPraxis/domains/Empiricism tests/RelativityTests.v",
       "problemMatcher": []
     },
     {
       "label": "coq: modal-praxis",
       "type": "shell",
-      "command": "bash -lc 'coqc modules/IEL/ModalPraxis/modal/FrameSpec.v && coqc modules/IEL/ModalPraxis/theorems/NormalBase.v && coqc modules/IEL/ModalPraxis/theorems/DerivedAxioms.v && coqc modules/IEL/ModalPraxis/theorems/Systems.v && coqc modules/IEL/ModalPraxis/theorems/Conservativity.v && coqc tests/UMIEL_Tests.v'",
+      "command": "bash -lc 'coqc modules/Internal Emergent Logics/ModalPraxis/modal/FrameSpec.v && coqc modules/Internal Emergent Logics/ModalPraxis/theorems/NormalBase.v && coqc modules/Internal Emergent Logics/ModalPraxis/theorems/DerivedAxioms.v && coqc modules/Internal Emergent Logics/ModalPraxis/theorems/Systems.v && coqc modules/Internal Emergent Logics/ModalPraxis/theorems/Conservativity.v && coqc tests/UMIEL_Tests.v'",
       "problemMatcher": []
     },
     {
       "label": "coq: gnosipraxis",
       "type": "shell",
-      "command": "bash -lc 'coqc modules/IEL/GnosiPraxis/modal/AgentFrames.v && coqc modules/IEL/GnosiPraxis/systems/Systems.v && coqc modules/IEL/GnosiPraxis/theorems/Conservativity.v && coqc tests/GnosiPraxis/GnosiPraxis_AgentTests.v'",
+      "command": "bash -lc 'coqc modules/Internal Emergent Logics/GnosiPraxis/modal/AgentFrames.v && coqc modules/Internal Emergent Logics/GnosiPraxis/systems/Systems.v && coqc modules/Internal Emergent Logics/GnosiPraxis/theorems/Conservativity.v && coqc tests/GnosiPraxis/GnosiPraxis_AgentTests.v'",
       "problemMatcher": []
     },
     {
       "label": "coq: themipraxis",
       "type": "shell",
-      "command": "bash -lc 'coqc modules/IEL/ThemiPraxis/modal/NormFrames.v && coqc modules/IEL/ThemiPraxis/theorems/Conservativity.v && coqc modules/IEL/ThemiPraxis/systems/Systems.v && coqc tests/ThemiPraxis/ThemiPraxis_Smoke.v'",
+      "command": "bash -lc 'coqc modules/Internal Emergent Logics/ThemiPraxis/modal/NormFrames.v && coqc modules/Internal Emergent Logics/ThemiPraxis/theorems/Conservativity.v && coqc modules/Internal Emergent Logics/ThemiPraxis/systems/Systems.v && coqc tests/ThemiPraxis/ThemiPraxis_Smoke.v'",
       "problemMatcher": []
     },
     {
       "label": "coq: dynapraxis",
       "type": "shell",
-      "command": "bash -lc 'coqc modules/IEL/DynaPraxis/modal/FrameSpec.v && coqc modules/IEL/DynaPraxis/theorems/Conservativity.v && coqc modules/IEL/DynaPraxis/systems/Systems.v && coqc tests/DynaPraxis/DynaPraxis_Smoke.v'",
+      "command": "bash -lc 'coqc modules/Internal Emergent Logics/DynaPraxis/modal/FrameSpec.v && coqc modules/Internal Emergent Logics/DynaPraxis/theorems/Conservativity.v && coqc modules/Internal Emergent Logics/DynaPraxis/systems/Systems.v && coqc tests/DynaPraxis/DynaPraxis_Smoke.v'",
       "problemMatcher": []
     },
     {
       "label": "coq: hexipraxis",
       "type": "shell",
-      "command": "bash -lc 'coqc modules/IEL/HexiPraxis/modal/FrameSpec.v && coqc modules/IEL/HexiPraxis/theorems/Conservativity.v && coqc modules/IEL/HexiPraxis/systems/Systems.v && coqc tests/HexiPraxis/HexiPraxis_Smoke.v'",
+      "command": "bash -lc 'coqc modules/Internal Emergent Logics/HexiPraxis/modal/FrameSpec.v && coqc modules/Internal Emergent Logics/HexiPraxis/theorems/Conservativity.v && coqc modules/Internal Emergent Logics/HexiPraxis/systems/Systems.v && coqc tests/HexiPraxis/HexiPraxis_Smoke.v'",
       "problemMatcher": []
     },
     {
       "label": "coq: chrema",
       "type": "shell",
-      "command": "bash -lc 'coqc modules/IEL/ChremaPraxis/modal/PhaseSpec.v && coqc modules/IEL/ChremaPraxis/theorems/NormalBase.v && coqc modules/IEL/ChremaPraxis/theorems/Conservativity.v && coqc modules/IEL/ChremaPraxis/systems/Systems.v && coqc tests/ChremaPraxis/ChremaPraxis_Smoke.v'"
+      "command": "bash -lc 'coqc modules/Internal Emergent Logics/ChremaPraxis/modal/PhaseSpec.v && coqc modules/Internal Emergent Logics/ChremaPraxis/theorems/NormalBase.v && coqc modules/Internal Emergent Logics/ChremaPraxis/theorems/Conservativity.v && coqc modules/Internal Emergent Logics/ChremaPraxis/systems/Systems.v && coqc tests/ChremaPraxis/ChremaPraxis_Smoke.v'"
     },
     {
       "label": "coq: mu",
       "type": "shell",
-      "command": "bash -lc 'coqc modules/IEL/MuPraxis/modal/FixSpec.v && coqc modules/IEL/MuPraxis/theorems/NormalBase.v && coqc modules/IEL/MuPraxis/theorems/Conservativity.v && coqc modules/IEL/MuPraxis/systems/Systems.v && coqc tests/MuPraxis/MuPraxis_Smoke.v'"
+      "command": "bash -lc 'coqc modules/Internal Emergent Logics/MuPraxis/modal/FixSpec.v && coqc modules/Internal Emergent Logics/MuPraxis/theorems/NormalBase.v && coqc modules/Internal Emergent Logics/MuPraxis/theorems/Conservativity.v && coqc modules/Internal Emergent Logics/MuPraxis/systems/Systems.v && coqc tests/MuPraxis/MuPraxis_Smoke.v'"
     },
     {
       "label": "coq: tyche",
       "type": "shell",
-      "command": "bash -lc 'coqc modules/IEL/TychePraxis/modal/ProbSpec.v && coqc modules/IEL/TychePraxis/theorems/NormalBase.v && coqc modules/IEL/TychePraxis/theorems/Conservativity.v && coqc modules/IEL/TychePraxis/systems/Systems.v && coqc tests/TychePraxis/TychePraxis_Smoke.v'"
+      "command": "bash -lc 'coqc modules/Internal Emergent Logics/TychePraxis/modal/ProbSpec.v && coqc modules/Internal Emergent Logics/TychePraxis/theorems/NormalBase.v && coqc modules/Internal Emergent Logics/TychePraxis/theorems/Conservativity.v && coqc modules/Internal Emergent Logics/TychePraxis/systems/Systems.v && coqc tests/TychePraxis/TychePraxis_Smoke.v'"
     },
     {
       "label": "coq: iels-all",

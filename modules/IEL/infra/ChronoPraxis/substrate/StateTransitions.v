@@ -1,7 +1,7 @@
 (* StateTransitions.v - Temporal State Evolution *)
 
-Require Import PXLs.IEL.Infra.ChronoPraxis.substrate.ChronoModes.
-Require Import PXLs.IEL.Infra.ChronoPraxis.substrate.ChronoState.
+Require Import PXLs.Internal Emergent Logics.Infra.ChronoPraxis.substrate.ChronoModes.
+Require Import PXLs.Internal Emergent Logics.Infra.ChronoPraxis.substrate.ChronoState.
 
 Module StateTransitions.
 
@@ -24,7 +24,7 @@ Definition valid_sequence (states : list ChronoState) : Prop :=
 
 (* Placeholder for complete implementation *)
 Parameter transition_preserves_truth : forall s1 s2 : ChronoState,
-  valid_transition s1 s2 -> 
+  valid_transition s1 s2 ->
   interpret_temporal_state s1 = interpret_temporal_state s2.
 
 End StateTransitions.

@@ -12,7 +12,7 @@ The LOGOS PXL Core verified slice contains only formally verified Coq modules th
 - **PXLs.PXLv3**: Modal logic kernel with inductive definitions for `form` and `Prov`, recursive functions, and complete proofs. Verified via coqchk.
 
 ### Philosophical Properties
-- **PXLs.IEL.Source.TheoPraxis.Props**: Type class definitions and verified instances for philosophical properties including:
+- **PXLs.Internal Emergent Logics.Source.TheoPraxis.Props**: Type class definitions and verified instances for philosophical properties including:
   - Truth, Beauty, Peace, Freedom, Glory, Wrath, Jealousy
   - Will, Necessity, Possibility, Space, Time, Life
   - Modal operators: □ (Box), ◇ (Diamond)
@@ -31,7 +31,7 @@ The LOGOS PXL Core verified slice contains only formally verified Coq modules th
 
 ### Build Integrity
 - Source of truth: `tools/verified_slice.lst`
-- Build command: `coqchk -Q pxl-minimal-kernel-main/coq PXLs -Q modules/IEL/source PXLs.IEL.Source [module]`
+- Build command: `coqchk -Q pxl-minimal-kernel-main/coq PXLs -Q modules/Internal Emergent Logics/source PXLs.Internal Emergent Logics.Source [module]`
 - CI gates prevent introduction of unverified dependencies
 
 ## Extending the Verified Slice
@@ -59,11 +59,11 @@ The LOGOS PXL Core verified slice contains only formally verified Coq modules th
 
     # coqchk verification
     while read module; do
-      coqchk -Q pxl-minimal-kernel-main/coq PXLs -Q modules/IEL/source PXLs.IEL.Source "$module"
+      coqchk -Q pxl-minimal-kernel-main/coq PXLs -Q modules/Internal Emergent Logics/source PXLs.Internal Emergent Logics.Source "$module"
     done < tools/verified_slice.lst
 
     # Contamination scan
-    if grep -r "^Axiom\|^Admitted" modules/IEL/source/; then
+    if grep -r "^Axiom\|^Admitted" modules/Internal Emergent Logics/source/; then
       echo "Axiom/Admitted contamination detected!"
       exit 1
     fi

@@ -1,6 +1,6 @@
-From PXLs.IEL.Pillars.GnosiPraxis.subdomains Require Import Truth.Spec.
+From PXLs.Internal Emergent Logics.Pillars.GnosiPraxis.subdomains Require Import Truth.Spec.
 Module GnosiPraxis.
-  Definition V := PXLs.IEL.Source.TheoPraxis.Props.Truth.
+  Definition V := PXLs.Internal Emergent Logics.Source.TheoPraxis.Props.Truth.
   Theorem K_sound : forall p, V p -> Box V p.
   Proof. apply TruthSub.k_sound. Qed.
   Theorem Monotone : forall p q, (p -> q) -> Box V p -> Box V q.

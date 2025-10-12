@@ -1,6 +1,6 @@
 From Coq Require Import Program.
 From PXLs Require Import PXLv3.
-Require Import modules.IEL.CosmoPraxis.subdomains.Immanence.Spec.
+Require Import modules.Internal Emergent Logics.CosmoPraxis.subdomains.Immanence.Spec.
 Module CosmoPraxis_OntoProps.
   (* name -> (pillar, c_value) *)
   Definition registry : list (string * string * string) := [

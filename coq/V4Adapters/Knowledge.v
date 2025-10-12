@@ -1,4 +1,4 @@
-(* V4Adapters/Knowledge.v - Map V4 Knowledge to IEL GnosiPraxis *)
+(* V4Adapters/Knowledge.v - Map V4 Knowledge to Internal Emergent Logics GnosiPraxis *)
 
 From Coq Require Import Program.
 From V4 Require Import Knowledge.
@@ -12,17 +12,17 @@ End GnosiPraxis_Placeholder.
 
 Module V4_Knowledge_Adapter.
 
-(* Translation function: V4 Knowledge → IEL GnosiPraxis form *)
+(* Translation function: V4 Knowledge → Internal Emergent Logics GnosiPraxis form *)
 Definition v4_knowledge_to_gnosi (k : V4.claim) : Prop :=
-  (* Implementation maps V4 knowledge claims to IEL epistemic forms *)
+  (* Implementation maps V4 knowledge claims to Internal Emergent Logics epistemic forms *)
   k. (* Identity mapping for demonstration *)
 
-(* Soundness: V4 forces implies IEL forces after translation *)
+(* Soundness: V4 forces implies Internal Emergent Logics forces after translation *)
 Lemma v4_knows_sound : forall w phi,
   V4.Forces w phi ->
   GnosiPraxis_Placeholder.Forces w (v4_knowledge_to_gnosi phi).
 Proof.
-  (* Proof that V4 knowledge claims are sound in IEL *)
+  (* Proof that V4 knowledge claims are sound in Internal Emergent Logics *)
   intros w phi H.
   (* Constructive proof using V4's forcing relation *)
   unfold v4_knowledge_to_gnosi. simpl. exact H.

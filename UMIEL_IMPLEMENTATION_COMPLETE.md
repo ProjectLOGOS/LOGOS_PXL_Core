@@ -1,4 +1,4 @@
-# Unified Modal IEL (UM-IEL) Implementation - Complete
+# Unified Modal Internal Emergent Logics (UM-Internal Emergent Logics) Implementation - Complete
 
 ## Overview
 Successfully implemented a unified modal logic framework that covers K/T/S4/S5/KD/KB systems through parameterized frame laws. All implementations maintain constructive proofs with zero admits policy, providing a foundational modal logic infrastructure for ChronoPraxis.
@@ -36,7 +36,7 @@ Frame-specific axioms proven under their corresponding conditions:
 ```coq
 Section T_4.
   Context (Hrefl: Reflexive) (Htran: Transitive).
-  
+
   Theorem provable_T : forall φ, Prov (Impl (Box φ) φ).
   Theorem provable_4 : forall φ, Prov (Impl (Box φ) (Box (Box φ))).
 End T_4.
@@ -46,7 +46,7 @@ End T_4.
 ```coq
 Section B_5.
   Context (Hsym: Symmetric) (Htran: Transitive) (Hrefl: Reflexive).
-  
+
   Theorem provable_B : forall φ, Prov (Impl φ (Box (Dia φ))).
   Theorem provable_5 : forall φ, Prov (Impl (Dia φ) (Box (Dia φ))).
 End B_5.
@@ -56,7 +56,7 @@ End B_5.
 ```coq
 Section D.
   Context (Hser: Serial).
-  
+
   Theorem provable_D : forall φ, Prov (Impl (Box φ) (Dia φ)).
 End D.
 ```
@@ -100,7 +100,7 @@ Each system provides organized access to its characteristic axioms with proper i
 ### Zero Admits Verification
 All modules pass the constructive policy check:
 ```
-[policy] OK: no Admitted. under modules/IEL
+[policy] OK: no Admitted. under modules/Internal Emergent Logics
 ✅ All proofs constructive, zero admits
 ```
 
@@ -108,7 +108,7 @@ All modules pass the constructive policy check:
 **T Axiom on Reflexive Frames**:
 ```coq
 Lemma valid_T : forall φ w, forces w (Impl (Box φ) φ).
-Proof. 
+Proof.
   intros φ w. rewrite forces_Impl. intro Hbox.
   rewrite forces_Box in Hbox.
   apply Hbox. apply reflexive_R.  (* Use reflexivity: R w w *)
@@ -119,7 +119,7 @@ Qed.
 ```coq
 Lemma valid_K : forall (φ ψ:form) (w:can_world),
   forces w (Impl (Box (Impl φ ψ)) (Impl (Box φ) (Box ψ))).
-Proof. 
+Proof.
   intros φ ψ w. (* Standard modal logic distribution argument *)
   (* From □(φ→ψ) and □φ at w, get (φ→ψ) and φ at any accessible u, hence ψ at u *)
   ...
@@ -129,8 +129,8 @@ Qed.
 ## Integration & Testing
 
 ### Build Integration
-- **Makefile**: All UM-IEL modules added to VFILES compilation pipeline
-- **VS Code Tasks**: New `coq: um-iel` task for targeted compilation
+- **Makefile**: All UM-Internal Emergent Logics modules added to VFILES compilation pipeline
+- **VS Code Tasks**: New `coq: um-Internal Emergent Logics` task for targeted compilation
 - **Policy Verification**: Integrated with existing constructive proof checking
 
 ### Comprehensive Testing
@@ -144,7 +144,7 @@ Qed.
 ### Test Results
 ```
 ✅ All 6 modal axioms (K, T, 4, 5, B, D) compile and type-check correctly
-✅ All 6 system modules (K, T, S4, S5, KD, KB) provide expected theorems  
+✅ All 6 system modules (K, T, S4, S5, KD, KB) provide expected theorems
 ✅ Frame parameterization works: axioms available only under appropriate conditions
 ✅ Conservativity theorem applies to modal-free formulas
 ✅ Complete modal hierarchy demonstrated constructively
@@ -152,9 +152,9 @@ Qed.
 
 ## Comparison with Existing Modal Infrastructure
 
-### ChronoPraxis Modal vs UM-IEL
+### ChronoPraxis Modal vs UM-Internal Emergent Logics
 
-| Aspect | ChronoPraxis Modal | UM-IEL |
+| Aspect | ChronoPraxis Modal | UM-Internal Emergent Logics |
 |--------|-------------------|---------|
 | **Purpose** | Domain-specific temporal reasoning | General modal logic foundation |
 | **Axioms** | T, 4, 5, B under specific contexts | K, T, 4, 5, B, D under parameterized frames |
@@ -164,7 +164,7 @@ Qed.
 
 ### Complementary Roles
 - **ChronoPraxis Modal**: Specialized for temporal reasoning with χ_A, χ_B, χ_C mappings
-- **UM-IEL**: General foundation that ChronoPraxis domains can build upon
+- **UM-Internal Emergent Logics**: General foundation that ChronoPraxis domains can build upon
 - **Shared Standards**: Both maintain constructive proofs and zero admits policy
 
 ## Usage Examples
@@ -198,7 +198,7 @@ Check conservative_nonmodal φ_modal_free Hmf.
 
 ### Additional Modal Axioms
 Ready framework for:
-- **G (Löb)**: □(□φ → φ) → □φ  
+- **G (Löb)**: □(□φ → φ) → □φ
 - **M**: □◇φ → ◇□φ
 - **H**: ◇□φ → □◇φ
 - **Grz**: □(□(φ → □φ) → φ) → φ
@@ -209,7 +209,7 @@ Ready framework for:
 - **Deontic Logic**: Obligation/permission modalities with normative frames
 
 ### ChronoPraxis Integration
-- **Temporal Modalities**: UM-IEL frame conditions applied to χ_A, χ_B, χ_C contexts
+- **Temporal Modalities**: UM-Internal Emergent Logics frame conditions applied to χ_A, χ_B, χ_C contexts
 - **Cross-Domain Modal Reasoning**: Unified modal operators across Compatibilism, Empiricism, Modal Ontology
 - **Physics-Constrained Frames**: Modal accessibility constrained by relativistic transformations
 
@@ -217,21 +217,21 @@ Ready framework for:
 
 ### Created Documentation
 - **UM_IEL_OVERVIEW.md**: Complete architectural overview and usage guide
-- **DOMAINS_OVERVIEW.md**: Updated with UM-IEL integration information
+- **DOMAINS_OVERVIEW.md**: Updated with UM-Internal Emergent Logics integration information
 - **Implementation Reports**: Detailed technical documentation with proofs and examples
 
 ### VS Code Integration
-- **Task Configuration**: `coq: um-iel` task for streamlined development
+- **Task Configuration**: `coq: um-Internal Emergent Logics` task for streamlined development
 - **Build Pipeline**: Integrated with existing ChronoPraxis build system
 - **Error Handling**: Proper compilation and type-checking verification
 
 ## Conclusion
 
-The Unified Modal IEL (UM-IEL) implementation provides ChronoPraxis with a complete, parameterized modal logic foundation that:
+The Unified Modal Internal Emergent Logics (UM-Internal Emergent Logics) implementation provides ChronoPraxis with a complete, parameterized modal logic foundation that:
 
 - ✅ **Covers Major Systems**: K, T, S4, S5, KD, KB with proper frame correspondence
 - ✅ **Maintains Constructive Standards**: Zero admits policy with full semantic proofs
-- ✅ **Provides Flexibility**: Parameterized frame laws enable custom modal logics  
+- ✅ **Provides Flexibility**: Parameterized frame laws enable custom modal logics
 - ✅ **Ensures Safety**: Conservative extension guarantees over propositional logic
 - ✅ **Integrates Cleanly**: Complements existing ChronoPraxis modal infrastructure
 - ✅ **Supports Future Extensions**: Ready framework for additional axioms and multi-modal systems

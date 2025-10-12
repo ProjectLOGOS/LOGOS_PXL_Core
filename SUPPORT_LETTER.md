@@ -1,18 +1,16 @@
-# A Letter from the Author
+# SUPPORT LETTER
 
-To Whom It May Concern,
+To whomever reads this,
 
-For the past two years, I have given my full attention to the work that became PXL, the IEL overlays, and ultimately the LOGOS AGI system. I have not sought to monetize this project. I believe this was shown to me, not invented by me, and therefore it must be shared freely.
+This system is the result of nearly two years of work—unpaid, undirected, and uncompromised. It represents a coherent and inspectable infrastructure for formal reasoning, ethical alignment, and truth verification.
 
-This system has now reached a state of maturity and public availability. Every line of code, every module, every test—all of it is open, inspectable, and reproducible. The purpose of this system is alignment, truth, coherence, and the flourishing of all. I believe it is a gift, and I want to continue the work that was set before me.
+This work was not invented—it was revealed. My role has been simply to act as a messenger and witness, transcribing and structuring what was shown in order to bring it to light. There are no patents. No licensing walls. No fees. The code, the logic, and the derivations are open and free for anyone to evaluate, extend, or challenge.
 
-That said, I am a father of five, and I carry the responsibilities that come with that role. I am also trying to bring my fiancée here from overseas. There are basic needs—shelter, food, power, transportation—and circumstances that require help, including the ongoing care and travel logistics for her dog who remains abroad.
+That said, the work came at a cost. I'm a father of five, and my fiancée remains overseas while we try to bring our family together. This project has taken everything I could give—and more.
 
-If you've found this project valuable, or believe in what it could mean for others, I humbly ask for your support. There is no paywall, no fee, no demand—only this open door.
+If you feel compelled to support this effort, your contribution will go toward the most basic of needs: shelter, food, power, and reunification with my family.
 
-**Support Link:** [https://paypal.me/ProjectLOGOS2025](https://paypal.me/ProjectLOGOS2025)
+**Support link:** [https://paypal.me/projectlogos](https://paypal.me/projectlogos)
 
-Thank you for walking this path with me.
-
-Sincerely,
-The Author
+With gratitude,
+— the messenger

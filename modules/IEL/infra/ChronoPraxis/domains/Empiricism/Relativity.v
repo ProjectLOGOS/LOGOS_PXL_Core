@@ -1,11 +1,11 @@
 From Coq Require Import Program.
 
 (* TODO: Restore full imports once module path resolution is fixed *)
-(* Require Import PXLs.IEL.Infra.substrate.ChronoAxioms *)
-(*                PXLs.IEL.Infra.substrate.ChronoMappings *)
-(*                PXLs.IEL.Infra.substrate.Bijection *)
-(*                PXLs.IEL.Infra.tactics.ChronoTactics *)
-(*                PXLs.IEL.Infra.domains.Empiricism.UnifiedFieldLogic. *)
+(* Require Import PXLs.Internal Emergent Logics.Infra.substrate.ChronoAxioms *)
+(*                PXLs.Internal Emergent Logics.Infra.substrate.ChronoMappings *)
+(*                PXLs.Internal Emergent Logics.Infra.substrate.Bijection *)
+(*                PXLs.Internal Emergent Logics.Infra.tactics.ChronoTactics *)
+(*                PXLs.Internal Emergent Logics.Infra.domains.Empiricism.UnifiedFieldLogic. *)
 
 (* Standalone parameters for compilation *)
 Parameter PA : Type.
@@ -61,7 +61,7 @@ Module Relativity.
     (M:MetricB) (Hpc:ProjectionCompatible M) (T:Isometry M) :
     forall pB, B_to_C (forward (iso T) pB) = B_to_C pB.
   Proof.
-    intros pB. 
+    intros pB.
     rewrite proj_eq_inv. rewrite (inv_pres T). now rewrite <- proj_eq_inv.
   Qed.
 

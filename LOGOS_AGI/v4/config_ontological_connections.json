@@ -12,7 +12,7 @@
 
   "Group_Connections": [
     ["Unity", "Aseity"],
-    ["Unity", "Immutability"], 
+    ["Unity", "Immutability"],
     ["Unity", "Holiness"],
     ["Aseity", "Immutability"],
     ["Aseity", "Holiness"],
@@ -26,7 +26,7 @@
     ["Knowledge", "Truthfulness"],
     ["Knowledge", "Wisdom"],
     ["Truthfulness", "Wisdom"],
-    
+
     ["Omnipotence", "Will"],
     ["Omnipotence", "Justice"],
     ["Omnipotence", "Wrath"],
@@ -37,39 +37,39 @@
     ["Justice", "Wrath"],
     ["Justice", "Order"],
     ["Wrath", "Order"],
-    
+
     ["Omnipresence", "Peace"],
     ["Omnipresence", "Love"],
     ["Omnipresence", "Grace"],
     ["Peace", "Love"],
     ["Peace", "Grace"],
     ["Love", "Grace"],
-    
+
     ["Eternity", "Blessedness"],
     ["Eternity", "Righteousness"],
     ["Eternity", "Beauty"],
     ["Blessedness", "Righteousness"],
     ["Blessedness", "Beauty"],
     ["Righteousness", "Beauty"],
-    
+
     ["Immutability", "Glory"],
     ["Immutability", "Goodness"],
     ["Glory", "Goodness"],
-    
+
     ["Transcendence", "Truthfulness"],
     ["Transcendence", "Knowledge"],
     ["Transcendence", "Glory"],
     ["Truthfulness", "Knowledge"],
     ["Truthfulness", "Glory"],
     ["Knowledge", "Glory"],
-    
+
     ["Immanence", "Grace"],
     ["Immanence", "Beauty"],
     ["Immanence", "Love"],
     ["Grace", "Beauty"],
     ["Grace", "Love"],
     ["Beauty", "Love"],
-    
+
     ["Simplicity", "Order"],
     ["Simplicity", "Peace"],
     ["Simplicity", "Justice"],
@@ -83,32 +83,32 @@
     ["Unity", "Omnipotence"],
     ["Unity", "Omnipresence"],
     ["Unity", "Immanence"],
-    
+
     ["Aseity", "Omniscience"],
     ["Aseity", "Omnipotence"],
     ["Aseity", "Omnipresence"],
     ["Aseity", "Immanence"],
-    
+
     ["Immutability", "Omniscience"],
     ["Immutability", "Omnipotence"],
     ["Immutability", "Omnipresence"],
     ["Immutability", "Immanence"],
-    
+
     ["Holiness", "Omniscience"],
     ["Holiness", "Omnipotence"],
     ["Holiness", "Omnipresence"],
     ["Holiness", "Immanence"],
-    
+
     ["Omniscience", "Transcendence"],
     ["Omniscience", "Eternity"],
     ["Omniscience", "Will"],
-    
+
     ["Omnipotence", "Transcendence"],
     ["Omnipotence", "Eternity"],
-    
+
     ["Omnipresence", "Transcendence"],
     ["Omnipresence", "Eternity"],
-    
+
     ["Immanence", "Transcendence"],
     ["Immanence", "Eternity"],
     ["Immanence", "Will"]
@@ -131,37 +131,37 @@
     ["Love", "Peace"],
     ["Love", "Order"],
     ["Peace", "Order"],
-    
+
     ["Freedom", "Will"],
     ["Freedom", "Goodness"],
     ["Will", "Goodness"],
-    
+
     ["Beauty", "Glory"],
     ["Beauty", "Blessedness"],
     ["Glory", "Blessedness"],
-    
+
     ["Justice", "Righteousness"],
     ["Justice", "Mercy"],
     ["Righteousness", "Mercy"],
-    
+
     ["Knowledge", "Wisdom"],
     ["Wisdom", "Truthfulness"],
-    
+
     ["Grace", "Mercy"],
     ["Grace", "Love"],
-    
+
     ["Wrath", "Justice"],
     ["Wrath", "Righteousness"],
-    
+
     ["Order", "Beauty"],
     ["Peace", "Beauty"],
-    
+
     ["Goodness", "Love"],
     ["Goodness", "Beauty"],
-    
+
     ["Glory", "Beauty"],
     ["Blessedness", "Peace"],
-    
+
     ["Jealousy", "Love"],
     ["Jealousy", "Justice"]
   ],
@@ -172,25 +172,25 @@
       "theological_basis": "Fundamental unity of divine essence",
       "mathematical_property": "Highest ontological dependency"
     },
-    
+
     "First_Order_to_Second_Order_Connections": {
       "description": "Derivational connections from primary to derived attributes",
       "theological_basis": "Attributes flow from fundamental divine nature",
       "mathematical_property": "Causal/logical dependency relationships"
     },
-    
+
     "Cross_Sectional_First_Order_Connections": {
       "description": "Lateral connections between first-order attributes",
       "theological_basis": "Mutual implication and co-presence of divine attributes",
       "mathematical_property": "Mutual entailment relationships"
     },
-    
+
     "Linear_First_Order_Connections": {
       "description": "Sequential ordering of first-order attributes",
       "theological_basis": "Logical order of divine attribute manifestation",
       "mathematical_property": "Partially ordered sequence"
     },
-    
+
     "Second_Order_to_Second_Order_Connections": {
       "description": "Relational connections between derived attributes",
       "theological_basis": "Harmonious expression of divine character",

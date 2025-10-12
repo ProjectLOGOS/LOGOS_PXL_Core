@@ -1,7 +1,7 @@
 From Coq Require Import Program.
 From PXLs Require Import PXLv3.
-Require Import modules.IEL.Axiopraxis.subdomains.Beauty.Spec.
-Require Import modules.IEL.Axiopraxis.subdomains.Goodness.Spec.
+Require Import modules.Internal Emergent Logics.Axiopraxis.subdomains.Beauty.Spec.
+Require Import modules.Internal Emergent Logics.Axiopraxis.subdomains.Goodness.Spec.
 Module Axiopraxis_OntoProps.
   (* name -> (pillar, c_value) *)
   Definition registry : list (string * string * string) := [

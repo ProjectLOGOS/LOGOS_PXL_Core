@@ -1,7 +1,7 @@
 From PXLs Require Import PXLv3.
-From PXLs.IEL.Infra.ChronoPraxis.Theorems Require Import MetaTheorems.
+From PXLs.Internal Emergent Logics.Infra.ChronoPraxis.Theorems Require Import MetaTheorems.
 Module ChronoPraxis.
-  Definition V := PXLs.IEL.Source.TheoPraxis.Props.ChronoPraxis.
+  Definition V := PXLs.Internal Emergent Logics.Source.TheoPraxis.Props.ChronoPraxis.
 
   Theorem temporal_unification : forall A B C : Prop,
     A -> B -> exists unified_logic : Prop,

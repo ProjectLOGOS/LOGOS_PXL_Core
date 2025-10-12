@@ -46,7 +46,7 @@ This glossary translates the formal concepts in ChronoPraxis domains into everyd
 - Start with lived experience: choices, observations, personal temporal flow
 - This is where agency, measurement, and possibility feel real
 
-### Translation: Move to χ_B  
+### Translation: Move to χ_B
 - Translate to physics time to compare across frames
 - This is where science happens: shared measurements, coordinate systems
 

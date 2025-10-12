@@ -1,9 +1,9 @@
 (* UnifiedFieldLogic.v - Physics Integration with Temporal Logic *)
 
 (* TODO: Restore ChronoPraxis imports once module path resolution is fixed *)
-(* Require Import PXLs.IEL.Infra.substrate.ChronoAxioms *)
-(*                PXLs.IEL.Infra.substrate.ChronoMappings *)
-(*                PXLs.IEL.Infra.tactics.ChronoTactics. *)
+(* Require Import PXLs.Internal Emergent Logics.Infra.substrate.ChronoAxioms *)
+(*                PXLs.Internal Emergent Logics.Infra.substrate.ChronoMappings *)
+(*                PXLs.Internal Emergent Logics.Infra.tactics.ChronoTactics. *)
 
 Module UnifiedFieldLogic.
 

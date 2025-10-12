@@ -1,34 +1,34 @@
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\substrate\ChronoAxioms.v:16: (* Removed: Axiom chi_reflexivity : forall m : chi, m = m. *)
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\substrate\ChronoAxioms.v:19: (* Axiom chi_distinction : chi_A <> chi_B /\ chi_B <> chi_C /\ chi_A <> chi_C. *)
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\substrate\ChronoAxioms.v:33: Axiom chi_universal_compatibility : forall m1 m2 : chi, chi_compatible m1 m2.
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\substrate\ChronoAxioms.v:41: (* Axiom P_chi_identity : forall (m : chi) (p : P_chi m), p = p. *)
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\substrate\ChronoAxioms.v:53: (* Removed: Axiom tau_reflexive : forall t : tau, t <= t. *)
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\substrate\ChronoAxioms.v:54: (* Removed: Axiom tau_antisymmetric : forall t1 t2 : tau, t1 <= t2 -> t2 <= t1 -> t1 = t2. *)
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\substrate\ChronoAxioms.v:55: (* Removed: Axiom tau_transitive : forall t1 t2 t3 : tau, t1 <= t2 -> t2 <= t3 -> t1 <= t3. *)
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\substrate\ChronoAxioms.v:68: Axiom eternal_timeless : forall (e : Eternal), e = e.
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\substrate\ChronoMappings.v:75: (* Axiom eternal_projection_A : forall (e : ChronoAxioms.Eternal), 
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\substrate\ChronoMappings.v:78: Axiom eternal_projection_B : forall (e : ChronoAxioms.Eternal), 
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\substrate\ChronoMappings.v:81: Axiom eternal_projection_C : forall (e : ChronoAxioms.Eternal), 
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\substrate\ChronoMappings.v:85: (* Axiom temporal_lifting_A : forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_A), 
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\substrate\ChronoMappings.v:88: Axiom temporal_lifting_B : forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_B), 
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\substrate\ChronoMappings.v:91: Axiom temporal_lifting_C : forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_C), 
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\tactics\ChronoTactics.v:1: (* TODO: remove Admitted. — constructive only. No classical axioms. *)
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\tactics\ChronoTactics.v:57: Proof. Admitted.
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\tactics\ChronoTactics.v:61: Proof. Admitted.
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\theorems\ChronoProofs.v:3: (* TODO: remove Admitted. — constructive oTheorem pairwise_convergence : 
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\theorems\ChronoProofs.v:10:   Admitted.axioms. *)
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\theorems\ChronoProofs.v:53:   Admitted.
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\theorems\ChronoProofs.v:58:   Admitted.
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\theorems\ChronoProofs.v:63:   Admitted.
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\theorems\ChronoProofs.v:69:   Admitted.
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\theorems\ChronoProofs.v:74:   Admitted.
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\theorems\ChronoProofs.v:79:   Admitted.
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\theorems\ChronoProofs.v:87:   Admitted.
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\theorems\ChronoProofs.v:92:   Admitted.
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\theorems\ChronoProofs.v:105:   Admitted.
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\theorems\ChronoProofs.v:117:   Admitted.
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\theorems\ChronoProofs.v:125:   Admitted.
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\theorems\ChronoProofs.v:136:   Admitted.
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\theorems\ChronoProofs.v:170:   Admitted.
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\theorems\ChronoProofs.v:250:   Admitted.
-C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\IEL\infra\ChronoPraxis\theorems\ChronoProofs.v:256:   Admitted.
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\substrate\ChronoAxioms.v:16: (* Removed: Axiom chi_reflexivity : forall m : chi, m = m. *)
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\substrate\ChronoAxioms.v:19: (* Axiom chi_distinction : chi_A <> chi_B /\ chi_B <> chi_C /\ chi_A <> chi_C. *)
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\substrate\ChronoAxioms.v:33: Axiom chi_universal_compatibility : forall m1 m2 : chi, chi_compatible m1 m2.
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\substrate\ChronoAxioms.v:41: (* Axiom P_chi_identity : forall (m : chi) (p : P_chi m), p = p. *)
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\substrate\ChronoAxioms.v:53: (* Removed: Axiom tau_reflexive : forall t : tau, t <= t. *)
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\substrate\ChronoAxioms.v:54: (* Removed: Axiom tau_antisymmetric : forall t1 t2 : tau, t1 <= t2 -> t2 <= t1 -> t1 = t2. *)
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\substrate\ChronoAxioms.v:55: (* Removed: Axiom tau_transitive : forall t1 t2 t3 : tau, t1 <= t2 -> t2 <= t3 -> t1 <= t3. *)
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\substrate\ChronoAxioms.v:68: Axiom eternal_timeless : forall (e : Eternal), e = e.
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\substrate\ChronoMappings.v:75: (* Axiom eternal_projection_A : forall (e : ChronoAxioms.Eternal),
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\substrate\ChronoMappings.v:78: Axiom eternal_projection_B : forall (e : ChronoAxioms.Eternal),
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\substrate\ChronoMappings.v:81: Axiom eternal_projection_C : forall (e : ChronoAxioms.Eternal),
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\substrate\ChronoMappings.v:85: (* Axiom temporal_lifting_A : forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_A),
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\substrate\ChronoMappings.v:88: Axiom temporal_lifting_B : forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_B),
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\substrate\ChronoMappings.v:91: Axiom temporal_lifting_C : forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_C),
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\tactics\ChronoTactics.v:1: (* TODO: remove Admitted. — constructive only. No classical axioms. *)
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\tactics\ChronoTactics.v:57: Proof. Admitted.
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\tactics\ChronoTactics.v:61: Proof. Admitted.
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\theorems\ChronoProofs.v:3: (* TODO: remove Admitted. — constructive oTheorem pairwise_convergence :
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\theorems\ChronoProofs.v:10:   Admitted.axioms. *)
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\theorems\ChronoProofs.v:53:   Admitted.
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\theorems\ChronoProofs.v:58:   Admitted.
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\theorems\ChronoProofs.v:63:   Admitted.
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\theorems\ChronoProofs.v:69:   Admitted.
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\theorems\ChronoProofs.v:74:   Admitted.
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\theorems\ChronoProofs.v:79:   Admitted.
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\theorems\ChronoProofs.v:87:   Admitted.
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\theorems\ChronoProofs.v:92:   Admitted.
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\theorems\ChronoProofs.v:105:   Admitted.
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\theorems\ChronoProofs.v:117:   Admitted.
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\theorems\ChronoProofs.v:125:   Admitted.
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\theorems\ChronoProofs.v:136:   Admitted.
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\theorems\ChronoProofs.v:170:   Admitted.
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\theorems\ChronoProofs.v:250:   Admitted.
+C:\Users\proje\OneDrive\Desktop\Project_Directory\LOGOS_PXL_Core\modules\Internal Emergent Logics\infra\ChronoPraxis\theorems\ChronoProofs.v:256:   Admitted.

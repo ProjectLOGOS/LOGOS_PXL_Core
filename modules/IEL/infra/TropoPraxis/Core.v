@@ -1,6 +1,6 @@
 From PXLs Require Import PXLv3.
 Module TropoPraxis.
-  Definition V := PXLs.IEL.Source.TheoPraxis.Props.TropoPraxis.
+  Definition V := PXLs.Internal Emergent Logics.Source.TheoPraxis.Props.TropoPraxis.
 
   Theorem tropological_reflexivity : forall p, V p -> V p.
   Proof. intros p H. unfold V in H. exact H. Qed.

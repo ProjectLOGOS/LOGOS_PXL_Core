@@ -2,13 +2,13 @@
 From Coq Require Import Program.
 
 (* TODO: Restore full imports once module path resolution is fixed *)
-(* Require Import PXLs.IEL.Infra.substrate.ChronoAxioms *)
-(*                PXLs.IEL.Infra.substrate.Bijection *)
-(*                PXLs.IEL.Infra.substrate.ChronoMappings *)
-(*                PXLs.IEL.Infra.tactics.ChronoTactics *)
-(*                PXLs.IEL.Infra.domains.Compatibilism.CompatibilismTheory *)
-(*                PXLs.IEL.Infra.domains.Empiricism.UnifiedFieldLogic *)
-(*                PXLs.IEL.Infra.domains.ModalOntology.ModalCollapse. *)
+(* Require Import PXLs.Internal Emergent Logics.Infra.substrate.ChronoAxioms *)
+(*                PXLs.Internal Emergent Logics.Infra.substrate.Bijection *)
+(*                PXLs.Internal Emergent Logics.Infra.substrate.ChronoMappings *)
+(*                PXLs.Internal Emergent Logics.Infra.tactics.ChronoTactics *)
+(*                PXLs.Internal Emergent Logics.Infra.domains.Compatibilism.CompatibilismTheory *)
+(*                PXLs.Internal Emergent Logics.Infra.domains.Empiricism.UnifiedFieldLogic *)
+(*                PXLs.Internal Emergent Logics.Infra.domains.ModalOntology.ModalCollapse. *)
 
 (* Simplified types for standalone testing *)
 Parameter PA : Type.  (* χ_A - lived time propositions *)
@@ -37,7 +37,7 @@ Module Empiricism.
 End Empiricism.
 
 Module ModalOntology.
-  Definition Access (pC qC : PC) : Prop := 
+  Definition Access (pC qC : PC) : Prop :=
     exists pA, A_to_C pA = pC /\ A_to_C pA = qC.
 End ModalOntology.
 
@@ -73,7 +73,7 @@ Lemma prop_access_iff_eq (pC:PC) :
 Proof.
   split.
   - intro H. reflexivity.  (* pC = pC is always true *)
-  - intro H. 
+  - intro H.
     (* Show Access pC pC given pC = pC *)
     destruct (A_to_C_surj pC) as [pA H_surj].
     exists pA.
@@ -91,7 +91,7 @@ Proof.
 Qed.
 
 (* P6: Bijection consistency - both directions compose to identity *)
-Lemma prop_bijection_consistency : 
+Lemma prop_bijection_consistency :
   (forall pA, B_to_A (A_to_B pA) = pA) /\ (forall pB, A_to_B (B_to_A pB) = pB).
 Proof.
   split.

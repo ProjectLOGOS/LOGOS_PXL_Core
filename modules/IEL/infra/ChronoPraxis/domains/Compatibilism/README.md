@@ -1,4 +1,4 @@
-# Compatibilism Domain - ChronoPraxis IEL
+# Compatibilism Domain - ChronoPraxis Internal Emergent Logics
 
 ## Goal
 Formalize temporal freedom over χ_A with convergence in χ_C
@@ -16,14 +16,14 @@ Formalize temporal freedom over χ_A with convergence in χ_C
 - **Convergence Proofs**: All temporal freedom paths must converge in χ_C
 
 ## Development Status
-🚧 **Domain branch ready**: `domain/compatibilism`  
+🚧 **Domain branch ready**: `domain/compatibilism`
 📋 **Next**: Formalize agent choice models and temporal freedom operators
 
-## IEL Integration
+## Internal Emergent Logics Integration
 - **Substrate**: Extends ChronoAxioms with agent choice axioms
 - **Tactics**: normalize_freedom, choice_preservation tactics
 - **Theorems**: Free will compatibility theorems
 - **Interface**: Compatibilist temporal reasoning API
 
 ---
-*ChronoPraxis IEL v1.0 Domain Extension*
+*ChronoPraxis Internal Emergent Logics v1.0 Domain Extension*

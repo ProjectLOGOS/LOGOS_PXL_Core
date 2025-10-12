@@ -1,6 +1,6 @@
 From Coq Require Import Program String.
 From PXLs Require Import PXLv3.
-Require Import PXLs.IEL.Infra.TopoPraxis.Core.
+Require Import PXLs.Internal Emergent Logics.Infra.TopoPraxis.Core.
 Module TopoPraxis_Registry.
   (* Registry for TopoPraxis infrastructure *)
   Definition core_available : Prop := True.

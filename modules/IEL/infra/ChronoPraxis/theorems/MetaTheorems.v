@@ -1,11 +1,11 @@
-(** ChronoPraxis IEL Meta-Theorem Registry *)
+(** ChronoPraxis Internal Emergent Logics Meta-Theorem Registry *)
 (** Emergent meta-theorems from constructive temporal logic *)
 
 (* Require Import Classical.
 From PXLs Require Import PXL_Completeness_Truth_WF.
 Export PXL_Completeness_Truth_WF. *)
 
-(* ===== IEL TAG: META-THEOREMS ===== *)
+(* ===== Internal Emergent Logics TAG: META-THEOREMS ===== *)
 
 Module ChronoPraxis_MetaTheorems.
 
@@ -29,12 +29,12 @@ Proof.
   contradiction.
 Qed.
 
-(** IEL Registry: Meta-theorem exports for emergent logic *)
+(** Internal Emergent Logics Registry: Meta-theorem exports for emergent logic *)
 Definition IEL_meta_registry := (temporal_unification_meta, constructive_temporal_completeness).
 
 End ChronoPraxis_MetaTheorems.
 
-(* TAG: PXL:IEL/ChronoPraxis/Meta::CompletenessTruthWF *)
+(* TAG: PXL:Internal Emergent Logics/ChronoPraxis/Meta::CompletenessTruthWF *)
 
-(* ===== IEL EXPORTS ===== *)
+(* ===== Internal Emergent Logics EXPORTS ===== *)
 Export ChronoPraxis_MetaTheorems.

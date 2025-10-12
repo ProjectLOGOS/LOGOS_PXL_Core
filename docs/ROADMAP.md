@@ -1,13 +1,13 @@
-# ChronoPraxis IEL v1.x Roadmap
+# ChronoPraxis Internal Emergent Logics v1.x Roadmap
 
 ## Phase 2: Domain Extensions
 
-Building on the stable ChronoPraxis IEL v1.0 foundation, Phase 2 introduces three specialized domain modules that extend the core temporal logic framework:
+Building on the stable ChronoPraxis Internal Emergent Logics v1.0 foundation, Phase 2 introduces three specialized domain modules that extend the core temporal logic framework:
 
 ### Domain Modules
 
 #### 1. Compatibilism Domain
-- **Location**: `modules/IEL/ChronoPraxis/domains/Compatibilism/`
+- **Location**: `modules/Internal Emergent Logics/ChronoPraxis/domains/Compatibilism/`
 - **Core File**: `CompatibilismTheory.v`
 - **Purpose**: Formal treatment of free will within deterministic temporal frameworks
 - **Key Concepts**:
@@ -16,8 +16,8 @@ Building on the stable ChronoPraxis IEL v1.0 foundation, Phase 2 introduces thre
   - Compatibilist projection theorems
   - Freedom-necessity consistency proofs
 
-#### 2. Empiricism Domain  
-- **Location**: `modules/IEL/ChronoPraxis/domains/Empiricism/`
+#### 2. Empiricism Domain
+- **Location**: `modules/Internal Emergent Logics/ChronoPraxis/domains/Empiricism/`
 - **Core File**: `UnifiedFieldLogic.v`
 - **Purpose**: Physics integration with temporal logic mapping
 - **Key Concepts**:
@@ -27,7 +27,7 @@ Building on the stable ChronoPraxis IEL v1.0 foundation, Phase 2 introduces thre
   - Physical reality temporal mappings
 
 #### 3. Modal Ontology Domain
-- **Location**: `modules/IEL/ChronoPraxis/domains/ModalOntology/`
+- **Location**: `modules/Internal Emergent Logics/ChronoPraxis/domains/ModalOntology/`
 - **Core File**: `ModalCollapse.v`
 - **Purpose**: Possible worlds theory and temporal modal collapse
 - **Key Concepts**:
@@ -39,7 +39,7 @@ Building on the stable ChronoPraxis IEL v1.0 foundation, Phase 2 introduces thre
 ## Development Milestones
 
 ### Milestone A: Formal Interfaces
-- **Deliverables**: 
+- **Deliverables**:
   - Complete type signatures for all domain-specific operations
   - Interface compatibility with ChronoPraxis v1.0 substrate
   - Parameter and axiom declarations
@@ -100,7 +100,7 @@ Each domain must satisfy these requirements before release:
 
 ### Documentation
 - ✅ README.md with domain overview and goals
-- ✅ API documentation for all public interfaces  
+- ✅ API documentation for all public interfaces
 - ✅ Proof strategy documentation
 - ✅ Examples and usage patterns
 
@@ -120,14 +120,14 @@ Each domain must satisfy these requirements before release:
 
 ### Version Numbering
 - **v1.1.0**: Compatibilism domain release
-- **v1.2.0**: Empiricism domain release  
+- **v1.2.0**: Empiricism domain release
 - **v1.3.0**: Modal Ontology domain release
 - **v2.0.0**: Complete Phase 2 integration
 
 ### Branch Strategy
 - **main**: Stable releases only
 - **domain/compatibilism**: Compatibilism development
-- **domain/empiricism**: Empiricism development  
+- **domain/empiricism**: Empiricism development
 - **domain/modal-ontology**: Modal Ontology development
 
 ### Integration Approach
@@ -145,7 +145,7 @@ Each domain must satisfy these requirements before release:
 - Build time under 5 minutes for complete verification
 - Memory usage under reasonable bounds for all proofs
 
-### Quality Metrics  
+### Quality Metrics
 - Complete documentation coverage
 - All examples compile and run successfully
 - Zero policy violations in automated checks
@@ -159,4 +159,4 @@ Each domain must satisfy these requirements before release:
 
 ---
 
-*This roadmap represents the strategic direction for ChronoPraxis IEL v1.x development. Regular updates will be made as milestones are achieved and new requirements emerge.*
+*This roadmap represents the strategic direction for ChronoPraxis Internal Emergent Logics v1.x development. Regular updates will be made as milestones are achieved and new requirements emerge.*

@@ -1,6 +1,6 @@
 # ChronoPraxis Domains Overview
 
-This document provides a high-level overview of the three specialized domains that extend the ChronoPraxis IEL v1.0 temporal logic framework.
+This document provides a high-level overview of the three specialized domains that extend the ChronoPraxis Internal Emergent Logics v1.0 temporal logic framework.
 
 ## Domain Architecture
 
@@ -14,7 +14,7 @@ Each domain provides a specialized perspective on temporal reasoning while maint
 ## The Three Domains
 
 ### 1. Compatibilism Domain
-**File**: `modules/IEL/ChronoPraxis/domains/Compatibilism/CompatibilismTheory.v`
+**File**: `modules/Internal Emergent Logics/ChronoPraxis/domains/Compatibilism/CompatibilismTheory.v`
 
 **Focus**: Free will and determinism in temporal contexts
 
@@ -26,8 +26,8 @@ Each domain provides a specialized perspective on temporal reasoning while maint
 - Causal necessity predicates
 - Compatibilist consistency theorems
 
-### 2. Empiricism Domain  
-**File**: `modules/IEL/ChronoPraxis/domains/Empiricism/UnifiedFieldLogic.v`
+### 2. Empiricism Domain
+**File**: `modules/Internal Emergent Logics/ChronoPraxis/domains/Empiricism/UnifiedFieldLogic.v`
 
 **Focus**: Physics integration with temporal logic
 
@@ -40,7 +40,7 @@ Each domain provides a specialized perspective on temporal reasoning while maint
 - Observational coherence theorems
 
 ### 3. Modal Ontology Domain
-**File**: `modules/IEL/ChronoPraxis/domains/ModalOntology/ModalCollapse.v`
+**File**: `modules/Internal Emergent Logics/ChronoPraxis/domains/ModalOntology/ModalCollapse.v`
 
 **Focus**: Possible worlds and temporal modal collapse
 
@@ -67,7 +67,7 @@ Each domain provides a specialized perspective on temporal reasoning while maint
 - Causal necessity relates to physical determinism
 - Temporal freedom constrained by relativistic physics
 
-### Compatibilism ↔ Modal Ontology  
+### Compatibilism ↔ Modal Ontology
 - Agent choices create branches in possible worlds
 - Free will operates across modal accessibility relations
 - Moral responsibility maintained despite modal collapse
@@ -90,7 +90,7 @@ Each domain provides a specialized perspective on temporal reasoning while maint
 For comprehensive technical documentation, see the detailed API references:
 
 - **[Compatibilism_API.md](domains/Compatibilism_API.md)**: Types, theorems, and example queries for free will reasoning
-- **[Empiricism_API.md](domains/Empiricism_API.md)**: Frame types, transformations, and physics integration  
+- **[Empiricism_API.md](domains/Empiricism_API.md)**: Frame types, transformations, and physics integration
 - **[ModalOntology_API.md](domains/ModalOntology_API.md)**: Modal types, accessibility relations, and convergence theorems
 
 ## Build and Test
@@ -98,7 +98,7 @@ For comprehensive technical documentation, see the detailed API references:
 ### Individual Domain Builds
 ```bash
 make domain-compatibilism    # Build Compatibilism domain + tests
-make domain-empiricism       # Build Empiricism domain + tests  
+make domain-empiricism       # Build Empiricism domain + tests
 make domain-modal-ontology   # Build Modal Ontology domain + tests
 ```
 
@@ -106,7 +106,7 @@ make domain-modal-ontology   # Build Modal Ontology domain + tests
 ```bash
 make clean                   # Clean previous builds
 make -j                      # Build entire project
-make domain-compatibilism    # Test Compatibilism  
+make domain-compatibilism    # Test Compatibilism
 make domain-empiricism       # Test Empiricism
 make domain-modal-ontology   # Test Modal Ontology
 make prove                   # Verify no admits, constructive proofs only
@@ -120,7 +120,7 @@ make prove                   # Verify no admits, constructive proofs only
 
 ### Phase 2 Roadmap
 1. **Module Integration**: Fix import paths for cross-domain dependencies
-2. **Constructive Theorems**: Replace parameter placeholders with proven theorems  
+2. **Constructive Theorems**: Replace parameter placeholders with proven theorems
 3. **Comprehensive Testing**: Expand beyond smoke tests to property-based testing
 4. **Real-World Examples**: Add concrete applications of each domain
 5. **Cross-Domain Proofs**: Prove compatibility and consistency across domains
@@ -133,13 +133,13 @@ make prove                   # Verify no admits, constructive proofs only
 
 ## Modal Logic Foundation
 
-**Files**: `modules/IEL/ChronoPraxis/theorems/ModalStrength/`
+**Files**: `modules/Internal Emergent Logics/ChronoPraxis/theorems/ModalStrength/`
 
 **Modal base (normal systems):** K axiom and Necessitation are proven semantically and lifted to proofs. S4/S5 add T/4/5/B under the corresponding frame conditions; propositional conservativity holds constructively.
 
 **Key Components**:
 - **ModalRules.v**: K axiom (□(φ→ψ) → (□φ → □ψ)) and Necessitation rule with semantic soundness
-- **ModalAxiomsSound.v**: T, 4, 5, B axiom schemata proven valid under frame classes (reflexive, transitive, symmetric)  
+- **ModalAxiomsSound.v**: T, 4, 5, B axiom schemata proven valid under frame classes (reflexive, transitive, symmetric)
 - **Systems.v**: Bundled K, S4, S5 modal systems with complete axiomatizations
 - **Frame Correspondence**: Each modal axiom corresponds to its standard frame condition with constructive proofs
 

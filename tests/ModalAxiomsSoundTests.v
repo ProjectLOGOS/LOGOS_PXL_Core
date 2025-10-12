@@ -2,9 +2,9 @@ From Coq Require Import Program.
 
 (* TODO: Restore full imports once module path resolution is fixed *)
 (* From PXLs Require Import PXLv3. *)
-(* Require Import PXLs.IEL.Infra.theorems.ModalStrength.S4Overlay *)
-(*                PXLs.IEL.Infra.theorems.ModalStrength.S5Overlay *)
-(*                PXLs.IEL.Infra.theorems.ModalStrength.ModalAxiomsSound. *)
+(* Require Import PXLs.Internal Emergent Logics.Infra.theorems.ModalStrength.S4Overlay *)
+(*                PXLs.Internal Emergent Logics.Infra.theorems.ModalStrength.S5Overlay *)
+(*                PXLs.Internal Emergent Logics.Infra.theorems.ModalStrength.ModalAxiomsSound. *)
 
 (* Standalone loading for compilation - using direct compilation approach *)
 Parameter form : Type.
@@ -46,7 +46,7 @@ Example B_instance : Prov (Impl example_atom (Box (Dia example_atom))).
 Proof. apply provable_B. Qed.
 
 (* Demonstrate that we have the complete S4 and S5 axiomatizations *)
-Lemma S4_axioms_complete : forall φ, 
+Lemma S4_axioms_complete : forall φ,
   Prov (Impl (Box φ) φ) /\                    (* T *)
   Prov (Impl (Box φ) (Box (Box φ))).          (* 4 *)
 Proof.

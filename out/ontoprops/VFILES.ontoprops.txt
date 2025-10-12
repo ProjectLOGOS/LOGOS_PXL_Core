@@ -1,4 +1,4 @@
-  modules/IEL/OntoPraxis/modal/FrameSpec.v \\
-  modules/IEL/OntoPraxis/theorems/NormalBase.v \\
-  modules/IEL/OntoPraxis/systems/Systems.v \\
-  modules/IEL/OntoPraxis/tests/OntoPraxis_Smoke.v
+  modules/Internal Emergent Logics/OntoPraxis/modal/FrameSpec.v \\
+  modules/Internal Emergent Logics/OntoPraxis/theorems/NormalBase.v \\
+  modules/Internal Emergent Logics/OntoPraxis/systems/Systems.v \\
+  modules/Internal Emergent Logics/OntoPraxis/tests/OntoPraxis_Smoke.v

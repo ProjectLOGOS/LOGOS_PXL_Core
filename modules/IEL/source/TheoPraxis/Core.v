@@ -1,6 +1,6 @@
 From PXLs Require Import PXLv3.
-From PXLs.IEL.Source.TheoPraxis Require Import Props.
-From PXLs.IEL.Source.TheoPraxis.subdomains.Unity Require Import Spec.
+From PXLs.Internal Emergent Logics.Source.TheoPraxis Require Import Props.
+From PXLs.Internal Emergent Logics.Source.TheoPraxis.subdomains.Unity Require Import Spec.
 Module TheoPraxis.
   Import TheoProps UnitySpec.
 

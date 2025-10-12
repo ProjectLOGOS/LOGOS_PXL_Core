@@ -1,16 +1,16 @@
-# Internally Emergent Logics (IEL) - ChronoPraxis Tree
+# Internally Emergent Logics (Internal Emergent Logics) - ChronoPraxis Tree
 
 ## Overview
 
-The ChronoPraxis framework has been restructured under an **Internally Emergent Logics (IEL)** organizational system. This system recognizes that complex temporal reasoning emerges from the interaction of foundational substrates, tactical operations, core theorems, and interface abstractions.
+The ChronoPraxis framework has been restructured under an **Internally Emergent Logics (Internal Emergent Logics)** organizational system. This system recognizes that complex temporal reasoning emerges from the interaction of foundational substrates, tactical operations, core theorems, and interface abstractions.
 
 ## Directory Structure
 
 ```
-modules/IEL/ChronoPraxis/
+modules/Internal Emergent Logics/ChronoPraxis/
 ├── substrate/          # Foundational definitions and axioms
 │   ├── ChronoAxioms.v     # Core temporal axioms
-│   ├── Bijection.v        # Constructive bijection interface  
+│   ├── Bijection.v        # Constructive bijection interface
 │   ├── ChronoMappings.v   # Bijective mappings between modes
 │   ├── ChronoAgents.v     # Agent-based temporal constructs
 │   └── SmokeTests.v       # Substrate validation tests
@@ -27,7 +27,7 @@ modules/IEL/ChronoPraxis/
     └── ModalOntology/     # Modal temporal logics
 ```
 
-## IEL Principle
+## Internal Emergent Logics Principle
 
 **Internally Emergent Logics** posits that sophisticated reasoning systems emerge from well-structured interactions between:
 
@@ -37,7 +37,7 @@ modules/IEL/ChronoPraxis/
 4. **Interfaces**: Abstraction layers that expose functionality
 5. **Domains**: Specialized applications to specific problem areas
 
-## Key IEL Features
+## Key Internal Emergent Logics Features
 
 ### Meta-Theorem Registry (`MetaTheorems.v`)
 - `temporal_unification_meta`: Constructive bijections enable unified reasoning
@@ -54,7 +54,7 @@ All ChronoPraxis theorems maintain constructive proof foundations:
 ### Bijective Core
 Three fundamental bijections form the temporal reasoning substrate:
 - `map_AB`: Mode A ↔ Mode B constructive mapping
-- `map_BC`: Mode B ↔ Mode C constructive mapping  
+- `map_BC`: Mode B ↔ Mode C constructive mapping
 - `map_AC`: Mode A ↔ Mode C direct constructive mapping
 
 ## Build System
@@ -83,11 +83,11 @@ The `domains/` directory provides specialized temporal logic applications:
 - **Empiricism**: Experience-based temporal reasoning patterns
 - **ModalOntology**: Modal temporal logics and possible world semantics
 
-## IEL Tags
+## Internal Emergent Logics Tags
 
-All IEL modules include standardized tags for emergent logic identification:
+All Internal Emergent Logics modules include standardized tags for emergent logic identification:
 ```coq
-(* ===== IEL TAG: [CATEGORY] ===== *)
+(* ===== Internal Emergent Logics TAG: [CATEGORY] ===== *)
 ```
 
 Categories: `SUBSTRATE`, `TACTICS`, `THEOREMS`, `META-THEOREMS`, `INTERFACES`, `DOMAINS`
@@ -96,18 +96,18 @@ Categories: `SUBSTRATE`, `TACTICS`, `THEOREMS`, `META-THEOREMS`, `INTERFACES`, `
 
 - ChronoPraxis status: **Stable (v1.0)** — constructive, zero admits
 
-## IEL Registry
+## Internal Emergent Logics Registry
 
-### Core IEL Implementations
+### Core Internal Emergent Logics Implementations
 
 - **TropoPraxis (TPX)** — unified normal modal systems (K/T/S4/S5/KD/… via frame flags)
-- **GnosiPraxis (GPX)** — Epistemic IEL (knowledge/belief modalities)
-- **ThemiPraxis (ThPX)** — Deontic IEL (obligation/permission modalities)  
-- **DynaPraxis (DyPX)** — Dynamic IEL (program execution modalities)
-- **HexiPraxis (HxPX)** — Agency IEL (agent capability modalities)
-- **ChremaPraxis (ChPX)** — Resource/Linear IEL (phase semantics)
-- **MuPraxis (MuPX)** — Fixpoint IEL (μ-calculus over finite frames)
-- **TychePraxis (TyPX)** — Probabilistic IEL (finite rational kernels)
+- **GnosiPraxis (GPX)** — Epistemic Internal Emergent Logics (knowledge/belief modalities)
+- **ThemiPraxis (ThPX)** — Deontic Internal Emergent Logics (obligation/permission modalities)
+- **DynaPraxis (DyPX)** — Dynamic Internal Emergent Logics (program execution modalities)
+- **HexiPraxis (HxPX)** — Agency Internal Emergent Logics (agent capability modalities)
+- **ChremaPraxis (ChPX)** — Resource/Linear Internal Emergent Logics (phase semantics)
+- **MuPraxis (MuPX)** — Fixpoint Internal Emergent Logics (μ-calculus over finite frames)
+- **TychePraxis (TyPX)** — Probabilistic Internal Emergent Logics (finite rational kernels)
 
 ### Status
 - ✅ TropoPraxis: v0.1 stub (interfaces only)
@@ -121,4 +121,4 @@ Categories: `SUBSTRATE`, `TACTICS`, `THEOREMS`, `META-THEOREMS`, `INTERFACES`, `
 
 ---
 
-*For detailed IEL specifications, see `IELS_SPEC.md`
+*For detailed Internal Emergent Logics specifications, see `IELS_SPEC.md`

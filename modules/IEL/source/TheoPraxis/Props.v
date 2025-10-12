@@ -17,7 +17,7 @@ Module TheoProps.
   Definition BioPraxis : Prop -> Prop := fun φ => φ.
   Definition Immanence : Prop -> Prop := fun φ => φ.
 
-  (* Modal operators over Prop for IEL *)
+  (* Modal operators over Prop for Internal Emergent Logics *)
   Definition Box_Prop : Prop -> Prop := fun φ => φ.  (* identity placeholder *)
   Definition Dia_Prop : Prop -> Prop := fun φ => φ.  (* identity placeholder *)
 

@@ -15,7 +15,7 @@ The Compatibilism domain models the philosophical position that free will and de
 - **Purpose**: Represents a moral agent capable of making free choices
 - **Usage**: Each agent has a unique identifier for tracking across temporal contexts
 
-### `Action` 
+### `Action`
 - **Type**: Abstract parameter type
 - **Purpose**: Represents temporal actions performed by agents
 - **Future**: Will be integrated with ChronoPraxis temporal propositions

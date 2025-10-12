@@ -1,36 +1,36 @@
 {
   "pillars": {
     "Teleology": {
-      "iel": "TeloPraxis",
+      "Internal Emergent Logics": "TeloPraxis",
       "members": [
         "Will"
       ]
     },
     "Cosmology": {
-      "iel": "CosmoPraxis",
+      "Internal Emergent Logics": "CosmoPraxis",
       "members": [
         "Immanence"
       ]
     },
     "Theology": {
-      "iel": "TheoPraxis",
+      "Internal Emergent Logics": "TheoPraxis",
       "members": [
         "Unity"
       ]
     },
     "Epistemology": {
-      "iel": "GnosiPraxis",
+      "Internal Emergent Logics": "GnosiPraxis",
       "members": [
         "Truth"
       ]
     },
     "Axiology": {
-      "iel": "Axiopraxis",
+      "Internal Emergent Logics": "Axiopraxis",
       "members": [
         "Beauty",
         "Goodness"
       ]
     }
   },
-  "policy": "Group/First-Order => TheoPraxis; Second-Order => pillar IEL"
+  "policy": "Group/First-Order => TheoPraxis; Second-Order => pillar Internal Emergent Logics"
 }

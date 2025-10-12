@@ -1,9 +1,9 @@
 (* ModalCollapse.v - Possible Worlds & Temporal Modal Collapse *)
 
 (* TODO: Restore ChronoPraxis imports once module path resolution is fixed *)
-(* Require Import PXLs.IEL.Infra.substrate.ChronoAxioms *)
-(*                PXLs.IEL.Infra.substrate.ChronoMappings *)
-(*                PXLs.IEL.Infra.tactics.ChronoTactics. *)
+(* Require Import PXLs.Internal Emergent Logics.Infra.substrate.ChronoAxioms *)
+(*                PXLs.Internal Emergent Logics.Infra.substrate.ChronoMappings *)
+(*                PXLs.Internal Emergent Logics.Infra.tactics.ChronoTactics. *)
 
 Module ModalCollapse.
 
@@ -73,12 +73,12 @@ Theorem access_iff_eq :
 Proof.
   split.
   - (* If accessible, then equal *)
-    intros [pA [HpC HqC]]. 
-    rewrite <- HpC, <- HqC. 
+    intros [pA [HpC HqC]].
+    rewrite <- HpC, <- HqC.
     reflexivity.
   - (* If equal, then accessible *)
-    intros ->. 
-    exists (C_to_A qC). 
+    intros ->.
+    exists (C_to_A qC).
     split.
     + (* Use bijection property A_to_C ∘ C_to_A = id *)
       exact (AC_back_fwd qC).

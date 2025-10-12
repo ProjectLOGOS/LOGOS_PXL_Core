@@ -22,7 +22,7 @@ The Modal Ontology domain models possible worlds theory and temporal modal colla
 - **Usage**: Modal propositions evaluated across possible worlds
 
 ### `Agent`
-- **Type**: Abstract parameter type  
+- **Type**: Abstract parameter type
 - **Purpose**: Represents agents making choices across possible worlds
 - **Usage**: Agents whose choices determine which worlds are accessible
 
@@ -93,13 +93,13 @@ Definition temporally_accessible (w1 w2 : World) : Prop :=
   Access w1 w2.
 
 (* Example: All worlds are currently accessible due to trivial Access definition *)
-Example all_worlds_accessible : 
+Example all_worlds_accessible :
   forall w1 w2 : World, temporally_accessible w1 w2.
-Proof. 
-  intros w1 w2. 
-  unfold temporally_accessible. 
-  unfold Access. 
-  exact I. 
+Proof.
+  intros w1 w2.
+  unfold temporally_accessible.
+  unfold Access.
+  exact I.
 Qed.
 ```
 
@@ -137,7 +137,7 @@ Definition Access (pC qC : PC) : Prop :=
 - ✅ **Constructive Access relation implemented**
 - ✅ **Path-insensitive collapse theorem proven**
 - ✅ **Modal accessibility extensionality theorem proven**
-- ✅ Temporal path framework established  
+- ✅ Temporal path framework established
 - 🔄 Temporal modal collapse theorem scaffolded
 - ⏳ Integration with possible worlds semantics needed
 - ⏳ Cross-domain modal compatibility proofs needed

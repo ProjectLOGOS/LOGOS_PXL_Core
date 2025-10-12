@@ -21,7 +21,7 @@ make coq-test
 ## Development Workflow
 
 * Branch from `main`, name: `feat/<short>`, `fix/<short>`, or `docs/<short>`.
-* Add tests under `tests/` or IEL-specific test dirs.
+* Add tests under `tests/` or Internal Emergent Logics-specific test dirs.
 * Run `ci/verify_pxl.sh` before pushing. PRs must pass `coqchk` and hash pin check.
 
 ## Code Standards

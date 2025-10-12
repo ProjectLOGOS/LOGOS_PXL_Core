@@ -1,8 +1,8 @@
 From Coq Require Import Program.
 
 (* TODO: Restore full imports once module path resolution is fixed *)
-(* Require Import PXLs.IEL.Infra.theorems.ModalStrength.{S4Overlay,S5Overlay,OverlayEquivalence} *)
-(*                modules.IEL.UM.modal.FrameSpec. *)
+(* Require Import PXLs.Internal Emergent Logics.Infra.theorems.ModalStrength.{S4Overlay,S5Overlay,OverlayEquivalence} *)
+(*                modules.Internal Emergent Logics.UM.modal.FrameSpec. *)
 
 (* Standalone loading for compilation tests *)
 Parameter form : Type.
@@ -54,10 +54,10 @@ Check S4_Equiv.S4_4_from_UM.
 Check S5_Equiv.S5_B_from_UM.
 Check S5_Equiv.S5_5_from_UM.
 
-(* Example: demonstrate that CP overlays are instances of UM-IEL systems *)
+(* Example: demonstrate that CP overlays are instances of UM-Internal Emergent Logics systems *)
 Example S4_equivalence_demo : forall (Hrefl : S4.Reflexive) (Htran : S4.Transitive) φ,
-  Prov (Impl (Box φ) φ) /\                    (* T axiom available via UM-IEL *)
-  Prov (Impl (Box φ) (Box (Box φ))).          (* 4 axiom available via UM-IEL *)
+  Prov (Impl (Box φ) φ) /\                    (* T axiom available via UM-Internal Emergent Logics *)
+  Prov (Impl (Box φ) (Box (Box φ))).          (* 4 axiom available via UM-Internal Emergent Logics *)
 Proof.
   intros Hrefl Htran φ. split.
   - apply (S4_Equiv.S4_T_from_UM Hrefl Htran).
@@ -65,9 +65,9 @@ Proof.
 Qed.
 
 Example S5_equivalence_demo : forall (Hrefl : S5.Reflexive) (Hsym : S5.Symmetric) (Htran : S5.Transitive) φ,
-  Prov (Impl (Box φ) φ) /\                    (* T axiom available via UM-IEL *)
-  Prov (Impl φ (Box (Dia φ))) /\              (* B axiom available via UM-IEL *)
-  Prov (Impl (Dia φ) (Box (Dia φ))).          (* 5 axiom available via UM-IEL *)
+  Prov (Impl (Box φ) φ) /\                    (* T axiom available via UM-Internal Emergent Logics *)
+  Prov (Impl φ (Box (Dia φ))) /\              (* B axiom available via UM-Internal Emergent Logics *)
+  Prov (Impl (Dia φ) (Box (Dia φ))).          (* 5 axiom available via UM-Internal Emergent Logics *)
 Proof.
   intros Hrefl Hsym Htran φ. split; [| split].
   - apply (S5_Equiv.S5_T_from_UM Hrefl Hsym Htran).
@@ -75,7 +75,7 @@ Proof.
   - apply (S5_Equiv.S5_5_from_UM Hrefl Hsym Htran).
 Qed.
 
-(* Show that CP overlays provide exactly the same theorems as UM-IEL instances *)
+(* Show that CP overlays provide exactly the same theorems as UM-Internal Emergent Logics instances *)
 Lemma overlay_um_equivalence : forall (Hrefl_S4 : S4.Reflexive) (Htran_S4 : S4.Transitive)
   (Hrefl_S5 : S5.Reflexive) (Hsym_S5 : S5.Symmetric) (Htran_S5 : S5.Transitive) φ ψ,
   (* S4 equivalence *)

@@ -2,12 +2,12 @@
 
 ## Overview
 
-This directory contains the Axiopraxis implementation within the IEL (Integrated Experiential Logic) framework.
+This directory contains the Axiopraxis implementation within the Internal Emergent Logics (Integrated Experiential Logic) framework.
 
 ## Files
 
-- `modules\IEL\Axiopraxis\README.md`
-- `modules\IEL\Axiopraxis\subdomains\Beauty\Spec.v`
+- `modules\Internal Emergent Logics\Axiopraxis\README.md`
+- `modules\Internal Emergent Logics\Axiopraxis\subdomains\Beauty\Spec.v`
 
 ## Development
 

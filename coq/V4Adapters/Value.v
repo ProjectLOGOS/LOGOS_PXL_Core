@@ -1,4 +1,4 @@
-(* V4Adapters/Value.v - Map V4 Values to IEL Axiopraxis *)
+(* V4Adapters/Value.v - Map V4 Values to Internal Emergent Logics Axiopraxis *)
 
 From Coq Require Import Program.
 From V4 Require Import Value.
@@ -13,9 +13,9 @@ End Axiopraxis_Placeholder.
 
 Module V4_Value_Adapter.
 
-(* Translation function: V4 Value → IEL Axiopraxis value judgment *)
+(* Translation function: V4 Value → Internal Emergent Logics Axiopraxis value judgment *)
 Definition v4_value_to_axio (v : V4.value) : Axiopraxis_Placeholder.value :=
-  (* Implementation maps V4 value judgments to IEL axiological forms *)
+  (* Implementation maps V4 value judgments to Internal Emergent Logics axiological forms *)
   v. (* Identity mapping for demonstration *)
 
 (* Monotonicity: V4 value ordering is preserved under translation *)

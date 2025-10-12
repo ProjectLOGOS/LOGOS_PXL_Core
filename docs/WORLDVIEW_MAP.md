@@ -1,4 +1,4 @@
-# Worldview Layer (PXL + IEL)
+# Worldview Layer (PXL + Internal Emergent Logics)
 
 Pillars → IELs:
 - Ontology → PXL core (+ Chrono, Tropo)

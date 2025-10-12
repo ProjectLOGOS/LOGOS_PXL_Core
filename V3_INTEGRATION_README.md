@@ -55,15 +55,15 @@ This outputs the `-Q` entries to add to `_CoqProject`. Copy these lines into you
 Based on the scan results, update the adapter files in `coq/V4Adapters/`:
 
 ### Knowledge.v
-- Maps V4 epistemic types to IEL GnosiPraxis
+- Maps V4 epistemic types to Internal Emergent Logics GnosiPraxis
 - Update `Require Import` statements to point to discovered modules
 
 ### Action.v
-- Maps V4 action types to IEL ErgoPraxis
+- Maps V4 action types to Internal Emergent Logics ErgoPraxis
 - Update for decision theory and Hoare logic components
 
 ### Value.v
-- Maps V4 value types to IEL Axiopraxis
+- Maps V4 value types to Internal Emergent Logics Axiopraxis
 - Update for utility theory and preference components
 
 ## Step 5: Create Shim Modules (if needed)

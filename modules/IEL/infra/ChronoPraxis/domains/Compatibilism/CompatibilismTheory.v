@@ -1,10 +1,10 @@
 (* CompatibilismTheory.v - Temporal Freedom & Determinism Integration *)
 
 (* TODO: Restore ChronoPraxis imports once module path resolution is fixed *)
-(* Require Import PXLs.IEL.Infra.substrate.ChronoAxioms *)
-(*                PXLs.IEL.Infra.substrate.Bijection *)
-(*                PXLs.IEL.Infra.substrate.ChronoMappings *)
-(*                PXLs.IEL.Infra.tactics.ChronoTactics. *)
+(* Require Import PXLs.Internal Emergent Logics.Infra.substrate.ChronoAxioms *)
+(*                PXLs.Internal Emergent Logics.Infra.substrate.Bijection *)
+(*                PXLs.Internal Emergent Logics.Infra.substrate.ChronoMappings *)
+(*                PXLs.Internal Emergent Logics.Infra.tactics.ChronoTactics. *)
 
 Module CompatibilismTheory.
 
@@ -13,7 +13,7 @@ Module CompatibilismTheory.
 (* Agent: A moral agent capable of making choices across temporal propositions *)
 Record Agent := { agent_id : nat }.
 
-(* Action: A concrete action with identifier, embedded in temporal context *)  
+(* Action: A concrete action with identifier, embedded in temporal context *)
 Record Action := { act_id : nat }.
 
 (* === Temporal Proposition Placeholders === *)
@@ -86,7 +86,7 @@ Parameter compatibilist_consistency :
 
 (* Future development:
    1. Upgrade remaining theorems to use PA/PC semantics
-   2. Add constructive proofs for compatibilist consistency  
+   2. Add constructive proofs for compatibilist consistency
    3. Prove freedom-necessity compatibility theorems
    4. Add comprehensive temporal choice analysis
 *)

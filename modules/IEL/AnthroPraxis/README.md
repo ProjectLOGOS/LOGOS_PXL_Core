@@ -2,12 +2,12 @@
 
 ## Overview
 
-This directory contains the AnthroPraxis implementation within the IEL (Integrated Experiential Logic) framework.
+This directory contains the AnthroPraxis implementation within the Internal Emergent Logics (Integrated Experiential Logic) framework.
 
 ## Files
 
-- `modules\IEL\AnthroPraxis\README.md`
-- `modules\IEL\AnthroPraxis\subdomains\Life\Spec.v`
+- `modules\Internal Emergent Logics\AnthroPraxis\README.md`
+- `modules\Internal Emergent Logics\AnthroPraxis\subdomains\Life\Spec.v`
 
 ## Development
 

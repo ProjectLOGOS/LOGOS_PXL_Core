@@ -11,7 +11,7 @@ The Empiricism domain models the integration of physics with temporal logic, pro
 ## Frame Mappings
 
 - **χ_A (Agent Time)** ↔ **LocalTime**: Observer's proper time measurements
-- **χ_B (Coordinate Time)** ↔ **CoordinateTime**: Coordinate system time measurements  
+- **χ_B (Coordinate Time)** ↔ **CoordinateTime**: Coordinate system time measurements
 - **χ_C (Cosmic Time)** ↔ **CosmicTime**: Universal/eternal time reference
 
 ## Core Types
@@ -134,7 +134,7 @@ Record MetricB := {
 
 **Plain English**: Think of `Inv` as the "physical essence" extractor. Given any coordinate time measurement in χ_B, it extracts the truly invariant content that survives coordinate transformations and maps to eternal time χ_C.
 
-#### Isometry Record  
+#### Isometry Record
 ```coq
 Record Isometry (M:MetricB) := {
   iso : Bijection PB PB;
@@ -163,7 +163,7 @@ Theorem frame_independence_isometry :
 
 **Plain English**: If your coordinate transformation is a valid isometry (preserves the physical essence), then transforming χ_B and then projecting to χ_C gives the same result as projecting directly. Physics transformations don't change the eternal time content.
 
-#### Lorentz Generalization  
+#### Lorentz Generalization
 The existing Lorentz transformations become special cases: if your Lorentz transform preserves `Inv`, it automatically inherits all the frame-independence theorems.
 
 ### Why This Keeps Proofs Constructive
@@ -178,7 +178,7 @@ This approach lets us capture the essential structure of general relativity (coo
 ## Development Status
 
 - ✅ Basic frame structure defined
-- ✅ Temporal type placeholders in place  
+- ✅ Temporal type placeholders in place
 - ✅ **Constructive measurement functions implemented**
 - ✅ **Observational coherence theorem proven constructively**
 - ✅ **Lorentz semantics with frame-independence proven**

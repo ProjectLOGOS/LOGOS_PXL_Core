@@ -1,4 +1,4 @@
-From PXLs.IEL.Infra.ModalPraxis Require Export Systems theorems.NormalBase DerivedAxioms.
+From PXLs.Internal Emergent Logics.Infra.ModalPraxis Require Export Systems theorems.NormalBase DerivedAxioms.
 
 Class Cap_ForcesBox (W:Type) (R:W->W->Prop) (forces: W->form->Prop) : Prop :=
   { forces_box_K : forall w (φ ψ : form), (forces w (Impl φ ψ)) -> (forces w φ) -> forces w ψ

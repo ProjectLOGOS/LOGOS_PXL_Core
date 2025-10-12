@@ -2,9 +2,9 @@
 
 ## 🚀 Production Status: READY TO SHIP
 
-**Release Version**: v1.0.0-production  
-**Deployment Date**: October 5, 2025  
-**Security Level**: Production-hardened with proof-gated authorization  
+**Release Version**: v1.0.0-production
+**Deployment Date**: October 5, 2025
+**Security Level**: Production-hardened with proof-gated authorization
 
 ---
 
@@ -122,7 +122,7 @@ python -m uvicorn services.tool_router.app:app --host 0.0.0.0 --port 8071
 $env:TOOL_ROUTER_URL="http://127.0.0.1:8071"
 python -m uvicorn services.executor.app:app --host 127.0.0.1 --port 8072
 
-# 4. Start Crawl Toolkit  
+# 4. Start Crawl Toolkit
 python -m uvicorn services.toolkits.crawl.app:app --host 0.0.0.0 --port 8064
 
 # 5. Start GUI Dashboard
@@ -134,11 +134,11 @@ cd gui; python gui_server.py
 # Verify all services
 $services = @(8090, 8072, 8071, 8064, 8095)
 foreach($port in $services) {
-    try { 
-        Invoke-RestMethod "http://127.0.0.1:$port/health" 
-        Write-Host "✅ Port $port: HEALTHY" 
-    } catch { 
-        Write-Host "❌ Port $port: DOWN" 
+    try {
+        Invoke-RestMethod "http://127.0.0.1:$port/health"
+        Write-Host "✅ Port $port: HEALTHY"
+    } catch {
+        Write-Host "❌ Port $port: DOWN"
     }
 }
 ```
@@ -199,6 +199,6 @@ python -c "from audit_system import audit; print(audit.verify_integrity())"
 
 ---
 
-*LOGOS PXL Core v1.0 - Proof-Gated Authorization System*  
-*Security-first design with deny-by-default policies*  
+*LOGOS PXL Core v1.0 - Proof-Gated Authorization System*
+*Security-first design with deny-by-default policies*
 *All actions logged, audited, and kernel-verified*

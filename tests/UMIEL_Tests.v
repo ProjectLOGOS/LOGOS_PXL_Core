@@ -2,9 +2,9 @@ From Coq Require Import Program.
 
 (* TODO: Restore full imports once module path resolution is fixed *)
 (* From PXLs Require Import PXLv3. *)
-(* Require Import modules.IEL.ModalPraxis.modal.FrameSpec *)
-(*                modules.IEL.ModalPraxis.theorems.{NormalBase,DerivedAxioms,Systems,Conservativity} *)
-(*                PXLs.IEL.Infra.theorems.ModalStrength.ModalFree. *)
+(* Require Import modules.Internal Emergent Logics.ModalPraxis.modal.FrameSpec *)
+(*                modules.Internal Emergent Logics.ModalPraxis.theorems.{NormalBase,DerivedAxioms,Systems,Conservativity} *)
+(*                PXLs.Internal Emergent Logics.Infra.theorems.ModalStrength.ModalFree. *)
 
 (* Standalone loading for compilation tests *)
 Parameter form : Type.
@@ -51,13 +51,13 @@ Check provable_D.             (* D axiom *)
 (* Verify system modules provide organized access *)
 Check KSystem_K_available.    (* K system *)
 Check S4System_T_available.   (* S4 system T *)
-Check S4System_4_available.   (* S4 system 4 *)  
+Check S4System_4_available.   (* S4 system 4 *)
 Check S5System_5_available.   (* S5 system 5 *)
 Check KDSystem_D_available.   (* KD system D *)
 Check KBSystem_B_available.   (* KB system B *)
 
 (* Test conservativity for modal-free formulas *)
-Parameter φ : form. 
+Parameter φ : form.
 Parameter Hmf : modal_free φ.
 Check (conservative_nonmodal φ Hmf).
 

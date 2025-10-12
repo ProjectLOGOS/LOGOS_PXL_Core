@@ -1,16 +1,16 @@
-(* ExtractCore.v - OCaml Extraction for PXL IEL Core *)
+(* ExtractCore.v - OCaml Extraction for PXL Internal Emergent Logics Core *)
 
 From Coq Require Import Extraction.
 Extraction Language OCaml.
 
 (* Require the verified modules *)
 Require Import PXLs.PXLv3
-               PXLs.IEL.Source.TheoPraxis.Props
-               PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms
-               PXLs.IEL.Infra.ChronoPraxis.Substrate.Bijection
-               PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoMappings
-               PXLs.IEL.Infra.ChronoPraxis.Tactics.ChronoTactics
-               PXLs.IEL.Infra.ChronoPraxis.Theorems.ChronoProofs.
+               PXLs.Internal Emergent Logics.Source.TheoPraxis.Props
+               PXLs.Internal Emergent Logics.Infra.ChronoPraxis.Substrate.ChronoAxioms
+               PXLs.Internal Emergent Logics.Infra.ChronoPraxis.Substrate.Bijection
+               PXLs.Internal Emergent Logics.Infra.ChronoPraxis.Substrate.ChronoMappings
+               PXLs.Internal Emergent Logics.Infra.ChronoPraxis.Tactics.ChronoTactics
+               PXLs.Internal Emergent Logics.Infra.ChronoPraxis.Theorems.ChronoProofs.
 
 (* Require V4 integration modules *)
 Require Import PXLs.V4.Adapters.Knowledge

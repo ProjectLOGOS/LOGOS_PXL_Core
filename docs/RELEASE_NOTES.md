@@ -1,8 +1,8 @@
-# ChronoPraxis IEL Release Notes
+# ChronoPraxis Internal Emergent Logics Release Notes
 
 ## Version: chronopraxis-v1.0
 
-**Release Date:** October 8, 2025  
+**Release Date:** October 8, 2025
 **Status:** Constructive core complete, zero admits, CI policy clean
 
 ### 🎯 Highlights
@@ -14,16 +14,16 @@
 - Constructive completeness: PXL modal logic integration without classical axioms
 
 **Policy Compliance:**
-- ✅ Zero `Admitted.` statements under `modules/IEL`
+- ✅ Zero `Admitted.` statements under `modules/Internal Emergent Logics`
 - ✅ Zero `Add LoadPath` statements (proper `-Q` namespace usage)
 - ✅ All proofs constructive (no classical axioms)
 - ✅ CI/CD pipeline with automated policy checks
 
 ### 🔧 Technical Foundation
 
-**IEL Architecture (5-strata):**
+**Internal Emergent Logics Architecture (5-strata):**
 - **Substrate:** ChronoAxioms, Bijection mappings, temporal ontologies
-- **Tactics:** normalize_time, bijection rewriting, composition reasoning  
+- **Tactics:** normalize_time, bijection rewriting, composition reasoning
 - **Theorems:** Constructive proofs, temporal consistency, modal preservation
 - **Interfaces:** ChronoPraxis main interface, cross-modal reasoning
 - **Domains:** Ready for Compatibilism, Empiricism, ModalOntology extensions
@@ -41,7 +41,7 @@
 
 **Upcoming Domains:**
 - **Compatibilism:** Temporal freedom formalization over χ_A with χ_C convergence
-- **Empiricism:** χ modes mapped to relativistic/QM observational frames  
+- **Empiricism:** χ modes mapped to relativistic/QM observational frames
 - **ModalOntology:** Possible-world accessibility via temporal instantiation paths
 
 **Development Model:**
@@ -62,6 +62,6 @@ git describe --tags  # chronopraxis-v1.0
 
 ---
 
-**ChronoPraxis IEL:** Internally Emergent Logics for temporal ontology and modal reasoning.  
-**Project:** LOGOS PXL Core Integration  
+**ChronoPraxis Internal Emergent Logics:** Internally Emergent Logics for temporal ontology and modal reasoning.
+**Project:** LOGOS PXL Core Integration
 **License:** Constructive Mathematical Foundation

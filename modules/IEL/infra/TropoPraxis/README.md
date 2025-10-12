@@ -2,17 +2,17 @@
 
 ## Overview
 
-This directory contains the infra_TropoPraxis implementation within the IEL (Integrated Experiential Logic) framework.
+This directory contains the infra_TropoPraxis implementation within the Internal Emergent Logics (Integrated Experiential Logic) framework.
 
 ## Files
 
-- `modules\IEL\infra\TropoPraxis\Core.v`
-- `modules\IEL\infra\TropoPraxis\modal\FrameSpec.v`
-- `modules\IEL\infra\TropoPraxis\README.md`
-- `modules\IEL\infra\TropoPraxis\Registry.v`
-- `modules\IEL\infra\TropoPraxis\theorems\Conservativity.v`
-- `modules\IEL\infra\TropoPraxis\theorems\NormalBase.v`
-- `modules\IEL\infra\TropoPraxis\theorems\Systems.v`
+- `modules\Internal Emergent Logics\infra\TropoPraxis\Core.v`
+- `modules\Internal Emergent Logics\infra\TropoPraxis\modal\FrameSpec.v`
+- `modules\Internal Emergent Logics\infra\TropoPraxis\README.md`
+- `modules\Internal Emergent Logics\infra\TropoPraxis\Registry.v`
+- `modules\Internal Emergent Logics\infra\TropoPraxis\theorems\Conservativity.v`
+- `modules\Internal Emergent Logics\infra\TropoPraxis\theorems\NormalBase.v`
+- `modules\Internal Emergent Logics\infra\TropoPraxis\theorems\Systems.v`
 
 ## Development
 

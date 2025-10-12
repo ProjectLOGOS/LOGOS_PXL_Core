@@ -1,6 +1,6 @@
 From Coq Require Import Program.
 From PXLs Require Import PXLv3.
-Require Import modules.IEL.TeloPraxis.subdomains.Will.Spec.
+Require Import modules.Internal Emergent Logics.TeloPraxis.subdomains.Will.Spec.
 Module TeloPraxis_OntoProps.
   (* name -> (pillar, c_value) *)
   Definition registry : list (string * string * string) := [

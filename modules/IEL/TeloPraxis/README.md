@@ -2,11 +2,11 @@
 
 ## Overview
 
-This directory contains the TeloPraxis implementation within the IEL (Integrated Experiential Logic) framework.
+This directory contains the TeloPraxis implementation within the Internal Emergent Logics (Integrated Experiential Logic) framework.
 
 ## Files
 
-- `modules\IEL\TeloPraxis\README.md`
+- `modules\Internal Emergent Logics\TeloPraxis\README.md`
 
 ## Development
 

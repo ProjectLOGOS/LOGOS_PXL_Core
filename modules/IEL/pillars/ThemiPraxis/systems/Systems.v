@@ -2,7 +2,7 @@ From Coq Require Import Program Setoids.Setoid.
 
 (* TODO: Restore full imports once module path resolution is fixed *)
 (* From PXLs Require Import PXLv3.
-Require Import modules.IEL.ThemiPraxis.modal.NormFrames. *)
+Require Import modules.Internal Emergent Logics.ThemiPraxis.modal.NormFrames. *)
 
 (* Standalone definitions for compilation - using PXL canonical model types *)
 Parameter form : Type.

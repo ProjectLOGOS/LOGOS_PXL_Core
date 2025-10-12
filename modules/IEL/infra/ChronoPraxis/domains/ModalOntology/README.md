@@ -1,4 +1,4 @@
-# Modal Ontology Domain - ChronoPraxis IEL
+# Modal Ontology Domain - ChronoPraxis Internal Emergent Logics
 
 ## Goal
 Possible-world accessibility via temporal instantiation paths
@@ -16,10 +16,10 @@ Possible-world accessibility via temporal instantiation paths
 - **Constructive Modality**: Modal logic without classical completeness assumptions
 
 ## Development Status
-🚧 **Domain branch ready**: `domain/modal-ontology`  
+🚧 **Domain branch ready**: `domain/modal-ontology`
 📋 **Next**: Formalize temporal-modal accessibility relations and necessity operators
 
-## IEL Integration
+## Internal Emergent Logics Integration
 - **Substrate**: Modal-temporal ontology axioms, possible world definitions
 - **Tactics**: modal_preserve, necessity_convergence tactics
 - **Theorems**: Temporal modal completeness, accessibility preservation
@@ -33,9 +33,9 @@ Possible-world accessibility via temporal instantiation paths
 
 ## Research Applications
 - **Temporal Metaphysics**: Temporal mode theory of possible worlds
-- **Modal Logic Extensions**: Temporal grounding for modal operators  
+- **Modal Logic Extensions**: Temporal grounding for modal operators
 - **Ontological Reduction**: Possible worlds as temporal instantiation patterns
 - **Necessity Theory**: Temporal foundations of modal necessity
 
 ---
-*ChronoPraxis IEL v1.0 Domain Extension*
+*ChronoPraxis Internal Emergent Logics v1.0 Domain Extension*

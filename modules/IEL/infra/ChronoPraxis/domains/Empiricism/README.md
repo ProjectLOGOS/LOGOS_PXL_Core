@@ -1,11 +1,11 @@
-# Empiricism Domain - ChronoPraxis IEL
+# Empiricism Domain - ChronoPraxis Internal Emergent Logics
 
-## Goal  
+## Goal
 Map χ modes to relativistic/QM frames
 
 ## Scope
 - **Observational Coherence**: χ_A (observer-relative) ↔ relativistic reference frames
-- **Structural Mapping**: χ_B (tenseless ordering) ↔ spacetime manifold structure  
+- **Structural Mapping**: χ_B (tenseless ordering) ↔ spacetime manifold structure
 - **Quantum Integration**: χ_C (atemporal) ↔ quantum measurement collapse
 - **Empirical Validation**: Experience-based temporal reasoning patterns
 
@@ -16,10 +16,10 @@ Map χ modes to relativistic/QM frames
 - **Measurement Preservation**: Quantum/relativistic measurements consistent across χ modes
 
 ## Development Status
-🚧 **Domain branch ready**: `domain/empiricism`  
+🚧 **Domain branch ready**: `domain/empiricism`
 📋 **Next**: Formalize observer-relative temporal frames and measurement operators
 
-## IEL Integration
+## Internal Emergent Logics Integration
 - **Substrate**: Physics-temporal ontology bridge axioms
 - **Tactics**: frame_transform, measurement_coherence tactics
 - **Theorems**: Empirical consistency across temporal modes
@@ -32,4 +32,4 @@ Map χ modes to relativistic/QM frames
 - **Empirical Verification**: Testable predictions from χ mode theory
 
 ---
-*ChronoPraxis IEL v1.0 Domain Extension*
+*ChronoPraxis Internal Emergent Logics v1.0 Domain Extension*

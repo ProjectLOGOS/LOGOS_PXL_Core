@@ -1,6 +1,6 @@
 From Coq Require Import Program.
 From PXLs Require Import PXLv3.
-Require Import modules.IEL.GnosiPraxis.subdomains.Truth.Spec.
+Require Import modules.Internal Emergent Logics.GnosiPraxis.subdomains.Truth.Spec.
 Module GnosiPraxis_OntoProps.
   (* name -> (pillar, c_value) *)
   Definition registry : list (string * string * string) := [

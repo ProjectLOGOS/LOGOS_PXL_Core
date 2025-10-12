@@ -2,11 +2,11 @@
 
 ## Overview
 
-This directory contains the ThemiPraxis implementation within the IEL (Integrated Experiential Logic) framework.
+This directory contains the ThemiPraxis implementation within the Internal Emergent Logics (Integrated Experiential Logic) framework.
 
 ## Files
 
-- `modules\IEL\ThemiPraxis\README.md`
+- `modules\Internal Emergent Logics\ThemiPraxis\README.md`
 
 ## Development
 

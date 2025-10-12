@@ -15,7 +15,7 @@ This document describes the build system for the ChronoPraxis constructive tempo
 # Build all modules
 .\build.ps1
 
-# Clean build artifacts  
+# Clean build artifacts
 .\build.ps1 -Clean
 ```
 
@@ -30,7 +30,7 @@ This document describes the build system for the ChronoPraxis constructive tempo
 
 #### Tasks Available:
 - **Ctrl+Shift+P** → "Tasks: Run Task" → "coq: build all"
-- **Ctrl+Shift+P** → "Tasks: Run Task" → "coq: clean" 
+- **Ctrl+Shift+P** → "Tasks: Run Task" → "coq: clean"
 - **Ctrl+Shift+P** → "Tasks: Run Task" → "coq: test"
 
 #### Build Keyboard Shortcut:
@@ -41,7 +41,7 @@ This document describes the build system for the ChronoPraxis constructive tempo
 For Unix-like environments or systems with proper Make:
 ```bash
 make all    # Build all modules
-make clean  # Clean artifacts  
+make clean  # Clean artifacts
 make test   # Run smoke tests
 ```
 
@@ -56,7 +56,7 @@ Bijection.v
 ChronoMappings.v (requires ChronoAxioms + Bijection)
     ↓
 ChronoTactics.v (requires ChronoAxioms + Bijection + ChronoMappings)
-    ↓  
+    ↓
 ChronoProofs.v (requires all above)
     ↓
 ChronoPraxis.v (requires all above)
@@ -85,7 +85,7 @@ Theorem temporal_convergence :
 
 ### 2. **chronological_collapse** (A, B, C variants)
 ```coq
-Theorem chronological_collapse_A : 
+Theorem chronological_collapse_A :
   forall pA:PA, (ChronoMappings.B_to_A (ChronoMappings.A_to_B pA)) = pA.
 ```
 
@@ -98,8 +98,8 @@ Theorem causal_bijection_forward :
 ### 4. **temporal_consistency**
 ```coq
 Theorem temporal_consistency :
-  forall pA : PA, 
-    ChronoMappings.A_to_C pA = (ChronoMappings.B_to_C (ChronoMappings.A_to_B pA)) /\ 
+  forall pA : PA,
+    ChronoMappings.A_to_C pA = (ChronoMappings.B_to_C (ChronoMappings.A_to_B pA)) /\
     ChronoMappings.A_to_C pA = (ChronoMappings.A_to_C pA).
 ```
 
@@ -154,7 +154,7 @@ The build system is designed for easy CI integration:
 
 1. **"coqc not found"**
    - Ensure Coq is installed and `coqc` is in PATH
-   
+
 2. **Module import warnings**
    - These are harmless deprecation warnings (masking-absolute-name)
    - All modules compile successfully despite warnings

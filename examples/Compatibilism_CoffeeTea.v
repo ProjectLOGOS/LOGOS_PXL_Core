@@ -3,9 +3,9 @@
 From Coq Require Import Program.
 
 (* TODO: Restore full imports once module path resolution is fixed *)
-(* Require Import PXLs.IEL.Infra.substrate.ChronoAxioms *)
-(*                PXLs.IEL.Infra.substrate.ChronoMappings *)
-(*                PXLs.IEL.Infra.domains.Compatibilism.CompatibilismTheory. *)
+(* Require Import PXLs.Internal Emergent Logics.Infra.substrate.ChronoAxioms *)
+(*                PXLs.Internal Emergent Logics.Infra.substrate.ChronoMappings *)
+(*                PXLs.Internal Emergent Logics.Infra.domains.Compatibilism.CompatibilismTheory. *)
 
 Module CoffeeTea.
 
@@ -36,7 +36,7 @@ Definition agent := {| agent_id := 1 |}.
 (* Because there exists a genuine alternative (tea) that maps to same eternal outcome *)
 Theorem free_coffee_example : Free agent pA_coffee.
 Proof.
-  exists pA_tea. 
+  exists pA_tea.
   split.
   - exact distinct_experiences.  (* Coffee ≠ tea in lived experience *)
   - exact same_cosmic_outcome.   (* Both → "warm beverage" in eternal time *)

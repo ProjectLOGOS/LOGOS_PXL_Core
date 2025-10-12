@@ -1,9 +1,9 @@
-(* V4Adapters/Action(* Reflection: V4 Hoare triples reflect to IEL Hoare triples *)
+(* V4Adapters/Action(* Reflection: V4 Hoare triples reflect to Internal Emergent Logics Hoare triples *)
 Lemma v4_hoare_reflects : forall a P Q,
   V4.Hoare P a Q ->
   ErgoPraxis_Placeholder.valid_hoare (v4_action_to_hoare a).
 Proof.
-  (* Proof that V4 Hoare triples are reflected in IEL *)
+  (* Proof that V4 Hoare triples are reflected in Internal Emergent Logics *)
   intros a P Q H.
   (* Constructive proof using V4's Hoare logic *)
   unfold ErgoPraxis_Placeholder.valid_hoare, v4_action_to_hoare.
@@ -11,7 +11,7 @@ Proof.
   destruct H as [H1 H2].
   (* Use the V4 Hoare property to construct the proof *)
   apply H0. (* Simplified - in real implementation would use V4's logic *)
-Qed. Actions to IEL ErgoPraxis *)
+Qed. Actions to Internal Emergent Logics ErgoPraxis *)
 
 From Coq Require Import Program.
 From V4 Require Import Action.
@@ -26,9 +26,9 @@ End ErgoPraxis_Placeholder.
 
 Module V4_Action_Adapter.
 
-(* Translation function: V4 Action → IEL ErgoPraxis hoare triple *)
+(* Translation function: V4 Action → Internal Emergent Logics ErgoPraxis hoare triple *)
 Definition v4_action_to_hoare (a : V4.action) : ErgoPraxis_Placeholder.hoare :=
-  (* Implementation maps V4 actions to IEL Hoare triples *)
+  (* Implementation maps V4 actions to Internal Emergent Logics Hoare triples *)
   (* The Hoare triple {P} a {Q} in V4 logic *)
   fun P Q => V4.Hoare P a Q.
 

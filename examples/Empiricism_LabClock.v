@@ -3,9 +3,9 @@
 From Coq Require Import Program.
 
 (* TODO: Restore full imports once module path resolution is fixed *)
-(* Require Import PXLs.IEL.Infra.substrate.ChronoAxioms *)
-(*                PXLs.IEL.Infra.substrate.ChronoMappings *)
-(*                PXLs.IEL.Infra.domains.Empiricism.UnifiedFieldLogic. *)
+(* Require Import PXLs.Internal Emergent Logics.Infra.substrate.ChronoAxioms *)
+(*                PXLs.Internal Emergent Logics.Infra.substrate.ChronoMappings *)
+(*                PXLs.Internal Emergent Logics.Infra.domains.Empiricism.UnifiedFieldLogic. *)
 
 Module LabClock.
 
@@ -19,7 +19,7 @@ Parameter A_to_C : PA -> PC.
 Parameter B_to_C : PB -> PC.
 
 (* Lab measurement context *)
-Record Frame := { 
+Record Frame := {
   location : nat;  (* lab room ID *)
   observer : nat   (* researcher ID *)
 }.
@@ -44,7 +44,7 @@ Parameter consistent_eternal_mapping : A_to_C pA_slow = B_to_C pB_measured.
 
 (* Coherence theorem: When we measure properly, *)
 (* lived time and physics time tell the same eternal story *)
-Theorem observational_coherence_labclock : 
+Theorem observational_coherence_labclock :
   A_to_C pA_slow = B_to_C (m lab_frame pA_slow).
 Proof.
   rewrite measurement_correspondence.
