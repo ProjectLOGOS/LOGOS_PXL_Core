@@ -1,3 +1,6 @@
 ﻿-Q pxl-minimal-kernel-main/coq                         PXLs
 -Q modules/IEL                                         PXLs.IEL
 -Q tests                                                PXLs.tests
+
+# --- IEL-MathPraxis ---
+-Q modules/iel-math/MathPraxis MathPraxis
