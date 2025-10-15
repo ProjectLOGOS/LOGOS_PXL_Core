@@ -30,8 +30,13 @@ jobs:
       - name: Domain builds
         run: |
           make domain-compatibilism
-          make domain-empiricism  
+          make domain-empiricism
           make domain-modal-ontology
+
+      - name: ArithmoPraxis builds
+        run: |
+          coqc modules/infra/arithmo/Core/ModalWrap.v
+          coqc modules/infra/arithmo/Examples/Goldbach/ScanFeatures.v
 
       - name: Property tests
         run: |

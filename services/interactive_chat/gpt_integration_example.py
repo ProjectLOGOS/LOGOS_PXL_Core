@@ -26,12 +26,12 @@ class GPTConversationEngine:
 
 AVAILABLE TOOLS:
 • TETRAGNOS: Text analysis and semantic clustering
-• TELOS: Time series forecasting and prediction  
+• TELOS: Time series forecasting and prediction
 • THONOC: Automated theorem proving
 • Proof-gated security with cryptographic verification
 
 CAPABILITIES:
-• Text analysis: "analyze this text: [content]" 
+• Text analysis: "analyze this text: [content]"
 • Forecasting: "predict trends for: 1, 2, 3, 4, 5"
 • Logic: "prove that P and Q"
 • System commands: /status, /capabilities, /help
@@ -44,7 +44,7 @@ BEHAVIOR:
 - Use emojis appropriately for a friendly interface
 
 TOOL ROUTING:
-When users ask for text analysis, forecasting, or theorem proving, 
+When users ask for text analysis, forecasting, or theorem proving,
 indicate which tool should be used and format the request appropriately.
 """
 
@@ -62,9 +62,11 @@ indicate which tool should be used and format the request appropriately.
             self.conversation_history[session_id] = []
 
         # Add user message to history
-        self.conversation_history[session_id].append(
-            {"role": "user", "content": user_message, "timestamp": datetime.now().isoformat()}
-        )
+        self.conversation_history[session_id].append({
+            "role": "user",
+            "content": user_message,
+            "timestamp": datetime.now().isoformat()
+        })
 
         # Keep conversation history manageable (last 10 exchanges)
         history = self.conversation_history[session_id][-20:]
@@ -75,7 +77,7 @@ indicate which tool should be used and format the request appropriately.
                 model="gpt-4",
                 messages=[
                     {"role": "system", "content": self.system_prompt},
-                    *[{"role": msg["role"], "content": msg["content"]} for msg in history],
+                    *[{"role": msg["role"], "content": msg["content"]} for msg in history]
                 ],
                 temperature=0.7,
                 max_tokens=500,
@@ -86,37 +88,30 @@ indicate which tool should be used and format the request appropriately.
                         "parameters": {
                             "type": "object",
                             "properties": {
-                                "tool": {
-                                    "type": "string",
-                                    "enum": ["tetragnos", "telos", "thonoc"],
-                                },
+                                "tool": {"type": "string", "enum": ["tetragnos", "telos", "thonoc"]},
                                 "operation": {"type": "string"},
-                                "data": {"type": "object"},
+                                "data": {"type": "object"}
                             },
-                            "required": ["tool", "operation", "data"],
-                        },
+                            "required": ["tool", "operation", "data"]
+                        }
                     }
                 ],
-                function_call="auto",
+                function_call="auto"
             )
 
             message = response.choices[0].message
 
             # Add GPT response to history
-            self.conversation_history[session_id].append(
-                {
-                    "role": "assistant",
-                    "content": message.content or "",
-                    "timestamp": datetime.now().isoformat(),
-                }
-            )
+            self.conversation_history[session_id].append({
+                "role": "assistant",
+                "content": message.content or "",
+                "timestamp": datetime.now().isoformat()
+            })
 
             # Check if GPT wants to call a tool
             if message.function_call:
                 function_args = json.loads(message.function_call.arguments)
-                return message.content or "Let me process that for you...", json.dumps(
-                    function_args
-                )
+                return message.content or "Let me process that for you...", json.dumps(function_args)
 
             return message.content, None
 
@@ -179,13 +174,12 @@ class EnhancedLOGOSChatEngine:
 
         return "Tool execution not implemented yet."
 
-
 """
 BENEFITS OF THIS APPROACH:
 
 1. ✅ EASY INTEGRATION: Uses existing service architecture
 2. ✅ INTELLIGENT ROUTING: GPT understands user intent naturally
-3. ✅ CONVERSATIONAL: Real back-and-forth dialogue 
+3. ✅ CONVERSATIONAL: Real back-and-forth dialogue
 4. ✅ CONTEXT AWARE: Remembers conversation history
 5. ✅ TOOL INTEGRATION: Seamlessly calls TETRAGNOS/TELOS/THONOC
 6. ✅ FALLBACK SAFE: Falls back to pattern matching if GPT unavailable

@@ -35,7 +35,7 @@ class GPTLOGOSEngine:
 
 AVAILABLE CAPABILITIES:
 • TETRAGNOS: Semantic text analysis and clustering
-• TELOS: Time series forecasting and prediction  
+• TELOS: Time series forecasting and prediction
 • THONOC: Automated theorem proving and logical reasoning
 • Proof-gated security with cryptographic verification
 
@@ -49,7 +49,7 @@ BEHAVIOR GUIDELINES:
 
 TOOL DETECTION:
 - Text analysis requests: "analyze this text", "understand this", "what does this mean", etc.
-- Forecasting requests: "predict", "forecast", "trends", "what happens next", etc.  
+- Forecasting requests: "predict", "forecast", "trends", "what happens next", etc.
 - Logic requests: "prove", "logic", "theorem", "is this true", etc.
 
 RESPONSE FORMAT:
@@ -71,9 +71,11 @@ RESPONSE FORMAT:
             self.conversation_history[session_id] = []
 
         # Add user message to history
-        self.conversation_history[session_id].append(
-            {"role": "user", "content": user_message, "timestamp": datetime.now().isoformat()}
-        )
+        self.conversation_history[session_id].append({
+            "role": "user",
+            "content": user_message,
+            "timestamp": datetime.now().isoformat()
+        })
 
         # Keep conversation manageable (last 10 exchanges)
         recent_history = self.conversation_history[session_id][-20:]
@@ -84,11 +86,8 @@ RESPONSE FORMAT:
                 model="gpt-4",
                 messages=[
                     {"role": "system", "content": self.system_prompt},
-                    *[
-                        {"role": msg["role"], "content": msg["content"]}
-                        for msg in recent_history
-                        if msg.get("role")
-                    ],
+                    *[{"role": msg["role"], "content": msg["content"]}
+                      for msg in recent_history if msg.get("role")]
                 ],
                 temperature=0.7,
                 max_tokens=500,
@@ -102,47 +101,42 @@ RESPONSE FORMAT:
                                 "tool": {
                                     "type": "string",
                                     "enum": ["tetragnos", "telos", "thonoc"],
-                                    "description": "Which LOGOS tool to use",
+                                    "description": "Which LOGOS tool to use"
                                 },
                                 "operation": {
                                     "type": "string",
-                                    "description": "What operation to perform",
+                                    "description": "What operation to perform"
                                 },
                                 "data": {
                                     "type": "object",
-                                    "description": "Data needed for the operation",
+                                    "description": "Data needed for the operation"
                                 },
                                 "explanation": {
                                     "type": "string",
-                                    "description": "Brief explanation of what the tool will do",
-                                },
+                                    "description": "Brief explanation of what the tool will do"
+                                }
                             },
-                            "required": ["tool", "operation", "data", "explanation"],
-                        },
+                            "required": ["tool", "operation", "data", "explanation"]
+                        }
                     }
                 ],
-                function_call="auto",
+                function_call="auto"
             )
 
             message = response.choices[0].message
 
             # Add GPT response to history
-            self.conversation_history[session_id].append(
-                {
-                    "role": "assistant",
-                    "content": message.content or "",
-                    "timestamp": datetime.now().isoformat(),
-                }
-            )
+            self.conversation_history[session_id].append({
+                "role": "assistant",
+                "content": message.content or "",
+                "timestamp": datetime.now().isoformat()
+            })
 
             # Check if GPT wants to use a tool
             if message.function_call:
                 try:
                     tool_request = json.loads(message.function_call.arguments)
-                    response_text = (
-                        message.content
-                        or f"🔧 {tool_request.get('explanation', 'Processing your request...')}"
-                    )
+                    response_text = message.content or f"🔧 {tool_request.get('explanation', 'Processing your request...')}"
                     return response_text, tool_request
                 except json.JSONDecodeError:
                     return message.content or "Let me help you with that...", None
@@ -158,22 +152,12 @@ RESPONSE FORMAT:
         message_lower = message.lower()
 
         # Enhanced pattern matching with more intelligence
-        if any(
-            word in message_lower
-            for word in ["analyze", "understand", "explain", "meaning", "semantic"]
-        ):
+        if any(word in message_lower for word in ["analyze", "understand", "explain", "meaning", "semantic"]):
             # Extract text after common prefixes
             text_to_analyze = message
-            for prefix in [
-                "analyze this text:",
-                "analyze text:",
-                "analyze this:",
-                "analyze",
-                "understand this:",
-                "explain this:",
-            ]:
+            for prefix in ["analyze this text:", "analyze text:", "analyze this:", "analyze", "understand this:", "explain this:"]:
                 if prefix in message_lower:
-                    text_to_analyze = message[message.lower().find(prefix) + len(prefix) :].strip()
+                    text_to_analyze = message[message.lower().find(prefix) + len(prefix):].strip()
                     break
 
             if text_to_analyze and text_to_analyze != message:
@@ -181,27 +165,21 @@ RESPONSE FORMAT:
                     "tool": "tetragnos",
                     "operation": "cluster_texts",
                     "data": {"texts": [text_to_analyze], "k": 1},
-                    "explanation": "I'll analyze this text using semantic clustering",
+                    "explanation": "I'll analyze this text using semantic clustering"
                 }
-                return (
-                    "🔍 I'll analyze that text for you using advanced semantic understanding...",
-                    tool_request,
-                )
+                return "🔍 I'll analyze that text for you using advanced semantic understanding...", tool_request
 
-        elif any(
-            word in message_lower for word in ["predict", "forecast", "trend", "future", "next"]
-        ):
+        elif any(word in message_lower for word in ["predict", "forecast", "trend", "future", "next"]):
             # Try to extract numbers
             import re
-
-            numbers = re.findall(r"-?\d+\.?\d*", message)
+            numbers = re.findall(r'-?\d+\.?\d*', message)
             if len(numbers) >= 3:
                 series = [float(num) for num in numbers[:10]]
                 tool_request = {
                     "tool": "telos",
                     "operation": "forecast_series",
                     "data": {"series": series, "horizon": 4},
-                    "explanation": f"I'll forecast the next values in this series: {', '.join(numbers[:5])}",
+                    "explanation": f"I'll forecast the next values in this series: {', '.join(numbers[:5])}"
                 }
                 return "📈 I'll analyze those trends and make predictions...", tool_request
 
@@ -212,14 +190,13 @@ RESPONSE FORMAT:
                 "tool": "thonoc",
                 "operation": "construct_proof",
                 "data": {"formula": statement},
-                "explanation": "I'll attempt to prove this logical statement",
+                "explanation": "I'll attempt to prove this logical statement"
             }
             return "🔬 I'll work on proving that logical statement...", tool_request
 
         # General conversation fallback
         if any(word in message_lower for word in ["hello", "hi", "hey"]):
-            return (
-                """👋 Hello! I'm the LOGOS Interactive Assistant powered by advanced AI.
+            return """👋 Hello! I'm the LOGOS Interactive Assistant powered by advanced AI.
 
 I can help you with:
 • 📝 Text analysis and semantic understanding
@@ -227,28 +204,21 @@ I can help you with:
 • 🔬 Logical reasoning and theorem proving
 • 🛡️ All secured through proof-gated architecture
 
-What would you like to explore today?""",
-                None,
-            )
+What would you like to explore today?""", None
 
         else:
-            return (
-                f"""🤖 I understand you're asking about: "{message[:100]}{'...' if len(message) > 100 else ''}"
+            return f"""🤖 I understand you're asking about: "{message[:100]}{'...' if len(message) > 100 else ''}"
 
 I'm here to help with:
 • 📝 Text analysis - Try: "analyze this text: [your content]"
-• 📈 Predictions - Try: "predict trends for: 1, 2, 3, 4, 5" 
+• 📈 Predictions - Try: "predict trends for: 1, 2, 3, 4, 5"
 • 🔬 Logic - Try: "prove that P and Q"
 • ❓ Commands - Type /help for more options
 
-How can I assist you?""",
-                None,
-            )
-
+How can I assist you?""", None
 
 # Example usage showing how this integrates with existing system
 if __name__ == "__main__":
-
     async def test_gpt_engine():
         engine = GPTLOGOSEngine()
 
@@ -256,7 +226,7 @@ if __name__ == "__main__":
             "Hello, what can you do?",
             "analyze this text: Machine learning is revolutionizing technology",
             "predict trends for: 10, 12, 15, 18, 22",
-            "prove that true and true equals true",
+            "prove that true and true equals true"
         ]
 
         for msg in test_messages:

@@ -1,5 +1,4 @@
 import json
-import os
 import uuid
 from datetime import datetime
 from typing import Any
@@ -12,7 +11,6 @@ from gpt_engine import GPTLOGOSEngine
 from pydantic import BaseModel
 
 app = FastAPI(title="LOGOS Interactive Chat Service")
-
 
 # Connection manager for WebSocket connections
 class ConnectionManager:
@@ -27,7 +25,7 @@ class ConnectionManager:
             "websocket": websocket,
             "connected_at": datetime.now(),
             "message_count": 0,
-            "conversation_history": [],
+            "conversation_history": []
         }
 
     def disconnect(self, websocket: WebSocket, session_id: str):
@@ -45,9 +43,7 @@ class ConnectionManager:
         for connection in self.active_connections:
             await connection.send_text(message)
 
-
 manager = ConnectionManager()
-
 
 # Models
 class ChatMessage(BaseModel):
@@ -57,7 +53,6 @@ class ChatMessage(BaseModel):
     message_type: str = "text"  # text, voice, command
     context: dict[str, Any] | None = {}
 
-
 class ChatResponse(BaseModel):
     response: str
     session_id: str
@@ -65,19 +60,16 @@ class ChatResponse(BaseModel):
     response_type: str = "text"
     metadata: dict[str, Any] | None = {}
 
-
 class VoiceMessage(BaseModel):
     audio_data: str  # Base64 encoded audio
     session_id: str
     format: str = "wav"
     sample_rate: int = 16000
 
-
 # Configuration
-LOGOS_API_URL = os.getenv("LOGOS_API_URL", "http://logos-api:8090")
-TOOL_ROUTER_URL = os.getenv("TOOL_ROUTER_URL", "http://tool-router:8071")
-EXECUTOR_URL = os.getenv("EXECUTOR_URL", "http://executor:8072")
-
+LOGOS_API_URL = "http://127.0.0.1:8090"
+TOOL_ROUTER_URL = "http://127.0.0.1:8071"
+EXECUTOR_URL = "http://127.0.0.1:8072"
 
 # AI Chat Engine with GPT Integration
 class LOGOSChatEngine:
@@ -89,7 +81,7 @@ class LOGOSChatEngine:
             "text_processing": "TETRAGNOS for semantic analysis and clustering",
             "forecasting": "TELOS for time series prediction",
             "theorem_proving": "THONOC for logical reasoning",
-            "security": "Proof-gated execution with kernel verification",
+            "security": "Proof-gated execution with kernel verification"
         }
 
     async def authorize_chat_action(self, action: str, session_id: str) -> dict[str, Any]:
@@ -101,13 +93,15 @@ class LOGOSChatEngine:
             "provenance": {
                 "src": "interactive_chat",
                 "session_id": session_id,
-                "timestamp": datetime.now().isoformat(),
-            },
+                "timestamp": datetime.now().isoformat()
+            }
         }
 
         try:
             response = requests.post(
-                f"{LOGOS_API_URL}/authorize_action", json=auth_request, timeout=5
+                f"{LOGOS_API_URL}/authorize_action",
+                json=auth_request,
+                timeout=5
             )
             if response.status_code == 200:
                 return response.json()
@@ -120,8 +114,8 @@ class LOGOSChatEngine:
                 "proof_token": {
                     "id": f"fallback-{uuid.uuid4()}",
                     "kernel_hash": "fallback",
-                    "action": action,
-                },
+                    "action": action
+                }
             }
 
     async def process_message(self, message: str, session_id: str) -> str:
@@ -175,16 +169,16 @@ class LOGOSChatEngine:
             request_data = {
                 "tool": "tetragnos",
                 "args": {"op": "cluster_texts", "texts": texts, "k": k},
-                "proof_token": auth["proof_token"],
+                "proof_token": auth["proof_token"]
             }
 
             response = requests.post(f"{TOOL_ROUTER_URL}/route", json=request_data, timeout=10)
 
             if response.status_code == 200:
                 result = response.json()
-                analysis_result = result["result"]
-                clusters = analysis_result.get("k", 1)
-                items = analysis_result.get("items", [])
+                analysis_result = result['result']
+                clusters = analysis_result.get('k', 1)
+                items = analysis_result.get('items', [])
 
                 return f"""📊 Text Analysis Results:
 
@@ -210,14 +204,14 @@ class LOGOSChatEngine:
             request_data = {
                 "tool": "telos",
                 "args": {"op": "forecast_series", "series": series, "horizon": horizon},
-                "proof_token": auth["proof_token"],
+                "proof_token": auth["proof_token"]
             }
 
             response = requests.post(f"{TOOL_ROUTER_URL}/route", json=request_data, timeout=10)
 
             if response.status_code == 200:
                 result = response.json()
-                forecast = result["result"]["forecast"]
+                forecast = result['result']['forecast']
                 return f"""📈 Forecasting Results:
 
 **Input Data:** {', '.join(map(str, series))}
@@ -240,7 +234,7 @@ The trend analysis shows the data progression and predicts the next {horizon} va
             request_data = {
                 "tool": "thonoc",
                 "args": {"op": "construct_proof", "formula": formula},
-                "proof_token": auth["proof_token"],
+                "proof_token": auth["proof_token"]
             }
 
             response = requests.post(f"{TOOL_ROUTER_URL}/route", json=request_data, timeout=10)
@@ -262,10 +256,7 @@ The logical statement has been processed using automated theorem proving.
 
     async def fallback_process_message(self, message: str, session_id: str) -> str:
         """Fallback to original pattern matching if GPT fails"""
-        if any(
-            keyword in message.lower()
-            for keyword in ["analyze", "cluster", "semantic", "text analysis"]
-        ):
+        if any(keyword in message.lower() for keyword in ["analyze", "cluster", "semantic", "text analysis"]):
             return await self.handle_text_analysis(message, session_id)
         elif any(keyword in message.lower() for keyword in ["predict", "forecast", "trend"]):
             return await self.handle_forecasting(message, session_id)
@@ -303,9 +294,7 @@ The logical statement has been processed using automated theorem proving.
             return await self.get_system_status()
 
         elif cmd == "/capabilities":
-            caps = "\n".join(
-                [f"• {name}: {desc}" for name, desc in self.system_capabilities.items()]
-            )
+            caps = "\n".join([f"• {name}: {desc}" for name, desc in self.system_capabilities.items()])
             return f"🔧 LOGOS AI Capabilities:\n\n{caps}"
 
         elif cmd == "/clear":
@@ -325,14 +314,7 @@ The logical statement has been processed using automated theorem proving.
             # Extract text to analyze (improved parsing)
             text_to_analyze = message.lower()
             # Remove common prefixes
-            for prefix in [
-                "analyze this text:",
-                "analyze text:",
-                "analyze this:",
-                "analyze",
-                "cluster",
-                "semantic analysis of",
-            ]:
+            for prefix in ["analyze this text:", "analyze text:", "analyze this:", "analyze", "cluster", "semantic analysis of"]:
                 text_to_analyze = text_to_analyze.replace(prefix, "")
             text_to_analyze = text_to_analyze.strip()
 
@@ -340,24 +322,32 @@ The logical statement has been processed using automated theorem proving.
                 return "📝 Please provide some text to analyze. Example: 'analyze this text: Machine learning is fascinating'"
 
             # Split into sentences for clustering
-            sentences = [s.strip() for s in text_to_analyze.split(".") if s.strip()]
+            sentences = [s.strip() for s in text_to_analyze.split('.') if s.strip()]
             if len(sentences) < 2:
                 sentences = [text_to_analyze]  # Single text item
 
             # Call TETRAGNOS through Tool Router
             request_data = {
                 "tool": "tetragnos",
-                "args": {"op": "cluster_texts", "texts": sentences, "k": min(2, len(sentences))},
-                "proof_token": auth["proof_token"],
+                "args": {
+                    "op": "cluster_texts",
+                    "texts": sentences,
+                    "k": min(2, len(sentences))
+                },
+                "proof_token": auth["proof_token"]
             }
 
-            response = requests.post(f"{TOOL_ROUTER_URL}/route", json=request_data, timeout=10)
+            response = requests.post(
+                f"{TOOL_ROUTER_URL}/route",
+                json=request_data,
+                timeout=10
+            )
 
             if response.status_code == 200:
                 result = response.json()
-                analysis_result = result["result"]  # Tool Router wraps the response
-                clusters = analysis_result.get("k", 1)
-                items = analysis_result.get("items", [])
+                analysis_result = result['result']  # Tool Router wraps the response
+                clusters = analysis_result.get('k', 1)
+                items = analysis_result.get('items', [])
 
                 return f"""📊 Text Analysis Results:
 
@@ -382,8 +372,7 @@ The logical statement has been processed using automated theorem proving.
 
             # Simple number extraction (could be enhanced with NLP)
             import re
-
-            numbers = re.findall(r"-?\d+\.?\d*", message)
+            numbers = re.findall(r'-?\d+\.?\d*', message)
             if len(numbers) < 3:
                 return "📈 Please provide at least 3 numbers for forecasting. Example: 'predict trends for: 10, 12, 15, 18'"
 
@@ -392,15 +381,23 @@ The logical statement has been processed using automated theorem proving.
             # Call TELOS through Tool Router
             request_data = {
                 "tool": "telos",
-                "args": {"op": "forecast_series", "series": series, "horizon": 4},
-                "proof_token": auth["proof_token"],
+                "args": {
+                    "op": "forecast_series",
+                    "series": series,
+                    "horizon": 4
+                },
+                "proof_token": auth["proof_token"]
             }
 
-            response = requests.post(f"{TOOL_ROUTER_URL}/route", json=request_data, timeout=10)
+            response = requests.post(
+                f"{TOOL_ROUTER_URL}/route",
+                json=request_data,
+                timeout=10
+            )
 
             if response.status_code == 200:
                 result = response.json()
-                forecast = result["result"]["forecast"]
+                forecast = result['result']['forecast']
                 return f"""📈 Forecasting Results:
 
 **Input Data:** {', '.join(map(str, series))}
@@ -433,11 +430,18 @@ The trend analysis shows the data progression and predicts the next 4 values bas
             # Call THONOC through Tool Router
             request_data = {
                 "tool": "thonoc",
-                "args": {"op": "construct_proof", "formula": formula},
-                "proof_token": auth["proof_token"],
+                "args": {
+                    "op": "construct_proof",
+                    "formula": formula
+                },
+                "proof_token": auth["proof_token"]
             }
 
-            response = requests.post(f"{TOOL_ROUTER_URL}/route", json=request_data, timeout=10)
+            response = requests.post(
+                f"{TOOL_ROUTER_URL}/route",
+                json=request_data,
+                timeout=10
+            )
 
             if response.status_code == 200:
                 result = response.json()
@@ -463,9 +467,10 @@ The logical statement has been formally verified using automated theorem proving
         if session_id not in self.conversation_context:
             self.conversation_context[session_id] = []
 
-        self.conversation_context[session_id].append(
-            {"user": message, "timestamp": datetime.now().isoformat()}
-        )
+        self.conversation_context[session_id].append({
+            "user": message,
+            "timestamp": datetime.now().isoformat()
+        })
 
         # Simple pattern-based responses (can be enhanced with actual LLM)
         message_lower = message.lower()
@@ -475,7 +480,7 @@ The logical statement has been formally verified using automated theorem proving
 
 I'm powered by a proof-gated AI system with advanced capabilities:
 • 📝 Text analysis and semantic clustering
-• 📈 Time series forecasting and prediction  
+• 📈 Time series forecasting and prediction
 • 🔬 Automated theorem proving
 • 🛡️ Cryptographically secured operations
 
@@ -494,7 +499,7 @@ Type /help for more commands."""
 
 I'm part of an advanced AI alignment architecture that ensures all operations are:
 ✅ Cryptographically verified
-✅ Proof-gated for security  
+✅ Proof-gated for security
 ✅ Aligned with safety objectives
 ✅ Fully auditable
 
@@ -521,7 +526,7 @@ What would you like me to help you with?"""
             ("THONOC", 8067),
             ("TOOL_ROUTER", 8071),
             ("EXECUTOR", 8072),
-            ("LOGOS_API", 8090),
+            ("LOGOS_API", 8090)
         ]
 
         status_lines = ["🔍 LOGOS System Status:\n"]
@@ -537,15 +542,12 @@ What would you like me to help you with?"""
 
         return "\n".join(status_lines)
 
-
 # Initialize chat engine
 chat_engine = LOGOSChatEngine()
-
 
 @app.get("/health")
 def health():
     return {"ok": True, "service": "logos-interactive-chat"}
-
 
 @app.websocket("/ws/{session_id}")
 async def websocket_endpoint(websocket: WebSocket, session_id: str):
@@ -555,7 +557,7 @@ async def websocket_endpoint(websocket: WebSocket, session_id: str):
         welcome_msg = {
             "type": "system",
             "message": "🤖 Welcome to LOGOS Interactive Assistant! Type /help for commands or just start chatting.",
-            "timestamp": datetime.now().isoformat(),
+            "timestamp": datetime.now().isoformat()
         }
         await websocket.send_text(json.dumps(welcome_msg))
 
@@ -575,24 +577,21 @@ async def websocket_endpoint(websocket: WebSocket, session_id: str):
                 "type": "assistant",
                 "message": response,
                 "timestamp": datetime.now().isoformat(),
-                "session_id": session_id,
+                "session_id": session_id
             }
             await websocket.send_text(json.dumps(response_msg))
 
             # Update session
             if session_id in manager.user_sessions:
                 manager.user_sessions[session_id]["message_count"] += 1
-                manager.user_sessions[session_id]["conversation_history"].append(
-                    {
-                        "user": user_message,
-                        "assistant": response,
-                        "timestamp": datetime.now().isoformat(),
-                    }
-                )
+                manager.user_sessions[session_id]["conversation_history"].append({
+                    "user": user_message,
+                    "assistant": response,
+                    "timestamp": datetime.now().isoformat()
+                })
 
     except WebSocketDisconnect:
         manager.disconnect(websocket, session_id)
-
 
 @app.post("/chat", response_model=ChatResponse)
 async def chat_endpoint(message: ChatMessage):
@@ -603,9 +602,8 @@ async def chat_endpoint(message: ChatMessage):
         response=response_text,
         session_id=message.session_id,
         timestamp=datetime.now().isoformat(),
-        response_type="text",
+        response_type="text"
     )
-
 
 @app.post("/voice")
 async def voice_endpoint(voice_message: VoiceMessage):
@@ -614,9 +612,8 @@ async def voice_endpoint(voice_message: VoiceMessage):
     return {
         "status": "received",
         "message": "Voice processing not yet implemented. Use text chat for now.",
-        "session_id": voice_message.session_id,
+        "session_id": voice_message.session_id
     }
-
 
 @app.get("/sessions")
 async def get_active_sessions():
@@ -626,12 +623,10 @@ async def get_active_sessions():
         sessions[session_id] = {
             "connected_at": data["connected_at"].isoformat(),
             "message_count": data["message_count"],
-            "conversation_length": len(data["conversation_history"]),
+            "conversation_length": len(data["conversation_history"])
         }
     return {"active_sessions": len(sessions), "sessions": sessions}
 
-
 if __name__ == "__main__":
     import uvicorn
-
     uvicorn.run(app, host="127.0.0.1", port=8080)
