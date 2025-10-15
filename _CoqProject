@@ -2,5 +2,5 @@
 -Q modules/IEL                                         PXLs.IEL
 -Q tests                                                PXLs.tests
 
-# --- IEL-MathPraxis ---
--Q modules/iel-math/MathPraxis MathPraxis
+# --- IEL-ArithmoPraxis (Infrastructure Mathematics) ---
+-Q modules/infra/arithmo IEL.ArithmoPraxis

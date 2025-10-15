@@ -162,7 +162,7 @@
       "problemMatcher": []
     },
     {
-      "label": "Build MathPraxis",
+      "label": "Build ArithmoPraxis",
       "type": "shell",
       "command": "pwsh",
       "args": ["-NoProfile", "-Command", "cd '${workspaceFolder}'; coq_makefile -f _CoqProject -o Makefile; make -j4"],

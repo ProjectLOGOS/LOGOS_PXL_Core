@@ -1,0 +1,22 @@
+DIGEST fb4bd54e81bf098daf46ff44db6af616
+FModalWrap
+R62:65 Coq.Bool.Bool <> <> lib
+R67:71 Coq.Arith.Arith <> <> lib
+R73:75 Coq.micromega.Lia <> <> lib
+mod 146:168 <> ArithmoPraxis_ModalWrap
+ax 267:277 ArithmoPraxis_ModalWrap Necessarily
+R285:288 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+ax 329:336 ArithmoPraxis_ModalWrap Possibly
+R347:350 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+ax 388:403 ArithmoPraxis_ModalWrap Nec_implies_Poss
+binder 414:414 <> P:5
+R430:433 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R417:427 ModalWrap ArithmoPraxis_ModalWrap Necessarily defax
+R429:429 ModalWrap <> P:5 var
+R434:441 ModalWrap ArithmoPraxis_ModalWrap Possibly defax
+R443:443 ModalWrap <> P:5 var
+R555:565 ModalWrap ArithmoPraxis_ModalWrap Necessarily defax
+not 543:543 ArithmoPraxis_ModalWrap :::'□'_x
+R608:615 ModalWrap ArithmoPraxis_ModalWrap Possibly defax
+not 596:596 ArithmoPraxis_ModalWrap :::'◇'_x
+R640:662 ModalWrap ArithmoPraxis_ModalWrap <> mod
