@@ -1,0 +1,66 @@
+DIGEST 7cc3bb0c195149eea663640e3dbcf359
+Ftest_boolean
+R71:75 Coq.Arith.Arith <> <> lib
+R77:80 Coq.Bool.Bool <> <> lib
+R82:87 Coq.Strings.String <> <> lib
+R89:98 Coq.Lists.List <> <> lib
+R144:152 IEL.ArithmoPraxis.Core.ModalWrap <> <> lib
+R154:160 IEL.ArithmoPraxis.Core.Numbers <> <> lib
+mod 171:181 <> TestBoolean
+ind 228:231 TestBoolean prop
+constr 247:247 TestBoolean T
+constr 290:290 TestBoolean F
+constr 334:336 TestBoolean Var
+constr 395:397 TestBoolean Not
+constr 442:444 TestBoolean And
+constr 492:493 TestBoolean Or
+constr 542:544 TestBoolean Imp
+R251:254 test_boolean <> prop:1 ind
+R294:297 test_boolean <> prop:1 ind
+R343:346 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R340:342 Coq.Init.Datatypes <> nat ind
+R347:350 test_boolean <> prop:1 ind
+R405:408 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R401:404 test_boolean <> prop:1 ind
+R409:412 test_boolean <> prop:1 ind
+R452:455 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R448:451 test_boolean <> prop:1 ind
+R460:463 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R456:459 test_boolean <> prop:1 ind
+R464:467 test_boolean <> prop:1 ind
+R501:504 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R497:500 test_boolean <> prop:1 ind
+R509:512 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R505:508 test_boolean <> prop:1 ind
+R513:516 test_boolean <> prop:1 ind
+R552:555 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R548:551 test_boolean <> prop:1 ind
+R560:563 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R556:559 test_boolean <> prop:1 ind
+R564:567 test_boolean <> prop:1 ind
+scheme 228:231 TestBoolean prop_rect
+scheme 228:231 TestBoolean prop_ind
+scheme 228:231 TestBoolean prop_rec
+scheme 228:231 TestBoolean prop_sind
+def 621:623 TestBoolean lit
+R639:641 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R636:638 Coq.Init.Datatypes <> nat ind
+R642:645 Coq.Init.Datatypes <> bool ind
+def 662:667 TestBoolean clause
+R679:682 Coq.Init.Datatypes <> list ind
+R684:686 test_boolean TestBoolean lit def
+def 702:704 TestBoolean cnf
+R716:719 Coq.Init.Datatypes <> list ind
+R721:726 test_boolean TestBoolean clause def
+def 773:780 TestBoolean test_cnf
+R789:792 test_boolean TestBoolean prop ind
+binder 783:785 <> phi:3
+R797:799 test_boolean TestBoolean cnf def
+R814:816 test_boolean <> phi:3 var
+R829:829 test_boolean TestBoolean T constr
+R834:836 Coq.Init.Datatypes <> nil constr
+R850:850 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R854:858 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R851:853 Coq.Init.Datatypes <> nil constr
+R859:861 Coq.Init.Datatypes <> nil constr
+R878:888 test_boolean TestBoolean <> mod

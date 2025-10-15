@@ -33,10 +33,27 @@ jobs:
           make domain-empiricism
           make domain-modal-ontology
 
-      - name: ArithmoPraxis builds
+      - name: ArithmoPraxis v0.4 builds
         run: |
+          # Core infrastructure
           coqc modules/infra/arithmo/Core/ModalWrap.v
+          coqc modules/infra/arithmo/Core/Numbers.v
+          # v0.4 Boolean Logic domain
+          coqc modules/infra/arithmo/BooleanLogic/Boolean.v
+          # v0.4 ConstructiveSets domain
+          coqc modules/infra/arithmo/ConstructiveSets/Sets.v
+          # Enhanced Meta modules
+          coqc modules/infra/arithmo/Meta/Realizability.v
+          coqc modules/infra/arithmo/Meta/SIGNALS.v
+          # Examples
           coqc modules/infra/arithmo/Examples/Goldbach/ScanFeatures.v
+          # v0.4 TwinPrimes example (4 modules)
+          coqc modules/infra/arithmo/Examples/TwinPrimes/Spec.v
+          coqc modules/infra/arithmo/Examples/TwinPrimes/Extract.v
+          coqc modules/infra/arithmo/Examples/TwinPrimes/Verify.v
+          coqc modules/infra/arithmo/Examples/TwinPrimes/Scan.v
+          # Test suite
+          coqc tests/arithmo_suite.v
 
       - name: Property tests
         run: |

@@ -1,6 +1,0 @@
-fastapi>=0.115.0
-uvicorn>=0.30.6
-pydantic>=2.8.2
-requests>=2.32.3
-prometheus-client>=0.20.0
-redis>=5.0.7  # optional; safe to install

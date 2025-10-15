@@ -1,0 +1,102 @@
+{{- $component := "tool-router" -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "logos.toolRouter.fullname" . }}
+  labels:
+    {{- include "logos.labels" . | nindent 4 }}
+    app.kubernetes.io/component: {{ $component }}
+spec:
+  replicas: {{ .Values.toolRouter.replicaCount }}
+  selector:
+    matchLabels:
+      {{- $ctx := merge (dict "component" $component) . -}}
+      {{- include "logos.componentSelectorLabels" $ctx | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap-tool-router.yaml") . | sha256sum }}
+        {{- with .Values.toolRouter.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      labels:
+        {{- $ctx := merge (dict "component" $component) . -}}
+        {{- include "logos.componentSelectorLabels" $ctx | nindent 8 }}
+        {{- with .Values.toolRouter.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.toolRouter.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "logos.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.toolRouter.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}-tool-router
+          securityContext:
+            {{- toYaml .Values.toolRouter.securityContext | nindent 12 }}
+          image: {{ include "logos.image" (dict "image" .Values.toolRouter.image "tag" .Values.toolRouter.imageTag "Chart" .Chart "Values" .Values) }}
+          imagePullPolicy: {{ .Values.toolRouter.imagePullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.toolRouter.service.targetPort }}
+              protocol: TCP
+            - name: metrics
+              containerPort: 9090
+              protocol: TCP
+          env:
+            - name: PORT
+              value: {{ .Values.toolRouter.service.targetPort | quote }}
+            - name: LOGOS_API_URL
+              value: "http://{{ include "logos.logosApi.fullname" . }}:{{ .Values.logosApi.service.port }}"
+            {{- if .Values.global.useRedisLimiter }}
+            - name: REDIS_URL
+              value: {{ include "logos.redisUrl" . | quote }}
+            {{- end }}
+            {{- include "logos.signingEnvVars" . | nindent 12 }}
+            {{- with .Values.toolRouter.env }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "logos.toolRouter.fullname" . }}-config
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+          resources:
+            {{- toYaml .Values.toolRouter.resources | nindent 12 }}
+          {{- with .Values.toolRouter.volumeMounts }}
+          volumeMounts:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.toolRouter.volumes }}
+      volumes:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.toolRouter.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.toolRouter.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.toolRouter.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

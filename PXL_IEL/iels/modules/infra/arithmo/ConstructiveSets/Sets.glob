@@ -1,0 +1,639 @@
+DIGEST 8ff9b6d7563787b34382ecfb84ce9d95
+FIEL.ArithmoPraxis.ConstructiveSets.Sets
+R221:224 Coq.Lists.List <> <> lib
+R226:229 Coq.Bool.Bool <> <> lib
+R231:235 Coq.Arith.Arith <> <> lib
+R281:289 IEL.ArithmoPraxis.Core.ModalWrap <> <> lib
+R291:297 IEL.ArithmoPraxis.Core.Numbers <> <> lib
+R308:320 Coq.Lists.List ListNotations <> mod
+mod 331:348 <> ArithmoPraxis_Sets
+rec 446:450 ArithmoPraxis_Sets DecEq
+proj 470:472 ArithmoPraxis_Sets deq
+binder 453:453 <> A:1
+R490:490 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:1 var
+binder 484:484 <> x:3
+binder 486:486 <> y:4
+R494:494 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R500:504 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R511:511 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R496:498 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R495:495 IEL.ArithmoPraxis.ConstructiveSets.Sets <> x:3 var
+R499:499 IEL.ArithmoPraxis.ConstructiveSets.Sets <> y:4 var
+R506:509 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R505:505 IEL.ArithmoPraxis.ConstructiveSets.Sets <> x:3 var
+R510:510 IEL.ArithmoPraxis.ConstructiveSets.Sets <> y:4 var
+inst 572:580 ArithmoPraxis_Sets DecEq_nat
+R584:588 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets DecEq class
+R590:592 Coq.Init.Datatypes <> nat ind
+R601:603 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets deq meth
+R608:617 Coq.Arith.PeanoNat Nat eq_dec thm
+inst 671:680 ArithmoPraxis_Sets DecEq_bool
+R684:688 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets DecEq class
+R690:693 Coq.Init.Datatypes <> bool ind
+R702:704 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets deq meth
+R709:721 Coq.Bool.Bool <> bool_dec thm
+def 838:840 ArithmoPraxis_Sets set
+binder 843:843 <> A:6
+R863:866 Coq.Init.Datatypes <> list ind
+R868:868 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:6 var
+def 945:947 ArithmoPraxis_Sets mem
+binder 950:950 <> A:7
+R962:966 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets DecEq class
+R968:968 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:7 var
+binder 962:968 <> H:8
+R976:976 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:7 var
+binder 972:972 <> x:9
+R984:986 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R988:988 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:7 var
+binder 980:980 <> s:10
+R993:996 Coq.Init.Datatypes <> bool ind
+R1009:1009 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s:10 var
+R1020:1021 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R1026:1030 Coq.Init.Datatypes <> false constr
+R1037:1040 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1058:1060 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets deq meth
+R1062:1062 IEL.ArithmoPraxis.ConstructiveSets.Sets <> x:9 var
+R1077:1080 Coq.Init.Specif <> left constr
+R1087:1090 Coq.Init.Datatypes <> true constr
+R1098:1102 Coq.Init.Specif <> right constr
+R1109:1111 IEL.ArithmoPraxis.ConstructiveSets.Sets <> mem:11 def
+R1113:1113 IEL.ArithmoPraxis.ConstructiveSets.Sets <> x:9 var
+def 1171:1176 ArithmoPraxis_Sets In_set
+binder 1179:1179 <> A:13
+R1191:1195 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets DecEq class
+R1197:1197 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:13 var
+binder 1191:1197 <> H:14
+R1205:1205 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:13 var
+binder 1201:1201 <> x:15
+R1213:1215 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R1217:1217 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:13 var
+binder 1209:1209 <> s:16
+R1239:1241 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1232:1234 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets mem def
+R1238:1238 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s:16 var
+R1236:1236 IEL.ArithmoPraxis.ConstructiveSets.Sets <> x:15 var
+R1242:1245 Coq.Init.Datatypes <> true constr
+def 1332:1337 ArithmoPraxis_Sets insert
+binder 1340:1340 <> A:17
+R1352:1356 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets DecEq class
+R1358:1358 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:17 var
+binder 1352:1358 <> H:18
+R1366:1366 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:17 var
+binder 1362:1362 <> x:19
+R1374:1376 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R1378:1378 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:17 var
+binder 1370:1370 <> s:20
+R1383:1385 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R1387:1387 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:17 var
+R1395:1398 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1394:1394 IEL.ArithmoPraxis.ConstructiveSets.Sets <> x:19 var
+R1399:1399 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s:20 var
+def 1452:1457 ArithmoPraxis_Sets remove
+binder 1460:1460 <> A:21
+R1472:1476 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets DecEq class
+R1478:1478 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:21 var
+binder 1472:1478 <> H:22
+R1486:1486 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:21 var
+binder 1482:1482 <> x:23
+R1494:1496 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R1498:1498 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:21 var
+binder 1490:1490 <> s:24
+R1503:1505 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R1507:1507 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:21 var
+R1520:1520 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s:24 var
+R1531:1532 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R1537:1538 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R1545:1548 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1566:1568 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets deq meth
+R1570:1570 IEL.ArithmoPraxis.ConstructiveSets.Sets <> x:23 var
+R1585:1588 Coq.Init.Specif <> left constr
+R1595:1600 IEL.ArithmoPraxis.ConstructiveSets.Sets <> remove:25 def
+R1602:1602 IEL.ArithmoPraxis.ConstructiveSets.Sets <> x:23 var
+R1613:1617 Coq.Init.Specif <> right constr
+R1625:1629 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1641:1641 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1630:1635 IEL.ArithmoPraxis.ConstructiveSets.Sets <> remove:25 def
+R1637:1637 IEL.ArithmoPraxis.ConstructiveSets.Sets <> x:23 var
+def 1725:1729 ArithmoPraxis_Sets dedup
+binder 1732:1732 <> A:27
+R1744:1748 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets DecEq class
+R1750:1750 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:27 var
+binder 1744:1750 <> H:28
+R1758:1760 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R1762:1762 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:27 var
+binder 1754:1754 <> s:29
+R1767:1769 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R1771:1771 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:27 var
+R1784:1784 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s:29 var
+R1795:1796 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R1801:1802 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R1809:1812 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1822:1824 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets mem def
+R1851:1855 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1864:1864 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1856:1860 IEL.ArithmoPraxis.ConstructiveSets.Sets <> dedup:30 def
+R1836:1840 IEL.ArithmoPraxis.ConstructiveSets.Sets <> dedup:30 def
+def 1910:1914 ArithmoPraxis_Sets union
+binder 1917:1917 <> A:32
+R1929:1933 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets DecEq class
+R1935:1935 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:32 var
+binder 1929:1935 <> H:33
+R1947:1949 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R1951:1951 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:32 var
+binder 1939:1940 <> s1:34
+binder 1942:1943 <> s2:35
+R1956:1958 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R1960:1960 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:32 var
+R1967:1971 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets dedup def
+R1974:1976 Coq.Init.Datatypes <> app def
+R1981:1982 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s2:35 var
+R1978:1979 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s1:34 var
+def 2028:2032 ArithmoPraxis_Sets inter
+binder 2035:2035 <> A:36
+R2047:2051 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets DecEq class
+R2053:2053 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:36 var
+binder 2047:2053 <> H:37
+R2065:2067 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R2069:2069 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:36 var
+binder 2057:2058 <> s1:38
+binder 2060:2061 <> s2:39
+R2074:2076 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R2078:2078 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:36 var
+R2091:2092 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s1:38 var
+R2103:2104 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R2109:2110 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R2117:2120 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2130:2132 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets mem def
+R2136:2137 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s2:39 var
+R2168:2172 IEL.ArithmoPraxis.ConstructiveSets.Sets <> inter:40 def
+R2177:2178 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s2:39 var
+R2145:2149 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2161:2161 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2150:2154 IEL.ArithmoPraxis.ConstructiveSets.Sets <> inter:40 def
+R2159:2160 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s2:39 var
+def 2219:2222 ArithmoPraxis_Sets diff
+binder 2225:2225 <> A:42
+R2237:2241 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets DecEq class
+R2243:2243 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:42 var
+binder 2237:2243 <> H:43
+R2255:2257 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R2259:2259 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:42 var
+binder 2247:2248 <> s1:44
+binder 2250:2251 <> s2:45
+R2264:2266 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R2268:2268 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:42 var
+R2281:2282 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s1:44 var
+R2293:2294 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R2299:2300 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R2307:2310 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2320:2322 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets mem def
+R2326:2327 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s2:45 var
+R2351:2355 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2366:2366 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2356:2359 IEL.ArithmoPraxis.ConstructiveSets.Sets <> diff:46 def
+R2364:2365 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s2:45 var
+R2334:2337 IEL.ArithmoPraxis.ConstructiveSets.Sets <> diff:46 def
+R2342:2343 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s2:45 var
+def 2408:2413 ArithmoPraxis_Sets subset
+binder 2416:2416 <> A:48
+R2428:2432 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets DecEq class
+R2434:2434 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:48 var
+binder 2428:2434 <> H:49
+R2446:2448 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R2450:2450 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:48 var
+binder 2438:2439 <> s1:50
+binder 2441:2442 <> s2:51
+R2455:2458 Coq.Init.Datatypes <> bool ind
+R2471:2472 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s1:50 var
+R2483:2484 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R2489:2492 Coq.Init.Datatypes <> true constr
+R2499:2502 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2509:2512 Coq.Init.Datatypes <> andb def
+R2526:2531 IEL.ArithmoPraxis.ConstructiveSets.Sets <> subset:52 def
+R2536:2537 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s2:51 var
+R2515:2517 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets mem def
+R2521:2522 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s2:51 var
+def 2619:2626 ArithmoPraxis_Sets map_type
+binder 2629:2629 <> A:54
+binder 2631:2631 <> B:55
+R2651:2654 Coq.Init.Datatypes <> list ind
+R2658:2660 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R2657:2657 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:54 var
+R2661:2661 IEL.ArithmoPraxis.ConstructiveSets.Sets <> B:55 var
+def 2696:2701 ArithmoPraxis_Sets lookup
+binder 2704:2704 <> A:56
+binder 2706:2706 <> B:57
+R2718:2722 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets DecEq class
+R2724:2724 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:56 var
+binder 2718:2724 <> H:58
+R2732:2732 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:56 var
+binder 2728:2728 <> k:59
+R2740:2747 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets map_type def
+R2749:2749 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:56 var
+R2751:2751 IEL.ArithmoPraxis.ConstructiveSets.Sets <> B:57 var
+binder 2736:2736 <> m:60
+R2756:2761 Coq.Init.Datatypes <> option ind
+R2763:2763 IEL.ArithmoPraxis.ConstructiveSets.Sets <> B:57 var
+R2776:2776 IEL.ArithmoPraxis.ConstructiveSets.Sets <> m:60 var
+R2787:2788 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R2793:2796 Coq.Init.Datatypes <> None constr
+R2809:2812 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2802:2802 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2805:2806 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2808:2808 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2832:2834 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets deq meth
+R2836:2836 IEL.ArithmoPraxis.ConstructiveSets.Sets <> k:59 var
+R2852:2855 Coq.Init.Specif <> left constr
+R2862:2865 Coq.Init.Datatypes <> Some constr
+R2875:2879 Coq.Init.Specif <> right constr
+R2886:2891 IEL.ArithmoPraxis.ConstructiveSets.Sets <> lookup:61 def
+R2893:2893 IEL.ArithmoPraxis.ConstructiveSets.Sets <> k:59 var
+def 2955:2964 ArithmoPraxis_Sets map_insert
+binder 2967:2967 <> A:63
+binder 2969:2969 <> B:64
+R2981:2985 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets DecEq class
+R2987:2987 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:63 var
+binder 2981:2987 <> H:65
+R2995:2995 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:63 var
+binder 2991:2991 <> k:66
+R3003:3003 IEL.ArithmoPraxis.ConstructiveSets.Sets <> B:64 var
+binder 2999:2999 <> v:67
+R3011:3018 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets map_type def
+R3020:3020 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:63 var
+R3022:3022 IEL.ArithmoPraxis.ConstructiveSets.Sets <> B:64 var
+binder 3007:3007 <> m:68
+R3027:3034 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets map_type def
+R3036:3036 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:63 var
+R3038:3038 IEL.ArithmoPraxis.ConstructiveSets.Sets <> B:64 var
+R3051:3054 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3045:3045 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3047:3048 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3050:3050 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3046:3046 IEL.ArithmoPraxis.ConstructiveSets.Sets <> k:66 var
+R3049:3049 IEL.ArithmoPraxis.ConstructiveSets.Sets <> v:67 var
+R3055:3055 IEL.ArithmoPraxis.ConstructiveSets.Sets <> m:68 var
+def 3091:3100 ArithmoPraxis_Sets map_remove
+binder 3103:3103 <> A:69
+binder 3105:3105 <> B:70
+R3117:3121 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets DecEq class
+R3123:3123 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:69 var
+binder 3117:3123 <> H:71
+R3131:3131 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:69 var
+binder 3127:3127 <> k:72
+R3139:3146 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets map_type def
+R3148:3148 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:69 var
+R3150:3150 IEL.ArithmoPraxis.ConstructiveSets.Sets <> B:70 var
+binder 3135:3135 <> m:73
+R3155:3162 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets map_type def
+R3164:3164 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:69 var
+R3166:3166 IEL.ArithmoPraxis.ConstructiveSets.Sets <> B:70 var
+R3179:3179 IEL.ArithmoPraxis.ConstructiveSets.Sets <> m:73 var
+R3190:3191 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R3196:3197 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R3210:3213 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3203:3203 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3206:3207 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3209:3209 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3233:3235 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets deq meth
+R3237:3237 IEL.ArithmoPraxis.ConstructiveSets.Sets <> k:72 var
+R3253:3256 Coq.Init.Specif <> left constr
+R3263:3272 IEL.ArithmoPraxis.ConstructiveSets.Sets <> map_remove:74 def
+R3274:3274 IEL.ArithmoPraxis.ConstructiveSets.Sets <> k:72 var
+R3287:3291 Coq.Init.Specif <> right constr
+R3305:3309 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3327:3327 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3298:3298 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3301:3302 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3304:3304 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3310:3319 IEL.ArithmoPraxis.ConstructiveSets.Sets <> map_remove:74 def
+R3321:3321 IEL.ArithmoPraxis.ConstructiveSets.Sets <> k:72 var
+def 3443:3448 ArithmoPraxis_Sets filter
+binder 3451:3451 <> A:76
+R3467:3470 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3466:3466 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:76 var
+R3471:3474 Coq.Init.Datatypes <> bool ind
+binder 3462:3462 <> p:77
+R3482:3484 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R3486:3486 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:76 var
+binder 3478:3478 <> s:78
+R3491:3493 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R3495:3495 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:76 var
+R3508:3508 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s:78 var
+R3519:3520 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R3525:3526 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R3533:3536 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3546:3546 IEL.ArithmoPraxis.ConstructiveSets.Sets <> p:77 var
+R3581:3586 IEL.ArithmoPraxis.ConstructiveSets.Sets <> filter:79 def
+R3590:3590 IEL.ArithmoPraxis.ConstructiveSets.Sets <> p:77 var
+R3588:3588 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:76 var
+R3556:3560 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3574:3574 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3561:3566 IEL.ArithmoPraxis.ConstructiveSets.Sets <> filter:79 def
+R3570:3570 IEL.ArithmoPraxis.ConstructiveSets.Sets <> p:77 var
+R3568:3568 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:76 var
+def 3641:3647 ArithmoPraxis_Sets map_set
+binder 3650:3650 <> A:81
+binder 3652:3652 <> B:82
+R3668:3671 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3667:3667 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:81 var
+R3672:3672 IEL.ArithmoPraxis.ConstructiveSets.Sets <> B:82 var
+binder 3663:3663 <> f:83
+R3680:3682 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R3684:3684 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:81 var
+binder 3676:3676 <> s:84
+R3689:3691 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R3693:3693 IEL.ArithmoPraxis.ConstructiveSets.Sets <> B:82 var
+R3706:3706 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s:84 var
+R3717:3718 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R3723:3724 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R3731:3734 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3741:3741 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3745:3750 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3767:3767 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3742:3742 IEL.ArithmoPraxis.ConstructiveSets.Sets <> f:83 var
+R3751:3757 IEL.ArithmoPraxis.ConstructiveSets.Sets <> map_set:85 def
+R3763:3763 IEL.ArithmoPraxis.ConstructiveSets.Sets <> f:83 var
+R3761:3761 IEL.ArithmoPraxis.ConstructiveSets.Sets <> B:82 var
+R3759:3759 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:81 var
+def 3841:3853 ArithmoPraxis_Sets fold_left_set
+binder 3856:3856 <> A:87
+binder 3858:3858 <> B:88
+R3874:3877 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3873:3873 IEL.ArithmoPraxis.ConstructiveSets.Sets <> B:88 var
+R3879:3882 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3878:3878 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:87 var
+R3883:3883 IEL.ArithmoPraxis.ConstructiveSets.Sets <> B:88 var
+binder 3869:3869 <> f:89
+R3893:3893 IEL.ArithmoPraxis.ConstructiveSets.Sets <> B:88 var
+binder 3887:3889 <> acc:90
+R3901:3903 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R3905:3905 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:87 var
+binder 3897:3897 <> s:91
+R3910:3910 IEL.ArithmoPraxis.ConstructiveSets.Sets <> B:88 var
+R3917:3925 Coq.Lists.List <> fold_left def
+R3931:3933 IEL.ArithmoPraxis.ConstructiveSets.Sets <> acc:90 var
+R3929:3929 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s:91 var
+R3927:3927 IEL.ArithmoPraxis.ConstructiveSets.Sets <> f:89 var
+def 3975:3988 ArithmoPraxis_Sets fold_right_set
+binder 3991:3991 <> A:92
+binder 3993:3993 <> B:93
+R4009:4012 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4008:4008 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:92 var
+R4014:4017 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4013:4013 IEL.ArithmoPraxis.ConstructiveSets.Sets <> B:93 var
+R4018:4018 IEL.ArithmoPraxis.ConstructiveSets.Sets <> B:93 var
+binder 4004:4004 <> f:94
+R4026:4028 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R4030:4030 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:92 var
+binder 4022:4022 <> s:95
+R4040:4040 IEL.ArithmoPraxis.ConstructiveSets.Sets <> B:93 var
+binder 4034:4036 <> acc:96
+R4045:4045 IEL.ArithmoPraxis.ConstructiveSets.Sets <> B:93 var
+R4052:4061 Coq.Lists.List <> fold_right def
+R4069:4069 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s:95 var
+R4065:4067 IEL.ArithmoPraxis.ConstructiveSets.Sets <> acc:96 var
+R4063:4063 IEL.ArithmoPraxis.ConstructiveSets.Sets <> f:94 var
+prf 4153:4162 ArithmoPraxis_Sets union_comm
+binder 4165:4165 <> A:97
+R4177:4181 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets DecEq class
+R4183:4183 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:97 var
+binder 4177:4183 <> H:98
+R4204:4206 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R4208:4208 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:97 var
+binder 4196:4197 <> s1:99
+binder 4199:4200 <> s2:100
+R4225:4227 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R4214:4218 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets union def
+R4223:4224 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s2:100 var
+R4220:4221 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s1:99 var
+R4228:4232 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets union def
+R4237:4238 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s1:99 var
+R4234:4235 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s2:100 var
+prf 4348:4358 ArithmoPraxis_Sets union_assoc
+binder 4361:4361 <> A:101
+R4373:4377 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets DecEq class
+R4379:4379 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:101 var
+binder 4373:4379 <> H:102
+R4403:4405 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R4407:4407 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:101 var
+binder 4392:4393 <> s1:103
+binder 4395:4396 <> s2:104
+binder 4398:4399 <> s3:105
+R4435:4437 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R4413:4417 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets union def
+R4433:4434 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s3:105 var
+R4420:4424 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets union def
+R4429:4430 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s2:104 var
+R4426:4427 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s1:103 var
+R4438:4442 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets union def
+R4448:4452 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets union def
+R4457:4458 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s3:105 var
+R4454:4455 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s2:104 var
+R4444:4445 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s1:103 var
+prf 4579:4588 ArithmoPraxis_Sets inter_comm
+binder 4591:4591 <> A:106
+R4603:4607 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets DecEq class
+R4609:4609 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:106 var
+binder 4603:4609 <> H:107
+R4630:4632 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R4634:4634 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:106 var
+binder 4622:4623 <> s1:108
+binder 4625:4626 <> s2:109
+R4651:4653 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R4640:4644 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets inter def
+R4649:4650 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s2:109 var
+R4646:4647 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s1:108 var
+R4654:4658 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets inter def
+R4663:4664 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s1:108 var
+R4660:4661 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s2:109 var
+prf 4781:4791 ArithmoPraxis_Sets inter_assoc
+binder 4794:4794 <> A:110
+R4806:4810 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets DecEq class
+R4812:4812 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:110 var
+binder 4806:4812 <> H:111
+R4836:4838 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R4840:4840 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:110 var
+binder 4825:4826 <> s1:112
+binder 4828:4829 <> s2:113
+binder 4831:4832 <> s3:114
+R4868:4870 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R4846:4850 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets inter def
+R4866:4867 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s3:114 var
+R4853:4857 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets inter def
+R4862:4863 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s2:113 var
+R4859:4860 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s1:112 var
+R4871:4875 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets inter def
+R4881:4885 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets inter def
+R4890:4891 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s3:114 var
+R4887:4888 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s2:113 var
+R4877:4878 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s1:112 var
+prf 5004:5013 ArithmoPraxis_Sets union_idem
+binder 5016:5016 <> A:115
+R5028:5032 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets DecEq class
+R5034:5034 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:115 var
+binder 5028:5034 <> H:116
+R5051:5053 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R5055:5055 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:115 var
+binder 5047:5047 <> s:117
+R5070:5072 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5061:5065 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets union def
+R5069:5069 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s:117 var
+R5067:5067 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s:117 var
+R5073:5073 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s:117 var
+prf 5229:5248 ArithmoPraxis_Sets map_preserves_length
+binder 5251:5251 <> A:118
+binder 5253:5253 <> B:119
+R5278:5281 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R5277:5277 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:118 var
+R5282:5282 IEL.ArithmoPraxis.ConstructiveSets.Sets <> B:119 var
+binder 5273:5273 <> f:120
+R5290:5292 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R5294:5294 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:118 var
+binder 5286:5286 <> s:121
+R5324:5326 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5300:5305 Coq.Init.Datatypes <> length def
+R5308:5314 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets map_set def
+R5316:5316 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:118 var
+R5318:5318 IEL.ArithmoPraxis.ConstructiveSets.Sets <> B:119 var
+R5320:5320 IEL.ArithmoPraxis.ConstructiveSets.Sets <> f:120 var
+R5322:5322 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s:121 var
+R5327:5332 Coq.Init.Datatypes <> length def
+R5334:5334 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s:121 var
+prf 5500:5515 ArithmoPraxis_Sets filter_length_le
+binder 5518:5518 <> A:122
+R5543:5546 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R5542:5542 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:122 var
+R5547:5550 Coq.Init.Datatypes <> bool ind
+binder 5538:5538 <> p:123
+R5558:5560 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R5562:5562 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:122 var
+binder 5554:5554 <> s:124
+R5589:5592 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
+R5568:5573 Coq.Init.Datatypes <> length def
+R5576:5581 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets filter def
+R5583:5583 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:122 var
+R5585:5585 IEL.ArithmoPraxis.ConstructiveSets.Sets <> p:123 var
+R5587:5587 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s:124 var
+R5593:5598 Coq.Init.Datatypes <> length def
+R5600:5600 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s:124 var
+def 5828:5835 ArithmoPraxis_Sets test_set
+R5839:5841 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R5843:5845 Coq.Init.Datatypes <> nat ind
+R5850:5850 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R5852:5853 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R5855:5856 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R5858:5859 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R5861:5862 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R5864:5864 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+def 5902:5911 ArithmoPraxis_Sets test_mem_1
+R5915:5918 Coq.Init.Datatypes <> bool ind
+R5923:5925 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets mem def
+R5929:5936 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets test_set def
+def 5950:5959 ArithmoPraxis_Sets test_mem_2
+R5963:5966 Coq.Init.Datatypes <> bool ind
+R5971:5973 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets mem def
+R5977:5984 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets test_set def
+def 6025:6034 ArithmoPraxis_Sets test_dedup
+R6038:6040 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R6042:6044 Coq.Init.Datatypes <> nat ind
+R6049:6053 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets dedup def
+R6055:6062 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets test_set def
+def 6104:6107 ArithmoPraxis_Sets set1
+R6111:6113 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R6115:6117 Coq.Init.Datatypes <> nat ind
+R6122:6122 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R6124:6125 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R6127:6128 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R6130:6130 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+def 6144:6147 ArithmoPraxis_Sets set2
+R6151:6153 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R6155:6157 Coq.Init.Datatypes <> nat ind
+R6162:6162 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R6164:6165 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R6167:6168 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R6170:6170 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+def 6184:6193 ArithmoPraxis_Sets test_union
+R6197:6199 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R6201:6203 Coq.Init.Datatypes <> nat ind
+R6208:6212 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets union def
+R6219:6222 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set2 def
+R6214:6217 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set1 def
+def 6236:6245 ArithmoPraxis_Sets test_inter
+R6249:6251 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R6253:6255 Coq.Init.Datatypes <> nat ind
+R6260:6264 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets inter def
+R6271:6274 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set2 def
+R6266:6269 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set1 def
+def 6288:6296 ArithmoPraxis_Sets test_diff
+R6300:6302 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R6304:6306 Coq.Init.Datatypes <> nat ind
+R6311:6314 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets diff def
+R6321:6324 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set2 def
+R6316:6319 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set1 def
+def 6382:6389 ArithmoPraxis_Sets test_map
+R6393:6400 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets map_type def
+R6402:6404 Coq.Init.Datatypes <> nat ind
+R6406:6408 Coq.Init.Datatypes <> nat ind
+R6416:6416 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R6425:6426 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R6435:6436 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R6445:6445 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R6417:6417 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R6419:6420 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R6424:6424 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R6427:6427 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R6429:6430 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R6434:6434 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R6437:6437 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R6439:6440 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R6444:6444 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+def 6479:6491 ArithmoPraxis_Sets test_lookup_1
+R6495:6500 Coq.Init.Datatypes <> option ind
+R6502:6504 Coq.Init.Datatypes <> nat ind
+R6509:6514 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets lookup def
+R6518:6525 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets test_map def
+def 6539:6551 ArithmoPraxis_Sets test_lookup_2
+R6555:6560 Coq.Init.Datatypes <> option ind
+R6562:6564 Coq.Init.Datatypes <> nat ind
+R6569:6574 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets lookup def
+R6578:6585 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets test_map def
+def 6668:6676 ArithmoPraxis_Sets empty_set
+binder 6679:6679 <> A:125
+R6691:6693 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R6695:6695 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:125 var
+R6700:6701 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+def 6715:6723 ArithmoPraxis_Sets singleton
+binder 6726:6726 <> A:126
+R6738:6742 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets DecEq class
+R6744:6744 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:126 var
+binder 6738:6744 <> H:127
+R6752:6752 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:126 var
+binder 6748:6748 <> x:128
+R6757:6759 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R6761:6761 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:126 var
+R6766:6766 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R6768:6768 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R6767:6767 IEL.ArithmoPraxis.ConstructiveSets.Sets <> x:128 var
+def 6782:6789 ArithmoPraxis_Sets is_empty
+binder 6792:6792 <> A:129
+R6807:6809 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R6811:6811 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:129 var
+binder 6803:6803 <> s:130
+R6816:6819 Coq.Init.Datatypes <> bool ind
+R6833:6833 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s:130 var
+R6844:6845 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R6850:6853 Coq.Init.Datatypes <> true constr
+R6864:6868 Coq.Init.Datatypes <> false constr
+def 6930:6933 ArithmoPraxis_Sets card
+binder 6936:6936 <> A:132
+R6948:6952 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets DecEq class
+R6954:6954 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:132 var
+binder 6948:6954 <> H:133
+R6962:6964 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets set def
+R6966:6966 IEL.ArithmoPraxis.ConstructiveSets.Sets <> A:132 var
+binder 6958:6958 <> s:134
+R6971:6973 Coq.Init.Datatypes <> nat ind
+R6978:6983 Coq.Init.Datatypes <> length def
+R6986:6990 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets dedup def
+R6992:6992 IEL.ArithmoPraxis.ConstructiveSets.Sets <> s:134 var
+R7001:7018 IEL.ArithmoPraxis.ConstructiveSets.Sets ArithmoPraxis_Sets <> mod

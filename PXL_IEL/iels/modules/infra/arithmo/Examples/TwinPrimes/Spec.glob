@@ -1,0 +1,121 @@
+DIGEST 24d455dc3374db39ea1afdddf6a424fd
+FIEL.ArithmoPraxis.Examples.TwinPrimes.Spec
+R163:167 Coq.Arith.Arith <> <> lib
+R169:172 Coq.Bool.Bool <> <> lib
+R218:224 IEL.ArithmoPraxis.Core.Numbers <> <> lib
+R226:234 IEL.ArithmoPraxis.Core.ModalWrap <> <> lib
+def 337:340 <> Twin
+R347:349 Coq.Init.Datatypes <> nat ind
+binder 343:343 <> p:1
+R391:394 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R362:388 IEL.ArithmoPraxis.Core.Numbers ArithmoPraxis_Numbers prime def
+R390:390 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> p:1 var
+R395:421 IEL.ArithmoPraxis.Core.Numbers ArithmoPraxis_Numbers prime def
+R425:427 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R424:424 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> p:1 var
+def 495:503 <> TwinCover
+R510:512 Coq.Init.Datatypes <> nat ind
+binder 506:506 <> n:2
+R525:531 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R533:534 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 532:532 <> p:3
+R541:544 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R536:539 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
+R535:535 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> p:3 var
+R540:540 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> n:2 var
+R545:548 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> Twin def
+R550:550 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> p:3 var
+def 639:645 <> NecTwin
+R652:654 Coq.Init.Datatypes <> nat ind
+binder 648:648 <> p:4
+R667:701 IEL.ArithmoPraxis.Core.ModalWrap ArithmoPraxis_ModalWrap Necessarily defax
+R704:707 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> Twin def
+R709:709 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> p:4 var
+def 759:766 <> PossTwin
+R773:775 Coq.Init.Datatypes <> nat ind
+binder 769:769 <> p:5
+R788:819 IEL.ArithmoPraxis.Core.ModalWrap ArithmoPraxis_ModalWrap Possibly defax
+R822:825 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> Twin def
+R827:827 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> p:5 var
+def 888:899 <> NecTwinCover
+R906:908 Coq.Init.Datatypes <> nat ind
+binder 902:902 <> n:6
+R921:955 IEL.ArithmoPraxis.Core.ModalWrap ArithmoPraxis_ModalWrap Necessarily defax
+R958:966 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> TwinCover def
+R968:968 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> n:6 var
+prf 1107:1114 <> twin_3_5
+R1118:1121 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> Twin def
+prf 1232:1239 <> twin_5_7
+R1243:1246 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> Twin def
+prf 1357:1366 <> twin_11_13
+R1370:1373 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> Twin def
+prf 1487:1496 <> twin_17_19
+R1500:1503 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> Twin def
+prf 1680:1692 <> twin_cover_20
+R1696:1704 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> TwinCover def
+R1801:1808 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> twin_3_5 prfax
+R1801:1808 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> twin_3_5 prfax
+prf 1879:1902 <> twin_infinity_conjecture
+binder 1913:1913 <> n:7
+R1916:1922 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R1924:1925 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 1923:1923 <> p:8
+R1931:1934 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R1927:1929 Coq.Init.Peano <> ::nat_scope:x_'>'_x not
+R1926:1926 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> p:8 var
+R1930:1930 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> n:7 var
+R1935:1938 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> Twin def
+R1940:1940 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> p:8 var
+prf 2110:2123 <> twin_necessity
+binder 2134:2134 <> p:9
+R2145:2148 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2139:2142 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> Twin def
+R2144:2144 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> p:9 var
+R2149:2183 IEL.ArithmoPraxis.Core.ModalWrap ArithmoPraxis_ModalWrap Necessarily defax
+R2186:2192 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R2194:2195 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 2193:2193 <> q:10
+R2196:2199 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> Twin def
+R2201:2201 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> q:10 var
+prf 2338:2353 <> modal_twin_cover
+binder 2364:2364 <> n:11
+R2380:2383 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2369:2377 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> TwinCover def
+R2379:2379 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> n:11 var
+R2384:2415 IEL.ArithmoPraxis.Core.ModalWrap ArithmoPraxis_ModalWrap Possibly defax
+R2418:2426 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> TwinCover def
+R2430:2432 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R2429:2429 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> n:11 var
+def 2632:2641 <> check_twin
+R2648:2650 Coq.Init.Datatypes <> nat ind
+binder 2644:2644 <> p:12
+R2655:2658 Coq.Init.Datatypes <> bool ind
+R2697:2700 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R2665:2694 IEL.ArithmoPraxis.Core.Numbers ArithmoPraxis_Numbers is_prime def
+R2696:2696 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> p:12 var
+R2701:2730 IEL.ArithmoPraxis.Core.Numbers ArithmoPraxis_Numbers is_prime def
+R2734:2736 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R2733:2733 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> p:12 var
+prf 2790:2805 <> check_twin_sound
+binder 2816:2816 <> p:13
+R2840:2843 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2833:2835 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2821:2830 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> check_twin def
+R2832:2832 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> p:13 var
+R2836:2839 Coq.Init.Datatypes <> true constr
+R2844:2847 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> Twin def
+R2849:2849 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> p:13 var
+R2887:2896 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> check_twin def
+R2918:2921 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> Twin def
+prf 3107:3131 <> check_twin_complete_small
+binder 3142:3142 <> p:14
+R3156:3159 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3148:3151 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
+R3147:3147 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> p:14 var
+R3166:3169 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3160:3163 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> Twin def
+R3165:3165 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> p:14 var
+R3182:3184 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3170:3179 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> check_twin def
+R3181:3181 IEL.ArithmoPraxis.Examples.TwinPrimes.Spec <> p:14 var
+R3185:3188 Coq.Init.Datatypes <> true constr

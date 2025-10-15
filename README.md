@@ -1,4 +1,15 @@
-# LOGOS PXL Core - Three-Part Alignment System
+# Project LOGOS — Repository Index
+
+**Start here**:
+- **3PDN/** — Corpus literature for the Three Pillars of Divine Necessity
+- **PXL_IEL/** — PXL kernel, IEL overlays, and Coq proofs/tests
+- **LOGOS_AGI/** — Current AGI runtime (services, API, UI)
+
+_Internal (not public-facing): `internal/`_
+
+---
+
+# Legacy: LOGOS PXL Core - Three-Part Alignment System
 
 [![verify](https://github.com/ProjectLOGOS/LOGOS_PXL_Core/actions/workflows/verify.yml/badge.svg)](.github/workflows/verify.yml)
 

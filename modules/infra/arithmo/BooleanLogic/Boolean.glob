@@ -1,5 +1,0 @@
-DIGEST 3d622d52efdc87c389ef66c3d7bccf09
-FBoolean
-R68:71 Coq.Bool.Bool <> <> lib
-mod 82:102 <> ArithmoPraxis_Boolean
-R324:344 Boolean ArithmoPraxis_Boolean <> mod

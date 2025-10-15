@@ -1,6 +1,7 @@
-﻿-Q pxl-minimal-kernel-main/coq                         PXLs
--Q modules/IEL                                         PXLs.IEL
--Q tests                                                PXLs.tests
+﻿# --- Updated paths for restructured repository ---
+-Q PXL_IEL/pxl/pxl-minimal-kernel-main/coq            PXLs
+-Q PXL_IEL/iels                                        IEL
+-Q PXL_IEL/proofs                                      Proofs
 
 # --- IEL-ArithmoPraxis (Infrastructure Mathematics) ---
--Q modules/infra/arithmo IEL.ArithmoPraxis
+-Q PXL_IEL/iels/infra/arithmo IEL.ArithmoPraxis
