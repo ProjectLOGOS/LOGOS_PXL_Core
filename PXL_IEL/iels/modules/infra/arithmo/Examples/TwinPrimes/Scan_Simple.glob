@@ -1,8 +1,0 @@
-DIGEST 55950dd55b29e85207b7f86c660ff530
-FIEL.ArithmoPraxis.Examples.TwinPrimes.Scan_Simple
-R152:156 Coq.Arith.Arith <> <> lib
-R158:161 Coq.Bool.Bool <> <> lib
-R163:166 Coq.Lists.List <> <> lib
-R168:173 Coq.Strings.String <> <> lib
-R219:225 IEL.ArithmoPraxis.Core.Numbers <> <> lib
-R227:235 IEL.ArithmoPraxis.Core.ModalWrap <> <> lib

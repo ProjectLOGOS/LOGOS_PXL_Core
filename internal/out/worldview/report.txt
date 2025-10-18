@@ -1,1 +1,0 @@
-All complex tags valid after normalization.

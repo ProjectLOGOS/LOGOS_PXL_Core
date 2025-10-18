@@ -1,5 +1,0 @@
-{
-  "TETRAGNOS": ["cluster_texts","translate_text","extract_features","analyze_patterns","semantic_similarity"],
-  "TELOS":     ["predict_outcomes","causal_retrodiction","analyze_intervention","forecast_series","test_hypothesis","build_causal_model"],
-  "THONOC":    ["construct_proof","assign_consequence","evaluate_lambda","modal_reasoning","consistency_check","theorem_proving"]
-}

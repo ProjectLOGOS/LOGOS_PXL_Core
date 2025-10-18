@@ -1,7 +1,0 @@
-PXLs.PXLv3
-PXLs.Internal Emergent Logics.Source.TheoPraxis.Props
-PXLs.Internal Emergent Logics.Infra.ChronoPraxis.Substrate.ChronoAxioms
-PXLs.Internal Emergent Logics.Infra.ChronoPraxis.Substrate.Bijection
-PXLs.Internal Emergent Logics.Infra.ChronoPraxis.Substrate.ChronoMappings
-PXLs.Internal Emergent Logics.Infra.ChronoPraxis.Tactics.ChronoTactics
-PXLs.Internal Emergent Logics.Infra.ChronoPraxis.Theorems.ChronoProofs
