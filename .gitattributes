@@ -1,0 +1,27 @@
+# LOGOS PXL Core Repository Attributes
+
+# Protect critical directory structures from accidental deletion
+PXL_IEL_overlay_system/** linguist-vendored=false
+
+# Ensure line ending consistency
+*.v text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+*.sh text eol=lf
+
+# Binary files
+*.vo binary
+*.vos binary
+*.vok binary
+*.glob binary
+*.aux binary
+*.pyc binary
+*.zip binary
+*.docx binary
+*.png binary
+*.ico binary
+*.icns binary
+*.svg binary
