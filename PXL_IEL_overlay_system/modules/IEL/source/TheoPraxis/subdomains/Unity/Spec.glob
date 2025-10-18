@@ -1,0 +1,17 @@
+DIGEST 00864f18524a26cd43dcbcc78f870d2c
+FPXLs.IEL.Source.TheoPraxis.subdomains.Unity.Spec
+R24:30 Coq.Program.Program <> <> lib
+R32:37 Coq.Strings.String <> <> lib
+R65:69 PXLs.PXLv3 <> <> lib
+mod 103:111 <> UnitySpec
+def 127:135 UnitySpec prop_name
+R139:144 Coq.Strings.String <> string ind
+def 171:180 UnitySpec prop_group
+R184:189 Coq.Strings.String <> string ind
+def 222:231 UnitySpec prop_order
+R235:240 Coq.Strings.String <> string ind
+def 273:278 UnitySpec pillar
+R286:291 Coq.Strings.String <> string ind
+def 321:327 UnitySpec c_value
+R334:339 Coq.Strings.String <> string ind
+R360:368 PXLs.IEL.Source.TheoPraxis.subdomains.Unity.Spec UnitySpec <> mod

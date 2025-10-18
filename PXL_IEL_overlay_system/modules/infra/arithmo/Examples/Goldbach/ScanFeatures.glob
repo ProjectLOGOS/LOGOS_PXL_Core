@@ -1,0 +1,609 @@
+DIGEST 3ae8223fee85fb007f6a21407d4c544c
+FScanFeatures
+R75:79 Coq.Arith.Arith <> <> lib
+R81:83 Coq.micromega.Lia <> <> lib
+R85:88 Coq.Bool.Bool <> <> lib
+R90:99 Coq.Lists.List <> <> lib
+R109:121 Coq.Lists.List ListNotations <> mod
+mod 132:143 <> ScanFeatures
+def 160:162 ScanFeatures Nat
+R167:169 Coq.Init.Datatypes <> nat ind
+def 229:235 ScanFeatures divides
+R242:244 ScanFeatures ScanFeatures Nat def
+binder 238:238 <> d:1
+binder 240:240 <> n:2
+R249:252 Coq.Init.Datatypes <> bool ind
+R267:267 ScanFeatures <> d:1 var
+R285:289 Coq.Init.Datatypes <> false constr
+R302:308 Coq.Arith.PeanoNat Nat eqb def
+R312:316 Coq.Arith.PeanoNat <> ::nat_scope:x_'mod'_x not
+R311:311 ScanFeatures <> n:2 var
+R317:317 ScanFeatures <> d:1 var
+def 343:353 ScanFeatures trial_prime
+R360:362 ScanFeatures ScanFeatures Nat def
+binder 356:356 <> n:5
+binder 358:358 <> d:6
+R367:370 Coq.Init.Datatypes <> bool ind
+R385:385 ScanFeatures <> d:6 var
+R407:410 Coq.Init.Datatypes <> true constr
+R407:410 Coq.Init.Datatypes <> true constr
+R418:418 Coq.Init.Datatypes <> S constr
+R429:435 ScanFeatures ScanFeatures divides def
+R437:437 ScanFeatures <> d:6 var
+R439:439 ScanFeatures <> n:5 var
+R463:473 ScanFeatures <> trial_prime:7 def
+R475:475 ScanFeatures <> n:5 var
+R446:452 Coq.Arith.PeanoNat Nat eqb def
+R454:454 ScanFeatures <> d:6 var
+R456:456 ScanFeatures <> n:5 var
+def 557:567 ScanFeatures sqrt_approx
+R572:574 ScanFeatures ScanFeatures Nat def
+binder 570:570 <> n:9
+R579:581 ScanFeatures ScanFeatures Nat def
+R593:599 Coq.Arith.PeanoNat Nat leb def
+R601:601 ScanFeatures <> n:9 var
+R624:630 Coq.Arith.PeanoNat Nat leb def
+R632:632 ScanFeatures <> n:9 var
+R655:661 Coq.Arith.PeanoNat Nat leb def
+R663:663 ScanFeatures <> n:9 var
+R687:693 Coq.Arith.PeanoNat Nat leb def
+R695:695 ScanFeatures <> n:9 var
+R719:725 Coq.Arith.PeanoNat Nat leb def
+R727:727 ScanFeatures <> n:9 var
+R751:757 Coq.Arith.PeanoNat Nat leb def
+R759:759 ScanFeatures <> n:9 var
+R783:789 Coq.Arith.PeanoNat Nat leb def
+R791:791 ScanFeatures <> n:9 var
+R815:821 Coq.Arith.PeanoNat Nat leb def
+R823:823 ScanFeatures <> n:9 var
+R847:853 Coq.Arith.PeanoNat Nat leb def
+R855:855 ScanFeatures <> n:9 var
+R881:887 Coq.Arith.PeanoNat Nat leb def
+R889:889 ScanFeatures <> n:9 var
+R915:921 Coq.Arith.PeanoNat Nat leb def
+R923:923 ScanFeatures <> n:9 var
+def 964:971 ScanFeatures is_prime
+R976:978 ScanFeatures ScanFeatures Nat def
+binder 974:974 <> n:10
+R983:986 Coq.Init.Datatypes <> bool ind
+R1001:1001 ScanFeatures <> n:10 var
+R1023:1027 Coq.Init.Datatypes <> false constr
+R1023:1027 Coq.Init.Datatypes <> false constr
+R1040:1043 Coq.Init.Datatypes <> true constr
+R1051:1051 Coq.Init.Datatypes <> S constr
+R1054:1054 Coq.Init.Datatypes <> S constr
+R1057:1057 Coq.Init.Datatypes <> S constr
+R1078:1085 Coq.Arith.PeanoNat Nat even def
+R1087:1087 ScanFeatures <> n:10 var
+R1151:1161 ScanFeatures ScanFeatures trial_prime def
+R1163:1163 ScanFeatures <> n:10 var
+R1166:1176 ScanFeatures ScanFeatures sqrt_approx def
+R1178:1178 ScanFeatures <> n:10 var
+R1094:1098 Coq.Init.Datatypes <> false constr
+def 1202:1222 ScanFeatures first_prime_pair_upto
+R1229:1231 ScanFeatures ScanFeatures Nat def
+binder 1225:1225 <> n:12
+binder 1227:1227 <> p:13
+R1236:1241 Coq.Init.Datatypes <> option ind
+R1247:1247 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R1244:1246 ScanFeatures ScanFeatures Nat def
+R1248:1250 ScanFeatures ScanFeatures Nat def
+R1266:1266 ScanFeatures <> p:13 var
+R1288:1291 Coq.Init.Datatypes <> None constr
+R1288:1291 Coq.Init.Datatypes <> None constr
+R1299:1299 Coq.Init.Datatypes <> S constr
+R1325:1325 Coq.Init.Datatypes <> S constr
+binder 1319:1320 <> p0:16
+R1344:1350 Coq.Arith.PeanoNat Nat leb def
+R1354:1354 Coq.Init.Peano <> ::nat_scope:x_'*'_x not
+R1355:1356 ScanFeatures <> p0:16 var
+R1359:1359 ScanFeatures <> n:12 var
+R1506:1509 Coq.Init.Datatypes <> None constr
+R1379:1382 Coq.Init.Datatypes <> andb def
+R1399:1406 ScanFeatures ScanFeatures is_prime def
+R1410:1412 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R1409:1409 ScanFeatures <> n:12 var
+R1413:1414 ScanFeatures <> p0:16 var
+R1385:1392 ScanFeatures ScanFeatures is_prime def
+R1394:1395 ScanFeatures <> p0:16 var
+R1466:1486 ScanFeatures <> first_prime_pair_upto:14 def
+R1488:1488 ScanFeatures <> n:12 var
+R1433:1436 Coq.Init.Datatypes <> Some constr
+R1438:1438 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1441:1442 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1449:1449 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1439:1440 ScanFeatures <> p0:16 var
+R1444:1446 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R1443:1443 ScanFeatures <> n:12 var
+R1447:1448 ScanFeatures <> p0:16 var
+def 1534:1549 ScanFeatures goldbach_witness
+R1554:1556 ScanFeatures ScanFeatures Nat def
+binder 1552:1552 <> n:17
+R1561:1566 Coq.Init.Datatypes <> option ind
+R1572:1572 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R1569:1571 ScanFeatures ScanFeatures Nat def
+R1573:1575 ScanFeatures ScanFeatures Nat def
+R1591:1598 Coq.Arith.PeanoNat Nat even def
+R1600:1600 ScanFeatures <> n:17 var
+R1613:1616 Coq.Init.Datatypes <> true constr
+R1622:1642 ScanFeatures ScanFeatures first_prime_pair_upto def
+R1644:1644 ScanFeatures <> n:17 var
+R1648:1648 Coq.Arith.PeanoNat <> ::nat_scope:x_'/'_x not
+R1647:1647 ScanFeatures <> n:17 var
+R1658:1662 Coq.Init.Datatypes <> false constr
+R1667:1670 Coq.Init.Datatypes <> None constr
+def 1695:1707 ScanFeatures check_witness
+R1712:1714 ScanFeatures ScanFeatures Nat def
+binder 1710:1710 <> n:18
+R1724:1724 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R1721:1723 ScanFeatures ScanFeatures Nat def
+R1725:1727 ScanFeatures ScanFeatures Nat def
+binder 1718:1719 <> pr:19
+R1732:1735 Coq.Init.Datatypes <> bool ind
+R1760:1761 ScanFeatures <> pr:19 var
+R1749:1749 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1752:1752 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1755:1755 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1804:1807 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R1789:1792 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R1770:1776 Coq.Arith.PeanoNat Nat eqb def
+R1781:1783 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R1788:1788 ScanFeatures <> n:18 var
+R1793:1800 ScanFeatures ScanFeatures is_prime def
+R1808:1815 ScanFeatures ScanFeatures is_prime def
+def 1897:1907 ScanFeatures log2_approx
+R1914:1916 ScanFeatures ScanFeatures Nat def
+binder 1910:1910 <> n:21
+R1921:1923 ScanFeatures ScanFeatures Nat def
+R1935:1941 Coq.Arith.PeanoNat Nat leb def
+R1943:1943 ScanFeatures <> n:21 var
+R1966:1972 Coq.Arith.PeanoNat Nat leb def
+R1974:1974 ScanFeatures <> n:21 var
+R1997:2003 Coq.Arith.PeanoNat Nat leb def
+R2005:2005 ScanFeatures <> n:21 var
+R2028:2034 Coq.Arith.PeanoNat Nat leb def
+R2036:2036 ScanFeatures <> n:21 var
+R2060:2066 Coq.Arith.PeanoNat Nat leb def
+R2068:2068 ScanFeatures <> n:21 var
+R2092:2098 Coq.Arith.PeanoNat Nat leb def
+R2100:2100 ScanFeatures <> n:21 var
+R2124:2130 Coq.Arith.PeanoNat Nat leb def
+R2132:2132 ScanFeatures <> n:21 var
+def 2171:2181 ScanFeatures window_size
+R2188:2190 ScanFeatures ScanFeatures Nat def
+binder 2184:2184 <> n:22
+R2195:2197 ScanFeatures ScanFeatures Nat def
+R2218:2228 ScanFeatures ScanFeatures log2_approx def
+R2231:2233 Coq.Init.Peano <> max abbrev
+R2237:2237 ScanFeatures <> n:22 var
+binder 2210:2213 <> logn:23
+R2251:2253 Coq.Init.Peano <> ::nat_scope:x_'*'_x not
+R2247:2250 ScanFeatures <> logn:23 var
+R2254:2257 ScanFeatures <> logn:23 var
+def 2274:2275 ScanFeatures NW
+R2282:2284 ScanFeatures ScanFeatures Nat def
+binder 2278:2278 <> n:24
+R2289:2292 Coq.Init.Datatypes <> bool ind
+R2310:2320 ScanFeatures ScanFeatures window_size def
+R2322:2322 ScanFeatures <> n:24 var
+binder 2305:2305 <> w:25
+R2344:2346 Coq.Arith.PeanoNat <> ::nat_scope:x_'/'_x not
+R2343:2343 ScanFeatures <> n:24 var
+binder 2335:2338 <> half:26
+R2362:2377 ScanFeatures ScanFeatures goldbach_witness def
+R2379:2379 ScanFeatures <> n:24 var
+R2392:2395 Coq.Init.Datatypes <> Some constr
+R2397:2397 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2400:2401 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2404:2404 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2432:2438 Coq.Arith.PeanoNat Nat leb def
+R2443:2446 ScanFeatures <> half:26 var
+R2470:2472 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R2473:2476 ScanFeatures <> half:26 var
+R2457:2459 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R2453:2456 ScanFeatures <> half:26 var
+binder 2421:2424 <> gap1:27
+R2504:2510 Coq.Arith.PeanoNat Nat leb def
+R2515:2518 ScanFeatures <> half:26 var
+R2542:2544 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R2545:2548 ScanFeatures <> half:26 var
+R2529:2531 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R2525:2528 ScanFeatures <> half:26 var
+binder 2493:2496 <> gap2:28
+R2575:2577 Coq.Init.Peano <> min abbrev
+R2579:2582 ScanFeatures <> gap1:27 var
+R2584:2587 ScanFeatures <> gap2:28 var
+binder 2565:2570 <> mingap:29
+R2600:2606 Coq.Arith.PeanoNat Nat leb def
+R2608:2613 ScanFeatures <> mingap:29 var
+R2615:2615 ScanFeatures <> w:25 var
+R2623:2626 Coq.Init.Datatypes <> None constr
+R2631:2635 Coq.Init.Datatypes <> false constr
+def 2660:2672 ScanFeatures shares_addend
+R2679:2681 ScanFeatures ScanFeatures Nat def
+binder 2675:2675 <> n:30
+R2686:2689 Coq.Init.Datatypes <> bool ind
+R2724:2739 ScanFeatures ScanFeatures goldbach_witness def
+R2743:2745 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R2742:2742 ScanFeatures <> n:30 var
+R2704:2719 ScanFeatures ScanFeatures goldbach_witness def
+R2721:2721 ScanFeatures <> n:30 var
+R2760:2763 Coq.Init.Datatypes <> Some constr
+R2765:2765 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2768:2769 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2772:2772 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2775:2778 Coq.Init.Datatypes <> Some constr
+R2780:2780 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2783:2784 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2787:2787 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2847:2850 Coq.Init.Datatypes <> ::bool_scope:x_'||'_x not
+R2830:2833 Coq.Init.Datatypes <> ::bool_scope:x_'||'_x not
+R2813:2816 Coq.Init.Datatypes <> ::bool_scope:x_'||'_x not
+R2800:2806 Coq.Arith.PeanoNat Nat eqb def
+R2817:2823 Coq.Arith.PeanoNat Nat eqb def
+R2834:2840 Coq.Arith.PeanoNat Nat eqb def
+R2851:2857 Coq.Arith.PeanoNat Nat eqb def
+R2879:2883 Coq.Init.Datatypes <> false constr
+def 2908:2921 ScanFeatures adjust_witness
+R2928:2930 ScanFeatures ScanFeatures Nat def
+binder 2924:2924 <> n:31
+R2935:2938 Coq.Init.Datatypes <> bool ind
+R2953:2968 ScanFeatures ScanFeatures goldbach_witness def
+R2970:2970 ScanFeatures <> n:31 var
+R2983:2986 Coq.Init.Datatypes <> Some constr
+R2988:2988 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2991:2992 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2995:2995 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3030:3032 ScanFeatures ScanFeatures Nat def
+binder 3024:3024 <> a:32
+binder 3026:3026 <> b:33
+R3088:3091 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R3074:3077 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R3051:3057 Coq.Arith.PeanoNat Nat eqb def
+R3061:3063 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R3060:3060 ScanFeatures <> a:32 var
+R3064:3064 ScanFeatures <> b:33 var
+R3069:3071 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R3068:3068 ScanFeatures <> n:31 var
+R3078:3085 ScanFeatures ScanFeatures is_prime def
+R3087:3087 ScanFeatures <> a:32 var
+R3092:3099 ScanFeatures ScanFeatures is_prime def
+R3101:3101 ScanFeatures <> b:33 var
+binder 3012:3021 <> check_pair:34
+R3195:3198 Coq.Init.Datatypes <> ::bool_scope:x_'||'_x not
+R3158:3170 Coq.Init.Datatypes <> ::bool_scope:x_'||'_x not
+R3134:3137 Coq.Init.Datatypes <> ::bool_scope:x_'||'_x not
+R3114:3123 ScanFeatures <> check_pair:34 var
+R3128:3128 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R3138:3147 ScanFeatures <> check_pair:34 var
+R3155:3155 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R3171:3180 ScanFeatures <> check_pair:34 var
+R3192:3192 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R3185:3185 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R3199:3208 ScanFeatures <> check_pair:34 var
+R3220:3220 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R3213:3213 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R3230:3233 Coq.Init.Datatypes <> None constr
+R3238:3242 Coq.Init.Datatypes <> false constr
+def 3267:3268 ScanFeatures CF
+R3275:3277 ScanFeatures ScanFeatures Nat def
+binder 3271:3271 <> n:35
+R3282:3285 Coq.Init.Datatypes <> bool ind
+R3309:3312 Coq.Init.Datatypes <> ::bool_scope:x_'||'_x not
+R3294:3306 ScanFeatures ScanFeatures shares_addend def
+R3308:3308 ScanFeatures <> n:35 var
+R3313:3326 ScanFeatures ScanFeatures adjust_witness def
+R3328:3328 ScanFeatures <> n:35 var
+def 3345:3355 ScanFeatures step_by_two
+R3362:3364 ScanFeatures ScanFeatures Nat def
+binder 3358:3358 <> n:36
+R3369:3372 Coq.Init.Datatypes <> bool ind
+R3407:3422 ScanFeatures ScanFeatures goldbach_witness def
+R3426:3428 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R3425:3425 ScanFeatures <> n:36 var
+R3387:3402 ScanFeatures ScanFeatures goldbach_witness def
+R3404:3404 ScanFeatures <> n:36 var
+R3443:3446 Coq.Init.Datatypes <> Some constr
+R3448:3448 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3451:3452 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3455:3455 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3458:3461 Coq.Init.Datatypes <> Some constr
+R3463:3463 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3466:3467 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3470:3470 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3499:3505 Coq.Arith.PeanoNat Nat leb def
+R3533:3535 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R3520:3522 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+binder 3487:3491 <> diff1:37
+R3566:3572 Coq.Arith.PeanoNat Nat leb def
+R3600:3602 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R3587:3589 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+binder 3554:3558 <> diff2:38
+R3617:3617 Coq.Init.Datatypes <> ::bool_scope:x_'||'_x not
+R3650:3655 Coq.Init.Datatypes <> ::bool_scope:x_'||'_x not
+R3688:3688 Coq.Init.Datatypes <> ::bool_scope:x_'||'_x not
+R3633:3636 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R3618:3624 Coq.Arith.PeanoNat Nat eqb def
+R3626:3630 ScanFeatures <> diff1:37 var
+R3637:3643 Coq.Arith.PeanoNat Nat eqb def
+R3671:3674 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R3656:3662 Coq.Arith.PeanoNat Nat eqb def
+R3664:3668 ScanFeatures <> diff2:38 var
+R3675:3681 Coq.Arith.PeanoNat Nat eqb def
+R3704:3708 Coq.Init.Datatypes <> false constr
+def 3733:3734 ScanFeatures BL
+R3741:3743 ScanFeatures ScanFeatures Nat def
+binder 3737:3737 <> n:39
+R3748:3751 Coq.Init.Datatypes <> bool ind
+R3760:3770 ScanFeatures ScanFeatures step_by_two def
+R3772:3772 ScanFeatures <> n:39 var
+def 3789:3794 ScanFeatures gap_le
+R3803:3805 ScanFeatures ScanFeatures Nat def
+binder 3797:3797 <> n:40
+binder 3799:3799 <> K:41
+R3810:3813 Coq.Init.Datatypes <> bool ind
+R3835:3837 Coq.Arith.PeanoNat <> ::nat_scope:x_'/'_x not
+R3834:3834 ScanFeatures <> n:40 var
+binder 3826:3829 <> half:42
+R3853:3868 ScanFeatures ScanFeatures goldbach_witness def
+R3870:3870 ScanFeatures <> n:40 var
+R3883:3886 Coq.Init.Datatypes <> Some constr
+R3888:3888 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3891:3892 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3895:3895 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3923:3929 Coq.Arith.PeanoNat Nat leb def
+R3934:3937 ScanFeatures <> half:42 var
+R3961:3963 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R3964:3967 ScanFeatures <> half:42 var
+R3948:3950 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R3944:3947 ScanFeatures <> half:42 var
+binder 3912:3915 <> gap1:43
+R3995:4001 Coq.Arith.PeanoNat Nat leb def
+R4006:4009 ScanFeatures <> half:42 var
+R4033:4035 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R4036:4039 ScanFeatures <> half:42 var
+R4020:4022 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R4016:4019 ScanFeatures <> half:42 var
+binder 3984:3987 <> gap2:44
+R4066:4068 Coq.Init.Peano <> min abbrev
+R4070:4073 ScanFeatures <> gap1:43 var
+R4075:4078 ScanFeatures <> gap2:44 var
+binder 4056:4061 <> mingap:45
+R4091:4097 Coq.Arith.PeanoNat Nat leb def
+R4099:4104 ScanFeatures <> mingap:45 var
+R4106:4106 ScanFeatures <> K:41 var
+R4114:4117 Coq.Init.Datatypes <> None constr
+R4122:4126 Coq.Init.Datatypes <> false constr
+rec 4194:4197 ScanFeatures feat
+proj 4215:4220 ScanFeatures n_even
+proj 4265:4272 ScanFeatures has_pair
+proj 4323:4328 ScanFeatures nw_win
+proj 4376:4382 ScanFeatures cf_next
+proj 4434:4440 ScanFeatures bl_next
+proj 4492:4496 ScanFeatures gapK2
+proj 4537:4541 ScanFeatures gapK4
+R4224:4226 ScanFeatures ScanFeatures Nat def
+R4276:4279 Coq.Init.Datatypes <> bool ind
+R4332:4335 Coq.Init.Datatypes <> bool ind
+R4386:4389 Coq.Init.Datatypes <> bool ind
+R4444:4447 Coq.Init.Datatypes <> bool ind
+R4500:4503 Coq.Init.Datatypes <> bool ind
+R4545:4548 Coq.Init.Datatypes <> bool ind
+def 4645:4651 ScanFeatures mk_feat
+R4658:4660 ScanFeatures ScanFeatures Nat def
+binder 4654:4654 <> n:54
+R4665:4668 ScanFeatures ScanFeatures feat rec
+R4692:4707 ScanFeatures ScanFeatures goldbach_witness def
+R4709:4709 ScanFeatures <> n:54 var
+binder 4681:4687 <> witness:55
+R4737:4743 ScanFeatures <> witness:55 var
+R4750:4753 Coq.Init.Datatypes <> Some constr
+R4760:4763 Coq.Init.Datatypes <> true constr
+R4767:4770 Coq.Init.Datatypes <> None constr
+R4775:4779 Coq.Init.Datatypes <> false constr
+binder 4722:4726 <> has_w:57
+R4814:4820 ScanFeatures <> witness:55 var
+R4849:4852 Coq.Init.Datatypes <> Some constr
+R4859:4871 ScanFeatures ScanFeatures check_witness def
+R4873:4873 ScanFeatures <> n:54 var
+R4899:4902 Coq.Init.Datatypes <> None constr
+R4907:4911 Coq.Init.Datatypes <> false constr
+binder 4796:4803 <> verified:59
+R4944:4949 ScanFeatures ScanFeatures mkFeat constr
+R4951:4951 ScanFeatures <> n:54 var
+R4971:4974 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R4966:4970 ScanFeatures <> has_w:57 var
+R4975:4982 ScanFeatures <> verified:59 var
+R4997:4998 ScanFeatures ScanFeatures NW def
+R5000:5000 ScanFeatures <> n:54 var
+R5015:5016 ScanFeatures ScanFeatures CF def
+R5018:5018 ScanFeatures <> n:54 var
+R5033:5034 ScanFeatures ScanFeatures BL def
+R5036:5036 ScanFeatures <> n:54 var
+R5051:5056 ScanFeatures ScanFeatures gap_le def
+R5058:5058 ScanFeatures <> n:54 var
+R5075:5080 ScanFeatures ScanFeatures gap_le def
+R5082:5082 ScanFeatures <> n:54 var
+def 5172:5178 ScanFeatures step_ok
+R5185:5188 ScanFeatures ScanFeatures feat rec
+binder 5181:5181 <> f:60
+R5193:5196 Coq.Init.Datatypes <> bool ind
+R5259:5263 Coq.Init.Datatypes <> ::bool_scope:x_'||'_x not
+R5283:5283 Coq.Init.Datatypes <> ::bool_scope:x_'||'_x not
+R5205:5205 Coq.Init.Datatypes <> ::bool_scope:x_'||'_x not
+R5229:5234 Coq.Init.Datatypes <> ::bool_scope:x_'||'_x not
+R5258:5258 Coq.Init.Datatypes <> ::bool_scope:x_'||'_x not
+R5216:5219 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R5206:5213 ScanFeatures ScanFeatures has_pair proj
+R5215:5215 ScanFeatures <> f:60 var
+R5220:5226 ScanFeatures ScanFeatures cf_next proj
+R5228:5228 ScanFeatures <> f:60 var
+R5245:5248 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R5235:5242 ScanFeatures ScanFeatures has_pair proj
+R5244:5244 ScanFeatures <> f:60 var
+R5249:5255 ScanFeatures ScanFeatures bl_next proj
+R5257:5257 ScanFeatures <> f:60 var
+R5272:5275 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R5264:5269 ScanFeatures ScanFeatures nw_win proj
+R5271:5271 ScanFeatures <> f:60 var
+R5276:5280 ScanFeatures ScanFeatures gapK4 proj
+R5282:5282 ScanFeatures <> f:60 var
+def 5361:5373 ScanFeatures closure_score
+R5380:5382 ScanFeatures ScanFeatures Nat def
+binder 5376:5376 <> k:61
+R5387:5389 ScanFeatures ScanFeatures Nat def
+R5404:5404 ScanFeatures <> k:61 var
+R5430:5430 Coq.Init.Datatypes <> S constr
+R5457:5460 Coq.Init.Peano <> ::nat_scope:x_'*'_x not
+R5467:5467 Coq.Init.Peano <> ::nat_scope:x_'*'_x not
+R5463:5465 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+binder 5451:5451 <> n:64
+R5525:5531 ScanFeatures ScanFeatures mk_feat def
+R5533:5533 ScanFeatures <> n:64 var
+binder 5520:5520 <> f:65
+R5564:5576 ScanFeatures <> closure_score:62 def
+binder 5550:5559 <> score_rest:66
+R5595:5601 ScanFeatures ScanFeatures step_ok def
+R5603:5603 ScanFeatures <> f:65 var
+R5628:5637 ScanFeatures <> score_rest:66 var
+R5610:5610 Coq.Init.Datatypes <> S constr
+R5612:5621 ScanFeatures <> score_rest:66 var
+def 5726:5736 ScanFeatures total_evens
+R5743:5745 ScanFeatures ScanFeatures Nat def
+binder 5739:5739 <> k:67
+R5750:5752 ScanFeatures ScanFeatures Nat def
+R5757:5757 ScanFeatures <> k:67 var
+def 5807:5818 ScanFeatures closure_rate
+R5825:5827 ScanFeatures ScanFeatures Nat def
+binder 5821:5821 <> k:68
+R5835:5837 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R5832:5834 ScanFeatures ScanFeatures Nat def
+R5838:5840 ScanFeatures ScanFeatures Nat def
+R5849:5849 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R5865:5866 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R5880:5880 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R5850:5862 ScanFeatures ScanFeatures closure_score def
+R5864:5864 ScanFeatures <> k:68 var
+R5867:5877 ScanFeatures ScanFeatures total_evens def
+R5879:5879 ScanFeatures <> k:68 var
+def 5972:5987 ScanFeatures extract_features
+R5994:5996 ScanFeatures ScanFeatures Nat def
+binder 5990:5990 <> n:69
+R6001:6004 Coq.Init.Datatypes <> list ind
+R6006:6009 Coq.Init.Datatypes <> bool ind
+R6027:6033 ScanFeatures ScanFeatures mk_feat def
+R6035:6035 ScanFeatures <> n:69 var
+binder 6022:6022 <> f:70
+R6044:6044 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6055:6059 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6045:6052 ScanFeatures ScanFeatures has_pair proj
+R6054:6054 ScanFeatures <> f:70 var
+R6060:6060 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6069:6073 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6061:6066 ScanFeatures ScanFeatures nw_win proj
+R6068:6068 ScanFeatures <> f:70 var
+R6074:6074 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6084:6088 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6075:6081 ScanFeatures ScanFeatures cf_next proj
+R6083:6083 ScanFeatures <> f:70 var
+R6089:6089 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6099:6103 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6090:6096 ScanFeatures ScanFeatures bl_next proj
+R6098:6098 ScanFeatures <> f:70 var
+R6104:6104 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6112:6116 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6105:6109 ScanFeatures ScanFeatures gapK2 proj
+R6111:6111 ScanFeatures <> f:70 var
+R6117:6117 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6125:6129 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6118:6122 ScanFeatures ScanFeatures gapK4 proj
+R6124:6124 ScanFeatures <> f:70 var
+R6130:6132 Coq.Init.Datatypes <> nil constr
+def 6211:6222 ScanFeatures count_nw_gap
+R6229:6231 ScanFeatures ScanFeatures Nat def
+binder 6225:6225 <> k:71
+R6236:6238 ScanFeatures ScanFeatures Nat def
+R6253:6253 ScanFeatures <> k:71 var
+R6279:6279 Coq.Init.Datatypes <> S constr
+R6305:6308 Coq.Init.Peano <> ::nat_scope:x_'*'_x not
+R6315:6315 Coq.Init.Peano <> ::nat_scope:x_'*'_x not
+R6311:6313 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+binder 6299:6299 <> n:74
+R6337:6343 ScanFeatures ScanFeatures mk_feat def
+R6345:6345 ScanFeatures <> n:74 var
+binder 6332:6332 <> f:75
+R6370:6381 ScanFeatures <> count_nw_gap:72 def
+binder 6362:6365 <> rest:76
+R6408:6411 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R6400:6405 ScanFeatures ScanFeatures nw_win proj
+R6407:6407 ScanFeatures <> f:75 var
+R6412:6416 ScanFeatures ScanFeatures gapK4 proj
+R6418:6418 ScanFeatures <> f:75 var
+R6437:6440 ScanFeatures <> rest:76 var
+R6425:6425 Coq.Init.Datatypes <> S constr
+R6427:6430 ScanFeatures <> rest:76 var
+def 6463:6470 ScanFeatures count_cf
+R6477:6479 ScanFeatures ScanFeatures Nat def
+binder 6473:6473 <> k:77
+R6484:6486 ScanFeatures ScanFeatures Nat def
+R6501:6501 ScanFeatures <> k:77 var
+R6527:6527 Coq.Init.Datatypes <> S constr
+R6553:6556 Coq.Init.Peano <> ::nat_scope:x_'*'_x not
+R6563:6563 Coq.Init.Peano <> ::nat_scope:x_'*'_x not
+R6559:6561 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+binder 6547:6547 <> n:80
+R6585:6591 ScanFeatures ScanFeatures mk_feat def
+R6593:6593 ScanFeatures <> n:80 var
+binder 6580:6580 <> f:81
+R6618:6625 ScanFeatures <> count_cf:78 def
+binder 6610:6613 <> rest:82
+R6654:6657 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R6644:6651 ScanFeatures ScanFeatures has_pair proj
+R6653:6653 ScanFeatures <> f:81 var
+R6658:6664 ScanFeatures ScanFeatures cf_next proj
+R6666:6666 ScanFeatures <> f:81 var
+R6685:6688 ScanFeatures <> rest:82 var
+R6673:6673 Coq.Init.Datatypes <> S constr
+R6675:6678 ScanFeatures <> rest:82 var
+def 6711:6718 ScanFeatures count_bl
+R6725:6727 ScanFeatures ScanFeatures Nat def
+binder 6721:6721 <> k:83
+R6732:6734 ScanFeatures ScanFeatures Nat def
+R6749:6749 ScanFeatures <> k:83 var
+R6775:6775 Coq.Init.Datatypes <> S constr
+R6801:6804 Coq.Init.Peano <> ::nat_scope:x_'*'_x not
+R6811:6811 Coq.Init.Peano <> ::nat_scope:x_'*'_x not
+R6807:6809 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+binder 6795:6795 <> n:86
+R6833:6839 ScanFeatures ScanFeatures mk_feat def
+R6841:6841 ScanFeatures <> n:86 var
+binder 6828:6828 <> f:87
+R6866:6873 ScanFeatures <> count_bl:84 def
+binder 6858:6861 <> rest:88
+R6902:6905 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R6892:6899 ScanFeatures ScanFeatures has_pair proj
+R6901:6901 ScanFeatures <> f:87 var
+R6906:6912 ScanFeatures ScanFeatures bl_next proj
+R6914:6914 ScanFeatures <> f:87 var
+R6933:6936 ScanFeatures <> rest:88 var
+R6921:6921 Coq.Init.Datatypes <> S constr
+R6923:6926 ScanFeatures <> rest:88 var
+def 6988:7004 ScanFeatures invariant_summary
+R7011:7013 ScanFeatures ScanFeatures Nat def
+binder 7007:7007 <> k:89
+R7028:7030 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R7022:7024 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R7019:7021 ScanFeatures ScanFeatures Nat def
+R7025:7027 ScanFeatures ScanFeatures Nat def
+R7031:7033 ScanFeatures ScanFeatures Nat def
+R7043:7043 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R7058:7059 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R7070:7071 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R7082:7082 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R7044:7055 ScanFeatures ScanFeatures count_nw_gap def
+R7057:7057 ScanFeatures <> k:89 var
+R7060:7067 ScanFeatures ScanFeatures count_cf def
+R7069:7069 ScanFeatures <> k:89 var
+R7072:7079 ScanFeatures ScanFeatures count_bl def
+R7081:7081 ScanFeatures <> k:89 var
+R7090:7101 ScanFeatures ScanFeatures <> mod

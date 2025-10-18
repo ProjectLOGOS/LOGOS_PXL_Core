@@ -1,0 +1,200 @@
+DIGEST 22ed86394c158fdf3c0af457e344ea69
+FScan
+R67:71 Coq.Arith.Arith <> <> lib
+R73:78 Coq.Strings.String <> <> lib
+R80:84 Coq.Strings.Ascii <> <> lib
+mod 95:106 <> GoldbachScan
+def 143:145 GoldbachScan Nat
+R150:152 Coq.Init.Datatypes <> nat ind
+def 214:220 GoldbachScan divides
+R227:229 Scan GoldbachScan Nat def
+binder 223:223 <> d:1
+binder 225:225 <> n:2
+R234:237 Coq.Init.Datatypes <> bool ind
+R252:252 Scan <> d:1 var
+R270:274 Coq.Init.Datatypes <> false constr
+R287:293 Coq.Arith.PeanoNat Nat eqb def
+R297:301 Coq.Arith.PeanoNat <> ::nat_scope:x_'mod'_x not
+R296:296 Scan <> n:2 var
+R302:302 Scan <> d:1 var
+def 328:338 GoldbachScan trial_prime
+R345:347 Scan GoldbachScan Nat def
+binder 341:341 <> n:5
+binder 343:343 <> d:6
+R352:355 Coq.Init.Datatypes <> bool ind
+R370:370 Scan <> d:6 var
+R392:395 Coq.Init.Datatypes <> true constr
+R392:395 Coq.Init.Datatypes <> true constr
+R403:403 Coq.Init.Datatypes <> S constr
+R414:420 Scan GoldbachScan divides def
+R422:422 Scan <> d:6 var
+R424:424 Scan <> n:5 var
+R448:458 Scan <> trial_prime:7 def
+R460:460 Scan <> n:5 var
+R431:437 Coq.Arith.PeanoNat Nat eqb def
+R439:439 Scan <> d:6 var
+R441:441 Scan <> n:5 var
+def 488:495 GoldbachScan is_prime
+R500:502 Scan GoldbachScan Nat def
+binder 498:498 <> n:9
+R507:510 Coq.Init.Datatypes <> bool ind
+R525:525 Scan <> n:9 var
+R547:551 Coq.Init.Datatypes <> false constr
+R547:551 Coq.Init.Datatypes <> false constr
+R564:567 Coq.Init.Datatypes <> true constr
+R575:575 Coq.Init.Datatypes <> S constr
+R578:578 Coq.Init.Datatypes <> S constr
+R581:581 Coq.Init.Datatypes <> S constr
+R590:600 Scan GoldbachScan trial_prime def
+R602:602 Scan <> n:9 var
+R606:606 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R605:605 Scan <> n:9 var
+def 631:651 GoldbachScan first_prime_pair_upto
+R658:660 Scan GoldbachScan Nat def
+binder 654:654 <> n:11
+binder 656:656 <> p:12
+R665:670 Coq.Init.Datatypes <> option ind
+R676:676 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R673:675 Scan GoldbachScan Nat def
+R677:679 Scan GoldbachScan Nat def
+R695:695 Scan <> p:12 var
+R717:720 Coq.Init.Datatypes <> None constr
+R717:720 Coq.Init.Datatypes <> None constr
+R728:728 Coq.Init.Datatypes <> S constr
+R754:754 Coq.Init.Datatypes <> S constr
+binder 748:749 <> p0:15
+R773:779 Coq.Arith.PeanoNat Nat leb def
+R783:783 Coq.Init.Peano <> ::nat_scope:x_'*'_x not
+R784:785 Scan <> p0:15 var
+R788:788 Scan <> n:11 var
+R935:938 Coq.Init.Datatypes <> None constr
+R808:811 Coq.Init.Datatypes <> andb def
+R828:835 Scan GoldbachScan is_prime def
+R839:841 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R838:838 Scan <> n:11 var
+R842:843 Scan <> p0:15 var
+R814:821 Scan GoldbachScan is_prime def
+R823:824 Scan <> p0:15 var
+R895:915 Scan <> first_prime_pair_upto:13 def
+R917:917 Scan <> n:11 var
+R862:865 Coq.Init.Datatypes <> Some constr
+R867:867 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R870:871 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R878:878 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R868:869 Scan <> p0:15 var
+R873:875 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R872:872 Scan <> n:11 var
+R876:877 Scan <> p0:15 var
+def 963:978 GoldbachScan goldbach_witness
+R983:985 Scan GoldbachScan Nat def
+binder 981:981 <> n:16
+R990:995 Coq.Init.Datatypes <> option ind
+R1001:1001 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R998:1000 Scan GoldbachScan Nat def
+R1002:1004 Scan GoldbachScan Nat def
+R1020:1027 Coq.Arith.PeanoNat Nat even def
+R1029:1029 Scan <> n:16 var
+R1042:1045 Coq.Init.Datatypes <> true constr
+R1051:1071 Scan GoldbachScan first_prime_pair_upto def
+R1073:1073 Scan <> n:16 var
+R1077:1077 Coq.Arith.PeanoNat <> ::nat_scope:x_'/'_x not
+R1076:1076 Scan <> n:16 var
+R1087:1091 Coq.Init.Datatypes <> false constr
+R1096:1099 Coq.Init.Datatypes <> None constr
+def 1124:1136 GoldbachScan check_witness
+R1141:1143 Scan GoldbachScan Nat def
+binder 1139:1139 <> n:17
+R1153:1153 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R1150:1152 Scan GoldbachScan Nat def
+R1154:1156 Scan GoldbachScan Nat def
+binder 1147:1148 <> pr:18
+R1161:1164 Coq.Init.Datatypes <> bool ind
+R1189:1190 Scan <> pr:18 var
+R1178:1178 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1181:1181 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1184:1184 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1233:1236 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R1218:1221 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R1199:1205 Coq.Arith.PeanoNat Nat eqb def
+R1210:1212 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R1217:1217 Scan <> n:17 var
+R1222:1229 Scan GoldbachScan is_prime def
+R1237:1244 Scan GoldbachScan is_prime def
+def 1332:1344 GoldbachScan nat_to_string
+R1351:1353 Coq.Init.Datatypes <> nat ind
+binder 1347:1347 <> n:20
+R1358:1363 Coq.Strings.String <> string ind
+R1378:1378 Scan <> n:20 var
+R1406:1406 Coq.Init.Datatypes <> S constr
+R1418:1421 Coq.Strings.String <> ::string_scope:x_'++'_x not
+R1422:1422 Coq.Strings.String <> ::string_scope:x_'++'_x not
+R1439:1443 Coq.Strings.String <> ::string_scope:x_'++'_x not
+R1423:1435 Scan <> nat_to_string:21 def
+def 1550:1557 GoldbachScan log_line
+R1562:1564 Scan GoldbachScan Nat def
+binder 1560:1560 <> n:23
+R1569:1574 Coq.Strings.String <> string ind
+R1589:1604 Scan GoldbachScan goldbach_witness def
+R1606:1606 Scan <> n:23 var
+R1619:1622 Coq.Init.Datatypes <> Some constr
+R1624:1624 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1627:1627 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1630:1630 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1646:1658 Scan GoldbachScan check_witness def
+R1660:1660 Scan <> n:23 var
+R1662:1662 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1665:1665 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1668:1668 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1832:1836 Coq.Strings.String <> ::string_scope:x_'++'_x not
+R1852:1852 Coq.Strings.String <> ::string_scope:x_'++'_x not
+R1837:1849 Scan GoldbachScan nat_to_string def
+R1851:1851 Scan <> n:23 var
+R1689:1692 Coq.Strings.String <> ::string_scope:x_'++'_x not
+R1693:1693 Coq.Strings.String <> ::string_scope:x_'++'_x not
+R1709:1713 Coq.Strings.String <> ::string_scope:x_'++'_x not
+R1694:1706 Scan GoldbachScan nat_to_string def
+R1708:1708 Scan <> n:23 var
+R1717:1741 Coq.Strings.String <> ::string_scope:x_'++'_x not
+R1742:1742 Coq.Strings.String <> ::string_scope:x_'++'_x not
+R1759:1763 Coq.Strings.String <> ::string_scope:x_'++'_x not
+R1743:1755 Scan GoldbachScan nat_to_string def
+R1767:1792 Coq.Strings.String <> ::string_scope:x_'++'_x not
+R1809:1809 Coq.Strings.String <> ::string_scope:x_'++'_x not
+R1793:1805 Scan GoldbachScan nat_to_string def
+R1861:1864 Coq.Init.Datatypes <> None constr
+R1877:1881 Coq.Strings.String <> ::string_scope:x_'++'_x not
+R1897:1897 Coq.Strings.String <> ::string_scope:x_'++'_x not
+R1882:1894 Scan GoldbachScan nat_to_string def
+R1896:1896 Scan <> n:23 var
+def 1984:1991 GoldbachScan count_ok
+R1998:2000 Scan GoldbachScan Nat def
+binder 1994:1994 <> n:24
+binder 1996:1996 <> k:25
+R2005:2007 Scan GoldbachScan Nat def
+R2022:2022 Scan <> k:25 var
+R2048:2048 Coq.Init.Datatypes <> S constr
+R2074:2075 Coq.Init.Peano <> ::nat_scope:x_'*'_x not
+R2082:2082 Coq.Init.Peano <> ::nat_scope:x_'*'_x not
+R2077:2079 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R2076:2076 Scan <> n:24 var
+binder 2068:2068 <> e:28
+R2101:2116 Scan GoldbachScan goldbach_witness def
+R2118:2118 Scan <> e:28 var
+R2135:2138 Coq.Init.Datatypes <> Some constr
+R2140:2140 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2143:2143 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2146:2146 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2166:2178 Scan GoldbachScan check_witness def
+R2180:2180 Scan <> e:28 var
+R2182:2182 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2185:2185 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2188:2188 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2219:2226 Scan <> count_ok:26 def
+R2228:2228 Scan <> n:24 var
+R2195:2195 Coq.Init.Datatypes <> S constr
+R2198:2205 Scan <> count_ok:26 def
+R2207:2207 Scan <> n:24 var
+R2244:2247 Coq.Init.Datatypes <> None constr
+R2252:2259 Scan <> count_ok:26 def
+R2261:2261 Scan <> n:24 var
+R2292:2303 Scan GoldbachScan <> mod

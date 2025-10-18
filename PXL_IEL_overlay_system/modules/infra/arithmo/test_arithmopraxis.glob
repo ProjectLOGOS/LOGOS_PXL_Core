@@ -1,0 +1,6 @@
+DIGEST 7daa1f68cdb00b24913f66a5f2148b92
+Ftest_arithmopraxis
+R330:341 test_arithmopraxis ScanFeatures <> mod
+R395:402 test_arithmopraxis <> is_prime def
+R425:440 test_arithmopraxis <> goldbach_witness def
+R464:476 test_arithmopraxis <> closure_score def
