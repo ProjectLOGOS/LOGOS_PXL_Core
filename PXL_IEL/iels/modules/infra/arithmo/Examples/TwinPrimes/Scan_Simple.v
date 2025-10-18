@@ -1,5 +1,5 @@
 (** * Twin Primes Scanning - Simplified Infrastructure Version
-    
+
     Performance-optimized scanning for twin primes with logging.
 *)
 
@@ -35,7 +35,7 @@ Fixpoint count_twins (n : nat) : nat :=
   | 0 => 0
   | 1 => 0
   | 2 => 0
-  | S n' => 
+  | S n' =>
     let rest_count := count_twins n' in
     if check_twin n then S rest_count else rest_count
   end.

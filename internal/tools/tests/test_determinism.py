@@ -1,5 +1,7 @@
 def test_router_determinism():
-    import subprocess, hashlib, pathlib
+    import hashlib
+    import pathlib
+    import subprocess
     p = pathlib.Path("config/ontological_properties.json").read_bytes()
     h1 = hashlib.sha256(p).hexdigest()
     subprocess.run(["python","tools/audit_and_emit.py","--write"], check=True)

@@ -1,5 +1,5 @@
 (** * Twin Primes Specification - Simplified Infrastructure Version
-    
+
     Define twin prime predicates and modal variants for ArithmoPraxis.
 *)
 
@@ -42,7 +42,7 @@ Admitted.
 
 Lemma twin_11_13 : Twin 11.
 Proof.
-  (* Infrastructure proof - detailed verification in domain expansion *)  
+  (* Infrastructure proof - detailed verification in domain expansion *)
   admit.
 Admitted.
 

@@ -44,4 +44,3 @@ Admitted.
 
 Theorem uniqueness_spirit : Prov (Impl (And Spirit (Meta_Necessary (Neg Spirit))) Bot).
 Admitted.
-

@@ -51,7 +51,7 @@ Qed.
 (** ** Boolean Logic Tests (v0.4) *)
 
 (** Test Boolean formula construction *)
-Lemma test_boolean_formula : 
+Lemma test_boolean_formula :
   exists phi : ArithmoPraxis_Boolean.prop, phi = ArithmoPraxis_Boolean.And (ArithmoPraxis_Boolean.Var 0) (ArithmoPraxis_Boolean.Var 1).
 Proof.
   exists (ArithmoPraxis_Boolean.And (ArithmoPraxis_Boolean.Var 0) (ArithmoPraxis_Boolean.Var 1)).
@@ -59,15 +59,15 @@ Proof.
 Qed.
 
 (** Test Boolean evaluation *)
-Definition test_eval_result : bool := 
-  ArithmoPraxis_Boolean.eval (fun n => match n with 0 => true | _ => false end) 
+Definition test_eval_result : bool :=
+  ArithmoPraxis_Boolean.eval (fun n => match n with 0 => true | _ => false end)
                              (ArithmoPraxis_Boolean.Var 0).
 
 Lemma test_boolean_eval : test_eval_result = true.
 Proof. reflexivity. Qed.
 
 (** Test CNF conversion type *)
-Definition test_cnf_result : ArithmoPraxis_Boolean.cnf := 
+Definition test_cnf_result : ArithmoPraxis_Boolean.cnf :=
   ArithmoPraxis_Boolean.to_cnf (ArithmoPraxis_Boolean.Var 0).
 
 (** ** Constructive Sets Tests (v0.4) *)
@@ -75,7 +75,7 @@ Definition test_cnf_result : ArithmoPraxis_Boolean.cnf :=
 (** Test set membership *)
 Lemma test_sets_membership :
   ArithmoPraxis_Sets.mem 2 (1 :: 2 :: 3 :: nil) = true.
-Proof. 
+Proof.
   unfold ArithmoPraxis_Sets.mem.
   simpl.
   destruct (ArithmoPraxis_Sets.deq 2 1); simpl.
@@ -86,7 +86,7 @@ Proof.
 Qed.
 
 (** Test set operations *)
-Definition test_union_result : ArithmoPraxis_Sets.set nat := 
+Definition test_union_result : ArithmoPraxis_Sets.set nat :=
   ArithmoPraxis_Sets.union (1 :: 2 :: nil) (2 :: 3 :: nil).
 
 (** ** TwinPrimes v0.4 Tests *)

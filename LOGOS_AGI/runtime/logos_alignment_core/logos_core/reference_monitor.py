@@ -1,7 +1,8 @@
 import time
 
-from logos_core.pxl_client import PXLClient
 from persistence.persistence import AuditLog
+
+from logos_core.pxl_client import PXLClient
 
 
 class ReferenceMonitor:

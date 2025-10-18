@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-
 from services.workers.common.runner import main
 
 app = FastAPI()

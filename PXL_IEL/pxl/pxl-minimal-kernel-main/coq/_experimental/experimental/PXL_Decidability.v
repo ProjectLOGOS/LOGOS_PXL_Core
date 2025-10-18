@@ -120,7 +120,7 @@ Lemma mem_true_in : forall x xs, mem x xs = true -> In x xs.
 Proof. intros; apply mem_in; auto. Qed.
 
 Lemma mem_nat_in : forall x xs, mem_nat x xs = true -> In x xs.
-Proof.  
+Proof.
   intros x xs. induction xs as [|y ys IH]; simpl; try discriminate.
   destruct (Nat.eqb_spec x y) as [->|Hneq]; intro H.
   + left. reflexivity.

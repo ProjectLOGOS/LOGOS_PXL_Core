@@ -12,7 +12,7 @@ Set Implicit Arguments.
 Definition set := form -> Prop.
 Definition In_set (G:set) (p:form) : Prop := G p.
 
-Definition consistent (G:set) : Prop := 
+Definition consistent (G:set) : Prop :=
   ~ (exists p, G p /\ G (Neg p)).
 
 Record mct (G : set) : Prop := {
@@ -73,16 +73,16 @@ Proof. exact (ax_PL_botE b). Qed.
 (* ============================================ *)
 
 Lemma can_R_box_elim : forall Γ Δ (HΓ:mct Γ) (HΔ:mct Δ) φ,
-  can_R (exist _ Γ HΓ) (exist _ Δ HΔ) -> 
-  In_set Γ (Box φ) -> 
+  can_R (exist _ Γ HΓ) (exist _ Δ HΔ) ->
+  In_set Γ (Box φ) ->
   In_set Δ φ.
-Proof. 
+Proof.
   unfold can_R. simpl. intros. apply H. assumption.
 Qed.
 
 Lemma explosion_from_neg_and_pos : forall Δ (HΔ:mct Δ) φ,
   In_set Δ (Neg φ) -> In_set Δ φ -> False.
-Proof. 
+Proof.
   intros Δ HΔ φ Hneg Hpos.
   apply (mct_cons HΔ). exists φ. split; assumption.
 Qed.
@@ -103,7 +103,7 @@ Fixpoint enum (n : nat) : form :=
   match n with
   | 0 => Bot
   | 1 => Atom 0
-  | S (S n') => 
+  | S (S n') =>
     let k := n' mod 6 in
     let m := n' / 6 in
     match k with
@@ -121,10 +121,10 @@ Fixpoint enum (n : nat) : form :=
 Fixpoint provable_upto (k : nat) (phi : form) : bool :=
   match k with
   | 0 => false
-  | S k' => 
+  | S k' =>
     (* Check if phi is an axiom instance or can be derived in k' steps *)
     (* For now, simplified to check basic axiom patterns *)
-    match phi with 
+    match phi with
     | Impl Bot psi => true  (* Ex falso *)
     | Impl psi (Impl chi psi) => true  (* K axiom *)
     | _ => provable_upto k' phi
@@ -260,31 +260,31 @@ Proof.
     destruct Himpl as [n1 H1], Hphi as [n2 H2].
     let m := max n1 n2 in
     exists m.
-    (* Apply modus ponens at the finite level *) 
+    (* Apply modus ponens at the finite level *)
     admit.
 Admitted.
 
 (* Main constructive Lindenbaum theorem *)
 Theorem constructive_lindenbaum :
-  forall Gamma phi (HGamma : mct Gamma), 
+  forall Gamma phi (HGamma : mct Gamma),
   ~ In_set Gamma (Box phi) ->
-  exists Delta (HDelta : mct Delta), 
+  exists Delta (HDelta : mct Delta),
     can_R (exist _ Gamma HGamma) (exist _ Delta HDelta) /\ In_set Delta (Neg phi).
 Proof.
   intros Gamma phi HGamma HnBox.
   (* Construct base finite set from Gamma extended with Neg phi *)
   (* This is a simplified construction - full version would need *)
   (* to extract a finite representation of Gamma consistent with Neg phi *)
-  
+
   set (base := [Neg phi]).
-  
+
   (* Build the limit extension *)
   set (Delta := limit_set base).
-  
+
   (* Prove Delta is an mct *)
   assert (HDelta : mct Delta).
   { apply fs_to_set_mct with base.
-    - (* base is consistent *) 
+    - (* base is consistent *)
       intro H. destruct H as [psi [H1 H2]].
       unfold fs_mem in *. simpl in *.
       destruct H1 as [H1|H1]; [|contradiction].
@@ -294,7 +294,7 @@ Proof.
     - (* theorem closure at finite level *) admit.
     - (* modus ponens at finite level *) admit.
   }
-  
+
   exists Delta, HDelta.
   split.
   - (* can_R relation *)
@@ -312,7 +312,7 @@ Admitted.
 (* ============================================ *)
 
 Lemma dia_intro : forall Γ (HΓ:mct Γ) φ,
-  (exists Δ (HΔ:mct Δ), 
+  (exists Δ (HΔ:mct Δ),
      can_R (exist _ Γ HΓ) (exist _ Δ HΔ) /\ In_set Δ φ) ->
   In_set Γ (Dia φ).
 Proof.
@@ -426,7 +426,7 @@ Proof.
       exists (Impl φ1 φ2). split; [|assumption].
       (* Use H to get membership via IH when needed *)
       apply (mct_thm (proj2_sig w) _ (prov_imp_weaken φ1 φ2)).
-    + intros Hf1. 
+    + intros Hf1.
       (* membership -> forces for Impl *)
       apply (mct_mp (proj2_sig w) _ _ H).
       apply H0; [unfold lt_form; simpl; lia | assumption].
@@ -436,7 +436,7 @@ Proof.
       apply (mct_thm (proj2_sig w) _ (ax_PL_andI φ1 φ2)).
       apply (mct_mp (proj2_sig w) _ _); [apply (mct_thm (proj2_sig w) _ (ax_PL_and1 φ1 φ2))|].
       apply H0; [unfold lt_form; simpl; lia | assumption].
-    + (* membership -> forces for Conj *) 
+    + (* membership -> forces for Conj *)
       split.
       * apply H0; [unfold lt_form; simpl; lia | ].
         apply (mct_mp (proj2_sig w) _ _ (mct_thm (proj2_sig w) _ (prov_and_elimL φ1 φ2)) H).
@@ -447,7 +447,7 @@ Proof.
       destruct H as [Hf1 | Hf2].
       * apply (mct_mp (proj2_sig w) _ _ (mct_thm (proj2_sig w) _ (prov_or_introL φ1 φ2))).
         apply H0; [unfold lt_form; simpl; lia | assumption].
-      * apply (mct_mp (proj2_sig w) _ _ (mct_thm (proj2_sig w) _ (prov_or_introR φ1 φ2))).  
+      * apply (mct_mp (proj2_sig w) _ _ (mct_thm (proj2_sig w) _ (prov_or_introR φ1 φ2))).
         apply H0; [unfold lt_form; simpl; lia | assumption].
     + (* membership -> forces for Disj *)
       destruct (mct_total (proj2_sig w) φ1) as [Hf1 | Hnf1].

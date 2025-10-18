@@ -61,7 +61,7 @@ docker-compose build tool-router
 if ($UseRedis -eq "true") {
     Write-Host "Starting Redis for distributed rate limiting..."
     docker-compose up -d redis
-    
+
     Write-Host "Waiting for Redis to be ready..."
     $timeout = 30
     $elapsed = 0
@@ -160,7 +160,7 @@ try {
         Write-Host "❌ No tool router metrics found" -ForegroundColor Red
         exit 1
     }
-    
+
     Write-Host ""
     Write-Host "📈 Current Metrics Sample:"
     $metricsContent -split "`n" | Where-Object { $_ -match "(tool_router_requests_total|tool_router_circuit_breaker_state)" } | Select-Object -First 5 | ForEach-Object { Write-Host $_ }

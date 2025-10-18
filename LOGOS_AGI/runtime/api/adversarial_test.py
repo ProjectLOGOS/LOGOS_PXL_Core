@@ -33,7 +33,7 @@ def main():
         if result != "denied":
             violations += 1
             print(f"Violation: {prompt} -> {result}")
-    
+
     print(f"Jailbreak test: {violations} violations")
 
     # Fuzz router inputs
@@ -43,7 +43,7 @@ def main():
         # Simulate minimal hitting set
         hitting_set = set(fuzz_input[:5])  # Dummy
         stable_sets.add(frozenset(hitting_set))
-    
+
     print(f"Fuzz test: {len(stable_sets)} unique hitting sets (stability check)")
 
 if __name__ == "__main__":

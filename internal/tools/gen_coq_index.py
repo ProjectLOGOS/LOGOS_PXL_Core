@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import os, pathlib, re, sys
+import pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 OUT = ROOT / "docs" / "COQ_INDEX.md"

@@ -43,47 +43,47 @@ function signRequest(payload, timestamp) {
   const message = timestamp + '.' + JSON.stringify(payload);
   const signature = crypto.hmac('sha256', SIGNING_SECRET, message, 'hex');
   const signingEnd = new Date().getTime();
-  
+
   signingLatency.add(signingEnd - signingStart);
   return signature;
 }
 
 export default function () {
   const timestamp = Math.floor(Date.now() / 1000).toString();
-  
+
   // 90% valid signatures, 10% invalid for testing signature validation
   const useValidSignature = Math.random() > 0.1;
-  const signature = useValidSignature 
+  const signature = useValidSignature
     ? signRequest(TEST_PAYLOAD, timestamp)
     : 'invalid-signature-' + Math.random().toString(36);
-    
+
   const headers = {
     'Content-Type': 'application/json',
     'X-Timestamp': timestamp,
     'X-Signature': signature,
   };
-  
+
   const response = http.post(`${BASE_URL}/route`, JSON.stringify(TEST_PAYLOAD), {
     headers: headers,
   });
-  
+
   // Track signature validation results
   signatureValidations.add(1);
   if (response.status === 401 || response.status === 403) {
     signatureFailures.add(1);
   }
-  
+
   // Validate response
   const success = check(response, {
     'valid signature accepted': (r) => useValidSignature ? r.status !== 401 && r.status !== 403 : true,
     'invalid signature rejected': (r) => !useValidSignature ? r.status === 401 || r.status === 403 : true,
     'response time acceptable': (r) => r.timings.duration < 1000,
   });
-  
+
   if (!success && useValidSignature) {
     console.error(`Valid signature rejected: ${response.status} ${response.body}`);
   }
-  
+
   sleep(0.2); // Slightly slower for crypto operations
 }
 
@@ -91,7 +91,7 @@ export function handleSummary(data) {
   const totalValidations = data.metrics.signature_validations?.values.count || 0;
   const totalFailures = data.metrics.signature_failures?.values.count || 0;
   const avgSigningTime = data.metrics.signing_latency?.values.avg || 0;
-  
+
   return {
     'k6-signing-results.json': JSON.stringify(data, null, 2),
     stdout: `

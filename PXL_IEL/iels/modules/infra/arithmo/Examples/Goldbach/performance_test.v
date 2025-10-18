@@ -8,7 +8,7 @@ Eval compute in (goldbach_witness 20).
 
 (* Test incremental closure scores *)
 Eval compute in (closure_score 10).
-Eval compute in (closure_score 25).  
+Eval compute in (closure_score 25).
 Eval compute in (closure_score 100).
 
 (* Test invariant summary for reasonable range *)

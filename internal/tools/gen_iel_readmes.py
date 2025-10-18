@@ -6,10 +6,9 @@ Lists all files in each directory with their relative paths.
 
 import os
 import pathlib
-from typing import List, Dict
 
 
-def get_all_files(directory: pathlib.Path) -> List[pathlib.Path]:
+def get_all_files(directory: pathlib.Path) -> list[pathlib.Path]:
     """Get all files in directory recursively, excluding hidden files and directories."""
     files = []
     for root, dirs, filenames in os.walk(directory):
@@ -28,7 +27,7 @@ def generate_readme(praxis_name: str, praxis_path: pathlib.Path, base_path: path
     files = get_all_files(praxis_path)
 
     content = f"# {praxis_name}\n\n"
-    content += f"## Overview\n\n"
+    content += "## Overview\n\n"
     content += f"This directory contains the {praxis_name} implementation within the IEL (Integrated Experiential Logic) framework.\n\n"
 
     if files:

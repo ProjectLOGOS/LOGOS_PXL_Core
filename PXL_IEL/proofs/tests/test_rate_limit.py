@@ -2,7 +2,6 @@
 Basic rate limit behavior. Why: prevent regression in middleware.
 """
 import importlib
-import os
 
 import pytest
 from fastapi.testclient import TestClient

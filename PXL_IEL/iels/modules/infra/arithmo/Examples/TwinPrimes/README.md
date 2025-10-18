@@ -11,7 +11,7 @@ ArithmoPraxis twin primes verification and analysis system, modeled after the Go
 - **Modal variants**: `NecTwin`, `PossTwin`, `NecTwinCover` with □/◇ operators
 - **Basic proofs**: `twin_3_5`, `twin_5_7`, `twin_11_13` (some admitted for infrastructure)
 
-### `Extract.v` - Witness Search  
+### `Extract.v` - Witness Search
 - **`check_twin p`**: Boolean check if p is twin prime
 - **`find_twin_upto n`**: Find first twin prime ≤ n
 - **`extract_twins_upto n`**: Extract all twin primes ≤ n
@@ -37,7 +37,7 @@ From IEL.ArithmoPraxis.Examples.TwinPrimes Require Import Spec Extract Verify Sc
 (* Count twin primes up to 100 *)
 Eval vm_compute in (scan_twin 100).
 
-(* Find first twin prime up to 20 *)  
+(* Find first twin prime up to 20 *)
 Eval vm_compute in (find_twin_upto 20).
 
 (* Generate CSV log for twins up to 30 *)
@@ -65,7 +65,7 @@ Eval vm_compute in (verify_range 3 20).
 ## Known Twin Primes (for testing)
 
 - **(3, 5)**: First twin prime pair
-- **(5, 7)**: Second twin prime pair  
+- **(5, 7)**: Second twin prime pair
 - **(11, 13)**: Third twin prime pair
 - **(17, 19)**: Fourth twin prime pair
 - **(29, 31)**: Fifth twin prime pair
@@ -86,7 +86,7 @@ Eval vm_compute in (verify_range 3 20).
 - Add memoization for repeated primality tests
 - Optimize range scanning with early termination
 
-### v0.6 Advanced Features  
+### v0.6 Advanced Features
 - Hardy-Littlewood conjecture verification
 - Twin prime constant approximation
 - Statistical analysis of twin prime gaps
@@ -109,7 +109,7 @@ The TwinPrimes example follows the exact same modular structure as the Goldbach 
 
 This parallel structure enables:
 - **Consistent API**: Same usage patterns across mathematical examples
-- **Shared infrastructure**: Common verification and logging frameworks  
+- **Shared infrastructure**: Common verification and logging frameworks
 - **Cross-domain analysis**: Compare twin primes vs Goldbach statistics
 - **Template expansion**: Easy addition of new number-theoretic examples
 

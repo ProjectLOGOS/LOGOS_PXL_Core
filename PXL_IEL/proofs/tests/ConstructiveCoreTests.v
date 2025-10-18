@@ -1,7 +1,7 @@
 (* Test file that can be compiled directly from the chronopraxis directory *)
 From Coq Require Import Program.
 Load "ChronoAxioms.v".
-Load "Bijection.v". 
+Load "Bijection.v".
 Load "ChronoMappings.v".
 Load "ChronoTactics.v".
 Load "ChronoProofs.v".
@@ -17,21 +17,21 @@ Variable pA : PA. Variable pB : PB. Variable pC : PC.
 
 (* Test basic bijection properties directly *)
 Lemma test_collapse_A : ChronoMappings.B_to_A (ChronoMappings.A_to_B pA) = pA.
-Proof. 
+Proof.
   unfold ChronoMappings.B_to_A, ChronoMappings.A_to_B.
   unfold backward, forward.
   apply (fg ChronoMappings.map_AB).
 Qed.
 
 Lemma test_collapse_B : ChronoMappings.A_to_B (ChronoMappings.B_to_A pB) = pB.
-Proof. 
+Proof.
   unfold ChronoMappings.A_to_B, ChronoMappings.B_to_A.
   unfold forward, backward.
   apply (gf ChronoMappings.map_AB).
 Qed.
 
 Lemma test_collapse_C : ChronoMappings.B_to_C (ChronoMappings.C_to_B pC) = pC.
-Proof. 
+Proof.
   unfold ChronoMappings.B_to_C, ChronoMappings.C_to_B.
   unfold forward, backward.
   apply (gf ChronoMappings.map_BC).

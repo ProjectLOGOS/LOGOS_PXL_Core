@@ -27,12 +27,12 @@ const BASE_URL = __ENV.TOOL_ROUTER_URL || 'http://localhost:8071';
 export default function () {
   // Test health endpoint
   const response = http.get(`${BASE_URL}/health`);
-  
+
   // Record metrics
   requestCount.add(1);
   requestDuration.add(response.timings.duration);
   errorRate.add(response.status !== 200);
-  
+
   // Validate response
   const success = check(response, {
     'status is 200': (r) => r.status === 200,
@@ -45,11 +45,11 @@ export default function () {
       }
     },
   });
-  
+
   if (!success) {
     console.error(`Health check failed: ${response.status} ${response.body}`);
   }
-  
+
   // Brief pause between requests
   sleep(0.1);
 }

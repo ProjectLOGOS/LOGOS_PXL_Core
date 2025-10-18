@@ -74,10 +74,10 @@ Definition backward {X Y : Type} (bij : Bijection X Y) : Y -> X := g bij.
 
 (* === Rewrite Lemmas === *)
 
-Lemma fg_rewrite {X Y : Type} (bij : Bijection X Y) : 
+Lemma fg_rewrite {X Y : Type} (bij : Bijection X Y) :
   forall x : X, backward bij (forward bij x) = x.
 Proof. intro x. unfold backward, forward. apply fg. Qed.
 
-Lemma gf_rewrite {X Y : Type} (bij : Bijection X Y) : 
+Lemma gf_rewrite {X Y : Type} (bij : Bijection X Y) :
   forall y : Y, forward bij (backward bij y) = y.
 Proof. intro y. unfold forward, backward. apply gf. Qed.

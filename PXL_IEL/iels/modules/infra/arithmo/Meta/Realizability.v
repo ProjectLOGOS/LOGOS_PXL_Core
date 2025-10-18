@@ -63,8 +63,8 @@ Module ArithmoPraxis_Realizability.
   Proof.
     intros P R dec_proc exists_proc.
     (* Construct total function using decidability and existence *)
-    pose (f := fun n => 
-      match dec_proc n with 
+    pose (f := fun n =>
+      match dec_proc n with
       | _ => 0  (* Placeholder - in full implementation, extract witness *)
       end).
     exists f.

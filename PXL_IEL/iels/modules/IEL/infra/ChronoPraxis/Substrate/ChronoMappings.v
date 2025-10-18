@@ -72,5 +72,3 @@ Parameter lift_from_C : ChronoAxioms.P_chi ChronoAxioms.chi_C -> ChronoAxioms.Et
 (* === Bijection Preservation - REMOVED === *)
 
 End ChronoMappings.
-
-

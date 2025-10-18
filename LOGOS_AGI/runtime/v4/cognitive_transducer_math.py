@@ -498,7 +498,7 @@ class SemanticGlyphDatabase:
             if domain:
                 cursor = conn.execute(
                     """
-                    SELECT glyph_data FROM semantic_glyphs 
+                    SELECT glyph_data FROM semantic_glyphs
                     WHERE content LIKE ? AND domain = ?
                     ORDER BY usage_count DESC LIMIT ?
                 """,
@@ -507,7 +507,7 @@ class SemanticGlyphDatabase:
             else:
                 cursor = conn.execute(
                     """
-                    SELECT glyph_data FROM semantic_glyphs 
+                    SELECT glyph_data FROM semantic_glyphs
                     WHERE content LIKE ?
                     ORDER BY usage_count DESC LIMIT ?
                 """,

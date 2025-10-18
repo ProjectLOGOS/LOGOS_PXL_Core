@@ -1,6 +1,8 @@
 import importlib
+
 import pytest
 from fastapi.testclient import TestClient
+
 
 @pytest.mark.smoke
 def test_metrics_endpoint():

@@ -1,4 +1,7 @@
-import json, re, os, sys, hashlib
+import hashlib
+import json
+import re
+import sys
 from pathlib import Path
 
 SRC=sys.argv[1]; OUT=sys.argv[2]
@@ -49,7 +52,7 @@ def fmt(rev,imv):
   sign="+" if imv>=0 else "-"
   return f"{rev}{sign}{abs(imv)}j"
 
-data=json.load(open(SRC,"r",encoding="utf-8"))
+data=json.load(open(SRC,encoding="utf-8"))
 props=data.get("properties",{})
 
 # 1) normalize + collect by (routing_key, c_value) to de-alias deterministically

@@ -1,5 +1,5 @@
 (** * Twin Primes Verification - Simplified Infrastructure Version
-    
+
     Verification functions for twin prime properties with formal proofs.
 *)
 
@@ -37,7 +37,7 @@ Fixpoint verify_monotonic (l : list nat) : bool :=
 
 (** Verification soundness *)
 Lemma verify_all_twins_sound : forall l,
-  verify_all_twins l = true -> 
+  verify_all_twins l = true ->
   forall p, In p l -> Twin p.
 Proof.
   intros l H p Hin.
@@ -91,7 +91,7 @@ Admitted.
 (** Verify extracted twins up to 30 *)
 Definition verify_twins_30 : bool := verify_all_twins twins_30.
 
-(** Verify coverage up to 20 *)  
+(** Verify coverage up to 20 *)
 Definition verify_cover_20 : bool := verify_coverage 20.
 
 (** Example verification results *)
@@ -108,7 +108,7 @@ Admitted.
 (** Complete verification for bounded search *)
 Lemma verification_complete : forall n,
   (forall p, p <= n -> Twin p -> check_twin p = true) ->
-  (forall l, (forall p, In p l -> p <= n /\ Twin p) -> 
+  (forall l, (forall p, In p l -> p <= n /\ Twin p) ->
              verify_all_twins l = true).
 Proof.
   (* Infrastructure completeness theorem *)

@@ -6,14 +6,14 @@ Unit tests for LOGOS API:
 - /verify_kernel compares against configured KERNEL_HASH
 """
 
-import importlib
-import os
-import re
-import time
-import hmac
 import hashlib
+import hmac
+import importlib
+import time
+
 import pytest
 from fastapi.testclient import TestClient
+
 
 def _load_app(monkeypatch: pytest.MonkeyPatch, **env):
     for k, v in env.items():

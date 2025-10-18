@@ -16,5 +16,3 @@ Proof.
   pose proof (id_prop X) as H.
   exact (nec H).
 Qed.
-
-

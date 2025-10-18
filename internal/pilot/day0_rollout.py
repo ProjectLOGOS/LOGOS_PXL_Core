@@ -256,11 +256,7 @@ class Day0Rollout:
                 continue
 
             # Check compliance based on SLO type
-            if slo.name in ["proof_p50", "proof_p95"]:
-                # Lower is better
-                compliant = metric_value <= slo.target_value
-                breach = metric_value > slo.alert_threshold
-            elif slo.name == "denial_budget":
+            if slo.name in ["proof_p50", "proof_p95"] or slo.name == "denial_budget":
                 # Lower is better
                 compliant = metric_value <= slo.target_value
                 breach = metric_value > slo.alert_threshold

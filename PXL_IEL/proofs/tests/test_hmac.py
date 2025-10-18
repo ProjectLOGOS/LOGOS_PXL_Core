@@ -1,11 +1,12 @@
+import hashlib
+import hmac
 import importlib
 import json
 import time
-import hmac
-import hashlib
-import os
+
 import pytest
 from fastapi.testclient import TestClient
+
 
 def _import_router_app():
     try:
@@ -34,7 +35,7 @@ def test_hmac_success(monkeypatch):
     ts, sig = _sign("secret", body)
     # mock upstream
     def fake_post(url, json, headers, timeout):
-        class R: 
+        class R:
             status_code=200
             text=""
             def json(self): return {"ok": True}

@@ -1,5 +1,5 @@
 (** * Boolean Logic Domain - Propositional Calculus
-    
+
     ArithmoPraxis Boolean logic infrastructure with propositional calculus,
     CNF conversion, and SAT solving framework.
 *)
@@ -72,10 +72,10 @@ Fixpoint to_cnf (phi : prop) : cnf :=
   | Var n => (((n, true) :: nil) :: nil)  (* Single positive literal *)
   | Not (Var n) => (((n, false) :: nil) :: nil)  (* Single negative literal *)
   | And p q => (to_cnf p) ++ (to_cnf q)  (* Concatenate clauses *)
-  | Or p q => 
+  | Or p q =>
       (* TODO: Implement proper disjunction handling *)
       (to_cnf p) ++ (to_cnf q)  (* Placeholder - needs proper implementation *)
-  | _ => 
+  | _ =>
       (* TODO: Handle complex cases with Tseitin transformation *)
       ((nil) :: nil)  (* Placeholder *)
   end.
@@ -91,7 +91,7 @@ Definition sat (phi : prop) : option (nat -> bool) :=
 
 (** Equivalence between direct evaluation and CNF evaluation *)
 (** TODO: Prove this lemma *)
-Lemma eval_equiv_cnf : forall rho phi, 
+Lemma eval_equiv_cnf : forall rho phi,
   eval rho phi = eval_cnf rho (to_cnf phi).
 Proof.
   intros rho phi.
@@ -100,7 +100,7 @@ Proof.
 Admitted.
 
 (** Soundness of SAT solver *)
-Lemma sat_sound : forall phi rho, 
+Lemma sat_sound : forall phi rho,
   sat phi = Some rho -> eval rho phi = true.
 Proof.
   intros phi rho H.

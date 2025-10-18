@@ -1,0 +1,81 @@
+name: Coq Build & Policy
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: coqorg/coq:latest
+    defaults:
+      run:
+        shell: bash -euo pipefail {0}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Policy check (no Admitted., no Add LoadPath)
+        run: |
+          bash scripts/check_policy.sh
+
+      - name: Build (Bash make)
+        run: |
+          make clean
+          make -j
+
+      - name: Kernel verification
+        run: |
+          make check
+
+      - name: Domain builds
+        run: |
+          make domain-compatibilism
+          make domain-empiricism
+          make domain-modal-ontology
+
+      - name: ArithmoPraxis v0.4 builds
+        run: |
+          # Core infrastructure
+          coqc modules/infra/arithmo/Core/ModalWrap.v
+          coqc modules/infra/arithmo/Core/Numbers.v
+          # v0.4 Boolean Logic domain
+          coqc modules/infra/arithmo/BooleanLogic/Boolean.v
+          # v0.4 ConstructiveSets domain
+          coqc modules/infra/arithmo/ConstructiveSets/Sets.v
+          # Enhanced Meta modules
+          coqc modules/infra/arithmo/Meta/Realizability.v
+          coqc modules/infra/arithmo/Meta/SIGNALS.v
+          # Examples
+          coqc modules/infra/arithmo/Examples/Goldbach/ScanFeatures.v
+          # v0.4 TwinPrimes example (4 modules)
+          coqc modules/infra/arithmo/Examples/TwinPrimes/Spec.v
+          coqc modules/infra/arithmo/Examples/TwinPrimes/Extract.v
+          coqc modules/infra/arithmo/Examples/TwinPrimes/Verify.v
+          coqc modules/infra/arithmo/Examples/TwinPrimes/Scan.v
+          # Test suite
+          coqc tests/arithmo_suite.v
+
+      - name: Property tests
+        run: |
+          coqc tests/DomainProperties.v
+
+      - name: Build coqdoc
+        run: |
+          make docs-html
+
+      - name: Upload docs
+        uses: actions/upload-artifact@v4
+        with:
+          name: coqdoc-html
+          path: docs/html
+
+      - name: Generate status report
+        run: |
+          bash scripts/gen_status.sh > docs/IEL_STATUS.md
+          sed -n '1,120p' docs/IEL_STATUS.md
+
+      - name: Upload status artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: IEL_STATUS
+          path: docs/IEL_STATUS.md

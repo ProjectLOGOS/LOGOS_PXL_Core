@@ -1,7 +1,8 @@
 import importlib
-import os
+
 import pytest
 from fastapi.testclient import TestClient
+
 
 def _import_router_app(monkeypatch):
     monkeypatch.setenv("USE_REDIS_RATE_LIMIT", "true")

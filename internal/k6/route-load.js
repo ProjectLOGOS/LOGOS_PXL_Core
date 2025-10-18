@@ -62,7 +62,7 @@ const TEST_PAYLOADS = [
 
 function signRequest(payload, timestamp) {
   if (!SIGNING_SECRET) return null;
-  
+
   const message = timestamp + '.' + JSON.stringify(payload);
   return crypto.hmac('sha256', SIGNING_SECRET, message, 'hex');
 }
@@ -70,12 +70,12 @@ function signRequest(payload, timestamp) {
 export default function () {
   // Select random payload
   const payload = TEST_PAYLOADS[Math.floor(Math.random() * TEST_PAYLOADS.length)];
-  
+
   // Prepare headers
   const headers = {
     'Content-Type': 'application/json',
   };
-  
+
   // Add HMAC signature if secret provided
   if (SIGNING_SECRET) {
     const timestamp = Math.floor(Date.now() / 1000).toString();
@@ -83,23 +83,23 @@ export default function () {
     headers['X-Timestamp'] = timestamp;
     headers['X-Signature'] = signature;
   }
-  
+
   // Make request
   const startTime = new Date().getTime();
   const response = http.post(`${BASE_URL}/route`, JSON.stringify(payload), {
     headers: headers,
   });
   const endTime = new Date().getTime();
-  
+
   // Record metrics
   const duration = endTime - startTime;
   routeLatency.add(duration);
   errorRate.add(response.status >= 400);
-  
+
   if (response.status === 429) {
     rateLimitHits.add(1);
   }
-  
+
   // Validate response
   const success = check(response, {
     'status is not 5xx': (r) => r.status < 500,
@@ -113,12 +113,12 @@ export default function () {
       }
     },
   });
-  
+
   // Log errors (but not rate limits)
   if (response.status >= 500) {
     console.error(`Route failed: ${response.status} ${response.body}`);
   }
-  
+
   // Realistic user behavior
   sleep(Math.random() * 0.5 + 0.1); // 0.1-0.6s between requests
 }
@@ -127,7 +127,7 @@ export function handleSummary(data) {
   const routeRequests = data.metrics.http_reqs.values.count;
   const rateLimits = data.metrics.rate_limit_hits?.values.count || 0;
   const errorCount = (data.metrics.http_req_failed?.values.count || 0) - rateLimits;
-  
+
   return {
     'k6-route-results.json': JSON.stringify(data, null, 2),
     stdout: `

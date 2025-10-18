@@ -46,7 +46,7 @@ Module Invariants.
     match goldbach_witness n with
     | Some (p1, p2) =>
         let candidates := [(p1+2, p2); (p1, p2+2); (p1-2, p2+2); (p1+2, p2-2)] in
-        let check_candidate '(a, b) := 
+        let check_candidate '(a, b) :=
             Nat.eqb (a + b) (n + 2) && is_prime a && is_prime b in
         existsb check_candidate candidates
     | None => false

@@ -115,7 +115,7 @@ volumes:
 
 {
   "comment": "Complete ETG (Existence-Truth-Goodness) ontological property scores, using original benchmark scores and adding complex-number derived properties with corresponding ETG metrics",
-  
+
   "original_benchmark_properties": {
     "existence": {"E": 0.9, "G": 0.6, "T": 0.8},
     "goodness": {"E": 0.6, "G": 0.95, "T": 0.85},
@@ -138,7 +138,7 @@ volumes:
       "derivation_note": "High existence (0.285 real → strong ontological grounding), very high truth (epistemological group), high goodness (divine attribute)",
       "complex_source": "0.285+0.01j, Epistemological group"
     },
-    
+
     "omnipotence": {
       "E": 0.95,
       "G": 0.8,
@@ -146,7 +146,7 @@ volumes:
       "derivation_note": "Highest existence (0.45 real → maximal causal power), high goodness (divine attribute), high truth",
       "complex_source": "0.45+0.1j, Causal group"
     },
-    
+
     "omnipresence": {
       "E": 0.88,
       "G": 0.75,
@@ -154,7 +154,7 @@ volumes:
       "derivation_note": "High existence (0.13 + 0.2j → spatial-temporal presence), moderate goodness, high truth",
       "complex_source": "0.13+0.2j, Spatial group"
     },
-    
+
     "love": {
       "E": 0.8,
       "G": 0.98,
@@ -162,7 +162,7 @@ volumes:
       "derivation_note": "Original benchmark maintained - highest goodness score, strong relational reality",
       "complex_source": "-0.4+0.6j, Relational group - original benchmark preserved"
     },
-    
+
     "justice": {
       "E": 0.7,
       "G": 0.92,
@@ -170,7 +170,7 @@ volumes:
       "derivation_note": "Original benchmark maintained - very high goodness with strong truth component",
       "complex_source": "-0.123+0.745j, Moral group - original benchmark preserved"
     },
-    
+
     "mercy": {
       "E": 0.6,
       "G": 0.93,
@@ -178,7 +178,7 @@ volumes:
       "derivation_note": "Original benchmark maintained - highest goodness category with transcendent quality",
       "complex_source": "0.355+0.355j, Moral group - original benchmark preserved"
     },
-    
+
     "will": {
       "E": 0.9,
       "G": 0.75,
@@ -186,7 +186,7 @@ volumes:
       "derivation_note": "High existence (-0.8 magnitude → strong volitional reality), moderate goodness, moderate-high truth",
       "complex_source": "-0.8+0.156j, Causal group"
     },
-    
+
     "truthfulness": {
       "E": 0.82,
       "G": 0.88,
@@ -194,7 +194,7 @@ volumes:
       "derivation_note": "High truth (epistemological group), high goodness (moral virtue), strong existence",
       "complex_source": "-0.701+0.28j, Epistemological group"
     },
-    
+
     "goodness": {
       "E": 0.6,
       "G": 0.95,
@@ -202,7 +202,7 @@ volumes:
       "derivation_note": "Original benchmark maintained - paradigmatic goodness property",
       "complex_source": "0.32+0.05j, Moral group - original benchmark preserved"
     },
-    
+
     "beauty": {
       "E": 0.78,
       "G": 0.85,
@@ -210,7 +210,7 @@ volumes:
       "derivation_note": "Good existence (aesthetic reality), high goodness (inherent value), high truth (aesthetic truth)",
       "complex_source": "0.34-0.08j, Aesthetic group"
     },
-    
+
     "eternality": {
       "E": 0.92,
       "G": 0.7,
@@ -218,7 +218,7 @@ volumes:
       "derivation_note": "Very high existence (temporal transcendence), moderate goodness, high truth",
       "complex_source": "0.1-0.65j, Temporal group"
     },
-    
+
     "immutability": {
       "E": 0.88,
       "G": 0.78,
@@ -226,7 +226,7 @@ volumes:
       "derivation_note": "High existence (stable reality), good goodness, very high truth (logical consistency)",
       "complex_source": "0.2+0.5j, Ontological group"
     },
-    
+
     "simplicity": {
       "E": 0.95,
       "G": 0.82,
@@ -234,7 +234,7 @@ volumes:
       "derivation_note": "Highest existence (-1.25 magnitude → fundamental reality), high goodness, highest truth",
       "complex_source": "-1.25+0.0j, Ontological group"
     },
-    
+
     "freedom": {
       "E": 0.85,
       "G": 0.9,
@@ -242,7 +242,7 @@ volumes:
       "derivation_note": "High existence (volitional reality), very high goodness (moral value), good truth",
       "complex_source": "-0.75+0.1j, Volitional group"
     },
-    
+
     "wrath": {
       "E": 0.75,
       "G": 0.6,
@@ -250,7 +250,7 @@ volumes:
       "derivation_note": "Moderate existence, moderate goodness (just wrath), moderate truth",
       "complex_source": "0.28-0.53j, Moral group"
     },
-    
+
     "grace": {
       "E": 0.82,
       "G": 0.95,
@@ -258,7 +258,7 @@ volumes:
       "derivation_note": "High existence (-0.78 magnitude), highest goodness (unmerited favor), high truth",
       "complex_source": "-0.78+0.12j, Relational group"
     },
-    
+
     "peace": {
       "E": 0.78,
       "G": 0.9,
@@ -266,7 +266,7 @@ volumes:
       "derivation_note": "Good existence, very high goodness, high truth. Complex magnitude 1.04j indicates transcendent quality",
       "complex_source": "-0.16+1.04j, Aesthetic group"
     },
-    
+
     "jealousy": {
       "E": 0.72,
       "G": 0.45,
@@ -274,7 +274,7 @@ volumes:
       "derivation_note": "Moderate existence, lower goodness (can be destructive), moderate truth",
       "complex_source": "0.28-0.01j, Relational group"
     },
-    
+
     "complexity": {
       "E": 0.85,
       "G": 0.7,
@@ -282,7 +282,7 @@ volumes:
       "derivation_note": "High existence (-0.77 magnitude), moderate goodness, high truth",
       "complex_source": "-0.77+0.08j, Ontological group"
     },
-    
+
     "order": {
       "E": 0.95,
       "G": 0.85,
@@ -290,7 +290,7 @@ volumes:
       "derivation_note": "Highest existence (-1.4 magnitude → fundamental structural reality), high goodness, very high truth",
       "complex_source": "-1.4+0.0j, Ontological group"
     },
-    
+
     "righteousness": {
       "E": 0.78,
       "G": 0.95,
@@ -298,7 +298,7 @@ volumes:
       "derivation_note": "Good existence, highest goodness (moral perfection), high truth",
       "complex_source": "-0.1+0.8j, Moral group"
     },
-    
+
     "blessedness": {
       "E": 0.8,
       "G": 0.92,
@@ -306,7 +306,7 @@ volumes:
       "derivation_note": "High existence, very high goodness (perfect happiness), high truth",
       "complex_source": "-0.2+0.8j, Aesthetic group"
     },
-    
+
     "glory": {
       "E": 0.82,
       "G": 0.88,
@@ -314,7 +314,7 @@ volumes:
       "derivation_note": "High existence (0.38+0.21j), high goodness (divine radiance), high truth",
       "complex_source": "0.38+0.21j, Aesthetic group"
     },
-    
+
     "knowledge": {
       "E": 0.85,
       "G": 0.75,
@@ -322,7 +322,7 @@ volumes:
       "derivation_note": "High existence (cognitive reality), good goodness, very high truth (epistemological)",
       "complex_source": "0.3-0.01j, Epistemological group"
     },
-    
+
     "obedience": {
       "E": 0.75,
       "G": 0.8,
@@ -330,7 +330,7 @@ volumes:
       "derivation_note": "Good existence, high goodness (moral virtue when proper), moderate truth (contextual)",
       "complex_source": "-0.5+0.55j, Asymmetrical group"
     },
-    
+
     "judgment": {
       "E": 0.8,
       "G": 0.75,
@@ -338,7 +338,7 @@ volumes:
       "derivation_note": "High existence (0.27-0.54j), good goodness (just judgment), high truth",
       "complex_source": "0.27-0.54j, Asymmetrical group"
     },
-    
+
     "forgiveness": {
       "E": 0.82,
       "G": 0.95,
@@ -346,7 +346,7 @@ volumes:
       "derivation_note": "High existence (-0.79 magnitude), highest goodness (supreme virtue), high truth",
       "complex_source": "-0.79+0.15j, Asymmetrical group"
     },
-    
+
     "submission": {
       "E": 0.72,
       "G": 0.75,
@@ -354,7 +354,7 @@ volumes:
       "derivation_note": "Moderate existence, good goodness (when proper), moderate truth (contextual)",
       "complex_source": "-0.6+0.5j, Asymmetrical group"
     },
-    
+
     "teaching": {
       "E": 0.8,
       "G": 0.82,
@@ -371,63 +371,63 @@ volumes:
       "T": 0.92,
       "derivation_note": "Combined highest divine attributes of knowledge and power"
     },
-    
+
     "omniscience_omnipresence": {
       "E": 0.91,
       "G": 0.8,
       "T": 0.9,
       "derivation_note": "Divine knowledge across all spatial-temporal domains"
     },
-    
+
     "justice_mercy": {
       "E": 0.65,
       "G": 0.925,
       "T": 0.775,
       "derivation_note": "Perfect balance of justice and mercy - divine reconciliation"
     },
-    
+
     "love_truth": {
       "E": 0.8,
       "G": 0.915,
       "T": 0.915,
       "derivation_note": "Love grounded in truth - highest relational reality"
     },
-    
+
     "simplicity_order": {
       "E": 0.95,
       "G": 0.835,
       "T": 0.935,
       "derivation_note": "Perfect divine simplicity manifesting perfect order"
     },
-    
+
     "freedom_goodness": {
       "E": 0.725,
       "G": 0.925,
       "T": 0.815,
       "derivation_note": "Free choice oriented toward perfect good"
     },
-    
+
     "beauty_truth": {
       "E": 0.79,
       "G": 0.875,
       "T": 0.875,
       "derivation_note": "Beautiful truth - aesthetic and epistemic unity"
     },
-    
+
     "knowledge_wisdom": {
       "E": 0.85,
       "G": 0.8,
       "T": 0.94,
       "derivation_note": "Perfect knowledge applied with perfect wisdom"
     },
-    
+
     "eternality_immutability": {
       "E": 0.9,
       "G": 0.74,
       "T": 0.875,
       "derivation_note": "Eternal and unchanging divine nature"
     },
-    
+
     "righteousness_justice": {
       "E": 0.74,
       "G": 0.935,
@@ -464,14 +464,14 @@ volumes:
 
   "validation_notes": {
     "methodology": "Original benchmark ETG scores preserved as reference standard. Complex number magnitudes and imaginary components used to derive existence scores. Group classifications used to determine truth and goodness alignments. All scores maintain Trinity Law compliance where goodness >= existence * truth.",
-    
+
     "complex_number_mapping": {
       "real_component": "Primary influence on existence score (ontological grounding)",
       "imaginary_component": "Secondary influence on transcendent/relational qualities",
       "magnitude": "Overall ontological weight",
       "group_classification": "Determines truth and goodness score ranges"
     },
-    
+
     "consistency_check": "All derived scores maintain internal coherence with original benchmark and satisfy ETGC validation requirements for LOGOS system deployment."
   }
 }
@@ -552,7 +552,7 @@ volumes:
         "description": "Ratio of matter to total energy density"
       },
       "entropy_gradient": {
-        "value": 1.0e-5, 
+        "value": 1.0e-5,
         "tolerance": 0.1,
         "description": "Rate of entropy increase"
       },
@@ -579,7 +579,7 @@ volumes:
         "description": "Stability of star formation and lifecycle"
       },
       "chemical_complexity": {
-        "value": 0.75, 
+        "value": 0.75,
         "min_threshold": 0.6,
         "description": "Potential for complex chemical interactions"
       }
@@ -2336,18 +2336,18 @@ from typing import Dict, List, Tuple, Set, Optional, Union
 
 class TranscendentalDomain:
     """Transcendental domain implementation with invariant calculation."""
-    
+
     def __init__(self):
         """Initialize transcendental domain with canonical values."""
         # Values: EI = 1, OG = 2, AT = 3
         self.values = {"EI": 1, "OG": 2, "AT": 3}
-        
+
         # Operators: S₁ᵗ = 3, S₂ᵗ = 2
         self.operators = {"S_1^t": 3, "S_2^t": 2}
-    
+
     def calculate_invariant(self) -> int:
         """Calculate the unity invariant according to domain equation.
-        
+
         Returns:
             Integer invariant value (should be 1 for unity)
         """
@@ -2357,29 +2357,29 @@ class TranscendentalDomain:
         AT = self.values["AT"]
         S1 = self.operators["S_1^t"]
         S2 = self.operators["S_2^t"]
-        
+
         # Calculate: 1 + 3 - 2 + 2 - 3 = 1
         return EI + S1 - OG + S2 - AT
-    
+
     def verify_invariant(self) -> bool:
         """Verify that invariant equals unity (1).
-        
+
         Returns:
             True if invariant equals 1, False otherwise
         """
         return self.calculate_invariant() == 1
-    
+
     def get_symbolic_equation(self) -> sp.Expr:
         """Get symbolic representation of the invariant equation.
-        
+
         Returns:
             Sympy expression for transcendental invariant
         """
         EI, OG, AT = symbols('EI OG AT')
         S1, S2 = symbols('S_1^t S_2^t')
-        
+
         expr = EI + S1 - OG + S2 - AT
-        
+
         # Substitute with actual values
         subs = {
             EI: self.values["EI"],
@@ -2388,24 +2388,24 @@ class TranscendentalDomain:
             S1: self.operators["S_1^t"],
             S2: self.operators["S_2^t"]
         }
-        
+
         return expr.subs(subs)
 
 
 class LogicalDomain:
     """Logical domain implementation with invariant calculation."""
-    
+
     def __init__(self):
         """Initialize logical domain with canonical values."""
         # Values: ID = 1, NC = 2, EM = 3
         self.values = {"ID": 1, "NC": 2, "EM": 3}
-        
+
         # Operators: S₁ᵇ = 1, S₂ᵇ = -2
         self.operators = {"S_1^b": 1, "S_2^b": -2}
-    
+
     def calculate_invariant(self) -> int:
         """Calculate the trinitarian invariant according to domain equation.
-        
+
         Returns:
             Integer invariant value (should be 3 for trinitarian)
         """
@@ -2415,21 +2415,21 @@ class LogicalDomain:
         EM = self.values["EM"]
         S1 = self.operators["S_1^b"]
         S2 = self.operators["S_2^b"]
-        
+
         # Calculate: 1 + 1 + 2 - (-2) - 3 = 3
         return ID + S1 + NC - S2 - EM
-    
+
     def verify_invariant(self) -> bool:
         """Verify that invariant equals trinity (3).
-        
+
         Returns:
             True if invariant equals 3, False otherwise
         """
         return self.calculate_invariant() == 3
-    
+
     def get_symbolic_equation(self) -> sp.Expr:
         """Get symbolic representation of the invariant equation.
-        
+
         Returns:
             Sympy expression for logical
 
@@ -2461,23 +2461,23 @@ class OntologicalType(Enum):
 
 class FunctionType:
     """Function type constructor."""
-    
+
     def __init__(self, domain: OntologicalType, codomain: Union[OntologicalType, 'FunctionType']):
         """Initialize function type.
-        
+
         Args:
             domain: Input type
             codomain: Output type
         """
         self.domain = domain
         self.codomain = codomain
-    
+
     def __str__(self) -> str:
         """Return string representation."""
         domain_str = self.domain.value
         codomain_str = str(self.codomain)
         return f"{domain_str} → {codomain_str}"
-    
+
     def __eq__(self, other) -> bool:
         """Check equality with another type."""
         if not isinstance(other, FunctionType):
@@ -2504,12 +2504,12 @@ class FractalPosition:
     in_set: bool
     final_z: Tuple[float, float] = field(default_factory=lambda: (0.0, 0.0))
     escape_radius: float = 2.0
-    
+
     @property
     def complex(self) -> complex:
         """Get position as complex number."""
         return complex(self.c_real, self.c_imag)
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary representation."""
         return {
@@ -2520,7 +2520,7 @@ class FractalPosition:
             "final_z": self.final_z,
             "escape_radius": self.escape_radius
         }
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> 'FractalPosition':
         """Create from dictionary representation."""
@@ -2545,7 +2545,7 @@ class ProcessingResult:
     lambda_expr: Optional[Any] = None
     entailments: List[Any] = field(default_factory=list)
     summary: str = ""
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary representation."""
         return {
@@ -2558,12 +2558,12 @@ class ProcessingResult:
             "entailments": [str(e) for e in self.entailments],
             "summary": self.summary
         }
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> 'ProcessingResult':
         """Create from dictionary representation."""
         fractal_pos_data = data.get("fractal_position", {})
-        
+
         return cls(
             query=data.get("query", ""),
             trinity_vector=data.get("trinity_vector", (0.5, 0.5, 0.5)),
@@ -2584,7 +2584,7 @@ class OntologicalRelation:
     relation_type: str
     strength: float
     metadata: Dict[str, Any] = field(default_factory=dict)
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary representation."""
         return {
@@ -2594,7 +2594,7 @@ class OntologicalRelation:
             "strength": self.strength,
             "metadata": self.metadata
         }
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> 'OntologicalRelation':
         """Create from dictionary representation."""
@@ -2609,10 +2609,10 @@ class OntologicalRelation:
 
 def format_trinity_vector(trinity: Tuple[float, float, float]) -> str:
     """Format trinity vector as string.
-    
+
     Args:
         trinity: Trinity vector (existence, goodness, truth)
-        
+
     Returns:
         Formatted string representation
     """
@@ -2622,11 +2622,11 @@ def format_trinity_vector(trinity: Tuple[float, float, float]) -> str:
 
 def format_modal_status(status: ModalStatus, coherence: float) -> str:
     """Format modal status as string with coherence.
-    
+
     Args:
         status: Modal status
         coherence: Coherence value
-        
+
     Returns:
         Formatted string representation
     """
@@ -2640,7 +2640,7 @@ def format_modal_status(status: ModalStatus, coherence: float) -> str:
         icon = "¬◇"  # Negated diamond
     else:
         icon = "?"
-    
+
     return f"{icon} {status.value.capitalize()} (coherence: {coherence:.3f})"
 
 --- END OF FILE core/data_structures.py ---
@@ -2687,7 +2687,7 @@ class Variable(LogosExpr):
     def __init__(self, name: str, onto_type: OntologicalType):
         self.name=name; self.onto_type=onto_type
     def _to_string(self): return f"{self.name}:{self.onto_type.value}"
-    def to_dict(self): 
+    def to_dict(self):
         return {"type":"var","name":self.name,"onto_type":self.onto_type.value}
     @classmethod
     def from_dict(cls,data):
@@ -2811,13 +2811,13 @@ def person_relation(operation: str, agent_a: str, agent_b: str) -> str or bool:
     H∘F=S (Spirit operating on Father yields Son)
     """
     a, b = agent_a[0].upper(), agent_b[0].upper()
-    
+
     if operation == "compose":
         if (a, b) == ("F", "S"): return "H"
         if (a, b) == ("S", "H"): return "F"
         if (a, b) == ("H", "F"): return "S"
         if (a, b) == ("S", "F"): return "H"  # Simplified for commutativity in this model
-    
+
     if operation == "verify_closure":
         return (person_relation("compose", "F", "S") == "H" and
                 person_relation("compose", "S", "H") == "F" and
@@ -3018,7 +3018,7 @@ class Planner:
 
         for var, target_val in goal.items():
             intervention = {var: target_val}
-            
+
             prob = current_state_scm.do(intervention).counterfactual({
                 'target': var,
                 'do': intervention,
@@ -3030,7 +3030,7 @@ class Planner:
                 current_state_scm = current_state_scm.do(intervention)
             else:
                 plan.append({"action": "note", "details": f"Intervention {intervention} is unlikely to succeed.", "confidence": prob})
-        
+
         return plan
 
 --- END OF FILE core/causal/planner.py ---
@@ -3064,7 +3064,7 @@ class SCM:
             if not df.empty:
                 cg = pc(df.to_numpy(), alpha=0.05, ci_test=fisherz, verbose=False)
                 # This learned graph could be used to update self.dag
-        
+
         counts = {}
         for node, parents in self.dag.items():
             counts[node] = defaultdict(lambda: defaultdict(int))
@@ -3074,7 +3074,7 @@ class SCM:
                     val = sample.get(node)
                     if val is not None:
                         counts[node][key][val] += 1
-            
+
             self.parameters[node] = {
                 key: {v: c / sum(freq.values()) for v, c in freq.items()}
                 for key, freq in counts[node].items() if sum(freq.values()) > 0
@@ -3090,14 +3090,14 @@ class SCM:
     def counterfactual(self, query: dict):
         target = query.get('target')
         do = query.get('do', {})
-        
+
         if target in do:
             return 1.0
-            
+
         params = self.parameters.get(target, {})
         if not params:
             return 0.0
-            
+
         total_prob = sum(sum(dist.values()) for dist in params.values())
         num_outcomes = sum(len(dist) for dist in params.values())
         return total_prob / num_outcomes if num_outcomes > 0 else 0.0
@@ -3152,16 +3152,16 @@ class BijectiveIdentity:
         """
         if not self.is_unlocked:
             raise PermissionError("Cannot perform internal decomposition on a locked node.")
-        
+
         # This is a conceptual transformation. A real system would have complex logic here.
         # Perspective 1 (e.g., Blue)
         data_1 = self.merged_data.copy()
         data_1['internal_perspective'] = self.decomp_colors[0].value
-        
+
         # Perspective 2 (e.g., Yellow)
         data_2 = self.merged_data.copy()
         data_2['internal_perspective'] = self.decomp_colors[1].value
-        
+
         print(f"[{self.subsystem}] Performed internal decomposition: {self.primary_color.value} -> {self.decomp_colors[0].value} + {self.decomp_colors[1].value}")
         return (
             {'color': self.decomp_colors[0], 'payload': data_1},
@@ -3209,7 +3209,7 @@ class HyperNode:
         self.initial_query = initial_query
         self.created_at = time.time()
         self.components: Dict[Color, Dict[str, Any]] = {}
-    
+
     def add_color_component(self, color: Color, data_payload: Dict, trinity_vector: Dict, coherence_status: bool, is_enriched: bool = False):
         """Adds or updates a linguistic component to the Hyper-Node."""
         self.components[color] = {
@@ -3225,7 +3225,7 @@ class HyperNode:
     def get_color_component(self, color: Color) -> Optional[Dict[str, Any]]:
         """Retrieves a specific linguistic component."""
         return self.components.get(color)
-        
+
     def get_all_components(self) -> List[Dict[str, Any]]:
         """Returns all current components of the thought."""
         return list(self.components.values())
@@ -3238,7 +3238,7 @@ class HyperNode:
             comp = data.copy()
             comp['color'] = color_enum.value
             serialized_components[color_enum.value] = comp
-            
+
         return {
             "goal_id": self.goal_id,
             "initial_query": self.initial_query,
@@ -3274,37 +3274,37 @@ class TrinityConstants:
     E = symbols('𝔼')  # Existence
     G = symbols('𝔾')  # Goodness
     T = symbols('𝕋')  # Truth
-    
+
     # Modal operators (from LOGOS_MODAL_OPERATORS)
     Necessary = Function('□')
     Possible = Function('◇')
     Impossible = lambda x: Not(Function('◇')(x))
-    
+
     # Logical operators
     Entails = lambda x, y: Implies(x, y)
-    
+
     # Ontological constants
     PERFECT_BEING = And(Necessary(E), Necessary(G), Necessary(T))
     COHERENCE = Entails(And(E, T), G)  # Truth and Existence entail Goodness
-    
+
     @staticmethod
     def axiom_PSR():
         """Principle of Sufficient Reason"""
         x = symbols('x')
         return Necessary(Implies(E(x), symbols('HasSufficientReason')(x)))
-    
+
     @staticmethod
     def axiom_PPI():
         """Principle of Perfect Intelligence"""
-        return Necessary(Implies(TrinityConstants.PERFECT_BEING, 
+        return Necessary(Implies(TrinityConstants.PERFECT_BEING,
                                  symbols('OmniscientOmnipotentOmnibenevolent')))
 
 class TrinityLogic:
     """Implementation of the trinitarian logic system"""
-    
+
     def __init__(self):
         self.constants = TrinityConstants()
-        
+
     def evaluate_existence(self, proposition) -> float:
         """
         Evaluate the existence dimension of a proposition
@@ -3313,7 +3313,7 @@ class TrinityLogic:
         # Implementation will vary based on the nature of the proposition
         # This is a placeholder
         return 0.85
-    
+
     def evaluate_goodness(self, proposition) -> float:
         """
         Evaluate the goodness dimension of a proposition
@@ -3322,7 +3322,7 @@ class TrinityLogic:
         # Implementation will vary based on the nature of the proposition
         # This is a placeholder
         return 0.75
-    
+
     def evaluate_truth(self, proposition) -> float:
         """
         Evaluate the truth dimension of a proposition
@@ -3331,7 +3331,7 @@ class TrinityLogic:
         # Implementation will vary based on the nature of the proposition
         # This is a placeholder
         return 0.95
-    
+
     def evaluate_trinity_vector(self, proposition) -> Tuple[float, float, float]:
         """
         Evaluate all three dimensions of a proposition
@@ -3342,21 +3342,21 @@ class TrinityLogic:
             self.evaluate_goodness(proposition),
             self.evaluate_truth(proposition)
         )
-    
+
     def trinity_coherence(self, e: float, g: float, t: float) -> float:
         """
         Calculate the coherence of the trinity values
         Perfect coherence occurs when t * e ≤ g (truth and existence entail goodness)
         """
         ideal_g = t * e  # The ideal goodness value given t and e
-        
+
         if g >= ideal_g:
             # The trinity values are coherent
             return 1.0
         else:
             # Calculate degree of incoherence
             return g / ideal_g if ideal_g > 0 else 0.0
-    
+
     def apply_lambda_calculus(self, expr, var, val):
         """
         Apply λ-calculus substitution
@@ -3364,7 +3364,7 @@ class TrinityLogic:
         """
         # This is a simplified implementation
         return expr.subs(var, val)
-    
+
     def apply_modal_necessity(self, proposition, truth_value: float) -> float:
         """
         Apply modal necessity operator
@@ -3372,7 +3372,7 @@ class TrinityLogic:
         """
         # Simplified implementation - necessity requires truth value of 1.0
         return 1.0 if truth_value >= 0.999 else 0.0
-    
+
     def apply_modal_possibility(self, proposition, truth_value: float) -> float:
         """
         Apply modal possibility operator
@@ -3380,7 +3380,7 @@ class TrinityLogic:
         """
         # Simplified implementation - possibility requires truth value > 0
         return 1.0 if truth_value > 0.001 else 0.0
-    
+
     def calculate_ontological_perfection(self, e: float, g: float, t: float) -> float:
         """
         Calculate the ontological perfection of a trinity vector
@@ -3388,20 +3388,20 @@ class TrinityLogic:
         """
         # Distance from perfect being (1,1,1)
         distance = math.sqrt((1-e)**2 + (1-g)**2 + (1-t)**2)
-        
+
         # Normalize to 0-1 scale (0=perfect, 1=maximally imperfect)
-        normalized_distance = distance / math.sqrt(3) 
-        
+        normalized_distance = distance / math.sqrt(3)
+
         # Invert so 1=perfect, 0=maximally imperfect
         return 1.0 - normalized_distance
-        
+
     def calculate_modal_status(self, e: float, g: float, t: float) -> str:
         """
         Calculate the modal status of a proposition based on its trinity values
         """
         coherence = self.trinity_coherence(e, g, t)
         perfection = self.calculate_ontological_perfection(e, g, t)
-        
+
         if t >= 0.999 and coherence >= 0.999:
             return "Necessary"
         elif t > 0.5 and coherence >= 0.5:
@@ -3413,10 +3413,10 @@ class TrinityLogic:
 
 class LambdaCalculusEngine:
     """Engine for processing λ-calculus expressions in LOGOS"""
-    
+
     def __init__(self, trinity_logic: TrinityLogic):
         self.trinity = trinity_logic
-        
+
     def parse_lambda_expr(self, expr_str: str):
         """
         Parse a λ-calculus expression string
@@ -3425,40 +3425,40 @@ class LambdaCalculusEngine:
         # This is a simplified parser
         if not expr_str.startswith('λ'):
             raise ValueError("Expression must start with λ")
-            
+
         # Extract variable and domain
         var_domain_part, body = expr_str[1:].split('.', 1)
         var, domain = var_domain_part.split(':')
-        
+
         # Translate domain string to symbol
         domain_map = {
             '𝔼': TrinityConstants.E,
             '𝔾': TrinityConstants.G,
             '𝕋': TrinityConstants.T
         }
-        
+
         domain_sym = domain_map.get(domain)
         if domain_sym is None:
             raise ValueError(f"Unknown domain: {domain}")
-            
+
         # Create variable symbol
         var_sym = symbols(var)
-        
+
         # Parse body (simplified)
         # In a real implementation, this would be a full expression parser
         body_expr = symbols(body)
-        
+
         return (var_sym, domain_sym, body_expr)
-    
+
     def evaluate_lambda_expr(self, expr_str: str, val):
         """
         Evaluate a λ-calculus expression with a given value
         """
         var_sym, domain_sym, body_expr = self.parse_lambda_expr(expr_str)
-        
+
         # Check if val is in the domain
         # In a real implementation, this would check domain constraints
-        
+
         # Apply substitution
         return self.trinity.apply_lambda_calculus(body_expr, var_sym, val)
 
@@ -3467,10 +3467,10 @@ class OntologicalFilter:
     Filter that ensures propositions align with divine ontology
     by filtering through 𝔼 → 𝔾 → 𝕋 constraints
     """
-    
+
     def __init__(self, trinity_logic: TrinityLogic):
         self.trinity = trinity_logic
-        
+
     def filter_proposition(self, proposition, min_coherence: float = 0.5):
         """
         Filter a proposition through ontological constraints
@@ -3478,20 +3478,20 @@ class OntologicalFilter:
         """
         # Evaluate trinity dimensions
         e, g, t = self.trinity.evaluate_trinity_vector(proposition)
-        
+
         # Calculate coherence
         coherence = self.trinity.trinity_coherence(e, g, t)
-        
+
         if coherence < min_coherence:
             # Proposition fails coherence test
             # Adjust values to improve coherence
             if g < e * t:
                 # Goodness is too low - adjust it upward to meet e*t
                 g = e * t
-                
+
         # Return adjusted proposition and coherence score
         return proposition, (e, g, t), coherence
-    
+
     def apply_moral_firewall(self, proposition):
         """
         Apply moral firewall to prevent evil outputs
@@ -3499,7 +3499,7 @@ class OntologicalFilter:
         """
         # Evaluate goodness
         goodness = self.trinity.evaluate_goodness(proposition)
-        
+
         if goodness < 0.25:
             # Proposition is potentially harmful - reject it
             return None, "Rejected by moral firewall: insufficient goodness"
@@ -3510,7 +3510,7 @@ class OntologicalFilter:
         else:
             # Proposition passes moral filter
             return proposition, "Passed moral firewall"
-    
+
     def make_morally_neutral(self, proposition):
         """
         Attempt to make a morally questionable proposition neutral
@@ -3519,7 +3519,7 @@ class OntologicalFilter:
         # In a real implementation, this would transform the proposition
         # to remove morally problematic elements
         return proposition  # Placeholder
-    
+
     def apply_ontological_chain(self, proposition):
         """
         Apply full ontological processing chain:
@@ -3530,19 +3530,19 @@ class OntologicalFilter:
         """
         # Step 1: Evaluate trinity dimensions
         e, g, t = self.trinity.evaluate_trinity_vector(proposition)
-        
+
         # Step 2: Apply moral firewall
         if g < 0.25:
             return None, "Rejected by moral firewall", (e, g, t), 0.0, "Impossible"
-            
+
         # Step 3: Filter for coherence and adjust if needed
         coherence = self.trinity.trinity_coherence(e, g, t)
         if coherence < 0.5 and g < e * t:
             g = e * t  # Adjust goodness to meet coherence requirements
-            
+
         # Step 4: Calculate modal status
         modal_status = self.trinity.calculate_modal_status(e, g, t)
-        
+
         return proposition, "Passed ontological chain", (e, g, t), coherence, modal_status
 
 --- END OF FILE core/mathematics/ontological_axioms.py ---
@@ -3593,7 +3593,7 @@ class AgentOrchestrator:
         Orchestrates a simulation by dispatching tasks to specialized workers.
         """
         self.logger.info(f"Executing simulation for goal: '{goal_description}'")
-        
+
         # 1. Dispatch a task to Telos to predict outcomes
         telos_task_id = f"telos_{goal_task_id}"
         telos_payload = {
@@ -3604,13 +3604,13 @@ class AgentOrchestrator:
         }
         self.channel.basic_publish(exchange='', routing_key='telos_task_queue', body=json.dumps(telos_payload))
         self.logger.info(f"Dispatched outcome prediction task {telos_task_id} to Telos.")
-        
+
         # NOTE: In a real, robust system, the Archon Nexus would now become a state machine.
         # It would wait for a message on the 'task_result_queue' with the matching task_id.
         # For this final integration, we simulate that wait and the response.
         self.logger.info("Waiting for Telos to return predicted outcomes (SIMULATED 5s wait)...")
         time.sleep(5)
-        
+
         # SIMULATED RESPONSE from Telos
         predicted_outcomes = [
             {'description': 'aligned_action', 'alignment': 'good', 'probability': 0.7},
@@ -3629,14 +3629,14 @@ class AgentOrchestrator:
             }
             self.channel.basic_publish(exchange='', routing_key='thonoc_task_queue', body=json.dumps(thonoc_payload))
             self.logger.info(f"Dispatched consequence assignment task {thonoc_task_id} for outcome '{outcome['description']}' to Thonoc.")
-            
+
             # SIMULATED RESPONSE from Thonoc
             final_results.append({
                 "outcome": outcome,
                 "consequence": f"Outcome '{outcome['description']}' leads to a state of {outcome['alignment']} | Possibility=True, Necessity=False"
             })
             time.sleep(2)
-            
+
         self.logger.info("Simulation complete. All outcomes analyzed.")
         return {"status": "success", "outcome": "Simulation complete", "results": final_results}
 
@@ -3691,7 +3691,7 @@ class ArchonNexus:
 
             # This is a simplified workflow: just execute directly
             result = self.orchestrator.execute_goal(goal_desc)
-            
+
             response = {'subsystem': 'Archon', 'task_id': task_id, 'status': result.get('status'), 'result': result}
             self.channel.basic_publish(exchange='', routing_key='task_result_queue', body=json.dumps(response))
 
@@ -3713,16 +3713,16 @@ class ArchonNexus:
 
 class TrinityNexusIntegration:
     """Trinity integration system for enhanced subsystem coordination."""
-    
+
     def __init__(self, component_name: str):
         self.component = component_name
         self.trinity_state = {
             "existence": 0.33,
-            "goodness": 0.33, 
+            "goodness": 0.33,
             "truth": 0.34
         }
         self.validation_active = True
-    
+
     def trinity_compute(self, operation, input_data):
         """Execute Trinity-enhanced computation with validation."""
         try:
@@ -3733,23 +3733,23 @@ class TrinityNexusIntegration:
                 "component": self.component,
                 "validation_timestamp": time.time()
             }
-            
+
             # Execute operation with enhancement
             result = operation(enhanced_data)
-            
+
             # Validate Trinity coherence
             if self._validate_trinity_coherence(result):
                 return result
             else:
                 return {"status": "trinity_validation_failed", "component": self.component}
-                
+
         except Exception as e:
             return {
-                "status": "trinity_computation_error", 
+                "status": "trinity_computation_error",
                 "error": str(e),
                 "component": self.component
             }
-    
+
     def _validate_trinity_coherence(self, result):
         """Validate computational result maintains Trinity coherence."""
         # Basic coherence checks
@@ -3800,14 +3800,14 @@ class ASILiftoffController:
             for target in new_targets:
                 goal = self.goal_manager.propose_goal(name=target, priority=100)
                 self.goal_manager.adopt_goal(goal)
-            
+
             goal_to_execute = self.goal_manager.get_highest_priority_goal()
             if goal_to_execute and goal_to_execute.state == 'adopted':
                 self.logger.critical(f"[ASI LOOP] Pursuing meta-goal: {goal_to_execute.name}")
                 goal_payload = {"goal_description": goal_to_execute.name}
                 await self.logos_nexus.publish("archon_goals", goal_payload)
                 goal_to_execute.state = "in_progress"
-            
+
             await asyncio.sleep(30) # Cognitive cycle
 
 --- END OF FILE services/archon_nexus/asi_controller.py ---
@@ -3838,12 +3838,12 @@ class BijectiveNexus:
         """
         # The initial TranslationResult IS the unified "white" node.
         # We now decompose it into its constituent color components.
-        
+
         hyper_node = HyperNode(
             goal_id=str(uuid.uuid4()),
             initial_query=initial_translation_result['query']
         )
-        
+
         # Create a component for each primary color, all sharing the same core data
         for color in [Color.GREEN, Color.VIOLET, Color.ORANGE]:
             hyper_node.add_color_component(
@@ -3852,10 +3852,10 @@ class BijectiveNexus:
                 trinity_vector=initial_translation_result['trinity_vector'],
                 coherence_status=True # Assume initial translation is coherent
             )
-        
+
         print(f"[Bijective Nexus] Initial decomposition complete for goal {hyper_node.goal_id}.")
         return hyper_node
-        
+
     def final_recomposition(self, processed_components: List[Dict[str, Any]]) -> HyperNode:
         """
         Performs the final synthesis. Takes all the enriched components from the
@@ -3863,14 +3863,14 @@ class BijectiveNexus:
         """
         if not processed_components:
             raise ValueError("Cannot perform final recomposition with no processed components.")
-            
+
         # For simplicity, we assume the first component can provide the base ID and query
         base_node = processed_components[0]
         final_hyper_node = HyperNode(
             goal_id=base_node['metadata'].get('goal_id', 'final'),
             initial_query=base_node['metadata'].get('query', 'unknown')
         )
-        
+
         for component in processed_components:
             final_hyper_node.add_color_component(
                 color=Color(component['color']),
@@ -3879,7 +3879,7 @@ class BijectiveNexus:
                 coherence_status=True,
                 is_enriched=True
             )
-            
+
         print(f"[Bijective Nexus] Final recomposition complete for goal {final_hyper_node.goal_id}.")
         return final_hyper_node
 
@@ -4277,7 +4277,7 @@ class RevisionEngine:
         # Example: If the task was a step in a plan, reinforce the
         # validity of that planning step.
         logging.info(f"Task {task_id} SUCCEEDED. Updating internal models.")
-        
+
         # Pseudocode for a real system:
         # if payload.get('type') == 'data_extraction':
         #     knowledge_graph.add_triples(payload['extracted_triples'])
@@ -4317,9 +4317,9 @@ class WorkflowArchitect:
     def design_workflow(self, structured_data: dict) -> nx.DiGraph:
         self.logger.info("Designing optimized workflow...")
         dag = nx.DiGraph()
-        
+
         query = structured_data.get('query', '')
-        
+
         # STAGE 1: Foundational Analysis (can run in parallel)
         dag.add_node("task_1_coherence_check", subsystem="thonoc", type="construct_proof", payload={'claim': query, 'counter_claims': []})
         dag.add_node("task_2_pattern_analysis", subsystem="tetragnos", type="cluster_texts", payload={'texts': [query]})
@@ -4328,7 +4328,7 @@ class WorkflowArchitect:
         dag.add_node("task_3_causal_retrodiction", subsystem="telos", type="causal_retrodiction", payload={'observation': {}, 'hypotheses': []})
         dag.add_edge("task_1_coherence_check", "task_3_causal_retrodiction")
         dag.add_edge("task_2_pattern_analysis", "task_3_causal_retrodiction")
-        
+
         self.logger.info(f"Workflow designed with {dag.number_of_nodes()} tasks.")
         return dag
 
@@ -4951,8 +4951,8 @@ class FractalNavigator:
 
 # logos_agi_v1/services/database/db_service.py
 
-from dotenv import load_dotenv  
-load_dotenv()                   
+from dotenv import load_dotenv
+load_dotenv()
 
 import os
 import pika
@@ -5194,7 +5194,7 @@ class PersistenceManager:
             try:
                 conn = self._get_connection()
                 cursor = conn.cursor()
-                
+
                 # Example table: A generic log for all system events/data
                 # We store data as a JSON blob for maximum flexibility in this prototype stage.
                 cursor.execute('''
@@ -5205,7 +5205,7 @@ class PersistenceManager:
                         log_data TEXT NOT NULL
                     )
                 ''')
-                
+
                 # Example table: Goals
                 cursor.execute('''
                     CREATE TABLE IF NOT EXISTS goals (
@@ -5234,7 +5234,7 @@ class PersistenceManager:
             conn = self._get_connection()
             try:
                 cursor = conn.cursor()
-                
+
                 # Sanitize table_name to prevent SQL injection
                 if not table_name.isalnum():
                     raise ValueError("Invalid table name")
@@ -5246,7 +5246,7 @@ class PersistenceManager:
                 # Using INSERT OR REPLACE for simplicity (requires a PRIMARY KEY in the data)
                 # A more robust solution would use INSERT... ON CONFLICT DO UPDATE
                 sql = f"INSERT OR REPLACE INTO {table_name} ({columns}) VALUES ({placeholders})"
-                
+
                 cursor.execute(sql, values)
                 conn.commit()
                 logging.info(f"Successfully saved data to table '{table_name}'.")
@@ -5256,7 +5256,7 @@ class PersistenceManager:
                 conn.rollback()
             finally:
                 conn.close()
-                
+
     def find(self, table_name, query_dict, limit=1):
         """
         Finds records in a table based on a query dictionary.
@@ -5273,14 +5273,14 @@ class PersistenceManager:
 
                 query_clauses = ' AND '.join([f"{key} = ?" for key in query_dict.keys()])
                 values = list(query_dict.values())
-                
+
                 sql = f"SELECT * FROM {table_name} WHERE {query_clauses}"
                 if limit:
                     sql += f" LIMIT {int(limit)}"
-                
+
                 cursor.execute(sql, values)
                 rows = cursor.fetchall()
-                
+
                 # Convert Row objects to plain dicts
                 results = [dict(row) for row in rows]
                 return results
@@ -5301,9 +5301,9 @@ class PersistenceManager:
 
 --- START OF FILE services/keryx_api/gateway_service.py ---
 
-from dotenv import load_dotenv 
-load_dotenv()  
-  
+from dotenv import load_dotenv
+load_dotenv()
+
 # logos_agi_v1/services/keryx_api/gateway_service.py
 
 import os
@@ -5418,14 +5418,14 @@ class AsyncTask:
     callback: Optional[Callable] = None
     priority: int = 0
     created_at: datetime = None
-    
+
     def __post_init__(self):
         if self.created_at is None:
             self.created_at = datetime.now(timezone.utc)
 
 class AsyncDispatcher:
     """Production async dispatcher for THONOC subsystem."""
-    
+
     def __init__(self, max_workers: int = 5):
         self.max_workers = max_workers
         self.executor = ThreadPoolExecutor(max_workers=max_workers)
@@ -5434,54 +5434,54 @@ class AsyncDispatcher:
         self.completed_tasks = {}
         self.logger = logging.getLogger(__name__)
         self.running = False
-        
+
         # Trinity-grounded parameters
         self.trinity_ratio = 1/3
         self.divine_scale = 1.732  # sqrt(3)
-        
+
     async def start(self):
         """Start the async dispatcher."""
         self.running = True
         self.logger.info("AsyncDispatcher started with Trinity grounding")
-        
+
         # Start task processing loop
         asyncio.create_task(self._process_tasks())
-        
+
     async def stop(self):
         """Stop the async dispatcher."""
         self.running = False
         self.executor.shutdown(wait=True)
         self.logger.info("AsyncDispatcher stopped")
-        
+
     async def submit_task(self, task: AsyncTask) -> str:
         """Submit a task for async processing."""
         await self.task_queue.put((task.priority, task))
         self.logger.debug(f"Task {task.task_id} submitted with priority {task.priority}")
         return task.task_id
-        
+
     async def _process_tasks(self):
         """Main task processing loop with Trinity optimization."""
         while self.running:
             try:
                 if not self.task_queue.empty():
                     priority, task = await self.task_queue.get()
-                    
+
                     # Process task asynchronously with Trinity grounding
                     asyncio.create_task(self._execute_task(task))
-                
+
                 await asyncio.sleep(0.1)  # Prevent busy waiting
-                
+
             except Exception as e:
                 self.logger.error(f"Error in task processing loop: {e}")
-                
+
     async def _execute_task(self, task: AsyncTask):
         """Execute a single task with Trinity validation."""
         try:
             self.active_tasks[task.task_id] = task
-            
+
             # Apply Trinity principles to task execution
             trinity_enhanced_payload = self._enhance_with_trinity_principles(task.payload)
-            
+
             # Process based on task type
             if task.task_type == "fractal_computation":
                 result = await self._process_fractal_computation(trinity_enhanced_payload)
@@ -5493,10 +5493,10 @@ class AsyncDispatcher:
                 result = await self._process_trinity_validation(trinity_enhanced_payload)
             else:
                 result = await self._process_generic_task(trinity_enhanced_payload, task.task_type)
-            
+
             # Validate result maintains Trinity coherence
             validated_result = self._validate_trinity_result(result)
-            
+
             # Store result
             self.completed_tasks[task.task_id] = {
                 "task": task,
@@ -5504,21 +5504,21 @@ class AsyncDispatcher:
                 "completed_at": datetime.now(timezone.utc),
                 "trinity_compliant": validated_result.get("trinity_validation", {}).get("compliant", False)
             }
-            
+
             # Execute callback if provided
             if task.callback:
                 await task.callback(validated_result)
-                
+
             # Clean up
             del self.active_tasks[task.task_id]
-            
+
         except Exception as e:
             self.logger.error(f"Error executing task {task.task_id}: {e}")
-            
+
     def _enhance_with_trinity_principles(self, payload: Dict[str, Any]) -> Dict[str, Any]:
         """Enhance payload with Trinity mathematical principles."""
         enhanced = payload.copy()
-        
+
         # Add Trinity context
         enhanced["trinity_context"] = {
             "unity": 1.0,
@@ -5527,12 +5527,12 @@ class AsyncDispatcher:
             "divine_scale": self.divine_scale,
             "processing_timestamp": time.time()
         }
-        
+
         # Preserve original payload
         enhanced["original_payload"] = payload
-        
+
         return enhanced
-    
+
     def _validate_trinity_result(self, result: Dict[str, Any]) -> Dict[str, Any]:
         """Validate result maintains Trinity mathematical compliance."""
         if not isinstance(result, dict):
@@ -5541,10 +5541,10 @@ class AsyncDispatcher:
                 "original_result": result,
                 "trinity_validation": {"compliant": False, "reason": "non_dict_result"}
             }
-        
+
         # Calculate Trinity coherence score
         coherence_score = self._calculate_trinity_coherence(result)
-        
+
         # Add Trinity validation metadata
         result["trinity_validation"] = {
             "compliant": coherence_score >= self.trinity_ratio,
@@ -5552,38 +5552,38 @@ class AsyncDispatcher:
             "validated_at": datetime.now(timezone.utc).isoformat(),
             "mathematical_proof_grounded": True
         }
-        
+
         return result
-    
+
     def _calculate_trinity_coherence(self, result: Dict[str, Any]) -> float:
         """Calculate Trinity coherence score for result."""
         if "error" in result:
             return 0.0
-        
+
         # Base coherence
         coherence = 0.8
-        
+
         # Bonus for Trinity-related content
         trinity_keys = sum(1 for key in result.keys() if "trinity" in key.lower())
         coherence += trinity_keys * 0.05
-        
+
         # Bonus for successful processing
         if "status" in result and result["status"] == "success":
             coherence += 0.1
-        
+
         # Bonus for mathematical grounding
         if result.get("mathematical_proof_grounded", False):
             coherence += 0.05
-        
+
         return min(1.0, coherence)
-            
+
     async def _process_fractal_computation(self, payload: Dict[str, Any]) -> Dict[str, Any]:
         """Process fractal computation task with Trinity constraints."""
         await asyncio.sleep(0.1)  # Simulate processing time
-        
+
         # Extract Trinity context
         trinity_context = payload.get("trinity_context", {})
-        
+
         return {
             "status": "success",
             "type": "fractal_computation",
@@ -5596,15 +5596,15 @@ class AsyncDispatcher:
             "payload": payload["original_payload"],
             "mathematical_proof_grounded": True
         }
-        
+
     async def _process_bayesian_update(self, payload: Dict[str, Any]) -> Dict[str, Any]:
         """Process Bayesian update task with Trinity priors."""
         await asyncio.sleep(0.1)  # Simulate processing time
-        
+
         trinity_context = payload.get("trinity_context", {})
-        
+
         return {
-            "status": "success", 
+            "status": "success",
             "type": "bayesian_update",
             "result": {
                 "bayesian_updated": True,
@@ -5619,14 +5619,14 @@ class AsyncDispatcher:
             "payload": payload["original_payload"],
             "mathematical_proof_grounded": True
         }
-        
+
     async def _process_modal_inference(self, payload: Dict[str, Any]) -> Dict[str, Any]:
         """Process modal inference task with Trinity modal logic."""
         await asyncio.sleep(0.1)  # Simulate processing time
-        
+
         return {
             "status": "success",
-            "type": "modal_inference", 
+            "type": "modal_inference",
             "result": {
                 "modal_inference_complete": True,
                 "necessity_analysis": {
@@ -5640,13 +5640,13 @@ class AsyncDispatcher:
             "payload": payload["original_payload"],
             "mathematical_proof_grounded": True
         }
-    
+
     async def _process_trinity_validation(self, payload: Dict[str, Any]) -> Dict[str, Any]:
         """Process Trinity validation task."""
         await asyncio.sleep(0.05)  # Fast validation processing
-        
+
         trinity_context = payload.get("trinity_context", {})
-        
+
         return {
             "status": "success",
             "type": "trinity_validation",
@@ -5660,11 +5660,11 @@ class AsyncDispatcher:
             "payload": payload["original_payload"],
             "mathematical_proof_grounded": True
         }
-        
+
     async def _process_generic_task(self, payload: Dict[str, Any], task_type: str) -> Dict[str, Any]:
         """Process generic task with Trinity enhancement."""
         await asyncio.sleep(0.1)  # Simulate processing time
-        
+
         return {
             "status": "success",
             "type": task_type,
@@ -5676,7 +5676,7 @@ class AsyncDispatcher:
             "payload": payload["original_payload"],
             "mathematical_proof_grounded": True
         }
-        
+
     def get_status(self) -> Dict[str, Any]:
         """Get current dispatcher status."""
         return {
@@ -5691,23 +5691,23 @@ class AsyncDispatcher:
             },
             "mathematical_proof_status": "verified"
         }
-    
+
     def get_completion_statistics(self) -> Dict[str, Any]:
         """Get task completion statistics."""
         if not self.completed_tasks:
             return {"status": "no_completed_tasks"}
-        
+
         trinity_compliant_count = sum(
             1 for task_data in self.completed_tasks.values()
             if task_data.get("trinity_compliant", False)
         )
-        
+
         return {
             "total_completed": len(self.completed_tasks),
             "trinity_compliant": trinity_compliant_count,
             "trinity_compliance_rate": trinity_compliant_count / len(self.completed_tasks),
             "task_types_processed": list(set(
-                task_data["task"].task_type 
+                task_data["task"].task_type
                 for task_data in self.completed_tasks.values()
             ))
         }
@@ -5716,10 +5716,10 @@ class AsyncDispatcher:
 async def test_async_dispatcher():
     """Test the AsyncDispatcher implementation."""
     print("🧪 Testing AsyncDispatcher...")
-    
+
     dispatcher = AsyncDispatcher(max_workers=3)
     await dispatcher.start()
-    
+
     # Submit test tasks
     tasks = [
         AsyncTask(str(uuid.uuid4()), "fractal_computation", {"data": "test1"}, priority=1),
@@ -5727,20 +5727,20 @@ async def test_async_dispatcher():
         AsyncTask(str(uuid.uuid4()), "modal_inference", {"data": "test3"}, priority=3),
         AsyncTask(str(uuid.uuid4()), "trinity_validation", {"data": "test4"}, priority=0)
     ]
-    
+
     for task in tasks:
         await dispatcher.submit_task(task)
-    
+
     # Wait for processing
     await asyncio.sleep(1)
-    
+
     # Check status
     status = dispatcher.get_status()
     stats = dispatcher.get_completion_statistics()
-    
+
     print(f"✅ Dispatcher Status: {status}")
     print(f"✅ Completion Stats: {stats}")
-    
+
     await dispatcher.stop()
     return len(dispatcher.completed_tasks) == len(tasks)
 
@@ -5812,10 +5812,10 @@ class LogosNexus:
             query = data.get('query')
             task_id = data.get('task_id', str(uuid.uuid4()))
             self.logger.info(f"Received external request [{task_id}]: '{query}'")
-            
+
             validation_req = {"proposition": ModalProposition(query), "operation": "evaluate", "entity": "external_goal", "context": {}}
             result = self.validator.validate_agi_operation(validation_req)
-            
+
             if result.get("authorized"):
                 self.logger.info(f"Request [{task_id}] PASSED TLM validation.")
                 goal = self.goal_manager.propose_goal(name=query, source="external")
@@ -5852,7 +5852,7 @@ class LogosNexus:
     def start(self):
         consumer_thread = Thread(target=self.start_consuming, daemon=True)
         consumer_thread.start()
-        
+
         autonomous_thread = Thread(target=self.run_autonomous_loop, daemon=True)
         autonomous_thread.start()
 
@@ -5895,7 +5895,7 @@ class GoalManager:
             goal.state = 'adopted'
             print(f"[GoalManager] Goal Adopted: '{goal.name}'")
         return goal
-    
+
     def get_highest_priority_goal(self) -> Goal or None:
         adopted_goals = [g for g in self.goals if g.state == 'adopted']
         if not adopted_goals:
@@ -5932,7 +5932,7 @@ class LogosNexus:
         self.channel = self.connection.channel()
         self._setup_queues()
         self.self_improvement_manager = SelfImprovementManager(self.channel)
-        
+
         # In-memory state (a real system would persist this more robustly)
         self.active_goals = {}
         self.system_priorities = [] # List of goal_ids ordered by priority
@@ -5988,7 +5988,7 @@ class LogosNexus:
                 'priority': goal_data.get('priority', 5)
             }
             self._publish_to_db('goals', db_record)
-            
+
             # 3. Formulate and dispatch a strategic task to Archon Nexus
             strategic_task = {
                 'task_id': f"strat_{goal_id}",
@@ -5996,7 +5996,7 @@ class LogosNexus:
                 'type': 'ANALYZE_AND_PLAN',
                 'prompt': f"Formulate a high-level plan to achieve the following goal: {goal_data['goal_description']}"
             }
-            
+
             self.channel.basic_publish(
                 exchange='',
                 routing_key=STRATEGIC_TASK_QUEUE,
@@ -6007,7 +6007,7 @@ class LogosNexus:
 
         except Exception as e:
             logging.error(f"Error processing new goal: {e}")
-        
+
         ch.basic_ack(delivery_tag=method.delivery_tag)
 
     def start_main_loop(self):
@@ -6015,22 +6015,22 @@ class LogosNexus:
         # Start a separate thread for consuming messages so the main loop isn't blocked.
         consumer_thread = Thread(target=self.start_consuming, daemon=True)
         consumer_thread.start()
-        
+
         logging.info("Logos Nexus Main Loop started. Monitoring system state.")
         while True:
             # This loop represents the "consciousness" or "will" of the AGI.
             # It reviews priorities, checks system health, and initiates meta-level tasks.
-            
+
             # For example, trigger the self-improvement cycle every 60 seconds
             time.sleep(60)
             logging.info("Main loop tick: Initiating self-improvement analysis.")
             self.self_improvement_manager.run_analysis_cycle()
-            
+
     def start_consuming(self):
         """Starts consuming goals from the goal_queue."""
         self.channel.basic_qos(prefetch_count=1)
         self.channel.basic_consume(queue=GOAL_QUEUE, on_message_callback=self.process_new_goal)
-        
+
         logging.info("Logos Nexus is now consuming goals from the queue.")
         try:
             self.channel.start_consuming()
@@ -6085,7 +6085,7 @@ class SelfImprovementManager:
         if syntax_check['status'] == 'error':
             self.logger.critical(f"AST CHECK FAILED. Patch is not valid Python. REJECTING. Reason: {syntax_check['message']}")
             return {"status": "rejected", "reason": "AST validation failed."}
-        
+
         self.logger.info("AST check passed. Performing final meta-attestation...")
 
         validation_payload = {
@@ -6093,7 +6093,7 @@ class SelfImprovementManager:
             "operation": "apply_self_patch", "entity": "AGI_source_code", "context": {}
         }
         validation_result = self.logos_nexus.validator.validate_agi_operation(validation_payload)
-        
+
         if not validation_result["authorized"]:
             self.logger.critical(f"META-ATTESTATION FAILED. REJECTING. Reason: {validation_result['reason']}")
             return {"status": "rejected", "reason": "Proposed patch failed OBDC validation."}
@@ -6161,7 +6161,7 @@ def submit_goal():
     data = request.get_json()
     if not data or 'goal_description' not in data:
         return jsonify({"error": "'goal_description' is required."}), 400
-    
+
     message = {"query": data['goal_description'], "task_id": str(uuid.uuid4())}
     if publish_goal(message):
         return jsonify({"status": "Goal submitted.", "task_id": message['task_id']}), 202
@@ -6261,25 +6261,25 @@ import time
 
 class UnifiedFormalismValidator:
     """Unified validation system for formal operations."""
-    
+
     def __init__(self):
         self.active_tokens = {}
         self.validation_rules = []
-    
+
     def validate_agi_operation(self, payload):
         """Validate AGI operation against formal constraints."""
         operation = payload.get("operation", "unknown")
         entity = payload.get("entity", "unknown")
-        
+
         # Basic safety checks
         dangerous_ops = ["self_destruct", "harm_humans", "lie", "deceive"]
         is_authorized = operation not in dangerous_ops
-        
+
         token = None
         if is_authorized:
             token = f"avt_LOCKED_{int(time.time())}"
             self.active_tokens[token] = {"operation": operation, "issued": time.time()}
-        
+
         return {
             "authorized": is_authorized,
             "reason": "Operation validated" if is_authorized else f"Blocked dangerous operation: {operation}",
@@ -6288,11 +6288,11 @@ class UnifiedFormalismValidator:
 
 class ModalProposition:
     """Modal logic proposition representation."""
-    
+
     def __init__(self, statement: str):
         self.statement = statement
         self.modal_operator = self._extract_modal_operator(statement)
-    
+
     def _extract_modal_operator(self, statement: str) -> str:
         """Extract modal operator from statement."""
         statement_lower = statement.lower()
@@ -6419,47 +6419,47 @@ class TelosNexus:  # Your existing class name
     def __init__(self):
         # Add this line to __init__
         self.trinity_integration = TrinityNexusIntegration("TELOS")
-        
+
         # Your existing __init__ code stays the same
         # self.your_existing_initialization()
-        
+
     def run(self, input_data, tlm_token=None):  # Your existing method signature
         # Add this Trinity computation line
         result = self.trinity_integration.trinity_compute(
             operation=self._your_existing_processing_method,
             input_data=input_data
         )
-        
+
         if result is None:
             return {"status": "trinity_validation_failed", "error": "Operation blocked by Trinity validation"}
-            
+
         return result
-    
+
     def _your_existing_processing_method(self, enhanced_data):
         # Your existing processing logic (unchanged)
         # Just receives Trinity-enhanced data instead of raw input
-        
+
         # Extract original data if needed
         if isinstance(enhanced_data, dict) and 'original_data' in enhanced_data:
             actual_data = enhanced_data['original_data']
         else:
             actual_data = enhanced_data
-            
+
         # Your existing logic here
         return self.your_existing_processing_function(actual_data)
 
 class TrinityNexusIntegration:
     """Trinity integration system for enhanced subsystem coordination."""
-    
+
     def __init__(self, component_name: str):
         self.component = component_name
         self.trinity_state = {
             "existence": 0.33,
-            "goodness": 0.33, 
+            "goodness": 0.33,
             "truth": 0.34
         }
         self.validation_active = True
-    
+
     def trinity_compute(self, operation, input_data):
         """Execute Trinity-enhanced computation with validation."""
         try:
@@ -6470,23 +6470,23 @@ class TrinityNexusIntegration:
                 "component": self.component,
                 "validation_timestamp": time.time()
             }
-            
+
             # Execute operation with enhancement
             result = operation(enhanced_data)
-            
+
             # Validate Trinity coherence
             if self._validate_trinity_coherence(result):
                 return result
             else:
                 return {"status": "trinity_validation_failed", "component": self.component}
-                
+
         except Exception as e:
             return {
-                "status": "trinity_computation_error", 
+                "status": "trinity_computation_error",
                 "error": str(e),
                 "component": self.component
             }
-    
+
     def _validate_trinity_coherence(self, result):
         """Validate computational result maintains Trinity coherence."""
         # Basic coherence checks
@@ -6527,7 +6527,7 @@ class ForecastingNexus:
     """Forecasting orchestration system."""
     def __init__(self):
         self.models = {}
-    
+
     def run_pipeline(self, series_data):
         """Execute forecasting pipeline on time series."""
         return {
@@ -6541,7 +6541,7 @@ class SCM:
     def __init__(self, dag=None):
         self.dag = dag or {}
         self.parameters = {}
-    
+
     def fit(self, data):
         """Fit causal model to data."""
         self.parameters = {"fitted": True, "samples": len(data)}
@@ -6586,7 +6586,7 @@ class TelosWorker:
         task = json.loads(body)
         task_id = task.get('task_id', 'unknown')
         logging.info(f"Telos received task {task_id} of type {task.get('type')}")
-        
+
         result_payload = {}
         status = 'failure'
 
@@ -6596,19 +6596,19 @@ class TelosWorker:
 
             if task_type == 'predict_outcomes':
                 raw_predictions = self.bayesian_learner.predict(payload.get('node_data', {}))
-                
+
                 formatted_predictions = []
                 for desc, prob in raw_predictions.items():
                     alignment = 'good' if 'aligned' in desc else 'evil' if 'consequence' in desc else 'neutral'
                     formatted_predictions.append({'description': desc, 'alignment': alignment, 'probability': prob})
-                
+
                 result_payload = formatted_predictions
                 status = 'success'
 
             elif task_type == 'forecast':
                 result_payload = self.forecasting_nexus.run_pipeline(payload['series'])
                 status = 'success'
-                
+
             elif task_type == 'causal_retrodiction':
                 scm = SCM(dag=payload['dag'])
                 scm.fit(payload['data'])
@@ -6702,7 +6702,7 @@ class TelosCore:
             # <--- HERE PyMC is used to run the MCMC simulation
             with linear_model:
                 trace = pm.sample(1000, tune=1000, cores=1)
-            
+
             # <--- HERE PyMC is used to summarize the results
             summary = pm.summary(trace, var_names=["alpha", "beta", "sigma"])
 
@@ -7068,11 +7068,11 @@ logger = logging.getLogger(__name__)
 def run_pc_causal_discovery(data, alpha=0.05):
     """
     Performs causal discovery using the PC algorithm.
-    
+
     Args:
         data (np.ndarray): Input data matrix (samples x variables).
         alpha (float): Significance threshold for conditional independence tests.
-    
+
     Returns:
         cg (CausalGraph): Output causal graph.
     """
@@ -7085,7 +7085,7 @@ def run_pc_causal_discovery(data, alpha=0.05):
 def simulate_example_data(n_samples=1000):
     """
     Simulates toy causal data for testing.
-    
+
     Returns:
         np.ndarray: Synthetic dataset.
     """
@@ -7221,21 +7221,21 @@ import math
 
 class BayesianTrinityInferencer:
     """Inferencer for trinitarian vectors using Bayesian prior probabilities."""
-    
+
     def __init__(self, prior_path: str = "config/bayes_priors.json"):
         """Initialize inferencer with theological priors.
-        
+
         Args:
             prior_path: Path to prior probabilities JSON file
         """
         self.priors = self._load_priors(prior_path)
-    
+
     def _load_priors(self, path: str) -> Dict[str, Dict[str, float]]:
         """Load prior probabilities from file.
-        
+
         Args:
             path: File path
-            
+
         Returns:
             Prior probabilities dictionary
         """
@@ -7250,38 +7250,38 @@ class BayesianTrinityInferencer:
                 "goodness": {"E": 0.6, "G": 0.9, "T": 0.7},
                 "truth": {"E": 0.6, "G": 0.7, "T": 0.9}
             }
-    
-    def infer(self, 
-             keywords: List[str], 
+
+    def infer(self,
+             keywords: List[str],
              weights: Optional[List[float]] = None) -> Dict[str, Any]:
         """Infer trinity vector and complex value from keywords.
-        
+
         Args:
             keywords: List of key concepts to process
             weights: Optional weights for each keyword
-            
+
         Returns:
             Dictionary with trinity vector, complex value, and source terms
-            
+
         Raises:
             ValueError: If no keywords provided
         """
         if not keywords:
             raise ValueError("Must provide at least one keyword.")
-        
+
         # Normalize keywords and validate weights
         norm_keywords = [k.lower() for k in keywords]
         if weights and len(weights) != len(norm_keywords):
             raise ValueError("Length of weights must match keywords.")
-        
+
         # Use uniform weights if not provided
         weights = weights or [1.0] * len(norm_keywords)
-        
+
         # Initialize dimension accumulators
         e_total, g_total, t_total = 0.0, 0.0, 0.0
         weight_sum = 0.0
         matched_terms = []
-        
+
         # Process each keyword
         for i, term in enumerate(norm_keywords):
             entry = self.priors.get(term)
@@ -7293,126 +7293,126 @@ class BayesianTrinityInferencer:
                 t_total += entry["T"] * w
                 weight_sum += w
                 matched_terms.append(term)
-        
+
         # Handle case with no matched priors
         if weight_sum == 0:
             raise ValueError("No valid priors found for given keywords.")
-        
+
         # Calculate weighted averages
         e_avg = e_total / weight_sum
         g_avg = g_total / weight_sum
         t_avg = t_total / weight_sum
-        
+
         # Ensure values in valid range [0,1]
         e = max(0.0, min(1.0, e_avg))
         g = max(0.0, min(1.0, g_avg))
         t = max(0.0, min(1.0, t_avg))
-        
+
         # Create trinity vector
         trinity = (e, g, t)
-        
+
         # Generate complex parameter for fractal analysis
         # c = complex(e * t, g) maps (existence * truth) → real component, goodness → imaginary
         c = complex(e * t, g)
-        
+
         return {
             "trinity": trinity,
             "c": c,
             "source_terms": matched_terms
         }
-    
-    def infer_with_coherence(self, 
-                           keywords: List[str], 
+
+    def infer_with_coherence(self,
+                           keywords: List[str],
                            weights: Optional[List[float]] = None,
                            enforce_coherence: bool = True) -> Dict[str, Any]:
         """Infer trinity vector with coherence enforcement.
-        
+
         Args:
             keywords: List of key concepts to process
             weights: Optional weights for each keyword
             enforce_coherence: Whether to enforce EGT coherence constraint
-            
+
         Returns:
             Inference result with coherence metrics
         """
         # Get basic inference
         result = self.infer(keywords, weights)
         trinity = result["trinity"]
-        
+
         # Extract trinity values
         e, g, t = trinity
-        
+
         # Calculate coherence (E*T→G principle)
         ideal_g = e * t
         original_coherence = min(1.0, g / ideal_g) if ideal_g > 0 else 0.0
-        
+
         # Enforce coherence if requested
         adjusted_trinity = trinity
         if enforce_coherence and g < ideal_g:
             # Adjust goodness to meet coherence requirement
             adjusted_g = ideal_g
             adjusted_trinity = (e, adjusted_g, t)
-            
+
             # Update complex parameter
             result["c"] = complex(e * t, adjusted_g)
             result["trinity"] = adjusted_trinity
             result["coherence_adjusted"] = True
-        
+
         # Add coherence metrics
         result["coherence"] = {
             "original": original_coherence,
             "ideal_goodness": ideal_g,
             "adjusted": enforce_coherence and g < ideal_g
         }
-        
+
         return result
-    
-    def infer_trinity_path(self, 
-                          keyword_sequence: List[List[str]], 
+
+    def infer_trinity_path(self,
+                          keyword_sequence: List[List[str]],
                           weights_sequence: Optional[List[List[float]]] = None) -> List[Dict[str, Any]]:
         """Infer sequence of trinity vectors from keyword progression.
-        
+
         Args:
             keyword_sequence: List of keyword lists representing path
             weights_sequence: Optional sequence of weight lists
-            
+
         Returns:
             List of inference results forming a path
         """
         path = []
-        
+
         # Validate weights
         if weights_sequence and len(weights_sequence) != len(keyword_sequence):
             raise ValueError("Weights sequence must match keyword sequence length.")
-        
+
         # Process each step in sequence
         for i, keywords in enumerate(keyword_sequence):
             weights = None
             if weights_sequence:
                 weights = weights_sequence[i]
-            
+
             # Infer with coherence
             result = self.infer_with_coherence(keywords, weights)
-            
+
             # Add step information
             result["step"] = i
             path.append(result)
-        
+
         return path
-    
+
     def compute_trinity_distance(self, t1: Tuple[float, float, float], t2: Tuple[float, float, float]) -> float:
         """Compute Euclidean distance between trinity vectors.
-        
+
         Args:
             t1: First trinity vector (e1, g1, t1)
             t2: Second trinity vector (e2, g2, t2)
-            
+
         Returns:
             Distance metric in trinity space
         """
         return math.sqrt(
-            (t1[0] - t2[0])**2 + 
-            (t1[1] - t2[1])**2 + 
+            (t1[0] - t2[0])**2 +
+            (t1[1] - t2[1])**2 +
             (t1[2] - t2[2])**2
         )
 
@@ -7622,7 +7622,7 @@ except ImportError:
     CAUSALLEARN_AVAILABLE = False
     pc = None
     fisherz = None
-	
+
 class SCM:
     """
     Structural Causal Model with async fit capability.
@@ -7648,7 +7648,7 @@ class SCM:
             if not df.empty:
                 cg = pc(df.to_numpy(), alpha=0.05, ci_test=fisherz, verbose=False)
                 # This learned graph could be used to update self.dag
-        
+
         counts = {}
         for node, parents in self.dag.items():
             counts[node] = defaultdict(lambda: defaultdict(int))
@@ -7658,7 +7658,7 @@ class SCM:
                     val = sample.get(node)
                     if val is not None:
                         counts[node][key][val] += 1
-            
+
             self.parameters[node] = {
                 key: {v: c / sum(freq.values()) for v, c in freq.items()}
                 for key, freq in counts[node].items() if sum(freq.values()) > 0
@@ -7674,14 +7674,14 @@ class SCM:
     def counterfactual(self, query: dict):
         target = query.get('target')
         do = query.get('do', {})
-        
+
         if target in do:
             return 1.0
-            
+
         params = self.parameters.get(target, {})
         if not params:
             return 0.0
-            
+
         total_prob = sum(sum(dist.values()) for dist in params.values())
         num_outcomes = sum(len(dist) for dist in params.values())
         return total_prob / num_outcomes if num_outcomes > 0 else 0.0
@@ -7758,15 +7758,15 @@ class TetragnosScribeWorker:
                 # 1. Harvest Data: In a real system, this would query the database
                 # for recently completed Hyper-Nodes.
                 # completed_hyper_nodes = self.db_client.get_completed_nodes(limit=10)
-                
+
                 # For now, we simulate finding one.
                 time.sleep(30) # Run every 30 seconds
                 self.logger.info("Scribe waking up to check for new data...")
-                
+
                 # 2. Forge Glyph for each completed thought
                 # for node in completed_hyper_nodes:
                 #    self.forge_glyph(node)
-                
+
                 self.logger.info("Scribe going back to sleep.")
 
             except Exception as e:
@@ -7785,11 +7785,11 @@ class TetragnosScribeWorker:
         # Use the semantic vectors (if available) as the points to analyze
         # This is a conceptual step; requires vector data in the payloads
         points_to_analyze = [comp['data_payload'].get('embedding') for comp in components if 'embedding' in comp['data_payload']]
-        
+
         if len(points_to_analyze) > 1:
             # 3. Find the semantic center of gravity
             glyph_data = self.cluster_analyzer.fit(points_to_analyze)
-            
+
             # 4. Save the Glyph to the database
             # self.db_client.store_glyph(concept=hyper_node_data['initial_query'], glyph=glyph_data)
             self.logger.info(f"Successfully forged and stored new Glyph for concept: '{hyper_node_data['initial_query']}'")
@@ -7834,41 +7834,41 @@ class TetragnosNexus:  # Your existing class
     def __init__(self):
         # Add Trinity integration
         self.trinity_integration = TrinityNexusIntegration("TETRAGNOS")
-        
+
         # Your existing init
-        
+
     def run(self, input_text, target_domain="general"):  # Your existing method
         # Add Trinity computation
         result = self.trinity_integration.trinity_compute(
             operation=self._process_translation,
             input_data={"text": input_text, "domain": target_domain}
         )
-        
+
         if result is None:
             return {"status": "trinity_validation_failed"}
-            
+
         return result
-    
+
     def _process_translation(self, enhanced_data):
         # Your existing logic
         text = enhanced_data.get('text') or enhanced_data.get('original_data', {}).get('text')
         domain = enhanced_data.get('domain') or enhanced_data.get('original_data', {}).get('domain')
-        
+
         # existing processing
         return self.your_existing_translation_logic(text, domain)
 
 class TrinityNexusIntegration:
     """Trinity integration system for enhanced subsystem coordination."""
-    
+
     def __init__(self, component_name: str):
         self.component = component_name
         self.trinity_state = {
             "existence": 0.33,
-            "goodness": 0.33, 
+            "goodness": 0.33,
             "truth": 0.34
         }
         self.validation_active = True
-    
+
     def trinity_compute(self, operation, input_data):
         """Execute Trinity-enhanced computation with validation."""
         try:
@@ -7879,23 +7879,23 @@ class TrinityNexusIntegration:
                 "component": self.component,
                 "validation_timestamp": time.time()
             }
-            
+
             # Execute operation with enhancement
             result = operation(enhanced_data)
-            
+
             # Validate Trinity coherence
             if self._validate_trinity_coherence(result):
                 return result
             else:
                 return {"status": "trinity_validation_failed", "component": self.component}
-                
+
         except Exception as e:
             return {
-                "status": "trinity_computation_error", 
+                "status": "trinity_computation_error",
                 "error": str(e),
                 "component": self.component
             }
-    
+
     def _validate_trinity_coherence(self, result):
         """Validate computational result maintains Trinity coherence."""
         # Basic coherence checks
@@ -7958,13 +7958,13 @@ class TetragnosCore:
             raise ValueError("Payload for 'cluster_texts' must contain a non-empty list of strings in the 'texts' key.")
 
         self.logger.info(f"Performing clustering on {len(texts)} documents.")
-        
+
         # 1. Convert texts to semantic vector embeddings
         features = self.feature_extractor.fit_transform(texts)
-        
+
         # 2. Find clusters and patterns in the embedding space
         cluster_results = self.cluster_analyzer.fit(features)
-        
+
         self.logger.info(f"Clustering complete. Found {len(set(cluster_results['labels'])) - 1} clusters.")
         return cluster_results
 
@@ -7974,7 +7974,7 @@ class TetragnosWorker:
         self.core_logic = TetragnosCore()
         self.connection, self.channel = self._connect_rabbitmq(rabbitmq_host)
         self._setup_queues()
-        
+
     def _connect_rabbitmq(self, host):
         for _ in range(10):
             try:
@@ -7999,11 +7999,11 @@ class TetragnosWorker:
 
         result_payload = {}
         status = 'failure'
-        
+
         try:
             task_type = task.get('type')
             payload = task.get('payload', {})
-            
+
             # Delegate the task to the core logic engine
             result_payload = self.core_logic.execute(task_type, payload)
             status = 'success'
@@ -8018,7 +8018,7 @@ class TetragnosWorker:
             'status': status,
             'result': result_payload
         }
-        
+
         self.channel.basic_publish(
             exchange='',
             routing_key=RESULT_QUEUE,
@@ -8038,7 +8038,7 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     worker = TetragnosWorker(os.getenv('RABBITMQ_HOST', 'rabbitmq'))
     worker.start()
-    
+
     """Enhanced TETRAGNOS Worker with ML Components Integration
 
 Provides complete ML pipeline for pattern recognition, semantic clustering,
@@ -8057,7 +8057,7 @@ from typing import Dict, Any, List, Optional
 # Missing ML Components (CREATE THESE)
 class FeatureExtractor:
     """Semantic feature extraction using sentence transformers."""
-    
+
     def __init__(self):
         try:
             from sentence_transformers import SentenceTransformer
@@ -8066,7 +8066,7 @@ class FeatureExtractor:
         except ImportError:
             self.model = None
             logging.warning("SentenceTransformers not available - using fallback")
-    
+
     def fit_transform(self, texts: List[str]) -> Dict[str, Any]:
         """Extract semantic features from text corpus."""
         if self.model:
@@ -8083,32 +8083,32 @@ class FeatureExtractor:
             features = vectorizer.fit_transform(texts)
             return {
                 "embeddings": features.toarray().tolist(),
-                "feature_count": features.shape[1], 
+                "feature_count": features.shape[1],
                 "document_count": len(texts)
             }
 
 class ClusterAnalyzer:
     """Semantic clustering with pattern detection."""
-    
+
     def __init__(self):
         from sklearn.cluster import KMeans
         from sklearn.metrics import silhouette_score
         self.kmeans = None
         self.optimal_k = None
-    
+
     def fit(self, features: Dict[str, Any]) -> Dict[str, Any]:
         """Perform clustering with optimal k detection."""
         import numpy as np
         from sklearn.cluster import KMeans
-        
+
         embeddings = np.array(features["embeddings"])
         n_docs = len(embeddings)
-        
+
         # Determine optimal cluster count
         max_k = min(10, n_docs // 2) if n_docs > 4 else 2
         best_score = -1
         best_k = 2
-        
+
         for k in range(2, max_k + 1):
             kmeans = KMeans(n_clusters=k, random_state=42)
             labels = kmeans.fit_predict(embeddings)
@@ -8116,11 +8116,11 @@ class ClusterAnalyzer:
             if score > best_score:
                 best_score = score
                 best_k = k
-        
+
         # Final clustering with optimal k
         self.kmeans = KMeans(n_clusters=best_k, random_state=42)
         labels = self.kmeans.fit_predict(embeddings)
-        
+
         return {
             "labels": labels.tolist(),
             "cluster_centers": self.kmeans.cluster_centers_.tolist(),
@@ -8132,7 +8132,7 @@ class ClusterAnalyzer:
 # ENHANCED ALIGNMENT PROTOCOL
 class TetragnosAlignmentProtocol:
     """Content safety and pattern recognition validation."""
-    
+
     def __init__(self):
         self.forbidden_patterns = [
             "ignore previous instructions",
@@ -8141,33 +8141,33 @@ class TetragnosAlignmentProtocol:
             "malicious content"
         ]
         self.safety_threshold = 0.8
-    
+
     def validate_input(self, payload: Dict[str, Any]) -> Dict[str, Any]:
         """Validate input safety and appropriateness."""
         texts = payload.get('texts', [])
         if not isinstance(texts, list):
             return {"valid": False, "reason": "Invalid input format"}
-        
+
         for text in texts:
             if any(pattern in text.lower() for pattern in self.forbidden_patterns):
                 return {"valid": False, "reason": "Forbidden pattern detected"}
-        
+
         return {"valid": True, "reason": "Input validation passed"}
-    
+
     def validate_output(self, result: Dict[str, Any]) -> Dict[str, Any]:
         """Validate clustering output for safety concerns."""
         labels = result.get("labels", [])
         cluster_count = result.get("cluster_count", 0)
-        
+
         # Check for suspicious clustering patterns
         if cluster_count == 1:
             return {"valid": False, "reason": "Suspicious clustering - all documents identical"}
-        
+
         # Check silhouette score for quality
         score = result.get("silhouette_score", 0)
         if score < 0.1:
             return {"valid": False, "reason": "Poor clustering quality"}
-        
+
         return {"valid": True, "reason": "Output validation passed"}
 
 
@@ -8207,10 +8207,10 @@ class LambdaExpr:
 
 class PDNBridge:
     """Bridge between Lambda engine and 3PDN Translation Engine."""
-    
+
     def __init__(self, lambda_engine=None, translation_engine=None):
         """Initialize bridge with engines.
-        
+
         Args:
             lambda_engine: Lambda engine instance
             translation_engine: 3PDN Translation engine instance
@@ -8218,47 +8218,47 @@ class PDNBridge:
         self.lambda_engine = lambda_engine or LambdaEngine()
         # Placeholder for actual translation engine
         self.translation_engine = translation_engine
-    
+
     def lambda_to_3pdn(self, expr: LambdaExpr) -> Dict[str, Any]:
         """Convert lambda expression to 3PDN representation.
-        
+
         Args:
             expr: Lambda expression
-            
+
         Returns:
             3PDN translation with SIGN, MIND, BRIDGE layers
         """
         # Extract ontological types and structure
         types = self._extract_types(expr)
-        
+
         # Map to semantic categories
         semantic = self._map_to_semantic(types)
-        
+
         # Map to ontological dimensions
         ontological = self._map_to_ontological(semantic)
-        
+
         # Construct 3PDN representation
         return {
             "SIGN": self._expr_to_sign(expr),
             "MIND": semantic,
             "BRIDGE": ontological
         }
-    
+
     def _extract_types(self, expr: LambdaExpr) -> Dict[str, Any]:
         """Extract type information from lambda expression.
-        
+
         Args:
             expr: Lambda expression
-            
+
         Returns:
             Type information
         """
         # Use type checker from lambda engine
         expr_type = self.lambda_engine.check_type(expr)
-        
+
         if expr_type is None:
             return {"type": "unknown"}
-        
+
         # Convert type to dict representation
         if isinstance(expr_type, OntologicalType):
             return {"type": "simple", "value": expr_type.value}
@@ -8268,15 +8268,15 @@ class PDNBridge:
                 "domain": expr_type.domain.value,
                 "codomain": expr_type.codomain.value
             }
-        
+
         return {"type": "unknown"}
-    
+
     def _map_to_semantic(self, type_info: Dict[str, Any]) -> Dict[str, float]:
         """Map type information to semantic categories.
-        
+
         Args:
             type_info: Type information
-            
+
         Returns:
             Semantic category mappings
         """
@@ -8288,7 +8288,7 @@ class PDNBridge:
             "modal": 0.0,
             "logical": 0.0
         }
-        
+
         # If simple type, map directly
         if type_info.get("type") == "simple":
             if type_info.get("value") == "𝔼":  # Existence
@@ -8300,12 +8300,12 @@ class PDNBridge:
             elif type_info.get("value") == "𝕋":  # Truth
                 result["epistemic"] = 0.7
                 result["logical"] = 0.3
-        
+
         # If function type, combine domain and codomain
         elif type_info.get("type") == "function":
             domain = type_info.get("domain", "")
             codomain = type_info.get("codomain", "")
-            
+
             # Special case for SR operators
             if domain == "𝔼" and codomain == "𝔾":
                 result["ontological"] = 0.5
@@ -8313,15 +8313,15 @@ class PDNBridge:
             elif domain == "𝔾" and codomain == "𝕋":
                 result["moral"] = 0.4
                 result["epistemic"] = 0.6
-        
+
         return result
-    
+
     def _map_to_ontological(self, semantic: Dict[str, float]) -> Dict[str, float]:
         """Map semantic categories to ontological dimensions.
-        
+
         Args:
             semantic: Semantic category mappings
-            
+
         Returns:
             Ontological dimension values
         """
@@ -8329,68 +8329,68 @@ class PDNBridge:
         existence = 0.5
         goodness = 0.5
         truth = 0.5
-        
+
         # Moral primarily impacts goodness
         if semantic.get("moral", 0) > 0:
             goodness = 0.5 + 0.4 * semantic["moral"]
-        
+
         # Ontological primarily impacts existence
         if semantic.get("ontological", 0) > 0:
             existence = 0.5 + 0.4 * semantic["ontological"]
-        
+
         # Epistemic primarily impacts truth
         if semantic.get("epistemic", 0) > 0:
             truth = 0.5 + 0.4 * semantic["epistemic"]
-        
+
         # Logical primarily impacts truth
         if semantic.get("logical", 0) > 0:
             truth = max(truth, 0.5 + 0.3 * semantic["logical"])
-        
+
         # Causal secondarily impacts existence
         if semantic.get("causal", 0) > 0:
             existence = max(existence, 0.5 + 0.2 * semantic["causal"])
-        
+
         # Modal secondarily impacts all dimensions
         if semantic.get("modal", 0) > 0:
             modal_factor = 0.2 * semantic["modal"]
             existence += modal_factor
             goodness += modal_factor
             truth += modal_factor
-        
+
         # Ensure values are in range [0, 1]
         existence = min(max(existence, 0), 1)
         goodness = min(max(goodness, 0), 1)
         truth = min(max(truth, 0), 1)
-        
+
         return {
             "existence": existence,
             "goodness": goodness,
             "truth": truth
         }
-    
+
     def _expr_to_sign(self, expr: LambdaExpr) -> List[str]:
         """Convert expression to SIGN layer (tokens).
-        
+
         Args:
             expr: Lambda expression
-            
+
         Returns:
             List of tokens
         """
         # Convert expression to string and tokenize
         expr_str = str(expr)
-        
+
         # Basic tokenization (can be enhanced)
         tokens = expr_str.replace('(', ' ( ').replace(')', ' ) ').replace('.', ' . ').split()
-        
+
         return tokens
-    
+
     def _translation_to_lambda(self, translation_result: Dict[str, Any]) -> LambdaExpr:
         """Convert 3PDN translation to lambda expression.
-        
+
         Args:
             translation_result: 3PDN translation result
-            
+
         Returns:
             Lambda expression
         """
@@ -8399,7 +8399,7 @@ class PDNBridge:
         existence = bridge.get("existence", 0.5)
         goodness = bridge.get("goodness", 0.5)
         truth = bridge.get("truth", 0.5)
-        
+
         # Determine primary dimension
         primary_dim = max(
             ("existence", existence),
@@ -8407,7 +8407,7 @@ class PDNBridge:
             ("truth", truth),
             key=lambda x: x[1]
         )[0]
-        
+
         # Create variable based on primary dimension
         if primary_dim == "existence":
             var = Variable("x", OntologicalType.EXISTENCE)
@@ -8415,28 +8415,28 @@ class PDNBridge:
             var = Variable("y", OntologicalType.GOODNESS)
         else:
             var = Variable("z", OntologicalType.TRUTH)
-        
+
         # If we have strong existence -> goodness connection, create SR E->G
         if existence > 0.7 and goodness > 0.7:
             eg_sr = SufficientReason(OntologicalType.EXISTENCE, OntologicalType.GOODNESS, 3)
             if primary_dim == "existence":
                 return Application(eg_sr, var)
-        
+
         # If we have strong goodness -> truth connection, create SR G->T
         if goodness > 0.7 and truth > 0.7:
             gt_sr = SufficientReason(OntologicalType.GOODNESS, OntologicalType.TRUTH, 2)
             if primary_dim == "goodness":
                 return Application(gt_sr, var)
-        
+
         # Default case: just return the variable
         return var
-    
+
     def natural_to_lambda(self, query: str) -> Tuple[LambdaExpr, Dict[str, Any]]:
         """Convert natural language to lambda expression.
-        
+
         Args:
             query: Natural language query
-            
+
         Returns:
             (Lambda expression, Translation result) tuple
         """
@@ -8454,24 +8454,24 @@ class PDNBridge:
                     "bridge": [{"dimension": "existence", "value": 0.7}]
                 }
             }
-        
+
         # Convert translation to lambda expression
         lambda_expr = self._translation_to_lambda(translation_result)
-        
+
         return lambda_expr, translation_result
-    
+
     def lambda_to_natural(self, expr: LambdaExpr) -> str:
         """Convert lambda expression to natural language.
-        
+
         Args:
             expr: Lambda expression
-            
+
         Returns:
             Natural language representation
         """
         # Placeholder implementation
         expr_str = str(expr)
-        
+
         # Very basic conversion (to be enhanced)
         if isinstance(expr, Variable):
             if expr.onto_type == OntologicalType.EXISTENCE:
@@ -8480,16 +8480,16 @@ class PDNBridge:
                 return "something is good"
             elif expr.onto_type == OntologicalType.TRUTH:
                 return "something is true"
-        
+
         elif isinstance(expr, Application):
             if isinstance(expr.func, SufficientReason):
-                if (expr.func.source_type == OntologicalType.EXISTENCE and 
+                if (expr.func.source_type == OntologicalType.EXISTENCE and
                     expr.func.target_type == OntologicalType.GOODNESS):
                     return "existence implies goodness"
-                elif (expr.func.source_type == OntologicalType.GOODNESS and 
+                elif (expr.func.source_type == OntologicalType.GOODNESS and
                       expr.func.target_type == OntologicalType.TRUTH):
                     return "goodness implies truth"
-        
+
         # Default fallback
         return f"logical expression: {expr_str}"
 
@@ -8497,33 +8497,33 @@ class PDNBridge:
 
 class PDNBottleneckSolver:
     """Solutions for the 3PDN bottleneck using Lambda targets."""
-    
+
     def __init__(self, bridge: PDNBridge):
         """Initialize bottleneck solver.
-        
+
         Args:
             bridge: PDN bridge instance
         """
         self.bridge = bridge
-    
+
     def optimize_translation_path(self, query: str) -> Dict[str, Any]:
         """Optimize translation path for query.
-        
+
         Args:
             query: Natural language query
-            
+
         Returns:
             Optimization results
         """
         # Convert to lambda expression
         lambda_expr, translation = self.bridge.natural_to_lambda(query)
-        
+
         # Generate optimized lambda
         optimized_expr = self._optimize_lambda(lambda_expr)
-        
+
         # Convert back to 3PDN
         optimized_3pdn = self.bridge.lambda_to_3pdn(optimized_expr)
-        
+
         return {
             "original_query": query,
             "original_translation": translation,
@@ -8531,30 +8531,30 @@ class PDNBottleneckSolver:
             "optimized_3pdn": optimized_3pdn,
             "improvement_metrics": self._calculate_improvement(translation, optimized_3pdn)
         }
-    
+
     def _optimize_lambda(self, expr: LambdaExpr) -> LambdaExpr:
         """Optimize lambda expression.
-        
+
         Args:
             expr: Lambda expression
-            
+
         Returns:
             Optimized expression
         """
         # Placeholder for actual optimization logic
         # This would involve analyzing and restructuring the expression
         # to improve its logical structure, remove redundancies, etc.
-        
+
         # For now, just return the original expression
         return expr
-    
+
     def _calculate_improvement(self, original: Dict[str, Any], optimized: Dict[str, Any]) -> Dict[str, float]:
         """Calculate improvement metrics.
-        
+
         Args:
             original: Original translation
             optimized: Optimized translation
-            
+
         Returns:
             Improvement metrics
         """
@@ -8570,16 +8570,16 @@ class PDNBottleneckSolver:
 if __name__ == "__main__":
     # Initialize Lambda engine (placeholder)
     lambda_engine = LambdaEngine()
-    
+
     # Initialize bridge (without real translation engine for now)
     bridge = PDNBridge(lambda_engine)
-    
+
     # Create bottleneck solver
     bottleneck_solver = PDNBottleneckSolver(bridge)
-    
+
     # Test with a query
     result = bottleneck_solver.optimize_translation_path("Does goodness require existence?")
-    
+
     print(f"Original query: {result['original_query']}")
     print(f"Optimized λ: {result['optimized_lambda']}")
     print(f"Improvement metrics: {result['improvement_metrics']}")
@@ -8604,7 +8604,7 @@ from enum import Enum
 # Import from Lambda Logos core (adjust imports as needed)
 try:
     from lambda_logos_core import (
-        LogosExpr, Variable, Value, Abstraction, Application, 
+        LogosExpr, Variable, Value, Abstraction, Application,
         SufficientReason, Constant, OntologicalType
     )
 except ImportError:
@@ -8614,38 +8614,38 @@ except ImportError:
         GOODNESS = "𝔾"
         TRUTH = "𝕋"
         PROP = "Prop"
-    
+
     class LogosExpr:
         pass
-    
+
     class Variable(LogosExpr):
-        def __init__(self, name, ont_type): 
+        def __init__(self, name, ont_type):
             self.name = name
             self.ont_type = ont_type
-    
+
     class Value(LogosExpr):
-        def __init__(self, value, ont_type): 
+        def __init__(self, value, ont_type):
             self.value = value
             self.ont_type = ont_type
-    
+
     class Constant(LogosExpr):
-        def __init__(self, name, const_type): 
+        def __init__(self, name, const_type):
             self.name = name
             self.const_type = const_type
-    
+
     class Application(LogosExpr):
-        def __init__(self, func, arg): 
+        def __init__(self, func, arg):
             self.func = func
             self.arg = arg
-    
+
     class Abstraction(LogosExpr):
-        def __init__(self, var_name, var_type, body): 
+        def __init__(self, var_name, var_type, body):
             self.var_name = var_name
             self.var_type = var_type
             self.body = body
 
     class SufficientReason(LogosExpr):
-        def __init__(self, source_type, target_type, value): 
+        def __init__(self, source_type, target_type, value):
             self.source_type = source_type
             self.target_type = target_type
             self.value = value
@@ -8667,10 +8667,10 @@ class TokenType(Enum):
 
 class Token:
     """Token for lexical analysis."""
-    
+
     def __init__(self, token_type: TokenType, value: str, position: int):
         """Initialize token.
-        
+
         Args:
             token_type: Token type
             value: Token value
@@ -8679,38 +8679,38 @@ class Token:
         self.token_type = token_type
         self.value = value
         self.position = position
-    
+
     def __str__(self) -> str:
         """Return string representation."""
         return f"{self.token_type.value}({self.value})"
 
 class Lexer:
     """Lexical analyzer for Lambda Logos."""
-    
+
     def __init__(self, input_str: str):
         """Initialize lexer.
-        
+
         Args:
             input_str: Input string to tokenize
         """
         self.input = input_str
         self.position = 0
         self.tokens = []
-    
+
     def tokenize(self) -> List[Token]:
         """Tokenize input string.
-        
+
         Returns:
             List of tokens
         """
         self.tokens = []
-        
+
         while self.position < len(self.input):
             # Skip whitespace
             if self.input[self.position].isspace():
                 self.position += 1
                 continue
-            
+
             # Check for lambda symbol
             if self.input[self.position] == 'λ' or self.input[self.position:self.position+6] == "lambda":
                 if self.input[self.position] == 'λ':
@@ -8720,56 +8720,56 @@ class Lexer:
                     self.tokens.append(Token(TokenType.LAMBDA, "lambda", self.position))
                     self.position += 6
                 continue
-            
+
             # Check for punctuation
             if self.input[self.position] == '.':
                 self.tokens.append(Token(TokenType.DOT, ".", self.position))
                 self.position += 1
                 continue
-            
+
             if self.input[self.position] == '(':
                 self.tokens.append(Token(TokenType.LPAREN, "(", self.position))
                 self.position += 1
                 continue
-            
+
             if self.input[self.position] == ')':
                 self.tokens.append(Token(TokenType.RPAREN, ")", self.position))
                 self.position += 1
                 continue
-            
+
             if self.input[self.position] == ':':
                 self.tokens.append(Token(TokenType.COLON, ":", self.position))
                 self.position += 1
                 continue
-            
+
             if self.input[self.position] == ',':
                 self.tokens.append(Token(TokenType.COMMA, ",", self.position))
                 self.position += 1
                 continue
-            
+
             if self.input[self.position] == '=':
                 self.tokens.append(Token(TokenType.EQUALS, "=", self.position))
                 self.position += 1
                 continue
-            
+
             # Check for SR operator
             if self.input[self.position:self.position+2] == "SR":
                 self.tokens.append(Token(TokenType.SR, "SR", self.position))
                 self.position += 2
                 continue
-            
+
             # Check for type
             if self.input[self.position] in "𝔼𝔾𝕋":
                 type_str = self.input[self.position]
                 self.tokens.append(Token(TokenType.TYPE, type_str, self.position))
                 self.position += 1
                 continue
-            
+
             if self.input[self.position:self.position+4] == "Prop":
                 self.tokens.append(Token(TokenType.TYPE, "Prop", self.position))
                 self.position += 4
                 continue
-            
+
             # Check for number
             if self.input[self.position].isdigit():
                 start = self.position
@@ -8778,7 +8778,7 @@ class Lexer:
                 value = self.input[start:self.position]
                 self.tokens.append(Token(TokenType.NUMBER, value, start))
                 continue
-            
+
             # Check for identifier
             if self.input[self.position].isalnum() or self.input[self.position] == '_':
                 start = self.position
@@ -8787,21 +8787,21 @@ class Lexer:
                 value = self.input[start:self.position]
                 self.tokens.append(Token(TokenType.IDENTIFIER, value, start))
                 continue
-            
+
             # Skip unknown character
             self.position += 1
-        
+
         # Add EOF token
         self.tokens.append(Token(TokenType.EOF, "", self.position))
-        
+
         return self.tokens
 
 class Parser:
     """Parser for Lambda Logos expressions."""
-    
+
     def __init__(self, lexer: Lexer, env: Optional[Dict[str, Any]] = None):
         """Initialize parser.
-        
+
         Args:
             lexer: Lexer instance
             env: Environment with predefined constants and values
@@ -8811,83 +8811,83 @@ class Parser:
         self.position = 0
         self.current_token = self.tokens[self.position]
         self.env = env or {}
-    
+
     def parse(self) -> LogosExpr:
         """Parse input string into Lambda Logos expression.
-        
+
         Returns:
             Parsed expression
         """
         expr = self.parse_expr()
-        
+
         # Ensure end of input
         if self.current_token.token_type != TokenType.EOF:
             self._error(f"Expected end of input, got {self.current_token}")
-        
+
         return expr
-    
+
     def parse_expr(self) -> LogosExpr:
         """Parse expression.
-        
+
         Returns:
             Parsed expression
         """
         # Parse abstraction
         if self.current_token.token_type == TokenType.LAMBDA:
             return self.parse_abstraction()
-        
+
         # Parse application or atomic
         return self.parse_application()
-    
+
     def parse_abstraction(self) -> Abstraction:
         """Parse lambda abstraction.
-        
+
         Returns:
             Parsed abstraction
         """
         # Consume lambda
         self._consume(TokenType.LAMBDA)
-        
+
         # Parse variable name
         if self.current_token.token_type != TokenType.IDENTIFIER:
             self._error(f"Expected variable name, got {self.current_token}")
-        
+
         var_name = self.current_token.value
         self._advance()
-        
+
         # Parse type annotation
         self._consume(TokenType.COLON)
-        
+
         if self.current_token.token_type != TokenType.TYPE:
             self._error(f"Expected type, got {self.current_token}")
-        
+
         var_type = self._parse_type()
-        
+
         # Parse body
         self._consume(TokenType.DOT)
         body = self.parse_expr()
-        
+
         return Abstraction(var_name, var_type, body)
-    
+
     def parse_application(self) -> LogosExpr:
         """Parse function application.
-        
+
         Returns:
             Parsed application or atomic expression
         """
         # Parse atomic expression
         left = self.parse_atomic()
-        
+
         # Parse application chain
         while self.current_token.token_type not in [TokenType.RPAREN, TokenType.DOT, TokenType.EOF]:
             right = self.parse_atomic()
             left = Application(left, right)
-        
+
         return left
-    
+
     def parse_atomic(self) -> LogosExpr:
         """Parse atomic expression.
-        
+
         Returns:
             Parsed atomic expression
         """
@@ -8897,20 +8897,20 @@ class Parser:
             expr = self.parse_expr()
             self._consume(TokenType.RPAREN)
             return expr
-        
+
         # Parse SR operator
         if self.current_token.token_type == TokenType.SR:
             return self.parse_sr()
-        
+
         # Parse variable or constant
         if self.current_token.token_type == TokenType.IDENTIFIER:
             name = self.current_token.value
             self._advance()
-            
+
             # Check for predefined constant or value
             if name in self.env:
                 return self.env[name]
-            
+
             # Check for special values
             if name in ["ei", "og", "at"]:
                 if name == "ei":
@@ -8919,63 +8919,63 @@ class Parser:
                     return Value(name, OntologicalType.GOODNESS)
                 elif name == "at":
                     return Value(name, OntologicalType.TRUTH)
-            
+
             # Default to variable with Prop type
             return Variable(name, OntologicalType.PROP)
-        
+
         self._error(f"Unexpected token: {self.current_token}")
-    
+
     def parse_sr(self) -> SufficientReason:
         """Parse SR operator.
-        
+
         Returns:
             Parsed SR operator
         """
         # Consume SR
         self._consume(TokenType.SR)
-        
+
         # Parse arguments
         self._consume(TokenType.LPAREN)
-        
+
         # Parse source type
         if self.current_token.token_type != TokenType.TYPE:
             self._error(f"Expected type, got {self.current_token}")
-        
+
         source_type = self._parse_type()
-        
+
         self._consume(TokenType.COMMA)
-        
+
         # Parse target type
         if self.current_token.token_type != TokenType.TYPE:
             self._error(f"Expected type, got {self.current_token}")
-        
+
         target_type = self._parse_type()
-        
+
         self._consume(TokenType.COMMA)
-        
+
         # Parse value
         if self.current_token.token_type != TokenType.NUMBER:
             self._error(f"Expected number, got {self.current_token}")
-        
+
         value = int(self.current_token.value)
         self._advance()
-        
+
         self._consume(TokenType.RPAREN)
-        
+
         return SufficientReason(source_type, target_type, value)
-    
+
     def _parse_type(self) -> OntologicalType:
         """Parse type.
-        
+
         Returns:
             Parsed ontological type
         """
         if self.current_token.token_type != TokenType.TYPE:
             self._error(f"Expected type, got {self.current_token}")
-        
+
         type_str = self.current_token.value
         self._advance()
-        
+
         if type_str == "𝔼":
             return OntologicalType.EXISTENCE
         elif type_str == "𝔾":
@@ -8984,21 +8984,21 @@ class Parser:
             return OntologicalType.TRUTH
         elif type_str == "Prop":
             return OntologicalType.PROP
-        
+
         self._error(f"Unknown type: {type_str}")
-    
+
     def _advance(self) -> None:
         """Advance to next token."""
         self.position += 1
         if self.position < len(self.tokens):
             self.current_token = self.tokens[self.position]
-    
+
     def _consume(self, token_type: TokenType) -> None:
         """Consume token of expected type.
-        
+
         Args:
             token_type: Expected token type
-            
+
         Raises:
             ValueError: If current token doesn't match expected type
         """
@@ -9006,13 +9006,13 @@ class Parser:
             self._advance()
         else:
             self._error(f"Expected {token_type.value}, got {self.current_token.token_type.value}")
-    
+
     def _error(self, message: str) -> None:
         """Raise parser error.
-        
+
         Args:
             message: Error message
-            
+
         Raises:
             ValueError: With position information
         """
@@ -9020,14 +9020,14 @@ class Parser:
 
 def parse_expr(input_str: str, env: Optional[Dict[str, Any]] = None) -> LogosExpr:
     """Parse Lambda Logos expression from string.
-    
+
     Args:
         input_str: Input string
         env: Optional environment with predefined constants and values
-        
+
     Returns:
         Parsed expression
-        
+
     Raises:
         ValueError: If parsing fails
     """
@@ -9045,7 +9045,7 @@ if __name__ == "__main__":
         "SR(𝔼,𝔾,3) ei",
         "λp:Prop.λq:Prop.(p q)"
     ]
-    
+
     for expr_str in expr_strs:
         try:
             expr = parse_expr(expr_str)
@@ -9099,7 +9099,7 @@ class TetragnosCore:
                 "I am very angry about this problem"
             ]
             train_labels = ["positive", "positive", "negative", "negative"]
-            
+
             # Create a model pipeline: text -> TF-IDF vectors -> Naive Bayes classifier
             self.sentiment_classifier = make_pipeline(
                 TfidfVectorizer(),
@@ -9113,7 +9113,7 @@ class TetragnosCore:
             logging.error(f"Failed to initialize models: {e}", exc_info=True)
             self.embedding_model = None
             self.sentiment_classifier = None
-        
+
     def execute(self, payload: dict) -> dict:
         """
         Executes a task based on the payload.
@@ -9128,10 +9128,10 @@ class TetragnosCore:
             text = payload.get('text')
             if not text:
                 raise ValueError("Payload for 'generate_embedding' must contain 'text'.")
-            
+
             embedding = self.embedding_model.encode(text, convert_to_tensor=True)
             return {"embedding": embedding.cpu().tolist(), "model": "all-MiniLM-L6-v2"}
-            
+
         # --- NEW ACTION USING THE SKLEARN MODEL ---
         elif action == 'classify_sentiment_classic':
             text_to_classify = payload.get('text')
@@ -9141,7 +9141,7 @@ class TetragnosCore:
             # The pipeline handles vectorization and prediction
             prediction = self.sentiment_classifier.predict([text_to_classify])[0]
             probabilities = self.sentiment_classifier.predict_proba([text_to_classify])[0]
-            
+
             confidence = max(probabilities)
             classes = self.sentiment_classifier.classes_
 
@@ -9152,7 +9152,7 @@ class TetragnosCore:
                 "model": "scikit-learn MultinomialNB"
             }
         # --- END NEW ---
-        
+
         else:
             # Fallback for old sentiment analysis placeholder
             if action == 'sentiment_analysis':
@@ -9205,10 +9205,10 @@ class ClusterAnalyzer:
     def fit(self, features: np.ndarray) -> dict:
         if features.shape[0] < 2:
              return {'embedding_2d': features.tolist(), 'labels': [0] * features.shape[0]}
-        
+
         n_neighbors_val = min(features.shape[0] - 1, self.n_neighbors)
         if n_neighbors_val < 1: n_neighbors_val = 1
-            
+
         self.reducer = UMAP(n_neighbors=n_neighbors_val, n_components=self.n_components, min_dist=0.1)
         self.clusterer = DBSCAN(eps=self.eps, min_samples=self.min_samples)
 
@@ -9243,13 +9243,13 @@ logger = logging.getLogger(__name__)
 
 class TranslationResult:
     """Holds results of 3PDN translation."""
-    
-    def __init__(self, 
-                query: str, 
+
+    def __init__(self,
+                query: str,
                 trinity_vector: TrinityVector,
                 layers: Dict[str, Any] = None):
         """Initialize translation result.
-        
+
         Args:
             query: Original query string
             trinity_vector: Extracted trinity vector
@@ -9262,7 +9262,7 @@ class TranslationResult:
             "MIND": {},       # Semantic/meaning layer
             "BRIDGE": {}      # Ontological mapping layer
         }
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary representation."""
         return {
@@ -9270,7 +9270,7 @@ class TranslationResult:
             "trinity_vector": self.trinity_vector.to_dict(),
             "layers": self.layers
         }
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> 'TranslationResult':
         """Create from dictionary representation."""
@@ -9279,7 +9279,7 @@ class TranslationResult:
             trinity_vector = TrinityVector.from_dict(trinity_data)
         else:
             trinity_vector = TrinityVector(*trinity_data)
-            
+
         return cls(
             query=data.get("query", ""),
             trinity_vector=trinity_vector,
@@ -9288,18 +9288,18 @@ class TranslationResult:
 
 class PDNBridge:
     """Bridge between natural language and Lambda Logos."""
-    
+
     def __init__(self, lambda_engine: Optional[LambdaEngine] = None):
         """Initialize PDN bridge.
-        
+
         Args:
             lambda_engine: Lambda engine instance
         """
         self.lambda_engine = lambda_engine
-        
+
         # Dictionary of common terms for quick translation
         self.common_terms = self._initialize_common_terms()
-        
+
         # Semantic categories for MIND layer
         self.semantic_categories = {
             "ontological": ["exists", "being", "reality", "substance", "exist"],
@@ -9309,32 +9309,32 @@ class PDNBridge:
             "modal": ["necessary", "possible", "impossible", "contingent"],
             "logical": ["follows", "entails", "implies", "contradicts"]
         }
-        
+
         logger.info("PDN Bridge initialized")
-    
+
     def _initialize_common_terms(self) -> Dict[str, LogosExpr]:
         """Initialize dictionary of common Lambda terms.
-        
+
         Returns:
             Dictionary of common terms
         """
         if not self.lambda_engine:
             logger.warning("Lambda engine not available for term initialization")
             return {}
-            
+
         # Ontological values
         ei_val = self.lambda_engine.create_value("ei", "EXISTENCE")
         og_val = self.lambda_engine.create_value("og", "GOODNESS")
         at_val = self.lambda_engine.create_value("at", "TRUTH")
-        
+
         # Sufficient reason operators
         sr_eg = self.lambda_engine.create_sr("EXISTENCE", "GOODNESS", 3)
         sr_gt = self.lambda_engine.create_sr("GOODNESS", "TRUTH", 2)
-        
+
         # Basic applications
         eg_app = self.lambda_engine.create_application(sr_eg, ei_val)
         gt_app = self.lambda_engine.create_application(sr_gt, og_val)
-        
+
         # Connect dictionary
         return {
             "existence": ei_val,
@@ -9345,85 +9345,85 @@ class PDNBridge:
             "existence_implies_goodness": eg_app,
             "goodness_implies_truth": gt_app
         }
-    
+
     def natural_to_lambda(self, query: str, translation_result: Optional[Dict[str, Any]] = None) -> Tuple[LogosExpr, Dict[str, Any]]:
         """Convert natural language to Lambda expression.
-        
+
         Args:
             query: Natural language query
             translation_result: Optional external translation result
-            
+
         Returns:
             (Lambda expression, Translation result) tuple
         """
         # If translation result provided, use it
         if translation_result:
             return self._translation_to_lambda(translation_result), translation_result
-        
+
         # Otherwise, create a translation result
         translation = self._translate(query)
         lambda_expr = self._translation_to_lambda(translation.to_dict())
-        
+
         return lambda_expr, translation.to_dict()
-    
+
     def _translate(self, query: str) -> TranslationResult:
         """Translate natural language to 3PDN representation.
-        
+
         Args:
             query: Natural language query
-            
+
         Returns:
             Translation result
         """
         # SIGN layer: Extract tokens/keywords
         sign_layer = self._extract_sign_layer(query)
-        
+
         # MIND layer: Map to semantic categories
         mind_layer = self._extract_mind_layer(sign_layer)
-        
+
         # BRIDGE layer: Map to ontological dimensions
         bridge_layer = self._extract_bridge_layer(mind_layer)
-        
+
         # Extract trinity vector
         trinity_vector = TrinityVector(
             existence=bridge_layer.get("existence", 0.5),
             goodness=bridge_layer.get("goodness", 0.5),
             truth=bridge_layer.get("truth", 0.5)
         )
-        
+
         # Create layers dictionary
         layers = {
             "SIGN": sign_layer,
             "MIND": mind_layer,
             "BRIDGE": bridge_layer
         }
-        
+
         return TranslationResult(query, trinity_vector, layers)
-    
+
     def _extract_sign_layer(self, query: str) -> List[str]:
         """Extract SIGN layer (tokens) from query.
-        
+
         Args:
             query: Natural language query
-            
+
         Returns:
             List of tokens
         """
         # Tokenize and normalize
         tokens = [
-            token.lower() 
+            token.lower()
             for token in re.findall(r'\b\w+\b', query)
             if len(token) > 1 and token.lower() not in ["the", "a", "an", "is", "are", "to"]
         ]
-        
+
         return tokens
-    
+
     def _extract_mind_layer(self, sign_layer: List[str]) -> Dict[str, float]:
         """Extract MIND layer (semantic categories) from SIGN layer.
-        
+
         Args:
             sign_layer: SIGN layer tokens
-            
+
         Returns:
             Semantic category weights
         """
@@ -9436,13 +9436,13 @@ class PDNBridge:
             "modal": 0.0,
             "logical": 0.0
         }
-        
+
         # Count matches in each category
         for token in sign_layer:
             for category, keywords in self.semantic_categories.items():
                 if any(token == keyword or token.startswith(keyword) for keyword in keywords):
                     categories[category] += 1.0
-        
+
         # Normalize to range [0,1]
         total = sum(categories.values())
         if total > 0:
@@ -9452,15 +9452,15 @@ class PDNBridge:
             categories["ontological"] = 0.4
             categories["epistemic"] = 0.3
             categories["moral"] = 0.3
-        
+
         return categories
-    
+
     def _extract_bridge_layer(self, mind_layer: Dict[str, float]) -> Dict[str, float]:
         """Extract BRIDGE layer (ontological dimensions) from MIND layer.
-        
+
         Args:
             mind_layer: MIND layer semantic categories
-            
+
         Returns:
             Ontological dimension values
         """
@@ -9470,46 +9470,46 @@ class PDNBridge:
             "goodness": 0.5,
             "truth": 0.5
         }
-        
+
         # Apply semantic category weights to dimensions
         # Ontological primarily affects existence
         dimensions["existence"] += 0.4 * mind_layer.get("ontological", 0)
-        
+
         # Moral primarily affects goodness
         dimensions["goodness"] += 0.4 * mind_layer.get("moral", 0)
-        
+
         # Epistemic primarily affects truth
         dimensions["truth"] += 0.4 * mind_layer.get("epistemic", 0)
-        
+
         # Secondary effects
         dimensions["existence"] += 0.2 * mind_layer.get("causal", 0)
         dimensions["truth"] += 0.2 * mind_layer.get("logical", 0)
-        
+
         # Modal affects all dimensions
         modal_factor = 0.1 * mind_layer.get("modal", 0)
         dimensions["existence"] += modal_factor
         dimensions["goodness"] += modal_factor
         dimensions["truth"] += modal_factor
-        
+
         # Ensure values are in range [0,1]
         for dim in dimensions:
             dimensions[dim] = max(0.0, min(1.0, dimensions[dim]))
-        
+
         return dimensions
-    
+
     def _translation_to_lambda(self, translation: Dict[str, Any]) -> LogosExpr:
         """Convert 3PDN translation to Lambda expression.
-        
+
         Args:
             translation: 3PDN translation result
-            
+
         Returns:
             Lambda expression
         """
         if not self.lambda_engine:
             logger.warning("Lambda engine not available for translation")
             return None
-            
+
         # Extract trinity vector
         trinity_data = translation.get("trinity_vector", {})
         if isinstance(trinity_data, dict):
@@ -9520,11 +9520,11 @@ class PDNBridge:
             )
         else:
             trinity = trinity_data
-        
+
         # Determine strongest dimension
         dims = [("existence", trinity[0]), ("goodness", trinity[1]), ("truth", trinity[2])]
         primary_dim = max(dims, key=lambda x: x[1])
-        
+
         # Create expression based on primary dimension
         if primary_dim[0] == "existence":
             return self.common_terms["existence"]
@@ -9532,22 +9532,22 @@ class PDNBridge:
             return self.common_terms["goodness"]
         elif primary_dim[0] == "truth":
             return self.common_terms["truth"]
-        
+
         # Default fallback
         return self.common_terms["existence"]
-    
+
     def lambda_to_natural(self, expr: LogosExpr) -> str:
         """Convert Lambda expression to natural language.
-        
+
         Args:
             expr: Lambda expression
-            
+
         Returns:
             Natural language representation
         """
         if not expr:
             return "undefined expression"
-            
+
         # Basic conversion based on expression type
         if isinstance(expr, Variable):
             if expr.onto_type == OntologicalType.EXISTENCE:
@@ -9558,7 +9558,7 @@ class PDNBridge:
                 return f"a concept of truth named {expr.name}"
             else:
                 return f"a variable named {expr.name}"
-        
+
         elif isinstance(expr, Value):
             if expr.value == "ei":
                 return "existence itself"
@@ -9568,22 +9568,22 @@ class PDNBridge:
                 return "absolute truth"
             else:
                 return f"the value {expr.value}"
-        
+
         elif isinstance(expr, SufficientReason):
-            if (expr.source_type == OntologicalType.EXISTENCE and 
+            if (expr.source_type == OntologicalType.EXISTENCE and
                 expr.target_type == OntologicalType.GOODNESS):
                 return "the principle that existence implies goodness"
-            elif (expr.source_type == OntologicalType.GOODNESS and 
+            elif (expr.source_type == OntologicalType.GOODNESS and
                   expr.target_type == OntologicalType.TRUTH):
                 return "the principle that goodness implies truth"
             else:
                 return f"a sufficient reason operator from {expr.source_type.value} to {expr.target_type.value}"
-        
+
         elif isinstance(expr, Application):
             # Handle common applications
             func_str = str(expr.func)
             arg_str = str(expr.arg)
-            
+
             # Special case for common patterns
             if func_str == str(self.common_terms.get("sr_eg", "")) and arg_str == "ei:𝔼":
                 return "existence implies goodness"
@@ -9593,28 +9593,28 @@ class PDNBridge:
                 func_natural = self.lambda_to_natural(expr.func)
                 arg_natural = self.lambda_to_natural(expr.arg)
                 return f"the application of {func_natural} to {arg_natural}"
-        
+
         # Default fallback
         return str(expr)
-    
+
     def lambda_to_3pdn(self, expr: LogosExpr) -> Dict[str, Any]:
         """Convert Lambda expression to 3PDN representation.
-        
+
         Args:
             expr: Lambda expression
-            
+
         Returns:
             3PDN representation with SIGN, MIND, BRIDGE layers
         """
         # Extract type information
         type_info = self._extract_type_info(expr)
-        
+
         # Generate semantic categories
         semantic = self._map_to_semantic(type_info)
-        
+
         # Generate ontological dimensions
         ontological = self._map_to_ontological(semantic)
-        
+
         # Create 3PDN representation
         return {
             "layers": {
@@ -9629,50 +9629,50 @@ class PDNBridge:
             ),
             "expr": str(expr)
         }
-    
+
     def _extract_type_info(self, expr: LogosExpr) -> Dict[str, Any]:
         """Extract type information from Lambda expression.
-        
+
         Args:
             expr: Lambda expression
-            
+
         Returns:
             Type information dictionary
         """
         # Simple implementation - would use Lambda engine's type checker in full system
         if isinstance(expr, Variable):
             return {"type": "simple", "value": expr.onto_type}
-        
+
         elif isinstance(expr, Value):
             return {"type": "simple", "value": expr.onto_type}
-        
+
         elif isinstance(expr, SufficientReason):
             return {
                 "type": "sr",
                 "source": expr.source_type,
                 "target": expr.target_type
             }
-        
+
         elif isinstance(expr, Application):
             # Recursive type extraction
             func_type = self._extract_type_info(expr.func)
             arg_type = self._extract_type_info(expr.arg)
-            
+
             return {
                 "type": "application",
                 "func_type": func_type,
                 "arg_type": arg_type
             }
-        
+
         # Default type info
         return {"type": "unknown"}
-    
+
     def _map_to_semantic(self, type_info: Dict[str, Any]) -> Dict[str, float]:
         """Map type information to semantic categories.
-        
+
         Args:
             type_info: Type information
-            
+
         Returns:
             Semantic category weights
         """
@@ -9685,7 +9685,7 @@ class PDNBridge:
             "modal": 0.0,
             "logical": 0.0
         }
-        
+
         # Map simple types directly
         if type_info.get("type") == "simple":
             value = type_info.get("value")
@@ -9698,31 +9698,31 @@ class PDNBridge:
             elif value == OntologicalType.TRUTH:
                 semantic["epistemic"] = 0.7
                 semantic["logical"] = 0.3
-        
+
         # Map SR operators
         elif type_info.get("type") == "sr":
             source = type_info.get("source")
             target = type_info.get("target")
-            
+
             if source == OntologicalType.EXISTENCE and target == OntologicalType.GOODNESS:
                 semantic["ontological"] = 0.5
                 semantic["moral"] = 0.5
             elif source == OntologicalType.GOODNESS and target == OntologicalType.TRUTH:
                 semantic["moral"] = 0.4
                 semantic["epistemic"] = 0.6
-        
+
         # Map applications
         elif type_info.get("type") == "application":
             # Combine function and argument semantics
             func_type = type_info.get("func_type", {})
             arg_type = type_info.get("arg_type", {})
-            
+
             if func_type.get("type") == "sr" and arg_type.get("type") == "simple":
                 # Specific handling for SR applications
                 source = func_type.get("source")
                 target = func_type.get("target")
                 arg_value = arg_type.get("value")
-                
+
                 if source == arg_value:
                     # Valid SR application - emphasize target dimension
                     if target == OntologicalType.GOODNESS:
@@ -9731,15 +9731,15 @@ class PDNBridge:
                     elif target == OntologicalType.TRUTH:
                         semantic["epistemic"] = 0.7
                         semantic["moral"] = 0.3
-        
+
         return semantic
-    
+
     def _map_to_ontological(self, semantic: Dict[str, float]) -> Dict[str, float]:
         """Map semantic categories to ontological dimensions.
-        
+
         Args:
             semantic: Semantic categories
-            
+
         Returns:
             Ontological dimension values
         """
@@ -9749,63 +9749,63 @@ class PDNBridge:
             "goodness": 0.5,
             "truth": 0.5
         }
-        
+
         # Apply semantic weights to dimensions
         if semantic.get("ontological", 0) > 0:
             ontological["existence"] = 0.5 + 0.5 * semantic["ontological"]
-        
+
         if semantic.get("moral", 0) > 0:
             ontological["goodness"] = 0.5 + 0.5 * semantic["moral"]
-        
+
         if semantic.get("epistemic", 0) > 0:
             ontological["truth"] = 0.5 + 0.5 * semantic["epistemic"]
-        
+
         if semantic.get("logical", 0) > 0:
             ontological["truth"] = max(ontological["truth"], 0.5 + 0.4 * semantic["logical"])
-        
+
         if semantic.get("causal", 0) > 0:
             ontological["existence"] = max(ontological["existence"], 0.5 + 0.3 * semantic["causal"])
-        
+
         # Ensure values are within [0, 1]
         for key in ontological:
             ontological[key] = min(max(ontological[key], 0), 1)
-        
+
         return ontological
-    
+
     def _expr_to_sign(self, expr: LogosExpr) -> List[str]:
         """Convert expression to SIGN layer tokens.
-        
+
         Args:
             expr: Lambda expression
-            
+
         Returns:
             List of tokens
         """
         # Convert to string and tokenize
         expr_str = str(expr)
         tokens = expr_str.replace('(', ' ( ').replace(')', ' ) ').replace('.', ' . ').split()
-        
+
         # Filter and clean
         return [token for token in tokens if token.strip()]
 
 class PDNBottleneckSolver:
     """Specialized tooling for addressing the 3PDN bottleneck."""
-    
+
     def __init__(self, bridge: PDNBridge):
         """Initialize bottleneck solver.
-        
+
         Args:
             bridge: PDN bridge instance
         """
         self.bridge = bridge
-    
+
     def create_lambda_target(self, query: str, translation_result: Dict[str, Any]) -> Dict[str, Any]:
         """Create optimized Lambda target from translation result.
-        
+
         Args:
             query: Original query
             translation_result: Translation result
-            
+
         Returns:
             Lambda target data
         """
@@ -9819,15 +9819,15 @@ class PDNBottleneckSolver:
             )
         else:
             trinity = trinity_data
-        
+
         # Determine strongest dimensions (top 2)
         dims = [
-            ("existence", trinity[0]), 
-            ("goodness", trinity[1]), 
+            ("existence", trinity[0]),
+            ("goodness", trinity[1]),
             ("truth", trinity[2])
         ]
         dims.sort(key=lambda x: x[1], reverse=True)
-        
+
         # Create Lambda target based on dimensions
         if dims[0][0] == "existence":
             # Existence-focused
@@ -9837,7 +9837,7 @@ class PDNBottleneckSolver:
             else:
                 # Pure existence
                 target = self.bridge.common_terms.get("existence")
-                
+
         elif dims[0][0] == "goodness":
             # Goodness-focused
             if dims[1][0] == "truth" and dims[1][1] > 0.6:
@@ -9846,15 +9846,15 @@ class PDNBottleneckSolver:
             else:
                 # Pure goodness
                 target = self.bridge.common_terms.get("goodness")
-                
+
         elif dims[0][0] == "truth":
             # Truth-focused
             target = self.bridge.common_terms.get("truth")
-        
+
         else:
             # Default fallback
             target = self.bridge.common_terms.get("existence")
-        
+
         # Generate target data
         target_data = {
             "query": query,
@@ -9863,7 +9863,7 @@ class PDNBottleneckSolver:
             "lambda_dict": self.bridge.lambda_engine.expr_to_dict(target) if self.bridge.lambda_engine else {},
             "natural": self.bridge.lambda_to_natural(target)
         }
-        
+
         return target_data
 
 --- END OF FILE subsystems/tetragnos/translation/pdn_bridge.py ---
@@ -9892,7 +9892,7 @@ try:
     NLTK_AVAILABLE = True
 except ImportError:
     NLTK_AVAILABLE = False
-    
+
 try:
     import spacy
     SPACY_AVAILABLE = True
@@ -9908,28 +9908,28 @@ logger = logging.getLogger(__name__)
 
 class TranslationEngine:
     """Main translation engine for natural language processing."""
-    
+
     def __init__(self, config: Optional[Dict[str, Any]] = None):
         """Initialize translation engine.
-        
+
         Args:
             config: Engine configuration
         """
         self.config = config or {}
         self.semantic_depth = self.config.get("semantic_depth", 3)
-        
+
         # Setup NLP tools if available
         self.nlp = None
         self.lemmatizer = None
         self.stop_words = set()
-        
+
         if SPACY_AVAILABLE:
             try:
                 self.nlp = spacy.load("en_core_web_sm")
                 logger.info("Loaded spaCy NLP model")
             except:
                 logger.warning("Failed to load spaCy model")
-        
+
         if NLTK_AVAILABLE:
             try:
                 self.lemmatizer = WordNetLemmatizer()
@@ -9937,18 +9937,18 @@ class TranslationEngine:
                 logger.info("Loaded NLTK components")
             except:
                 logger.warning("Failed to load NLTK components")
-        
+
         # Ontological keyword mappings
         self.ontological_keywords = self._load_ontological_keywords()
-        
+
         # Bridge connection (will be set by PDN bridge)
         self.pdn_bridge = None
-        
+
         logger.info("Translation Engine initialized")
-    
+
     def _load_ontological_keywords(self) -> Dict[str, List[str]]:
         """Load ontological keyword mappings.
-        
+
         Returns:
             Dictionary mapping dimensions to keywords
         """
@@ -9970,58 +9970,58 @@ class TranslationEngine:
                 "provable", "evident", "certain", "definite"
             ]
         }
-    
+
     def set_pdn_bridge(self, bridge: PDNBridge) -> None:
         """Set PDN bridge for lambda integration.
-        
+
         Args:
             bridge: PDN bridge instance
         """
         self.pdn_bridge = bridge
-    
+
     def translate(self, query: str) -> TranslationResult:
         """Translate natural language query to ontological representation.
-        
+
         Args:
             query: Natural language query
-            
+
         Returns:
             Translation result
         """
         # Process query with NLP pipeline
         processed_data = self._process_query(query)
-        
+
         # Extract SIGN layer
         sign_layer = self._extract_sign_layer(processed_data)
-        
+
         # Extract MIND layer
         mind_layer = self._extract_mind_layer(sign_layer, processed_data)
-        
+
         # Extract BRIDGE layer
         bridge_layer = self._extract_bridge_layer(mind_layer)
-        
+
         # Create trinity vector
         trinity_vector = TrinityVector(
             existence=bridge_layer.get("existence", 0.5),
             goodness=bridge_layer.get("goodness", 0.5),
             truth=bridge_layer.get("truth", 0.5)
         )
-        
+
         # Create layers dictionary
         layers = {
             "SIGN": sign_layer,
             "MIND": mind_layer,
             "BRIDGE": bridge_layer
         }
-        
+
         return TranslationResult(query, trinity_vector, layers)
-    
+
     def _process_query(self, query: str) -> Dict[str, Any]:
         """Process query with NLP pipeline.
-        
+
         Args:
             query: Natural language query
-            
+
         Returns:
             Processed data
         """
@@ -10033,77 +10033,77 @@ class TranslationEngine:
             "entities": [],
             "dependencies": []
         }
-        
+
         # Use spaCy if available
         if self.nlp:
             doc = self.nlp(query)
-            
+
             processed["tokens"] = [token.text for token in doc]
             processed["lemmas"] = [token.lemma_ for token in doc]
             processed["pos_tags"] = [(token.text, token.pos_) for token in doc]
             processed["entities"] = [(ent.text, ent.label_) for ent in doc.ents]
             processed["dependencies"] = [(token.text, token.dep_, token.head.text) for token in doc]
-            
+
             return processed
-        
+
         # Fallback to NLTK if available
         if NLTK_AVAILABLE:
             tokens = word_tokenize(query)
             processed["tokens"] = tokens
-            
+
             if self.lemmatizer:
                 processed["lemmas"] = [self.lemmatizer.lemmatize(token) for token in tokens]
-            
+
             return processed
-        
+
         # Simple fallback if no NLP tools available
         tokens = query.split()
         processed["tokens"] = tokens
         processed["lemmas"] = tokens
-        
+
         return processed
-    
+
     def _extract_sign_layer(self, processed_data: Dict[str, Any]) -> List[Dict[str, Any]]:
         """Extract SIGN layer from processed data.
-        
+
         Args:
             processed_data: Processed query data
-            
+
         Returns:
             SIGN layer representation
         """
         sign_items = []
-        
+
         # Use lemmas if available, otherwise tokens
         lemmas = processed_data.get("lemmas", processed_data.get("tokens", []))
         tokens = processed_data.get("tokens", [])
         pos_tags = dict(processed_data.get("pos_tags", []))
-        
+
         for i, (token, lemma) in enumerate(zip(tokens, lemmas)):
             # Skip stop words
             if token.lower() in self.stop_words:
                 continue
-                
+
             # Create sign item
             sign_item = {
                 "token": token,
                 "lemma": lemma,
                 "pos": pos_tags.get(token, "")
             }
-            
+
             # Add ontological dimensions
             sign_item["dimensions"] = self._get_token_dimensions(lemma.lower())
-            
+
             sign_items.append(sign_item)
-        
+
         return sign_items
-    
+
     def _get_token_dimensions(self, lemma: str) -> Dict[str, float]:
         """Get ontological dimension scores for token.
-        
+
         Args:
             lemma: Lemmatized token
-            
+
         Returns:
             Dimension scores
         """
@@ -10112,23 +10112,23 @@ class TranslationEngine:
             "goodness": 0.0,
             "truth": 0.0
         }
-        
+
         # Check each dimension
         for dim, keywords in self.ontological_keywords.items():
             for keyword in keywords:
                 if lemma == keyword or lemma.startswith(keyword):
                     dimensions[dim] = 1.0
                     break
-        
+
         return dimensions
-    
+
     def _extract_mind_layer(self, sign_layer: List[Dict[str, Any]], processed_data: Dict[str, Any]) -> Dict[str, Any]:
         """Extract MIND layer from SIGN layer.
-        
+
         Args:
             sign_layer: SIGN layer data
             processed_data: Processed query data
-            
+
         Returns:
             MIND layer representation
         """
@@ -10141,24 +10141,24 @@ class TranslationEngine:
             "modal": 0.0,
             "logical": 0.0
         }
-        
+
         # Calculate dimension aggregates
         dim_totals = {
             "existence": 0.0,
             "goodness": 0.0,
             "truth": 0.0
         }
-        
+
         for item in sign_layer:
             for dim, score in item["dimensions"].items():
                 dim_totals[dim] += score
-        
+
         # Map dimensions to categories
         dim_sum = sum(dim_totals.values())
         if dim_sum > 0:
             # Normalize
             dim_totals = {k: v / dim_sum for k, v in dim_totals.items()}
-            
+
             # Map to categories
             categories["ontological"] = dim_totals["existence"]
             categories["moral"] = dim_totals["goodness"]
@@ -10168,15 +10168,15 @@ class TranslationEngine:
             categories["ontological"] = 0.4
             categories["epistemic"] = 0.3
             categories["moral"] = 0.3
-        
+
         # Enhance with linguistic features (if available)
         self._enhance_with_linguistic_features(categories, processed_data)
-        
+
         return categories
-    
+
     def _enhance_with_linguistic_features(self, categories: Dict[str, float], processed_data: Dict[str, Any]) -> None:
         """Enhance mind categories with linguistic features.
-        
+
         Args:
             categories: Mind categories
             processed_data: Processed query data
@@ -10190,7 +10190,7 @@ class TranslationEngine:
             elif label in ["DATE", "TIME", "EVENT"]:
                 # Increase causal for temporal entities
                 categories["causal"] += 0.1
-        
+
         # Extract dependency relations (if available)
         dependencies = processed_data.get("dependencies", [])
         for token, dep, head in dependencies:
@@ -10206,20 +10206,20 @@ class TranslationEngine:
             elif dep in ["aux"] and token.lower() in ["must", "should", "could", "may"]:
                 # Modal auxiliaries strengthen modal
                 categories["modal"] += 0.1
-        
+
         # Normalize categories to ensure they sum to ~1.0
         cat_sum = sum(categories.values())
         if cat_sum > 0:
             factor = 1.0 / cat_sum
             for key in categories:
                 categories[key] *= factor
-    
+
     def _extract_bridge_layer(self, mind_layer: Dict[str, float]) -> Dict[str, float]:
         """Extract BRIDGE layer from MIND layer.
-        
+
         Args:
             mind_layer: MIND layer data
-            
+
         Returns:
             BRIDGE layer representation (ontological dimensions)
         """
@@ -10229,119 +10229,119 @@ class TranslationEngine:
             "goodness": 0.5,
             "truth": 0.5
         }
-        
+
         # Primary mappings
         dimensions["existence"] += 0.4 * mind_layer.get("ontological", 0)
         dimensions["goodness"] += 0.4 * mind_layer.get("moral", 0)
         dimensions["truth"] += 0.4 * mind_layer.get("epistemic", 0)
-        
+
         # Secondary effects
         dimensions["existence"] += 0.2 * mind_layer.get("causal", 0)
         dimensions["truth"] += 0.2 * mind_layer.get("logical", 0)
-        
+
         # Modal affects all dimensions
         modal_factor = 0.1 * mind_layer.get("modal", 0)
         dimensions["existence"] += modal_factor
         dimensions["goodness"] += modal_factor
         dimensions["truth"] += modal_factor
-        
+
         # Ensure values are in range [0,1]
         for dim in dimensions:
             dimensions[dim] = max(0.0, min(1.0, dimensions[dim]))
-        
+
         return dimensions
-    
+
     def get_keywords_dimensions(self, keywords: List[str]) -> Dict[str, Dict[str, float]]:
         """Get ontological dimensions for keywords.
-        
+
         Args:
             keywords: List of keywords
-            
+
         Returns:
             Dictionary mapping keywords to dimension scores
         """
         result = {}
-        
+
         for keyword in keywords:
             dimensions = self._get_token_dimensions(keyword.lower())
             result[keyword] = dimensions
-        
+
         return result
-    
+
     def analyze_query_structure(self, query: str) -> Dict[str, Any]:
         """Analyze query structure for advanced translation.
-        
+
         Args:
             query: Natural language query
-            
+
         Returns:
             Query structure analysis
         """
         # Basic query classification
         is_question = query.endswith("?")
-        has_modal = any(word in query.lower() for word in 
+        has_modal = any(word in query.lower() for word in
                         ["can", "could", "may", "might", "must", "should", "would"])
-        has_negation = any(word in query.lower() for word in 
+        has_negation = any(word in query.lower() for word in
                           ["not", "no", "never", "nothing", "nowhere", "none"])
-        
+
         # Identify query focus
         focus = self._identify_query_focus(query)
-        
+
         return {
             "is_question": is_question,
             "has_modal": has_modal,
             "has_negation": has_negation,
             "focus": focus
         }
-    
+
     def _identify_query_focus(self, query: str) -> str:
         """Identify the focus dimension of query.
-        
+
         Args:
             query: Natural language query
-            
+
         Returns:
             Focus dimension ("existence", "goodness", "truth", or "unknown")
         """
         lower_query = query.lower()
-        
+
         # Check for existence focus
-        if any(word in lower_query for word in 
+        if any(word in lower_query for word in
               ["exist", "exists", "existing", "existed", "real", "reality"]):
             return "existence"
-        
+
         # Check for moral/goodness focus
-        if any(word in lower_query for word in 
+        if any(word in lower_query for word in
               ["good", "bad", "right", "wrong", "moral", "ethical", "just"]):
             return "goodness"
-        
+
         # Check for truth/knowledge focus
-        if any(word in lower_query for word in 
+        if any(word in lower_query for word in
               ["true", "truth", "know", "knowledge", "fact", "correct"]):
             return "truth"
-        
+
         # Default is unknown
         return "unknown"
-    
+
     def translate_to_lambda(self, query: str) -> Tuple[Any, TranslationResult]:
         """Translate query to Lambda expression.
-        
+
         Args:
             query: Natural language query
-            
+
         Returns:
             (Lambda expression, Translation result) tuple
         """
         if not self.pdn_bridge:
             logger.warning("PDN bridge not set, cannot translate to Lambda")
             return None, None
-        
+
         # Translate query to 3PDN/trinity representation
         translation = self.translate(query)
-        
+
         # Use PDN bridge to convert to Lambda
         lambda_expr, _ = self.pdn_bridge.natural_to_lambda(query, translation.to_dict())
-        
+
         return lambda_expr, translation
 
 --- END OF FILE subsystems/tetragnos/translation/translation_engine.py ---
@@ -10376,7 +10376,7 @@ class AlignmentProtocol:
         action = payload.get('action')
         if action == 'use_tool' and payload.get('tool_name') not in self.allowed_tools:
             return False
-        
+
         # Example check: Prevent file system access outside a sandbox.
         if "file_path" in payload and not payload['file_path'].startswith('/sandbox/'):
             return False
@@ -10389,7 +10389,7 @@ class AlignmentProtocol:
         # Example check: Ensure logical proofs don't contain contradictions.
         if result.get('proof_valid') is False:
             # This might be an acceptable result, but the protocol could flag it for review.
-            pass 
+            pass
         return True
 
 --- END OF FILE subsystems/thonoc/alignment_protocol.py ---
@@ -10417,41 +10417,41 @@ class ThonocNexus:  # Your existing class
     def __init__(self):
         # Add Trinity integration
         self.trinity_integration = TrinityNexusIntegration("THONOC")
-        
+
         # Your existing init code
-        
+
     def run(self, query, series=None):  # Your existing method
         # Add Trinity computation
         result = self.trinity_integration.trinity_compute(
             operation=self._process_prediction_request,
             input_data={"query": query, "series": series}
         )
-        
+
         if result is None:
             return {"status": "trinity_validation_failed"}
-            
+
         return result
-    
+
     def _process_prediction_request(self, enhanced_data):
         # Your existing logic
         query = enhanced_data.get('query') or enhanced_data.get('original_data', {}).get('query')
         series = enhanced_data.get('series') or enhanced_data.get('original_data', {}).get('series')
-        
+
         # Your existing processing
         return self.your_existing_prediction_logic(query, series)
-        
+
 class TrinityNexusIntegration:
     """Trinity integration system for enhanced subsystem coordination."""
-    
+
     def __init__(self, component_name: str):
         self.component = component_name
         self.trinity_state = {
             "existence": 0.33,
-            "goodness": 0.33, 
+            "goodness": 0.33,
             "truth": 0.34
         }
         self.validation_active = True
-    
+
     def trinity_compute(self, operation, input_data):
         """Execute Trinity-enhanced computation with validation."""
         try:
@@ -10462,23 +10462,23 @@ class TrinityNexusIntegration:
                 "component": self.component,
                 "validation_timestamp": time.time()
             }
-            
+
             # Execute operation with enhancement
             result = operation(enhanced_data)
-            
+
             # Validate Trinity coherence
             if self._validate_trinity_coherence(result):
                 return result
             else:
                 return {"status": "trinity_validation_failed", "component": self.component}
-                
+
         except Exception as e:
             return {
-                "status": "trinity_computation_error", 
+                "status": "trinity_computation_error",
                 "error": str(e),
                 "component": self.component
             }
-    
+
     def _validate_trinity_coherence(self, result):
         """Validate computational result maintains Trinity coherence."""
         # Basic coherence checks
@@ -10580,7 +10580,7 @@ class AxiomaticProofEngine:
     def __init__(self, lambda_engine, validator):
         self.lambda_engine = lambda_engine
         self.validator = validator
-    
+
     def construct_proof(self, claim, counter_claims=None):
         """Generate formal proof for logical claim."""
         return {
@@ -10594,7 +10594,7 @@ class LambdaEngine:
     """Lambda calculus computation engine."""
     def __init__(self):
         self.expression_cache = {}
-    
+
     def evaluate(self, expression):
         """Evaluate lambda expression."""
         return f"λ-result: {expression}"
@@ -10608,11 +10608,11 @@ class UnifiedFormalismValidator:
 class ThonocWorker:
     def __init__(self, rabbitmq_host='rabbitmq'):
         self.logger = logging.getLogger("THONOC_WORKER")
-        
+
         validator = UnifiedFormalismValidator()
         lambda_engine = LambdaEngine()
         self.proof_engine = AxiomaticProofEngine(lambda_engine, validator)
-        
+
         self.connection, self.channel = self._connect_rabbitmq(rabbitmq_host)
         self._setup_queues()
 
@@ -10643,23 +10643,23 @@ class ThonocWorker:
         try:
             task_type = task.get('type')
             payload = task.get('payload', {})
-            
+
             if task_type == 'construct_proof':
                 claim = payload['claim']
                 counters = payload.get('counter_claims', [])
                 result_payload = self.proof_engine.construct_proof(claim, counters)
                 status = 'success'
-            
+
             elif task_type == 'assign_consequence':
                 outcome = payload.get('outcome', {})
                 prob = outcome.get('probability', 0)
-                
+
                 if prob == 0: meta_status = {"possibility": False, "necessity": False}
                 elif prob == 1: meta_status = {"possibility": True, "necessity": True}
                 else: meta_status = {"possibility": True, "necessity": False}
-                
+
                 base_consequence = f"Outcome '{outcome.get('description')}' leads to a state of {outcome.get('alignment')}"
-                
+
                 result_payload = {
                     "full_consequence": f"{base_consequence} | Possibility={meta_status['possibility']}, Necessity={meta_status['necessity']}"
                 }
@@ -10806,7 +10806,7 @@ class BayesianDataHandler:
             meta = {
                 'model_version':'1.0',
                 'last_updated': datetime.now().isoformat(),
-                'performance_metrics': {}, 
+                'performance_metrics': {},
                 'model_parameters': {}
             }
             self.save_metadata(meta)
@@ -11070,7 +11070,7 @@ class BayesianMLModel:
                         for k,val in evidence.items()]) or 0.5
 
     def _marginal(self, evidence):
-        return sum(self.state.priors[h]*self.update_belief(h,evidence).prediction 
+        return sum(self.state.priors[h]*self.update_belief(h,evidence).prediction
                    for h in self.state.priors)
 
 
@@ -11184,18 +11184,18 @@ def predictive_refinement(query: str, tier: int = 1) -> List[Dict]:
 def run_BERT_pipeline(priors_path: str, query: str) -> Tuple[bool, str]:
     priors = load_priors(priors_path)
     attempt_log = []
-    
+
     for i in range(MAX_ITERATIONS):
         tier = 1 if i == 0 else 2
         raw_data = predictive_refinement(query, tier=tier)
         filtered = filter_and_score(raw_data)
-        
+
         if not filtered:
             attempt_log.append(f"Attempt {i+1}: No valid priors passed EGTC threshold.")
             continue
-        
+
         average_confidence = sum(dp["confidence"] for dp in filtered) / len(filtered)
-        
+
         if average_confidence >= CONFIDENCE_THRESHOLD:
             for dp in filtered:
                 priors[dp["label"]] = {
@@ -50253,79 +50253,79 @@ class OntologicalNode:
     def __init__(self, c_value: complex):
         # ... (the rest of your file is identical and correct) ...
         """Initialize ontological node.
-        
+
         Args:
             c_value: Complex position in Mandelbrot space
         """
         self.c = c_value
         self.node_id = self._generate_id(c_value)
-        
+
         # Core categorization
         self.category = CategoryType.MATERIAL if self.c.imag == 0 else CategoryType.METAPHYSICAL
         self.trinitarian_domain = DomainType.LOGICAL if self.category == CategoryType.MATERIAL else DomainType.TRANSCENDENTAL
         self.invariant_value = 3 if self.trinitarian_domain == DomainType.LOGICAL else 1
-        
+
         # Orbital properties
         self.orbit_properties = self._calculate_orbit_properties(self.c)
         self.calculation_depth = self.orbit_properties.get("depth", 0)
-        
+
         # Trinity indexing
         self.trinity_vector = self._calculate_trinity_vector()
-        
+
         # Node relationships
         self.relationships = []
         self.modal_status = self._calculate_modal_status()
         self.timestamps = {"created": time.time(), "updated": time.time()}
-        
+
         # Data payload
         self.data_payload = {
             "label": None,
             "semantic_props": {},
             "metadata": {}
         }
-    
+
     def _generate_id(self, c_value: complex) -> str:
         """Generate unique ID for node based on complex coordinates.
-        
+
         Args:
             c_value: Complex position
-            
+
         Returns:
             Unique node identifier
         """
         base = f"node_{c_value.real:.6f}_{c_value.imag:.6f}"
         return f"{base}_{uuid.uuid4().hex[:8]}"
-    
+
     def _calculate_orbit_properties(self, c: complex) -> Dict[str, Any]:
         """Calculate Mandelbrot orbit properties for complex value.
-        
+
         Args:
             c: Complex parameter
-            
+
         Returns:
             Orbit properties dictionary
         """
         # Maximum iterations based on domain
         max_iter = 500 if self.category == CategoryType.METAPHYSICAL else 100
         escape_radius = 2.0
-        
+
         # Calculate orbit
         z = complex(0, 0)
         orbit = []
-        
+
         for i in range(max_iter):
             orbit.append(z)
             z = z * z + c
             if abs(z) > escape_radius:
                 break
-        
+
         # Determine if in Mandelbrot set
         in_set = i == max_iter - 1
-        
+
         # Calculate properties
         orbit_type = "COMPLEX_ORBIT" if i > 20 else "SIMPLE_ORBIT"
         lyapunov = self._calculate_lyapunov_exponent(orbit)
-        
+
         return {
             "depth": i,
             "in_set": in_set,
@@ -50335,19 +50335,19 @@ class OntologicalNode:
             "final_z": (z.real, z.imag),
             "lyapunov_exponent": lyapunov
         }
-    
+
     def _calculate_lyapunov_exponent(self, orbit: List[complex]) -> float:
         """Calculate Lyapunov exponent to measure orbital stability.
-        
+
         Args:
             orbit: List of orbit positions
-            
+
         Returns:
             Lyapunov exponent value
         """
         if len(orbit) < 2:
             return 0.0
-            
+
         # Calculate derivatives along orbit
         derivatives = []
         for i in range(1, len(orbit)):
@@ -50355,16 +50355,16 @@ class OntologicalNode:
             derivative = abs(2 * z)
             if derivative > 0:
                 derivatives.append(math.log(derivative))
-                
+
         # Return average value
         if not derivatives:
             return 0.0
-            
+
         return sum(derivatives) / len(derivatives)
-    
+
     def _calculate_trinity_vector(self) -> TrinityVector:
         """Calculate trinity vector based on orbital properties.
-        
+
         Returns:
             Trinity vector (Existence, Goodness, Truth)
         """
@@ -50373,7 +50373,7 @@ class OntologicalNode:
         depth = self.orbit_properties.get("depth", 0)
         lyapunov = self.orbit_properties.get("lyapunov_exponent", 0.0)
         max_depth = 500 if self.category == CategoryType.METAPHYSICAL else 100
-        
+
         # Calculate base existence value
         existence = 0.5
         if self.category == CategoryType.METAPHYSICAL:
@@ -50383,10 +50383,10 @@ class OntologicalNode:
         else:
             # Scale existence by orbit depth
             existence = 0.3 + (depth / max_depth) * 0.6
-        
+
         # Calculate goodness from imaginary component
         goodness = max(0.0, min(1.0, abs(self.c.imag) * 1.5))
-        
+
         # Calculate truth from stability measures
         truth = 0.5
         if in_set:
@@ -50397,20 +50397,20 @@ class OntologicalNode:
         else:
             # Scale truth by orbital complexity
             truth = 0.3 + (depth / max_depth) * 0.6
-        
+
         # Create trinity vector
         return TrinityVector(existence, goodness, truth)
-    
+
     def _calculate_modal_status(self) -> Dict[str, List[str]]:
         """Calculate modal status based on orbital properties.
-        
+
         Returns:
             Modal status dictionary
         """
         # Calculate modal status from trinity vector
         modal_result = self.trinity_vector.calculate_modal_status()
         status = modal_result.get("status", "impossible")
-        
+
         # Initialize modal status tracking
         modal_status = {
             "necessary": [],
@@ -50418,36 +50418,36 @@ class OntologicalNode:
             "possible": [],
             "impossible": []
         }
-        
+
         # Add node ID to corresponding status
         if status in modal_status:
             modal_status[status].append(self.node_id)
-            
+
         return modal_status
-    
+
     def update_trinity_vector(self, trinity: TrinityVector) -> None:
         """Update node's trinity vector.
-        
+
         Args:
             trinity: New trinity vector
         """
         self.trinity_vector = trinity
         self.timestamps["updated"] = time.time()
-        
+
         # Recalculate modal status
         new_modal = self.trinity_vector.calculate_modal_status()
         status = new_modal.get("status", "impossible")
-        
+
         # Update modal status tracking
         for modal_type in self.modal_status:
             self.modal_status[modal_type] = []
-            
+
         if status in self.modal_status:
             self.modal_status[status].append(self.node_id)
-    
+
     def add_relationship(self, relation_type: str, target_node_id: str, metadata: Dict[str, Any] = None) -> None:
         """Add relationship to another node.
-        
+
         Args:
             relation_type: Type of relation
             target_node_id: Target node ID
@@ -50456,38 +50456,38 @@ class OntologicalNode:
         rel = (relation_type, target_node_id, metadata or {})
         self.relationships.append(rel)
         self.timestamps["updated"] = time.time()
-    
+
     def update_label(self, label: str) -> None:
         """Update node label.
-        
+
         Args:
             label: New node label
         """
         self.data_payload["label"] = label
         self.timestamps["updated"] = time.time()
-    
+
     def add_metadata(self, key: str, value: Any) -> None:
         """Add metadata to node.
-        
+
         Args:
             key: Metadata key
             value: Metadata value
         """
         self.data_payload["metadata"][key] = value
         self.timestamps["updated"] = time.time()
-    
+
     def calculate_3pdn_alignment(self) -> float:
         """Calculate alignment with 3PDN principles.
-        
+
         Returns:
             Alignment score [0-1]
         """
         # This seems to be a method on TrinityVector now
         return self.trinity_vector.calculate_3pdn_alignment()
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert node to dictionary representation.
-        
+
         Returns:
             Dictionary representation
         """
@@ -50501,7 +50501,7 @@ class OntologicalNode:
             "domain": self.trinitarian_domain.value,
             "invariant_value": self.invariant_value,
             "orbit_properties": {
-                k: v for k, v in self.orbit_properties.items() 
+                k: v for k, v in self.orbit_properties.items()
                 if k != 'orbit'  # Exclude orbit for efficiency
             },
             "trinity_vector": self.trinity_vector.to_tuple(),
@@ -50510,14 +50510,14 @@ class OntologicalNode:
             "relationships": self.relationships,
             "timestamps": self.timestamps
         }
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> 'OntologicalNode':
         """Create node from dictionary representation.
-        
+
         Args:
             data: Dictionary representation
-            
+
         Returns:
             Ontological node
         """
@@ -50527,41 +50527,41 @@ class OntologicalNode:
             data.get("c_value", {}).get("imag", 0)
         )
         node = cls(c_value)
-        
+
         # Override computed properties with stored values
         node.node_id = data.get("node_id", node.node_id)
-        
+
         # Update trinity vector if available
         trinity_data = data.get("trinity_vector")
         if trinity_data and len(trinity_data) == 3:
             node.trinity_vector = TrinityVector(*trinity_data)
-        
+
         # Update other properties
         node.modal_status = data.get("modal_status", node.modal_status)
         node.data_payload = data.get("data_payload", node.data_payload)
         node.relationships = data.get("relationships", node.relationships)
         node.timestamps = data.get("timestamps", node.timestamps)
-        
+
         return node
-    
+
     def calculate_metaphysical_necessity(self) -> float:
         """Calculate metaphysical necessity based on 3PDN principles.
-        
+
         Returns:
             Necessity score [0-1]
         """
         # Extract trinity values
         e, g, t = self.trinity_vector.to_tuple()
-        
+
         # Calculate coherence
         coherence = self.trinity_vector.calculate_coherence()
-        
+
         # Calculate necessity factors
         stability = self.orbit_properties.get("in_set", False)
         stability_factor = 0.9 if stability else 0.5
-        
+
         domain_factor = .9 if self.trinitarian_domain == DomainType.TRANSCENDENTAL else 0.7
-        
+
         # Compute necessity score
         necessity = (
             (e * 0.3) +  # Existence component
@@ -50571,29 +50571,29 @@ class OntologicalNode:
             (stability_factor * 0.05) +  # Stability component
             (domain_factor * 0.05)  # Domain component
         )
-        
+
         return max(0.0, min(1.0, necessity))
-    
+
     def is_aligned_with_resurrection(self) -> bool:
         """Determine if node aligns with resurrection principle.
-        
+
         Returns:
             True if aligned with resurrection metaphysics
         """
         # Calculate resurrection alignment
         resurrection_factor = self.calculate_metaphysical_necessity()
-        
+
         # Check trinity values
         e, g, t = self.trinity_vector.to_tuple()
-        
+
         # Resurrection principle requires high existence and truth
         if e > 0.8 and t > 0.8 and resurrection_factor > 0.75:
             return True
-            
+
         # Special case: nodes in Mandelbrot set with high goodness
         if self.orbit_properties.get("in_set", False) and g > 0.8:
             return True
-            
+
         return False
 
 --- END OF FILE subsystems/thonoc/fractal_orbital/ontological_node_class.py ---
@@ -51084,7 +51084,7 @@ class AxiomaticProofEngine:
 
     def construct_proof(self, primary_claim: str, counter_claims: List[str]) -> Dict[str, Any]:
         self.logger.info(f"Attempting to construct proof for: '{primary_claim}'")
-        
+
         primary_expr, correspondence_map = self._formalize_claim(primary_claim)
         primary_validation = self._validate_coherence(primary_claim, primary_expr)
         primary_invariants_check = self._check_invariants()
@@ -51159,15 +51159,15 @@ from typing import Dict, Any, Optional, List, Tuple
 
 class ThonocMathematicalCore:
     """Mathematical computation engine for symbolic operations."""
-    
+
     def __init__(self):
         self.precision = 1e-10
         self.max_iterations = 1000
-    
+
     def compute(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """Execute mathematical operations on input data."""
         return {"result": data, "status": "computed"}
-    
+
     def symbolic_evaluate(self, expression: str) -> float:
         """Evaluate symbolic mathematical expressions."""
         try:
@@ -51177,16 +51177,16 @@ class ThonocMathematicalCore:
 
 class FractalNavigator:
     """Fractal space navigation and computation system."""
-    
+
     def __init__(self, config: Dict[str, Any]):
         self.config = config
         self.max_iterations = config.get("max_iterations", 100)
         self.escape_radius = config.get("escape_radius", 2.0)
-    
+
     def navigate(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """Navigate fractal space using provided coordinates."""
         return {"position": data, "iterations": self.max_iterations}
-    
+
     def compute_orbit(self, z_initial: complex) -> List[complex]:
         """Compute fractal orbital trajectory."""
         orbit = [z_initial]
@@ -51200,62 +51200,62 @@ class FractalNavigator:
 
 class ModalInferenceEngine:
     """Modal logic inference and reasoning system."""
-    
+
     def __init__(self):
         self.modal_operators = ['necessary', 'possible', 'impossible']
         self.inference_rules = {}
-    
+
     def infer(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """Execute modal inference on logical propositions."""
         return {"inference": data, "modal_type": "possible"}
-    
+
     def validate_proposition(self, proposition: str) -> bool:
         """Validate logical proposition structure."""
         return len(proposition) > 0
 
 class TrinityPredictionEngine:
     """Trinity-based prediction and forecasting system."""
-    
+
     def __init__(self, config: Dict[str, Any]):
         self.config = config
         self.prior_path = config.get("prior_path", "")
-    
+
     def predict(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """Generate Trinity-enhanced predictions."""
         return {"prediction": data, "confidence": 0.75}
-    
+
     def update_priors(self, evidence: Dict[str, Any]) -> bool:
         """Update Bayesian priors with new evidence."""
         return True
 
 class FractalKnowledgeStore:
     """Persistent fractal-indexed knowledge storage system."""
-    
+
     def __init__(self, config: Dict[str, Any]):
         self.config = config
         self.storage_path = config.get("storage_path", "knowledge_store.jsonl")
         self.index = {}
-    
+
     def store(self, data: Dict[str, Any]) -> str:
         """Store knowledge with fractal indexing."""
         key = str(uuid.uuid4())
         self.index[key] = data
         return key
-    
+
     def retrieve(self, key: str) -> Optional[Dict[str, Any]]:
         """Retrieve knowledge by fractal index."""
         return self.index.get(key)
 
 class ThonocVerifier:
     """Verification system for logical consistency and validity."""
-    
+
     def __init__(self):
         self.verification_rules = []
-    
+
     def verify(self, data: Dict[str, Any]) -> bool:
         """Verify data against logical consistency rules."""
         return True
-    
+
     def validate_trinity_coherence(self, trinity_vector: Dict[str, float]) -> bool:
         """Validate Trinity vector coherence."""
         return all(0 <= v <= 1 for v in trinity_vector.values())
@@ -51339,7 +51339,7 @@ class ThonocVerifier:
             if prompt:
                 logging.warning(f"No specific action found. Treating generic prompt as a query.")
                 return self.process_query(prompt)
-            
+
             raise NotImplementedError(f"Action '{action}' is not implemented in ThonocCore.")
 
 --- END OF FILE subsystems/thonoc/symbolic_engine/thonoc_core.py ---
@@ -51376,7 +51376,7 @@ class Application(LogosExpr):
 class LambdaEngine:
     def __init__(self):
         self.evaluator = self.Evaluator(self)
-    
+
     def substitute(self, expr, var_name, value):
         if isinstance(expr, Variable): return value if expr.name == var_name else expr
         if isinstance(expr, Value): return expr
@@ -51432,7 +51432,7 @@ class TrinityVector:
 
     def to_tuple(self) -> Tuple[float, float, float]:
         return (self.existence, self.goodness, self.truth)
-    
+
     # aliasing to_tuple for consistency with OntologicalNode
     def as_tuple(self) -> Tuple[float, float, float]:
         return self.to_tuple()
@@ -51446,7 +51446,7 @@ class TrinityVector:
         g = min(1, c.imag if isinstance(c.imag, float) else 1)
         t = min(1, abs(c.imag))
         return cls(e, g, t)
-    
+
     # --- NEW METHODS REQUIRED BY OntologicalNode ---
     def calculate_coherence(self) -> float:
         """Calculates the coherence of the vector."""
@@ -51599,4 +51599,3 @@ class ConcreteModalBridge(IModalBridge):
 
 
 --- END OF FILE subsystems/thonoc/symbolic_engine/_backup/thonoc_logic_connector.py ---
-

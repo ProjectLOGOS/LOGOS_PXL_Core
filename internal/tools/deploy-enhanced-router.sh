@@ -66,7 +66,7 @@ docker-compose build tool-router
 if [ "$USE_REDIS" = "true" ]; then
     echo "Starting Redis for distributed rate limiting..."
     docker-compose up -d redis
-    
+
     # Wait for Redis to be ready
     echo "Waiting for Redis to be ready..."
     timeout 30 bash -c 'until docker-compose exec redis redis-cli ping; do sleep 1; done'
@@ -123,7 +123,7 @@ if [ -n "$SIGNING_SECRET" ]; then
     if command -v jq &> /dev/null && [ -f "tools/sign-route.sh" ]; then
         SIGN_TEST=$(echo '{"tool":"tetragnos","args":{"op":"ping"},"proof_token":{"token":"sign-test"}}' | \
             SIGNING_SECRET="$SIGNING_SECRET" TOOL_ROUTER_URL=http://localhost:8071 bash tools/sign-route.sh 2>/dev/null || echo "FAILED")
-        
+
         if [[ "$SIGN_TEST" == "FAILED" ]]; then
             echo -e "${YELLOW}⚠️  HMAC signing test failed (may be expected if upstream tools not running)${NC}"
         else

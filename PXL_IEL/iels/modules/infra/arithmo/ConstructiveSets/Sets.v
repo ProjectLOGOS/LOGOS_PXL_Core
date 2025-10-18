@@ -1,5 +1,5 @@
 (** * Constructive Sets Domain - Finite Sets with Decidable Operations
-    
+
     ArithmoPraxis constructive set theory with finite sets as lists,
     decidable membership, and choice-free constructions.
 *)
@@ -39,7 +39,7 @@ Definition set (A : Type) : Type := list A.
 Fixpoint mem {A : Type} `{DecEq A} (x : A) (s : set A) : bool :=
   match s with
   | [] => false
-  | y :: ys => 
+  | y :: ys =>
     match deq x y with
     | left _ => true
     | right _ => mem x ys
@@ -60,7 +60,7 @@ Definition insert {A : Type} `{DecEq A} (x : A) (s : set A) : set A :=
 Fixpoint remove {A : Type} `{DecEq A} (x : A) (s : set A) : set A :=
   match s with
   | [] => []
-  | y :: ys => 
+  | y :: ys =>
     match deq x y with
     | left _ => remove x ys
     | right _ => y :: (remove x ys)
@@ -108,7 +108,7 @@ Definition map_type (A B : Type) : Type := list (A * B).
 Fixpoint lookup {A B : Type} `{DecEq A} (k : A) (m : map_type A B) : option B :=
   match m with
   | [] => None
-  | (k', v) :: rest => 
+  | (k', v) :: rest =>
     match deq k k' with
     | left _ => Some v
     | right _ => lookup k rest
@@ -123,7 +123,7 @@ Definition map_insert {A B : Type} `{DecEq A} (k : A) (v : B) (m : map_type A B)
 Fixpoint map_remove {A B : Type} `{DecEq A} (k : A) (m : map_type A B) : map_type A B :=
   match m with
   | [] => []
-  | (k', v) :: rest => 
+  | (k', v) :: rest =>
     match deq k k' with
     | left _ => map_remove k rest
     | right _ => (k', v) :: (map_remove k rest)
@@ -249,7 +249,7 @@ Definition test_diff : set nat := diff set1 set2.
 (** ** Map Examples *)
 
 (** Example map *)
-Definition test_map : map_type nat nat := 
+Definition test_map : map_type nat nat :=
   [(1, 100); (2, 200); (3, 300)].
 
 (** Test lookup *)
@@ -261,7 +261,7 @@ Definition test_lookup_2 : option nat := lookup 5 test_map.
 (** Export main operations *)
 Definition empty_set (A : Type) : set A := [].
 Definition singleton {A : Type} `{DecEq A} (x : A) : set A := [x].
-Definition is_empty (A : Type) (s : set A) : bool := 
+Definition is_empty (A : Type) (s : set A) : bool :=
   match s with
   | [] => true
   | _ => false

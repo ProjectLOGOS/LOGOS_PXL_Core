@@ -273,7 +273,7 @@
                 height: 100vh;
                 border-radius: 0;
             }
-            
+
             .message {
                 max-width: 85%;
             }
@@ -282,7 +282,7 @@
 </head>
 <body>
     <div class="connection-status" id="connectionStatus">Connecting...</div>
-    
+
     <div class="chat-container">
         <div class="chat-header">
             <div class="status-indicator"></div>
@@ -318,7 +318,7 @@
                 this.isRecording = false;
                 this.mediaRecorder = null;
                 this.recordedChunks = [];
-                
+
                 this.initializeElements();
                 this.connect();
                 this.setupEventListeners();
@@ -339,9 +339,9 @@
             connect() {
                 const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
                 const wsUrl = `${wsProtocol}//${window.location.host}/ws/${this.sessionId}`;
-                
+
                 this.ws = new WebSocket(wsUrl);
-                
+
                 this.ws.onopen = () => {
                     console.log('Connected to LOGOS Chat');
                     this.updateConnectionStatus(true);
@@ -508,7 +508,7 @@
                     this.isRecording = true;
                     this.voiceButton.classList.add('recording');
                     this.voiceButton.innerHTML = '🔴';
-                    
+
                     // Show recording feedback
                     this.displayMessage({
                         type: 'system',
@@ -531,7 +531,7 @@
 
                 this.mediaRecorder.stop();
                 this.mediaRecorder.stream.getTracks().forEach(track => track.stop());
-                
+
                 this.isRecording = false;
                 this.voiceButton.classList.remove('recording');
                 this.voiceButton.innerHTML = '🎤';
@@ -539,7 +539,7 @@
 
             processRecording() {
                 const blob = new Blob(this.recordedChunks, { type: 'audio/wav' });
-                
+
                 // For now, show a placeholder message
                 this.displayMessage({
                     type: 'system',

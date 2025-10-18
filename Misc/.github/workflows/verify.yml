@@ -1,0 +1,40 @@
+name: verify
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  coq:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: ~/.opam
+          key: opam-${{ runner.os }}-${{ hashFiles('**/*.opam','**/_CoqProject') }}
+          restore-keys: opam-${{ runner.os }}-
+      - name: Set up Coq 8.20.1
+        uses: coq-community/docker-coq-action@v1
+        with:
+          custom_image: coqorg/coq:8.20.1
+          script: |
+            set -eux
+            apt-get update && apt-get install -y python3 python3-pip
+            python3 -m pip install -U -r requirements-dev.txt
+            make verify-kernel
+            make docs-index
+            make coq-test
+      - name: Pre-commit (CI)
+        run: |
+          python3 -m pip install -U pre-commit
+          pre-commit run --all-files
+      - name: Upload COQ_INDEX.md
+        uses: actions/upload-artifact@v4
+        with:
+          name: coq-index
+          path: docs/COQ_INDEX.md
+      - name: Upload kernel hash
+        uses: actions/upload-artifact@v4
+        with:
+          name: kernel-hash
+          path: out/kernel_hash.txt

@@ -43,7 +43,7 @@ def index():
     <div id="status">Loading...</div>
     <script>
     fetch('/status').then(r=>r.json()).then(s=>{
-      document.getElementById('status').innerHTML = 
+      document.getElementById('status').innerHTML =
         `Kernel: ${s.kernel_hash}<br>
          ARCHON: ${s.archon_ok ? 'OK' : 'DOWN'}<br>
          LOGOS: ${s.logos_ok ? 'OK' : 'DOWN'}<br>

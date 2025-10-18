@@ -34,19 +34,19 @@ def index():
     <input type="text" id="command" placeholder="Enter task command (e.g., 'test_task')" style="width:400px">
     <button onclick="sendCommand()">Send to ARCHON</button>
     <div id="result" style="margin-top:20px; padding:10px; border:1px solid #ccc; min-height:100px;"></div>
-    
+
     <script>
     fetch('/status').then(r=>r.json()).then(s=>{
-      document.getElementById('status').innerHTML = 
+      document.getElementById('status').innerHTML =
         `ARCHON: ${s.archon_ok ? 'OK ✅' : 'DOWN ❌'}`;
     });
-    
+
     async function sendCommand() {
       const cmd = document.getElementById('command').value.trim();
       if (!cmd) return;
-      
+
       document.getElementById('result').innerHTML = 'Sending...';
-      
+
       try {
         const response = await fetch('/ask', {
           method: 'POST',
@@ -54,7 +54,7 @@ def index():
           body: JSON.stringify({text: cmd})
         });
         const result = await response.json();
-        document.getElementById('result').innerHTML = 
+        document.getElementById('result').innerHTML =
           '<pre>' + JSON.stringify(result, null, 2) + '</pre>';
       } catch(e) {
         document.getElementById('result').innerHTML = 'Error: ' + e.message;

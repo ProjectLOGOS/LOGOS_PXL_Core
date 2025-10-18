@@ -100,8 +100,8 @@ Theorem ax_ident_refl  : forall x:Obj, x ⧟ x.
 Proof. intros x. reflexivity. Qed.
 
 Theorem ax_ident_symm  : forall x y:Obj, x ⧟ y -> y ⧟ x.
-Proof. 
-  intros x y H. 
+Proof.
+  intros x y H.
   unfold Ident in H.
   unfold Ident.
   apply symmetry_helper.
@@ -109,8 +109,8 @@ Proof.
 Qed.
 
 Theorem ax_ident_trans : forall x y z:Obj, x ⧟ y -> y ⧟ z -> x ⧟ z.
-Proof. 
-  intros x y z Hxy Hyz. 
+Proof.
+  intros x y z Hxy Hyz.
   unfold Ident in Hxy, Hyz.
   unfold Ident.
   rewrite Hxy.
@@ -135,11 +135,11 @@ Qed.
 
 Theorem A2_noncontradiction : □ (forall x y:Obj, ∼ (x ⧟ y /\ x ⇎ y)).
 Proof.
-  intros x y [Hid Hneq]. 
+  intros x y [Hid Hneq].
   unfold Ident in Hid.
-  unfold NonEquiv in Hneq. 
+  unfold NonEquiv in Hneq.
   rewrite Hid in Hneq.
-  apply Hneq. 
+  apply Hneq.
   reflexivity.
 Qed.
 

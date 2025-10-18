@@ -1,5 +1,5 @@
 (** * Twin Primes Extraction - Simplified Infrastructure Version
-    
+
     Computational witness generation for twin prime predicates.
 *)
 
@@ -21,7 +21,7 @@ Definition check_twin (p : nat) : bool :=
 Fixpoint find_twin_upto (n : nat) : option nat :=
   match n with
   | 0 => None
-  | 1 => None  
+  | 1 => None
   | 2 => None
   | S n' => if check_twin n then Some n else find_twin_upto n'
   end.
@@ -32,7 +32,7 @@ Fixpoint extract_twins_upto (n : nat) : list nat :=
   | 0 => []
   | 1 => []
   | 2 => []
-  | S n' => 
+  | S n' =>
     let rest := extract_twins_upto n' in
     if check_twin n then n :: rest else rest
   end.
@@ -96,7 +96,7 @@ Admitted.
 (** ** Modal Extraction *)
 
 (** Modal witness: if ◇(Twin p) then witness extraction possible *)
-Definition modal_extract_twin (n : nat) : 
+Definition modal_extract_twin (n : nat) :
   ArithmoPraxis_ModalWrap.Possibly (exists p, p <= n /\ Twin p) ->
   {p | p <= n /\ Twin p} + {forall p, p <= n -> ~Twin p}.
 Proof.

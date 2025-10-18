@@ -42,12 +42,12 @@ def test_route_tetragnos_and_thonoc(monkeypatch: pytest.MonkeyPatch):
     # Set very high rate limits to avoid test interference
     monkeypatch.setenv("RATE_LIMIT_REQS", "10000")
     monkeypatch.setenv("RATE_LIMIT_WINDOW_SECS", "60")
-    
+
     # Clear rate limiter buckets to avoid interference
     import services.tool_router.app as router_mod  # type: ignore
     importlib.reload(router_mod)
     router_mod._buckets.clear()
-    
+
     app = _import_router_app()
     client = TestClient(app)
 
@@ -69,7 +69,7 @@ def test_route_tetragnos_and_thonoc(monkeypatch: pytest.MonkeyPatch):
     # Mock requests module with exceptions
     class MockRequestException(Exception):
         pass
-    
+
     mock_requests = type(
         "MockRequests",
         (),

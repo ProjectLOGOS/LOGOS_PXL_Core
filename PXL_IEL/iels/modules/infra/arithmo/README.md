@@ -17,12 +17,12 @@ modules/infra/arithmo/
 │   └── Goldbach/           # Example: Goldbach conjecture verification
 │       ├── Spec.v          # Classical + modal forms with bridge axioms
 │       ├── Extract.v       # Witness finder for prime pairs
-│       ├── Verify.v        # Verification of witness correctness  
+│       ├── Verify.v        # Verification of witness correctness
 │       ├── Scan.v          # vm_compute testing + CSV logging
 │       ├── Invariants.v    # Invariant miners (NW/CF/BL/gap constraints)
 │       └── ScanFeatures.v  # Closure harness and automated analysis
 ├── BooleanLogic/           # SAT solving, BDD manipulation
-├── ConstructiveSets/       # Axiom-free set theory, finite constructions  
+├── ConstructiveSets/       # Axiom-free set theory, finite constructions
 ├── CategoryTheory/         # Objects, morphisms, functors, topoi
 ├── TypeTheory/            # Dependent types, universes, HoTT
 ├── NumberTheory/          # Primes, modular arithmetic, cryptography
@@ -84,7 +84,7 @@ Results: **44/50 closure rate, NW+gapK4 best performer**
 **ArithmoPraxis** represents LOGOS's unique approach to **infrastructure mathematics**:
 
 1. **Modal Foundations**: Mathematical statements expressed in LOGOS modal logic
-2. **Constructive Verification**: Computational witnesses generated through Coq programs  
+2. **Constructive Verification**: Computational witnesses generated through Coq programs
 3. **Formal Bridges**: Proved connections between modal assertions and classical theorems
 4. **Domain Generality**: Unified framework spanning all mathematical disciplines
 5. **Auditable Evidence**: Verifiable computational logs for trustworthy mathematical AI
@@ -94,7 +94,7 @@ This creates the **first mathematically complete infrastructure** for modal reas
 ## Next Steps
 
 - **Domain Expansion**: Implement full Boolean logic and set theory modules
-- **Cross-Domain Integration**: Category theory bridges between mathematical areas  
+- **Cross-Domain Integration**: Category theory bridges between mathematical areas
 - **Performance Scaling**: Optimize for large-scale mathematical verification
 - **PXL Integration**: Complete connection to verified PXL modal framework
 - **Applications**: Cryptographic protocols, theorem proving, automated mathematics

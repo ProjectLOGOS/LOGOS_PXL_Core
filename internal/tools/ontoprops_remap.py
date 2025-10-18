@@ -1,6 +1,8 @@
-import json, sys
+import json
+import sys
+
 src, out = sys.argv[1], sys.argv[2]
-with open(src,"r",encoding="utf-8") as f: data=json.load(f)
+with open(src,encoding="utf-8") as f: data=json.load(f)
 
 props = data.get("properties",{})
 gc = data.get("group_classifications",{})

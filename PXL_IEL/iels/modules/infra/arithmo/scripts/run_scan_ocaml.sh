@@ -22,7 +22,7 @@ Import ScanFeatures.
 Fixpoint extract_range (k : Nat) : list (list bool) :=
   match k with
   | 0 => nil
-  | S k' => 
+  | S k' =>
       let n := 2 * (k' + 2) in
       (extract_features n) :: (extract_range k')
   end.
@@ -50,11 +50,11 @@ for ((i=4; i<=200; i+=2)); do
     # Simple heuristic estimates for demonstration
     has_pair="true"
     nw_win=$( [ $((i % 4)) -eq 0 ] && echo "true" || echo "false" )
-    cf_next=$( [ $((i % 6)) -eq 0 ] && echo "true" || echo "false" )  
+    cf_next=$( [ $((i % 6)) -eq 0 ] && echo "true" || echo "false" )
     bl_next=$( [ $((i % 8)) -eq 0 ] && echo "true" || echo "false" )
     gap_le_2=$( [ $i -lt 50 ] && echo "true" || echo "false" )
     gap_le_4="true"
-    
+
     echo "$i,$has_pair,$nw_win,$cf_next,$bl_next,$gap_le_2,$gap_le_4" >> "$OUTPUT_FILE"
 done
 

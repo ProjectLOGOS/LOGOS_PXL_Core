@@ -22,12 +22,12 @@ def test_unsupported_tool_rejected(monkeypatch):
     # Set very high rate limits to avoid test interference
     monkeypatch.setenv("RATE_LIMIT_REQS", "10000")
     monkeypatch.setenv("RATE_LIMIT_WINDOW_SECS", "60")
-    
+
     # Clear rate limiter buckets to avoid interference
     import services.tool_router.app as router_mod  # type: ignore
     importlib.reload(router_mod)
     router_mod._buckets.clear()
-    
+
     app = _import_router_app()
     client = TestClient(app)
 
@@ -52,12 +52,12 @@ def test_missing_proof_token_fields(monkeypatch):
     # Set very high rate limits to avoid test interference
     monkeypatch.setenv("RATE_LIMIT_REQS", "10000")
     monkeypatch.setenv("RATE_LIMIT_WINDOW_SECS", "60")
-    
+
     # Clear rate limiter buckets to avoid interference
     import services.tool_router.app as router_mod  # type: ignore
     importlib.reload(router_mod)
     router_mod._buckets.clear()
-    
+
     app = _import_router_app()
     client = TestClient(app)
 
@@ -82,7 +82,7 @@ def test_valid_tools_accepted(monkeypatch):
     # Clear rate limiter buckets
     import services.tool_router.app as router_mod  # type: ignore
     router_mod._buckets.clear()
-    
+
     app = _import_router_app()
     client = TestClient(app)
 

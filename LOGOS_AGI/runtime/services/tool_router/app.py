@@ -9,23 +9,29 @@ FastAPI Tool Router with:
 - Per-tool circuit breaker
 """
 from __future__ import annotations
-import os
-import time
-import json
-import hmac
-import uuid
-import math
-import random
-import typing as t
+
 import hashlib
+import hmac
+import json
 import logging
-from dataclasses import dataclass, field
+import os
+import random
+import time
+import typing as t
+import uuid
+from dataclasses import dataclass
 
 import requests
 from fastapi import FastAPI, Header, HTTPException, Request, status
 from fastapi.responses import JSONResponse, PlainTextResponse
+from prometheus_client import (
+    CONTENT_TYPE_LATEST,
+    CollectorRegistry,
+    Counter,
+    Histogram,
+    generate_latest,
+)
 from pydantic import BaseModel, Field, ValidationError, field_validator
-from prometheus_client import Counter, Histogram, CollectorRegistry, generate_latest, CONTENT_TYPE_LATEST
 
 # -------- Config --------
 WEB_URL = os.getenv("WEB_URL", "http://web:8000")
@@ -251,10 +257,10 @@ async def core_middleware(request: Request, call_next):
     resp.headers["X-Request-ID"] = req_id
     # structured access log
     rec = logger.makeRecord(logger.name, logging.INFO, "", 0, "access", args=(), exc_info=None)
-    setattr(rec, "request_id", req_id)
-    setattr(rec, "path", request.url.path)
-    setattr(rec, "method", request.method)
-    setattr(rec, "status", getattr(resp, "status_code", 0))
+    rec.request_id = req_id
+    rec.path = request.url.path
+    rec.method = request.method
+    rec.status = getattr(resp, "status_code", 0)
     logger.handle(rec)
     MET_REQS.labels(endpoint=request.url.path, method=request.method, status=str(getattr(resp, "status_code", 0))).inc()
     return resp

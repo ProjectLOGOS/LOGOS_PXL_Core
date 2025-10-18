@@ -5,23 +5,21 @@ Provides authentication, rate limiting, provenance headers, and request routing
 
 import os
 import time
-import yaml
-import structlog
-from typing import Dict, Any, Optional
-from datetime import datetime, timedelta
 
+import httpx
+import structlog
 import uvicorn
-from fastapi import FastAPI, Request, Response, HTTPException, Depends
+import yaml
+from fastapi import Depends, FastAPI, HTTPException, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from jose import JWTError, jwt
+from prometheus_client import CONTENT_TYPE_LATEST, Counter, Histogram, generate_latest
 from pydantic import BaseModel
-from jose import jwt, JWTError
 from slowapi import Limiter, _rate_limit_exceeded_handler
-from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
-import httpx
-from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
+from slowapi.util import get_remote_address
 
 # Configure structured logging
 structlog.configure(
@@ -45,7 +43,7 @@ structlog.configure(
 logger = structlog.get_logger()
 
 # Load configuration
-with open('config.yaml', 'r') as f:
+with open('config.yaml') as f:
     config = yaml.safe_load(f)
 
 # Initialize FastAPI app
@@ -93,7 +91,7 @@ class HealthResponse(BaseModel):
     build_sha: str
     v4_sha: str
 
-async def verify_token(credentials: Optional[HTTPAuthorizationCredentials] = Depends(security)):
+async def verify_token(credentials: HTTPAuthorizationCredentials | None = Depends(security)):
     """Verify JWT token for authenticated endpoints"""
     if not config['auth']['enabled']:
         return None
@@ -199,7 +197,7 @@ async def proxy_request(service_name: str, path: str, request: Request) -> Respo
 # Route handlers
 @app.api_route("/v1/proofs", methods=["POST"])
 @limiter.limit(f"{config['rate_limit']['max_requests']}/minute")
-async def proofs(request: Request, token: Optional[dict] = Depends(verify_token)):
+async def proofs(request: Request, token: dict | None = Depends(verify_token)):
     return await proxy_request('pxl_core', '/v1/proofs', request)
 
 @app.api_route("/v1/proofs/{proof_id}", methods=["GET"])
@@ -209,12 +207,12 @@ async def get_proof(proof_id: str, request: Request):
 
 @app.api_route("/v1/overlays/chrono", methods=["POST"])
 @limiter.limit(f"{config['rate_limit']['max_requests']}/minute")
-async def chrono_overlay(request: Request, token: Optional[dict] = Depends(verify_token)):
+async def chrono_overlay(request: Request, token: dict | None = Depends(verify_token)):
     return await proxy_request('overlay_chrono', '/v1/overlays/chrono', request)
 
 @app.api_route("/v1/overlays/v4", methods=["POST"])
 @limiter.limit(f"{config['rate_limit']['max_requests']}/minute")
-async def v4_overlay(request: Request, token: Optional[dict] = Depends(verify_token)):
+async def v4_overlay(request: Request, token: dict | None = Depends(verify_token)):
     return await proxy_request('overlay_v4', '/v1/overlays/v4', request)
 
 @app.api_route("/v1/metrics", methods=["GET"])

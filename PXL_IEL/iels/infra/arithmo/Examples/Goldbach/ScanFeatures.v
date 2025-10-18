@@ -38,7 +38,7 @@ Module ScanFeatures.
     match n with
     | 0 | 1 => false
     | 2 => true
-    | S (S (S _)) => 
+    | S (S (S _)) =>
         if Nat.even n then false  (* even numbers > 2 are not prime *)
         else trial_prime n (sqrt_approx n)
     end.
@@ -102,9 +102,9 @@ Module ScanFeatures.
   Definition adjust_witness (n : Nat) : bool :=
     match goldbach_witness n with
     | Some (p1, p2) =>
-        let check_pair (a b : Nat) := 
+        let check_pair (a b : Nat) :=
             Nat.eqb (a + b) (n + 2) && is_prime a && is_prime b in
-        check_pair (p1+2) p2 || check_pair p1 (p2+2) || 
+        check_pair (p1+2) p2 || check_pair p1 (p2+2) ||
         check_pair (p1-2) (p2+2) || check_pair (p1+2) (p2-2)
     | None => false
     end.
@@ -154,7 +154,7 @@ Module ScanFeatures.
                     | Some p => check_witness n p
                     | None => false
                     end in
-    mkFeat n 
+    mkFeat n
            (has_w && verified)
            (NW n)
            (CF n)
@@ -170,7 +170,7 @@ Module ScanFeatures.
   Fixpoint closure_score (k : Nat) : Nat :=
     match k with
     | 0 => 0
-    | S k' => 
+    | S k' =>
         let n := 2 * (k' + 2) in  (* even numbers starting from 4 *)
         let f := mk_feat n in
         let score_rest := closure_score k' in

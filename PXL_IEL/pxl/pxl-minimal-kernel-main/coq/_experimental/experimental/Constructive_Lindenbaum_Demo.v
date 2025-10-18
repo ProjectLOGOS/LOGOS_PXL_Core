@@ -6,7 +6,7 @@ Import ListNotations.
 (* Simplified modal logic formulas for demonstration *)
 Inductive form : Type :=
 | Bot : form
-| Atom : nat -> form  
+| Atom : nat -> form
 | Neg : form -> form
 | Impl : form -> form -> form
 | Conj : form -> form -> form
@@ -47,7 +47,7 @@ Fixpoint enum (n : nat) : form :=
   | 7 => Impl Bot (Atom 0)
   | 8 => Conj Bot (Atom 0)
   | 9 => Disj Bot (Atom 0)
-  | S (S (S (S (S (S (S (S (S (S n'))))))))) => 
+  | S (S (S (S (S (S (S (S (S (S n'))))))))) =>
     (* For larger n, cycle through basic patterns *)
     match n' mod 4 with
     | 0 => Atom (n' / 4)
@@ -69,10 +69,10 @@ Admitted.
 Fixpoint provable_upto (k : nat) (phi : form) : bool :=
   match k with
   | 0 => false
-  | S k' => 
-    match phi with 
+  | S k' =>
+    match phi with
     | Impl Bot _ => true  (* Ex falso axiom *)
-    | Impl psi (Impl _ psi') => 
+    | Impl psi (Impl _ psi') =>
         if form_eq_dec psi psi' then true else provable_upto k' phi  (* K axiom pattern *)
     | _ => provable_upto k' phi
     end
@@ -84,7 +84,7 @@ Lemma provable_upto_sound : forall k phi,
 Proof.
   induction k; intros phi H.
   - discriminate.
-  - simpl in H. 
+  - simpl in H.
     destruct phi; try (apply IHk; assumption).
     (* Handle Impl case *)
     destruct phi1; try (apply IHk; assumption).
@@ -187,7 +187,7 @@ Proof.
         subst phi. destruct (enum n); discriminate.
       * (* phi = Neg (enum n) and Neg phi in old set *)
         subst phi. apply IHn. exists (enum n). split; assumption.
-      * (* phi in old set and Neg phi = Neg (enum n) *) 
+      * (* phi in old set and Neg phi = Neg (enum n) *)
         subst phi. apply IHn. exists (Neg (enum n)). split; assumption.
       * (* Both in old set *)
         apply IHn. exists phi. split; assumption.
@@ -227,7 +227,7 @@ Admitted.
 Definition set := form -> Prop.
 Definition In_set (G : set) (p : form) : Prop := G p.
 
-Definition consistent (G : set) : Prop := 
+Definition consistent (G : set) : Prop :=
   ~ (exists p, G p /\ G (Neg p)).
 
 Record mct (G : set) : Prop := {
@@ -268,16 +268,16 @@ Definition can_R (Gamma Delta : set) : Prop :=
 
 (* The constructive replacement *)
 Theorem constructive_lindenbaum :
-  forall Gamma phi (HGamma : mct Gamma), 
+  forall Gamma phi (HGamma : mct Gamma),
   ~ In_set Gamma (Box phi) ->
-  exists Delta (HDelta : mct Delta), 
+  exists Delta (HDelta : mct Delta),
     can_R Gamma Delta /\ In_set Delta (Neg phi).
 Proof.
   intros Gamma phi HGamma HnBox.
-  
+
   (* Construct base set with Neg phi *)
   set (base := [Neg phi]).
-  
+
   (* Prove base is consistent *)
   assert (Hbase_cons : fs_consistent base).
   { intro H. destruct H as [psi [H1 H2]].
@@ -285,16 +285,16 @@ Proof.
     destruct H1 as [H1|H1]; [|contradiction].
     destruct H2 as [H2|H2]; [|contradiction].
     subst psi. destruct phi; discriminate. }
-  
+
   (* Build the limit extension *)
   set (Delta := limit_set base).
-  
+
   (* Prove Delta is mct - requires additional lemmas *)
   assert (HDelta : mct Delta).
   { apply limit_to_mct; [assumption | | ].
     - (* Theorem closure *) admit.
     - (* Modus ponens *) admit. }
-  
+
   exists Delta, HDelta.
   split.
   - (* Canonical accessibility *)
@@ -312,7 +312,7 @@ Admitted.
    2. The construction uses decidable enumeration and bounded proof search
    3. Stage-wise extension ensures totality and consistency
    4. The limit satisfies all mct properties constructively
-   
-   The admits above represent lemmas that would be fully proven in the 
+
+   The admits above represent lemmas that would be fully proven in the
    complete implementation, but the core constructive machinery is in place.
 *)

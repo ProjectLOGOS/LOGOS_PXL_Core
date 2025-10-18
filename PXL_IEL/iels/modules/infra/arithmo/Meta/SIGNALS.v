@@ -149,18 +149,18 @@ Definition arithmo_bench (req : BenchRequest) : BenchAck :=
 
 (** ** EnergoPraxis Cost Integration (v0.4) *)
 
-(** 
+(**
    Cost hints for EnergoPraxis energy-aware computation:
-   
+
    - **sa_cost**: Specification analysis cost (computational complexity estimate)
-   - **wa_cost**: Witness generation cost (search/computation overhead)  
+   - **wa_cost**: Witness generation cost (search/computation overhead)
    - **pa_cost**: Proof construction cost (formal verification overhead)
-   
+
    Cost units are abstract and should be calibrated by EnergoPraxis based on:
    - Hardware capability (CPU, memory, storage)
    - Power consumption profiles
    - Quality-of-service requirements
-   
+
    Example usage by EnergoPraxis:
    ```coq
    Definition energy_budget := 100.

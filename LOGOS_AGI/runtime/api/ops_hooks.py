@@ -4,9 +4,9 @@ Ops hooks: Prometheus counters for allow/deny, proof time, router coverage.
 Artifact provenance: proof-hash per action.
 """
 
-import time
 import hashlib
 import hmac
+import time
 
 # Simulate deploy key for signing
 DEPLOY_KEY = b'secret_deploy_key'
@@ -47,7 +47,7 @@ def simulate_ops():
         log_decision(f"action_{i}", decision, proof_time, coverage)
         # Emit attestation
         emit_attestation("b39a8d8", "conservative_theorem", provenance[-1]["proof_hash"], "coqchk_passed")
-    
+
     print(f"Counters: {counters}")
     print(f"Provenance sample: {provenance[:5]}")
 

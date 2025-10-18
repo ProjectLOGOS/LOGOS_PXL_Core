@@ -25,9 +25,9 @@ Module ArithmoPraxis_Numbers.
     | S fuel' =>
       match d with
       | 0 | 1 => true
-      | S (S _) => 
-        if divides d n 
-        then Nat.eqb d n 
+      | S (S _) =>
+        if divides d n
+        then Nat.eqb d n
         else trial_divisor fuel' (d-1) n
       end
     end.

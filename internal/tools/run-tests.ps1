@@ -8,22 +8,22 @@ pip install -e .[dev]
 
 if ($LASTEXITCODE -eq 0) {
     Write-Host "✅ Dependencies installed" -ForegroundColor Green
-    
+
     Write-Host "`n🔍 Running linting..." -ForegroundColor Cyan
     ruff check .
-    
+
     if ($LASTEXITCODE -eq 0) {
         Write-Host "✅ Linting passed" -ForegroundColor Green
-        
+
         Write-Host "`n📐 Running type checking..." -ForegroundColor Cyan
         mypy .
-        
+
         if ($LASTEXITCODE -eq 0) {
             Write-Host "✅ Type checking passed" -ForegroundColor Green
-            
+
             Write-Host "`n🧪 Running tests..." -ForegroundColor Cyan
             pytest -q
-            
+
             if ($LASTEXITCODE -eq 0) {
                 Write-Host "`n🎉 ALL TESTS PASSED!" -ForegroundColor Green
             } else {

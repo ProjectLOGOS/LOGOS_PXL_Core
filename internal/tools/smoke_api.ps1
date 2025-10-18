@@ -26,7 +26,7 @@ try {
 
     $authResponse = Invoke-WebRequest -Uri "$BaseUrl/authorize_action" -Method Post -Body $authBody -ContentType "application/json" -UseBasicParsing
     $authData = $authResponse.Content | ConvertFrom-Json
-    
+
     try {
         Write-Host ($authResponse.Content | jq .)
     } catch {

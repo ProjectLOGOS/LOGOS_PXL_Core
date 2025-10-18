@@ -6,7 +6,7 @@ From PXLs Require Import PXLv3.(* Formal definitions for PXL↔CPX bijection *)
 
 
 
-Module ChronoPraxis_PXL_Formal.(* Formal definitions for PXL↔CPX bijection *)(* 
+Module ChronoPraxis_PXL_Formal.(* Formal definitions for PXL↔CPX bijection *)(*
 
 
 

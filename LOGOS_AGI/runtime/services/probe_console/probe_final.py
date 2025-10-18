@@ -53,33 +53,33 @@ def index():
     <body>
     <h1>🚀 LOGOS Probe Console - OPERATIONAL</h1>
     <div id="status">Loading system status...</div>
-    
+
     <h3>Test Commands:</h3>
     <ul>
         <li><code>test logos</code> - Test LOGOS authorization</li>
-        <li><code>test exec</code> - Test Executor health</li> 
+        <li><code>test exec</code> - Test Executor health</li>
         <li><code>authorize [action]</code> - Get proof token</li>
     </ul>
-    
+
     <input type="text" id="cmd" placeholder="Enter command (e.g., 'test logos')" value="test logos">
     <button onclick="sendCommand()">Execute</button>
     <div id="result">Ready for commands...</div>
-    
+
     <script>
     fetch('/status').then(r=>r.json()).then(s=>{
-      document.getElementById('status').innerHTML = 
+      document.getElementById('status').innerHTML =
         `<strong>System Status:</strong><br>
          🔒 Kernel Hash: ${s.kernel_hash.substring(0,16)}...<br>
-         📡 LOGOS API: <span class="${s.logos_ok?'success':'error'}">${s.logos_ok?'✅ ONLINE':'❌ OFFLINE'}</span><br>  
+         📡 LOGOS API: <span class="${s.logos_ok?'success':'error'}">${s.logos_ok?'✅ ONLINE':'❌ OFFLINE'}</span><br>
          ⚡ Executor: <span class="${s.exec_ok?'success':'error'}">${s.exec_ok?'✅ ONLINE':'❌ OFFLINE'}</span>`;
     });
-    
+
     async function sendCommand() {
       const cmd = document.getElementById('cmd').value.trim();
       if (!cmd) return;
-      
+
       document.getElementById('result').innerHTML = '<div class="info">⏳ Processing...</div>';
-      
+
       try {
         const response = await fetch('/ask', {
           method: 'POST',
@@ -87,12 +87,12 @@ def index():
           body: JSON.stringify({text: cmd})
         });
         const result = await response.json();
-        
+
         let html = '<div class="success">✅ Success</div>';
         html += '<pre>' + JSON.stringify(result, null, 2) + '</pre>';
         document.getElementById('result').innerHTML = html;
       } catch(e) {
-        document.getElementById('result').innerHTML = 
+        document.getElementById('result').innerHTML =
           '<div class="error">❌ Error: ' + e.message + '</div>';
       }
     }

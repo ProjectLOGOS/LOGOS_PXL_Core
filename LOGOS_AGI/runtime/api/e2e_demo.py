@@ -4,8 +4,6 @@ E2E Runtime Exercise: Gate a read-only tool through PolicyDemo.run equivalent.
 Log proof token metadata: lemma-id, commit, coqchk stamp.
 """
 
-import time
-import json
 
 # Simulate proof token metadata
 class ProofToken:
@@ -21,7 +19,7 @@ def policy_demo_run(token):
 
 # Read-only tool
 def read_only_tool():
-    with open('README.md', 'r', encoding='utf-8') as f:
+    with open('README.md', encoding='utf-8') as f:
         content = f.read()[:100]  # Read first 100 chars
     print(f"Read-only tool executed: {content}")
     return content

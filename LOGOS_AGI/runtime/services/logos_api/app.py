@@ -3,9 +3,15 @@ Minimal LOGOS Core API.
 Why: Unblock router and chat with a proof-gated token mint and kernel hash check.
 """
 from __future__ import annotations
-import os, time, hmac, hashlib, secrets
-from typing import Any, Dict
-from fastapi import FastAPI, HTTPException, Header
+
+import hashlib
+import hmac
+import os
+import secrets
+import time
+from typing import Any
+
+from fastapi import FastAPI, Header, HTTPException
 from pydantic import BaseModel, Field
 
 API_SIGNING_SECRET = os.getenv("API_SIGNING_SECRET", "")
@@ -16,7 +22,7 @@ app = FastAPI(title="LOGOS Core API", version="0.1.0")
 
 class AuthorizeRequest(BaseModel):
     action: str = Field(..., min_length=1)
-    state: Dict[str, Any] = {}
+    state: dict[str, Any] = {}
 
 class ProofToken(BaseModel):
     token: str

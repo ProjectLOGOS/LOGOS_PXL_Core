@@ -4,15 +4,15 @@ Require Import PXLs.IEL.Infra.ChronoPraxis.Substrate.Bijection
 (* Specialized rewrite lemmas for bijection normalization *)
 Lemma AB_back_fwd : forall x, ChronoMappings.B_to_A (ChronoMappings.A_to_B x) = x.
 Proof.
-  intro x. 
+  intro x.
   (* B_to_A (A_to_B x) = backward (forward x) = x by fg_rewrite *)
-  unfold ChronoMappings.B_to_A, ChronoMappings.A_to_B. 
+  unfold ChronoMappings.B_to_A, ChronoMappings.A_to_B.
   apply (fg_rewrite ChronoMappings.map_AB).
 Qed.
 
 Lemma AB_fwd_back : forall y, ChronoMappings.A_to_B (ChronoMappings.B_to_A y) = y.
 Proof.
-  intro y. 
+  intro y.
   (* A_to_B (B_to_A y) = forward (backward y) = y by gf_rewrite *)
   unfold ChronoMappings.A_to_B, ChronoMappings.B_to_A.
   apply (gf_rewrite ChronoMappings.map_AB).
@@ -52,8 +52,8 @@ Ltac normalize_time :=
 (* Additional tactical support for composition reasoning *)
 Lemma AC_composition_unfold : forall x,
   ChronoMappings.A_to_C x = ChronoMappings.B_to_C (ChronoMappings.A_to_B x).
-Proof. 
-  intros x. 
+Proof.
+  intros x.
   unfold ChronoMappings.A_to_C, ChronoMappings.B_to_C, ChronoMappings.A_to_B.
   unfold forward.
   unfold ChronoMappings.map_AC, ChronoMappings.map_AB, ChronoMappings.map_BC.
@@ -63,8 +63,8 @@ Qed.
 
 Lemma CA_composition_unfold : forall z,
   ChronoMappings.C_to_A z = ChronoMappings.B_to_A (ChronoMappings.C_to_B z).
-Proof. 
-  intros z. 
+Proof.
+  intros z.
   unfold ChronoMappings.C_to_A, ChronoMappings.B_to_A, ChronoMappings.C_to_B.
   unfold backward.
   unfold ChronoMappings.map_AC, ChronoMappings.map_AB, ChronoMappings.map_BC.
@@ -77,4 +77,3 @@ Hint Rewrite AB_back_fwd AB_fwd_back : chrono_norm.
 Hint Rewrite BC_back_fwd BC_fwd_back : chrono_norm.
 Hint Rewrite AC_back_fwd AC_fwd_back : chrono_norm.
 Hint Rewrite AC_composition_unfold CA_composition_unfold : chrono_comp.
-

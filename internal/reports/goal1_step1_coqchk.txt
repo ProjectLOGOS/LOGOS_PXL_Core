@@ -1,1 +1,1 @@
-coqchk failed: 
+coqchk failed:
