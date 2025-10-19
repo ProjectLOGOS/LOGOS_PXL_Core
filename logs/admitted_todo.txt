@@ -1,0 +1,107 @@
+﻿
+PXLs\PXLv3.v:55:  Admitted.
+PXL_IEL_overlay_system\coq\Guards\V4_Conservativity.v:92:Admitted.
+PXL_IEL_overlay_system\modules\IEL\AnthroPraxis\subdomains\Life\Spec.
+v:7:Admitted. (* must be proved before CI passes; no Admitted in
+final branch *)
+PXL_IEL_overlay_system\modules\IEL\Axiopraxis\subdomains\Beauty\Spec.
+v:7:Admitted. (* must be proved before CI passes; no Admitted in
+final branch *)
+PXL_IEL_overlay_system\modules\IEL\CosmoPraxis\subdomains\Space\Spec.
+v:7:Admitted. (* must be proved before CI passes; no Admitted in
+final branch *)
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\interfaces\Chro
+noPraxis.v:3:(* TODO: remove Admitted. — constructive only. No
+classical axioms. *)
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\interfaces\Chro
+noPraxis.v:34:Proof. Admitted.
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\interfaces\Chro
+noPraxis.v:56:Proof. Admitted.
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\interfaces\Chro
+noPraxis.v:73:Proof. Admitted.
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\substrate\Chron
+oPraxis_PXL_Formal.v:132:Admitted.
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\substrate\Chron
+oPraxis_PXL_Formal.v:142:Admitted.
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\substrate\Chron
+oPraxis_PXL_Proofs.v:158:Admitted.
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\substrate\Chron
+oZAgents.v:61:Admitted. *)
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\substrate\Chron
+oZAgents.v:66:Admitted.
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\substrate\Chron
+oZAgents.v:75:Admitted.
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\theorems\experi
+mental\ChronoProofs.v:3:(* TODO: remove Admitted. — constructive
+oTheorem pairwise_convergence :
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\theorems\experi
+mental\ChronoProofs.v:10:  Admitted.axioms. *)
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\theorems\experi
+mental\ChronoProofs.v:51:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\theorems\experi
+mental\ChronoProofs.v:56:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\theorems\experi
+mental\ChronoProofs.v:61:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\theorems\experi
+mental\ChronoProofs.v:67:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\theorems\experi
+mental\ChronoProofs.v:72:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\theorems\experi
+mental\ChronoProofs.v:77:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\theorems\experi
+mental\ChronoProofs.v:85:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\theorems\experi
+mental\ChronoProofs.v:90:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\theorems\experi
+mental\ChronoProofs.v:103:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\theorems\experi
+mental\ChronoProofs.v:115:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\theorems\experi
+mental\ChronoProofs.v:123:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\theorems\experi
+mental\ChronoProofs.v:134:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\theorems\experi
+mental\ChronoProofs.v:168:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\theorems\experi
+mental\ChronoProofs.v:248:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\theorems\experi
+mental\ChronoProofs.v:254:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\_experimental\ChronoPraxis_Theorem
+s\ChronoProofs.v:3:(* TODO: remove Admitted. — constructive oTheorem
+pairwise_convergence :
+PXL_IEL_overlay_system\modules\IEL\_experimental\ChronoPraxis_Theorem
+s\ChronoProofs.v:10:  Admitted.axioms. *)
+PXL_IEL_overlay_system\modules\IEL\_experimental\ChronoPraxis_Theorem
+s\ChronoProofs.v:51:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\_experimental\ChronoPraxis_Theorem
+s\ChronoProofs.v:56:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\_experimental\ChronoPraxis_Theorem
+s\ChronoProofs.v:61:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\_experimental\ChronoPraxis_Theorem
+s\ChronoProofs.v:67:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\_experimental\ChronoPraxis_Theorem
+s\ChronoProofs.v:72:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\_experimental\ChronoPraxis_Theorem
+s\ChronoProofs.v:77:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\_experimental\ChronoPraxis_Theorem
+s\ChronoProofs.v:85:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\_experimental\ChronoPraxis_Theorem
+s\ChronoProofs.v:90:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\_experimental\ChronoPraxis_Theorem
+s\ChronoProofs.v:103:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\_experimental\ChronoPraxis_Theorem
+s\ChronoProofs.v:115:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\_experimental\ChronoPraxis_Theorem
+s\ChronoProofs.v:123:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\_experimental\ChronoPraxis_Theorem
+s\ChronoProofs.v:134:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\_experimental\ChronoPraxis_Theorem
+s\ChronoProofs.v:168:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\_experimental\ChronoPraxis_Theorem
+s\ChronoProofs.v:248:  Admitted.
+PXL_IEL_overlay_system\modules\IEL\_experimental\ChronoPraxis_Theorem
+s\ChronoProofs.v:254:  Admitted.
+PXL_IEL_overlay_system\modules\infra\arithmo\Core\Numbers.v:77:
+Admitted.
+PXL_IEL_overlay_system\modules\infra\arithmo\Examples\Goldbach\Verify
+.v:39:  Admitted.

@@ -50,9 +50,41 @@ Module PXLv3.
 
   Lemma prov_impl_refl : forall φ, Prov (Impl φ φ).
   Proof.
-    (* TODO: Complete combinatory proof using S and K axioms *)
-    admit.
-  Admitted.
+    (* Constructive proof of φ → φ using combinatory SKI principles *)
+    intro φ.
+    (*
+       Standard combinatory derivation of I (identity) from S and K:
+       I = S K K, which gives us the identity combinator φ → φ
+
+       We use: S : (A → B → C) → (A → B) → A → C
+                K : A → B → A
+
+       In propositional form:
+       S_φψχ : (φ → ψ → χ) → (φ → ψ) → φ → χ
+       K_φψ   : φ → ψ → φ
+    *)
+
+    (* Step 1: Get K_φ(φ→φ) : φ → (φ → φ) → φ *)
+    assert (H1 : Prov (Impl φ (Impl (Impl φ φ) φ))).
+    { exact (ax_PL_imp φ (Impl φ φ)). }
+
+    (* Step 2: Get K_φφ : φ → φ → φ, which is the same as φ → (φ → φ) *)
+    assert (H2 : Prov (Impl φ (Impl φ φ))).
+    { exact (ax_PL_imp φ φ). }
+
+    (* Step 3: Use S-axiom instance to combine these *)
+    (* S applied to H1 and H2 should give us φ → φ *)
+    assert (H3 : Prov (Impl (Impl φ (Impl (Impl φ φ) φ))
+                           (Impl (Impl φ (Impl φ φ)) (Impl φ φ)))).
+    { exact (ax_PL_comp φ (Impl φ φ) φ). }
+
+    (* Step 4: Apply modus ponens to get (φ → (φ → φ)) → (φ → φ) *)
+    assert (H4 : Prov (Impl (Impl φ (Impl φ φ)) (Impl φ φ))).
+    { exact (rule_MP _ _ H3 H1). }
+
+    (* Step 5: Final application to get φ → φ *)
+    exact (rule_MP _ _ H4 H2).
+  Qed.
 
 End PXLv3.
 
