@@ -1,108 +1,98 @@
-DIGEST bae5963c505f4ba84d58fb4c23967b01
-FNumbers
+DIGEST a11e74b11a4e5a46c7b49eaeb9769513
+FLOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers
 R60:64 Coq.Arith.Arith <> <> lib
 R66:73 Coq.Arith.PeanoNat <> <> lib
-R100:109 Coq.Lists.List <> <> lib
-R119:131 Coq.Lists.List ListNotations <> mod
-mod 142:162 <> ArithmoPraxis_Numbers
-def 223:225 ArithmoPraxis_Numbers Nat
-R230:232 Coq.Init.Datatypes <> nat ind
-def 248:251 ArithmoPraxis_Numbers even
-R256:258 Numbers ArithmoPraxis_Numbers Nat def
-binder 254:254 <> n:1
-R271:278 Coq.Arith.PeanoNat Nat Even def
-R280:280 Numbers <> n:1 var
-def 361:365 ArithmoPraxis_Numbers prime
-R370:372 Numbers ArithmoPraxis_Numbers Nat def
-binder 368:368 <> n:2
-R390:393 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R386:388 Coq.Init.Peano <> ::nat_scope:x_'>'_x not
-R385:385 Numbers <> n:2 var
-binder 401:401 <> d:3
-R413:416 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R405:407 Coq.Init.Peano <> ::nat_scope:x_'<'_x_'<'_x not
+R75:77 Coq.micromega.Lia <> <> lib
+R104:113 Coq.Lists.List <> <> lib
+R123:135 Coq.Lists.List ListNotations <> mod
+mod 146:166 <> ArithmoPraxis_Numbers
+def 227:229 ArithmoPraxis_Numbers Nat
+R234:236 Coq.Init.Datatypes <> nat ind
+def 252:255 ArithmoPraxis_Numbers even
+R260:262 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers ArithmoPraxis_Numbers Nat def
+binder 258:258 <> n:1
+R275:282 Coq.Arith.PeanoNat Nat Even def
+R284:284 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers <> n:1 var
+def 365:369 ArithmoPraxis_Numbers prime
+R374:376 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers ArithmoPraxis_Numbers Nat def
+binder 372:372 <> n:2
+R394:397 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R390:392 Coq.Init.Peano <> ::nat_scope:x_'>'_x not
+R389:389 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers <> n:2 var
+binder 405:405 <> d:3
+R417:420 Coq.Init.Logic <> ::type_scope:x_'->'_x not
 R409:411 Coq.Init.Peano <> ::nat_scope:x_'<'_x_'<'_x not
-R408:408 Numbers <> d:3 var
-R408:408 Numbers <> d:3 var
-R412:412 Numbers <> n:2 var
-R424:427 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
-R418:422 Coq.Arith.PeanoNat <> ::nat_scope:x_'mod'_x not
-R417:417 Numbers <> n:2 var
-R423:423 Numbers <> d:3 var
-def 511:517 ArithmoPraxis_Numbers divides
-R524:526 Numbers ArithmoPraxis_Numbers Nat def
-binder 520:520 <> d:4
-binder 522:522 <> n:5
-R531:534 Coq.Init.Datatypes <> bool ind
-R549:549 Numbers <> d:4 var
-R567:571 Coq.Init.Datatypes <> false constr
-R584:590 Coq.Arith.PeanoNat Nat eqb def
-R594:598 Coq.Arith.PeanoNat <> ::nat_scope:x_'mod'_x not
-R593:593 Numbers <> n:5 var
-R599:599 Numbers <> d:4 var
-def 692:704 ArithmoPraxis_Numbers trial_divisor
-R718:720 Numbers ArithmoPraxis_Numbers Nat def
-binder 707:710 <> fuel:8
-binder 712:712 <> d:9
-binder 714:714 <> n:10
-R725:728 Coq.Init.Datatypes <> bool ind
-R743:746 Numbers <> fuel:8 var
-R764:767 Coq.Init.Datatypes <> true constr
-R812:812 Coq.Init.Datatypes <> S constr
-R835:835 Numbers <> d:9 var
-R859:862 Coq.Init.Datatypes <> true constr
-R859:862 Coq.Init.Datatypes <> true constr
-R880:886 Numbers ArithmoPraxis_Numbers divides def
-R888:888 Numbers <> d:9 var
-R890:890 Numbers <> n:10 var
-R914:926 Numbers <> trial_divisor:11 def
-R940:940 Numbers <> n:10 var
-R936:936 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
-R935:935 Numbers <> d:9 var
-R897:903 Coq.Arith.PeanoNat Nat eqb def
-R905:905 Numbers <> d:9 var
-R907:907 Numbers <> n:10 var
-def 975:982 ArithmoPraxis_Numbers is_prime
-R987:989 Numbers ArithmoPraxis_Numbers Nat def
-binder 985:985 <> n:14
-R994:997 Coq.Init.Datatypes <> bool ind
-R1012:1012 Numbers <> n:14 var
-R1034:1038 Coq.Init.Datatypes <> false constr
-R1034:1038 Coq.Init.Datatypes <> false constr
-R1051:1054 Coq.Init.Datatypes <> true constr
-R1067:1079 Numbers ArithmoPraxis_Numbers trial_divisor def
-R1081:1081 Numbers <> n:14 var
-R1085:1085 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
-R1084:1084 Numbers <> n:14 var
-R1089:1089 Numbers <> n:14 var
-prf 1109:1128 ArithmoPraxis_Numbers is_prime_sound_small
-binder 1143:1143 <> n:16
-R1157:1160 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1147:1150 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
-R1146:1146 Numbers <> n:16 var
-R1178:1181 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1171:1173 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R1161:1168 Numbers ArithmoPraxis_Numbers is_prime def
-R1170:1170 Numbers <> n:16 var
-R1174:1177 Coq.Init.Datatypes <> true constr
-R1182:1186 Numbers ArithmoPraxis_Numbers prime def
-R1188:1188 Numbers <> n:16 var
-R1368:1372 Numbers ArithmoPraxis_Numbers prime def
-R1419:1426 Numbers ArithmoPraxis_Numbers is_prime def
-R1930:1937 Numbers ArithmoPraxis_Numbers is_prime def
-R2451:2453 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R2430:2436 Numbers ArithmoPraxis_Numbers divides def
-R2441:2441 Coq.Init.Datatypes <> S constr
-R2444:2444 Coq.Init.Datatypes <> S constr
-R2454:2457 Coq.Init.Datatypes <> true constr
-R2451:2453 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R2430:2436 Numbers ArithmoPraxis_Numbers divides def
-R2441:2441 Coq.Init.Datatypes <> S constr
-R2444:2444 Coq.Init.Datatypes <> S constr
-R2454:2457 Coq.Init.Datatypes <> true constr
-R2478:2484 Numbers ArithmoPraxis_Numbers divides def
-R2536:2546 Coq.Arith.PeanoNat Nat nlt_0_r thm
-R2536:2546 Coq.Arith.PeanoNat Nat nlt_0_r thm
-R2585:2594 Coq.Arith.PeanoNat Nat eqb_eq thm
-R2585:2594 Coq.Arith.PeanoNat Nat eqb_eq thm
-R2901:2921 Numbers ArithmoPraxis_Numbers <> mod
+R413:415 Coq.Init.Peano <> ::nat_scope:x_'<'_x_'<'_x not
+R412:412 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers <> d:3 var
+R412:412 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers <> d:3 var
+R416:416 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers <> n:2 var
+R428:431 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R422:426 Coq.Arith.PeanoNat <> ::nat_scope:x_'mod'_x not
+R421:421 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers <> n:2 var
+R427:427 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers <> d:3 var
+def 515:521 ArithmoPraxis_Numbers divides
+R528:530 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers ArithmoPraxis_Numbers Nat def
+binder 524:524 <> d:4
+binder 526:526 <> n:5
+R535:538 Coq.Init.Datatypes <> bool ind
+R553:553 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers <> d:4 var
+R571:575 Coq.Init.Datatypes <> false constr
+R588:594 Coq.Arith.PeanoNat Nat eqb def
+R598:602 Coq.Arith.PeanoNat <> ::nat_scope:x_'mod'_x not
+R597:597 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers <> n:5 var
+R603:603 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers <> d:4 var
+def 696:708 ArithmoPraxis_Numbers trial_divisor
+R722:724 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers ArithmoPraxis_Numbers Nat def
+binder 711:714 <> fuel:8
+binder 716:716 <> d:9
+binder 718:718 <> n:10
+R729:732 Coq.Init.Datatypes <> bool ind
+R747:750 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers <> fuel:8 var
+R768:771 Coq.Init.Datatypes <> true constr
+R816:816 Coq.Init.Datatypes <> S constr
+R839:839 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers <> d:9 var
+R863:866 Coq.Init.Datatypes <> true constr
+R863:866 Coq.Init.Datatypes <> true constr
+R884:890 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers ArithmoPraxis_Numbers divides def
+R892:892 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers <> d:9 var
+R894:894 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers <> n:10 var
+R918:930 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers <> trial_divisor:11 def
+R944:944 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers <> n:10 var
+R940:940 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R939:939 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers <> d:9 var
+R901:907 Coq.Arith.PeanoNat Nat eqb def
+R909:909 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers <> d:9 var
+R911:911 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers <> n:10 var
+def 979:986 ArithmoPraxis_Numbers is_prime
+R991:993 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers ArithmoPraxis_Numbers Nat def
+binder 989:989 <> n:14
+R998:1001 Coq.Init.Datatypes <> bool ind
+R1016:1016 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers <> n:14 var
+R1038:1042 Coq.Init.Datatypes <> false constr
+R1038:1042 Coq.Init.Datatypes <> false constr
+R1055:1058 Coq.Init.Datatypes <> true constr
+R1071:1083 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers ArithmoPraxis_Numbers trial_divisor def
+R1085:1085 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers <> n:14 var
+R1089:1089 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R1088:1088 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers <> n:14 var
+R1093:1093 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers <> n:14 var
+prf 1369:1388 ArithmoPraxis_Numbers is_prime_sound_small
+binder 1403:1403 <> n:16
+R1417:1420 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1407:1410 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
+R1406:1406 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers <> n:16 var
+R1438:1441 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1431:1433 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1421:1428 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers ArithmoPraxis_Numbers is_prime def
+R1430:1430 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers <> n:16 var
+R1434:1437 Coq.Init.Datatypes <> true constr
+R1442:1446 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers ArithmoPraxis_Numbers prime def
+R1448:1448 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers <> n:16 var
+R1628:1632 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers ArithmoPraxis_Numbers prime def
+R1679:1686 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers ArithmoPraxis_Numbers is_prime def
+R2190:2197 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers ArithmoPraxis_Numbers is_prime def
+R3374:3384 Coq.Arith.PeanoNat Nat nlt_0_r thm
+R3374:3384 Coq.Arith.PeanoNat Nat nlt_0_r thm
+R3462:3474 Coq.Arith.PeanoNat Nat lt_irrefl thm
+R3462:3474 Coq.Arith.PeanoNat Nat lt_irrefl thm
+R3857:3877 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.infra.arithmo.Core.Numbers ArithmoPraxis_Numbers <> mod
