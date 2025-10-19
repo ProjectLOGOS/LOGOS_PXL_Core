@@ -1,0 +1,68 @@
+{
+  "version": "v0.5-rc1",
+  "release_date": "2025-10-19T17:33:14.196568+00:00",
+  "components": {},
+  "checksums": {
+    "PXL_IEL_overlay_system\\pxl-prover\\serve_pxl.py": {
+      "sha256": "a46c3d9b048ea482db93b537a59051b0db055346c834ce0debf6506509104b1c",
+      "sha1": "09bf3f40331d1bdc58479650246e84df4de93fd5",
+      "size_bytes": 29268,
+      "modified": "2025-10-19T17:24:11.903646+00:00"
+    },
+    "PXL_IEL_overlay_system\\pxl-prover\\performance.py": {
+      "sha256": "27d4cbe80c39d8096d8f7f781e55bbf24058042fb0643ea3117162a1f38fc407",
+      "sha1": "db2d009ed9b1fa8c10b011e7681a48dd17a56cdf",
+      "size_bytes": 13123,
+      "modified": "2025-10-19T17:01:44.549545+00:00"
+    },
+    "PXL_IEL_overlay_system\\pxl-prover\\security.py": {
+      "sha256": "370a7b063b2f460cd5eec2519c87d342f5c326deb31b42e9d41b0fc47b1601b1",
+      "sha1": "24b3c307ef727b6e772fe75f0005ddad6c7786b5",
+      "size_bytes": 10196,
+      "modified": "2025-10-19T17:00:37.500746+00:00"
+    },
+    "integration_test_suite.py": {
+      "sha256": "ead04b5003ad4188d798cc3bb393a1f385db7d3a9c1423fd357c7c660e92926b",
+      "sha1": "d8ef661db48d1a44904232345dcc2d1ff022b771",
+      "size_bytes": 28471,
+      "modified": "2025-10-19T17:23:14.980731+00:00"
+    },
+    "verify_security.py": {
+      "sha256": "d66e0b8586c29ff4ade554859a4ea175a2ce68bec513f73d89dc9fe1465f9636",
+      "sha1": "7e85a1df0931d2a0e3b49801c587bf780d4cf428",
+      "size_bytes": 17798,
+      "modified": "2025-10-19T17:29:00.528480+00:00"
+    },
+    "verify_performance.ps1": {
+      "sha256": "26c9c79c8aafe133fe13d893d46d6bc9879a6e3d68d02254db842df71a9f3b46",
+      "sha1": "b1e66cb03497027972af56b8fdd9c40a1aa90cde",
+      "size_bytes": 7965,
+      "modified": "2025-10-19T17:18:22.930947+00:00"
+    },
+    "DEPLOYMENT_GUIDE.md": {
+      "sha256": "c4324fab7f00f1e4359e205feb40eb47e04397e3f55af9273d0e243b865ea305",
+      "sha1": "2fe1ed037af6f8214489a16b19e02428e943a37e",
+      "size_bytes": 16398,
+      "modified": "2025-10-19T17:26:10.953620+00:00"
+    },
+    "OPERATIONS_MANUAL.md": {
+      "sha256": "6ab7a00041aece5f149076fe85192e2cab4fefbeca9ac5403a438f214290508d",
+      "sha1": "8b06c31cacdd0c3c7d54418ba72d49f2850ec21a",
+      "size_bytes": 26010,
+      "modified": "2025-10-19T17:27:58.341043+00:00"
+    },
+    "docker-compose.prod.yml": {
+      "sha256": "aa854ef13465092ba43504f9c2be3712d123c7c2b9aeab1813418b003b440d92",
+      "sha1": "4dd6e6ee3e5ae948ff3338a40aa2be3abc0dd680",
+      "size_bytes": 1404,
+      "modified": "2025-10-19T17:31:42.785947+00:00"
+    }
+  },
+  "validation": {},
+  "deployment": {},
+  "system": {
+    "platform": "win32",
+    "python_version": "3.13.9",
+    "release_time": "2025-10-19T17:33:14.235734+00:00"
+  }
+}

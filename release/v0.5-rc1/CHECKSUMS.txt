@@ -1,0 +1,4 @@
+﻿{
+    "Hash":  "DE93EBE953277081CBD82819A638D341C768D60196CAFFDF2F7FB33648F35B8F",
+    "Path":  "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\release\\v0.5-rc1\\logos_pxl_core_v0.5-rc1.tar.gz"
+}

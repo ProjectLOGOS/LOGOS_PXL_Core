@@ -1,0 +1,7 @@
+README.md
+pyproject.toml
+logos_pxl_core.egg-info/PKG-INFO
+logos_pxl_core.egg-info/SOURCES.txt
+logos_pxl_core.egg-info/dependency_links.txt
+logos_pxl_core.egg-info/requires.txt
+logos_pxl_core.egg-info/top_level.txt

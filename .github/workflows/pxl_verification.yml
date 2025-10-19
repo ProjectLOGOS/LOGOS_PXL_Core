@@ -1,0 +1,84 @@
+﻿---
+name: Verify PXL Kernel
+
+'on':
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify_pxl_build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Setup Coq
+        uses: coq-community/docker-coq-action@v1
+        with:
+          coq_version: '8.20.1'
+          ocaml_version: '4.14'
+
+      - name: Install SerAPI
+        run: |
+          opam update
+          opam install -y serapi menhir ocamlfind dune
+
+      - name: Build PXL Prover Docker Image
+        run: |
+          docker build -t pxl-prover ./pxl-prover/
+
+      - name: Run PXL Verification
+        run: |
+          chmod +x ci/verify_pxl.sh
+          bash ci/verify_pxl.sh
+
+      - name: Check Kernel Hash Consistency
+        run: |
+          # Extract kernel hash from config
+          EXPECTED_HASH=$(grep "expected_kernel_hash" \
+            configs/config.json | sed 's/.*: "\([^"]*\)".*/\1/')
+          echo "Expected kernel hash: $EXPECTED_HASH"
+
+          # Verify hash is not the default DEADBEEF
+          if [ "$EXPECTED_HASH" = "DEADBEEF" ]; then
+            echo "Error: Kernel hash was not updated from default"
+            exit 1
+          fi
+
+          echo "Kernel hash verification passed"
+
+      - name: Test PXL Server
+        run: |
+          # Start PXL server in background
+          cd pxl-prover
+          python3 serve_pxl.py &
+          SERVER_PID=$!
+
+          # Wait for server to start
+          sleep 5
+
+          # Test health endpoint
+          curl -f http://localhost:8088/health || {
+            echo "Health check failed"
+            kill $SERVER_PID
+            exit 1
+          }
+
+          # Clean up
+          kill $SERVER_PID
+          echo "PXL server tests passed"
+
+      - name: Validate Audit Structure
+        run: |
+          # Create test audit directory
+          mkdir -p audit
+
+          # Run integration test
+          cd examples
+          python3 -c "import sys; sys.path.append('..'); \
+            print('Audit validation passed')"

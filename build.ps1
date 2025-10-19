@@ -21,7 +21,7 @@ Write-Host "Compiling Coq files..."
 
 # First compile the PXL kernel
 Write-Host "Compiling PXL kernel..."
-$coqcCmd = "coqc -Q pxl-minimal-kernel-main/coq PXLs `"pxl-minimal-kernel-main/coq/PXLv3.v`""
+$coqcCmd = "coqc -Q PXLs PXLs `"PXLs/PXLv3.v`""
 Write-Host "Running: $coqcCmd"
 Invoke-Expression $coqcCmd
 if ($LASTEXITCODE -ne 0) {
