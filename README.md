@@ -1,15 +1,20 @@
-# Project LOGOS — Repository Index
+# LOGOS_PXL_Core Repository
+**Version: v0.4.2-recovery** | Repository restructured into four root directories with PXL/IEL system recovery
 
-**Start here**:
-- **3PDN/** — Corpus literature for the Three Pillars of Divine Necessity
-- **PXL_IEL/** — PXL kernel, IEL overlays, and Coq proofs/tests
-- **LOGOS_AGI/** — Current AGI runtime (services, API, UI)
-
-_Internal (not public-facing): `internal/`_
+**Unified framework containing:**
+• **Three_Pillars_Corpus_Literature** – 3PDN canonical corpus  
+• **PXL_IEL_overlay_system** – PXL / IEL verification suite  
+• **LOGOS_AGI** – AGI source and runtime  
+• **Misc** – Internal and archival tooling  
 
 ---
 
-# Legacy: LOGOS PXL Core - Three-Part Alignment System
+## Relationship to 3PDN and Logos AGI
+This verification suite implements the PXL and IEL layers derived from the 3PDN metaphysical framework. It provides formal proof-gating and coherence validation for the LOGOS AGI runtime. The Three_Pillars_Corpus_Literature directory holds the canonical corpus; this directory implements its formal verification layer.
+
+---
+
+# LOGOS PXL Core - Three-Part Alignment System
 
 [![verify](https://github.com/ProjectLOGOS/LOGOS_PXL_Core/actions/workflows/verify.yml/badge.svg)](.github/workflows/verify.yml)
 
@@ -47,11 +52,11 @@ This implementation provides a fail-closed alignment core with three key compone
 
 ```bash
 # Option A: Direct Python (for development)
-cd pxl-prover
+cd PXL_IEL_overlay_system/pxl-prover
 python3 serve_pxl.py
 
 # Option B: Docker (for production)
-docker build -t pxl-prover ./pxl-prover/
+docker build -t pxl-prover ./PXL_IEL_overlay_system/pxl-prover/
 docker run -p 8088:8088 pxl-prover
 ```
 
@@ -61,22 +66,22 @@ The system requires a pinned kernel hash for security. Run the verification scri
 
 ```bash
 # On Linux/Mac
-chmod +x ci/verify_pxl.sh
-./ci/verify_pxl.sh
+chmod +x Misc/ci/verify_pxl.sh
+./Misc/ci/verify_pxl.sh
 
 # On Windows (PowerShell)
-# Manual hash update required - see verify_pxl.sh for steps
+# Manual hash update required - see Misc/ci/verify_pxl.sh for steps
 ```
 
 This will:
 - Build and verify the PXL kernel using Coq
 - Compute a deterministic kernel hash
-- Update `configs/config.json` with the correct hash
+- Update `Misc/configs/config.json` with the correct hash
 
 ### 3. Run the Demo
 
 ```bash
-cd examples
+cd PXL_IEL_overlay_system/examples
 python3 main_demo.py
 ```
 
@@ -151,7 +156,7 @@ plan_validation = validator.validate_plan_goal(plan_id, goal, provenance)
 
 ## Configuration
 
-Edit `configs/config.json`:
+Edit `Misc/configs/config.json`:
 
 ```json
 {
@@ -175,31 +180,41 @@ The system meets all specified acceptance criteria:
 ## Directory Structure
 
 ```
-├── pxl-prover/          # PXL proof server (Coq + SerAPI)
-│   ├── Dockerfile       # Coq 8.20.1 + SerAPI container
-│   └── serve_pxl.py     # HTTP proof server
-├── configs/             # Configuration files
-│   └── config.json      # Main config with kernel hash
-├── logos_core/          # Core alignment components
-│   ├── pxl_client.py    # HTTP client for PXL server
-│   ├── reference_monitor.py  # Proof gate enforcement
-│   ├── unified_formalisms.py # Action authorization
-│   ├── archon_planner.py     # Proof-gated planning
-│   ├── logos_nexus.py        # Main request handler
-│   └── integration_harmonizer.py # Drift reconciliation
-├── obdc/                # Structure-preserving kernel
-│   └── kernel.py        # Bijections and commutations
-├── policies/            # Policy definitions
-│   └── privative_policies.py # Obligation mappings
-├── persistence/         # Audit and logging
-│   └── persistence.py   # JSONL audit logger
-├── ci/                  # Continuous integration
-│   ├── verify_pxl.sh    # Kernel verification script
-│   └── test_audit.py    # Audit system test
-├── examples/            # Demonstrations
-│   └── main_demo.py     # Full system demo
-└── .github/workflows/   # GitHub Actions
-    └── verify.yml       # CI pipeline
+LOGOS_PXL_Core/
+├── Three_Pillars_Corpus_Literature/  # 3PDN canonical corpus
+├── PXL_IEL_overlay_system/           # Complete PXL/IEL verification suite
+│   ├── pxl-prover/                   # PXL proof server (Coq + SerAPI)
+│   │   ├── Dockerfile                # Coq 8.20.1 + SerAPI container
+│   │   └── serve_pxl.py              # HTTP proof server
+│   ├── logos_core/                   # Core alignment components
+│   │   ├── pxl_client.py             # HTTP client for PXL server
+│   │   ├── reference_monitor.py      # Proof gate enforcement
+│   │   ├── unified_formalisms.py     # Action authorization
+│   │   ├── archon_planner.py         # Proof-gated planning
+│   │   ├── logos_nexus.py            # Main request handler
+│   │   └── integration_harmonizer.py # Drift reconciliation
+│   ├── examples/                     # Demonstrations
+│   │   └── main_demo.py              # Full system demo
+│   ├── coq/                          # Coq proof files
+│   ├── modules/                      # IEL modules with ArithmoPraxis v0.4
+│   ├── api/, gateway/, gui/          # API and interface components  
+│   ├── services/                     # Microservices
+│   └── third_party/                  # External dependencies
+├── LOGOS_AGI/                        # AGI source and runtime
+└── Misc/                             # Internal and archival tooling
+    ├── configs/                      # Configuration files
+    │   └── config.json               # Main config with kernel hash  
+    ├── obdc/                         # Structure-preserving kernel
+    │   └── kernel.py                 # Bijections and commutations
+    ├── policies/                     # Policy definitions
+    │   └── privative_policies.py     # Obligation mappings
+    ├── persistence/                  # Audit and logging
+    │   └── persistence.py            # JSONL audit logger
+    ├── ci/                           # Continuous integration
+    │   ├── verify_pxl.sh             # Kernel verification script
+    │   └── test_audit.py             # Audit system test
+    └── .github/workflows/            # GitHub Actions
+        └── verify.yml                # CI pipeline
 ```
 
 ## TODOs - SerAPI Integration
@@ -238,39 +253,39 @@ The current implementation uses proof stubs for demonstration. To integrate with
 ### Start prover and run demo:
 ```bash
 # Terminal 1: Start PXL prover server
-cd pxl-prover
+cd PXL_IEL_overlay_system/pxl-prover
 python3 serve_pxl.py
 
 # Terminal 2: Run demo
-cd examples
+cd PXL_IEL_overlay_system/examples
 python3 main_demo.py
 ```
 
 ### Run tests:
 ```bash
-# Run alignment tests
-python3 -m pytest tests/test_alignment.py -v
+# Run alignment tests  
+python3 -m pytest Misc/tests/test_alignment.py -v
 
 # Run bypass scanner
-python3 tools/scan_bypass.py
+python3 Misc/tools/scan_bypass.py
 
 # Run all tests
-python3 -m pytest -v
+python3 -m pytest Misc/tests/ -v
 ```
 
 ### Update kernel hash:
 ```bash
 # Build kernel and update config
-bash ci/verify_pxl.sh
+bash Misc/ci/verify_pxl.sh
 
 # Verify hash is pinned correctly
-grep expected_kernel_hash configs/config.json
+grep expected_kernel_hash Misc/configs/config.json
 ```
 
 ### Production deployment:
 ```bash
 # Build Docker image
-docker build -t pxl-prover ./pxl-prover/
+docker build -t pxl-prover ./PXL_IEL_overlay_system/pxl-prover/
 
 # Run with proper kernel
 docker run -p 8088:8088 pxl-prover
@@ -290,7 +305,7 @@ cd pxl-prover && python3 serve_pxl.py
 **Kernel hash mismatch**:
 ```bash
 # Regenerate expected hash
-bash ci/verify_pxl.sh
+bash Misc/ci/verify_pxl.sh
 ```
 
 **Demo failures**:
