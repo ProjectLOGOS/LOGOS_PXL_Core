@@ -1,0 +1,424 @@
+{
+  "timestamp": "2025-10-19T12:45:28.114666",
+  "repository_version": "v0.4.2-recovery",
+  "total_v_files": 178,
+  "total_admitted_proofs": 48,
+  "overall_verification_ratio": 0.9382022471910112,
+  "modules": [
+    {
+      "module_path": "PXL_IEL_overlay_system\\modules\\infra",
+      "total_v_files": 26,
+      "files_with_admitted": 2,
+      "total_admitted_count": 2,
+      "verification_ratio": 0.9230769230769231,
+      "priority_level": "medium"
+    },
+    {
+      "module_path": "PXL_IEL_overlay_system\\modules\\IEL",
+      "total_v_files": 133,
+      "files_with_admitted": 8,
+      "total_admitted_count": 45,
+      "verification_ratio": 0.9398496240601504,
+      "priority_level": "medium"
+    },
+    {
+      "module_path": "PXL_IEL_overlay_system\\coq",
+      "total_v_files": 4,
+      "files_with_admitted": 1,
+      "total_admitted_count": 1,
+      "verification_ratio": 0.75,
+      "priority_level": "medium"
+    }
+  ],
+  "admitted_proofs": [
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\infra\\arithmo\\Core\\Numbers.v",
+      "line_number": 77,
+      "theorem_name": null,
+      "context": "(* For a complete proof, we would show that trial_divisor finds any proper divisor *)\n        (* This requires proving the correctness of the trial_divisor algorithm *)\n        admit. (* TODO: Prove trial_divisor correctness by strong induction on fuel parameter *)\n  Admitted.\nEnd ArithmoPraxis_Numbers.",
+      "priority": "medium",
+      "module_category": "core"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\infra\\arithmo\\Examples\\Goldbach\\Verify.v",
+      "line_number": 39,
+      "theorem_name": "check_witness_sound_small",
+      "context": "check_witness n p = true ->\n      exists p1 p2, p = (p1,p2) /\\ prime p1 /\\ prime p2 /\\ n = p1 + p2.\n  Proof. (* TODO: connect to is_prime_sound_small; small-range guarantee *)\n  Admitted.\n\nEnd GoldbachVerify.",
+      "priority": "medium",
+      "module_category": "infrastructure"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\_experimental\\ChronoPraxis_Theorems\\ChronoProofs.v",
+      "line_number": 3,
+      "theorem_name": "pairwise_convergence",
+      "context": "(* ChronoProofs.v - PXL Canonical Constructive Proofs *)\n\n(* TODO: remove Admitted. \u2014 constructive oTheorem pairwise_convergence :\n  forall (e : ChronoAxioms.Eternal),\n    ChronoMappings.lift_from_A (ChronoMappings.project_to_A e) =\n    ChronoMappings.lift_from_B (ChronoMappings.project_to_B e) /\\",
+      "priority": "low",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\_experimental\\ChronoPraxis_Theorems\\ChronoProofs.v",
+      "line_number": 10,
+      "theorem_name": "pairwise_convergence",
+      "context": "ChronoMappings.lift_from_B (ChronoMappings.project_to_B e) =\n    ChronoMappings.lift_from_C (ChronoMappings.project_to_C e).\nProof.\n  Admitted.axioms. *)\n\nRequire Import PXLs.Internal Emergent Logics.Infra.ChronoPraxis.Substrate.ChronoAxioms\n               PXLs.Internal Emergent Logics.Infra.ChronoPraxis.Substrate.Bijection",
+      "priority": "low",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\_experimental\\ChronoPraxis_Theorems\\ChronoProofs.v",
+      "line_number": 51,
+      "theorem_name": "eternal_temporal_soundness_A",
+      "context": "Theorem eternal_temporal_soundness_A :\n  forall (e : ChronoAxioms.Eternal), ChronoMappings.lift_from_A (ChronoMappings.project_to_A e) = e.\nProof.\n  Admitted.\n\nTheorem eternal_temporal_soundness_B :\n  forall (e : ChronoAxioms.Eternal), ChronoMappings.lift_from_B (ChronoMappings.project_to_B e) = e.",
+      "priority": "low",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\_experimental\\ChronoPraxis_Theorems\\ChronoProofs.v",
+      "line_number": 56,
+      "theorem_name": "eternal_temporal_soundness_B",
+      "context": "Theorem eternal_temporal_soundness_B :\n  forall (e : ChronoAxioms.Eternal), ChronoMappings.lift_from_B (ChronoMappings.project_to_B e) = e.\nProof.\n  Admitted.\n\nTheorem eternal_temporal_soundness_C :\n  forall (e : ChronoAxioms.Eternal), ChronoMappings.lift_from_C (ChronoMappings.project_to_C e) = e.",
+      "priority": "low",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\_experimental\\ChronoPraxis_Theorems\\ChronoProofs.v",
+      "line_number": 61,
+      "theorem_name": "eternal_temporal_soundness_C",
+      "context": "Theorem eternal_temporal_soundness_C :\n  forall (e : ChronoAxioms.Eternal), ChronoMappings.lift_from_C (ChronoMappings.project_to_C e) = e.\nProof.\n  Admitted.\n\n(* Completeness: temporal -> ChronoAxioms.Eternal -> temporal preserves identity *)\nTheorem temporal_eternal_completeness_A :",
+      "priority": "low",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\_experimental\\ChronoPraxis_Theorems\\ChronoProofs.v",
+      "line_number": 67,
+      "theorem_name": "temporal_eternal_completeness_A",
+      "context": "Theorem temporal_eternal_completeness_A :\n  forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_A), ChronoMappings.project_to_A (ChronoMappings.lift_from_A p) = p.\nProof.\n  Admitted.\n\nTheorem temporal_eternal_completeness_B :\n  forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_B), ChronoMappings.project_to_B (ChronoMappings.lift_from_B p) = p.",
+      "priority": "low",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\_experimental\\ChronoPraxis_Theorems\\ChronoProofs.v",
+      "line_number": 72,
+      "theorem_name": "temporal_eternal_completeness_B",
+      "context": "Theorem temporal_eternal_completeness_B :\n  forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_B), ChronoMappings.project_to_B (ChronoMappings.lift_from_B p) = p.\nProof.\n  Admitted.\n\nTheorem temporal_eternal_completeness_C :\n  forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_C), ChronoMappings.project_to_C (ChronoMappings.lift_from_C p) = p.",
+      "priority": "low",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\_experimental\\ChronoPraxis_Theorems\\ChronoProofs.v",
+      "line_number": 77,
+      "theorem_name": "temporal_eternal_completeness_C",
+      "context": "Theorem temporal_eternal_completeness_C :\n  forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_C), ChronoMappings.project_to_C (ChronoMappings.lift_from_C p) = p.\nProof.\n  Admitted.\n\n(* === Cross-Mode Bijection Proofs === *)",
+      "priority": "low",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\_experimental\\ChronoPraxis_Theorems\\ChronoProofs.v",
+      "line_number": 85,
+      "theorem_name": "cross_mode_bijection_AB",
+      "context": "Theorem cross_mode_bijection_AB :\n  forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_A), ChronoMappings.B_to_A (ChronoMappings.A_to_B p) = p.\nProof.\n  Admitted.\n\nTheorem cross_mode_bijection_BA :\n  forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_B), ChronoMappings.A_to_B (ChronoMappings.B_to_A p) = p.",
+      "priority": "low",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\_experimental\\ChronoPraxis_Theorems\\ChronoProofs.v",
+      "line_number": 90,
+      "theorem_name": "cross_mode_bijection_BA",
+      "context": "Theorem cross_mode_bijection_BA :\n  forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_B), ChronoMappings.A_to_B (ChronoMappings.B_to_A p) = p.\nProof.\n  Admitted.\n\n(* === Temporal Convergence Theorems === *)",
+      "priority": "low",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\_experimental\\ChronoPraxis_Theorems\\ChronoProofs.v",
+      "line_number": 103,
+      "theorem_name": "universal_temporal_convergence",
+      "context": "Theorem universal_temporal_convergence :\n  forall (e : ChronoAxioms.Eternal), temporal_convergence_formula e.\nProof.\n  Admitted.\n\n(* === Triune Unity Theorem === *)\n(* This is the central theorem proving A/B/C theory compatibility *)",
+      "priority": "low",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\_experimental\\ChronoPraxis_Theorems\\ChronoProofs.v",
+      "line_number": 115,
+      "theorem_name": "triune_temporal_unity",
+      "context": "ChronoMappings.lift_from_B (ChronoMappings.project_to_B e) =\n    ChronoMappings.lift_from_C (ChronoMappings.project_to_C e).\nProof.\n  Admitted.\n\n(* === Chronological Collapse Prevention === *)\n(* Proves that temporal modes remain distinct despite convergence *)",
+      "priority": "low",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\_experimental\\ChronoPraxis_Theorems\\ChronoProofs.v",
+      "line_number": 123,
+      "theorem_name": "chronological_non_collapse",
+      "context": "Theorem chronological_non_collapse :\n  ChronoAxioms.chi_A <> ChronoAxioms.chi_B /\\ ChronoAxioms.chi_B <> ChronoAxioms.chi_C /\\ ChronoAxioms.chi_A <> ChronoAxioms.chi_C.\nProof.\n  Admitted.\n\n(* === Temporal Resolution Soundness === *)\n(* Mapping between temporal states preserves logical identity *)",
+      "priority": "low",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\_experimental\\ChronoPraxis_Theorems\\ChronoProofs.v",
+      "line_number": 134,
+      "theorem_name": "temporal_resolution_soundness",
+      "context": "ChronoMappings.lift_from_B (ChronoMappings.project_to_B e) = e /\\\n    ChronoMappings.lift_from_C (ChronoMappings.project_to_C e) = e.\nProof.\n  Admitted.\n\n(* === Main Constructive Theorem === *)\n(* ChronoPraxis preserves PXL's fundamental logical laws *)",
+      "priority": "low",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\_experimental\\ChronoPraxis_Theorems\\ChronoProofs.v",
+      "line_number": 168,
+      "theorem_name": "bijection_round_trip_convergence",
+      "context": "ChronoMappings.B_to_A (ChronoMappings.A_to_B pA) = pA /\\\n    ChronoMappings.A_to_B (ChronoMappings.B_to_A (ChronoMappings.A_to_B pA)) = ChronoMappings.A_to_B pA.\nProof.\n  Admitted.\n\nEnd ChronoProofs.",
+      "priority": "low",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\_experimental\\ChronoPraxis_Theorems\\ChronoProofs.v",
+      "line_number": 248,
+      "theorem_name": "temporal_consistency",
+      "context": "ChronoMappings.A_to_C pA = (ChronoMappings.B_to_C (ChronoMappings.A_to_B pA)) /\\\n    ChronoMappings.A_to_C pA = (ChronoMappings.A_to_C pA).\nProof.\n  Admitted.\n\n(* Quick smoketest lemmas (ensure rewrite works across contexts) *)\nLemma ac_eq_bc (pA:PA) : ChronoMappings.A_to_C pA = ChronoMappings.B_to_C (ChronoMappings.A_to_B pA).",
+      "priority": "low",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\_experimental\\ChronoPraxis_Theorems\\ChronoProofs.v",
+      "line_number": 254,
+      "theorem_name": "since",
+      "context": "Lemma ac_eq_bc (pA:PA) : ChronoMappings.A_to_C pA = ChronoMappings.B_to_C (ChronoMappings.A_to_B pA).\nProof.\n  (* By definition since map_AC := compose_bij map_AB map_BC *)\n  Admitted.\n\nEnd ConstructiveCore.",
+      "priority": "low",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\infra\\ChronoPraxis\\interfaces\\ChronoPraxis.v",
+      "line_number": 3,
+      "theorem_name": null,
+      "context": "(* ChronoPraxis.v - Main Interface Module *)\n\n(* TODO: remove Admitted. \u2014 constructive only. No classical axioms. *)\n\nFrom PXLs.Internal Emergent Logics.Infra.ChronoPraxis.Substrate Require Import ChronoAxioms.\nFrom PXLs.Internal Emergent Logics.Infra.ChronoPraxis.Substrate Require Import Bijection.",
+      "priority": "medium",
+      "module_category": "infrastructure"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\infra\\ChronoPraxis\\interfaces\\ChronoPraxis.v",
+      "line_number": 34,
+      "theorem_name": "chrono_reason_preserves_truth",
+      "context": "| ChronoAxioms.chi_B => ChronoMappings.lift_from_B (chrono_reason e ChronoAxioms.chi_B) = e\n    | ChronoAxioms.chi_C => ChronoMappings.lift_from_C (chrono_reason e ChronoAxioms.chi_C) = e\n    end.\nProof. Admitted.\n\n(* === Cross-Modal Reasoning === *)",
+      "priority": "medium",
+      "module_category": "infrastructure"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\infra\\ChronoPraxis\\interfaces\\ChronoPraxis.v",
+      "line_number": 56,
+      "theorem_name": "cross_modal_preservation",
+      "context": "forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_A),\n    ChronoMappings.lift_from_A p = ChronoMappings.lift_from_B (cross_modal_reason p ChronoAxioms.chi_B) /\\\n    ChronoMappings.lift_from_A p = ChronoMappings.lift_from_C (cross_modal_reason p ChronoAxioms.chi_C).\nProof. Admitted.\n\n(* === Main ChronoPraxis Theorem === *)",
+      "priority": "medium",
+      "module_category": "infrastructure"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\infra\\ChronoPraxis\\interfaces\\ChronoPraxis.v",
+      "line_number": 73,
+      "theorem_name": "chronopraxis_main_theorem",
+      "context": "(* ChronoPraxis preserves PXL logical laws *)\n  (forall (m : ChronoAxioms.chi) (p : ChronoAxioms.P_chi m), p = p) /\\\n  (forall (m : ChronoAxioms.chi) (p : ChronoAxioms.P_chi m), ~(p <> p)).\nProof. Admitted.\n\n(* === Export Core Constructive Theorems === *)\n(* Note: These theorems are available from the ConstructiveCore section of ChronoProofs.v *)",
+      "priority": "medium",
+      "module_category": "infrastructure"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\infra\\ChronoPraxis\\substrate\\ChronoPraxis_PXL_Proofs.v",
+      "line_number": 158,
+      "theorem_name": null,
+      "context": "(* can be \"read back\" as a PXL derivation, which requires proof transformation *)\n  \n  admit. (* Requires full semantic completeness or proof transformation theorem *)\nAdmitted.\n\n(* Theorem: Bijection preserves PXL identity law *)\nTheorem cpx_identity_preservation : forall \u03c6 : cpx_form,",
+      "priority": "medium",
+      "module_category": "core"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\infra\\ChronoPraxis\\substrate\\ChronoZAgents.v",
+      "line_number": 61,
+      "theorem_name": "agent_identity_temporal_persistence",
+      "context": "forall (a1 a2 : ChronoAgent),\n    agent_evolution a1 a2 -> agent_id a1 = agent_id a2.\nProof.\nAdmitted. *)\n\nTheorem telic_agent_forecast_consistency :\n  forall (ta : TelicAgent) (s : ChronoState),",
+      "priority": "medium",
+      "module_category": "core"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\infra\\ChronoPraxis\\substrate\\ChronoZAgents.v",
+      "line_number": 66,
+      "theorem_name": "telic_agent_forecast_consistency",
+      "context": "Theorem telic_agent_forecast_consistency :\n  forall (ta : TelicAgent) (s : ChronoState),\n    prediction ta s -> True.\nAdmitted.\n\n(* BDI coherence theorem *)\nTheorem agent_BDI_rationality :",
+      "priority": "medium",
+      "module_category": "core"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\infra\\ChronoPraxis\\substrate\\ChronoZAgents.v",
+      "line_number": 75,
+      "theorem_name": "agent_BDI_rationality",
+      "context": "forall s : ChronoState,\n      intentions a s -> beliefs a s.\nProof.\nAdmitted.\n\nEnd ChronoAgents.",
+      "priority": "medium",
+      "module_category": "core"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\infra\\ChronoPraxis\\theorems\\experimental\\ChronoProofs.v",
+      "line_number": 3,
+      "theorem_name": "pairwise_convergence",
+      "context": "(* ChronoProofs.v - PXL Canonical Constructive Proofs *)\n\n(* TODO: remove Admitted. \u2014 constructive oTheorem pairwise_convergence : \n  forall (e : ChronoAxioms.Eternal),\n    ChronoMappings.lift_from_A (ChronoMappings.project_to_A e) = \n    ChronoMappings.lift_from_B (ChronoMappings.project_to_B e) /\\",
+      "priority": "medium",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\infra\\ChronoPraxis\\theorems\\experimental\\ChronoProofs.v",
+      "line_number": 10,
+      "theorem_name": "pairwise_convergence",
+      "context": "ChronoMappings.lift_from_B (ChronoMappings.project_to_B e) = \n    ChronoMappings.lift_from_C (ChronoMappings.project_to_C e).\nProof.\n  Admitted.axioms. *)\n\nRequire Import PXLs.IEL.Infra.ChronoPraxis.Substrate.ChronoAxioms\n               PXLs.IEL.Infra.ChronoPraxis.Substrate.Bijection",
+      "priority": "medium",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\infra\\ChronoPraxis\\theorems\\experimental\\ChronoProofs.v",
+      "line_number": 51,
+      "theorem_name": "eternal_temporal_soundness_A",
+      "context": "Theorem eternal_temporal_soundness_A : \n  forall (e : ChronoAxioms.Eternal), ChronoMappings.lift_from_A (ChronoMappings.project_to_A e) = e.\nProof.\n  Admitted.\n\nTheorem eternal_temporal_soundness_B : \n  forall (e : ChronoAxioms.Eternal), ChronoMappings.lift_from_B (ChronoMappings.project_to_B e) = e.",
+      "priority": "medium",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\infra\\ChronoPraxis\\theorems\\experimental\\ChronoProofs.v",
+      "line_number": 56,
+      "theorem_name": "eternal_temporal_soundness_B",
+      "context": "Theorem eternal_temporal_soundness_B : \n  forall (e : ChronoAxioms.Eternal), ChronoMappings.lift_from_B (ChronoMappings.project_to_B e) = e.\nProof.\n  Admitted.\n\nTheorem eternal_temporal_soundness_C : \n  forall (e : ChronoAxioms.Eternal), ChronoMappings.lift_from_C (ChronoMappings.project_to_C e) = e.",
+      "priority": "medium",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\infra\\ChronoPraxis\\theorems\\experimental\\ChronoProofs.v",
+      "line_number": 61,
+      "theorem_name": "eternal_temporal_soundness_C",
+      "context": "Theorem eternal_temporal_soundness_C : \n  forall (e : ChronoAxioms.Eternal), ChronoMappings.lift_from_C (ChronoMappings.project_to_C e) = e.\nProof.\n  Admitted.\n\n(* Completeness: temporal -> ChronoAxioms.Eternal -> temporal preserves identity *)\nTheorem temporal_eternal_completeness_A :",
+      "priority": "medium",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\infra\\ChronoPraxis\\theorems\\experimental\\ChronoProofs.v",
+      "line_number": 67,
+      "theorem_name": "temporal_eternal_completeness_A",
+      "context": "Theorem temporal_eternal_completeness_A : \n  forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_A), ChronoMappings.project_to_A (ChronoMappings.lift_from_A p) = p.\nProof.\n  Admitted.\n\nTheorem temporal_eternal_completeness_B : \n  forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_B), ChronoMappings.project_to_B (ChronoMappings.lift_from_B p) = p.",
+      "priority": "medium",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\infra\\ChronoPraxis\\theorems\\experimental\\ChronoProofs.v",
+      "line_number": 72,
+      "theorem_name": "temporal_eternal_completeness_B",
+      "context": "Theorem temporal_eternal_completeness_B : \n  forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_B), ChronoMappings.project_to_B (ChronoMappings.lift_from_B p) = p.\nProof.\n  Admitted.\n\nTheorem temporal_eternal_completeness_C : \n  forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_C), ChronoMappings.project_to_C (ChronoMappings.lift_from_C p) = p.",
+      "priority": "medium",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\infra\\ChronoPraxis\\theorems\\experimental\\ChronoProofs.v",
+      "line_number": 77,
+      "theorem_name": "temporal_eternal_completeness_C",
+      "context": "Theorem temporal_eternal_completeness_C : \n  forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_C), ChronoMappings.project_to_C (ChronoMappings.lift_from_C p) = p.\nProof.\n  Admitted.\n\n(* === Cross-Mode Bijection Proofs === *)",
+      "priority": "medium",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\infra\\ChronoPraxis\\theorems\\experimental\\ChronoProofs.v",
+      "line_number": 85,
+      "theorem_name": "cross_mode_bijection_AB",
+      "context": "Theorem cross_mode_bijection_AB : \n  forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_A), ChronoMappings.B_to_A (ChronoMappings.A_to_B p) = p.\nProof.\n  Admitted.\n\nTheorem cross_mode_bijection_BA : \n  forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_B), ChronoMappings.A_to_B (ChronoMappings.B_to_A p) = p.",
+      "priority": "medium",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\infra\\ChronoPraxis\\theorems\\experimental\\ChronoProofs.v",
+      "line_number": 90,
+      "theorem_name": "cross_mode_bijection_BA",
+      "context": "Theorem cross_mode_bijection_BA : \n  forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_B), ChronoMappings.A_to_B (ChronoMappings.B_to_A p) = p.\nProof.\n  Admitted.\n\n(* === Temporal Convergence Theorems === *)",
+      "priority": "medium",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\infra\\ChronoPraxis\\theorems\\experimental\\ChronoProofs.v",
+      "line_number": 103,
+      "theorem_name": "universal_temporal_convergence",
+      "context": "Theorem universal_temporal_convergence : \n  forall (e : ChronoAxioms.Eternal), temporal_convergence_formula e.\nProof.\n  Admitted.\n\n(* === Triune Unity Theorem === *)\n(* This is the central theorem proving A/B/C theory compatibility *)",
+      "priority": "medium",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\infra\\ChronoPraxis\\theorems\\experimental\\ChronoProofs.v",
+      "line_number": 115,
+      "theorem_name": "triune_temporal_unity",
+      "context": "ChronoMappings.lift_from_B (ChronoMappings.project_to_B e) = \n    ChronoMappings.lift_from_C (ChronoMappings.project_to_C e).\nProof.\n  Admitted.\n\n(* === Chronological Collapse Prevention === *)\n(* Proves that temporal modes remain distinct despite convergence *)",
+      "priority": "medium",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\infra\\ChronoPraxis\\theorems\\experimental\\ChronoProofs.v",
+      "line_number": 123,
+      "theorem_name": "chronological_non_collapse",
+      "context": "Theorem chronological_non_collapse : \n  ChronoAxioms.chi_A <> ChronoAxioms.chi_B /\\ ChronoAxioms.chi_B <> ChronoAxioms.chi_C /\\ ChronoAxioms.chi_A <> ChronoAxioms.chi_C.\nProof.\n  Admitted.\n\n(* === Temporal Resolution Soundness === *)\n(* Mapping between temporal states preserves logical identity *)",
+      "priority": "medium",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\infra\\ChronoPraxis\\theorems\\experimental\\ChronoProofs.v",
+      "line_number": 134,
+      "theorem_name": "temporal_resolution_soundness",
+      "context": "ChronoMappings.lift_from_B (ChronoMappings.project_to_B e) = e /\\\n    ChronoMappings.lift_from_C (ChronoMappings.project_to_C e) = e.\nProof.\n  Admitted.\n\n(* === Main Constructive Theorem === *)\n(* ChronoPraxis preserves PXL's fundamental logical laws *)",
+      "priority": "medium",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\infra\\ChronoPraxis\\theorems\\experimental\\ChronoProofs.v",
+      "line_number": 168,
+      "theorem_name": "bijection_round_trip_convergence",
+      "context": "ChronoMappings.B_to_A (ChronoMappings.A_to_B pA) = pA /\\\n    ChronoMappings.A_to_B (ChronoMappings.B_to_A (ChronoMappings.A_to_B pA)) = ChronoMappings.A_to_B pA.\nProof.\n  Admitted.\n\nEnd ChronoProofs.",
+      "priority": "medium",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\infra\\ChronoPraxis\\theorems\\experimental\\ChronoProofs.v",
+      "line_number": 248,
+      "theorem_name": "temporal_consistency",
+      "context": "ChronoMappings.A_to_C pA = (ChronoMappings.B_to_C (ChronoMappings.A_to_B pA)) /\\ \n    ChronoMappings.A_to_C pA = (ChronoMappings.A_to_C pA).\nProof.\n  Admitted.\n\n(* Quick smoketest lemmas (ensure rewrite works across contexts) *)  \nLemma ac_eq_bc (pA:PA) : ChronoMappings.A_to_C pA = ChronoMappings.B_to_C (ChronoMappings.A_to_B pA).",
+      "priority": "medium",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\infra\\ChronoPraxis\\theorems\\experimental\\ChronoProofs.v",
+      "line_number": 254,
+      "theorem_name": "since",
+      "context": "Lemma ac_eq_bc (pA:PA) : ChronoMappings.A_to_C pA = ChronoMappings.B_to_C (ChronoMappings.A_to_B pA).\nProof. \n  (* By definition since map_AC := compose_bij map_AB map_BC *)\n  Admitted.\n\nEnd ConstructiveCore.",
+      "priority": "medium",
+      "module_category": "experimental"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\CosmoPraxis\\subdomains\\Space\\Spec.v",
+      "line_number": 7,
+      "theorem_name": "conservative",
+      "context": "Import TheoProps.\n  Definition V := Space.\n  Theorem conservative : forall \u03c6, V \u03c6 -> \u03c6. (* prove from PXL lemmas chosen for Space *)\nAdmitted. (* must be proved before CI passes; no Admitted in final branch *)\nEnd SpaceSub.",
+      "priority": "medium",
+      "module_category": "other"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\Axiopraxis\\subdomains\\Beauty\\Spec.v",
+      "line_number": 7,
+      "theorem_name": "conservative",
+      "context": "Import TheoProps.\n  Definition V := Beauty.\n  Theorem conservative : forall \u03c6, V \u03c6 -> \u03c6. (* prove from PXL lemmas chosen for Beauty *)\nAdmitted. (* must be proved before CI passes; no Admitted in final branch *)\nEnd BeautySub.",
+      "priority": "medium",
+      "module_category": "other"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\modules\\IEL\\AnthroPraxis\\subdomains\\Life\\Spec.v",
+      "line_number": 7,
+      "theorem_name": "conservative",
+      "context": "Import TheoProps.\n  Definition V := Life.\n  Theorem conservative : forall \u03c6, V \u03c6 -> \u03c6. (* prove from PXL lemmas chosen for Life *)\nAdmitted. (* must be proved before CI passes; no Admitted in final branch *)\nEnd LifeSub.",
+      "priority": "medium",
+      "module_category": "other"
+    },
+    {
+      "file_path": "PXL_IEL_overlay_system\\coq\\Guards\\V4_Conservativity.v",
+      "line_number": 92,
+      "theorem_name": "to",
+      "context": "(* In real implementation, this would pattern match on tau and apply\n     the appropriate adapter lemma to construct the proof *)\n  admit. (* Would be replaced with actual case analysis *)\nAdmitted.\n\n(* === Runtime Safety === *)",
+      "priority": "medium",
+      "module_category": "other"
+    }
+  ],
+  "recommendations": [
+    "\ud83d\udfe1 MEDIUM PRIORITY: 31 infrastructure proofs",
+    "\ud83d\udfe2 LOW PRIORITY: 17 experimental/example proofs",
+    "\ud83d\udca1 Consider quarantining 34 experimental proofs to _experimental/ directories"
+  ]
+}

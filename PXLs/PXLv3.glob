@@ -1,5 +1,5 @@
 DIGEST 4910a1b382699756dd320f58d88f1f3c
-FPXLv3
+FPXLs.PXLv3
 R226:229 Coq.Lists.List <> <> lib
 R231:234 Coq.Bool.Bool <> <> lib
 R236:240 Coq.Arith.Arith <> <> lib
@@ -15,32 +15,32 @@ constr 486:488 PXLv3 Box
 constr 509:511 PXLv3 Dia
 R339:342 Coq.Init.Logic <> ::type_scope:x_'->'_x not
 R336:338 Coq.Init.Datatypes <> nat ind
-R343:346 PXLv3 <> form:1 ind
-R358:361 PXLv3 <> form:1 ind
+R343:346 PXLs.PXLv3 <> form:1 ind
+R358:361 PXLs.PXLv3 <> form:1 ind
 R377:380 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R373:376 PXLv3 <> form:1 ind
-R381:384 PXLv3 <> form:1 ind
+R373:376 PXLs.PXLv3 <> form:1 ind
+R381:384 PXLs.PXLv3 <> form:1 ind
 R401:404 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R397:400 PXLv3 <> form:1 ind
+R397:400 PXLs.PXLv3 <> form:1 ind
 R409:412 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R405:408 PXLv3 <> form:1 ind
-R413:416 PXLv3 <> form:1 ind
+R405:408 PXLs.PXLv3 <> form:1 ind
+R413:416 PXLs.PXLv3 <> form:1 ind
 R433:436 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R429:432 PXLv3 <> form:1 ind
+R429:432 PXLs.PXLv3 <> form:1 ind
 R441:444 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R437:440 PXLv3 <> form:1 ind
-R445:448 PXLv3 <> form:1 ind
+R437:440 PXLs.PXLv3 <> form:1 ind
+R445:448 PXLs.PXLv3 <> form:1 ind
 R465:468 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R461:464 PXLv3 <> form:1 ind
+R461:464 PXLs.PXLv3 <> form:1 ind
 R473:476 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R469:472 PXLv3 <> form:1 ind
-R477:480 PXLv3 <> form:1 ind
+R469:472 PXLs.PXLv3 <> form:1 ind
+R477:480 PXLs.PXLv3 <> form:1 ind
 R496:499 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R492:495 PXLv3 <> form:1 ind
-R500:503 PXLv3 <> form:1 ind
+R492:495 PXLs.PXLv3 <> form:1 ind
+R500:503 PXLs.PXLv3 <> form:1 ind
 R519:522 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R515:518 PXLv3 <> form:1 ind
-R523:526 PXLv3 <> form:1 ind
+R515:518 PXLs.PXLv3 <> form:1 ind
+R523:526 PXLs.PXLv3 <> form:1 ind
 scheme 310:313 PXLv3 form_rect
 scheme 310:313 PXLv3 form_ind
 scheme 310:313 PXLv3 form_rec
@@ -56,125 +56,125 @@ constr 1002:1012 PXLv3 ax_PL_contr
 constr 1061:1067 PXLv3 rule_MP
 constr 1129:1136 PXLv3 rule_Nec
 R583:586 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R579:582 PXLv3 PXLv3 form ind
+R579:582 PXLs.PXLv3 PXLv3 form ind
 binder 613:614 <> φ:5
 binder 616:617 <> ψ:6
-R620:623 PXLv3 <> Prov:3 ind
-R626:629 PXLv3 PXLv3 Impl constr
-R632:634 PXLv3 PXLv3 Box constr
-R637:640 PXLv3 PXLv3 Impl constr
-R642:643 PXLv3 <> φ:5 var
-R645:646 PXLv3 <> ψ:6 var
-R651:654 PXLv3 PXLv3 Impl constr
-R657:659 PXLv3 PXLv3 Box constr
-R661:662 PXLv3 <> φ:5 var
-R666:668 PXLv3 PXLv3 Box constr
-R670:671 PXLv3 <> ψ:6 var
+R620:623 PXLs.PXLv3 <> Prov:3 ind
+R626:629 PXLs.PXLv3 PXLv3 Impl constr
+R632:634 PXLs.PXLv3 PXLv3 Box constr
+R637:640 PXLs.PXLv3 PXLv3 Impl constr
+R642:643 PXLs.PXLv3 <> φ:5 var
+R645:646 PXLs.PXLv3 <> ψ:6 var
+R651:654 PXLs.PXLv3 PXLv3 Impl constr
+R657:659 PXLs.PXLv3 PXLv3 Box constr
+R661:662 PXLs.PXLv3 <> φ:5 var
+R666:668 PXLs.PXLv3 PXLv3 Box constr
+R670:671 PXLs.PXLv3 <> ψ:6 var
 binder 694:695 <> φ:7
-R698:701 PXLv3 <> Prov:3 ind
-R704:707 PXLv3 PXLv3 Impl constr
-R710:712 PXLv3 PXLv3 Box constr
-R714:715 PXLv3 <> φ:7 var
-R718:719 PXLv3 <> φ:7 var
+R698:701 PXLs.PXLv3 <> Prov:3 ind
+R704:707 PXLs.PXLv3 PXLv3 Impl constr
+R710:712 PXLs.PXLv3 PXLv3 Box constr
+R714:715 PXLs.PXLv3 <> φ:7 var
+R718:719 PXLs.PXLv3 <> φ:7 var
 binder 740:741 <> φ:8
-R744:747 PXLv3 <> Prov:3 ind
-R750:753 PXLv3 PXLv3 Impl constr
-R756:758 PXLv3 PXLv3 Box constr
-R760:761 PXLv3 <> φ:8 var
-R765:767 PXLv3 PXLv3 Box constr
-R770:772 PXLv3 PXLv3 Box constr
-R774:775 PXLv3 <> φ:8 var
+R744:747 PXLs.PXLv3 <> Prov:3 ind
+R750:753 PXLs.PXLv3 PXLv3 Impl constr
+R756:758 PXLs.PXLv3 PXLv3 Box constr
+R760:761 PXLs.PXLv3 <> φ:8 var
+R765:767 PXLs.PXLv3 PXLv3 Box constr
+R770:772 PXLs.PXLv3 PXLv3 Box constr
+R774:775 PXLs.PXLv3 <> φ:8 var
 binder 798:799 <> φ:9
-R802:805 PXLv3 <> Prov:3 ind
-R808:811 PXLv3 PXLv3 Impl constr
-R814:816 PXLv3 PXLv3 Dia constr
-R818:819 PXLv3 <> φ:9 var
-R823:825 PXLv3 PXLv3 Box constr
-R828:830 PXLv3 PXLv3 Dia constr
-R832:833 PXLv3 <> φ:9 var
+R802:805 PXLs.PXLv3 <> Prov:3 ind
+R808:811 PXLs.PXLv3 PXLv3 Impl constr
+R814:816 PXLs.PXLv3 PXLv3 Dia constr
+R818:819 PXLs.PXLv3 <> φ:9 var
+R823:825 PXLs.PXLv3 PXLv3 Box constr
+R828:830 PXLs.PXLv3 PXLv3 Dia constr
+R832:833 PXLs.PXLv3 <> φ:9 var
 binder 861:862 <> φ:10
 binder 864:865 <> ψ:11
-R868:871 PXLv3 <> Prov:3 ind
-R874:877 PXLv3 PXLv3 Impl constr
-R879:880 PXLv3 <> φ:10 var
-R883:886 PXLv3 PXLv3 Impl constr
-R888:889 PXLv3 <> ψ:11 var
-R891:892 PXLv3 <> φ:10 var
+R868:871 PXLs.PXLv3 <> Prov:3 ind
+R874:877 PXLs.PXLv3 PXLv3 Impl constr
+R879:880 PXLs.PXLv3 <> φ:10 var
+R883:886 PXLs.PXLv3 PXLv3 Impl constr
+R888:889 PXLs.PXLv3 <> ψ:11 var
+R891:892 PXLs.PXLv3 <> φ:10 var
 binder 920:921 <> φ:12
 binder 923:924 <> ψ:13
 binder 926:927 <> χ:14
-R930:933 PXLv3 <> Prov:3 ind
-R936:939 PXLv3 PXLv3 Impl constr
-R942:945 PXLv3 PXLv3 Impl constr
-R947:948 PXLv3 <> φ:12 var
-R951:954 PXLv3 PXLv3 Impl constr
-R956:957 PXLv3 <> ψ:13 var
-R959:960 PXLv3 <> χ:14 var
-R965:968 PXLv3 PXLv3 Impl constr
-R971:974 PXLv3 PXLv3 Impl constr
-R976:977 PXLv3 <> φ:12 var
-R979:980 PXLv3 <> ψ:13 var
-R984:987 PXLv3 PXLv3 Impl constr
-R989:990 PXLv3 <> φ:12 var
-R992:993 PXLv3 <> χ:14 var
+R930:933 PXLs.PXLv3 <> Prov:3 ind
+R936:939 PXLs.PXLv3 PXLv3 Impl constr
+R942:945 PXLs.PXLv3 PXLv3 Impl constr
+R947:948 PXLs.PXLv3 <> φ:12 var
+R951:954 PXLs.PXLv3 PXLv3 Impl constr
+R956:957 PXLs.PXLv3 <> ψ:13 var
+R959:960 PXLs.PXLv3 <> χ:14 var
+R965:968 PXLs.PXLv3 PXLv3 Impl constr
+R971:974 PXLs.PXLv3 PXLv3 Impl constr
+R976:977 PXLs.PXLv3 <> φ:12 var
+R979:980 PXLs.PXLv3 <> ψ:13 var
+R984:987 PXLs.PXLv3 PXLv3 Impl constr
+R989:990 PXLs.PXLv3 <> φ:12 var
+R992:993 PXLs.PXLv3 <> χ:14 var
 binder 1023:1024 <> φ:15
-R1027:1030 PXLv3 <> Prov:3 ind
-R1033:1036 PXLv3 PXLv3 Impl constr
-R1039:1041 PXLv3 PXLv3 Neg constr
-R1044:1046 PXLv3 PXLv3 Neg constr
-R1048:1049 PXLv3 <> φ:15 var
-R1053:1054 PXLv3 <> φ:15 var
+R1027:1030 PXLs.PXLv3 <> Prov:3 ind
+R1033:1036 PXLs.PXLv3 PXLv3 Impl constr
+R1039:1041 PXLs.PXLv3 PXLv3 Neg constr
+R1044:1046 PXLs.PXLv3 PXLv3 Neg constr
+R1048:1049 PXLs.PXLv3 <> φ:15 var
+R1053:1054 PXLs.PXLv3 <> φ:15 var
 binder 1078:1079 <> φ:16
 binder 1081:1082 <> ψ:17
 R1102:1105 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1085:1088 PXLv3 <> Prov:3 ind
-R1091:1094 PXLv3 PXLv3 Impl constr
-R1096:1097 PXLv3 <> φ:16 var
-R1099:1100 PXLv3 <> ψ:17 var
+R1085:1088 PXLs.PXLv3 <> Prov:3 ind
+R1091:1094 PXLs.PXLv3 PXLv3 Impl constr
+R1096:1097 PXLs.PXLv3 <> φ:16 var
+R1099:1100 PXLs.PXLv3 <> ψ:17 var
 R1113:1116 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1106:1109 PXLv3 <> Prov:3 ind
-R1111:1112 PXLv3 <> φ:16 var
-R1117:1120 PXLv3 <> Prov:3 ind
-R1122:1123 PXLv3 <> ψ:17 var
+R1106:1109 PXLs.PXLv3 <> Prov:3 ind
+R1111:1112 PXLs.PXLv3 <> φ:16 var
+R1117:1120 PXLs.PXLv3 <> Prov:3 ind
+R1122:1123 PXLs.PXLv3 <> ψ:17 var
 binder 1147:1148 <> φ:18
 R1158:1161 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1151:1154 PXLv3 <> Prov:3 ind
-R1156:1157 PXLv3 <> φ:18 var
-R1162:1165 PXLv3 <> Prov:3 ind
-R1168:1170 PXLv3 PXLv3 Box constr
-R1172:1173 PXLv3 <> φ:18 var
+R1151:1154 PXLs.PXLv3 <> Prov:3 ind
+R1156:1157 PXLs.PXLv3 <> φ:18 var
+R1162:1165 PXLs.PXLv3 <> Prov:3 ind
+R1168:1170 PXLs.PXLv3 PXLv3 Box constr
+R1172:1173 PXLs.PXLv3 <> φ:18 var
 scheme 572:575 PXLv3 Prov_ind
 scheme 572:575 PXLv3 Prov_sind
 def 1228:1230 PXLv3 Top
-R1234:1237 PXLv3 PXLv3 form ind
-R1242:1244 PXLv3 PXLv3 Neg constr
-R1246:1248 PXLv3 PXLv3 Bot constr
+R1234:1237 PXLs.PXLv3 PXLv3 form ind
+R1242:1244 PXLs.PXLv3 PXLv3 Neg constr
+R1246:1248 PXLs.PXLv3 PXLv3 Bot constr
 def 1265:1270 PXLv3 Biimpl
-R1281:1284 PXLv3 PXLv3 form ind
+R1281:1284 PXLs.PXLv3 PXLv3 form ind
 binder 1273:1274 <> φ:19
 binder 1276:1277 <> ψ:20
-R1289:1292 PXLv3 PXLv3 form ind
-R1297:1300 PXLv3 PXLv3 Conj constr
-R1303:1306 PXLv3 PXLv3 Impl constr
-R1308:1309 PXLv3 <> φ:19 var
-R1311:1312 PXLv3 <> ψ:20 var
-R1316:1319 PXLv3 PXLv3 Impl constr
-R1321:1322 PXLv3 <> ψ:20 var
-R1324:1325 PXLv3 <> φ:19 var
+R1289:1292 PXLs.PXLv3 PXLv3 form ind
+R1297:1300 PXLs.PXLv3 PXLv3 Conj constr
+R1303:1306 PXLs.PXLv3 PXLv3 Impl constr
+R1308:1309 PXLs.PXLv3 <> φ:19 var
+R1311:1312 PXLs.PXLv3 <> ψ:20 var
+R1316:1319 PXLs.PXLv3 PXLv3 Impl constr
+R1321:1322 PXLs.PXLv3 <> ψ:20 var
+R1324:1325 PXLs.PXLv3 <> φ:19 var
 ax 1380:1396 PXLv3 semantic_validity
 R1404:1407 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1400:1403 PXLv3 PXLv3 form ind
+R1400:1403 PXLs.PXLv3 PXLv3 form ind
 ax 1423:1431 PXLv3 soundness
 binder 1442:1443 <> φ:23
 R1453:1456 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1446:1449 PXLv3 PXLv3 Prov ind
-R1451:1452 PXLv3 <> φ:23 var
-R1457:1473 PXLv3 PXLv3 semantic_validity defax
-R1475:1476 PXLv3 <> φ:23 var
+R1446:1449 PXLs.PXLv3 PXLv3 Prov ind
+R1451:1452 PXLs.PXLv3 <> φ:23 var
+R1457:1473 PXLs.PXLv3 PXLv3 semantic_validity defax
+R1475:1476 PXLs.PXLv3 <> φ:23 var
 prf 1527:1540 PXLv3 prov_impl_refl
 binder 1551:1552 <> φ:26
-R1555:1558 PXLv3 PXLv3 Prov ind
-R1561:1564 PXLv3 PXLv3 Impl constr
-R1566:1567 PXLv3 <> φ:26 var
-R1569:1570 PXLv3 <> φ:26 var
-R1675:1679 PXLv3 PXLv3 <> mod
+R1555:1558 PXLs.PXLv3 PXLv3 Prov ind
+R1561:1564 PXLs.PXLv3 PXLv3 Impl constr
+R1566:1567 PXLs.PXLv3 <> φ:26 var
+R1569:1570 PXLs.PXLv3 <> φ:26 var
+R1675:1679 PXLs.PXLv3 PXLv3 <> mod

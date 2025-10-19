@@ -1,330 +1,376 @@
-DIGEST dff55d4fb39c3160ad37f4482b3220ec
+DIGEST a00b6eed65fa35a242b43e23c2c5a952
 FChronoPraxis_PXL_Proofs
 R269:272 Coq.Lists.List <> <> lib
 mod 283:305 <> ChronoPraxis_PXL_Proofs
 ind 368:371 ChronoPraxis_PXL_Proofs form
 constr 387:390 ChronoPraxis_PXL_Proofs Atom
 constr 410:412 ChronoPraxis_PXL_Proofs Bot
-constr 427:429 ChronoPraxis_PXL_Proofs Neg
-constr 450:453 ChronoPraxis_PXL_Proofs Conj
-constr 482:485 ChronoPraxis_PXL_Proofs Disj
-constr 514:517 ChronoPraxis_PXL_Proofs Impl
-constr 546:548 ChronoPraxis_PXL_Proofs Box
-constr 569:571 ChronoPraxis_PXL_Proofs Dia
+constr 425:427 ChronoPraxis_PXL_Proofs Neg
+constr 448:451 ChronoPraxis_PXL_Proofs Conj
+constr 480:483 ChronoPraxis_PXL_Proofs Disj
+constr 512:515 ChronoPraxis_PXL_Proofs Impl
+constr 544:546 ChronoPraxis_PXL_Proofs Box
+constr 567:569 ChronoPraxis_PXL_Proofs Dia
 R397:400 Coq.Init.Logic <> ::type_scope:x_'->'_x not
 R394:396 Coq.Init.Datatypes <> nat ind
 R401:404 ChronoPraxis_PXL_Proofs <> form:1 ind
 R416:419 ChronoPraxis_PXL_Proofs <> form:1 ind
-R437:440 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R433:436 ChronoPraxis_PXL_Proofs <> form:1 ind
-R441:444 ChronoPraxis_PXL_Proofs <> form:1 ind
-R461:464 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R457:460 ChronoPraxis_PXL_Proofs <> form:1 ind
-R469:472 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R465:468 ChronoPraxis_PXL_Proofs <> form:1 ind
-R473:476 ChronoPraxis_PXL_Proofs <> form:1 ind
-R493:496 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R489:492 ChronoPraxis_PXL_Proofs <> form:1 ind
-R501:504 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R497:500 ChronoPraxis_PXL_Proofs <> form:1 ind
-R505:508 ChronoPraxis_PXL_Proofs <> form:1 ind
-R525:528 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R521:524 ChronoPraxis_PXL_Proofs <> form:1 ind
-R533:536 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R529:532 ChronoPraxis_PXL_Proofs <> form:1 ind
-R537:540 ChronoPraxis_PXL_Proofs <> form:1 ind
-R556:559 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R552:555 ChronoPraxis_PXL_Proofs <> form:1 ind
-R560:563 ChronoPraxis_PXL_Proofs <> form:1 ind
-R579:582 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R575:578 ChronoPraxis_PXL_Proofs <> form:1 ind
-R583:586 ChronoPraxis_PXL_Proofs <> form:1 ind
+R435:438 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R431:434 ChronoPraxis_PXL_Proofs <> form:1 ind
+R439:442 ChronoPraxis_PXL_Proofs <> form:1 ind
+R459:462 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R455:458 ChronoPraxis_PXL_Proofs <> form:1 ind
+R467:470 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R463:466 ChronoPraxis_PXL_Proofs <> form:1 ind
+R471:474 ChronoPraxis_PXL_Proofs <> form:1 ind
+R491:494 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R487:490 ChronoPraxis_PXL_Proofs <> form:1 ind
+R499:502 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R495:498 ChronoPraxis_PXL_Proofs <> form:1 ind
+R503:506 ChronoPraxis_PXL_Proofs <> form:1 ind
+R523:526 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R519:522 ChronoPraxis_PXL_Proofs <> form:1 ind
+R531:534 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R527:530 ChronoPraxis_PXL_Proofs <> form:1 ind
+R535:538 ChronoPraxis_PXL_Proofs <> form:1 ind
+R554:557 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R550:553 ChronoPraxis_PXL_Proofs <> form:1 ind
+R558:561 ChronoPraxis_PXL_Proofs <> form:1 ind
+R577:580 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R573:576 ChronoPraxis_PXL_Proofs <> form:1 ind
+R581:584 ChronoPraxis_PXL_Proofs <> form:1 ind
 scheme 368:371 ChronoPraxis_PXL_Proofs form_rect
 scheme 368:371 ChronoPraxis_PXL_Proofs form_ind
 scheme 368:371 ChronoPraxis_PXL_Proofs form_rec
 scheme 368:371 ChronoPraxis_PXL_Proofs form_sind
-ind 600:603 ChronoPraxis_PXL_Proofs Prov
-constr 627:630 ChronoPraxis_PXL_Proofs ax_K
-constr 708:711 ChronoPraxis_PXL_Proofs ax_T
-constr 754:757 ChronoPraxis_PXL_Proofs ax_4
-constr 812:815 ChronoPraxis_PXL_Proofs ax_5
-constr 870:878 ChronoPraxis_PXL_Proofs ax_PL_imp
-constr 928:934 ChronoPraxis_PXL_Proofs rule_MP
-constr 996:1003 ChronoPraxis_PXL_Proofs rule_Nec
-R611:614 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R607:610 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
-binder 641:642 <> φ:5
-binder 644:645 <> ψ:6
-R648:651 ChronoPraxis_PXL_Proofs <> Prov:3 ind
-R654:657 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
-R660:662 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
-R665:668 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
-R670:671 ChronoPraxis_PXL_Proofs <> φ:5 var
-R673:674 ChronoPraxis_PXL_Proofs <> ψ:6 var
-R679:682 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
-R685:687 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
-R689:690 ChronoPraxis_PXL_Proofs <> φ:5 var
-R694:696 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
-R698:699 ChronoPraxis_PXL_Proofs <> ψ:6 var
-binder 722:723 <> φ:7
-R726:729 ChronoPraxis_PXL_Proofs <> Prov:3 ind
-R732:735 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
-R738:740 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
-R742:743 ChronoPraxis_PXL_Proofs <> φ:7 var
-R746:747 ChronoPraxis_PXL_Proofs <> φ:7 var
-binder 768:769 <> φ:8
-R772:775 ChronoPraxis_PXL_Proofs <> Prov:3 ind
-R778:781 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
-R784:786 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
-R788:789 ChronoPraxis_PXL_Proofs <> φ:8 var
-R793:795 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
-R798:800 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
-R802:803 ChronoPraxis_PXL_Proofs <> φ:8 var
-binder 826:827 <> φ:9
-R830:833 ChronoPraxis_PXL_Proofs <> Prov:3 ind
-R836:839 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
-R842:844 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Dia constr
-R846:847 ChronoPraxis_PXL_Proofs <> φ:9 var
-R851:853 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
-R856:858 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Dia constr
-R860:861 ChronoPraxis_PXL_Proofs <> φ:9 var
-binder 889:890 <> φ:10
-binder 892:893 <> ψ:11
-R896:899 ChronoPraxis_PXL_Proofs <> Prov:3 ind
-R902:905 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
-R907:908 ChronoPraxis_PXL_Proofs <> φ:10 var
-R911:914 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
-R916:917 ChronoPraxis_PXL_Proofs <> ψ:11 var
-R919:920 ChronoPraxis_PXL_Proofs <> φ:10 var
-binder 945:946 <> φ:12
-binder 948:949 <> ψ:13
-R969:972 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R952:955 ChronoPraxis_PXL_Proofs <> Prov:3 ind
-R958:961 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
-R963:964 ChronoPraxis_PXL_Proofs <> φ:12 var
-R966:967 ChronoPraxis_PXL_Proofs <> ψ:13 var
-R980:983 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R973:976 ChronoPraxis_PXL_Proofs <> Prov:3 ind
-R978:979 ChronoPraxis_PXL_Proofs <> φ:12 var
-R984:987 ChronoPraxis_PXL_Proofs <> Prov:3 ind
-R989:990 ChronoPraxis_PXL_Proofs <> ψ:13 var
-binder 1014:1015 <> φ:14
-R1025:1028 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1018:1021 ChronoPraxis_PXL_Proofs <> Prov:3 ind
-R1023:1024 ChronoPraxis_PXL_Proofs <> φ:14 var
-R1029:1032 ChronoPraxis_PXL_Proofs <> Prov:3 ind
-R1035:1037 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
-R1039:1040 ChronoPraxis_PXL_Proofs <> φ:14 var
-scheme 600:603 ChronoPraxis_PXL_Proofs Prov_ind
-scheme 600:603 ChronoPraxis_PXL_Proofs Prov_sind
-ind 1098:1105 ChronoPraxis_PXL_Proofs cpx_form
-constr 1121:1128 ChronoPraxis_PXL_Proofs CPX_Atom
-constr 1152:1158 ChronoPraxis_PXL_Proofs CPX_Bot
-constr 1175:1181 ChronoPraxis_PXL_Proofs CPX_Neg
-constr 1210:1217 ChronoPraxis_PXL_Proofs CPX_Conj
-constr 1258:1265 ChronoPraxis_PXL_Proofs CPX_Disj
-constr 1306:1313 ChronoPraxis_PXL_Proofs CPX_Impl
-constr 1354:1360 ChronoPraxis_PXL_Proofs CPX_Box
-constr 1389:1395 ChronoPraxis_PXL_Proofs CPX_Dia
-R1135:1138 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1132:1134 Coq.Init.Datatypes <> nat ind
-R1139:1146 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
-R1162:1169 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
-R1193:1196 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1185:1192 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
-R1197:1204 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
-R1229:1232 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1221:1228 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
-R1241:1244 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1233:1240 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
-R1245:1252 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
-R1277:1280 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1269:1276 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
-R1289:1292 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1281:1288 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
-R1293:1300 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
-R1325:1328 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1317:1324 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
-R1337:1340 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1329:1336 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
-R1341:1348 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
-R1372:1375 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1364:1371 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
-R1376:1383 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
-R1407:1410 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1399:1406 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
-R1411:1418 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
-scheme 1098:1105 ChronoPraxis_PXL_Proofs cpx_form_rect
-scheme 1098:1105 ChronoPraxis_PXL_Proofs cpx_form_ind
-scheme 1098:1105 ChronoPraxis_PXL_Proofs cpx_form_rec
-scheme 1098:1105 ChronoPraxis_PXL_Proofs cpx_form_sind
-ind 1432:1439 ChronoPraxis_PXL_Proofs CPX_Prov
-constr 1467:1474 ChronoPraxis_PXL_Proofs cpx_ax_K
-constr 1574:1581 ChronoPraxis_PXL_Proofs cpx_ax_T
-constr 1633:1640 ChronoPraxis_PXL_Proofs cpx_ax_4
-constr 1712:1719 ChronoPraxis_PXL_Proofs cpx_ax_5
-constr 1791:1803 ChronoPraxis_PXL_Proofs cpx_ax_PL_imp
-constr 1860:1870 ChronoPraxis_PXL_Proofs cpx_rule_MP
-constr 1942:1953 ChronoPraxis_PXL_Proofs cpx_rule_Nec
-R1451:1454 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1443:1450 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_form ind
-binder 1485:1485 <> p:19
-binder 1487:1487 <> q:20
-R1490:1497 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
-R1500:1507 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R1510:1516 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
-R1519:1526 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R1528:1528 ChronoPraxis_PXL_Proofs <> p:19 var
-R1530:1530 ChronoPraxis_PXL_Proofs <> q:20 var
-R1535:1542 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R1545:1551 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
-R1553:1553 ChronoPraxis_PXL_Proofs <> p:19 var
-R1557:1563 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
-R1565:1565 ChronoPraxis_PXL_Proofs <> q:20 var
-binder 1592:1592 <> p:21
-R1595:1602 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
-R1605:1612 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R1615:1621 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
-R1623:1623 ChronoPraxis_PXL_Proofs <> p:21 var
-R1626:1626 ChronoPraxis_PXL_Proofs <> p:21 var
-binder 1651:1651 <> p:22
-R1654:1661 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
-R1664:1671 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R1674:1680 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
-R1682:1682 ChronoPraxis_PXL_Proofs <> p:22 var
-R1686:1692 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
-R1695:1701 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
-R1703:1703 ChronoPraxis_PXL_Proofs <> p:22 var
-binder 1730:1730 <> p:23
-R1733:1740 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
-R1743:1750 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R1753:1759 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Dia constr
-R1761:1761 ChronoPraxis_PXL_Proofs <> p:23 var
-R1765:1771 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
-R1774:1780 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Dia constr
-R1782:1782 ChronoPraxis_PXL_Proofs <> p:23 var
-binder 1814:1814 <> p:24
-binder 1816:1816 <> q:25
-R1819:1826 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
-R1829:1836 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R1838:1838 ChronoPraxis_PXL_Proofs <> p:24 var
-R1841:1848 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R1850:1850 ChronoPraxis_PXL_Proofs <> q:25 var
-R1852:1852 ChronoPraxis_PXL_Proofs <> p:24 var
-binder 1881:1881 <> p:26
-binder 1883:1883 <> q:27
-R1909:1912 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1886:1893 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
-R1896:1903 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R1905:1905 ChronoPraxis_PXL_Proofs <> p:26 var
-R1907:1907 ChronoPraxis_PXL_Proofs <> q:27 var
-R1923:1926 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1913:1920 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
-R1922:1922 ChronoPraxis_PXL_Proofs <> p:26 var
-R1927:1934 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
-R1936:1936 ChronoPraxis_PXL_Proofs <> q:27 var
-binder 1964:1964 <> p:28
-R1977:1980 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1967:1974 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
-R1976:1976 ChronoPraxis_PXL_Proofs <> p:28 var
-R1981:1988 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
-R1991:1997 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
-R1999:1999 ChronoPraxis_PXL_Proofs <> p:28 var
-scheme 1432:1439 ChronoPraxis_PXL_Proofs CPX_Prov_ind
-scheme 1432:1439 ChronoPraxis_PXL_Proofs CPX_Prov_sind
-def 2048:2057 ChronoPraxis_PXL_Proofs pxl_to_cpx
-R2065:2068 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
-binder 2060:2061 <> φ:29
-R2073:2080 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_form ind
-R2093:2094 ChronoPraxis_PXL_Proofs <> φ:29 var
-R2105:2108 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Atom constr
-R2115:2122 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Atom constr
-R2130:2132 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Bot constr
-R2137:2143 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Bot constr
-R2149:2151 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Neg constr
-R2159:2165 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Neg constr
-R2168:2177 ChronoPraxis_PXL_Proofs <> pxl_to_cpx:30 def
-R2187:2190 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Conj constr
-R2201:2208 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Conj constr
-R2211:2220 ChronoPraxis_PXL_Proofs <> pxl_to_cpx:30 def
-R2227:2236 ChronoPraxis_PXL_Proofs <> pxl_to_cpx:30 def
-R2246:2249 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Disj constr
-R2260:2267 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Disj constr
-R2270:2279 ChronoPraxis_PXL_Proofs <> pxl_to_cpx:30 def
-R2286:2295 ChronoPraxis_PXL_Proofs <> pxl_to_cpx:30 def
-R2305:2308 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
-R2319:2326 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R2329:2338 ChronoPraxis_PXL_Proofs <> pxl_to_cpx:30 def
-R2345:2354 ChronoPraxis_PXL_Proofs <> pxl_to_cpx:30 def
-R2364:2366 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
-R2374:2380 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
-R2383:2392 ChronoPraxis_PXL_Proofs <> pxl_to_cpx:30 def
-R2402:2404 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Dia constr
-R2412:2418 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Dia constr
-R2421:2430 ChronoPraxis_PXL_Proofs <> pxl_to_cpx:30 def
-prf 2530:2562 ChronoPraxis_PXL_Proofs pxl_embedding_preserves_structure
-R2578:2581 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
-binder 2573:2574 <> φ:32
-R2593:2596 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R2586:2589 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Prov ind
-R2591:2592 ChronoPraxis_PXL_Proofs <> φ:32 var
-R2597:2604 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Prov ind
-R2607:2616 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_to_cpx def
-R2618:2619 ChronoPraxis_PXL_Proofs <> φ:32 var
-prf 2917:2943 ChronoPraxis_PXL_Proofs cpx_projection_conservative
-R2959:2962 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
-binder 2954:2955 <> φ:33
-R2991:2994 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R2967:2974 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Prov ind
-R2977:2986 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_to_cpx def
-R2988:2989 ChronoPraxis_PXL_Proofs <> φ:33 var
-R2995:2998 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Prov ind
-R3000:3001 ChronoPraxis_PXL_Proofs <> φ:33 var
-prf 3303:3327 ChronoPraxis_PXL_Proofs cpx_identity_preservation
-R3343:3350 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_form ind
-binder 3338:3339 <> φ:34
-R3355:3362 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Prov ind
-R3365:3372 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R3374:3375 ChronoPraxis_PXL_Proofs <> φ:34 var
-R3377:3378 ChronoPraxis_PXL_Proofs <> φ:34 var
-prf 3669:3696 ChronoPraxis_PXL_Proofs modal_necessitation_transfer
-R3712:3715 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
-binder 3707:3708 <> φ:35
-R3727:3730 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R3720:3723 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Prov ind
-R3725:3726 ChronoPraxis_PXL_Proofs <> φ:35 var
-R3731:3738 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Prov ind
-R3741:3747 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
-R3750:3759 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_to_cpx def
-R3761:3762 ChronoPraxis_PXL_Proofs <> φ:35 var
-R3973:3984 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_rule_Nec constr
-R3973:3984 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_rule_Nec constr
-R3995:4027 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_embedding_preserves_structure prfax
-R3995:4027 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_embedding_preserves_structure prfax
-prf 4117:4144 ChronoPraxis_PXL_Proofs bijection_soundness_identity
-R4160:4163 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
-binder 4155:4156 <> φ:36
-R4181:4183 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R4168:4177 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_to_cpx def
-R4179:4180 ChronoPraxis_PXL_Proofs <> φ:36 var
-R4184:4193 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_to_cpx def
-R4195:4196 ChronoPraxis_PXL_Proofs <> φ:36 var
-prf 4398:4419 ChronoPraxis_PXL_Proofs conservative_extension
-R4435:4438 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
-binder 4430:4431 <> φ:37
-R4443:4443 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R4477:4485 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R4511:4511 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R4444:4450 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R4464:4465 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R4456:4463 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_form ind
-binder 4451:4452 <> ψ:38
-R4466:4473 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Prov ind
-R4475:4476 ChronoPraxis_PXL_Proofs <> ψ:38 var
-R4486:4492 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R4502:4503 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R4498:4501 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
-binder 4493:4494 <> χ:39
-R4504:4507 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Prov ind
-R4509:4510 ChronoPraxis_PXL_Proofs <> χ:39 var
-R4775:4797 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs <> mod
+ind 598:601 ChronoPraxis_PXL_Proofs Prov
+constr 625:628 ChronoPraxis_PXL_Proofs ax_K
+constr 706:709 ChronoPraxis_PXL_Proofs ax_T
+constr 752:755 ChronoPraxis_PXL_Proofs ax_4
+constr 810:813 ChronoPraxis_PXL_Proofs ax_5
+constr 868:876 ChronoPraxis_PXL_Proofs ax_PL_imp
+constr 926:932 ChronoPraxis_PXL_Proofs rule_MP
+constr 994:1001 ChronoPraxis_PXL_Proofs rule_Nec
+R609:612 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R605:608 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
+binder 639:640 <> φ:5
+binder 642:643 <> ψ:6
+R646:649 ChronoPraxis_PXL_Proofs <> Prov:3 ind
+R652:655 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R658:660 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
+R663:666 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R668:669 ChronoPraxis_PXL_Proofs <> φ:5 var
+R671:672 ChronoPraxis_PXL_Proofs <> ψ:6 var
+R677:680 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R683:685 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
+R687:688 ChronoPraxis_PXL_Proofs <> φ:5 var
+R692:694 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
+R696:697 ChronoPraxis_PXL_Proofs <> ψ:6 var
+binder 720:721 <> φ:7
+R724:727 ChronoPraxis_PXL_Proofs <> Prov:3 ind
+R730:733 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R736:738 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
+R740:741 ChronoPraxis_PXL_Proofs <> φ:7 var
+R744:745 ChronoPraxis_PXL_Proofs <> φ:7 var
+binder 766:767 <> φ:8
+R770:773 ChronoPraxis_PXL_Proofs <> Prov:3 ind
+R776:779 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R782:784 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
+R786:787 ChronoPraxis_PXL_Proofs <> φ:8 var
+R791:793 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
+R796:798 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
+R800:801 ChronoPraxis_PXL_Proofs <> φ:8 var
+binder 824:825 <> φ:9
+R828:831 ChronoPraxis_PXL_Proofs <> Prov:3 ind
+R834:837 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R840:842 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Dia constr
+R844:845 ChronoPraxis_PXL_Proofs <> φ:9 var
+R849:851 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
+R854:856 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Dia constr
+R858:859 ChronoPraxis_PXL_Proofs <> φ:9 var
+binder 887:888 <> φ:10
+binder 890:891 <> ψ:11
+R894:897 ChronoPraxis_PXL_Proofs <> Prov:3 ind
+R900:903 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R905:906 ChronoPraxis_PXL_Proofs <> φ:10 var
+R909:912 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R914:915 ChronoPraxis_PXL_Proofs <> ψ:11 var
+R917:918 ChronoPraxis_PXL_Proofs <> φ:10 var
+binder 943:944 <> φ:12
+binder 946:947 <> ψ:13
+R967:970 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R950:953 ChronoPraxis_PXL_Proofs <> Prov:3 ind
+R956:959 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R961:962 ChronoPraxis_PXL_Proofs <> φ:12 var
+R964:965 ChronoPraxis_PXL_Proofs <> ψ:13 var
+R978:981 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R971:974 ChronoPraxis_PXL_Proofs <> Prov:3 ind
+R976:977 ChronoPraxis_PXL_Proofs <> φ:12 var
+R982:985 ChronoPraxis_PXL_Proofs <> Prov:3 ind
+R987:988 ChronoPraxis_PXL_Proofs <> ψ:13 var
+binder 1012:1013 <> φ:14
+R1023:1026 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1016:1019 ChronoPraxis_PXL_Proofs <> Prov:3 ind
+R1021:1022 ChronoPraxis_PXL_Proofs <> φ:14 var
+R1027:1030 ChronoPraxis_PXL_Proofs <> Prov:3 ind
+R1033:1035 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
+R1037:1038 ChronoPraxis_PXL_Proofs <> φ:14 var
+scheme 598:601 ChronoPraxis_PXL_Proofs Prov_ind
+scheme 598:601 ChronoPraxis_PXL_Proofs Prov_sind
+ind 1096:1103 ChronoPraxis_PXL_Proofs cpx_form
+constr 1119:1126 ChronoPraxis_PXL_Proofs CPX_Atom
+constr 1150:1156 ChronoPraxis_PXL_Proofs CPX_Bot
+constr 1173:1179 ChronoPraxis_PXL_Proofs CPX_Neg
+constr 1208:1215 ChronoPraxis_PXL_Proofs CPX_Conj
+constr 1256:1263 ChronoPraxis_PXL_Proofs CPX_Disj
+constr 1304:1311 ChronoPraxis_PXL_Proofs CPX_Impl
+constr 1352:1358 ChronoPraxis_PXL_Proofs CPX_Box
+constr 1387:1393 ChronoPraxis_PXL_Proofs CPX_Dia
+R1133:1136 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1130:1132 Coq.Init.Datatypes <> nat ind
+R1137:1144 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1160:1167 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1191:1194 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1183:1190 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1195:1202 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1227:1230 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1219:1226 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1239:1242 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1231:1238 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1243:1250 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1275:1278 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1267:1274 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1287:1290 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1279:1286 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1291:1298 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1323:1326 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1315:1322 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1335:1338 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1327:1334 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1339:1346 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1370:1373 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1362:1369 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1374:1381 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1405:1408 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1397:1404 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1409:1416 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+scheme 1096:1103 ChronoPraxis_PXL_Proofs cpx_form_rect
+scheme 1096:1103 ChronoPraxis_PXL_Proofs cpx_form_ind
+scheme 1096:1103 ChronoPraxis_PXL_Proofs cpx_form_rec
+scheme 1096:1103 ChronoPraxis_PXL_Proofs cpx_form_sind
+ind 1430:1437 ChronoPraxis_PXL_Proofs CPX_Prov
+constr 1465:1472 ChronoPraxis_PXL_Proofs cpx_ax_K
+constr 1572:1579 ChronoPraxis_PXL_Proofs cpx_ax_T
+constr 1631:1638 ChronoPraxis_PXL_Proofs cpx_ax_4
+constr 1710:1717 ChronoPraxis_PXL_Proofs cpx_ax_5
+constr 1789:1801 ChronoPraxis_PXL_Proofs cpx_ax_PL_imp
+constr 1858:1871 ChronoPraxis_PXL_Proofs cpx_ax_PL_comp
+constr 1982:1993 ChronoPraxis_PXL_Proofs cpx_ax_PL_id
+constr 2087:2097 ChronoPraxis_PXL_Proofs cpx_rule_MP
+constr 2169:2180 ChronoPraxis_PXL_Proofs cpx_rule_Nec
+R1449:1452 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1441:1448 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_form ind
+binder 1483:1483 <> p:19
+binder 1485:1485 <> q:20
+R1488:1495 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
+R1498:1505 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1508:1514 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
+R1517:1524 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1526:1526 ChronoPraxis_PXL_Proofs <> p:19 var
+R1528:1528 ChronoPraxis_PXL_Proofs <> q:20 var
+R1533:1540 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1543:1549 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
+R1551:1551 ChronoPraxis_PXL_Proofs <> p:19 var
+R1555:1561 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
+R1563:1563 ChronoPraxis_PXL_Proofs <> q:20 var
+binder 1590:1590 <> p:21
+R1593:1600 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
+R1603:1610 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1613:1619 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
+R1621:1621 ChronoPraxis_PXL_Proofs <> p:21 var
+R1624:1624 ChronoPraxis_PXL_Proofs <> p:21 var
+binder 1649:1649 <> p:22
+R1652:1659 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
+R1662:1669 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1672:1678 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
+R1680:1680 ChronoPraxis_PXL_Proofs <> p:22 var
+R1684:1690 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
+R1693:1699 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
+R1701:1701 ChronoPraxis_PXL_Proofs <> p:22 var
+binder 1728:1728 <> p:23
+R1731:1738 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
+R1741:1748 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1751:1757 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Dia constr
+R1759:1759 ChronoPraxis_PXL_Proofs <> p:23 var
+R1763:1769 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
+R1772:1778 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Dia constr
+R1780:1780 ChronoPraxis_PXL_Proofs <> p:23 var
+binder 1812:1812 <> p:24
+binder 1814:1814 <> q:25
+R1817:1824 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
+R1827:1834 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1836:1836 ChronoPraxis_PXL_Proofs <> p:24 var
+R1839:1846 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1848:1848 ChronoPraxis_PXL_Proofs <> q:25 var
+R1850:1850 ChronoPraxis_PXL_Proofs <> p:24 var
+binder 1882:1882 <> p:26
+binder 1884:1884 <> q:27
+binder 1886:1886 <> r:28
+R1889:1896 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
+R1899:1906 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1909:1916 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1918:1918 ChronoPraxis_PXL_Proofs <> p:26 var
+R1921:1928 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1930:1930 ChronoPraxis_PXL_Proofs <> q:27 var
+R1932:1932 ChronoPraxis_PXL_Proofs <> r:28 var
+R1937:1944 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1947:1954 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1956:1956 ChronoPraxis_PXL_Proofs <> p:26 var
+R1958:1958 ChronoPraxis_PXL_Proofs <> q:27 var
+R1962:1969 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1971:1971 ChronoPraxis_PXL_Proofs <> p:26 var
+R1973:1973 ChronoPraxis_PXL_Proofs <> r:28 var
+binder 2004:2004 <> p:29
+R2007:2014 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
+R2017:2024 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R2026:2026 ChronoPraxis_PXL_Proofs <> p:29 var
+R2028:2028 ChronoPraxis_PXL_Proofs <> p:29 var
+binder 2108:2108 <> p:30
+binder 2110:2110 <> q:31
+R2136:2139 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2113:2120 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
+R2123:2130 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R2132:2132 ChronoPraxis_PXL_Proofs <> p:30 var
+R2134:2134 ChronoPraxis_PXL_Proofs <> q:31 var
+R2150:2153 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2140:2147 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
+R2149:2149 ChronoPraxis_PXL_Proofs <> p:30 var
+R2154:2161 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
+R2163:2163 ChronoPraxis_PXL_Proofs <> q:31 var
+binder 2191:2191 <> p:32
+R2204:2207 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2194:2201 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
+R2203:2203 ChronoPraxis_PXL_Proofs <> p:32 var
+R2208:2215 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
+R2218:2224 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
+R2226:2226 ChronoPraxis_PXL_Proofs <> p:32 var
+scheme 1430:1437 ChronoPraxis_PXL_Proofs CPX_Prov_ind
+scheme 1430:1437 ChronoPraxis_PXL_Proofs CPX_Prov_sind
+def 2275:2284 ChronoPraxis_PXL_Proofs pxl_to_cpx
+R2292:2295 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
+binder 2287:2288 <> φ:33
+R2300:2307 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_form ind
+R2320:2321 ChronoPraxis_PXL_Proofs <> φ:33 var
+R2332:2335 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Atom constr
+R2342:2349 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Atom constr
+R2357:2359 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Bot constr
+R2364:2370 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Bot constr
+R2376:2378 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Neg constr
+R2386:2392 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Neg constr
+R2395:2404 ChronoPraxis_PXL_Proofs <> pxl_to_cpx:34 def
+R2414:2417 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Conj constr
+R2428:2435 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Conj constr
+R2438:2447 ChronoPraxis_PXL_Proofs <> pxl_to_cpx:34 def
+R2454:2463 ChronoPraxis_PXL_Proofs <> pxl_to_cpx:34 def
+R2473:2476 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Disj constr
+R2487:2494 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Disj constr
+R2497:2506 ChronoPraxis_PXL_Proofs <> pxl_to_cpx:34 def
+R2513:2522 ChronoPraxis_PXL_Proofs <> pxl_to_cpx:34 def
+R2532:2535 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R2546:2553 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R2556:2565 ChronoPraxis_PXL_Proofs <> pxl_to_cpx:34 def
+R2572:2581 ChronoPraxis_PXL_Proofs <> pxl_to_cpx:34 def
+R2591:2593 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
+R2601:2607 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
+R2610:2619 ChronoPraxis_PXL_Proofs <> pxl_to_cpx:34 def
+R2629:2631 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Dia constr
+R2639:2645 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Dia constr
+R2648:2657 ChronoPraxis_PXL_Proofs <> pxl_to_cpx:34 def
+prf 2757:2789 ChronoPraxis_PXL_Proofs pxl_embedding_preserves_structure
+R2805:2808 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
+binder 2800:2801 <> φ:36
+R2820:2823 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2813:2816 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Prov ind
+R2818:2819 ChronoPraxis_PXL_Proofs <> φ:36 var
+R2824:2831 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Prov ind
+R2834:2843 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_to_cpx def
+R2845:2846 ChronoPraxis_PXL_Proofs <> φ:36 var
+R3165:3172 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_K constr
+R3165:3172 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_K constr
+R3218:3225 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_T constr
+R3218:3225 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_T constr
+R3271:3278 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_4 constr
+R3271:3278 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_4 constr
+R3324:3331 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_5 constr
+R3324:3331 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_5 constr
+R3382:3394 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_PL_imp constr
+R3382:3394 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_PL_imp constr
+R3542:3552 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_rule_MP constr
+R3542:3552 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_rule_MP constr
+R3652:3663 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_rule_Nec constr
+R3652:3663 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_rule_Nec constr
+prf 3755:3781 ChronoPraxis_PXL_Proofs cpx_projection_conservative
+R3797:3800 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
+binder 3792:3793 <> φ:37
+R3829:3832 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3805:3812 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Prov ind
+R3815:3824 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_to_cpx def
+R3826:3827 ChronoPraxis_PXL_Proofs <> φ:37 var
+R3833:3836 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Prov ind
+R3838:3839 ChronoPraxis_PXL_Proofs <> φ:37 var
+prf 6211:6235 ChronoPraxis_PXL_Proofs cpx_identity_preservation
+R6251:6258 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_form ind
+binder 6246:6247 <> φ:38
+R6263:6270 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Prov ind
+R6273:6280 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R6282:6283 ChronoPraxis_PXL_Proofs <> φ:38 var
+R6285:6286 ChronoPraxis_PXL_Proofs <> φ:38 var
+R6465:6476 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_PL_id constr
+R6465:6476 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_PL_id constr
+prf 6556:6583 ChronoPraxis_PXL_Proofs modal_necessitation_transfer
+R6599:6602 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
+binder 6594:6595 <> φ:39
+R6614:6617 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6607:6610 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Prov ind
+R6612:6613 ChronoPraxis_PXL_Proofs <> φ:39 var
+R6618:6625 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Prov ind
+R6628:6634 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
+R6637:6646 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_to_cpx def
+R6648:6649 ChronoPraxis_PXL_Proofs <> φ:39 var
+R6860:6871 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_rule_Nec constr
+R6860:6871 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_rule_Nec constr
+R6882:6914 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_embedding_preserves_structure thm
+R6882:6914 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_embedding_preserves_structure thm
+prf 7004:7031 ChronoPraxis_PXL_Proofs bijection_soundness_identity
+R7047:7050 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
+binder 7042:7043 <> φ:40
+R7068:7070 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R7055:7064 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_to_cpx def
+R7066:7067 ChronoPraxis_PXL_Proofs <> φ:40 var
+R7071:7080 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_to_cpx def
+R7082:7083 ChronoPraxis_PXL_Proofs <> φ:40 var
+prf 7285:7306 ChronoPraxis_PXL_Proofs conservative_extension
+R7322:7325 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
+binder 7317:7318 <> φ:41
+R7330:7330 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7364:7371 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7397:7397 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7331:7337 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R7351:7352 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R7343:7350 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_form ind
+binder 7338:7339 <> ψ:42
+R7353:7360 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Prov ind
+R7362:7363 ChronoPraxis_PXL_Proofs <> ψ:42 var
+R7372:7378 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R7388:7389 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R7384:7387 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
+binder 7379:7380 <> χ:43
+R7390:7393 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Prov ind
+R7395:7396 ChronoPraxis_PXL_Proofs <> χ:43 var
+R7727:7730 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R7736:7739 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R7727:7730 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R7736:7739 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R7809:7817 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs ax_PL_imp constr
+R7809:7817 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs ax_PL_imp constr
+R7830:7852 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs <> mod
