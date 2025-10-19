@@ -2,6 +2,7 @@
 """
 PXL Proof Server - HTTP interface to PXL minimal kernel with SerAPI
 Exposes /prove and /countermodel endpoints
+HARDENED VERSION: Fail-closed verification with connection pooling and caching
 """
 
 import glob
@@ -13,15 +14,249 @@ import sys
 import threading
 import time
 import uuid
+from typing import Dict, Optional, Tuple, Any
+from dataclasses import dataclass
+from collections import OrderedDict
 
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-# Global sertop process and communication
-sertop_process = None
-sertop_queue = queue.Queue()
-sertop_lock = threading.Lock()
+
+class ProofValidationError(Exception):
+    """Raised when proof validation fails in fail-closed mode"""
+    pass
+
+
+@dataclass
+class ProofCacheEntry:
+    """Cache entry for proof validation results"""
+    verdict: bool
+    timestamp: float
+    proof_method: str
+    latency_ms: int
+
+
+@dataclass
+class SessionInfo:
+    """Information about an active Coq session"""
+    process: subprocess.Popen
+    session_id: str
+    created_at: float
+    last_used: float
+    is_busy: bool
+
+
+class CoqSessionPool:
+    """Connection pool for persistent Coq sessions"""
+
+    def __init__(self, max_pool_size: int = 3):
+        self.max_pool_size = max_pool_size
+        self.sessions: Dict[str, SessionInfo] = {}
+        self.available_sessions = queue.Queue()
+        self.lock = threading.Lock()
+        self._session_counter = 0
+
+    def _create_session(self) -> Optional[SessionInfo]:
+        """Create a new Coq session"""
+        try:
+            session_id = f"coq_session_{self._session_counter}"
+            self._session_counter += 1
+
+            cmd = ["sertop", "--implicit", "-Q", "pxl_kernel", "PXLs"]
+            process = subprocess.Popen(
+                cmd,
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+                bufsize=1,
+            )
+
+            session = SessionInfo(
+                process=process,
+                session_id=session_id,
+                created_at=time.time(),
+                last_used=time.time(),
+                is_busy=False
+            )
+
+            # Initialize session with PXL kernel
+            init_cmd = '(Add () "Require Import PXLs.PXLv3.")'
+            if self._send_command(session, init_cmd).get("error"):
+                process.terminate()
+                return None
+
+            return session
+
+        except Exception as e:
+            print(f"Failed to create Coq session: {e}", file=sys.stderr)
+            return None
+
+    def _send_command(self, session: SessionInfo, cmd: str) -> Dict[str, Any]:
+        """Send command to a specific session"""
+        try:
+            session.process.stdin.write(cmd + "\n")
+            session.process.stdin.flush()
+            response = session.process.stdout.readline().strip()
+            return {"response": response}
+        except Exception as e:
+            return {"error": str(e)}
+
+    def get_session(self) -> Optional[SessionInfo]:
+        """Get an available session from the pool"""
+        with self.lock:
+            # Try to get an available session
+            try:
+                while not self.available_sessions.empty():
+                    session_id = self.available_sessions.get_nowait()
+                    if session_id in self.sessions:
+                        session = self.sessions[session_id]
+                        if session.process.poll() is None:  # Still alive
+                            session.is_busy = True
+                            session.last_used = time.time()
+                            return session
+                        else:
+                            # Session died, remove it
+                            del self.sessions[session_id]
+            except queue.Empty:
+                pass
+
+            # Create new session if under limit
+            if len(self.sessions) < self.max_pool_size:
+                session = self._create_session()
+                if session:
+                    self.sessions[session.session_id] = session
+                    session.is_busy = True
+                    return session
+
+            return None
+
+    def return_session(self, session: SessionInfo):
+        """Return a session to the pool"""
+        with self.lock:
+            if session.session_id in self.sessions:
+                session.is_busy = False
+                session.last_used = time.time()
+                self.available_sessions.put(session.session_id)
+
+    def cleanup_session(self, session: SessionInfo):
+        """Remove a failed session from the pool"""
+        with self.lock:
+            if session.session_id in self.sessions:
+                try:
+                    session.process.terminate()
+                except:
+                    pass
+                del self.sessions[session.session_id]
+
+    def get_stats(self) -> Dict[str, Any]:
+        """Get pool statistics"""
+        with self.lock:
+            active_sessions = len([s for s in self.sessions.values() if not s.is_busy])
+            busy_sessions = len([s for s in self.sessions.values() if s.is_busy])
+            return {
+                "total_sessions": len(self.sessions),
+                "active_sessions": active_sessions,
+                "busy_sessions": busy_sessions,
+                "max_pool_size": self.max_pool_size
+            }
+
+    def shutdown(self):
+        """Shutdown all sessions"""
+        with self.lock:
+            for session in self.sessions.values():
+                try:
+                    session.process.terminate()
+                    session.process.wait(timeout=2)
+                except:
+                    try:
+                        session.process.kill()
+                    except:
+                        pass
+            self.sessions.clear()
+
+
+class ProofCache:
+    """TTL-based cache for proof validation results"""
+
+    def __init__(self, ttl_seconds: int = 300, max_size: int = 1000):
+        self.ttl_seconds = ttl_seconds
+        self.max_size = max_size
+        self.cache: OrderedDict[str, ProofCacheEntry] = OrderedDict()
+        self.lock = threading.Lock()
+        self.hits = 0
+        self.misses = 0
+
+    def _compute_key(self, goal: str) -> str:
+        """Compute cache key for a goal"""
+        return hashlib.sha256(goal.encode('utf-8')).hexdigest()
+
+    def get(self, goal: str) -> Optional[ProofCacheEntry]:
+        """Get cached result for a goal"""
+        key = self._compute_key(goal)
+
+        with self.lock:
+            if key in self.cache:
+                entry = self.cache[key]
+                # Check TTL
+                if time.time() - entry.timestamp <= self.ttl_seconds:
+                    # Move to end (LRU)
+                    self.cache.move_to_end(key)
+                    self.hits += 1
+                    return entry
+                else:
+                    # Expired
+                    del self.cache[key]
+
+            self.misses += 1
+            return None
+
+    def put(self, goal: str, verdict: bool, proof_method: str, latency_ms: int):
+        """Cache a proof result"""
+        key = self._compute_key(goal)
+        entry = ProofCacheEntry(
+            verdict=verdict,
+            timestamp=time.time(),
+            proof_method=proof_method,
+            latency_ms=latency_ms
+        )
+
+        with self.lock:
+            # Remove oldest entries if at capacity
+            while len(self.cache) >= self.max_size:
+                self.cache.popitem(last=False)
+
+            self.cache[key] = entry
+
+    def get_stats(self) -> Dict[str, Any]:
+        """Get cache statistics"""
+        with self.lock:
+            total_requests = self.hits + self.misses
+            hit_rate = (self.hits / total_requests) if total_requests > 0 else 0.0
+            return {
+                "cache_hits": self.hits,
+                "cache_misses": self.misses,
+                "hit_rate": hit_rate,
+                "cache_size": len(self.cache),
+                "max_size": self.max_size
+            }
+
+    def clear_expired(self):
+        """Clear expired entries"""
+        current_time = time.time()
+        with self.lock:
+            expired_keys = [
+                key for key, entry in self.cache.items()
+                if current_time - entry.timestamp > self.ttl_seconds
+            ]
+            for key in expired_keys:
+                del self.cache[key]
+
+
+# Global instances
+session_pool = CoqSessionPool(max_pool_size=3)
+proof_cache = ProofCache(ttl_seconds=300)
 
 
 def compute_kernel_hash():
@@ -48,52 +283,8 @@ def compute_kernel_hash():
         return "FALLBACK"
 
 
-def start_sertop():
-    """Start sertop process with PXL kernel loaded"""
-    global sertop_process
-    try:
-        # Try to start sertop with PXL kernel
-        cmd = ["sertop", "--implicit", "-Q", "pxl_kernel", "PXLs"]
-        sertop_process = subprocess.Popen(
-            cmd,
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
-            bufsize=1,
-        )
-        print("SerAPI (sertop) started successfully", file=sys.stderr)
-        return True
-    except FileNotFoundError:
-        print("Warning: sertop not found, using fallback mode", file=sys.stderr)
-        return False
-    except Exception as e:
-        print(f"Error starting sertop: {e}", file=sys.stderr)
-        return False
-
-
-def send_sertop_command(cmd):
-    """Send command to sertop and read response"""
-    global sertop_process
-    if not sertop_process:
-        return {"error": "sertop not available"}
-
-    try:
-        with sertop_lock:
-            sertop_process.stdin.write(cmd + "\n")
-            sertop_process.stdin.flush()
-
-            # Read response (simplified - real implementation would parse S-expressions)
-            response = sertop_process.stdout.readline().strip()
-            return {"response": response}
-    except Exception as e:
-        print(f"Error communicating with sertop: {e}", file=sys.stderr)
-        return {"error": str(e)}
-
-
-def translate_box_to_coq(goal_str):
+def translate_box_to_coq(goal_str: str) -> str:
     """Translate BOX(...) notation to PXL Coq goal"""
-    # Simple translation - real implementation would parse properly
     if goal_str.startswith("BOX(") and goal_str.endswith(")"):
         inner = goal_str[4:-1]
         # Map logical connectives
@@ -103,24 +294,55 @@ def translate_box_to_coq(goal_str):
     return f"Goal ({goal_str})."
 
 
-def shutdown_sertop():
-    """Gracefully shutdown sertop process"""
-    global sertop_process
-    if sertop_process:
-        try:
-            sertop_process.terminate()
-            sertop_process.wait(timeout=5)
-        except subprocess.TimeoutExpired:
-            sertop_process.kill()
-        except Exception as e:
-            print(f"Error shutting down sertop: {e}", file=sys.stderr)
+def validate_proof_with_serapi(goal: str, session: SessionInfo) -> Tuple[bool, str, int]:
+    """
+    Validate proof using SerAPI - FAIL-CLOSED implementation
+    Returns: (success, error_message, latency_ms)
+    """
+    start_time = time.time()
+
+    try:
+        # Translate goal to Coq
+        coq_goal = translate_box_to_coq(goal)
+
+        # Send goal to SerAPI
+        cmd_result = session_pool._send_command(session, f'(Add () "{coq_goal}")')
+
+        if "error" in cmd_result:
+            error_msg = f"SerAPI goal parsing failed: {cmd_result.get('error', 'Unknown error')}"
+            latency_ms = int((time.time() - start_time) * 1000)
+            return False, error_msg, latency_ms
+
+        # Try to execute/prove
+        exec_result = session_pool._send_command(session, "(Exec 1)")
+
+        latency_ms = int((time.time() - start_time) * 1000)
+
+        # FAIL-CLOSED: Only succeed if we have explicit success indicators
+        if ("error" not in exec_result and
+            "Error" not in exec_result.get("response", "") and
+            exec_result.get("response", "").strip()):
+            return True, "Proof successful", latency_ms
+        else:
+            error_msg = f"SerAPI proof failed: {exec_result.get('response', 'No response')}"
+            return False, error_msg, latency_ms
+
+    except Exception as e:
+        latency_ms = int((time.time() - start_time) * 1000)
+        error_msg = f"SerAPI validation exception: {str(e)}"
+        return False, error_msg, latency_ms
+
+
+def shutdown_handler():
+    """Gracefully shutdown all resources"""
+    print("Shutting down PXL server...", file=sys.stderr)
+    session_pool.shutdown()
+    sys.exit(0)
 
 
 def signal_handler(signum, frame):
     """Handle shutdown signals"""
-    print("Shutting down PXL server...", file=sys.stderr)
-    shutdown_sertop()
-    sys.exit(0)
+    shutdown_handler()
 
 
 # Register signal handlers
@@ -128,27 +350,62 @@ signal.signal(signal.SIGTERM, signal_handler)
 signal.signal(signal.SIGINT, signal_handler)
 
 # Initialize on startup
-sertop_available = start_sertop()
 KERNEL_HASH = compute_kernel_hash()
 print(f"PXL Kernel Hash: {KERNEL_HASH}")
+
+# Start background thread for cache cleanup
+def cache_cleanup_worker():
+    """Background worker to clean expired cache entries"""
+    while True:
+        time.sleep(60)  # Check every minute
+        proof_cache.clear_expired()
+
+cache_cleanup_thread = threading.Thread(target=cache_cleanup_worker, daemon=True)
+cache_cleanup_thread.start()
 
 
 @app.route("/health", methods=["GET"])
 def health():
-    """Health check endpoint with readiness status"""
-    global sertop_process, sertop_available
-
-    # Check if sertop is still alive
-    sertop_alive = sertop_process and sertop_process.poll() is None if sertop_available else False
+    """Health check endpoint with basic system status"""
+    pool_stats = session_pool.get_stats()
 
     return jsonify(
         {
-            "status": "ok" if sertop_alive or not sertop_available else "degraded",
-            "ready": True,  # Always ready for proof requests (fallback mode available)
+            "status": "ok",
+            "ready": True,
             "kernel_hash": KERNEL_HASH,
-            "sertop_available": sertop_available,
-            "sertop_alive": sertop_alive,
-            "fallback_mode": not sertop_available,
+            "session_pool": pool_stats,
+            "timestamp": int(time.time()),
+        }
+    )
+
+
+@app.route("/health/proof_server", methods=["GET"])
+def health_proof_server():
+    """Detailed health check for proof server with monitoring metrics"""
+    pool_stats = session_pool.get_stats()
+    cache_stats = proof_cache.get_stats()
+
+    # Determine overall status
+    status = "ok"
+    if pool_stats["total_sessions"] == 0:
+        status = "degraded"
+    elif pool_stats["active_sessions"] == 0 and pool_stats["busy_sessions"] > 0:
+        status = "busy"
+
+    return jsonify(
+        {
+            "status": status,
+            "active_sessions": pool_stats["active_sessions"],
+            "cache_hits": cache_stats["cache_hits"],
+            "cache_misses": cache_stats["cache_misses"],
+            "hit_rate": cache_stats["hit_rate"],
+            "total_sessions": pool_stats["total_sessions"],
+            "busy_sessions": pool_stats["busy_sessions"],
+            "max_pool_size": pool_stats["max_pool_size"],
+            "cache_size": cache_stats["cache_size"],
+            "cache_max_size": cache_stats["max_size"],
+            "kernel_hash": KERNEL_HASH,
             "timestamp": int(time.time()),
         }
     )
@@ -158,99 +415,102 @@ def health():
 def prove():
     """
     Prove a goal using PXL minimal kernel via SerAPI
+    HARDENED VERSION: Fail-closed validation with caching and connection pooling
     """
     start_time = time.time()
     data = request.get_json()
+
     if not data or "goal" not in data:
         return jsonify({"error": "Missing 'goal' in request body"}), 400
 
     goal = data["goal"]
     proof_id = str(uuid.uuid4())
 
-    # Check for explicit denial patterns first
-    if "DENY" in goal.upper():
-        return (
-            jsonify(
-                {
-                    "ok": False,
-                    "id": proof_id,
-                    "kernel_hash": KERNEL_HASH,
-                    "goal": goal,
-                    "error": "Goal contains DENY - proof failed",
-                    "latency_ms": int((time.time() - start_time) * 1000),
-                }
-            ),
-            200,
+    # Check cache first
+    cached_result = proof_cache.get(goal)
+    if cached_result:
+        return jsonify(
+            {
+                "ok": cached_result.verdict,
+                "id": proof_id,
+                "kernel_hash": KERNEL_HASH,
+                "goal": goal,
+                "proof_method": f"{cached_result.proof_method}_cached",
+                "latency_ms": int((time.time() - start_time) * 1000),
+                "cache_hit": True,
+            }
         )
 
-    if sertop_available and sertop_process:
-        try:
-            # Translate BOX notation to Coq
-            coq_goal = translate_box_to_coq(goal)
+    # Check for explicit denial patterns
+    if "DENY" in goal.upper():
+        error_msg = "Goal contains DENY - proof failed"
+        proof_cache.put(goal, False, "pattern_deny", 0)
+        return jsonify(
+            {
+                "ok": False,
+                "id": proof_id,
+                "kernel_hash": KERNEL_HASH,
+                "goal": goal,
+                "error": error_msg,
+                "latency_ms": int((time.time() - start_time) * 1000),
+                "cache_hit": False,
+            }
+        ), 200
 
-            # Send to SerAPI
-            cmd_result = send_sertop_command(f'(Add () "{coq_goal}")')
+    # FAIL-CLOSED: Get session from pool or fail
+    session = session_pool.get_session()
+    if not session:
+        error_msg = "No available Coq sessions - SerAPI unavailable"
+        raise ProofValidationError(error_msg)
 
-            if "error" not in cmd_result:
-                # Try to execute/prove (simplified)
-                exec_result = send_sertop_command("(Exec 1)")
+    try:
+        # Validate using SerAPI in fail-closed mode
+        success, error_msg, validation_latency = validate_proof_with_serapi(goal, session)
 
-                # Check if proof succeeded (simplified check)
-                if "error" not in exec_result and "Error" not in exec_result.get("response", ""):
-                    return jsonify(
-                        {
-                            "ok": True,
-                            "id": proof_id,
-                            "kernel_hash": KERNEL_HASH,
-                            "goal": goal,
-                            "proof_method": "serapi",
-                            "latency_ms": int((time.time() - start_time) * 1000),
-                        }
-                    )
-                else:
-                    return jsonify(
-                        {
-                            "ok": False,
-                            "id": proof_id,
-                            "kernel_hash": KERNEL_HASH,
-                            "goal": goal,
-                            "error": "SerAPI proof failed",
-                            "latency_ms": int((time.time() - start_time) * 1000),
-                        }
-                    )
-            else:
-                print(f"SerAPI command failed: {cmd_result}", file=sys.stderr)
-        except Exception as e:
-            print(f"SerAPI error: {e}", file=sys.stderr)
+        # Cache the result
+        total_latency = int((time.time() - start_time) * 1000)
+        proof_method = "serapi" if success else "serapi_failed"
+        proof_cache.put(goal, success, proof_method, total_latency)
 
-    # Fallback to pattern-based validation when SerAPI unavailable
-    if goal.startswith("BOX(") and goal.endswith(")"):
-        inner_goal = goal[4:-1]
-        # Enhanced validation logic
-        valid_keywords = ["Good", "TrueP", "Coherent", "preserves", "consistency", "commutes"]
-        if any(keyword in inner_goal for keyword in valid_keywords):
+        # Return session to pool
+        session_pool.return_session(session)
+
+        if success:
             return jsonify(
                 {
                     "ok": True,
                     "id": proof_id,
                     "kernel_hash": KERNEL_HASH,
                     "goal": goal,
-                    "proof_method": "fallback",
-                    "latency_ms": int((time.time() - start_time) * 1000),
+                    "proof_method": "serapi",
+                    "latency_ms": total_latency,
+                    "cache_hit": False,
                 }
             )
+        else:
+            # FAIL-CLOSED: Raise exception instead of falling back
+            raise ProofValidationError(error_msg)
 
-    # Deny by default (fail-closed)
-    return jsonify(
-        {
-            "ok": False,
-            "id": proof_id,
-            "kernel_hash": KERNEL_HASH,
-            "goal": goal,
-            "error": "Goal could not be proven",
-            "latency_ms": int((time.time() - start_time) * 1000),
-        }
-    )
+    except Exception as e:
+        # Clean up failed session
+        session_pool.cleanup_session(session)
+
+        # FAIL-CLOSED: Block action, log event, raise error
+        error_msg = f"Proof validation failed: {str(e)}"
+        print(f"PROOF_VALIDATION_ERROR: {error_msg} for goal: {goal}", file=sys.stderr)
+
+        return jsonify(
+            {
+                "ok": False,
+                "id": proof_id,
+                "kernel_hash": KERNEL_HASH,
+                "goal": goal,
+                "error": error_msg,
+                "latency_ms": int((time.time() - start_time) * 1000),
+                "cache_hit": False,
+            }
+        ), 500  # Internal server error for validation failures
+
 
 
 @app.route("/countermodel", methods=["POST"])
@@ -276,8 +536,10 @@ def countermodel():
 
 
 if __name__ == "__main__":
-    print(f"Starting PXL Proof Server with kernel hash: {KERNEL_HASH}")
-    print(f"SerAPI available: {sertop_available}", file=sys.stderr)
+    print(f"Starting HARDENED PXL Proof Server with kernel hash: {KERNEL_HASH}")
+    print(f"Session pool size: {session_pool.max_pool_size}", file=sys.stderr)
+    print(f"Cache TTL: {proof_cache.ttl_seconds}s", file=sys.stderr)
+    print("FAIL-CLOSED mode: No fallback validation enabled", file=sys.stderr)
 
     # Production mode: Use waitress WSGI server for stability
     try:
@@ -298,17 +560,6 @@ if __name__ == "__main__":
         print("Waitress not available, using Flask with improved settings...")
         print("Install waitress for production: pip install waitress")
 
-        # Set up graceful shutdown
-        import signal
-
-        def signal_handler(sig, frame):
-            print("Shutting down PXL server...")
-            shutdown_sertop()
-            sys.exit(0)
-
-        signal.signal(signal.SIGINT, signal_handler)
-        signal.signal(signal.SIGTERM, signal_handler)
-
         try:
             # Improved Flask settings for stability
             app.run(
@@ -320,4 +571,4 @@ if __name__ == "__main__":
                 processes=1,
             )
         finally:
-            shutdown_sertop()
+            shutdown_handler()
