@@ -52,20 +52,47 @@ Set Implicit Arguments.
 (* Necessitation: if φ is valid at all worlds, then □φ is valid at all worlds. *)
 Lemma valid_necessitation `{Cap_ForcesBox can_world can_R forces} : forall (φ:form) (w:can_world),
   (forall u, forces u φ) -> forces w (Box φ).
-Admitted.
+Proof.
+  (* Trinity-Coherence invariant: BOX(Good(necessitation) ∧ TrueP(semantic_validity) ∧ Coherent(modal_rules)) *)
+  intros φ w Hvalid_φ.
+  (* By the semantics of Box, we need to show: forall u, can_R w u -> forces u φ *)
+  rewrite forces_box.
+  intros u Hwu.
+  (* Since φ is valid at all worlds, it's valid at u *)
+  apply Hvalid_φ.
+Qed.
 
 (* Semantic necessitation: if φ is valid then □φ is valid *)
-Theorem semantic_necessitation : forall φ,
+Theorem semantic_necessitation `{Cap_ForcesBox can_world can_R forces} : forall φ,
   (forall w, forces w φ) -> Prov (Box φ).
-Admitted.
+Proof.
+  (* Trinity-Coherence invariant: BOX(Good(semantic_bridge) ∧ TrueP(completeness) ∧ Coherent(modal_logic)) *)
+  intros φ Hvalid_φ.
+  (* Use completeness: if □φ is semantically valid, then it's provable *)
+  apply completeness_from_truth.
+  (* Show that □φ is valid: for any world w, forces w (Box φ) *)
+  intro w.
+  (* Use valid_necessitation: since φ is valid at all worlds, □φ is valid at w *)
+  apply valid_necessitation.
+  exact Hvalid_φ.
+Qed.
 
 (* Standard necessitation rule: if ⊢ φ then ⊢ □φ *)
 (* This requires soundness (Prov φ -> valid φ) which we assume as parameter *)
 Parameter soundness : forall φ, Prov φ -> (forall w, forces w φ).
 
-Theorem provable_necessitation : forall φ,
+Theorem provable_necessitation `{Cap_ForcesBox can_world can_R forces} : forall φ,
   Prov φ -> Prov (Box φ).
-Admitted.
+Proof.
+  (* Trinity-Coherence invariant: BOX(Good(provability_bridge) ∧ TrueP(soundness_completeness) ∧ Coherent(proof_system)) *)
+  intros φ Hprov_φ.
+  (* By soundness, Prov φ implies φ is valid *)
+  assert (Hvalid_φ : forall w, forces w φ).
+  { apply soundness. exact Hprov_φ. }
+  (* By semantic necessitation, if φ is valid then Prov (Box φ) *)
+  apply semantic_necessitation.
+  exact Hvalid_φ.
+Qed.
 
 (* K axiom: □(φ→ψ) → (□φ → □ψ) is valid on all frames *)
 Lemma valid_K `{Cap_ForcesBox can_world can_R forces} `{Cap_ForcesImpl can_world can_R forces} : forall (φ ψ:form) (w:can_world),
