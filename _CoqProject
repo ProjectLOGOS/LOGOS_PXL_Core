@@ -1,5 +1,6 @@
 ﻿# --- Updated paths for restructured repository ---
--Q PXL_IEL/pxl/pxl-minimal-kernel-main/coq            PXLs
+-Q PXLs                                                PXLs
+-Q PXL_IEL/pxl/pxl-minimal-kernel-main/coq            PXLs_Original
 -Q PXL_IEL/iels                                        IEL
 -Q PXL_IEL/proofs                                      Proofs
 

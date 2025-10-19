@@ -1,0 +1,40 @@
+DIGEST 59a6a9a3fe062554cd0f59cc127e0d34
+FChronoModes
+mod 56:66 <> ChronoModes
+ax 120:124 ChronoModes Agent
+ax 144:150 ChronoModes Context
+def 225:228 ChronoModes Time
+R233:235 Coq.Init.Datatypes <> nat ind
+ind 270:277 ChronoModes TimeMode
+constr 286:293 ChronoModes Temporal
+constr 310:318 ChronoModes Atemporal
+constr 335:341 ChronoModes Eternal
+R297:304 ChronoModes <> TimeMode:5 ind
+R322:329 ChronoModes <> TimeMode:5 ind
+R345:352 ChronoModes <> TimeMode:5 ind
+scheme 270:277 ChronoModes TimeMode_rect
+scheme 270:277 ChronoModes TimeMode_ind
+scheme 270:277 ChronoModes TimeMode_rec
+scheme 270:277 ChronoModes TimeMode_sind
+rec 406:417 ChronoModes AgentContext
+proj 426:430 ChronoModes agent
+proj 443:450 ChronoModes agent_id
+proj 495:511 ChronoModes temporal_position
+proj 523:529 ChronoModes context
+R434:438 ChronoModes ChronoModes Agent defax
+R454:458 ChronoModes ChronoModes Agent defax
+R515:518 ChronoModes ChronoModes Time def
+R533:539 ChronoModes ChronoModes Context defax
+def 599:610 ChronoModes get_agent_id
+R619:630 ChronoModes ChronoModes AgentContext rec
+binder 613:615 <> ctx:12
+R635:639 ChronoModes ChronoModes Agent defax
+R649:656 ChronoModes ChronoModes agent_id proj
+R644:646 ChronoModes <> ctx:12 var
+def 671:691 ChronoModes get_temporal_position
+R700:711 ChronoModes ChronoModes AgentContext rec
+binder 694:696 <> ctx:13
+R716:719 ChronoModes ChronoModes Time def
+R729:745 ChronoModes ChronoModes temporal_position proj
+R724:726 ChronoModes <> ctx:13 var
+R754:764 ChronoModes ChronoModes <> mod

@@ -1,0 +1,39 @@
+DIGEST 7b415419ac4e738d7fc9f1340dd76439
+FMetaTheorems
+mod 320:344 <> ChronoPraxis_MetaTheorems
+prf 478:502 ChronoPraxis_MetaTheorems temporal_unification_meta
+binder 513:513 <> A:1
+binder 515:515 <> B:2
+binder 517:517 <> C:3
+R530:533 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R529:529 MetaTheorems <> A:1 var
+R535:538 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R534:534 MetaTheorems <> B:2 var
+R539:545 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R566:571 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 546:558 <> unified_logic:4
+R585:588 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R600:600 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R572:584 MetaTheorems <> unified_logic:4 var
+R590:593 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R589:589 MetaTheorems <> A:1 var
+R595:598 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R594:594 MetaTheorems <> B:2 var
+R599:599 MetaTheorems <> C:3 var
+R645:648 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R650:653 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R645:648 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R650:653 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+prf 810:842 ChronoPraxis_MetaTheorems constructive_temporal_consistency
+binder 853:853 <> P:5
+R865:867 Coq.Init.Logic <> ::type_scope:'~'_x not
+R876:876 Coq.Init.Logic <> ::type_scope:'~'_x not
+R869:872 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R868:868 MetaTheorems <> P:5 var
+R873:874 Coq.Init.Logic <> ::type_scope:'~'_x not
+R875:875 MetaTheorems <> P:5 var
+def 1023:1039 ChronoPraxis_MetaTheorems IEL_meta_registry
+R1044:1044 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1070:1071 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1106:1106 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1045:1069 MetaTheorems ChronoPraxis_MetaTheorems temporal_unification_meta thm

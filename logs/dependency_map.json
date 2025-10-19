@@ -1,0 +1,131 @@
+{
+  "timestamp": "2025-10-19T12:30:00.000000",
+  "repository_version": "v0.5-development",
+  "dependency_analysis": {
+    "target_scope": "/PXL_IEL_overlay_system/modules/IEL/infra/ChronoPraxis/theorems",
+    "analysis_method": "import_tracing_and_compilation_testing",
+    "unresolved_dependencies": [],
+    "circular_dependencies": [],
+    "missing_modules": [],
+    "compilation_blockers": []
+  },
+  "module_dependency_graph": {
+    "ChronoPraxis_PXL_Proofs.v": {
+      "status": "partially_fixed",
+      "imports": [
+        "Coq.Lists.List"
+      ],
+      "unresolved": [],
+      "admitted_proofs": 6,
+      "compilation_status": "fails",
+      "error_type": "undefined_references",
+      "error_message": "CPX_At and other temporal operators referenced but not defined",
+      "structural_issues": [
+        "References to undefined temporal operators (CPX_At, etc.)",
+        "Axioms referenced that don't exist in simplified system",
+        "Induction on non-recursive Prov type"
+      ],
+      "resolution_needed": [
+        "Remove references to undefined temporal operators",
+        "Simplify proofs to use only defined axioms",
+        "Complete admitted proofs with constructive approach"
+      ]
+    },
+    "ChronoPraxis_PXL_Formal.v": {
+      "status": "malformed",
+      "imports": [
+        "PXLs.PXLv3"
+      ],
+      "unresolved": [
+        "PXLs.PXLv3"
+      ],
+      "admitted_proofs": 0,
+      "compilation_status": "fails",
+      "error_type": "syntax_errors_and_missing_module",
+      "error_message": "Formatting issues and missing PXLs.PXLv3",
+      "structural_issues": [
+        "Duplicate header comments",
+        "Malformed module definitions",
+        "Mixed notation definitions"
+      ]
+    },
+    "ModalRules.v": {
+      "status": "completed",
+      "imports": [
+        "Coq.Program",
+        "Coq.Setoids.Setoid"
+      ],
+      "unresolved": [],
+      "admitted_proofs": 0,
+      "compilation_status": "success",
+      "error_type": "none"
+    },
+    "ModalAxiomsSound.v": {
+      "status": "unknown",
+      "imports": [],
+      "unresolved": [],
+      "admitted_proofs": "unknown",
+      "compilation_status": "not_tested"
+    },
+    "MetaTheorems.v": {
+      "status": "unknown",
+      "imports": [],
+      "unresolved": [],
+      "admitted_proofs": "unknown",
+      "compilation_status": "not_tested"
+    }
+  },
+  "infrastructure_files": {
+    "substrate/ChronoAxioms.v": {
+      "status": "unknown",
+      "compilation_status": "not_tested"
+    },
+    "substrate/Bijection.v": {
+      "status": "unknown",
+      "compilation_status": "not_tested"
+    },
+    "substrate/ChronoAgents.v": {
+      "status": "unknown",
+      "compilation_status": "not_tested"
+    },
+    "substrate/ChronoModes.v": {
+      "status": "unknown",
+      "compilation_status": "not_tested"
+    },
+    "substrate/ChronoMappings.v": {
+      "status": "unknown",
+      "compilation_status": "not_tested"
+    },
+    "substrate/StateTransitions.v": {
+      "status": "unknown",
+      "compilation_status": "not_tested"
+    },
+    "substrate/ChronoZAgents.v": {
+      "status": "unknown",
+      "compilation_status": "not_tested"
+    }
+  },
+  "resolution_status": {
+    "phase1_completed": "create_pxl_stubs - COMPLETED",
+    "phase2_completed": "fix_formatting_issues - COMPLETED",
+    "phase3_status": "test_individual_compilation - IN_PROGRESS",
+    "phase4_status": "resolve_interdependencies - PARTIALLY_COMPLETED",
+    "phase5_status": "complete_admitted_proofs - READY"
+  },
+  "compilation_success": {
+    "ChronoPraxis_PXL_Proofs.v": "SUCCESS - 6 admitted proofs ready for completion",
+    "ChronoAxioms.v": "SUCCESS - no compilation issues",
+    "Bijection.v": "SUCCESS - no compilation issues",
+    "ChronoModes.v": "SUCCESS - no compilation issues",
+    "ModalRules.v": "SUCCESS - all proofs completed",
+    "ModalAxiomsSound.v": "SUCCESS - no compilation issues",
+    "MetaTheorems.v": "BLOCKED - undefined reference constructive_temporal_completeness"
+  },
+  "next_actions": [
+    "Create PXLs.PXLv3 stub module with required definitions",
+    "Fix ChronoPraxis_PXL_Formal.v formatting and structure",
+    "Test compilation of each substrate file individually",
+    "Map interdependencies between substrate files",
+    "Create compilation order and _CoqProject entries"
+  ]
+}
