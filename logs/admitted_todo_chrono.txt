@@ -1,0 +1,18 @@
+﻿
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\interfaces\Chro
+noPraxis.v:3:(* TODO: remove Admitted. — constructive only. No 
+classical axioms. *)
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\substrate\Chron
+oPraxis_PXL_Formal.v:132:Admitted.
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\substrate\Chron
+oPraxis_PXL_Formal.v:142:Admitted.
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\substrate\Chron
+oPraxis_PXL_Proofs.v:158:Admitted.
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\substrate\Chron
+oZAgents.v:61:Admitted. *)
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\substrate\Chron
+oZAgents.v:66:Admitted.
+PXL_IEL_overlay_system\modules\IEL\infra\ChronoPraxis\substrate\Chron
+oZAgents.v:75:Admitted.
+
+

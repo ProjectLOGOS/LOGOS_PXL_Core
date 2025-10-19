@@ -1,5 +1,5 @@
-DIGEST a00b6eed65fa35a242b43e23c2c5a952
-FChronoPraxis_PXL_Proofs
+DIGEST 388f46984a78271200e35f86145b6ecd
+FLOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs
 R269:272 Coq.Lists.List <> <> lib
 mod 283:305 <> ChronoPraxis_PXL_Proofs
 ind 368:371 ChronoPraxis_PXL_Proofs form
@@ -13,32 +13,32 @@ constr 544:546 ChronoPraxis_PXL_Proofs Box
 constr 567:569 ChronoPraxis_PXL_Proofs Dia
 R397:400 Coq.Init.Logic <> ::type_scope:x_'->'_x not
 R394:396 Coq.Init.Datatypes <> nat ind
-R401:404 ChronoPraxis_PXL_Proofs <> form:1 ind
-R416:419 ChronoPraxis_PXL_Proofs <> form:1 ind
+R401:404 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> form:1 ind
+R416:419 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> form:1 ind
 R435:438 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R431:434 ChronoPraxis_PXL_Proofs <> form:1 ind
-R439:442 ChronoPraxis_PXL_Proofs <> form:1 ind
+R431:434 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> form:1 ind
+R439:442 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> form:1 ind
 R459:462 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R455:458 ChronoPraxis_PXL_Proofs <> form:1 ind
+R455:458 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> form:1 ind
 R467:470 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R463:466 ChronoPraxis_PXL_Proofs <> form:1 ind
-R471:474 ChronoPraxis_PXL_Proofs <> form:1 ind
+R463:466 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> form:1 ind
+R471:474 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> form:1 ind
 R491:494 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R487:490 ChronoPraxis_PXL_Proofs <> form:1 ind
+R487:490 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> form:1 ind
 R499:502 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R495:498 ChronoPraxis_PXL_Proofs <> form:1 ind
-R503:506 ChronoPraxis_PXL_Proofs <> form:1 ind
+R495:498 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> form:1 ind
+R503:506 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> form:1 ind
 R523:526 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R519:522 ChronoPraxis_PXL_Proofs <> form:1 ind
+R519:522 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> form:1 ind
 R531:534 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R527:530 ChronoPraxis_PXL_Proofs <> form:1 ind
-R535:538 ChronoPraxis_PXL_Proofs <> form:1 ind
+R527:530 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> form:1 ind
+R535:538 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> form:1 ind
 R554:557 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R550:553 ChronoPraxis_PXL_Proofs <> form:1 ind
-R558:561 ChronoPraxis_PXL_Proofs <> form:1 ind
+R550:553 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> form:1 ind
+R558:561 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> form:1 ind
 R577:580 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R573:576 ChronoPraxis_PXL_Proofs <> form:1 ind
-R581:584 ChronoPraxis_PXL_Proofs <> form:1 ind
+R573:576 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> form:1 ind
+R581:584 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> form:1 ind
 scheme 368:371 ChronoPraxis_PXL_Proofs form_rect
 scheme 368:371 ChronoPraxis_PXL_Proofs form_ind
 scheme 368:371 ChronoPraxis_PXL_Proofs form_rec
@@ -52,69 +52,69 @@ constr 868:876 ChronoPraxis_PXL_Proofs ax_PL_imp
 constr 926:932 ChronoPraxis_PXL_Proofs rule_MP
 constr 994:1001 ChronoPraxis_PXL_Proofs rule_Nec
 R609:612 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R605:608 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
+R605:608 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
 binder 639:640 <> φ:5
 binder 642:643 <> ψ:6
-R646:649 ChronoPraxis_PXL_Proofs <> Prov:3 ind
-R652:655 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
-R658:660 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
-R663:666 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
-R668:669 ChronoPraxis_PXL_Proofs <> φ:5 var
-R671:672 ChronoPraxis_PXL_Proofs <> ψ:6 var
-R677:680 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
-R683:685 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
-R687:688 ChronoPraxis_PXL_Proofs <> φ:5 var
-R692:694 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
-R696:697 ChronoPraxis_PXL_Proofs <> ψ:6 var
+R646:649 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> Prov:3 ind
+R652:655 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R658:660 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
+R663:666 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R668:669 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> φ:5 var
+R671:672 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> ψ:6 var
+R677:680 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R683:685 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
+R687:688 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> φ:5 var
+R692:694 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
+R696:697 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> ψ:6 var
 binder 720:721 <> φ:7
-R724:727 ChronoPraxis_PXL_Proofs <> Prov:3 ind
-R730:733 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
-R736:738 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
-R740:741 ChronoPraxis_PXL_Proofs <> φ:7 var
-R744:745 ChronoPraxis_PXL_Proofs <> φ:7 var
+R724:727 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> Prov:3 ind
+R730:733 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R736:738 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
+R740:741 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> φ:7 var
+R744:745 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> φ:7 var
 binder 766:767 <> φ:8
-R770:773 ChronoPraxis_PXL_Proofs <> Prov:3 ind
-R776:779 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
-R782:784 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
-R786:787 ChronoPraxis_PXL_Proofs <> φ:8 var
-R791:793 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
-R796:798 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
-R800:801 ChronoPraxis_PXL_Proofs <> φ:8 var
+R770:773 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> Prov:3 ind
+R776:779 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R782:784 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
+R786:787 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> φ:8 var
+R791:793 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
+R796:798 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
+R800:801 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> φ:8 var
 binder 824:825 <> φ:9
-R828:831 ChronoPraxis_PXL_Proofs <> Prov:3 ind
-R834:837 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
-R840:842 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Dia constr
-R844:845 ChronoPraxis_PXL_Proofs <> φ:9 var
-R849:851 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
-R854:856 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Dia constr
-R858:859 ChronoPraxis_PXL_Proofs <> φ:9 var
+R828:831 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> Prov:3 ind
+R834:837 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R840:842 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Dia constr
+R844:845 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> φ:9 var
+R849:851 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
+R854:856 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Dia constr
+R858:859 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> φ:9 var
 binder 887:888 <> φ:10
 binder 890:891 <> ψ:11
-R894:897 ChronoPraxis_PXL_Proofs <> Prov:3 ind
-R900:903 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
-R905:906 ChronoPraxis_PXL_Proofs <> φ:10 var
-R909:912 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
-R914:915 ChronoPraxis_PXL_Proofs <> ψ:11 var
-R917:918 ChronoPraxis_PXL_Proofs <> φ:10 var
+R894:897 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> Prov:3 ind
+R900:903 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R905:906 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> φ:10 var
+R909:912 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R914:915 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> ψ:11 var
+R917:918 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> φ:10 var
 binder 943:944 <> φ:12
 binder 946:947 <> ψ:13
 R967:970 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R950:953 ChronoPraxis_PXL_Proofs <> Prov:3 ind
-R956:959 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
-R961:962 ChronoPraxis_PXL_Proofs <> φ:12 var
-R964:965 ChronoPraxis_PXL_Proofs <> ψ:13 var
+R950:953 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> Prov:3 ind
+R956:959 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R961:962 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> φ:12 var
+R964:965 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> ψ:13 var
 R978:981 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R971:974 ChronoPraxis_PXL_Proofs <> Prov:3 ind
-R976:977 ChronoPraxis_PXL_Proofs <> φ:12 var
-R982:985 ChronoPraxis_PXL_Proofs <> Prov:3 ind
-R987:988 ChronoPraxis_PXL_Proofs <> ψ:13 var
+R971:974 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> Prov:3 ind
+R976:977 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> φ:12 var
+R982:985 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> Prov:3 ind
+R987:988 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> ψ:13 var
 binder 1012:1013 <> φ:14
 R1023:1026 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1016:1019 ChronoPraxis_PXL_Proofs <> Prov:3 ind
-R1021:1022 ChronoPraxis_PXL_Proofs <> φ:14 var
-R1027:1030 ChronoPraxis_PXL_Proofs <> Prov:3 ind
-R1033:1035 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
-R1037:1038 ChronoPraxis_PXL_Proofs <> φ:14 var
+R1016:1019 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> Prov:3 ind
+R1021:1022 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> φ:14 var
+R1027:1030 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> Prov:3 ind
+R1033:1035 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
+R1037:1038 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> φ:14 var
 scheme 598:601 ChronoPraxis_PXL_Proofs Prov_ind
 scheme 598:601 ChronoPraxis_PXL_Proofs Prov_sind
 ind 1096:1103 ChronoPraxis_PXL_Proofs cpx_form
@@ -128,32 +128,32 @@ constr 1352:1358 ChronoPraxis_PXL_Proofs CPX_Box
 constr 1387:1393 ChronoPraxis_PXL_Proofs CPX_Dia
 R1133:1136 Coq.Init.Logic <> ::type_scope:x_'->'_x not
 R1130:1132 Coq.Init.Datatypes <> nat ind
-R1137:1144 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
-R1160:1167 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1137:1144 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1160:1167 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
 R1191:1194 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1183:1190 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
-R1195:1202 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1183:1190 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1195:1202 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
 R1227:1230 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1219:1226 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1219:1226 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
 R1239:1242 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1231:1238 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
-R1243:1250 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1231:1238 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1243:1250 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
 R1275:1278 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1267:1274 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1267:1274 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
 R1287:1290 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1279:1286 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
-R1291:1298 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1279:1286 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1291:1298 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
 R1323:1326 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1315:1322 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1315:1322 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
 R1335:1338 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1327:1334 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
-R1339:1346 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1327:1334 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1339:1346 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
 R1370:1373 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1362:1369 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
-R1374:1381 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1362:1369 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1374:1381 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
 R1405:1408 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1397:1404 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
-R1409:1416 ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1397:1404 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
+R1409:1416 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> cpx_form:15 ind
 scheme 1096:1103 ChronoPraxis_PXL_Proofs cpx_form_rect
 scheme 1096:1103 ChronoPraxis_PXL_Proofs cpx_form_ind
 scheme 1096:1103 ChronoPraxis_PXL_Proofs cpx_form_rec
@@ -169,208 +169,219 @@ constr 1982:1993 ChronoPraxis_PXL_Proofs cpx_ax_PL_id
 constr 2087:2097 ChronoPraxis_PXL_Proofs cpx_rule_MP
 constr 2169:2180 ChronoPraxis_PXL_Proofs cpx_rule_Nec
 R1449:1452 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1441:1448 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_form ind
+R1441:1448 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_form ind
 binder 1483:1483 <> p:19
 binder 1485:1485 <> q:20
-R1488:1495 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
-R1498:1505 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R1508:1514 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
-R1517:1524 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R1526:1526 ChronoPraxis_PXL_Proofs <> p:19 var
-R1528:1528 ChronoPraxis_PXL_Proofs <> q:20 var
-R1533:1540 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R1543:1549 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
-R1551:1551 ChronoPraxis_PXL_Proofs <> p:19 var
-R1555:1561 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
-R1563:1563 ChronoPraxis_PXL_Proofs <> q:20 var
+R1488:1495 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
+R1498:1505 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1508:1514 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
+R1517:1524 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1526:1526 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> p:19 var
+R1528:1528 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> q:20 var
+R1533:1540 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1543:1549 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
+R1551:1551 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> p:19 var
+R1555:1561 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
+R1563:1563 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> q:20 var
 binder 1590:1590 <> p:21
-R1593:1600 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
-R1603:1610 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R1613:1619 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
-R1621:1621 ChronoPraxis_PXL_Proofs <> p:21 var
-R1624:1624 ChronoPraxis_PXL_Proofs <> p:21 var
+R1593:1600 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
+R1603:1610 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1613:1619 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
+R1621:1621 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> p:21 var
+R1624:1624 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> p:21 var
 binder 1649:1649 <> p:22
-R1652:1659 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
-R1662:1669 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R1672:1678 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
-R1680:1680 ChronoPraxis_PXL_Proofs <> p:22 var
-R1684:1690 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
-R1693:1699 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
-R1701:1701 ChronoPraxis_PXL_Proofs <> p:22 var
+R1652:1659 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
+R1662:1669 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1672:1678 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
+R1680:1680 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> p:22 var
+R1684:1690 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
+R1693:1699 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
+R1701:1701 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> p:22 var
 binder 1728:1728 <> p:23
-R1731:1738 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
-R1741:1748 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R1751:1757 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Dia constr
-R1759:1759 ChronoPraxis_PXL_Proofs <> p:23 var
-R1763:1769 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
-R1772:1778 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Dia constr
-R1780:1780 ChronoPraxis_PXL_Proofs <> p:23 var
+R1731:1738 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
+R1741:1748 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1751:1757 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Dia constr
+R1759:1759 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> p:23 var
+R1763:1769 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
+R1772:1778 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Dia constr
+R1780:1780 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> p:23 var
 binder 1812:1812 <> p:24
 binder 1814:1814 <> q:25
-R1817:1824 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
-R1827:1834 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R1836:1836 ChronoPraxis_PXL_Proofs <> p:24 var
-R1839:1846 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R1848:1848 ChronoPraxis_PXL_Proofs <> q:25 var
-R1850:1850 ChronoPraxis_PXL_Proofs <> p:24 var
+R1817:1824 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
+R1827:1834 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1836:1836 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> p:24 var
+R1839:1846 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1848:1848 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> q:25 var
+R1850:1850 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> p:24 var
 binder 1882:1882 <> p:26
 binder 1884:1884 <> q:27
 binder 1886:1886 <> r:28
-R1889:1896 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
-R1899:1906 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R1909:1916 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R1918:1918 ChronoPraxis_PXL_Proofs <> p:26 var
-R1921:1928 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R1930:1930 ChronoPraxis_PXL_Proofs <> q:27 var
-R1932:1932 ChronoPraxis_PXL_Proofs <> r:28 var
-R1937:1944 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R1947:1954 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R1956:1956 ChronoPraxis_PXL_Proofs <> p:26 var
-R1958:1958 ChronoPraxis_PXL_Proofs <> q:27 var
-R1962:1969 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R1971:1971 ChronoPraxis_PXL_Proofs <> p:26 var
-R1973:1973 ChronoPraxis_PXL_Proofs <> r:28 var
+R1889:1896 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
+R1899:1906 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1909:1916 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1918:1918 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> p:26 var
+R1921:1928 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1930:1930 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> q:27 var
+R1932:1932 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> r:28 var
+R1937:1944 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1947:1954 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1956:1956 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> p:26 var
+R1958:1958 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> q:27 var
+R1962:1969 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R1971:1971 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> p:26 var
+R1973:1973 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> r:28 var
 binder 2004:2004 <> p:29
-R2007:2014 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
-R2017:2024 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R2026:2026 ChronoPraxis_PXL_Proofs <> p:29 var
-R2028:2028 ChronoPraxis_PXL_Proofs <> p:29 var
+R2007:2014 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
+R2017:2024 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R2026:2026 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> p:29 var
+R2028:2028 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> p:29 var
 binder 2108:2108 <> p:30
 binder 2110:2110 <> q:31
 R2136:2139 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R2113:2120 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
-R2123:2130 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R2132:2132 ChronoPraxis_PXL_Proofs <> p:30 var
-R2134:2134 ChronoPraxis_PXL_Proofs <> q:31 var
+R2113:2120 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
+R2123:2130 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R2132:2132 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> p:30 var
+R2134:2134 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> q:31 var
 R2150:2153 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R2140:2147 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
-R2149:2149 ChronoPraxis_PXL_Proofs <> p:30 var
-R2154:2161 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
-R2163:2163 ChronoPraxis_PXL_Proofs <> q:31 var
+R2140:2147 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
+R2149:2149 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> p:30 var
+R2154:2161 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
+R2163:2163 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> q:31 var
 binder 2191:2191 <> p:32
 R2204:2207 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R2194:2201 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
-R2203:2203 ChronoPraxis_PXL_Proofs <> p:32 var
-R2208:2215 ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
-R2218:2224 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
-R2226:2226 ChronoPraxis_PXL_Proofs <> p:32 var
+R2194:2201 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
+R2203:2203 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> p:32 var
+R2208:2215 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> CPX_Prov:17 ind
+R2218:2224 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
+R2226:2226 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> p:32 var
 scheme 1430:1437 ChronoPraxis_PXL_Proofs CPX_Prov_ind
 scheme 1430:1437 ChronoPraxis_PXL_Proofs CPX_Prov_sind
 def 2275:2284 ChronoPraxis_PXL_Proofs pxl_to_cpx
-R2292:2295 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
+R2292:2295 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
 binder 2287:2288 <> φ:33
-R2300:2307 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_form ind
-R2320:2321 ChronoPraxis_PXL_Proofs <> φ:33 var
-R2332:2335 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Atom constr
-R2342:2349 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Atom constr
-R2357:2359 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Bot constr
-R2364:2370 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Bot constr
-R2376:2378 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Neg constr
-R2386:2392 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Neg constr
-R2395:2404 ChronoPraxis_PXL_Proofs <> pxl_to_cpx:34 def
-R2414:2417 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Conj constr
-R2428:2435 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Conj constr
-R2438:2447 ChronoPraxis_PXL_Proofs <> pxl_to_cpx:34 def
-R2454:2463 ChronoPraxis_PXL_Proofs <> pxl_to_cpx:34 def
-R2473:2476 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Disj constr
-R2487:2494 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Disj constr
-R2497:2506 ChronoPraxis_PXL_Proofs <> pxl_to_cpx:34 def
-R2513:2522 ChronoPraxis_PXL_Proofs <> pxl_to_cpx:34 def
-R2532:2535 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
-R2546:2553 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R2556:2565 ChronoPraxis_PXL_Proofs <> pxl_to_cpx:34 def
-R2572:2581 ChronoPraxis_PXL_Proofs <> pxl_to_cpx:34 def
-R2591:2593 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
-R2601:2607 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
-R2610:2619 ChronoPraxis_PXL_Proofs <> pxl_to_cpx:34 def
-R2629:2631 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Dia constr
-R2639:2645 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Dia constr
-R2648:2657 ChronoPraxis_PXL_Proofs <> pxl_to_cpx:34 def
+R2300:2307 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_form ind
+R2320:2321 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> φ:33 var
+R2332:2335 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Atom constr
+R2342:2349 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Atom constr
+R2357:2359 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Bot constr
+R2364:2370 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Bot constr
+R2376:2378 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Neg constr
+R2386:2392 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Neg constr
+R2395:2404 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> pxl_to_cpx:34 def
+R2414:2417 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Conj constr
+R2428:2435 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Conj constr
+R2438:2447 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> pxl_to_cpx:34 def
+R2454:2463 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> pxl_to_cpx:34 def
+R2473:2476 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Disj constr
+R2487:2494 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Disj constr
+R2497:2506 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> pxl_to_cpx:34 def
+R2513:2522 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> pxl_to_cpx:34 def
+R2532:2535 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R2546:2553 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R2556:2565 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> pxl_to_cpx:34 def
+R2572:2581 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> pxl_to_cpx:34 def
+R2591:2593 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Box constr
+R2601:2607 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
+R2610:2619 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> pxl_to_cpx:34 def
+R2629:2631 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Dia constr
+R2639:2645 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Dia constr
+R2648:2657 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> pxl_to_cpx:34 def
 prf 2757:2789 ChronoPraxis_PXL_Proofs pxl_embedding_preserves_structure
-R2805:2808 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
+R2805:2808 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
 binder 2800:2801 <> φ:36
 R2820:2823 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R2813:2816 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Prov ind
-R2818:2819 ChronoPraxis_PXL_Proofs <> φ:36 var
-R2824:2831 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Prov ind
-R2834:2843 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_to_cpx def
-R2845:2846 ChronoPraxis_PXL_Proofs <> φ:36 var
-R3165:3172 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_K constr
-R3165:3172 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_K constr
-R3218:3225 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_T constr
-R3218:3225 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_T constr
-R3271:3278 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_4 constr
-R3271:3278 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_4 constr
-R3324:3331 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_5 constr
-R3324:3331 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_5 constr
-R3382:3394 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_PL_imp constr
-R3382:3394 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_PL_imp constr
-R3542:3552 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_rule_MP constr
-R3542:3552 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_rule_MP constr
-R3652:3663 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_rule_Nec constr
-R3652:3663 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_rule_Nec constr
-prf 3755:3781 ChronoPraxis_PXL_Proofs cpx_projection_conservative
-R3797:3800 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
-binder 3792:3793 <> φ:37
-R3829:3832 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R3805:3812 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Prov ind
-R3815:3824 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_to_cpx def
-R3826:3827 ChronoPraxis_PXL_Proofs <> φ:37 var
-R3833:3836 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Prov ind
-R3838:3839 ChronoPraxis_PXL_Proofs <> φ:37 var
-prf 6211:6235 ChronoPraxis_PXL_Proofs cpx_identity_preservation
-R6251:6258 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_form ind
-binder 6246:6247 <> φ:38
-R6263:6270 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Prov ind
-R6273:6280 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
-R6282:6283 ChronoPraxis_PXL_Proofs <> φ:38 var
-R6285:6286 ChronoPraxis_PXL_Proofs <> φ:38 var
-R6465:6476 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_PL_id constr
-R6465:6476 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_PL_id constr
-prf 6556:6583 ChronoPraxis_PXL_Proofs modal_necessitation_transfer
-R6599:6602 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
-binder 6594:6595 <> φ:39
-R6614:6617 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R6607:6610 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Prov ind
-R6612:6613 ChronoPraxis_PXL_Proofs <> φ:39 var
-R6618:6625 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Prov ind
-R6628:6634 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
-R6637:6646 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_to_cpx def
-R6648:6649 ChronoPraxis_PXL_Proofs <> φ:39 var
-R6860:6871 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_rule_Nec constr
-R6860:6871 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_rule_Nec constr
-R6882:6914 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_embedding_preserves_structure thm
-R6882:6914 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_embedding_preserves_structure thm
-prf 7004:7031 ChronoPraxis_PXL_Proofs bijection_soundness_identity
-R7047:7050 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
-binder 7042:7043 <> φ:40
-R7068:7070 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R7055:7064 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_to_cpx def
-R7066:7067 ChronoPraxis_PXL_Proofs <> φ:40 var
-R7071:7080 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_to_cpx def
-R7082:7083 ChronoPraxis_PXL_Proofs <> φ:40 var
-prf 7285:7306 ChronoPraxis_PXL_Proofs conservative_extension
-R7322:7325 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
-binder 7317:7318 <> φ:41
-R7330:7330 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R7364:7371 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R7397:7397 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R7331:7337 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R7351:7352 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R7343:7350 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_form ind
-binder 7338:7339 <> ψ:42
-R7353:7360 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Prov ind
-R7362:7363 ChronoPraxis_PXL_Proofs <> ψ:42 var
-R7372:7378 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R7388:7389 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R7384:7387 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
-binder 7379:7380 <> χ:43
-R7390:7393 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Prov ind
-R7395:7396 ChronoPraxis_PXL_Proofs <> χ:43 var
-R7727:7730 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
-R7736:7739 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
-R7727:7730 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
-R7736:7739 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
-R7809:7817 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs ax_PL_imp constr
-R7809:7817 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs ax_PL_imp constr
-R7830:7852 ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs <> mod
+R2813:2816 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Prov ind
+R2818:2819 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> φ:36 var
+R2824:2831 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Prov ind
+R2834:2843 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_to_cpx def
+R2845:2846 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> φ:36 var
+R3163:3170 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_K constr
+R3163:3170 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_K constr
+R3212:3219 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_T constr
+R3212:3219 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_T constr
+R3261:3268 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_4 constr
+R3261:3268 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_4 constr
+R3310:3317 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_5 constr
+R3310:3317 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_5 constr
+R3364:3376 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_PL_imp constr
+R3364:3376 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_PL_imp constr
+R3520:3530 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_rule_MP constr
+R3520:3530 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_rule_MP constr
+R3626:3637 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_rule_Nec constr
+R3626:3637 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_rule_Nec constr
+ax 3807:3824 ChronoPraxis_PXL_Proofs cpx_conservativity
+R3840:3843 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
+binder 3835:3836 <> φ:37
+R3872:3875 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3848:3855 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Prov ind
+R3858:3867 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_to_cpx def
+R3869:3870 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> φ:37 var
+R3876:3879 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Prov ind
+R3881:3882 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> φ:37 var
+prf 3949:3975 ChronoPraxis_PXL_Proofs cpx_projection_conservative
+R3991:3994 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
+binder 3986:3987 <> φ:40
+R4023:4026 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3999:4006 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Prov ind
+R4009:4018 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_to_cpx def
+R4020:4021 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> φ:40 var
+R4027:4030 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Prov ind
+R4032:4033 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> φ:40 var
+R8192:8209 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_conservativity prfax
+R8192:8209 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_conservativity prfax
+prf 8293:8317 ChronoPraxis_PXL_Proofs cpx_identity_preservation
+R8333:8340 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_form ind
+binder 8328:8329 <> φ:41
+R8345:8352 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Prov ind
+R8355:8362 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Impl constr
+R8364:8365 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> φ:41 var
+R8367:8368 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> φ:41 var
+R8547:8558 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_PL_id constr
+R8547:8558 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_ax_PL_id constr
+prf 8638:8665 ChronoPraxis_PXL_Proofs modal_necessitation_transfer
+R8681:8684 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
+binder 8676:8677 <> φ:42
+R8696:8699 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8689:8692 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Prov ind
+R8694:8695 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> φ:42 var
+R8700:8707 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Prov ind
+R8710:8716 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Box constr
+R8719:8728 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_to_cpx def
+R8730:8731 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> φ:42 var
+R8942:8953 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_rule_Nec constr
+R8942:8953 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_rule_Nec constr
+R8964:8996 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_embedding_preserves_structure thm
+R8964:8996 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_embedding_preserves_structure thm
+prf 9086:9113 ChronoPraxis_PXL_Proofs bijection_soundness_identity
+R9129:9132 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
+binder 9124:9125 <> φ:43
+R9150:9152 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R9137:9146 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_to_cpx def
+R9148:9149 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> φ:43 var
+R9153:9162 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs pxl_to_cpx def
+R9164:9165 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> φ:43 var
+prf 9367:9388 ChronoPraxis_PXL_Proofs conservative_extension
+R9404:9407 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
+binder 9399:9400 <> φ:44
+R9412:9412 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R9446:9453 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R9479:9479 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R9413:9419 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R9433:9434 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R9425:9432 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs cpx_form ind
+binder 9420:9421 <> ψ:45
+R9435:9442 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs CPX_Prov ind
+R9444:9445 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> ψ:45 var
+R9454:9460 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R9470:9471 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R9466:9469 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs form ind
+binder 9461:9462 <> χ:46
+R9472:9475 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Prov ind
+R9477:9478 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs <> χ:46 var
+R9809:9812 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R9818:9821 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R9809:9812 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R9818:9821 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs Impl constr
+R9891:9899 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs ax_PL_imp constr
+R9891:9899 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs ax_PL_imp constr
+R9912:9934 LOGOS_PXL_Core.PXL_IEL_overlay_system.modules.IEL.infra.ChronoPraxis.substrate.ChronoPraxis_PXL_Proofs ChronoPraxis_PXL_Proofs <> mod
