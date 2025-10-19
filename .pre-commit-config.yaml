@@ -1,0 +1,36 @@
+# Pre-commit configuration for LOGOS_PXL_Core
+# See https://pre-commit.com for more information
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: '\.md$'  # Allow trailing whitespace in markdown
+      - id: end-of-file-fixer
+        exclude: '\.coq$|\.v$'  # Exclude Coq files from EOF fixing
+      - id: check-merge-conflict
+      - id: check-yaml
+        exclude: '\.md$'
+      - id: check-json
+        exclude: 'manifest\.lock\.json$'  # Exclude lock files
+      - id: mixed-line-ending
+        args: ['--fix=lf']
+        exclude: '\.ps1$|\.bat$|\.cmd$'  # Preserve Windows line endings for scripts
+
+  # Python-specific hooks (for LOGOS_AGI directory)
+  - repo: https://github.com/psf/black
+    rev: 23.12.1
+    hooks:
+      - id: black
+        files: 'LOGOS_AGI/.*\.py$'
+        language_version: python3
+
+  # Coq-specific validation (basic syntax check)
+  - repo: local
+    hooks:
+      - id: coq-syntax
+        name: Coq Syntax Check
+        entry: bash -c 'if command -v coqc >/dev/null 2>&1; then for file in "$@"; do coqc -q "$file" >/dev/null || exit 1; done; fi'
+        language: system
+        files: '\.v$'
+        pass_filenames: true
