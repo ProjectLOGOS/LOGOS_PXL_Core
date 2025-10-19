@@ -127,9 +127,48 @@ Fixpoint cpx_to_pxl (φ : cpx_form) : option form :=
 Lemma pxl_cpx_bijection_embedding : forall φ : form,
   cpx_to_pxl (pxl_to_cpx φ) = Some φ.
 Proof.
-  (* TODO: Induction on form structure *)
-  admit.
-Admitted.
+  (* Induction on form structure *)
+  intro φ.
+  induction φ as [n | | ψ IHψ | ψ IHψ χ IHχ | ψ IHψ χ IHχ | ψ IHψ χ IHχ | ψ IHψ | ψ IHψ].
+
+  - (* Atom case *)
+    simpl.
+    reflexivity.
+
+  - (* Bot case *)
+    simpl.
+    reflexivity.
+
+  - (* Neg case *)
+    simpl.
+    rewrite IHψ.
+    reflexivity.
+
+  - (* Conj case *)
+    simpl.
+    rewrite IHψ, IHχ.
+    reflexivity.
+
+  - (* Disj case *)
+    simpl.
+    rewrite IHψ, IHχ.
+    reflexivity.
+
+  - (* Impl case *)
+    simpl.
+    rewrite IHψ, IHχ.
+    reflexivity.
+
+  - (* Box case *)
+    simpl.
+    rewrite IHψ.
+    reflexivity.
+
+  - (* Dia case *)
+    simpl.
+    rewrite IHψ.
+    reflexivity.
+Qed.
 
 Lemma pxl_cpx_bijection_projection : forall φ : cpx_form,
   match cpx_to_pxl φ with
@@ -137,8 +176,66 @@ Lemma pxl_cpx_bijection_projection : forall φ : cpx_form,
   | None => True  (* Temporal formulas have no PXL equivalent *)
   end.
 Proof.
-  (* TODO: Induction on cpx_form structure *)
-  admit.
-Admitted.
+  (* Induction on cpx_form structure *)
+  intro φ.
+  induction φ; simpl.
+
+  - (* CPX_Atom case *)
+    reflexivity.
+
+  - (* CPX_Bot case *)
+    reflexivity.
+
+  - (* CPX_Neg case *)
+    destruct (cpx_to_pxl φ) as [ψ'|] eqn:Hψ.
+    + simpl. f_equal. exact IHφ.
+    + exact I.
+
+  - (* CPX_Conj case *)
+    destruct (cpx_to_pxl φ1) as [ψ'|] eqn:Hψ;
+    destruct (cpx_to_pxl φ2) as [χ'|] eqn:Hχ.
+    + simpl. f_equal; [exact IHφ1 | exact IHφ2].
+    + exact I.
+    + exact I.
+    + exact I.
+
+  - (* CPX_Disj case *)
+    destruct (cpx_to_pxl φ1) as [ψ'|] eqn:Hψ;
+    destruct (cpx_to_pxl φ2) as [χ'|] eqn:Hχ.
+    + simpl. f_equal; [exact IHφ1 | exact IHφ2].
+    + exact I.
+    + exact I.
+    + exact I.
+
+  - (* CPX_Impl case *)
+    destruct (cpx_to_pxl φ1) as [ψ'|] eqn:Hψ;
+    destruct (cpx_to_pxl φ2) as [χ'|] eqn:Hχ.
+    + simpl. f_equal; [exact IHφ1 | exact IHφ2].
+    + exact I.
+    + exact I.
+    + exact I.
+
+  - (* CPX_Box case *)
+    destruct (cpx_to_pxl φ) as [ψ'|] eqn:Hψ.
+    + simpl. f_equal. exact IHφ.
+    + exact I.
+
+  - (* CPX_Dia case *)
+    destruct (cpx_to_pxl φ) as [ψ'|] eqn:Hψ.
+    + simpl. f_equal. exact IHφ.
+    + exact I.
+
+  - (* CPX_Until case - temporal operator *)
+    exact I.
+
+  - (* CPX_Since case - temporal operator *)
+    exact I.
+
+  - (* CPX_Next case - temporal operator *)
+    exact I.
+
+  - (* CPX_Prev case - temporal operator *)
+    exact I.
+Qed.
 
 End ChronoPraxis_PXL_Formal.
