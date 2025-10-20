@@ -1,0 +1,7 @@
+{"timestamp": "2025-10-19T22:22:12.453137", "event_type": "daemon_started", "data": {"config": {"interval_sec": 1, "max_self_extension_per_cycle": 1, "proof_gate_policy": "strict", "enable_coherence_optimizer": true, "telemetry_output": "metrics/agi_status.jsonl", "max_memory_mb": 512, "max_cpu_percent": 10.0, "enable_gap_detection": true, "enable_autonomous_reasoning": false}}}
+{"timestamp": "2025-10-19T22:22:12.863457", "event_type": "verification_cycle", "data": {"success": false, "error": "'UnifiedFormalismValidator' object has no attribute 'verify_pxl_integrity'"}}
+{"timestamp": "2025-10-19T22:22:12.863616", "event_type": "gap_detected", "data": {"type": "mock_gap", "severity": "medium", "location": "test.v:42"}}
+{"timestamp": "2025-10-19T22:22:12.863621", "event_type": "gaps_detected", "data": {"count": 1, "gaps": [{"type": "mock_gap", "severity": "medium", "location": "test.v:42"}]}}
+{"timestamp": "2025-10-19T22:22:12.863632", "event_type": "coherence_metrics", "data": {"pxl_coherence": 0.95, "iel_coherence": 0.92, "trinity_coherence": 0.93, "timestamp": 1760926932.863624}}
+{"timestamp": "2025-10-19T22:22:13.460173", "event_type": "verification_cycle", "data": {"success": false, "error": "'UnifiedFormalismValidator' object has no attribute 'verify_pxl_integrity'"}}
+{"timestamp": "2025-10-19T22:22:13.460192", "event_type": "coherence_metrics", "data": {"pxl_coherence": 0.95, "iel_coherence": 0.92, "trinity_coherence": 0.93, "timestamp": 1760926933.46019}}

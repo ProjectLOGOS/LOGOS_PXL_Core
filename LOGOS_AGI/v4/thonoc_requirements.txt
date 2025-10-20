@@ -1,0 +1,68 @@
+# logos_agi_v1/subsystems/thonoc/requirements.txt
+
+# Core messaging and infrastructure
+pika>=1.3.0
+python-dotenv>=1.0.0
+
+# Theorem proving and logical reasoning
+z3-solver>=4.12.0
+sympy>=1.12.0
+
+# Lambda calculus and functional programming
+toolz>=0.12.0
+funcy>=2.0.0
+
+# Logic programming and constraint solving
+python-constraint>=1.4.0
+ortools>=9.7.0
+
+# Formal verification and model checking
+pysmt>=0.9.0
+
+# Mathematical computation
+numpy>=1.24.0
+scipy>=1.11.0
+
+# Graph theory for proof trees
+networkx>=3.1.0
+
+# Parsing and AST manipulation
+lark>=1.1.0
+pyparsing>=3.1.0
+ply>=3.11.0
+
+# Pattern matching and rule engines
+aima3>=1.0.0
+
+# Knowledge representation
+rdflib>=7.0.0
+owlrl>=6.0.0
+
+# Probabilistic reasoning
+pgmpy>=0.1.23
+pomegranate>=0.14.0
+
+# Natural language processing for logical forms
+nltk>=3.8.0
+
+# Data structures and algorithms
+sortedcontainers>=2.4.0
+
+# Utilities and support
+tqdm>=4.65.0
+requests>=2.31.0
+cachetools>=5.3.0
+
+# Logging and monitoring
+structlog>=23.1.0
+
+# Testing and development (optional)
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+black>=23.0.0
+flake8>=6.0.0
+hypothesis>=6.82.0
+
+# Type checking
+mypy>=1.5.0
+types-requests>=2.31.0

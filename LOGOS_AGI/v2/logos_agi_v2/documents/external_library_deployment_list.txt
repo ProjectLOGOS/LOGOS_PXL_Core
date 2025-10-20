@@ -1,0 +1,12 @@
+ADDITIONAL REPO INTEGRATIONS: "C:\Users\proje\OneDrive\Desktop\LOGOS SYSTEM\logos_agi_v2\external_libraries"
+1. pymc-main
+2. pyro-dev
+3. pytorch-main
+4. sentence-transformers-main
+5. networkx-main
+6. arch-main
+7. filterpy-master
+8. pmdarima-master
+9. pykalman-main
+10. sickit-learn-main
+11. mandelbulb

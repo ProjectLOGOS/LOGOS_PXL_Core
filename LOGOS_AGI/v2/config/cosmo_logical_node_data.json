@@ -1,0 +1,124 @@
+{
+  "metadata": {
+    "name": "Standard Universe",
+    "description": "Default universe parameters with Earth-like conditions",
+    "version": "1.0",
+    "created": "2025-03-11T12:00:00Z",
+    "display": {
+      "color_schemes": {
+        "constants": ["#e6f7ff", "#1890ff", "#003a8c"],
+        "forces": ["#f6ffed", "#52c41a", "#135200"],
+        "properties": ["#fff1f0", "#ff4d4f", "#820014"],
+        "life_criteria": ["#f9f0ff", "#722ed1", "#120338"]
+      }
+    }
+  },
+  "parameters": {
+    "constants": {
+      "fine_structure": {
+        "value": 0.0072973525693,
+        "tolerance": 0.01,
+        "description": "Determines electromagnetic interaction strength"
+      },
+      "gravitational_constant": {
+        "value": 6.67430e-11,
+        "tolerance": 0.01,
+        "description": "Determines gravitational interaction strength"
+      },
+      "speed_of_light": {
+        "value": 299792458.0,
+        "tolerance": 0.01,
+        "description": "Maximum speed limit in universe"
+      },
+      "planck_constant": {
+        "value": 6.62607015e-34,
+        "tolerance": 0.01,
+        "description": "Quantum action scale"
+      },
+      "cosmological_constant": {
+        "value": 1.0e-52,
+        "tolerance": 0.01,
+        "description": "Energy density of vacuum space"
+      }
+    },
+    "forces": {
+      "strong_nuclear": {
+        "value": 1.0,
+        "tolerance": 0.05,
+        "description": "Relative strength of strong nuclear force"
+      },
+      "weak_nuclear": {
+        "value": 1.0e-13,
+        "tolerance": 0.05,
+        "description": "Relative strength of weak nuclear force"
+      },
+      "electromagnetic": {
+        "value": 1.0e-2,
+        "tolerance": 0.05,
+        "description": "Relative strength of electromagnetic force"
+      },
+      "gravitational": {
+        "value": 1.0e-38,
+        "tolerance": 0.05,
+        "description": "Relative strength of gravitational force"
+      }
+    },
+    "properties": {
+      "matter_energy_ratio": {
+        "value": 0.315,
+        "tolerance": 0.1,
+        "description": "Ratio of matter to total energy density"
+      },
+      "entropy_gradient": {
+        "value": 1.0e-5, 
+        "tolerance": 0.1,
+        "description": "Rate of entropy increase"
+      },
+      "expansion_rate": {
+        "value": 67.4,
+        "tolerance": 0.1,
+        "description": "Universe expansion rate (km/s/Mpc)"
+      },
+      "dimensionality": {
+        "value": 3,
+        "tolerance": 0,
+        "description": "Number of spatial dimensions"
+      }
+    },
+    "life_criteria": {
+      "carbon_oxygen_formation": {
+        "value": 0.7,
+        "min_threshold": 0.5,
+        "description": "Ability to form carbon and oxygen atoms"
+      },
+      "stellar_stability": {
+        "value": 0.85,
+        "min_threshold": 0.7,
+        "description": "Stability of star formation and lifecycle"
+      },
+      "chemical_complexity": {
+        "value": 0.75, 
+        "min_threshold": 0.6,
+        "description": "Potential for complex chemical interactions"
+      }
+    },
+    "logical": {
+      "non_contradiction": {
+        "value": true,
+        "description": "Logical requirement of non-contradiction"
+      },
+      "identity": {
+        "value": true,
+        "description": "Logical requirement of identity"
+      },
+      "excluded_middle": {
+        "value": true,
+        "description": "Logical requirement of excluded middle"
+      },
+      "causality": {
+        "value": true,
+        "description": "Logical requirement of causality"
+      }
+    }
+  }
+}

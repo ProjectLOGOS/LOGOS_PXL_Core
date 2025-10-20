@@ -1,0 +1,18 @@
+{
+  "timestamp": 1760914764.9696798,
+  "total_duration": 0.03108358383178711,
+  "total_tests": 1,
+  "successful_tests": 0,
+  "failed_tests": 1,
+  "success_rate": 0.0,
+  "overall_success": false,
+  "results": [
+    {
+      "name": "Environment Validation",
+      "success": false,
+      "duration": 0.013174295425415039,
+      "message": "Environment validation failed",
+      "timestamp": 1760914764.9655423
+    }
+  ]
+}

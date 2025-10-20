@@ -1,10 +1,16 @@
-# LOGOS PXL Core v0.5-rc1 Production Requirements
-# Core dependencies for production deployment
+# LOGOS PXL Core v0.7-rc2 Production Requirements with AGI v1.0 Enhancements
+# Core dependencies for production deployment with autonomous reasoning capabilities
 
 # Web framework and server
 Flask==2.3.2
 Werkzeug==2.3.6
 waitress==2.1.2
+
+# AGI v1.0 Enhancement Framework
+fastapi==0.115.0
+uvicorn==0.30.6
+pydantic==2.8.2
+websockets==11.0.0
 
 # HTTP client for testing and external API calls
 requests==2.31.0
@@ -13,11 +19,22 @@ urllib3==2.0.4
 # JSON handling and data structures
 jsonschema==4.19.0
 
-# Cryptography for HMAC authentication
+# Configuration management
+pyyaml==6.0.1
+
+# Database and storage for IEL registry
+sqlalchemy==2.0.23
+sqlite3==3.44.2  # Included with Python
+
+# Cryptography for IEL signing and verification
 cryptography==41.0.4
 
 # Process and system utilities
 psutil==5.9.5
+
+# Numerical computing for coherence optimization
+numpy==1.24.0
+scipy==1.11.0
 
 # Date/time handling
 python-dateutil==2.8.2

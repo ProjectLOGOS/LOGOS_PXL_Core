@@ -1,0 +1,102 @@
+name: Run CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  code-quality:
+    name: code-quality
+    runs-on: ubuntu-latest
+    steps:
+      - name: repository checkout step
+        uses: actions/checkout@v4
+
+      - name: python environment step
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: install pre-commit
+        run: python3 -m pip install pre-commit
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get changed files
+        id: changed-files
+        run: |
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | tr '\n' ' ')
+          echo "CHANGED_FILES=${CHANGED_FILES}" >> $GITHUB_ENV
+
+      - name: Print changed files
+        run: |
+          echo "Changed files: $CHANGED_FILES"
+
+      - name: Run pre-commit on changed files
+        run: |
+          if [ -n "$CHANGED_FILES" ]; then
+            pre-commit run --color always --files $CHANGED_FILES --show-diff-on-failure
+          else
+            echo "No changed files to check."
+          fi
+
+      - name: check missing __init__ files
+        run: build_tools/fail_on_missing_init_files.sh
+        shell: bash
+
+  test-nodevdeps:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+
+      - name: Install pykalman and dependencies
+        run: |
+          python -m pip install .
+
+      - name: Run pytest-free tests
+        run: |
+          python pykalman/_nopytest_tests.py
+
+  build:
+    needs: test-nodevdeps
+    name: build
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        operating-system:
+          - macos-13
+          - ubuntu-latest
+          - windows-latest
+    runs-on: ${{ matrix.operating-system }}
+    steps:
+      - name: checkout pull request branch
+        uses: actions/checkout@v4
+      - name: Set Up Python Environment
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install Dependencies
+        run: pip install .[tests]
+        shell: bash
+      - name: Display Python Version
+        run: python -c "import sys; print(sys.version)"
+        shell: bash
+      - name: Show Available Branches
+        run: git branch -a
+        shell: bash
+      - name: Run Unit Tests
+        run: pytest pykalman/tests/
+        shell: bash

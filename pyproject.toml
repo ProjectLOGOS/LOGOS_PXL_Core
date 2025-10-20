@@ -11,6 +11,14 @@ dependencies = [
   "pydantic>=2.8.2",
   "requests>=2.32.3",
   "openai>=1.0.0",
+  # LOGOS AGI v1.0 Enhancement Dependencies
+  "cryptography>=41.0.0",  # For IEL signing and verification
+  "websockets>=11.0.0",    # For real-time telemetry streaming
+  "psutil>=5.9.0",         # For system resource monitoring
+  "sqlalchemy>=2.0.0",     # For IEL registry database
+  "pyyaml>=6.0.0",         # For policy configuration
+  "scipy>=1.11.0",         # For coherence optimization algorithms
+  "numpy>=1.24.0",         # For numerical computations
 ]
 
 [project.optional-dependencies]
