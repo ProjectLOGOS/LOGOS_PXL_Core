@@ -11,38 +11,30 @@ from pmdarima.warnings import ModelFitWarning
 
 
 @pytest.mark.parametrize(
-    'ic,ooss,expect_error,expect_warning,expected_val', [
-
+    "ic,ooss,expect_error,expect_warning,expected_val",
+    [
         # happy paths
-        pytest.param('aic', 0, False, False, 'aic'),
-        pytest.param('aicc', 0, False, False, 'aicc'),
-        pytest.param('bic', 0, False, False, 'bic'),
-        pytest.param('hqic', 0, False, False, 'hqic'),
-        pytest.param('oob', 10, False, False, 'oob'),
-
+        pytest.param("aic", 0, False, False, "aic"),
+        pytest.param("aicc", 0, False, False, "aicc"),
+        pytest.param("bic", 0, False, False, "bic"),
+        pytest.param("hqic", 0, False, False, "hqic"),
+        pytest.param("oob", 10, False, False, "oob"),
         # unhappy paths :-(
-        pytest.param('aaic', 0, True, False, None),
-        pytest.param('oob', 0, False, True, 'aic'),
-
-    ]
+        pytest.param("aaic", 0, True, False, None),
+        pytest.param("oob", 0, False, True, "aic"),
+    ],
 )
-def test_check_information_criterion(ic,
-                                     ooss,
-                                     expect_error,
-                                     expect_warning,
-                                     expected_val):
-
+def test_check_information_criterion(ic, ooss, expect_error, expect_warning, expected_val):
     if expect_error:
         with pytest.raises(ValueError) as ve:
             val.check_information_criterion(ic, ooss)
-        assert 'not defined for information_criteria' in pytest_error_str(ve)
+        assert "not defined for information_criteria" in pytest_error_str(ve)
 
     else:
         if expect_warning:
             with pytest.warns(UserWarning) as w:
                 res = val.check_information_criterion(ic, ooss)
-            assert any('information_criterion cannot be' in s
-                       for s in pytest_warning_messages(w))
+            assert any("information_criterion cannot be" in s for s in pytest_warning_messages(w))
         else:
             with warnings.catch_warnings(record=True) as w:
                 res = val.check_information_criterion(ic, ooss)
@@ -52,11 +44,12 @@ def test_check_information_criterion(ic,
 
 
 @pytest.mark.parametrize(
-    'kwargs,expected', [
+    "kwargs,expected",
+    [
         pytest.param(None, {}),
         pytest.param({}, {}),
-        pytest.param({'foo': 'bar'}, {'foo': 'bar'}),
-    ]
+        pytest.param({"foo": "bar"}, {"foo": "bar"}),
+    ],
 )
 def test_check_kwargs(kwargs, expected):
     res = val.check_kwargs(kwargs)
@@ -64,33 +57,30 @@ def test_check_kwargs(kwargs, expected):
 
 
 @pytest.mark.parametrize(
-    'm,seasonal,expect_error,expect_warning,expected_val', [
-
+    "m,seasonal,expect_error,expect_warning,expected_val",
+    [
         # happy path
         pytest.param(12, True, False, False, 12),
         pytest.param(1, True, False, False, 1),
         pytest.param(0, False, False, False, 0),
         pytest.param(1, False, False, False, 0),
-
         # unhappy path :-(
         pytest.param(2, False, False, True, 0),
         pytest.param(0, True, True, False, None),
         pytest.param(-1, False, True, False, None),
-
-    ]
+    ],
 )
 def test_check_m(m, seasonal, expect_error, expect_warning, expected_val):
     if expect_error:
         with pytest.raises(ValueError) as ve:
             val.check_m(m, seasonal)
-        assert 'must be a positive integer' in pytest_error_str(ve)
+        assert "must be a positive integer" in pytest_error_str(ve)
 
     else:
         if expect_warning:
             with pytest.warns(UserWarning) as w:
                 res = val.check_m(m, seasonal)
-            assert any('set for non-seasonal fit' in s
-                       for s in pytest_warning_messages(w))
+            assert any("set for non-seasonal fit" in s for s in pytest_warning_messages(w))
         else:
             with warnings.catch_warnings(record=True) as w:
                 res = val.check_m(m, seasonal)
@@ -100,21 +90,21 @@ def test_check_m(m, seasonal, expect_error, expect_warning, expected_val):
 
 
 @pytest.mark.parametrize(
-    'stepwise,n_jobs,expect_warning,expected_n_jobs', [
-
+    "stepwise,n_jobs,expect_warning,expected_n_jobs",
+    [
         pytest.param(False, 1, False, 1),
         pytest.param(True, 1, False, 1),
         pytest.param(False, 2, False, 2),
         pytest.param(True, 2, True, 1),
-
-    ]
+    ],
 )
 def test_check_n_jobs(stepwise, n_jobs, expect_warning, expected_n_jobs):
     if expect_warning:
         with pytest.warns(UserWarning) as w:
             res = val.check_n_jobs(stepwise, n_jobs)
-        assert any('stepwise model cannot be fit in parallel' in s
-                   for s in pytest_warning_messages(w))
+        assert any(
+            "stepwise model cannot be fit in parallel" in s for s in pytest_warning_messages(w)
+        )
     else:
         with warnings.catch_warnings(record=True) as w:
             res = val.check_n_jobs(stepwise, n_jobs)
@@ -124,19 +114,17 @@ def test_check_n_jobs(stepwise, n_jobs, expect_warning, expected_n_jobs):
 
 
 @pytest.mark.parametrize(
-    'st,mx,argname,exp_vals,exp_err_msg', [
-
+    "st,mx,argname,exp_vals,exp_err_msg",
+    [
         # happy paths
-        pytest.param(0, 1, 'p', (0, 1), None),
-        pytest.param(1, 1, 'q', (1, 1), None),
-        pytest.param(1, None, 'P', (1, np.inf), None),
-
+        pytest.param(0, 1, "p", (0, 1), None),
+        pytest.param(1, 1, "q", (1, 1), None),
+        pytest.param(1, None, "P", (1, np.inf), None),
         # unhappy paths :-(
-        pytest.param(None, 1, 'Q', None, "start_Q cannot be None"),
-        pytest.param(-1, 1, 'p', None, "start_p must be positive"),
-        pytest.param(2, 1, 'foo', None, "max_foo must be >= start_foo"),
-
-    ]
+        pytest.param(None, 1, "Q", None, "start_Q cannot be None"),
+        pytest.param(-1, 1, "p", None, "start_p must be positive"),
+        pytest.param(2, 1, "foo", None, "max_foo must be >= start_foo"),
+    ],
 )
 def test_check_start_max_values(st, mx, argname, exp_vals, exp_err_msg):
     if exp_err_msg:
@@ -149,15 +137,16 @@ def test_check_start_max_values(st, mx, argname, exp_vals, exp_err_msg):
 
 
 @pytest.mark.parametrize(
-    'trace,expected', [
+    "trace,expected",
+    [
         pytest.param(None, 0),
         pytest.param(True, 1),
         pytest.param(False, 0),
         pytest.param(1, 1),
         pytest.param(2, 2),
-        pytest.param('trace it fam', 1),
-        pytest.param('', 0),
-    ]
+        pytest.param("trace it fam", 1),
+        pytest.param("", 0),
+    ],
 )
 def test_check_trace(trace, expected):
     res = val.check_trace(trace)
@@ -165,15 +154,15 @@ def test_check_trace(trace, expected):
 
 
 @pytest.mark.parametrize(
-    'metric,expected_error,expected_error_msg', [
+    "metric,expected_error,expected_error_msg",
+    [
         pytest.param("mae", None, None),
         pytest.param("mse", None, None),
         pytest.param("mean_squared_error", None, None),
         pytest.param("r2_score", None, None),
-
         pytest.param("foo", ValueError, "is not a valid scoring"),
         pytest.param(123, TypeError, "must be a valid scoring method, or a"),
-    ]
+    ],
 )
 def test_valid_metrics(metric, expected_error, expected_error_msg):
     if not expected_error:
@@ -185,12 +174,13 @@ def test_valid_metrics(metric, expected_error, expected_error_msg):
 
 
 @pytest.mark.parametrize(
-    'd,D,expected', [
+    "d,D,expected",
+    [
         pytest.param(0, 1, None),
         pytest.param(0, 2, "Having more than one"),
         pytest.param(2, 1, "Having 3 or more"),
         pytest.param(3, 1, "Having 3 or more"),
-    ]
+    ],
 )
 def test_warn_for_D(d, D, expected):
     if expected:

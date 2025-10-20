@@ -215,4 +215,3 @@ NetworkX acknowledges the following financial support:
   EOSS2-0000000066 and EOSS4-0000000138
 
 - Wellcome Trust via CZI, Wellcome and Kavli EOSS Cycle 6 (EOSS6-000000368)
-

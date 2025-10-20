@@ -65,9 +65,7 @@ def main():
     ]
 
     for benchmark in all:
-        benchmark.enable_compile_time_instruction_count().collect_all().append_results(
-            result_path
-        )
+        benchmark.enable_compile_time_instruction_count().collect_all().append_results(result_path)
 
 
 if __name__ == "__main__":

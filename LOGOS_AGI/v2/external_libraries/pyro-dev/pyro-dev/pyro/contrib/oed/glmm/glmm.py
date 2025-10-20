@@ -31,14 +31,9 @@ def known_covariance_linear_model(
 
     model = partial(
         bayesian_linear_model,
-        w_means=OrderedDict(
-            [(label, mean) for label, mean in zip(coef_labels, coef_means)]
-        ),
+        w_means=OrderedDict([(label, mean) for label, mean in zip(coef_labels, coef_means)]),
         w_sqrtlambdas=OrderedDict(
-            [
-                (label, 1.0 / (observation_sd * sd))
-                for label, sd in zip(coef_labels, coef_sds)
-            ]
+            [(label, 1.0 / (observation_sd * sd)) for label, sd in zip(coef_labels, coef_sds)]
         ),
         obs_sd=observation_sd,
         response_label=observation_label,
@@ -46,9 +41,7 @@ def known_covariance_linear_model(
     # For computing the true EIG
     model.obs_sd = observation_sd
     model.w_sds = OrderedDict([(label, sd) for label, sd in zip(coef_labels, coef_sds)])
-    model.w_sizes = OrderedDict(
-        [(label, sd.shape[-1]) for label, sd in zip(coef_labels, coef_sds)]
-    )
+    model.w_sizes = OrderedDict([(label, sd.shape[-1]) for label, sd in zip(coef_labels, coef_sds)])
     model.observation_label = observation_label
     model.coef_labels = coef_labels
     return model
@@ -122,16 +115,11 @@ def normal_inverse_gamma_linear_model(
 
 def normal_inverse_gamma_guide(coef_shape, coef_label="w", **kwargs):
     return partial(
-        normal_inv_gamma_family_guide,
-        obs_sd=None,
-        w_sizes={coef_label: coef_shape},
-        **kwargs
+        normal_inv_gamma_family_guide, obs_sd=None, w_sizes={coef_label: coef_shape}, **kwargs
     )
 
 
-def logistic_regression_model(
-    coef_mean, coef_sd, coef_label="w", observation_label="y"
-):
+def logistic_regression_model(coef_mean, coef_sd, coef_label="w", observation_label="y"):
     return partial(
         bayesian_linear_model,
         w_means={coef_label: coef_mean},
@@ -184,9 +172,7 @@ def sigmoid_model(
         k_shape = batch_shape + (sigmoid_design.shape[-1],)
         k = pyro.sample(
             sigmoid_label,
-            dist.Gamma(
-                sigmoid_alpha.expand(k_shape), sigmoid_beta.expand(k_shape)
-            ).to_event(1),
+            dist.Gamma(sigmoid_alpha.expand(k_shape), sigmoid_beta.expand(k_shape)).to_event(1),
         )
         k_assigned = rmv(sigmoid_design, k)
 
@@ -282,16 +268,13 @@ def bayesian_linear_model(
 
         if obs_sd is None:
             # First, sample tau (observation precision)
-            tau_prior = dist.Gamma(
-                alpha_0.unsqueeze(-1), beta_0.unsqueeze(-1)
-            ).to_event(1)
+            tau_prior = dist.Gamma(alpha_0.unsqueeze(-1), beta_0.unsqueeze(-1)).to_event(1)
             tau = pyro.sample("tau", tau_prior)
             obs_sd = 1.0 / torch.sqrt(tau)
 
         elif alpha_0 is not None or beta_0 is not None:
             warnings.warn(
-                "Values of `alpha_0` and `beta_0` unused becased"
-                "`obs_sd` was specified already."
+                "Values of `alpha_0` and `beta_0` unused becased" "`obs_sd` was specified already."
             )
 
         obs_sd = obs_sd.expand(batch_shape + (1,))
@@ -322,13 +305,9 @@ def bayesian_linear_model(
         prediction_mean = rmv(design, w)
         if response == "normal":
             # y is an n-vector: hence use .to_event(1)
-            return pyro.sample(
-                response_label, dist.Normal(prediction_mean, obs_sd).to_event(1)
-            )
+            return pyro.sample(response_label, dist.Normal(prediction_mean, obs_sd).to_event(1))
         elif response == "bernoulli":
-            return pyro.sample(
-                response_label, dist.Bernoulli(logits=prediction_mean).to_event(1)
-            )
+            return pyro.sample(response_label, dist.Bernoulli(logits=prediction_mean).to_event(1))
         elif response == "sigmoid":
             base_dist = dist.Normal(prediction_mean, obs_sd).to_event(1)
             # You can add loc via the linear model itself
@@ -373,12 +352,8 @@ def normal_inv_gamma_family_guide(design, obs_sd, w_sizes, mf=False):
 
         if obs_sd is None:
             # First, sample tau (observation precision)
-            alpha = softplus(
-                pyro.param("invsoftplus_alpha", 20.0 * torch.ones(tau_shape))
-            )
-            beta = softplus(
-                pyro.param("invsoftplus_beta", 20.0 * torch.ones(tau_shape))
-            )
+            alpha = softplus(pyro.param("invsoftplus_alpha", 20.0 * torch.ones(tau_shape)))
+            beta = softplus(pyro.param("invsoftplus_beta", 20.0 * torch.ones(tau_shape)))
             # Global variable
             tau_prior = dist.Gamma(alpha, beta)
             tau = pyro.sample("tau", tau_prior)
@@ -455,9 +430,9 @@ def analytic_posterior_cov(prior_cov, x, obs_sd):
     # Use some kernel trick magic
     p = prior_cov.shape[-1]
     SigmaXX = prior_cov.mm(x.t().mm(x))
-    posterior_cov = prior_cov - torch.inverse(
-        SigmaXX + (obs_sd**2) * torch.eye(p)
-    ).mm(SigmaXX.mm(prior_cov))
+    posterior_cov = prior_cov - torch.inverse(SigmaXX + (obs_sd**2) * torch.eye(p)).mm(
+        SigmaXX.mm(prior_cov)
+    )
     return posterior_cov
 
 

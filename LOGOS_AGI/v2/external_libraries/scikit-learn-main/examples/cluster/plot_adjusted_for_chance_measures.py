@@ -198,9 +198,7 @@ for marker, (score_name, score_func) in zip("d^vx.,", score_funcs):
     )
     names.append(score_name)
 
-plt.title(
-    "Clustering measures for 2 random uniform labelings\nwith equal number of clusters"
-)
+plt.title("Clustering measures for 2 random uniform labelings\nwith equal number of clusters")
 plt.xlabel(f"Number of clusters (Number of samples is fixed to {n_samples})")
 plt.ylabel("Score value")
 plt.legend(plots, names)

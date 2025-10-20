@@ -4,9 +4,7 @@ from sphinx_gallery.sorting import ExplicitOrder, FileNameSortKey
 from intersphinx_registry import get_intersphinx_mapping
 from warnings import filterwarnings
 
-filterwarnings(
-    "ignore", message="Matplotlib is currently using agg", category=UserWarning
-)
+filterwarnings("ignore", message="Matplotlib is currently using agg", category=UserWarning)
 
 # General configuration
 # ---------------------
@@ -149,9 +147,7 @@ html_theme_options = {
     "secondary_sidebar_items": ["page-toc", "edit-this-page"],
     "header_links_before_dropdown": 8,
     "switcher": {
-        "json_url": (
-            "https://networkx.org/documentation/latest/_static/version_switcher.json"
-        ),
+        "json_url": ("https://networkx.org/documentation/latest/_static/version_switcher.json"),
         "version_match": "latest" if "dev" in version else version,
     },
     "show_version_warning_banner": True,

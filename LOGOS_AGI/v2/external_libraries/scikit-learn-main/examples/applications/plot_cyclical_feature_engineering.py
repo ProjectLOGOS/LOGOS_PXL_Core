@@ -108,10 +108,7 @@ X["weather"].value_counts()
 # representation by collapsing those into the `"rain"` category.
 #
 X["weather"] = (
-    X["weather"]
-    .astype(object)
-    .replace(to_replace="heavy_rain", value="rain")
-    .astype("category")
+    X["weather"].astype(object).replace(to_replace="heavy_rain", value="rain").astype("category")
 )
 
 # %%
@@ -214,9 +211,7 @@ def evaluate(model, X, y, cv, model_prop=None, model_step=None):
     )
     if model_prop is not None:
         if model_step is not None:
-            values = [
-                getattr(m[model_step], model_prop) for m in cv_results["estimator"]
-            ]
+            values = [getattr(m[model_step], model_prop) for m in cv_results["estimator"]]
         else:
             values = [getattr(m, model_prop) for m in cv_results["estimator"]]
         print(f"Mean model.{model_prop} = {np.mean(values)}")
@@ -266,9 +261,7 @@ naive_linear_pipeline = make_pipeline(
 )
 
 
-evaluate(
-    naive_linear_pipeline, X, y, cv=ts_cv, model_prop="alpha_", model_step="ridgecv"
-)
+evaluate(naive_linear_pipeline, X, y, cv=ts_cv, model_prop="alpha_", model_step="ridgecv")
 
 
 # %%

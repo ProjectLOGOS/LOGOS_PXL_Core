@@ -85,9 +85,7 @@ def show_with_diff(image, reference, title):
     difference = image - reference
 
     plt.title("Difference (norm: %.2f)" % np.sqrt(np.sum(difference**2)))
-    plt.imshow(
-        difference, vmin=-0.5, vmax=0.5, cmap=plt.cm.PuOr, interpolation="nearest"
-    )
+    plt.imshow(difference, vmin=-0.5, vmax=0.5, cmap=plt.cm.PuOr, interpolation="nearest")
     plt.xticks(())
     plt.yticks(())
     plt.suptitle(title, size=16)
@@ -141,8 +139,7 @@ for i, comp in enumerate(V[:100]):
     plt.xticks(())
     plt.yticks(())
 plt.suptitle(
-    "Dictionary learned from face patches\n"
-    + "Train time %.1fs on %d patches" % (dt, len(data)),
+    "Dictionary learned from face patches\n" + "Train time %.1fs on %d patches" % (dt, len(data)),
     fontsize=16,
 )
 plt.subplots_adjust(0.08, 0.02, 0.92, 0.85, 0.08, 0.23)

@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from pmdarima.compat.pytest import pytest_error_str
-from pmdarima.model_selection import RollingForecastCV, \
-    SlidingWindowForecastCV, check_cv, train_test_split
+from pmdarima.model_selection import (
+    RollingForecastCV,
+    SlidingWindowForecastCV,
+    check_cv,
+    train_test_split,
+)
 from pmdarima.datasets import load_wineind
 import pytest
 import numpy as np
@@ -12,12 +16,13 @@ y = load_wineind()
 
 
 @pytest.mark.parametrize(
-    'cv', [
+    "cv",
+    [
         RollingForecastCV(),
         RollingForecastCV(h=4),
         RollingForecastCV(initial=150, h=10),
         RollingForecastCV(initial=12, h=16, step=7),
-    ]
+    ],
 )
 def test_rolling_forecast_cv_passing(cv):
     # get all splits
@@ -33,12 +38,13 @@ def test_rolling_forecast_cv_passing(cv):
 
 
 @pytest.mark.parametrize(
-    'cv', [
+    "cv",
+    [
         SlidingWindowForecastCV(),
         SlidingWindowForecastCV(h=4),
         SlidingWindowForecastCV(window_size=42, h=10),
         SlidingWindowForecastCV(window_size=67, h=16, step=7),
-    ]
+    ],
 )
 def test_sliding_forecast_cv_passing(cv):
     # get all splits
@@ -63,11 +69,12 @@ def test_sliding_forecast_cv_passing(cv):
 
 
 @pytest.mark.parametrize(
-    'cv', [
+    "cv",
+    [
         RollingForecastCV(initial=-1),  # too low initial
         RollingForecastCV(initial=150, h=100),  # too high sum of initial + h
         SlidingWindowForecastCV(window_size=500),  # too high window
-    ]
+    ],
 )
 def test_cv_split_value_errors(cv):
     with pytest.raises(ValueError):
@@ -88,7 +95,7 @@ def test_check_cv():
     assert isinstance(check_cv(None), RollingForecastCV)
 
     with pytest.raises(TypeError):
-        check_cv('something else')
+        check_cv("something else")
 
 
 def test_train_test_split():

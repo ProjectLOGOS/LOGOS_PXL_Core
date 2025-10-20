@@ -77,9 +77,7 @@ mean_scores = mean_scores.reshape(len(C_OPTIONS), -1, len(N_FEATURES_OPTIONS))
 # select score for best C
 mean_scores = mean_scores.max(axis=0)
 # create a dataframe to ease plotting
-mean_scores = pd.DataFrame(
-    mean_scores.T, index=N_FEATURES_OPTIONS, columns=reducer_labels
-)
+mean_scores = pd.DataFrame(mean_scores.T, index=N_FEATURES_OPTIONS, columns=reducer_labels)
 
 ax = mean_scores.plot.bar()
 ax.set_title("Comparing feature reduction techniques")

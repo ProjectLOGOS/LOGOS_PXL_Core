@@ -1,0 +1,36 @@
+{
+  "ranking_timestamp": "2025-10-19T23:14:17.138707",
+  "threshold": 0.92,
+  "total_candidates": 3,
+  "qualified_candidates": 1,
+  "ranked_iels": [
+    {
+      "iel_id": "iel_candidate_002",
+      "file_path": "build/refined_candidate.v",
+      "timestamp": "2025-10-19T23:15:00.000000",
+      "proof_metrics": {
+        "has_theorem": true,
+        "has_proof": true,
+        "has_qed": false,
+        "syntax_score": 0.95,
+        "structure_score": 0.93,
+        "completeness_score": 0.7
+      },
+      "coherence_metrics": {
+        "base_coherence": 0.95,
+        "naming_coherence": 0.98,
+        "logical_coherence": 0.92,
+        "framework_coherence": 0.96,
+        "overall_coherence": 0.9525
+      },
+      "performance_metrics": {
+        "complexity_score": 0.88,
+        "efficiency_score": 0.9,
+        "maintainability_score": 0.92
+      },
+      "overall_score": 0.923,
+      "classification": "excellent",
+      "rank": 1
+    }
+  ]
+}

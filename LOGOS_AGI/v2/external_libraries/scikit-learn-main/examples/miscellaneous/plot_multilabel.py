@@ -93,12 +93,8 @@ def plot_subfigure(X, Y, subplot, title, transform):
         label="Class 2",
     )
 
-    plot_hyperplane(
-        classif.estimators_[0], min_x, max_x, "k--", "Boundary\nfor class 1"
-    )
-    plot_hyperplane(
-        classif.estimators_[1], min_x, max_x, "k-.", "Boundary\nfor class 2"
-    )
+    plot_hyperplane(classif.estimators_[0], min_x, max_x, "k--", "Boundary\nfor class 1")
+    plot_hyperplane(classif.estimators_[1], min_x, max_x, "k-.", "Boundary\nfor class 2")
     plt.xticks(())
     plt.yticks(())
 
@@ -112,9 +108,7 @@ def plot_subfigure(X, Y, subplot, title, transform):
 
 plt.figure(figsize=(8, 6))
 
-X, Y = make_multilabel_classification(
-    n_classes=2, n_labels=1, allow_unlabeled=True, random_state=1
-)
+X, Y = make_multilabel_classification(n_classes=2, n_labels=1, allow_unlabeled=True, random_state=1)
 
 plot_subfigure(X, Y, 1, "With unlabeled samples + CCA", "cca")
 plot_subfigure(X, Y, 2, "With unlabeled samples + PCA", "pca")

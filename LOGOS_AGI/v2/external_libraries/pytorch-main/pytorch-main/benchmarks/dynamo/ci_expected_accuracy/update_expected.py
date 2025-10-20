@@ -71,8 +71,7 @@ ARTIFACTS_QUERY_URL = (
     "c1cdfadc-6bb2-4a91-bbf9-3d19e1981cd4/run?format=JSON"
 )
 CSV_LINTER = str(
-    Path(__file__).absolute().parents[3]
-    / "tools/linter/adapters/no_merge_conflict_csv_linter.py"
+    Path(__file__).absolute().parents[3] / "tools/linter/adapters/no_merge_conflict_csv_linter.py"
 )
 
 
@@ -122,8 +121,12 @@ def get_artifacts_urls(results, suites):
             runAttempt = r["runAttempt"]
 
             if suite in suites:
-                artifact_filename = f"test-reports-test-{suite}-{shard_id}-{num_shards}-{machine}_{id}.zip"
-                s3_url = f"{S3_BASE_URL}/{repo}/{workflowId}/{runAttempt}/artifact/{artifact_filename}"
+                artifact_filename = (
+                    f"test-reports-test-{suite}-{shard_id}-{num_shards}-{machine}_{id}.zip"
+                )
+                s3_url = (
+                    f"{S3_BASE_URL}/{repo}/{workflowId}/{runAttempt}/artifact/{artifact_filename}"
+                )
                 urls[(suite, int(shard_id))] = s3_url
                 print(f"{suite} {shard_id}, {num_shards}: {s3_url}")
     return urls

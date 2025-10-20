@@ -284,9 +284,7 @@ def _autolag_ols_low_memory(
         try:
             b = solve(xpx_sub, xpy[:i])
         except LinAlgError:
-            raise InfeasibleTestException(
-                singular_array_error.format(max_lags=maxlag, lag=m - i)
-            )
+            raise InfeasibleTestException(singular_array_error.format(max_lags=maxlag, lag=m - i))
         sigma2[i - m] = squeeze(ypy - b.T @ xpx_sub @ b) / nobs
         if lower_method == "t-stat":
             xpxi = inv(xpx_sub)
@@ -343,9 +341,7 @@ def _autolag_ols(
         if exog_rank is None:
             exog_rank = matrix_rank(exog)
         raise InfeasibleTestException(
-            singular_array_error.format(
-                max_lags=maxlag, lag=max(exog_rank - startlag, 0)
-            )
+            singular_array_error.format(max_lags=maxlag, lag=max(exog_rank - startlag, 0))
         )
     _exog = np.asarray(exog, dtype=float)
     _endog = to_array_1d(endog)
@@ -1460,9 +1456,7 @@ class ZivotAndrews(UnitRootTest, metaclass=AbstractDocStringInheritor):
         self._method = method
         self._test_name = "Zivot-Andrews"
         self._all_stats = full(self._y.shape[0], nan)
-        self._null_hypothesis = (
-            "The process contains a unit root with a single structural break."
-        )
+        self._null_hypothesis = "The process contains a unit root with a single structural break."
         self._alternative_hypothesis = "The process is trend and break stationary."
 
     @staticmethod
@@ -1523,9 +1517,7 @@ class ZivotAndrews(UnitRootTest, metaclass=AbstractDocStringInheritor):
         exog[:, 0] = c_const
         # lagged y and dy
         exog[:, basecols - 1] = y_2d[baselags : (nobs - 1), 0]
-        exog[:, basecols:] = lagmat(dy, baselags, trim="none")[
-            baselags : exog.shape[0] + baselags
-        ]
+        exog[:, basecols:] = lagmat(dy, baselags, trim="none")[baselags : exog.shape[0] + baselags]
         # better time trend: t_const @ t_const = 1 for large nobs
         t_const = arange(1.0, nobs + 2)
         t_const *= sqrt(3) / nobs ** (3 / 2)
@@ -1811,8 +1803,7 @@ def mackinnonp(
     dist_type = cast(Literal["adf-t", "adf-z", "dfgls"], dist_type.lower())
     if num_unit_roots > 1 and dist_type.lower() != "adf-t":
         raise ValueError(
-            "Cointegration results (num_unit_roots > 1) are"
-            + "only available for ADF-t values"
+            "Cointegration results (num_unit_roots > 1) are" + "only available for ADF-t values"
         )
     if dist_type == "adf-t":
         maxstat = tau_max[regression][num_unit_roots - 1]
@@ -1926,9 +1917,7 @@ def mackinnoncrit(
         return polyval(poly_coef[::-1], 1.0 / nobs).astype(float)
 
 
-def kpss_crit(
-    stat: float, trend: Literal["c", "ct"] = "c"
-) -> tuple[float, Float64Array]:
+def kpss_crit(stat: float, trend: Literal["c", "ct"] = "c") -> tuple[float, Float64Array]:
     """
     Linear interpolation for KPSS p-values and critical values
 
@@ -1966,9 +1955,7 @@ def kpss_crit(
 
 def auto_bandwidth(
     y: Sequence[float | int] | ArrayLike1D,
-    kernel: Literal[
-        "ba", "bartlett", "nw", "pa", "parzen", "gallant", "qs", "andrews"
-    ] = "ba",
+    kernel: Literal["ba", "bartlett", "nw", "pa", "parzen", "gallant", "qs", "andrews"] = "ba",
 ) -> float:
     """
     Automatic bandwidth selection of Andrews (1991) and Newey & West (1994).

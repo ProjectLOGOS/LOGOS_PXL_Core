@@ -27,9 +27,7 @@ def test_gnp_generators_negative_edge_probability(generator, directed):
     ("directed", "expected_num_edges"),
     [(False, 45), (True, 90)],
 )
-def test_gnp_generators_greater_than_1_edge_probability(
-    generator, directed, expected_num_edges
-):
+def test_gnp_generators_greater_than_1_edge_probability(generator, directed, expected_num_edges):
     """If the edge probability `p` is >=1, the resulting graph should be complete."""
     G = generator(10, 1.1, directed=directed)
     assert len(G) == 10
@@ -50,9 +48,7 @@ def test_gnp_generators_basic(generator, directed):
 def test_gnp_generators_for_p_close_to_1(generator):
     """If the edge probability `p` is close to 1, the resulting graph should have all edges."""
     runs = 100
-    edges = sum(
-        generator(10, 0.99999, directed=True).number_of_edges() for _ in range(runs)
-    )
+    edges = sum(generator(10, 0.99999, directed=True).number_of_edges() for _ in range(runs))
     assert abs(edges / float(runs) - 90) <= runs * 2.0 / 100
 
 
@@ -204,9 +200,7 @@ class TestGeneratorsRandom:
             DBA = nx.dual_barabasi_albert_graph(100, m1, m2, p, seed, initial_graph)
             BA1 = nx.barabasi_albert_graph(100, m1, seed, initial_graph)
             BA2 = nx.barabasi_albert_graph(100, m2, seed, initial_graph)
-            assert (
-                min(BA1.size(), BA2.size()) <= DBA.size() <= max(BA1.size(), BA2.size())
-            )
+            assert min(BA1.size(), BA2.size()) <= DBA.size() <= max(BA1.size(), BA2.size())
 
         # Testing exceptions
         dbag = nx.dual_barabasi_albert_graph

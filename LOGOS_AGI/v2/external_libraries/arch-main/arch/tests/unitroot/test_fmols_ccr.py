@@ -14,9 +14,7 @@ from arch.unitroot.cointegration import CanonicalCointegratingReg, FullyModified
 @pytest.mark.parametrize("kernel", ["bartlett", "gallant", "andrews"])
 @pytest.mark.parametrize("bandwidth", [1, 10, None])
 @pytest.mark.parametrize("force_int", [True, False])
-def test_fmols_smoke(
-    trivariate_data, trend, x_trend, diff, kernel, bandwidth, force_int
-):
+def test_fmols_smoke(trivariate_data, trend, x_trend, diff, kernel, bandwidth, force_int):
     y, x = trivariate_data
     if x_trend is not None and len(x_trend) < len(trend):
         x_trend = trend
@@ -43,9 +41,7 @@ def test_ccr_smoke(trivariate_data, trend, x_trend, diff, kernel, bandwidth, for
 @pytest.mark.parametrize("estimator", [CanonicalCointegratingReg, FullyModifiedOLS])
 def test_exceptions(trivariate_data, estimator):
     y, x = trivariate_data
-    with pytest.raises(
-        ValueError, match="The number of observations in y and x differ"
-    ):
+    with pytest.raises(ValueError, match="The number of observations in y and x differ"):
         estimator(y[1:], x)
     mod = estimator(y, x)
     with pytest.raises(ValueError, match="kernel is not a known kernel estimator"):

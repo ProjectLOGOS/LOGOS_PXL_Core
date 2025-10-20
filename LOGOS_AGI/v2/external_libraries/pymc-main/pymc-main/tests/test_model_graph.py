@@ -660,7 +660,8 @@ def test_scalars_dim_info() -> None:
 
 
 def test_model_to_mermaid(simple_model):
-    expected_mermaid_string = dedent("""
+    expected_mermaid_string = dedent(
+        """
     graph TD
     %% Nodes:
     a([a ~ Normal])
@@ -675,7 +676,8 @@ def test_model_to_mermaid(simple_model):
     b --> c
 
     %% Plates:
-    """)
+    """
+    )
     assert model_to_mermaid(simple_model) == expected_mermaid_string.strip()
 
 
@@ -683,7 +685,8 @@ def test_model_to_mermaid_with_variable_with_space():
     with pm.Model() as variable_with_space:
         pm.Normal("plant growth")
 
-    expected_mermaid_string = dedent("""
+    expected_mermaid_string = dedent(
+        """
     graph TD
     %% Nodes:
     plant_growth([plant growth ~ Normal])
@@ -692,5 +695,6 @@ def test_model_to_mermaid_with_variable_with_space():
     %% Edges:
 
     %% Plates:
-    """)
+    """
+    )
     assert model_to_mermaid(variable_with_space) == expected_mermaid_string.strip()

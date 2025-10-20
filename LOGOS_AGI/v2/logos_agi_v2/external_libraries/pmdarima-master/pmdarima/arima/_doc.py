@@ -178,7 +178,7 @@ _AUTO_ARIMA_DOCSTR = \
         test. See ``pmdarima.arima.seasonality`` for more details. Examples of
         valid kwargs will vary based on the test. For the ``OCSBTest``
         (default) they include:
-        
+
         - 'lag_method'
         - 'max_lag'
 
@@ -251,7 +251,7 @@ _AUTO_ARIMA_DOCSTR = \
         Whether to include an intercept term. Default is "auto" which behaves
         like True until a point in the search where the sum of differencing
         terms will explicitly set it to True or False.
-    
+
     {sarimax_kwargs}
     {fit_args}
     See Also

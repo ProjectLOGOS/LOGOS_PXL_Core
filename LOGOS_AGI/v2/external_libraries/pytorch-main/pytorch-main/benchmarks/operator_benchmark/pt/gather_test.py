@@ -33,9 +33,7 @@ class GatherBenchmark(op_bench.TorchBenchmarkBase):
         self.inputs = {
             "input_one": torch.rand(M, N, device=device),
             "dim": dim,
-            "index": torch.tensor(
-                numpy.random.randint(0, min_val, (M, N)), device=device
-            ),
+            "index": torch.tensor(numpy.random.randint(0, min_val, (M, N)), device=device),
         }
         self.set_module_name("gather")
 

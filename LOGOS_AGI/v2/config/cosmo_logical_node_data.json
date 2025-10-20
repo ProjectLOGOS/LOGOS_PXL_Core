@@ -70,7 +70,7 @@
         "description": "Ratio of matter to total energy density"
       },
       "entropy_gradient": {
-        "value": 1.0e-5, 
+        "value": 1.0e-5,
         "tolerance": 0.1,
         "description": "Rate of entropy increase"
       },
@@ -97,7 +97,7 @@
         "description": "Stability of star formation and lifecycle"
       },
       "chemical_complexity": {
-        "value": 0.75, 
+        "value": 0.75,
         "min_threshold": 0.6,
         "description": "Potential for complex chemical interactions"
       }

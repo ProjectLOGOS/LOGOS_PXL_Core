@@ -77,10 +77,7 @@ def eval_and_print_metrics(clf, X_train, y_train, X_test, y_test):
     print("Unlabeled samples in training set:", sum(1 for x in y_train if x == -1))
     clf.fit(X_train, y_train)
     y_pred = clf.predict(X_test)
-    print(
-        "Micro-averaged F1 score on test set: %0.3f"
-        % f1_score(y_test, y_pred, average="micro")
-    )
+    print("Micro-averaged F1 score on test set: %0.3f" % f1_score(y_test, y_pred, average="micro"))
     print("-" * 10)
     print()
 
@@ -96,9 +93,7 @@ if __name__ == "__main__":
     y_mask = np.random.rand(len(y_train)) < 0.2
 
     # X_20 and y_20 are the subset of the train dataset indicated by the mask
-    X_20, y_20 = map(
-        list, zip(*((x, y) for x, y, m in zip(X_train, y_train, y_mask) if m))
-    )
+    X_20, y_20 = map(list, zip(*((x, y) for x, y, m in zip(X_train, y_train, y_mask) if m)))
     print("Supervised SGDClassifier on 20% of the training data:")
     eval_and_print_metrics(pipeline, X_20, y_20, X_test, y_test)
 

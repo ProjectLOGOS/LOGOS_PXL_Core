@@ -1,0 +1,99 @@
+{
+  "evaluation_timestamp": "2025-10-19T23:15:00.000000",
+  "total_iels_evaluated": 3,
+  "evaluation_results": {
+    "iel_candidate_001": {
+      "iel_id": "iel_candidate_001",
+      "file_path": "build/candidate_iel.v",
+      "timestamp": "2025-10-19T23:15:00.000000",
+      "proof_metrics": {
+        "has_theorem": true,
+        "has_proof": true,
+        "has_qed": true,
+        "syntax_score": 0.85,
+        "structure_score": 0.9,
+        "completeness_score": 0.8
+      },
+      "coherence_metrics": {
+        "base_coherence": 0.88,
+        "naming_coherence": 0.9,
+        "logical_coherence": 0.85,
+        "framework_coherence": 0.92,
+        "overall_coherence": 0.8875
+      },
+      "performance_metrics": {
+        "complexity_score": 0.75,
+        "efficiency_score": 0.8,
+        "maintainability_score": 0.85
+      },
+      "overall_score": 0.843,
+      "classification": "good"
+    },
+    "iel_candidate_002": {
+      "iel_id": "iel_candidate_002",
+      "file_path": "build/refined_candidate.v",
+      "timestamp": "2025-10-19T23:15:00.000000",
+      "proof_metrics": {
+        "has_theorem": true,
+        "has_proof": true,
+        "has_qed": false,
+        "syntax_score": 0.95,
+        "structure_score": 0.93,
+        "completeness_score": 0.7
+      },
+      "coherence_metrics": {
+        "base_coherence": 0.95,
+        "naming_coherence": 0.98,
+        "logical_coherence": 0.92,
+        "framework_coherence": 0.96,
+        "overall_coherence": 0.9525
+      },
+      "performance_metrics": {
+        "complexity_score": 0.88,
+        "efficiency_score": 0.9,
+        "maintainability_score": 0.92
+      },
+      "overall_score": 0.923,
+      "classification": "excellent"
+    },
+    "iel_candidate_003": {
+      "iel_id": "iel_candidate_003",
+      "file_path": "build/low_quality.v",
+      "timestamp": "2025-10-19T23:15:00.000000",
+      "proof_metrics": {
+        "has_theorem": false,
+        "has_proof": false,
+        "has_qed": false,
+        "syntax_score": 0.3,
+        "structure_score": 0.2,
+        "completeness_score": 0.1
+      },
+      "coherence_metrics": {
+        "base_coherence": 0.4,
+        "naming_coherence": 0.3,
+        "logical_coherence": 0.25,
+        "framework_coherence": 0.35,
+        "overall_coherence": 0.325
+      },
+      "performance_metrics": {
+        "complexity_score": 0.6,
+        "efficiency_score": 0.2,
+        "maintainability_score": 0.1
+      },
+      "overall_score": 0.298,
+      "classification": "poor"
+    }
+  },
+  "summary_statistics": {
+    "mean_score": 0.688,
+    "median_score": 0.843,
+    "min_score": 0.298,
+    "max_score": 0.923,
+    "score_std_dev": 0.312,
+    "classification_counts": {
+      "excellent": 1,
+      "good": 1,
+      "poor": 1
+    }
+  }
+}

@@ -156,13 +156,7 @@ def write_adjlist(G, path, comments="#", delimiter=" ", encoding="utf-8"):
     import time
 
     pargs = comments + " ".join(sys.argv) + "\n"
-    header = (
-        pargs
-        + comments
-        + f" GMT {time.asctime(time.gmtime())}\n"
-        + comments
-        + f" {G.name}\n"
-    )
+    header = pargs + comments + f" GMT {time.asctime(time.gmtime())}\n" + comments + f" {G.name}\n"
     path.write(header.encode(encoding))
 
     for line in generate_adjlist(G, delimiter):
@@ -171,9 +165,7 @@ def write_adjlist(G, path, comments="#", delimiter=" ", encoding="utf-8"):
 
 
 @nx._dispatchable(graphs=None, returns_graph=True)
-def parse_adjlist(
-    lines, comments="#", delimiter=None, create_using=None, nodetype=None
-):
+def parse_adjlist(lines, comments="#", delimiter=None, create_using=None, nodetype=None):
     """Parse lines of a graph adjacency list representation.
 
     Parameters
@@ -228,9 +220,7 @@ def parse_adjlist(
             try:
                 u = nodetype(u)
             except BaseException as err:
-                raise TypeError(
-                    f"Failed to convert node ({u}) to type {nodetype}"
-                ) from err
+                raise TypeError(f"Failed to convert node ({u}) to type {nodetype}") from err
         G.add_node(u)
         if nodetype is not None:
             try:

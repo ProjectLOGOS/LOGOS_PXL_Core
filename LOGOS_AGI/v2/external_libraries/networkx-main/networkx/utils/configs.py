@@ -115,18 +115,14 @@ class Config:
 
     def __delattr__(self, key):
         if self._strict:
-            raise TypeError(
-                f"Configuration items can't be deleted (can't delete {key!r})."
-            )
+            raise TypeError(f"Configuration items can't be deleted (can't delete {key!r}).")
         self._on_delattr(key)
         object.__delattr__(self, key)
         self.__class__._prev = None
 
     # Be a `collection.abc.Collection`
     def __contains__(self, key):
-        return (
-            key in self.__dataclass_fields__ if self._strict else key in self.__dict__
-        )
+        return key in self.__dataclass_fields__ if self._strict else key in self.__dict__
 
     def __iter__(self):
         return iter(self.__dataclass_fields__ if self._strict else self.__dict__)
@@ -257,9 +253,7 @@ class BackendPriorities(Config, strict=False):
                 "of a dispatchable function (e.g. `.name` attribute of the function)."
             )
         if not (isinstance(value, list) and all(isinstance(x, str) for x in value)):
-            raise TypeError(
-                f"{key!r} config must be a list of backend names; got {value!r}"
-            )
+            raise TypeError(f"{key!r} config must be a list of backend names; got {value!r}")
         if missing := {x for x in value if x not in backend_info}:
             missing = ", ".join(map(repr, sorted(missing)))
             raise ValueError(f"Unknown backend when setting {key!r}: {missing}")
@@ -378,9 +372,7 @@ class NetworkXConfig(Config):
                 raise TypeError(f"{key!r} config must be True or False; got {value!r}")
         elif key == "warnings_to_ignore":
             if not (isinstance(value, set) and all(isinstance(x, str) for x in value)):
-                raise TypeError(
-                    f"{key!r} config must be a set of warning names; got {value!r}"
-                )
+                raise TypeError(f"{key!r} config must be a set of warning names; got {value!r}")
             known_warnings = {"cache"}
             if missing := {x for x in value if x not in known_warnings}:
                 missing = ", ".join(map(repr, sorted(missing)))

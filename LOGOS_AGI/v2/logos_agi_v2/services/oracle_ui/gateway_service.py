@@ -32,7 +32,7 @@ def submit_goal():
     data = request.get_json()
     if not data or 'goal_description' not in data:
         return jsonify({"error": "'goal_description' is required."}), 400
-    
+
     message = {"query": data['goal_description'], "task_id": str(uuid.uuid4())}
     if publish_goal(message):
         return jsonify({"status": "Goal submitted.", "task_id": message['task_id']}), 202

@@ -48,4 +48,3 @@ loss = losses.SpladeLoss(
 .. note::
     :class:`~sentence_transformers.sparse_encoder.losses.SparseMultipleNegativesRankingLoss` only works if *(a_i, b_j)* with j != i is actually a negative, non-duplicate question pair. In few instances, this assumption is wrong. But in the majority of cases, if we sample two random questions, they are not duplicates. If your dataset cannot fulfil this property,  :class:`~sentence_transformers.sparse_encoder.losses.SparseMultipleNegativesRankingLoss` might not work well.
 ```
-

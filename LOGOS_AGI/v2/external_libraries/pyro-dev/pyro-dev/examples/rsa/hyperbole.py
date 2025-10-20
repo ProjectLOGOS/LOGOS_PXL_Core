@@ -74,17 +74,13 @@ qud_fns = {
     "valence": lambda state: State(price=None, valence=state.valence),
     "priceValence": lambda state: State(price=state.price, valence=state.valence),
     "approxPrice": lambda state: State(price=approx(state.price), valence=None),
-    "approxPriceValence": lambda state: State(
-        price=approx(state.price), valence=state.valence
-    ),
+    "approxPriceValence": lambda state: State(price=approx(state.price), valence=state.valence),
 }
 
 
 def qud_prior():
     values = ["price", "valence", "priceValence", "approxPrice", "approxPriceValence"]
-    ix = pyro.sample(
-        "qud", dist.Categorical(probs=torch.ones(len(values)) / len(values))
-    )
+    ix = pyro.sample("qud", dist.Categorical(probs=torch.ones(len(values)) / len(values)))
     return values[ix]
 
 
@@ -95,9 +91,7 @@ def utterance_cost(numberUtt):
 
 def utterance_prior():
     utterances = [50, 51, 500, 501, 1000, 1001, 5000, 5001, 10000, 10001]
-    utteranceLogits = -torch.tensor(
-        list(map(utterance_cost, utterances)), dtype=torch.float64
-    )
+    utteranceLogits = -torch.tensor(list(map(utterance_cost, utterances)), dtype=torch.float64)
     ix = pyro.sample("utterance", dist.Categorical(logits=utteranceLogits))
     return utterances[ix]
 

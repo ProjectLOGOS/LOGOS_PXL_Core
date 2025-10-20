@@ -49,7 +49,7 @@ class TelosCore:
             # <--- HERE PyMC is used to run the MCMC simulation
             with linear_model:
                 trace = pm.sample(1000, tune=1000, cores=1)
-            
+
             # <--- HERE PyMC is used to summarize the results
             summary = pm.summary(trace, var_names=["alpha", "beta", "sigma"])
 

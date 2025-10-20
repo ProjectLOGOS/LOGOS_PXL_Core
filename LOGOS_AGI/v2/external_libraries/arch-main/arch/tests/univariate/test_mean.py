@@ -182,13 +182,9 @@ class TestMeanModel:
             zm.simulate(np.array([0.1, 0.1, 0.8]), 1000, initial_value=3.0)
         date_index = pd.date_range("2000-12-31", periods=1000, freq="W")
         cls.y = sim_data.data.values
-        cls.y_df = pd.DataFrame(
-            cls.y[:, None], columns=["LongVariableName"], index=date_index
-        )
+        cls.y_df = pd.DataFrame(cls.y[:, None], columns=["LongVariableName"], index=date_index)
 
-        cls.y_series = pd.Series(
-            cls.y, name="VeryVeryLongLongVariableName", index=date_index
-        )
+        cls.y_series = pd.Series(cls.y, name="VeryVeryLongLongVariableName", index=date_index)
         x = cls.resids + cls.rng.standard_normal(cls.T)
         cls.x = x[:, None]
         cls.x_df = pd.DataFrame(cls.x, columns=["LongExogenousName"])
@@ -505,9 +501,7 @@ class TestMeanModel:
             fcast = np.zeros(y.shape[0] + 5)
             fcast[: y.shape[0]] = y.copy()
             for h in range(1, 6):
-                reg = np.array(
-                    [1.0, fcast[i + h - 1], fcast[i + h - 2], fcast[i + h - 3]]
-                )
+                reg = np.array([1.0, fcast[i + h - 1], fcast[i + h - 2], fcast[i + h - 3]])
                 fcast[i + h] = reg.dot(params)
             direct.iloc[i, :] = fcast[i + 1 : i + 6]
         assert isinstance(forecasts, ARCHModelForecast)
@@ -775,12 +769,8 @@ class TestMeanModel:
         assert_almost_equal(res_har_r_v2.rsquared, res_har_r.rsquared)
         assert_almost_equal(np.asarray(res_ar.params), np.asarray(res_ar_v2.params))
         assert_almost_equal(np.asarray(res_ar.params), np.asarray(res_har_r_v2.params))
-        assert_almost_equal(
-            np.asarray(res_ar.param_cov), np.asarray(res_har_r_v2.param_cov)
-        )
-        assert_almost_equal(
-            res_ar.conditional_volatility, res_har_r_v2.conditional_volatility
-        )
+        assert_almost_equal(np.asarray(res_ar.param_cov), np.asarray(res_har_r_v2.param_cov))
+        assert_almost_equal(res_ar.conditional_volatility, res_har_r_v2.conditional_volatility)
         assert_almost_equal(res_ar.resid, res_har_r_v2.resid)
 
     def test_starting_values(self):
@@ -924,9 +914,7 @@ class TestMeanModel:
         am = arch_model(self.y_series)
         res = am.fit(disp=DISPLAY)
         fixed_res = am.fix(res.params)
-        assert_series_equal(
-            res.conditional_volatility, fixed_res.conditional_volatility
-        )
+        assert_series_equal(res.conditional_volatility, fixed_res.conditional_volatility)
         assert_series_equal(res.params, fixed_res.params)
         assert_equal(res.aic, fixed_res.aic)
         assert_equal(res.bic, fixed_res.bic)
@@ -940,9 +928,7 @@ class TestMeanModel:
         res = am.fit(disp=DISPLAY)
         new_am = arch_model(self.y_series)
         fixed_res = new_am.fix(res.params)
-        assert_series_equal(
-            res.conditional_volatility, fixed_res.conditional_volatility
-        )
+        assert_series_equal(res.conditional_volatility, fixed_res.conditional_volatility)
         assert_series_equal(res.params, fixed_res.params)
         assert_equal(res.aic, fixed_res.aic)
         assert_equal(res.bic, fixed_res.bic)
@@ -1092,9 +1078,7 @@ class TestMeanModel:
         rng = RandomState(1234)
         variance = 2 + rng.standard_normal(self.y.shape[0]) ** 2.0
         std = np.sqrt(variance)
-        y = pd.Series(
-            std * rng.standard_normal(self.y_series.shape[0]), index=self.y_series.index
-        )
+        y = pd.Series(std * rng.standard_normal(self.y_series.shape[0]), index=self.y_series.index)
 
         mod = ConstantMean(y, volatility=FixedVariance(variance))
         res = mod.fit(disp=DISPLAY)

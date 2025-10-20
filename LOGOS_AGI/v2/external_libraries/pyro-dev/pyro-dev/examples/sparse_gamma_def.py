@@ -84,9 +84,7 @@ class SparseGammaDEF:
                 else w_top.reshape(-1, self.top_width, self.mid_width)
             )
             mean_mid = torch.matmul(z_top, w_top)
-            z_mid = pyro.sample(
-                "z_mid", Gamma(self.alpha_z, self.beta_z / mean_mid).to_event(1)
-            )
+            z_mid = pyro.sample("z_mid", Gamma(self.alpha_z, self.beta_z / mean_mid).to_event(1))
 
             w_mid = (
                 w_mid.reshape(self.mid_width, self.bottom_width)
@@ -124,9 +122,7 @@ class SparseGammaDEF:
                 lambda: rand_tensor((x_size, width), self.mean_init, self.sigma_init),
             )
             alpha_z_q, mean_z_q = softplus(alpha_z_q), softplus(mean_z_q)
-            pyro.sample(
-                "z_%s" % name, Gamma(alpha_z_q, alpha_z_q / mean_z_q).to_event(1)
-            )
+            pyro.sample("z_%s" % name, Gamma(alpha_z_q, alpha_z_q / mean_z_q).to_event(1))
 
         # define a helper function to sample w's for a single layer
         def sample_ws(name, width):
@@ -179,13 +175,9 @@ class MyEasyGuide(EasyGuide):
     def guide(self, x):
         # group all the latent weights into one large latent variable
         global_group = self.group(match="w_.*")
-        global_mean = pyro.param(
-            "w_mean", lambda: rand_tensor(global_group.event_shape, 0.5, 0.1)
-        )
+        global_mean = pyro.param("w_mean", lambda: rand_tensor(global_group.event_shape, 0.5, 0.1))
         global_scale = softplus(
-            pyro.param(
-                "w_scale", lambda: rand_tensor(global_group.event_shape, 0.0, 0.1)
-            )
+            pyro.param("w_scale", lambda: rand_tensor(global_group.event_shape, 0.0, 0.1))
         )
         # use a mean field Normal distribution on all the ws
         global_group.sample("ws", Normal(global_mean, global_scale).to_event(1))
@@ -196,9 +188,7 @@ class MyEasyGuide(EasyGuide):
 
         with self.plate("data", x.size(0)):
             local_mean = pyro.param("z_mean", lambda: rand_tensor(x_shape, 0.5, 0.1))
-            local_scale = softplus(
-                pyro.param("z_scale", lambda: rand_tensor(x_shape, 0.0, 0.1))
-            )
+            local_scale = softplus(pyro.param("z_scale", lambda: rand_tensor(x_shape, 0.0, 0.1)))
             # use a mean field Normal distribution on all the zs
             local_group.sample("zs", Normal(local_mean, local_scale).to_event(1))
 
@@ -249,9 +239,7 @@ def main(args):
         sparse_gamma_def.model,
         guide,
         opt,
-        loss=TraceMeanField_ELBO(
-            num_particles=args.eval_particles, vectorize_particles=True
-        ),
+        loss=TraceMeanField_ELBO(num_particles=args.eval_particles, vectorize_particles=True),
     )
 
     print("\nbeginning training with %s guide..." % args.guide)

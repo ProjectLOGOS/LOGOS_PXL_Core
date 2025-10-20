@@ -6,9 +6,7 @@ __all__ = ["average_degree_connectivity"]
 
 
 @nx._dispatchable(edge_attrs="weight")
-def average_degree_connectivity(
-    G, source="in+out", target="in+out", nodes=None, weight=None
-):
+def average_degree_connectivity(G, source="in+out", target="in+out", nodes=None, weight=None):
     r"""Compute the average degree connectivity of graph.
 
     The average degree connectivity is the average nearest neighbor degree of

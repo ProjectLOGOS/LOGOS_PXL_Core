@@ -214,9 +214,7 @@ def main(args):
         build.unittest("convolution-test", build.cxx("convolution.cc"))
         build.unittest("deconvolution-test", build.cxx("deconvolution.cc"))
         build.unittest("fully-connected-test", build.cxx("fully-connected.cc"))
-        build.unittest(
-            "global-average-pooling-test", build.cxx("global-average-pooling.cc")
-        )
+        build.unittest("global-average-pooling-test", build.cxx("global-average-pooling.cc"))
         build.unittest("leaky-relu-test", build.cxx("leaky-relu.cc"))
         build.unittest("max-pooling-test", build.cxx("max-pooling.cc"))
         build.unittest("sigmoid-test", build.cxx("sigmoid.cc"))
@@ -254,9 +252,7 @@ def main(args):
         build.benchmark("average-pooling-bench", build.cxx("average-pooling.cc"))
         build.benchmark("channel-shuffle-bench", build.cxx("channel-shuffle.cc"))
         build.benchmark("convolution-bench", build.cxx("convolution.cc"))
-        build.benchmark(
-            "global-average-pooling-bench", build.cxx("global-average-pooling.cc")
-        )
+        build.benchmark("global-average-pooling-bench", build.cxx("global-average-pooling.cc"))
         build.benchmark("max-pooling-bench", build.cxx("max-pooling.cc"))
         build.benchmark("sigmoid-bench", build.cxx("sigmoid.cc"))
         build.benchmark("softargmax-bench", build.cxx("softargmax.cc"))

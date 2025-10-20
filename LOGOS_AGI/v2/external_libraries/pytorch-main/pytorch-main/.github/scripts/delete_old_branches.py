@@ -251,10 +251,7 @@ def delete_branches() -> None:
             print(
                 f"[{base_branch}] Has PR {pr['number']}: {pr['state']}, updated {(now - pr['updatedAt']) / SEC_IN_DAY} days ago"
             )
-            if (
-                now - pr["updatedAt"] < CLOSED_PR_RETENTION
-                or (now - date) < CLOSED_PR_RETENTION
-            ):
+            if now - pr["updatedAt"] < CLOSED_PR_RETENTION or (now - date) < CLOSED_PR_RETENTION:
                 continue
         elif now - date < NO_PR_RETENTION:
             continue

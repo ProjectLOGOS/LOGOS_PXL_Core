@@ -212,9 +212,7 @@ def test_validate_plot_params(pyplot):
         name=name,
         pos_label=None,
     )
-    fpr_out, tpr_out, roc_auc_out, name_out = display._validate_plot_params(
-        ax=None, name=None
-    )
+    fpr_out, tpr_out, roc_auc_out, name_out = display._validate_plot_params(ax=None, name=None)
 
     assert isinstance(fpr_out, list)
     assert isinstance(tpr_out, list)
@@ -293,9 +291,7 @@ def test_roc_curve_from_cv_results_param_validation(pyplot, data_binary):
     "curve_kwargs",
     [None, {"alpha": 0.2}, [{"alpha": 0.2}, {"alpha": 0.3}, {"alpha": 0.4}]],
 )
-def test_roc_curve_display_from_cv_results_curve_kwargs(
-    pyplot, data_binary, curve_kwargs
-):
+def test_roc_curve_display_from_cv_results_curve_kwargs(pyplot, data_binary, curve_kwargs):
     """Check `curve_kwargs` correctly passed."""
     X, y = data_binary
     n_cv = 3
@@ -317,8 +313,7 @@ def test_roc_curve_display_from_cv_results_curve_kwargs(
     else:
         # Different `alpha` used for each curve
         assert all(
-            line.get_alpha() == curve_kwargs[i]["alpha"]
-            for i, line in enumerate(display.line_)
+            line.get_alpha() == curve_kwargs[i]["alpha"] for i, line in enumerate(display.line_)
         )
 
 
@@ -332,9 +327,7 @@ def test_roc_curve_display_estimator_name_deprecation(pyplot):
 
 
 # TODO(1.9): Remove in 1.9
-@pytest.mark.parametrize(
-    "constructor_name", ["from_estimator", "from_predictions", "plot"]
-)
+@pytest.mark.parametrize("constructor_name", ["from_estimator", "from_predictions", "plot"])
 def test_roc_curve_display_kwargs_deprecation(pyplot, data_binary, constructor_name):
     """Check **kwargs deprecated correctly in favour of `curve_kwargs`."""
     X, y = data_binary
@@ -346,17 +339,11 @@ def test_roc_curve_display_kwargs_deprecation(pyplot, data_binary, constructor_n
     # Error when both `curve_kwargs` and `**kwargs` provided
     with pytest.raises(ValueError, match="Cannot provide both `curve_kwargs`"):
         if constructor_name == "from_estimator":
-            RocCurveDisplay.from_estimator(
-                lr, X, y, curve_kwargs={"alpha": 1}, label="test"
-            )
+            RocCurveDisplay.from_estimator(lr, X, y, curve_kwargs={"alpha": 1}, label="test")
         elif constructor_name == "from_predictions":
-            RocCurveDisplay.from_predictions(
-                y, y, curve_kwargs={"alpha": 1}, label="test"
-            )
+            RocCurveDisplay.from_predictions(y, y, curve_kwargs={"alpha": 1}, label="test")
         else:
-            RocCurveDisplay(fpr=fpr, tpr=tpr).plot(
-                curve_kwargs={"alpha": 1}, label="test"
-            )
+            RocCurveDisplay(fpr=fpr, tpr=tpr).plot(curve_kwargs={"alpha": 1}, label="test")
 
     # Warning when `**kwargs`` provided
     with pytest.warns(FutureWarning, match=r"`\*\*kwargs` is deprecated and will be"):
@@ -428,9 +415,7 @@ def test_roc_curve_display_plotting_from_cv_results(
             pos_label=pos_label,
         )[0]
         sample_weight_fold = (
-            None
-            if sample_weight is None
-            else _safe_indexing(sample_weight, test_indices)
+            None if sample_weight is None else _safe_indexing(sample_weight, test_indices)
         )
         fpr, tpr, _ = roc_curve(
             y_true,
@@ -505,9 +490,7 @@ def test_roc_curve_plot_legend_label(pyplot, data_binary, name, curve_kwargs, ro
                     assert label == expected_label
                 else:
                     # `name` is a list of different strings
-                    expected_label = (
-                        f"{name[idx]} (AUC = 1.00)" if roc_auc else f"{name[idx]}"
-                    )
+                    expected_label = f"{name[idx]} (AUC = 1.00)" if roc_auc else f"{name[idx]}"
                     assert label == expected_label
         else:
             # Single label in legend
@@ -526,9 +509,7 @@ def test_roc_curve_plot_legend_label(pyplot, data_binary, name, curve_kwargs, ro
     [None, {"color": "red"}, [{"c": "red"}, {"c": "green"}, {"c": "yellow"}]],
 )
 @pytest.mark.parametrize("name", [None, "single", ["one", "two", "three"]])
-def test_roc_curve_from_cv_results_legend_label(
-    pyplot, data_binary, name, curve_kwargs
-):
+def test_roc_curve_from_cv_results_legend_label(pyplot, data_binary, name, curve_kwargs):
     """Check legend label correct with all `curve_kwargs`, `name` combinations."""
     X, y = data_binary
     n_cv = 3
@@ -538,9 +519,7 @@ def test_roc_curve_from_cv_results_legend_label(
 
     if not isinstance(curve_kwargs, list) and isinstance(name, list):
         with pytest.raises(ValueError, match="To avoid labeling individual curves"):
-            RocCurveDisplay.from_cv_results(
-                cv_results, X, y, name=name, curve_kwargs=curve_kwargs
-            )
+            RocCurveDisplay.from_cv_results(cv_results, X, y, name=name, curve_kwargs=curve_kwargs)
     else:
         display = RocCurveDisplay.from_cv_results(
             cv_results, X, y, name=name, curve_kwargs=curve_kwargs
@@ -581,9 +560,7 @@ def test_roc_curve_from_cv_results_curve_kwargs(pyplot, data_binary, curve_kwarg
     cv_results = cross_validate(
         LogisticRegression(), X, y, cv=3, return_estimator=True, return_indices=True
     )
-    display = RocCurveDisplay.from_cv_results(
-        cv_results, X, y, curve_kwargs=curve_kwargs
-    )
+    display = RocCurveDisplay.from_cv_results(cv_results, X, y, curve_kwargs=curve_kwargs)
 
     for idx, line in enumerate(display.line_):
         color = line.get_color()
@@ -759,9 +736,7 @@ def test_roc_curve_chance_level_line_from_cv_results(
     [
         LogisticRegression(),
         make_pipeline(StandardScaler(), LogisticRegression()),
-        make_pipeline(
-            make_column_transformer((StandardScaler(), [0, 1])), LogisticRegression()
-        ),
+        make_pipeline(make_column_transformer((StandardScaler(), [0, 1])), LogisticRegression()),
     ],
 )
 @pytest.mark.parametrize("constructor_name", ["from_estimator", "from_predictions"])
@@ -802,9 +777,7 @@ def test_roc_curve_display_complex_pipeline(pyplot, data_binary, clf, constructo
         (None, ["fold1", "fold2"], [{"c": "blue"}, {"c": "red"}], ["fold1", "fold2"]),
     ],
 )
-def test_roc_curve_display_default_labels(
-    pyplot, roc_auc, name, curve_kwargs, expected_labels
-):
+def test_roc_curve_display_default_labels(pyplot, roc_auc, name, curve_kwargs, expected_labels):
     """Check the default labels used in the display."""
     fpr = [np.array([0, 0.5, 1]), np.array([0, 0.3, 1])]
     tpr = [np.array([0, 0.5, 1]), np.array([0, 0.3, 1])]
@@ -932,9 +905,7 @@ def test_y_score_and_y_pred_specified_error(pyplot):
     y_score = np.array([0.1, 0.4, 0.35, 0.8])
     y_pred = np.array([0.2, 0.3, 0.5, 0.1])
 
-    with pytest.raises(
-        ValueError, match="`y_pred` and `y_score` cannot be both specified"
-    ):
+    with pytest.raises(ValueError, match="`y_pred` and `y_score` cannot be both specified"):
         RocCurveDisplay.from_predictions(y_true, y_score=y_score, y_pred=y_pred)
 
     with pytest.warns(FutureWarning, match="y_pred was deprecated in 1.7"):

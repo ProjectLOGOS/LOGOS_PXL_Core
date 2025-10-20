@@ -187,9 +187,7 @@ def benchmark(configuration):
         a, b = benchmark_estimator(estimator_conf["instance"], X_test)
         stats[estimator_conf["name"]] = {"atomic": a, "bulk": b}
 
-    cls_names = [
-        estimator_conf["name"] for estimator_conf in configuration["estimators"]
-    ]
+    cls_names = [estimator_conf["name"] for estimator_conf in configuration["estimators"]]
     runtimes = [1e6 * stats[clf_name]["atomic"] for clf_name in cls_names]
     boxplot_runtimes(runtimes, "atomic", configuration)
     runtimes = [1e6 * stats[clf_name]["bulk"] for clf_name in cls_names]
@@ -277,8 +275,7 @@ def plot_benchmark_throughput(throughputs, configuration):
         for estimator_conf in configuration["estimators"]
     ]
     cls_values = [
-        throughputs[estimator_conf["name"]]
-        for estimator_conf in configuration["estimators"]
+        throughputs[estimator_conf["name"]] for estimator_conf in configuration["estimators"]
     ]
     plt.bar(range(len(throughputs)), cls_values, width=0.5, color=colors)
     ax.set_xticks(np.linspace(0.25, len(throughputs) - 0.75, len(throughputs)))
@@ -287,8 +284,7 @@ def plot_benchmark_throughput(throughputs, configuration):
     ax.set_ylim((0, ymax))
     ax.set_ylabel("Throughput (predictions/sec)")
     ax.set_title(
-        "Prediction Throughput for different estimators (%d features)"
-        % configuration["n_features"]
+        "Prediction Throughput for different estimators (%d features)" % configuration["n_features"]
     )
     plt.show()
 
@@ -304,9 +300,7 @@ configuration = {
     "estimators": [
         {
             "name": "Linear Model",
-            "instance": SGDRegressor(
-                penalty="elasticnet", alpha=0.01, l1_ratio=0.25, tol=1e-4
-            ),
+            "instance": SGDRegressor(penalty="elasticnet", alpha=0.01, l1_ratio=0.25, tol=1e-4),
             "complexity_label": "non-zero coefficients",
             "complexity_computer": lambda clf: np.count_nonzero(clf.coef_),
         },

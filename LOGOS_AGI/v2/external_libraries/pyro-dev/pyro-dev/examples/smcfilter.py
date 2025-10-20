@@ -39,9 +39,7 @@ class SimpleHarmonicModel:
             "z_{}".format(self.t),
             dist.Normal(state["z"].matmul(self.A), self.B * self.sigma_z).to_event(1),
         )
-        y = pyro.sample(
-            "y_{}".format(self.t), dist.Normal(state["z"][..., 0], self.sigma_y), obs=y
-        )
+        y = pyro.sample("y_{}".format(self.t), dist.Normal(state["z"][..., 0], self.sigma_y), obs=y)
         return state["z"], y
 
 
@@ -59,9 +57,7 @@ class SimpleHarmonicModel_Guide:
         # Proposal distribution
         pyro.sample(
             "z_{}".format(self.t),
-            dist.Normal(
-                state["z"].matmul(self.model.A), torch.tensor([1.0, 1.0])
-            ).to_event(1),
+            dist.Normal(state["z"].matmul(self.model.A), torch.tensor([1.0, 1.0])).to_event(1),
         )
 
 

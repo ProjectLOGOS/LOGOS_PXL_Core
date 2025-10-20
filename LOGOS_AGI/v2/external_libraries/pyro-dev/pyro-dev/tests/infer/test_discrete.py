@@ -117,19 +117,13 @@ def test_distribution_1(infer, temperature):
     first_available_dim = -3
     sampled_model = infer(model, first_available_dim, temperature)
     sampled_trace = poutine.trace(sampled_model).get_trace(num_particles)
-    conditioned_traces = {
-        z: poutine.trace(model).get_trace(z=torch.tensor(z)) for z in [0.0, 1.0]
-    }
+    conditioned_traces = {z: poutine.trace(model).get_trace(z=torch.tensor(z)) for z in [0.0, 1.0]}
 
     # Check  posterior over z.
     actual_z_mean = sampled_trace.nodes["z"]["value"].mean()
     if temperature:
         expected_z_mean = 1 / (
-            1
-            + (
-                conditioned_traces[0].log_prob_sum()
-                - conditioned_traces[1].log_prob_sum()
-            ).exp()
+            1 + (conditioned_traces[0].log_prob_sum() - conditioned_traces[1].log_prob_sum()).exp()
         )
     else:
         expected_z_mean = (
@@ -174,9 +168,7 @@ def test_distribution_2(infer, temperature):
     sampled_model = infer(model, first_available_dim, temperature)
     sampled_trace = poutine.trace(sampled_model).get_trace(num_particles)
     conditioned_traces = {
-        (z1, z2): poutine.trace(model).get_trace(
-            z1=torch.tensor(z1), z2=torch.tensor(z2)
-        )
+        (z1, z2): poutine.trace(model).get_trace(z1=torch.tensor(z1), z2=torch.tensor(z2))
         for z1 in [0, 1]
         for z2 in [0, 1]
     }
@@ -296,19 +288,13 @@ def test_distribution_masked(infer, temperature):
     first_available_dim = -3
     sampled_model = infer(model, first_available_dim, temperature)
     sampled_trace = poutine.trace(sampled_model).get_trace(num_particles)
-    conditioned_traces = {
-        z: poutine.trace(model).get_trace(z=torch.tensor(z)) for z in [0.0, 1.0]
-    }
+    conditioned_traces = {z: poutine.trace(model).get_trace(z=torch.tensor(z)) for z in [0.0, 1.0]}
 
     # Check  posterior over z.
     actual_z_mean = sampled_trace.nodes["z"]["value"].mean()
     if temperature:
         expected_z_mean = 1 / (
-            1
-            + (
-                conditioned_traces[0].log_prob_sum()
-                - conditioned_traces[1].log_prob_sum()
-            ).exp()
+            1 + (conditioned_traces[0].log_prob_sum() - conditioned_traces[1].log_prob_sum()).exp()
         )
     else:
         expected_z_mean = (
@@ -335,9 +321,7 @@ def test_hmm_smoke(infer, temperature, length):
         states = [0]
         for t in pyro.markov(range(len(data))):
             states.append(
-                pyro.sample(
-                    "states_{}".format(t), dist.Categorical(transition[states[-1]])
-                )
+                pyro.sample("states_{}".format(t), dist.Categorical(transition[states[-1]]))
             )
             data[t] = pyro.sample(
                 "obs_{}".format(t), dist.Normal(means[states[-1]], 1.0), obs=data[t]
@@ -348,9 +332,7 @@ def test_hmm_smoke(infer, temperature, length):
     assert len(data) == length
     assert len(true_states) == 1 + len(data)
 
-    decoder = infer(
-        config_enumerate(hmm), first_available_dim=-1, temperature=temperature
-    )
+    decoder = infer(config_enumerate(hmm), first_available_dim=-1, temperature=temperature)
     inferred_states, _ = decoder(data)
     assert len(inferred_states) == len(true_states)
 
@@ -382,12 +364,8 @@ def test_prob(nderivs):
     elbo = TraceEnum_ELBO(max_plate_nesting=2)
     expected_logprob = -elbo.differentiable_loss(model, guide, num_particles=1)
 
-    posterior_model = infer_discrete(
-        config_enumerate(model, "parallel"), first_available_dim=-3
-    )
-    posterior_trace = poutine.trace(posterior_model).get_trace(
-        num_particles=num_particles
-    )
+    posterior_model = infer_discrete(config_enumerate(model, "parallel"), first_available_dim=-3)
+    posterior_trace = poutine.trace(posterior_model).get_trace(num_particles=num_particles)
     actual_logprob = log_mean_prob(posterior_trace, particle_dim=-2)
 
     if nderivs == 0:
@@ -407,9 +385,7 @@ def test_warning():
             pyro.sample("obs", dist.Normal(x.float(), 1), obs=data)
 
     model_1 = infer_discrete(model, first_available_dim=-2)
-    model_2 = infer_discrete(
-        model, first_available_dim=-2, strict_enumeration_warning=False
-    )
+    model_2 = infer_discrete(model, first_available_dim=-2, strict_enumeration_warning=False)
     model_3 = infer_discrete(config_enumerate(model), first_available_dim=-2)
 
     # model_1 should raise warnings.

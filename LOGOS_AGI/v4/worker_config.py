@@ -13,7 +13,7 @@ from enum import Enum
 class WorkerType(Enum):
     """Enumeration of worker subsystem types."""
     TETRAGNOS = "tetragnos"
-    TELOS = "telos" 
+    TELOS = "telos"
     THONOC = "thonoc"
 
 class TaskPriority(Enum):
@@ -137,7 +137,7 @@ SECURITY_CONFIG = {
 TASK_TYPE_MAPPINGS = {
     WorkerType.TETRAGNOS: [
         'cluster_texts',
-        'translate_text', 
+        'translate_text',
         'extract_features',
         'analyze_patterns',
         'semantic_similarity'
@@ -178,7 +178,7 @@ def get_queue_name(worker_type: WorkerType, queue_type: str = 'task') -> str:
     config = get_worker_config(worker_type)
     if not config:
         return None
-    
+
     if queue_type == 'task':
         return config.task_queue.name
     elif queue_type == 'result':
@@ -186,7 +186,7 @@ def get_queue_name(worker_type: WorkerType, queue_type: str = 'task') -> str:
     else:
         return None
 
-def create_task_message(task_id: str, task_type: str, payload: Dict[str, Any], 
+def create_task_message(task_id: str, task_type: str, payload: Dict[str, Any],
                        priority: TaskPriority = TaskPriority.MEDIUM,
                        workflow_id: str = None) -> Dict[str, Any]:
     """Create a standardized task message."""
@@ -201,7 +201,7 @@ def create_task_message(task_id: str, task_type: str, payload: Dict[str, Any],
         'timeout': PERFORMANCE_CONFIG['processing_timeout']
     }
 
-def create_result_message(subsystem: str, task_id: str, status: str, 
+def create_result_message(subsystem: str, task_id: str, status: str,
                          result: Dict[str, Any], processing_time: float = None,
                          workflow_id: str = None) -> Dict[str, Any]:
     """Create a standardized result message."""
@@ -219,7 +219,7 @@ def create_result_message(subsystem: str, task_id: str, status: str,
 if os.getenv('ENVIRONMENT') == 'development':
     PERFORMANCE_CONFIG['max_concurrent_tasks'] = 5
     LOGGING_CONFIG['handlers']['console']['level'] = 'DEBUG'
-    
+
 elif os.getenv('ENVIRONMENT') == 'production':
     PERFORMANCE_CONFIG['max_concurrent_tasks'] = 20
     LOGGING_CONFIG['handlers']['console']['level'] = 'INFO'
@@ -234,20 +234,20 @@ def validate_config() -> bool:
         for var in required_vars:
             if not os.getenv(var):
                 print(f"Warning: Required environment variable {var} not set")
-        
+
         # Validate queue configurations
         for worker_type, config in QUEUE_CONFIGS.items():
             if not config.task_queue.name or not config.result_queue.name:
                 print(f"Error: Invalid queue configuration for {worker_type}")
                 return False
-        
+
         # Validate performance limits
         if PERFORMANCE_CONFIG['max_concurrent_tasks'] < 1:
             print("Error: max_concurrent_tasks must be at least 1")
             return False
-            
+
         return True
-        
+
     except Exception as e:
         print(f"Configuration validation error: {e}")
         return False

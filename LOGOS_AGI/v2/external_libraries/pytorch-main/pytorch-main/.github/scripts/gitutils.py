@@ -136,9 +136,7 @@ class GitRepo:
         rc = self._run_git("rev-list", revision_range, "--", ".").strip()
         return rc.split("\n") if len(rc) > 0 else []
 
-    def branches_containing_ref(
-        self, ref: str, *, include_remote: bool = True
-    ) -> list[str]:
+    def branches_containing_ref(self, ref: str, *, include_remote: bool = True) -> list[str]:
         rc = (
             self._run_git("branch", "--remote", "--contains", ref)
             if include_remote
@@ -207,9 +205,7 @@ class GitRepo:
     def revert(self, ref: str) -> None:
         self._run_git("revert", "--no-edit", ref)
 
-    def compute_branch_diffs(
-        self, from_branch: str, to_branch: str
-    ) -> tuple[list[str], list[str]]:
+    def compute_branch_diffs(self, from_branch: str, to_branch: str) -> tuple[list[str], list[str]]:
         """
         Returns list of commits that are missing in each other branch since their merge base
         Might be slow if merge base is between two branches is pretty far off
@@ -233,20 +229,14 @@ class GitRepo:
                     if frc.title != toc.title or frc.author_date != toc.author_date:
                         # HACK: Same commit were merged, reverted and landed again
                         # which creates a tracking problem
-                        if (
-                            "pytorch/pytorch" not in self.remote_url()
-                            or frc.commit_hash
-                            not in {
-                                "0a6a1b27a464ba5be5f587cce2ee12ab8c504dbf",
-                                "6d0f4a1d545a8f161df459e8d4ccafd4b9017dbe",
-                                "edf909e58f06150f7be41da2f98a3b9de3167bca",
-                                "a58c6aea5a0c9f8759a4154e46f544c8b03b8db1",
-                                "7106d216c29ca16a3504aa2bedad948ebcf4abc2",
-                            }
-                        ):
-                            raise RuntimeError(
-                                f"Unexpected differences between {frc} and {toc}"
-                            )
+                        if "pytorch/pytorch" not in self.remote_url() or frc.commit_hash not in {
+                            "0a6a1b27a464ba5be5f587cce2ee12ab8c504dbf",
+                            "6d0f4a1d545a8f161df459e8d4ccafd4b9017dbe",
+                            "edf909e58f06150f7be41da2f98a3b9de3167bca",
+                            "a58c6aea5a0c9f8759a4154e46f544c8b03b8db1",
+                            "7106d216c29ca16a3504aa2bedad948ebcf4abc2",
+                        }:
+                            raise RuntimeError(f"Unexpected differences between {frc} and {toc}")
                     from_commits.remove(frc.commit_hash)
                     to_commits.remove(toc.commit_hash)
                 continue
@@ -432,9 +422,7 @@ def retries_decorator(
                 try:
                     return f(*args, **kwargs)
                 except Exception as e:
-                    print(
-                        f'Attempt {idx} of {num_retries} to call {f.__name__} failed with "{e}"'
-                    )
+                    print(f'Attempt {idx} of {num_retries} to call {f.__name__} failed with "{e}"')
             return cast(T, rc)
 
         return wrapper

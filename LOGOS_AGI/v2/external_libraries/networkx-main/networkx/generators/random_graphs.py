@@ -85,9 +85,7 @@ def fast_gnp_random_graph(n, p, seed=None, directed=False, *, create_using=None)
         create_using, directed=directed, multigraph=False, default=default
     )
     if p <= 0 or p >= 1:
-        return nx.gnp_random_graph(
-            n, p, seed=seed, directed=directed, create_using=create_using
-        )
+        return nx.gnp_random_graph(n, p, seed=seed, directed=directed, create_using=create_using)
 
     G = empty_graph(n, create_using=create_using)
 
@@ -623,11 +621,7 @@ def random_regular_graph(d, n, seed=None, *, create_using=None):
             if not _suitable(edges, potential_edges):
                 return None  # failed to find suitable edge set
 
-            stubs = [
-                node
-                for node, potential in potential_edges.items()
-                for _ in range(potential)
-            ]
+            stubs = [node for node, potential in potential_edges.items() for _ in range(potential)]
         return edges
 
     # Even though a suitable edge set exists,
@@ -734,9 +728,7 @@ def barabasi_albert_graph(n, m, seed=None, initial_graph=None, *, create_using=N
 
 @py_random_state(4)
 @nx._dispatchable(graphs=None, returns_graph=True)
-def dual_barabasi_albert_graph(
-    n, m1, m2, p, seed=None, initial_graph=None, *, create_using=None
-):
+def dual_barabasi_albert_graph(n, m1, m2, p, seed=None, initial_graph=None, *, create_using=None):
     """Returns a random graph using dual Barabási–Albert preferential attachment
 
     A graph of $n$ nodes is grown by attaching new nodes each with either $m_1$
@@ -790,9 +782,7 @@ def dual_barabasi_albert_graph(
             f"Dual Barabási–Albert must have m2 >= 1 and m2 < n, m2 = {m2}, n = {n}"
         )
     if p < 0 or p > 1:
-        raise nx.NetworkXError(
-            f"Dual Barabási–Albert network must have 0 <= p <= 1, p = {p}"
-        )
+        raise nx.NetworkXError(f"Dual Barabási–Albert network must have 0 <= p <= 1, p = {p}")
 
     # For simplicity, if p == 0 or 1, just return BA
     if p == 1:
@@ -967,9 +957,7 @@ def extended_barabasi_albert_graph(n, m, p, q, seed=None, *, create_using=None):
                 # Picking a target node that is not 'node' or
                 # neighbor with 'node', with preferential attachment
                 nbr_nodes.append(node)
-                dest_node = seed.choice(
-                    [nd for nd in attachment_preference if nd not in nbr_nodes]
-                )
+                dest_node = seed.choice([nd for nd in attachment_preference if nd not in nbr_nodes])
                 # Rewire
                 G.remove_edge(node, src_node)
                 G.add_edge(node, dest_node)
@@ -1326,16 +1314,12 @@ def random_powerlaw_tree_sequence(n, gamma=3, seed=None, tries=100):
         index = seed.randint(0, n - 1)
         zseq[index] = swap.pop()
 
-    raise nx.NetworkXError(
-        f"Exceeded max ({tries}) attempts for a valid tree sequence."
-    )
+    raise nx.NetworkXError(f"Exceeded max ({tries}) attempts for a valid tree sequence.")
 
 
 @py_random_state(3)
 @nx._dispatchable(graphs=None, returns_graph=True)
-def random_kernel_graph(
-    n, kernel_integral, kernel_root=None, seed=None, *, create_using=None
-):
+def random_kernel_graph(n, kernel_integral, kernel_root=None, seed=None, *, create_using=None):
     r"""Returns an random graph based on the specified kernel.
 
     The algorithm chooses each of the $[n(n-1)]/2$ possible edges with

@@ -44,16 +44,16 @@ class BijectiveIdentity:
         """
         if not self.is_unlocked:
             raise PermissionError("Cannot perform internal decomposition on a locked node.")
-        
+
         # This is a conceptual transformation. A real system would have complex logic here.
         # Perspective 1 (e.g., Blue)
         data_1 = self.merged_data.copy()
         data_1['internal_perspective'] = self.decomp_colors[0].value
-        
+
         # Perspective 2 (e.g., Yellow)
         data_2 = self.merged_data.copy()
         data_2['internal_perspective'] = self.decomp_colors[1].value
-        
+
         print(f"[{self.subsystem}] Performed internal decomposition: {self.primary_color.value} -> {self.decomp_colors[0].value} + {self.decomp_colors[1].value}")
         return (
             {'color': self.decomp_colors[0], 'payload': data_1},

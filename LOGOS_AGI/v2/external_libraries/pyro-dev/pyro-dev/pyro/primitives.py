@@ -494,9 +494,9 @@ def module(
                 mod_name = _name
             if _name in target_state_dict.keys():
                 if not is_param:
-                    attrgetter(mod_name)(nn_module)._parameters[param_name] = (
-                        target_state_dict[_name]
-                    )
+                    attrgetter(mod_name)(nn_module)._parameters[
+                        param_name
+                    ] = target_state_dict[_name]
                 else:
                     nn_module._parameters[mod_name] = target_state_dict[_name]  # type: ignore[assignment]
 

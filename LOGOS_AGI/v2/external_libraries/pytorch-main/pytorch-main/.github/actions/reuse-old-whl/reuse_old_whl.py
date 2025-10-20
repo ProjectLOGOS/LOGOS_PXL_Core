@@ -75,9 +75,7 @@ def check_labels_for_pr() -> bool:
     url = f"https://api.github.com/repos/pytorch/pytorch/commits/{head_sha}/pulls"
     response = query_github_api(url)
 
-    print(
-        f"Found {len(response)} PRs for commit {head_sha}: {[pr['number'] for pr in response]}"
-    )
+    print(f"Found {len(response)} PRs for commit {head_sha}: {[pr['number'] for pr in response]}")
     for pr in response:
         labels = pr.get("labels", [])
         for label in labels:
@@ -115,11 +113,7 @@ def get_workflow_id(run_id: str) -> Optional[str]:
 def ok_changed_file(file: str) -> bool:
     # Return true if the file is in the list of allowed files to be changed to
     # reuse the old whl
-    if (
-        file.startswith("torch/")
-        and file.endswith(".py")
-        and not file.startswith("torch/csrc/")
-    ):
+    if file.startswith("torch/") and file.endswith(".py") and not file.startswith("torch/csrc/"):
         return True
     if file.startswith("test/") and file.endswith(".py"):
         return True
@@ -152,9 +146,7 @@ def check_changed_files(sha: str) -> bool:
         .split()
     )
     if any(file.startswith("torch/") for file in removed_files):
-        print(
-            f"Removed files between {sha} and HEAD: {removed_files}, cannot reuse old whl"
-        )
+        print(f"Removed files between {sha} and HEAD: {removed_files}, cannot reuse old whl")
         return False
 
     changed_files = (
@@ -230,9 +222,7 @@ def unzip_artifact_and_replace_files() -> None:
 
         def rename_to_new_version(file: Union[str, Path]) -> None:
             # Rename file with old_version to new_version
-            subprocess.check_output(
-                ["mv", file, str(file).replace(old_version, new_version)]
-            )
+            subprocess.check_output(["mv", file, str(file).replace(old_version, new_version)])
 
         def change_content_to_new_version(file: Union[str, Path]) -> None:
             # Check if is a file
@@ -315,9 +305,7 @@ def set_output() -> None:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Check for old whl files.")
     parser.add_argument("--run-id", type=str, required=True, help="Workflow ID")
-    parser.add_argument(
-        "--build-environment", type=str, required=True, help="Build environment"
-    )
+    parser.add_argument("--build-environment", type=str, required=True, help="Build environment")
     parser.add_argument(
         "--github-ref",
         type=str,

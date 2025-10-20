@@ -42,9 +42,7 @@ ec2 = boto3.resource("ec2")
 
 
 def ec2_get_instances(filter_name, filter_value):
-    return ec2.instances.filter(
-        Filters=[{"Name": filter_name, "Values": [filter_value]}]
-    )
+    return ec2.instances.filter(Filters=[{"Name": filter_name, "Values": [filter_value]}])
 
 
 def ec2_instances_of_type(instance_type="t4g.2xlarge"):
@@ -56,9 +54,7 @@ def ec2_instances_by_id(instance_id):
     return rc[0] if len(rc) > 0 else None
 
 
-def start_instance(
-    key_name, ami=ubuntu20_04_ami, instance_type="t4g.2xlarge", ebs_size: int = 50
-):
+def start_instance(key_name, ami=ubuntu20_04_ami, instance_type="t4g.2xlarge", ebs_size: int = 50):
     inst = ec2.create_instances(
         ImageId=ami,
         InstanceType=instance_type,
@@ -115,9 +111,9 @@ class RemoteHost:
         subprocess.check_call(self._gen_ssh_prefix() + self._split_cmd(args))
 
     def check_ssh_output(self, args: Union[str, list[str]]) -> str:
-        return subprocess.check_output(
-            self._gen_ssh_prefix() + self._split_cmd(args)
-        ).decode("utf-8")
+        return subprocess.check_output(self._gen_ssh_prefix() + self._split_cmd(args)).decode(
+            "utf-8"
+        )
 
     def scp_upload_file(self, local_file: str, remote_file: str) -> None:
         subprocess.check_call(
@@ -130,9 +126,7 @@ class RemoteHost:
             ]
         )
 
-    def scp_download_file(
-        self, remote_file: str, local_file: Optional[str] = None
-    ) -> None:
+    def scp_download_file(self, remote_file: str, local_file: Optional[str] = None) -> None:
         if local_file is None:
             local_file = "."
         subprocess.check_call(
@@ -150,9 +144,7 @@ class RemoteHost:
         self.run_ssh_cmd(f"sudo usermod -a -G docker {self.login_name}")
         self.run_ssh_cmd("sudo service docker start")
         self.run_ssh_cmd(f"docker pull {image}")
-        self.container_id = self.check_ssh_output(
-            f"docker run -t -d -w /root {image}"
-        ).strip()
+        self.container_id = self.check_ssh_output(f"docker run -t -d -w /root {image}").strip()
 
     def using_docker(self) -> bool:
         return self.container_id is not None
@@ -170,9 +162,7 @@ class RemoteHost:
         ]
         p = subprocess.Popen(docker_cmd, stdin=subprocess.PIPE)
         p.communicate(
-            input=" ".join(["source .bashrc && "] + self._split_cmd(args)).encode(
-                "utf-8"
-            )
+            input=" ".join(["source .bashrc && "] + self._split_cmd(args)).encode("utf-8")
         )
         rc = p.wait()
         if rc != 0:
@@ -191,9 +181,7 @@ class RemoteHost:
         ]
         p = subprocess.Popen(docker_cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
         (out, err) = p.communicate(
-            input=" ".join(["source .bashrc && "] + self._split_cmd(args)).encode(
-                "utf-8"
-            )
+            input=" ".join(["source .bashrc && "] + self._split_cmd(args)).encode("utf-8")
         )
         rc = p.wait()
         if rc != 0:
@@ -205,29 +193,21 @@ class RemoteHost:
             return self.scp_upload_file(local_file, remote_file)
         tmp_file = os.path.join("/tmp", os.path.basename(local_file))
         self.scp_upload_file(local_file, tmp_file)
-        self.run_ssh_cmd(
-            ["docker", "cp", tmp_file, f"{self.container_id}:/root/{remote_file}"]
-        )
+        self.run_ssh_cmd(["docker", "cp", tmp_file, f"{self.container_id}:/root/{remote_file}"])
         self.run_ssh_cmd(["rm", tmp_file])
 
     def download_file(self, remote_file: str, local_file: Optional[str] = None) -> None:
         if not self.using_docker():
             return self.scp_download_file(remote_file, local_file)
         tmp_file = os.path.join("/tmp", os.path.basename(remote_file))
-        self.run_ssh_cmd(
-            ["docker", "cp", f"{self.container_id}:/root/{remote_file}", tmp_file]
-        )
+        self.run_ssh_cmd(["docker", "cp", f"{self.container_id}:/root/{remote_file}", tmp_file])
         self.scp_download_file(tmp_file, local_file)
         self.run_ssh_cmd(["rm", tmp_file])
 
-    def download_wheel(
-        self, remote_file: str, local_file: Optional[str] = None
-    ) -> None:
+    def download_wheel(self, remote_file: str, local_file: Optional[str] = None) -> None:
         if self.using_docker() and local_file is None:
             basename = os.path.basename(remote_file)
-            local_file = basename.replace(
-                "-linux_aarch64.whl", "-manylinux2014_aarch64.whl"
-            )
+            local_file = basename.replace("-linux_aarch64.whl", "-manylinux2014_aarch64.whl")
         self.download_file(remote_file, local_file)
 
     def list_dir(self, path: str) -> list[str]:
@@ -251,12 +231,8 @@ def update_apt_repo(host: RemoteHost) -> None:
     time.sleep(5)
     host.run_cmd("sudo systemctl stop apt-daily.service || true")
     host.run_cmd("sudo systemctl stop unattended-upgrades.service || true")
-    host.run_cmd(
-        "while systemctl is-active --quiet apt-daily.service; do sleep 1; done"
-    )
-    host.run_cmd(
-        "while systemctl is-active --quiet unattended-upgrades.service; do sleep 1; done"
-    )
+    host.run_cmd("while systemctl is-active --quiet apt-daily.service; do sleep 1; done")
+    host.run_cmd("while systemctl is-active --quiet unattended-upgrades.service; do sleep 1; done")
     host.run_cmd("sudo apt-get update")
     time.sleep(3)
     host.run_cmd("sudo apt-get update")
@@ -285,25 +261,17 @@ def install_condaforge(
 def install_condaforge_python(host: RemoteHost, python_version="3.8") -> None:
     if python_version == "3.6":
         # Python-3.6 EOLed and not compatible with conda-4.11
-        install_condaforge(
-            host, suffix="download/4.10.3-10/Miniforge3-4.10.3-10-Linux-aarch64.sh"
-        )
+        install_condaforge(host, suffix="download/4.10.3-10/Miniforge3-4.10.3-10-Linux-aarch64.sh")
         host.run_cmd(f"conda install -y python={python_version} numpy pyyaml")
     else:
-        install_condaforge(
-            host, suffix="download/4.11.0-4/Miniforge3-4.11.0-4-Linux-aarch64.sh"
-        )
+        install_condaforge(host, suffix="download/4.11.0-4/Miniforge3-4.11.0-4-Linux-aarch64.sh")
         # Pytorch-1.10 or older are not compatible with setuptools=59.6 or newer
-        host.run_cmd(
-            f"conda install -y python={python_version} numpy pyyaml setuptools>=59.5.0"
-        )
+        host.run_cmd(f"conda install -y python={python_version} numpy pyyaml setuptools>=59.5.0")
 
 
 def build_OpenBLAS(host: RemoteHost, git_clone_flags: str = "") -> None:
     print("Building OpenBLAS")
-    host.run_cmd(
-        f"git clone https://github.com/xianyi/OpenBLAS -b v0.3.28 {git_clone_flags}"
-    )
+    host.run_cmd(f"git clone https://github.com/xianyi/OpenBLAS -b v0.3.28 {git_clone_flags}")
     make_flags = "NUM_THREADS=64 USE_OPENMP=1 NO_SHARED=1 DYNAMIC_ARCH=1 TARGET=ARMV8"
     host.run_cmd(
         f"pushd OpenBLAS && make {make_flags} -j8 && sudo make {make_flags} install && popd && rm -rf OpenBLAS"
@@ -335,9 +303,7 @@ def build_ArmComputeLibrary(host: RemoteHost, git_clone_flags: str = "") -> None
 
 def embed_libgomp(host: RemoteHost, use_conda, wheel_name) -> None:
     host.run_cmd("pip3 install auditwheel")
-    host.run_cmd(
-        "conda install -y patchelf" if use_conda else "sudo apt-get install -y patchelf"
-    )
+    host.run_cmd("conda install -y patchelf" if use_conda else "sudo apt-get install -y patchelf")
     from tempfile import NamedTemporaryFile
 
     with NamedTemporaryFile() as tmp:
@@ -438,9 +404,7 @@ def build_torchvision(
         )
         build_vars += f"BUILD_VERSION={version}.dev{build_date}"
     elif build_version is not None:
-        build_vars += (
-            f"BUILD_VERSION={build_version} PYTORCH_VERSION={branch[1:].split('-')[0]}"
-        )
+        build_vars += f"BUILD_VERSION={build_version} PYTORCH_VERSION={branch[1:].split('-')[0]}"
     if host.using_docker():
         build_vars += " CMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=0x10000"
 
@@ -451,9 +415,7 @@ def build_torchvision(
     print("Copying TorchVision wheel")
     host.download_wheel(os.path.join("vision", "dist", vision_wheel_name))
     if run_smoke_tests:
-        host.run_cmd(
-            f"pip3 install {os.path.join('vision', 'dist', vision_wheel_name)}"
-        )
+        host.run_cmd(f"pip3 install {os.path.join('vision', 'dist', vision_wheel_name)}")
         host.run_cmd("python3 vision/test/smoke_test.py")
     print("Delete vision checkout")
     host.run_cmd("rm -rf vision")
@@ -495,9 +457,7 @@ def build_torchdata(
         )
         build_vars += f"BUILD_VERSION={version}.dev{build_date}"
     elif build_version is not None:
-        build_vars += (
-            f"BUILD_VERSION={build_version} PYTORCH_VERSION={branch[1:].split('-')[0]}"
-        )
+        build_vars += f"BUILD_VERSION={build_version} PYTORCH_VERSION={branch[1:].split('-')[0]}"
     if host.using_docker():
         build_vars += " CMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=0x10000"
 
@@ -553,9 +513,7 @@ def build_torchtext(
         )
         build_vars += f"BUILD_VERSION={version}.dev{build_date}"
     elif build_version is not None:
-        build_vars += (
-            f"BUILD_VERSION={build_version} PYTORCH_VERSION={branch[1:].split('-')[0]}"
-        )
+        build_vars += f"BUILD_VERSION={build_version} PYTORCH_VERSION={branch[1:].split('-')[0]}"
     if host.using_docker():
         build_vars += " CMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=0x10000"
 
@@ -613,9 +571,7 @@ def build_torchaudio(
         )
         build_vars += f"BUILD_VERSION={version}.dev{build_date}"
     elif build_version is not None:
-        build_vars += (
-            f"BUILD_VERSION={build_version} PYTORCH_VERSION={branch[1:].split('-')[0]}"
-        )
+        build_vars += f"BUILD_VERSION={build_version} PYTORCH_VERSION={branch[1:].split('-')[0]}"
     if host.using_docker():
         build_vars += " CMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=0x10000"
 
@@ -705,9 +661,7 @@ def start_build(
         print("Disable mkldnn for host builds")
         enable_mkldnn = False
 
-    configure_system(
-        host, compiler=compiler, use_conda=use_conda, python_version=python_version
-    )
+    configure_system(host, compiler=compiler, use_conda=use_conda, python_version=python_version)
     build_OpenBLAS(host, git_clone_flags)
 
     if host.using_docker():
@@ -745,7 +699,9 @@ def start_build(
             .replace("-", "")
         )
         version = host.check_output("cat pytorch/version.txt").strip()[:-2]
-        build_vars += f"BUILD_TEST=0 PYTORCH_BUILD_VERSION={version}.dev{build_date} PYTORCH_BUILD_NUMBER=1"
+        build_vars += (
+            f"BUILD_TEST=0 PYTORCH_BUILD_VERSION={version}.dev{build_date} PYTORCH_BUILD_NUMBER=1"
+        )
     if branch.startswith(("v1.", "v2.")):
         build_vars += f"BUILD_TEST=0 PYTORCH_BUILD_VERSION={branch[1 : branch.find('-')]} PYTORCH_BUILD_NUMBER=1"
     if host.using_docker():
@@ -770,9 +726,7 @@ def start_build(
         )
     else:
         print("build pytorch without mkldnn backend")
-        host.run_cmd(
-            f"cd pytorch && {build_vars} python3 setup.py bdist_wheel{build_opts}"
-        )
+        host.run_cmd(f"cd pytorch && {build_vars} python3 setup.py bdist_wheel{build_opts}")
 
     print("Deleting build folder")
     host.run_cmd("cd pytorch && rm -rf build")
@@ -970,13 +924,17 @@ if __name__ == "__main__":
         sys.exit(0)
 
     if len(key_name) == 0:
-        raise RuntimeError("""
+        raise RuntimeError(
+            """
             Cannot start build without key_name, please specify
-            --key-name argument or AWS_KEY_NAME environment variable.""")
+            --key-name argument or AWS_KEY_NAME environment variable."""
+        )
     if len(keyfile_path) == 0 or not os.path.exists(keyfile_path):
-        raise RuntimeError(f"""
+        raise RuntimeError(
+            f"""
             Cannot find keyfile with name: [{key_name}] in path: [{keyfile_path}], please
-            check `~/.ssh/` folder or manually set SSH_KEY_PATH environment variable.""")
+            check `~/.ssh/` folder or manually set SSH_KEY_PATH environment variable."""
+        )
 
     # Starting the instance
     inst = start_instance(
@@ -1018,9 +976,7 @@ if __name__ == "__main__":
         configure_system(host, compiler=args.compiler, python_version=python_version)
         print("Installing PyTorch wheel")
         host.run_cmd("pip3 install torch")
-        build_domains(
-            host, branch=args.branch, git_clone_flags=" --depth 1 --shallow-submodules"
-        )
+        build_domains(host, branch=args.branch, git_clone_flags=" --depth 1 --shallow-submodules")
     else:
         start_build(
             host,

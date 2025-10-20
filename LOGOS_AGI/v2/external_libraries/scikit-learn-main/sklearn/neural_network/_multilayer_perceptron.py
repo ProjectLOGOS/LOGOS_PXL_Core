@@ -219,9 +219,7 @@ class BaseMultilayerPerceptron(BaseEstimator, ABC):
 
         return activation
 
-    def _compute_loss_grad(
-        self, layer, sw_sum, activations, deltas, coef_grads, intercept_grads
-    ):
+    def _compute_loss_grad(self, layer, sw_sum, activations, deltas, coef_grads, intercept_grads):
         """Compute the gradient of loss with respect to coefs and intercept for
         specified layer.
 
@@ -294,9 +292,7 @@ class BaseMultilayerPerceptron(BaseEstimator, ABC):
         grad = _pack(coef_grads, intercept_grads)
         return loss, grad
 
-    def _backprop(
-        self, X, y, sample_weight, activations, deltas, coef_grads, intercept_grads
-    ):
+    def _backprop(self, X, y, sample_weight, activations, deltas, coef_grads, intercept_grads):
         """Compute the MLP loss function and its corresponding derivatives
         with respect to each parameter: weights and bias vectors.
 
@@ -372,9 +368,7 @@ class BaseMultilayerPerceptron(BaseEstimator, ABC):
             deltas[last] *= sample_weight.reshape(-1, 1)
 
         # Compute gradient for the last layer
-        self._compute_loss_grad(
-            last, sw_sum, activations, deltas, coef_grads, intercept_grads
-        )
+        self._compute_loss_grad(last, sw_sum, activations, deltas, coef_grads, intercept_grads)
 
         inplace_derivative = DERIVATIVES[self.activation]
         # Iterate over the hidden layers
@@ -382,9 +376,7 @@ class BaseMultilayerPerceptron(BaseEstimator, ABC):
             deltas[i - 1] = safe_sparse_dot(deltas[i], self.coefs_[i].T)
             inplace_derivative(activations[i], deltas[i - 1])
 
-            self._compute_loss_grad(
-                i - 1, sw_sum, activations, deltas, coef_grads, intercept_grads
-            )
+            self._compute_loss_grad(i - 1, sw_sum, activations, deltas, coef_grads, intercept_grads)
 
         return loss, coef_grads, intercept_grads
 
@@ -417,9 +409,7 @@ class BaseMultilayerPerceptron(BaseEstimator, ABC):
         self.intercepts_ = []
 
         for i in range(self.n_layers_ - 1):
-            coef_init, intercept_init = self._init_coef(
-                layer_units[i], layer_units[i + 1], dtype
-            )
+            coef_init, intercept_init = self._init_coef(layer_units[i], layer_units[i + 1], dtype)
             self.coefs_.append(coef_init)
             self.intercepts_.append(intercept_init)
 
@@ -447,9 +437,7 @@ class BaseMultilayerPerceptron(BaseEstimator, ABC):
         init_bound = np.sqrt(factor / (fan_in + fan_out))
 
         # Generate weights and bias:
-        coef_init = self._random_state.uniform(
-            -init_bound, init_bound, (fan_in, fan_out)
-        )
+        coef_init = self._random_state.uniform(-init_bound, init_bound, (fan_in, fan_out))
         intercept_init = self._random_state.uniform(-init_bound, init_bound, fan_out)
         coef_init = coef_init.astype(dtype, copy=False)
         intercept_init = intercept_init.astype(dtype, copy=False)
@@ -463,12 +451,8 @@ class BaseMultilayerPerceptron(BaseEstimator, ABC):
         hidden_layer_sizes = list(hidden_layer_sizes)
 
         if np.any(np.array(hidden_layer_sizes) <= 0):
-            raise ValueError(
-                "hidden_layer_sizes must be > 0, got %s." % hidden_layer_sizes
-            )
-        first_pass = not hasattr(self, "coefs_") or (
-            not self.warm_start and not incremental
-        )
+            raise ValueError("hidden_layer_sizes must be > 0, got %s." % hidden_layer_sizes)
+        first_pass = not hasattr(self, "coefs_") or (not self.warm_start and not incremental)
 
         X, y = self._validate_input(X, y, incremental, reset=first_pass)
         n_samples, n_features = X.shape
@@ -499,9 +483,7 @@ class BaseMultilayerPerceptron(BaseEstimator, ABC):
             for n_fan_in_, n_fan_out_ in pairwise(layer_units)
         ]
 
-        intercept_grads = [
-            np.empty(n_fan_out_, dtype=X.dtype) for n_fan_out_ in layer_units[1:]
-        ]
+        intercept_grads = [np.empty(n_fan_out_, dtype=X.dtype) for n_fan_out_ in layer_units[1:]]
 
         # Run the Stochastic optimization solver
         if self.solver in _STOCHASTIC_SOLVERS:
@@ -727,9 +709,7 @@ class BaseMultilayerPerceptron(BaseEstimator, ABC):
                         coef_grads,
                         intercept_grads,
                     )
-                    accumulated_loss += batch_loss * (
-                        batch_slice.stop - batch_slice.start
-                    )
+                    accumulated_loss += batch_loss * (batch_slice.stop - batch_slice.start)
 
                     # update weights
                     grads = coef_grads + intercept_grads
@@ -745,9 +725,7 @@ class BaseMultilayerPerceptron(BaseEstimator, ABC):
 
                 # update no_improvement_count based on training loss or
                 # validation score according to early_stopping
-                self._update_no_improvement_count(
-                    early_stopping, X_val, y_val, sample_weight_val
-                )
+                self._update_no_improvement_count(early_stopping, X_val, y_val, sample_weight_val)
 
                 # for learning rate that needs to be updated at iteration end
                 self._optimizer.iteration_ends(self.t_)
@@ -758,14 +736,12 @@ class BaseMultilayerPerceptron(BaseEstimator, ABC):
                     if early_stopping:
                         msg = (
                             "Validation score did not improve more than "
-                            "tol=%f for %d consecutive epochs."
-                            % (self.tol, self.n_iter_no_change)
+                            "tol=%f for %d consecutive epochs." % (self.tol, self.n_iter_no_change)
                         )
                     else:
                         msg = (
                             "Training loss did not improve more than tol=%f"
-                            " for %d consecutive epochs."
-                            % (self.tol, self.n_iter_no_change)
+                            " for %d consecutive epochs." % (self.tol, self.n_iter_no_change)
                         )
 
                     is_stopping = self._optimizer.trigger_stopping(msg, self.verbose)
@@ -780,8 +756,7 @@ class BaseMultilayerPerceptron(BaseEstimator, ABC):
                 if self.n_iter_ == self.max_iter:
                     warnings.warn(
                         "Stochastic Optimizer: Maximum iterations (%d) "
-                        "reached and the optimization hasn't converged yet."
-                        % self.max_iter,
+                        "reached and the optimization hasn't converged yet." % self.max_iter,
                         ConvergenceWarning,
                     )
         except KeyboardInterrupt:

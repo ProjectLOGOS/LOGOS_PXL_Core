@@ -114,16 +114,13 @@ print("done in %0.3fs." % (time() - t0))
 
 
 tfidf_feature_names = tfidf_vectorizer.get_feature_names_out()
-plot_top_words(
-    nmf, tfidf_feature_names, n_top_words, "Topics in NMF model (Frobenius norm)"
-)
+plot_top_words(nmf, tfidf_feature_names, n_top_words, "Topics in NMF model (Frobenius norm)")
 
 # Fit the NMF model
 print(
     "\n" * 2,
     "Fitting the NMF model (generalized Kullback-Leibler "
-    "divergence) with tf-idf features, n_samples=%d and n_features=%d..."
-    % (n_samples, n_features),
+    "divergence) with tf-idf features, n_samples=%d and n_features=%d..." % (n_samples, n_features),
 )
 t0 = time()
 nmf = NMF(

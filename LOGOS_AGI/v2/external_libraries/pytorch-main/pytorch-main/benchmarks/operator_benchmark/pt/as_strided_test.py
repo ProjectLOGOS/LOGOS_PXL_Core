@@ -41,15 +41,11 @@ class As_stridedBenchmark(op_bench.TorchBenchmarkBase):
         }
         self.set_module_name("as_strided")
 
-    def forward(
-        self, input_one, size: list[int], stride: list[int], storage_offset: int
-    ):
+    def forward(self, input_one, size: list[int], stride: list[int], storage_offset: int):
         return torch.as_strided(input_one, size, stride, storage_offset)
 
 
-op_bench.generate_pt_test(
-    as_strided_configs_short + as_strided_configs_long, As_stridedBenchmark
-)
+op_bench.generate_pt_test(as_strided_configs_short + as_strided_configs_long, As_stridedBenchmark)
 
 
 if __name__ == "__main__":

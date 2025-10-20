@@ -120,9 +120,7 @@ for label in labels:
 # plot results by scaling C
 for train_size_idx, label in enumerate(labels):
     train_size = train_sizes[train_size_idx]
-    results_scaled = results[[label]].assign(
-        C_scaled=Cs * float(n_samples * np.sqrt(train_size))
-    )
+    results_scaled = results[[label]].assign(C_scaled=Cs * float(n_samples * np.sqrt(train_size)))
     results_scaled.plot(x="C_scaled", ax=axes[1], logx=True, label=label)
     best_C_scaled = results_scaled["C_scaled"].loc[results[label].idxmax()]
     axes[1].axvline(x=best_C_scaled, linestyle="--", color="grey", alpha=0.7)

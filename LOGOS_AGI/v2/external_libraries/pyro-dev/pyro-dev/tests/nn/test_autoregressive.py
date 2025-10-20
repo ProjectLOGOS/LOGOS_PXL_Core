@@ -38,13 +38,11 @@ class AutoRegressiveNNTests(TestCase):
                     epsilon_vector[0, j] = self.epsilon
                     if observed_dim > 0:
                         delta = (
-                            arn(x + 0.5 * epsilon_vector, y)
-                            - arn(x - 0.5 * epsilon_vector, y)
+                            arn(x + 0.5 * epsilon_vector, y) - arn(x - 0.5 * epsilon_vector, y)
                         ) / self.epsilon
                     else:
                         delta = (
-                            arn(x + 0.5 * epsilon_vector)
-                            - arn(x - 0.5 * epsilon_vector)
+                            arn(x + 0.5 * epsilon_vector) - arn(x - 0.5 * epsilon_vector)
                         ) / self.epsilon
                     jacobian[j, k] = float(delta[0, output_index, k])
 
@@ -58,9 +56,7 @@ class AutoRegressiveNNTests(TestCase):
 
             assert lower_sum == float(0.0)
 
-    def _test_masks(
-        self, input_dim, observed_dim, hidden_dims, permutation, output_dim_multiplier
-    ):
+    def _test_masks(self, input_dim, observed_dim, hidden_dims, permutation, output_dim_multiplier):
         masks, mask_skip = create_mask(
             input_dim, observed_dim, hidden_dims, permutation, output_dim_multiplier
         )
@@ -102,8 +98,7 @@ class AutoRegressiveNNTests(TestCase):
                     prev_connections = this_connections
 
                 assert (
-                    torch.tensor(list(sorted(prev_connections)), dtype=torch.long)
-                    == correct
+                    torch.tensor(list(sorted(prev_connections)), dtype=torch.long) == correct
                 ).all()
 
                 # Test the skip-connections mask
@@ -112,8 +107,7 @@ class AutoRegressiveNNTests(TestCase):
                     if mask_skip[idx + jdx * input_dim, kdx]:
                         skip_connections.add(kdx)
                 assert (
-                    torch.tensor(list(sorted(skip_connections)), dtype=torch.long)
-                    == correct
+                    torch.tensor(list(sorted(skip_connections)), dtype=torch.long) == correct
                 ).all()
 
     def test_jacobians(self):

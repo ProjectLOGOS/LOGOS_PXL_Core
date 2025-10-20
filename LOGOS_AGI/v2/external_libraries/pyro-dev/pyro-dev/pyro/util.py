@@ -63,9 +63,15 @@ def set_rng_state(state: Dict[str, Any]) -> None:
 
 
 @overload
-def torch_isnan(x: numbers.Number) -> bool: ...
+def torch_isnan(x: numbers.Number) -> bool:
+    ...
+
+
 @overload
-def torch_isnan(x: torch.Tensor) -> torch.Tensor: ...
+def torch_isnan(x: torch.Tensor) -> torch.Tensor:
+    ...
+
+
 def torch_isnan(x: Union[torch.Tensor, numbers.Number]) -> Union[bool, torch.Tensor]:
     """
     A convenient function to check if a Tensor contains any nan; also works with numbers
@@ -76,9 +82,15 @@ def torch_isnan(x: Union[torch.Tensor, numbers.Number]) -> Union[bool, torch.Ten
 
 
 @overload
-def torch_isinf(x: numbers.Number) -> bool: ...
+def torch_isinf(x: numbers.Number) -> bool:
+    ...
+
+
 @overload
-def torch_isinf(x: torch.Tensor) -> torch.Tensor: ...
+def torch_isinf(x: torch.Tensor) -> torch.Tensor:
+    ...
+
+
 def torch_isinf(x: Union[torch.Tensor, numbers.Number]) -> Union[bool, torch.Tensor]:
     """
     A convenient function to check if a Tensor contains any +inf; also works with numbers
@@ -95,7 +107,10 @@ def warn_if_nan(
     *,
     filename: Optional[str] = None,
     lineno: Optional[int] = None,
-) -> numbers.Number: ...
+) -> numbers.Number:
+    ...
+
+
 @overload
 def warn_if_nan(
     value: torch.Tensor,
@@ -103,7 +118,10 @@ def warn_if_nan(
     *,
     filename: Optional[str] = None,
     lineno: Optional[int] = None,
-) -> torch.Tensor: ...
+) -> torch.Tensor:
+    ...
+
+
 def warn_if_nan(
     value: Union[torch.Tensor, numbers.Number],
     msg: str = "",
@@ -153,7 +171,10 @@ def warn_if_inf(
     *,
     filename: Optional[str] = None,
     lineno: Optional[int] = None,
-) -> numbers.Number: ...
+) -> numbers.Number:
+    ...
+
+
 @overload
 def warn_if_inf(
     value: torch.Tensor,
@@ -163,7 +184,10 @@ def warn_if_inf(
     *,
     filename: Optional[str] = None,
     lineno: Optional[int] = None,
-) -> torch.Tensor: ...
+) -> torch.Tensor:
+    ...
+
+
 def warn_if_inf(
     value: Union[torch.Tensor, numbers.Number],
     msg: str = "",
@@ -572,9 +596,9 @@ def check_traceenum_requirements(model_trace: "Trace", guide_trace: "Trace") -> 
     )
     for role, trace in [("model", model_trace), ("guide", guide_trace)]:
         plate_counters: Dict[str, Dict[str, int]] = {}  # for sequential plates only
-        enumerated_contexts: Dict[FrozenSet["CondIndepStackFrame"], Set[str]] = (
-            defaultdict(set)
-        )
+        enumerated_contexts: Dict[
+            FrozenSet["CondIndepStackFrame"], Set[str]
+        ] = defaultdict(set)
         for name, site in trace.nodes.items():
             if site["type"] != "sample":
                 continue
@@ -715,9 +739,15 @@ class timed:
 
 
 @overload
-def torch_float(x: Union[float, int]) -> float: ...
+def torch_float(x: Union[float, int]) -> float:
+    ...
+
+
 @overload
-def torch_float(x: torch.Tensor) -> torch.Tensor: ...
+def torch_float(x: torch.Tensor) -> torch.Tensor:
+    ...
+
+
 def torch_float(
     x: Union[torch.Tensor, Union[float, int]],
 ) -> Union[torch.Tensor, float]:

@@ -357,9 +357,7 @@ class TestRunnerDeterminatorGetRunnerPrefix(TestCase):
         self.assertEqual("lf.", prefix, "Runner prefix not correct for user")
 
     @patch("random.uniform", return_value=10)
-    def test_opted_out_user_was_pulled_in_by_rollout_filter_exp(
-        self, mock_uniform: Mock
-    ) -> None:
+    def test_opted_out_user_was_pulled_in_by_rollout_filter_exp(self, mock_uniform: Mock) -> None:
         settings_text = """
         experiments:
             lf:
@@ -382,9 +380,7 @@ class TestRunnerDeterminatorGetRunnerPrefix(TestCase):
         self.assertEqual("otherExp.", prefix, "Runner prefix not correct for user")
 
     @patch("random.uniform", return_value=25)
-    def test_opted_out_user_was_pulled_out_by_rollout_filter_exp(
-        self, mock_uniform: Mock
-    ) -> None:
+    def test_opted_out_user_was_pulled_out_by_rollout_filter_exp(self, mock_uniform: Mock) -> None:
         settings_text = """
         experiments:
             lf:

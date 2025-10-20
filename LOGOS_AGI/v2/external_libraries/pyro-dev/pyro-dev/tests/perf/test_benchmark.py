@@ -27,9 +27,7 @@ Model = namedtuple("TestModel", ["model", "model_args", "model_id"])
 
 TEST_MODELS = []
 MODEL_IDS = []
-ROOT_DIR = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), os.pardir, os.pardir)
-)
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir, os.pardir))
 PROF_DIR = os.path.join(ROOT_DIR, ".benchmarks")
 if not os.path.exists(PROF_DIR):
     os.makedirs(PROF_DIR)
@@ -51,17 +49,13 @@ def register_model(**model_kwargs):
     Elbo=TraceGraph_ELBO,
     id="PoissonGamma::reparam=True_TraceGraph",
 )
-@register_model(
-    reparameterized=True, Elbo=Trace_ELBO, id="PoissonGamma::reparam=True_Trace"
-)
+@register_model(reparameterized=True, Elbo=Trace_ELBO, id="PoissonGamma::reparam=True_Trace")
 @register_model(
     reparameterized=False,
     Elbo=TraceGraph_ELBO,
     id="PoissonGamma::reparam=False_TraceGraph",
 )
-@register_model(
-    reparameterized=False, Elbo=Trace_ELBO, id="PoissonGamma::reparam=False_Trace"
-)
+@register_model(reparameterized=False, Elbo=Trace_ELBO, id="PoissonGamma::reparam=False_Trace")
 def poisson_gamma_model(reparameterized, Elbo):
     pyro.set_rng_seed(0)
     alpha0 = torch.tensor(1.0)
@@ -96,9 +90,7 @@ def poisson_gamma_model(reparameterized, Elbo):
 
 
 @register_model(kernel=NUTS, step_size=0.02, num_samples=300, id="BernoulliBeta::NUTS")
-@register_model(
-    kernel=HMC, step_size=0.02, num_steps=3, num_samples=1000, id="BernoulliBeta::HMC"
-)
+@register_model(kernel=HMC, step_size=0.02, num_steps=3, num_samples=1000, id="BernoulliBeta::HMC")
 def bernoulli_beta_hmc(**kwargs):
     def model(data):
         alpha = pyro.param("alpha", torch.tensor([1.1, 1.1]))

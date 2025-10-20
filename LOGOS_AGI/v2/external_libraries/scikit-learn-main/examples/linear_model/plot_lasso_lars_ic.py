@@ -71,9 +71,7 @@ aic_criterion = zou_et_al_criterion_rescaling(
     lasso_lars_ic[-1].noise_variance_,
 )
 
-index_alpha_path_aic = np.flatnonzero(
-    lasso_lars_ic[-1].alphas_ == lasso_lars_ic[-1].alpha_
-)[0]
+index_alpha_path_aic = np.flatnonzero(lasso_lars_ic[-1].alphas_ == lasso_lars_ic[-1].alpha_)[0]
 
 # %%
 lasso_lars_ic.set_params(lassolarsic__criterion="bic").fit(X, y)
@@ -84,9 +82,7 @@ bic_criterion = zou_et_al_criterion_rescaling(
     lasso_lars_ic[-1].noise_variance_,
 )
 
-index_alpha_path_bic = np.flatnonzero(
-    lasso_lars_ic[-1].alphas_ == lasso_lars_ic[-1].alpha_
-)[0]
+index_alpha_path_bic = np.flatnonzero(lasso_lars_ic[-1].alphas_ == lasso_lars_ic[-1].alpha_)[0]
 
 # %%
 # Now that we collected the AIC and BIC, we can as well check that the minima

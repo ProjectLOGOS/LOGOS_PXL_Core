@@ -121,9 +121,7 @@ def parse_args():
         default=8,
         help="input batch size for training (default: 8)",
     )
-    parser.add_argument(
-        "--lr", type=float, default=5e-5, help="learning rate (default: 5e-5)"
-    )
+    parser.add_argument("--lr", type=float, default=5e-5, help="learning rate (default: 5e-5)")
     parser.add_argument(
         "--backend",
         choices=torch._dynamo.list_backends(exclude_tags=None),
@@ -146,12 +144,8 @@ def parse_args():
 
 def main():
     args = parse_args()
-    train_dataloader, eval_dataloader = data_processing(
-        args.num_samples, args.batch_size
-    )
-    model = AutoModelForSequenceClassification.from_pretrained(
-        "bert-base-cased", num_labels=5
-    )
+    train_dataloader, eval_dataloader = data_processing(args.num_samples, args.batch_size)
+    model = AutoModelForSequenceClassification.from_pretrained("bert-base-cased", num_labels=5)
     optimizer_cls = getattr(sys.modules["torch.optim"], args.optimizer)
     if "capturable" in inspect.signature(optimizer_cls).parameters.keys():
         optimizer = optimizer_cls(model.parameters(), lr=args.lr, capturable=True)
@@ -183,9 +177,7 @@ def main():
             "[PASSED] TorchDynamo end to end training loss is less than or equal to native PyTorch"
         )
     else:
-        print(
-            "[FAILED] TorchDynamo end to end training loss is greater than native Pytorch"
-        )
+        print("[FAILED] TorchDynamo end to end training loss is greater than native Pytorch")
     if args.evaluation:
         print(f"Model accuracy: {accuracy}")
     native_elapsed = native_end - native_start
@@ -194,9 +186,7 @@ def main():
         f"Train model on {args.epochs} epochs with backend {args.backend} and optimizer {args.optimizer}:"
     )
     print(f"PyTorch spent {timedelta(seconds=native_elapsed / args.epochs)} per epoch")
-    print(
-        f"TorchDynamo spent {timedelta(seconds=dynamo_elapsed / args.epochs)} per epoch"
-    )
+    print(f"TorchDynamo spent {timedelta(seconds=dynamo_elapsed / args.epochs)} per epoch")
 
 
 if __name__ == "__main__":

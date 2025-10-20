@@ -27,9 +27,7 @@ FACTORIES = [
             (["x", "z"], Newton()),
         ]
     ),
-    lambda: MixedMultiOptimizer(
-        [(["y"], pyro.optim.Adam({"lr": 0.05})), (["x", "z"], Newton())]
-    ),
+    lambda: MixedMultiOptimizer([(["y"], pyro.optim.Adam({"lr": 0.05})), (["x", "z"], Newton())]),
 ]
 
 
@@ -40,9 +38,7 @@ def test_optimizers(factory):
     def model(loc, cov):
         x = pyro.param("x", torch.randn(2))
         y = pyro.param("y", torch.randn(3, 2))
-        z = pyro.param(
-            "z", torch.randn(4, 2).abs(), constraint=constraints.greater_than(-1)
-        )
+        z = pyro.param("z", torch.randn(4, 2).abs(), constraint=constraints.greater_than(-1))
         pyro.sample("obs_x", dist.MultivariateNormal(loc, cov), obs=x)
         with pyro.plate("y_plate", 3):
             pyro.sample("obs_y", dist.MultivariateNormal(loc, cov), obs=y)

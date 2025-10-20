@@ -28,7 +28,7 @@ HMC
     :members:
     :undoc-members:
     :show-inheritance:
-    
+
 NUTS
 ----
 

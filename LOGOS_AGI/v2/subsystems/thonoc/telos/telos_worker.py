@@ -8,7 +8,7 @@ class ForecastingNexus:
     """Forecasting orchestration system."""
     def __init__(self):
         self.models = {}
-    
+
     def run_pipeline(self, series_data):
         """Execute forecasting pipeline on time series."""
         return {
@@ -22,7 +22,7 @@ class SCM:
     def __init__(self, dag=None):
         self.dag = dag or {}
         self.parameters = {}
-    
+
     def fit(self, data):
         """Fit causal model to data."""
         self.parameters = {"fitted": True, "samples": len(data)}
@@ -67,7 +67,7 @@ class TelosWorker:
         task = json.loads(body)
         task_id = task.get('task_id', 'unknown')
         logging.info(f"Telos received task {task_id} of type {task.get('type')}")
-        
+
         result_payload = {}
         status = 'failure'
 
@@ -77,19 +77,19 @@ class TelosWorker:
 
             if task_type == 'predict_outcomes':
                 raw_predictions = self.bayesian_learner.predict(payload.get('node_data', {}))
-                
+
                 formatted_predictions = []
                 for desc, prob in raw_predictions.items():
                     alignment = 'good' if 'aligned' in desc else 'evil' if 'consequence' in desc else 'neutral'
                     formatted_predictions.append({'description': desc, 'alignment': alignment, 'probability': prob})
-                
+
                 result_payload = formatted_predictions
                 status = 'success'
 
             elif task_type == 'forecast':
                 result_payload = self.forecasting_nexus.run_pipeline(payload['series'])
                 status = 'success'
-                
+
             elif task_type == 'causal_retrodiction':
                 scm = SCM(dag=payload['dag'])
                 scm.fit(payload['data'])

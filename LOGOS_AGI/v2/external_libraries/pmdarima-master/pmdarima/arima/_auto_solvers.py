@@ -46,8 +46,8 @@ def _root_test(model, ic, trace):
                 "Near non-invertible roots for order "
                 "(%i, %i, %i)(%i, %i, %i, %i); setting score to inf (at "
                 "least one inverse root too close to the border of the "
-                "unit circle: %.3f)"
-                % (p, d, q, P, D, Q, m, max_invroot))
+                "unit circle: %.3f)" % (p, d, q, P, D, Q, m, max_invroot)
+            )
     return ic
 
 
@@ -62,11 +62,28 @@ class _SolverMixin(metaclass=abc.ABCMeta):
 class _RandomFitWrapper(_SolverMixin):
     """Searches for the best model using a random search"""
 
-    def __init__(self, y, X, fit_partial, d, D, m, max_order,
-                 max_p, max_q, max_P, max_Q, random, random_state,
-                 n_fits, n_jobs, seasonal, trace, with_intercept,
-                 sarimax_kwargs):
-
+    def __init__(
+        self,
+        y,
+        X,
+        fit_partial,
+        d,
+        D,
+        m,
+        max_order,
+        max_p,
+        max_q,
+        max_P,
+        max_Q,
+        random,
+        random_state,
+        n_fits,
+        n_jobs,
+        seasonal,
+        trace,
+        with_intercept,
+        sarimax_kwargs,
+    ):
         # NOTE: pre-1.5.2, we started at start_p, start_q, etc. However, when
         # using stepwise=FALSE in R, hyndman starts at 0. He only uses start_*
         # when stepwise=TRUE.
@@ -102,7 +119,9 @@ class _RandomFitWrapper(_SolverMixin):
             # make a list to scramble... `gen` may have a ragged nested
             # sequence, so we have to explicitly use dtype='object', otherwise
             # it will raise a ValueError on numpy >= 1.24
-            gen = random_state.permutation(np.array(list(gen), dtype='object'))[:n_fits]  # noqa: E501
+            gen = random_state.permutation(np.array(list(gen), dtype="object"))[
+                :n_fits
+            ]  # noqa: E501
 
         self.gen = gen
         self.n_jobs = n_jobs
@@ -141,7 +160,7 @@ class _RandomFitWrapper(_SolverMixin):
 
 class _StepwiseFitWrapper(_SolverMixin):
     """Searches for the best model using the stepwise algorithm.
-    
+
     The stepwise algorithm fluctuates the more sensitive pieces of the ARIMA
     (the seasonal components) first, adjusting towards the direction of the
     smaller {A|B|HQ}IC(c), and continues to step down as long as the error
@@ -155,12 +174,38 @@ class _StepwiseFitWrapper(_SolverMixin):
     .. [1] R's auto-arima stepwise source code: https://github.com/robjhyndman/forecast/blob/30308a4e314ff29338291462e81bf68ff0c5f86d/R/newarima2.R#L366
     .. [2] https://robjhyndman.com/hyndsight/arma-roots/
     """  # noqa
-    def __init__(self, y, X, start_params, trend, method, maxiter,
-                 fit_params, suppress_warnings, trace, error_action,
-                 out_of_sample_size, scoring, scoring_args,
-                 p, d, q, P, D, Q, m, max_p, max_q, max_P, max_Q, seasonal,
-                 information_criterion, with_intercept, **kwargs):
 
+    def __init__(
+        self,
+        y,
+        X,
+        start_params,
+        trend,
+        method,
+        maxiter,
+        fit_params,
+        suppress_warnings,
+        trace,
+        error_action,
+        out_of_sample_size,
+        scoring,
+        scoring_args,
+        p,
+        d,
+        q,
+        P,
+        D,
+        Q,
+        m,
+        max_p,
+        max_q,
+        max_P,
+        max_Q,
+        seasonal,
+        information_criterion,
+        with_intercept,
+        **kwargs,
+    ):
         self.trace = _validation.check_trace(trace)
 
         # Create a partial of the fit call so we don't have arg bloat all over
@@ -180,7 +225,8 @@ class _StepwiseFitWrapper(_SolverMixin):
             scoring=scoring,
             scoring_args=scoring_args,
             information_criterion=information_criterion,
-            **kwargs)
+            **kwargs,
+        )
 
         self.information_criterion = information_criterion
         self.with_intercept = with_intercept
@@ -204,8 +250,7 @@ class _StepwiseFitWrapper(_SolverMixin):
 
         # other internal start vars
         self.k = self.start_k = 0
-        self.max_k = 100 if self.exec_context.max_steps is None \
-            else self.exec_context.max_steps
+        self.max_k = 100 if self.exec_context.max_steps is None else self.exec_context.max_steps
         self.max_dur = self.exec_context.max_dur
 
         # results list to store intermittent hashes of orders to determine if
@@ -228,14 +273,12 @@ class _StepwiseFitWrapper(_SolverMixin):
             constant = self.with_intercept
 
         if (order, seasonal_order, constant) not in self.results_dict:
-
             # increment the number of fits
             self.k += 1
 
             fit, fit_time, new_ic = self._fit_arima(
-                order=order,
-                seasonal_order=seasonal_order,
-                with_intercept=constant)
+                order=order, seasonal_order=seasonal_order, with_intercept=constant
+            )
 
             # use the orders as a key to be hashed for
             # the dictionary (pointing to fit)
@@ -261,10 +304,8 @@ class _StepwiseFitWrapper(_SolverMixin):
             # otherwise there's a current best
             current_ic = self.ic_dict[self.bestfit_key]
             if new_ic < current_ic:
-
                 if self.trace > 1:
-                    print("New best model found (%.3f < %.3f)"
-                          % (new_ic, current_ic))
+                    print("New best model found (%.3f < %.3f)" % (new_ic, current_ic))
 
                 self.bestfit = fit
                 self.bestfit_key = (order, seasonal_order, constant)
@@ -281,8 +322,7 @@ class _StepwiseFitWrapper(_SolverMixin):
         max_P, max_Q = self.max_P, self.max_Q
 
         if self.trace:
-            print("Performing stepwise search to minimize %s"
-                  % self.information_criterion)
+            print("Performing stepwise search to minimize %s" % self.information_criterion)
 
         # fit a baseline p, d, q model
         self._do_fit((p, d, q), (P, D, Q, m))
@@ -323,113 +363,122 @@ class _StepwiseFitWrapper(_SolverMixin):
             # continuing again
             dur = (datetime.now() - start_time).total_seconds()
             if self.max_dur and dur > self.max_dur:
-                warnings.warn('early termination of stepwise search due to '
-                              'max_dur threshold (%.3f > %.3f)'
-                              % (dur, self.max_dur))
+                warnings.warn(
+                    "early termination of stepwise search due to "
+                    "max_dur threshold (%.3f > %.3f)" % (dur, self.max_dur)
+                )
                 break
 
             # NOTE: k changes for every fit, so we might need to bail halfway
             # through the loop, hence the multiple checks.
-            if P > 0 and \
-                    self.k < self.max_k and \
-                    self._do_fit((p, d, q), (P - 1, D, Q, m)):
+            if P > 0 and self.k < self.max_k and self._do_fit((p, d, q), (P - 1, D, Q, m)):
                 P -= 1
                 continue
 
-            if Q > 0 and \
-                    self.k < self.max_k and \
-                    self._do_fit((p, d, q), (P, D, Q - 1, m)):
+            if Q > 0 and self.k < self.max_k and self._do_fit((p, d, q), (P, D, Q - 1, m)):
                 Q -= 1
                 continue
 
-            if P < max_P and \
-                    self.k < self.max_k and \
-                    self._do_fit((p, d, q), (P + 1, D, Q, m)):
+            if P < max_P and self.k < self.max_k and self._do_fit((p, d, q), (P + 1, D, Q, m)):
                 P += 1
                 continue
 
-            if Q < max_Q and \
-                    self.k < self.max_k and \
-                    self._do_fit((p, d, q), (P, D, Q + 1, m)):
+            if Q < max_Q and self.k < self.max_k and self._do_fit((p, d, q), (P, D, Q + 1, m)):
                 Q += 1
                 continue
 
-            if Q > 0 and P > 0 and \
-                    self.k < self.max_k and \
-                    self._do_fit((p, d, q), (P - 1, D, Q - 1, m)):
+            if (
+                Q > 0
+                and P > 0
+                and self.k < self.max_k
+                and self._do_fit((p, d, q), (P - 1, D, Q - 1, m))
+            ):
                 Q -= 1
                 P -= 1
                 continue
 
-            if Q < max_Q and P > 0 and \
-                    self.k < self.max_k and \
-                    self._do_fit((p, d, q), (P - 1, D, Q + 1, m)):
+            if (
+                Q < max_Q
+                and P > 0
+                and self.k < self.max_k
+                and self._do_fit((p, d, q), (P - 1, D, Q + 1, m))
+            ):
                 Q += 1
                 P -= 1
                 continue
 
-            if Q > 0 and P < max_P and \
-                    self.k < self.max_k and \
-                    self._do_fit((p, d, q), (P + 1, D, Q - 1, m)):
+            if (
+                Q > 0
+                and P < max_P
+                and self.k < self.max_k
+                and self._do_fit((p, d, q), (P + 1, D, Q - 1, m))
+            ):
                 Q -= 1
                 P += 1
                 continue
 
-            if Q < max_Q and P < max_P and \
-                    self.k < self.max_k and \
-                    self._do_fit((p, d, q), (P + 1, D, Q + 1, m)):
+            if (
+                Q < max_Q
+                and P < max_P
+                and self.k < self.max_k
+                and self._do_fit((p, d, q), (P + 1, D, Q + 1, m))
+            ):
                 Q += 1
                 P += 1
                 continue
 
-            if p > 0 and \
-                    self.k < self.max_k and \
-                    self._do_fit((p - 1, d, q), (P, D, Q, m)):
+            if p > 0 and self.k < self.max_k and self._do_fit((p - 1, d, q), (P, D, Q, m)):
                 p -= 1
                 continue
 
-            if q > 0 and \
-                    self.k < self.max_k and \
-                    self._do_fit((p, d, q - 1), (P, D, Q, m)):
+            if q > 0 and self.k < self.max_k and self._do_fit((p, d, q - 1), (P, D, Q, m)):
                 q -= 1
                 continue
 
-            if p < max_p and \
-                    self.k < self.max_k and \
-                    self._do_fit((p + 1, d, q), (P, D, Q, m)):
+            if p < max_p and self.k < self.max_k and self._do_fit((p + 1, d, q), (P, D, Q, m)):
                 p += 1
                 continue
 
-            if q < max_q and \
-                    self.k < self.max_k and \
-                    self._do_fit((p, d, q + 1), (P, D, Q, m)):
+            if q < max_q and self.k < self.max_k and self._do_fit((p, d, q + 1), (P, D, Q, m)):
                 q += 1
                 continue
 
-            if q > 0 and p > 0 and \
-                    self.k < self.max_k and \
-                    self._do_fit((p - 1, d, q - 1), (P, D, Q, m)):
+            if (
+                q > 0
+                and p > 0
+                and self.k < self.max_k
+                and self._do_fit((p - 1, d, q - 1), (P, D, Q, m))
+            ):
                 q -= 1
                 p -= 1
                 continue
 
-            if q < max_q and p > 0 and \
-                    self.k < self.max_k and \
-                    self._do_fit((p - 1, d, q + 1), (P, D, Q, m)):
+            if (
+                q < max_q
+                and p > 0
+                and self.k < self.max_k
+                and self._do_fit((p - 1, d, q + 1), (P, D, Q, m))
+            ):
                 q += 1
                 p -= 1
                 continue
 
-            if q > 0 and p < max_p and \
-                    self.k < self.max_k and \
-                    self._do_fit((p + 1, d, q - 1), (P, D, Q, m)):
+            if (
+                q > 0
+                and p < max_p
+                and self.k < self.max_k
+                and self._do_fit((p + 1, d, q - 1), (P, D, Q, m))
+            ):
                 q -= 1
                 p += 1
                 continue
 
-            if q < max_q and p < max_p and \
-                    self.k < self.max_k and \
-                    self._do_fit((p + 1, d, q + 1), (P, D, Q, m)):
+            if (
+                q < max_q
+                and p < max_p
+                and self.k < self.max_k
+                and self._do_fit((p + 1, d, q + 1), (P, D, Q, m))
+            ):
                 q += 1
                 p += 1
                 continue
@@ -437,25 +486,27 @@ class _StepwiseFitWrapper(_SolverMixin):
             # R: if (allowdrift || allowmean)
             # we don't have these args, so we just default this case to true to
             # evaluate all corners
-            if self.k < self.max_k and \
-                    self._do_fit((p, d, q),
-                                 (P, D, Q, m),
-                                 constant=not self.with_intercept):
+            if self.k < self.max_k and self._do_fit(
+                (p, d, q), (P, D, Q, m), constant=not self.with_intercept
+            ):
                 self.with_intercept = not self.with_intercept
                 continue
 
         # check if the search has been ended after max_steps
-        if self.exec_context.max_steps is not None \
-                and self.k >= self.exec_context.max_steps:
-            warnings.warn('stepwise search has reached the maximum number '
-                          'of tries to find the best fit model')
+        if self.exec_context.max_steps is not None and self.k >= self.exec_context.max_steps:
+            warnings.warn(
+                "stepwise search has reached the maximum number "
+                "of tries to find the best fit model"
+            )
 
         # TODO: if (approximation && !is.null(bestfit$arma)) - refit best w MLE
 
         filtered_models_ics = sorted(
-            [(v, self.fit_time_dict[k], self.ic_dict[k])
-             for k, v in self.results_dict.items()
-             if v is not None],
+            [
+                (v, self.fit_time_dict[k], self.ic_dict[k])
+                for k, v in self.results_dict.items()
+                if v is not None
+            ],
             key=(lambda fit_ic: fit_ic[1]),
         )
 
@@ -466,24 +517,26 @@ class _StepwiseFitWrapper(_SolverMixin):
         return sorted_fits
 
 
-def _fit_candidate_model(y,
-                         X,
-                         order,
-                         seasonal_order,
-                         start_params,
-                         trend,
-                         method,
-                         maxiter,
-                         fit_params,
-                         suppress_warnings,
-                         trace,
-                         error_action,
-                         out_of_sample_size,
-                         scoring,
-                         scoring_args,
-                         with_intercept,
-                         information_criterion,
-                         **kwargs):
+def _fit_candidate_model(
+    y,
+    X,
+    order,
+    seasonal_order,
+    start_params,
+    trend,
+    method,
+    maxiter,
+    fit_params,
+    suppress_warnings,
+    trace,
+    error_action,
+    out_of_sample_size,
+    scoring,
+    scoring_args,
+    with_intercept,
+    information_criterion,
+    **kwargs,
+):
     """Instantiate and fit a candidate model
 
     1. Initialize a model
@@ -497,12 +550,20 @@ def _fit_candidate_model(y,
 
     # Fit outside try block, so if there is a type error in user input we
     # don't mask it with a warning or worse
-    fit = ARIMA(order=order, seasonal_order=seasonal_order,
-                start_params=start_params, trend=trend, method=method,
-                maxiter=maxiter, suppress_warnings=suppress_warnings,
-                out_of_sample_size=out_of_sample_size, scoring=scoring,
-                scoring_args=scoring_args,
-                with_intercept=with_intercept, **kwargs)
+    fit = ARIMA(
+        order=order,
+        seasonal_order=seasonal_order,
+        start_params=start_params,
+        trend=trend,
+        method=method,
+        maxiter=maxiter,
+        suppress_warnings=suppress_warnings,
+        out_of_sample_size=out_of_sample_size,
+        scoring=scoring,
+        scoring_args=scoring_args,
+        with_intercept=with_intercept,
+        **kwargs,
+    )
 
     try:
         fit.fit(y, X=X, **fit_params)
@@ -513,12 +574,13 @@ def _fit_candidate_model(y,
             raise v
 
         elif error_action in ("warn", "trace"):
-            warning_str = 'Error fitting %s ' \
-                          '(if you do not want to see these warnings, run ' \
-                          'with error_action="ignore").' \
-                          % str(fit)
+            warning_str = (
+                "Error fitting %s "
+                "(if you do not want to see these warnings, run "
+                'with error_action="ignore").' % str(fit)
+            )
 
-            if error_action == 'trace':
+            if error_action == "trace":
                 warning_str += "\nTraceback:\n" + traceback.format_exc()
 
             warnings.warn(warning_str, ModelFitWarning)
@@ -534,11 +596,9 @@ def _fit_candidate_model(y,
     # log the model fit
     if trace:
         print(
-            "{model}   : {ic_name}={ic:.3f}, Time={time:.2f} sec"
-            .format(model=str(fit),
-                    ic_name=information_criterion.upper(),
-                    ic=ic,
-                    time=fit_time)
+            "{model}   : {ic_name}={ic:.3f}, Time={time:.2f} sec".format(
+                model=str(fit), ic_name=information_criterion.upper(), ic=ic, time=fit_time
+            )
         )
 
     return fit, fit_time, ic
@@ -562,8 +622,7 @@ def _sort_and_filter_fits(models):
         models = [models]
 
     # Filter out the Nones or Infs (the failed models)...
-    filtered = [(mod, ic) for mod, _, ic in models
-                if mod is not None and np.isfinite(ic)]
+    filtered = [(mod, ic) for mod, _, ic in models if mod is not None and np.isfinite(ic)]
 
     # if the list is empty, or if it was an ARIMA and it's None
     if not filtered:

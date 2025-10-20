@@ -440,7 +440,8 @@ def sample(
     blas_cores: int | None | Literal["auto"] = "auto",
     compile_kwargs: dict | None = None,
     **kwargs,
-) -> InferenceData: ...
+) -> InferenceData:
+    ...
 
 
 @overload
@@ -473,7 +474,8 @@ def sample(
     blas_cores: int | None | Literal["auto"] = "auto",
     compile_kwargs: dict | None = None,
     **kwargs,
-) -> MultiTrace: ...
+) -> MultiTrace:
+    ...
 
 
 def sample(

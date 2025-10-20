@@ -29,9 +29,7 @@ layouts_params = {
         "connectionstyle": "arc3,rad=-1.57079632679",
     },
     # a layout showcasing the time series values
-    "Time Series values with Connectivity": {
-        "pos": {i: (i, v) for i, v in enumerate(time_series)}
-    },
+    "Time Series values with Connectivity": {"pos": {i: (i, v) for i, v in enumerate(time_series)}},
 }
 
 for i, (name, params) in enumerate(layouts_params.items()):
@@ -41,9 +39,7 @@ for i, (name, params) in enumerate(layouts_params.items()):
     axs[i].margins(0.10)
     nx.draw_networkx_nodes(G, params.get("pos"), ax=axs[i], alpha=0.5)
     nx.draw_networkx_labels(G, params.get("pos"), ax=axs[i], labels=labels)
-    nx.draw_networkx_edges(
-        G, **params, ax=axs[i], arrows=True, arrowstyle="<->", arrowsize=10
-    )
+    nx.draw_networkx_edges(G, **params, ax=axs[i], arrows=True, arrowstyle="<->", arrowsize=10)
 
 axs[1].set_ylabel("Value", size=10)
 

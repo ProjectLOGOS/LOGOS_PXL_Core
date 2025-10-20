@@ -140,9 +140,7 @@ class _UnitLowerCholesky(Constraint):
 
     def check(self, value):
         value_tril = value.tril()
-        lower_triangular = (
-            (value_tril == value).view(value.shape[:-2] + (-1,)).min(-1)[0]
-        )
+        lower_triangular = (value_tril == value).view(value.shape[:-2] + (-1,)).min(-1)[0]
 
         ones_diagonal = (value.diagonal(dim1=-2, dim2=-1) == 1).min(-1)[0]
         return lower_triangular & ones_diagonal
@@ -223,9 +221,7 @@ __doc__ += "\n".join(
                 "alias of :class:`torch.distributions.constraints.{}`".format(_name)
                 if globals()[_name].__module__.startswith("torch")
                 else ".. autoclass:: {}".format(
-                    _name
-                    if type(globals()[_name]) is type
-                    else type(globals()[_name]).__name__
+                    _name if type(globals()[_name]) is type else type(globals()[_name]).__name__
                 )
             ),
         )

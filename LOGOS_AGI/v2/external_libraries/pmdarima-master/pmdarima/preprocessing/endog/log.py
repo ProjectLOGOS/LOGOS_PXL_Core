@@ -2,7 +2,7 @@
 
 from .boxcox import BoxCoxEndogTransformer
 
-__all__ = ['LogEndogTransformer']
+__all__ = ["LogEndogTransformer"]
 
 
 class LogEndogTransformer(BoxCoxEndogTransformer):
@@ -30,8 +30,8 @@ class LogEndogTransformer(BoxCoxEndogTransformer):
         if values are truncated, invertibility will not be preserved, and the
         transformed array may not be perfectly inverse-transformed.
     """
-    def __init__(self, lmbda=0, neg_action="raise", floor=1e-16):
 
+    def __init__(self, lmbda=0, neg_action="raise", floor=1e-16):
         super().__init__(neg_action=neg_action, floor=floor)
 
         # See: https://github.com/alkaline-ml/pmdarima/issues/407
@@ -126,5 +126,5 @@ class LogEndogTransformer(BoxCoxEndogTransformer):
         # See: https://github.com/alkaline-ml/pmdarima/issues/407
         # Thanks to @jseabold
         params = super().get_params(deep=deep)
-        params['lmbda'] = self.lmbda2
+        params["lmbda"] = self.lmbda2
         return params

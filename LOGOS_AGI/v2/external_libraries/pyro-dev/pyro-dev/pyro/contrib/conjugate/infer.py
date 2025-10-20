@@ -44,15 +44,11 @@ def _make_cls(base, static_attrs, instance_attrs, parent_linkage=None):
 
 
 def _latent(base, parent):
-    return _make_cls(
-        base, {"collapsible": True}, {"site_name": None, "parent": parent}, "_latent"
-    )
+    return _make_cls(base, {"collapsible": True}, {"site_name": None, "parent": parent}, "_latent")
 
 
 def _conditional(base, parent):
-    return _make_cls(
-        base, {"marginalize_latent": True}, {"parent": parent}, "_conditional"
-    )
+    return _make_cls(base, {"marginalize_latent": True}, {"parent": parent}, "_conditional")
 
 
 def _compound(base, parent):

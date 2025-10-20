@@ -110,13 +110,9 @@ from sklearn.pipeline import make_pipeline
 from sklearn.random_projection import SparseRandomProjection
 
 embeddings = {
-    "Random projection embedding": SparseRandomProjection(
-        n_components=2, random_state=42
-    ),
+    "Random projection embedding": SparseRandomProjection(n_components=2, random_state=42),
     "Truncated SVD embedding": TruncatedSVD(n_components=2),
-    "Linear Discriminant Analysis embedding": LinearDiscriminantAnalysis(
-        n_components=2
-    ),
+    "Linear Discriminant Analysis embedding": LinearDiscriminantAnalysis(n_components=2),
     "Isomap embedding": Isomap(n_neighbors=n_neighbors, n_components=2),
     "Standard LLE embedding": LocallyLinearEmbedding(
         n_neighbors=n_neighbors, n_components=2, method="standard"
@@ -135,9 +131,7 @@ embeddings = {
         RandomTreesEmbedding(n_estimators=200, max_depth=5, random_state=0),
         TruncatedSVD(n_components=2),
     ),
-    "Spectral embedding": SpectralEmbedding(
-        n_components=2, random_state=0, eigen_solver="arpack"
-    ),
+    "Spectral embedding": SpectralEmbedding(n_components=2, random_state=0, eigen_solver="arpack"),
     "t-SNE embedding": TSNE(
         n_components=2,
         max_iter=500,
@@ -145,9 +139,7 @@ embeddings = {
         n_jobs=2,
         random_state=0,
     ),
-    "NCA embedding": NeighborhoodComponentsAnalysis(
-        n_components=2, init="pca", random_state=0
-    ),
+    "NCA embedding": NeighborhoodComponentsAnalysis(n_components=2, init="pca", random_state=0),
 }
 
 # %%

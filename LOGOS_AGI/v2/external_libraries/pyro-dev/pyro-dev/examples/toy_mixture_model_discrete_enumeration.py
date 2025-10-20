@@ -58,12 +58,8 @@ def generate_data(num_obs):
         "p_C": Beta(prior["C"][:, 0], prior["C"][:, 1]).sample(),
     }
     data = {"A": Bernoulli(torch.ones(num_obs) * CPDs["p_A"]).sample()}
-    data["B"] = Bernoulli(
-        torch.gather(CPDs["p_B"], 0, data["A"].type(torch.long))
-    ).sample()
-    data["C"] = Bernoulli(
-        torch.gather(CPDs["p_C"], 0, data["B"].type(torch.long))
-    ).sample()
+    data["B"] = Bernoulli(torch.gather(CPDs["p_B"], 0, data["A"].type(torch.long))).sample()
+    data["C"] = Bernoulli(torch.gather(CPDs["p_C"], 0, data["B"].type(torch.long))).sample()
     return prior, CPDs, data
 
 
@@ -105,9 +101,7 @@ def train(prior, data, num_steps, num_obs):
     plt.plot(losses)
     plt.show()
     posterior_params = {k: np.array(v.data) for k, v in pyro.get_param_store().items()}
-    posterior_params["a"] = posterior_params["a"][
-        None, :
-    ]  # reshape to same as other variables
+    posterior_params["a"] = posterior_params["a"][None, :]  # reshape to same as other variables
     return posterior_params
 
 

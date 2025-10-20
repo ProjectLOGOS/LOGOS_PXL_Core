@@ -13,8 +13,7 @@ from pmdarima.compat.pytest import pytest_error_str
 from pmdarima.datasets import load_lynx, load_wineind, load_heartrate
 
 from numpy.random import RandomState
-from numpy.testing import assert_array_almost_equal, assert_almost_equal, \
-    assert_allclose
+from numpy.testing import assert_array_almost_equal, assert_almost_equal, assert_allclose
 from statsmodels import api as sm
 from sklearn.metrics import mean_squared_error
 
@@ -33,19 +32,60 @@ y = rs.rand(25)
 
 # > set.seed(123)
 # > abc <- rnorm(50, 5, 1)
-abc = np.array([4.439524, 4.769823, 6.558708, 5.070508,
-                5.129288, 6.715065, 5.460916, 3.734939,
-                4.313147, 4.554338, 6.224082, 5.359814,
-                5.400771, 5.110683, 4.444159, 6.786913,
-                5.497850, 3.033383, 5.701356, 4.527209,
-                3.932176, 4.782025, 3.973996, 4.271109,
-                4.374961, 3.313307, 5.837787, 5.153373,
-                3.861863, 6.253815, 5.426464, 4.704929,
-                5.895126, 5.878133, 5.821581, 5.688640,
-                5.553918, 4.938088, 4.694037, 4.619529,
-                4.305293, 4.792083, 3.734604, 7.168956,
-                6.207962, 3.876891, 4.597115, 4.533345,
-                5.779965, 4.916631])
+abc = np.array(
+    [
+        4.439524,
+        4.769823,
+        6.558708,
+        5.070508,
+        5.129288,
+        6.715065,
+        5.460916,
+        3.734939,
+        4.313147,
+        4.554338,
+        6.224082,
+        5.359814,
+        5.400771,
+        5.110683,
+        4.444159,
+        6.786913,
+        5.497850,
+        3.033383,
+        5.701356,
+        4.527209,
+        3.932176,
+        4.782025,
+        3.973996,
+        4.271109,
+        4.374961,
+        3.313307,
+        5.837787,
+        5.153373,
+        3.861863,
+        6.253815,
+        5.426464,
+        4.704929,
+        5.895126,
+        5.878133,
+        5.821581,
+        5.688640,
+        5.553918,
+        4.938088,
+        4.694037,
+        4.619529,
+        4.305293,
+        4.792083,
+        3.734604,
+        7.168956,
+        6.207962,
+        3.876891,
+        4.597115,
+        4.533345,
+        5.779965,
+        4.916631,
+    ]
+)
 
 hr = load_heartrate(as_series=True)
 wineind = load_wineind()
@@ -80,39 +120,49 @@ def test_basic_arma():
     assert_almost_equal(arma.bic(), 13.639060053303311, decimal=5)
 
     # get predictions
-    expected_preds = np.array([0.44079876, 0.44079876, 0.44079876,
-                               0.44079876, 0.44079876, 0.44079876,
-                               0.44079876, 0.44079876, 0.44079876,
-                               0.44079876])
+    expected_preds = np.array(
+        [
+            0.44079876,
+            0.44079876,
+            0.44079876,
+            0.44079876,
+            0.44079876,
+            0.44079876,
+            0.44079876,
+            0.44079876,
+            0.44079876,
+            0.44079876,
+        ]
+    )
 
     # generate predictions
     assert_array_almost_equal(preds, expected_preds)
 
     # Make sure we can get confidence intervals
-    expected_intervals = np.array([
-        [-0.10692387, 0.98852139],
-        [-0.10692387, 0.98852139],
-        [-0.10692387, 0.98852139],
-        [-0.10692387, 0.98852139],
-        [-0.10692387, 0.98852139],
-        [-0.10692387, 0.98852139],
-        [-0.10692387, 0.98852139],
-        [-0.10692387, 0.98852139],
-        [-0.10692387, 0.98852139],
-        [-0.10692387, 0.98852139]
-    ])
+    expected_intervals = np.array(
+        [
+            [-0.10692387, 0.98852139],
+            [-0.10692387, 0.98852139],
+            [-0.10692387, 0.98852139],
+            [-0.10692387, 0.98852139],
+            [-0.10692387, 0.98852139],
+            [-0.10692387, 0.98852139],
+            [-0.10692387, 0.98852139],
+            [-0.10692387, 0.98852139],
+            [-0.10692387, 0.98852139],
+            [-0.10692387, 0.98852139],
+        ]
+    )
 
-    _, intervals = arma.predict(n_periods=10, return_conf_int=True,
-                                alpha=0.05)
+    _, intervals = arma.predict(n_periods=10, return_conf_int=True, alpha=0.05)
     assert_array_almost_equal(intervals, expected_intervals)
 
 
 def test_issue_30():
     # From the issue:
-    vec = np.array([33., 44., 58., 49., 46., 98., 97.])
+    vec = np.array([33.0, 44.0, 58.0, 49.0, 46.0, 98.0, 97.0])
 
-    arm = AutoARIMA(out_of_sample_size=1, seasonal=False,
-                    suppress_warnings=True)
+    arm = AutoARIMA(out_of_sample_size=1, seasonal=False, suppress_warnings=True)
     arm.fit(vec)
 
     # This is a way to force it:
@@ -120,9 +170,7 @@ def test_issue_30():
 
     # Want to make sure it works with X arrays as well
     X = np.random.RandomState(1).rand(vec.shape[0], 2)
-    auto_arima(vec, X=X, out_of_sample_size=1,
-               seasonal=False,
-               suppress_warnings=True)
+    auto_arima(vec, X=X, out_of_sample_size=1, seasonal=False, suppress_warnings=True)
 
     # This is a way to force it:
     ARIMA(order=(0, 1, 0), out_of_sample_size=1).fit(vec, X=X)
@@ -130,11 +178,12 @@ def test_issue_30():
 
 @pytest.mark.parametrize(
     # will be m - d
-    'model', [
+    "model",
+    [
         ARIMA(order=(2, 0, 0)),  # arma
         ARIMA(order=(2, 1, 0)),  # arima
         ARIMA(order=(2, 1, 0), seasonal_order=(1, 0, 0, 12)),  # sarimax
-    ]
+    ],
 )
 def test_predict_in_sample_conf_int(model):
     model.fit(wineind)
@@ -145,7 +194,7 @@ def test_predict_in_sample_conf_int(model):
 
 
 @pytest.mark.parametrize(
-    'y,model,start,end,exp_len',
+    "y,model,start,end,exp_len",
     [
         pytest.param(
             series_with_dt_index(30),
@@ -161,7 +210,7 @@ def test_predict_in_sample_conf_int(model):
             "20220106",
             4,
         ),
-    ]
+    ],
 )
 def test_predict_in_sample_non_int_index(y, model, start, end, exp_len):
     # issue 499
@@ -171,14 +220,15 @@ def test_predict_in_sample_non_int_index(y, model, start, end, exp_len):
 
 
 @pytest.mark.parametrize(
-    'model', [
+    "model",
+    [
         ARIMA(order=(2, 0, 0)),  # arma
         ARIMA(order=(2, 1, 0)),  # arima
         ARIMA(order=(2, 1, 0), seasonal_order=(1, 0, 0, 12)),  # sarimax
-    ]
+    ],
 )
-@pytest.mark.parametrize('X', [None, rs.rand(wineind.shape[0], 2)])
-@pytest.mark.parametrize('confints', [True, False])
+@pytest.mark.parametrize("X", [None, rs.rand(wineind.shape[0], 2)])
+@pytest.mark.parametrize("confints", [True, False])
 def test_predict_in_sample_X(model, X, confints):
     model.fit(wineind, X=X)
     res = model.predict_in_sample(X, return_conf_int=confints)
@@ -193,8 +243,8 @@ def _two_times_mse(y_true, y_pred, **_):
     return mean_squared_error(y_true, y_pred) * 2
 
 
-@pytest.mark.parametrize('as_pd', [True, False])
-@pytest.mark.parametrize('scoring', ['mse', _two_times_mse])
+@pytest.mark.parametrize("as_pd", [True, False])
+@pytest.mark.parametrize("scoring", ["mse", _two_times_mse])
 def test_with_oob_and_X(as_pd, scoring):
     endog = hr
     X = np.random.RandomState(1).rand(hr.shape[0], 3)
@@ -202,10 +252,9 @@ def test_with_oob_and_X(as_pd, scoring):
         X = pd.DataFrame.from_records(X)
         endog = pd.Series(hr)
 
-    arima = ARIMA(order=(2, 1, 2),
-                  suppress_warnings=True,
-                  scoring=scoring,
-                  out_of_sample_size=10).fit(y=endog, X=X)
+    arima = ARIMA(
+        order=(2, 1, 2), suppress_warnings=True, scoring=scoring, out_of_sample_size=10
+    ).fit(y=endog, X=X)
 
     # show we can get oob score and preds
     arima.oob()
@@ -213,10 +262,9 @@ def test_with_oob_and_X(as_pd, scoring):
 
 def test_with_oob():
     # show we can fit with CV (kinda)
-    arima = ARIMA(order=(2, 1, 2),
-                  suppress_warnings=True,
-                  scoring='mse',
-                  out_of_sample_size=10).fit(y=hr)
+    arima = ARIMA(
+        order=(2, 1, 2), suppress_warnings=True, scoring="mse", out_of_sample_size=10
+    ).fit(y=hr)
 
     oob = arima.oob()
     assert not np.isnan(oob)  # show this works
@@ -224,12 +272,11 @@ def test_with_oob():
     # Assert the predictions give the expected MAE/MSE
     oob_preds = arima.oob_preds_
     assert oob_preds.shape[0] == 10
-    scoring = val.get_scoring_metric('mse')
+    scoring = val.get_scoring_metric("mse")
     assert scoring(hr[-10:], oob_preds) == oob
 
     # show we can fit if ooss < 0 and oob will be nan
-    arima = ARIMA(order=(2, 1, 2), suppress_warnings=True,
-                  out_of_sample_size=-1).fit(y=hr)
+    arima = ARIMA(order=(2, 1, 2), suppress_warnings=True, out_of_sample_size=-1).fit(y=hr)
     assert np.isnan(arima.oob())
 
     # This will raise since n_steps is not an int
@@ -248,10 +295,7 @@ def test_with_oob():
 def test_oob_for_issue_28():
     # Continuation of above: can we do one with an X array, too?
     xreg = rs.rand(hr.shape[0], 4)
-    arima = ARIMA(order=(2, 1, 2),
-                  suppress_warnings=True,
-                  out_of_sample_size=10).fit(
-        y=hr, X=xreg)
+    arima = ARIMA(order=(2, 1, 2), suppress_warnings=True, out_of_sample_size=10).fit(y=hr, X=xreg)
 
     oob = arima.oob()
     assert not np.isnan(oob)
@@ -269,10 +313,9 @@ def test_oob_for_issue_28():
     # without any OOB scoring, and we'll show that the OOB scoring in the
     # first IS in fact only applied to the first (train - n_out_of_bag)
     # samples
-    arima_no_oob = ARIMA(
-        order=(2, 1, 2), suppress_warnings=True,
-        out_of_sample_size=0).fit(y=hr[:-10],
-                                  X=xreg[:-10, :])
+    arima_no_oob = ARIMA(order=(2, 1, 2), suppress_warnings=True, out_of_sample_size=0).fit(
+        y=hr[:-10], X=xreg[:-10, :]
+    )
 
     scoring = val.get_scoring_metric(arima_no_oob.scoring)
     preds = arima_no_oob.predict(n_periods=10, X=xreg[-10:, :])
@@ -285,8 +328,7 @@ def test_oob_for_issue_28():
 
     # Now assert on the forecast differences.
     with_oob_forecasts = arima.predict(n_periods=5, X=xreg_test)
-    no_oob_forecasts = arima_no_oob.predict(n_periods=5,
-                                            X=xreg_test)
+    no_oob_forecasts = arima_no_oob.predict(n_periods=5, X=xreg_test)
 
     with pytest.raises(AssertionError):
         assert_array_almost_equal(with_oob_forecasts, no_oob_forecasts)
@@ -308,26 +350,27 @@ def test_oob_for_issue_28():
 
     # Actually add them now, and compare the forecasts (should be the same)
     arima_no_oob.update(hr[-10:], xreg[-10:, :])
-    assert np.allclose(with_oob_forecasts,
-                       arima_no_oob.predict(n_periods=5, X=xreg_test),
-                       rtol=1e-2)
+    assert np.allclose(
+        with_oob_forecasts, arima_no_oob.predict(n_periods=5, X=xreg_test), rtol=1e-2
+    )
 
 
 # Test the OOB functionality for SARIMAX (Issue #28) --------------------------
 
+
 def test_oob_sarimax():
     xreg = rs.rand(wineind.shape[0], 2)
-    fit = ARIMA(order=(1, 1, 1),
-                seasonal_order=(0, 1, 1, 12),
-                maxiter=5,
-                out_of_sample_size=15).fit(y=wineind, X=xreg)
+    fit = ARIMA(
+        order=(1, 1, 1), seasonal_order=(0, 1, 1, 12), maxiter=5, out_of_sample_size=15
+    ).fit(y=wineind, X=xreg)
 
-    fit_no_oob = ARIMA(order=(1, 1, 1),
-                       seasonal_order=(0, 1, 1, 12),
-                       out_of_sample_size=0,
-                       maxiter=5,
-                       suppress_warnings=True).fit(y=wineind[:-15],
-                                                   X=xreg[:-15, :])
+    fit_no_oob = ARIMA(
+        order=(1, 1, 1),
+        seasonal_order=(0, 1, 1, 12),
+        out_of_sample_size=0,
+        maxiter=5,
+        suppress_warnings=True,
+    ).fit(y=wineind[:-15], X=xreg[:-15, :])
 
     # now assert some of the same things here that we did in the former test
     oob = fit.oob()
@@ -343,9 +386,7 @@ def test_oob_sarimax():
     # show we can add the new samples and get the exact same forecasts
     xreg_test = rs.rand(5, 2)
     fit_no_oob.update(wineind[-15:], xreg[-15:, :])
-    assert np.allclose(fit.predict(5, xreg_test),
-                       fit_no_oob.predict(5, xreg_test),
-                       rtol=1e-2)
+    assert np.allclose(fit.predict(5, xreg_test), fit_no_oob.predict(5, xreg_test), rtol=1e-2)
 
     # And also the params should be close now after updating
     assert np.allclose(fit.params(), fit_no_oob.params())
@@ -360,17 +401,16 @@ def test_oob_sarimax():
 
 class TestIssue29:
     dta = sm.datasets.sunspots.load_pandas().data
-    dta.index = pd.Index(sm.tsa.datetools.dates_from_range('1700', '2008'))
+    dta.index = pd.Index(sm.tsa.datetools.dates_from_range("1700", "2008"))
     del dta["YEAR"]
 
     xreg = np.random.RandomState(1).rand(dta.shape[0], 3)
 
-    @pytest.mark.parametrize('d', [0, 1])
-    @pytest.mark.parametrize('cv', [0, 3])
-    @pytest.mark.parametrize('X', [xreg, None])
+    @pytest.mark.parametrize("d", [0, 1])
+    @pytest.mark.parametrize("cv", [0, 3])
+    @pytest.mark.parametrize("X", [xreg, None])
     def test_oob_for_issue_29(self, d, cv, X):
-        model = ARIMA(order=(2, d, 0),
-                      out_of_sample_size=cv).fit(self.dta, X=X)
+        model = ARIMA(order=(2, d, 0), out_of_sample_size=cv).fit(self.dta, X=X)
 
         # If X is defined, we need to pass n_periods of
         # X rows to the predict function. Otherwise we'll
@@ -386,9 +426,22 @@ class TestIssue29:
 def _try_get_attrs(arima):
     # show we can get all these attrs without getting an error
     attrs = {
-        'aic', 'aicc', 'arparams', 'arroots', 'bic', 'bse', 'conf_int',
-        'df_model', 'df_resid', 'hqic', 'maparams', 'maroots',
-        'params', 'pvalues', 'resid', 'fittedvalues',
+        "aic",
+        "aicc",
+        "arparams",
+        "arroots",
+        "bic",
+        "bse",
+        "conf_int",
+        "df_model",
+        "df_resid",
+        "hqic",
+        "maparams",
+        "maroots",
+        "params",
+        "pvalues",
+        "resid",
+        "fittedvalues",
     }
 
     # this just shows all of these attrs work.
@@ -407,12 +460,11 @@ def test_more_elaborate():
     _try_get_attrs(arima)
 
     with tempfile.TemporaryDirectory() as tdir:
-
         # pickle this for the __get/setattr__ coverage.
         # since the only time this is tested is in parallel in auto.py,
         # this doesn't actually get any coverage proof...
-        fl = os.path.join(tdir, 'some_temp_file.pkl')
-        with open(fl, 'wb') as p:
+        fl = os.path.join(tdir, "some_temp_file.pkl")
+        with open(fl, "wb") as p:
             pickle.dump(arima, p)
 
         # show we can predict with this even though it's been pickled
@@ -420,7 +472,7 @@ def test_more_elaborate():
         _preds = arima.predict(n_periods=5, X=new_xreg)
 
         # now unpickle
-        with open(fl, 'rb') as p:
+        with open(fl, "rb") as p:
             other = pickle.load(p)
 
         # show we can still predict, compare
@@ -440,7 +492,7 @@ def test_more_elaborate():
 
 def test_the_r_src():
     # this is the test the R code provides
-    fit = ARIMA(order=(2, 0, 1), trend='c', suppress_warnings=True).fit(abc)
+    fit = ARIMA(order=(2, 0, 1), trend="c", suppress_warnings=True).fit(abc)
 
     # the R code's AIC = 135.4
     assert abs(135.4 - fit.aic()) < 1.0
@@ -463,17 +515,25 @@ def test_the_r_src():
 
     # > fit = forecast::auto.arima(abc, max.p=5, max.d=5,
     #             max.q=5, max.order=100, stepwise=F)
-    fit = auto_arima(abc, max_p=5, max_d=5, max_q=5, max_order=100,
-                     seasonal=False, trend='c', suppress_warnings=True,
-                     error_action='ignore')
+    fit = auto_arima(
+        abc,
+        max_p=5,
+        max_d=5,
+        max_q=5,
+        max_order=100,
+        seasonal=False,
+        trend="c",
+        suppress_warnings=True,
+        error_action="ignore",
+    )
 
     assert abs(135.28 - fit.aic()) < 1.0  # R's is 135.28
 
 
 def test_with_seasonality():
-    fit = ARIMA(order=(1, 1, 1),
-                seasonal_order=(0, 1, 1, 12),
-                suppress_warnings=True).fit(y=wineind)
+    fit = ARIMA(order=(1, 1, 1), seasonal_order=(0, 1, 1, 12), suppress_warnings=True).fit(
+        y=wineind
+    )
     _try_get_attrs(fit)
 
     # R code AIC result is ~3004
@@ -495,14 +555,13 @@ def test_with_seasonality():
 # Test that (as of v0.9.1) we can pickle a model, pickle it again, load both
 # and create predictions.
 def test_double_pickle():
-    arima = ARIMA(order=(0, 0, 0), trend='c', suppress_warnings=True)
+    arima = ARIMA(order=(0, 0, 0), trend="c", suppress_warnings=True)
     arima.fit(y)
 
     with tempfile.TemporaryDirectory() as tdir:
-
         # Now save it twice
-        file_a = os.path.join(tdir, 'first.pkl')
-        file_b = os.path.join(tdir, 'second.pkl')
+        file_a = os.path.join(tdir, "first.pkl")
+        file_b = os.path.join(tdir, "second.pkl")
 
         # No compression
         joblib.dump(arima, file_a)
@@ -526,7 +585,7 @@ def test_double_pickle():
 # Regression testing for unpickling an ARIMA from an older version
 def test_for_older_version():
     # Fit an ARIMA
-    arima = ARIMA(order=(0, 0, 0), trend='c', suppress_warnings=True)
+    arima = ARIMA(order=(0, 0, 0), trend="c", suppress_warnings=True)
 
     # There are three possibilities here:
     # 1. The model is serialized/deserialized BEFORE it has been fit.
@@ -538,23 +597,19 @@ def test_for_older_version():
     #
     # 3. The model is saved after the fit, and it's version does not match.
     #    We warn for this.
-    for case, do_fit, expect_warning in [(1, False, False),
-                                         (2, True, True),
-                                         (3, True, True)]:
-
+    for case, do_fit, expect_warning in [(1, False, False), (2, True, True), (3, True, True)]:
         # Only fit it if we should
         if do_fit:
             arima.fit(y)
 
         # If it's case 2, we remove the pkg_version_. If 3, we set it low
         if case == 2:
-            delattr(arima, 'pkg_version_')
+            delattr(arima, "pkg_version_")
         elif case == 3:
-            arima.pkg_version_ = '0.0.1'  # will always be < than current
+            arima.pkg_version_ = "0.0.1"  # will always be < than current
 
         with tempfile.TemporaryDirectory() as tdir:
-
-            pickle_file = os.path.join(tdir, 'model.pkl')
+            pickle_file = os.path.join(tdir, "model.pkl")
             joblib.dump(arima, pickle_file)
 
             # Now unpickle it and show that we get a warning (if expected)
@@ -570,22 +625,20 @@ def test_for_older_version():
 
 
 @pytest.mark.parametrize(
-    'order,seasonal', [
+    "order,seasonal",
+    [
         # ARMA
         pytest.param((1, 0, 0), (0, 0, 0, 0)),
-
         # ARIMA
         pytest.param((1, 1, 0), (0, 0, 0, 0)),
-
         # SARIMAX
-        pytest.param((1, 1, 0), (1, 0, 0, 12))
-    ])
+        pytest.param((1, 1, 0), (1, 0, 0, 12)),
+    ],
+)
 def test_with_intercept(order, seasonal):
     n_params = None
     for intercept in (False, True):
-        modl = ARIMA(order=order,
-                     seasonal_order=seasonal,
-                     with_intercept=intercept).fit(lynx)
+        modl = ARIMA(order=order, seasonal_order=seasonal, with_intercept=intercept).fit(lynx)
 
         if not intercept:  # first time
             n_params = modl.params().shape[0]
@@ -596,10 +649,23 @@ def test_with_intercept(order, seasonal):
 
 def test_to_dict_returns_dict():
     train = lynx[:90]
-    modl = auto_arima(train, start_p=1, start_q=1, start_P=1, start_Q=1,
-                      max_p=5, max_q=5, max_P=5, max_Q=5, seasonal=True,
-                      stepwise=True, suppress_warnings=True, D=10, max_D=10,
-                      error_action='ignore')
+    modl = auto_arima(
+        train,
+        start_p=1,
+        start_q=1,
+        start_P=1,
+        start_Q=1,
+        max_p=5,
+        max_q=5,
+        max_P=5,
+        max_Q=5,
+        seasonal=True,
+        stepwise=True,
+        suppress_warnings=True,
+        D=10,
+        max_D=10,
+        error_action="ignore",
+    )
     assert isinstance(modl.to_dict(), dict)
 
 
@@ -612,62 +678,142 @@ def test_to_dict_raises_attribute_error_on_unfit_model():
 # tgsmith61591: I really hate this test. But it ensures no drift, at least..
 def test_to_dict_is_accurate():
     train = lynx[:90]
-    modl = auto_arima(train, start_p=1, start_q=1, start_P=1, start_Q=1,
-                      max_p=5, max_q=5, max_P=5, max_Q=5, seasonal=True,
-                      stepwise=True, suppress_warnings=True, D=10, max_D=10,
-                      error_action='ignore')
+    modl = auto_arima(
+        train,
+        start_p=1,
+        start_q=1,
+        start_P=1,
+        start_Q=1,
+        max_p=5,
+        max_q=5,
+        max_P=5,
+        max_Q=5,
+        seasonal=True,
+        stepwise=True,
+        suppress_warnings=True,
+        D=10,
+        max_D=10,
+        error_action="ignore",
+    )
     expected = {
-        'pvalues': np.array([2.04752445e-03, 1.43710465e-61,
-                             1.29504002e-10, 5.22119887e-15]),
-        'resid': np.array(
-            [-1244.3973072, -302.89697033, -317.63342593, -304.57267897,
-             131.69413491, 956.15566697, 880.37459722, 2445.86460353,
-             -192.84268876, -177.1932523, -101.67727903, 384.05487582,
-             -304.52047818, -570.72748088, -497.48574217, 1286.86848903,
-             -400.22840217, 1017.55518758, -1157.37024626, -295.26213543,
-             104.79931827, -574.9867485, -588.49652697, -535.37707505,
-             -355.71298419, -164.06179682, 574.51900799, 15.45522718,
-             -1358.43416826, 120.42735893, -147.94038284, -685.64124874,
-             -365.18947057, -243.79704985, 317.79437422, 585.59553667,
-             34.70605783, -216.21587989, -692.53375089, 116.87379358,
-             -385.52193301, -540.95554558, -283.16913167, 438.72324376,
-             1078.63542578, 3198.50449405, -2167.76083646, -783.80525821,
-             1384.85947061, -95.84379882, -728.85293118, -35.68476597,
-             211.33538732, -379.91950618, 599.42290213, -839.30599392,
-             -201.97018962, -393.28468589, -376.16010796, -516.52280993,
-             -369.25037143, -362.25159504, 783.17714317, 207.96692746,
-             1744.27617969, -1573.37293342, -479.20751405, 473.18948601,
-             -503.20223823, -648.62384466, -671.12469446, -547.51554005,
-             -501.37768686, 274.76714385, 2073.1897026, -1063.19580729,
-             -1664.39957997, 882.73400004, -304.17429193, -422.60267409,
-             -292.34984241, -27.76090888, 1724.60937822, 3095.90133612,
-             -325.78549678, 110.95150845, 645.21273504, -135.91225092,
-             417.12710097, -118.27553718]),
-        'order': (2, 0, 0),
-        'seasonal_order': (0, 0, 0, 0),
-        'oob': np.nan,
-        'aic': 1487.8850037609368,
-        'aicc': 1488.3555919962284,
-        'bic': 1497.8842424422578,
-        'bse': np.array([2.26237893e+02, 6.97744631e-02,
-                         9.58556537e-02, 1.03225425e+05]),
-        'params': np.array([6.97548186e+02, 1.15522102e+00,
-                            -6.16136459e-01, 8.07374077e+05])
+        "pvalues": np.array([2.04752445e-03, 1.43710465e-61, 1.29504002e-10, 5.22119887e-15]),
+        "resid": np.array(
+            [
+                -1244.3973072,
+                -302.89697033,
+                -317.63342593,
+                -304.57267897,
+                131.69413491,
+                956.15566697,
+                880.37459722,
+                2445.86460353,
+                -192.84268876,
+                -177.1932523,
+                -101.67727903,
+                384.05487582,
+                -304.52047818,
+                -570.72748088,
+                -497.48574217,
+                1286.86848903,
+                -400.22840217,
+                1017.55518758,
+                -1157.37024626,
+                -295.26213543,
+                104.79931827,
+                -574.9867485,
+                -588.49652697,
+                -535.37707505,
+                -355.71298419,
+                -164.06179682,
+                574.51900799,
+                15.45522718,
+                -1358.43416826,
+                120.42735893,
+                -147.94038284,
+                -685.64124874,
+                -365.18947057,
+                -243.79704985,
+                317.79437422,
+                585.59553667,
+                34.70605783,
+                -216.21587989,
+                -692.53375089,
+                116.87379358,
+                -385.52193301,
+                -540.95554558,
+                -283.16913167,
+                438.72324376,
+                1078.63542578,
+                3198.50449405,
+                -2167.76083646,
+                -783.80525821,
+                1384.85947061,
+                -95.84379882,
+                -728.85293118,
+                -35.68476597,
+                211.33538732,
+                -379.91950618,
+                599.42290213,
+                -839.30599392,
+                -201.97018962,
+                -393.28468589,
+                -376.16010796,
+                -516.52280993,
+                -369.25037143,
+                -362.25159504,
+                783.17714317,
+                207.96692746,
+                1744.27617969,
+                -1573.37293342,
+                -479.20751405,
+                473.18948601,
+                -503.20223823,
+                -648.62384466,
+                -671.12469446,
+                -547.51554005,
+                -501.37768686,
+                274.76714385,
+                2073.1897026,
+                -1063.19580729,
+                -1664.39957997,
+                882.73400004,
+                -304.17429193,
+                -422.60267409,
+                -292.34984241,
+                -27.76090888,
+                1724.60937822,
+                3095.90133612,
+                -325.78549678,
+                110.95150845,
+                645.21273504,
+                -135.91225092,
+                417.12710097,
+                -118.27553718,
+            ]
+        ),
+        "order": (2, 0, 0),
+        "seasonal_order": (0, 0, 0, 0),
+        "oob": np.nan,
+        "aic": 1487.8850037609368,
+        "aicc": 1488.3555919962284,
+        "bic": 1497.8842424422578,
+        "bse": np.array([2.26237893e02, 6.97744631e-02, 9.58556537e-02, 1.03225425e05]),
+        "params": np.array([6.97548186e02, 1.15522102e00, -6.16136459e-01, 8.07374077e05]),
     }
 
     actual = modl.to_dict()
 
     assert actual.keys() == expected.keys()
-    assert_almost_equal(actual['pvalues'], expected['pvalues'], decimal=5)
-    assert_allclose(actual['resid'], expected['resid'], rtol=1e-3)
-    assert actual['order'] == expected['order']
-    assert actual['seasonal_order'] == expected['seasonal_order']
-    assert np.isnan(actual['oob'])
-    assert_almost_equal(actual['aic'], expected['aic'], decimal=5)
-    assert_almost_equal(actual['aicc'], expected['aicc'], decimal=5)
-    assert_almost_equal(actual['bic'], expected['bic'], decimal=5)
-    assert_allclose(actual['bse'], expected['bse'], rtol=1e-3)
-    assert_almost_equal(actual['params'], expected['params'], decimal=3)
+    assert_almost_equal(actual["pvalues"], expected["pvalues"], decimal=5)
+    assert_allclose(actual["resid"], expected["resid"], rtol=1e-3)
+    assert actual["order"] == expected["order"]
+    assert actual["seasonal_order"] == expected["seasonal_order"]
+    assert np.isnan(actual["oob"])
+    assert_almost_equal(actual["aic"], expected["aic"], decimal=5)
+    assert_almost_equal(actual["aicc"], expected["aicc"], decimal=5)
+    assert_almost_equal(actual["bic"], expected["bic"], decimal=5)
+    assert_allclose(actual["bse"], expected["bse"], rtol=1e-3)
+    assert_almost_equal(actual["params"], expected["params"], decimal=3)
 
 
 def test_serialization_methods_equal():
@@ -680,10 +826,10 @@ def test_serialization_methods_equal():
         joblib_preds = loaded.predict()
 
         pickle_path = os.path.join(dirname, "pickle.pkl")
-        with open(pickle_path, 'wb') as p:
+        with open(pickle_path, "wb") as p:
             pickle.dump(arima, p)
 
-        with open(pickle_path, 'rb') as p:
+        with open(pickle_path, "rb") as p:
             loaded = pickle.load(p)
         pickle_preds = loaded.predict()
 
@@ -691,16 +837,15 @@ def test_serialization_methods_equal():
 
 
 @pytest.mark.parametrize(
-    'model', [
+    "model",
+    [
         # ARMA
         ARIMA(order=(1, 0, 0)),
-
         # ARIMA
         ARIMA(order=(1, 1, 2)),
-
         # SARIMAX
-        ARIMA(order=(1, 1, 2), seasonal_order=(0, 1, 1, 12))
-    ]
+        ARIMA(order=(1, 1, 2), seasonal_order=(0, 1, 1, 12)),
+    ],
 )
 def test_issue_104(model):
     # Issue 104 shows that observations were not being updated appropriately.
@@ -728,13 +873,13 @@ def test_issue_286():
 
 
 @pytest.mark.parametrize(
-    'model', [
+    "model",
+    [
         # ARMA
         ARIMA(order=(1, 0, 0)),
-
         # ARIMA
-        ARIMA(order=(1, 1, 0))
-    ]
+        ARIMA(order=(1, 1, 0)),
+    ],
 )
 def test_update_1_iter(model):
     # The model should *barely* change if we update with one iter.

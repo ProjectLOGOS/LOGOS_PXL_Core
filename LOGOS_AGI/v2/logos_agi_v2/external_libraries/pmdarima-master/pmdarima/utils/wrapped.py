@@ -25,7 +25,7 @@ def inheritdoc(parent):
         The parent function or class that contains the sought-after
         docstring. If it doesn't have a docstring, this might behave
         in unexpected ways.
-        
+
     Examples
     --------
     >>> def a(x=1):

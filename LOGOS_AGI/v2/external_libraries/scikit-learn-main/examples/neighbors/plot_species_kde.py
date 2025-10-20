@@ -139,9 +139,7 @@ for i in range(2):
         m.drawcountries()
     else:
         print(" - plot coastlines from coverage")
-        plt.contour(
-            X, Y, land_reference, levels=[-9998], colors="k", linestyles="solid"
-        )
+        plt.contour(X, Y, land_reference, levels=[-9998], colors="k", linestyles="solid")
         plt.xticks([])
         plt.yticks([])
 

@@ -27,7 +27,11 @@ import json
 from datetime import datetime
 from collections import defaultdict, deque
 
-from ..unified_formalisms import UnifiedFormalisms
+try:
+    from logos_core.unified_formalisms import UnifiedFormalismValidator as UnifiedFormalisms
+except ImportError:
+    class UnifiedFormalisms:
+        def __init__(self): pass
 
 
 @dataclass
@@ -42,7 +46,7 @@ class ReasoningGap:
     suggested_iel: Optional[str] = None
     confidence: float = 0.0
     detected_at: datetime = field(default_factory=datetime.now)
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for serialization"""
         return {
@@ -58,7 +62,7 @@ class ReasoningGap:
         }
 
 
-@dataclass 
+@dataclass
 class GapAnalysisResult:
     """Results of gap analysis across the system"""
     total_gaps: int
@@ -72,26 +76,26 @@ class GapAnalysisResult:
 class GapDetector:
     """
     LOGOS Reasoning Gap Detector
-    
+
     Analyzes the completeness of reasoning chains and identifies gaps where
     new IELs might be beneficial. Operates safely within formal verification
     boundaries.
     """
-    
+
     def __init__(self):
         self.logger = self._setup_logging()
         self.unified_formalisms = UnifiedFormalisms()
-        
+
         # Gap detection configuration
         self.min_gap_confidence = 0.3
         self.max_gaps_per_scan = 100
         self.severity_threshold = 0.5
-        
+
         # Cache for performance
         self._premise_cache: Dict[str, Set[str]] = {}
         self._conclusion_cache: Dict[str, Set[str]] = {}
         self._rule_graph: Dict[str, List[str]] = defaultdict(list)
-        
+
     def _setup_logging(self) -> logging.Logger:
         """Configure gap detector logging"""
         logger = logging.getLogger("logos.gap_detector")
@@ -104,71 +108,71 @@ class GapDetector:
             logger.addHandler(handler)
             logger.setLevel(logging.INFO)
         return logger
-        
+
     def detect_reasoning_gaps(self) -> List[ReasoningGap]:
         """
         Main entry point for gap detection
-        
+
         Returns:
             List[ReasoningGap]: Identified reasoning gaps sorted by priority
         """
         self.logger.info("Starting reasoning gap detection")
-        
+
         try:
             gaps = []
-            
+
             # 1. Analyze IEL coverage gaps
             coverage_gaps = self._detect_coverage_gaps()
             gaps.extend(coverage_gaps)
-            
+
             # 2. Analyze inference chain completeness
             chain_gaps = self._detect_chain_gaps()
             gaps.extend(chain_gaps)
-            
+
             # 3. Analyze boundary gaps between domains
             boundary_gaps = self._detect_boundary_gaps()
             gaps.extend(boundary_gaps)
-            
+
             # 4. Analyze missing inference rules
             rule_gaps = self._detect_missing_rules()
             gaps.extend(rule_gaps)
-            
+
             # Filter and prioritize gaps
             filtered_gaps = self._filter_and_prioritize_gaps(gaps)
-            
+
             self.logger.info(f"Gap detection completed: {len(filtered_gaps)} gaps identified")
             return filtered_gaps
-            
+
         except Exception as e:
             self.logger.error(f"Gap detection failed: {e}")
             return []
-            
+
     def analyze_gap_coverage(self) -> GapAnalysisResult:
         """
         Comprehensive gap analysis with metrics
-        
+
         Returns:
             GapAnalysisResult: Detailed analysis of reasoning gap coverage
         """
         gaps = self.detect_reasoning_gaps()
-        
+
         # Group gaps by type and domain
         gaps_by_type = defaultdict(int)
         gaps_by_domain = defaultdict(int)
-        
+
         for gap in gaps:
             gaps_by_type[gap.gap_type] += 1
             gaps_by_domain[gap.domain] += 1
-            
+
         # Identify high priority gaps
         high_priority_gaps = [
-            gap for gap in gaps 
+            gap for gap in gaps
             if gap.severity >= self.severity_threshold and gap.confidence >= self.min_gap_confidence
         ]
-        
+
         # Compute coverage metrics
         coverage_metrics = self._compute_coverage_metrics(gaps)
-        
+
         return GapAnalysisResult(
             total_gaps=len(gaps),
             gaps_by_type=dict(gaps_by_type),
@@ -176,16 +180,16 @@ class GapDetector:
             high_priority_gaps=high_priority_gaps,
             coverage_metrics=coverage_metrics
         )
-        
+
     def _detect_coverage_gaps(self) -> List[ReasoningGap]:
         """Detect gaps in IEL coverage of reasoning domains"""
         gaps = []
-        
+
         try:
             # Get current IEL coverage
             iel_domains = self._get_iel_domains()
             pxl_requirements = self._get_pxl_requirements()
-            
+
             # Find uncovered requirements
             for domain, requirements in pxl_requirements.items():
                 if domain not in iel_domains:
@@ -199,7 +203,7 @@ class GapDetector:
                         confidence=0.9
                     )
                     gaps.append(gap)
-                    
+
                 elif len(iel_domains[domain]) < len(requirements):
                     # Partial coverage
                     missing_count = len(requirements) - len(iel_domains[domain])
@@ -213,24 +217,24 @@ class GapDetector:
                         confidence=0.7
                     )
                     gaps.append(gap)
-                    
+
         except Exception as e:
             self.logger.error(f"Coverage gap detection failed: {e}")
-            
+
         return gaps
-        
+
     def _detect_chain_gaps(self) -> List[ReasoningGap]:
         """Detect incomplete reasoning chains"""
         gaps = []
-        
+
         try:
             # Analyze proof dependency chains
             chains = self._build_proof_chains()
-            
+
             for chain_id, chain in chains.items():
                 if self._is_chain_incomplete(chain):
                     missing_steps = self._find_missing_chain_steps(chain)
-                    
+
                     for step in missing_steps:
                         gap = ReasoningGap(
                             gap_type="incomplete_chain",
@@ -242,20 +246,20 @@ class GapDetector:
                             confidence=step.get("confidence", 0.6)
                         )
                         gaps.append(gap)
-                        
+
         except Exception as e:
             self.logger.error(f"Chain gap detection failed: {e}")
-            
+
         return gaps
-        
+
     def _detect_boundary_gaps(self) -> List[ReasoningGap]:
         """Detect gaps at domain boundaries"""
         gaps = []
-        
+
         try:
             # Find domain interfaces
             domain_interfaces = self._identify_domain_interfaces()
-            
+
             for interface in domain_interfaces:
                 if self._has_boundary_gap(interface):
                     gap = ReasoningGap(
@@ -268,20 +272,20 @@ class GapDetector:
                         confidence=0.5
                     )
                     gaps.append(gap)
-                    
+
         except Exception as e:
             self.logger.error(f"Boundary gap detection failed: {e}")
-            
+
         return gaps
-        
+
     def _detect_missing_rules(self) -> List[ReasoningGap]:
         """Detect missing inference rules"""
         gaps = []
-        
+
         try:
             # Analyze inference patterns
             patterns = self._analyze_inference_patterns()
-            
+
             for pattern in patterns:
                 if self._is_rule_missing(pattern):
                     gap = ReasoningGap(
@@ -295,23 +299,23 @@ class GapDetector:
                         confidence=pattern.get("confidence", 0.4)
                     )
                     gaps.append(gap)
-                    
+
         except Exception as e:
             self.logger.error(f"Missing rule detection failed: {e}")
-            
+
         return gaps
-        
+
     def _filter_and_prioritize_gaps(self, gaps: List[ReasoningGap]) -> List[ReasoningGap]:
         """Filter and prioritize gaps by confidence and severity"""
         # Filter by minimum confidence
         filtered = [gap for gap in gaps if gap.confidence >= self.min_gap_confidence]
-        
+
         # Sort by priority (severity * confidence)
         filtered.sort(key=lambda g: g.severity * g.confidence, reverse=True)
-        
+
         # Limit to maximum gaps
         return filtered[:self.max_gaps_per_scan]
-        
+
     def _get_iel_domains(self) -> Dict[str, List[str]]:
         """Get current IEL coverage by domain"""
         try:
@@ -325,7 +329,7 @@ class GapDetector:
         except Exception as e:
             self.logger.error(f"IEL domain analysis failed: {e}")
             return {}
-            
+
     def _get_pxl_requirements(self) -> Dict[str, List[str]]:
         """Get PXL requirements by domain"""
         try:
@@ -340,7 +344,7 @@ class GapDetector:
         except Exception as e:
             self.logger.error(f"PXL requirement analysis failed: {e}")
             return {}
-            
+
     def _build_proof_chains(self) -> Dict[str, Dict[str, Any]]:
         """Build proof dependency chains for analysis"""
         # Placeholder implementation
@@ -356,11 +360,11 @@ class GapDetector:
                 "missing": []
             }
         }
-        
+
     def _is_chain_incomplete(self, chain: Dict[str, Any]) -> bool:
         """Check if a proof chain is incomplete"""
         return not chain.get("complete", True) or len(chain.get("missing", [])) > 0
-        
+
     def _find_missing_chain_steps(self, chain: Dict[str, Any]) -> List[Dict[str, Any]]:
         """Find missing steps in a proof chain"""
         missing = []
@@ -374,7 +378,7 @@ class GapDetector:
                 "domain": "unknown"
             })
         return missing
-        
+
     def _identify_domain_interfaces(self) -> List[Dict[str, str]]:
         """Identify interfaces between reasoning domains"""
         return [
@@ -382,12 +386,12 @@ class GapDetector:
             {"source": "epistemic_logic", "target": "deontic_logic"},
             {"source": "temporal_logic", "target": "epistemic_logic"}
         ]
-        
+
     def _has_boundary_gap(self, interface: Dict[str, str]) -> bool:
         """Check if there's a gap at domain boundary"""
         # Placeholder: check for missing bridging rules
         return interface["source"] == "modal_logic" and interface["target"] == "temporal_logic"
-        
+
     def _analyze_inference_patterns(self) -> List[Dict[str, Any]]:
         """Analyze common inference patterns"""
         return [
@@ -408,26 +412,26 @@ class GapDetector:
                 "confidence": 0.5
             }
         ]
-        
+
     def _is_rule_missing(self, pattern: Dict[str, Any]) -> bool:
         """Check if inference rule is missing for pattern"""
         # Placeholder: check against current IEL registry
         return pattern["confidence"] > 0.4 and pattern["importance"] > 0.5
-        
+
     def _generate_iel_suggestion(self, pattern: Dict[str, Any]) -> str:
         """Generate IEL suggestion for missing rule"""
         return f"IEL_{pattern['name']}: {' ∧ '.join(pattern['premises'])} → {pattern['conclusion']}"
-        
+
     def _compute_coverage_metrics(self, gaps: List[ReasoningGap]) -> Dict[str, float]:
         """Compute coverage metrics from gap analysis"""
         if not gaps:
             return {"overall_coverage": 1.0, "domain_coverage": 1.0, "rule_coverage": 1.0}
-            
+
         total_severity = sum(gap.severity for gap in gaps)
         max_possible_severity = len(gaps) * 1.0
-        
+
         coverage = 1.0 - (total_severity / max_possible_severity) if max_possible_severity > 0 else 1.0
-        
+
         return {
             "overall_coverage": coverage,
             "domain_coverage": max(0.0, 1.0 - len(set(gap.domain for gap in gaps)) * 0.1),

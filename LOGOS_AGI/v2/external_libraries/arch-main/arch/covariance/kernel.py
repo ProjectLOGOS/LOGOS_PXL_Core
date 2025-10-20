@@ -136,9 +136,7 @@ class CovarianceEstimate:
         return self._wrap(self._oss)
 
 
-def _cov_kernel(
-    df: int, k: int, num_weights: int, w: np.ndarray, x: np.ndarray
-) -> np.ndarray:
+def _cov_kernel(df: int, k: int, num_weights: int, w: np.ndarray, x: np.ndarray) -> np.ndarray:
     oss = np.zeros((k, k))
     for i in range(1, num_weights):
         oss += w[i] * (x[i:].T @ x[:-i]) / df
@@ -223,12 +221,7 @@ class CovarianceEstimator(ABC):
         else:
             _xw = ensure1d(np.asarray(weights), "weights", series=False).astype(float)
             xw = self._x_weights = cast(Float64Array2D, _xw[:, None])
-        if (
-            xw.shape[0] != self._x.shape[1]
-            or xw.shape[1] != 1
-            or np.any(xw < 0)
-            or np.all(xw == 0)
-        ):
+        if xw.shape[0] != self._x.shape[1] or xw.shape[1] != 1 or np.any(xw < 0) or np.all(xw == 0):
             raise ValueError(
                 f"weights must be a 1 by {self._x.shape[1]} (x.shape[1]) "
                 f"array with non-negative values where at least one value is "
@@ -452,9 +445,7 @@ class Bartlett(CovarianceEstimator, metaclass=AbstractDocStringInheritor):
 
     def _weights(self) -> Float64Array:
         bw = self.bandwidth
-        return ((bw + 1 - np.arange(int(bw + 1), dtype="double")) / (bw + 1)).astype(
-            float
-        )
+        return ((bw + 1 - np.arange(int(bw + 1), dtype="double")) / (bw + 1)).astype(float)
 
 
 _parzen_formula = """\

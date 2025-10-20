@@ -18,7 +18,7 @@ class AxiomaticProofEngine:
 
     def construct_proof(self, primary_claim: str, counter_claims: List[str]) -> Dict[str, Any]:
         self.logger.info(f"Attempting to construct proof for: '{primary_claim}'")
-        
+
         primary_expr, correspondence_map = self._formalize_claim(primary_claim)
         primary_validation = self._validate_coherence(primary_claim, primary_expr)
         primary_invariants_check = self._check_invariants()

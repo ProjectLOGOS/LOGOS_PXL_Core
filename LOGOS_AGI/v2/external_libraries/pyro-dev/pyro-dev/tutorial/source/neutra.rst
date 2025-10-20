@@ -9,4 +9,3 @@ __ github_
 
 .. literalinclude:: ../../examples/neutra.py
     :language: python
-

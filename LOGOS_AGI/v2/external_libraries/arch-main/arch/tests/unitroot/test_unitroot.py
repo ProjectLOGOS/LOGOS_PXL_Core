@@ -42,9 +42,7 @@ DECIMAL_1 = 1
 
 BASE_PATH = os.path.split(os.path.abspath(__file__))[0]
 DATA_PATH = os.path.join(BASE_PATH, "data")
-ZIVOT_ANDREWS_DATA = pd.read_csv(
-    os.path.join(DATA_PATH, "zivot-andrews.csv"), index_col=0
-)
+ZIVOT_ANDREWS_DATA = pd.read_csv(os.path.join(DATA_PATH, "zivot-andrews.csv"), index_col=0)
 
 # Time series to test the autobandwidth method against its implementation under R
 REAL_TIME_SERIES = [8, 9, 2, 4, 8, 9, 9, 4, 4, 9, 7, 1, 1, 9, 4, 9, 3]
@@ -685,9 +683,7 @@ def test_kpss_legacy():
         assert np.isfinite(KPSS(y, lags=-1).stat)
 
 
-@pytest.mark.parametrize(
-    "x", [np.ones((2, 10)), np.full((20, 2), np.nan), np.ones((20, 2))]
-)
+@pytest.mark.parametrize("x", [np.ones((2, 10)), np.full((20, 2), np.nan), np.ones((20, 2))])
 def test_rank_checker(x):
     assert _is_reduced_rank(x)
 

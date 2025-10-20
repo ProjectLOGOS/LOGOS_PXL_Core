@@ -97,9 +97,7 @@ connectivity = kneighbors_graph(X, n_neighbors=10, include_self=False)
 
 print("Compute structured hierarchical clustering...")
 st = time.time()
-ward = AgglomerativeClustering(
-    n_clusters=6, connectivity=connectivity, linkage="ward"
-).fit(X)
+ward = AgglomerativeClustering(n_clusters=6, connectivity=connectivity, linkage="ward").fit(X)
 elapsed_time = time.time() - st
 label = ward.labels_
 print(f"Elapsed time: {elapsed_time:.2f}s")

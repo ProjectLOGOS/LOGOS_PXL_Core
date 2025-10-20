@@ -82,9 +82,7 @@ def compute_score_for(X, y, imputer=None):
         estimator = make_pipeline(RobustScaler(), BayesianRidge())
     else:
         estimator = make_pipeline(RobustScaler(), imputer, BayesianRidge())
-    return cross_val_score(
-        estimator, X, y, scoring="neg_mean_squared_error", cv=N_SPLITS
-    )
+    return cross_val_score(estimator, X, y, scoring="neg_mean_squared_error", cv=N_SPLITS)
 
 
 # Estimate the score on the entire dataset, with no missing values
@@ -127,9 +125,7 @@ named_estimators = [
     ),
     (
         "Nystroem + Ridge",
-        make_pipeline(
-            Nystroem(kernel="polynomial", degree=2, random_state=0), Ridge(alpha=1e4)
-        ),
+        make_pipeline(Nystroem(kernel="polynomial", degree=2, random_state=0), Ridge(alpha=1e4)),
     ),
     (
         "k-NN",
@@ -147,9 +143,7 @@ for (name, impute_estimator), tol in zip(named_estimators, tolerances):
     score_iterative_imputer[name] = compute_score_for(
         X_missing,
         y_missing,
-        IterativeImputer(
-            random_state=0, estimator=impute_estimator, max_iter=40, tol=tol
-        ),
+        IterativeImputer(random_state=0, estimator=impute_estimator, max_iter=40, tol=tol),
     )
 
 scores = pd.concat(

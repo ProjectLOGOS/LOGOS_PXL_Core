@@ -252,12 +252,7 @@ class HARX(ARCHModel, metaclass=AbstractDocStringInheritor):
         y: ArrayLike | None = None,
         x: ArrayLike | ArrayLike2D | None = None,
         lags: (
-            int
-            | Sequence[int]
-            | Sequence[Sequence[int]]
-            | Int32Array
-            | Int64Array
-            | None
+            int | Sequence[int] | Sequence[Sequence[int]] | Int32Array | Int64Array | None
         ) = None,
         constant: bool = True,
         use_rotated: bool = False,
@@ -278,12 +273,7 @@ class HARX(ARCHModel, metaclass=AbstractDocStringInheritor):
         self._x_names: list[str] = []
         self._x_index: NDArray | pd.Index | None = None
         self.lags: (
-            int
-            | Sequence[int]
-            | Sequence[Sequence[int]]
-            | Int32Array
-            | Int64Array
-            | None
+            int | Sequence[int] | Sequence[Sequence[int]] | Int32Array | Int64Array | None
         ) = lags
         self._lags: Int64Array2D = np.empty((0, 0), dtype=int)
         self.constant: bool = constant
@@ -405,13 +395,9 @@ class HARX(ARCHModel, metaclass=AbstractDocStringInheritor):
         if initial_value is None:
             initial_value = 0.0
         elif not np.isscalar(initial_value):
-            initial_value = np.asarray(
-                ensure1d(initial_value, "initial_value"), dtype=float
-            )
+            initial_value = np.asarray(ensure1d(initial_value, "initial_value"), dtype=float)
             if initial_value.shape[0] != max_lag:
-                raise ValueError(
-                    f"initial_value has the wrong shape. Expected {max_lag} values"
-                )
+                raise ValueError(f"initial_value has the wrong shape. Expected {max_lag} values")
         y[:max_lag] = initial_value
         k_x = x.shape[1]
 
@@ -503,12 +489,7 @@ class HARX(ARCHModel, metaclass=AbstractDocStringInheritor):
         if x_arr.shape[0] != nobs + burn:
             raise ValueError("x must have nobs + burn rows")
         assert self._lags is not None
-        mc = (
-            int(self.constant)
-            + self._lags.shape[1]
-            + k_x
-            + self._extra_simulation_params
-        )
+        mc = int(self.constant) + self._lags.shape[1] + k_x + self._extra_simulation_params
         vc = self.volatility.num_params
         dc = self.distribution.num_params
         num_params = mc + vc + dc
@@ -558,9 +539,7 @@ class HARX(ARCHModel, metaclass=AbstractDocStringInheritor):
 
     def _check_specification(self) -> None:
         """Checks the specification for obvious errors"""
-        err_msg = (
-            "x must be nobs by n, where nobs is the same as the number of elements in y"
-        )
+        err_msg = "x must be nobs by n, where nobs is the same as the number of elements in y"
         if self._x_original is not None:
             if isinstance(self._x_original, pd.Series):
                 self._x = pd.DataFrame(self._x_original)
@@ -596,9 +575,7 @@ class HARX(ARCHModel, metaclass=AbstractDocStringInheritor):
 
         if lags.ndim == 1:
             if np.any(lags <= 0):
-                raise ValueError(
-                    "When using the 1-d format of lags, values must be positive"
-                )
+                raise ValueError("When using the 1-d format of lags, values must be positive")
             lags = np.unique(lags)
             temp = cast(Int64Array2D, np.array([lags, lags], dtype=int))
             if self.use_rotated:
@@ -671,9 +648,7 @@ class HARX(ARCHModel, metaclass=AbstractDocStringInheritor):
         else:
             reg_x = np.empty((nobs_orig, 0), dtype=np.double)
 
-        self.regressors = cast(
-            Float64Array2D, np.hstack((reg_constant, reg_lags, reg_x))
-        )
+        self.regressors = cast(Float64Array2D, np.hstack((reg_constant, reg_lags, reg_x)))
 
     def _r2(self, params: ArrayLike1D) -> float:
         y = self._fit_y
@@ -777,9 +752,7 @@ class HARX(ARCHModel, metaclass=AbstractDocStringInheritor):
         opt = OptimizeResult({"status": 0, "message": ""})
 
         if x.shape[1] > 0:
-            regression_params: Float64Array1D = cast(
-                Float64Array1D, np.linalg.pinv(x).dot(y)
-            )
+            regression_params: Float64Array1D = cast(Float64Array1D, np.linalg.pinv(x).dot(y))
             xpxi = np.linalg.inv(x.T.dot(x) / nobs)
             fitted = x.dot(regression_params)
         else:
@@ -874,9 +847,7 @@ class HARX(ARCHModel, metaclass=AbstractDocStringInheritor):
                     "construct forecasts."
                 )
         elif self._x is None:
-            raise TypeError(
-                "x is not None but the model does not contain any exogenous variables."
-            )
+            raise TypeError("x is not None but the model does not contain any exogenous variables.")
         assert self._x is not None
         nx = self._x.shape[1]
         if isinstance(x, Mapping):
@@ -1020,9 +991,7 @@ class HARX(ARCHModel, metaclass=AbstractDocStringInheritor):
         constant = arp[0] if self.constant else 0.0
         dynp = arp[int(self.constant) :]
         expected_x = self._reformat_forecast_x(x, horizon, start_index)
-        mean_fcast = _ar_forecast(
-            self._y, horizon, start_index, constant, dynp, expected_x, exog_p
-        )
+        mean_fcast = _ar_forecast(self._y, horizon, start_index, constant, dynp, expected_x, exog_p)
         # Compute total variance forecasts, which depend on model
         impulse = _ar_to_impulse(horizon, dynp)
         longrun_var_fcasts = var_fcasts.copy()
@@ -1064,9 +1033,7 @@ class HARX(ARCHModel, metaclass=AbstractDocStringInheritor):
                         + shocks[path_loc, :, j]
                     )
                     if expected_x.shape[0] > 0:
-                        mean_paths[path_loc, :, m + j] += (
-                            expected_x[:, path_loc, j].T @ exog_p
-                        )
+                        mean_paths[path_loc, :, m + j] += expected_x[:, path_loc, j].T @ exog_p
 
             mean_paths = mean_paths[:, :, m:]
 
@@ -1205,8 +1172,7 @@ class ConstantMean(HARX):
         """
         if initial_value is not None or x is not None:
             raise ValueError(
-                "Both initial value and x must be none when "
-                "simulating a constant mean process."
+                "Both initial value and x must be none when " "simulating a constant mean process."
             )
 
         mp, vp, dp = self._parse_parameters(params)
@@ -1356,8 +1322,7 @@ class ZeroMean(HARX):
         _params = ensure1d(params, "params", False).astype(float)
         if initial_value is not None or x is not None:
             raise ValueError(
-                "Both initial value and x must be none when "
-                "simulating a constant mean process."
+                "Both initial value and x must be none when " "simulating a constant mean process."
             )
 
         _, vp, dp = self._parse_parameters(_params)
@@ -1661,13 +1626,9 @@ class ARCHInMean(ARX):
         rescale: bool | None = None,
         form: int | float | Literal["log", "vol", "var"] = "vol",
     ) -> None:
-        super().__init__(
-            y, x, lags, constant, hold_back, volatility, distribution, rescale
-        )
+        super().__init__(y, x, lags, constant, hold_back, volatility, distribution, rescale)
         self._name = "ARCH-in-mean"
-        form_err = (
-            "form must be a floating point number of one of 'log', 'vol' or 'var', got "
-        )
+        form_err = "form must be a floating point number of one of 'log', 'vol' or 'var', got "
         if not isinstance(form, (str, int, float, np.floating, np.integer)):
             raise TypeError(form_err + f"{type(form)}")
         if isinstance(form, str):
@@ -1738,9 +1699,7 @@ class ARCHInMean(ARX):
         reindex: bool | None = None,
         x: dict[Label, ArrayLike] | ArrayLike | None = None,
     ) -> ARCHModelForecast:
-        raise NotImplementedError(
-            "forecasts are not implemented for (G)ARCH-in-mean models"
-        )
+        raise NotImplementedError("forecasts are not implemented for (G)ARCH-in-mean models")
 
     def resids(
         self,
@@ -1748,9 +1707,7 @@ class ARCHInMean(ARX):
         y: ArrayLike1D | None = None,
         regressors: ArrayLike2D | None = None,
     ) -> ArrayLike1D:
-        return super().resids(
-            cast(Float64Array1D, params[:-1]), y=y, regressors=regressors
-        )
+        return super().resids(cast(Float64Array1D, params[:-1]), y=y, regressors=regressors)
 
     def starting_values(self) -> Float64Array1D:
         return np.r_[super().starting_values(), 0.0]
@@ -1857,13 +1814,9 @@ class ARCHInMean(ARX):
         if initial_value is None:
             initial_value = 0.0
         elif not np.isscalar(initial_value):
-            initial_value = np.asarray(
-                ensure1d(initial_value, "initial_value"), dtype=float
-            )
+            initial_value = np.asarray(ensure1d(initial_value, "initial_value"), dtype=float)
             if initial_value.shape[0] != max_lag:
-                raise ValueError(
-                    f"initial_value has the wrong shape. Expected {max_lag} values"
-                )
+                raise ValueError(f"initial_value has the wrong shape. Expected {max_lag} values")
         y[:max_lag] = initial_value
         k_x = x.shape[1]
 
@@ -1890,9 +1843,7 @@ def arch_model(
         "Constant", "Zero", "LS", "AR", "ARX", "HAR", "HARX", "constant", "zero"
     ] = "Constant",
     lags: int | list[int] | Int32Array | Int64Array | None = 0,
-    vol: Literal[
-        "GARCH", "ARCH", "EGARCH", "FIGARCH", "APARCH", "HARCH", "FIGARCH"
-    ] = "GARCH",
+    vol: Literal["GARCH", "ARCH", "EGARCH", "FIGARCH", "APARCH", "HARCH", "FIGARCH"] = "GARCH",
     p: int | list[int] = 1,
     o: int = 0,
     q: int = 1,
@@ -2036,12 +1987,8 @@ def arch_model(
     else:  # mean == "zero"
         am = ZeroMean(y, hold_back=hold_back, rescale=rescale)
 
-    if vol in ("arch", "garch", "figarch", "egarch", "aparch") and not isinstance(
-        p, int
-    ):
-        raise TypeError(
-            "p must be a scalar int for all volatility processes except HARCH."
-        )
+    if vol in ("arch", "garch", "figarch", "egarch", "aparch") and not isinstance(p, int):
+        raise TypeError("p must be a scalar int for all volatility processes except HARCH.")
 
     if vol_model == "constant":
         v: VolatilityProcess = ConstantVariance()

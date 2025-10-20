@@ -268,9 +268,7 @@ def joint_degree_graph(joint_degrees, seed=None):
                             if k != l:
                                 _neighbor_switch(G, w, l_unsat, h_node_residual)
                             else:
-                                _neighbor_switch(
-                                    G, w, l_unsat, h_node_residual, avoid_node_id=v
-                                )
+                                _neighbor_switch(G, w, l_unsat, h_node_residual, avoid_node_id=v)
 
                         # add edge (v, w) and update data structures
                         G.add_edge(v, w)
@@ -353,9 +351,7 @@ def is_valid_directed_joint_degree(in_degrees, out_degrees, nkk):
     return all(S[s] / s[0] == V[s] for s in S)
 
 
-def _directed_neighbor_switch(
-    G, w, unsat, h_node_residual_out, chords, h_partition_in, partition
-):
+def _directed_neighbor_switch(G, w, unsat, h_node_residual_out, chords, h_partition_in, partition):
     """Releases one free stub for node w, while preserving joint degree in G.
 
     Parameters

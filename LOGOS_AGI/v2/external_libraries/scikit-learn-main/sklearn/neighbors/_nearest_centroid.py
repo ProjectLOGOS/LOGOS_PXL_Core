@@ -26,9 +26,7 @@ from ..utils.sparsefuncs import csc_median_axis_0
 from ..utils.validation import check_is_fitted, validate_data
 
 
-class NearestCentroid(
-    DiscriminantAnalysisPredictionMixin, ClassifierMixin, BaseEstimator
-):
+class NearestCentroid(DiscriminantAnalysisPredictionMixin, ClassifierMixin, BaseEstimator):
     """Nearest centroid classifier.
 
     Each class is represented by its centroid, with test samples classified to
@@ -173,9 +171,7 @@ class NearestCentroid(
         if self.metric == "manhattan":
             X, y = validate_data(self, X, y, accept_sparse=["csc"])
         else:
-            ensure_all_finite = (
-                "allow-nan" if get_tags(self).input_tags.allow_nan else True
-            )
+            ensure_all_finite = "allow-nan" if get_tags(self).input_tags.allow_nan else True
             X, y = validate_data(
                 self,
                 X,
@@ -193,8 +189,7 @@ class NearestCentroid(
         n_classes = classes.size
         if n_classes < 2:
             raise ValueError(
-                "The number of classes has to be greater than one; got %d class"
-                % (n_classes)
+                "The number of classes has to be greater than one; got %d class" % (n_classes)
             )
 
         if self.priors == "empirical":  # estimate priors from sample
@@ -260,9 +255,7 @@ class NearestCentroid(
         s = self.within_class_std_dev_ + np.median(self.within_class_std_dev_)
         mm = m.reshape(len(m), 1)  # Reshape to allow broadcasting.
         ms = mm * s
-        self.deviations_ = np.array(
-            (self.centroids_ - dataset_centroid_) / ms, copy=False
-        )
+        self.deviations_ = np.array((self.centroids_ - dataset_centroid_) / ms, copy=False)
         # Soft thresholding: if the deviation crosses 0 during shrinking,
         # it becomes zero.
         if self.shrink_threshold:
@@ -293,9 +286,7 @@ class NearestCentroid(
         check_is_fitted(self)
         if np.isclose(self.class_prior_, 1 / len(self.classes_)).all():
             # `validate_data` is called here since we are not calling `super()`
-            ensure_all_finite = (
-                "allow-nan" if get_tags(self).input_tags.allow_nan else True
-            )
+            ensure_all_finite = "allow-nan" if get_tags(self).input_tags.allow_nan else True
             X = validate_data(
                 self,
                 X,
@@ -303,9 +294,7 @@ class NearestCentroid(
                 accept_sparse="csr",
                 reset=False,
             )
-            return self.classes_[
-                pairwise_distances_argmin(X, self.centroids_, metric=self.metric)
-            ]
+            return self.classes_[pairwise_distances_argmin(X, self.centroids_, metric=self.metric)]
         else:
             return super().predict(X)
 
@@ -317,9 +306,7 @@ class NearestCentroid(
             self, X, copy=True, reset=False, accept_sparse="csr", dtype=np.float64
         )
 
-        discriminant_score = np.empty(
-            (X_normalized.shape[0], self.classes_.size), dtype=np.float64
-        )
+        discriminant_score = np.empty((X_normalized.shape[0], self.classes_.size), dtype=np.float64)
 
         mask = self.within_class_std_dev_ != 0
         X_normalized[:, mask] /= self.within_class_std_dev_[mask]

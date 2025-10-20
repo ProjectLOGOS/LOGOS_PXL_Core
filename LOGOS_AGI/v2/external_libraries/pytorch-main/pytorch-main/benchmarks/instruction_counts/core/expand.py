@@ -68,9 +68,7 @@ def _generate_torchscript_file(model_src: str, name: str) -> Optional[str]:
         f.write(model_src)
 
     # Import magic to actually load our function.
-    module_spec = importlib.util.spec_from_file_location(
-        f"torchscript__{name}", module_path
-    )
+    module_spec = importlib.util.spec_from_file_location(f"torchscript__{name}", module_path)
     assert module_spec is not None
     module = importlib.util.module_from_spec(module_spec)
     loader = module_spec.loader
@@ -80,9 +78,9 @@ def _generate_torchscript_file(model_src: str, name: str) -> Optional[str]:
 
     # And again, the type checker has no way of knowing that this line is valid.
     jit_model = module.jit_model  # type: ignore[attr-defined]
-    assert isinstance(jit_model, (torch.jit.ScriptFunction, torch.jit.ScriptModule)), (
-        f"Expected ScriptFunction or ScriptModule, got: {type(jit_model)}"
-    )
+    assert isinstance(
+        jit_model, (torch.jit.ScriptFunction, torch.jit.ScriptModule)
+    ), f"Expected ScriptFunction or ScriptModule, got: {type(jit_model)}"
     jit_model.save(artifact_path)  # type: ignore[call-arg]
 
     # Cleanup now that we have the actual serialized model.
@@ -209,9 +207,7 @@ def materialize(benchmarks: FlatIntermediateDefinition) -> FlatDefinition:
     for label, args in benchmarks.items():
         if isinstance(args, TimerArgs):
             # User provided an explicit TimerArgs, so no processing is necessary.
-            auto_labels = AutoLabels(
-                RuntimeMode.EXPLICIT, AutogradMode.EXPLICIT, args.language
-            )
+            auto_labels = AutoLabels(RuntimeMode.EXPLICIT, AutogradMode.EXPLICIT, args.language)
             results.append((label, auto_labels, args))
 
         else:
@@ -219,9 +215,7 @@ def materialize(benchmarks: FlatIntermediateDefinition) -> FlatDefinition:
 
             model_path: Optional[str] = None
             if args.py_model_setup and args.torchscript:
-                model_setup = (
-                    f"{args.py_model_setup}\njit_model = torch.jit.script(model)"
-                )
+                model_setup = f"{args.py_model_setup}\njit_model = torch.jit.script(model)"
 
                 # This is just for debugging. We just need a unique name for the
                 # model, but embedding the label makes debugging easier.

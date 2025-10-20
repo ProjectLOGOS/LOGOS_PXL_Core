@@ -88,15 +88,9 @@ CANARY_FLEET_SUFFIX = ".c"
 
 
 class Experiment(NamedTuple):
-    rollout_perc: float = (
-        0  # Percentage of workflows to experiment on when user is not opted-in.
-    )
-    all_branches: bool = (
-        False  # If True, the experiment is also enabled on the exception branches
-    )
-    default: bool = (
-        True  # If True, the experiment is enabled by default for all queries
-    )
+    rollout_perc: float = 0  # Percentage of workflows to experiment on when user is not opted-in.
+    all_branches: bool = False  # If True, the experiment is also enabled on the exception branches
+    default: bool = True  # If True, the experiment is enabled by default for all queries
 
     # Add more fields as needed
 
@@ -152,9 +146,7 @@ def set_github_output(key: str, value: str) -> None:
 
 
 def _str_comma_separated_to_set(value: str) -> frozenset[str]:
-    return frozenset(
-        filter(lambda itm: itm != "", map(str.strip, value.strip(" \n\t").split(",")))
-    )
+    return frozenset(filter(lambda itm: itm != "", map(str.strip, value.strip(" \n\t").split(","))))
 
 
 def parse_args() -> Any:
@@ -173,15 +165,9 @@ def parse_args() -> Any:
         required=True,
         help="GitHub repo where CI is running",
     )
-    parser.add_argument(
-        "--github-issue", type=int, required=True, help="GitHub issue number"
-    )
-    parser.add_argument(
-        "--github-actor", type=str, required=True, help="GitHub triggering_actor"
-    )
-    parser.add_argument(
-        "--github-issue-owner", type=str, required=True, help="GitHub issue owner"
-    )
+    parser.add_argument("--github-issue", type=int, required=True, help="GitHub issue number")
+    parser.add_argument("--github-actor", type=str, required=True, help="GitHub triggering_actor")
+    parser.add_argument("--github-issue-owner", type=str, required=True, help="GitHub issue owner")
     parser.add_argument(
         "--github-branch", type=str, required=True, help="Current GitHub branch or tag"
     )
@@ -240,11 +226,7 @@ def get_potential_pr_author(
 
     if username == "pytorch-bot[bot]" and ref_type == "tag":
         split_tag = ref_name.split("/")
-        if (
-            len(split_tag) == 3
-            and split_tag[0] == "ciflow"
-            and split_tag[2].isnumeric()
-        ):
+        if len(split_tag) == 3 and split_tag[0] == "ciflow" and split_tag[2].isnumeric():
             pr_number = split_tag[2]
             try:
                 repository = gh.get_repo(repo)
@@ -463,9 +445,7 @@ def get_runner_prefix(
                 )
                 continue
         elif not experiment_settings.default:
-            log.info(
-                f"Skipping experiment '{experiment_name}', as it is not a default experiment"
-            )
+            log.info(f"Skipping experiment '{experiment_name}', as it is not a default experiment")
             continue
 
         # Is any workflow_requestor opted out to this experiment?
@@ -490,9 +470,7 @@ def get_runner_prefix(
 
         enabled = False
         if opted_in_users:
-            log.info(
-                f"{', '.join(opted_in_users)} have opted into experiment {experiment_name}."
-            )
+            log.info(f"{', '.join(opted_in_users)} have opted into experiment {experiment_name}.")
             enabled = True
 
         elif experiment_settings.rollout_perc:
@@ -579,9 +557,7 @@ def get_labels(github_repo: str, github_token: str, pr_number: int) -> set[str]:
     Dynamically get the latest list of labels from the pull request
     """
     pr_info = get_pr_info(github_repo, github_token, pr_number)
-    return {
-        label.get("name") for label in pr_info.get("labels", []) if label.get("name")
-    }
+    return {label.get("name") for label in pr_info.get("labels", []) if label.get("name")}
 
 
 def main() -> None:

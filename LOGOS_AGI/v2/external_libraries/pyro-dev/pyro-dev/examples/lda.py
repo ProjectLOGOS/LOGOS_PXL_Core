@@ -42,9 +42,7 @@ logging.basicConfig(format="%(relativeCreated) 9d %(message)s", level=logging.IN
 def model(data=None, args=None, batch_size=None):
     # Globals.
     with pyro.plate("topics", args.num_topics):
-        topic_weights = pyro.sample(
-            "topic_weights", dist.Gamma(1.0 / args.num_topics, 1.0)
-        )
+        topic_weights = pyro.sample("topic_weights", dist.Gamma(1.0 / args.num_topics, 1.0))
         topic_words = pyro.sample(
             "topic_words", dist.Dirichlet(torch.ones(args.num_words) / args.num_words)
         )
@@ -66,9 +64,7 @@ def model(data=None, args=None, batch_size=None):
                 dist.Categorical(doc_topics),
                 infer={"enumerate": "parallel"},
             )
-            data = pyro.sample(
-                "doc_words", dist.Categorical(topic_words[word_topics]), obs=data
-            )
+            data = pyro.sample("doc_words", dist.Categorical(topic_words[word_topics]), obs=data)
 
     return topic_weights, topic_words, data
 
@@ -77,9 +73,7 @@ def model(data=None, args=None, batch_size=None):
 # multi-layer perceptron. We'll wrap the guide in an nn.Module.
 def make_predictor(args):
     layer_sizes = (
-        [args.num_words]
-        + [int(s) for s in args.layer_sizes.split("-")]
-        + [args.num_topics]
+        [args.num_words] + [int(s) for s in args.layer_sizes.split("-")] + [args.num_topics]
     )
     logging.info("Creating MLP with sizes {}".format(layer_sizes))
     layers = []
@@ -137,9 +131,7 @@ def main(args):
     guide = functools.partial(parametrized_guide, predictor)
     Elbo = JitTraceEnum_ELBO if args.jit else TraceEnum_ELBO
     elbo = Elbo(max_plate_nesting=2)
-    optim = ClippedAdam(
-        {"lr": args.learning_rate, "centered_variance": args.centered_variance}
-    )
+    optim = ClippedAdam({"lr": args.learning_rate, "centered_variance": args.centered_variance})
     svi = SVI(model, guide, optim, elbo)
     logging.info("Step\tLoss")
     for step in range(args.num_steps):
@@ -152,9 +144,7 @@ def main(args):
 
 if __name__ == "__main__":
     assert pyro.__version__.startswith("1.9.1")
-    parser = argparse.ArgumentParser(
-        description="Amortized Latent Dirichlet Allocation"
-    )
+    parser = argparse.ArgumentParser(description="Amortized Latent Dirichlet Allocation")
     parser.add_argument("-t", "--num-topics", default=8, type=int)
     parser.add_argument("-w", "--num-words", default=1024, type=int)
     parser.add_argument("-d", "--num-docs", default=1000, type=int)

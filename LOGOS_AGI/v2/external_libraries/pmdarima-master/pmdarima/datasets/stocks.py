@@ -2,7 +2,7 @@
 
 from ._base import _load_tarfile
 
-__all__ = ['load_msft']
+__all__ = ["load_msft"]
 
 
 def load_msft():

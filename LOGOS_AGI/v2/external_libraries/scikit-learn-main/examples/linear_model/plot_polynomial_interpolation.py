@@ -78,9 +78,7 @@ X_plot = x_plot[:, np.newaxis]
 # plot function
 lw = 2
 fig, ax = plt.subplots()
-ax.set_prop_cycle(
-    color=["black", "teal", "yellowgreen", "gold", "darkorange", "tomato"]
-)
+ax.set_prop_cycle(color=["black", "teal", "yellowgreen", "gold", "darkorange", "tomato"])
 ax.plot(x_plot, f(x_plot), linewidth=lw, label="ground truth")
 
 # plot training points
@@ -204,9 +202,7 @@ fig.show()
 # %% We again plot the underlying splines.
 fig, ax = plt.subplots()
 knots = np.linspace(0, 2 * np.pi, 4)
-splt = SplineTransformer(knots=knots[:, None], degree=3, extrapolation="periodic").fit(
-    X_train
-)
+splt = SplineTransformer(knots=knots[:, None], degree=3, extrapolation="periodic").fit(X_train)
 ax.plot(x_plot_ext, splt.transform(X_plot_ext))
 ax.legend(ax.lines, [f"spline {n}" for n in range(3)])
 plt.show()

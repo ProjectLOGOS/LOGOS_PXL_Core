@@ -25,31 +25,25 @@ from . import _auto_solvers as solvers
 from ..compat.numpy import DTYPE
 from ..compat import statsmodels as sm_compat
 
-__all__ = [
-    'auto_arima',
-    'AutoARIMA',
-    'StepwiseContext'
-]
+__all__ = ["auto_arima", "AutoARIMA", "StepwiseContext"]
 
 
 def _warn_for_deprecations(**kwargs):
     # TODO: remove these warnings in the future
-    for k in ('solver', 'transparams'):
+    for k in ("solver", "transparams"):
         if kwargs.pop(k, None):
-            warnings.warn('%s has been deprecated and will be removed in '
-                          'a future version.' % k,
-                          DeprecationWarning)
+            warnings.warn(
+                "%s has been deprecated and will be removed in " "a future version." % k,
+                DeprecationWarning,
+            )
     return kwargs
 
 
 class AutoARIMA(BaseARIMA):
     # Don't add the y, exog, etc. here since they are used in 'fit'
     __doc__ = _doc._AUTO_ARIMA_DOCSTR.format(
-        y="",
-        X="",
-        fit_args="",
-        return_valid_fits="",
-        sarimax_kwargs=_doc._KWARGS_DOCSTR)
+        y="", X="", fit_args="", return_valid_fits="", sarimax_kwargs=_doc._KWARGS_DOCSTR
+    )
 
     # todo: someday store defaults somewhere else for single source of truth
     def __init__(
@@ -70,31 +64,30 @@ class AutoARIMA(BaseARIMA):
         m=1,
         seasonal=True,
         stationary=False,
-        information_criterion='aic',
+        information_criterion="aic",
         alpha=0.05,
-        test='kpss',
-        seasonal_test='ocsb',
+        test="kpss",
+        seasonal_test="ocsb",
         stepwise=True,
         n_jobs=1,
         start_params=None,
         trend=None,
-        method='lbfgs',
+        method="lbfgs",
         maxiter=50,
         offset_test_args=None,
         seasonal_test_args=None,
         suppress_warnings=True,
-        error_action='trace',
+        error_action="trace",
         trace=False,
         random=False,
         random_state=None,
         n_fits=10,
         out_of_sample_size=0,
-        scoring='mse',
+        scoring="mse",
         scoring_args=None,
         with_intercept="auto",
         **kwargs,
     ):
-
         self.start_p = start_p
         self.d = d
         self.start_q = start_q
@@ -207,7 +200,8 @@ class AutoARIMA(BaseARIMA):
             scoring_args=self.scoring_args,
             with_intercept=self.with_intercept,
             sarimax_kwargs=sarimax_kwargs,
-            **fit_args)
+            **fit_args,
+        )
 
         return self
 
@@ -220,7 +214,7 @@ class AutoARIMA(BaseARIMA):
         dynamic=False,
         return_conf_int=False,
         alpha=0.05,
-        typ='levels',
+        typ="levels",
     ):
         return self.model_.predict_in_sample(
             X=X,
@@ -255,14 +249,9 @@ class AutoARIMA(BaseARIMA):
         maxiter=None,
         **kwargs,
     ):
-        return self.model_.update(
-            y,
-            X=X,
-            maxiter=maxiter,
-            **kwargs
-        )
+        return self.model_.update(y, X=X, maxiter=maxiter, **kwargs)
 
-    @if_has_delegate('model_')
+    @if_has_delegate("model_")
     def summary(self):
         """Get a summary of the ARIMA model"""
         return self.model_.summary()
@@ -311,15 +300,12 @@ class StepwiseContext(AbstractContext):
     def __init__(self, max_steps=None, max_dur=None):
         # TODO: do we want an upper limit on this?
         if max_steps is not None and not 0 < max_steps <= 1000:
-            raise ValueError('max_steps should be between 1 and 1000')
+            raise ValueError("max_steps should be between 1 and 1000")
 
         if max_dur is not None and max_dur <= 0:
-            raise ValueError('max_dur should be greater than zero')
+            raise ValueError("max_dur should be greater than zero")
 
-        kwargs = {
-            'max_steps': max_steps,
-            'max_dur': max_dur
-        }
+        kwargs = {"max_steps": max_steps, "max_dur": max_dur}
         super(StepwiseContext, self).__init__(**kwargs)
 
     # override base class member
@@ -346,33 +332,32 @@ def auto_arima(
     m=1,
     seasonal=True,
     stationary=False,
-    information_criterion='aic',
+    information_criterion="aic",
     alpha=0.05,
-    test='kpss',
-    seasonal_test='ocsb',
+    test="kpss",
+    seasonal_test="ocsb",
     stepwise=True,
     n_jobs=1,
     start_params=None,
     trend=None,
-    method='lbfgs',
+    method="lbfgs",
     maxiter=50,
     offset_test_args=None,
     seasonal_test_args=None,
     suppress_warnings=True,
-    error_action='trace',
+    error_action="trace",
     trace=False,
     random=False,
     random_state=None,
     n_fits=10,
     return_valid_fits=False,
     out_of_sample_size=0,
-    scoring='mse',
+    scoring="mse",
     scoring_args=None,
     with_intercept="auto",
     sarimax_kwargs=None,
     **fit_args,
 ):
-
     # NOTE: Doc is assigned BELOW this function
 
     # pop out the deprecated kwargs
@@ -398,22 +383,19 @@ def auto_arima(
     # validate d & D
     for _d, _max_d in ((d, max_d), (D, max_D)):
         if _max_d < 0:
-            raise ValueError('max_d & max_D must be positive integers (>= 0)')
+            raise ValueError("max_d & max_D must be positive integers (>= 0)")
         if _d is not None:
             if _d < 0:
-                raise ValueError('d & D must be None or a positive '
-                                 'integer (>= 0)')
+                raise ValueError("d & D must be None or a positive " "integer (>= 0)")
 
     # check on n_fits
     if random and n_fits < 0:
-        raise ValueError('n_fits must be a positive integer '
-                         'for a random search')
+        raise ValueError("n_fits must be a positive integer " "for a random search")
 
     # validate error action
-    actions = {'warn', 'raise', 'ignore', 'trace', None}
+    actions = {"warn", "raise", "ignore", "trace", None}
     if error_action not in actions:
-        raise ValueError('error_action must be one of %r, but got %r'
-                         % (actions, error_action))
+        raise ValueError("error_action must be one of %r, but got %r" % (actions, error_action))
 
     # start the timer after the parameter validation
     start = time.time()
@@ -441,8 +423,7 @@ def auto_arima(
 
     # check for constant data
     if is_constant(y):
-        warnings.warn('Input time-series is completely constant; '
-                      'returning a (0, 0, 0) ARMA.')
+        warnings.warn("Input time-series is completely constant; " "returning a (0, 0, 0) ARMA.")
 
         return _return_wrapper(
             solvers._sort_and_filter_fits(
@@ -452,15 +433,19 @@ def auto_arima(
                     order=(0, 0, 0),
                     seasonal_order=(0, 0, 0, 0),
                     with_intercept=val.auto_intercept(
-                        with_intercept, False),  # False for the constant model
-                    **sarimax_kwargs
+                        with_intercept, False
+                    ),  # False for the constant model
+                    **sarimax_kwargs,
                 )
             ),
-            return_valid_fits, start, trace)
+            return_valid_fits,
+            start,
+            trace,
+        )
 
-    information_criterion = \
-        val.check_information_criterion(information_criterion,
-                                        out_of_sample_size)
+    information_criterion = val.check_information_criterion(
+        information_criterion, out_of_sample_size
+    )
 
     # the R code handles this, but I don't think statsmodels
     # will even fit a model this small...
@@ -503,8 +488,7 @@ def auto_arima(
         D = max_P = max_Q = 0
     # m must be > 1 for nsdiffs
     elif D is None:  # we don't have a D yet and we need one (seasonal)
-        D = nsdiffs(xx, m=m, test=seasonal_test, max_D=max_D,
-                    **seasonal_test_args)
+        D = nsdiffs(xx, m=m, test=seasonal_test, max_D=max_D, **seasonal_test_args)
 
         if D > 0 and X is not None:
             diffxreg = diff(X, differences=D, lag=m)
@@ -520,13 +504,14 @@ def auto_arima(
 
     # If D was too big, we might have gotten rid of x altogether!
     if dx.shape[0] == 0:
-        raise ValueError("The seasonal differencing order, D=%i, was too "
-                         "large for your time series, and after differencing, "
-                         "there are no samples remaining in your data. "
-                         "Try a smaller value for D, or if you didn't set D "
-                         "to begin with, try setting it explicitly. This can "
-                         "also occur in seasonal settings when m is too large."
-                         % D)
+        raise ValueError(
+            "The seasonal differencing order, D=%i, was too "
+            "large for your time series, and after differencing, "
+            "there are no samples remaining in your data. "
+            "Try a smaller value for D, or if you didn't set D "
+            "to begin with, try setting it explicitly. This can "
+            "also occur in seasonal settings when m is too large." % D
+        )
 
     # difference the exogenous matrix
     if X is not None:
@@ -568,8 +553,7 @@ def auto_arima(
 
     # check for constant
     if is_constant(dx):
-        ssn = (0, 0, 0, 0) if not seasonal \
-            else sm_compat.check_seasonal_order((0, D, 0, m))
+        ssn = (0, 0, 0, 0) if not seasonal else sm_compat.check_seasonal_order((0, D, 0, m))
 
         # Include the benign `ifs`, because R's auto.arima does. R has some
         # more options to control that we don't, but this is more readable
@@ -587,8 +571,9 @@ def auto_arima(
             # TODO: if ever implemented in sm
             # fixed=mean(dx, na.rm = TRUE)
         else:
-            raise ValueError('data follow a simple polynomial and are not '
-                             'suitable for ARIMA modeling')
+            raise ValueError(
+                "data follow a simple polynomial and are not " "suitable for ARIMA modeling"
+            )
 
         # perfect regression
         return _return_wrapper(
@@ -599,10 +584,12 @@ def auto_arima(
                     order=(0, d, 0),
                     seasonal_order=ssn,
                     with_intercept=with_intercept,
-                    **sarimax_kwargs
+                    **sarimax_kwargs,
                 )
             ),
-            return_valid_fits, start, trace
+            return_valid_fits,
+            start,
+            trace,
         )
 
     # seasonality issues
@@ -620,17 +607,15 @@ def auto_arima(
     #   allowmean <- allowmean & (d + D) == 0
     #   constant <- allowdrift | allowmean
     # but we don't have `allowdrift` or `allowmean` so use just d and D
-    if with_intercept == 'auto':
+    if with_intercept == "auto":
         with_intercept = (d + D) in (0, 1)
 
     if not stepwise:
-
         # validate max_order
         if max_order is None:
             max_order = np.inf
         elif max_order < 0:
-            raise ValueError('max_order must be None or a positive '
-                             'integer (>= 0)')
+            raise ValueError("max_order must be None or a positive " "integer (>= 0)")
 
         search = solvers._RandomFitWrapper(
             y=y,
@@ -708,7 +693,7 @@ auto_arima.__doc__ = _doc._AUTO_ARIMA_DOCSTR.format(
     X=_doc._EXOG_DOCSTR,
     fit_args=_doc._FIT_ARGS_DOCSTR,
     sarimax_kwargs=_doc._SARIMAX_ARGS_DOCSTR,
-    return_valid_fits=_doc._VALID_FITS_DOCSTR
+    return_valid_fits=_doc._VALID_FITS_DOCSTR,
 )
 
 
@@ -735,7 +720,7 @@ def _return_wrapper(fits, return_all, start, trace):
 
     # whether to print the final runtime
     if trace:
-        print('Total fit time: %.3f seconds' % (time.time() - start))
+        print("Total fit time: %.3f seconds" % (time.time() - start))
 
     # which to return? if not all, then first index (assume sorted)
     if not return_all:

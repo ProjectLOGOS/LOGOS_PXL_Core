@@ -31,9 +31,13 @@ check_regex
             "check_same"
         ).check_next("check_next").check_count("check_count", 1).check_dag(
             "check_dag"
-        ).check_source_highlighted("check_source_highlighted").check_regex(
+        ).check_source_highlighted(
+            "check_source_highlighted"
+        ).check_regex(
             r"check_.+"
-        ).run(test_string)
+        ).run(
+            test_string
+        )
 
         FileCheck().run(
             """

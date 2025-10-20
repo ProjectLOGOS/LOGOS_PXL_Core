@@ -54,9 +54,7 @@ setting.
 
 from sklearn.datasets import fetch_openml
 
-electricity = fetch_openml(
-    name="electricity", version=1, as_frame=True, parser="pandas"
-)
+electricity = fetch_openml(name="electricity", version=1, as_frame=True, parser="pandas")
 df = electricity.frame
 
 # %%
@@ -125,12 +123,8 @@ for idx, max_iter in enumerate(max_iter_list):
     y_pred = hgbt.predict(X_test)
     prediction_df = df.loc[X_test.index].copy()
     prediction_df["y_pred"] = y_pred
-    average_pred = prediction_df.groupby(["day", "period"], observed=False)[
-        "y_pred"
-    ].mean()
-    average_pred.plot(
-        color=colors[idx + 1], label=f"max_iter={max_iter}", linewidth=2, ax=ax
-    )
+    average_pred = prediction_df.groupby(["day", "period"], observed=False)["y_pred"].mean()
+    average_pred.plot(color=colors[idx + 1], label=f"max_iter={max_iter}", linewidth=2, ax=ax)
 
 ax.set(
     title="Predicted average energy transfer during the week",
@@ -359,9 +353,7 @@ monotonic_cst = {
     "vicdemand": -1,
     "vicprice": -1,
 }
-hgbt_no_cst = HistGradientBoostingRegressor(
-    categorical_features=None, random_state=42
-).fit(X, y)
+hgbt_no_cst = HistGradientBoostingRegressor(categorical_features=None, random_state=42).fit(X, y)
 hgbt_cst = HistGradientBoostingRegressor(
     monotonic_cst=monotonic_cst, categorical_features=None, random_state=42
 ).fit(X, y)

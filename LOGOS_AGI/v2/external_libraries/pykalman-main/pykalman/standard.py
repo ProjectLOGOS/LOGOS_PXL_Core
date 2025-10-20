@@ -43,8 +43,7 @@ def _arg_or_default(arg, default, dim, name):
         result = arg
     if len(result.shape) > dim:
         raise ValueError(
-            ("%s is not constant for all time." + "  You must specify it manually.")
-            % (name,)
+            ("%s is not constant for all time." + "  You must specify it manually.") % (name,)
         )
     return result
 
@@ -115,8 +114,7 @@ def _last_dims(X, t, ndims=2):
         return X
     else:
         raise ValueError(
-            ("X only has %d dimensions when %d" + " or more are required")
-            % (len(X.shape), ndims)
+            ("X only has %d dimensions when %d" + " or more are required") % (len(X.shape), ndims)
         )
 
 
@@ -218,9 +216,7 @@ def _filter_predict(
         covariance of state at time t+1 given observations from times
         [0...t]
     """
-    predicted_state_mean = (
-        np.dot(transition_matrix, current_state_mean) + transition_offset
-    )
+    predicted_state_mean = np.dot(transition_matrix, current_state_mean) + transition_offset
     predicted_state_covariance = (
         np.dot(transition_matrix, np.dot(current_state_covariance, transition_matrix.T))
         + transition_covariance
@@ -698,9 +694,7 @@ def _em(
     if "transition_offsets" in given:
         transition_offset = given["transition_offsets"]
     else:
-        transition_offset = _em_transition_offset(
-            transition_matrix, smoothed_state_means
-        )
+        transition_offset = _em_transition_offset(transition_matrix, smoothed_state_means)
 
     if "observation_offsets" in given:
         observation_offset = given["observation_offsets"]
@@ -742,9 +736,7 @@ def _em_observation_matrix(
     for t in range(n_timesteps):
         if not np.any(np.ma.getmask(observations[t])):
             observation_offset = _last_dims(observation_offsets, t, ndims=1)
-            res1 += np.outer(
-                observations[t] - observation_offset, smoothed_state_means[t]
-            )
+            res1 += np.outer(observations[t] - observation_offset, smoothed_state_means[t])
             res2 += smoothed_state_covariances[t] + np.outer(
                 smoothed_state_means[t], smoothed_state_means[t]
             )
@@ -1147,9 +1139,7 @@ class KalmanFilter:
 
         # logic for selecting initial state
         if initial_state is None:
-            initial_state = rng.multivariate_normal(
-                initial_state_mean, initial_state_covariance
-            )
+            initial_state = rng.multivariate_normal(initial_state_mean, initial_state_covariance)
 
         # logic for generating samples
         for t in range(n_timesteps):
@@ -1470,8 +1460,7 @@ class KalmanFilter:
         for k, v in get_params(self).items():
             if k in DIM and (k not in given) and len(v.shape) != DIM[k]:
                 warn_str = (
-                    "{0} has {1} dimensions now; after fitting, "
-                    + "it will have dimension {2}"
+                    "{0} has {1} dimensions now; after fitting, " + "it will have dimension {2}"
                 ).format(k, len(v.shape), DIM[k])
                 warnings.warn(warn_str, stacklevel=2)
 
@@ -1505,9 +1494,7 @@ class KalmanFilter:
                 predicted_state_means,
                 predicted_state_covariances,
             )
-            sigma_pair_smooth = _smooth_pair(
-                smoothed_state_covariances, kalman_smoothing_gains
-            )
+            sigma_pair_smooth = _smooth_pair(smoothed_state_covariances, kalman_smoothing_gains)
             (
                 self.transition_matrices,
                 self.observation_matrices,

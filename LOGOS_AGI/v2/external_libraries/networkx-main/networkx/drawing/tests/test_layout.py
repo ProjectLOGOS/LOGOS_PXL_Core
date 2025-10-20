@@ -388,12 +388,8 @@ class TestLayout:
 
         # return near-equidistant points after the first value if set to true
         pos_equidistant = np.array(list(nx.spiral_layout(G, equidistant=True).values()))
-        distances_equidistant = np.linalg.norm(
-            pos_equidistant[:-1] - pos_equidistant[1:], axis=1
-        )
-        assert np.allclose(
-            distances_equidistant[1:], distances_equidistant[-1], atol=0.01
-        )
+        distances_equidistant = np.linalg.norm(pos_equidistant[:-1] - pos_equidistant[1:], axis=1)
+        assert np.allclose(distances_equidistant[1:], distances_equidistant[-1], atol=0.01)
 
     def test_spiral_layout_equidistant(self):
         G = nx.path_graph(10)
@@ -604,9 +600,7 @@ def test_layouts_negative_dim(layout):
         layout(G, dim=-1)
 
 
-@pytest.mark.parametrize(
-    ("num_nodes", "expected_method"), [(100, "force"), (501, "energy")]
-)
+@pytest.mark.parametrize(("num_nodes", "expected_method"), [(100, "force"), (501, "energy")])
 @pytest.mark.parametrize(
     "extra_layout_kwargs",
     [
@@ -615,17 +609,13 @@ def test_layouts_negative_dim(layout):
         {"dim": 3},  # 3D layout
     ],
 )
-def test_spring_layout_graph_size_heuristic(
-    num_nodes, expected_method, extra_layout_kwargs
-):
+def test_spring_layout_graph_size_heuristic(num_nodes, expected_method, extra_layout_kwargs):
     """Expect 'force' layout for n < 500 and 'energy' for n >= 500"""
     G = nx.cycle_graph(num_nodes)
     # Seeded layout to compare explicit method to one determined by "auto"
     seed = 163674319
 
     # Compare explicit method to auto method
-    expected = nx.spring_layout(
-        G, method=expected_method, seed=seed, **extra_layout_kwargs
-    )
+    expected = nx.spring_layout(G, method=expected_method, seed=seed, **extra_layout_kwargs)
     actual = nx.spring_layout(G, method="auto", seed=seed, **extra_layout_kwargs)
     assert np.allclose(list(expected.values()), list(actual.values()), atol=1e-5)

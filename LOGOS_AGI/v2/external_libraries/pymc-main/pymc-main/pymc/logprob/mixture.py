@@ -497,9 +497,12 @@ def split_valued_ifelse(fgraph, node):
         key=lambda x: max(toposort.index(x[0].owner), toposort.index(x[1].owner)),
     )
 
-    (first_then, first_else, first_value_var, first_valued_out), *remaining_vars = (
-        then_else_valued_outputs
-    )
+    (
+        first_then,
+        first_else,
+        first_value_var,
+        first_valued_out,
+    ), *remaining_vars = then_else_valued_outputs
     first_ifelse = ifelse(cond, first_then, first_else)
     first_valued_ifelse = valued_rv(first_ifelse, first_value_var)
     replacements = {first_valued_out: first_valued_ifelse}

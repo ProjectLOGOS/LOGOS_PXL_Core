@@ -6,6 +6,3 @@ LEDA
 
    read_leda
    parse_leda
-
-
-

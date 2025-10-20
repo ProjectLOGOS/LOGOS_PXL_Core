@@ -35,8 +35,7 @@ LIBTORCH_NAMESPACE_LIST = (
 
 def _apply_libtorch_symbols(symbols):
     return [
-        re.compile(f"{x}.*{y}")
-        for (x, y) in itertools.product(LIBTORCH_NAMESPACE_LIST, symbols)
+        re.compile(f"{x}.*{y}") for (x, y) in itertools.product(LIBTORCH_NAMESPACE_LIST, symbols)
     ]
 
 
@@ -54,9 +53,7 @@ def get_symbols(lib: str) -> list[tuple[str, str, str]]:
 
 
 def grep_symbols(lib: str, patterns: list[Any]) -> list[str]:
-    def _grep_symbols(
-        symbols: list[tuple[str, str, str]], patterns: list[Any]
-    ) -> list[str]:
+    def _grep_symbols(symbols: list[tuple[str, str, str]], patterns: list[Any]) -> list[str]:
         rc = []
         for _s_addr, _s_type, s_name in symbols:
             for pattern in patterns:

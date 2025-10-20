@@ -11,25 +11,39 @@ def unroll(num_unrolls, IndexType, InType, OutType):
         pred = "svAll" if is_main else "pg"
         if InType == "float":
             for i in range(num_unrolls):
-                code.append(f"        output = svmla_x({pred}, output, svld1(svAll, &ip{i}[k]), wgt{i});")
+                code.append(
+                    f"        output = svmla_x({pred}, output, svld1(svAll, &ip{i}[k]), wgt{i});"
+                )
         elif InType == "at::Half":
             for i in range(num_unrolls):
-                code.append(f"        auto input{i} = svcvt_f32_x({pred}, svreinterpret_f16(\n"
-                f"          svld1uh_u32({pred}, reinterpret_cast<const uint16_t*>(&ip{i}[k]))));")
+                code.append(
+                    f"        auto input{i} = svcvt_f32_x({pred}, svreinterpret_f16(\n"
+                    f"          svld1uh_u32({pred}, reinterpret_cast<const uint16_t*>(&ip{i}[k]))));"
+                )
             for i in range(num_unrolls):
-                code.append(f"        output = svmla_x({pred}, output, input{i}, wgt{i});")
+                code.append(
+                    f"        output = svmla_x({pred}, output, input{i}, wgt{i});"
+                )
         elif InType == "at::BFloat16":
             for i in range(num_unrolls):
-                code.append(f"        auto input{i} = svreinterpret_f32(svlsl_x({pred},\n"
-                f"          svld1uh_u32({pred}, reinterpret_cast<const uint16_t*>(&ip{i}[k])), 16));")
+                code.append(
+                    f"        auto input{i} = svreinterpret_f32(svlsl_x({pred},\n"
+                    f"          svld1uh_u32({pred}, reinterpret_cast<const uint16_t*>(&ip{i}[k])), 16));"
+                )
             for i in range(num_unrolls):
-                code.append(f"        output = svmla_x({pred}, output, input{i}, wgt{i});")
+                code.append(
+                    f"        output = svmla_x({pred}, output, input{i}, wgt{i});"
+                )
         elif InType == "uint8_t":
             code.append(f"        output = svadd_x({pred}, output, bio);")
             for i in range(num_unrolls):
-                code.append(f"        auto input{i} = svcvt_f32_x({pred}, svld1ub_u32({pred}, &ip{i}[k]));")
+                code.append(
+                    f"        auto input{i} = svcvt_f32_x({pred}, svld1ub_u32({pred}, &ip{i}[k]));"
+                )
             for i in range(num_unrolls):
-                code.append(f"        output = svmla_x({pred}, output, input{i}, wgt{i});")
+                code.append(
+                    f"        output = svmla_x({pred}, output, input{i}, wgt{i});"
+                )
         else:
             raise ValueError(f'Unknown datatype "{InType}"')
 
@@ -64,7 +78,9 @@ def unroll(num_unrolls, IndexType, InType, OutType):
 
     code.append("      if (weights) {")
     for i in range(num_unrolls):
-        code.append(f"        wgt{i} = weights[IS_WEIGHT_POSITIONAL ? (j + {i} - start_offset) : pos + {i}];")
+        code.append(
+            f"        wgt{i} = weights[IS_WEIGHT_POSITIONAL ? (j + {i} - start_offset) : pos + {i}];"
+        )
     code.append("      }")
     if InType == "uint8_t":
         code.append("      if (scale_bias) {")
@@ -103,6 +119,7 @@ def unroll(num_unrolls, IndexType, InType, OutType):
     code.append("    }")
 
     return code
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -198,12 +215,16 @@ def main():
         code.append("      svbool_t pg;")
         code.append("      int64_t j = 0;")
         code.append("      while (j + vLen - 1 < block_size) {")
-        code.append("        svst1(svAll, &op[j], svmul_x(svAll, svld1(svAll, &op[j]), len_inv));")
+        code.append(
+            "        svst1(svAll, &op[j], svmul_x(svAll, svld1(svAll, &op[j]), len_inv));"
+        )
         code.append("        j += vLen;")
         code.append("      }")
         code.append("      if (j < block_size) {")
         code.append("        pg = svwhilelt_b32_s64(j, block_size);")
-        code.append("        svst1(pg, &op[j], svmul_x(pg, svld1(pg, &op[j]), len_inv));")
+        code.append(
+            "        svst1(pg, &op[j], svmul_x(pg, svld1(pg, &op[j]), len_inv));"
+        )
         code.append("      }")
         code.append("    }")
 

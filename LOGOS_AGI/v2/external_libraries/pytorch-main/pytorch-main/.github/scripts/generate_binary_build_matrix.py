@@ -124,9 +124,7 @@ def get_nccl_wheel_version(arch_version: str) -> str:
     requirements = map(
         str.strip, re.split("[;|]", PYTORCH_EXTRA_INSTALL_REQUIREMENTS[arch_version])
     )
-    return next(x for x in requirements if x.startswith("nvidia-nccl-cu")).split("==")[
-        1
-    ]
+    return next(x for x in requirements if x.startswith("nvidia-nccl-cu")).split("==")[1]
 
 
 def read_nccl_pin(arch_version: str) -> str:
@@ -245,9 +243,7 @@ def generate_libtorch_matrix(
                 {
                     "gpu_arch_type": gpu_arch_type,
                     "gpu_arch_version": gpu_arch_version,
-                    "desired_cuda": translate_desired_cuda(
-                        gpu_arch_type, gpu_arch_version
-                    ),
+                    "desired_cuda": translate_desired_cuda(gpu_arch_type, gpu_arch_version),
                     "libtorch_config": release_type,
                     "libtorch_variant": libtorch_variant,
                     "container_image": (
@@ -340,12 +336,10 @@ def generate_wheels_matrix(
                         "gpu_arch_version": gpu_arch_version,
                         "desired_cuda": desired_cuda,
                         "use_split_build": "True" if use_split_build else "False",
-                        "container_image": WHEEL_CONTAINER_IMAGES[arch_version].split(
+                        "container_image": WHEEL_CONTAINER_IMAGES[arch_version].split(":")[0],
+                        "container_image_tag_prefix": WHEEL_CONTAINER_IMAGES[arch_version].split(
                             ":"
-                        )[0],
-                        "container_image_tag_prefix": WHEEL_CONTAINER_IMAGES[
-                            arch_version
-                        ].split(":")[1],
+                        )[1],
                         "package_type": package_type,
                         "pytorch_extra_install_requirements": (
                             PYTORCH_EXTRA_INSTALL_REQUIREMENTS[
@@ -369,13 +363,9 @@ def generate_wheels_matrix(
                             "python_version": python_version,
                             "gpu_arch_type": gpu_arch_type,
                             "gpu_arch_version": gpu_arch_version,
-                            "desired_cuda": translate_desired_cuda(
-                                gpu_arch_type, gpu_arch_version
-                            ),
+                            "desired_cuda": translate_desired_cuda(gpu_arch_type, gpu_arch_version),
                             "use_split_build": "True" if use_split_build else "False",
-                            "container_image": WHEEL_CONTAINER_IMAGES[
-                                arch_version
-                            ].split(":")[0],
+                            "container_image": WHEEL_CONTAINER_IMAGES[arch_version].split(":")[0],
                             "container_image_tag_prefix": WHEEL_CONTAINER_IMAGES[
                                 arch_version
                             ].split(":")[1],
@@ -392,16 +382,12 @@ def generate_wheels_matrix(
                         "python_version": python_version,
                         "gpu_arch_type": gpu_arch_type,
                         "gpu_arch_version": gpu_arch_version,
-                        "desired_cuda": translate_desired_cuda(
-                            gpu_arch_type, gpu_arch_version
-                        ),
+                        "desired_cuda": translate_desired_cuda(gpu_arch_type, gpu_arch_version),
                         "use_split_build": "True" if use_split_build else "False",
-                        "container_image": WHEEL_CONTAINER_IMAGES[arch_version].split(
+                        "container_image": WHEEL_CONTAINER_IMAGES[arch_version].split(":")[0],
+                        "container_image_tag_prefix": WHEEL_CONTAINER_IMAGES[arch_version].split(
                             ":"
-                        )[0],
-                        "container_image_tag_prefix": WHEEL_CONTAINER_IMAGES[
-                            arch_version
-                        ].split(":")[1],
+                        )[1],
                         "package_type": package_type,
                         "build_name": f"{package_type}-py{python_version}-{gpu_arch_type}{gpu_arch_version}".replace(
                             ".", "_"

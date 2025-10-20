@@ -249,9 +249,7 @@ class _CommonCointegrationResults:
             data.append(txt_row)
 
         header = ["Parameter", "Std. Err.", "T-stat", "P-value", "Lower CI", "Upper CI"]
-        table = SimpleTable(
-            data, stubs=stubs, txt_fmt=fmt_params, headers=header, title=title
-        )
+        table = SimpleTable(data, stubs=stubs, txt_fmt=fmt_params, headers=header, title=title)
         return table
 
     def summary(self) -> Summary:
@@ -565,13 +563,9 @@ class DynamicOLS:
         self._lags = int(self._lags) if self._lags is not None else self._lags
 
         if self._common and self._leads != self._lags:
-            raise ValueError(
-                "common is specified but leads and lags have different values"
-            )
+            raise ValueError("common is specified but leads and lags have different values")
         if self._common and self._max_lead != self._max_lag:
-            raise ValueError(
-                "common is specified but max_lead and max_lag have different values"
-            )
+            raise ValueError("common is specified but max_lead and max_lag have different values")
         max_ll = self._max_lead_lag()
 
         obs_remaining = self._y.shape[0] - 1
@@ -584,9 +578,7 @@ class DynamicOLS:
                 "cannot be estimated."
             )
 
-    def _format_variables(
-        self, leads: int, lags: int
-    ) -> tuple[pd.DataFrame, pd.DataFrame]:
+    def _format_variables(self, leads: int, lags: int) -> tuple[pd.DataFrame, pd.DataFrame]:
         """Format the variables for the regression"""
         x = self._x
         y = self._y_df
@@ -596,9 +588,7 @@ class DynamicOLS:
         for lag in range(-lags, leads + 1):
             lag_data = delta_x.shift(-lag)
             typ = "LAG" if lag < 0 else "LEAD"
-            lag_data.columns = pd.Index(
-                [f"D.{c}.{typ}{abs(lag)}" for c in lag_data.columns]
-            )
+            lag_data.columns = pd.Index([f"D.{c}.{typ}{abs(lag)}" for c in lag_data.columns])
             if lag == 0:
                 lag_data.columns = pd.Index([f"D.{c}" for c in lag_data.columns])
             data.append(lag_data)
@@ -680,9 +670,7 @@ class DynamicOLS:
 
     def fit(
         self,
-        cov_type: Literal[
-            "unadjusted", "homoskedastic", "robust", "kernel"
-        ] = "unadjusted",
+        cov_type: Literal["unadjusted", "homoskedastic", "robust", "kernel"] = "unadjusted",
         kernel: str = "bartlett",
         bandwidth: int | None = None,
         force_int: bool = False,
@@ -757,12 +745,8 @@ class DynamicOLS:
         mod = OLS(lhs, rhs)
         res = mod.fit()
         coeffs = np.asarray(res.params)
-        resid = pd.Series(
-            lhs.squeeze() - np.asarray(rhs @ coeffs).squeeze(), name="resid"
-        )
-        cov, est = self._cov(
-            cov_type, kernel, bandwidth, force_int, df_adjust, rhs, resid
-        )
+        resid = pd.Series(lhs.squeeze() - np.asarray(rhs @ coeffs).squeeze(), name="resid")
+        cov, est = self._cov(cov_type, kernel, bandwidth, force_int, df_adjust, rhs, resid)
         params = Series(np.squeeze(coeffs), index=rhs.columns, name="params")
         num_x = self._x.shape[1]
         return DynamicOLSResults(

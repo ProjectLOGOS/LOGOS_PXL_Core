@@ -60,9 +60,7 @@ def test_newton_step(batch_shape, trust_radius, dims):
     )
     actual_eye = torch.bmm(flat_cov, flat_hessian)
     expected_eye = torch.eye(dims).expand(actual_eye.shape)
-    assert_equal(
-        actual_eye, expected_eye, prec=1e-4, msg="bad covariance {}".format(actual_eye)
-    )
+    assert_equal(actual_eye, expected_eye, prec=1e-4, msg="bad covariance {}".format(actual_eye))
 
     # check gradients
     for i in itertools.product(*map(range, mode.shape)):

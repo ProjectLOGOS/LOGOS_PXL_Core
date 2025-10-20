@@ -12,10 +12,9 @@ y = pm.datasets.load_wineind()
 
 
 @pytest.mark.parametrize(
-    'wrapped_func,native_func', [
-        pytest.param(sm.tsa.stattools.acf, acf),
-        pytest.param(sm.tsa.stattools.pacf, pacf)
-    ])
+    "wrapped_func,native_func",
+    [pytest.param(sm.tsa.stattools.acf, acf), pytest.param(sm.tsa.stattools.pacf, pacf)],
+)
 def test_wrapped_functions(wrapped_func, native_func):
     sm_res = wrapped_func(y)  # type: np.ndarray
     pm_res = native_func(y)

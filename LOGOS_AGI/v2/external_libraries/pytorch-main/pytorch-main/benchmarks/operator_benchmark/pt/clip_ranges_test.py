@@ -46,9 +46,7 @@ class ClipRangesBenchmark(op_bench.TorchBenchmarkBase):
         return torch.ops.fb.clip_ranges(input, max_length)
 
 
-op_bench.generate_pt_test(
-    clip_ranges_long_configs + clip_ranges_short_configs, ClipRangesBenchmark
-)
+op_bench.generate_pt_test(clip_ranges_long_configs + clip_ranges_short_configs, ClipRangesBenchmark)
 
 
 if __name__ == "__main__":

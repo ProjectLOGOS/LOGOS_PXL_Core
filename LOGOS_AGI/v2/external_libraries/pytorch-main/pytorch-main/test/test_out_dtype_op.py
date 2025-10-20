@@ -8,7 +8,13 @@ import torch._inductor.decomposition
 from torch._higher_order_ops.out_dtype import out_dtype
 from torch.fx.experimental.proxy_tensor import make_fx
 from torch.testing._internal.common_utils import (
-    run_tests, TestCase, IS_WINDOWS, TEST_WITH_ROCM, IS_FBCODE, IS_REMOTE_GPU, TEST_CUDA
+    run_tests,
+    TestCase,
+    IS_WINDOWS,
+    TEST_WITH_ROCM,
+    IS_FBCODE,
+    IS_REMOTE_GPU,
+    TEST_CUDA,
 )
 from torch.testing._internal.common_quantization import skipIfNoDynamoSupport
 from torch.testing import FileCheck
@@ -24,9 +30,7 @@ class TestOutDtypeOp(TestCase):
                 self.weight = weight
 
             def forward(self, x):
-                return out_dtype(
-                    torch.ops.aten.mm.default, torch.int32, x, self.weight
-                )
+                return out_dtype(torch.ops.aten.mm.default, torch.int32, x, self.weight)
 
         weight = torch.randint(-128, 127, (5, 5), dtype=torch.int8)
         m = M(weight)
@@ -38,7 +42,9 @@ class TestOutDtypeOp(TestCase):
         gm = make_fx(torch.func.functionalize(M(weight)))(x)
         self.assertTrue(torch.allclose(m(x), gm(x)))
 
-        FileCheck().check("torch.ops.higher_order.out_dtype").check("aten.mm.default").run(gm.code)
+        FileCheck().check("torch.ops.higher_order.out_dtype").check(
+            "aten.mm.default"
+        ).run(gm.code)
         self.assertTrue(torch.allclose(m(x), gm(x)))
         for node in gm.graph.nodes:
             if node.op == "call_function" and node.target is out_dtype:
@@ -54,9 +60,7 @@ class TestOutDtypeOp(TestCase):
                 self.weight = weight
 
             def forward(self, x):
-                return out_dtype(
-                    torch.ops.aten.mm.default, torch.int32, x, self.weight
-                )
+                return out_dtype(torch.ops.aten.mm.default, torch.int32, x, self.weight)
 
         weight = torch.randint(-128, 127, (5, 5), dtype=torch.int8)
         m = M(weight)
@@ -80,9 +84,7 @@ class TestOutDtypeOp(TestCase):
                 self.weight = weight
 
             def forward(self, x):
-                return out_dtype(
-                    torch.ops.aten.mm.default, torch.int32, x, self.weight
-                )
+                return out_dtype(torch.ops.aten.mm.default, torch.int32, x, self.weight)
 
         weight = torch.randint(-128, 127, (5, 5), dtype=torch.int8)
         m = M(weight)
@@ -97,9 +99,7 @@ class TestOutDtypeOp(TestCase):
 
     def test_out_dtype_dynamo(self):
         def f(x, y):
-            return out_dtype(
-                torch.ops.aten.mul.Scalar, torch.int32, x, y
-            )
+            return out_dtype(torch.ops.aten.mul.Scalar, torch.int32, x, y)
 
         inp = (torch.randint(-128, 127, (5, 5), dtype=torch.int8), 3.0)
 
@@ -108,9 +108,7 @@ class TestOutDtypeOp(TestCase):
 
     def test_out_dtype_mul_scalar_numerical(self):
         def f(x, y):
-            return out_dtype(
-                torch.ops.aten.mul.Scalar, torch.int32, x, y
-            )
+            return out_dtype(torch.ops.aten.mul.Scalar, torch.int32, x, y)
 
         inp = (torch.randint(-128, 127, (5, 5), dtype=torch.int8), 3.0)
 
@@ -121,11 +119,11 @@ class TestOutDtypeOp(TestCase):
     def test_out_dtype_non_functional(self):
         class M(torch.nn.Module):
             def forward(self, x, y):
-                return out_dtype(
-                    torch.ops.aten.add_.Tensor, torch.int32, x, y
-                )
+                return out_dtype(torch.ops.aten.add_.Tensor, torch.int32, x, y)
 
-        with self.assertRaisesRegex(ValueError, "out_dtype's first argument needs to be a functional operator"):
+        with self.assertRaisesRegex(
+            ValueError, "out_dtype's first argument needs to be a functional operator"
+        ):
             _ = torch.export.export(
                 M(),
                 (
@@ -137,27 +135,33 @@ class TestOutDtypeOp(TestCase):
 
     def test_out_dtype_non_op_overload(self):
         def f(x, y):
-            return out_dtype(
-                torch.add, torch.int32, x, y
-            )
+            return out_dtype(torch.add, torch.int32, x, y)
 
-        with self.assertRaisesRegex(ValueError, "out_dtype's first argument must be an OpOverload"):
-            f(torch.randint(-128, 127, (5, 5), dtype=torch.int8), torch.randint(-128, 127, (5, 5), dtype=torch.int8))
+        with self.assertRaisesRegex(
+            ValueError, "out_dtype's first argument must be an OpOverload"
+        ):
+            f(
+                torch.randint(-128, 127, (5, 5), dtype=torch.int8),
+                torch.randint(-128, 127, (5, 5), dtype=torch.int8),
+            )
 
     def test_out_dtype_no_autograd(self):
         def f(x, y):
-            return out_dtype(
-                torch.ops.aten.mm.default, torch.int32, x, y
-            )
+            return out_dtype(torch.ops.aten.mm.default, torch.int32, x, y)
 
-        inp = (torch.randn(5, 5, requires_grad=True), torch.randn(5, 5, requires_grad=True))
+        inp = (
+            torch.randn(5, 5, requires_grad=True),
+            torch.randn(5, 5, requires_grad=True),
+        )
         # error is delayed
         f(*inp)
 
         with torch.no_grad():
             f(*inp)
 
-        with self.assertRaisesRegex(RuntimeError, "does not require grad and does not have a grad_fn"):
+        with self.assertRaisesRegex(
+            RuntimeError, "does not require grad and does not have a grad_fn"
+        ):
             out = f(*inp)
             loss = out - torch.ones(out.shape)
             loss.backward()
@@ -194,10 +198,13 @@ class TestOutDtypeOp(TestCase):
         # Check that make_fx with inductor decomps produces _int_mm
         decomp_table = torch._inductor.decomposition.select_decomp_table()
         gm = make_fx(func, decomp_table, tracing_mode="symbolic")(x, w)
-        self.assertExpectedInline(gm.code.strip(), """\
+        self.assertExpectedInline(
+            gm.code.strip(),
+            """\
 def forward(self, x_1, w_1):
     _int_mm = torch.ops.aten._int_mm.default(x_1, w_1);  x_1 = w_1 = None
-    return _int_mm""")
+    return _int_mm""",
+        )
 
     @unittest.skipIf(not TEST_CUDA, "cuda only")
     def test_out_dtype_int_mm_default_trace(self) -> None:
@@ -209,29 +216,33 @@ def forward(self, x_1, w_1):
 
         # By default, out_dtype is preserved in the trace
         gm = make_fx(func, tracing_mode="symbolic")(x, w)
-        self.assertExpectedInline(gm.code.strip(), """\
+        self.assertExpectedInline(
+            gm.code.strip(),
+            """\
 def forward(self, x_1, w_1):
     out_dtype = torch.ops.higher_order.out_dtype(torch.ops.aten.mm.default, torch.int32, x_1, w_1);  x_1 = w_1 = None
-    return out_dtype""")
+    return out_dtype""",
+        )
 
     def test_out_dtype_wrong_output(self) -> None:
         def multiple_out(x):
-            return out_dtype(
-                torch.ops.aten.topk.default, torch.int32, x, 5
-            )
+            return out_dtype(torch.ops.aten.topk.default, torch.int32, x, 5)
 
         inp = (torch.randn(10),)
 
-        with self.assertRaisesRegex(ValueError, "out_dtype's can only apply to ops that return a single tensor"):
+        with self.assertRaisesRegex(
+            ValueError, "out_dtype's can only apply to ops that return a single tensor"
+        ):
             multiple_out(*inp)
 
         def singleton_list_out(x):
-            return out_dtype(
-                torch.ops.aten.split_copy.Tensor, torch.int32, x, 10
-            )
+            return out_dtype(torch.ops.aten.split_copy.Tensor, torch.int32, x, 10)
 
-        with self.assertRaisesRegex(ValueError, "out_dtype's can only apply to ops that return a single tensor"):
+        with self.assertRaisesRegex(
+            ValueError, "out_dtype's can only apply to ops that return a single tensor"
+        ):
             singleton_list_out(*inp)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     run_tests()

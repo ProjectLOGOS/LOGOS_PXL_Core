@@ -105,9 +105,7 @@ _ = LearningCurveDisplay.from_estimator(
 # using bar plots and heatmaps.
 from sklearn.datasets import fetch_openml
 
-X, y = fetch_openml(
-    "titanic", version=1, as_frame=True, return_X_y=True, parser="pandas"
-)
+X, y = fetch_openml("titanic", version=1, as_frame=True, return_X_y=True, parser="pandas")
 X = X.select_dtypes(["number", "category"]).drop(columns=["body"])
 
 # %%
@@ -142,9 +140,7 @@ _ = PartialDependenceDisplay.from_estimator(
 # more memory and CPU efficient. In v1.4, the default will change to
 # `parser="auto"` which will automatically use the `"pandas"` parser for dense
 # data and `"liac-arff"` for sparse data.
-X, y = fetch_openml(
-    "titanic", version=1, as_frame=True, return_X_y=True, parser="pandas"
-)
+X, y = fetch_openml("titanic", version=1, as_frame=True, return_X_y=True, parser="pandas")
 X.head()
 
 # %%

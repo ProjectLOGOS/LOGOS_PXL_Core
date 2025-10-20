@@ -157,11 +157,7 @@ class ExperimentGroupConfig:
     def name(self) -> str:
         M, N, K = self.shape
         B = self.batch_size
-        sizes = (
-            f"(BS: {B}, {M}x{K}, {K}x{N})"
-            if self.op_name == "bmm"
-            else f"({M}x{K}, {K}x{N})"
-        )
+        sizes = f"(BS: {B}, {M}x{K}, {K}x{N})" if self.op_name == "bmm" else f"({M}x{K}, {K}x{N})"
         return f"{self.op_name} {sizes} {self.dtype}"
 
 
@@ -373,9 +369,7 @@ def calculate_table_data(results: list[ExperimentResults]) -> dict:
             aten_perf = experiment_result.forward_time
             table_data[PERF_OVER_ATEN_STR].append("NA")
         elif aten_perf is not None:
-            perf_over_aten = (
-                (experiment_result.forward_time - aten_perf) / aten_perf * 100
-            )
+            perf_over_aten = (experiment_result.forward_time - aten_perf) / aten_perf * 100
             table_data[PERF_OVER_ATEN_STR].append(perf_over_aten)
         else:
             # fallback in case aten is not in experiment group
@@ -411,24 +405,18 @@ def get_printable_results(experiment_groups: list[ExperimentGroup]) -> list[str]
         table_data = calculate_table_data(experiment_group.results)
         for name, edge in zip(table_data["name"], table_data[PERF_OVER_ATEN_STR]):
             edge_over_aten[name].append(edge)
-        output.append(
-            tabulate(table_data, headers="keys", tablefmt="pretty", floatfmt=".3f")
-        )
+        output.append(tabulate(table_data, headers="keys", tablefmt="pretty", floatfmt=".3f"))
 
     if "aten" in edge_over_aten:
         output.append("\nAverage edge over aten (max(-edge, 0), higher is better):")
         for name in edge_over_aten:
             if name != "aten":
                 values = [
-                    max(-v, 0.0)
-                    for v in edge_over_aten[name]
-                    if v != float("inf") and v != "NA"
+                    max(-v, 0.0) for v in edge_over_aten[name] if v != float("inf") and v != "NA"
                 ]
                 valid_count = len(values)
                 average_edge = sum(values) / valid_count if values else "No valid data"
-                output.append(
-                    f"{name}: {average_edge} (from {valid_count} valid values)"
-                )
+                output.append(f"{name}: {average_edge} (from {valid_count} valid values)")
         output.append("\n")
 
     return "\n".join(output)
@@ -455,8 +443,7 @@ def main():
             ExperimentGroup(config=group_config, results=group_results),
         )
         sys.stderr.write(
-            f"\nINTERMEDIATE results: {i + 1}/{len(configs)} \n"
-            + get_printable_results(results)
+            f"\nINTERMEDIATE results: {i + 1}/{len(configs)} \n" + get_printable_results(results)
         )
     print("\nFINAL results...")
     print(get_printable_results(results))

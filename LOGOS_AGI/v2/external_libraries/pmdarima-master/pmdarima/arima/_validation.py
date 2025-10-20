@@ -12,7 +12,7 @@ from sklearn import metrics
 from pmdarima.warnings import ModelFitWarning
 
 # The valid information criteria
-VALID_CRITERIA = {'aic', 'aicc', 'bic', 'hqic', 'oob'}
+VALID_CRITERIA = {"aic", "aicc", "bic", "hqic", "oob"}
 
 
 def auto_intercept(with_intercept, default):
@@ -25,16 +25,19 @@ def auto_intercept(with_intercept, default):
 def check_information_criterion(information_criterion, out_of_sample_size):
     """Check whether the information criterion is valid"""
     if information_criterion not in VALID_CRITERIA:
-        raise ValueError('auto_arima not defined for information_criteria=%s. '
-                         'Valid information criteria include: %r'
-                         % (information_criterion, VALID_CRITERIA))
+        raise ValueError(
+            "auto_arima not defined for information_criteria=%s. "
+            "Valid information criteria include: %r" % (information_criterion, VALID_CRITERIA)
+        )
 
     # check on information criterion and out_of_sample size
-    if information_criterion == 'oob' and out_of_sample_size == 0:
-        information_criterion = 'aic'
-        warnings.warn('information_criterion cannot be \'oob\' with '
-                      'out_of_sample_size = 0. '
-                      'Falling back to information criterion = aic.')
+    if information_criterion == "oob" and out_of_sample_size == 0:
+        information_criterion = "aic"
+        warnings.warn(
+            "information_criterion cannot be 'oob' with "
+            "out_of_sample_size = 0. "
+            "Falling back to information criterion = aic."
+        )
 
     return information_criterion
 
@@ -54,7 +57,7 @@ def check_kwargs(kwargs):
 def check_m(m, seasonal):
     """Check the value of M (seasonal periodicity)"""
     if (m < 1 and seasonal) or m < 0:
-        raise ValueError('m must be a positive integer (> 0)')
+        raise ValueError("m must be a positive integer (> 0)")
 
     if not seasonal:
         # default m is 1, so if it's the default, don't warn
@@ -73,8 +76,10 @@ def check_n_jobs(stepwise, n_jobs):
     """
     if stepwise and n_jobs != 1:
         n_jobs = 1
-        warnings.warn('stepwise model cannot be fit in parallel (n_jobs=%i). '
-                      'Falling back to stepwise parameter search.' % n_jobs)
+        warnings.warn(
+            "stepwise model cannot be fit in parallel (n_jobs=%i). "
+            "Falling back to stepwise parameter search." % n_jobs
+        )
     return n_jobs
 
 
@@ -120,7 +125,6 @@ def get_scoring_metric(metric):
         return the negative value of the score.
     """
     if isinstance(metric, str):
-
         # XXX: legacy support, remap mse/mae to their long versions
         if metric == "mse":
             return metrics.mean_squared_error
@@ -133,8 +137,10 @@ def get_scoring_metric(metric):
             raise ValueError("'%s' is not a valid scoring method." % metric)
 
     if not callable(metric):
-        raise TypeError("`metric` must be a valid scoring method, or a "
-                        "callable, but got type=%s" % type(metric))
+        raise TypeError(
+            "`metric` must be a valid scoring method, or a "
+            "callable, but got type=%s" % type(metric)
+        )
 
     # TODO: warn for potentially invalid signature?
     return metric
@@ -143,12 +149,18 @@ def get_scoring_metric(metric):
 def warn_for_D(d, D):
     """Warn for large values of D"""
     if D >= 2:
-        warnings.warn("Having more than one seasonal differences is "
-                      "not recommended. Please consider using only one "
-                      "seasonal difference.", ModelFitWarning)
+        warnings.warn(
+            "Having more than one seasonal differences is "
+            "not recommended. Please consider using only one "
+            "seasonal difference.",
+            ModelFitWarning,
+        )
     # if D is -1, this will be off, so we include the OR
     # TODO: @FutureTayTay.. how can D be -1?
     elif D + d > 2 or d > 2:
-        warnings.warn("Having 3 or more differencing operations is not "
-                      "recommended. Please consider reducing the total "
-                      "number of differences.", ModelFitWarning)
+        warnings.warn(
+            "Having 3 or more differencing operations is not "
+            "recommended. Please consider reducing the total "
+            "number of differences.",
+            ModelFitWarning,
+        )

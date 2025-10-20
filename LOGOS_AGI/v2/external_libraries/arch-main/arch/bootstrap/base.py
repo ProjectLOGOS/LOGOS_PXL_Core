@@ -418,9 +418,7 @@ class IIDBootstrap(metaclass=DocStringInheritor):
         if self._common_size_required:
             for arg in all_args:
                 if len(arg) != self._num_items:
-                    raise ValueError(
-                        "All inputs must have the same number of elements in axis 0"
-                    )
+                    raise ValueError("All inputs must have the same number of elements in axis 0")
         self._index: BootstrapIndexT = np.arange(self._num_items, dtype=np.int64)
 
         self._parameters: list[int] = []
@@ -573,9 +571,7 @@ class IIDBootstrap(metaclass=DocStringInheritor):
         self,
         func: Callable[..., Float64Array],
         reps: int = 1000,
-        method: Literal[
-            "basic", "percentile", "studentized", "norm", "bc", "bca"
-        ] = "basic",
+        method: Literal["basic", "percentile", "studentized", "norm", "bc", "bca"] = "basic",
         size: float = 0.95,
         tail: Literal["two", "upper", "lower"] = "two",
         extra_kwargs: dict[str, Any] | None = None,
@@ -949,8 +945,7 @@ class IIDBootstrap(metaclass=DocStringInheritor):
         if extra_kwargs is not None:
             if any(k in self._kwargs for k in extra_kwargs):
                 raise ValueError(
-                    "extra_kwargs contains keys used for variable"
-                    " names in the bootstrap"
+                    "extra_kwargs contains keys used for variable" " names in the bootstrap"
                 )
         kwargs = _add_extra_kwargs(self._kwargs, extra_kwargs)
         base = func(*self._args, **kwargs)
@@ -1155,9 +1150,7 @@ class IIDBootstrap(metaclass=DocStringInheritor):
         Update indices for the next iteration of the bootstrap.  This must
         be overridden when creating new bootstraps.
         """
-        return _get_random_integers(
-            self._generator, self._num_items, size=self._num_items
-        )
+        return _get_random_integers(self._generator, self._num_items, size=self._num_items)
 
     def _resample(self) -> tuple[tuple[ArrayLike, ...], dict[str, ArrayLike]]:
         """
@@ -1321,12 +1314,10 @@ class IndependentSamplesBootstrap(IIDBootstrap):
             to the initial state.  Default is True
         """
         pos_indices: list[Int64Array1D] = [
-            np.arange(self._num_arg_items[i], dtype=np.int64)
-            for i in range(self._num_args)
+            np.arange(self._num_arg_items[i], dtype=np.int64) for i in range(self._num_args)
         ]
         kw_indices: dict[str, Int64Array1D] = {
-            key: np.arange(self._num_kw_items[key], dtype=np.int64)
-            for key in self._kwargs
+            key: np.arange(self._num_kw_items[key], dtype=np.int64) for key in self._kwargs
         }
         self._index = pos_indices, kw_indices
         self._resample()
@@ -1336,9 +1327,7 @@ class IndependentSamplesBootstrap(IIDBootstrap):
         """
         Resample all data using the values in _index
         """
-        pos_indices, kw_indices = cast(
-            tuple[list[Int64Array], dict[str, Int64Array]], self._index
-        )
+        pos_indices, kw_indices = cast(tuple[list[Int64Array], dict[str, Int64Array]], self._index)
         pos_data: list[NDArray | pd.DataFrame | pd.Series] = []
         for i, values in enumerate(self._args):
             if isinstance(values, (pd.Series, pd.DataFrame)):
@@ -1493,9 +1482,7 @@ class CircularBlockBootstrap(IIDBootstrap):
         num_blocks = self._num_items // self.block_size
         if num_blocks * self.block_size < self._num_items:
             num_blocks += 1
-        indices = _get_random_integers(
-            self._generator, self._num_items, size=num_blocks
-        )
+        indices = _get_random_integers(self._generator, self._num_items, size=num_blocks)
         _indices = indices[:, None] + np.arange(self.block_size, dtype=np.int64)
         indices = _indices.flatten()
         indices %= self._num_items
@@ -1592,9 +1579,7 @@ class StationaryBootstrap(CircularBlockBootstrap):
         self._p = 1.0 / block_size
 
     def update_indices(self) -> Int64Array1D:
-        indices = _get_random_integers(
-            self._generator, self._num_items, size=self._num_items
-        )
+        indices = _get_random_integers(self._generator, self._num_items, size=self._num_items)
         indices = indices.astype(np.int64)
         if isinstance(self._generator, Generator):
             u = self._generator.random(self._num_items)
@@ -1718,7 +1703,5 @@ class MOONBootstrap(IIDBootstrap):  # pragma: no cover
 
     def update_indices(
         self,
-    ) -> (
-        Int64Array1D | tuple[list[Int64Array1D], dict[str, Int64Array1D]]
-    ):  # pragma: no cover
+    ) -> Int64Array1D | tuple[list[Int64Array1D], dict[str, Int64Array1D]]:  # pragma: no cover
         raise NotImplementedError

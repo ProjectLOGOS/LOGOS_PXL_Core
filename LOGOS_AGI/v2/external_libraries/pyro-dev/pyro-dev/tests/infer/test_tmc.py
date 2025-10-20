@@ -177,9 +177,7 @@ def test_tmc_normals_chain_iwae(
         num_samples=num_samples,
         tmc=tmc_strategy,
     )
-    actual_loss = (
-        -tmc.differentiable_loss(tmc_model, tmc_guide, reparameterized)
-    ).exp()
+    actual_loss = (-tmc.differentiable_loss(tmc_model, tmc_guide, reparameterized)).exp()
     actual_grads = grad(actual_loss, qs)
 
     assert_equal(
@@ -258,9 +256,7 @@ def test_tmc_normals_chain_gradient(
     guide = (
         factorized_guide
         if guide_type == "factorized"
-        else (
-            nonfactorized_guide if guide_type == "nonfactorized" else lambda *args: None
-        )
+        else (nonfactorized_guide if guide_type == "nonfactorized" else lambda *args: None)
     )
     tmc_guide = config_enumerate(
         guide,
@@ -271,14 +267,10 @@ def test_tmc_normals_chain_gradient(
     )
 
     # gold values from Funsor
-    expected_grads = (
-        torch.tensor({1: 0.0999, 2: 0.0860, 3: 0.0802, 4: 0.0771}[depth]),
-    )
+    expected_grads = (torch.tensor({1: 0.0999, 2: 0.0860, 3: 0.0802, 4: 0.0771}[depth]),)
 
     # convert to linear space for unbiasedness
-    actual_loss = (
-        -tmc.differentiable_loss(tmc_model, tmc_guide, reparameterized)
-    ).exp()
+    actual_loss = (-tmc.differentiable_loss(tmc_model, tmc_guide, reparameterized)).exp()
     actual_grads = grad(actual_loss, qs)
 
     grad_prec = 0.05 if reparameterized else 0.1

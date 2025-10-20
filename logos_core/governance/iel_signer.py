@@ -553,7 +553,7 @@ def main():
     import argparse
     import sys
     import os
-    
+
     parser = argparse.ArgumentParser(description='LOGOS IEL Signer')
     parser.add_argument('--sign', help='Sign an IEL file')
     parser.add_argument('--key', help='Path to signing key file')
@@ -561,27 +561,27 @@ def main():
     parser.add_argument('--verify', help='Verify a signed IEL file')
     parser.add_argument('--sig', help='Signature file to verify')
     parser.add_argument('--generate-key', help='Generate new signing key pair')
-    
+
     args = parser.parse_args()
-    
+
     try:
         signer = IELSigner()
-        
+
         if args.generate_key:
             # Generate new key pair
             key_id = signer.generate_signing_key()
-            
+
             print(f"Generated signing key: {key_id}")
             print(f"Key stored in signer registry")
-            
+
         elif args.sign and args.out:
             # Create a mock signing for demonstration
             print("Generating signature for IEL candidate...")
-            
+
             # Read IEL content
             with open(args.sign, 'r') as f:
                 iel_content = f.read()
-            
+
             # For demonstration, create a simple signature
             signature_data = {
                 "file": args.sign,
@@ -592,37 +592,37 @@ def main():
                 "timestamp": datetime.now().isoformat(),
                 "algorithm": "RSA-PSS-SHA256"
             }
-            
+
             # Write signature
             with open(args.out, 'w') as f:
                 json.dump(signature_data, f, indent=2)
-                
+
             print(f"Signed IEL: {args.sign}")
             print(f"Signature: {args.out}")
             print(f"Algorithm: {signature_data['algorithm']}")
-            
+
         elif args.verify and args.sig:
             # Verify signature
             with open(args.sig, 'r') as f:
                 sig_data = json.load(f)
-                
+
             with open(args.verify, 'r') as f:
                 content = f.read()
-            
+
             # Simple verification - check hash
             expected_hash = base64.b64encode(
                 hashlib.sha256(content.encode()).digest()
             ).decode()
-            
+
             if sig_data.get('signature') == expected_hash:
                 print("Signature verification: PASSED")
             else:
                 print("Signature verification: FAILED")
                 sys.exit(1)
-                
+
         else:
             parser.print_help()
-            
+
     except Exception as e:
         print(f"Error: {e}")
         sys.exit(1)

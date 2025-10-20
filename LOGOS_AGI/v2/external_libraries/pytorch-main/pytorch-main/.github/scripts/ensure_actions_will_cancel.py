@@ -11,9 +11,7 @@ WORKFLOWS = REPO_ROOT / ".github" / "workflows"
 EXPECTED_GROUP_PREFIX = (
     "${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}"
 )
-EXPECTED_GROUP = (
-    EXPECTED_GROUP_PREFIX + "-${{ github.event_name == 'workflow_dispatch' }}"
-)
+EXPECTED_GROUP = EXPECTED_GROUP_PREFIX + "-${{ github.event_name == 'workflow_dispatch' }}"
 
 
 def should_check(filename: Path) -> bool:

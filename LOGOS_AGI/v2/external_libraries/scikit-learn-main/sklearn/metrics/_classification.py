@@ -102,9 +102,7 @@ def _check_targets(y_true, y_pred, sample_weight=None):
     type_true = type_of_target(y_true, input_name="y_true")
     type_pred = type_of_target(y_pred, input_name="y_pred")
     if sample_weight is not None:
-        sample_weight = _check_sample_weight(
-            sample_weight, y_true, force_float_dtype=False
-        )
+        sample_weight = _check_sample_weight(sample_weight, y_true, force_float_dtype=False)
 
     y_type = {type_true, type_pred}
     if y_type == {"binary", "multiclass"}:
@@ -159,9 +157,7 @@ def _check_targets(y_true, y_pred, sample_weight=None):
     return y_type, y_true, y_pred, sample_weight
 
 
-def _validate_multiclass_probabilistic_prediction(
-    y_true, y_prob, sample_weight, labels
-):
+def _validate_multiclass_probabilistic_prediction(y_true, y_prob, sample_weight, labels):
     r"""Convert y_true and y_prob to shape (n_samples, n_classes)
 
     1. Verify that y_true, y_prob, and sample_weights have the same first dim
@@ -198,9 +194,7 @@ def _validate_multiclass_probabilistic_prediction(
 
     y_prob : array of shape (n_samples, n_classes)
     """
-    y_prob = check_array(
-        y_prob, ensure_2d=False, dtype=[np.float64, np.float32, np.float16]
-    )
+    y_prob = check_array(y_prob, ensure_2d=False, dtype=[np.float64, np.float32, np.float16])
 
     if y_prob.max() > 1:
         raise ValueError(f"y_prob contains values greater than 1: {y_prob.max()}")
@@ -251,9 +245,7 @@ def _validate_multiclass_probabilistic_prediction(
     transformed_labels = lb.transform(y_true)
 
     if transformed_labels.shape[1] == 1:
-        transformed_labels = np.append(
-            1 - transformed_labels, transformed_labels, axis=1
-        )
+        transformed_labels = np.append(1 - transformed_labels, transformed_labels, axis=1)
 
     # If y_prob is of single dimension, assume y_true to be binary
     # and then check.
@@ -281,9 +273,7 @@ def _validate_multiclass_probabilistic_prediction(
                 "classes: {0} vs {1}. Please provide the true "
                 "labels explicitly through the labels argument. "
                 "Classes found in "
-                "y_true: {2}".format(
-                    transformed_labels.shape[1], y_prob.shape[1], lb.classes_
-                )
+                "y_true: {2}".format(transformed_labels.shape[1], y_prob.shape[1], lb.classes_)
             )
         else:
             raise ValueError(
@@ -367,9 +357,7 @@ def accuracy_score(y_true, y_pred, *, normalize=True, sample_weight=None):
     xp, _, device = get_namespace_and_device(y_true, y_pred, sample_weight)
     # Compute accuracy for each possible representation
     y_true, y_pred = attach_unique(y_true, y_pred)
-    y_type, y_true, y_pred, sample_weight = _check_targets(
-        y_true, y_pred, sample_weight
-    )
+    y_type, y_true, y_pred, sample_weight = _check_targets(y_true, y_pred, sample_weight)
 
     if y_type.startswith("multilabel"):
         differing_labels = _count_nonzero(y_true - y_pred, xp=xp, device=device, axis=1)
@@ -390,9 +378,7 @@ def accuracy_score(y_true, y_pred, *, normalize=True, sample_weight=None):
     },
     prefer_skip_nested_validation=True,
 )
-def confusion_matrix(
-    y_true, y_pred, *, labels=None, sample_weight=None, normalize=None
-):
+def confusion_matrix(y_true, y_pred, *, labels=None, sample_weight=None, normalize=None):
     """Compute confusion matrix to evaluate the accuracy of a classification.
 
     By definition a confusion matrix :math:`C` is such that :math:`C_{i, j}`
@@ -476,9 +462,7 @@ def confusion_matrix(
     (0, 2, 1, 1)
     """
     y_true, y_pred = attach_unique(y_true, y_pred)
-    y_type, y_true, y_pred, sample_weight = _check_targets(
-        y_true, y_pred, sample_weight
-    )
+    y_type, y_true, y_pred, sample_weight = _check_targets(y_true, y_pred, sample_weight)
     if y_type not in ("binary", "multiclass"):
         raise ValueError("%s is not supported" % y_type)
 
@@ -665,9 +649,7 @@ def multilabel_confusion_matrix(
     """
     y_true, y_pred = attach_unique(y_true, y_pred)
     xp, _, device_ = get_namespace_and_device(y_true, y_pred, sample_weight)
-    y_type, y_true, y_pred, sample_weight = _check_targets(
-        y_true, y_pred, sample_weight
-    )
+    y_type, y_true, y_pred, sample_weight = _check_targets(y_true, y_pred, sample_weight)
 
     if y_type not in ("binary", "multiclass", "multilabel-indicator"):
         raise ValueError("%s is not supported" % y_type)
@@ -687,8 +669,7 @@ def multilabel_confusion_matrix(
     if y_true.ndim == 1:
         if samplewise:
             raise ValueError(
-                "Samplewise metrics are not available outside of "
-                "multilabel classification."
+                "Samplewise metrics are not available outside of " "multilabel classification."
             )
 
         le = LabelEncoder()
@@ -706,20 +687,14 @@ def multilabel_confusion_matrix(
             tp_bins_weights = None
 
         if tp_bins.shape[0]:
-            tp_sum = _bincount(
-                tp_bins, weights=tp_bins_weights, minlength=labels.shape[0], xp=xp
-            )
+            tp_sum = _bincount(tp_bins, weights=tp_bins_weights, minlength=labels.shape[0], xp=xp)
         else:
             # Pathological case
             true_sum = pred_sum = tp_sum = xp.zeros(labels.shape[0])
         if y_pred.shape[0]:
-            pred_sum = _bincount(
-                y_pred, weights=sample_weight, minlength=labels.shape[0], xp=xp
-            )
+            pred_sum = _bincount(y_pred, weights=sample_weight, minlength=labels.shape[0], xp=xp)
         if y_true.shape[0]:
-            true_sum = _bincount(
-                y_true, weights=sample_weight, minlength=labels.shape[0], xp=xp
-            )
+            true_sum = _bincount(y_true, weights=sample_weight, minlength=labels.shape[0], xp=xp)
 
         # Retain only selected labels
         indices = _searchsorted(sorted_labels, labels[:n_labels], xp=xp)
@@ -732,9 +707,7 @@ def multilabel_confusion_matrix(
 
         # All labels are index integers for multilabel.
         # Select labels:
-        if labels.shape != present_labels.shape or xp.any(
-            xp.not_equal(labels, present_labels)
-        ):
+        if labels.shape != present_labels.shape or xp.any(xp.not_equal(labels, present_labels)):
             if xp.max(labels) > xp.max(present_labels):
                 raise ValueError(
                     "All labels must be in [0, n labels) for "
@@ -1180,9 +1153,7 @@ def matthews_corrcoef(y_true, y_pred, *, sample_weight=None):
     -0.33
     """
     y_true, y_pred = attach_unique(y_true, y_pred)
-    y_type, y_true, y_pred, sample_weight = _check_targets(
-        y_true, y_pred, sample_weight
-    )
+    y_type, y_true, y_pred, sample_weight = _check_targets(y_true, y_pred, sample_weight)
     if y_type not in {"binary", "multiclass"}:
         raise ValueError("%s is not supported" % y_type)
 
@@ -1278,9 +1249,7 @@ def zero_one_loss(y_true, y_pred, *, normalize=True, sample_weight=None):
     0.5
     """
     xp, _ = get_namespace(y_true, y_pred)
-    score = accuracy_score(
-        y_true, y_pred, normalize=normalize, sample_weight=sample_weight
-    )
+    score = accuracy_score(y_true, y_pred, normalize=normalize, sample_weight=sample_weight)
 
     if normalize:
         return 1 - score
@@ -1704,9 +1673,7 @@ def fbeta_score(
     return f
 
 
-def _prf_divide(
-    numerator, denominator, metric, modifier, average, warn_for, zero_division="warn"
-):
+def _prf_divide(numerator, denominator, metric, modifier, average, warn_for, zero_division="warn"):
     """Performs division and handles divide-by-zero.
 
     On zero-division, sets the corresponding result elements equal to
@@ -1794,8 +1761,7 @@ def _check_set_wise_labels(y_true, y_pred, average, labels, pos_label):
         warnings.warn(
             "Note that pos_label (set to %r) is ignored when "
             "average != 'binary' (got %r). You may use "
-            "labels=[pos_label] to specify a single positive class."
-            % (pos_label, average),
+            "labels=[pos_label] to specify a single positive class." % (pos_label, average),
             UserWarning,
         )
     return labels
@@ -2032,9 +1998,7 @@ def precision_recall_fscore_support(
     precision = _prf_divide(
         tp_sum, pred_sum, "precision", "predicted", average, warn_for, zero_division
     )
-    recall = _prf_divide(
-        tp_sum, true_sum, "recall", "true", average, warn_for, zero_division
-    )
+    recall = _prf_divide(tp_sum, true_sum, "recall", "true", average, warn_for, zero_division)
 
     if np.isposinf(beta):
         f_score = recall
@@ -2050,9 +2014,7 @@ def precision_recall_fscore_support(
         # need to convert true_sum, pred_sum and tp_sum to the max supported
         # float dtype because beta2 is a float
         max_float_type = _max_precision_float_dtype(xp=xp, device=device_)
-        denom = beta2 * xp.astype(true_sum, max_float_type) + xp.astype(
-            pred_sum, max_float_type
-        )
+        denom = beta2 * xp.astype(true_sum, max_float_type) + xp.astype(pred_sum, max_float_type)
         f_score = _prf_divide(
             (1 + beta2) * xp.astype(tp_sum, max_float_type),
             denom,
@@ -2237,9 +2199,7 @@ def class_likelihood_ratios(
     # remove `FutureWarning`, and the Warns section in the docstring should not mention
     # `raise_warning` anymore.
     y_true, y_pred = attach_unique(y_true, y_pred)
-    y_type, y_true, y_pred, sample_weight = _check_targets(
-        y_true, y_pred, sample_weight
-    )
+    y_type, y_true, y_pred, sample_weight = _check_targets(y_true, y_pred, sample_weight)
     if y_type != "binary":
         raise ValueError(
             "class_likelihood_ratios only supports binary classification "
@@ -2957,9 +2917,7 @@ def classification_report(
     """
 
     y_true, y_pred = attach_unique(y_true, y_pred)
-    y_type, y_true, y_pred, sample_weight = _check_targets(
-        y_true, y_pred, sample_weight
-    )
+    y_type, y_true, y_pred, sample_weight = _check_targets(y_true, y_pred, sample_weight)
 
     if labels is None:
         labels = unique_labels(y_true, y_pred)
@@ -3045,10 +3003,7 @@ def classification_report(
         else:
             if line_heading == "accuracy":
                 row_fmt_accuracy = (
-                    "{:>{width}s} "
-                    + " {:>9.{digits}}" * 2
-                    + " {:>9.{digits}f}"
-                    + " {:>9}\n"
+                    "{:>{width}s} " + " {:>9.{digits}}" * 2 + " {:>9.{digits}f}" + " {:>9}\n"
                 )
                 report += row_fmt_accuracy.format(
                     line_heading, "", "", *avg[2:], width=width, digits=digits
@@ -3148,9 +3103,7 @@ def hamming_loss(y_true, y_pred, *, sample_weight=None):
     0.75
     """
     y_true, y_pred = attach_unique(y_true, y_pred)
-    y_type, y_true, y_pred, sample_weight = _check_targets(
-        y_true, y_pred, sample_weight
-    )
+    y_type, y_true, y_pred, sample_weight = _check_targets(y_true, y_pred, sample_weight)
 
     xp, _, device = get_namespace_and_device(y_true, y_pred, sample_weight)
 
@@ -3163,9 +3116,7 @@ def hamming_loss(y_true, y_pred, *, sample_weight=None):
         n_differences = _count_nonzero(
             y_true - y_pred, xp=xp, device=device, sample_weight=sample_weight
         )
-        return float(n_differences) / (
-            y_true.shape[0] * y_true.shape[1] * weight_average
-        )
+        return float(n_differences) / (y_true.shape[0] * y_true.shape[1] * weight_average)
 
     elif y_type in ["binary", "multiclass"]:
         return float(_average(y_true != y_pred, weights=sample_weight, normalize=True))
@@ -3372,8 +3323,7 @@ def hinge_loss(y_true, pred_decision, *, labels=None, sample_weight=None):
         if y_true_unique.size != pred_decision.shape[1]:
             if labels is None:
                 raise ValueError(
-                    "Please include all labels in y_true "
-                    "or pass labels as third argument"
+                    "Please include all labels in y_true " "or pass labels as third argument"
                 )
             else:
                 raise ValueError(
@@ -3617,9 +3567,7 @@ def brier_score_loss(
     ... )
     0.146
     """
-    y_proba = check_array(
-        y_proba, ensure_2d=False, dtype=[np.float64, np.float32, np.float16]
-    )
+    y_proba = check_array(y_proba, ensure_2d=False, dtype=[np.float64, np.float32, np.float16])
 
     if y_proba.ndim == 1 or y_proba.shape[1] == 1:
         transformed_labels, y_proba = _validate_binary_probabilistic_prediction(

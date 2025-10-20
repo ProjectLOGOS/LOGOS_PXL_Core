@@ -117,9 +117,7 @@ ax.set_xlabel(r"$\alpha$")
 ax.set_ylabel("criterion")
 ax.set_xscale("log")
 ax.legend()
-_ = ax.set_title(
-    f"Information-criterion for model selection (training time {fit_time:.2f}s)"
-)
+_ = ax.set_title(f"Information-criterion for model selection (training time {fit_time:.2f}s)")
 
 # %%
 # Model selection with an information-criterion is very fast. It relies on
@@ -177,9 +175,7 @@ plt.ylim(ymin, ymax)
 plt.xlabel(r"$\alpha$")
 plt.ylabel("Mean square error")
 plt.legend()
-_ = plt.title(
-    f"Mean square error on each fold: coordinate descent (train time: {fit_time:.2f}s)"
-)
+_ = plt.title(f"Mean square error on each fold: coordinate descent (train time: {fit_time:.2f}s)")
 
 # %%
 # Lasso via least angle regression

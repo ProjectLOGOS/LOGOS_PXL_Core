@@ -38,9 +38,7 @@ param_grid = {"gamma": gammas, "C": Cs}
 clf = SVC(random_state=rng)
 
 tic = time()
-gsh = HalvingGridSearchCV(
-    estimator=clf, param_grid=param_grid, factor=2, random_state=rng
-)
+gsh = HalvingGridSearchCV(estimator=clf, param_grid=param_grid, factor=2, random_state=rng)
 gsh.fit(X, y)
 gsh_time = time() - tic
 
@@ -56,9 +54,7 @@ gs_time = time() - tic
 def make_heatmap(ax, gs, is_sh=False, make_cbar=False):
     """Helper to make a heatmap."""
     results = pd.DataFrame(gs.cv_results_)
-    results[["param_C", "param_gamma"]] = results[["param_C", "param_gamma"]].astype(
-        np.float64
-    )
+    results[["param_C", "param_gamma"]] = results[["param_C", "param_gamma"]].astype(np.float64)
     if is_sh:
         # SH dataframe: get mean_test_score values for the highest iter
         scores_matrix = results.sort_values("iter").pivot_table(

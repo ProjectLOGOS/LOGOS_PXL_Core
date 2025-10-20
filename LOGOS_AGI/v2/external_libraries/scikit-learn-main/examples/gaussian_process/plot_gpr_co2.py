@@ -76,9 +76,7 @@ co2_data = (
 plt.plot(co2_data["date"], co2_data["co2"])
 plt.xlabel("date")
 plt.ylabel("Monthly average of CO$_2$ concentration (ppm)")
-_ = plt.title(
-    "Monthly average of air samples measurements\nfrom the Mauna Loa Observatory"
-)
+_ = plt.title("Monthly average of air samples measurements\nfrom the Mauna Loa Observatory")
 
 # %%
 # The idea in this example will be to predict the CO2 concentration in function
@@ -87,9 +85,7 @@ _ = plt.title(
 #
 # As a first step, we will divide the data and the target to estimate. The data
 # being a date, we will convert it into a numeric.
-X = co2_data.select(
-    pl.col("date").dt.year() + pl.col("date").dt.month() / 12
-).to_numpy()
+X = co2_data.select(pl.col("date").dt.year() + pl.col("date").dt.month() / 12).to_numpy()
 y = co2_data["co2"].to_numpy()
 
 # %%
@@ -151,9 +147,7 @@ noise_kernel = 0.1**2 * RBF(length_scale=0.1) + WhiteKernel(
 
 # %%
 # Thus, our final kernel is an addition of all previous kernel.
-co2_kernel = (
-    long_term_trend_kernel + seasonal_kernel + irregularities_kernel + noise_kernel
-)
+co2_kernel = long_term_trend_kernel + seasonal_kernel + irregularities_kernel + noise_kernel
 co2_kernel
 
 # %%
@@ -203,9 +197,7 @@ plt.fill_between(
 plt.legend()
 plt.xlabel("Year")
 plt.ylabel("Monthly average of CO$_2$ concentration (ppm)")
-_ = plt.title(
-    "Monthly average of air samples measurements\nfrom the Mauna Loa Observatory"
-)
+_ = plt.title("Monthly average of air samples measurements\nfrom the Mauna Loa Observatory")
 
 # %%
 # Our fitted model is capable to fit previous data properly and extrapolate to

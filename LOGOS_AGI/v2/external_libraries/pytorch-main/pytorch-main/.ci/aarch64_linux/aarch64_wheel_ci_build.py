@@ -161,9 +161,7 @@ def complete_wheel(folder: str) -> str:
             f"/{folder}/dist/{repaired_wheel_name}",
         )
     else:
-        repaired_wheel_name = wheel_name.replace(
-            "linux_aarch64", "manylinux_2_28_aarch64"
-        )
+        repaired_wheel_name = wheel_name.replace("linux_aarch64", "manylinux_2_28_aarch64")
         print(f"Renaming {wheel_name} wheel to {repaired_wheel_name}")
         os.rename(
             f"/{folder}/dist/{wheel_name}",
@@ -171,9 +169,7 @@ def complete_wheel(folder: str) -> str:
         )
 
     print(f"Copying {repaired_wheel_name} to artifacts")
-    shutil.copy2(
-        f"/{folder}/dist/{repaired_wheel_name}", f"/artifacts/{repaired_wheel_name}"
-    )
+    shutil.copy2(f"/{folder}/dist/{repaired_wheel_name}", f"/artifacts/{repaired_wheel_name}")
 
     return repaired_wheel_name
 
@@ -200,9 +196,7 @@ if __name__ == "__main__":
     args = parse_arguments()
     enable_mkldnn = args.enable_mkldnn
     enable_cuda = args.enable_cuda
-    branch = check_output(
-        ["git", "rev-parse", "--abbrev-ref", "HEAD"], cwd="/pytorch"
-    ).decode()
+    branch = check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"], cwd="/pytorch").decode()
 
     print("Building PyTorch wheel")
     build_vars = "CMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=0x10000 "
@@ -214,18 +208,14 @@ if __name__ == "__main__":
     desired_cuda = os.getenv("DESIRED_CUDA")
     if override_package_version is not None:
         version = override_package_version
-        build_vars += (
-            f"BUILD_TEST=0 PYTORCH_BUILD_VERSION={version} PYTORCH_BUILD_NUMBER=1 "
-        )
+        build_vars += f"BUILD_TEST=0 PYTORCH_BUILD_VERSION={version} PYTORCH_BUILD_NUMBER=1 "
     elif branch in ["nightly", "main"]:
         build_date = (
             check_output(["git", "log", "--pretty=format:%cs", "-1"], cwd="/pytorch")
             .decode()
             .replace("-", "")
         )
-        version = (
-            check_output(["cat", "version.txt"], cwd="/pytorch").decode().strip()[:-2]
-        )
+        version = check_output(["cat", "version.txt"], cwd="/pytorch").decode().strip()[:-2]
         if enable_cuda:
             build_vars += f"BUILD_TEST=0 PYTORCH_BUILD_VERSION={version}.dev{build_date}+{desired_cuda} PYTORCH_BUILD_NUMBER=1 "
         else:

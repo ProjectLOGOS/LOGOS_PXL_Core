@@ -131,9 +131,7 @@ class FrontendWorker(mp.Process):
         # Lock for writing to metrics_dict
         metrics_lock = threading.Lock()
         requests_thread = threading.Thread(target=self._send_requests)
-        metrics_thread = threading.Thread(
-            target=self._run_metrics, args=(metrics_lock,)
-        )
+        metrics_thread = threading.Thread(target=self._run_metrics, args=(metrics_lock,))
         gpu_utilization_thread = threading.Thread(
             target=self._run_gpu_utilization, args=(metrics_lock,)
         )
@@ -317,13 +315,9 @@ if __name__ == "__main__":
     parser.add_argument("--num_iters", type=int, default=100)
     parser.add_argument("--batch_size", type=int, default=32)
     parser.add_argument("--model_dir", type=str, default=".")
-    parser.add_argument(
-        "--compile", default=True, action=argparse.BooleanOptionalAction
-    )
+    parser.add_argument("--compile", default=True, action=argparse.BooleanOptionalAction)
     parser.add_argument("--output_file", type=str, default="output.csv")
-    parser.add_argument(
-        "--profile", default=False, action=argparse.BooleanOptionalAction
-    )
+    parser.add_argument("--profile", default=False, action=argparse.BooleanOptionalAction)
     parser.add_argument("--num_workers", type=int, default=4)
     args = parser.parse_args()
 

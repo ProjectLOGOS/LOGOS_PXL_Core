@@ -78,12 +78,8 @@ newsgroups = fetch_20newsgroups(categories=categories)
 y_true = newsgroups.target
 
 vectorizer = NumberNormalizingVectorizer(stop_words="english", min_df=5)
-cocluster = SpectralCoclustering(
-    n_clusters=len(categories), svd_method="arpack", random_state=0
-)
-kmeans = MiniBatchKMeans(
-    n_clusters=len(categories), batch_size=20000, random_state=0, n_init=3
-)
+cocluster = SpectralCoclustering(n_clusters=len(categories), svd_method="arpack", random_state=0)
+kmeans = MiniBatchKMeans(n_clusters=len(categories), batch_size=20000, random_state=0, n_init=3)
 
 print("Vectorizing...")
 X = vectorizer.fit_transform(newsgroups.data)
@@ -150,13 +146,10 @@ for idx, cluster in enumerate(best_idx):
     out_of_cluster_docs = out_of_cluster_docs.nonzero()[0]
     word_col = X[:, cluster_words]
     word_scores = np.array(
-        word_col[cluster_docs, :].sum(axis=0)
-        - word_col[out_of_cluster_docs, :].sum(axis=0)
+        word_col[cluster_docs, :].sum(axis=0) - word_col[out_of_cluster_docs, :].sum(axis=0)
     )
     word_scores = word_scores.ravel()
-    important_words = list(
-        feature_names[cluster_words[i]] for i in word_scores.argsort()[:-11:-1]
-    )
+    important_words = list(feature_names[cluster_words[i]] for i in word_scores.argsort()[:-11:-1])
 
     print(f"bicluster {idx} : {n_rows} documents, {n_cols} words")
     print(f"categories   : {cat_string}")

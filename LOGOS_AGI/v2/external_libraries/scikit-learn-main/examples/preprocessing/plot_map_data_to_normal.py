@@ -53,9 +53,7 @@ bc = PowerTransformer(method="box-cox")
 yj = PowerTransformer(method="yeo-johnson")
 # n_quantiles is set to the training set size rather than the default value
 # to avoid a warning being raised by this example
-qt = QuantileTransformer(
-    n_quantiles=500, output_distribution="normal", random_state=rng
-)
+qt = QuantileTransformer(n_quantiles=500, output_distribution="normal", random_state=rng)
 size = (N_SAMPLES, 1)
 
 

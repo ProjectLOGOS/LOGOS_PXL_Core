@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # This is used (with minor differences) in both the class and the function
-_AUTO_ARIMA_DOCSTR = \
-    """Automatically discover the optimal order for an ARIMA model.
+_AUTO_ARIMA_DOCSTR = """Automatically discover the optimal order for an ARIMA model.
 
     The auto-ARIMA process seeks to identify the most optimal
     parameters for an ``ARIMA`` model, settling on a single fitted ARIMA model.
@@ -178,7 +177,7 @@ _AUTO_ARIMA_DOCSTR = \
         test. See ``pmdarima.arima.seasonality`` for more details. Examples of
         valid kwargs will vary based on the test. For the ``OCSBTest``
         (default) they include:
-        
+
         - 'lag_method'
         - 'max_lag'
 
@@ -251,7 +250,7 @@ _AUTO_ARIMA_DOCSTR = \
         Whether to include an intercept term. Default is "auto" which behaves
         like True until a point in the search where the sum of differencing
         terms will explicitly set it to True or False.
-    
+
     {sarimax_kwargs}
     {fit_args}
     See Also

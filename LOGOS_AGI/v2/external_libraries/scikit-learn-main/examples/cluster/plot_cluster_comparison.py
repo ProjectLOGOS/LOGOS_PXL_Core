@@ -68,9 +68,7 @@ varied = datasets.make_blobs(
 # Set up cluster parameters
 # ============
 plt.figure(figsize=(9 * 2 + 3, 13))
-plt.subplots_adjust(
-    left=0.02, right=0.98, bottom=0.001, top=0.95, wspace=0.05, hspace=0.01
-)
+plt.subplots_adjust(left=0.02, right=0.98, bottom=0.001, top=0.95, wspace=0.05, hspace=0.01)
 
 plot_num = 1
 
@@ -150,9 +148,7 @@ for i_dataset, (dataset, algo_params) in enumerate(datasets):
     bandwidth = cluster.estimate_bandwidth(X, quantile=params["quantile"])
 
     # connectivity matrix for structured Ward
-    connectivity = kneighbors_graph(
-        X, n_neighbors=params["n_neighbors"], include_self=False
-    )
+    connectivity = kneighbors_graph(X, n_neighbors=params["n_neighbors"], include_self=False)
     # make connectivity symmetric
     connectivity = 0.5 * (connectivity + connectivity.T)
 

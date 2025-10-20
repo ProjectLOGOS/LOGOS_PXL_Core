@@ -294,9 +294,7 @@ class TimmRunner(BenchmarkRunner):
         extra_args=None,
     ):
         if self.args.enable_activation_checkpointing:
-            raise NotImplementedError(
-                "Activation checkpointing not implemented for Timm models"
-            )
+            raise NotImplementedError("Activation checkpointing not implemented for Timm models")
 
         is_training = self.args.training
         use_eval_mode = self.args.use_eval_mode
@@ -322,23 +320,19 @@ class TimmRunner(BenchmarkRunner):
         recorded_batch_size = TIMM_MODELS[model_name]
 
         if model_name in BATCH_SIZE_DIVISORS:
-            recorded_batch_size = max(
-                int(recorded_batch_size / BATCH_SIZE_DIVISORS[model_name]), 1
-            )
+            recorded_batch_size = max(int(recorded_batch_size / BATCH_SIZE_DIVISORS[model_name]), 1)
         batch_size = batch_size or recorded_batch_size
 
         torch.manual_seed(1337)
-        input_tensor = torch.randint(
-            256, size=(batch_size,) + input_size, device=device
-        ).to(dtype=torch.float32)
+        input_tensor = torch.randint(256, size=(batch_size,) + input_size, device=device).to(
+            dtype=torch.float32
+        )
         mean = torch.mean(input_tensor)
         std_dev = torch.std(input_tensor)
         example_inputs = (input_tensor - mean) / std_dev
 
         if channels_last:
-            example_inputs = example_inputs.contiguous(
-                memory_format=torch.channels_last
-            )
+            example_inputs = example_inputs.contiguous(memory_format=torch.channels_last)
         example_inputs = [
             example_inputs,
         ]
@@ -398,8 +392,7 @@ class TimmRunner(BenchmarkRunner):
             from torch._inductor import config as inductor_config
 
             if name in REQUIRE_EVEN_HIGHER_TOLERANCE or (
-                inductor_config.max_autotune
-                and name in REQUIRE_EVEN_HIGHER_TOLERANCE_MAX_AUTOTUNE
+                inductor_config.max_autotune and name in REQUIRE_EVEN_HIGHER_TOLERANCE_MAX_AUTOTUNE
             ):
                 tolerance = 8 * 1e-2
             elif name in REQUIRE_HIGHER_TOLERANCE or (

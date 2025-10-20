@@ -9,4 +9,3 @@ __ github_
 
 .. literalinclude:: ../../examples/contrib/cevae/synthetic.py
     :language: python
-

@@ -140,9 +140,7 @@ def check_nightly_binaries_date(package: str) -> None:
             imported_module = importlib.import_module(module["name"])
             module_version = imported_module.__version__
             date_m_str = re.findall("dev\\d+", module_version)
-            date_m_delta = datetime.now() - datetime.strptime(
-                date_m_str[0][3:], format_dt
-            )
+            date_m_delta = datetime.now() - datetime.strptime(date_m_str[0][3:], format_dt)
             print(f"Nightly date check for {module['name']} version {module_version}")
             if date_m_delta.days > NIGHTLY_ALLOWED_DELTA:
                 raise RuntimeError(
@@ -213,17 +211,13 @@ def cudnn_to_version_str(cudnn_version: int) -> str:
     return f"{major}.{minor}.{patch}"
 
 
-def compare_pypi_to_torch_versions(
-    package: str, pypi_version: str, torch_version: str
-) -> None:
+def compare_pypi_to_torch_versions(package: str, pypi_version: str, torch_version: str) -> None:
     if pypi_version is None:
         raise RuntimeError(f"Can't find {package} in PyPI for Torch: {torch_version}")
     if pypi_version.startswith(torch_version):
         print(f"Found matching {package}. Torch: {torch_version} PyPI {pypi_version}")
     else:
-        raise RuntimeError(
-            f"Wrong {package} version. Torch: {torch_version} PyPI: {pypi_version}"
-        )
+        raise RuntimeError(f"Wrong {package} version. Torch: {torch_version} PyPI: {pypi_version}")
 
 
 def smoke_test_cuda(
@@ -299,9 +293,7 @@ def smoke_test_conv2d() -> None:
     m = nn.Conv2d(16, 33, (3, 5), stride=(2, 1), padding=(4, 2))
     assert m is not None
     # non-square kernels and unequal stride and with padding and dilation
-    basic_conv = nn.Conv2d(
-        16, 33, (3, 5), stride=(2, 1), padding=(4, 2), dilation=(3, 1)
-    )
+    basic_conv = nn.Conv2d(16, 33, (3, 5), stride=(2, 1), padding=(4, 2), dilation=(3, 1))
     input = torch.randn(20, 16, 50, 100)
     output = basic_conv(input)
 
@@ -326,11 +318,7 @@ def test_linalg(device="cpu") -> None:
     print(f"Testing smoke_test_linalg on {device}")
     A = torch.randn(5, 3, device=device)
     U, S, Vh = torch.linalg.svd(A, full_matrices=False)
-    assert (
-        U.shape == A.shape
-        and S.shape == torch.Size([3])
-        and Vh.shape == torch.Size([3, 3])
-    )
+    assert U.shape == A.shape and S.shape == torch.Size([3]) and Vh.shape == torch.Size([3, 3])
     torch.dist(A, U @ torch.diag(S) @ Vh)
 
     U, S, Vh = torch.linalg.svd(A)

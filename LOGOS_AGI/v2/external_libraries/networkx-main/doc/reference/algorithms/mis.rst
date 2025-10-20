@@ -7,4 +7,3 @@ Maximal independent set
    :toctree: generated/
 
    maximal_independent_set
-

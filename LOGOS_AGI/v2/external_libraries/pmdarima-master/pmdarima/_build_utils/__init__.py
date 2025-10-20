@@ -12,13 +12,13 @@ import contextlib
 
 from .pre_build_helpers import basic_check_build
 
-DEFAULT_ROOT = 'pmdarima'
-CYTHON_MIN_VERSION = '0.28.5'  # 28 since 3.5 uses 28, not 29
+DEFAULT_ROOT = "pmdarima"
+CYTHON_MIN_VERSION = "0.28.5"  # 28 since 3.5 uses 28, not 29
 
 
 def get_blas_info():
     def atlas_not_found(blas_info_):
-        def_macros = blas_info.get('define_macros', [])
+        def_macros = blas_info.get("define_macros", [])
         for x in def_macros:
             if x[0] == "NO_ATLAS_INFO":
                 # if x[1] != 1 we should have lapack
@@ -30,20 +30,21 @@ def get_blas_info():
                     return True
         return False
 
-    blas_info = get_info('blas_opt', 0)
+    blas_info = get_info("blas_opt", 0)
     if (not blas_info) or atlas_not_found(blas_info):
-        cblas_libs = ['cblas']
-        blas_info.pop('libraries', None)
+        cblas_libs = ["cblas"]
+        blas_info.pop("libraries", None)
     else:
-        cblas_libs = blas_info.pop('libraries', [])
+        cblas_libs = blas_info.pop("libraries", [])
 
     return cblas_libs, blas_info
 
 
 def _check_cython_version():
-    message = 'Please install Cython with a version >= {0} in order ' \
-              'to build a pmdarima distribution from source.' \
-              .format(CYTHON_MIN_VERSION)
+    message = (
+        "Please install Cython with a version >= {0} in order "
+        "to build a pmdarima distribution from source.".format(CYTHON_MIN_VERSION)
+    )
     try:
         import Cython
     except ModuleNotFoundError:
@@ -51,8 +52,9 @@ def _check_cython_version():
         raise ModuleNotFoundError(message)
 
     if LooseVersion(Cython.__version__) < CYTHON_MIN_VERSION:
-        message += (' The current version of Cython is {} installed in {}.'
-                    .format(Cython.__version__, Cython.__path__))
+        message += " The current version of Cython is {} installed in {}.".format(
+            Cython.__version__, Cython.__path__
+        )
         raise ValueError(message)
 
 
@@ -81,6 +83,7 @@ def cythonize_extensions(top_path, config):
     n_jobs = 1
     with contextlib.suppress(ImportError):
         import joblib
+
         if LooseVersion(joblib.__version__) > LooseVersion("0.13.0"):
             # earlier joblib versions don't account for CPU affinity
             # constraints, and may over-estimate the number of available
@@ -88,9 +91,8 @@ def cythonize_extensions(top_path, config):
             n_jobs = joblib.cpu_count()
 
     config.ext_modules = cythonize(
-        config.ext_modules,
-        nthreads=n_jobs,
-        compiler_directives={'language_level': 3})
+        config.ext_modules, nthreads=n_jobs, compiler_directives={"language_level": 3}
+    )
 
 
 def gen_from_templates(templates, top_path):
@@ -99,12 +101,10 @@ def gen_from_templates(templates, top_path):
     from Cython import Tempita
 
     for template in templates:
-        outfile = template.replace('.tp', '')
+        outfile = template.replace(".tp", "")
 
         # if the template is not updated, no need to output the cython file
-        if not (os.path.exists(outfile) and
-                os.stat(template).st_mtime < os.stat(outfile).st_mtime):
-
+        if not (os.path.exists(outfile) and os.stat(template).st_mtime < os.stat(outfile).st_mtime):
             with open(template, "r") as f:
                 tmpl = f.read()
 

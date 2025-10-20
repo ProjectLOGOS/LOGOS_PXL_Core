@@ -172,8 +172,7 @@ def config_list(**configs):
 
     for inputs in configs["attrs"]:
         tmp_result = [
-            {configs["attr_names"][i]: input_value}
-            for i, input_value in enumerate(inputs)
+            {configs["attr_names"][i]: input_value} for i, input_value in enumerate(inputs)
         ]
         # TODO(mingzhe0908):
         # If multiple 'tags' were provided, do they get concat?
@@ -273,9 +272,7 @@ def random_sample_configs(**configs):
     that you don't want, and remove them.
     """
     if "probs" not in configs:
-        raise ValueError(
-            "probs is missing. Consider adding probs or using other config functions"
-        )
+        raise ValueError("probs is missing. Consider adding probs or using other config functions")
 
     configs_attrs_list = []
     randomsample = RandomSample(configs)
@@ -311,10 +308,7 @@ def op_list(**configs):
     if "attrs" not in configs:
         raise ValueError("Missing attrs in configs")
     for inputs in configs["attrs"]:
-        tmp_result = {
-            configs["attr_names"][i]: input_value
-            for i, input_value in enumerate(inputs)
-        }
+        tmp_result = {configs["attr_names"][i]: input_value for i, input_value in enumerate(inputs)}
         generated_configs.append(tmp_result)
     return generated_configs
 
@@ -326,8 +320,7 @@ def get_operator_range(chars_range):
 
     if all(item not in chars_range for item in [",", "-"]):
         raise ValueError(
-            "The correct format for operator_range is "
-            "<start>-<end>, or <point>, <start>-<end>"
+            "The correct format for operator_range is " "<start>-<end>, or <point>, <start>-<end>"
         )
 
     ops_start_chars_set = set()
@@ -337,9 +330,7 @@ def get_operator_range(chars_range):
             ops_start_chars_set.add(item.lower())
             continue
         start, end = item.split("-")
-        ops_start_chars_set.update(
-            chr(c).lower() for c in range(ord(start), ord(end) + 1)
-        )
+        ops_start_chars_set.update(chr(c).lower() for c in range(ord(start), ord(end) + 1))
     return ops_start_chars_set
 
 

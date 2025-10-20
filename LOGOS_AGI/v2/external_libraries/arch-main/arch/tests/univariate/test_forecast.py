@@ -63,12 +63,9 @@ ANALYTICAL_VOLATILITIES = [
 MODEL_SPECS = list(product(MEAN_MODELS, VOLATILITIES))
 ANALYTICAL_MODEL_SPECS = list(product(MEAN_MODELS, ANALYTICAL_VOLATILITIES))
 
-IDS = [
-    f"{str(mean).split('(')[0]}-{str(vol).split('(')[0]}" for mean, vol in MODEL_SPECS
-]
+IDS = [f"{str(mean).split('(')[0]}-{str(vol).split('(')[0]}" for mean, vol in MODEL_SPECS]
 ANALYTICAL_IDS = [
-    f"{str(mean).split('(')[0]}-{str(vol).split('(')[0]}"
-    for mean, vol in ANALYTICAL_MODEL_SPECS
+    f"{str(mean).split('(')[0]}-{str(vol).split('(')[0]}" for mean, vol in ANALYTICAL_MODEL_SPECS
 ]
 
 
@@ -117,9 +114,7 @@ class TestForecasting:
 
     def test_ar_forecasting(self):
         params = np.array([0.9])
-        forecasts = _ar_forecast(
-            self.zero_mean, 5, 0, 0.0, params, np.empty(0), np.empty(0)
-        )
+        forecasts = _ar_forecast(self.zero_mean, 5, 0, 0.0, params, np.empty(0), np.empty(0))
         expected = np.zeros((1000, 5))
         expected[:, 0] = 0.9 * self.zero_mean.values
         for i in range(1, 5):
@@ -127,18 +122,14 @@ class TestForecasting:
         assert_allclose(forecasts, expected)
 
         params = np.array([0.5, -0.3, 0.2])
-        forecasts = _ar_forecast(
-            self.zero_mean, 5, 2, 0.0, params, np.empty(0), np.empty(0)
-        )
+        forecasts = _ar_forecast(self.zero_mean, 5, 2, 0.0, params, np.empty(0), np.empty(0))
         expected = np.zeros((998, 8))
         expected[:, 0] = self.zero_mean.iloc[0:-2]
         expected[:, 1] = self.zero_mean.iloc[1:-1]
         expected[:, 2] = self.zero_mean.iloc[2:]
         for i in range(3, 8):
             expected[:, i] = (
-                0.5 * expected[:, i - 1]
-                - 0.3 * expected[:, i - 2]
-                + 0.2 * expected[:, i - 3]
+                0.5 * expected[:, i - 1] - 0.3 * expected[:, i - 2] + 0.2 * expected[:, i - 3]
             )
         fill = np.empty((2, 5))
         fill.fill(np.nan)
@@ -190,9 +181,7 @@ class TestForecasting:
         fcast_reindex = res.forecast(res.params, horizon=3, reindex=True)
         assert_frame_equal(fcast.mean, fcast_reindex.mean.iloc[-1:])
         assert_frame_equal(fcast.variance, fcast_reindex.variance.iloc[-1:])
-        assert_frame_equal(
-            fcast.residual_variance, fcast_reindex.residual_variance.iloc[-1:]
-        )
+        assert_frame_equal(fcast.residual_variance, fcast_reindex.residual_variance.iloc[-1:])
         assert fcast_reindex.mean.shape[0] == self.zero_mean.shape[0]
 
         assert np.all(np.asarray(np.isnan(fcast.mean[:-1])))
@@ -292,9 +281,7 @@ class TestForecasting:
         expected = np.zeros(7)
         expected[:2] = self.ar2.iloc[-2:]
         for i in range(2, 7):
-            expected[i] = (
-                params[0] + params[1] * expected[i - 1] + params[2] * expected[i - 2]
-            )
+            expected[i] = params[0] + params[1] * expected[i - 1] + params[2] * expected[i - 2]
 
         expected = expected[2:]
         assert np.all(np.asarray(np.isnan(fcast.mean.iloc[:-1])))
@@ -319,9 +306,7 @@ class TestForecasting:
         expected[:, 1] = self.ar2.iloc[1:]
         for i in range(2, 7):
             expected[:, i] = (
-                params[0]
-                + params[1] * expected[:, i - 1]
-                + params[2] * expected[:, i - 2]
+                params[0] + params[1] * expected[:, i - 1] + params[2] * expected[:, i - 2]
             )
         fill = np.empty((1, 5))
         fill.fill(np.nan)
@@ -446,18 +431,12 @@ class TestForecasting:
                 start=0,
                 method="simulation",
             )
-            forecast_reindex = res.forecast(
-                horizon=5, start=10, method="simulation", reindex=True
-            )
+            forecast_reindex = res.forecast(horizon=5, start=10, method="simulation", reindex=True)
         assert forecast.simulations.index.shape[0] == self.ar1.shape[0]
-        assert (
-            forecast.simulations.index.shape[0] == forecast.simulations.values.shape[0]
-        )
+        assert forecast.simulations.index.shape[0] == forecast.simulations.values.shape[0]
 
         with preserved_state(self.rng):
-            forecast_reindex = res.forecast(
-                horizon=5, start=10, method="simulation", reindex=True
-            )
+            forecast_reindex = res.forecast(horizon=5, start=10, method="simulation", reindex=True)
         assert forecast_reindex.mean.shape[0] == self.ar1.shape[0]
         assert forecast_reindex.simulations.index.shape[0] == self.ar1.shape[0]
 
@@ -486,9 +465,7 @@ class TestForecasting:
         means[:, 0] = const + ar * y
         for i in range(1, 5):
             means[:, i] = const + ar * means[:, i - 1]
-        means = pd.DataFrame(
-            means, index=index, columns=[f"h.{j}" for j in range(1, 6)]
-        )
+        means = pd.DataFrame(means, index=index, columns=[f"h.{j}" for j in range(1, 6)])
         assert_frame_equal(means, forecast.mean)
         var = np.concatenate([[[np.nan] * 5], vfcast.forecasts])
         rv = pd.DataFrame(var, index=index, columns=[f"h.{j}" for j in range(1, 6)])
@@ -642,9 +619,7 @@ def test_reindex(model_spec, reindex, first_obs, last_obs):
     res = model_spec.fit(disp="off", first_obs=first_obs, last_obs=last_obs)
     fcast = res.forecast(horizon=1, reindex=reindex)
     assert fcast.mean.shape == (dim0, 1)
-    fcast = res.forecast(
-        horizon=2, method="simulation", simulations=25, reindex=reindex
-    )
+    fcast = res.forecast(horizon=2, method="simulation", simulations=25, reindex=reindex)
     assert fcast.mean.shape == (dim0, 2)
     fcast = res.forecast(horizon=2, method="bootstrap", simulations=25, reindex=reindex)
     assert fcast.mean.shape == (dim0, 2)
@@ -732,9 +707,7 @@ def test_x_reformat_1var(exog_format):
             nexog = 1
     cols = [f"x{i}" for i in range(1, nexog + 1)]
     rng = RandomState(12345)
-    x = pd.DataFrame(
-        rng.standard_normal((SP500.shape[0], nexog)), columns=cols, index=SP500.index
-    )
+    x = pd.DataFrame(rng.standard_normal((SP500.shape[0], nexog)), columns=cols, index=SP500.index)
     mod = ARX(SP500, lags=1, x=x)
     res = mod.fit()
     fcasts = res.forecast(horizon=10, x=exog)
@@ -1036,9 +1009,7 @@ def test_rescale():
     omega_bar_rescale = res_rescale.params.omega / (
         1 - res_rescale.params["alpha[1]"] - res_rescale.params["beta[1]"]
     )
-    assert_allclose(
-        lr_fcast_rescale.residual_variance.iloc[0, -1], omega_bar_rescale, rtol=1e-5
-    )
+    assert_allclose(lr_fcast_rescale.residual_variance.iloc[0, -1], omega_bar_rescale, rtol=1e-5)
 
     rets = 10000 * SP500.copy()
     model_rescale = arch_model(
@@ -1056,9 +1027,7 @@ def test_rescale():
     omega_bar_rescale = res_rescale.params.omega / (
         1 - res_rescale.params["alpha[1]"] - res_rescale.params["beta[1]"]
     )
-    assert_allclose(
-        lr_fcast_rescale.residual_variance.iloc[0, -1], omega_bar_rescale, rtol=1e-5
-    )
+    assert_allclose(lr_fcast_rescale.residual_variance.iloc[0, -1], omega_bar_rescale, rtol=1e-5)
 
 
 def test_rescale_ar():
@@ -1220,7 +1189,5 @@ def test_forecast_start():
     c, p1, p2, p3, b, _ = res.params
     oos = np.full((8, 1), np.nan)
     for i in range(2, 9):
-        oos[i - 2, 0] = (
-            c + p1 * y[i] + p2 * y[i - 1] + p3 * y[i - 2] + b * x.iloc[i + 1, 0]
-        )
+        oos[i - 2, 0] = c + p1 * y[i] + p2 * y[i - 1] + p3 * y[i - 2] + b * x.iloc[i + 1, 0]
     assert_allclose(fcast.mean, oos)

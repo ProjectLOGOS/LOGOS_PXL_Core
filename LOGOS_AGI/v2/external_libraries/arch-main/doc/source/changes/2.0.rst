@@ -16,5 +16,3 @@ Version 2.1
   * KPSS
   * Variance Ratio
 - Removed deprecated locations for ARCH modeling functions
-
-

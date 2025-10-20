@@ -53,9 +53,7 @@ def main():
     result_path = sys.argv[1]
     all_benchamrks = [Benchmark(False), Benchmark(True)]
     for b in all_benchamrks:
-        b.enable_compile_time_instruction_count().collect_all().append_results(
-            result_path
-        )
+        b.enable_compile_time_instruction_count().collect_all().append_results(result_path)
 
 
 if __name__ == "__main__":

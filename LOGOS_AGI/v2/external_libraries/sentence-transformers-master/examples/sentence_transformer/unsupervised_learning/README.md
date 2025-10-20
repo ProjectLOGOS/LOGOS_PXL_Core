@@ -64,6 +64,3 @@ In [GPL: Generative Pseudo Labeling for Unsupervised Domain Adaptation of Dense 
 
 In our paper 
 [TSDAE](https://arxiv.org/abs/2104.06979) we compare approaches for sentence embedding tasks, and in [GPL](https://arxiv.org/abs/2112.07577) we compare them for semantic search tasks (given a query, find relevant passages). While the unsupervised approach achieve acceptable performances for sentence embedding tasks, they perform poorly for semantic search tasks.
-
-
-

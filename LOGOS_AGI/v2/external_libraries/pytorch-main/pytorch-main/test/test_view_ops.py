@@ -49,9 +49,7 @@ def _generate_input(shape, dtype, device, with_extremal):
                 x = torch.randn(*shape, device=device) * random.randint(30, 100)
                 x = x.to(torch.bfloat16)
             else:
-                x = torch.randn(*shape, dtype=dtype, device=device) * random.randint(
-                    30, 100
-                )
+                x = torch.randn(*shape, dtype=dtype, device=device) * random.randint(30, 100)
             x[torch.randn(*shape) > 0.5] = 0
             if with_extremal and dtype.is_floating_point:
                 # Use extremal values
@@ -163,15 +161,15 @@ class TestViewOps(TestCase):
 
         def generate_inputs():
             yield make_tensor((4, 4, 64), dtype=dtype, device=device, low=-5, high=5)
-            yield make_tensor(
-                (4, 4, 64), dtype=dtype, device=device, low=-5, high=5
-            ).permute(1, 0, 2)
-            yield make_tensor(
-                (4, 64, 4), dtype=dtype, device=device, low=-5, high=5
-            ).permute(2, 0, 1)
-            yield make_tensor(
-                (1, 5, 1), dtype=dtype, device=device, low=-5, high=5
-            ).expand(5, 5, 64)
+            yield make_tensor((4, 4, 64), dtype=dtype, device=device, low=-5, high=5).permute(
+                1, 0, 2
+            )
+            yield make_tensor((4, 64, 4), dtype=dtype, device=device, low=-5, high=5).permute(
+                2, 0, 1
+            )
+            yield make_tensor((1, 5, 1), dtype=dtype, device=device, low=-5, high=5).expand(
+                5, 5, 64
+            )
             yield make_tensor((2, 5, 256), dtype=dtype, device=device, low=-5, high=5)[
                 1::2, 1:, ::2
             ]
@@ -215,16 +213,12 @@ class TestViewOps(TestCase):
                 ) == torch._utils._element_size(view_dtype)
 
                 if not equal_element_size and a.dim() == 0:
-                    with self.assertRaisesRegex(
-                        RuntimeError, r"self.dim\(\) cannot be 0"
-                    ):
+                    with self.assertRaisesRegex(RuntimeError, r"self.dim\(\) cannot be 0"):
                         a.view(view_dtype)
                     continue
 
                 if not equal_element_size and a.stride(-1) != 1:
-                    with self.assertRaisesRegex(
-                        RuntimeError, r"self.stride\(-1\) must be 1"
-                    ):
+                    with self.assertRaisesRegex(RuntimeError, r"self.stride\(-1\) must be 1"):
                         a.view(view_dtype)
                     continue
 
@@ -232,9 +226,7 @@ class TestViewOps(TestCase):
                 self.assertEqual(a_view.dtype, view_dtype)
                 self.assertEqual(a.data_ptr(), a_view.data_ptr())
 
-                expected_size, expected_stride = calc_expected_size_and_stride(
-                    a, view_dtype
-                )
+                expected_size, expected_stride = calc_expected_size_and_stride(a, view_dtype)
                 self.assertEqual(a_view.size(), expected_size)
                 self.assertEqual(a_view.stride(), expected_stride)
 
@@ -254,9 +246,7 @@ class TestViewOps(TestCase):
         # because view(dtype) does not support backward yet
         # TODO: Remove this when autograd support is added
         if dtype.is_floating_point or dtype.is_complex:
-            for view_dtype in floating_and_complex_types_and(
-                torch.half, torch.bfloat16
-            ):
+            for view_dtype in floating_and_complex_types_and(torch.half, torch.bfloat16):
                 t = make_tensor(
                     (5, 5, 64),
                     dtype=dtype,
@@ -274,17 +264,13 @@ class TestViewOps(TestCase):
     def test_view_dtype_upsize_errors(self, device, dtype):
         dtype_size = torch._utils._element_size(dtype)
 
-        for view_dtype in all_types_and_complex_and(
-            torch.half, torch.bfloat16, torch.bool
-        ):
+        for view_dtype in all_types_and_complex_and(torch.half, torch.bfloat16, torch.bool):
             view_dtype_size = torch._utils._element_size(view_dtype)
             if view_dtype_size <= dtype_size:
                 continue
 
             size_ratio = view_dtype_size // dtype_size
-            a = make_tensor(
-                (4, 4, size_ratio + 1), dtype=dtype, device=device, low=-5, high=5
-            )
+            a = make_tensor((4, 4, size_ratio + 1), dtype=dtype, device=device, low=-5, high=5)
             with self.assertRaisesRegex(
                 RuntimeError, rf"self.size\(-1\) must be divisible by {size_ratio}"
             ):
@@ -296,9 +282,7 @@ class TestViewOps(TestCase):
             ):
                 a[:, :, 1:].view(view_dtype)
 
-            a = make_tensor(
-                (4, 4, size_ratio), dtype=dtype, device=device, low=-5, high=5
-            )
+            a = make_tensor((4, 4, size_ratio), dtype=dtype, device=device, low=-5, high=5)
             a = a.as_strided((4, 4, size_ratio), (size_ratio, 1, 1))
             with self.assertRaisesRegex(
                 RuntimeError, rf"self.stride\(1\) must be divisible by {size_ratio}"
@@ -398,9 +382,7 @@ class TestViewOps(TestCase):
 
     @onlyNativeDeviceTypes
     @dtypes(*all_types_and_complex_and(torch.half, torch.bfloat16, torch.bool))
-    @dtypesIfMPS(
-        *integral_types_and(torch.half, torch.bfloat16, torch.bool, torch.float32)
-    )
+    @dtypesIfMPS(*integral_types_and(torch.half, torch.bfloat16, torch.bool, torch.float32))
     def test_view_tensor_split(self, device, dtype):
         a = make_tensor((40, 30), dtype=dtype, device=device, low=-9, high=9)
         a_split_dim0 = a.tensor_split(7, 0)
@@ -868,9 +850,7 @@ class TestViewOps(TestCase):
         self.assertTrue(self.is_view_of_same_base(t, v))
 
         # stride[i] = stride[i + 1] * size[i + 1] is satisfied for 3 groups:
-        t = torch.ones(720, device=device).as_strided(
-            (2, 3, 2, 3, 5, 4), (6, 2, 15, 5, 1, 0)
-        )
+        t = torch.ones(720, device=device).as_strided((2, 3, 2, 3, 5, 4), (6, 2, 15, 5, 1, 0))
         #               [--1--|---2---|-3-] [--1--|----2---|-3-]
         v1 = t.flatten(0, 1)
         v2 = v1.flatten(1, 3)
@@ -939,9 +919,7 @@ class TestViewOps(TestCase):
         nv[1, 1] = 0
         self.assertNotEqual(t[2, 2], nv[1, 1])
 
-    @unittest.skipIf(
-        IS_FBCODE, "TorchScript backend not yet supported in FBCODE/OVRSOURCE builds"
-    )
+    @unittest.skipIf(IS_FBCODE, "TorchScript backend not yet supported in FBCODE/OVRSOURCE builds")
     def test_advanced_indexing_assignment(self, device):
         t = torch.ones(3, 3, device=device)
         rows = torch.tensor([[0, 0], [2, 2]], device=device)
@@ -1136,9 +1114,7 @@ class TestOldViewOps(TestCase):
         # test non-contiguous
         noncontig = torch.randn(5, 2, 1, 3, device=device)[:, 0]
         self.assertFalse(noncontig.is_contiguous())
-        self.assertEqual(
-            noncontig.expand(2, 5, 4, 3), noncontig.contiguous().repeat(2, 1, 4, 1)
-        )
+        self.assertEqual(noncontig.expand(2, 5, 4, 3), noncontig.contiguous().repeat(2, 1, 4, 1))
 
         # make sure it's compatible with unsqueeze
         expanded = tensor2.expand(1, 1, 5)
@@ -1151,9 +1127,7 @@ class TestOldViewOps(TestCase):
         self.assertRaises(RuntimeError, lambda: tensor2.expand(-1, -1))
 
         # test expanding empty to empty
-        self.assertEqual(
-            torch.zeros(0, device=device).expand((0,)), torch.zeros(0, device=device)
-        )
+        self.assertEqual(torch.zeros(0, device=device).expand((0,)), torch.zeros(0, device=device))
 
     # TODO: this should be refactored into the view ops test suite
     def test_view_empty(self, device):
@@ -1192,9 +1166,7 @@ class TestOldViewOps(TestCase):
         x = torch.randn(3, 3, device=device)
         self.assertEqual(x.data_ptr(), x.reshape_as(torch.rand(9)).data_ptr())
         self.assertEqual(x.data_ptr(), x.reshape_as(torch.rand(1, 9, 1)).data_ptr())
-        self.assertRaises(
-            RuntimeError, lambda: x.reshape_as(torch.rand(10, device=device))
-        )
+        self.assertRaises(RuntimeError, lambda: x.reshape_as(torch.rand(10, device=device)))
 
     def test_flatten(self, device):
         # Test that flatten returns 1-dim tensor when given a 0-dim tensor
@@ -1251,9 +1223,7 @@ class TestOldViewOps(TestCase):
                 src.flatten(5, 10)
 
             # invalid start and end
-            with self.assertRaisesRegex(
-                RuntimeError, "start_dim cannot come after end_dim"
-            ):
+            with self.assertRaisesRegex(RuntimeError, "start_dim cannot come after end_dim"):
                 src.flatten(2, 0)
 
     # TODO: update to work on CUDA, too
@@ -1265,9 +1235,7 @@ class TestOldViewOps(TestCase):
         self.assertEqual(x.narrow(0, 1, 1), torch.tensor([[3, 4, 5]]))
         self.assertEqual(x.narrow(0, -1, 1), torch.tensor([[6, 7, 8]]))
         self.assertEqual(x.narrow(0, -2, 2), torch.tensor([[3, 4, 5], [6, 7, 8]]))
-        self.assertEqual(
-            x.narrow(0, -3, 3), torch.tensor([[0, 1, 2], [3, 4, 5], [6, 7, 8]])
-        )
+        self.assertEqual(x.narrow(0, -3, 3), torch.tensor([[0, 1, 2], [3, 4, 5], [6, 7, 8]]))
         self.assertEqual(x.narrow(-1, -1, 1), torch.tensor([[2], [5], [8]]))
         self.assertEqual(x.narrow(-2, -1, 1), torch.tensor([[6, 7, 8]]))
 
@@ -1326,9 +1294,7 @@ class TestOldViewOps(TestCase):
         start = 0
         for target_size, split in zip(target_sizes, splits):
             self.assertEqual(split.size(), target_size)
-            self.assertEqual(
-                tensor.narrow(dim, start, target_size[dim]), split, atol=0, rtol=0
-            )
+            self.assertEqual(tensor.narrow(dim, start, target_size[dim]), split, atol=0, rtol=0)
             start = start + target_size[dim]
 
         # Variable sections split
@@ -1340,9 +1306,7 @@ class TestOldViewOps(TestCase):
         start = 0
         for target_size, split in zip(target_sizes, splits):
             self.assertEqual(split.size(), target_size)
-            self.assertEqual(
-                tensor.narrow(dim, start, target_size[dim]), split, atol=0, rtol=0
-            )
+            self.assertEqual(tensor.narrow(dim, start, target_size[dim]), split, atol=0, rtol=0)
             start = start + target_size[dim]
 
         split_sizes = [2, 2, 6]
@@ -1352,9 +1316,7 @@ class TestOldViewOps(TestCase):
         start = 0
         for target_size, split in zip(target_sizes, splits):
             self.assertEqual(split.size(), target_size)
-            self.assertEqual(
-                tensor.narrow(dim, start, target_size[dim]), split, atol=0, rtol=0
-            )
+            self.assertEqual(tensor.narrow(dim, start, target_size[dim]), split, atol=0, rtol=0)
             start = start + target_size[dim]
 
     @onlyCPU
@@ -1367,9 +1329,7 @@ class TestOldViewOps(TestCase):
         start = 0
         for target_size, split in zip(target_sizes, splits):
             self.assertEqual(split.size(), target_size)
-            self.assertEqual(
-                tensor.narrow(dim, start, target_size[dim]), split, atol=0, rtol=0
-            )
+            self.assertEqual(tensor.narrow(dim, start, target_size[dim]), split, atol=0, rtol=0)
             start = start + target_size[dim]
 
         # Invalid chunk sizes
@@ -1414,9 +1374,7 @@ class TestOldViewOps(TestCase):
     @dtypes(*all_types_and_complex_and(torch.half, torch.bfloat16, torch.bool))
     def test_transposes(self, device, dtype):
         for op in ("T", "H", "mT", "mH", "adjoint"):
-            shapes = (
-                ((2, 3), (2, 3, 4)) if op[0] == "m" or op == "adjoint" else ((2, 3),)
-            )
+            shapes = ((2, 3), (2, 3, 4)) if op[0] == "m" or op == "adjoint" else ((2, 3),)
             for shape in shapes:
                 a = make_tensor(shape, device=device, dtype=dtype)
                 t1 = getattr(a, op)
@@ -1461,9 +1419,7 @@ class TestOldViewOps(TestCase):
 
     def test_memory_format_resize_as(self, device):
         def test_helper(shape, memory_format, device):
-            xc = torch.randn(shape, device=device).contiguous(
-                memory_format=memory_format
-            )
+            xc = torch.randn(shape, device=device).contiguous(memory_format=memory_format)
             flat = torch.randn(xc.numel(), device=device)
             flat.resize_as_(xc, memory_format=torch.preserve_format)
             self.assertTrue(flat.is_contiguous(memory_format=memory_format))
@@ -1478,9 +1434,7 @@ class TestOldViewOps(TestCase):
             self.assertTrue(flat.is_contiguous(memory_format=memory_format))
 
         test_helper((10, 3, 32, 32), 10 * 3 * 32 * 32, torch.channels_last, device)
-        test_helper(
-            (3, 10, 3, 32, 32), 3 * 10 * 3 * 32 * 32, torch.channels_last_3d, device
-        )
+        test_helper((3, 10, 3, 32, 32), 3 * 10 * 3 * 32 * 32, torch.channels_last_3d, device)
 
     @onlyNativeDeviceTypes
     @dtypes(torch.int64, torch.float, torch.complex128)
@@ -1515,22 +1469,14 @@ class TestOldViewOps(TestCase):
                             dst_dim = dst_dim - nd
 
                         partial_map = {
-                            torch.swapdims: partial(
-                                torch.swapdims, dim0=src_dim, dim1=dst_dim
-                            ),
-                            torch.swapaxes: partial(
-                                torch.swapaxes, axis0=src_dim, axis1=dst_dim
-                            ),
-                            torch.transpose: partial(
-                                torch.transpose, dim0=src_dim, dim1=dst_dim
-                            ),
+                            torch.swapdims: partial(torch.swapdims, dim0=src_dim, dim1=dst_dim),
+                            torch.swapaxes: partial(torch.swapaxes, axis0=src_dim, axis1=dst_dim),
+                            torch.transpose: partial(torch.transpose, dim0=src_dim, dim1=dst_dim),
                         }
 
                         torch_fn = partial_map[fn]
                         np_fn = partial(np.swapaxes, axis1=src_dim, axis2=dst_dim)
-                        self.compare_with_numpy(
-                            torch_fn, np_fn, x, device=None, dtype=None
-                        )
+                        self.compare_with_numpy(torch_fn, np_fn, x, device=None, dtype=None)
 
             # Move dim to same position
             x = torch.randn(2, 3, 5, 7, 11)
@@ -1553,9 +1499,7 @@ class TestOldViewOps(TestCase):
                         x = _generate_input(shape, dtype, device, with_extremal)
                         if contiguous:
                             x = x.T
-                        self.compare_with_numpy(
-                            torch_fn, np_fn, x, device=None, dtype=None
-                        )
+                        self.compare_with_numpy(torch_fn, np_fn, x, device=None, dtype=None)
 
                         # Compare sequence input
                         torch_sequence_x = (x,) * random.randint(3, 10)
@@ -1671,8 +1615,7 @@ class TestOldViewOps(TestCase):
             for float_input in error_case:
                 with self.assertRaisesRegex(
                     RuntimeError,
-                    "Input shapes "
-                    "should be of type ints, a tuple of ints, or a list of ints",
+                    "Input shapes " "should be of type ints, a tuple of ints, or a list of ints",
                 ):
                     torch.broadcast_shapes(float_input)
 
@@ -1748,11 +1691,7 @@ class TestOldViewOps(TestCase):
 
         # test view when tensor is not contiguous in every dimension, but only
         # contiguous dimensions are touched.
-        tensor = (
-            torch.rand(4, 2, 5, 1, 6, 2, 9, 3, device=device)
-            .transpose(-1, 2)
-            .transpose(-2, 3)
-        )
+        tensor = torch.rand(4, 2, 5, 1, 6, 2, 9, 3, device=device).transpose(-1, 2).transpose(-2, 3)
         # size:                      [   4,    2,    3,    9,    6,    2,    1,    5]
         # stride:                    [3840, 1620,    1,    3,   54,   27,  324,  324]
         # contiguous dim chunks:     [__________, ____, ____, __________, ____, ____]
@@ -1786,9 +1725,7 @@ class TestOldViewOps(TestCase):
         self.assertRaises(RuntimeError, lambda: tensor.view(8, 3, 54, 2, 1, 5))
 
         # view with stride 0 dims
-        tensor = torch.empty(1, 1, device=device).expand(
-            3, 4
-        )  # all dims are contiguous
+        tensor = torch.empty(1, 1, device=device).expand(3, 4)  # all dims are contiguous
         contig_tensor = tensor.clone()
         self.assertEqual(tensor.view(-1), contig_tensor.view(-1))
         self.assertEqual(tensor.view(1, -1, 1), contig_tensor.view(1, -1, 1))
@@ -1810,9 +1747,7 @@ class TestOldViewOps(TestCase):
         # the copy).
         copy_tensor = tensor.transpose(0, 1).reshape(target)
         self.assertEqual(copy_tensor.size(), target)
-        self.assertNotEqual(
-            tensor.storage().data_ptr(), copy_tensor.storage().data_ptr()
-        )
+        self.assertNotEqual(tensor.storage().data_ptr(), copy_tensor.storage().data_ptr())
 
     def test_contiguous(self, device):
         x = torch.randn(1, 16, 5, 5, device=device)
@@ -1986,9 +1921,7 @@ class TestOldViewOps(TestCase):
     @onlyNativeDeviceTypes
     def test_resize_overflow(self, device):
         x = torch.empty((), dtype=torch.float64)
-        with self.assertRaisesRegex(
-            RuntimeError, "Storage size calculation overflowed"
-        ):
+        with self.assertRaisesRegex(RuntimeError, "Storage size calculation overflowed"):
             x.resize_([2, 4, 2**29, 2**29])
         with self.assertRaisesRegex(RuntimeError, "overflow"):
             x.resize_([8, 8, 2**29, 2**29])
@@ -1998,13 +1931,9 @@ class TestOldViewOps(TestCase):
     @onlyNativeDeviceTypes
     def test_as_strided_overflow_storage_offset(self, device):
         t = torch.randn(2, 3, device=device)
-        with self.assertRaisesRegex(
-            RuntimeError, "Storage size calculation overflowed"
-        ):
+        with self.assertRaisesRegex(RuntimeError, "Storage size calculation overflowed"):
             torch.as_strided(t, [1], [1], 2**63 - 1)
-        with self.assertRaisesRegex(
-            RuntimeError, "Storage size calculation overflowed"
-        ):
+        with self.assertRaisesRegex(RuntimeError, "Storage size calculation overflowed"):
             torch.as_strided(t, [1], [1], 2**61 - 1)
 
     def test_view_all_dtypes_and_devices(self, device):

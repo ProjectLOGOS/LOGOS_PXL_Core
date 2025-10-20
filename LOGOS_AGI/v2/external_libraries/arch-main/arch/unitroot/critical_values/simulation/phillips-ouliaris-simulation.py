@@ -61,9 +61,7 @@ def inner_prod(a: Float64Array, b: Float64Array | None = None) -> Float64Array:
     return a.transpose((0, 2, 1)) @ b
 
 
-def z_tests_vec(
-    z: Float64Array, lag: int, trend: UnitRootTrend
-) -> tuple[np.ndarray, np.ndarray]:
+def z_tests_vec(z: Float64Array, lag: int, trend: UnitRootTrend) -> tuple[np.ndarray, np.ndarray]:
     assert z.ndim == 3
     nobs = int(z.shape[1])
     if trend == "c":
@@ -124,9 +122,7 @@ def z_tests(z: Float64Array, lag: int, trend: UnitRootTrend) -> tuple[float, flo
     return z_a, z_t
 
 
-def p_tests_vec(
-    z: Float64Array, lag: int, trend: UnitRootTrend
-) -> tuple[np.ndarray, np.ndarray]:
+def p_tests_vec(z: Float64Array, lag: int, trend: UnitRootTrend) -> tuple[np.ndarray, np.ndarray]:
     assert z.ndim == 3
     z_lag, z_lead = z[:, :-1], z[:, 1:]
     nobs = z.shape[1]
@@ -287,9 +283,7 @@ def worker(
     ncols = len(SAMPLE_SIZES) * MAX_STOCHASTIC_TRENDS * 4
     block_size = int(MAX_MEMORY / (ncols * 8))
     columns = DF_Z_COLUMNS if statistic == "z" else DF_P_COLUMNS
-    results = pd.DataFrame(
-        index=pd.RangeIndex(EX_SIZE), columns=columns, dtype="double"
-    )
+    results = pd.DataFrame(index=pd.RangeIndex(EX_SIZE), columns=columns, dtype="double")
     gen, results, remaining = load_partial(gen, results, remaining, full_path)
     start = dt.datetime.now()
     last_print_remaining = remaining
@@ -355,9 +349,7 @@ if __name__ == "__main__":
 
     ss = np.random.SeedSequence(entropy)
     children = ss.spawn(len(TRENDS) * EX_NUM * len(STATISTICS))
-    jobs: list[
-        tuple[np.random.Generator, Literal["z", "p"], UnitRootTrend, int, str]
-    ] = []
+    jobs: list[tuple[np.random.Generator, Literal["z", "p"], UnitRootTrend, int, str]] = []
     loc = 0
     from itertools import product
 
@@ -365,8 +357,7 @@ if __name__ == "__main__":
         child = children[loc]
         gen = np.random.Generator(np.random.PCG64(child))
         filename = (
-            "phillips-ouliaris-results-statistic-"
-            + f"{statistic}-trend-{trend}-{idx:04d}.hdf"
+            "phillips-ouliaris-results-statistic-" + f"{statistic}-trend-{trend}-{idx:04d}.hdf"
         )
 
         full_file = os.path.join(ROOT, filename)
@@ -397,10 +388,7 @@ if __name__ == "__main__":
     jobs = first + remaining
     nremconfig = len(jobs)
     nconfig = len(children)
-    print(
-        f"Total configurations: {BLUE}{nconfig}{RESET}, "
-        f"Remaining: {RED}{nremconfig}{RESET}"
-    )
+    print(f"Total configurations: {BLUE}{nconfig}{RESET}, " f"Remaining: {RED}{nremconfig}{RESET}")
     print(f"Running on {BLUE}{njobs}{RESET} CPUs")
     if njobs == 1:
         for job in jobs:

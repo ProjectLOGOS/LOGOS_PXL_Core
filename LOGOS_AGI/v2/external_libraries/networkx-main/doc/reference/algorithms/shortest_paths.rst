@@ -84,4 +84,3 @@ A* Algorithm
 
    astar_path
    astar_path_length
-

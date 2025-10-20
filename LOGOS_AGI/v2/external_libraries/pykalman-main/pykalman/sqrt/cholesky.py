@@ -86,9 +86,7 @@ def _filter_predict(
 
     # predict new mean
     # x_{t+1|t} = A x_t + b_t
-    predicted_state_mean = (
-        np.dot(transition_matrix, current_state_mean) + transition_offset
-    )
+    predicted_state_mean = np.dot(transition_matrix, current_state_mean) + transition_offset
 
     # predict new covariance
     # [S_{k|k-1}^T; 0] = T_1 [ S_{k-1|k-1}^T A^T; Q^{1/2}^T ] for orthonormal T_1
@@ -100,9 +98,7 @@ def _filter_predict(
             ]
         ).T
     )
-    predicted_state_covariance2 = predicted_state_covariance2[
-        :n_dim_state, :n_dim_state
-    ].T
+    predicted_state_covariance2 = predicted_state_covariance2[:n_dim_state, :n_dim_state].T
 
     return (predicted_state_mean, predicted_state_covariance2)
 
@@ -160,9 +156,7 @@ def _filter_correct(
         #                       (C S_{t|t-1})^T,  S_{t|t-1}^T]
         M = np.zeros(2 * [n_dim_obs + n_dim_state])
         M[0:n_dim_obs, 0:n_dim_obs] = observation_covariance2.T
-        M[n_dim_obs:, 0:n_dim_obs] = observation_matrix.dot(
-            predicted_state_covariance2
-        ).T
+        M[n_dim_obs:, 0:n_dim_obs] = observation_matrix.dot(predicted_state_covariance2).T
         M[n_dim_obs:, n_dim_obs:] = predicted_state_covariance2.T
 
         # solve for [((C P_{t|t-1} C^T + R)^{1/2})^T,         K^T;
@@ -401,9 +395,7 @@ class CholeskyKalmanFilter(KalmanFilter):
             Z,
         )
 
-        filtered_state_covariances = _reconstruct_covariances(
-            filtered_state_covariance2s
-        )
+        filtered_state_covariances = _reconstruct_covariances(filtered_state_covariance2s)
 
         return (filtered_state_means, filtered_state_covariances)
 
@@ -508,9 +500,7 @@ class CholeskyKalmanFilter(KalmanFilter):
         # turn covariance into cholesky factorizations
         transition_covariance2 = linalg.cholesky(transition_covariance, lower=True)
         observation_covariance2 = linalg.cholesky(observation_covariance, lower=True)
-        filtered_state_covariance2 = linalg.cholesky(
-            filtered_state_covariance, lower=True
-        )
+        filtered_state_covariance2 = linalg.cholesky(filtered_state_covariance, lower=True)
 
         # predict
         predicted_state_mean, predicted_state_covariance2 = _filter_predict(
@@ -532,9 +522,7 @@ class CholeskyKalmanFilter(KalmanFilter):
         )
 
         # reconstruct actual covariance
-        next_filtered_state_covariance = _reconstruct_covariances(
-            next_filtered_state_covariance2
-        )
+        next_filtered_state_covariance = _reconstruct_covariances(next_filtered_state_covariance2)
 
         return (next_filtered_state_mean, next_filtered_state_covariance)
 
@@ -593,12 +581,8 @@ class CholeskyKalmanFilter(KalmanFilter):
         )
 
         # construct actual covariance matrices
-        predicted_state_covariances = _reconstruct_covariances(
-            predicted_state_covariance2s
-        )
-        filtered_state_covariances = _reconstruct_covariances(
-            filtered_state_covariance2s
-        )
+        predicted_state_covariances = _reconstruct_covariances(predicted_state_covariance2s)
+        filtered_state_covariances = _reconstruct_covariances(filtered_state_covariance2s)
 
         (smoothed_state_means, smoothed_state_covariances) = _smooth(
             transition_matrices,
@@ -668,8 +652,7 @@ class CholeskyKalmanFilter(KalmanFilter):
         for k, v in get_params(self).items():
             if k in DIM and (k not in given) and len(v.shape) != DIM[k]:
                 warn_str = (
-                    "{0} has {1} dimensions now; after fitting, "
-                    + "it will have dimension {2}"
+                    "{0} has {1} dimensions now; after fitting, " + "it will have dimension {2}"
                 ).format(k, len(v.shape), DIM[k])
                 warnings.warn(warn_str, stacklevel=2)
 
@@ -694,12 +677,8 @@ class CholeskyKalmanFilter(KalmanFilter):
             )
 
             # reconstruct covariances
-            filtered_state_covariances = _reconstruct_covariances(
-                filtered_state_covariance2s
-            )
-            predicted_state_covariances = _reconstruct_covariances(
-                predicted_state_covariance2s
-            )
+            filtered_state_covariances = _reconstruct_covariances(filtered_state_covariance2s)
+            predicted_state_covariances = _reconstruct_covariances(predicted_state_covariance2s)
 
             # run smoother
             (
@@ -715,9 +694,7 @@ class CholeskyKalmanFilter(KalmanFilter):
             )
 
             # calculate pairwise covariances
-            sigma_pair_smooth = _smooth_pair(
-                smoothed_state_covariances, kalman_smoothing_gains
-            )
+            sigma_pair_smooth = _smooth_pair(smoothed_state_covariances, kalman_smoothing_gains)
             (
                 self.transition_matrices,
                 self.observation_matrices,
@@ -784,9 +761,7 @@ class CholeskyKalmanFilter(KalmanFilter):
         )
 
         # get likelihoods for each time step
-        predicted_state_covariances = _reconstruct_covariances(
-            predicted_state_covariance2s
-        )
+        predicted_state_covariances = _reconstruct_covariances(predicted_state_covariance2s)
         loglikelihoods = _loglikelihoods(
             observation_matrices,
             observation_offsets,

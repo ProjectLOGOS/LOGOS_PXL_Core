@@ -63,9 +63,7 @@ for name, penalty in (("unreg", 1), ("reg", 0.05)):
         zorder=10,
         edgecolors="k",
     )
-    plt.scatter(
-        X[:, 0], X[:, 1], c=Y, zorder=10, cmap=plt.get_cmap("RdBu"), edgecolors="k"
-    )
+    plt.scatter(X[:, 0], X[:, 1], c=Y, zorder=10, cmap=plt.get_cmap("RdBu"), edgecolors="k")
 
     plt.axis("tight")
     x_min = -4.8

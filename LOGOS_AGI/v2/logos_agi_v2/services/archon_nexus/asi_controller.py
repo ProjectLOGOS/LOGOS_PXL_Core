@@ -29,12 +29,12 @@ class ASILiftoffController:
             for target in new_targets:
                 goal = self.goal_manager.propose_goal(name=target, priority=100)
                 self.goal_manager.adopt_goal(goal)
-            
+
             goal_to_execute = self.goal_manager.get_highest_priority_goal()
             if goal_to_execute and goal_to_execute.state == 'adopted':
                 self.logger.critical(f"[ASI LOOP] Pursuing meta-goal: {goal_to_execute.name}")
                 goal_payload = {"goal_description": goal_to_execute.name}
                 await self.logos_nexus.publish("archon_goals", goal_payload)
                 goal_to_execute.state = "in_progress"
-            
+
             await asyncio.sleep(30) # Cognitive cycle

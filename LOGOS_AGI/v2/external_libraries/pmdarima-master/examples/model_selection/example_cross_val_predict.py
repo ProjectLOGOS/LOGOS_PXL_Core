@@ -26,18 +26,15 @@ print("pmdarima version: %s" % pm.__version__)
 
 # Load the data and split it into separate pieces
 y = pm.datasets.load_wineind()
-est = pm.ARIMA(order=(1, 1, 2),
-               seasonal_order=(0, 1, 1, 12),
-               suppress_warnings=True)
+est = pm.ARIMA(order=(1, 1, 2), seasonal_order=(0, 1, 1, 12), suppress_warnings=True)
 cv = model_selection.SlidingWindowForecastCV(window_size=150, step=4, h=4)
-predictions = model_selection.cross_val_predict(
-    est, y, cv=cv, verbose=2, averaging="median")
+predictions = model_selection.cross_val_predict(est, y, cv=cv, verbose=2, averaging="median")
 
 # plot the predictions over the original series
 x_axis = np.arange(y.shape[0])
 n_test = predictions.shape[0]
 
-plt.plot(x_axis, y, alpha=0.75, c='b')
-plt.plot(x_axis[-n_test:], predictions, alpha=0.75, c='g')  # Forecasts
+plt.plot(x_axis, y, alpha=0.75, c="b")
+plt.plot(x_axis[-n_test:], predictions, alpha=0.75, c="g")  # Forecasts
 plt.title("Cross-validated wineind forecasts")
 plt.show()

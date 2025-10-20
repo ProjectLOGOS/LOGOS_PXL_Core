@@ -149,9 +149,7 @@ class BaseGraphML:
         cls.node_attribute_default_graph.add_node("n0")
         cls.node_attribute_default_graph.add_node("n1")
         cls.node_attribute_default_graph.add_edge("n0", "n1", id="e0")
-        cls.node_attribute_default_fh = io.BytesIO(
-            cls.node_attribute_default_data.encode("UTF-8")
-        )
+        cls.node_attribute_default_fh = io.BytesIO(cls.node_attribute_default_data.encode("UTF-8"))
 
         cls.attribute_named_key_ids_data = """<?xml version='1.0' encoding='utf-8'?>
 <graphml xmlns="http://graphml.graphdrawing.org/xmlns"
@@ -1329,9 +1327,7 @@ class TestWriteGraphML(BaseGraphML):
         assert len(children) == 2
         edge_ids = [
             edge.attrib["id"]
-            for edge in tree.getroot().findall(
-                ".//{http://graphml.graphdrawing.org/xmlns}edge"
-            )
+            for edge in tree.getroot().findall(".//{http://graphml.graphdrawing.org/xmlns}edge")
         ]
         # verify edge id value is equal to specified attribute value
         assert sorted(edge_ids) == sorted(edge_attributes.values())
@@ -1369,18 +1365,14 @@ class TestWriteGraphML(BaseGraphML):
             edge_attributes.values()
         )
         # NetworkX uses edge_ids as keys in multigraphs if no key
-        assert sorted(key for u, v, key in H.edges(keys=True)) == sorted(
-            edge_attributes.values()
-        )
+        assert sorted(key for u, v, key in H.edges(keys=True)) == sorted(edge_attributes.values())
 
         tree = parse(fname)
         children = list(tree.getroot())
         assert len(children) == 2
         edge_ids = [
             edge.attrib["id"]
-            for edge in tree.getroot().findall(
-                ".//{http://graphml.graphdrawing.org/xmlns}edge"
-            )
+            for edge in tree.getroot().findall(".//{http://graphml.graphdrawing.org/xmlns}edge")
         ]
         # verify edge id value is equal to specified attribute value
         assert sorted(edge_ids) == sorted(edge_attributes.values())
@@ -1396,9 +1388,7 @@ class TestWriteGraphML(BaseGraphML):
             edge_attributes.values()
         )
         # NetworkX uses edge_ids as keys in multigraphs if no key
-        assert sorted(key for u, v, key in J.edges(keys=True)) == sorted(
-            edge_attributes.values()
-        )
+        assert sorted(key for u, v, key in J.edges(keys=True)) == sorted(edge_attributes.values())
 
     def test_numpy_float64(self, tmp_path):
         np = pytest.importorskip("numpy")

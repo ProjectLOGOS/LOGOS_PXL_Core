@@ -262,9 +262,7 @@ class RocCurveDisplay(_BinaryClassifierCurveDisplayMixin):
         if chance_level_kw is None:
             chance_level_kw = {}
 
-        chance_level_kw = _validate_style_kwargs(
-            default_chance_level_line_kw, chance_level_kw
-        )
+        chance_level_kw = _validate_style_kwargs(default_chance_level_line_kw, chance_level_kw)
 
         self.line_ = []
         for fpr, tpr, line_kw in zip(fpr, tpr, curve_kwargs):
@@ -732,9 +730,7 @@ class RocCurveDisplay(_BinaryClassifierCurveDisplayMixin):
         )
 
         fpr_folds, tpr_folds, auc_folds = [], [], []
-        for estimator, test_indices in zip(
-            cv_results["estimator"], cv_results["indices"]["test"]
-        ):
+        for estimator, test_indices in zip(cv_results["estimator"], cv_results["indices"]["test"]):
             y_true = _safe_indexing(y, test_indices)
             y_pred, _ = _get_response_values_binary(
                 estimator,
@@ -743,9 +739,7 @@ class RocCurveDisplay(_BinaryClassifierCurveDisplayMixin):
                 pos_label=pos_label_,
             )
             sample_weight_fold = (
-                None
-                if sample_weight is None
-                else _safe_indexing(sample_weight, test_indices)
+                None if sample_weight is None else _safe_indexing(sample_weight, test_indices)
             )
             fpr, tpr, _ = roc_curve(
                 y_true,

@@ -62,24 +62,14 @@ def check_dims(n_dim_state, n_dim_obs, n_func_args, kf_cls, kwargs):
         if "transition_functions" not in kwargs
         else (len(kwargs["transition_functions"]),)
     )
-    assert all(
-        [
-            len(inspect.getfullargspec(f).args) == n_func_args
-            for f in transition_functions
-        ]
-    )
+    assert all([len(inspect.getfullargspec(f).args) == n_func_args for f in transition_functions])
     assert transition_covariance.shape == (n_dim_state, n_dim_state)
     assert (
         observation_functions.shape == (1,)
         if "observation_functions" not in kwargs
         else (len(kwargs["observation_functions"]),)
     )
-    assert all(
-        [
-            len(inspect.getfullargspec(f).args) == n_func_args
-            for f in observation_functions
-        ]
-    )
+    assert all([len(inspect.getfullargspec(f).args) == n_func_args for f in observation_functions])
     assert observation_covariance.shape == (n_dim_obs, n_dim_obs)
     assert initial_state_mean.shape == (n_dim_state,)
     assert initial_state_covariance.shape == (n_dim_state, n_dim_state)
@@ -272,12 +262,6 @@ def test_additive_initialize_parameters():
         AdditiveUnscentedKalmanFilter,
         {"transition_functions": [lambda x: x, lambda x: x]},
     )
-    check_dims(
-        3, 5, 1, AdditiveUnscentedKalmanFilter, {"n_dim_state": 3, "n_dim_obs": 5}
-    )
-    check_dims(
-        1, 3, 1, AdditiveUnscentedKalmanFilter, {"observation_covariance": np.eye(3)}
-    )
-    check_dims(
-        2, 1, 1, AdditiveUnscentedKalmanFilter, {"initial_state_mean": np.zeros(2)}
-    )
+    check_dims(3, 5, 1, AdditiveUnscentedKalmanFilter, {"n_dim_state": 3, "n_dim_obs": 5})
+    check_dims(1, 3, 1, AdditiveUnscentedKalmanFilter, {"observation_covariance": np.eye(3)})
+    check_dims(2, 1, 1, AdditiveUnscentedKalmanFilter, {"initial_state_mean": np.zeros(2)})

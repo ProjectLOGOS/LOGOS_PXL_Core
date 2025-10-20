@@ -33,9 +33,7 @@ class Kernel(Parameterized):
         if active_dims is None:
             active_dims = list(range(input_dim))
         elif input_dim != len(active_dims):
-            raise ValueError(
-                "Input size and the length of active dimensionals should be equal."
-            )
+            raise ValueError("Input size and the length of active dimensionals should be equal.")
         self.input_dim = input_dim
         self.active_dims = active_dims
 
@@ -171,9 +169,7 @@ class VerticalScaling(Transforming):
 
     def forward(self, X, Z=None, diag=False):
         if diag:
-            return (
-                self.vscaling_fn(X) * self.kern(X, Z, diag=diag) * self.vscaling_fn(X)
-            )
+            return self.vscaling_fn(X) * self.kern(X, Z, diag=diag) * self.vscaling_fn(X)
         elif Z is None:
             vscaled_X = self.vscaling_fn(X).unsqueeze(1)
             return vscaled_X * self.kern(X, Z, diag=diag) * vscaled_X.t()
@@ -235,13 +231,11 @@ class Warping(Transforming):
             for coef in owarping_coef:
                 if not isinstance(coef, int) and coef < 0:
                     raise ValueError(
-                        "Coefficients of the polynomial must be a "
-                        "non-negative integer."
+                        "Coefficients of the polynomial must be a " "non-negative integer."
                     )
             if len(owarping_coef) < 2 and sum(owarping_coef) == 0:
                 raise ValueError(
-                    "The ouput warping polynomial should have a degree "
-                    "of at least 1."
+                    "The ouput warping polynomial should have a degree " "of at least 1."
                 )
         self.owarping_coef = owarping_coef
 

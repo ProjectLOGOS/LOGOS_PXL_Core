@@ -26,7 +26,7 @@ __subsystem__ = "THONOC"
 from .thonoc_worker import ThonocWorker, ThonocCoreEngine
 
 __all__ = [
-    "ThonocWorker", 
+    "ThonocWorker",
     "ThonocCoreEngine"
 ]
 

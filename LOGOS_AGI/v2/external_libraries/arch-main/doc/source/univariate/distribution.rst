@@ -27,4 +27,3 @@ methods.
    :toctree: generated/
 
    Distribution
-

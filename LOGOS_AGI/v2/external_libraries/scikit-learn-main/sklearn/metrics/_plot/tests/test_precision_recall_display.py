@@ -148,9 +148,7 @@ def test_precision_recall_display_name(pyplot, constructor_name, default_label):
     if constructor_name == "from_estimator":
         display = PrecisionRecallDisplay.from_estimator(classifier, X, y)
     else:
-        display = PrecisionRecallDisplay.from_predictions(
-            y, y_score, pos_label=pos_label
-        )
+        display = PrecisionRecallDisplay.from_predictions(y, y_score, pos_label=pos_label)
 
     average_precision = average_precision_score(y, y_score, pos_label=pos_label)
 
@@ -159,19 +157,14 @@ def test_precision_recall_display_name(pyplot, constructor_name, default_label):
 
     # check that the name can be set
     display.plot(name="MySpecialEstimator")
-    assert (
-        display.line_.get_label()
-        == f"MySpecialEstimator (AP = {average_precision:.2f})"
-    )
+    assert display.line_.get_label() == f"MySpecialEstimator (AP = {average_precision:.2f})"
 
 
 @pytest.mark.parametrize(
     "clf",
     [
         make_pipeline(StandardScaler(), LogisticRegression()),
-        make_pipeline(
-            make_column_transformer((StandardScaler(), [0, 1])), LogisticRegression()
-        ),
+        make_pipeline(make_column_transformer((StandardScaler(), [0, 1])), LogisticRegression()),
     ],
 )
 def test_precision_recall_display_pipeline(pyplot, clf):
@@ -204,9 +197,7 @@ def test_precision_recall_display_string_labels(pyplot):
     with pytest.raises(ValueError, match=err_msg):
         PrecisionRecallDisplay.from_predictions(y, y_score)
 
-    display = PrecisionRecallDisplay.from_predictions(
-        y, y_score, pos_label=lr.classes_[1]
-    )
+    display = PrecisionRecallDisplay.from_predictions(y, y_score, pos_label=lr.classes_[1])
     assert display.average_precision == pytest.approx(avg_prec)
 
 
@@ -317,13 +308,9 @@ def test_precision_recall_prevalence_pos_label_reusable(pyplot, constructor_name
     y_score = lr.fit(X, y).predict_proba(X)[:, 1]
 
     if constructor_name == "from_estimator":
-        display = PrecisionRecallDisplay.from_estimator(
-            lr, X, y, plot_chance_level=False
-        )
+        display = PrecisionRecallDisplay.from_estimator(lr, X, y, plot_chance_level=False)
     else:
-        display = PrecisionRecallDisplay.from_predictions(
-            y, y_score, plot_chance_level=False
-        )
+        display = PrecisionRecallDisplay.from_predictions(y, y_score, plot_chance_level=False)
     assert display.chance_level_ is None
 
     import matplotlib as mpl
@@ -391,9 +378,7 @@ def test_y_score_and_y_pred_specified_error(pyplot):
     y_score = np.array([0.1, 0.4, 0.35, 0.8])
     y_pred = np.array([0.2, 0.3, 0.5, 0.1])
 
-    with pytest.raises(
-        ValueError, match="`y_pred` and `y_score` cannot be both specified"
-    ):
+    with pytest.raises(ValueError, match="`y_pred` and `y_score` cannot be both specified"):
         PrecisionRecallDisplay.from_predictions(y_true, y_score=y_score, y_pred=y_pred)
 
     with pytest.warns(FutureWarning, match="y_pred was deprecated in 1.8"):

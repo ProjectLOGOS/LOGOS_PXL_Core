@@ -240,9 +240,7 @@ class CHTest(_SeasonalStationarityTest):
         R1 = CHTest._seas_dummy(wts, s)
 
         # fit model, get residuals
-        lmch = make_pipeline(
-            StandardScaler(with_mean=False), LinearRegression()
-        ).fit(R1, wts)
+        lmch = make_pipeline(StandardScaler(with_mean=False), LinearRegression()).fit(R1, wts)
         # lmch = sm.OLS(wts, R1).fit(method='qr')
         residuals = wts - lmch.predict(R1)
 
@@ -290,9 +288,7 @@ class CHTest(_SeasonalStationarityTest):
         # https://github.com/robjhyndman/forecast/blob/master/R/arima.R#L321
         Fhat = Fhataux.cumsum(axis=0)
         solved = solve(AtOmfhatA, np.identity(AtOmfhatA.shape[0]))
-        return (1.0 / n**2) * solved.dot(A.T).dot(Fhat.T).dot(Fhat).dot(
-            A
-        ).diagonal().sum()
+        return (1.0 / n**2) * solved.dot(A.T).dot(Fhat.T).dot(Fhat).dot(A).diagonal().sum()
 
     @staticmethod
     def _seas_dummy(x, m):
@@ -317,10 +313,7 @@ class CHTest(_SeasonalStationarityTest):
         n = x.shape[0]
 
         # assume m > 1 since this function called internally...
-        assert m > 1, (
-            "This function is called internally and "
-            "should not encounter this issue"
-        )
+        assert m > 1, "This function is called internally and " "should not encounter this issue"
 
         tt = np.arange(n) + 1
         fmat = np.ones((n, 2 * m)) * np.nan
@@ -449,11 +442,9 @@ class OCSBTest(_SeasonalStationarityTest):
         # 8c6b63b1274b064c84d7514838b26dd0acb98aee/R/unitRoot.R#L409
         log_m = np.log(m)
         return (
-            -0.2937411 * np.exp(
-                -0.2850853 * (log_m - 0.7656451) + (-0.05983644) * (
-                    (log_m - 0.7656451) ** 2
-                )
-            ) - 1.652202
+            -0.2937411
+            * np.exp(-0.2850853 * (log_m - 0.7656451) + (-0.05983644) * ((log_m - 0.7656451) ** 2))
+            - 1.652202
         )
 
     @staticmethod
@@ -467,7 +458,7 @@ class OCSBTest(_SeasonalStationarityTest):
         # If there are tons of lags, this may not be super efficient...
         out = np.ones((n + (lag - 1), lag)) * np.nan
         for i in range(lag):
-            out[i: i + n, i] = y
+            out[i : i + n, i] = y
 
         if omit_na:
             out = out[~np.isnan(out).any(axis=1)]
@@ -510,9 +501,7 @@ class OCSBTest(_SeasonalStationarityTest):
 
         # Create Z4
         z4_y = y_first_order_diff[lag:]  # new endog
-        z4_lag = OCSBTest._gen_lags(y_first_order_diff, lag)[
-            : z4_y.shape[0], :
-        ]
+        z4_lag = OCSBTest._gen_lags(y_first_order_diff, lag)[: z4_y.shape[0], :]
         z4_preds = ar_fit.predict(add_constant(z4_lag))  # preds
         z4 = z4_y - z4_preds  # test residuals
 
@@ -548,8 +537,7 @@ class OCSBTest(_SeasonalStationarityTest):
                 icfunc = self._ic_method_map[method]
             except KeyError as err:
                 raise ValueError(
-                    "'%s' is an invalid method. Must be one "
-                    "of ('aic', 'aicc', 'bic', 'fixed')"
+                    "'%s' is an invalid method. Must be one " "of ('aic', 'aicc', 'bic', 'fixed')"
                 ) from err
 
             fits = []

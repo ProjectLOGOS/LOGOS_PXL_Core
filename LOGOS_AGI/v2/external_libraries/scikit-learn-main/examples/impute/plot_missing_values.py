@@ -77,9 +77,7 @@ def add_missing_values(X_full, y_full, rng):
 
 rng = np.random.RandomState(42)
 X_miss_diabetes, y_miss_diabetes = add_missing_values(X_diabetes, y_diabetes, rng)
-X_miss_california, y_miss_california = add_missing_values(
-    X_california, y_california, rng
-)
+X_miss_california, y_miss_california = add_missing_values(X_california, y_california, rng)
 
 
 # %%
@@ -109,9 +107,7 @@ def get_score(X, y, imputer=None):
         estimator = make_pipeline(imputer, regressor)
     else:
         estimator = regressor
-    scores = cross_val_score(
-        estimator, X, y, scoring="neg_mean_squared_error", cv=N_SPLITS
-    )
+    scores = cross_val_score(estimator, X, y, scoring="neg_mean_squared_error", cv=N_SPLITS)
     return scores.mean(), scores.std()
 
 
@@ -143,12 +139,8 @@ x_labels.append("Full Data")
 #
 
 imputer = SimpleImputer(strategy="constant", fill_value=0, add_indicator=True)
-mses_diabetes[1], stds_diabetes[1] = get_score(
-    X_miss_diabetes, y_miss_diabetes, imputer
-)
-mses_california[1], stds_california[1] = get_score(
-    X_miss_california, y_miss_california, imputer
-)
+mses_diabetes[1], stds_diabetes[1] = get_score(X_miss_diabetes, y_miss_diabetes, imputer)
+mses_california[1], stds_california[1] = get_score(X_miss_california, y_miss_california, imputer)
 x_labels.append("Zero Imputation")
 
 # %%
@@ -157,12 +149,8 @@ x_labels.append("Zero Imputation")
 #
 
 imputer = SimpleImputer(strategy="mean", add_indicator=True)
-mses_diabetes[2], stds_diabetes[2] = get_score(
-    X_miss_diabetes, y_miss_diabetes, imputer
-)
-mses_california[2], stds_california[2] = get_score(
-    X_miss_california, y_miss_california, imputer
-)
+mses_diabetes[2], stds_diabetes[2] = get_score(X_miss_diabetes, y_miss_diabetes, imputer)
+mses_california[2], stds_california[2] = get_score(X_miss_california, y_miss_california, imputer)
 x_labels.append("Mean Imputation")
 
 
@@ -177,9 +165,7 @@ x_labels.append("Mean Imputation")
 #
 
 imputer = KNNImputer(add_indicator=True)
-mses_diabetes[3], stds_diabetes[3] = get_score(
-    X_miss_diabetes, y_miss_diabetes, imputer
-)
+mses_diabetes[3], stds_diabetes[3] = get_score(X_miss_diabetes, y_miss_diabetes, imputer)
 mses_california[3], stds_california[3] = get_score(
     X_miss_california, y_miss_california, make_pipeline(RobustScaler(), imputer)
 )
@@ -201,9 +187,7 @@ x_labels.append("KNN Imputation")
 
 imputer = IterativeImputer(add_indicator=True)
 
-mses_diabetes[4], stds_diabetes[4] = get_score(
-    X_miss_diabetes, y_miss_diabetes, imputer
-)
+mses_diabetes[4], stds_diabetes[4] = get_score(X_miss_diabetes, y_miss_diabetes, imputer)
 mses_california[4], stds_california[4] = get_score(
     X_miss_california, y_miss_california, make_pipeline(RobustScaler(), imputer)
 )

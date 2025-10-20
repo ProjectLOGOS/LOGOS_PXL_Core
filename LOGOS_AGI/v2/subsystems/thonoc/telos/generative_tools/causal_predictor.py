@@ -14,11 +14,11 @@ logger = logging.getLogger(__name__)
 def run_pc_causal_discovery(data, alpha=0.05):
     """
     Performs causal discovery using the PC algorithm.
-    
+
     Args:
         data (np.ndarray): Input data matrix (samples x variables).
         alpha (float): Significance threshold for conditional independence tests.
-    
+
     Returns:
         cg (CausalGraph): Output causal graph.
     """
@@ -31,7 +31,7 @@ def run_pc_causal_discovery(data, alpha=0.05):
 def simulate_example_data(n_samples=1000):
     """
     Simulates toy causal data for testing.
-    
+
     Returns:
         np.ndarray: Synthetic dataset.
     """

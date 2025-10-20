@@ -21,8 +21,16 @@ from torch.testing._internal.common_methods_invocations import (
 
 from torch.masked import as_masked_tensor, masked_tensor, _combine_input_and_mask
 from torch.masked.maskedtensor.core import _masks_match, _tensors_match
-from torch.masked.maskedtensor.unary import NATIVE_INPLACE_UNARY_FNS, NATIVE_UNARY_FNS, UNARY_NAMES
-from torch.masked.maskedtensor.binary import NATIVE_BINARY_FNS, NATIVE_INPLACE_BINARY_FNS, BINARY_NAMES
+from torch.masked.maskedtensor.unary import (
+    NATIVE_INPLACE_UNARY_FNS,
+    NATIVE_UNARY_FNS,
+    UNARY_NAMES,
+)
+from torch.masked.maskedtensor.binary import (
+    NATIVE_BINARY_FNS,
+    NATIVE_INPLACE_BINARY_FNS,
+    BINARY_NAMES,
+)
 from torch.masked.maskedtensor.reductions import REDUCE_NAMES
 
 
@@ -38,20 +46,25 @@ def _compare_mt_t(mt_result, t_result, rtol=1e-05, atol=1e-05):
     if not _tensors_match(a, b, exact=False, rtol=rtol, atol=atol):
         raise ValueError("The data in MaskedTensor a and Tensor b do not match")
 
+
 def _compare_mts(mt1, mt2, rtol=1e-05, atol=1e-08):
     mt_data1 = mt1.get_data()
     mt_data2 = mt2.get_data()
     if mt_data1.layout != mt_data2.layout:
-        raise ValueError("mt1's data and mt2's data do not have the same layout. "
-                         f"mt1.get_data().layout = {mt_data1.layout} while mt2.get_data().layout = {mt_data2.layout}")
+        raise ValueError(
+            "mt1's data and mt2's data do not have the same layout. "
+            f"mt1.get_data().layout = {mt_data1.layout} while mt2.get_data().layout = {mt_data2.layout}"
+        )
 
     mask = mt1.get_mask()
     mask2 = mt2.get_mask()
     if not _masks_match(mt1, mt2):
         raise ValueError("mt1 and mt2 must have matching masks")
     if mask.layout != mask2.layout:
-        raise ValueError("mt1's mask and mt2's mask do not have the same layout. "
-                         f"mt1.get_mask().layout = {mask.layout} while mt2.get_mask().layout = {mask2.layout}")
+        raise ValueError(
+            "mt1's mask and mt2's mask do not have the same layout. "
+            f"mt1.get_mask().layout = {mask.layout} while mt2.get_mask().layout = {mask2.layout}"
+        )
     if mask.layout in {torch.sparse_coo, torch.sparse_csr}:
         mask = mask.to_dense()
 
@@ -62,7 +75,10 @@ def _compare_mts(mt1, mt2, rtol=1e-05, atol=1e-08):
     b = mt_data2.detach().masked_fill_(~mask, 0)
 
     if not _tensors_match(a, b, exact=False, rtol=rtol, atol=atol):
-        raise ValueError("The data in MaskedTensor mt1 and MaskedTensor mt2 do not match")
+        raise ValueError(
+            "The data in MaskedTensor mt1 and MaskedTensor mt2 do not match"
+        )
+
 
 def _compare_forward_backward(data, mask, fn):
     mt = masked_tensor(data, mask, requires_grad=True)
@@ -76,8 +92,10 @@ def _compare_forward_backward(data, mask, fn):
     _compare_mt_t(masked_res, tensor_res)
     _compare_mt_t(mt.grad, t.grad, atol=1e-06)
 
+
 def _create_random_mask(shape, device):
     return make_tensor(shape, device=device, dtype=torch.bool)
+
 
 def _generate_sample_data(
     device="cpu", dtype=torch.float, requires_grad=True, layout=torch.strided
@@ -108,6 +126,7 @@ def _generate_sample_data(
         inputs.append(SampleInput(data, kwargs={"mask": mask}))
     return inputs
 
+
 def _fix_fn_name(fn_name):
     if fn_name[-1] == "_":
         fn_name = fn_name[:-1]
@@ -132,19 +151,25 @@ class TestBasics(TestCase):
     def test_diff_layouts(self, device):
         data = torch.randn((3, 4), device=device).to_sparse_coo()
         mask = _create_random_mask((3, 4), device=device)
-        with self.assertRaisesRegex(TypeError, "data and mask must have the same layout"):
+        with self.assertRaisesRegex(
+            TypeError, "data and mask must have the same layout"
+        ):
             masked_tensor(data, mask)
 
     def test_diff_dim(self, device):
         data = torch.randn((3, 4, 5), device=device)
         mask = _create_random_mask((3, 4), device=device)
-        with self.assertRaisesRegex(ValueError, "data.dim\\(\\) must equal mask.dim\\(\\)"):
+        with self.assertRaisesRegex(
+            ValueError, "data.dim\\(\\) must equal mask.dim\\(\\)"
+        ):
             masked_tensor(data, mask)
 
     def test_diff_sizes(self, device):
         data = torch.randn((3, 4), device=device)
         mask = _create_random_mask((3, 3), device=device)
-        with self.assertRaisesRegex(ValueError, "data.size\\(\\) must equal mask.size\\(\\)"):
+        with self.assertRaisesRegex(
+            ValueError, "data.size\\(\\) must equal mask.size\\(\\)"
+        ):
             masked_tensor(data, mask)
 
     def test_grad_warning(self, device):
@@ -161,7 +186,9 @@ class TestBasics(TestCase):
         m1 = masked_tensor(data, ~mask)
         with self.assertRaisesRegex(ValueError, "Input masks must match."):
             m0 + m1
-        _compare_mts(m0 + m0, masked_tensor(torch.tensor([0., 2, 0, 6, 0], device=device), mask))
+        _compare_mts(
+            m0 + m0, masked_tensor(torch.tensor([0.0, 2, 0, 6, 0], device=device), mask)
+        )
 
     def test_softmax(self, device):
         data = torch.randn((3, 4), device=device) * 0.1
@@ -171,13 +198,15 @@ class TestBasics(TestCase):
                 [False, True, False, True],
                 [True, True, False, False],
             ],
-            device=device
+            device=device,
         )
 
         _compare_forward_backward(data, mask, lambda t: torch.softmax(t, -1))
 
     def test_where(self, device):
-        data = torch.tensor([-10.0, -5, 0, 5, 10, 50, 60, 70, 80, 90, 100], device=device)
+        data = torch.tensor(
+            [-10.0, -5, 0, 5, 10, 50, 60, 70, 80, 90, 100], device=device
+        )
         mask = data < 0
 
         mx = masked_tensor(data, mask, requires_grad=True)
@@ -202,7 +231,9 @@ class TestBasics(TestCase):
     def test_nn_unfold(self, device):
         data = torch.rand(2, 5, 3, 4, device=device)
         mask = torch.rand(2, 5, 3, 4, device=device) > 0.5
-        _compare_forward_backward(data, mask, lambda t: torch.nn.functional.unfold(t, kernel_size=(2, 3)))
+        _compare_forward_backward(
+            data, mask, lambda t: torch.nn.functional.unfold(t, kernel_size=(2, 3))
+        )
 
     def test_stack(self, device):
         masked_tensors = [
@@ -210,10 +241,13 @@ class TestBasics(TestCase):
                 torch.rand(2, 5, 3, 4, device=device),
                 torch.rand(2, 5, 3, 4, device=device) > 0.5,
                 requires_grad=True,
-            ) for _ in range(3)
+            )
+            for _ in range(3)
         ]
 
-        data_tensors = [mt.get_data().detach().clone().requires_grad_() for mt in masked_tensors]
+        data_tensors = [
+            mt.get_data().detach().clone().requires_grad_() for mt in masked_tensors
+        ]
         masked_res = torch.stack(masked_tensors)
         tensor_res = torch.stack(data_tensors)
 
@@ -242,7 +276,11 @@ class TestBasics(TestCase):
             mask = sample.kwargs["mask"]
             mt = masked_tensor(data, mask, requires_grad=True)
 
-            new_device = torch.device("cuda") if device != "cuda" and torch.cuda.is_available() else torch.device("cpu")
+            new_device = (
+                torch.device("cuda")
+                if device != "cuda" and torch.cuda.is_available()
+                else torch.device("cpu")
+            )
             mt_device = mt.to(new_device)
 
             self.assertEqual(mt_device.device.type, new_device.type)
@@ -264,8 +302,7 @@ class TestBasics(TestCase):
 
     def test_to_dense(self, device):
         samples = _generate_sample_data(
-            device=device,
-            layout=torch.sparse_coo
+            device=device, layout=torch.sparse_coo
         ) + _generate_sample_data(device=device, layout=torch.sparse_csr)
         for sample in samples:
             data = sample.input
@@ -321,7 +358,9 @@ class TestBasics(TestCase):
     def test_invalid_sparse_layout(self, device):
         data = torch.randn((3, 4), device=device).to_sparse_csc()
         mask = _create_random_mask((3, 4), device=device).to_sparse_csc()
-        with self.assertRaisesRegex(TypeError, "data layout of torch.sparse_csc is not supported"):
+        with self.assertRaisesRegex(
+            TypeError, "data layout of torch.sparse_csc is not supported"
+        ):
             masked_tensor(data, mask)
 
     def test_invalid_sparse_coo_values(self, device):
@@ -330,7 +369,9 @@ class TestBasics(TestCase):
         i2 = torch.tensor([[0, 1, 1], [2, 1, 2]])
 
         t = torch.sparse_coo_tensor(i1, v, (2, 4), device=device)
-        mask = torch.sparse_coo_tensor(i2, torch.tensor([True, True, True]), (2, 4), device=device)
+        mask = torch.sparse_coo_tensor(
+            i2, torch.tensor([True, True, True]), (2, 4), device=device
+        )
 
         msg = "data and mask are both sparse COO tensors but do not have the same indices."
         with self.assertRaisesRegex(ValueError, msg):
@@ -349,7 +390,7 @@ class TestBasics(TestCase):
             torch.tensor(crow_indices1, dtype=torch.int64),
             torch.tensor(col_indices1, dtype=torch.int64),
             torch.tensor(values),
-            size=(2, 4)
+            size=(2, 4),
         )
         mask1 = torch.sparse_csr_tensor(
             torch.tensor(crow_indices2, dtype=torch.int64),
@@ -417,6 +458,7 @@ class TestBasics(TestCase):
         self.assertEqual(now_contiguous_mt.get_data().is_contiguous(), True)
         self.assertEqual(now_contiguous_mt.is_contiguous(), True)
 
+
 class TestUnary(TestCase):
     def _get_test_data(self, fn_name):
         data = torch.randn(10, 10)
@@ -480,6 +522,7 @@ class TestUnary(TestCase):
         t_result = fn(*t_args, **kwargs)
         _compare_mt_t(mt_result, t_result)
 
+
 class TestBinary(TestCase):
     def _get_test_data(self, fn_name):
         fn_name = _fix_fn_name(fn_name)
@@ -500,9 +543,9 @@ class TestBinary(TestCase):
         return kwargs
 
     def _yield_sample_args(self, fn_name, data0, data1, mask):
-        """ Returns two sets of Tensor and MaskedTensor args for a binary function to compute.
-            Tensor args are all the same (just the two provided data tensors),
-            while the MaskedTensor args tests both (MaskedTensor, MaskedTensor) and (MaskedTensor, Tensor)
+        """Returns two sets of Tensor and MaskedTensor args for a binary function to compute.
+        Tensor args are all the same (just the two provided data tensors),
+        while the MaskedTensor args tests both (MaskedTensor, MaskedTensor) and (MaskedTensor, Tensor)
         """
         fn_name = _fix_fn_name(fn_name)
         mt0 = masked_tensor(data0, mask)
@@ -523,7 +566,7 @@ class TestBinary(TestCase):
         data0, data1, mask = self._get_test_data(fn_name)
         kwargs = self._get_sample_kwargs(fn_name)
 
-        for (t_args, mt_args) in self._yield_sample_args(fn_name, data0, data1, mask):
+        for t_args, mt_args in self._yield_sample_args(fn_name, data0, data1, mask):
             mt_result = fn(*mt_args, **kwargs)
             t_result = fn(*t_args, **kwargs)
             _compare_mt_t(mt_result, t_result)
@@ -535,7 +578,7 @@ class TestBinary(TestCase):
         data0, data1, mask = self._get_test_data(fn_name)
         kwargs = self._get_sample_kwargs(fn_name)
 
-        for (t_args, mt_args) in self._yield_sample_args(fn_name, data0, data1, mask):
+        for t_args, mt_args in self._yield_sample_args(fn_name, data0, data1, mask):
             mt_result = fn(*mt_args, **kwargs)
             t_result = fn(*t_args, **kwargs)
             _compare_mt_t(mt_result, t_result)
@@ -557,6 +600,7 @@ class TestBinary(TestCase):
                 "Input masks must match. If you need support for this, please open an issue on Github."
                 == str(e)
             )
+
 
 class TestReductions(TestCase):
     def test_max_not_implemented(self):
@@ -649,46 +693,54 @@ class TestReductions(TestCase):
             will yield a RuntimeError of "element 0 of tensors does not require grad and does not have a grad_fn"
             as expected.
     """
+
     def test_mean_grad_case_1a(self):
-        """ values.requires_grad = True
-            mt = masked_tensor(values, mask, requires_grad=True)
+        """values.requires_grad = True
+        mt = masked_tensor(values, mask, requires_grad=True)
         """
         d = torch.tensor([[0, 1, 2], [3, 4, 5.0]], requires_grad=True)
         m = torch.tensor([[True, False, False], [False, True, False]])
-        with self.assertWarnsRegex(UserWarning, "It is not recommended to create a MaskedTensor"):
+        with self.assertWarnsRegex(
+            UserWarning, "It is not recommended to create a MaskedTensor"
+        ):
             mt = masked_tensor(d, m, requires_grad=True)
         mt.mean().backward()
         self.assertIsNone(d.grad)
-        _compare_mts(mt.grad, masked_tensor(torch.tensor([[0.5, 0, 0], [0, 0.5, 0]]), m))
+        _compare_mts(
+            mt.grad, masked_tensor(torch.tensor([[0.5, 0, 0], [0, 0.5, 0]]), m)
+        )
 
     def test_mean_grad_case_1b(self):
-        """ values.requires_grad = False
-            mt = masked_tensor(values, mask, requires_grad=True)
+        """values.requires_grad = False
+        mt = masked_tensor(values, mask, requires_grad=True)
         """
         d = torch.tensor([[0, 1, 2], [3, 4, 5.0]])
         m = torch.tensor([[True, False, False], [False, True, False]])
         mt = masked_tensor(d, m, requires_grad=True)
         mt.mean().backward()
         self.assertIsNone(d.grad)
-        _compare_mts(mt.grad, masked_tensor(torch.tensor([[0.5, 0, 0], [0, 0.5, 0]]), m))
+        _compare_mts(
+            mt.grad, masked_tensor(torch.tensor([[0.5, 0, 0], [0, 0.5, 0]]), m)
+        )
 
     def test_mean_grad_case_1c(self):
-        """ values.requires_grad = True
-            mt = masked_tensor(values, mask, requires_grad=False)
+        """values.requires_grad = True
+        mt = masked_tensor(values, mask, requires_grad=False)
         """
         d = torch.tensor([[0, 1, 2], [3, 4, 5.0]], requires_grad=True)
         m = torch.tensor([[True, False, False], [False, True, False]])
-        with self.assertWarnsRegex(UserWarning, "It is not recommended to create a MaskedTensor"):
+        with self.assertWarnsRegex(
+            UserWarning, "It is not recommended to create a MaskedTensor"
+        ):
             mt = masked_tensor(d, m, requires_grad=False)
         result = mt.mean()
         msg = "element 0 of tensors does not require grad and does not have a grad_fn"
         with self.assertRaisesRegex(RuntimeError, msg):
             result.backward()
 
-
     def test_mean_grad_case_1d(self):
-        """ values.requires_grad = False
-            mt = masked_tensor(values, mask, requires_grad=False)
+        """values.requires_grad = False
+        mt = masked_tensor(values, mask, requires_grad=False)
         """
         d = torch.tensor([[0, 1, 2], [3, 4, 5.0]])
         m = torch.tensor([[True, False, False], [False, True, False]])
@@ -699,8 +751,8 @@ class TestReductions(TestCase):
             result.backward()
 
     def test_mean_grad_case_1e(self):
-        """ values.requires_grad = True
-            mt = as_masked_tensor(values, mask)
+        """values.requires_grad = True
+        mt = as_masked_tensor(values, mask)
         """
         d = torch.tensor([[0, 1, 2], [3, 4, 5.0]], requires_grad=True)
         m = torch.tensor([[True, False, False], [False, True, False]])
@@ -712,8 +764,8 @@ class TestReductions(TestCase):
             self.assertIsNone(mt.grad)
 
     def test_mean_grad_case_1f(self):
-        """ values.requires_grad = False
-            mt = as_masked_tensor(values, mask)
+        """values.requires_grad = False
+        mt = as_masked_tensor(values, mask)
         """
         d = torch.tensor([[0, 1, 2], [3, 4, 5.0]])
         m = torch.tensor([[True, False, False], [False, True, False]])
@@ -728,7 +780,9 @@ class TestReductions(TestCase):
         m = torch.tensor([[True, True, False], [False, True, False]])
         mt = masked_tensor(d, m, requires_grad=True)
         mt.mean(1).sum().backward()
-        _compare_mts(mt.grad, masked_tensor(torch.tensor([[0.5, 0.5, 0], [0, 1, 0]]), m))
+        _compare_mts(
+            mt.grad, masked_tensor(torch.tensor([[0.5, 0.5, 0], [0, 1, 0]]), m)
+        )
 
     def test_amax(self):
         d = torch.tensor([[0, 1, 3, -3], [3, -4, 1.0, 3]])
@@ -821,10 +875,7 @@ class TestReductions(TestCase):
             masked_tensor(d, m, requires_grad=True)
 
     def test_any_true_dtype(self):
-        mt = torch.masked.MaskedTensor(
-            torch.rand(2, 2),
-            torch.rand(2, 2) > 0.5
-        )
+        mt = torch.masked.MaskedTensor(torch.rand(2, 2), torch.rand(2, 2) > 0.5)
         msg = "expected a boolean tensor"
         with self.assertRaisesRegex(ValueError, msg):
             mt._is_any_true()
@@ -845,7 +896,10 @@ class TestReductions(TestCase):
             torch.tensor([[False, False, False], [False, False, False]]),
         )
         _compare_mts(
-            masked_tensor(torch.tensor(False), torch.tensor(True),),
+            masked_tensor(
+                torch.tensor(False),
+                torch.tensor(True),
+            ),
             mt._is_any_true(),
         )
 
@@ -853,9 +907,7 @@ class TestReductions(TestCase):
         # See https://github.com/pytorch/pytorch/issues/128557
         with torch.autograd.detect_anomaly():
             mt = torch.masked.MaskedTensor(
-                torch.rand(2, 2),
-                torch.rand(2, 2) > 0.5,
-                requires_grad=True
+                torch.rand(2, 2), torch.rand(2, 2) > 0.5, requires_grad=True
             )
             mt.sum().backward()
 
@@ -863,11 +915,14 @@ class TestReductions(TestCase):
 def is_unary(op):
     return op.name in UNARY_NAMES
 
+
 def is_binary(op):
     return op.name in BINARY_NAMES
 
+
 def is_reduction(op):
     return op.name in REDUCE_NAMES and op.name not in {"all", "mean", "std", "var"}
+
 
 mt_unary_ufuncs = [op for op in unary_ufuncs if is_unary(op)]
 mt_binary_ufuncs = [op for op in binary_ufuncs if is_binary(op)]
@@ -878,6 +933,7 @@ MASKEDTENSOR_FLOAT_TYPES = {
     torch.float32,
     torch.float64,
 }
+
 
 class TestOperators(TestCase):
     def _convert_mt_args(self, args, mask, layout):
@@ -1002,5 +1058,5 @@ instantiate_parametrized_tests(TestUnary)
 instantiate_parametrized_tests(TestBinary)
 instantiate_parametrized_tests(TestReductions)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     run_tests()

@@ -10,7 +10,9 @@ CIFLOW_LABEL = re.compile(r"^ciflow/.+")
 CIFLOW_TRUNK_LABEL = re.compile(r"^ciflow/trunk")
 
 OFFICE_HOURS_LINK = "https://github.com/pytorch/pytorch/wiki/Dev-Infra-Office-Hours"
-CONTACT_US = f"Questions? Feedback? Please reach out to the [PyTorch DevX Team]({OFFICE_HOURS_LINK})"
+CONTACT_US = (
+    f"Questions? Feedback? Please reach out to the [PyTorch DevX Team]({OFFICE_HOURS_LINK})"
+)
 ALTERNATIVES = f"Learn more about merging in the [wiki]({BOT_COMMANDS_WIKI})."
 
 
@@ -47,9 +49,7 @@ class TryMergeExplainer:
 
     def _get_flag_msg(
         self,
-        ignore_current_checks: Optional[
-            list[tuple[str, Optional[str], Optional[int]]]
-        ] = None,
+        ignore_current_checks: Optional[list[tuple[str, Optional[str], Optional[int]]]] = None,
     ) -> str:
         if self.force:
             return (
@@ -68,9 +68,7 @@ class TryMergeExplainer:
 
     def get_merge_message(
         self,
-        ignore_current_checks: Optional[
-            list[tuple[str, Optional[str], Optional[int]]]
-        ] = None,
+        ignore_current_checks: Optional[list[tuple[str, Optional[str], Optional[int]]]] = None,
     ) -> str:
         title = "### Merge started"
         main_message = self._get_flag_msg(ignore_current_checks)

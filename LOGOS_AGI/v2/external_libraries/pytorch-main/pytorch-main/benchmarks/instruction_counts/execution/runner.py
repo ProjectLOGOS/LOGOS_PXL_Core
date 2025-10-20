@@ -266,6 +266,4 @@ class Runner:
             )
 
             if proc.returncode:
-                raise ImportError(
-                    f"Failed to import torch in subprocess: {cmd}\n{proc.stdout}"
-                )
+                raise ImportError(f"Failed to import torch in subprocess: {cmd}\n{proc.stdout}")

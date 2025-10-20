@@ -168,9 +168,7 @@ preprocessor = ColumnTransformer(
     ]
 )
 
-pipe = Pipeline(
-    steps=[("preprocessor", preprocessor), ("classifier", RandomForestClassifier())]
-)
+pipe = Pipeline(steps=[("preprocessor", preprocessor), ("classifier", RandomForestClassifier())])
 
 param_grid = {
     "classifier__n_estimators": [200, 500],

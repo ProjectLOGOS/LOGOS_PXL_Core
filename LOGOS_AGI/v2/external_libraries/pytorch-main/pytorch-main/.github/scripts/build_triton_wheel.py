@@ -36,9 +36,7 @@ def check_and_replace(inp: str, src: str, dst: str) -> str:
     return inp.replace(src, dst)
 
 
-def patch_init_py(
-    path: Path, *, version: str, expected_version: Optional[str] = None
-) -> None:
+def patch_init_py(path: Path, *, version: str, expected_version: Optional[str] = None) -> None:
     if not expected_version:
         expected_version = read_triton_version()
     with open(path) as f:
@@ -80,9 +78,7 @@ def build_triton(
         check_call(["git", "clone", triton_repo, "triton"], cwd=tmpdir)
         if release:
             ver, rev, patch = version.split(".")
-            check_call(
-                ["git", "checkout", f"release/{ver}.{rev}.x"], cwd=triton_basedir
-            )
+            check_call(["git", "checkout", f"release/{ver}.{rev}.x"], cwd=triton_basedir)
         else:
             check_call(["git", "checkout", commit_hash], cwd=triton_basedir)
 
@@ -108,14 +104,10 @@ def build_triton(
         # old triton versions have setup.py in the python/ dir,
         # new versions have it in the root dir.
         triton_setupdir = (
-            triton_basedir
-            if (triton_basedir / "setup.py").exists()
-            else triton_pythondir
+            triton_basedir if (triton_basedir / "setup.py").exists() else triton_pythondir
         )
 
-        check_call(
-            [sys.executable, "setup.py", "bdist_wheel"], cwd=triton_setupdir, env=env
-        )
+        check_call([sys.executable, "setup.py", "bdist_wheel"], cwd=triton_setupdir, env=env)
 
         whl_path = next(iter((triton_setupdir / "dist").glob("*.whl")))
         shutil.copy(whl_path, Path.cwd())
@@ -149,9 +141,7 @@ def main() -> None:
 
     build_triton(
         device=args.device,
-        commit_hash=(
-            args.commit_hash if args.commit_hash else read_triton_pin(args.device)
-        ),
+        commit_hash=(args.commit_hash if args.commit_hash else read_triton_pin(args.device)),
         version=triton_version,
         py_version=args.py_version,
         release=args.release,

@@ -44,9 +44,7 @@ def plot_permutation_importance(clf, X, y, ax):
     # scikit-learn user you probably can write simpler code by using `labels=...`
     # (matplotlib < 3.9) or `tick_labels=...` (matplotlib >= 3.9).
     tick_labels_parameter_name = (
-        "tick_labels"
-        if parse_version(matplotlib.__version__) >= parse_version("3.9")
-        else "labels"
+        "tick_labels" if parse_version(matplotlib.__version__) >= parse_version("3.9") else "labels"
     )
     tick_labels_dict = {tick_labels_parameter_name: X.columns[perm_sorted_idx]}
     ax.boxplot(result.importances[perm_sorted_idx].T, vert=False, **tick_labels_dict)
@@ -84,9 +82,7 @@ mdi_importances.sort_values().plot.barh(ax=ax1)
 ax1.set_xlabel("Gini importance")
 plot_permutation_importance(clf, X_train, y_train, ax2)
 ax2.set_xlabel("Decrease in accuracy score")
-fig.suptitle(
-    "Impurity-based vs. permutation importances on multicollinear features (train set)"
-)
+fig.suptitle("Impurity-based vs. permutation importances on multicollinear features (train set)")
 _ = fig.tight_layout()
 
 # %%
@@ -143,9 +139,7 @@ np.fill_diagonal(corr, 1)
 # hierarchical clustering using Ward's linkage.
 distance_matrix = 1 - np.abs(corr)
 dist_linkage = hierarchy.ward(squareform(distance_matrix))
-dendro = hierarchy.dendrogram(
-    dist_linkage, labels=X.columns.to_list(), ax=ax1, leaf_rotation=90
-)
+dendro = hierarchy.dendrogram(dist_linkage, labels=X.columns.to_list(), ax=ax1, leaf_rotation=90)
 dendro_idx = np.arange(0, len(dendro["ivl"]))
 
 ax2.imshow(corr[dendro["leaves"], :][:, dendro["leaves"]])

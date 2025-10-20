@@ -136,9 +136,7 @@ for tr in trends:
         # out = [ wrapper(a, b, c, d) for a, b, c, d in zip(*args)]
 
         # Parallel version
-        res = lview.map_async(
-            wrapper, [t] * EX_NUM, [tr] * EX_NUM, [EX_SIZE] * EX_NUM, seeds
-        )
+        res = lview.map_async(wrapper, [t] * EX_NUM, [tr] * EX_NUM, [EX_SIZE] * EX_NUM, seeds)
         sleep_count = 0
         while not res.ready():
             sleep_count += 1

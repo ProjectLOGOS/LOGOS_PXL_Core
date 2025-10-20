@@ -156,8 +156,6 @@ import numpy as np
 
 from sklearn.preprocessing import OrdinalEncoder
 
-X = np.array(
-    [["dog"] * 5 + ["cat"] * 20 + ["rabbit"] * 10 + ["snake"] * 3], dtype=object
-).T
+X = np.array([["dog"] * 5 + ["cat"] * 20 + ["rabbit"] * 10 + ["snake"] * 3], dtype=object).T
 enc = OrdinalEncoder(min_frequency=6).fit(X)
 enc.infrequent_categories_

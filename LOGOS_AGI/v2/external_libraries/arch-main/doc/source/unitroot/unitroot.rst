@@ -48,5 +48,3 @@ series and cointegration testing and cointegrating vector estimation.
 
     Cointegration Testing Examples <unitroot_cointegration_examples.ipynb>
     Cointegration Testing and Estimation <cointegration>
-
-

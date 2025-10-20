@@ -7,10 +7,7 @@
 import sys
 import os
 
-__all__ = [
-    'get_compatible_pyplot',
-    'mpl_hist_arg'
-]
+__all__ = ["get_compatible_pyplot", "mpl_hist_arg"]
 
 
 def get_compatible_pyplot(backend=None, debug=True):
@@ -39,16 +36,17 @@ def get_compatible_pyplot(backend=None, debug=True):
 
         # Print out the new backend
         if debug:
-            sys.stderr.write("Currently using '%s' MPL backend, "
-                             "switching to '%s' backend%s"
-                             % (existing_backend, backend, os.linesep))
+            sys.stderr.write(
+                "Currently using '%s' MPL backend, "
+                "switching to '%s' backend%s" % (existing_backend, backend, os.linesep)
+            )
 
     # If backend is not set via env variable, but debug is
     elif debug:
-        sys.stderr.write("Using '%s' MPL backend%s"
-                         % (existing_backend, os.linesep))
+        sys.stderr.write("Using '%s' MPL backend%s" % (existing_backend, os.linesep))
 
     from matplotlib import pyplot as plt
+
     return plt
 
 
@@ -73,6 +71,5 @@ def mpl_hist_arg(value=True):
     """
     import matplotlib
 
-    density_kwarg = 'density' if matplotlib.__version__ >= '2.1.0'\
-        else 'normed'
+    density_kwarg = "density" if matplotlib.__version__ >= "2.1.0" else "normed"
     return {density_kwarg: value}

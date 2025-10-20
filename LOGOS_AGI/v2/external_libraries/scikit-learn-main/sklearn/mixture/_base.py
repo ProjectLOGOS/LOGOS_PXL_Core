@@ -59,9 +59,7 @@ class BaseMixture(DensityMixin, BaseEstimator, metaclass=ABCMeta):
         "reg_covar": [Interval(Real, 0.0, None, closed="left")],
         "max_iter": [Interval(Integral, 0, None, closed="left")],
         "n_init": [Interval(Integral, 1, None, closed="left")],
-        "init_params": [
-            StrOptions({"kmeans", "random", "random_from_data", "k-means++"})
-        ],
+        "init_params": [StrOptions({"kmeans", "random", "random_from_data", "k-means++"})],
         "random_state": ["random_state"],
         "warm_start": ["boolean"],
         "verbose": ["verbose"],
@@ -119,9 +117,7 @@ class BaseMixture(DensityMixin, BaseEstimator, metaclass=ABCMeta):
         if self.init_params == "kmeans":
             resp = np.zeros((n_samples, self.n_components), dtype=X.dtype)
             label = (
-                cluster.KMeans(
-                    n_clusters=self.n_components, n_init=1, random_state=random_state
-                )
+                cluster.KMeans(n_clusters=self.n_components, n_init=1, random_state=random_state)
                 .fit(X)
                 .labels_
             )
@@ -134,12 +130,8 @@ class BaseMixture(DensityMixin, BaseEstimator, metaclass=ABCMeta):
             )
             resp /= xp.sum(resp, axis=1)[:, xp.newaxis]
         elif self.init_params == "random_from_data":
-            resp = xp.zeros(
-                (n_samples, self.n_components), dtype=X.dtype, device=device
-            )
-            indices = random_state.choice(
-                n_samples, size=self.n_components, replace=False
-            )
+            resp = xp.zeros((n_samples, self.n_components), dtype=X.dtype, device=device)
+            indices = random_state.choice(n_samples, size=self.n_components, replace=False)
             # TODO: when array API supports __setitem__ with fancy indexing we
             # can use the previous code:
             # resp[indices, xp.arange(self.n_components)] = 1
@@ -458,9 +450,7 @@ class BaseMixture(DensityMixin, BaseEstimator, metaclass=ABCMeta):
 
         _, n_features = self.means_.shape
         rng = check_random_state(self.random_state)
-        n_samples_comp = rng.multinomial(
-            n_samples, _convert_to_numpy(self.weights_, xp)
-        )
+        n_samples_comp = rng.multinomial(n_samples, _convert_to_numpy(self.weights_, xp))
 
         if self.covariance_type == "full":
             X = np.vstack(
@@ -479,17 +469,13 @@ class BaseMixture(DensityMixin, BaseEstimator, metaclass=ABCMeta):
                     rng.multivariate_normal(
                         mean, _convert_to_numpy(self.covariances_, xp), int(sample)
                     )
-                    for (mean, sample) in zip(
-                        _convert_to_numpy(self.means_, xp), n_samples_comp
-                    )
+                    for (mean, sample) in zip(_convert_to_numpy(self.means_, xp), n_samples_comp)
                 ]
             )
         else:
             X = np.vstack(
                 [
-                    mean
-                    + rng.standard_normal(size=(sample, n_features))
-                    * np.sqrt(covariance)
+                    mean + rng.standard_normal(size=(sample, n_features)) * np.sqrt(covariance)
                     for (mean, covariance, sample) in zip(
                         _convert_to_numpy(self.means_, xp),
                         _convert_to_numpy(self.covariances_, xp),
@@ -571,9 +557,7 @@ class BaseMixture(DensityMixin, BaseEstimator, metaclass=ABCMeta):
         log_prob_norm = _logsumexp(weighted_log_prob, axis=1, xp=xp)
 
         # There is no errstate equivalent for warning/error management in array API
-        context_manager = (
-            np.errstate(under="ignore") if _is_numpy_namespace(xp) else nullcontext()
-        )
+        context_manager = np.errstate(under="ignore") if _is_numpy_namespace(xp) else nullcontext()
         with context_manager:
             # ignore underflow
             log_resp = weighted_log_prob - log_prob_norm[:, xp.newaxis]
@@ -609,6 +593,5 @@ class BaseMixture(DensityMixin, BaseEstimator, metaclass=ABCMeta):
         elif self.verbose >= 2:
             t = time() - self._init_prev_time
             print(
-                f"Initialization {converged_msg}. time lapse {t:.5f}s\t lower bound"
-                f" {lb:.5f}."
+                f"Initialization {converged_msg}. time lapse {t:.5f}s\t lower bound" f" {lb:.5f}."
             )

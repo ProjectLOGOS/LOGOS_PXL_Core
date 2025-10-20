@@ -10,11 +10,12 @@ from abc import ABC, abstractmethod
 from enum import Enum
 import collections
 
-__all__ = ['AbstractContext', 'ContextStore', 'ContextType']
+__all__ = ["AbstractContext", "ContextStore", "ContextType"]
 
 
 class _CtxSingleton:
     """Singleton class to store context information"""
+
     store = {}
 
 
@@ -26,6 +27,7 @@ class ContextType(Enum):
 
     An enumeration of Context Types known to :class:`ContextStore`
     """
+
     EMPTY = 0
     STEPWISE = 1
 
@@ -37,11 +39,11 @@ class AbstractContext(ABC):
     execution context. Has helper methods to iterate over the context info
     and provide a string representation of the context info.
     """
+
     def __init__(self, **kwargs):
         # remove None valued entries,
         # since __getattr__ returns None if an attr is not present
-        self.props = {k: v for k, v in kwargs.items() if v is not None} \
-            if kwargs else {}
+        self.props = {k: v for k, v in kwargs.items() if v is not None} if kwargs else {}
 
     def __enter__(self):
         ContextStore._add_context(self)
@@ -101,6 +103,7 @@ class ContextStore:
     This class hosts static methods to wrap access to and encapsulate the
     singleton content store instance
     """
+
     @staticmethod
     def get_context(context_type):
         """Returns most recently added instance of given Context Type
@@ -116,7 +119,7 @@ class ContextStore:
             An instance of AbstractContext subclass or None
         """
         if not isinstance(context_type, ContextType):
-            raise ValueError('context_type must be an instance of ContextType')
+            raise ValueError("context_type must be an instance of ContextType")
 
         if context_type in _ctx.store and len(_ctx.store[context_type]) > 0:
             return _ctx.store[context_type][-1]
@@ -199,7 +202,7 @@ class ContextStore:
         ...     auto_arima(samp,...)
         """
         if not isinstance(ctx, AbstractContext):
-            raise ValueError('ctx must be be an instance of AbstractContext')
+            raise ValueError("ctx must be be an instance of AbstractContext")
 
         # if given Context Type is not present into store, make an entry
         context_type = ctx.get_type()
@@ -222,12 +225,11 @@ class ContextStore:
         :return: None
         """
         if not isinstance(ctx, AbstractContext):
-            raise ValueError('ctx must be be an instance of AbstractContext')
+            raise ValueError("ctx must be be an instance of AbstractContext")
 
         context_type = ctx.get_type()
 
-        if context_type not in _ctx.store or \
-                len(_ctx.store[context_type]) == 0:
+        if context_type not in _ctx.store or len(_ctx.store[context_type]) == 0:
             return
 
         _ctx.store[context_type].pop()

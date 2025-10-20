@@ -308,9 +308,7 @@ def read_graphml(path, node_type=str, edge_key_type=int, force_multigraph=False)
 
 
 @nx._dispatchable(graphs=None, returns_graph=True)
-def parse_graphml(
-    graphml_string, node_type=str, edge_key_type=int, force_multigraph=False
-):
+def parse_graphml(graphml_string, node_type=str, edge_key_type=int, force_multigraph=False):
     """Read graph in GraphML format from string.
 
     Parameters
@@ -455,9 +453,7 @@ class GraphML:
         try:
             return self.xml_type[key]
         except KeyError as err:
-            raise TypeError(
-                f"GraphML does not support type {key} as data values."
-            ) from err
+            raise TypeError(f"GraphML does not support type {key} as data values.") from err
 
 
 class GraphMLWriter(GraphML):
@@ -591,8 +587,7 @@ class GraphMLWriter(GraphML):
                     source=str(u),
                     target=str(v),
                     id=str(data.get(self.edge_id_from_attribute))
-                    if self.edge_id_from_attribute
-                    and self.edge_id_from_attribute in data
+                    if self.edge_id_from_attribute and self.edge_id_from_attribute in data
                     else str(key),
                 )
                 default = G.graph.get("edge_default", {})
@@ -628,15 +623,9 @@ class GraphMLWriter(GraphML):
         if graphid is None:
             graph_element = self.myElement("graph", edgedefault=default_edge_type)
         else:
-            graph_element = self.myElement(
-                "graph", edgedefault=default_edge_type, id=graphid
-            )
+            graph_element = self.myElement("graph", edgedefault=default_edge_type, id=graphid)
         default = {}
-        data = {
-            k: v
-            for (k, v) in G.graph.items()
-            if k not in ["node_default", "edge_default"]
-        }
+        data = {k: v for (k, v) in G.graph.items() if k not in ["node_default", "edge_default"]}
         self.add_attributes("graph", graph_element, data, default)
         self.add_nodes(G, graph_element)
         self.add_edges(G, graph_element)
@@ -648,9 +637,7 @@ class GraphMLWriter(GraphML):
         for xml_obj, data in self.attributes.items():
             for k, v, scope, default in data:
                 xml_obj.append(
-                    self.add_data(
-                        str(k), self.attr_type(k, scope, v), str(v), scope, default
-                    )
+                    self.add_data(str(k), self.attr_type(k, scope, v), str(v), scope, default)
                 )
         self.xml.append(graph_element)
 
@@ -759,18 +746,12 @@ class GraphMLWriterLxml(GraphMLWriter):
         if graphid is None:
             graph_element = self._xml.element("graph", edgedefault=default_edge_type)
         else:
-            graph_element = self._xml.element(
-                "graph", edgedefault=default_edge_type, id=graphid
-            )
+            graph_element = self._xml.element("graph", edgedefault=default_edge_type, id=graphid)
 
         # gather attributes types for the whole graph
         # to find the most general numeric format needed.
         # Then pass through attributes to create key_id for each.
-        graphdata = {
-            k: v
-            for k, v in G.graph.items()
-            if k not in ("node_default", "edge_default")
-        }
+        graphdata = {k: v for k, v in G.graph.items() if k not in ("node_default", "edge_default")}
         node_default = G.graph.get("node_default", {})
         edge_default = G.graph.get("edge_default", {})
         # Graph attributes
@@ -1045,9 +1026,7 @@ class GraphMLReader(GraphML):
                 # Handle default values identically to data element values
                 python_type = graphml_keys[attr_id]["type"]
                 if python_type is bool:
-                    graphml_key_defaults[attr_id] = self.convert_bool[
-                        default.text.lower()
-                    ]
+                    graphml_key_defaults[attr_id] = self.convert_bool[default.text.lower()]
                 else:
                     graphml_key_defaults[attr_id] = python_type(default.text)
         return graphml_keys, graphml_key_defaults

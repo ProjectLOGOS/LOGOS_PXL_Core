@@ -80,9 +80,7 @@ def test_graph_converter_needs_backend():
         assert side_effects == []
         assert type(nx.from_scipy_sparse_array(A)) is nx.Graph
         assert side_effects == [1]
-        assert (
-            type(nx.from_scipy_sparse_array(A, backend="nx_loopback")) is LoopbackGraph
-        )
+        assert type(nx.from_scipy_sparse_array(A, backend="nx_loopback")) is LoopbackGraph
         assert side_effects == [1, 1]
         # backend="networkx" is default implementation
         assert type(nx.from_scipy_sparse_array(A, backend="networkx")) is nx.Graph
@@ -161,9 +159,7 @@ def test_mixing_backend_graphs():
 
 def test_bad_backend_name():
     """Using `backend=` raises with unknown backend even if there are no backends."""
-    with pytest.raises(
-        ImportError, match="'this_backend_does_not_exist' backend is not installed"
-    ):
+    with pytest.raises(ImportError, match="'this_backend_does_not_exist' backend is not installed"):
         nx.null_graph(backend="this_backend_does_not_exist")
 
 

@@ -22,11 +22,11 @@ def test_bind_df_model():
     res = ARIMAResults()
 
     # First, there is no 'df_model' in arima res
-    assert not hasattr(res, 'df_model')
+    assert not hasattr(res, "df_model")
     bind_df_model(fit, res)
 
     # Now it should
-    assert hasattr(res, 'df_model')
+    assert hasattr(res, "df_model")
     assert res.df_model == 11, res.df_model
 
 

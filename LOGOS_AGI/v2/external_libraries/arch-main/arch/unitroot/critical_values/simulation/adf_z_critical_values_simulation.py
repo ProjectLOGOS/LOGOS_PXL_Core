@@ -30,9 +30,7 @@ with dview.sync_imports():
     from numpy.random import RandomState
 
 
-def wrapper(
-    n: int, trend: Literal["n", "c", "ct", "ctt"], b: int, seed: int = 0
-) -> ndarray:
+def wrapper(n: int, trend: Literal["n", "c", "ct", "ctt"], b: int, seed: int = 0) -> ndarray:
     """
     Wraps and blocks the main simulation so that the maximum amount of memory
     can be controlled on multi processor systems when executing in parallel

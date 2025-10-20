@@ -64,9 +64,7 @@ param_dist = {
 
 # run randomized search
 n_iter_search = 15
-random_search = RandomizedSearchCV(
-    clf, param_distributions=param_dist, n_iter=n_iter_search
-)
+random_search = RandomizedSearchCV(clf, param_distributions=param_dist, n_iter=n_iter_search)
 
 start = time()
 random_search.fit(X, y)

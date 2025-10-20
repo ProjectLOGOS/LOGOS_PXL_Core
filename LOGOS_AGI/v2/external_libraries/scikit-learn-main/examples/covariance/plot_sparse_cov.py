@@ -111,9 +111,7 @@ covs = [
 vmax = cov_.max()
 for i, (name, this_cov) in enumerate(covs):
     plt.subplot(2, 4, i + 1)
-    plt.imshow(
-        this_cov, interpolation="nearest", vmin=-vmax, vmax=vmax, cmap=plt.cm.RdBu_r
-    )
+    plt.imshow(this_cov, interpolation="nearest", vmin=-vmax, vmax=vmax, cmap=plt.cm.RdBu_r)
     plt.xticks(())
     plt.yticks(())
     plt.title("%s covariance" % name)

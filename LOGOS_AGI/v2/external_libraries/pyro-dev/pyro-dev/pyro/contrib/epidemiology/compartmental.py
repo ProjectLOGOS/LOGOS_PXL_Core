@@ -73,9 +73,7 @@ def _disallow_latent_variables(section_name):
         yield
     for name, site in tr.trace.nodes.items():
         if site["type"] == "sample" and not site["is_observed"]:
-            raise NotImplementedError(
-                "{} contained latent variable {}".format(section_name, name)
-            )
+            raise NotImplementedError("{} contained latent variable {}".format(section_name, name))
 
 
 class CompartmentalModel(ABC):
@@ -185,9 +183,7 @@ class CompartmentalModel(ABC):
         A ``pyro.plate`` for the time dimension.
         """
         if self._time_plate is None:
-            self._time_plate = pyro.plate(
-                "time", self.duration, dim=-2 if self.is_regional else -1
-            )
+            self._time_plate = pyro.plate("time", self.duration, dim=-2 if self.is_regional else -1)
         return self._time_plate
 
     @property
@@ -373,9 +369,7 @@ class CompartmentalModel(ABC):
         model = poutine.condition(model, fixed)
         trace = poutine.trace(model).get_trace()
         samples = OrderedDict(
-            (name, site["value"])
-            for name, site in trace.nodes.items()
-            if site["type"] == "sample"
+            (name, site["value"]) for name, site in trace.nodes.items() if site["type"] == "sample"
         )
 
         self._concat_series(samples, trace)
@@ -466,9 +460,7 @@ class CompartmentalModel(ABC):
         if guide_rank == 0:
             guide = AutoNormal(model, init_loc_fn=init_strategy, init_scale=init_scale)
         elif guide_rank == "full":
-            guide = AutoMultivariateNormal(
-                model, init_loc_fn=init_strategy, init_scale=init_scale
-            )
+            guide = AutoMultivariateNormal(model, init_loc_fn=init_strategy, init_scale=init_scale)
         elif guide_rank is None or isinstance(guide_rank, int):
             guide = AutoLowRankMultivariateNormal(
                 model, init_loc_fn=init_strategy, init_scale=init_scale, rank=guide_rank
@@ -501,16 +493,12 @@ class CompartmentalModel(ABC):
             losses.append(loss)
         elapsed = default_timer() - start_time
         logger.info(
-            "SVI took {:0.1f} seconds, {:0.1f} step/sec".format(
-                elapsed, (1 + num_steps) / elapsed
-            )
+            "SVI took {:0.1f} seconds, {:0.1f} step/sec".format(elapsed, (1 + num_steps) / elapsed)
         )
 
         # Draw posterior samples.
         with torch.no_grad():
-            particle_plate = pyro.plate(
-                "particles", num_samples, dim=-1 - self.max_plate_nesting
-            )
+            particle_plate = pyro.plate("particles", num_samples, dim=-1 - self.max_plate_nesting)
             guide_trace = poutine.trace(particle_plate(guide)).get_trace()
             model_trace = poutine.trace(
                 poutine.replay(particle_plate(model), guide_trace)
@@ -648,12 +636,10 @@ class CompartmentalModel(ABC):
         # Unsqueeze samples to align particle dim for use in poutine.condition.
         # TODO refactor to an align_samples or particle_dim kwarg to MCMC.get_samples().
         model = self._relaxed_model if self.relaxed else self._quantized_model
-        self.samples = align_samples(
-            self.samples, model, particle_dim=-1 - self.max_plate_nesting
-        )
-        assert all(
-            v.size(0) == num_samples * num_chains for v in self.samples.values()
-        ), {k: tuple(v.shape) for k, v in self.samples.items()}
+        self.samples = align_samples(self.samples, model, particle_dim=-1 - self.max_plate_nesting)
+        assert all(v.size(0) == num_samples * num_chains for v in self.samples.values()), {
+            k: tuple(v.shape) for k, v in self.samples.items()
+        }
 
         return mcmc  # E.g. so user can run mcmc.summary().
 
@@ -679,24 +665,18 @@ class CompartmentalModel(ABC):
 
         samples = self.samples
         num_samples = len(next(iter(samples.values())))
-        particle_plate = pyro.plate(
-            "particles", num_samples, dim=-1 - self.max_plate_nesting
-        )
+        particle_plate = pyro.plate("particles", num_samples, dim=-1 - self.max_plate_nesting)
 
         # Sample discrete auxiliary variables conditioned on the continuous
         # variables sampled by _quantized_model. This samples only time steps
         # [0:duration]. Here infer_discrete runs a forward-filter
         # backward-sample algorithm.
-        logger.info(
-            "Predicting latent variables for {} time steps...".format(self.duration)
-        )
+        logger.info("Predicting latent variables for {} time steps...".format(self.duration))
         model = self._sequential_model
         model = poutine.condition(model, samples)
         model = particle_plate(model)
         if not self.relaxed:
-            model = infer_discrete(
-                model, first_available_dim=-2 - self.max_plate_nesting
-            )
+            model = infer_discrete(model, first_available_dim=-2 - self.max_plate_nesting)
         trace = poutine.trace(model).get_trace()
         samples = OrderedDict(
             (name, site["value"].expand(site["fn"].shape()))
@@ -870,10 +850,7 @@ class CompartmentalModel(ABC):
         shape = (C, T) + R_shape
         auxiliary = pyro.sample(
             "auxiliary",
-            dist.Uniform(-0.5, self.population + 0.5)
-            .mask(False)
-            .expand(shape)
-            .to_event(),
+            dist.Uniform(-0.5, self.population + 0.5).mask(False).expand(shape).to_event(),
         )
         extra_dims = auxiliary.dim() - len(shape)
 
@@ -939,9 +916,7 @@ class CompartmentalModel(ABC):
             self.transition(params, state, t)
             with self.region_plate:
                 for name in self.compartments:
-                    pyro.deterministic(
-                        "{}_{}".format(name, t), state[name], event_dim=0
-                    )
+                    pyro.deterministic("{}_{}".format(name, t), state[name], event_dim=0)
 
         self._clear_plates()
 
@@ -1026,9 +1001,7 @@ class CompartmentalModel(ABC):
             if name in self.compartments:
                 if isinstance(value, torch.Tensor):
                     value = value[..., None]  # Because curr is enumerated on the right.
-                prev[name] = cat2(
-                    value, curr[name][:-1], dim=-3 if self.is_regional else -2
-                )
+                prev[name] = cat2(value, curr[name][:-1], dim=-3 if self.is_regional else -2)
             else:  # non-compartmental
                 prev[name] = cat2(init[name], curr[name][:-1], dim=-curr[name].dim())
 
@@ -1051,9 +1024,7 @@ class CompartmentalModel(ABC):
         for name in self.approximate:
             aux = auxiliary[self.compartments.index(name)]
             curr[name + "_approx"] = aux
-            prev[name + "_approx"] = cat2(
-                init[name], aux[:-1], dim=-2 if self.is_regional else -1
-            )
+            prev[name + "_approx"] = cat2(init[name], aux[:-1], dim=-2 if self.is_regional else -1)
 
         # Record transition factors.
         with poutine.block(), poutine.trace() as tr:
@@ -1069,18 +1040,14 @@ class CompartmentalModel(ABC):
                     continue
                 if self.is_regional and log_prob.shape[-1:] != R_shape:
                     # Poor man's tensor variable elimination.
-                    log_prob = (
-                        log_prob.expand(log_prob.shape[:-1] + R_shape) / R_shape[0]
-                    )
+                    log_prob = log_prob.expand(log_prob.shape[:-1] + R_shape) / R_shape[0]
                 logp[name] = site["log_prob"]
 
         # Manually perform variable elimination.
         logp = reduce(operator.add, logp.values())
         logp = logp.reshape(Q**C, Q**C, T, -1)  # prev, curr, T, batch
         logp = logp.permute(3, 2, 0, 1).squeeze(0)  # batch, T, prev, curr
-        logp = pyro.distributions.hmm._sequential_logmatmulexp(
-            logp
-        )  # batch, prev, curr
+        logp = pyro.distributions.hmm._sequential_logmatmulexp(logp)  # batch, prev, curr
         logp = logp.reshape(-1, Q**C * Q**C).logsumexp(-1).sum()
         warn_if_nan(logp)
         pyro.factor("transition", logp)

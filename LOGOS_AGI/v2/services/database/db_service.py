@@ -1,7 +1,7 @@
 # logos_agi_v1/services/database/db_service.py
 
-from dotenv import load_dotenv  
-load_dotenv()                   
+from dotenv import load_dotenv
+load_dotenv()
 
 import os
 import pika

@@ -86,9 +86,7 @@ def profile(
 def system(command):
     """Returns (return-code, stdout, stderr)"""
     print(f"[system] {command}")
-    p = subprocess.Popen(
-        command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True
-    )
+    p = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     output, err = p.communicate()
     rc = p.returncode
     output = output.decode("ascii")
@@ -144,9 +142,7 @@ if __name__ == "__main__":
     parser.add_argument("--inputSize", default="512", type=int)
     parser.add_argument("--hiddenSize", default="512", type=int)
     parser.add_argument("--miniBatch", default="64", type=int)
-    parser.add_argument(
-        "--sleep-between-seconds", "--sleep_between_seconds", default="1", type=int
-    )
+    parser.add_argument("--sleep-between-seconds", "--sleep_between_seconds", default="1", type=int)
     parser.add_argument("--nloops", default="5", type=int)
 
     parser.add_argument("--rnns", nargs="*", help="What to run. cudnn, aten, jit, etc")

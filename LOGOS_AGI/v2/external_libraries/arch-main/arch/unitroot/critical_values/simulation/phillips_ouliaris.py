@@ -12,9 +12,7 @@ else:
 
 # percentiles to save
 PERCENTILES = (
-    list(np.arange(1, 10, 1))
-    + list(np.arange(10, 990, 5))
-    + list(np.arange(990, 1000, 1))
+    list(np.arange(1, 10, 1)) + list(np.arange(10, 990, 5)) + list(np.arange(990, 1000, 1))
 )
 PERCENTILES = PERCENTILES[::-1]
 QUANTILES = np.array(PERCENTILES) / 1000.0

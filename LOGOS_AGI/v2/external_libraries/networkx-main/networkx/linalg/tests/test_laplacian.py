@@ -11,9 +11,7 @@ class TestLaplacian:
     def setup_class(cls):
         deg = [3, 2, 2, 1, 0]
         cls.G = nx.havel_hakimi_graph(deg)
-        cls.WG = nx.Graph(
-            (u, v, {"weight": 0.5, "other": 0.3}) for (u, v) in cls.G.edges()
-        )
+        cls.WG = nx.Graph((u, v, {"weight": 0.5, "other": 0.3}) for (u, v) in cls.G.edges())
         cls.WG.add_node(4)
         cls.MG = nx.MultiGraph(cls.G)
 
@@ -40,9 +38,7 @@ class TestLaplacian:
             )
         )
         cls.DiMG = nx.MultiDiGraph(cls.DiG)
-        cls.DiWG = nx.DiGraph(
-            (u, v, {"weight": 0.5, "other": 0.3}) for (u, v) in cls.DiG.edges()
-        )
+        cls.DiWG = nx.DiGraph((u, v, {"weight": 0.5, "other": 0.3}) for (u, v) in cls.DiG.edges())
         cls.DiGsl = cls.DiG.copy()
         for node in cls.DiGsl.nodes():
             cls.DiGsl.add_edge(node, node)
@@ -76,9 +72,7 @@ class TestLaplacian:
         )
         np.testing.assert_equal(nx.laplacian_matrix(self.WG).todense(), WL)
         np.testing.assert_equal(nx.laplacian_matrix(self.WG, weight=None).todense(), NL)
-        np.testing.assert_equal(
-            nx.laplacian_matrix(self.WG, weight="other").todense(), OL
-        )
+        np.testing.assert_equal(nx.laplacian_matrix(self.WG, weight="other").todense(), OL)
 
         np.testing.assert_equal(nx.laplacian_matrix(self.DiG).todense(), DiNL)
         np.testing.assert_equal(nx.laplacian_matrix(self.DiMG).todense(), DiNL)
@@ -87,12 +81,8 @@ class TestLaplacian:
             np.array([[1, -1], [0, 0]]),
         )
         np.testing.assert_equal(nx.laplacian_matrix(self.DiWG).todense(), DiWL)
-        np.testing.assert_equal(
-            nx.laplacian_matrix(self.DiWG, weight=None).todense(), DiNL
-        )
-        np.testing.assert_equal(
-            nx.laplacian_matrix(self.DiWG, weight="other").todense(), DiOL
-        )
+        np.testing.assert_equal(nx.laplacian_matrix(self.DiWG, weight=None).todense(), DiNL)
+        np.testing.assert_equal(nx.laplacian_matrix(self.DiWG, weight="other").todense(), DiOL)
 
     def test_normalized_laplacian(self):
         "Generalized Graph Laplacian"
@@ -224,9 +214,7 @@ def test_directed_laplacian():
                    [ 0.    , -0.3162, -0.0913, -0.5   ,  1.    , -0.25  ],
                    [-0.3227,  0.    ,  0.    , -0.5   , -0.25  ,  1.    ]])
     # fmt: on
-    L = nx.directed_laplacian_matrix(
-        G, alpha=0.9, nodelist=sorted(G), walk_type="random"
-    )
+    L = nx.directed_laplacian_matrix(G, alpha=0.9, nodelist=sorted(G), walk_type="random")
     np.testing.assert_almost_equal(L, GL, decimal=3)
 
     # fmt: off

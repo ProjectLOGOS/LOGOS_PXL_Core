@@ -11,9 +11,7 @@ class ManyComponentsBenchmark:
     """
 
     def setup(self):
-        atlas = nx.graph_atlas_g()[
-            3:209
-        ]  # 0, 1, 2 => no edges. 208 is last 6 node graph
+        atlas = nx.graph_atlas_g()[3:209]  # 0, 1, 2 => no edges. 208 is last 6 node graph
         U = nx.Graph()
         for G in atlas:
             if (nx.number_connected_components(G) == 1) and (

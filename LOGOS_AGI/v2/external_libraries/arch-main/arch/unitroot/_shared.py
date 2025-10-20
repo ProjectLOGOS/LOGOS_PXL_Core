@@ -33,9 +33,7 @@ def _check_kernel(kernel: str) -> str:
     kernel = kernel.replace("-", "").replace("_", "").lower()
     if kernel not in KERNEL_ESTIMATORS:
         est = "\n".join(sorted(k for k in KERNEL_ESTIMATORS))
-        raise ValueError(
-            f"kernel is not a known kernel estimator. Must be one of:\n {est}"
-        )
+        raise ValueError(f"kernel is not a known kernel estimator. Must be one of:\n {est}")
     return kernel
 
 
@@ -219,9 +217,7 @@ class ResidualCointegrationTestResult(CointegrationTestResult):
         resid.name = "Cointegrating Residual"
         return resid
 
-    def plot(
-        self, axes: Optional["plt.Axes"] = None, title: str | None = None
-    ) -> "plt.Figure":
+    def plot(self, axes: Optional["plt.Axes"] = None, title: str | None = None) -> "plt.Figure":
         """
         Plot the cointegration residuals.
 

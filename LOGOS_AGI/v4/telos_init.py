@@ -38,7 +38,7 @@ SUBSYSTEM_INFO = {
     "capabilities": [
         "causal_modeling",
         "outcome_prediction",
-        "causal_retrodiction", 
+        "causal_retrodiction",
         "intervention_analysis",
         "time_series_forecasting",
         "hypothesis_testing",

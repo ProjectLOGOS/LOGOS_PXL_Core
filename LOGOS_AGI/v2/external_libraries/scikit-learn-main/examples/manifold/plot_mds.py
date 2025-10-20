@@ -113,15 +113,11 @@ plt.legend(scatterpoints=1, loc="best", shadow=False)
 start_idx, end_idx = X_mds.nonzero()
 # a sequence of (*line0*, *line1*, *line2*), where::
 #            linen = (x0, y0), (x1, y1), ... (xm, ym)
-segments = [
-    [X_true[i, :], X_true[j, :]] for i in range(len(X_true)) for j in range(len(X_true))
-]
+segments = [[X_true[i, :], X_true[j, :]] for i in range(len(X_true)) for j in range(len(X_true))]
 edges = distances.max() / (distances + EPSILON) * 100
 np.fill_diagonal(edges, 0)
 edges = np.abs(edges)
-lc = LineCollection(
-    segments, zorder=0, cmap=plt.cm.Blues, norm=plt.Normalize(0, edges.max())
-)
+lc = LineCollection(segments, zorder=0, cmap=plt.cm.Blues, norm=plt.Normalize(0, edges.max()))
 lc.set_array(edges.flatten())
 lc.set_linewidths(np.full(len(segments), 0.5))
 ax.add_collection(lc)

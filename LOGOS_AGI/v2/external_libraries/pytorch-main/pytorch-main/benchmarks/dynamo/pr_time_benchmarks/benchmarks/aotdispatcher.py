@@ -32,14 +32,10 @@ class Benchmark(BenchmarkBase):
 
     def _prepare_once(self):
         _args = [
-            torch.ones(100, requires_grad=self._training, device=self.device())
-            for _ in range(100)
+            torch.ones(100, requires_grad=self._training, device=self.device()) for _ in range(100)
         ]
         if self._subclass:
-            _args = [
-                TwoTensor(x, x.clone().detach().requires_grad_(self._training))
-                for x in _args
-            ]
+            _args = [TwoTensor(x, x.clone().detach().requires_grad_(self._training)) for x in _args]
         self._args = _args
 
     def _prepare(self):
@@ -64,9 +60,7 @@ def main():
     ]
 
     for benchmark in all:
-        benchmark.enable_compile_time_instruction_count().collect_all().append_results(
-            result_path
-        )
+        benchmark.enable_compile_time_instruction_count().collect_all().append_results(result_path)
 
 
 if __name__ == "__main__":

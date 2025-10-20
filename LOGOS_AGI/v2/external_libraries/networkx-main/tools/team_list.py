@@ -14,10 +14,7 @@ steering_url = f"https://api.github.com/orgs/{project}/teams/{steering}/members"
 
 token = os.environ.get("GH_TOKEN", None)
 if token is None:
-    print(
-        "No token found.  Please export a GH_TOKEN with permissions "
-        "to read team members."
-    )
+    print("No token found.  Please export a GH_TOKEN with permissions " "to read team members.")
     sys.exit(-1)
 
 

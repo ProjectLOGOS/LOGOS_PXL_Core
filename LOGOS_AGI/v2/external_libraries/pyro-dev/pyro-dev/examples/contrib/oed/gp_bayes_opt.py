@@ -41,9 +41,7 @@ class GPBayesOptimizer(pyro.optim.multi.MultiOptimizer):
         gp.util.train(
             self.gpmodel,
             optimizer,
-            loss_fn=TraceEnum_ELBO(
-                strict_enumeration_warning=False
-            ).differentiable_loss,
+            loss_fn=TraceEnum_ELBO(strict_enumeration_warning=False).differentiable_loss,
             retain_graph=True,
         )
 
@@ -68,9 +66,7 @@ class GPBayesOptimizer(pyro.optim.multi.MultiOptimizer):
                 return torch.tensor(float("inf"))
             x = transform_to(self.constraints)(unconstrained_x)
             y = differentiable(x)
-            autograd.backward(
-                unconstrained_x, autograd.grad(y, unconstrained_x, retain_graph=True)
-            )
+            autograd.backward(unconstrained_x, autograd.grad(y, unconstrained_x, retain_graph=True))
             return y
 
         minimizer.step(closure)

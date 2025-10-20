@@ -46,7 +46,7 @@ class RevisionEngine:
         # Example: If the task was a step in a plan, reinforce the
         # validity of that planning step.
         logging.info(f"Task {task_id} SUCCEEDED. Updating internal models.")
-        
+
         # Pseudocode for a real system:
         # if payload.get('type') == 'data_extraction':
         #     knowledge_graph.add_triples(payload['extracted_triples'])

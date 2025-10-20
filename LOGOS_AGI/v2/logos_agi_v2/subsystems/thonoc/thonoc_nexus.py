@@ -19,41 +19,41 @@ class ThonocNexus:  # Your existing class
     def __init__(self):
         # Add Trinity integration
         self.trinity_integration = TrinityNexusIntegration("THONOC")
-        
+
         # Your existing init code
-        
+
     def run(self, query, series=None):  # Your existing method
         # Add Trinity computation
         result = self.trinity_integration.trinity_compute(
             operation=self._process_prediction_request,
             input_data={"query": query, "series": series}
         )
-        
+
         if result is None:
             return {"status": "trinity_validation_failed"}
-            
+
         return result
-    
+
     def _process_prediction_request(self, enhanced_data):
         # Your existing logic
         query = enhanced_data.get('query') or enhanced_data.get('original_data', {}).get('query')
         series = enhanced_data.get('series') or enhanced_data.get('original_data', {}).get('series')
-        
+
         # Your existing processing
         return self.your_existing_prediction_logic(query, series)
-        
+
 class TrinityNexusIntegration:
     """Trinity integration system for enhanced subsystem coordination."""
-    
+
     def __init__(self, component_name: str):
         self.component = component_name
         self.trinity_state = {
             "existence": 0.33,
-            "goodness": 0.33, 
+            "goodness": 0.33,
             "truth": 0.34
         }
         self.validation_active = True
-    
+
     def trinity_compute(self, operation, input_data):
         """Execute Trinity-enhanced computation with validation."""
         try:
@@ -64,23 +64,23 @@ class TrinityNexusIntegration:
                 "component": self.component,
                 "validation_timestamp": time.time()
             }
-            
+
             # Execute operation with enhancement
             result = operation(enhanced_data)
-            
+
             # Validate Trinity coherence
             if self._validate_trinity_coherence(result):
                 return result
             else:
                 return {"status": "trinity_validation_failed", "component": self.component}
-                
+
         except Exception as e:
             return {
-                "status": "trinity_computation_error", 
+                "status": "trinity_computation_error",
                 "error": str(e),
                 "component": self.component
             }
-    
+
     def _validate_trinity_coherence(self, result):
         """Validate computational result maintains Trinity coherence."""
         # Basic coherence checks

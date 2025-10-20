@@ -65,9 +65,7 @@ def compute_speedups(
 
                         # benchmarker.benchmark_gpu() clears L2 cache to hide the latency of CPU launch time
                         # along with cuda synchronization
-                        timings[rep, m] = benchmarker.benchmark_gpu(
-                            lambda: model(*example_inputs)
-                        )
+                        timings[rep, m] = benchmarker.benchmark_gpu(lambda: model(*example_inputs))
                     else:
                         from torch._inductor.utils import timed
 
@@ -124,16 +122,12 @@ def microbenchmark(
 
     if measure_nvfuser:
         g = convert_to_jit(gm, gm_args)
-        cudagraphs_jit = cudagraphs_inner(
-            g, gm_args, copy_outputs=False, copy_inputs=False
-        )
+        cudagraphs_jit = cudagraphs_inner(g, gm_args, copy_outputs=False, copy_inputs=False)
         compiled += [cudagraphs_jit]
     if accuracy_checking:
         repeats = 1
 
-    medians = compute_speedups(
-        operator, compiled, gm_args, repeats, accuracy_checking, device
-    )
+    medians = compute_speedups(operator, compiled, gm_args, repeats, accuracy_checking, device)
     return medians
 
 
@@ -192,9 +186,7 @@ def skip_operator(operator):
 @click.option("--dtype", help="dtype to benchmark", default="float32")
 @click.option("--max-samples", help="max samples per op", default=15)
 @click.option("--accuracy-checking", help="check accuracy", default=False)
-@click.option(
-    "--repeats", help="how many times to repeat for perf measurement", default=3
-)
+@click.option("--repeats", help="how many times to repeat for perf measurement", default=3)
 @click.option(
     "--inductor-config",
     multiple=True,
@@ -208,9 +200,7 @@ def skip_operator(operator):
 @click.option("--device", help="cpu or cuda", default="cuda")
 @click.option("--inp-file", help="use custom input file instead of suite", default=None)
 @click.option("--start-idx", help="specify start index of samples", default=0)
-@click.option(
-    "--channels-last", help="force inputs to channels last", is_flag=True, default=False
-)
+@click.option("--channels-last", help="force inputs to channels last", is_flag=True, default=False)
 @click.option("--profile", help="profile the benchmark", is_flag=True, default=False)
 def benchmark(
     suite,
@@ -323,9 +313,7 @@ def benchmark(
                     break
                 args, kwargs = inps
                 if channels_last:
-                    args, kwargs = tree_map_only(
-                        torch.Tensor, to_channels_last, (args, kwargs)
-                    )
+                    args, kwargs = tree_map_only(torch.Tensor, to_channels_last, (args, kwargs))
                 try:
                     with maybe_record_function(f"iter_{i}"):
                         # aten, nvfuser, inductor
@@ -350,9 +338,7 @@ def benchmark(
             continue
 
         timings = np.stack(timings)
-        speedups = [
-            quantiles(timings[:, 0] / timings[:, x]) for x in range(1, timings.shape[1])
-        ]
+        speedups = [quantiles(timings[:, 0] / timings[:, x]) for x in range(1, timings.shape[1])]
         if compare2:
             speedups.append(quantiles(timings[:, 1] / timings[:, 2]))
         assert len(backend_names) == len(speedups)

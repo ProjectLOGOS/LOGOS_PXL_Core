@@ -184,9 +184,7 @@ def squared_loss(y_true, y_pred, sample_weight=None):
     loss : float
         The degree to which the samples are correctly predicted.
     """
-    return (
-        0.5 * np.average((y_true - y_pred) ** 2, weights=sample_weight, axis=0).mean()
-    )
+    return 0.5 * np.average((y_true - y_pred) ** 2, weights=sample_weight, axis=0).mean()
 
 
 def poisson_loss(y_true, y_pred, sample_weight=None):

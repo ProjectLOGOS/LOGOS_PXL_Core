@@ -43,9 +43,7 @@ def _generate_graph6_bytes(G, nodes, header):
     """
     n = len(G)
     if n >= 2**36:
-        raise ValueError(
-            "graph6 is only defined if number of nodes is less than 2 ** 36"
-        )
+        raise ValueError("graph6 is only defined if number of nodes is less than 2 ** 36")
     if header:
         yield b">>graph6<<"
     for d in n_to_data(n):
@@ -125,9 +123,7 @@ def from_graph6_bytes(bytes_in):
     n, data = data_to_n(data)
     nd = (n * (n - 1) // 2 + 5) // 6
     if len(data) != nd:
-        raise NetworkXError(
-            f"Expected {n * (n - 1) // 2} bits but got {len(data) * 6} in graph6"
-        )
+        raise NetworkXError(f"Expected {n * (n - 1) // 2} bits but got {len(data) * 6} in graph6")
 
     G = nx.Graph()
     G.add_nodes_from(range(n))

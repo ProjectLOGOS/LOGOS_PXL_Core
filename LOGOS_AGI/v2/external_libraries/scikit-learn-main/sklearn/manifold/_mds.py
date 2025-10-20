@@ -122,9 +122,7 @@ def _smacof_single(
         # overrides the parameter p
         n_components = init.shape[1]
         if n_samples != init.shape[0]:
-            raise ValueError(
-                "init matrix should be of shape (%d, %d)" % (n_samples, n_components)
-            )
+            raise ValueError("init matrix should be of shape (%d, %d)" % (n_samples, n_components))
         X = init
     distances = euclidean_distances(X)
 
@@ -150,15 +148,11 @@ def _smacof_single(
             if it < 1:
                 disparities_flat = dissimilarities_flat_w
             else:
-                disparities_flat = ir.fit_transform(
-                    dissimilarities_flat_w, distances_flat_w
-                )
+                disparities_flat = ir.fit_transform(dissimilarities_flat_w, distances_flat_w)
             disparities = np.zeros_like(distances_flat)
             disparities[dissimilarities_flat != 0] = disparities_flat
             disparities = disparities.reshape((n_samples, n_samples))
-            disparities *= np.sqrt(
-                (n_samples * (n_samples - 1) / 2) / (disparities**2).sum()
-            )
+            disparities *= np.sqrt((n_samples * (n_samples - 1) / 2) / (disparities**2).sum())
             disparities = disparities + disparities.T
 
         # Update X using the Guttman transform

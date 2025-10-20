@@ -53,9 +53,7 @@ def trivial_model():
 
 
 tr_normal = poutine.Trace()
-tr_normal.add_node(
-    "normal_0", type="sample", is_observed=False, value=torch.zeros(1), infer={}
-)
+tr_normal.add_node("normal_0", type="sample", is_observed=False, value=torch.zeros(1), infer={})
 
 
 @register_model(

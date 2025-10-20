@@ -223,35 +223,51 @@ class __array_namespace_info__:
     @overload
     def dtypes(
         self, /, *, device: _Device | None = None, kind: None = None
-    ) -> DTypesAll: ...
+    ) -> DTypesAll:
+        ...
+
     @overload
     def dtypes(
         self, /, *, device: _Device | None = None, kind: L["bool"]
-    ) -> DTypesBool: ...
+    ) -> DTypesBool:
+        ...
+
     @overload
     def dtypes(
         self, /, *, device: _Device | None = None, kind: L["signed integer"]
-    ) -> DTypesSigned: ...
+    ) -> DTypesSigned:
+        ...
+
     @overload
     def dtypes(
         self, /, *, device: _Device | None = None, kind: L["unsigned integer"]
-    ) -> DTypesUnsigned: ...
+    ) -> DTypesUnsigned:
+        ...
+
     @overload
     def dtypes(
         self, /, *, device: _Device | None = None, kind: L["integral"]
-    ) -> DTypesIntegral: ...
+    ) -> DTypesIntegral:
+        ...
+
     @overload
     def dtypes(
         self, /, *, device: _Device | None = None, kind: L["real floating"]
-    ) -> DTypesReal: ...
+    ) -> DTypesReal:
+        ...
+
     @overload
     def dtypes(
         self, /, *, device: _Device | None = None, kind: L["complex floating"]
-    ) -> DTypesComplex: ...
+    ) -> DTypesComplex:
+        ...
+
     @overload
     def dtypes(
         self, /, *, device: _Device | None = None, kind: L["numeric"]
-    ) -> DTypesNumeric: ...
+    ) -> DTypesNumeric:
+        ...
+
     def dtypes(
         self, /, *, device: _Device | None = None, kind: DTypeKind | None = None
     ) -> DTypesAny:

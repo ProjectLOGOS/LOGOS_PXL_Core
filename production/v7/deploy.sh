@@ -40,21 +40,21 @@ log_error() {
 # Check prerequisites
 check_prerequisites() {
     log_info "Checking prerequisites..."
-    
+
     # Check Docker
     if ! command -v docker &> /dev/null; then
         log_error "Docker is not installed"
         exit 1
     fi
     log_success "Docker found: $(docker --version)"
-    
+
     # Check Docker Compose
     if ! command -v docker-compose &> /dev/null; then
         log_error "Docker Compose is not installed"
         exit 1
     fi
     log_success "Docker Compose found: $(docker-compose --version)"
-    
+
     # Check available memory
     if command -v free &> /dev/null; then
         AVAILABLE_MEM=$(free -m | awk 'NR==2{printf "%.0f", $7}')
@@ -64,7 +64,7 @@ check_prerequisites() {
             log_success "Available memory: ${AVAILABLE_MEM}MB"
         fi
     fi
-    
+
     # Check disk space
     if command -v df &> /dev/null; then
         AVAILABLE_SPACE=$(df -BG . | awk 'NR==2{print $4}' | sed 's/G//')
@@ -79,7 +79,7 @@ check_prerequisites() {
 # Build Docker images
 build_images() {
     log_info "Building LOGOS v${LOGOS_VERSION} Docker images..."
-    
+
     # Build unified image
     if [ -f "../../../Dockerfile.unified" ]; then
         log_info "Building unified runtime image..."
@@ -95,19 +95,19 @@ build_images() {
 # Create necessary directories
 create_directories() {
     log_info "Creating deployment directories..."
-    
+
     mkdir -p monitoring/grafana/{dashboards,datasources}
     mkdir -p nginx/ssl
     mkdir -p logs
     mkdir -p data/{models,proofs,cache}
-    
+
     log_success "Directories created"
 }
 
 # Generate configuration files
 generate_configs() {
     log_info "Generating configuration files..."
-    
+
     # Prometheus configuration
     cat > monitoring/prometheus.yml << EOF
 global:
@@ -150,37 +150,37 @@ http {
     upstream logos_backend {
         server logos-unified:8080;
     }
-    
+
     upstream proof_backend {
         server logos-proof-server:8081;
     }
-    
+
     upstream reasoning_backend {
         server logos-reasoning:8082;
     }
 
     server {
         listen 80;
-        
+
         location / {
             proxy_pass http://logos_backend;
             proxy_set_header Host \$host;
             proxy_set_header X-Real-IP \$remote_addr;
             proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
         }
-        
+
         location /proof/ {
             proxy_pass http://proof_backend/;
             proxy_set_header Host \$host;
             proxy_set_header X-Real-IP \$remote_addr;
         }
-        
+
         location /reasoning/ {
             proxy_pass http://reasoning_backend/;
             proxy_set_header Host \$host;
             proxy_set_header X-Real-IP \$remote_addr;
         }
-        
+
         location /health {
             return 200 'healthy';
             add_header Content-Type text/plain;
@@ -207,37 +207,37 @@ EOF
 # Deploy services
 deploy_services() {
     log_info "Deploying LOGOS v${LOGOS_VERSION} services..."
-    
+
     # Stop existing services
     docker-compose -f docker-compose.v7.yml down --remove-orphans
-    
+
     # Start services
     docker-compose -f docker-compose.v7.yml up -d
-    
+
     log_success "Services deployment initiated"
 }
 
 # Wait for services to be healthy
 wait_for_services() {
     log_info "Waiting for services to become healthy..."
-    
+
     local services=("logos-unified" "logos-proof-server" "logos-reasoning" "redis" "rabbitmq")
     local max_wait=300  # 5 minutes
     local wait_time=0
-    
+
     for service in "${services[@]}"; do
         log_info "Waiting for ${service}..."
-        
+
         while [ $wait_time -lt $max_wait ]; do
             if docker-compose -f docker-compose.v7.yml ps ${service} | grep -q "healthy\|Up"; then
                 log_success "${service} is ready"
                 break
             fi
-            
+
             sleep 10
             wait_time=$((wait_time + 10))
         done
-        
+
         if [ $wait_time -ge $max_wait ]; then
             log_warning "${service} did not become healthy within ${max_wait} seconds"
         fi
@@ -247,12 +247,12 @@ wait_for_services() {
 # Run deployment validation
 validate_deployment() {
     log_info "Running deployment validation..."
-    
+
     # Check if validation script exists
     if [ -f "../../../validate_v7.py" ]; then
         log_info "Running LOGOS v7 validation..."
         python3 ../../../validate_v7.py --environment ${DEPLOYMENT_ENV} --skip-performance
-        
+
         if [ $? -eq 0 ]; then
             log_success "Deployment validation passed"
         else
@@ -261,17 +261,17 @@ validate_deployment() {
     else
         log_warning "Validation script not found, skipping validation"
     fi
-    
+
     # Basic service health checks
     log_info "Performing basic health checks..."
-    
+
     # Check unified runtime
     if curl -f http://localhost:8080/health &> /dev/null; then
         log_success "Unified runtime health check passed"
     else
         log_warning "Unified runtime health check failed"
     fi
-    
+
     # Check monitoring
     if curl -f http://localhost:9090/-/healthy &> /dev/null; then
         log_success "Prometheus health check passed"
@@ -306,7 +306,7 @@ show_deployment_info() {
 # Main deployment flow
 main() {
     log_info "Starting LOGOS AGI v${LOGOS_VERSION} deployment..."
-    
+
     check_prerequisites
     create_directories
     generate_configs
@@ -315,7 +315,7 @@ main() {
     wait_for_services
     validate_deployment
     show_deployment_info
-    
+
     log_success "Deployment completed successfully!"
 }
 

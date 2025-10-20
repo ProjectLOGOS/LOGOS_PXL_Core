@@ -19,4 +19,3 @@ This page provides examples showing how to train Sparse Encoder models for vario
    :caption: Advanced Usage
 
    ../../sentence_transformer/training/distributed
-

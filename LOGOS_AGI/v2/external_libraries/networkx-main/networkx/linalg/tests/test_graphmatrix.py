@@ -66,9 +66,7 @@ class TestGraphMatrix:
         )
         # fmt: on
         cls.WG = nx.havel_hakimi_graph(deg)
-        cls.WG.add_edges_from(
-            (u, v, {"weight": 0.5, "other": 0.3}) for (u, v) in cls.G.edges()
-        )
+        cls.WG.add_edges_from((u, v, {"weight": 0.5, "other": 0.3}) for (u, v) in cls.G.edges())
         # fmt: off
         cls.WA = np.array(
             [[0, 0.5, 0.5, 0.5, 0],
@@ -260,12 +258,8 @@ class TestGraphMatrix:
             nx.adjacency_matrix(self.G, nodelist=[0, 1]).todense(), self.A[:2, :2]
         )
         np.testing.assert_equal(nx.adjacency_matrix(self.WG).todense(), self.WA)
-        np.testing.assert_equal(
-            nx.adjacency_matrix(self.WG, weight=None).todense(), self.A
-        )
-        np.testing.assert_equal(
-            nx.adjacency_matrix(self.MG2, weight=None).todense(), self.MG2A
-        )
+        np.testing.assert_equal(nx.adjacency_matrix(self.WG, weight=None).todense(), self.A)
+        np.testing.assert_equal(nx.adjacency_matrix(self.MG2, weight=None).todense(), self.MG2A)
         np.testing.assert_equal(
             nx.adjacency_matrix(self.WG, weight="other").todense(), 0.6 * self.WA
         )

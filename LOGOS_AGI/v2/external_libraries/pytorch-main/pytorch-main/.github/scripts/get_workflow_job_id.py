@@ -28,9 +28,7 @@ def parse_json_and_links(conn: Any) -> tuple[Any, dict[str, dict[str, str]]]:
             url = urllib.parse.unquote(url.strip("<> "))
             qparams = urllib.parse.parse_qs(params_.strip(), separator=";")
             params = {
-                k: v[0].strip('"')
-                for k, v in qparams.items()
-                if type(v) is list and len(v) > 0
+                k: v[0].strip('"') for k, v in qparams.items() if type(v) is list and len(v) > 0
             }
             params["url"] = url
             if "rel" in params:

@@ -128,9 +128,7 @@ def test_parse_edgelist_with_data_dict(example_graph):
 
 def test_parse_edgelist_with_data_list(example_graph):
     G = example_graph
-    H = nx.parse_edgelist(
-        ["1 2 3", "2 3 27", "3 4 3.0"], nodetype=int, data=(("weight", float),)
-    )
+    H = nx.parse_edgelist(["1 2 3", "2 3 27", "3 4 3.0"], nodetype=int, data=(("weight", float),))
     assert nodes_equal(G.nodes, H.nodes)
     assert edges_equal(G.edges(data=True), H.edges(data=True))
 
@@ -151,9 +149,7 @@ def test_parse_edgelist():
     # edge data and data_keys not the same length
     with pytest.raises(IndexError, match="not the same length"):
         lines = ["1 2 3", "2 3 27", "3 4 3.0"]
-        nx.parse_edgelist(
-            lines, nodetype=int, data=(("weight", float), ("capacity", int))
-        )
+        nx.parse_edgelist(lines, nodetype=int, data=(("weight", float), ("capacity", int)))
     # edge data can't be converted to edge type
     with pytest.raises(TypeError, match="Failed to convert"):
         lines = ["1 2 't1'", "2 3 't3'", "3 4 't3'"]

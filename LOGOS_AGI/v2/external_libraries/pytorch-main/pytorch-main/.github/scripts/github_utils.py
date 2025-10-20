@@ -48,10 +48,7 @@ def gh_fetch_url_and_headers(
     except HTTPError as err:
         if (
             err.code == 403
-            and all(
-                key in err.headers
-                for key in ["X-RateLimit-Limit", "X-RateLimit-Remaining"]
-            )
+            and all(key in err.headers for key in ["X-RateLimit-Limit", "X-RateLimit-Remaining"])
             and int(err.headers["X-RateLimit-Remaining"]) == 0
         ):
             print(
@@ -75,9 +72,9 @@ def gh_fetch_url(
     method: Optional[str] = None,
     reader: Callable[[Any], Any] = json.load,
 ) -> Any:
-    return gh_fetch_url_and_headers(
-        url, headers=headers, data=data, reader=reader, method=method
-    )[1]
+    return gh_fetch_url_and_headers(url, headers=headers, data=data, reader=reader, method=method)[
+        1
+    ]
 
 
 def gh_fetch_json(
@@ -88,9 +85,7 @@ def gh_fetch_json(
 ) -> list[dict[str, Any]]:
     headers = {"Accept": "application/vnd.github.v3+json"}
     if params is not None and len(params) > 0:
-        url += "?" + "&".join(
-            f"{name}={quote(str(val))}" for name, val in params.items()
-        )
+        url += "?" + "&".join(f"{name}={quote(str(val))}" for name, val in params.items())
     return cast(
         list[dict[str, Any]],
         gh_fetch_url(url, headers=headers, data=data, reader=json.load, method=method),
@@ -104,9 +99,7 @@ def _gh_fetch_json_any(
 ) -> Any:
     headers = {"Accept": "application/vnd.github.v3+json"}
     if params is not None and len(params) > 0:
-        url += "?" + "&".join(
-            f"{name}={quote(str(val))}" for name, val in params.items()
-        )
+        url += "?" + "&".join(f"{name}={quote(str(val))}" for name, val in params.items())
     return gh_fetch_url(url, headers=headers, data=data, reader=json.load)
 
 
@@ -133,15 +126,11 @@ def gh_graphql(query: str, **kwargs: Any) -> dict[str, Any]:
         reader=json.load,
     )
     if "errors" in rc:
-        raise RuntimeError(
-            f"GraphQL query {query}, args {kwargs} failed: {rc['errors']}"
-        )
+        raise RuntimeError(f"GraphQL query {query}, args {kwargs} failed: {rc['errors']}")
     return cast(dict[str, Any], rc)
 
 
-def _gh_post_comment(
-    url: str, comment: str, dry_run: bool = False
-) -> list[dict[str, Any]]:
+def _gh_post_comment(url: str, comment: str, dry_run: bool = False) -> list[dict[str, Any]]:
     if dry_run:
         print(comment)
         return []
@@ -195,9 +184,7 @@ def gh_fetch_merge_base(org: str, repo: str, base: str, head: str) -> str:
         if json_data:
             merge_base = json_data.get("merge_base_commit", {}).get("sha", "")
         else:
-            warnings.warn(
-                f"Failed to get merge base for {base}...{head}: Empty response"
-            )
+            warnings.warn(f"Failed to get merge base for {base}...{head}: Empty response")
     except Exception as error:
         warnings.warn(f"Failed to get merge base for {base}...{head}: {error}")
 
@@ -223,6 +210,4 @@ def gh_query_issues_by_labels(
     org: str, repo: str, labels: list[str], state: str = "open"
 ) -> list[dict[str, Any]]:
     url = f"{GITHUB_API_URL}/repos/{org}/{repo}/issues"
-    return gh_fetch_json(
-        url, method="GET", params={"labels": ",".join(labels), "state": state}
-    )
+    return gh_fetch_json(url, method="GET", params={"labels": ",".join(labels), "state": state})

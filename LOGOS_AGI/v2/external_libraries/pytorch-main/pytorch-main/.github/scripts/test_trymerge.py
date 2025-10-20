@@ -129,9 +129,7 @@ def mock_parse_args(revert: bool = False, force: bool = False) -> Any:
     return Object()
 
 
-def mock_remove_label(
-    org: str, repo: str, pr_num: str, label: str, dry_run: bool
-) -> None:
+def mock_remove_label(org: str, repo: str, pr_num: str, label: str, dry_run: bool) -> None:
     pass
 
 
@@ -210,9 +208,7 @@ def mocked_read_merge_rules(repo: Any, org: str, project: str) -> list[MergeRule
     ]
 
 
-def mocked_read_merge_rules_approvers(
-    repo: Any, org: str, project: str
-) -> list[MergeRule]:
+def mocked_read_merge_rules_approvers(repo: Any, org: str, project: str) -> list[MergeRule]:
     return [
         MergeRule(
             name="Core Reviewers",
@@ -269,9 +265,7 @@ class DummyGitRepo(GitRepo):
 
 
 @mock.patch("trymerge.gh_graphql", side_effect=mocked_gh_graphql)
-@mock.patch(
-    "trymerge.get_drci_classifications", side_effect=mocked_drci_classifications
-)
+@mock.patch("trymerge.get_drci_classifications", side_effect=mocked_drci_classifications)
 class TestTryMerge(TestCase):
     def test_merge_rules_valid(self, *args: Any) -> None:
         "Test that merge_rules.yaml can be parsed"
@@ -291,13 +285,9 @@ class TestTryMerge(TestCase):
         "Tests that PR fails to read the merge rules"
         pr = GitHubPR("pytorch", "pytorch", 77700)
         repo = DummyGitRepo()
-        self.assertRaisesRegex(
-            RuntimeError, "testing", lambda: find_matching_merge_rule(pr, repo)
-        )
+        self.assertRaisesRegex(RuntimeError, "testing", lambda: find_matching_merge_rule(pr, repo))
 
-    @mock.patch(
-        "trymerge.read_merge_rules", side_effect=mocked_read_merge_rules_approvers
-    )
+    @mock.patch("trymerge.read_merge_rules", side_effect=mocked_read_merge_rules_approvers)
     def test_match_rules_approvers(self, *args: Any) -> None:
         "Tests that PR has the necessary approvers"
         repo = DummyGitRepo()
@@ -428,9 +418,7 @@ class TestTryMerge(TestCase):
         pr = GitHubPR("pytorch", "pytorch", 105260)
         conclusions = pr.get_checkrun_conclusions()
         self.assertEqual(len(conclusions), 221)
-        self.assertTrue(
-            "pull / linux-docs / build-docs-cpp-false" in conclusions.keys()
-        )
+        self.assertTrue("pull / linux-docs / build-docs-cpp-false" in conclusions.keys())
 
     def test_cancelled_gets_ignored(self, *args: Any) -> None:
         """Tests that cancelled workflow does not override existing successful status"""
@@ -438,9 +426,7 @@ class TestTryMerge(TestCase):
         conclusions = pr.get_checkrun_conclusions()
         lint_checks = [name for name in conclusions.keys() if "Lint" in name]
         self.assertTrue(len(lint_checks) > 0)
-        self.assertTrue(
-            all(conclusions[name].status == "SUCCESS" for name in lint_checks)
-        )
+        self.assertTrue(all(conclusions[name].status == "SUCCESS" for name in lint_checks))
 
     def test_get_review_comment_by_id(self, *args: Any) -> None:
         """Tests that even if the comment requested was actually a review instead of a simple comment, we can still find it"""
@@ -460,9 +446,7 @@ class TestTryMerge(TestCase):
     @mock.patch("trymerge.parse_args", return_value=mock_parse_args(False, True))
     @mock.patch("trymerge.gh_remove_label", side_effect=mock_remove_label)
     @mock.patch("trymerge.merge", side_effect=mock_merge)
-    def test_main_force(
-        self, mock_merge: Any, mock_parse_args: Any, *args: Any
-    ) -> None:
+    def test_main_force(self, mock_merge: Any, mock_parse_args: Any, *args: Any) -> None:
         trymerge_main()
         mock_merge.assert_called_once_with(
             mock.ANY,
@@ -585,9 +569,7 @@ class TestTryMerge(TestCase):
 
 @mock.patch("trymerge.gh_graphql", side_effect=mocked_gh_graphql)
 @mock.patch("trymerge.gh_fetch_merge_base", return_value="")
-@mock.patch(
-    "trymerge.get_drci_classifications", side_effect=mocked_drci_classifications
-)
+@mock.patch("trymerge.get_drci_classifications", side_effect=mocked_drci_classifications)
 class TestBypassFailures(TestCase):
     def test_get_classifications(self, *args: Any) -> None:
         pr = GitHubPR("pytorch", "pytorch", 109584)
@@ -712,9 +694,7 @@ class TestBypassFailures(TestCase):
         )
         workflow_name = "linux-bionic-cuda12.1-py3.10-gcc9-bazel-test"
         job_name = "build-and-test (default, 1, 1, linux.4xlarge.nvidia.gpu, unstable)"
-        self.assertTrue(
-            checks[f"pull / {workflow_name} / {job_name}"].classification == "UNSTABLE"
-        )
+        self.assertTrue(checks[f"pull / {workflow_name} / {job_name}"].classification == "UNSTABLE")
         pending, failed, ignorable = categorize_checks(
             checks, list(checks.keys()), ok_failed_checks_threshold=1
         )
@@ -736,8 +716,7 @@ class TestBypassFailures(TestCase):
         workflow_name = "test-llama-app"
         job_name = "mobile-job (android)"
         self.assertTrue(
-            checks[f"Android / {workflow_name} / {job_name}"].classification
-            == "UNSTABLE"
+            checks[f"Android / {workflow_name} / {job_name}"].classification == "UNSTABLE"
         )
         pending, failed, ignorable = categorize_checks(
             checks, list(checks.keys()), ok_failed_checks_threshold=1
@@ -803,9 +782,7 @@ class TestBypassFailures(TestCase):
                 checks, list(checks.keys()), ok_failed_checks_threshold=0
             )
             self.assertTrue(len(pending) == 0)
-            self.assertTrue(
-                len(failed) == flaky_or_broken_trunk + related_failure_count
-            )
+            self.assertTrue(len(failed) == flaky_or_broken_trunk + related_failure_count)
 
     def test_ignore_current(self, *args: Any) -> None:
         # Test various interactions of the failure classifier to ensure that ignore
@@ -813,9 +790,7 @@ class TestBypassFailures(TestCase):
         # or broken trunk. Only actual new failures should be kept in the list of
         # ignore current checks to use to record force merge with actual failures
         flaky = "pull / linux-focal-cuda11.8-py3.10-gcc9 / test (distributed, 1, 3, linux.8xlarge.nvidia.gpu)"
-        broken_trunk = (
-            "pull / linux-focal-py3.11-clang10 / test (dynamo, 1, 2, linux.2xlarge)"
-        )
+        broken_trunk = "pull / linux-focal-py3.11-clang10 / test (dynamo, 1, 2, linux.2xlarge)"
 
         pr = GitHubPR("pytorch", "pytorch", 109584)
         checks = pr.get_checkrun_conclusions()
@@ -987,9 +962,7 @@ class TestBypassFailuresOnSandCastle(TestCase):
 
 @mock.patch("trymerge.gh_graphql", side_effect=mocked_gh_graphql)
 @mock.patch("trymerge.gh_fetch_merge_base", return_value="")
-@mock.patch(
-    "trymerge.get_drci_classifications", side_effect=mocked_drci_classifications
-)
+@mock.patch("trymerge.get_drci_classifications", side_effect=mocked_drci_classifications)
 class TestGitHubPRGhstackDependencies(TestCase):
     def test_pr_dependencies(self, *args: Any) -> None:
         pr = GitHubPR("pytorch", "pytorch", 106068)
@@ -1045,9 +1018,7 @@ class TestGitHubPRGhstackDependencies(TestCase):
         ]
 
         mock_merge_rules.return_value = [
-            MergeRule(
-                "Mock title", patterns=["*"], approved_by=[], mandatory_checks_name=None
-            )
+            MergeRule("Mock title", patterns=["*"], approved_by=[], mandatory_checks_name=None)
         ]
 
         mock_repo.cherry_pick.return_value = None
@@ -1091,9 +1062,7 @@ class TestGitHubPRGhstackDependencies(TestCase):
 
 @mock.patch("trymerge.gh_graphql", side_effect=mocked_gh_graphql)
 @mock.patch("trymerge.gh_fetch_merge_base", return_value="")
-@mock.patch(
-    "trymerge.get_drci_classifications", side_effect=mocked_drci_classifications
-)
+@mock.patch("trymerge.get_drci_classifications", side_effect=mocked_drci_classifications)
 @mock.patch.object(DummyGitRepo, "commit_message")
 class TestRevListToPR(TestCase):
     # Tests for _revlist_to_prs function
@@ -1111,9 +1080,7 @@ class TestRevListToPR(TestCase):
             lambda: _revlist_to_prs(repo, pr, ["dummy"]),
         )
 
-    def test__revlist_to_prs_two_prs(
-        self, mock_commit_message: mock.MagicMock, *args: Any
-    ) -> None:
+    def test__revlist_to_prs_two_prs(self, mock_commit_message: mock.MagicMock, *args: Any) -> None:
         # If two PRs are mentioned in the commit message, it should raise an error
         pr_num = 154394
         pr = GitHubPR("pytorch", "pytorch", pr_num)

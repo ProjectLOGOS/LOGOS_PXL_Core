@@ -107,13 +107,9 @@ plot_gallery("Faces from dataset", faces_centered[:n_components])
 #     that cannot be displayed as an image.
 
 # %%
-pca_estimator = decomposition.PCA(
-    n_components=n_components, svd_solver="randomized", whiten=True
-)
+pca_estimator = decomposition.PCA(n_components=n_components, svd_solver="randomized", whiten=True)
 pca_estimator.fit(faces_centered)
-plot_gallery(
-    "Eigenfaces - PCA using randomized SVD", pca_estimator.components_[:n_components]
-)
+plot_gallery("Eigenfaces - PCA using randomized SVD", pca_estimator.components_[:n_components])
 
 # %%
 # Non-negative components - NMF
@@ -137,9 +133,7 @@ ica_estimator = decomposition.FastICA(
     n_components=n_components, max_iter=400, whiten="arbitrary-variance", tol=15e-5
 )
 ica_estimator.fit(faces_centered)
-plot_gallery(
-    "Independent components - FastICA", ica_estimator.components_[:n_components]
-)
+plot_gallery("Independent components - FastICA", ica_estimator.components_[:n_components])
 
 # %%
 # Sparse components - MiniBatchSparsePCA

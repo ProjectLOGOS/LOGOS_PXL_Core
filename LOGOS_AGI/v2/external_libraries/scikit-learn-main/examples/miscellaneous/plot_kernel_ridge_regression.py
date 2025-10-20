@@ -111,9 +111,7 @@ plt.plot(
     c="r",
     label="SVR (fit: %.3fs, predict: %.3fs)" % (svr_fit, svr_predict),
 )
-plt.plot(
-    X_plot, y_kr, c="g", label="KRR (fit: %.3fs, predict: %.3fs)" % (kr_fit, kr_predict)
-)
+plt.plot(X_plot, y_kr, c="g", label="KRR (fit: %.3fs, predict: %.3fs)" % (kr_fit, kr_predict))
 plt.xlabel("data")
 plt.ylabel("target")
 plt.title("SVR versus Kernel Ridge")

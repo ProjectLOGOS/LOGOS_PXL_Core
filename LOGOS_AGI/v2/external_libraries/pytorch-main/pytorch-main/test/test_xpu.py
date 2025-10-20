@@ -65,9 +65,7 @@ _xpu_not_test_dtype_op_list = [
 ]
 _xpu_all_op_list = _xpu_computation_op_list + _xpu_tensor_factory_op_list
 _xpu_all_ops = [op for op in ops_and_refs if op.name in _xpu_all_op_list]
-_xpu_computation_ops = [
-    op for op in ops_and_refs if op.name in _xpu_computation_op_list
-]
+_xpu_computation_ops = [op for op in ops_and_refs if op.name in _xpu_computation_op_list]
 
 
 @unittest.skipIf(not TEST_XPU, "XPU not available, skipping tests")
@@ -104,14 +102,10 @@ class TestXpu(TestCase):
         self.assertTrue(device_capability["device_id"] > 0)
         self.assertTrue(device_capability["max_work_group_size"] > 0)
         self.assertTrue(device_capability["max_num_sub_groups"] > 0)
-        self.assertEqual(
-            device_properties.driver_version, device_capability["driver_version"]
-        )
+        self.assertEqual(device_properties.driver_version, device_capability["driver_version"])
         self.assertEqual(device_properties.has_fp16, device_capability["has_fp16"])
         self.assertEqual(device_properties.has_fp64, device_capability["has_fp64"])
-        self.assertEqual(
-            device_properties.has_atomic64, device_capability["has_atomic64"]
-        )
+        self.assertEqual(device_properties.has_atomic64, device_capability["has_atomic64"])
         self.assertEqual(
             device_properties.has_bfloat16_conversions,
             device_capability["has_bfloat16_conversions"],
@@ -164,11 +158,7 @@ if __name__ == "__main__":
         """Validate that no XPU calls are made during `import torch` call"""
 
         def check_output(script: str) -> str:
-            return (
-                subprocess.check_output([sys.executable, "-c", script])
-                .decode("ascii")
-                .strip()
-            )
+            return subprocess.check_output([sys.executable, "-c", script]).decode("ascii").strip()
 
         test_script = """\
 import torch
@@ -411,9 +401,7 @@ if __name__ == "__main__":
                 return x
 
             # Map False -> 0 and True -> Random value in [2, 255]
-            true_vals = torch.randint(
-                2, 255, x.shape, dtype=torch.uint8, device=x.device
-            )
+            true_vals = torch.randint(2, 255, x.shape, dtype=torch.uint8, device=x.device)
             false_vals = torch.zeros((), dtype=torch.uint8, device=x.device)
             x_int = torch.where(x, true_vals, false_vals)
 
@@ -501,9 +489,7 @@ if __name__ == "__main__":
         )
         self.assertEqual(torch.xpu.memory_stats()["active_bytes.all.freed"], 0)
         del a
-        self.assertEqual(
-            torch.xpu.memory_stats()["active_bytes.all.current"], prev_active_current
-        )
+        self.assertEqual(torch.xpu.memory_stats()["active_bytes.all.current"], prev_active_current)
         self.assertEqual(torch.xpu.memory_stats()["active_bytes.all.freed"], 1024)
 
     @unittest.skipIf(not TEST_MULTIXPU, "only one GPU detected")
@@ -635,9 +621,7 @@ class TestXpuAutocast(TestAutocast):
         model = torch.nn.Sequential(
             torch.nn.Linear(8, 8), torch.nn.Linear(8, 8), torch.nn.Linear(8, 8)
         ).xpu()
-        input = torch.rand(
-            (8, 8), device="xpu", dtype=torch.float16, requires_grad=True
-        )
+        input = torch.rand((8, 8), device="xpu", dtype=torch.float16, requires_grad=True)
         for reentrant in (True, False):
             with torch.autocast("xpu"):
                 output = checkpoint_sequential(model, 2, input, use_reentrant=reentrant)

@@ -87,9 +87,7 @@ def main(args):
 
 if __name__ == "__main__":
     assert pyro.__version__.startswith("1.9.1")
-    parser = argparse.ArgumentParser(
-        description="Causal Effect Variational Autoencoder"
-    )
+    parser = argparse.ArgumentParser(description="Causal Effect Variational Autoencoder")
     parser.add_argument("--num-data", default=1000, type=int)
     parser.add_argument("--feature-dim", default=5, type=int)
     parser.add_argument("--latent-dim", default=20, type=int)

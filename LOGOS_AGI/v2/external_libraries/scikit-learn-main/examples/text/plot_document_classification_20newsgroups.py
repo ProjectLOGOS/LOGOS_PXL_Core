@@ -76,9 +76,7 @@ def load_dataset(verbose=False, remove=()):
 
     # Extracting features from the training data using a sparse vectorizer
     t0 = time()
-    vectorizer = TfidfVectorizer(
-        sublinear_tf=True, max_df=0.5, min_df=5, stop_words="english"
-    )
+    vectorizer = TfidfVectorizer(sublinear_tf=True, max_df=0.5, min_df=5, stop_words="english")
     X_train = vectorizer.fit_transform(data_train.data)
     duration_train = time() - t0
 
@@ -94,10 +92,7 @@ def load_dataset(verbose=False, remove=()):
         data_train_size_mb = size_mb(data_train.data)
         data_test_size_mb = size_mb(data_test.data)
 
-        print(
-            f"{len(data_train.data)} documents - "
-            f"{data_train_size_mb:.2f}MB (training set)"
-        )
+        print(f"{len(data_train.data)} documents - " f"{data_train_size_mb:.2f}MB (training set)")
         print(f"{len(data_test.data)} documents - {data_test_size_mb:.2f}MB (test set)")
         print(f"{len(target_names)} categories")
         print(
@@ -130,9 +125,7 @@ def load_dataset(verbose=False, remove=()):
 # We start by using the custom function `load_dataset` to load the data without
 # metadata stripping.
 
-X_train, X_test, y_train, y_test, feature_names, target_names = load_dataset(
-    verbose=True
-)
+X_train, X_test, y_train, y_test, feature_names, target_names = load_dataset(verbose=True)
 
 # %%
 # Our first model is an instance of the
@@ -162,9 +155,7 @@ fig, ax = plt.subplots(figsize=(10, 5))
 ConfusionMatrixDisplay.from_predictions(y_test, pred, ax=ax)
 ax.xaxis.set_ticklabels(target_names)
 ax.yaxis.set_ticklabels(target_names)
-_ = ax.set_title(
-    f"Confusion Matrix for {clf.__class__.__name__}\non the original documents"
-)
+_ = ax.set_title(f"Confusion Matrix for {clf.__class__.__name__}\non the original documents")
 
 # %%
 # The confusion matrix highlights that documents of the `alt.atheism` class are
@@ -286,9 +277,7 @@ fig, ax = plt.subplots(figsize=(10, 5))
 ConfusionMatrixDisplay.from_predictions(y_test, pred, ax=ax)
 ax.xaxis.set_ticklabels(target_names)
 ax.yaxis.set_ticklabels(target_names)
-_ = ax.set_title(
-    f"Confusion Matrix for {clf.__class__.__name__}\non filtered documents"
-)
+_ = ax.set_title(f"Confusion Matrix for {clf.__class__.__name__}\non filtered documents")
 
 # %%
 # By looking at the confusion matrix, it is more evident that the scores of the
@@ -375,9 +364,7 @@ for clf, name in (
     (LinearSVC(C=0.1, dual=False, max_iter=1000), "Linear SVC"),
     # L2 penalty Linear SGD
     (
-        SGDClassifier(
-            loss="log_loss", alpha=1e-4, n_iter_no_change=3, early_stopping=True
-        ),
+        SGDClassifier(loss="log_loss", alpha=1e-4, n_iter_no_change=3, early_stopping=True),
         "log-loss SGD",
     ),
     # NearestCentroid (aka Rocchio classifier)

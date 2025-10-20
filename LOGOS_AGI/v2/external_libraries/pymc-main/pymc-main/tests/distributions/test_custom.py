@@ -190,7 +190,9 @@ class TestCustomDist:
     )
     def test_custom_dist_default_support_point_univariate(self, support_point, size, expected):
         if support_point == "custom_support_point":
-            support_point = lambda rv, size, *rv_inputs: 5 * pt.ones(size, dtype=rv.dtype)  # noqa: E731
+            support_point = lambda rv, size, *rv_inputs: 5 * pt.ones(
+                size, dtype=rv.dtype
+            )  # noqa: E731
         with Model() as model:
             x = CustomDist("x", support_point=support_point, size=size)
         assert isinstance(x.owner.op, CustomDistRV)

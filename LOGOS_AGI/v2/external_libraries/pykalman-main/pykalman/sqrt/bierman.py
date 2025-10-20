@@ -138,9 +138,7 @@ def decorrelate_observations(
     if len(observation_matrices.shape) == DIM["observation_matrices"] + 1:
         n_timesteps = observation_matrices.shape[0]
         for t in range(n_timesteps):
-            observation_matrices2[t] = observation_covariance_inv.dot(
-                observation_matrices[t]
-            )
+            observation_matrices2[t] = observation_covariance_inv.dot(observation_matrices[t])
     else:
         observation_matrices2 = observation_covariance_inv.dot(observation_matrices)
 
@@ -199,15 +197,11 @@ def _filter_predict(
       Practical Handbook. Page 401.
     """
     # predict new mean
-    predicted_state_mean = (
-        np.dot(transition_matrix, current_state_mean) + transition_offset
-    )
+    predicted_state_mean = np.dot(transition_matrix, current_state_mean) + transition_offset
 
     # predict new covariance
     predicted_state_covariance = udu(
-        transition_matrix.dot(current_state_covariance.reconstruct()).dot(
-            transition_matrix.T
-        )
+        transition_matrix.dot(current_state_covariance.reconstruct()).dot(transition_matrix.T)
         + transition_covariance
     )
     return (predicted_state_mean, predicted_state_covariance)
@@ -334,9 +328,7 @@ def _filter_correct(
 
             # update corrected state mean
             predicted_observation_mean = h.dot(corrected_state_mean) + b
-            corrected_state_mean = corrected_state_mean + k.dot(
-                o - predicted_observation_mean
-            )
+            corrected_state_mean = corrected_state_mean + k.dot(o - predicted_observation_mean)
 
     else:
         n_dim_obs = len(observation)
@@ -564,9 +556,7 @@ class BiermanKalmanFilter(KalmanFilter):
             Z,
         )
 
-        filtered_state_covariances = _reconstruct_covariances(
-            filtered_state_covariances
-        )
+        filtered_state_covariances = _reconstruct_covariances(filtered_state_covariances)
 
         return (filtered_state_means, filtered_state_covariances)
 
@@ -701,9 +691,7 @@ class BiermanKalmanFilter(KalmanFilter):
         )
 
         # reconstruct actual covariance
-        next_filtered_state_covariance = _reconstruct_covariances(
-            next_filtered_state_covariance
-        )
+        next_filtered_state_covariance = _reconstruct_covariances(next_filtered_state_covariance)
 
         return (next_filtered_state_mean, next_filtered_state_covariance)
 
@@ -762,12 +750,8 @@ class BiermanKalmanFilter(KalmanFilter):
         )
 
         # construct actual covariance matrices
-        predicted_state_covariances = _reconstruct_covariances(
-            predicted_state_covariances
-        )
-        filtered_state_covariances = _reconstruct_covariances(
-            filtered_state_covariances
-        )
+        predicted_state_covariances = _reconstruct_covariances(predicted_state_covariances)
+        filtered_state_covariances = _reconstruct_covariances(filtered_state_covariances)
 
         (smoothed_state_means, smoothed_state_covariances) = _smooth(
             transition_matrices,
@@ -837,8 +821,7 @@ class BiermanKalmanFilter(KalmanFilter):
         for k, v in get_params(self).items():
             if k in DIM and (k not in given) and len(v.shape) != DIM[k]:
                 warn_str = (
-                    "{0} has {1} dimensions now; after fitting,"
-                    + " it will have dimension {2}"
+                    "{0} has {1} dimensions now; after fitting," + " it will have dimension {2}"
                 ).format(k, len(v.shape), DIM[k])
                 warnings.warn(warn_str, stacklevel=2)
 
@@ -863,12 +846,8 @@ class BiermanKalmanFilter(KalmanFilter):
             )
 
             # reconstruct covariances
-            filtered_state_covariances = _reconstruct_covariances(
-                filtered_state_covariances
-            )
-            predicted_state_covariances = _reconstruct_covariances(
-                predicted_state_covariances
-            )
+            filtered_state_covariances = _reconstruct_covariances(filtered_state_covariances)
+            predicted_state_covariances = _reconstruct_covariances(predicted_state_covariances)
 
             # run smoother
             (
@@ -884,9 +863,7 @@ class BiermanKalmanFilter(KalmanFilter):
             )
 
             # calculate pairwise covariances
-            sigma_pair_smooth = _smooth_pair(
-                smoothed_state_covariances, kalman_smoothing_gains
-            )
+            sigma_pair_smooth = _smooth_pair(smoothed_state_covariances, kalman_smoothing_gains)
             (
                 self.transition_matrices,
                 self.observation_matrices,
@@ -953,9 +930,7 @@ class BiermanKalmanFilter(KalmanFilter):
         )
 
         # get likelihoods for each time step
-        predicted_state_covariances = _reconstruct_covariances(
-            predicted_state_covariances
-        )
+        predicted_state_covariances = _reconstruct_covariances(predicted_state_covariances)
         loglikelihoods = _loglikelihoods(
             observation_matrices,
             observation_offsets,

@@ -204,12 +204,7 @@ def _lg_undirected(G, selfloops=False, create_using=None):
         # especially important for multigraphs, we store the edges in
         # canonical form in a set.
         for i, a in enumerate(nodes):
-            edges.update(
-                [
-                    tuple(sorted((a, b), key=edge_key_function))
-                    for b in nodes[i + shift :]
-                ]
-            )
+            edges.update([tuple(sorted((a, b), key=edge_key_function)) for b in nodes[i + shift :]])
 
     L.add_edges_from(edges)
     return L
@@ -399,10 +394,7 @@ def _find_partition(G, starting_cell):
             for u in new_cell:
                 for v in new_cell:
                     if (u != v) and (v not in G_partition[u]):
-                        msg = (
-                            "G is not a line graph "
-                            "(partition cell not a complete subgraph)"
-                        )
+                        msg = "G is not a line graph " "(partition cell not a complete subgraph)"
                         raise nx.NetworkXError(msg)
             P.append(tuple(new_cell))
             G_partition.remove_edges_from(list(combinations(new_cell, 2)))
@@ -485,8 +477,7 @@ def _select_starting_cell(G, starting_edge=None):
                 for v in triangle_nodes:
                     if u != v and (v not in G[u]):
                         msg = (
-                            "G is not a line graph (odd triangles "
-                            "do not form complete subgraph)"
+                            "G is not a line graph (odd triangles " "do not form complete subgraph)"
                         )
                         raise nx.NetworkXError(msg)
             # otherwise then we can use this as the starting cell
@@ -494,8 +485,7 @@ def _select_starting_cell(G, starting_edge=None):
 
         else:
             msg = (
-                "G is not a line graph (incorrect number of "
-                "odd triangles around starting edge)"
+                "G is not a line graph (incorrect number of " "odd triangles around starting edge)"
             )
             raise nx.NetworkXError(msg)
     return starting_cell

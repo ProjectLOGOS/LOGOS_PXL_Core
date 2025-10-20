@@ -11,14 +11,10 @@ from core.utils import parse_stmts
 _TRIVIAL_2D = GroupedSetup(r"x = torch.ones((4, 4))", r"auto x = torch::ones({4, 4});")
 
 
-_TRIVIAL_3D = GroupedSetup(
-    r"x = torch.ones((4, 4, 4))", r"auto x = torch::ones({4, 4, 4});"
-)
+_TRIVIAL_3D = GroupedSetup(r"x = torch.ones((4, 4, 4))", r"auto x = torch::ones({4, 4, 4});")
 
 
-_TRIVIAL_4D = GroupedSetup(
-    r"x = torch.ones((4, 4, 4, 4))", r"auto x = torch::ones({4, 4, 4, 4});"
-)
+_TRIVIAL_4D = GroupedSetup(r"x = torch.ones((4, 4, 4, 4))", r"auto x = torch::ones({4, 4, 4, 4});")
 
 
 _TRAINING = GroupedSetup(

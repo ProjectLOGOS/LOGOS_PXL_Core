@@ -11,17 +11,31 @@ y = load_wineind()
 
 
 @pytest.mark.parametrize(
-    'est', [
+    "est",
+    [
         ARIMA(order=(2, 1, 1)),
         AutoARIMA(seasonal=False, maxiter=3),
-        Pipeline([
-            ("fourier", FourierFeaturizer(m=12)),
-            ("arima", AutoARIMA(seasonal=False, stepwise=True,
-                                suppress_warnings=True, d=1, max_p=2, max_q=0,
-                                start_q=0, start_p=1,
-                                maxiter=3, error_action='ignore'))
-        ])
-    ]
+        Pipeline(
+            [
+                ("fourier", FourierFeaturizer(m=12)),
+                (
+                    "arima",
+                    AutoARIMA(
+                        seasonal=False,
+                        stepwise=True,
+                        suppress_warnings=True,
+                        d=1,
+                        max_p=2,
+                        max_q=0,
+                        start_q=0,
+                        start_p=1,
+                        maxiter=3,
+                        error_action="ignore",
+                    ),
+                ),
+            ]
+        ),
+    ],
 )
 def test_clonable(est):
     # fit it, then clone it

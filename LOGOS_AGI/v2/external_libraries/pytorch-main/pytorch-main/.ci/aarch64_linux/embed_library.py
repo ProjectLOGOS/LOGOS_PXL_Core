@@ -28,9 +28,7 @@ def replace_tag(filename):
 
 class AlignedPatchelf(Patchelf):
     def set_soname(self, file_name: str, new_soname: str) -> None:
-        check_call(
-            ["patchelf", "--page-size", "65536", "--set-soname", new_soname, file_name]
-        )
+        check_call(["patchelf", "--page-size", "65536", "--set-soname", new_soname, file_name])
 
     def replace_needed(self, file_name: str, soname: str, new_soname: str) -> None:
         check_call(
@@ -82,6 +80,4 @@ def embed_library(whl_path, lib_soname, update_tag=False):
 
 
 if __name__ == "__main__":
-    embed_library(
-        sys.argv[1], "libgomp.so.1", len(sys.argv) > 2 and sys.argv[2] == "--update-tag"
-    )
+    embed_library(sys.argv[1], "libgomp.so.1", len(sys.argv) > 2 and sys.argv[2] == "--update-tag")

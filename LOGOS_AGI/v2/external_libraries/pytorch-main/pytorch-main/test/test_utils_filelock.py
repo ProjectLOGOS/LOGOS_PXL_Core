@@ -13,9 +13,7 @@ class TestFileLock(TestCase):
         with FileLock(p):
             pass
 
-    @skipIfWindows(
-        msg="Windows doesn't support multiple files being opened at once easily"
-    )
+    @skipIfWindows(msg="Windows doesn't support multiple files being opened at once easily")
     def test_sequencing(self):
         with tempfile.NamedTemporaryFile() as ofd:
             p = ofd.name
@@ -35,9 +33,7 @@ class TestFileLock(TestCase):
                     times.append(f.result(60))
 
             with open(p) as fd:
-                self.assertEqual(
-                    set(fd.read()), {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"}
-                )
+                self.assertEqual(set(fd.read()), {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"})
 
             for i, (start, end) in enumerate(times):
                 for j, (newstart, newend) in enumerate(times):

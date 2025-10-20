@@ -23,7 +23,7 @@ Once you have `installed <../../installation.html>`_ Sentence Transformers, you 
 ::
 
    from sentence_transformers import CrossEncoder
-   
+
    # 1. Load a pre-trained CrossEncoder model
    model = CrossEncoder("cross-encoder/ms-marco-MiniLM-L6-v2")
 
@@ -33,7 +33,7 @@ Once you have `installed <../../installation.html>`_ Sentence Transformers, you 
        ("How many people live in Berlin?", "Berlin is well known for its museums."),
    ])
    # => array([ 8.607138 , -4.3200774], dtype=float32)
-   
+
    # 3. Rank a list of passages for a query
    query = "How many people live in Berlin?"
    passages = [
@@ -49,7 +49,7 @@ Once you have `installed <../../installation.html>`_ Sentence Transformers, you 
        "Berlin has a yearly total of about 135 million day visitors, which puts it in third place among the most-visited city destinations in the European Union.",
    ]
    ranks = model.rank(query, passages)
-   
+
    # Print the scores
    print("Query:", query)
    for rank in ranks:

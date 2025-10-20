@@ -11,9 +11,7 @@ import networkx as nx
 
 B = nx.DiGraph()
 B.add_nodes_from(["A", "B", "C", "D", "E", "F"])
-B.add_edges_from(
-    [("A", "B"), ("A", "C"), ("B", "D"), ("B", "F"), ("C", "E"), ("E", "F")]
-)
+B.add_edges_from([("A", "B"), ("A", "C"), ("B", "D"), ("B", "F"), ("C", "E"), ("E", "F")])
 
 options = {"with_labels": True, "node_color": "white", "edgecolors": "blue"}
 

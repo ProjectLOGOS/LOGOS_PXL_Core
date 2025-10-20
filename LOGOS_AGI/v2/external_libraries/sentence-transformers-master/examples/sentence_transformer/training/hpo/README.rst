@@ -4,7 +4,7 @@ Hyperparameter Optimization
 
 The :class:`~sentence_transformers.trainer.SentenceTransformerTrainer` supports hyperparameter optimization using ``transformers``, which in turn supports four hyperparameter search backends: `optuna <https://optuna.org/>`_, `sigopt <https://sigopt.org/>`_, `raytune <https://docs.ray.io/en/latest/tune/index.html>`_, and `wandb <https://wandb.ai/site/sweeps>`_. You should install your backend of choice before using it::
 
-    pip install optuna/sigopt/wandb/ray[tune] 
+    pip install optuna/sigopt/wandb/ray[tune]
 
 On this page, we'll show you how to use the hyperparameter optimization feature with the `optuna` backend. The other backends are similar to use, but you should refer to their respective documentation or the `transformers HPO documentation <https://huggingface.co/docs/transformers/en/hpo_train>`_ for more information.
 

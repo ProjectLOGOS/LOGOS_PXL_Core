@@ -67,9 +67,9 @@ nbsphinx_allow_errors = True
 master_doc = "index"
 
 # General information about the project.
-project = u"Pyro Tutorials"
-copyright = u"Pyro Contributors"
-author = u"Uber AI Labs"
+project = "Pyro Tutorials"
+copyright = "Pyro Contributors"
+author = "Uber AI Labs"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -156,8 +156,8 @@ latex_documents = [
     (
         master_doc,
         "PyroTutorials.tex",
-        u"Pyro Examples and Tutorials",
-        u"Uber AI Labs",
+        "Pyro Examples and Tutorials",
+        "Uber AI Labs",
         "manual",
     ),
 ]
@@ -167,7 +167,7 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, "pyrotutorials", u"Pyro Examples and Tutorials", [author], 1)]
+man_pages = [(master_doc, "pyrotutorials", "Pyro Examples and Tutorials", [author], 1)]
 
 
 # -- Options for Texinfo output -------------------------------------------
@@ -179,7 +179,7 @@ texinfo_documents = [
     (
         master_doc,
         "PyroTutorials",
-        u"Pyro Examples and Tutorials",
+        "Pyro Examples and Tutorials",
         author,
         "PyroTutorials",
         "One line description of project.",

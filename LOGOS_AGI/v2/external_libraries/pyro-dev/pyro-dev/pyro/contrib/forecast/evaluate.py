@@ -187,9 +187,7 @@ def backtest(
         train_covariates = covariates[..., t0:t1, :]
         start_time = default_timer()
         model = model_fn()
-        forecaster = forecaster_fn(
-            model, train_data, train_covariates, **forecaster_options
-        )
+        forecaster = forecaster_fn(model, train_data, train_covariates, **forecaster_options)
         train_walltime = default_timer() - start_time
 
         # Forecast forward to testing window.

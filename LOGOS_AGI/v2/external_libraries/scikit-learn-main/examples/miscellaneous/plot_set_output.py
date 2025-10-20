@@ -52,9 +52,7 @@ from sklearn.feature_selection import SelectPercentile
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import make_pipeline
 
-clf = make_pipeline(
-    StandardScaler(), SelectPercentile(percentile=75), LogisticRegression()
-)
+clf = make_pipeline(StandardScaler(), SelectPercentile(percentile=75), LogisticRegression())
 clf.set_output(transform="pandas")
 clf.fit(X_train, y_train)
 
@@ -103,9 +101,7 @@ ct = ColumnTransformer(
         ("numerical", num_pipe, num_cols),
         (
             "categorical",
-            OneHotEncoder(
-                sparse_output=False, drop="if_binary", handle_unknown="ignore"
-            ),
+            OneHotEncoder(sparse_output=False, drop="if_binary", handle_unknown="ignore"),
             ["embarked", "sex", "pclass"],
         ),
     ),

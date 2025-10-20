@@ -75,16 +75,12 @@ def main(args):
 
     # We sample Alice's true choice of location
     # by marginalizing over her decision process
-    alice_decision = HashingMarginal(
-        Search(alice_fb).run(shared_preference, alice_depth)
-    )
+    alice_decision = HashingMarginal(Search(alice_fb).run(shared_preference, alice_depth))
 
     # draw num_samples samples from Alice's decision process
     # and use those to estimate the marginal probability
     # that Alice chooses their preferred location
-    alice_prob = sum([alice_decision() for i in range(num_samples)]) / float(
-        num_samples
-    )
+    alice_prob = sum([alice_decision() for i in range(num_samples)]) / float(num_samples)
 
     print(
         "Empirical frequency of Alice choosing their favored location "

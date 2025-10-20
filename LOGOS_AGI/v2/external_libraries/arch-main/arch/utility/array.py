@@ -144,11 +144,7 @@ def ensure2d(
 
 def parse_dataframe(
     x: ArrayLike | None, name: str | list[str]
-) -> (
-    tuple[Index, Index]
-    | tuple[list[Hashable | None], Index]
-    | tuple[list[str], NDArray]
-):
+) -> tuple[Index, Index] | tuple[list[Hashable | None], Index] | tuple[list[str], NDArray]:
     if x is None:
         assert isinstance(name, str)
         return [name], np.empty(0)
@@ -169,9 +165,7 @@ class DocStringInheritor(type):
     by Paul McGuire
     """
 
-    def __new__(
-        mcs, name: str, bases: tuple[type, ...], clsdict: dict[str, Any]
-    ) -> Any:
+    def __new__(mcs, name: str, bases: tuple[type, ...], clsdict: dict[str, Any]) -> Any:
         if not ("__doc__" in clsdict and clsdict["__doc__"]):
             for mro_cls in (mro_cls for base in bases for mro_cls in base.mro()):
                 doc = mro_cls.__doc__
@@ -181,10 +175,7 @@ class DocStringInheritor(type):
         for attr, attribute in clsdict.items():
             if not attribute.__doc__:
                 for mro_cls in (
-                    mro_cls
-                    for base in bases
-                    for mro_cls in base.mro()
-                    if hasattr(mro_cls, attr)
+                    mro_cls for base in bases for mro_cls in base.mro() if hasattr(mro_cls, attr)
                 ):
                     doc = getattr(mro_cls, attr).__doc__
                     if doc:
@@ -210,9 +201,7 @@ class ConcreteClassMeta(ABCMeta):
         missing: list[str] = getattr(cls, "__abstractmethods__", [])
         if missing:
             missing_meth = ", ".join(missing)
-            raise TypeError(
-                f"{cls.__name__} has not implemented abstract methods {missing_meth}"
-            )
+            raise TypeError(f"{cls.__name__} has not implemented abstract methods {missing_meth}")
 
 
 class AbstractDocStringInheritor(ConcreteClassMeta, DocStringInheritor):
@@ -244,11 +233,7 @@ def date_to_index(
     """
     if not is_datetime64_any_dtype(date_index):
         raise ValueError("date_index must be a datetime64 array")
-    values = (
-        date_index.values
-        if isinstance(date_index, DatetimeIndex)
-        else np.asarray(date_index)
-    )
+    values = date_index.values if isinstance(date_index, DatetimeIndex) else np.asarray(date_index)
     if not np.all((np.diff(values).astype(dtype=np.int64)) > 0):
         raise ValueError("date_index is not monotonic and unique")
     if not isinstance(date, (dt.datetime, np.datetime64, str, Timestamp)):

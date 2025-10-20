@@ -122,10 +122,12 @@ class QuadPotential(WithSamplingState):
         self.rng = get_random_generator(rng)
 
     @overload
-    def velocity(self, x: np.ndarray, out: None) -> np.ndarray: ...
+    def velocity(self, x: np.ndarray, out: None) -> np.ndarray:
+        ...
 
     @overload
-    def velocity(self, x: np.ndarray, out: np.ndarray) -> None: ...
+    def velocity(self, x: np.ndarray, out: np.ndarray) -> None:
+        ...
 
     def velocity(self, x: np.ndarray, out: np.ndarray | None = None) -> np.ndarray | None:
         """Compute the current velocity at a position in parameter space."""

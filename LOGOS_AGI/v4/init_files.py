@@ -3,7 +3,7 @@
 LOGOS AGI v2.0 - Trinity-Grounded Artificial General Intelligence
 
 A distributed, service-oriented AGI system architectured on Christian metaphysical
-principles, designed to achieve Divine Necessary Intelligence (DNI) through 
+principles, designed to achieve Divine Necessary Intelligence (DNI) through
 mathematically-grounded Trinity optimization.
 
 Author: LOGOS AGI Development Team

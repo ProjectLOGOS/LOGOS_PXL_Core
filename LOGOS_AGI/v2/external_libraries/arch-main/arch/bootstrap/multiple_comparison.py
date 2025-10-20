@@ -47,9 +47,7 @@ class MultipleComparison:
     def __init__(self) -> None:
         self._model = ""
         self._info: dict[str, str] = {}
-        self.bootstrap: CircularBlockBootstrap = CircularBlockBootstrap(
-            10, np.ones(100)
-        )
+        self.bootstrap: CircularBlockBootstrap = CircularBlockBootstrap(10, np.ones(100))
 
     def __str__(self) -> str:
         return _info_to_str(self._model, self._info, False)
@@ -207,9 +205,7 @@ class MCS(MultipleComparison):
         bs = self.bootstrap
         for j, data in enumerate(bs.bootstrap(self.reps)):
             bs_index = data[0][0]  # Only element in pos data
-            self._bootstrap_indices.append(
-                np.asarray(bs_index, dtype=int)
-            )  # For testing
+            self._bootstrap_indices.append(np.asarray(bs_index, dtype=int))  # For testing
             mean_losses_star = losses[bs_index].mean(0)[:, None]
             bootstrapped_mean_losses[j] = mean_losses_star - mean_losses_star.T
         # Recenter
@@ -258,9 +254,7 @@ class MCS(MultipleComparison):
         bs_avg_loss_errors = np.zeros((self.reps, self.k))
         for i, data in enumerate(self.bootstrap.bootstrap(self.reps)):
             bs_index = data[0][0]
-            self._bootstrap_indices.append(
-                np.asarray(bs_index, dtype=int)
-            )  # For testing
+            self._bootstrap_indices.append(np.asarray(bs_index, dtype=int))  # For testing
             bs_errors = loss_errors[bs_index]
             avg_bs_errors = bs_errors.mean(0)
             avg_bs_errors -= avg_bs_errors.mean()
@@ -583,17 +577,11 @@ class SPA(MultipleComparison, metaclass=DocStringInheritor):
         self.k: int = self._loss_diff.shape[1]
         bootstrap_name = bootstrap.lower().replace(" ", "_")
         if bootstrap_name in ("circular", "cbb"):
-            bootstrap_inst = CircularBlockBootstrap(
-                self.block_size, self._loss_diff, seed=seed
-            )
+            bootstrap_inst = CircularBlockBootstrap(self.block_size, self._loss_diff, seed=seed)
         elif bootstrap_name in ("stationary", "sb"):
-            bootstrap_inst = StationaryBootstrap(
-                self.block_size, self._loss_diff, seed=seed
-            )
+            bootstrap_inst = StationaryBootstrap(self.block_size, self._loss_diff, seed=seed)
         elif bootstrap_name in ("moving_block", "mbb"):
-            bootstrap_inst = MovingBlockBootstrap(
-                self.block_size, self._loss_diff, seed=seed
-            )
+            bootstrap_inst = MovingBlockBootstrap(self.block_size, self._loss_diff, seed=seed)
         else:
             raise ValueError(f"Unknown bootstrap: {bootstrap_name}")
         self._seed = seed
@@ -701,12 +689,8 @@ class SPA(MultipleComparison, metaclass=DocStringInheritor):
             p = 1.0 / self.block_size
             variances = np.sum(demeaned**2, 0) / t
             for i in range(1, t):
-                kappa = ((1.0 - (i / t)) * ((1 - p) ** i)) + (
-                    (i / t) * ((1 - p) ** (t - i))
-                )
-                variances += (
-                    2 * kappa * np.sum(demeaned[: (t - i), :] * demeaned[i:, :], 0) / t
-                )
+                kappa = ((1.0 - (i / t)) * ((1 - p) ** i)) + ((i / t) * ((1 - p) ** (t - i)))
+                variances += 2 * kappa * np.sum(demeaned[: (t - i), :] * demeaned[i:, :], 0) / t
         self._loss_diff_var = cast(np.ndarray, variances)
 
     def _check_column_validity(self) -> BoolArray:

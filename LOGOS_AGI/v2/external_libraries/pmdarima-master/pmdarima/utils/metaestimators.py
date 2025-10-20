@@ -8,9 +8,7 @@
 from operator import attrgetter
 from functools import update_wrapper
 
-__all__ = [
-    'if_has_delegate'
-]
+__all__ = ["if_has_delegate"]
 
 
 class _IffHasDelegate(object):
@@ -27,6 +25,7 @@ class _IffHasDelegate(object):
     See https://docs.python.org/3/howto/descriptor.html for an explanation of
     descriptors.
     """
+
     def __init__(self, fn, delegate_names):
         self.fn = fn
         self.delegate_names = delegate_names
@@ -50,7 +49,7 @@ class _IffHasDelegate(object):
                 attrgetter(self.delegate_names[-1])(obj)
 
         # lambda, but not partial, allows help() to work with update_wrapper
-        out = (lambda *args, **kwargs: self.fn(obj, *args, **kwargs))
+        out = lambda *args, **kwargs: self.fn(obj, *args, **kwargs)
         # update the docstring of the returned function
         update_wrapper(out, self.fn)
         return out

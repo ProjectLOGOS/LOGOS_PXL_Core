@@ -236,14 +236,10 @@ class GroupedBenchmark:
         """
         signature_args, signature_output = cls._parse_signature(signature)
         if signature_args is None:
-            raise ValueError(
-                "signature is needed when initializing from model definitions."
-            )
+            raise ValueError("signature is needed when initializing from model definitions.")
 
         return cls(
-            *cls._make_model_invocation(
-                signature_args, signature_output, RuntimeMode.EAGER
-            ),
+            *cls._make_model_invocation(signature_args, signature_output, RuntimeMode.EAGER),
             py_model_setup=py_model_setup,
             cpp_model_setup=cpp_model_setup,
             inferred_model_setup=False,
@@ -262,12 +258,8 @@ class GroupedBenchmark:
         cpp_block: str = "",
         num_threads: Union[int, tuple[int, ...]] = 1,
     ) -> dict[Union[tuple[str, ...], Optional[str]], "GroupedBenchmark"]:
-        py_cases, py_setup, py_global_setup = cls._parse_variants(
-            py_block, Language.PYTHON
-        )
-        cpp_cases, cpp_setup, cpp_global_setup = cls._parse_variants(
-            cpp_block, Language.CPP
-        )
+        py_cases, py_setup, py_global_setup = cls._parse_variants(py_block, Language.PYTHON)
+        cpp_cases, cpp_setup, cpp_global_setup = cls._parse_variants(cpp_block, Language.CPP)
 
         assert not py_global_setup
         setup = GroupedSetup(
@@ -312,19 +304,13 @@ class GroupedBenchmark:
 
     def __post_init__(self) -> None:
         if self.autograd and self.signature_output is None:
-            raise ValueError(
-                "An output variable must be specified when `autograd=True`."
-            )
+            raise ValueError("An output variable must be specified when `autograd=True`.")
 
         if self.py_model_setup and "model" not in self.py_model_setup:
-            raise ValueError(
-                "`py_model_setup` appears to be missing `model` definition."
-            )
+            raise ValueError("`py_model_setup` appears to be missing `model` definition.")
 
         if self.cpp_model_setup and "model" not in self.cpp_model_setup:
-            raise ValueError(
-                "`cpp_model_setup` appears to be missing `model` definition."
-            )
+            raise ValueError("`cpp_model_setup` appears to be missing `model` definition.")
 
     # =========================================================================
     # == String manipulation methods ==========================================
@@ -345,9 +331,7 @@ class GroupedBenchmark:
         output: str = match.groups()[1].strip()
 
         if "," in output:
-            raise ValueError(
-                f"Multiple return values are not currently allowed: `{output}`"
-            )
+            raise ValueError(f"Multiple return values are not currently allowed: `{output}`")
 
         if output == "None":
             return args, None
@@ -387,9 +371,7 @@ class GroupedBenchmark:
 
         if runtime == RuntimeMode.EAGER:
             model_name = "model"
-            cpp_invocation = (
-                f"{cpp_prefix}{model_name}->forward({', '.join(signature_args)});"
-            )
+            cpp_invocation = f"{cpp_prefix}{model_name}->forward({', '.join(signature_args)});"
 
         else:
             assert runtime == RuntimeMode.JIT
@@ -413,9 +395,7 @@ class GroupedBenchmark:
         return py_invocation, cpp_invocation
 
     @staticmethod
-    def _parse_variants(
-        block: str, language: Language
-    ) -> tuple[dict[str, list[str]], str, str]:
+    def _parse_variants(block: str, language: Language) -> tuple[dict[str, list[str]], str, str]:
         block = textwrap.dedent(block).strip()
         comment = "#" if language == Language.PYTHON else "//"
         label_pattern = f"{comment} @(.+)$"

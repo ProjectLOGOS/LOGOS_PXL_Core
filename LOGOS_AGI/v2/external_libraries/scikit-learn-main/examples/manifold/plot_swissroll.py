@@ -30,9 +30,7 @@ sr_points, sr_color = datasets.make_swiss_roll(n_samples=1500, random_state=0)
 fig = plt.figure(figsize=(8, 6))
 ax = fig.add_subplot(111, projection="3d")
 fig.add_axes(ax)
-ax.scatter(
-    sr_points[:, 0], sr_points[:, 1], sr_points[:, 2], c=sr_color, s=50, alpha=0.8
-)
+ax.scatter(sr_points[:, 0], sr_points[:, 1], sr_points[:, 2], c=sr_color, s=50, alpha=0.8)
 ax.set_title("Swiss Roll in Ambient Space")
 ax.view_init(azim=-66, elev=12)
 _ = ax.text2D(0.8, 0.05, s="n_samples=1500", transform=ax.transAxes)
@@ -44,13 +42,9 @@ _ = ax.text2D(0.8, 0.05, s="n_samples=1500", transform=ax.transAxes)
 # continuous nature of our original data. Instead, it seems to unnecessarily
 # clump sections of points together.
 
-sr_lle, sr_err = manifold.locally_linear_embedding(
-    sr_points, n_neighbors=12, n_components=2
-)
+sr_lle, sr_err = manifold.locally_linear_embedding(sr_points, n_neighbors=12, n_components=2)
 
-sr_tsne = manifold.TSNE(n_components=2, perplexity=40, random_state=0).fit_transform(
-    sr_points
-)
+sr_tsne = manifold.TSNE(n_components=2, perplexity=40, random_state=0).fit_transform(sr_points)
 
 fig, axs = plt.subplots(figsize=(8, 8), nrows=2)
 axs[0].scatter(sr_lle[:, 0], sr_lle[:, 1], c=sr_color)
@@ -74,16 +68,12 @@ _ = axs[1].set_title("t-SNE Embedding of Swiss Roll")
 # Now let's take a look at how both algorithms deal with us adding a hole to
 # the data. First, we generate the Swiss-Hole dataset and plot it:
 
-sh_points, sh_color = datasets.make_swiss_roll(
-    n_samples=1500, hole=True, random_state=0
-)
+sh_points, sh_color = datasets.make_swiss_roll(n_samples=1500, hole=True, random_state=0)
 
 fig = plt.figure(figsize=(8, 6))
 ax = fig.add_subplot(111, projection="3d")
 fig.add_axes(ax)
-ax.scatter(
-    sh_points[:, 0], sh_points[:, 1], sh_points[:, 2], c=sh_color, s=50, alpha=0.8
-)
+ax.scatter(sh_points[:, 0], sh_points[:, 1], sh_points[:, 2], c=sh_color, s=50, alpha=0.8)
 ax.set_title("Swiss-Hole in Ambient Space")
 ax.view_init(azim=-66, elev=12)
 _ = ax.text2D(0.8, 0.05, s="n_samples=1500", transform=ax.transAxes)
@@ -95,13 +85,11 @@ _ = ax.text2D(0.8, 0.05, s="n_samples=1500", transform=ax.transAxes)
 # note that it preserves the general topology of the original data.
 
 
-sh_lle, sh_err = manifold.locally_linear_embedding(
-    sh_points, n_neighbors=12, n_components=2
-)
+sh_lle, sh_err = manifold.locally_linear_embedding(sh_points, n_neighbors=12, n_components=2)
 
-sh_tsne = manifold.TSNE(
-    n_components=2, perplexity=40, init="random", random_state=0
-).fit_transform(sh_points)
+sh_tsne = manifold.TSNE(n_components=2, perplexity=40, init="random", random_state=0).fit_transform(
+    sh_points
+)
 
 fig, axs = plt.subplots(figsize=(8, 8), nrows=2)
 axs[0].scatter(sh_lle[:, 0], sh_lle[:, 1], c=sh_color)

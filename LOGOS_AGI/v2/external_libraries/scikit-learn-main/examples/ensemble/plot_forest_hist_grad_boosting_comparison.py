@@ -85,9 +85,7 @@ from sklearn.ensemble import HistGradientBoostingRegressor, RandomForestRegresso
 from sklearn.model_selection import GridSearchCV, KFold
 
 models = {
-    "Random Forest": RandomForestRegressor(
-        min_samples_leaf=5, random_state=0, n_jobs=N_CORES
-    ),
+    "Random Forest": RandomForestRegressor(min_samples_leaf=5, random_state=0, n_jobs=N_CORES),
     "Hist Gradient Boosting": HistGradientBoostingRegressor(
         max_leaf_nodes=15, random_state=0, early_stopping=False
     ),
@@ -136,9 +134,7 @@ fig = make_subplots(
     subplot_titles=["Train time vs score", "Predict time vs score"],
 )
 model_names = [result["model"] for result in results]
-colors_list = colors.qualitative.Plotly * (
-    len(model_names) // len(colors.qualitative.Plotly) + 1
-)
+colors_list = colors.qualitative.Plotly * (len(model_names) // len(colors.qualitative.Plotly) + 1)
 
 for idx, result in enumerate(results):
     cv_results = result["cv_results"].round(3)

@@ -12,5 +12,3 @@ Graphical degree sequence
    is_pseudographical
    is_valid_degree_sequence_havel_hakimi
    is_valid_degree_sequence_erdos_gallai
-
-

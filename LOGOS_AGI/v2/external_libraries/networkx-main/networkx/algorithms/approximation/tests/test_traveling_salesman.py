@@ -245,9 +245,7 @@ class TestSimulatedAnnealingTSP(TestBase):
     def test_failure_of_costs_too_high_when_iterations_low(self):
         # Simulated Annealing Version:
         # set number of moves low and alpha high
-        cycle = self.tsp(
-            self.DG2, "greedy", source="D", move="1-0", alpha=1, N_inner=1, seed=42
-        )
+        cycle = self.tsp(self.DG2, "greedy", source="D", move="1-0", alpha=1, N_inner=1, seed=42)
         cost = sum(self.DG2[n][nbr]["weight"] for n, nbr in pairwise(cycle))
         assert cost > self.DG2_cost
 
@@ -287,9 +285,7 @@ class TestThresholdAcceptingTSP(TestSimulatedAnnealingTSP):
 
         # set threshold too low
         initial_sol = ["D", "A", "B", "C", "D"]
-        cycle = self.tsp(
-            self.DG, initial_sol, source="D", move="1-0", threshold=-3, seed=42
-        )
+        cycle = self.tsp(self.DG, initial_sol, source="D", move="1-0", threshold=-3, seed=42)
         cost = sum(self.DG[n][nbr]["weight"] for n, nbr in pairwise(cycle))
         assert cost > self.DG_cost
 
@@ -370,9 +366,7 @@ def test_TSP_weighted():
         cycle = tsp(G, nodes=[3, 6], weight="weight", method=method, **kwargs)
         assert cycle in expected_cycles
 
-        path = tsp(
-            G, nodes=[3, 6], weight="weight", method=method, cycle=False, **kwargs
-        )
+        path = tsp(G, nodes=[3, 6], weight="weight", method=method, cycle=False, **kwargs)
         assert path in expected_paths
 
         tourpath = tsp(G, weight="weight", method=method, cycle=False, **kwargs)

@@ -39,12 +39,21 @@ train, test = model_selection.train_test_split(data, train_size=150)
 # Let's create a pipeline with multiple stages... the Wineind dataset is
 # seasonal, so we'll include a FourierFeaturizer so we can fit it without
 # seasonality
-pipe = pipeline.Pipeline([
-    ("fourier", ppc.FourierFeaturizer(m=12, k=4)),
-    ("arima", arima.AutoARIMA(stepwise=True, trace=1, error_action="ignore",
-                              seasonal=False,  # because we use Fourier
-                              suppress_warnings=True))
-])
+pipe = pipeline.Pipeline(
+    [
+        ("fourier", ppc.FourierFeaturizer(m=12, k=4)),
+        (
+            "arima",
+            arima.AutoARIMA(
+                stepwise=True,
+                trace=1,
+                error_action="ignore",
+                seasonal=False,  # because we use Fourier
+                suppress_warnings=True,
+            ),
+        ),
+    ]
+)
 
 pipe.fit(train)
 print("Model fit:")
@@ -60,27 +69,24 @@ fig, axes = plt.subplots(3, 1, figsize=(12, 8))
 fig.tight_layout()
 
 # Visualize goodness of fit
-in_sample_preds, in_sample_confint = \
-    pipe.predict_in_sample(X=None, return_conf_int=True)
+in_sample_preds, in_sample_confint = pipe.predict_in_sample(X=None, return_conf_int=True)
 
 n_train = train.shape[0]
 
 x0 = np.arange(n_train)
 axes[0].plot(x0, train, alpha=0.75)
-axes[0].scatter(x0, in_sample_preds, alpha=0.4, marker='x')
-axes[0].fill_between(x0, in_sample_confint[:, 0], in_sample_confint[:, 1],
-                     alpha=0.1, color='b')
-axes[0].set_title('Actual train samples vs. in-sample predictions')
+axes[0].scatter(x0, in_sample_preds, alpha=0.4, marker="x")
+axes[0].fill_between(x0, in_sample_confint[:, 0], in_sample_confint[:, 1], alpha=0.1, color="b")
+axes[0].set_title("Actual train samples vs. in-sample predictions")
 axes[0].set_xlim((0, x0.shape[0]))
 
 # Visualize actual + predicted
 x1 = np.arange(n_train + preds.shape[0])
 axes[1].plot(x1[:n_train], train, alpha=0.75)
 # axes[1].scatter(x[n_train:], preds, alpha=0.4, marker='o')
-axes[1].scatter(x1[n_train:], test[:preds.shape[0]], alpha=0.4, marker='x')
-axes[1].fill_between(x1[n_train:], conf_int[:, 0], conf_int[:, 1],
-                     alpha=0.1, color='b')
-axes[1].set_title('Actual test samples vs. forecasts')
+axes[1].scatter(x1[n_train:], test[: preds.shape[0]], alpha=0.4, marker="x")
+axes[1].fill_between(x1[n_train:], conf_int[:, 0], conf_int[:, 1], alpha=0.1, color="b")
+axes[1].set_title("Actual test samples vs. forecasts")
 axes[1].set_xlim((0, data.shape[0]))
 
 # We can also call `update` directly on the pipeline object, which will update
@@ -96,10 +102,10 @@ x2 = np.arange(data.shape[0])
 n_trained_on = n_train + newly_observed.shape[0]
 
 axes[2].plot(x2[:n_train], train, alpha=0.75)
-axes[2].plot(x2[n_train: n_trained_on], newly_observed, alpha=0.75, c='orange')
+axes[2].plot(x2[n_train:n_trained_on], newly_observed, alpha=0.75, c="orange")
 # axes[2].scatter(x2[n_trained_on:], new_preds, alpha=0.4, marker='o')
-axes[2].scatter(x2[n_trained_on:], still_test, alpha=0.4, marker='x')
-axes[2].set_title('Actual test samples vs. forecasts')
+axes[2].scatter(x2[n_trained_on:], still_test, alpha=0.4, marker="x")
+axes[2].set_title("Actual test samples vs. forecasts")
 axes[2].set_xlim((0, data.shape[0]))
 
 plt.show()

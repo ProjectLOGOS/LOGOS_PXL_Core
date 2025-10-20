@@ -1,6 +1,4 @@
-
-from pmdarima.utils.array import diff, diff_inv, c, is_iterable, as_series, \
-    check_exog, check_endog
+from pmdarima.utils.array import diff, diff_inv, c, is_iterable, as_series, check_exog, check_endog
 from pmdarima.utils import get_callable
 from numpy.testing import assert_array_equal, assert_array_almost_equal
 
@@ -11,17 +9,14 @@ import numpy as np
 
 x = np.arange(5)
 m = np.array([10, 5, 12, 23, 18, 3, 2, 0, 12]).reshape(3, 3).T
-X = pd.DataFrame.from_records(
-    np.random.RandomState(2).rand(4, 4),
-    columns=['a', 'b', 'c', 'd']
-)
+X = pd.DataFrame.from_records(np.random.RandomState(2).rand(4, 4), columns=["a", "b", "c", "d"])
 
 # need some infinite values in X for testing check_exog
 X_nan = X.copy()
-X_nan.loc[0, 'a'] = np.nan
+X_nan.loc[0, "a"] = np.nan
 
 X_inf = X.copy()
-X_inf.loc[0, 'a'] = np.inf
+X_inf.loc[0, "a"] = np.inf
 
 # for diffinv
 x_mat = (np.arange(9) + 1).reshape(3, 3).T
@@ -46,40 +41,33 @@ def test_diff():
     assert_array_equal(diff(x, lag=2, differences=2), np.zeros(1))
 
     # test matrix for lag = (1, 2), diff = (1, 2)
-    assert_array_equal(diff(m, lag=1, differences=1),
-                       np.array([[-5, -5, -2], [7, -15, 12]]))
-    assert_array_equal(diff(m, lag=1, differences=2),
-                       np.array([[12, -10, 14]]))
+    assert_array_equal(diff(m, lag=1, differences=1), np.array([[-5, -5, -2], [7, -15, 12]]))
+    assert_array_equal(diff(m, lag=1, differences=2), np.array([[12, -10, 14]]))
     assert_array_equal(diff(m, lag=2, differences=1), np.array([[2, -20, 10]]))
     assert diff(m, lag=2, differences=2).shape[0] == 0
 
 
 @pytest.mark.parametrize(
-    'arr,lag,differences,xi,expected', [
+    "arr,lag,differences,xi,expected",
+    [
         # VECTORS -------------------------------------------------------------
         # > x = c(0, 1, 2, 3, 4)
         # > diffinv(x, lag=1, differences=1)
         # [1]  0  0  1  3  6 10
         pytest.param(x, 1, 1, None, [0, 0, 1, 3, 6, 10]),
-
         # > diffinv(x, lag=1, differences=2)
         # [1]  0  0  0  1  4 10 20
         pytest.param(x, 1, 2, None, [0, 0, 0, 1, 4, 10, 20]),
-
         # > diffinv(x, lag=2, differences=1)
         # [1] 0 0 0 1 2 4 6
         pytest.param(x, 2, 1, None, [0, 0, 0, 1, 2, 4, 6]),
-
         # > diffinv(x, lag=2, differences=2)
         # [1] 0 0 0 0 0 1 2 5 8
         pytest.param(x, 2, 2, None, [0, 0, 0, 0, 0, 1, 2, 5, 8]),
-
         # This is a test of the intermediate stage when x == [1, 0, 3, 2]
         pytest.param([1, 0, 3, 2], 1, 1, [0], [0, 1, 1, 4, 6]),
-
         # This is an intermediate stage when x == [0, 1, 2, 3, 4]
         pytest.param(x, 1, 1, [0], [0, 0, 1, 3, 6, 10]),
-
         # MATRICES ------------------------------------------------------------
         # > matrix(data=c(1, 2, 3, 4, 5, 6, 7, 8, 9), nrow=3, ncol=3)
         #      [,1] [,2] [,3]
@@ -92,12 +80,7 @@ def test_diff():
         # [2,]    1    4    7
         # [3,]    3    9   15
         # [4,]    6   15   24
-        pytest.param(x_mat, 1, 1, None,
-                     [[0, 0, 0],
-                      [1, 4, 7],
-                      [3, 9, 15],
-                      [6, 15, 24]]),
-
+        pytest.param(x_mat, 1, 1, None, [[0, 0, 0], [1, 4, 7], [3, 9, 15], [6, 15, 24]]),
         # > diffinv(X, 1, 2)
         #      [,1] [,2] [,3]
         # [1,]    0    0    0
@@ -105,13 +88,9 @@ def test_diff():
         # [3,]    1    4    7
         # [4,]    4   13   22
         # [5,]   10   28   46
-        pytest.param(x_mat, 1, 2, None,
-                     [[0, 0, 0],
-                      [0, 0, 0],
-                      [1, 4, 7],
-                      [4, 13, 22],
-                      [10, 28, 46]]),
-
+        pytest.param(
+            x_mat, 1, 2, None, [[0, 0, 0], [0, 0, 0], [1, 4, 7], [4, 13, 22], [10, 28, 46]]
+        ),
         # > diffinv(X, 2, 1)
         #      [,1] [,2] [,3]
         # [1,]    0    0    0
@@ -119,13 +98,7 @@ def test_diff():
         # [3,]    1    4    7
         # [4,]    2    5    8
         # [5,]    4   10   16
-        pytest.param(x_mat, 2, 1, None,
-                     [[0, 0, 0],
-                      [0, 0, 0],
-                      [1, 4, 7],
-                      [2, 5, 8],
-                      [4, 10, 16]]),
-
+        pytest.param(x_mat, 2, 1, None, [[0, 0, 0], [0, 0, 0], [1, 4, 7], [2, 5, 8], [4, 10, 16]]),
         # > diffinv(X, 2, 2)
         #      [,1] [,2] [,3]
         # [1,]    0    0    0
@@ -135,15 +108,14 @@ def test_diff():
         # [5,]    1    4    7
         # [6,]    2    5    8
         # [7,]    5   14   23
-        pytest.param(x_mat, 2, 2, None,
-                     [[0, 0, 0],
-                      [0, 0, 0],
-                      [0, 0, 0],
-                      [0, 0, 0],
-                      [1, 4, 7],
-                      [2, 5, 8],
-                      [5, 14, 23]]),
-    ]
+        pytest.param(
+            x_mat,
+            2,
+            2,
+            None,
+            [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [1, 4, 7], [2, 5, 8], [5, 14, 23]],
+        ),
+    ],
 )
 def test_diff_inv(arr, lag, differences, xi, expected):
     res = diff_inv(arr, lag=lag, differences=differences, xi=xi)
@@ -152,7 +124,7 @@ def test_diff_inv(arr, lag, differences, xi, expected):
 
 
 @pytest.mark.parametrize(
-    'y,preserve_series,exp,exp_error',
+    "y,preserve_series,exp,exp_error",
     [
         # base case, preserve=True, but not a series
         pytest.param(
@@ -161,7 +133,6 @@ def test_diff_inv(arr, lag, differences, xi, expected):
             np.arange(5),
             None,
         ),
-
         # base case, preserve=False, but not a series
         pytest.param(
             np.arange(5),
@@ -169,7 +140,6 @@ def test_diff_inv(arr, lag, differences, xi, expected):
             np.arange(5),
             None,
         ),
-
         # series, with preserve=True
         pytest.param(
             series_with_dt_index(5),
@@ -177,7 +147,6 @@ def test_diff_inv(arr, lag, differences, xi, expected):
             series_with_dt_index(5),
             None,
         ),
-
         # series, with preserve=False
         pytest.param(
             series_with_dt_index(5),
@@ -185,7 +154,6 @@ def test_diff_inv(arr, lag, differences, xi, expected):
             np.arange(5),
             None,
         ),
-
         # dataframe w n_cols>1. assert error
         pytest.param(
             pd.DataFrame([[1, 2, 3], [4, 5, 6]]),
@@ -193,7 +161,7 @@ def test_diff_inv(arr, lag, differences, xi, expected):
             None,
             ValueError,  # raised by sklearn
         ),
-    ]
+    ],
 )
 def test_check_endog(y, preserve_series, exp, exp_error):
     if exp_error is not None:
@@ -221,7 +189,7 @@ def test_concatenate():
 def test_corner_in_callable():
     # test the ValueError in the get-callable method
     with pytest.raises(ValueError):
-        get_callable('fake-key', {'a': 1})
+        get_callable("fake-key", {"a": 1})
 
 
 def test_corner():
@@ -256,24 +224,24 @@ def test_as_series():
 
 
 @pytest.mark.parametrize(
-    'arr', [
+    "arr",
+    [
         np.random.rand(5),
         pd.Series(np.random.rand(5)),
-    ]
+    ],
 )
 def test_check_exog_ndim_value_err(arr):
     with pytest.raises(ValueError):
         check_exog(arr)
 
 
-@pytest.mark.parametrize('arr', [X_nan, X_inf])
+@pytest.mark.parametrize("arr", [X_nan, X_inf])
 def test_check_exog_infinite_value_err(arr):
     with pytest.raises(ValueError):
         check_exog(arr, force_all_finite=True)
 
     # show it passes when False
-    assert check_exog(
-        arr, force_all_finite=False, dtype=None, copy=False) is arr
+    assert check_exog(arr, force_all_finite=False, dtype=None, copy=False) is arr
 
 
 def test_exog_pd_dataframes():

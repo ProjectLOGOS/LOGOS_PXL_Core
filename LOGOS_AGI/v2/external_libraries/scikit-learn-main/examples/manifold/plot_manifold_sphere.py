@@ -60,9 +60,7 @@ x, y, z = (
 
 # Plot our dataset.
 fig = plt.figure(figsize=(15, 8))
-plt.suptitle(
-    "Manifold Learning with %i points, %i neighbors" % (1000, n_neighbors), fontsize=14
-)
+plt.suptitle("Manifold Learning with %i points, %i neighbors" % (1000, n_neighbors), fontsize=14)
 
 ax = fig.add_subplot(251, projection="3d")
 ax.scatter(x, y, z, c=p[indices], cmap=plt.cm.rainbow)
@@ -95,11 +93,7 @@ for i, method in enumerate(methods):
 
 # Perform Isomap Manifold learning.
 t0 = time()
-trans_data = (
-    manifold.Isomap(n_neighbors=n_neighbors, n_components=2)
-    .fit_transform(sphere_data)
-    .T
-)
+trans_data = manifold.Isomap(n_neighbors=n_neighbors, n_components=2).fit_transform(sphere_data).T
 t1 = time()
 print("%s: %.2g sec" % ("ISO", t1 - t0))
 
@@ -126,9 +120,7 @@ plt.axis("tight")
 
 # Perform Spectral Embedding.
 t0 = time()
-se = manifold.SpectralEmbedding(
-    n_components=2, n_neighbors=n_neighbors, random_state=42
-)
+se = manifold.SpectralEmbedding(n_components=2, n_neighbors=n_neighbors, random_state=42)
 trans_data = se.fit_transform(sphere_data).T
 t1 = time()
 print("Spectral Embedding: %.2g sec" % (t1 - t0))

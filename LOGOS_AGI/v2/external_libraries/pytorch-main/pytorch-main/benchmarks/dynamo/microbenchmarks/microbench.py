@@ -98,26 +98,16 @@ class MicroBenchmarks:
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--filter", "-k", action="append", help="filter benchmarks with regexp"
-    )
-    parser.add_argument(
-        "--exclude", "-x", action="append", help="filter benchmarks with regexp"
-    )
+    parser.add_argument("--filter", "-k", action="append", help="filter benchmarks with regexp")
+    parser.add_argument("--exclude", "-x", action="append", help="filter benchmarks with regexp")
     parser.add_argument("--devices", "-d", action="append", help="cpu or cuda")
     parser.add_argument("--size", "-s", action="append", help="cpu or cuda")
-    parser.add_argument(
-        "--repeat", "-n", type=int, default=30, help="number of timing runs"
-    )
-    parser.add_argument(
-        "--threads", "-t", type=int, help="number of threads to use for eager"
-    )
+    parser.add_argument("--repeat", "-n", type=int, default=30, help="number of timing runs")
+    parser.add_argument("--threads", "-t", type=int, help="number of threads to use for eager")
     parser.add_argument(
         "--verbose", "-v", action="store_true", help="enable verbose debug printouts"
     )
-    parser.add_argument(
-        "--nvfuser", action="store_true", help="enable nvfuser globally"
-    )
+    parser.add_argument("--nvfuser", action="store_true", help="enable nvfuser globally")
     parser.add_argument("--transpose", action="store_true", help="transpose one input")
     parser.add_argument("--broadcast", action="store_true", help="broadcast one input")
     args = parser.parse_args()

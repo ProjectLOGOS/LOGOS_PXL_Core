@@ -331,9 +331,7 @@ class KBinsDiscretizer(TransformerMixin, BaseEstimator):
             col_max = column[nnz_weight_mask].max()
 
             if col_min == col_max:
-                warnings.warn(
-                    "Feature %d is constant and will be replaced with 0." % jj
-                )
+                warnings.warn("Feature %d is constant and will be replaced with 0." % jj)
                 n_bins[jj] = 1
                 bin_edges[jj] = np.array([-np.inf, np.inf])
                 continue
@@ -381,9 +379,9 @@ class KBinsDiscretizer(TransformerMixin, BaseEstimator):
 
                 # 1D k-means procedure
                 km = KMeans(n_clusters=n_bins[jj], init=init, n_init=1)
-                centers = km.fit(
-                    column[:, None], sample_weight=sample_weight
-                ).cluster_centers_[:, 0]
+                centers = km.fit(column[:, None], sample_weight=sample_weight).cluster_centers_[
+                    :, 0
+                ]
                 # Must sort, centers may be unsorted even with sorted init
                 centers.sort()
                 bin_edges[jj] = (centers[1:] + centers[:-1]) * 0.5
@@ -435,9 +433,7 @@ class KBinsDiscretizer(TransformerMixin, BaseEstimator):
             raise ValueError(
                 "{} received an invalid number "
                 "of bins at indices {}. Number of bins "
-                "must be at least 2, and must be an int.".format(
-                    KBinsDiscretizer.__name__, indices
-                )
+                "must be at least 2, and must be an int.".format(KBinsDiscretizer.__name__, indices)
             )
         return n_bins
 

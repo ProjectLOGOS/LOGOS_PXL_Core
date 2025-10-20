@@ -91,9 +91,7 @@ for i, n_outliers in enumerate(range_n_outliers):
         X = rng.randn(n_samples, n_features)
         # add some outliers
         outliers_index = rng.permutation(n_samples)[:n_outliers]
-        outliers_offset = 10.0 * (
-            np.random.randint(2, size=(n_outliers, n_features)) - 0.5
-        )
+        outliers_offset = 10.0 * (np.random.randint(2, size=(n_outliers, n_features)) - 0.5)
         X[outliers_index] += outliers_offset
         inliers_mask = np.ones(n_samples).astype(bool)
         inliers_mask[outliers_index] = False
@@ -107,9 +105,7 @@ for i, n_outliers in enumerate(range_n_outliers):
         # compare estimators learned from the full data set with true
         # parameters
         err_loc_emp_full[i, j] = np.sum(X.mean(0) ** 2)
-        err_cov_emp_full[i, j] = (
-            EmpiricalCovariance().fit(X).error_norm(np.eye(n_features))
-        )
+        err_cov_emp_full[i, j] = EmpiricalCovariance().fit(X).error_norm(np.eye(n_features))
 
         # compare with an empirical covariance learned from a pure data set
         # (i.e. "perfect" mcd)

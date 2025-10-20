@@ -76,10 +76,7 @@ plt.scatter(X_train_r[:, 0], Y_train_r[:, 0], label="train", marker="o", s=25)
 plt.scatter(X_test_r[:, 0], Y_test_r[:, 0], label="test", marker="o", s=25)
 plt.xlabel("x scores")
 plt.ylabel("y scores")
-plt.title(
-    "Comp. 1: X vs Y (test corr = %.2f)"
-    % np.corrcoef(X_test_r[:, 0], Y_test_r[:, 0])[0, 1]
-)
+plt.title("Comp. 1: X vs Y (test corr = %.2f)" % np.corrcoef(X_test_r[:, 0], Y_test_r[:, 0])[0, 1])
 plt.xticks(())
 plt.yticks(())
 plt.legend(loc="best")
@@ -89,10 +86,7 @@ plt.scatter(X_train_r[:, 1], Y_train_r[:, 1], label="train", marker="o", s=25)
 plt.scatter(X_test_r[:, 1], Y_test_r[:, 1], label="test", marker="o", s=25)
 plt.xlabel("x scores")
 plt.ylabel("y scores")
-plt.title(
-    "Comp. 2: X vs Y (test corr = %.2f)"
-    % np.corrcoef(X_test_r[:, 1], Y_test_r[:, 1])[0, 1]
-)
+plt.title("Comp. 2: X vs Y (test corr = %.2f)" % np.corrcoef(X_test_r[:, 1], Y_test_r[:, 1])[0, 1])
 plt.xticks(())
 plt.yticks(())
 plt.legend(loc="best")
@@ -104,8 +98,7 @@ plt.scatter(X_test_r[:, 0], X_test_r[:, 1], label="test", marker="*", s=50)
 plt.xlabel("X comp. 1")
 plt.ylabel("X comp. 2")
 plt.title(
-    "X comp. 1 vs X comp. 2 (test corr = %.2f)"
-    % np.corrcoef(X_test_r[:, 0], X_test_r[:, 1])[0, 1]
+    "X comp. 1 vs X comp. 2 (test corr = %.2f)" % np.corrcoef(X_test_r[:, 0], X_test_r[:, 1])[0, 1]
 )
 plt.legend(loc="best")
 plt.xticks(())

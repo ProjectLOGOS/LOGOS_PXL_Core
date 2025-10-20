@@ -124,9 +124,7 @@ def fit_and_evaluate(km, X, name=None, n_runs=5):
         scores["Homogeneity"].append(metrics.homogeneity_score(labels, km.labels_))
         scores["Completeness"].append(metrics.completeness_score(labels, km.labels_))
         scores["V-measure"].append(metrics.v_measure_score(labels, km.labels_))
-        scores["Adjusted Rand-Index"].append(
-            metrics.adjusted_rand_score(labels, km.labels_)
-        )
+        scores["Adjusted Rand-Index"].append(metrics.adjusted_rand_score(labels, km.labels_))
         scores["Silhouette Coefficient"].append(
             metrics.silhouette_score(X, km.labels_, sample_size=2000)
         )
@@ -233,8 +231,7 @@ for seed in range(5):
     print(f"Number of elements assigned to each cluster: {cluster_sizes}")
 print()
 print(
-    "True number of documents in each category according to the class labels: "
-    f"{category_sizes}"
+    "True number of documents in each category according to the class labels: " f"{category_sizes}"
 )
 
 # %%

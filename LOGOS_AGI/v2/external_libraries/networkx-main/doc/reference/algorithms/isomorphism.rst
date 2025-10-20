@@ -41,4 +41,3 @@ Advanced Interfaces
 
    isomorphism.vf2
    isomorphism.ismags
-

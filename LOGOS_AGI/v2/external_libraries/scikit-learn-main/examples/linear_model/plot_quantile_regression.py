@@ -60,9 +60,7 @@ axs[1, 1].hist(y_true_mean - y_pareto, edgecolor="black")
 
 axs[0, 0].set_title("Dataset with heteroscedastic Normal distributed targets")
 axs[0, 1].set_title("Dataset with asymmetric Pareto distributed target")
-axs[1, 0].set_title(
-    "Residuals distribution for heteroscedastic Normal distributed targets"
-)
+axs[1, 0].set_title("Residuals distribution for heteroscedastic Normal distributed targets")
 axs[1, 1].set_title("Residuals distribution for asymmetric Pareto distributed target")
 axs[0, 0].legend()
 axs[0, 1].legend()
@@ -122,13 +120,9 @@ for quantile in quantiles:
     predictions[quantile] = y_pred
 
     if quantile == min(quantiles):
-        out_bounds_predictions = np.logical_or(
-            out_bounds_predictions, y_pred >= y_normal
-        )
+        out_bounds_predictions = np.logical_or(out_bounds_predictions, y_pred >= y_normal)
     elif quantile == max(quantiles):
-        out_bounds_predictions = np.logical_or(
-            out_bounds_predictions, y_pred <= y_normal
-        )
+        out_bounds_predictions = np.logical_or(out_bounds_predictions, y_pred <= y_normal)
 
 # %%
 # Now, we can plot the three linear models and the distinguished samples that
@@ -184,13 +178,9 @@ for quantile in quantiles:
     predictions[quantile] = y_pred
 
     if quantile == min(quantiles):
-        out_bounds_predictions = np.logical_or(
-            out_bounds_predictions, y_pred >= y_pareto
-        )
+        out_bounds_predictions = np.logical_or(out_bounds_predictions, y_pred >= y_pareto)
     elif quantile == max(quantiles):
-        out_bounds_predictions = np.logical_or(
-            out_bounds_predictions, y_pred <= y_pareto
-        )
+        out_bounds_predictions = np.logical_or(out_bounds_predictions, y_pred <= y_pareto)
 
 # %%
 plt.plot(X, y_true_mean, color="black", linestyle="dashed", label="True mean")

@@ -15,7 +15,9 @@ from pyro.contrib.timeseries import IndependentMaternGP, LinearlyCoupledMaternGP
 # download dataset from UCI archive
 def download_data():
     if not exists("eeg.dat"):
-        url = "http://archive.ics.uci.edu/ml/machine-learning-databases/00264/EEG%20Eye%20State.arff"
+        url = (
+            "http://archive.ics.uci.edu/ml/machine-learning-databases/00264/EEG%20Eye%20State.arff"
+        )
         with open("eeg.dat", "wb") as f:
             f.write(urlopen(url).read())
 
@@ -67,9 +69,7 @@ def main(args):
         amsgrad=True,
     )
     # we decay the learning rate over the course of training
-    gamma = (args.final_learning_rate / args.init_learning_rate) ** (
-        1.0 / args.num_steps
-    )
+    gamma = (args.final_learning_rate / args.init_learning_rate) ** (1.0 / args.num_steps)
     scheduler = torch.optim.lr_scheduler.ExponentialLR(adam, gamma=gamma)
 
     report_frequency = 10
@@ -93,9 +93,7 @@ def main(args):
 
         # do rolling prediction
         print("doing one-step-ahead forecasting...")
-        onestep_means, onestep_stds = np.zeros((T_onestep, obs_dim)), np.zeros(
-            (T_onestep, obs_dim)
-        )
+        onestep_means, onestep_stds = np.zeros((T_onestep, obs_dim)), np.zeros((T_onestep, obs_dim))
         for t in range(T_onestep):
             # predict one step into the future, conditioning on all previous data.
             # note that each call to forecast() conditions on more data than the previous call
@@ -117,9 +115,7 @@ def main(args):
         if args.model == "imgp":
             multistep_stds = pred_dist.scale.data.numpy()
         elif args.model == "lcmgp":
-            multistep_stds = pred_dist.covariance_matrix.diagonal(
-                dim1=-1, dim2=-2
-            ).data.numpy()
+            multistep_stds = pred_dist.covariance_matrix.diagonal(dim1=-1, dim2=-2).data.numpy()
 
         import matplotlib
 
@@ -190,9 +186,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="contrib.timeseries example usage")
     parser.add_argument("-n", "--num-steps", default=300, type=int)
     parser.add_argument("-s", "--seed", default=0, type=int)
-    parser.add_argument(
-        "-m", "--model", default="imgp", type=str, choices=["imgp", "lcmgp"]
-    )
+    parser.add_argument("-m", "--model", default="imgp", type=str, choices=["imgp", "lcmgp"])
     parser.add_argument("-ilr", "--init-learning-rate", default=0.01, type=float)
     parser.add_argument("-flr", "--final-learning-rate", default=0.0003, type=float)
     parser.add_argument("-b1", "--beta1", default=0.50, type=float)

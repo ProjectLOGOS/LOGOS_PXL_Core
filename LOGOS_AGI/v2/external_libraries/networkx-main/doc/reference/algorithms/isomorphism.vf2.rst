@@ -64,4 +64,3 @@ Match helpers
    generic_node_match
    generic_edge_match
    generic_multiedge_match
-

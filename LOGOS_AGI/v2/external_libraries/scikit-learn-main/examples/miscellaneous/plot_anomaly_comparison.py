@@ -126,11 +126,7 @@ datasets = [
     make_blobs(centers=[[0, 0], [0, 0]], cluster_std=0.5, **blobs_params)[0],
     make_blobs(centers=[[2, 2], [-2, -2]], cluster_std=[0.5, 0.5], **blobs_params)[0],
     make_blobs(centers=[[2, 2], [-2, -2]], cluster_std=[1.5, 0.3], **blobs_params)[0],
-    4.0
-    * (
-        make_moons(n_samples=n_samples, noise=0.05, random_state=0)[0]
-        - np.array([0.5, 0.25])
-    ),
+    4.0 * (make_moons(n_samples=n_samples, noise=0.05, random_state=0)[0] - np.array([0.5, 0.25])),
     14.0 * (np.random.RandomState(42).rand(n_samples, 2) - 0.5),
 ]
 
@@ -138,9 +134,7 @@ datasets = [
 xx, yy = np.meshgrid(np.linspace(-7, 7, 150), np.linspace(-7, 7, 150))
 
 plt.figure(figsize=(len(anomaly_algorithms) * 2 + 4, 12.5))
-plt.subplots_adjust(
-    left=0.02, right=0.98, bottom=0.001, top=0.96, wspace=0.05, hspace=0.01
-)
+plt.subplots_adjust(left=0.02, right=0.98, bottom=0.001, top=0.96, wspace=0.05, hspace=0.01)
 
 plot_num = 1
 rng = np.random.RandomState(42)

@@ -44,9 +44,7 @@ from sklearn.preprocessing import StandardScaler
 X, y = load_wine(return_X_y=True, as_frame=True)
 scaler = StandardScaler().set_output(transform="pandas")
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.30, random_state=42
-)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=42)
 scaled_X_train = scaler.fit_transform(X_train)
 
 # %%
@@ -130,13 +128,9 @@ scaled_pca = PCA(n_components=2).fit(scaled_X_train)
 X_train_transformed = pca.transform(X_train)
 X_train_std_transformed = scaled_pca.transform(scaled_X_train)
 
-first_pca_component = pd.DataFrame(
-    pca.components_[0], index=X.columns, columns=["without scaling"]
-)
+first_pca_component = pd.DataFrame(pca.components_[0], index=X.columns, columns=["without scaling"])
 first_pca_component["with scaling"] = scaled_pca.components_[0]
-first_pca_component.plot.bar(
-    title="Weights of the first principal component", figsize=(6, 8)
-)
+first_pca_component.plot.bar(title="Weights of the first principal component", figsize=(6, 8))
 
 _ = plt.tight_layout()
 

@@ -14,9 +14,3 @@ which is similar to the size of a test.
     Examples <multiple-comparison_examples.ipynb>
     Module Reference <multiple-comparison-reference>
     Background and References <background>
-
-
-
-
-
-

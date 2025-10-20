@@ -28,7 +28,7 @@ class Application(LogosExpr):
 class LambdaEngine:
     def __init__(self):
         self.evaluator = self.Evaluator(self)
-    
+
     def substitute(self, expr, var_name, value):
         if isinstance(expr, Variable): return value if expr.name == var_name else expr
         if isinstance(expr, Value): return expr

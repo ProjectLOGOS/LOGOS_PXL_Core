@@ -127,9 +127,7 @@ class BiosequenceDataset(Dataset):
             device=self.device,
         )
         # Pad.
-        x = torch.cat(
-            [oh, torch.zeros([length - len(seq), len(alphabet)], device=self.device)]
-        )
+        x = torch.cat([oh, torch.zeros([length - len(seq), len(alphabet)], device=self.device)])
 
         return x
 
@@ -162,9 +160,7 @@ def write(x, alphabet, file, truncate_stop=False, append=False, scores=None):
     if truncate_stop:
         mask = (
             torch.cumsum(
-                torch.matmul(
-                    x, torch.tensor(print_alphabet == "*", dtype=torch.double)
-                ),
+                torch.matmul(x, torch.tensor(print_alphabet == "*", dtype=torch.double)),
                 -1,
             )
             > 0
@@ -174,15 +170,11 @@ def write(x, alphabet, file, truncate_stop=False, append=False, scores=None):
     else:
         x[:, :, -1] = (torch.sum(x, -1) < 0.5).to(torch.double)
     index = (
-        torch.matmul(x, torch.arange(x.shape[-1], dtype=torch.double))
-        .to(torch.long)
-        .cpu()
-        .numpy()
+        torch.matmul(x, torch.arange(x.shape[-1], dtype=torch.double)).to(torch.long).cpu().numpy()
     )
     if scores is None:
         seqs = [
-            ">{}\n".format(j) + "".join(elem) + "\n"
-            for j, elem in enumerate(print_alphabet[index])
+            ">{}\n".format(j) + "".join(elem) + "\n" for j, elem in enumerate(print_alphabet[index])
         ]
     else:
         seqs = [

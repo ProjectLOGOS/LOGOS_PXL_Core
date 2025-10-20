@@ -14,16 +14,17 @@ from .utils import check_endog
 from .compat import DTYPE, check_is_fitted
 from .compat.sklearn import if_delegate_has_method
 
-__all__ = ['Pipeline']
+__all__ = ["Pipeline"]
 
 
 def _warn_for_deprecated(**kwargs):
     # TODO: remove this in the future
-    for k in ('typ',):
+    for k in ("typ",):
         if kwargs.pop(k, None):
-            warnings.warn("'%s' is deprecated and will be removed in a future "
-                          "release" % k,
-                          DeprecationWarning)
+            warnings.warn(
+                "'%s' is deprecated and will be removed in a future " "release" % k,
+                DeprecationWarning,
+            )
     return kwargs
 
 
@@ -84,16 +85,18 @@ class Pipeline(BaseEstimator):
 
     def _validate_names(self, names):
         if len(set(names)) != len(names):
-            raise ValueError('Names provided are not unique: '
-                             '{0!r}'.format(list(names)))
+            raise ValueError("Names provided are not unique: " "{0!r}".format(list(names)))
         invalid_names = set(names).intersection(self.get_params(deep=False))
         if invalid_names:
-            raise ValueError('Estimator names conflict with constructor '
-                             'arguments: {0!r}'.format(sorted(invalid_names)))
-        invalid_names = [name for name in names if '__' in name]
+            raise ValueError(
+                "Estimator names conflict with constructor "
+                "arguments: {0!r}".format(sorted(invalid_names))
+            )
+        invalid_names = [name for name in names if "__" in name]
         if invalid_names:
-            raise ValueError('Estimator names must not contain __: got '
-                             '{0!r}'.format(invalid_names))
+            raise ValueError(
+                "Estimator names must not contain __: got " "{0!r}".format(invalid_names)
+            )
 
     def _validate_steps(self):
         names, estimators = zip(*self.steps)
@@ -108,14 +111,17 @@ class Pipeline(BaseEstimator):
         for t in transformers:
             # Transformers must be endog/exog transformers
             if not isinstance(t, BaseTransformer):
-                raise TypeError("All intermediate steps should be "
-                                "instances of BaseTransformer, but "
-                                "'%s' (type %s) is not" % (t, type(t)))
+                raise TypeError(
+                    "All intermediate steps should be "
+                    "instances of BaseTransformer, but "
+                    "'%s' (type %s) is not" % (t, type(t))
+                )
 
         if not isinstance(estimator, BaseARIMA):
             raise TypeError(
                 "Last step of Pipeline should be of type BaseARIMA. "
-                "'%s' (type %s) isn't" % (estimator, type(estimator)))
+                "'%s' (type %s) isn't" % (estimator, type(estimator))
+            )
 
         # Shallow copy
         return list(self.steps)
@@ -133,10 +139,9 @@ class Pipeline(BaseEstimator):
             yield idx, name, trans
 
     def _get_kwargs(self, **params):
-        params_steps = {name: {} for name, step in self.steps
-                        if step is not None}
+        params_steps = {name: {} for name, step in self.steps if step is not None}
         for pname, pval in params.items():
-            step, param = pname.split('__', 1)
+            step, param = pname.split("__", 1)
             params_steps[step][param] = pval
         return params_steps
 
@@ -214,8 +219,7 @@ class Pipeline(BaseEstimator):
             steps[step_idx] = (name, cloned_transformer)
 
         # Save the order of the columns so we can select in the predict phase
-        self.x_feats_ = Xt.columns.tolist() \
-            if isinstance(Xt, pd.DataFrame) else None
+        self.x_feats_ = Xt.columns.tolist() if isinstance(Xt, pd.DataFrame) else None
 
         # Now fit the final estimator
         kwargs = named_kwargs[steps[-1][0]]
@@ -239,10 +243,11 @@ class Pipeline(BaseEstimator):
                 if isinstance(transformer, BaseExogFeaturizer):
                     num_p = kw.get("n_periods", None)
                     if num_p is not None and num_p != n_periods:
-                        raise ValueError("Manually set 'n_periods' kwarg for "
-                                         "step '%s' differs from forecasting "
-                                         "n_periods (%r != %r)"
-                                         % (name, num_p, n_periods))
+                        raise ValueError(
+                            "Manually set 'n_periods' kwarg for "
+                            "step '%s' differs from forecasting "
+                            "n_periods (%r != %r)" % (name, num_p, n_periods)
+                        )
                     kw["n_periods"] = n_periods
 
                 # TODO: manual check to ensure Xt shape == n_periods shape?
@@ -298,15 +303,17 @@ class Pipeline(BaseEstimator):
         Xt, _, _ = self._pre_predict(n_periods, X, **kwargs)
         return Xt
 
-    def predict_in_sample(self,
-                          X=None,
-                          start=None,
-                          end=None,
-                          dynamic=False,
-                          return_conf_int=False,
-                          alpha=0.05,
-                          inverse_transform=True,
-                          **kwargs):
+    def predict_in_sample(
+        self,
+        X=None,
+        start=None,
+        end=None,
+        dynamic=False,
+        return_conf_int=False,
+        alpha=0.05,
+        inverse_transform=True,
+        **kwargs,
+    ):
         """Generate in-sample predictions from the fit pipeline.
 
         Predicts the original training (in-sample) time series values. This can
@@ -377,18 +384,20 @@ class Pipeline(BaseEstimator):
             return_conf_int=return_conf_int,
             alpha=alpha,
             dynamic=dynamic,
-            **predict_kwargs)
+            **predict_kwargs,
+        )
 
-        return self._post_predict(
-            Xt, return_vals, return_conf_int, inverse_transform)
+        return self._post_predict(Xt, return_vals, return_conf_int, inverse_transform)
 
-    def predict(self,
-                n_periods=10,
-                X=None,
-                return_conf_int=False,
-                alpha=0.05,
-                inverse_transform=True,
-                **kwargs):
+    def predict(
+        self,
+        n_periods=10,
+        X=None,
+        return_conf_int=False,
+        alpha=0.05,
+        inverse_transform=True,
+        **kwargs,
+    ):
         """Forecast future (transformed) values
 
         Generate predictions (forecasts) ``n_periods`` in the future.
@@ -440,24 +449,19 @@ class Pipeline(BaseEstimator):
         """
         n_periods = self._check_n_periods(n_periods, X)
         kwargs = _warn_for_deprecated(**kwargs)
-        Xt, est, predict_kwargs = self._pre_predict(
-            n_periods, X, **kwargs)
+        Xt, est, predict_kwargs = self._pre_predict(n_periods, X, **kwargs)
 
         return_vals = est.predict(
             n_periods=n_periods,
             X=Xt,
             return_conf_int=return_conf_int,
             alpha=alpha,
-            **predict_kwargs)
+            **predict_kwargs,
+        )
 
-        return self._post_predict(
-            Xt, return_vals, return_conf_int, inverse_transform)
+        return self._post_predict(Xt, return_vals, return_conf_int, inverse_transform)
 
-    def _post_predict(self,
-                      Xt,
-                      return_vals,
-                      return_conf_int,
-                      inverse_transform):
+    def _post_predict(self, Xt, return_vals, return_conf_int, inverse_transform):
         """Inverse-transform predictions to original data scale"""
 
         if not inverse_transform:
@@ -475,16 +479,14 @@ class Pipeline(BaseEstimator):
                 if return_conf_int:
                     # inverse transform of Xt is irrelevant to y
                     # so only transform it once
-                    conf_ints[:, 0], _ = transformer.inverse_transform(
-                        conf_ints[:, 0], Xt)
-                    conf_ints[:, 1], _ = transformer.inverse_transform(
-                        conf_ints[:, 1], Xt)
+                    conf_ints[:, 0], _ = transformer.inverse_transform(conf_ints[:, 0], Xt)
+                    conf_ints[:, 1], _ = transformer.inverse_transform(conf_ints[:, 1], Xt)
 
         if return_conf_int:
             return y_pred, conf_ints
         return y_pred
 
-    @if_delegate_has_method('_final_estimator')
+    @if_delegate_has_method("_final_estimator")
     def summary(self):
         """Get a summary of the ARIMA model"""
         return self._final_estimator.summary()
@@ -530,8 +532,7 @@ class Pipeline(BaseEstimator):
         for step_idx, name, transformer in self._iter(with_final=False):
             kw = named_kwargs[name]
             if hasattr(transformer, "update_and_transform"):
-                yt, Xt = transformer.update_and_transform(
-                    y=yt, X=Xt, **kw)
+                yt, Xt = transformer.update_and_transform(y=yt, X=Xt, **kw)
             else:
                 yt, Xt = transformer.transform(yt, Xt, **kw)
 
@@ -540,5 +541,4 @@ class Pipeline(BaseEstimator):
 
         # Now we can update the arima
         nm, est = self.steps_[-1]
-        return est.update(
-            yt, X=Xt, maxiter=maxiter, **named_kwargs[nm])
+        return est.update(yt, X=Xt, maxiter=maxiter, **named_kwargs[nm])

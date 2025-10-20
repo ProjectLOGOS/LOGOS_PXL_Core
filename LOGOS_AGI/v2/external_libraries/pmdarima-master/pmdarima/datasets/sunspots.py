@@ -13,9 +13,7 @@ import calendar
 from ..compat import DTYPE
 from . import _base as base
 
-__all__ = [
-    'load_sunspots'
-]
+__all__ = ["load_sunspots"]
 
 
 def load_sunspots(as_series=False, dtype=DTYPE):
@@ -63,11 +61,11 @@ def load_sunspots(as_series=False, dtype=DTYPE):
     rslt : array-like, shape=(n_samples,)
         The sunspots dataset. There are 2820 observations.
     """  # noqa: E501
-    rslt = base._cache.get('sunspots', None)
+    rslt = base._cache.get("sunspots", None)
     if rslt is None:
-        data_path = join(base.get_data_path(), 'sunspots.txt.gz')
+        data_path = join(base.get_data_path(), "sunspots.txt.gz")
         rslt = np.loadtxt(data_path).ravel()
-        base._cache['sunspots'] = rslt
+        base._cache["sunspots"] = rslt
 
     # don't want to cache type conversion
     rslt = rslt.astype(dtype)

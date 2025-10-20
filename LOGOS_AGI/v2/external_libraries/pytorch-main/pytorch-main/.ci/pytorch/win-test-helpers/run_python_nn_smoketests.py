@@ -45,9 +45,7 @@ if __name__ == "__main__":
         try:
             subprocess.check_call(command_args)
         except subprocess.CalledProcessError as e:
-            sdk_root = os.environ.get(
-                "WindowsSdkDir", "C:\\Program Files (x86)\\Windows Kits\\10"
-            )
+            sdk_root = os.environ.get("WindowsSdkDir", "C:\\Program Files (x86)\\Windows Kits\\10")
             debugger = os.path.join(sdk_root, "Debuggers", "x64", "cdb.exe")
             if os.path.exists(debugger):
                 command_args = [debugger, "-o", "-c", "~*g; q"] + command_args

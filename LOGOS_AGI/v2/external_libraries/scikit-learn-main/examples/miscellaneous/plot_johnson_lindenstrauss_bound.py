@@ -130,10 +130,7 @@ else:
 # - 1D histogram of the ratio of those distances (projected / original).
 
 n_samples, n_features = data.shape
-print(
-    f"Embedding {n_samples} samples with dim {n_features} using various "
-    "random projections"
-)
+print(f"Embedding {n_samples} samples with dim {n_features} using various " "random projections")
 
 n_components_range = np.array([300, 1_000, 10_000])
 dists = euclidean_distances(data, squared=True).ravel()

@@ -1396,7 +1396,9 @@ class TestMvNormalCov(BaseTestDistributionRandom):
         "mean": np.array([1.0, 2.0]),
         "cov": np.array([[2.0, 0.0], [0.0, 3.5]]),
     }
-    reference_dist = lambda self: ft.partial(self.mvnormal_rng_fn, rng=self.get_random_state())  # noqa: E731
+    reference_dist = lambda self: ft.partial(
+        self.mvnormal_rng_fn, rng=self.get_random_state()
+    )  # noqa: E731
 
     checks_to_run = [
         "check_pymc_params_match_rv_op",
@@ -1521,14 +1523,14 @@ class TestZeroSumNormal:
     def assert_zerosum_axes(self, random_samples, axes_to_check, check_zerosum_axes=True):
         if check_zerosum_axes:
             for ax in axes_to_check:
-                assert np.allclose(random_samples.mean(axis=ax), 0), (
-                    f"{ax} is a zerosum_axis but is not summing to 0 across all samples."
-                )
+                assert np.allclose(
+                    random_samples.mean(axis=ax), 0
+                ), f"{ax} is a zerosum_axis but is not summing to 0 across all samples."
         else:
             for ax in axes_to_check:
-                assert not np.allclose(random_samples.mean(axis=ax), 0), (
-                    f"{ax} is not a zerosum_axis, but is nonetheless summing to 0 across all samples."
-                )
+                assert not np.allclose(
+                    random_samples.mean(axis=ax), 0
+                ), f"{ax} is not a zerosum_axis, but is nonetheless summing to 0 across all samples."
 
     @pytest.mark.parametrize(
         "dims, n_zerosum_axes",
@@ -1790,7 +1792,9 @@ class TestMvStudentTCov(BaseTestDistributionRandom):
         "mu": np.array([1.0, 2.0]),
         "scale": np.array([[2.0, 0.0], [0.0, 3.5]]),
     }
-    reference_dist = lambda self: ft.partial(self.mvstudentt_rng_fn, rng=self.get_random_state())  # noqa: E731
+    reference_dist = lambda self: ft.partial(
+        self.mvstudentt_rng_fn, rng=self.get_random_state()
+    )  # noqa: E731
     checks_to_run = [
         "check_pymc_params_match_rv_op",
         "check_pymc_draws_match_reference",
@@ -1993,7 +1997,9 @@ class TestWishart(BaseTestDistributionRandom):
         (1, 3, 3),
         (4, 5, 3, 3),
     ]
-    reference_dist = lambda self: ft.partial(self.wishart_rng_fn, rng=self.get_random_state())  # noqa: E731
+    reference_dist = lambda self: ft.partial(
+        self.wishart_rng_fn, rng=self.get_random_state()
+    )  # noqa: E731
     checks_to_run = [
         "check_rv_size",
         "check_pymc_params_match_rv_op",
@@ -2124,7 +2130,9 @@ class TestKroneckerNormal(BaseTestDistributionRandom):
     sizes_to_check = [None, (), 1, (1,), 5, (4, 5), (2, 4, 2)]
     sizes_expected = [(N,), (N,), (1, N), (1, N), (5, N), (4, 5, N), (2, 4, 2, N)]
 
-    reference_dist = lambda self: ft.partial(self.kronecker_rng_fn, rng=self.get_random_state())  # noqa: E731
+    reference_dist = lambda self: ft.partial(
+        self.kronecker_rng_fn, rng=self.get_random_state()
+    )  # noqa: E731
     checks_to_run = [
         "check_pymc_draws_match_reference",
         "check_rv_size",

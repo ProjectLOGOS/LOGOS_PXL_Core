@@ -12,9 +12,7 @@ class UndirectedGraphAtlasSevenNodesConnected:
     param_names = ["edge_weights"]
 
     def setup(self, edge_weights):
-        connected_sevens = [
-            G for G in nx.graph_atlas_g() if (len(G) == 7) and nx.is_connected(G)
-        ]
+        connected_sevens = [G for G in nx.graph_atlas_g() if (len(G) == 7) and nx.is_connected(G)]
 
         match edge_weights:
             case "uniform":
@@ -30,9 +28,7 @@ class UndirectedGraphAtlasSevenNodesConnected:
                     )
             case "increasing":
                 for G in connected_sevens:
-                    nx.set_edge_attributes(
-                        G, {e: max(e) for e in G.edges}, name="weight"
-                    )
+                    nx.set_edge_attributes(G, {e: max(e) for e in G.edges}, name="weight")
             case _:
                 pass  # Default case ("unweighted")
 

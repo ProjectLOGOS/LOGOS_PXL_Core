@@ -78,9 +78,7 @@ def get_task_functorch(task: str) -> Callable:
     def hvp(model, inp, v=None, strict=None):
         assert v is not None
         argnums = tuple(range(len(inp)))
-        _, hvp_out, aux = ft.jvp(
-            ft.grad_and_value(model, argnums), inp, v, has_aux=True
-        )
+        _, hvp_out, aux = ft.jvp(ft.grad_and_value(model, argnums), inp, v, has_aux=True)
         return aux, hvp_out
 
     @torch.no_grad()
@@ -267,9 +265,7 @@ def main():
         default=-2,
         help="GPU to use, -1 for CPU and -2 for auto-detect",
     )
-    parser.add_argument(
-        "--run-slow-tasks", action="store_true", help="Run even the slow tasks"
-    )
+    parser.add_argument("--run-slow-tasks", action="store_true", help="Run even the slow tasks")
     parser.add_argument(
         "--model-filter",
         type=str,
@@ -316,9 +312,7 @@ def main():
 
             if has_functorch:
                 try:
-                    runtimes = run_model(
-                        model_getter, args, task, run_once_fn=run_once_functorch
-                    )
+                    runtimes = run_model(model_getter, args, task, run_once_fn=run_once_functorch)
                 except RuntimeError as e:
                     print(
                         f"Failed model using Functorch: {name}, task: {task}, Error message: \n\t",

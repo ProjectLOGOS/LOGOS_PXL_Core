@@ -30,7 +30,7 @@ class PersistenceManager:
             try:
                 conn = self._get_connection()
                 cursor = conn.cursor()
-                
+
                 # Example table: A generic log for all system events/data
                 # We store data as a JSON blob for maximum flexibility in this prototype stage.
                 cursor.execute('''
@@ -41,7 +41,7 @@ class PersistenceManager:
                         log_data TEXT NOT NULL
                     )
                 ''')
-                
+
                 # Example table: Goals
                 cursor.execute('''
                     CREATE TABLE IF NOT EXISTS goals (
@@ -70,7 +70,7 @@ class PersistenceManager:
             conn = self._get_connection()
             try:
                 cursor = conn.cursor()
-                
+
                 # Sanitize table_name to prevent SQL injection
                 if not table_name.isalnum():
                     raise ValueError("Invalid table name")
@@ -82,7 +82,7 @@ class PersistenceManager:
                 # Using INSERT OR REPLACE for simplicity (requires a PRIMARY KEY in the data)
                 # A more robust solution would use INSERT... ON CONFLICT DO UPDATE
                 sql = f"INSERT OR REPLACE INTO {table_name} ({columns}) VALUES ({placeholders})"
-                
+
                 cursor.execute(sql, values)
                 conn.commit()
                 logging.info(f"Successfully saved data to table '{table_name}'.")
@@ -92,7 +92,7 @@ class PersistenceManager:
                 conn.rollback()
             finally:
                 conn.close()
-                
+
     def find(self, table_name, query_dict, limit=1):
         """
         Finds records in a table based on a query dictionary.
@@ -109,14 +109,14 @@ class PersistenceManager:
 
                 query_clauses = ' AND '.join([f"{key} = ?" for key in query_dict.keys()])
                 values = list(query_dict.values())
-                
+
                 sql = f"SELECT * FROM {table_name} WHERE {query_clauses}"
                 if limit:
                     sql += f" LIMIT {int(limit)}"
-                
+
                 cursor.execute(sql, values)
                 rows = cursor.fetchall()
-                
+
                 # Convert Row objects to plain dicts
                 results = [dict(row) for row in rows]
                 return results

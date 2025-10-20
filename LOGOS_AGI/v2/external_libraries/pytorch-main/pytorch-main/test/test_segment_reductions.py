@@ -66,19 +66,16 @@ class TestSegmentReductions(TestCase):
         )
         expected_result = torch.tensor(expected_arr, device=device, dtype=dtype)
         expected_grad = torch.tensor(expected_grad_arr, device=device, dtype=dtype)
-        for mode in ['lengths', 'offsets']:
+        for mode in ["lengths", "offsets"]:
             segment_reduce_kwargs = dict(
-                axis=axis,
-                unsafe=unsafe,
-                initial=initial_value)
-            if (mode == 'lengths'):
-                segment_reduce_kwargs['lengths'] = lengths
+                axis=axis, unsafe=unsafe, initial=initial_value
+            )
+            if mode == "lengths":
+                segment_reduce_kwargs["lengths"] = lengths
             else:
-                segment_reduce_kwargs['offsets'] = offsets
+                segment_reduce_kwargs["offsets"] = offsets
             actual_result = torch._segment_reduce(
-                data=data,
-                reduce=reduction,
-                **segment_reduce_kwargs
+                data=data, reduce=reduction, **segment_reduce_kwargs
             )
             self.assertEqual(
                 expected_result, actual_result, rtol=1e-02, atol=1e-05, equal_nan=True
@@ -109,9 +106,7 @@ class TestSegmentReductions(TestCase):
                 self.assertTrue(
                     gradcheck(
                         lambda x: torch._segment_reduce(
-                            data=x,
-                            reduce=reduction,
-                            **segment_reduce_kwargs
+                            data=x, reduce=reduction, **segment_reduce_kwargs
                         ),
                         (new_data,),
                     )
@@ -150,7 +145,9 @@ class TestSegmentReductions(TestCase):
                     expected_grad = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
                 elif reduction == "prod":
                     if initial is not None:
-                        initial_value = 2  # 0 initial_value will zero out everything for prod
+                        initial_value = (
+                            2  # 0 initial_value will zero out everything for prod
+                        )
                         default_value = get_default_value(initial_value, reduction)
                         expected_result = [2, float("nan"), 200, default_value]
                         expected_grad = [2.0, 6.0, float("nan"), 50.0, 40.0, 40.0]
@@ -207,7 +204,9 @@ class TestSegmentReductions(TestCase):
                     expected_grad = []
                 elif reduction == "prod":
                     if initial is not None:
-                        initial_value = 2  # 0 initial_value will zero out everything for prod
+                        initial_value = (
+                            2  # 0 initial_value will zero out everything for prod
+                        )
                         default_value = get_default_value(initial_value, reduction)
                         expected_result = [default_value, default_value]
                         expected_grad = []
@@ -314,7 +313,9 @@ class TestSegmentReductions(TestCase):
                     ]
                 elif reduction == "prod":
                     if initial is not None:
-                        initial_value = 2  # 0 initial_value will zero out everything for prod
+                        initial_value = (
+                            2  # 0 initial_value will zero out everything for prod
+                        )
                         default_value = get_default_value(initial_value, reduction)
                         expected_result = [
                             [2, 2],
@@ -366,78 +367,86 @@ class TestSegmentReductions(TestCase):
             (torch.int, torch.int64),
         )
     )
-    @parametrize("reduce", ['sum', 'prod', 'min', 'max', 'mean'])
+    @parametrize("reduce", ["sum", "prod", "min", "max", "mean"])
     def test_pytorch_scatter_test_cases(self, device, dtypes, reduce):
         val_dtype, length_dtype = dtypes
         # zero-length segments are filled with reduction inits contrary to pytorch_scatter.
         tests = [
             {
-                'src': [1, 2, 3, 4, 5, 6],
-                'index': [0, 0, 1, 1, 1, 3],
-                'indptr': [0, 2, 5, 5, 6],
-                'sum': [3, 12, 0, 6],
-                'prod': [2, 60, 1, 6],
-                'mean': [1.5, 4, float('nan'), 6],
-                'min': [1, 3, float('inf'), 6],
-                'max': [2, 5, -float('inf'), 6],
+                "src": [1, 2, 3, 4, 5, 6],
+                "index": [0, 0, 1, 1, 1, 3],
+                "indptr": [0, 2, 5, 5, 6],
+                "sum": [3, 12, 0, 6],
+                "prod": [2, 60, 1, 6],
+                "mean": [1.5, 4, float("nan"), 6],
+                "min": [1, 3, float("inf"), 6],
+                "max": [2, 5, -float("inf"), 6],
             },
             {
-                'src': [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10], [11, 12]],
-                'index': [0, 0, 1, 1, 1, 3],
-                'indptr': [0, 2, 5, 5, 6],
-                'sum': [[4, 6], [21, 24], [0, 0], [11, 12]],
-                'prod': [[3, 8], [315, 480], [1, 1], [11, 12]],
-                'mean': [[2, 3], [7, 8], [float('nan'), float('nan')], [11, 12]],
-                'min': [[1, 2], [5, 6], [float('inf'), float('inf')], [11, 12]],
-                'max': [[3, 4], [9, 10], [-float('inf'), -float('inf')], [11, 12]],
+                "src": [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10], [11, 12]],
+                "index": [0, 0, 1, 1, 1, 3],
+                "indptr": [0, 2, 5, 5, 6],
+                "sum": [[4, 6], [21, 24], [0, 0], [11, 12]],
+                "prod": [[3, 8], [315, 480], [1, 1], [11, 12]],
+                "mean": [[2, 3], [7, 8], [float("nan"), float("nan")], [11, 12]],
+                "min": [[1, 2], [5, 6], [float("inf"), float("inf")], [11, 12]],
+                "max": [[3, 4], [9, 10], [-float("inf"), -float("inf")], [11, 12]],
             },
             {
-                'src': [[1, 3, 5, 7, 9, 11], [2, 4, 6, 8, 10, 12]],
-                'index': [[0, 0, 1, 1, 1, 3], [0, 0, 0, 1, 1, 2]],
-                'indptr': [[0, 2, 5, 5, 6], [0, 3, 5, 6, 6]],
-                'sum': [[4, 21, 0, 11], [12, 18, 12, 0]],
-                'prod': [[3, 315, 1, 11], [48, 80, 12, 1]],
-                'mean': [[2, 7, float('nan'), 11], [4, 9, 12, float('nan')]],
-                'min': [[1, 5, float('inf'), 11], [2, 8, 12, float('inf')]],
-                'max': [[3, 9, -float('inf'), 11], [6, 10, 12, -float('inf')]],
+                "src": [[1, 3, 5, 7, 9, 11], [2, 4, 6, 8, 10, 12]],
+                "index": [[0, 0, 1, 1, 1, 3], [0, 0, 0, 1, 1, 2]],
+                "indptr": [[0, 2, 5, 5, 6], [0, 3, 5, 6, 6]],
+                "sum": [[4, 21, 0, 11], [12, 18, 12, 0]],
+                "prod": [[3, 315, 1, 11], [48, 80, 12, 1]],
+                "mean": [[2, 7, float("nan"), 11], [4, 9, 12, float("nan")]],
+                "min": [[1, 5, float("inf"), 11], [2, 8, 12, float("inf")]],
+                "max": [[3, 9, -float("inf"), 11], [6, 10, 12, -float("inf")]],
             },
             {
-                'src': [[[1, 2], [3, 4], [5, 6]], [[7, 9], [10, 11], [12, 13]]],
-                'index': [[0, 0, 1], [0, 2, 2]],
-                'indptr': [[0, 2, 3, 3], [0, 1, 1, 3]],
-                'sum': [[[4, 6], [5, 6], [0, 0]], [[7, 9], [0, 0], [22, 24]]],
-                'prod': [[[3, 8], [5, 6], [1, 1]], [[7, 9], [1, 1], [120, 143]]],
-                'mean': [[[2, 3], [5, 6], [float('nan'), float('nan')]],
-                         [[7, 9], [float('nan'), float('nan')], [11, 12]]],
-                'min': [[[1, 2], [5, 6], [float('inf'), float('inf')]],
-                        [[7, 9], [float('inf'), float('inf')], [10, 11]]],
-                'max': [[[3, 4], [5, 6], [-float('inf'), -float('inf')]],
-                        [[7, 9], [-float('inf'), -float('inf')], [12, 13]]],
+                "src": [[[1, 2], [3, 4], [5, 6]], [[7, 9], [10, 11], [12, 13]]],
+                "index": [[0, 0, 1], [0, 2, 2]],
+                "indptr": [[0, 2, 3, 3], [0, 1, 1, 3]],
+                "sum": [[[4, 6], [5, 6], [0, 0]], [[7, 9], [0, 0], [22, 24]]],
+                "prod": [[[3, 8], [5, 6], [1, 1]], [[7, 9], [1, 1], [120, 143]]],
+                "mean": [
+                    [[2, 3], [5, 6], [float("nan"), float("nan")]],
+                    [[7, 9], [float("nan"), float("nan")], [11, 12]],
+                ],
+                "min": [
+                    [[1, 2], [5, 6], [float("inf"), float("inf")]],
+                    [[7, 9], [float("inf"), float("inf")], [10, 11]],
+                ],
+                "max": [
+                    [[3, 4], [5, 6], [-float("inf"), -float("inf")]],
+                    [[7, 9], [-float("inf"), -float("inf")], [12, 13]],
+                ],
             },
             {
-                'src': [[1, 3], [2, 4]],
-                'index': [[0, 0], [0, 0]],
-                'indptr': [[0, 2], [0, 2]],
-                'sum': [[4], [6]],
-                'prod': [[3], [8]],
-                'mean': [[2], [3]],
-                'min': [[1], [2]],
-                'max': [[3], [4]],
+                "src": [[1, 3], [2, 4]],
+                "index": [[0, 0], [0, 0]],
+                "indptr": [[0, 2], [0, 2]],
+                "sum": [[4], [6]],
+                "prod": [[3], [8]],
+                "mean": [[2], [3]],
+                "min": [[1], [2]],
+                "max": [[3], [4]],
             },
             {
-                'src': [[[1, 1], [3, 3]], [[2, 2], [4, 4]]],
-                'index': [[0, 0], [0, 0]],
-                'indptr': [[0, 2], [0, 2]],
-                'sum': [[[4, 4]], [[6, 6]]],
-                'prod': [[[3, 3]], [[8, 8]]],
-                'mean': [[[2, 2]], [[3, 3]]],
-                'min': [[[1, 1]], [[2, 2]]],
-                'max': [[[3, 3]], [[4, 4]]],
+                "src": [[[1, 1], [3, 3]], [[2, 2], [4, 4]]],
+                "index": [[0, 0], [0, 0]],
+                "indptr": [[0, 2], [0, 2]],
+                "sum": [[[4, 4]], [[6, 6]]],
+                "prod": [[[3, 3]], [[8, 8]]],
+                "mean": [[[2, 2]], [[3, 3]]],
+                "min": [[[1, 1]], [[2, 2]]],
+                "max": [[[3, 3]], [[4, 4]]],
             },
         ]
         for test in tests:
-            data = torch.tensor(test['src'], dtype=val_dtype, device=device, requires_grad=True)
-            indptr = torch.tensor(test['indptr'], dtype=length_dtype, device=device)
+            data = torch.tensor(
+                test["src"], dtype=val_dtype, device=device, requires_grad=True
+            )
+            indptr = torch.tensor(test["indptr"], dtype=length_dtype, device=device)
             dim = indptr.ndim - 1
             # calculate lengths from indptr
             lengths = torch.diff(indptr, dim=dim)
@@ -463,24 +472,37 @@ class TestSegmentReductions(TestCase):
             self.assertEqual(actual_result, expected)
 
             if val_dtype == torch.float64:
-                def fn(x, mode='lengths'):
+
+                def fn(x, mode="lengths"):
                     initial = 1
                     # supply initial values to prevent gradcheck from failing for 0 length segments
                     # where nan/inf are reduction identities that produce nans when calculating the numerical jacobian
-                    if reduce == 'min':
+                    if reduce == "min":
                         initial = 1000
-                    elif reduce == 'max':
+                    elif reduce == "max":
                         initial = -1000
                     segment_reduce_args = {x, reduce}
                     segment_reduce_kwargs = dict(axis=dim, unsafe=True, initial=initial)
-                    if mode == 'lengths':
+                    if mode == "lengths":
                         segment_reduce_kwargs[mode] = lengths
-                    elif mode == 'offsets':
+                    elif mode == "offsets":
                         segment_reduce_kwargs[mode] = indptr
-                    return torch._segment_reduce(*segment_reduce_args, **segment_reduce_kwargs)
-                self.assertTrue(gradcheck(partial(fn, mode='lengths'), (data.detach().clone().requires_grad_(True))))
-                self.assertTrue(gradcheck(partial(fn, mode='offsets'), (data.detach().clone().requires_grad_(True))))
+                    return torch._segment_reduce(
+                        *segment_reduce_args, **segment_reduce_kwargs
+                    )
 
+                self.assertTrue(
+                    gradcheck(
+                        partial(fn, mode="lengths"),
+                        (data.detach().clone().requires_grad_(True)),
+                    )
+                )
+                self.assertTrue(
+                    gradcheck(
+                        partial(fn, mode="offsets"),
+                        (data.detach().clone().requires_grad_(True)),
+                    )
+                )
 
     @dtypes(
         *product(
@@ -559,16 +581,22 @@ class TestSegmentReductions(TestCase):
         data = torch.arange(6, dtype=torch.float, device=device)
 
         # test for error on 1-D lengths
-        with self.assertRaisesRegex(RuntimeError, "Expected all rows of lengths along axis"):
-            torch._segment_reduce(data, 'sum', lengths=lengths, axis=0, unsafe=False)
+        with self.assertRaisesRegex(
+            RuntimeError, "Expected all rows of lengths along axis"
+        ):
+            torch._segment_reduce(data, "sum", lengths=lengths, axis=0, unsafe=False)
 
         # test for error on multi-D lengths
-        nd_lengths = torch.tensor([[0, 3, 3, 0], [2, 3, 0, 0]], dtype=length_type, device=device)
+        nd_lengths = torch.tensor(
+            [[0, 3, 3, 0], [2, 3, 0, 0]], dtype=length_type, device=device
+        )
         nd_data = torch.arange(12, dtype=torch.float, device=device).reshape(2, 6)
-        with self.assertRaisesRegex(RuntimeError, "Expected all rows of lengths along axis"):
-            torch._segment_reduce(nd_data, 'sum', lengths=nd_lengths, axis=1, unsafe=False)
-
-
+        with self.assertRaisesRegex(
+            RuntimeError, "Expected all rows of lengths along axis"
+        ):
+            torch._segment_reduce(
+                nd_data, "sum", lengths=nd_lengths, axis=1, unsafe=False
+            )
 
 
 instantiate_device_type_tests(TestSegmentReductions, globals())

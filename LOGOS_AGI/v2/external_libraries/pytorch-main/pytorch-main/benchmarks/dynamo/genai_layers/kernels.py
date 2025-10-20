@@ -130,19 +130,13 @@ class CrossEntropyBackward(BenchmarkKernel):
         x, target, dloss = args
         # Memory ba
         M, N = x.shape
-        return (
-            2 * M * N * x.dtype.itemsize
-            + M * target.dtype.itemsize
-            + M * dloss.dtype.itemsize
-        )
+        return 2 * M * N * x.dtype.itemsize + M * target.dtype.itemsize + M * dloss.dtype.itemsize
 
     def eager(self, args, kwargs=None) -> Any:
         assert kwargs is None
         x, target, dloss = args
         loss = F.cross_entropy(x, target, reduction="none")
-        return lambda: torch.autograd.grad(
-            loss, x, grad_outputs=dloss, retain_graph=True
-        )
+        return lambda: torch.autograd.grad(loss, x, grad_outputs=dloss, retain_graph=True)
 
     def compiled(self, args, kwargs=None) -> Any:
         assert kwargs is None
@@ -154,9 +148,7 @@ class CrossEntropyBackward(BenchmarkKernel):
             fullgraph=True,
         )
         loss = compiled_cross_entropy(x, target)
-        return lambda: torch.autograd.grad(
-            loss, x, grad_outputs=dloss, retain_graph=True
-        )
+        return lambda: torch.autograd.grad(loss, x, grad_outputs=dloss, retain_graph=True)
 
     def quack(self, args, kwargs=None) -> Any:
         from quack.cross_entropy import cross_entropy
@@ -164,9 +156,7 @@ class CrossEntropyBackward(BenchmarkKernel):
         assert kwargs is None
         x, target, dloss = args
         loss = cross_entropy(x, target)
-        return lambda: torch.autograd.grad(
-            loss, x, grad_outputs=dloss, retain_graph=True
-        )
+        return lambda: torch.autograd.grad(loss, x, grad_outputs=dloss, retain_graph=True)
 
     def liger(self, args, kwargs=None) -> Any:
         assert kwargs is None
@@ -175,22 +165,16 @@ class CrossEntropyBackward(BenchmarkKernel):
         x, target, dloss = args
         cross_entropy = LigerCrossEntropyLoss(reduction="none")
         loss = cross_entropy(x, target)
-        return lambda: torch.autograd.grad(
-            loss, x, grad_outputs=dloss, retain_graph=True
-        )
+        return lambda: torch.autograd.grad(loss, x, grad_outputs=dloss, retain_graph=True)
 
     def benchmark(self):
         for M, N in self.get_shapes():
             print(f"Tensor dimensions: [{M}, {N}]")
             torch_dtype = cutlass_torch.dtype(cutlass.BFloat16)
-            x = 0.1 * torch.randn(
-                M, N, device="cuda", dtype=torch_dtype, requires_grad=True
-            )
+            x = 0.1 * torch.randn(M, N, device="cuda", dtype=torch_dtype, requires_grad=True)
             target = torch.randint(0, N, (M,), device="cuda", dtype=torch.int64)
             dloss = torch.randn(M, device="cuda", dtype=torch.float32)
-            self.benchmark_single_shape(
-                (x, target, dloss), setting=f"shape: [{M}, {N}]"
-            )
+            self.benchmark_single_shape((x, target, dloss), setting=f"shape: [{M}, {N}]")
 
 
 class SoftmaxForward(BenchmarkKernel):
@@ -321,9 +305,7 @@ class SoftmaxBackward(BenchmarkKernel):
         for M, N in self.get_shapes():
             print(f"Tensor dimensions: [{M}, {N}]")
             torch_dtype = cutlass_torch.dtype(cutlass.BFloat16)
-            x = 0.1 * torch.randn(
-                M, N, device="cuda", dtype=torch_dtype, requires_grad=True
-            )
+            x = 0.1 * torch.randn(M, N, device="cuda", dtype=torch_dtype, requires_grad=True)
             dy = torch.randn(M, N, device="cuda", dtype=torch_dtype)
             self.benchmark_single_shape((x, dy), setting=f"shape: [{M}, {N}]")
 
@@ -356,9 +338,7 @@ class RMSNormForward(BenchmarkKernel):
     def rms_norm_ref(self, x, w):
         x_f32 = x.float()
         return (
-            x_f32
-            * torch.rsqrt(torch.mean(x_f32.square(), dim=-1, keepdim=True) + 1e-6)
-            * w
+            x_f32 * torch.rsqrt(torch.mean(x_f32.square(), dim=-1, keepdim=True) + 1e-6) * w
         ).to(x.dtype)
 
     def eager(self, args, kwargs=None) -> Any:
@@ -373,9 +353,7 @@ class RMSNormForward(BenchmarkKernel):
         # Mark batch size as dynamic for realistic workload
         torch._dynamo.mark_dynamic(x, 0)
 
-        compiled_rms_norm = torch.compile(
-            self.rms_norm_ref, mode=self.compile_mode, fullgraph=True
-        )
+        compiled_rms_norm = torch.compile(self.rms_norm_ref, mode=self.compile_mode, fullgraph=True)
         return lambda: compiled_rms_norm(x, w)
 
     def quack(self, args, kwargs=None) -> Any:
@@ -431,28 +409,20 @@ class RMSNormBackward(BenchmarkKernel):
     def rms_norm_ref(self, x, w):
         x_f32 = x.float()
         return (
-            x_f32
-            * torch.rsqrt(torch.mean(x_f32.square(), dim=-1, keepdim=True) + 1e-6)
-            * w
+            x_f32 * torch.rsqrt(torch.mean(x_f32.square(), dim=-1, keepdim=True) + 1e-6) * w
         ).to(x.dtype)
 
     def eager(self, args, kwargs=None) -> Any:
         assert kwargs is None
         x, w, dy = args
         y = self.rms_norm_ref(x, w)
-        return lambda: torch.autograd.grad(
-            y, [x, w], grad_outputs=dy, retain_graph=True
-        )
+        return lambda: torch.autograd.grad(y, [x, w], grad_outputs=dy, retain_graph=True)
 
     def compiled(self, args, kwargs=None) -> Any:
         assert kwargs is None
         x, w, dy = args
-        y = torch.compile(self.rms_norm_ref, mode=self.compile_mode, fullgraph=True)(
-            x, w
-        )
-        return lambda: torch.autograd.grad(
-            y, [x, w], grad_outputs=dy, retain_graph=True
-        )
+        y = torch.compile(self.rms_norm_ref, mode=self.compile_mode, fullgraph=True)(x, w)
+        return lambda: torch.autograd.grad(y, [x, w], grad_outputs=dy, retain_graph=True)
 
     def quack(self, args, kwargs=None) -> Any:
         from quack.rmsnorm import _rmsnorm_backward
@@ -548,9 +518,7 @@ class LayerNormForward(BenchmarkKernel):
         M, N = x.shape
         liger_layernorm = LigerLayerNorm(hidden_size=N, eps=1e-6).cuda()
         liger_layernorm.weight.data.copy_(w)
-        liger_layernorm.bias.data.copy_(
-            torch.zeros(N, device="cuda", dtype=torch.float32)
-        )
+        liger_layernorm.bias.data.copy_(torch.zeros(N, device="cuda", dtype=torch.float32))
         return lambda: liger_layernorm(x)
 
     def benchmark(self):
@@ -585,11 +553,7 @@ class LayerNormBackward(BenchmarkKernel):
         x, w, dy = args
         M, N = x.shape
         # Read x ([M, N]), w ([N]), dy ([M, N]), write dx ([M, N]), dw ([N])
-        return (
-            2 * M * N * x.dtype.itemsize
-            + 2 * N * w.dtype.itemsize
-            + M * N * dy.dtype.itemsize
-        )
+        return 2 * M * N * x.dtype.itemsize + 2 * N * w.dtype.itemsize + M * N * dy.dtype.itemsize
 
     def layernorm_ref(self, x: torch.Tensor, w: torch.Tensor, eps: float = 1e-6):
         x_f32 = x.float()
@@ -599,9 +563,7 @@ class LayerNormBackward(BenchmarkKernel):
         assert kwargs is None
         x, w, dy = args
         y = self.layernorm_ref(x, w)
-        return lambda: torch.autograd.grad(
-            y, [x, w], grad_outputs=dy, retain_graph=True
-        )
+        return lambda: torch.autograd.grad(y, [x, w], grad_outputs=dy, retain_graph=True)
 
     def compiled(self, args, kwargs=None) -> Any:
         assert kwargs is None
@@ -610,9 +572,7 @@ class LayerNormBackward(BenchmarkKernel):
             self.layernorm_ref, mode=self.compile_mode, fullgraph=True
         )
         y = compiled_layernorm(x, w)
-        return lambda: torch.autograd.grad(
-            y, [x, w], grad_outputs=dy, retain_graph=True
-        )
+        return lambda: torch.autograd.grad(y, [x, w], grad_outputs=dy, retain_graph=True)
 
     def liger(self, args, kwargs) -> Any:
         from liger_kernel.transformers.layer_norm import LigerLayerNorm
@@ -621,9 +581,7 @@ class LayerNormBackward(BenchmarkKernel):
         M, N = x.shape
         liger_layernorm = LigerLayerNorm(hidden_size=N, eps=1e-6).cuda()
         liger_layernorm.weight.data.copy_(w)
-        liger_layernorm.bias.data.copy_(
-            torch.zeros(N, device="cuda", dtype=torch.float32)
-        )
+        liger_layernorm.bias.data.copy_(torch.zeros(N, device="cuda", dtype=torch.float32))
         y = liger_layernorm(x)
         return lambda: torch.autograd.grad(
             y, [x, liger_layernorm.weight], grad_outputs=dy, retain_graph=True

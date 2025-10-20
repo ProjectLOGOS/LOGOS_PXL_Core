@@ -156,9 +156,7 @@ class PyTorchVAEImpl(VAE):
     def compute_loss_and_gradient(self, x):
         self.optimizer.zero_grad()
         recon_x, z_mean, z_var = self.model_eval(x)
-        binary_cross_entropy = functional.binary_cross_entropy(
-            recon_x, x.reshape(-1, 784)
-        )
+        binary_cross_entropy = functional.binary_cross_entropy(recon_x, x.reshape(-1, 784))
         # Uses analytical KL divergence expression for D_kl(q(z|x) || p(z))
         # Refer to Appendix B from VAE paper:
         # Kingma and Welling. Auto-Encoding Variational Bayes. ICLR, 2014
@@ -172,9 +170,7 @@ class PyTorchVAEImpl(VAE):
         return loss.item()
 
     def initialize_optimizer(self, lr=1e-3):
-        model_params = itertools.chain(
-            self.vae_encoder.parameters(), self.vae_decoder.parameters()
-        )
+        model_params = itertools.chain(self.vae_encoder.parameters(), self.vae_decoder.parameters())
         return torch.optim.Adam(model_params, lr)
 
 

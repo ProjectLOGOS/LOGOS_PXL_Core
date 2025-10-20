@@ -107,9 +107,7 @@ def bench_k_means(kmeans, name, data, labels):
     ]
 
     # Show the results
-    formatter_result = (
-        "{:9s}\t{:.3f}s\t{:.0f}\t{:.3f}\t{:.3f}\t{:.3f}\t{:.3f}\t{:.3f}\t{:.3f}"
-    )
+    formatter_result = "{:9s}\t{:.3f}s\t{:.0f}\t{:.3f}\t{:.3f}\t{:.3f}\t{:.3f}\t{:.3f}\t{:.3f}"
     print(formatter_result.format(*results))
 
 

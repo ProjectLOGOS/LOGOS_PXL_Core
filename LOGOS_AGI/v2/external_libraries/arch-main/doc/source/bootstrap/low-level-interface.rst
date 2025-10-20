@@ -75,4 +75,3 @@ bootstrap iterator.
         xstar = pos[0]  # pos is always a tuple, even when a singleton
         ystar = kw['y']  # A dictionary
         zstar = kw['z']  # A dictionary
-

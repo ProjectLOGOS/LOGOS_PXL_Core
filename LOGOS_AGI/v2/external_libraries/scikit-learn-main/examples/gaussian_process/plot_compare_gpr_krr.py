@@ -132,9 +132,7 @@ kernel_ridge = KernelRidge(kernel=ExpSineSquared())
 
 start_time = time.time()
 kernel_ridge.fit(training_data, training_noisy_target)
-print(
-    f"Fitting KernelRidge with default kernel: {time.time() - start_time:.3f} seconds"
-)
+print(f"Fitting KernelRidge with default kernel: {time.time() - start_time:.3f} seconds")
 
 # %%
 plt.plot(data, target, label="True signal", linewidth=2, linestyle="dashed")
@@ -250,15 +248,11 @@ _ = plt.title(
 from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.gaussian_process.kernels import WhiteKernel
 
-kernel = 1.0 * ExpSineSquared(1.0, 5.0, periodicity_bounds=(1e-2, 1e1)) + WhiteKernel(
-    1e-1
-)
+kernel = 1.0 * ExpSineSquared(1.0, 5.0, periodicity_bounds=(1e-2, 1e1)) + WhiteKernel(1e-1)
 gaussian_process = GaussianProcessRegressor(kernel=kernel)
 start_time = time.time()
 gaussian_process.fit(training_data, training_noisy_target)
-print(
-    f"Time for GaussianProcessRegressor fitting: {time.time() - start_time:.3f} seconds"
-)
+print(f"Time for GaussianProcessRegressor fitting: {time.time() - start_time:.3f} seconds")
 
 # %%
 # The computation cost of training a Gaussian process is much less than the
@@ -276,9 +270,7 @@ mean_predictions_gpr, std_predictions_gpr = gaussian_process.predict(
     data,
     return_std=True,
 )
-print(
-    f"Time for GaussianProcessRegressor predict: {time.time() - start_time:.3f} seconds"
-)
+print(f"Time for GaussianProcessRegressor predict: {time.time() - start_time:.3f} seconds")
 
 # %%
 plt.plot(data, target, label="True signal", linewidth=2, linestyle="dashed")

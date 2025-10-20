@@ -112,9 +112,7 @@ def plot_on_dataset(X, y, ax, name):
         # some parameter combinations will not converge as can be seen on the
         # plots so they are ignored here
         with warnings.catch_warnings():
-            warnings.filterwarnings(
-                "ignore", category=ConvergenceWarning, module="sklearn"
-            )
+            warnings.filterwarnings("ignore", category=ConvergenceWarning, module="sklearn")
             mlp.fit(X, y)
 
         mlps.append(mlp)
@@ -135,9 +133,7 @@ data_sets = [
     datasets.make_moons(noise=0.3, random_state=0),
 ]
 
-for ax, data, name in zip(
-    axes.ravel(), data_sets, ["iris", "digits", "circles", "moons"]
-):
+for ax, data, name in zip(axes.ravel(), data_sets, ["iris", "digits", "circles", "moons"]):
     plot_on_dataset(*data, ax=ax, name=name)
 
 fig.legend(ax.get_lines(), labels, ncol=3, loc="upper center")

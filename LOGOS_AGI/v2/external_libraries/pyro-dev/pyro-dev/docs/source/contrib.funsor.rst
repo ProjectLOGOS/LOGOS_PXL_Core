@@ -70,4 +70,3 @@ Inference algorithms
     :undoc-members:
     :show-inheritance:
     :member-order: bysource
-

@@ -18,9 +18,7 @@ from statsmodels import api as sm
 from . import _validation as val
 from ..base import BaseARIMA
 from ..compat.numpy import DTYPE  # DTYPE for arrays
-from ..compat.sklearn import (
-    check_is_fitted, if_delegate_has_method, safe_indexing
-)
+from ..compat.sklearn import check_is_fitted, if_delegate_has_method, safe_indexing
 from ..compat import statsmodels as sm_compat
 from ..compat import matplotlib as mpl_compat
 from ..utils import if_has_delegate, is_iterable, check_endog, check_exog
@@ -30,10 +28,7 @@ from ..utils.array import diff_inv, diff
 # Get the version
 import pmdarima
 
-__all__ = [
-    'ARIMA',
-    'ARMAtoMA'
-]
+__all__ = ["ARIMA", "ARMAtoMA"]
 
 
 def ARMAtoMA(ar, ma, max_deg):
@@ -120,7 +115,7 @@ def _aicc(model_results, nobs, add_constant):
     df_model = model_results.df_model
     if add_constant:
         add_constant += 1  # add one for constant term
-    return aic + 2. * df_model * (nobs / (nobs - df_model - 1.) - 1.)
+    return aic + 2.0 * df_model * (nobs / (nobs - df_model - 1.0) - 1.0)
 
 
 def _append_to_endog(endog, new_y):
@@ -134,9 +129,11 @@ def _append_to_endog(endog, new_y):
     new_y : np.ndarray, shape=(n_samples)
         The new endogenous array to append
     """
-    return np.concatenate((endog, new_y)) if \
-        endog.ndim == 1 else \
-        np.concatenate((endog.ravel(), new_y))[:, np.newaxis]
+    return (
+        np.concatenate((endog, new_y))
+        if endog.ndim == 1
+        else np.concatenate((endog.ravel(), new_y))[:, np.newaxis]
+    )
 
 
 def _seasonal_prediction_with_confidence(
@@ -157,15 +154,11 @@ def _seasonal_prediction_with_confidence(
     -----
     For internal use only.
     """
-    results = arima_res.get_prediction(
-        start=start,
-        end=end,
-        exog=X,
-        **kwargs)
+    results = arima_res.get_prediction(start=start, end=end, exog=X, **kwargs)
 
     f = results.predicted_mean
     conf_int = results.conf_int(alpha=alpha)
-    if arima_res.specification['simple_differencing']:
+    if arima_res.specification["simple_differencing"]:
         # If simple_differencing == True, statsmodels.get_prediction returns
         # mid and confidence intervals on differenced time series.
         # We have to invert differencing the mid and confidence intervals
@@ -178,26 +171,26 @@ def _seasonal_prediction_with_confidence(
             y_sdiff = y_org if D == 0 else diff(y_org, period, D)
             f_temp = np.append(y_sdiff[-d:], f)
             f_temp = diff_inv(f_temp, 1, d)
-            f = f_temp[(2 * d):]
+            f = f_temp[(2 * d) :]
         # Forecast mid: undifferencing seasonal part
         if D > 0 and period > 1:
-            f_temp = np.append(y_org[-(D * period):], f)
+            f_temp = np.append(y_org[-(D * period) :], f)
             f_temp = diff_inv(f_temp, period, D)
-            f = f_temp[(2 * D * period):]
+            f = f_temp[(2 * D * period) :]
         # confidence interval
         ar_poly = arima_res.polynomial_reduced_ar
-        poly_diff = np_polynomial.polypow(np.array([1., -1.]), d)
+        poly_diff = np_polynomial.polypow(np.array([1.0, -1.0]), d)
         sdiff = np.zeros(period + 1)
-        sdiff[0] = 1.
-        sdiff[-1] = 1.
+        sdiff[0] = 1.0
+        sdiff[-1] = 1.0
         poly_sdiff = np_polynomial.polypow(sdiff, D)
         ar = -np.polymul(ar_poly, np.polymul(poly_diff, poly_sdiff))[1:]
         ma = arima_res.polynomial_reduced_ma[1:]
         n_predMinus1 = end - start
         ema = ARMAtoMA(ar, ma, n_predMinus1)
         sigma2 = arima_res._params_variance[0]
-        var = np.cumsum(np.append(1., ema * ema)) * sigma2
-        q = results.dist.ppf(1. - alpha / 2, *results.dist_args)
+        var = np.cumsum(np.append(1.0, ema * ema)) * sigma2
+        q = results.dist.ppf(1.0 - alpha / 2, *results.dist_args)
         conf_int[:, 0] = f - q * np.sqrt(var)
         conf_int[:, 1] = f + q * np.sqrt(var)
 
@@ -417,22 +410,22 @@ class ARIMA(BaseARIMA):
     ----------
     .. [1] https://wikipedia.org/wiki/Autoregressive_integrated_moving_average
     """  # noqa: E501
+
     def __init__(
         self,
         order,
         seasonal_order=(0, 0, 0, 0),
         start_params=None,
-        method='lbfgs',
+        method="lbfgs",
         maxiter=50,
         suppress_warnings=False,
         out_of_sample_size=0,
-        scoring='mse',
+        scoring="mse",
         scoring_args=None,
         trend=None,
         with_intercept=True,
         **sarimax_kwargs,
     ):
-
         # Future proofing: this isn't currently required--sklearn doesn't
         # need a super call
         super(ARIMA, self).__init__()
@@ -451,13 +444,16 @@ class ARIMA(BaseARIMA):
 
         # TODO: Remove these warnings in a later version
         for deprecated_key, still_in_use in (
-                ('disp', True),
-                ('callback', True),
-                ('transparams', False),
-                ('solver', False)):
+            ("disp", True),
+            ("callback", True),
+            ("transparams", False),
+            ("solver", False),
+        ):
             if sarimax_kwargs.pop(deprecated_key, None):
-                msg = ("'%s' is deprecated in the ARIMA constructor and will "
-                       "be removed in a future release." % deprecated_key)
+                msg = (
+                    "'%s' is deprecated in the ARIMA constructor and will "
+                    "be removed in a future release." % deprecated_key
+                )
                 if still_in_use:
                     msg += " Pass via **fit_kwargs instead"
                 warnings.warn(msg, DeprecationWarning)
@@ -479,18 +475,19 @@ class ARIMA(BaseARIMA):
             # here without explicitly changing `with_intercept` from 'auto' we
             # will treat it as True.
             if trend is None and self.with_intercept:
-                trend = 'c'
+                trend = "c"
 
             # create the SARIMAX
-            sarimax_kwargs = \
-                {} if not self.sarimax_kwargs else self.sarimax_kwargs
-            seasonal_order = \
-                sm_compat.check_seasonal_order(self.seasonal_order)
+            sarimax_kwargs = {} if not self.sarimax_kwargs else self.sarimax_kwargs
+            seasonal_order = sm_compat.check_seasonal_order(self.seasonal_order)
             arima = sm.tsa.statespace.SARIMAX(
-                endog=y, exog=X, order=self.order,
+                endog=y,
+                exog=X,
+                order=self.order,
                 seasonal_order=seasonal_order,
                 trend=trend,
-                **sarimax_kwargs)
+                **sarimax_kwargs,
+            )
 
             # actually fit the model, now. If this was called from 'update',
             # give priority to start_params from the fit_args
@@ -520,7 +517,7 @@ class ARIMA(BaseARIMA):
         # sometimes too many warnings...
         if self.suppress_warnings:
             with warnings.catch_warnings(record=False):
-                warnings.simplefilter('ignore')
+                warnings.simplefilter("ignore")
                 fit, self.arima_res_ = _fit_wrapper()
         else:
             fit, self.arima_res_ = _fit_wrapper()
@@ -582,8 +579,7 @@ class ARIMA(BaseARIMA):
 
         # if cv is too big, raise
         if cv >= n_samples:
-            raise ValueError("out-of-sample size must be less than number "
-                             "of samples!")
+            raise ValueError("out-of-sample size must be less than number " "of samples!")
 
         # If we want to get a score on the out-of-sample, we need to trim
         # down the size of our y vec for fitting. Addressed due to Issue #28
@@ -626,9 +622,11 @@ class ARIMA(BaseARIMA):
         # if we fit with exog, make sure one was passed, or else fail out:
         if self.fit_with_exog_:
             if X is None:
-                raise ValueError('When an ARIMA is fit with an X '
-                                 'array, it must also be provided one for '
-                                 'predicting or updating observations.')
+                raise ValueError(
+                    "When an ARIMA is fit with an X "
+                    "array, it must also be provided one for "
+                    "predicting or updating observations."
+                )
             else:
                 return check_exog(X, force_all_finite=True, dtype=DTYPE)
         return None
@@ -694,16 +692,14 @@ class ARIMA(BaseARIMA):
             The confidence intervals for the predictions. Only returned if
             ``return_conf_int`` is True.
         """
-        check_is_fitted(self, 'arima_res_')
+        check_is_fitted(self, "arima_res_")
 
         # issue #499: support prediction with non-integer start/end indices
         # issue #286: we can't produce valid preds for start < diff value
         # we can only do the validation for issue 286 if `start` is an int
         d = self.order[1]
         if isinstance(start, numbers.Integral) and start < d:
-            raise ValueError(
-                f"In-sample predictions undefined for start={start} when d={d}"
-            )
+            raise ValueError(f"In-sample predictions undefined for start={start} when d={d}")
 
         # if we fit with exog, make sure one was passed:
         X = self._check_exog(X)  # type: np.ndarray
@@ -722,8 +718,10 @@ class ARIMA(BaseARIMA):
 
         # We cannot get confidence intervals if dynamic is true
         if dynamic:
-            warnings.warn("Cannot produce in-sample confidence intervals for "
-                          "dynamic=True. Setting dynamic=False")
+            warnings.warn(
+                "Cannot produce in-sample confidence intervals for "
+                "dynamic=True. Setting dynamic=False"
+            )
             dynamic = False
 
         # Otherwise confidence intervals are requested...
@@ -738,12 +736,9 @@ class ARIMA(BaseARIMA):
 
         return preds, conf_int
 
-    def predict(self,
-                n_periods=10,
-                X=None,
-                return_conf_int=False,
-                alpha=0.05,
-                **kwargs):  # TODO: remove kwargs after exog disappears
+    def predict(
+        self, n_periods=10, X=None, return_conf_int=False, alpha=0.05, **kwargs
+    ):  # TODO: remove kwargs after exog disappears
         """Forecast future values
 
         Generate predictions (forecasts) ``n_periods`` in the future.
@@ -777,7 +772,7 @@ class ARIMA(BaseARIMA):
             The confidence intervals for the forecasts. Only returned if
             ``return_conf_int`` is True.
         """
-        check_is_fitted(self, 'arima_res_')
+        check_is_fitted(self, "arima_res_")
         if not isinstance(n_periods, int):
             raise TypeError("n_periods must be an int")
 
@@ -785,8 +780,8 @@ class ARIMA(BaseARIMA):
         X = self._check_exog(X)  # type: np.ndarray
         if X is not None and X.shape[0] != n_periods:
             raise ValueError(
-                f'X array dims (n_rows) != n_periods. Received '
-                f'n_rows={X.shape[0]} and n_periods={n_periods}'
+                f"X array dims (n_rows) != n_periods. Received "
+                f"n_rows={X.shape[0]} and n_periods={n_periods}"
             )
 
         # f = self.arima_res_.forecast(steps=n_periods, exog=X)
@@ -794,11 +789,8 @@ class ARIMA(BaseARIMA):
         end = arima.nobs + n_periods - 1
 
         f, conf_int = _seasonal_prediction_with_confidence(
-            arima_res=arima,
-            start=arima.nobs,
-            end=end,
-            X=X,
-            alpha=alpha)
+            arima_res=arima, start=arima.nobs, end=end, X=X, alpha=alpha
+        )
 
         if return_conf_int:
             # The confidence intervals may be a Pandas frame if it comes from
@@ -838,7 +830,7 @@ class ARIMA(BaseARIMA):
         this_version = pmdarima.__version__
 
         try:
-            modl_version = getattr(self, 'pkg_version_')
+            modl_version = getattr(self, "pkg_version_")
 
             # Either < or > or '-dev' vs. release version
             if modl_version != this_version:
@@ -847,20 +839,22 @@ class ARIMA(BaseARIMA):
             # Either wasn't fit when pickled or didn't have the attr due to
             # it being an older version. If it wasn't fit, it will be missing
             # the arima_res_ attr.
-            if hasattr(self, 'arima_res_'):  # it was fit, but is older
+            if hasattr(self, "arima_res_"):  # it was fit, but is older
                 do_warn = True
-                modl_version = '<0.8.1'
+                modl_version = "<0.8.1"
 
             # else: it may not have the model (not fit) and still be older,
             # but we can't detect that.
 
         # Means it was older
         if do_warn:
-            warnings.warn("You've deserialized an ARIMA from a version (%s) "
-                          "that does not match your installed version of "
-                          "pmdarima (%s). This could cause unforeseen "
-                          "behavior."
-                          % (modl_version, this_version), UserWarning)
+            warnings.warn(
+                "You've deserialized an ARIMA from a version (%s) "
+                "that does not match your installed version of "
+                "pmdarima (%s). This could cause unforeseen "
+                "behavior." % (modl_version, this_version),
+                UserWarning,
+            )
 
     def __str__(self):
         """Different from __repr__, returns a debug string used in logging"""
@@ -868,18 +862,16 @@ class ARIMA(BaseARIMA):
         P, D, Q, m = self.seasonal_order
         int_str = "intercept"
         with_intercept = self.with_intercept
-        return (
-            " ARIMA({p},{d},{q})({P},{D},{Q})[{m}] {intercept}".format(
-                p=p,
-                d=d,
-                q=q,
-                P=P,
-                D=D,
-                Q=Q,
-                m=m,
-                # just for consistent spacing
-                intercept=int_str if with_intercept else " " * len(int_str)
-            )
+        return " ARIMA({p},{d},{q})({P},{D},{Q})[{m}] {intercept}".format(
+            p=p,
+            d=d,
+            q=q,
+            P=P,
+            D=D,
+            Q=Q,
+            m=m,
+            # just for consistent spacing
+            intercept=int_str if with_intercept else " " * len(int_str),
         )
 
     def update(self, y, X=None, maxiter=None, **kwargs):
@@ -915,7 +907,7 @@ class ARIMA(BaseARIMA):
         * Internally, this calls ``fit`` again using the OLD model parameters
           as the starting parameters for the new model's MLE computation.
         """
-        check_is_fitted(self, 'arima_res_')
+        check_is_fitted(self, "arima_res_")
         model_res = self.arima_res_
 
         # Allow updating with a scalar if the user is just adding a single
@@ -936,17 +928,12 @@ class ARIMA(BaseARIMA):
             n_exog, exog_dim = X.shape
 
             if X.shape[1] != k_exog:
-                raise ValueError(
-                    f"Dim mismatch in fit `X` ({k_exog}) and new "
-                    f"`X` ({exog_dim})"
-                )
+                raise ValueError(f"Dim mismatch in fit `X` ({k_exog}) and new " f"`X` ({exog_dim})")
 
             # make sure the number of samples in X match the number
             # of samples in the endog
             if n_exog != n_samples:
-                raise ValueError(
-                    f"Dim mismatch in n_samples (y={n_samples}, X={n_exog})"
-                )
+                raise ValueError(f"Dim mismatch in n_samples (y={n_samples}, X={n_exog})")
 
         # first concatenate the original data (might be 2d or 1d)
         y = np.squeeze(_append_to_endog(model_res.data.endog, y))
@@ -975,7 +962,7 @@ class ARIMA(BaseARIMA):
         # Behaves like `fit`
         return self
 
-    @if_delegate_has_method('arima_res_')
+    @if_delegate_has_method("arima_res_")
     def aic(self):
         """Get the AIC, the Akaike Information Criterion:
 
@@ -997,7 +984,7 @@ class ARIMA(BaseARIMA):
         return self.arima_res_.aic
 
     # TODO: this looks like it's implemented on statsmodels' master
-    @if_has_delegate('arima_res_')
+    @if_has_delegate("arima_res_")
     def aicc(self):
         """Get the AICc, the corrected Akaike Information Criterion:
 
@@ -1020,11 +1007,9 @@ class ARIMA(BaseARIMA):
         # this code should really be added to statsmodels. Rewrite
         # this function to reflect other metric implementations if/when
         # statsmodels incorporates AICc
-        return _aicc(self.arima_res_,
-                     self.nobs_,
-                     not self.with_intercept)
+        return _aicc(self.arima_res_, self.nobs_, not self.with_intercept)
 
-    @if_delegate_has_method('arima_res_')
+    @if_delegate_has_method("arima_res_")
     def arparams(self):
         """Get the parameters associated with the AR coefficients in the model.
 
@@ -1035,7 +1020,7 @@ class ARIMA(BaseARIMA):
         """
         return self.arima_res_.arparams
 
-    @if_delegate_has_method('arima_res_')
+    @if_delegate_has_method("arima_res_")
     def arroots(self):
         """The roots of the AR coefficients are the solution to:
 
@@ -1052,7 +1037,7 @@ class ARIMA(BaseARIMA):
         """
         return self.arima_res_.arroots
 
-    @if_delegate_has_method('arima_res_')
+    @if_delegate_has_method("arima_res_")
     def bic(self):
         """Get the BIC, the Bayes Information Criterion:
 
@@ -1073,7 +1058,7 @@ class ARIMA(BaseARIMA):
         """
         return self.arima_res_.bic
 
-    @if_delegate_has_method('arima_res_')
+    @if_delegate_has_method("arima_res_")
     def bse(self):
         """Get the standard errors of the parameters. These are
         computed using the numerical Hessian.
@@ -1085,7 +1070,7 @@ class ARIMA(BaseARIMA):
         """
         return self.arima_res_.bse
 
-    @if_delegate_has_method('arima_res_')
+    @if_delegate_has_method("arima_res_")
     def conf_int(self, alpha=0.05, **kwargs):
         r"""Returns the confidence interval of the fitted parameters.
 
@@ -1101,7 +1086,7 @@ class ARIMA(BaseARIMA):
         """
         return self.arima_res_.conf_int(alpha=alpha, **kwargs)
 
-    @if_delegate_has_method('arima_res_')
+    @if_delegate_has_method("arima_res_")
     def df_model(self):
         """The model degrees of freedom: ``k_exog`` + ``k_trend`` +
         ``k_ar`` + ``k_ma``.
@@ -1113,7 +1098,7 @@ class ARIMA(BaseARIMA):
         """
         return self.arima_res_.df_model
 
-    @if_delegate_has_method('arima_res_')
+    @if_delegate_has_method("arima_res_")
     def df_resid(self):
         """Get the residual degrees of freedom:
 
@@ -1126,7 +1111,7 @@ class ARIMA(BaseARIMA):
         """
         return self.arima_res_.df_resid
 
-    @if_delegate_has_method('arima_res_')
+    @if_delegate_has_method("arima_res_")
     def fittedvalues(self):
         """Get the fitted values from the model
 
@@ -1137,7 +1122,7 @@ class ARIMA(BaseARIMA):
         """
         return self.arima_res_.fittedvalues
 
-    @if_delegate_has_method('arima_res_')
+    @if_delegate_has_method("arima_res_")
     def hqic(self):
         """Get the Hannan-Quinn Information Criterion:
 
@@ -1157,7 +1142,7 @@ class ARIMA(BaseARIMA):
         """
         return self.arima_res_.hqic
 
-    @if_delegate_has_method('arima_res_')
+    @if_delegate_has_method("arima_res_")
     def maparams(self):
         """Get the value of the moving average coefficients.
 
@@ -1168,7 +1153,7 @@ class ARIMA(BaseARIMA):
         """
         return self.arima_res_.maparams
 
-    @if_delegate_has_method('arima_res_')
+    @if_delegate_has_method("arima_res_")
     def maroots(self):
         """The roots of the MA coefficients are the solution to:
 
@@ -1196,7 +1181,7 @@ class ARIMA(BaseARIMA):
         """
         return self.oob_
 
-    @if_delegate_has_method('arima_res_')
+    @if_delegate_has_method("arima_res_")
     def params(self):
         """Get the parameters of the model. The order of variables is the trend
         coefficients and the :func:`k_exog` exogenous coefficients, then the
@@ -1210,7 +1195,7 @@ class ARIMA(BaseARIMA):
         """
         return self.arima_res_.params
 
-    @if_delegate_has_method('arima_res_')
+    @if_delegate_has_method("arima_res_")
     def pvalues(self):
         """Get the p-values associated with the t-values of the coefficients.
         Note that the coefficients are assumed to have a Student's T
@@ -1223,7 +1208,7 @@ class ARIMA(BaseARIMA):
         """
         return self.arima_res_.pvalues
 
-    @if_delegate_has_method('arima_res_')
+    @if_delegate_has_method("arima_res_")
     def resid(self):
         """Get the model residuals. If the model is fit using 'mle', then the
         residuals are created via the Kalman Filter. If the model is fit
@@ -1238,12 +1223,12 @@ class ARIMA(BaseARIMA):
         """
         return self.arima_res_.resid
 
-    @if_delegate_has_method('arima_res_')
+    @if_delegate_has_method("arima_res_")
     def summary(self):
         """Get a summary of the ARIMA model"""
         return self.arima_res_.summary()
 
-    @if_has_delegate('arima_res_')
+    @if_has_delegate("arima_res_")
     def to_dict(self):
         """Get the ARIMA model as a dictionary
 
@@ -1256,19 +1241,19 @@ class ARIMA(BaseARIMA):
         """
         seasonal = sm_compat.check_seasonal_order(self.seasonal_order)
         return {
-            'pvalues': self.pvalues(),
-            'resid': self.resid(),
-            'order': self.order,
-            'seasonal_order': seasonal,
-            'oob': self.oob(),
-            'aic': self.aic(),
-            'aicc': self.aicc(),
-            'bic': self.bic(),
-            'bse': self.bse(),
-            'params': self.params()
+            "pvalues": self.pvalues(),
+            "resid": self.resid(),
+            "order": self.order,
+            "seasonal_order": seasonal,
+            "oob": self.oob(),
+            "aic": self.aic(),
+            "aicc": self.aicc(),
+            "bic": self.bic(),
+            "bse": self.bse(),
+            "params": self.params(),
         }
 
-    @if_has_delegate('arima_res_')
+    @if_has_delegate("arima_res_")
     def plot_diagnostics(self, variable=0, lags=10, fig=None, figsize=None):
         """Plot an ARIMA's diagnostics.
 
@@ -1319,6 +1304,7 @@ class ARIMA(BaseARIMA):
         # statsmodels makes it difficult to trust their API, so we just re-
         # implemented a common method for all results wrappers.
         from statsmodels.graphics import utils as sm_graphics
+
         fig = sm_graphics.create_mpl_fig(fig, figsize)
 
         res_wpr = self.arima_res_
@@ -1334,15 +1320,14 @@ class ARIMA(BaseARIMA):
 
         # If the class has it, it's a SARIMAX and we'll use it. Otherwise we
         # will just access the residuals as we normally would...
-        if hasattr(res_wpr, 'loglikelihood_burn'):
+        if hasattr(res_wpr, "loglikelihood_burn"):
             # This is introduced in the bleeding edge version, but is not
             # backwards compatible with 0.9.0 and less:
             d = res_wpr.loglikelihood_burn
-            if hasattr(res_wpr, 'nobs_diffuse'):
+            if hasattr(res_wpr, "nobs_diffuse"):
                 d = np.maximum(d, res_wpr.nobs_diffuse)
 
-            resid = res_wpr.filter_results\
-                           .standardized_forecasts_error[variable, d:]
+            resid = res_wpr.filter_results.standardized_forecasts_error[variable, d:]
         else:
             # This gets the residuals, but they need to be standardized
             d = 0
@@ -1351,14 +1336,14 @@ class ARIMA(BaseARIMA):
 
         # Top-left: residuals vs time
         ax = fig.add_subplot(221)
-        if hasattr(data, 'dates') and data.dates is not None:
+        if hasattr(data, "dates") and data.dates is not None:
             x = data.dates[d:]._mpl_repr()
         else:
             x = np.arange(len(resid))
         ax.plot(x, resid)
         ax.hlines(0, x[0], x[-1], alpha=0.5)
         ax.set_xlim(x[0], x[-1])
-        ax.set_title('Standardized residual')
+        ax.set_title("Standardized residual")
 
         # Top-right: histogram, Gaussian kernel density, Normal density
         # Can only do histogram and Gaussian kernel density on the non-null
@@ -1370,32 +1355,30 @@ class ARIMA(BaseARIMA):
         # 'normed' argument is no longer supported in matplotlib since
         # version 3.2.0. New function added for backwards compatibility
         with warnings.catch_warnings(record=True):
-            ax.hist(
-                resid_nonmissing,
-                label='Hist',
-                **mpl_compat.mpl_hist_arg()
-            )
+            ax.hist(resid_nonmissing, label="Hist", **mpl_compat.mpl_hist_arg())
 
         kde = gaussian_kde(resid_nonmissing)
         xlim = (-1.96 * 2, 1.96 * 2)
         x = np.linspace(xlim[0], xlim[1])
-        ax.plot(x, kde(x), label='KDE')
-        ax.plot(x, norm.pdf(x), label='N(0,1)')
+        ax.plot(x, kde(x), label="KDE")
+        ax.plot(x, norm.pdf(x), label="N(0,1)")
         ax.set_xlim(xlim)
         ax.legend()
-        ax.set_title('Histogram plus estimated density')
+        ax.set_title("Histogram plus estimated density")
 
         # Bottom-left: QQ plot
         ax = fig.add_subplot(223)
         from statsmodels.graphics import gofplots
-        gofplots.qqplot(resid_nonmissing, line='s', ax=ax)
-        ax.set_title('Normal Q-Q')
+
+        gofplots.qqplot(resid_nonmissing, line="s", ax=ax)
+        ax.set_title("Normal Q-Q")
 
         # Bottom-right: Correlogram
         ax = fig.add_subplot(224)
         from statsmodels.graphics import tsaplots
+
         tsaplots.plot_acf(resid, ax=ax, lags=lags)
-        ax.set_title('Correlogram')
+        ax.set_title("Correlogram")
 
         ax.set_ylim(-1, 1)
 

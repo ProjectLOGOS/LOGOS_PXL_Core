@@ -208,17 +208,13 @@ partial_correlations *= d[:, np.newaxis]
 non_zero = np.abs(np.triu(partial_correlations, k=1)) > 0.02
 
 # Plot the nodes using the coordinates of our embedding
-plt.scatter(
-    embedding[0], embedding[1], s=100 * d**2, c=labels, cmap=plt.cm.nipy_spectral
-)
+plt.scatter(embedding[0], embedding[1], s=100 * d**2, c=labels, cmap=plt.cm.nipy_spectral)
 
 # Plot the edges
 start_idx, end_idx = non_zero.nonzero()
 # a sequence of (*line0*, *line1*, *line2*), where::
 #            linen = (x0, y0), (x1, y1), ... (xm, ym)
-segments = [
-    [embedding[:, start], embedding[:, stop]] for start, stop in zip(start_idx, end_idx)
-]
+segments = [[embedding[:, start], embedding[:, stop]] for start, stop in zip(start_idx, end_idx)]
 values = np.abs(partial_correlations[non_zero])
 lc = LineCollection(
     segments, zorder=0, cmap=plt.cm.hot_r, norm=plt.Normalize(0, 0.7 * values.max())

@@ -172,9 +172,7 @@ def get_sequence_length(model_cls, model_name):
     return seq_length
 
 
-def generate_inputs_for_model(
-    model_cls, model, model_name, bs, device, include_loss_args=False
-):
+def generate_inputs_for_model(model_cls, model, model_name, bs, device, include_loss_args=False):
     # TODO - Check if following values are representative
     num_choices = 3
     num_visual_features = 42
@@ -221,9 +219,7 @@ def generate_inputs_for_model(
             model.config.visual_feat_dim,
             model.config.visual_pos_dim,
         )
-        input_dict["visual_feats"] = torch.randn(
-            bs, num_visual_features, visual_feat_dim
-        )
+        input_dict["visual_feats"] = torch.randn(bs, num_visual_features, visual_feat_dim)
         input_dict["visual_pos"] = torch.randn(bs, num_visual_features, visual_pos_dim)
 
     if include_loss_args:
@@ -236,21 +232,13 @@ def generate_inputs_for_model(
                     if model_cls in [AlbertForPreTraining]
                     else "next_sentence_label"
                 )
-                input_dict["labels"] = (
-                    rand_int_tensor(device, 0, vocab_size, (bs, seq_length)),
-                )
+                input_dict["labels"] = (rand_int_tensor(device, 0, vocab_size, (bs, seq_length)),)
                 input_dict[label_name] = rand_int_tensor(device, 0, 1, (bs,))
         elif model_name.endswith("QuestionAnswering"):
-            input_dict["start_positions"] = rand_int_tensor(
-                device, 0, seq_length, (bs,)
-            )
+            input_dict["start_positions"] = rand_int_tensor(device, 0, seq_length, (bs,))
             input_dict["end_positions"] = rand_int_tensor(device, 0, seq_length, (bs,))
-        elif model_name.endswith(
-            ("MaskedLM", "HeadModel", "CausalLM", "DoubleHeadsModel")
-        ):
-            input_dict["labels"] = rand_int_tensor(
-                device, 0, vocab_size, (bs, seq_length)
-            )
+        elif model_name.endswith(("MaskedLM", "HeadModel", "CausalLM", "DoubleHeadsModel")):
+            input_dict["labels"] = rand_int_tensor(device, 0, vocab_size, (bs, seq_length))
         elif model_name.endswith("TokenClassification"):
             input_dict["labels"] = rand_int_tensor(
                 device, 0, model.config.num_labels - 1, (bs, seq_length)
@@ -258,23 +246,15 @@ def generate_inputs_for_model(
         elif model_name.endswith("MultipleChoice"):
             input_dict["labels"] = rand_int_tensor(device, 0, num_choices, (bs,))
         elif model_name.endswith("SequenceClassification"):
-            input_dict["labels"] = rand_int_tensor(
-                device, 0, model.config.num_labels - 1, (bs,)
-            )
+            input_dict["labels"] = rand_int_tensor(device, 0, model.config.num_labels - 1, (bs,))
         elif model_name.endswith("NextSentencePrediction"):
             input_dict["labels"] = rand_int_tensor(device, 0, 1, (bs,))
         elif model_name.endswith("ForConditionalGeneration"):
-            input_dict["labels"] = rand_int_tensor(
-                device, 0, vocab_size - 1, (bs, seq_length)
-            )
+            input_dict["labels"] = rand_int_tensor(device, 0, vocab_size - 1, (bs, seq_length))
         elif model_name in EXTRA_MODELS:
-            input_dict["labels"] = rand_int_tensor(
-                device, 0, vocab_size, (bs, seq_length)
-            )
+            input_dict["labels"] = rand_int_tensor(device, 0, vocab_size, (bs, seq_length))
         else:
-            raise NotImplementedError(
-                f"Class {model_name} unsupported for training test "
-            )
+            raise NotImplementedError(f"Class {model_name} unsupported for training test ")
 
     return input_dict
 
@@ -444,9 +424,7 @@ class HuggingfaceRunner(BenchmarkRunner):
         if (
             is_training
             and not use_eval_mode
-            and not (
-                self.args.accuracy and model_name in self._config["only_inference"]
-            )
+            and not (self.args.accuracy and model_name in self._config["only_inference"])
         ):
             model.train()
         else:

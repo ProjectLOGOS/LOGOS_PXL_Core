@@ -114,9 +114,7 @@ def get_data(dataset="pbmc", batch_size=100, cuda=False):
     if dataset == "mock":
         num_genes = 17
         num_data = 200
-        X = torch.distributions.Poisson(rate=10.0).sample(
-            sample_shape=(num_data, num_genes)
-        )
+        X = torch.distributions.Poisson(rate=10.0).sample(sample_shape=(num_data, num_genes))
         Y = torch.zeros(num_data, dtype=torch.long)
         Y[50:100] = 1
         Y[100:] = -1

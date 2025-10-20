@@ -9,9 +9,9 @@ import sklearn
 from sklearn.exceptions import NotFittedError
 
 __all__ = [
-    'check_is_fitted',
-    'if_delegate_has_method',
-    'safe_indexing',
+    "check_is_fitted",
+    "if_delegate_has_method",
+    "safe_indexing",
 ]
 
 
@@ -45,11 +45,11 @@ def check_is_fitted(estimator, attributes):
 
 def safe_indexing(X, indices):
     """Slice an array or dataframe. This is deprecated in sklearn"""
-    if hasattr(X, 'iloc'):
+    if hasattr(X, "iloc"):
         return X.iloc[indices]
     # numpy:
     # TODO: this does not currently support axis 1
-    if hasattr(X, 'ndim') and X.ndim == 2:
+    if hasattr(X, "ndim") and X.ndim == 2:
         return X[indices, :]
     # list or 1d array
     return X[indices]
@@ -71,6 +71,7 @@ def _estimator_has(attr):
         A function that will either raise an `AttributeError` if the attribute
         does not exist, or True if it does.
     """
+
     def check(self):
         # raise original `AttributeError` if `attr` does not exist
         getattr(self, attr)
@@ -92,7 +93,9 @@ def if_delegate_has_method(attr):
     """
     if Version(sklearn.__version__) < Version("1.0.0"):
         from sklearn.utils.metaestimators import if_delegate_has_method
+
         return if_delegate_has_method(attr)
     else:
         from sklearn.utils.metaestimators import available_if
+
         return available_if(_estimator_has(attr))

@@ -71,9 +71,7 @@ def model(X, Y, hypers, jitter=1.0e-4):
 
     eta2 = eta1.pow(2.0) * xisq.sqrt() / msq
 
-    lam = pyro.sample(
-        "lambda", dist.HalfCauchy(torch.ones(P, device=X.device)).to_event(1)
-    )
+    lam = pyro.sample("lambda", dist.HalfCauchy(torch.ones(P, device=X.device)).to_event(1))
     kappa = msq.sqrt() * lam / (msq + (eta1 * lam).pow(2.0)).sqrt()
     kX = kappa * X
 
@@ -124,21 +122,12 @@ def compute_posterior_stats(X, Y, msq, lam, eta1, xisq, c, sigma, jitter=1.0e-4)
 
     # compute mean and variance for singleton weights
     vec = torch.tensor([0.50, -0.50], dtype=X.dtype, device=X.device)
-    mu = (
-        torch.matmul(k_probeX, torch.matmul(k_xx_inv, Y).unsqueeze(-1))
-        .squeeze(-1)
-        .reshape(P, 2)
-    )
+    mu = torch.matmul(k_probeX, torch.matmul(k_xx_inv, Y).unsqueeze(-1)).squeeze(-1).reshape(P, 2)
     mu = (mu * vec).sum(-1)
 
     var = k_prbprb - torch.matmul(k_probeX, torch.matmul(k_xx_inv, k_probeX.t()))
     var = var.reshape(P, 2, P, 2).diagonal(dim1=-4, dim2=-2)  # 2 2 P
-    std = (
-        ((var * vec.unsqueeze(-1)).sum(-2) * vec.unsqueeze(-1))
-        .sum(-2)
-        .clamp(min=0.0)
-        .sqrt()
-    )
+    std = ((var * vec.unsqueeze(-1)).sum(-2) * vec.unsqueeze(-1)).sum(-2).clamp(min=0.0).sqrt()
 
     # select active dimensions (those that are non-zero with sufficient statistical significance)
     active_dims = (((mu - 4.0 * std) > 0.0) | ((mu + 4.0 * std) < 0.0)).bool()
@@ -183,15 +172,8 @@ def compute_posterior_stats(X, Y, msq, lam, eta1, xisq, c, sigma, jitter=1.0e-4)
     mu = (mu * vec).sum(-1)
 
     var = k_prbprb - torch.matmul(k_probeX, torch.matmul(k_xx_inv, k_probeX.t()))
-    var = var.reshape(left_dims.size(0), 4, left_dims.size(0), 4).diagonal(
-        dim1=-4, dim2=-2
-    )
-    std = (
-        ((var * vec.unsqueeze(-1)).sum(-2) * vec.unsqueeze(-1))
-        .sum(-2)
-        .clamp(min=0.0)
-        .sqrt()
-    )
+    var = var.reshape(left_dims.size(0), 4, left_dims.size(0), 4).diagonal(dim1=-4, dim2=-2)
+    std = ((var * vec.unsqueeze(-1)).sum(-2) * vec.unsqueeze(-1)).sum(-2).clamp(min=0.0).sqrt()
 
     active_quad_dims = (((mu - 4.0 * std) > 0.0) | ((mu + 4.0 * std) < 0.0)) & (
         mu.abs() > 1.0e-4
@@ -205,9 +187,7 @@ def compute_posterior_stats(X, Y, msq, lam, eta1, xisq, c, sigma, jitter=1.0e-4)
         ],
         axis=1,
     )
-    active_quadratic_dims = np.split(
-        active_quadratic_dims, active_quadratic_dims.shape[0]
-    )
+    active_quadratic_dims = np.split(active_quadratic_dims, active_quadratic_dims.shape[0])
     active_quadratic_dims = [tuple(a.tolist()[0]) for a in active_quadratic_dims]
 
     return active_dims.data.numpy(), active_quadratic_dims
@@ -358,8 +338,7 @@ def main(args):
         + "(%d, %d, %d)" % singleton_stats
     )
     print(
-        "Quadratic  (true positive, false positive, false negative): "
-        + "(%d, %d, %d)" % quad_stats
+        "Quadratic  (true positive, false positive, false negative): " + "(%d, %d, %d)" % quad_stats
     )
 
 

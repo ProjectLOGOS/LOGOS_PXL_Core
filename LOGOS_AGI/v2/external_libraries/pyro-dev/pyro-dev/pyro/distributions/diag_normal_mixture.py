@@ -80,9 +80,7 @@ class MixtureOfDiagNormals(TorchDistribution):
         self.dim = locs.size(-1)
         self.categorical = Categorical(logits=component_logits)
         self.probs = self.categorical.probs
-        super().__init__(
-            batch_shape=torch.Size(batch_shape), event_shape=torch.Size((self.dim,))
-        )
+        super().__init__(batch_shape=torch.Size(batch_shape), event_shape=torch.Size((self.dim,)))
 
     def expand(self, batch_shape, _instance=None):
         new = self._get_checked_instance(MixtureOfDiagNormals, _instance)
@@ -90,9 +88,7 @@ class MixtureOfDiagNormals(TorchDistribution):
         batch_shape = torch.Size(batch_shape)
         new.dim = self.dim
         new.locs = self.locs.expand(batch_shape + self.locs.shape[-2:])
-        new.coord_scale = self.coord_scale.expand(
-            batch_shape + self.coord_scale.shape[-2:]
-        )
+        new.coord_scale = self.coord_scale.expand(batch_shape + self.coord_scale.shape[-2:])
         new.component_logits = self.component_logits.expand(
             batch_shape + self.component_logits.shape[-1:]
         )
@@ -170,9 +166,7 @@ class _MixDiagNormalSample(Function):
 
         mu_ll_cd = (locs.unsqueeze(-2) * mu_cd).sum(-1)  # b c d
         z_ll_cd = (z.unsqueeze(-2).unsqueeze(-2) * mu_cd).sum(-1)  # l b c d
-        z_perp_cd = (
-            z.unsqueeze(-2).unsqueeze(-2) - z_ll_cd.unsqueeze(-1) * mu_cd
-        )  # l b c d i
+        z_perp_cd = z.unsqueeze(-2).unsqueeze(-2) - z_ll_cd.unsqueeze(-1) * mu_cd  # l b c d i
         z_perp_cd_sqr = torch.pow(z_perp_cd, 2.0).sum(-1)  # l b c d
 
         shift_indices = torch.empty((dim,), dtype=torch.long, device=z.device)
@@ -191,9 +185,7 @@ class _MixDiagNormalSample(Function):
 
         log_scales = torch.log(scales)  # b j i
         epsilons_sqr = torch.pow(z_tilde, 2.0)  # l b j i
-        log_qs = (
-            -0.5 * epsilons_sqr - 0.5 * math.log(2.0 * math.pi) - log_scales
-        )  # l b j i
+        log_qs = -0.5 * epsilons_sqr - 0.5 * math.log(2.0 * math.pi) - log_scales  # l b j i
         log_q_j = log_qs.sum(-1, keepdim=True)  # l b j 1
         q_j = torch.exp(log_q_j)  # l b j 1
         q_tot = (pis * q_j.squeeze(-1)).sum(-1)  # l b
@@ -204,9 +196,7 @@ class _MixDiagNormalSample(Function):
         shift_log_scales[..., 0] = 0.0
         sigma_products = torch.cumsum(shift_log_scales, dim=-1).exp()  # b j i
 
-        reverse_indices = torch.tensor(
-            range(dim - 1, -1, -1), dtype=torch.long, device=z.device
-        )
+        reverse_indices = torch.tensor(range(dim - 1, -1, -1), dtype=torch.long, device=z.device)
         reverse_log_sigma_0 = sigma_0.log()[..., reverse_indices]  # b 1 i
         sigma_0_products = torch.cumsum(reverse_log_sigma_0, dim=-1).exp()[
             ..., reverse_indices - 1
@@ -214,9 +204,7 @@ class _MixDiagNormalSample(Function):
         sigma_0_products[..., -1] = 1.0
         sigma_products *= sigma_0_products
 
-        logits_grad = torch.erf(z_tilde / root_two) - torch.erf(
-            z_shift / root_two
-        )  # l b j i
+        logits_grad = torch.erf(z_tilde / root_two) - torch.erf(z_shift / root_two)  # l b j i
         logits_grad *= torch.exp(-0.5 * r_sqr_ji)  # l b j i
         logits_grad = (logits_grad * g / sigma_products).sum(-1)  # l b j
         logits_grad = sum_leftmost(logits_grad / q_tot, -1 - batch_dims)  # b j
@@ -231,10 +219,7 @@ class _MixDiagNormalSample(Function):
         v_cd *= torch.exp(-0.5 * z_perp_cd_sqr)  # l b c d
         mu_cd_g = (g.unsqueeze(-2) * mu_cd).sum(-1)  # l b c d
         v_cd *= (
-            -mu_cd_g
-            * pis.unsqueeze(-2)
-            * 0.5
-            * math.pow(2.0 * math.pi, -0.5 * (dim - 1))
+            -mu_cd_g * pis.unsqueeze(-2) * 0.5 * math.pow(2.0 * math.pi, -0.5 * (dim - 1))
         )  # l b c d
         v_cd = pis * sum_leftmost(v_cd.sum(-1) / q_tot, -1 - batch_dims)
         logits_grad += v_cd

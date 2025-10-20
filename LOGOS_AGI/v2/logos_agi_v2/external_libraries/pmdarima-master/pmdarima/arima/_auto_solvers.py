@@ -141,7 +141,7 @@ class _RandomFitWrapper(_SolverMixin):
 
 class _StepwiseFitWrapper(_SolverMixin):
     """Searches for the best model using the stepwise algorithm.
-    
+
     The stepwise algorithm fluctuates the more sensitive pieces of the ARIMA
     (the seasonal components) first, adjusting towards the direction of the
     smaller {A|B|HQ}IC(c), and continues to step down as long as the error

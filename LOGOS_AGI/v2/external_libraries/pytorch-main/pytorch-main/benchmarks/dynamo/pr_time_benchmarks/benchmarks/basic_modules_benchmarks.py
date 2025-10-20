@@ -20,9 +20,7 @@ class ListOfLinears(nn.Module):
 
 
 class Benchmark(BenchmarkBase):
-    def __init__(
-        self, ModuleClass, backend, is_gpu=False, dynamic=False, force_shape_pad=False
-    ):
+    def __init__(self, ModuleClass, backend, is_gpu=False, dynamic=False, force_shape_pad=False):
         self.ModuleClass = ModuleClass
         self._name = ModuleClass.__name__
         self._is_gpu = is_gpu
@@ -73,9 +71,7 @@ def main():
         Benchmark(ListOfLinears, "inductor", is_gpu=True, force_shape_pad=True),
     ]
     for b in benchmarks:
-        b.enable_compile_time_instruction_count().collect_all().append_results(
-            result_path
-        )
+        b.enable_compile_time_instruction_count().collect_all().append_results(result_path)
 
 
 if __name__ == "__main__":

@@ -75,9 +75,7 @@ def geometric_edges(G, radius, p=2, *, pos_name="pos"):
     # Input validation - every node must have a "pos" attribute
     for n, pos in G.nodes(data=pos_name):
         if pos is None:
-            raise nx.NetworkXError(
-                f"Node {n} (and all nodes) must have a '{pos_name}' attribute."
-            )
+            raise nx.NetworkXError(f"Node {n} (and all nodes) must have a '{pos_name}' attribute.")
 
     # NOTE: See _geometric_edges for the actual implementation. The reason this
     # is split into two functions is to avoid the overhead of input validation
@@ -113,9 +111,7 @@ def _geometric_edges(G, radius, p, pos_name):
 
 @py_random_state(5)
 @nx._dispatchable(graphs=None, returns_graph=True)
-def random_geometric_graph(
-    n, radius, dim=2, pos=None, p=2, seed=None, *, pos_name="pos"
-):
+def random_geometric_graph(n, radius, dim=2, pos=None, p=2, seed=None, *, pos_name="pos"):
     """Returns a random geometric graph in the unit cube of dimensions `dim`.
 
     The random geometric graph model places `n` nodes uniformly at
@@ -977,9 +973,7 @@ def geometric_soft_configuration_graph(
 
     if kappas is not None:
         if not all((n is None, gamma is None, mean_degree is None)):
-            raise nx.NetworkXError(
-                "When kappas is input, n, gamma and mean_degree must not be."
-            )
+            raise nx.NetworkXError("When kappas is input, n, gamma and mean_degree must not be.")
 
         n = len(kappas)
         mean_degree = sum(kappas) / len(kappas)

@@ -62,9 +62,7 @@ class FuncCallWrapper:
 
     def __repr__(self):
         args = ", ".join([repr(arg) for arg in self.args])
-        kwargs = "".join(
-            [f", {str(key)}={value}" for key, value in self.kwargs.items()]
-        )
+        kwargs = "".join([f", {str(key)}={value}" for key, value in self.kwargs.items()])
         out = f"{self.call}({args}{kwargs})".strip('"')
         # f strings introduce quotations we dont want
         for key in dtype_abbrs_parsing:
@@ -76,9 +74,7 @@ def serialize_sparse_tensor(e):
     if isinstance(e, torch._subclasses.FakeTensor):
         return FuncCallWrapper("ST", list(e.shape), e.dtype, e.layout, e.is_coalesced())
     else:
-        return FuncCallWrapper(
-            "ST", list(e.shape), e.dtype, e.layout, e.is_coalesced(), e._nnz()
-        )
+        return FuncCallWrapper("ST", list(e.shape), e.dtype, e.layout, e.is_coalesced(), e._nnz())
 
 
 def deserialize_sparse_tensor(size, dtype, layout, is_coalesced, nnz=None):
@@ -158,9 +154,7 @@ def non_compute_operator(op):
 
     for inp in tensor_inps:
         if inp.alias_info and tensor_outputs[0].alias_info:
-            if inp.alias_info.before_set.intersection(
-                tensor_outputs[0].alias_info.after_set
-            ):
+            if inp.alias_info.before_set.intersection(tensor_outputs[0].alias_info.after_set):
                 return True
 
     return False
@@ -249,9 +243,7 @@ class OperatorInputsLoader:
             op_line = lines[i].strip("\n")
             assert "Operator: " in op_line, op_line
             operator = op_line[len("Operator: ") :]
-            operator = (
-                operator if operator != "aten.sum.SymInt" else "aten.sum.dim_IntList"
-            )
+            operator = operator if operator != "aten.sum.SymInt" else "aten.sum.dim_IntList"
             op_inps = Counter()
             i += 1
             while i < len(lines) and "Operator: " not in lines[i]:
@@ -265,9 +257,9 @@ class OperatorInputsLoader:
     def get_inputs_for_operator(
         self, operator, dtype=None, device="cuda"
     ) -> Generator[tuple[Iterable[Any], dict[str, Any]], None, None]:
-        assert str(operator) in self.operator_db, (
-            f"Could not find {operator}, must provide overload"
-        )
+        assert (
+            str(operator) in self.operator_db
+        ), f"Could not find {operator}, must provide overload"
 
         if "embedding" in str(operator):
             log.warning("Embedding inputs NYI, input data cannot be randomized")
@@ -302,9 +294,7 @@ class OperatorInputsLoader:
             yield op
 
     def get_call_frequency(self, op):
-        assert str(op) in self.operator_db, (
-            f"Could not find {op}, must provide overload"
-        )
+        assert str(op) in self.operator_db, f"Could not find {op}, must provide overload"
 
         count = 0
         for counter in self.operator_db[str(op)].values():

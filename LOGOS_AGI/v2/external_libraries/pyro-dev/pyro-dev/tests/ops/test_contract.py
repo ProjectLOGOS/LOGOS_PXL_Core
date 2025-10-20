@@ -144,9 +144,7 @@ def test_partition_terms(inputs, dims, expected_num_components):
 
 
 def frame(dim, size):
-    return CondIndepStackFrame(
-        name="plate_{}".format(size), dim=dim, size=size, counter=0
-    )
+    return CondIndepStackFrame(name="plate_{}".format(size), dim=dim, size=size, counter=0)
 
 
 EXAMPLES = [
@@ -434,9 +432,7 @@ def test_einsum_linear(equation, plates):
     operands = [x.exp() for x in log_operands]
 
     try:
-        log_expected = ubersum(
-            equation, *log_operands, plates=plates, modulo_total=True
-        )
+        log_expected = ubersum(equation, *log_operands, plates=plates, modulo_total=True)
         expected = [x.exp() for x in log_expected]
     except NotImplementedError:
         pytest.skip()
@@ -508,9 +504,7 @@ def test_ubersum_total(equation, plates):
     assert_equal(
         expected,
         actual,
-        msg="Expected:\n{}\nActual:\n{}".format(
-            expected.detach().cpu(), actual.detach().cpu()
-        ),
+        msg="Expected:\n{}\nActual:\n{}".format(expected.detach().cpu(), actual.detach().cpu()),
     )
 
 
@@ -657,9 +651,7 @@ def test_ubersum_collide_implemented(impl, implemented):
     x = torch.randn(a, c)
     y = torch.randn(b, d)
     z = torch.randn(a, b, c, d)
-    raises = pytest.raises(
-        NotImplementedError, match="Expected tree-structured plate nesting"
-    )
+    raises = pytest.raises(NotImplementedError, match="Expected tree-structured plate nesting")
     with optional(raises, not implemented):
         impl("ac,bd,abcd->", x, y, z, plates="ab", modulo_total=True)
 
@@ -746,9 +738,7 @@ UBERSUM_BATCH_ERRORS = [
 @pytest.mark.parametrize("impl", [naive_ubersum, ubersum])
 def test_ubersum_plate_error(impl, equation, plates):
     inputs, outputs = equation.split("->")
-    operands = [
-        torch.randn(torch.Size((2,) * len(input_))) for input_ in inputs.split(",")
-    ]
+    operands = [torch.randn(torch.Size((2,) * len(input_))) for input_ in inputs.split(",")]
     with pytest.raises(ValueError, match="It is nonsensical to preserve a plated dim"):
         impl(equation, *operands, plates=plates, modulo_total=True)
 
@@ -779,9 +769,7 @@ def test_adjoint_shape(backend, equation, plates):
     # run forward-backward algorithm
     for x in operands:
         require_backward(x)
-    (result,) = ubersum(
-        equation, *operands, plates=plates, modulo_total=True, backend=backend
-    )
+    (result,) = ubersum(equation, *operands, plates=plates, modulo_total=True, backend=backend)
     result._pyro_backward()
 
     for input_, x in zip(inputs, operands):
@@ -809,14 +797,10 @@ def test_adjoint_marginal(equation, plates):
         *operands,
         plates=plates,
         modulo_total=True,
-        backend="pyro.ops.einsum.torch_marginal"
+        backend="pyro.ops.einsum.torch_marginal",
     )
     (expected,) = ubersum(
-        equation,
-        *operands,
-        plates=plates,
-        modulo_total=True,
-        backend="pyro.ops.einsum.torch_log"
+        equation, *operands, plates=plates, modulo_total=True, backend="pyro.ops.einsum.torch_log"
     )
     assert_equal(expected, actual)
 
@@ -829,7 +813,7 @@ def test_adjoint_marginal(equation, plates):
             *operands,
             plates=plates,
             modulo_total=True,
-            backend="pyro.ops.einsum.torch_log"
+            backend="pyro.ops.einsum.torch_log",
         )
         actual = operand._pyro_backward_result
         assert_equal(expected, actual)

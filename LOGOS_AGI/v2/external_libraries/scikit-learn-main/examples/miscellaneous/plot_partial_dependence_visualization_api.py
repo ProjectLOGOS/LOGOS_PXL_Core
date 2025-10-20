@@ -104,9 +104,7 @@ ax2.set_title("Multi-layer Perceptron")
 # sphinx_gallery_thumbnail_number = 4
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 6))
 tree_disp.plot(ax=[ax1, ax2], line_kw={"label": "Decision Tree"})
-mlp_disp.plot(
-    ax=[ax1, ax2], line_kw={"label": "Multi-layer Perceptron", "color": "red"}
-)
+mlp_disp.plot(ax=[ax1, ax2], line_kw={"label": "Multi-layer Perceptron", "color": "red"})
 ax1.legend()
 ax2.legend()
 
@@ -119,9 +117,7 @@ ax2.legend()
 # `plot` will only show the y label and y ticks on the left most plot.
 
 tree_disp.plot(line_kw={"label": "Decision Tree"})
-mlp_disp.plot(
-    line_kw={"label": "Multi-layer Perceptron", "color": "red"}, ax=tree_disp.axes_
-)
+mlp_disp.plot(line_kw={"label": "Multi-layer Perceptron", "color": "red"}, ax=tree_disp.axes_)
 tree_disp.figure_.set_size_inches(10, 6)
 tree_disp.axes_[0, 0].legend()
 tree_disp.axes_[0, 1].legend()

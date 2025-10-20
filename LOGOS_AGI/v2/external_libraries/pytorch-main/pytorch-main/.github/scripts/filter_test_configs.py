@@ -63,21 +63,15 @@ class IssueType(Enum):
 def parse_args() -> Any:
     from argparse import ArgumentParser
 
-    parser = ArgumentParser(
-        "Filter all test configurations and keep only requested ones"
-    )
-    parser.add_argument(
-        "--test-matrix", type=str, required=True, help="the original test matrix"
-    )
+    parser = ArgumentParser("Filter all test configurations and keep only requested ones")
+    parser.add_argument("--test-matrix", type=str, required=True, help="the original test matrix")
     parser.add_argument(
         "--selected-test-configs",
         type=str,
         default="",
         help="a comma-separated list of test configurations from the test matrix to keep",
     )
-    parser.add_argument(
-        "--workflow", type=str, help="the name of the current workflow, i.e. pull"
-    )
+    parser.add_argument("--workflow", type=str, help="the name of the current workflow, i.e. pull")
     parser.add_argument(
         "--job-name",
         type=str,
@@ -135,9 +129,7 @@ def get_labels(pr_number: int) -> set[str]:
     Dynamically get the latest list of labels from the pull request
     """
     pr_info = get_pr_info(pr_number)
-    return {
-        label.get("name") for label in pr_info.get("labels", []) if label.get("name")
-    }
+    return {label.get("name") for label in pr_info.get("labels", []) if label.get("name")}
 
 
 def filter_labels(labels: set[str], label_regex: Any) -> set[str]:
@@ -515,18 +507,12 @@ def perform_misc_tasks(
         "ci-verbose-test-logs",
         check_for_setting(labels, pr_body, "ci-verbose-test-logs"),
     )
-    set_output(
-        "ci-test-showlocals", check_for_setting(labels, pr_body, "ci-test-showlocals")
-    )
-    set_output(
-        "ci-no-test-timeout", check_for_setting(labels, pr_body, "ci-no-test-timeout")
-    )
+    set_output("ci-test-showlocals", check_for_setting(labels, pr_body, "ci-test-showlocals"))
+    set_output("ci-no-test-timeout", check_for_setting(labels, pr_body, "ci-no-test-timeout"))
     set_output("ci-no-td", check_for_setting(labels, pr_body, "ci-no-td"))
     # Only relevant for the one linux distributed cuda job, delete this when TD
     # is rolled out completely
-    set_output(
-        "ci-td-distributed", check_for_setting(labels, pr_body, "ci-td-distributed")
-    )
+    set_output("ci-td-distributed", check_for_setting(labels, pr_body, "ci-td-distributed"))
 
     # Obviously, if the job name includes unstable, then this is an unstable job
     is_unstable = job_name and IssueType.UNSTABLE.value in job_name
@@ -602,9 +588,7 @@ def main() -> None:
 
     if args.selected_test_configs:
         selected_test_configs = {
-            v.strip().lower()
-            for v in args.selected_test_configs.split(",")
-            if v.strip()
+            v.strip().lower() for v in args.selected_test_configs.split(",") if v.strip()
         }
         filtered_test_matrix = filter_selected_test_configs(
             filtered_test_matrix, selected_test_configs

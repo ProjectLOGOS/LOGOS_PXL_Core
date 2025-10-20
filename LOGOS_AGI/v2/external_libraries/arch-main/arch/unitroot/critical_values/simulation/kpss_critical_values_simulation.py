@@ -62,9 +62,7 @@ def wrapper(nobs: int, b: int, trend: str = "c", max_memory: int = 1024) -> np.n
     while remaining > 0:
         b_eff = min(remaining, b_max_memory)
         completed = b - remaining
-        results[completed : completed + b_eff] = simulate_kpss(
-            nobs, b_eff, trend=trend, rng=rng
-        )
+        results[completed : completed + b_eff] = simulate_kpss(nobs, b_eff, trend=trend, rng=rng)
         remaining -= b_max_memory
         elapsed = (dt.datetime.now() - now).total_seconds()
         expected_remaining = max(0, remaining) * (elapsed / (b - remaining))

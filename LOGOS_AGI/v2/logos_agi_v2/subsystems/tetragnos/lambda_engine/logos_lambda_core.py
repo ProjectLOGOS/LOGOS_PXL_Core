@@ -40,7 +40,7 @@ class TetragnosCore:
                 "I am very angry about this problem"
             ]
             train_labels = ["positive", "positive", "negative", "negative"]
-            
+
             # Create a model pipeline: text -> TF-IDF vectors -> Naive Bayes classifier
             self.sentiment_classifier = make_pipeline(
                 TfidfVectorizer(),
@@ -54,7 +54,7 @@ class TetragnosCore:
             logging.error(f"Failed to initialize models: {e}", exc_info=True)
             self.embedding_model = None
             self.sentiment_classifier = None
-        
+
     def execute(self, payload: dict) -> dict:
         """
         Executes a task based on the payload.
@@ -69,10 +69,10 @@ class TetragnosCore:
             text = payload.get('text')
             if not text:
                 raise ValueError("Payload for 'generate_embedding' must contain 'text'.")
-            
+
             embedding = self.embedding_model.encode(text, convert_to_tensor=True)
             return {"embedding": embedding.cpu().tolist(), "model": "all-MiniLM-L6-v2"}
-            
+
         # --- NEW ACTION USING THE SKLEARN MODEL ---
         elif action == 'classify_sentiment_classic':
             text_to_classify = payload.get('text')
@@ -82,7 +82,7 @@ class TetragnosCore:
             # The pipeline handles vectorization and prediction
             prediction = self.sentiment_classifier.predict([text_to_classify])[0]
             probabilities = self.sentiment_classifier.predict_proba([text_to_classify])[0]
-            
+
             confidence = max(probabilities)
             classes = self.sentiment_classifier.classes_
 
@@ -93,7 +93,7 @@ class TetragnosCore:
                 "model": "scikit-learn MultinomialNB"
             }
         # --- END NEW ---
-        
+
         else:
             # Fallback for old sentiment analysis placeholder
             if action == 'sentiment_analysis':

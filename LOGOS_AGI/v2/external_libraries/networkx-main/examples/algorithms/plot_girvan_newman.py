@@ -21,10 +21,7 @@ communities = list(nx.community.girvan_newman(G))
 
 # Modularity -> measures the strength of division of a network into modules
 modularity_df = pd.DataFrame(
-    [
-        [k + 1, nx.community.modularity(G, communities[k])]
-        for k in range(len(communities))
-    ],
+    [[k + 1, nx.community.modularity(G, communities[k])] for k in range(len(communities))],
     columns=["k", "modularity"],
 )
 
@@ -48,7 +45,9 @@ def create_community_node_colors(graph, communities):
 def visualize_communities(graph, communities, i):
     node_colors = create_community_node_colors(graph, communities)
     modularity = round(nx.community.modularity(graph, communities), 6)
-    title = f"Community Visualization of {len(communities)} communities with modularity of {modularity}"
+    title = (
+        f"Community Visualization of {len(communities)} communities with modularity of {modularity}"
+    )
     pos = nx.spring_layout(graph, k=0.3, iterations=50, seed=2)
     plt.subplot(3, 1, i)
     plt.title(title)

@@ -232,9 +232,7 @@ def parse_args():
         "This is because one can always use eager if compile is not speeding things up",
     )
 
-    parser.add_argument(
-        "--extra-args", default="", help="Append commandline with these args"
-    )
+    parser.add_argument("--extra-args", default="", help="Append commandline with these args")
 
     # Choose either inference or training
     group_mode = parser.add_mutually_exclusive_group(required=True)
@@ -380,15 +378,11 @@ def get_skip_tests(suite, device, is_training: bool):
     if suite == "torchbench":
         skip_tests.update(module.TorchBenchmarkRunner().skip_models)
         if is_training:
-            skip_tests.update(
-                module.TorchBenchmarkRunner().skip_not_suitable_for_training_models
-            )
+            skip_tests.update(module.TorchBenchmarkRunner().skip_not_suitable_for_training_models)
         if device == "cpu":
             skip_tests.update(module.TorchBenchmarkRunner().skip_models_for_cpu)
             if arch == "aarch64":
-                skip_tests.update(
-                    module.TorchBenchmarkRunner().skip_models_for_cpu_aarch64
-                )
+                skip_tests.update(module.TorchBenchmarkRunner().skip_models_for_cpu_aarch64)
         elif device == "cuda":
             skip_tests.update(module.TorchBenchmarkRunner().skip_models_for_cuda)
 
@@ -408,9 +402,7 @@ def generate_commands(args, dtypes, suites, devices, compilers, output_dir):
     devices_str = "_".join(devices)
     dtypes_str = "_".join(dtypes)
     compilers_str = "_".join(compilers)
-    generated_file = (
-        f"run_{mode}_{devices_str}_{dtypes_str}_{suites_str}_{compilers_str}.sh"
-    )
+    generated_file = f"run_{mode}_{devices_str}_{dtypes_str}_{suites_str}_{compilers_str}.sh"
     with open(generated_file, "w") as runfile:
         lines = []
 
@@ -435,7 +427,9 @@ def generate_commands(args, dtypes, suites, devices, compilers, output_dir):
                     output_filename = f"{output_dir}/{generate_csv_name(args, dtype, suite, device, compiler, testing)}"
                     launcher_cmd = "python"
                     if args.enable_cpu_launcher:
-                        launcher_cmd = f"python -m torch.backends.xeon.run_cpu {args.cpu_launcher_args}"
+                        launcher_cmd = (
+                            f"python -m torch.backends.xeon.run_cpu {args.cpu_launcher_args}"
+                        )
                     cmd = f"{launcher_cmd} benchmarks/dynamo/{suite}.py --{testing} --{dtype} -d{device} --output={output_filename}"
                     cmd = f"{cmd} {base_cmd} {args.extra_args} --dashboard"
                     skip_tests_str = get_skip_tests(suite, device, args.training)
@@ -583,9 +577,7 @@ def default_archive_name(dtype):
 
 
 def get_archive_name(args, dtype):
-    return (
-        default_archive_name(dtype) if args.archive_name is None else args.archive_name
-    )
+    return default_archive_name(dtype) if args.archive_name is None else args.archive_name
 
 
 def archive(src_dir, dest_dir_prefix, archive_name, dtype):
@@ -612,9 +604,7 @@ def get_metric_title(metric):
 
 
 class Parser:
-    def __init__(
-        self, suites, devices, dtypes, compilers, flag_compilers, mode, output_dir
-    ):
+    def __init__(self, suites, devices, dtypes, compilers, flag_compilers, mode, output_dir):
         self.suites = suites
         self.devices = devices
         self.dtypes = dtypes
@@ -714,12 +704,10 @@ class ParsePerformanceLogs(Parser):
         batch_sizes = frames[0]["batch_size"].to_list()
         for frame in frames[1:]:
             frame_batch_sizes = frame["batch_size"].to_list()
-            for idx, (batch_a, batch_b) in enumerate(
-                zip(batch_sizes, frame_batch_sizes)
-            ):
-                assert batch_a == batch_b or batch_a == 0 or batch_b == 0, (
-                    f"a={batch_a}, b={batch_b}"
-                )
+            for idx, (batch_a, batch_b) in enumerate(zip(batch_sizes, frame_batch_sizes)):
+                assert (
+                    batch_a == batch_b or batch_a == 0 or batch_b == 0
+                ), f"a={batch_a}, b={batch_b}"
                 batch_sizes[idx] = max(batch_a, batch_b)
         for frame in frames:
             frame["batch_size"] = batch_sizes
@@ -751,14 +739,10 @@ class ParsePerformanceLogs(Parser):
 
             if testing == "performance":
                 for compiler in self.compilers:
-                    df[compiler] = pd.to_numeric(df[compiler], errors="coerce").fillna(
-                        0
-                    )
+                    df[compiler] = pd.to_numeric(df[compiler], errors="coerce").fillna(0)
 
             df_copy = df.copy()
-            df_copy = df_copy.sort_values(
-                by=list(reversed(self.compilers)), ascending=False
-            )
+            df_copy = df_copy.sort_values(by=list(reversed(self.compilers)), ascending=False)
             if "inductor" in self.compilers:
                 df_copy = df_copy.sort_values(by="inductor", ascending=False)
             self.untouched_parsed_frames[suite][metric] = df_copy
@@ -882,23 +866,17 @@ class ParsePerformanceLogs(Parser):
         str_io.write(comment)
 
         speedup_caption = "Geometric mean speedup \n"
-        speedup_summary = self.exec_summary_text(
-            speedup_caption, self.geomean, "speedup"
-        )
+        speedup_summary = self.exec_summary_text(speedup_caption, self.geomean, "speedup")
 
         passrate_caption = "Passrate\n"
-        passrate_summary = self.exec_summary_text(
-            passrate_caption, self.passrate, "speedup"
-        )
+        passrate_summary = self.exec_summary_text(passrate_caption, self.passrate, "speedup")
 
         comp_time_caption = "Mean compilation time (seconds)\n"
         comp_time_summary = self.exec_summary_text(
             comp_time_caption, self.comp_time, "compilation_latency"
         )
 
-        peak_memory_caption = (
-            "Peak memory footprint compression ratio (higher is better)\n"
-        )
+        peak_memory_caption = "Peak memory footprint compression ratio (higher is better)\n"
         peak_memory_summary = self.exec_summary_text(
             peak_memory_caption, self.memory, "compression_ratio"
         )
@@ -1057,9 +1035,7 @@ def find_last_2_with_filenames(lookup_file, dashboard_archive_path, dtype, filen
     last2 = []
     for path in df["path"]:
         output_dir = os.path.join(dashboard_archive_path, path)
-        fullpaths = [
-            os.path.join(dashboard_archive_path, path, name) for name in filenames
-        ]
+        fullpaths = [os.path.join(dashboard_archive_path, path, name) for name in filenames]
         if all(os.path.exists(fullpath) for fullpath in fullpaths):
             last2.append(output_dir)
         if len(last2) >= 2:
@@ -1117,9 +1093,7 @@ class SummaryStatDiffer:
             for state, path in zip(("Current", "Previous"), last2):
                 body += f"{state} report name: {path}\n\n"
             body += self.generate_diff(last2, "passrate.csv", "Passrate diff")
-            body += self.generate_diff(
-                last2, "geomean.csv", "Geometric mean speedup diff"
-            )
+            body += self.generate_diff(last2, "geomean.csv", "Geometric mean speedup diff")
 
         comment = generate_dropdown_comment(title, body)
 
@@ -1154,9 +1128,7 @@ class RegressionDetector:
 
             for compiler in self.args.flag_compilers:
                 filenames = [
-                    generate_csv_name(
-                        self.args, dtype, suite, device, compiler, testing
-                    )
+                    generate_csv_name(self.args, dtype, suite, device, compiler, testing)
                     for testing in ["performance", "accuracy"]
                 ]
                 compiler_last2 = find_last_2_with_filenames(
@@ -1194,20 +1166,15 @@ class RegressionDetector:
                         continue
 
                     df_cur, df_prev = (
-                        last2[compiler][i].untouched_parsed_frames[suite][metric]
-                        for i in (0, 1)
+                        last2[compiler][i].untouched_parsed_frames[suite][metric] for i in (0, 1)
                     )
-                    df_merge = df_cur.merge(
-                        df_prev, on="name", suffixes=("_cur", "_prev")
-                    )
+                    df_merge = df_cur.merge(df_prev, on="name", suffixes=("_cur", "_prev"))
                     flag_fn = FLAG_FNS[metric]
                     flag = np.logical_and(
                         df_merge[compiler + "_prev"].apply(
                             lambda x: not pd.isna(x) and not flag_fn(x)
                         ),
-                        df_merge[compiler + "_cur"].apply(
-                            lambda x: not pd.isna(x) and flag_fn(x)
-                        ),
+                        df_merge[compiler + "_cur"].apply(lambda x: not pd.isna(x) and flag_fn(x)),
                     )
                     df_bad = df_merge[flag]
                     dfs.append(
@@ -1227,9 +1194,7 @@ class RegressionDetector:
                 if df.empty:
                     continue
                 regressions_present = True
-                tabform = tabulate(
-                    df, headers="keys", tablefmt="pretty", showindex="never"
-                )
+                tabform = tabulate(df, headers="keys", tablefmt="pretty", showindex="never")
                 str_io = io.StringIO()
                 str_io.write("\n")
                 str_io.write(f"{get_metric_title(metric)} regressions\n")
@@ -1299,9 +1264,7 @@ class RegressionTracker:
             for idx, suite in enumerate(self.suites):
                 dfs = []
                 for log_info in log_infos:
-                    dir_path = os.path.join(
-                        self.args.dashboard_archive_path, log_info.dir_path
-                    )
+                    dir_path = os.path.join(self.args.dashboard_archive_path, log_info.dir_path)
                     assert os.path.exists(dir_path)
                     gmean_filename = os.path.join(dir_path, f"{metric}.csv")
                     if not os.path.exists(gmean_filename):
@@ -1388,9 +1351,7 @@ class DashboardUpdater:
             for name in glob.glob(self.output_dir + "/*png"):
                 if "over_time" not in name:
                     output = (
-                        subprocess.check_output(
-                            [self.args.dashboard_image_uploader, name]
-                        )
+                        subprocess.check_output([self.args.dashboard_image_uploader, name])
                         .decode("ascii")
                         .rstrip()
                     )
@@ -1505,18 +1466,14 @@ if __name__ == "__main__":
     args.suites = suites
 
     if args.print_run_commands:
-        generated_file = generate_commands(
-            args, dtypes, suites, devices, compilers, output_dir
-        )
+        generated_file = generate_commands(args, dtypes, suites, devices, compilers, output_dir)
         print(
             f"Running commands are generated in file {generated_file}. Please run (bash {generated_file})."
         )
     elif args.visualize_logs:
         parse_logs(args, dtypes, suites, devices, compilers, flag_compilers, output_dir)
     elif args.run:
-        generated_file = generate_commands(
-            args, dtypes, suites, devices, compilers, output_dir
-        )
+        generated_file = generate_commands(args, dtypes, suites, devices, compilers, output_dir)
         # generate memoized archive name now so that the date is reflective
         # of when the run started
         get_archive_name(args, dtypes[0])
@@ -1536,9 +1493,7 @@ if __name__ == "__main__":
                     args.archive_name,
                     dtypes[0],
                 )
-            parse_logs(
-                args, dtypes, suites, devices, compilers, flag_compilers, output_dir
-            )
+            parse_logs(args, dtypes, suites, devices, compilers, flag_compilers, output_dir)
             if not args.no_update_archive:
                 archive(
                     output_dir,

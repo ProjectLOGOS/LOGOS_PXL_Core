@@ -11,9 +11,7 @@ y, X = load_date_example()
 
 
 def test_no_options_warns():
-    feat = DateFeaturizer(column_name="date",
-                          with_day_of_month=False,
-                          with_day_of_week=False)
+    feat = DateFeaturizer(column_name="date", with_day_of_month=False, with_day_of_week=False)
 
     with pytest.warns(UserWarning) as w:
         y_prime, X_prime = feat.fit_transform(y, X)
@@ -52,7 +50,7 @@ def test_numpy_array_fails():
 
 def _dummy_assertions(X_prime):
     # they are dummies, so they should sum to 1 along the row axis
-    dummies = X_prime[[n for n in X_prime.columns if 'WEEKDAY' in n]]
+    dummies = X_prime[[n for n in X_prime.columns if "WEEKDAY" in n]]
     assert (dummies.values.sum(axis=1) == 1).all()
 
 
@@ -63,9 +61,7 @@ def _ordinal_assertions(X_prime):
 
 
 def test_all_true():
-    feat = DateFeaturizer(column_name="date",
-                          with_day_of_month=True,
-                          with_day_of_week=True)
+    feat = DateFeaturizer(column_name="date", with_day_of_month=True, with_day_of_week=True)
 
     y_prime, X_prime = feat.fit_transform(y, X)
 
@@ -84,10 +80,9 @@ def test_all_true():
 
 
 def test_dummy_only():
-    feat = DateFeaturizer(column_name="date",
-                          prefix="DATE",
-                          with_day_of_month=False,
-                          with_day_of_week=True)
+    feat = DateFeaturizer(
+        column_name="date", prefix="DATE", with_day_of_month=False, with_day_of_week=True
+    )
 
     y_prime, X_prime = feat.fit_transform(y, X)
 
@@ -107,10 +102,9 @@ def test_dummy_only():
 
 
 def test_ordinal_only():
-    feat = DateFeaturizer(column_name="date",
-                          prefix="DATE",
-                          with_day_of_month=True,
-                          with_day_of_week=False)
+    feat = DateFeaturizer(
+        column_name="date", prefix="DATE", with_day_of_month=True, with_day_of_week=False
+    )
 
     y_prime, X_prime = feat.fit_transform(y, X)
 

@@ -92,12 +92,8 @@ print(f"Custom score: {custom_score(y_test, classifier_05.predict(X_test)):.2f}"
 from sklearn.metrics import make_scorer
 from sklearn.model_selection import TunedThresholdClassifierCV
 
-custom_scorer = make_scorer(
-    custom_score, response_method="predict", greater_is_better=True
-)
-tuned_classifier = TunedThresholdClassifierCV(
-    classifier_05, cv=5, scoring=custom_scorer
-).fit(X, y)
+custom_scorer = make_scorer(custom_score, response_method="predict", greater_is_better=True)
+tuned_classifier = TunedThresholdClassifierCV(classifier_05, cv=5, scoring=custom_scorer).fit(X, y)
 
 print(f"Tuned decision threshold: {tuned_classifier.best_threshold_:.3f}")
 print(f"Custom score: {custom_score(y_test, tuned_classifier.predict(X_test)):.2f}")
@@ -127,9 +123,7 @@ print(f"Custom score: {custom_score(y_test, tuned_classifier.predict(X_test)):.2
 from sklearn.datasets import make_low_rank_matrix
 from sklearn.decomposition import PCA
 
-X = make_low_rank_matrix(
-    n_samples=10_000, n_features=100, tail_strength=0.1, random_state=0
-)
+X = make_low_rank_matrix(n_samples=10_000, n_features=100, tail_strength=0.1, random_state=0)
 
 pca = PCA(n_components=10, svd_solver="covariance_eigh").fit(X)
 print(f"Explained variance: {pca.explained_variance_ratio_.sum():.2f}")

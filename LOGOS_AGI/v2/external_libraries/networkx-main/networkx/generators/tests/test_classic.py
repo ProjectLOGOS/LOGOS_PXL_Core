@@ -129,9 +129,7 @@ class TestGeneratorClassic:
         b = nx.barbell_graph(m1, m2)
         assert nx.could_be_isomorphic(b, nx.path_graph(m2 + 4))
 
-        pytest.raises(
-            nx.NetworkXError, nx.barbell_graph, m1, m2, create_using=nx.DiGraph()
-        )
+        pytest.raises(nx.NetworkXError, nx.barbell_graph, m1, m2, create_using=nx.DiGraph())
 
         mb = nx.barbell_graph(m1, m2, create_using=nx.MultiGraph())
         assert edges_equal(mb.edges(), b.edges())
@@ -183,9 +181,7 @@ class TestGeneratorClassic:
 
     def test_circular_ladder_graph(self):
         G = nx.circular_ladder_graph(5)
-        pytest.raises(
-            nx.NetworkXError, nx.circular_ladder_graph, 5, create_using=nx.DiGraph
-        )
+        pytest.raises(nx.NetworkXError, nx.circular_ladder_graph, 5, create_using=nx.DiGraph)
         mG = nx.circular_ladder_graph(5, create_using=nx.MultiGraph)
         assert edges_equal(mG.edges(), G.edges())
 
@@ -444,9 +440,7 @@ class TestGeneratorClassic:
         assert nx.could_be_isomorphic(nx.star_graph(0), nx.empty_graph(1))
         assert nx.could_be_isomorphic(nx.star_graph(1), nx.path_graph(2))
         assert nx.could_be_isomorphic(nx.star_graph(2), nx.path_graph(3))
-        assert nx.could_be_isomorphic(
-            nx.star_graph(5), nx.complete_bipartite_graph(1, 5)
-        )
+        assert nx.could_be_isomorphic(nx.star_graph(5), nx.complete_bipartite_graph(1, 5))
 
         s = nx.star_graph(10)
         assert sorted(d for n, d in s.degree()) == [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 10]

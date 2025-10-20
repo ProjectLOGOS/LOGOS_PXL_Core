@@ -176,9 +176,7 @@ rf_pipeline
 # %%
 from sklearn.ensemble import HistGradientBoostingRegressor
 
-gbdt_pipeline = make_pipeline(
-    tree_preprocessor, HistGradientBoostingRegressor(random_state=0)
-)
+gbdt_pipeline = make_pipeline(tree_preprocessor, HistGradientBoostingRegressor(random_state=0))
 gbdt_pipeline
 
 # %%
@@ -213,15 +211,11 @@ from sklearn.model_selection import cross_val_predict, cross_validate
 fig, axs = plt.subplots(2, 2, figsize=(9, 7))
 axs = np.ravel(axs)
 
-for ax, (name, est) in zip(
-    axs, estimators + [("Stacking Regressor", stacking_regressor)]
-):
+for ax, (name, est) in zip(axs, estimators + [("Stacking Regressor", stacking_regressor)]):
     scorers = {"R2": "r2", "MAE": "neg_mean_absolute_error"}
 
     start_time = time.time()
-    scores = cross_validate(
-        est, X, y, scoring=list(scorers.values()), n_jobs=-1, verbose=0
-    )
+    scores = cross_validate(est, X, y, scoring=list(scorers.values()), n_jobs=-1, verbose=0)
     elapsed_time = time.time() - start_time
 
     y_pred = cross_val_predict(est, X, y, n_jobs=-1, verbose=0)

@@ -1,4 +1,3 @@
-
 from pmdarima.utils.metaestimators import if_has_delegate
 
 
@@ -10,11 +9,11 @@ class _IfHasDelegateTester(object):
         self.a_ = None
         return self
 
-    @if_has_delegate('a_')
+    @if_has_delegate("a_")
     def predict(self):
         return True
 
-    @if_has_delegate(['b_', 'a_'])
+    @if_has_delegate(["b_", "a_"])
     def predict2(self):
         return True
 
@@ -22,9 +21,9 @@ class _IfHasDelegateTester(object):
 def test_single_delegate():
     # show it passes for a "fit"
     assert _IfHasDelegateTester().fit().predict()
-    assert not hasattr(_IfHasDelegateTester(), 'predict')
+    assert not hasattr(_IfHasDelegateTester(), "predict")
 
 
 def test_multiple_delegates():
     assert _IfHasDelegateTester().fit().predict2()
-    assert not hasattr(_IfHasDelegateTester(), 'predict2')
+    assert not hasattr(_IfHasDelegateTester(), "predict2")

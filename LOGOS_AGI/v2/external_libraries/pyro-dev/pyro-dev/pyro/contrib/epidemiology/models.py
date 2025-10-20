@@ -186,9 +186,7 @@ class SimpleSEIRDModel(CompartmentalModel):
         transitions. This allows false negative but no false positives.
     """
 
-    def __init__(
-        self, population, incubation_time, recovery_time, mortality_rate, data
-    ):
+    def __init__(self, population, incubation_time, recovery_time, mortality_rate, data):
         compartments = ("S", "E", "I", "D")  # R is implicit.
         duration = len(data)
         super().__init__(compartments, duration, population)
@@ -239,9 +237,7 @@ class SimpleSEIRDModel(CompartmentalModel):
         # I2R, however the Multinomial distribution does not currently
         # implement overdispersion or moment matching.
         I2D = pyro.sample("I2D_{}".format(t), binomial_dist(state["I"], mu / tau_i))
-        I2R = pyro.sample(
-            "I2R_{}".format(t), binomial_dist(state["I"] - I2D, 1 / tau_i)
-        )
+        I2R = pyro.sample("I2R_{}".format(t), binomial_dist(state["I"] - I2D, 1 / tau_i))
 
         # Update compartments with flows.
         state["S"] = state["S"] - S2E
@@ -347,9 +343,7 @@ class OverdispersedSIRModel(CompartmentalModel):
                 overdispersion=od,
             ),
         )
-        I2R = pyro.sample(
-            "I2R_{}".format(t), binomial_dist(state["I"], 1 / tau, overdispersion=od)
-        )
+        I2R = pyro.sample("I2R_{}".format(t), binomial_dist(state["I"], 1 / tau, overdispersion=od))
 
         # Update compartments with flows.
         state["S"] = state["S"] - S2I
@@ -608,14 +602,7 @@ class SuperspreadingSEIRModel(CompartmentalModel):
     """
 
     def __init__(
-        self,
-        population,
-        incubation_time,
-        recovery_time,
-        data,
-        *,
-        leaf_times=None,
-        coal_times=None
+        self, population, incubation_time, recovery_time, data, *, leaf_times=None, coal_times=None
     ):
         compartments = ("S", "E", "I")  # R is implicit.
         duration = len(data)
@@ -635,9 +622,7 @@ class SuperspreadingSEIRModel(CompartmentalModel):
         if leaf_times is None:
             self.coal_likelihood = None
         else:
-            self.coal_likelihood = dist.CoalescentRateLikelihood(
-                leaf_times, coal_times, duration
-            )
+            self.coal_likelihood = dist.CoalescentRateLikelihood(leaf_times, coal_times, duration)
 
     def global_model(self):
         tau_e = self.incubation_time
@@ -680,11 +665,7 @@ class SuperspreadingSEIRModel(CompartmentalModel):
             coal_rate = R * (1.0 + 1.0 / k) / (tau_i * state["I"] + 1e-8)
             pyro.factor(
                 "coalescent_{}".format(t),
-                (
-                    self.coal_likelihood(coal_rate, t)
-                    if t_is_observed
-                    else torch.tensor(0.0)
-                ),
+                (self.coal_likelihood(coal_rate, t) if t_is_observed else torch.tensor(0.0)),
             )
 
         # Update compartements with flows.
@@ -761,9 +742,7 @@ class HeterogeneousSIRModel(CompartmentalModel):
 
         # Sample heterogeneous variables.
         # This assumes beta slowly drifts via Brownian motion in log space.
-        beta = pyro.sample(
-            "beta_{}".format(t), dist.LogNormal(state["beta"].log(), 0.1)
-        )
+        beta = pyro.sample("beta_{}".format(t), dist.LogNormal(state["beta"].log(), 0.1))
         Rt = pyro.deterministic("Rt_{}".format(t), R0 * beta)
 
         # Sample flows between compartments.
@@ -1273,9 +1252,7 @@ for _name, _Model in list(locals().items()):
     if isinstance(_Model, type) and issubclass(_Model, CompartmentalModel):
         if _Model is not CompartmentalModel:
             __all__.append(_name)
-__all__.sort(
-    key=lambda name, vals=locals(): vals[name].__init__.__code__.co_firstlineno
-)
+__all__.sort(key=lambda name, vals=locals(): vals[name].__init__.__code__.co_firstlineno)
 __doc__ = "\n\n".join(
     [
         """

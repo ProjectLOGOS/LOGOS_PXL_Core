@@ -38,18 +38,14 @@ the difficult-to-classify samples.
 # distribution).
 from sklearn.datasets import make_gaussian_quantiles
 
-X, y = make_gaussian_quantiles(
-    n_samples=2_000, n_features=10, n_classes=3, random_state=1
-)
+X, y = make_gaussian_quantiles(n_samples=2_000, n_features=10, n_classes=3, random_state=1)
 
 # %%
 # We split the dataset into 2 sets: 70 percent of the samples are used for
 # training and the remaining 30 percent for testing.
 from sklearn.model_selection import train_test_split
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, train_size=0.7, random_state=42
-)
+X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.7, random_state=42)
 
 # %%
 # Training the `AdaBoostClassifier`
@@ -119,8 +115,7 @@ print(
     f"{weak_learners_misclassification_error:.3f}"
 )
 print(
-    "DummyClassifier's misclassification_error: "
-    f"{dummy_classifiers_misclassification_error:.3f}"
+    "DummyClassifier's misclassification_error: " f"{dummy_classifiers_misclassification_error:.3f}"
 )
 
 # %%

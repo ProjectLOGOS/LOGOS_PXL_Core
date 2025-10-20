@@ -93,9 +93,7 @@ def check_accuracy(actual_csv, expected_csv, expected_filename):
         else:
             status = "IMPROVED:"
             improved.append(model)
-        print(
-            f"{model:34}  {status:9} accuracy={accuracy}, expected={expected_accuracy}"
-        )
+        print(f"{model:34}  {status:9} accuracy={accuracy}, expected={expected_accuracy}")
 
     msg = ""
     if failed or improved:

@@ -460,10 +460,7 @@ graph
   name "&amp;&#34;&#xf;&#x4444;&#1234567890;&#x1234567890abcdef;&unknown;"
 ]"""
         G = nx.parse_gml(gml)
-        assert (
-            '&"\x0f' + chr(0x4444) + "&#1234567890;&#x1234567890abcdef;&unknown;"
-            == G.name
-        )
+        assert '&"\x0f' + chr(0x4444) + "&#1234567890;&#x1234567890abcdef;&unknown;" == G.name
         gml = "\n".join(nx.generate_gml(G))
         alnu = "#1234567890;&#38;#x1234567890abcdef"
         answer = (
@@ -549,14 +546,11 @@ graph
             "directed 1 multigraph 1 ]"
         )
         assert_parse_error(
-            "graph [edge [ source '\u4200' target '\u4200' ] "
-            + "node [ id '\u4200' label b ] ]"
+            "graph [edge [ source '\u4200' target '\u4200' ] " + "node [ id '\u4200' label b ] ]"
         )
 
         def assert_generate_error(*args, **kwargs):
-            pytest.raises(
-                nx.NetworkXError, lambda: list(nx.generate_gml(*args, **kwargs))
-            )
+            pytest.raises(nx.NetworkXError, lambda: list(nx.generate_gml(*args, **kwargs)))
 
         G = nx.Graph()
         G.graph[3] = 3

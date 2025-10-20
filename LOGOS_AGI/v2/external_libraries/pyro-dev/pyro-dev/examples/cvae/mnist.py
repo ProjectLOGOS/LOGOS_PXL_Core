@@ -29,9 +29,7 @@ class CVAEMNIST(Dataset):
 class ToTensor:
     def __call__(self, sample):
         sample["original"] = functional.to_tensor(sample["original"])
-        sample["digit"] = torch.as_tensor(
-            np.asarray(sample["digit"]), dtype=torch.int64
-        )
+        sample["digit"] = torch.as_tensor(np.asarray(sample["digit"]), dtype=torch.int64)
         return sample
 
 
@@ -75,9 +73,7 @@ class MaskImages:
 
 
 def get_data(num_quadrant_inputs, batch_size):
-    transforms = Compose(
-        [ToTensor(), MaskImages(num_quadrant_inputs=num_quadrant_inputs)]
-    )
+    transforms = Compose([ToTensor(), MaskImages(num_quadrant_inputs=num_quadrant_inputs)])
     datasets, dataloaders, dataset_sizes = {}, {}, {}
     for mode in ["train", "val"]:
         datasets[mode] = CVAEMNIST(

@@ -45,7 +45,7 @@ class ArchonNexus:
 
             # This is a simplified workflow: just execute directly
             result = self.orchestrator.execute_goal(goal_desc)
-            
+
             response = {'subsystem': 'Archon', 'task_id': task_id, 'status': result.get('status'), 'result': result}
             self.channel.basic_publish(exchange='', routing_key='task_result_queue', body=json.dumps(response))
 
@@ -67,16 +67,16 @@ class ArchonNexus:
 
 class TrinityNexusIntegration:
     """Trinity integration system for enhanced subsystem coordination."""
-    
+
     def __init__(self, component_name: str):
         self.component = component_name
         self.trinity_state = {
             "existence": 0.33,
-            "goodness": 0.33, 
+            "goodness": 0.33,
             "truth": 0.34
         }
         self.validation_active = True
-    
+
     def trinity_compute(self, operation, input_data):
         """Execute Trinity-enhanced computation with validation."""
         try:
@@ -87,23 +87,23 @@ class TrinityNexusIntegration:
                 "component": self.component,
                 "validation_timestamp": time.time()
             }
-            
+
             # Execute operation with enhancement
             result = operation(enhanced_data)
-            
+
             # Validate Trinity coherence
             if self._validate_trinity_coherence(result):
                 return result
             else:
                 return {"status": "trinity_validation_failed", "component": self.component}
-                
+
         except Exception as e:
             return {
-                "status": "trinity_computation_error", 
+                "status": "trinity_computation_error",
                 "error": str(e),
                 "component": self.component
             }
-    
+
     def _validate_trinity_coherence(self, result):
         """Validate computational result maintains Trinity coherence."""
         # Basic coherence checks

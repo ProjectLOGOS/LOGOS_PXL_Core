@@ -39,41 +39,23 @@ class Wav2Letter(nn.Module):
                 padding=23,
             ),
             nn.ReLU(inplace=True),
-            nn.Conv1d(
-                in_channels=250, out_channels=250, kernel_size=7, stride=1, padding=3
-            ),
+            nn.Conv1d(in_channels=250, out_channels=250, kernel_size=7, stride=1, padding=3),
             nn.ReLU(inplace=True),
-            nn.Conv1d(
-                in_channels=250, out_channels=250, kernel_size=7, stride=1, padding=3
-            ),
+            nn.Conv1d(in_channels=250, out_channels=250, kernel_size=7, stride=1, padding=3),
             nn.ReLU(inplace=True),
-            nn.Conv1d(
-                in_channels=250, out_channels=250, kernel_size=7, stride=1, padding=3
-            ),
+            nn.Conv1d(in_channels=250, out_channels=250, kernel_size=7, stride=1, padding=3),
             nn.ReLU(inplace=True),
-            nn.Conv1d(
-                in_channels=250, out_channels=250, kernel_size=7, stride=1, padding=3
-            ),
+            nn.Conv1d(in_channels=250, out_channels=250, kernel_size=7, stride=1, padding=3),
             nn.ReLU(inplace=True),
-            nn.Conv1d(
-                in_channels=250, out_channels=250, kernel_size=7, stride=1, padding=3
-            ),
+            nn.Conv1d(in_channels=250, out_channels=250, kernel_size=7, stride=1, padding=3),
             nn.ReLU(inplace=True),
-            nn.Conv1d(
-                in_channels=250, out_channels=250, kernel_size=7, stride=1, padding=3
-            ),
+            nn.Conv1d(in_channels=250, out_channels=250, kernel_size=7, stride=1, padding=3),
             nn.ReLU(inplace=True),
-            nn.Conv1d(
-                in_channels=250, out_channels=250, kernel_size=7, stride=1, padding=3
-            ),
+            nn.Conv1d(in_channels=250, out_channels=250, kernel_size=7, stride=1, padding=3),
             nn.ReLU(inplace=True),
-            nn.Conv1d(
-                in_channels=250, out_channels=2000, kernel_size=32, stride=1, padding=16
-            ),
+            nn.Conv1d(in_channels=250, out_channels=2000, kernel_size=32, stride=1, padding=16),
             nn.ReLU(inplace=True),
-            nn.Conv1d(
-                in_channels=2000, out_channels=2000, kernel_size=1, stride=1, padding=0
-            ),
+            nn.Conv1d(in_channels=2000, out_channels=2000, kernel_size=1, stride=1, padding=0),
             nn.ReLU(inplace=True),
             nn.Conv1d(
                 in_channels=2000,
@@ -190,9 +172,7 @@ class BatchRNN(nn.Module):
         self.input_size = input_size
         self.hidden_size = hidden_size
         self.bidirectional = bidirectional
-        self.batch_norm = (
-            SequenceWise(nn.BatchNorm1d(input_size)) if batch_norm else None
-        )
+        self.batch_norm = SequenceWise(nn.BatchNorm1d(input_size)) if batch_norm else None
         self.rnn = rnn_type(
             input_size=input_size,
             hidden_size=hidden_size,
@@ -212,9 +192,7 @@ class BatchRNN(nn.Module):
         x, _ = nn.utils.rnn.pad_packed_sequence(x)
         if self.bidirectional:
             x = (
-                x.view(x.size(0), x.size(1), 2, -1)
-                .sum(2)
-                .view(x.size(0), x.size(1), -1)
+                x.view(x.size(0), x.size(1), 2, -1).sum(2).view(x.size(0), x.size(1), -1)
             )  # (TxNxH*2) -> (TxNxH) by sum
         return x
 
@@ -341,9 +319,7 @@ class DeepSpeech(nn.Module):
         x, _ = self.conv(x, output_lengths)
 
         sizes = x.size()
-        x = x.view(
-            sizes[0], sizes[1] * sizes[2], sizes[3]
-        )  # Collapse feature dimension
+        x = x.view(sizes[0], sizes[1] * sizes[2], sizes[3])  # Collapse feature dimension
         x = x.transpose(1, 2).transpose(0, 1).contiguous()  # TxNxH
 
         for rnn in self.rnns:
@@ -368,12 +344,7 @@ class DeepSpeech(nn.Module):
         seq_len = input_length
         for m in self.conv.modules():
             if type(m) == nn.modules.conv.Conv2d:
-                seq_len = (
-                    seq_len
-                    + 2 * m.padding[1]
-                    - m.dilation[1] * (m.kernel_size[1] - 1)
-                    - 1
-                )
+                seq_len = seq_len + 2 * m.padding[1] - m.dilation[1] * (m.kernel_size[1] - 1) - 1
                 seq_len = seq_len.true_divide(m.stride[1]) + 1
         return seq_len.int()
 
@@ -402,9 +373,7 @@ class PositionalEncoding(nn.Module):
 
         pe = torch.zeros(max_len, d_model)
         position = torch.arange(0, max_len, dtype=torch.float).unsqueeze(1)
-        div_term = torch.exp(
-            torch.arange(0, d_model, 2).float() * (-math.log(10000.0) / d_model)
-        )
+        div_term = torch.exp(torch.arange(0, d_model, 2).float() * (-math.log(10000.0) / d_model))
         pe[:, 0::2] = torch.sin(position * div_term)
         pe[:, 1::2] = torch.cos(position * div_term)
         pe = pe.unsqueeze(0).transpose(0, 1)
@@ -459,9 +428,7 @@ class TransformerModel(nn.Module):
             device = src.device
             # This will be created once during warmup
             if self.src_mask is None or self.src_mask.size(0) != len(src):
-                mask = nn.Transformer.generate_square_subsequent_mask(len(src)).to(
-                    device
-                )
+                mask = nn.Transformer.generate_square_subsequent_mask(len(src)).to(device)
                 self.src_mask = mask
         else:
             self.src_mask = None
@@ -538,21 +505,21 @@ class MultiheadAttentionContainer(torch.nn.Module):
             query.size(-1),
         )
         q, k, v = self.in_proj_container(query, key, value)
-        assert q.size(-1) % self.nhead == 0, (
-            "query's embed_dim must be divisible by the number of heads"
-        )
+        assert (
+            q.size(-1) % self.nhead == 0
+        ), "query's embed_dim must be divisible by the number of heads"
         head_dim = q.size(-1) // self.nhead
         q = q.reshape(tgt_len, bsz * self.nhead, head_dim)
 
-        assert k.size(-1) % self.nhead == 0, (
-            "key's embed_dim must be divisible by the number of heads"
-        )
+        assert (
+            k.size(-1) % self.nhead == 0
+        ), "key's embed_dim must be divisible by the number of heads"
         head_dim = k.size(-1) // self.nhead
         k = k.reshape(src_len, bsz * self.nhead, head_dim)
 
-        assert v.size(-1) % self.nhead == 0, (
-            "value's embed_dim must be divisible by the number of heads"
-        )
+        assert (
+            v.size(-1) % self.nhead == 0
+        ), "value's embed_dim must be divisible by the number of heads"
         head_dim = v.size(-1) // self.nhead
         v = v.reshape(src_len, bsz * self.nhead, head_dim)
 
@@ -629,9 +596,9 @@ class ScaledDotProduct(torch.nn.Module):
                 attn_mask = torch.nn.functional.pad(_attn_mask, [0, 1])
 
         tgt_len, head_dim = query.size(-3), query.size(-1)
-        assert query.size(-1) == key.size(-1) == value.size(-1), (
-            "The feature dim of query, key, value must be equal."
-        )
+        assert (
+            query.size(-1) == key.size(-1) == value.size(-1)
+        ), "The feature dim of query, key, value must be equal."
         assert key.size() == value.size(), "Shape of key, value must match"
         src_len = key.size(-3)
         batch_heads = max(query.size(-2), key.size(-2))

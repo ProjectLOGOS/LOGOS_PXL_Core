@@ -446,9 +446,7 @@ MERGE_RULE_PATH = Path(".github") / "merge_rules.yaml"
 REMOTE_MAIN_BRANCH = "origin/main"
 DRCI_CHECKRUN_NAME = "Dr.CI"
 INTERNAL_CHANGES_CHECKRUN_NAME = "Meta Internal-Only Changes Check"
-HAS_NO_CONNECTED_DIFF_TITLE = (
-    "There is no internal Diff connected, this can be merged now"
-)
+HAS_NO_CONNECTED_DIFF_TITLE = "There is no internal Diff connected, this can be merged now"
 # This could be set to -1 to ignore all flaky and broken trunk failures. On the
 # other hand, using a large value like 10 here might be useful in sev situation
 IGNORABLE_FAILED_CHECKS_THESHOLD = 10
@@ -462,9 +460,7 @@ def gh_get_pr_info(org: str, proj: str, pr_no: int) -> Any:
 @cache
 def gh_get_team_members(org: str, name: str) -> list[str]:
     rc: list[str] = []
-    team_members: dict[str, Any] = {
-        "pageInfo": {"hasNextPage": "true", "endCursor": None}
-    }
+    team_members: dict[str, Any] = {"pageInfo": {"hasNextPage": "true", "endCursor": None}}
     while bool(team_members["pageInfo"]["hasNextPage"]):
         query = gh_graphql(
             GH_GET_TEAM_MEMBERS_QUERY,
@@ -528,10 +524,7 @@ def add_workflow_conclusions(
 
                 # Only keep the latest workflow run for each workflow, heuristically,
                 # it's the run with largest run ID
-                if (
-                    workflow_id not in workflows
-                    or workflows[workflow_id].run_id < workflow_run_id
-                ):
+                if workflow_id not in workflows or workflows[workflow_id].run_id < workflow_run_id:
                     workflows[workflow_id] = WorkflowCheckState(
                         name=workflow_name,
                         status=workflow_conclusion,
@@ -545,11 +538,11 @@ def add_workflow_conclusions(
                     if not isinstance(checkrun_node, dict):
                         warn(f"Expected dictionary, but got {type(checkrun_node)}")
                         continue
-                    checkrun_name = f"{get_check_run_name_prefix(workflow_run)}{checkrun_node['name']}"
+                    checkrun_name = (
+                        f"{get_check_run_name_prefix(workflow_run)}{checkrun_node['name']}"
+                    )
                     existing_checkrun = workflow_obj.jobs.get(checkrun_name)
-                    if existing_checkrun is None or not is_passing_status(
-                        existing_checkrun.status
-                    ):
+                    if existing_checkrun is None or not is_passing_status(existing_checkrun.status):
                         workflow_obj.jobs[checkrun_name] = JobCheckState(
                             checkrun_name,
                             checkrun_node["detailsUrl"],
@@ -640,9 +633,7 @@ def _revlist_to_prs(
 
         m = all_matches[0]
         if pr.org != m.group("owner") or pr.project != m.group("repo"):
-            raise RuntimeError(
-                f"PR {m.group('number')} resolved to wrong owner/repo pair"
-            )
+            raise RuntimeError(f"PR {m.group('number')} resolved to wrong owner/repo pair")
         pr_num = int(m.group("number"))
         candidate = GitHubPR(pr.org, pr.project, pr_num) if pr_num != pr.pr_num else pr
         if should_skip is not None and should_skip(idx, candidate):
@@ -828,9 +819,7 @@ class GitHubPR:
                     cursor=info["reviews"]["pageInfo"]["startCursor"],
                 )
                 info = rc["data"]["repository"]["pullRequest"]
-        reviews = {
-            author: state for author, state in self._reviews if state != "COMMENTED"
-        }
+        reviews = {author: state for author, state in self._reviews if state != "COMMENTED"}
         return list(reviews.items())
 
     def get_approved_by(self) -> list[str]:
@@ -908,9 +897,7 @@ class GitHubPR:
                 cs_cursor=edges[edge_idx - 1]["cursor"] if edge_idx > 0 else None,
                 cr_cursor=checkruns["pageInfo"]["endCursor"],
             )
-            last_commit = rc["data"]["repository"]["pullRequest"]["commits"]["nodes"][
-                -1
-            ]["commit"]
+            last_commit = rc["data"]["repository"]["pullRequest"]["commits"]["nodes"][-1]["commit"]
             checkruns = last_commit["checkSuites"]["nodes"][-1]["checkRuns"]
             return checkruns
 
@@ -1076,18 +1063,14 @@ class GitHubPR:
         skip_all_rule_checks: bool = False,
     ) -> list["GitHubPR"]:
         assert self.is_ghstack_pr()
-        ghstack_prs = get_ghstack_prs(
-            repo, self, open_only=False
-        )  # raises error if out of sync
+        ghstack_prs = get_ghstack_prs(repo, self, open_only=False)  # raises error if out of sync
         pr_dependencies = []
         for pr, rev in ghstack_prs:
             if pr.is_closed():
                 pr_dependencies.append(pr)
                 continue
 
-            commit_msg = pr.gen_commit_message(
-                filter_ghstack=True, ghstack_deps=pr_dependencies
-            )
+            commit_msg = pr.gen_commit_message(filter_ghstack=True, ghstack_deps=pr_dependencies)
             if pr.pr_num != self.pr_num and not skip_all_rule_checks:
                 # Raises exception if matching rule is not found
                 find_matching_merge_rule(
@@ -1171,9 +1154,7 @@ class GitHubPR:
             skip_internal_checks=can_skip_internal_checks(self, comment_id),
             ignore_current_checks=ignore_current_checks,
         )
-        additional_merged_prs = self.merge_changes(
-            repo, skip_mandatory_checks, comment_id
-        )
+        additional_merged_prs = self.merge_changes(repo, skip_mandatory_checks, comment_id)
 
         repo.push(self.default_branch(), dry_run)
         if not dry_run:
@@ -1293,9 +1274,7 @@ def gen_new_issue_link(
     )
 
 
-def read_merge_rules(
-    repo: Optional[GitRepo], org: str, project: str
-) -> list[MergeRule]:
+def read_merge_rules(repo: Optional[GitRepo], org: str, project: str) -> list[MergeRule]:
     """Returns the list of all merge rules for the repo or project.
 
     NB: this function is used in Meta-internal workflows, see the comment
@@ -1347,11 +1326,15 @@ def find_matching_merge_rule(
         project=pr.project,
         labels=["module: ci"],
     )
-    reject_reason = f"No rule found to match PR. Please [report]{issue_link} this issue to DevX team."
+    reject_reason = (
+        f"No rule found to match PR. Please [report]{issue_link} this issue to DevX team."
+    )
 
     rules = read_merge_rules(repo, pr.org, pr.project)
     if not rules:
-        reject_reason = f"Rejecting the merge as no rules are defined for the repository in {MERGE_RULE_PATH}"
+        reject_reason = (
+            f"Rejecting the merge as no rules are defined for the repository in {MERGE_RULE_PATH}"
+        )
         raise RuntimeError(reject_reason)
 
     checks = pr.get_checkrun_conclusions()
@@ -1524,9 +1507,7 @@ def checks_to_str(checks: list[tuple[str, Optional[str]]]) -> str:
 def checks_to_markdown_bullets(
     checks: list[tuple[str, Optional[str], Optional[int]]],
 ) -> list[str]:
-    return [
-        f"- [{c[0]}]({c[1]})" if c[1] is not None else f"- {c[0]}" for c in checks[:5]
-    ]
+    return [f"- [{c[0]}]({c[1]})" if c[1] is not None else f"- {c[0]}" for c in checks[:5]]
 
 
 def post_starting_merge_comment(
@@ -1534,9 +1515,7 @@ def post_starting_merge_comment(
     pr: GitHubPR,
     explainer: TryMergeExplainer,
     dry_run: bool,
-    ignore_current_checks_info: Optional[
-        list[tuple[str, Optional[str], Optional[int]]]
-    ] = None,
+    ignore_current_checks_info: Optional[list[tuple[str, Optional[str], Optional[int]]]] = None,
 ) -> None:
     """Post the initial merge starting message on the PR. Also post a short
     message on all PRs in the stack."""
@@ -1739,19 +1718,12 @@ def is_invalid_cancel(
     signals have been removed from HUD and Dr.CI. The same needs to be done
     here for consistency
     """
-    if (
-        not name
-        or not drci_classifications
-        or not conclusion
-        or conclusion.upper() != "CANCELLED"
-    ):
+    if not name or not drci_classifications or not conclusion or conclusion.upper() != "CANCELLED":
         return False
 
     # If a job is cancelled and not listed as a failure by Dr.CI, it's an
     # invalid signal and can be ignored
-    return all(
-        name != failure["name"] for failure in drci_classifications.get("FAILED", [])
-    )
+    return all(name != failure["name"] for failure in drci_classifications.get("FAILED", []))
 
 
 def get_classifications(
@@ -1885,11 +1857,7 @@ def get_pr_commit_sha(repo: GitRepo, pr: GitHubPR) -> str:
 def validate_revert(
     repo: GitRepo, pr: GitHubPR, *, comment_id: Optional[int] = None
 ) -> tuple[str, str]:
-    comment = (
-        pr.get_last_comment()
-        if comment_id is None
-        else pr.get_comment_by_id(comment_id)
-    )
+    comment = pr.get_last_comment() if comment_id is None else pr.get_comment_by_id(comment_id)
     if comment.editor_login is not None:
         raise PostCommentError("Don't want to revert based on edited command")
     author_association = comment.author_association
@@ -1905,9 +1873,7 @@ def validate_revert(
         )
 
     # Raises exception if matching rule is not found, but ignores all status checks
-    find_matching_merge_rule(
-        pr, repo, skip_mandatory_checks=True, skip_internal_checks=True
-    )
+    find_matching_merge_rule(pr, repo, skip_mandatory_checks=True, skip_internal_checks=True)
     commit_sha = get_pr_commit_sha(repo, pr)
     return (author_login, commit_sha)
 
@@ -1923,9 +1889,7 @@ def get_ghstack_dependent_prs(
     orig_ref = f"{repo.remote}/{pr.get_ghstack_orig_ref()}"
     rev_list = repo.revlist(f"{pr.default_branch()}..{orig_ref}")
     if len(rev_list) == 0:
-        raise RuntimeError(
-            f"PR {pr.pr_num} does not have any revisions associated with it"
-        )
+        raise RuntimeError(f"PR {pr.pr_num} does not have any revisions associated with it")
     skip_len = len(rev_list) - 1
     for branch in repo.branches_containing_ref(orig_ref):
         candidate = repo.revlist(f"{pr.default_branch()}..{branch}")
@@ -1963,7 +1927,9 @@ def do_revert_prs(
 ) -> None:
     # Prepare and push revert commits
     for commit_sha, pr in shas_and_prs:
-        revert_msg = f"\nReverted {pr.get_pr_url()} on behalf of {prefix_with_github_url(author_login)}"
+        revert_msg = (
+            f"\nReverted {pr.get_pr_url()} on behalf of {prefix_with_github_url(author_login)}"
+        )
         revert_msg += extra_msg
         repo.checkout(pr.default_branch())
         repo.revert(commit_sha)
@@ -1992,9 +1958,7 @@ def do_revert_prs(
         ):
             revert_message += "\n:warning: This PR might contain internal changes"
             revert_message += "\ncc: @pytorch/pytorch-dev-infra"
-        gh_post_pr_comment(
-            pr.org, pr.project, pr.pr_num, revert_message, dry_run=dry_run
-        )
+        gh_post_pr_comment(pr.org, pr.project, pr.pr_num, revert_message, dry_run=dry_run)
 
         pr.add_numbered_label("reverted", dry_run)
         pr.add_label("ci-no-td", dry_run)
@@ -2030,9 +1994,7 @@ def try_revert(
             prs_to_revert = " ".join([t[1].get_pr_url() for t in shas_and_prs])
             print(f"About to stack of PRs: {prs_to_revert}")
         except Exception as e:
-            print(
-                f"Failed to fetch dependent PRs: {str(e)}, fall over to single revert"
-            )
+            print(f"Failed to fetch dependent PRs: {str(e)}, fall over to single revert")
 
     do_revert_prs(
         repo,
@@ -2122,15 +2084,13 @@ def categorize_checks(
         elif not is_passing_status(check_runs[checkname].status):
             target = (
                 failed_checks_categorization[classification]
-                if classification
-                in ("IGNORE_CURRENT_CHECK", "BROKEN_TRUNK", "FLAKY", "UNSTABLE")
+                if classification in ("IGNORE_CURRENT_CHECK", "BROKEN_TRUNK", "FLAKY", "UNSTABLE")
                 else failed_checks
             )
             target.append((checkname, url, job_id))
 
     flaky_or_broken_trunk = (
-        failed_checks_categorization["BROKEN_TRUNK"]
-        + failed_checks_categorization["FLAKY"]
+        failed_checks_categorization["BROKEN_TRUNK"] + failed_checks_categorization["FLAKY"]
     )
 
     if flaky_or_broken_trunk:
@@ -2245,9 +2205,7 @@ def merge(
             failed_rule_message = None
             ignore_flaky_failures = True
             try:
-                find_matching_merge_rule(
-                    pr, repo, ignore_current_checks=ignore_current_checks
-                )
+                find_matching_merge_rule(pr, repo, ignore_current_checks=ignore_current_checks)
             except MandatoryChecksMissingError as ex:
                 if ex.rule is not None:
                     ignore_flaky_failures = ex.rule.ignore_flaky_failures
@@ -2264,8 +2222,7 @@ def merge(
             )
             pending, failing, _ = categorize_checks(
                 checks,
-                required_checks
-                + [x for x in checks.keys() if x not in required_checks],
+                required_checks + [x for x in checks.keys() if x not in required_checks],
                 ok_failed_checks_threshold=IGNORABLE_FAILED_CHECKS_THESHOLD
                 if ignore_flaky_failures
                 else 0,
@@ -2411,9 +2368,7 @@ def main() -> None:
         return
 
     if not args.force and pr.has_invalid_submodule_updates():
-        message = (
-            f"This PR updates submodules {', '.join(pr.get_changed_submodules())}\n"
-        )
+        message = f"This PR updates submodules {', '.join(pr.get_changed_submodules())}\n"
         message += '\nIf those updates are intentional, please add "submodule" keyword to PR title/description.'
         gh_post_pr_comment(org, project, args.pr_num, message, dry_run=args.dry_run)
         return
@@ -2456,9 +2411,7 @@ def main() -> None:
             print("Missing comment ID or PR number, couldn't upload to s3")
     finally:
         if not args.check_mergeability:
-            gh_remove_label(
-                org, project, args.pr_num, MERGE_IN_PROGRESS_LABEL, args.dry_run
-            )
+            gh_remove_label(org, project, args.pr_num, MERGE_IN_PROGRESS_LABEL, args.dry_run)
 
 
 if __name__ == "__main__":

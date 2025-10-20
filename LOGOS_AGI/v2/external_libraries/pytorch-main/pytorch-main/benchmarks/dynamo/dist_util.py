@@ -91,9 +91,7 @@ def model_iter_fn(model, example_inputs, collect_outputs=False):
 def get_model(args):
     if args.torchbench_model:
         setup_torchbench_cwd()
-        module = importlib.import_module(
-            f"torchbenchmark.models.{args.torchbench_model}"
-        )
+        module = importlib.import_module(f"torchbenchmark.models.{args.torchbench_model}")
         benchmark_cls = getattr(module, "Model", None)
         bm = benchmark_cls(test="train", device=args.device, batch_size=args.batch_size)
         model, inputs = bm.get_module()
@@ -101,9 +99,7 @@ def get_model(args):
         model = ToyModel()
         inputs = (torch.randn(20, 10),)
     else:
-        raise argparse.ArgumentError(
-            args.torchbench_model, message="Must specify a model"
-        )
+        raise argparse.ArgumentError(args.torchbench_model, message="Must specify a model")
 
     return model, inputs
 
@@ -135,9 +131,7 @@ MODEL_FSDP_WRAP = {
 
 def apply_fsdp(args, model, use_checkpointing=False, use_wrap_policy=True):
     wrap_policy = None
-    blocks = MODEL_FSDP_WRAP[
-        "toy_model" if model.__class__ is ToyModel else args.torchbench_model
-    ]
+    blocks = MODEL_FSDP_WRAP["toy_model" if model.__class__ is ToyModel else args.torchbench_model]
     if use_wrap_policy:
         wrap_policy = ModuleWrapPolicy(blocks)
 

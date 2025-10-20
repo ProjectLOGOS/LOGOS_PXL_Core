@@ -87,9 +87,7 @@ def plot_digits(X, title):
 # Let's first have a look to see the difference between noise-free and noisy
 # images. We will check the test set in this regard.
 plot_digits(X_test, "Uncorrupted test images")
-plot_digits(
-    X_test_noisy, f"Noisy test images\nMSE: {np.mean((X_test - X_test_noisy) ** 2):.2f}"
-)
+plot_digits(X_test_noisy, f"Noisy test images\nMSE: {np.mean((X_test - X_test_noisy) ** 2):.2f}")
 
 # %%
 # Learn the `PCA` basis
@@ -123,9 +121,7 @@ _ = kernel_pca.fit(X_train_noisy)
 # PCA; however, we expect a better reconstruction because we use a non-linear
 # kernel to learn the PCA basis and a kernel ridge to learn the mapping
 # function.
-X_reconstructed_kernel_pca = kernel_pca.inverse_transform(
-    kernel_pca.transform(X_test_noisy)
-)
+X_reconstructed_kernel_pca = kernel_pca.inverse_transform(kernel_pca.transform(X_test_noisy))
 X_reconstructed_pca = pca.inverse_transform(pca.transform(X_test_noisy))
 
 # %%

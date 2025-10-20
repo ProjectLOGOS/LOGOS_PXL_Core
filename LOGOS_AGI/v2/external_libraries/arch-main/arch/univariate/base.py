@@ -96,11 +96,7 @@ def _callback(parameters: Float64Array1D) -> None:
     _callback_info["iter"] += 1
     disp = "Iteration: {0:>6},   Func. Count: {1:>6.3g},   Neg. LLF: {2}"
     if _callback_info["iter"] % _callback_info["display"] == 0:
-        print(
-            disp.format(
-                _callback_info["iter"], _callback_info["count"], _callback_info["llf"]
-            )
-        )
+        print(disp.format(_callback_info["iter"], _callback_info["count"], _callback_info["llf"]))
 
 
 def constraint(a: Float64Array, b: Float64Array) -> list[dict[str, object]]:
@@ -198,13 +194,9 @@ class ARCHModel(metaclass=ABCMeta):
             self._y_series = cast(pd.Series, ensure1d(y, "y", series=True))
         else:
             self._y_series = cast(pd.Series, ensure1d(np.empty((0,)), "y", series=True))
-        self._y = to_array_1d(
-            np.ascontiguousarray(self._y_series.to_numpy()).astype(float)
-        )
+        self._y = to_array_1d(np.ascontiguousarray(self._y_series.to_numpy()).astype(float))
         if not np.all(np.isfinite(self._y)):
-            raise ValueError(
-                "NaN or inf values found in y. y must contains only finite values."
-            )
+            raise ValueError("NaN or inf values found in y. y must contains only finite values.")
         self._y_original = y
 
         self._fit_indices: list[int] = [0, int(self._y.shape[0])]
@@ -486,9 +478,7 @@ class ARCHModel(metaclass=ABCMeta):
         _resids = self.resids(mp)
 
         # 2. Compute sigma2 using VolatilityModel
-        sigma2 = self.volatility.compute_variance(
-            vp, _resids, sigma2, backcast, var_bounds
-        )
+        sigma2 = self.volatility.compute_variance(vp, _resids, sigma2, backcast, var_bounds)
         # 3. Compute log likelihood using Distribution
         llf = self.distribution.loglikelihood(dp, _resids, sigma2, individual)
 
@@ -682,9 +672,7 @@ class ARCHModel(metaclass=ABCMeta):
 
         # Closed form is applicable when model has no parameters
         # Or when distribution is normal and constant variance
-        has_closed_form = (
-            v.closed_form and d.num_params == 0 and isinstance(v, ConstantVariance)
-        )
+        has_closed_form = v.closed_form and d.num_params == 0 and isinstance(v, ConstantVariance)
 
         self._adjust_sample(first_obs, last_obs)
 
@@ -692,9 +680,7 @@ class ARCHModel(metaclass=ABCMeta):
         self._check_scale(resids)
         if self.scale != 1.0:
             # Scale changed, rescale data and reset model
-            self._y = to_array_1d(
-                self.scale * ensure1d(self._y_original, "y", series=False)
-            )
+            self._y = to_array_1d(self.scale * ensure1d(self._y_original, "y", series=False))
             self._scale_changed()
             self._adjust_sample(first_obs, last_obs)
             resids = self.resids(self.starting_values())
@@ -773,9 +759,7 @@ class ARCHModel(metaclass=ABCMeta):
             for i, bound in enumerate(bounds):
                 valid = valid and bound[0] <= sv[i] <= bound[1]
             if not valid:
-                warnings.warn(
-                    starting_value_warning, StartingValueWarning, stacklevel=2
-                )
+                warnings.warn(starting_value_warning, StartingValueWarning, stacklevel=2)
                 starting_values = None
 
         # 4. Estimate models using constrained optimization
@@ -979,9 +963,7 @@ class ARCHModel(metaclass=ABCMeta):
         inv_hess = np.linalg.inv(hess)
         if robust:
             kwargs["individual"] = True
-            scores = approx_fprime(
-                params, self._loglikelihood, kwargs=kwargs
-            )  # type: np.ndarray
+            scores = approx_fprime(params, self._loglikelihood, kwargs=kwargs)  # type: np.ndarray
             score_cov = np.cov(scores.T)
             return inv_hess.dot(score_cov).dot(inv_hess) / nobs
         else:
@@ -1364,9 +1346,7 @@ class ARCHModelFixedResult(_SummaryRepr):
             std_res.name = "std_resid"
         return std_res
 
-    def plot(
-        self, annualize: str | None = None, scale: float | None = None
-    ) -> "Figure":
+    def plot(self, annualize: str | None = None, scale: float | None = None) -> "Figure":
         """
         Plot standardized residuals and conditional volatility
 
@@ -1558,10 +1538,7 @@ class ARCHModelFixedResult(_SummaryRepr):
         if params is None:
             params = self._params
         else:
-            if (
-                params.size != np.array(self._params).size
-                or params.ndim != self._params.ndim
-            ):
+            if params.size != np.array(self._params).size or params.ndim != self._params.ndim:
                 raise ValueError("params have incorrect dimensions")
         if not isinstance(horizon, (int, np.integer)) or horizon < 1:
             raise ValueError("horizon must be an integer >= 1.")
@@ -1685,9 +1662,7 @@ class ARCHModelFixedResult(_SummaryRepr):
             if plot_mean:
                 spine_data = np.asarray(forecasts.mean.iloc[i], dtype=float)
             else:
-                spine_data = np.asarray(
-                    np.sqrt(forecasts.variance.iloc[i]), dtype=float
-                )
+                spine_data = np.asarray(np.sqrt(forecasts.variance.iloc[i]), dtype=float)
             temp_y = np.hstack([y_values[i], spine_data])
             line = plot_fn(temp_x, temp_y, linewidth=3, linestyle="-", marker="")
             spines.append(line)
@@ -1726,11 +1701,7 @@ class ARCHModelFixedResult(_SummaryRepr):
         resids = resids[~np.isnan(resids)]
         nobs = resids.shape[0]
         resid2 = resids**2
-        lags = (
-            int(np.ceil(12.0 * np.power(nobs / 100.0, 1 / 4.0)))
-            if lags is None
-            else lags
-        )
+        lags = int(np.ceil(12.0 * np.power(nobs / 100.0, 1 / 4.0))) if lags is None else lags
         lags = max(min(resids.shape[0] // 2 - 1, lags), 1)
         if resid2.shape[0] < 3:
             raise ValueError("Test requires at least 3 non-nan observations")
@@ -1742,9 +1713,7 @@ class ARCHModelFixedResult(_SummaryRepr):
         null = f"{test_type}esiduals are homoskedastic."
         alt = f"{test_type}esiduals are conditionally heteroskedastic."
         assert isinstance(lags, int)
-        return WaldTestStatistic(
-            stat, df=lags, null=null, alternative=alt, name="ARCH-LM Test"
-        )
+        return WaldTestStatistic(stat, df=lags, null=null, alternative=alt, name="ARCH-LM Test")
 
 
 class ARCHModelResult(ARCHModelFixedResult):
@@ -1804,9 +1773,7 @@ class ARCHModelResult(ARCHModelFixedResult):
         fit_stop: int,
         model: ARCHModel,
     ) -> None:
-        super().__init__(
-            params, resid, volatility, dep_var, names, loglikelihood, is_pandas, model
-        )
+        super().__init__(params, resid, volatility, dep_var, names, loglikelihood, is_pandas, model)
 
         self._fit_indices = (fit_start, fit_stop)
         self._param_cov = param_cov
@@ -1920,11 +1887,7 @@ class ARCHModelResult(ARCHModelFixedResult):
         conf_int_str = []
         for c in conf_int:
             conf_int_str.append(
-                "["
-                + format_float_fixed(c[0], 7, 3)
-                + ","
-                + format_float_fixed(c[1], 7, 3)
-                + "]"
+                "[" + format_float_fixed(c[0], 7, 3) + "," + format_float_fixed(c[1], 7, 3) + "]"
             )
 
         stubs = list(self._names)
@@ -2016,9 +1979,7 @@ class ARCHModelResult(ARCHModelFixedResult):
         """
         Degree of freedom adjusted R-squared
         """
-        return 1 - (
-            (1 - self.rsquared) * (self.nobs - 1) / (self.nobs - self.model.num_params)
-        )
+        return 1 - ((1 - self.rsquared) * (self.nobs - 1) / (self.nobs - self.model.num_params))
 
     @cached_property
     def pvalues(self) -> pd.Series:
@@ -2065,9 +2026,7 @@ class ARCHModelResult(ARCHModelFixedResult):
         return self._optim_output
 
 
-def _align_forecast(
-    f: pd.DataFrame, align: Literal["origin", "target"]
-) -> pd.DataFrame:
+def _align_forecast(f: pd.DataFrame, align: Literal["origin", "target"]) -> pd.DataFrame:
     if align == "origin":
         return f
     elif align in ("target", "horizon"):
@@ -2084,9 +2043,7 @@ def _format_forecasts(
     horizon = values.shape[1]
     format_str = "{0:>0" + str(int(np.ceil(np.log10(horizon + 0.5)))) + "}"
     columns = ["h." + format_str.format(h + 1) for h in range(horizon)]
-    forecasts = pd.DataFrame(
-        values, index=index[start_index:], columns=columns, dtype="float"
-    )
+    forecasts = pd.DataFrame(values, index=index[start_index:], columns=columns, dtype="float")
     return forecasts
 
 
@@ -2143,9 +2100,7 @@ class ARCHModelForecastSimulation:
         return self._residual_variances
 
 
-def _reindex(
-    a: Float64Array | None, idx: list[Label] | pd.Index
-) -> Float64Array | None:
+def _reindex(a: Float64Array | None, idx: list[Label] | pd.Index) -> Float64Array | None:
     if a is None:
         return a
     assert a is not None

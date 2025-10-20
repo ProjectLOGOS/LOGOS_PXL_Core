@@ -191,9 +191,7 @@ html_css_files = ["css/small_fixes.css"]
 # "searchbox.html"]``.
 #
 # html_sidebars = {}
-html_sidebars = {
-    "**": ["logo-text.html", "globaltoc.html", "searchbox.html", "localtoc.html"]
-}
+html_sidebars = {"**": ["logo-text.html", "globaltoc.html", "searchbox.html", "localtoc.html"]}
 
 # If false, no module index is generated.
 html_domain_indices = True

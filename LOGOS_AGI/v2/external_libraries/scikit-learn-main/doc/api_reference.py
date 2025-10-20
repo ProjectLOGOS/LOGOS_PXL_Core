@@ -823,9 +823,7 @@ API_REFERENCE = {
             {
                 "title": "Pairwise metrics",
                 "description": (
-                    _get_submodule("sklearn.metrics", "pairwise")
-                    + "\n\n"
-                    + _get_guide("metrics")
+                    _get_submodule("sklearn.metrics", "pairwise") + "\n\n" + _get_guide("metrics")
                 ),
                 "autosummary": [
                     "pairwise.additive_chi2_kernel",
@@ -1016,9 +1014,7 @@ API_REFERENCE = {
     },
     "sklearn.neural_network": {
         "short_summary": "Neural network models.",
-        "description": _get_guide(
-            "neural_networks_supervised", "neural_networks_unsupervised"
-        ),
+        "description": _get_guide("neural_networks_supervised", "neural_networks_unsupervised"),
         "sections": [
             {
                 "title": None,

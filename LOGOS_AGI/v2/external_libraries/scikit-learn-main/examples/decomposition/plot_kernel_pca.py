@@ -66,9 +66,7 @@ X_test_pca = pca.fit(X_train).transform(X_test)
 X_test_kernel_pca = kernel_pca.fit(X_train).transform(X_test)
 
 # %%
-fig, (orig_data_ax, pca_proj_ax, kernel_pca_proj_ax) = plt.subplots(
-    ncols=3, figsize=(14, 4)
-)
+fig, (orig_data_ax, pca_proj_ax, kernel_pca_proj_ax) = plt.subplots(ncols=3, figsize=(14, 4))
 
 orig_data_ax.scatter(X_test[:, 0], X_test[:, 1], c=y_test)
 orig_data_ax.set_ylabel("Feature #1")

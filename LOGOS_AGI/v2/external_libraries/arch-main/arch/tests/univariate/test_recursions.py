@@ -292,13 +292,9 @@ var_bounds = np.ones((nobs, 2)) * var_bounds
             parameters, resids, sigma2, lags, nobs, backcast, self.var_bounds
         )
         sigma2_python = sigma2.copy()
-        recpy.harch_recursion(
-            parameters, resids, sigma2, lags, nobs, backcast, self.var_bounds
-        )
+        recpy.harch_recursion(parameters, resids, sigma2, lags, nobs, backcast, self.var_bounds)
         sigma2_numba = sigma2.copy()
-        rec.harch_recursion(
-            parameters, resids, sigma2, lags, nobs, backcast, self.var_bounds
-        )
+        rec.harch_recursion(parameters, resids, sigma2, lags, nobs, backcast, self.var_bounds)
         assert_almost_equal(sigma2_numba, sigma2)
         assert_almost_equal(sigma2_python, sigma2)
 
@@ -324,9 +320,7 @@ var_bounds = np.ones((nobs, 2)) * var_bounds
         )
         assert np.all(sigma2 >= self.var_bounds[:, 0])
         assert np.all(sigma2 <= 1.1 * self.var_bounds[:, 1])
-        rec.harch_recursion(
-            parameters, mod_resids, sigma2, lags, nobs, backcast, self.var_bounds
-        )
+        rec.harch_recursion(parameters, mod_resids, sigma2, lags, nobs, backcast, self.var_bounds)
         assert np.all(sigma2 >= self.var_bounds[:, 0])
         assert np.all(sigma2 <= 1.1 * self.var_bounds[:, 1])
 
@@ -336,27 +330,19 @@ var_bounds = np.ones((nobs, 2)) * var_bounds
 
         parameters = np.array([0.1, 0.4, 0.3, 0.2])
         lags = np.array([1, 5, 22], dtype=np.int32)
-        rec.harch_recursion(
-            parameters, resids, sigma2, lags, nobs, backcast, self.var_bounds
-        )
+        rec.harch_recursion(parameters, resids, sigma2, lags, nobs, backcast, self.var_bounds)
         sigma2_direct = sigma2.copy()
         sigma2[:] = np.nan
         for t in range(nobs):
-            recpy.harch_core_python(
-                t, parameters, resids, sigma2, lags, backcast, self.var_bounds
-            )
+            recpy.harch_core_python(t, parameters, resids, sigma2, lags, backcast, self.var_bounds)
         assert_allclose(sigma2, sigma2_direct)
 
         for t in range(nobs):
-            recpy.harch_core(
-                t, parameters, resids, sigma2, lags, backcast, self.var_bounds
-            )
+            recpy.harch_core(t, parameters, resids, sigma2, lags, backcast, self.var_bounds)
         assert_allclose(sigma2, sigma2_direct)
 
         for t in range(nobs):
-            rec.harch_core(
-                t, parameters, resids, sigma2, lags, backcast, self.var_bounds
-            )
+            rec.harch_core(t, parameters, resids, sigma2, lags, backcast, self.var_bounds)
         assert_allclose(sigma2, sigma2_direct)
 
         sigma2[:] = np.nan
@@ -386,31 +372,21 @@ var_bounds = np.ones((nobs, 2)) * var_bounds
         parameters = np.array([0.1, 0.4, 0.3, 0.2])
         p = 3
 
-        recpy.arch_recursion_python(
-            parameters, resids, sigma2, p, nobs, backcast, self.var_bounds
-        )
+        recpy.arch_recursion_python(parameters, resids, sigma2, p, nobs, backcast, self.var_bounds)
         sigma2_python = sigma2.copy()
-        recpy.arch_recursion(
-            parameters, resids, sigma2, p, nobs, backcast, self.var_bounds
-        )
+        recpy.arch_recursion(parameters, resids, sigma2, p, nobs, backcast, self.var_bounds)
         sigma2_numba = sigma2.copy()
-        rec.arch_recursion(
-            parameters, resids, sigma2, p, nobs, backcast, self.var_bounds
-        )
+        rec.arch_recursion(parameters, resids, sigma2, p, nobs, backcast, self.var_bounds)
         assert_almost_equal(sigma2_numba, sigma2)
         assert_almost_equal(sigma2_python, sigma2)
 
         parameters = np.array([-0.1, -0.4, 0.3, 0.2])
-        recpy.arch_recursion_python(
-            parameters, resids, sigma2, p, nobs, backcast, self.var_bounds
-        )
+        recpy.arch_recursion_python(parameters, resids, sigma2, p, nobs, backcast, self.var_bounds)
         assert np.all(sigma2 >= self.var_bounds[:, 0])
         assert np.all(sigma2 <= 1.1 * self.var_bounds[:, 1])
 
         parameters = np.array([0.1, 4e8, 3, 2])
-        recpy.arch_recursion_python(
-            parameters, resids, sigma2, p, nobs, backcast, self.var_bounds
-        )
+        recpy.arch_recursion_python(parameters, resids, sigma2, p, nobs, backcast, self.var_bounds)
         assert np.all(sigma2 >= self.var_bounds[:, 0])
         assert np.all(sigma2 <= 1.1 * self.var_bounds[:, 1])
 
@@ -421,9 +397,7 @@ var_bounds = np.ones((nobs, 2)) * var_bounds
         )
         assert np.all(sigma2 >= self.var_bounds[:, 0])
         assert np.all(sigma2 <= 1.1 * self.var_bounds[:, 1])
-        rec.arch_recursion(
-            parameters, mod_resids, sigma2, p, nobs, backcast, self.var_bounds
-        )
+        rec.arch_recursion(parameters, mod_resids, sigma2, p, nobs, backcast, self.var_bounds)
         assert np.all(sigma2 >= self.var_bounds[:, 0])
         assert np.all(sigma2 <= 1.1 * self.var_bounds[:, 1])
 
@@ -472,9 +446,7 @@ var_bounds = np.ones((nobs, 2)) * var_bounds
 
         for t in range(nobs):
             if t == 0:
-                sigma2[t] = parameters.dot(
-                    np.array([1.0, backcast, 0.5 * backcast, backcast])
-                )
+                sigma2[t] = parameters.dot(np.array([1.0, backcast, 0.5 * backcast, backcast]))
             else:
                 var = np.array(
                     [
@@ -627,9 +599,7 @@ var_bounds = np.ones((nobs, 2)) * var_bounds
             self.var_bounds,
         )
         sigma2_garch = sigma2.copy()
-        rec.arch_recursion(
-            parameters, resids, sigma2, 3, nobs, backcast, self.var_bounds
-        )
+        rec.arch_recursion(parameters, resids, sigma2, 3, nobs, backcast, self.var_bounds)
 
         assert_almost_equal(sigma2_garch, sigma2)
 
@@ -639,25 +609,17 @@ var_bounds = np.ones((nobs, 2)) * var_bounds
 
         parameters = np.array([1e100, 0.4, 0.3, 0.2])
         lags = np.array([1, 5, 22], dtype=np.int32)
-        recpy.harch_recursion(
-            parameters, resids, sigma2, lags, nobs, backcast, self.var_bounds
-        )
+        recpy.harch_recursion(parameters, resids, sigma2, lags, nobs, backcast, self.var_bounds)
         sigma2_python = sigma2.copy()
-        rec.harch_recursion(
-            parameters, resids, sigma2, lags, nobs, backcast, self.var_bounds
-        )
+        rec.harch_recursion(parameters, resids, sigma2, lags, nobs, backcast, self.var_bounds)
         assert_almost_equal(sigma2_python, sigma2)
         assert np.all(sigma2 >= self.var_bounds[:, 0])
         assert np.all(sigma2 <= 1.1 * self.var_bounds[:, 1])
 
         parameters = np.array([-1e100, 0.4, 0.3, 0.2])
-        recpy.harch_recursion(
-            parameters, resids, sigma2, lags, nobs, backcast, self.var_bounds
-        )
+        recpy.harch_recursion(parameters, resids, sigma2, lags, nobs, backcast, self.var_bounds)
         sigma2_python = sigma2.copy()
-        rec.harch_recursion(
-            parameters, resids, sigma2, lags, nobs, backcast, self.var_bounds
-        )
+        rec.harch_recursion(parameters, resids, sigma2, lags, nobs, backcast, self.var_bounds)
         assert_almost_equal(sigma2_python, sigma2)
         assert_almost_equal(sigma2, self.var_bounds[:, 0])
 
@@ -724,25 +686,17 @@ var_bounds = np.ones((nobs, 2)) * var_bounds
         assert_almost_equal(sigma2, self.var_bounds[:, 0])
 
         parameters = np.array([1e100, 0.4, 0.3, 0.2])
-        recpy.arch_recursion(
-            parameters, resids, sigma2, 3, nobs, backcast, self.var_bounds
-        )
+        recpy.arch_recursion(parameters, resids, sigma2, 3, nobs, backcast, self.var_bounds)
         sigma2_python = sigma2.copy()
-        rec.arch_recursion(
-            parameters, resids, sigma2, 3, nobs, backcast, self.var_bounds
-        )
+        rec.arch_recursion(parameters, resids, sigma2, 3, nobs, backcast, self.var_bounds)
         assert_almost_equal(sigma2_python, sigma2)
         assert np.all(sigma2 >= self.var_bounds[:, 0])
         assert np.all(sigma2 <= 1.1 * self.var_bounds[:, 1])
 
         parameters = np.array([-1e100, 0.4, 0.3, 0.2])
-        recpy.arch_recursion(
-            parameters, resids, sigma2, 3, nobs, backcast, self.var_bounds
-        )
+        recpy.arch_recursion(parameters, resids, sigma2, 3, nobs, backcast, self.var_bounds)
         sigma2_python = sigma2.copy()
-        rec.arch_recursion(
-            parameters, resids, sigma2, 3, nobs, backcast, self.var_bounds
-        )
+        rec.arch_recursion(parameters, resids, sigma2, 3, nobs, backcast, self.var_bounds)
         assert_almost_equal(sigma2_python, sigma2)
         assert_almost_equal(sigma2, self.var_bounds[:, 0])
 
@@ -937,17 +891,13 @@ var_bounds = np.ones((nobs, 2)) * var_bounds
         j = np.arange(1, 22 + 1)
         weights = gamma(j + 0.6) / (gamma(j + 1) * gamma(0.6))
         weights = weights / weights.sum()
-        recpy.midas_recursion(
-            parameters, weights, resids, sigma2, nobs, backcast, self.var_bounds
-        )
+        recpy.midas_recursion(parameters, weights, resids, sigma2, nobs, backcast, self.var_bounds)
         sigma2_numba = sigma2.copy()
         recpy.midas_recursion_python(
             parameters, weights, resids, sigma2, nobs, backcast, self.var_bounds
         )
         sigma2_python = sigma2.copy()
-        rec.midas_recursion(
-            parameters, weights, resids, sigma2, nobs, backcast, self.var_bounds
-        )
+        rec.midas_recursion(parameters, weights, resids, sigma2, nobs, backcast, self.var_bounds)
         assert_almost_equal(sigma2_numba, sigma2)
         assert_almost_equal(sigma2_python, sigma2)
 
@@ -968,9 +918,7 @@ var_bounds = np.ones((nobs, 2)) * var_bounds
         )
         assert np.all(sigma2 >= self.var_bounds[:, 0])
         assert np.all(sigma2 <= 1.1 * self.var_bounds[:, 1])
-        rec.midas_recursion(
-            parameters, weights, resids, sigma2, nobs, backcast, self.var_bounds
-        )
+        rec.midas_recursion(parameters, weights, resids, sigma2, nobs, backcast, self.var_bounds)
         assert np.all(sigma2 >= self.var_bounds[:, 0])
         assert np.all(sigma2 <= 1.1 * self.var_bounds[:, 1])
 
@@ -980,9 +928,7 @@ var_bounds = np.ones((nobs, 2)) * var_bounds
         )
         assert np.all(sigma2 >= self.var_bounds[:, 0])
         assert np.all(sigma2 <= 1.1 * self.var_bounds[:, 1])
-        rec.midas_recursion(
-            parameters, weights, resids, sigma2, nobs, backcast, self.var_bounds
-        )
+        rec.midas_recursion(parameters, weights, resids, sigma2, nobs, backcast, self.var_bounds)
         assert np.all(sigma2 >= self.var_bounds[:, 0])
         assert np.all(sigma2 <= 1.1 * self.var_bounds[:, 1])
 
@@ -994,9 +940,7 @@ var_bounds = np.ones((nobs, 2)) * var_bounds
         j = np.arange(1, 22 + 1)
         weights = gamma(j + 0.6) / (gamma(j + 1) * gamma(0.6))
         weights = weights / weights.sum()
-        recpy.midas_recursion(
-            parameters, weights, resids, sigma2, nobs, backcast, self.var_bounds
-        )
+        recpy.midas_recursion(parameters, weights, resids, sigma2, nobs, backcast, self.var_bounds)
         sigma2_ref = sigma2.copy()
 
         sigma2[:] = np.nan
@@ -1098,9 +1042,7 @@ var_bounds = np.ones((nobs, 2)) * var_bounds
             lam_direct[i] = (i - parameters[-1]) / (i + 1) * lam_direct[i - 1]
         assert_almost_equal(lam, lam_direct)
 
-    @pytest.mark.skipif(
-        MISSING_NUMBA or MISSING_EXTENSION, reason="numba not installed"
-    )
+    @pytest.mark.skipif(MISSING_NUMBA or MISSING_EXTENSION, reason="numba not installed")
     def test_garch_performance(self):
         garch_setup = """
 parameters = np.array([.1, .4, .3, .2])
@@ -1129,9 +1071,7 @@ var_bounds)
         if not (MISSING_NUMBA or CYTHON_COVERAGE):
             assert 0.1 < timer.ratio
 
-    @pytest.mark.skipif(
-        MISSING_NUMBA or MISSING_EXTENSION, reason="numba not installed"
-    )
+    @pytest.mark.skipif(MISSING_NUMBA or MISSING_EXTENSION, reason="numba not installed")
     def test_harch_performance(self):
         harch_setup = """
 parameters = np.array([.1, .4, .3, .2])
@@ -1160,9 +1100,7 @@ rec.harch_recursion(parameters, resids, sigma2, lags, nobs, backcast, var_bounds
         if not (MISSING_NUMBA or CYTHON_COVERAGE):
             assert 0.1 < timer.ratio
 
-    @pytest.mark.skipif(
-        MISSING_NUMBA or MISSING_EXTENSION, reason="numba not installed"
-    )
+    @pytest.mark.skipif(MISSING_NUMBA or MISSING_EXTENSION, reason="numba not installed")
     def test_egarch_performance(self):
         egarch_setup = """
 parameters = np.array([0.0, 0.1, -0.1, 0.95])
@@ -1195,9 +1133,7 @@ var_bounds, lnsigma2, std_resids, abs_std_resids)
         if not (MISSING_NUMBA or CYTHON_COVERAGE):
             assert 0.1 < timer.ratio
 
-    @pytest.mark.skipif(
-        MISSING_NUMBA or MISSING_EXTENSION, reason="numba not installed"
-    )
+    @pytest.mark.skipif(MISSING_NUMBA or MISSING_EXTENSION, reason="numba not installed")
     def test_midas_performance(self):
         midas_setup = """
 from scipy.special import gamma
@@ -1226,9 +1162,7 @@ rec.midas_recursion(parameters, weights, resids, sigma2, nobs, backcast, var_bou
         if not (MISSING_NUMBA or CYTHON_COVERAGE):
             assert 0.1 < timer.ratio
 
-    @pytest.mark.skipif(
-        MISSING_NUMBA or MISSING_EXTENSION, reason="numba not installed"
-    )
+    @pytest.mark.skipif(MISSING_NUMBA or MISSING_EXTENSION, reason="numba not installed")
     def test_figarch_performance(self):
         midas_setup = """
 p = q = 1
@@ -1498,7 +1432,5 @@ rec.figarch_recursion(parameters, fresids, sigma2, p, q,
 def test_bounds_check():
     var_bounds = np.array([0.1, 10])
     assert_almost_equal(recpy.bounds_check_python(-1.0, var_bounds), 0.1)
-    assert_almost_equal(
-        recpy.bounds_check_python(20.0, var_bounds), 10 + np.log(20.0 / 10.0)
-    )
+    assert_almost_equal(recpy.bounds_check_python(20.0, var_bounds), 10 + np.log(20.0 / 10.0))
     assert_almost_equal(recpy.bounds_check_python(np.inf, var_bounds), 1010.0)

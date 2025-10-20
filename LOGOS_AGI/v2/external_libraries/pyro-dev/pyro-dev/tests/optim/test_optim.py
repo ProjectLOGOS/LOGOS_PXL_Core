@@ -81,9 +81,7 @@ class OptimTests(TestCase):
         assert adam2_step_count_after_load_and_step == 2
 
         free_param_unchanged = torch.equal(pyro.param(free_param).data, torch.zeros(1))
-        fixed_param_unchanged = torch.equal(
-            pyro.param(fixed_param).data, torch.zeros(1)
-        )
+        fixed_param_unchanged = torch.equal(pyro.param(fixed_param).data, torch.zeros(1))
         assert fixed_param_unchanged and not free_param_unchanged
 
 
@@ -105,9 +103,7 @@ class OptimTests(TestCase):
                 "step_size": 1,
             }
         ),
-        optim.ExponentialLR(
-            {"optimizer": torch.optim.SGD, "optim_args": {"lr": 0.01}, "gamma": 2}
-        ),
+        optim.ExponentialLR({"optimizer": torch.optim.SGD, "optim_args": {"lr": 0.01}, "gamma": 2}),
         optim.ReduceLROnPlateau(
             {
                 "optimizer": torch.optim.SGD,
@@ -123,9 +119,7 @@ def test_dynamic_lr(scheduler):
 
     def model():
         sample = pyro.sample("latent", Normal(torch.tensor(0.0), torch.tensor(0.3)))
-        return pyro.sample(
-            "obs", Normal(sample, torch.tensor(0.2)), obs=torch.tensor(0.1)
-        )
+        return pyro.sample("obs", Normal(sample, torch.tensor(0.2)), obs=torch.tensor(0.1))
 
     def guide():
         loc = pyro.param("loc", torch.tensor(0.0))
@@ -197,9 +191,7 @@ def test_clip_norm(pyro_optim, clip, value):
 def test_clippedadam_clip(clip_norm):
     x1 = torch.tensor(0.0, requires_grad=True)
     x2 = torch.tensor(0.0, requires_grad=True)
-    opt_ca = optim.clipped_adam.ClippedAdam(
-        params=[x1], lr=1.0, lrd=1.0, clip_norm=clip_norm
-    )
+    opt_ca = optim.clipped_adam.ClippedAdam(params=[x1], lr=1.0, lrd=1.0, clip_norm=clip_norm)
     opt_a = torch.optim.Adam(params=[x2], lr=1.0)
     for step in range(3):
         opt_ca.zero_grad()
@@ -215,9 +207,7 @@ def test_clippedadam_clip(clip_norm):
 def test_clippedadam_pass(clip_norm):
     x1 = torch.tensor(0.0, requires_grad=True)
     x2 = torch.tensor(0.0, requires_grad=True)
-    opt_ca = optim.clipped_adam.ClippedAdam(
-        params=[x1], lr=1.0, lrd=1.0, clip_norm=clip_norm
-    )
+    opt_ca = optim.clipped_adam.ClippedAdam(params=[x1], lr=1.0, lrd=1.0, clip_norm=clip_norm)
     opt_a = torch.optim.Adam(params=[x2], lr=1.0)
     for step in range(3):
         g = Uniform(-clip_norm, clip_norm).sample()
@@ -371,17 +361,13 @@ def test_name_preserved_by_to_pyro_module():
 )
 def test_checkpoint(Optim, config):
     def model():
-        x_scale = pyro.param(
-            "x_scale", torch.tensor(1.0), constraint=constraints.positive
-        )
+        x_scale = pyro.param("x_scale", torch.tensor(1.0), constraint=constraints.positive)
         z = pyro.sample("z", Normal(0, 1))
         return pyro.sample("x", Normal(z, x_scale), obs=torch.tensor(0.1))
 
     def guide():
         z_loc = pyro.param("z_loc", torch.tensor(0.0))
-        z_scale = pyro.param(
-            "z_scale", torch.tensor(0.5), constraint=constraints.positive
-        )
+        z_scale = pyro.param("z_scale", torch.tensor(0.5), constraint=constraints.positive)
         pyro.sample("z", Normal(z_loc, z_scale))
 
     store = pyro.get_param_store()
@@ -491,9 +477,7 @@ def test_centered_clipped_adam(plot):
         ultimate_loss_vec, convergence_rate_vec, convergence_iter_vec = [], [], []
         for lr in lr_vec:
             loss_vec = fit(lr=lr, centered_variance=centered_variance)
-            ultimate_loss, convergence_rate, convergence_iter = calc_convergence(
-                loss_vec
-            )
+            ultimate_loss, convergence_rate, convergence_iter = calc_convergence(loss_vec)
             ultimate_loss_vec.append(ultimate_loss)
             convergence_rate_vec.append(convergence_rate)
             convergence_iter_vec.append(convergence_iter)
@@ -527,9 +511,7 @@ def test_centered_clipped_adam(plot):
 
         plt.figure(figsize=(6, 8))
         plt.subplot(3, 1, 1)
-        plt.loglog(
-            lr_vec, centered_convergence_iter_vec, "b.-", label="Centered Variance"
-        )
+        plt.loglog(lr_vec, centered_convergence_iter_vec, "b.-", label="Centered Variance")
         plt.loglog(lr_vec, convergence_iter_vec, "r.-", label="Uncentered Variance")
         plt.xlabel("Learning Rate")
         plt.ylabel("Convergence Iteration")
@@ -537,9 +519,7 @@ def test_centered_clipped_adam(plot):
         plt.grid()
         plt.legend(loc="best")
         plt.subplot(3, 1, 2)
-        plt.loglog(
-            lr_vec, centered_convergence_rate_vec, "b.-", label="Centered Variance"
-        )
+        plt.loglog(lr_vec, centered_convergence_rate_vec, "b.-", label="Centered Variance")
         plt.loglog(lr_vec, convergence_rate_vec, "r.-", label="Uncentered Variance")
         plt.xlabel("Learning Rate")
         plt.ylabel("Convergence Rate")
@@ -547,9 +527,7 @@ def test_centered_clipped_adam(plot):
         plt.grid()
         plt.legend(loc="best")
         plt.subplot(3, 1, 3)
-        plt.semilogx(
-            lr_vec, centered_ultimate_loss_vec, "b.-", label="Centered Variance"
-        )
+        plt.semilogx(lr_vec, centered_ultimate_loss_vec, "b.-", label="Centered Variance")
         plt.semilogx(lr_vec, ultimate_loss_vec, "r.-", label="Uncentered Variance")
         plt.xlabel("Learning Rate")
         plt.ylabel("Ultimate Loss")

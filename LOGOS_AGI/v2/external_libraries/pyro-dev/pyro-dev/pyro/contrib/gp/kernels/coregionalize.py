@@ -45,9 +45,7 @@ class Coregionalize(Kernel):
     :param str name: Name of the kernel.
     """
 
-    def __init__(
-        self, input_dim, rank=None, components=None, diagonal=None, active_dims=None
-    ):
+    def __init__(self, input_dim, rank=None, components=None, diagonal=None, active_dims=None):
         super().__init__(input_dim, active_dims)
 
         # Add a low-rank kernel with expected value torch.eye(input_dim, input_dim) / 2.
@@ -66,14 +64,10 @@ class Coregionalize(Kernel):
 
         # Add a diagonal component initialized to torch.eye(input_dim, input_dim) / 2,
         # such that the total kernel has expected value the identity matrix.
-        diagonal = (
-            components.new_ones(input_dim) * 0.5 if diagonal is None else diagonal
-        )
+        diagonal = components.new_ones(input_dim) * 0.5 if diagonal is None else diagonal
         if diagonal.shape != (input_dim,):
             raise ValueError(
-                "Expected diagonal.shape == ({},), actual {}".format(
-                    input_dim, diagonal.shape
-                )
+                "Expected diagonal.shape == ({},), actual {}".format(input_dim, diagonal.shape)
             )
         self.diagonal = PyroParam(diagonal, constraints.positive)
 

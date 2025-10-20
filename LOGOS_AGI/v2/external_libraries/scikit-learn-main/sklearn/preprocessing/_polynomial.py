@@ -190,31 +190,23 @@ class PolynomialFeatures(TransformerMixin, BaseEstimator):
         "order": [StrOptions({"C", "F"})],
     }
 
-    def __init__(
-        self, degree=2, *, interaction_only=False, include_bias=True, order="C"
-    ):
+    def __init__(self, degree=2, *, interaction_only=False, include_bias=True, order="C"):
         self.degree = degree
         self.interaction_only = interaction_only
         self.include_bias = include_bias
         self.order = order
 
     @staticmethod
-    def _combinations(
-        n_features, min_degree, max_degree, interaction_only, include_bias
-    ):
+    def _combinations(n_features, min_degree, max_degree, interaction_only, include_bias):
         comb = combinations if interaction_only else combinations_w_r
         start = max(1, min_degree)
-        iter = chain.from_iterable(
-            comb(range(n_features), i) for i in range(start, max_degree + 1)
-        )
+        iter = chain.from_iterable(comb(range(n_features), i) for i in range(start, max_degree + 1))
         if include_bias:
             iter = chain(comb(range(n_features), 0), iter)
         return iter
 
     @staticmethod
-    def _num_combinations(
-        n_features, min_degree, max_degree, interaction_only, include_bias
-    ):
+    def _num_combinations(n_features, min_degree, max_degree, interaction_only, include_bias):
         """Calculate number of terms in polynomial expansion
 
         This should be equivalent to counting the number of terms returned by
@@ -251,9 +243,7 @@ class PolynomialFeatures(TransformerMixin, BaseEstimator):
             interaction_only=self.interaction_only,
             include_bias=self.include_bias,
         )
-        return np.vstack(
-            [np.bincount(c, minlength=self.n_features_in_) for c in combinations]
-        )
+        return np.vstack([np.bincount(c, minlength=self.n_features_in_) for c in combinations])
 
     def get_feature_names_out(self, input_features=None):
         """Get output feature names for transformation.
@@ -282,11 +272,7 @@ class PolynomialFeatures(TransformerMixin, BaseEstimator):
             inds = np.where(row)[0]
             if len(inds):
                 name = " ".join(
-                    (
-                        "%s^%d" % (input_features[ind], exp)
-                        if exp != 1
-                        else input_features[ind]
-                    )
+                    ("%s^%d" % (input_features[ind], exp) if exp != 1 else input_features[ind])
                     for ind, exp in zip(inds, row[inds])
                 )
             else:
@@ -323,9 +309,7 @@ class PolynomialFeatures(TransformerMixin, BaseEstimator):
 
             self._min_degree = 0
             self._max_degree = self.degree
-        elif (
-            isinstance(self.degree, collections.abc.Iterable) and len(self.degree) == 2
-        ):
+        elif isinstance(self.degree, collections.abc.Iterable) and len(self.degree) == 2:
             self._min_degree, self._max_degree = self.degree
             if not (
                 isinstance(self._min_degree, Integral)
@@ -370,8 +354,7 @@ class PolynomialFeatures(TransformerMixin, BaseEstimator):
                 f" include a bias term, currently {self.include_bias}."
             )
             if (
-                np.intp == np.int32
-                and self.n_output_features_ <= np.iinfo(np.int64).max
+                np.intp == np.int32 and self.n_output_features_ <= np.iinfo(np.int64).max
             ):  # pragma: nocover
                 msg += (
                     "\nNote that the current Python runtime has a limited 32 bit "
@@ -438,9 +421,7 @@ class PolynomialFeatures(TransformerMixin, BaseEstimator):
                 return self.transform(X.tocsc()).tocsr()
             to_stack = []
             if self.include_bias:
-                to_stack.append(
-                    sparse.csr_matrix(np.ones(shape=(n_samples, 1), dtype=X.dtype))
-                )
+                to_stack.append(sparse.csr_matrix(np.ones(shape=(n_samples, 1), dtype=X.dtype)))
             if self._min_degree <= 1 and self._max_degree > 0:
                 to_stack.append(X)
 
@@ -740,9 +721,7 @@ class SplineTransformer(TransformerMixin, BaseEstimator):
         "n_knots": [Interval(Integral, 2, None, closed="left")],
         "degree": [Interval(Integral, 0, None, closed="left")],
         "knots": [StrOptions({"uniform", "quantile"}), "array-like"],
-        "extrapolation": [
-            StrOptions({"error", "constant", "linear", "continue", "periodic"})
-        ],
+        "extrapolation": [StrOptions({"error", "constant", "linear", "continue", "periodic"})],
         "include_bias": ["boolean"],
         "order": [StrOptions({"C", "F"})],
         "handle_missing": [StrOptions({"error", "zeros"})],
@@ -784,9 +763,7 @@ class SplineTransformer(TransformerMixin, BaseEstimator):
             Knot positions (points) of base interval.
         """
         if knots == "quantile":
-            percentile_ranks = 100 * np.linspace(
-                start=0, stop=1, num=n_knots, dtype=np.float64
-            )
+            percentile_ranks = 100 * np.linspace(start=0, stop=1, num=n_knots, dtype=np.float64)
 
             if sample_weight is None:
                 knots = np.nanpercentile(X, percentile_ranks, axis=0)
@@ -988,9 +965,7 @@ class SplineTransformer(TransformerMixin, BaseEstimator):
         extrapolate = self.extrapolation in ["periodic", "continue"]
 
         bsplines = [
-            BSpline.construct_fast(
-                knots[:, i], coef, self.degree, extrapolate=extrapolate
-            )
+            BSpline.construct_fast(knots[:, i], coef, self.degree, extrapolate=extrapolate)
             for i in range(n_features)
         ]
         self.bsplines_ = bsplines
@@ -1098,9 +1073,7 @@ class SplineTransformer(TransformerMixin, BaseEstimator):
                     elif nan_row_indices.shape[0] > 0:
                         x = x.copy()  # avoid mutation of input data
                         x[nan_row_indices] = np.nanmin(x)
-                    XBS_sparse = BSpline.design_matrix(
-                        x, spl.t, spl.k, **kwargs_extrapolate
-                    )
+                    XBS_sparse = BSpline.design_matrix(x, spl.t, spl.k, **kwargs_extrapolate)
 
                     if self.extrapolation == "periodic":
                         # See the construction of coef in fit. We need to add the last
@@ -1116,17 +1089,13 @@ class SplineTransformer(TransformerMixin, BaseEstimator):
                         XBS = XBS_sparse.tolil()
 
                 else:
-                    XBS[
-                        :, (feature_idx * n_splines) : ((feature_idx + 1) * n_splines)
-                    ] = spl(x)
+                    XBS[:, (feature_idx * n_splines) : ((feature_idx + 1) * n_splines)] = spl(x)
 
                 # Replace any indicated values with 0:
                 if nan_row_indices.shape[0] > 0:
                     for spline_idx in range(n_splines):
                         output_feature_idx = n_splines * feature_idx + spline_idx
-                        XBS[
-                            nan_row_indices, output_feature_idx : output_feature_idx + 1
-                        ] = 0
+                        XBS[nan_row_indices, output_feature_idx : output_feature_idx + 1] = 0
                     if use_sparse:
                         XBS_sparse = XBS
 
@@ -1136,9 +1105,7 @@ class SplineTransformer(TransformerMixin, BaseEstimator):
                 f_min, f_max = spl(xmin), spl(xmax)
                 # Values outside of the feature range during fit and nan values get
                 # filtered out:
-                inside_range_mask = (xmin <= X[:, feature_idx]) & (
-                    X[:, feature_idx] <= xmax
-                )
+                inside_range_mask = (xmin <= X[:, feature_idx]) & (X[:, feature_idx] <= xmax)
 
                 if use_sparse:
                     outside_range_mask = ~inside_range_mask
@@ -1174,15 +1141,11 @@ class SplineTransformer(TransformerMixin, BaseEstimator):
                     XBS_sparse = XBS_sparse.tocsr()
                     has_nan_output_values = np.any(np.isnan(XBS_sparse.data))
                 else:
-                    output_features = slice(
-                        feature_idx * n_splines, (feature_idx + 1) * n_splines
-                    )
+                    output_features = slice(feature_idx * n_splines, (feature_idx + 1) * n_splines)
                     has_nan_output_values = np.any(np.isnan(XBS[:, output_features]))
 
                 if has_nan_output_values:
-                    raise ValueError(
-                        "`X` contains values beyond the limits of the knots."
-                    )
+                    raise ValueError("`X` contains values beyond the limits of the knots.")
 
             elif self.extrapolation == "constant":
                 # Set all values beyond xmin and xmax to the value of the
@@ -1200,9 +1163,7 @@ class SplineTransformer(TransformerMixin, BaseEstimator):
                     else:
                         XBS[
                             below_xmin_mask,
-                            (feature_idx * n_splines) : (
-                                feature_idx * n_splines + degree
-                            ),
+                            (feature_idx * n_splines) : (feature_idx * n_splines + degree),
                         ] = f_min[:degree]
 
                 above_xmax_mask = X[:, feature_idx] > xmax
@@ -1237,35 +1198,27 @@ class SplineTransformer(TransformerMixin, BaseEstimator):
                     below_xmin_mask = X[:, feature_idx] < xmin
                     if np.any(below_xmin_mask):
                         linear_extr = (
-                            f_min[j]
-                            + (X[below_xmin_mask, feature_idx] - xmin) * fp_min[j]
+                            f_min[j] + (X[below_xmin_mask, feature_idx] - xmin) * fp_min[j]
                         )
                         if use_sparse:
                             # Note: See comment about SparseEfficiencyWarning above.
                             XBS_sparse = XBS_sparse.tolil()
                             XBS_sparse[below_xmin_mask, j] = linear_extr
                         else:
-                            XBS[below_xmin_mask, feature_idx * n_splines + j] = (
-                                linear_extr
-                            )
+                            XBS[below_xmin_mask, feature_idx * n_splines + j] = linear_extr
 
                     above_xmax_mask = X[:, feature_idx] > xmax
                     if np.any(above_xmax_mask):
                         k = n_splines - 1 - j
                         linear_extr = (
-                            f_max[k]
-                            + (X[above_xmax_mask, feature_idx] - xmax) * fp_max[k]
+                            f_max[k] + (X[above_xmax_mask, feature_idx] - xmax) * fp_max[k]
                         )
                         if use_sparse:
                             # Note: See comment about SparseEfficiencyWarning above.
                             XBS_sparse = XBS_sparse.tolil()
-                            XBS_sparse[above_xmax_mask, k : k + 1] = linear_extr[
-                                :, None
-                            ]
+                            XBS_sparse[above_xmax_mask, k : k + 1] = linear_extr[:, None]
                         else:
-                            XBS[above_xmax_mask, feature_idx * n_splines + k] = (
-                                linear_extr
-                            )
+                            XBS[above_xmax_mask, feature_idx * n_splines + k] = linear_extr
 
             if use_sparse:
                 XBS_sparse = XBS_sparse.tocsr()

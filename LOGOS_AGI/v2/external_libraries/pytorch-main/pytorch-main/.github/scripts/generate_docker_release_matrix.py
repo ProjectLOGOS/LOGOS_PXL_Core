@@ -29,9 +29,7 @@ def generate_docker_matrix() -> dict[str, list[dict[str, str]]]:
                 {
                     "cuda": cuda,
                     "cuda_full_version": version,
-                    "cudnn_version": generate_binary_build_matrix.CUDA_ARCHES_CUDNN_VERSION[
-                        cuda
-                    ],
+                    "cudnn_version": generate_binary_build_matrix.CUDA_ARCHES_CUDNN_VERSION[cuda],
                     "image_type": image,
                     "platform": "linux/amd64",
                 }

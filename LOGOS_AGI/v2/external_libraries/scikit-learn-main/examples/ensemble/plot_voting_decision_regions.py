@@ -171,18 +171,14 @@ for (est_name, _), est_probas in zip(eclf.estimators, predict_probas):
 
 # %%
 print(
-    "Weighted average of soft-predictions: "
-    f"{np.dot(weights, predict_probas) / np.sum(weights)}"
+    "Weighted average of soft-predictions: " f"{np.dot(weights, predict_probas) / np.sum(weights)}"
 )
 
 # %%
 # We can see that manual calculation of predicted probabilities above is
 # equivalent to that produced by the `VotingClassifier`:
 
-print(
-    "Predicted probability of VotingClassifier: "
-    f"{eclf.predict_proba(test_sample).ravel()}"
-)
+print("Predicted probability of VotingClassifier: " f"{eclf.predict_proba(test_sample).ravel()}")
 
 # %%
 # To convert soft predictions into hard predictions when weights are provided,

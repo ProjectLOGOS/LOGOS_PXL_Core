@@ -72,8 +72,7 @@ def lower_bound(cv_results):
     best_score_idx = np.argmax(cv_results["mean_test_score"])
 
     return (
-        cv_results["mean_test_score"][best_score_idx]
-        - cv_results["std_test_score"][best_score_idx]
+        cv_results["mean_test_score"][best_score_idx] - cv_results["std_test_score"][best_score_idx]
     )
 
 
@@ -95,9 +94,7 @@ def best_low_complexity(cv_results):
     """
     threshold = lower_bound(cv_results)
     candidate_idx = np.flatnonzero(cv_results["mean_test_score"] >= threshold)
-    best_idx = candidate_idx[
-        cv_results["param_reduce_dim__n_components"][candidate_idx].argmin()
-    ]
+    best_idx = candidate_idx[cv_results["param_reduce_dim__n_components"][candidate_idx].argmin()]
     return best_idx
 
 
@@ -192,9 +189,7 @@ results_df = results_df.with_columns(
 
 # Get the number of CV splits from the results
 n_splits = sum(
-    1
-    for key in grid.cv_results_.keys()
-    if key.startswith("split") and key.endswith("test_score")
+    1 for key in grid.cv_results_.keys() if key.startswith("split") and key.endswith("test_score")
 )
 
 # Extract individual scores for each split

@@ -107,9 +107,7 @@ def test_display_curve_error_regression(pyplot, data_binary, Display):
         ),
     ],
 )
-@pytest.mark.parametrize(
-    "Display", [DetCurveDisplay, PrecisionRecallDisplay, RocCurveDisplay]
-)
+@pytest.mark.parametrize("Display", [DetCurveDisplay, PrecisionRecallDisplay, RocCurveDisplay])
 def test_display_curve_error_no_response(
     pyplot,
     data_binary,
@@ -171,9 +169,7 @@ def test_display_curve_estimator_name_multiple_calls(
     [
         LogisticRegression(),
         make_pipeline(StandardScaler(), LogisticRegression()),
-        make_pipeline(
-            make_column_transformer((StandardScaler(), [0, 1])), LogisticRegression()
-        ),
+        make_pipeline(make_column_transformer((StandardScaler(), [0, 1])), LogisticRegression()),
     ],
 )
 @pytest.mark.parametrize("Display", [DetCurveDisplay, PrecisionRecallDisplay])
@@ -197,9 +193,7 @@ def test_display_curve_not_fitted_errors_old_name(pyplot, data_binary, clf, Disp
     [
         LogisticRegression(),
         make_pipeline(StandardScaler(), LogisticRegression()),
-        make_pipeline(
-            make_column_transformer((StandardScaler(), [0, 1])), LogisticRegression()
-        ),
+        make_pipeline(make_column_transformer((StandardScaler(), [0, 1])), LogisticRegression()),
     ],
 )
 @pytest.mark.parametrize("Display", [RocCurveDisplay])
@@ -217,9 +211,7 @@ def test_display_curve_not_fitted_errors(pyplot, data_binary, clf, Display):
     assert disp.name == model.__class__.__name__
 
 
-@pytest.mark.parametrize(
-    "Display", [DetCurveDisplay, PrecisionRecallDisplay, RocCurveDisplay]
-)
+@pytest.mark.parametrize("Display", [DetCurveDisplay, PrecisionRecallDisplay, RocCurveDisplay])
 def test_display_curve_n_samples_consistency(pyplot, data_binary, Display):
     """Check the error raised when `y_pred` or `sample_weight` have inconsistent
     length."""
@@ -235,9 +227,7 @@ def test_display_curve_n_samples_consistency(pyplot, data_binary, Display):
         Display.from_estimator(classifier, X, y, sample_weight=np.ones(X.shape[0] - 2))
 
 
-@pytest.mark.parametrize(
-    "Display", [DetCurveDisplay, PrecisionRecallDisplay, RocCurveDisplay]
-)
+@pytest.mark.parametrize("Display", [DetCurveDisplay, PrecisionRecallDisplay, RocCurveDisplay])
 def test_display_curve_error_pos_label(pyplot, data_binary, Display):
     """Check consistence of error message when `pos_label` should be specified."""
     X, y = data_binary

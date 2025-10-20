@@ -20,7 +20,9 @@ import torch._inductor.config
 
 torch._inductor.config.coordinate_descent_tuning = True
 torch._inductor.config.triton.unique_kernel_names = True
-torch._inductor.config.fx_graph_cache = True  # Experimental feature to reduce compilation times, will be on by default in future
+torch._inductor.config.fx_graph_cache = (
+    True  # Experimental feature to reduce compilation times, will be on by default in future
+)
 torch._inductor.config.assert_indirect_indexing = False
 
 compiled = False
@@ -108,9 +110,7 @@ def decode_n_tokens(
         with torch.nn.attention.sdpa_kernel(
             torch.nn.attention.SDPBackend.MATH
         ):  # Actually better for Inductor to codegen attention here
-            next_token, next_prob = decode_one_token(
-                model, cur_token, input_pos, **sampling_kwargs
-            )
+            next_token, next_prob = decode_one_token(model, cur_token, input_pos, **sampling_kwargs)
             input_pos += 1
             new_tokens.append(next_token.clone())
             new_probs.append(next_prob.clone())
@@ -183,15 +183,11 @@ def _get_model_size(model):
     if hasattr(model.config, "num_experts"):
         config = model.config
         for submodule in model.modules():
-            if isinstance(
-                submodule, (ConditionalFeedForward, ConditionalFeedForwardInt8)
-            ):
+            if isinstance(submodule, (ConditionalFeedForward, ConditionalFeedForwardInt8)):
                 model_size -= (
                     sum(
                         p.numel() * p.dtype.itemsize
-                        for p in itertools.chain(
-                            submodule.parameters(), child.buffers()
-                        )
+                        for p in itertools.chain(submodule.parameters(), child.buffers())
                     )
                     * (config.num_experts - config.num_activated_experts)
                     / config.num_experts
@@ -214,9 +210,7 @@ def run_experiment(
     device_sync(device=device)  # MKG
     print(f"Time to load model: {time.time() - t0:.02f} seconds")
 
-    prompt = torch.tensor(
-        [1, 15043, 29892, 590, 1024, 338], device=device, dtype=torch.int32
-    )
+    prompt = torch.tensor([1, 15043, 29892, 590, 1024, 338], device=device, dtype=torch.int32)
     prompt_length = prompt.size(0)
 
     torch.manual_seed(1234)
@@ -259,9 +253,7 @@ def run_experiment(
     global decode_one_token, prefill, compiled
     if not compiled:
         compiled = True
-        decode_one_token = torch.compile(
-            decode_one_token, mode="reduce-overhead", fullgraph=True
-        )
+        decode_one_token = torch.compile(decode_one_token, mode="reduce-overhead", fullgraph=True)
         prefill = torch.compile(prefill, fullgraph=True)
 
     for i in range(start, num_samples):
@@ -269,9 +261,7 @@ def run_experiment(
 
         torch.compiler.cudagraph_mark_step_begin()
         t0 = time.perf_counter()
-        y = generate(
-            model, prompt, max_new_tokens, temperature=temperature, top_k=top_k
-        )
+        y = generate(model, prompt, max_new_tokens, temperature=temperature, top_k=top_k)
 
         if i == -1:
             compilation_time = time.perf_counter() - t0
@@ -286,9 +276,7 @@ def run_experiment(
         aggregate_metrics["memory_bandwidth"].append(model_size * tokens_sec / 1e9)
 
     token_per_sec = torch.mean(torch.tensor(aggregate_metrics["tokens_per_sec"])).item()
-    memory_bandwidth = torch.mean(
-        torch.tensor(aggregate_metrics["memory_bandwidth"])
-    ).item()
+    memory_bandwidth = torch.mean(torch.tensor(aggregate_metrics["memory_bandwidth"])).item()
     print(f"Average tokens/sec: {token_per_sec:.2f} tokens/sec")
     print(f"Average bandwidth achieved: {memory_bandwidth:.02f} GB/s")
     print(f"Memory used: {torch.cuda.max_memory_reserved() / 1e9:.02f} GB")
@@ -307,9 +295,7 @@ def run_llama2_7b_bf16(device: str = "cuda"):
         1253,
         133,
     )
-    token_per_sec, memory_bandwidth, compilation_time = run_experiment(
-        model, device=device
-    )
+    token_per_sec, memory_bandwidth, compilation_time = run_experiment(model, device=device)
     return [
         Experiment(
             model.name,
@@ -356,9 +342,7 @@ def run_llama2_7b_int8(device: str = "cuda"):
         957,
         136,
     )
-    token_per_sec, memory_bandwidth, compilation_time = run_experiment(
-        model, device=device
-    )
+    token_per_sec, memory_bandwidth, compilation_time = run_experiment(model, device=device)
     return [
         Experiment(
             model.name,
@@ -406,9 +390,7 @@ def run_mixtral_8x7b_int8(device: str = "cuda"):
         1130,
         133,
     )
-    token_per_sec, memory_bandwidth, compilation_time = run_experiment(
-        model, device=device
-    )
+    token_per_sec, memory_bandwidth, compilation_time = run_experiment(model, device=device)
     return [
         Experiment(
             model.name,
@@ -454,9 +436,7 @@ def run_llama2_7b_autoquant(device: str = "cuda"):
         957,
         136,
     )
-    token_per_sec, memory_bandwidth, compilation_time = run_experiment(
-        model, device=device
-    )
+    token_per_sec, memory_bandwidth, compilation_time = run_experiment(model, device=device)
     return [
         Experiment(
             model.name,
@@ -503,9 +483,7 @@ def run_mixtral_8x7b_autoquant(device: str = "cuda"):
         1130,
         133,
     )
-    token_per_sec, memory_bandwidth, compilation_time = run_experiment(
-        model, device=device
-    )
+    token_per_sec, memory_bandwidth, compilation_time = run_experiment(model, device=device)
     return [
         Experiment(
             model.name,
@@ -552,9 +530,7 @@ def run_llama2_7b_autoquant_v2(device: str = "cuda"):
         136,
         6,  # batch_size
     )
-    token_per_sec, memory_bandwidth, compilation_time = run_experiment(
-        model, device=device
-    )
+    token_per_sec, memory_bandwidth, compilation_time = run_experiment(model, device=device)
     return [
         Experiment(
             model.name,
@@ -602,9 +578,7 @@ def run_mixtral_8x7b_autoquant_v2(device: str = "cuda"):
         133,
         6,  # batch_size
     )
-    token_per_sec, memory_bandwidth, compilation_time = run_experiment(
-        model, device=device
-    )
+    token_per_sec, memory_bandwidth, compilation_time = run_experiment(model, device=device)
     return [
         Experiment(
             model.name,

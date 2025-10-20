@@ -26,9 +26,7 @@ from .utils_numpy import newbyteorder
 
 # represents a collection of sigma points and their associated weights. one
 # point per row
-SigmaPoints = namedtuple(
-    "SigmaPoints", ["points", "weights_mean", "weights_covariance"]
-)
+SigmaPoints = namedtuple("SigmaPoints", ["points", "weights_mean", "weights_covariance"])
 
 
 # represents mean and covariance of a multivariate normal distribution
@@ -387,9 +385,7 @@ def unscented_filter_correct(
     )
 
     # Calculate E[x_t | z_{0:t}], Var(x_t | z_{0:t})
-    moments_filt = unscented_correct(
-        sigma_pair, moments_pred, obs_moments_pred, observation
-    )
+    moments_filt = unscented_correct(sigma_pair, moments_pred, obs_moments_pred, observation)
     return moments_filt
 
 
@@ -531,9 +527,7 @@ def augmented_unscented_smoother(mu_filt, sigma_filt, f, Q):
 
         # compute smoothed mean, covariance
         smoother_gain = sigma_pair.dot(linalg.pinv(moments_pred.covariance))
-        mu_smooth[t] = mu_filt[t] + smoother_gain.dot(
-            mu_smooth[t + 1] - moments_pred.mean
-        )
+        mu_smooth[t] = mu_filt[t] + smoother_gain.dot(mu_smooth[t + 1] - moments_pred.mean)
         sigma_smooth[t] = sigma_filt[t] + smoother_gain.dot(
             sigma_smooth[t + 1] - moments_pred.covariance
         ).dot(smoother_gain.T)
@@ -651,9 +645,7 @@ def additive_unscented_smoother(mu_filt, sigma_filt, f, Q):
 
         # compute E[x_{t+1} | z_{0:t}], Var(x_{t+1} | z_{0:t})
         f_t = _last_dims(f, t, ndims=1)[0]
-        (points_pred, moments_pred) = unscented_transform(
-            points_state, f_t, sigma_noise=Q
-        )
+        (points_pred, moments_pred) = unscented_transform(points_state, f_t, sigma_noise=Q)
 
         # Calculate Cov(x_{t+1}, x_t | z_{0:t-1})
         sigma_pair = (
@@ -665,9 +657,7 @@ def additive_unscented_smoother(mu_filt, sigma_filt, f, Q):
 
         # compute smoothed mean, covariance
         smoother_gain = sigma_pair.dot(linalg.pinv(moments_pred.covariance))
-        mu_smooth[t] = mu_filt[t] + smoother_gain.dot(
-            mu_smooth[t + 1] - moments_pred.mean
-        )
+        mu_smooth[t] = mu_filt[t] + smoother_gain.dot(mu_smooth[t + 1] - moments_pred.mean)
         sigma_smooth[t] = sigma_filt[t] + smoother_gain.dot(
             sigma_smooth[t + 1] - moments_pred.covariance
         ).dot(smoother_gain.T)
@@ -699,9 +689,7 @@ class UnscentedMixin:
             ],
             n_dim_state,
         )
-        n_dim_obs = _determine_dimensionality(
-            [(observation_covariance, array2d, -2)], n_dim_obs
-        )
+        n_dim_obs = _determine_dimensionality([(observation_covariance, array2d, -2)], n_dim_obs)
 
         # set parameters
         self.transition_functions = transition_functions
@@ -836,9 +824,7 @@ class UnscentedKalmanFilter(UnscentedMixin):
 
         # logic for selecting initial state
         if initial_state is None:
-            initial_state = rng.multivariate_normal(
-                initial_state_mean, initial_state_covariance
-            )
+            initial_state = rng.multivariate_normal(initial_state_mean, initial_state_covariance)
 
         # logic for generating samples
         x = np.zeros((n_timesteps, n_dim_state))
@@ -969,12 +955,8 @@ class UnscentedKalmanFilter(UnscentedMixin):
                 f = arr[0]
             return f
 
-        transition_function = default_function(
-            transition_function, transition_functions
-        )
-        observation_function = default_function(
-            observation_function, observation_functions
-        )
+        transition_function = default_function(transition_function, transition_functions)
+        observation_function = default_function(observation_function, observation_functions)
         transition_covariance = _arg_or_default(
             transition_covariance, transition_cov, 2, "transition_covariance"
         )
@@ -1152,9 +1134,7 @@ class AdditiveUnscentedKalmanFilter(UnscentedMixin):
 
         # logic for selecting initial state
         if initial_state is None:
-            initial_state = rng.multivariate_normal(
-                initial_state_mean, initial_state_covariance
-            )
+            initial_state = rng.multivariate_normal(initial_state_mean, initial_state_covariance)
 
         # logic for generating samples
         x = np.zeros((n_timesteps, n_dim_state))
@@ -1285,12 +1265,8 @@ class AdditiveUnscentedKalmanFilter(UnscentedMixin):
                 f = arr[0]
             return f
 
-        transition_function = default_function(
-            transition_function, transition_functions
-        )
-        observation_function = default_function(
-            observation_function, observation_functions
-        )
+        transition_function = default_function(transition_function, transition_functions)
+        observation_function = default_function(observation_function, observation_functions)
         transition_covariance = _arg_or_default(
             transition_covariance, transition_cov, 2, "transition_covariance"
         )

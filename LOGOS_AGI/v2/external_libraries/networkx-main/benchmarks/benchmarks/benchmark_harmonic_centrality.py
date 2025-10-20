@@ -6,9 +6,7 @@ import networkx as nx
 class HarmonicCentralityBenchmarks:
     timeout = 120
     nodes = [10, 100, 1000]
-    params = [f"wheel_graph({i})" for i in nodes] + [
-        f"directed_wheel({i})" for i in nodes
-    ]
+    params = [f"wheel_graph({i})" for i in nodes] + [f"directed_wheel({i})" for i in nodes]
     param_names = ["graph"]
 
     def setup(self, graph):

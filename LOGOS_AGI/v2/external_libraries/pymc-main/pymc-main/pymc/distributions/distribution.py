@@ -116,9 +116,11 @@ class DistributionMeta(ABCMeta):
             if issubclass(rv_type, SymbolicRandomVariable):
                 extended_signature = getattr(rv_type, "extended_signature", None)
                 if extended_signature is not None:
-                    [_, size_idx, params_idxs], _ = (
-                        SymbolicRandomVariable.get_input_output_type_idxs(extended_signature)
-                    )
+                    [
+                        _,
+                        size_idx,
+                        params_idxs,
+                    ], _ = SymbolicRandomVariable.get_input_output_type_idxs(extended_signature)
 
             class_change_dist_size = clsdict.get("change_dist_size")
             if class_change_dist_size:

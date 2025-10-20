@@ -23,7 +23,7 @@ class GoalManager:
             goal.state = 'adopted'
             print(f"[GoalManager] Goal Adopted: '{goal.name}'")
         return goal
-    
+
     def get_highest_priority_goal(self) -> Goal or None:
         adopted_goals = [g for g in self.goals if g.state == 'adopted']
         if not adopted_goals:

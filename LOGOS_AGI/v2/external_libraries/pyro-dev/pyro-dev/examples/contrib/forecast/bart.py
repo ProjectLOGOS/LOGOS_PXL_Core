@@ -66,16 +66,12 @@ class Model(ForecastingModel):
         trans_loc = pyro.sample("trans_loc", dist.Cauchy(0, 1 / period))
         trans_loc = trans_loc.unsqueeze(-1).expand(trans_loc.shape + (dim,))
         assert trans_loc.shape[-1:] == (dim,)
-        trans_scale = pyro.sample(
-            "trans_scale", dist.LogNormal(torch.zeros(dim), 0.1).to_event(1)
-        )
+        trans_scale = pyro.sample("trans_scale", dist.LogNormal(torch.zeros(dim), 0.1).to_event(1))
         trans_corr = pyro.sample("trans_corr", dist.LKJCholesky(dim, torch.ones(())))
         trans_scale_tril = trans_scale.unsqueeze(-1) * trans_corr
         assert trans_scale_tril.shape[-2:] == (dim, dim)
 
-        obs_scale = pyro.sample(
-            "obs_scale", dist.LogNormal(torch.zeros(dim), 0.1).to_event(1)
-        )
+        obs_scale = pyro.sample("obs_scale", dist.LogNormal(torch.zeros(dim), 0.1).to_event(1))
         obs_corr = pyro.sample("obs_corr", dist.LKJCholesky(dim, torch.ones(())))
         obs_scale_tril = obs_scale.unsqueeze(-1) * obs_corr
         assert obs_scale_tril.shape[-2:] == (dim, dim)
@@ -84,16 +80,12 @@ class Model(ForecastingModel):
         # same dim as the time_plate, dim=-1. That way we can repeat the dim
         # below using periodic_repeat().
         with pyro.plate("season_plate", period, dim=-1):
-            season_init = pyro.sample(
-                "season_init", dist.Normal(torch.zeros(dim), 1).to_event(1)
-            )
+            season_init = pyro.sample("season_init", dist.Normal(torch.zeros(dim), 1).to_event(1))
             assert season_init.shape[-2:] == (period, dim)
 
         # Sample independent noise at each time step.
         with self.time_plate:
-            season_noise = pyro.sample(
-                "season_noise", dist.Normal(0, noise_scale).to_event(1)
-            )
+            season_noise = pyro.sample("season_noise", dist.Normal(0, noise_scale).to_event(1))
             assert season_noise.shape[-2:] == (duration, dim)
 
         # Construct a prediction. This prediction has an exactly repeated

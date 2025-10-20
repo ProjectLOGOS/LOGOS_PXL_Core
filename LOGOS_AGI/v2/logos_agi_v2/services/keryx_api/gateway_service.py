@@ -1,6 +1,6 @@
-from dotenv import load_dotenv 
-load_dotenv()  
-  
+from dotenv import load_dotenv
+load_dotenv()
+
 # logos_agi_v1/services/keryx_api/gateway_service.py
 
 import os

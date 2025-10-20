@@ -35,10 +35,7 @@ def generate_graph(words):
                 yield left + cc + right
 
     candgen = (
-        (word, cand)
-        for word in sorted(words)
-        for cand in edit_distance_one(word)
-        if cand in words
+        (word, cand) for word in sorted(words) for cand in edit_distance_one(word) if cand in words
     )
     G.add_nodes_from(words)
     for word, cand in candgen:

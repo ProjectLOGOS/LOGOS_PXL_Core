@@ -98,9 +98,7 @@ ax_roc.grid(linestyle="--")
 ax_det.grid(linestyle="--")
 
 for name, clf in classifiers.items():
-    (color, linestyle) = (
-        ("black", "--") if name == "Non-informative baseline" else (None, None)
-    )
+    (color, linestyle) = ("black", "--") if name == "Non-informative baseline" else (None, None)
     clf.fit(X_train, y_train)
     RocCurveDisplay.from_estimator(
         clf,

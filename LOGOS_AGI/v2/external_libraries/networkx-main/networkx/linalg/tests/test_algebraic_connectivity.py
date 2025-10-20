@@ -75,9 +75,7 @@ class TestAlgebraicConnectivity:
     @pytest.mark.parametrize("method", methods)
     def test_directed(self, method):
         G = nx.DiGraph()
-        pytest.raises(
-            nx.NetworkXNotImplemented, nx.algebraic_connectivity, G, method=method
-        )
+        pytest.raises(nx.NetworkXNotImplemented, nx.algebraic_connectivity, G, method=method)
         pytest.raises(nx.NetworkXNotImplemented, nx.fiedler_vector, G, method=method)
 
     @pytest.mark.parametrize("method", methods)
@@ -111,9 +109,7 @@ class TestAlgebraicConnectivity:
         G = nx.Graph()
         G.add_edge(0, 1, weight=1)
         A = nx.laplacian_matrix(G)
-        assert nx.algebraic_connectivity(G, tol=1e-12, method=method) == pytest.approx(
-            2, abs=1e-7
-        )
+        assert nx.algebraic_connectivity(G, tol=1e-12, method=method) == pytest.approx(2, abs=1e-7)
         x = nx.fiedler_vector(G, tol=1e-12, method=method)
         check_eigenvector(A, 2, x)
 

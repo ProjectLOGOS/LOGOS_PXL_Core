@@ -80,9 +80,7 @@ class BenchmarkKernel:
         raise NotImplementedError
 
     def clone_inputs(self, args, kwargs) -> Any:
-        args_ref = [
-            arg.clone().detach().requires_grad_(arg.requires_grad) for arg in args
-        ]
+        args_ref = [arg.clone().detach().requires_grad_(arg.requires_grad) for arg in args]
 
         kwargs_ref = (
             {
@@ -221,10 +219,7 @@ def visualize_comparison(
     ax.set_ylabel("memory bandwidth (GB/s)", fontsize=12)
     ax.set_xticks(range(len(all_settings)))
     ax.set_xticklabels(
-        [
-            s.replace("shape: ", "").replace("[", "").replace("]", "")
-            for s in all_settings
-        ],
+        [s.replace("shape: ", "").replace("[", "").replace("]", "") for s in all_settings],
         rotation=45,
         ha="right",
     )

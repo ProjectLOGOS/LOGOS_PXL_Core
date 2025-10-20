@@ -47,9 +47,7 @@ def get_deepspeech(device: torch.device) -> GetterReturnType:
     labels = torch.rand(num_classes, device=device)
     inputs = torch.rand(N, 1, spectrogram_size, seq_length, device=device)
     # Sequence length for each input
-    inputs_sizes = (
-        torch.rand(N, device=device).mul(seq_length * 0.1).add(seq_length * 0.8)
-    )
+    inputs_sizes = torch.rand(N, device=device).mul(seq_length * 0.1).add(seq_length * 0.8)
     targets = torch.rand(N, target_length, device=device)
     targets_sizes = torch.full((N,), target_length, dtype=torch.int, device=device)
 
@@ -87,9 +85,7 @@ def get_transformer(device: torch.device) -> GetterReturnType:
     N = 64
     seq_length = 128
     ntoken = 50
-    model = models.TransformerModel(
-        ntoken=ntoken, ninp=720, nhead=12, nhid=2048, nlayers=2
-    )
+    model = models.TransformerModel(ntoken=ntoken, ninp=720, nhead=12, nhid=2048, nlayers=2)
     model.to(device)
 
     if has_functorch:
@@ -107,9 +103,7 @@ def get_transformer(device: torch.device) -> GetterReturnType:
         load_weights(model, names, new_params)
         out = model(inputs)
 
-        loss = criterion(
-            out.reshape(N * seq_length, ntoken), targets.reshape(N * seq_length)
-        )
+        loss = criterion(out.reshape(N * seq_length, ntoken), targets.reshape(N * seq_length))
         return loss
 
     return forward, params

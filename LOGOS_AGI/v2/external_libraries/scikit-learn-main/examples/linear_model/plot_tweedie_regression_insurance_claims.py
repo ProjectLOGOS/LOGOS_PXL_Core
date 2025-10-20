@@ -231,17 +231,13 @@ df["ClaimAmount"] = df["ClaimAmount"].clip(upper=200000)
 # frequency and severity are more consistent with each other.
 df.loc[(df["ClaimAmount"] == 0) & (df["ClaimNb"] >= 1), "ClaimNb"] = 0
 
-log_scale_transformer = make_pipeline(
-    FunctionTransformer(func=np.log), StandardScaler()
-)
+log_scale_transformer = make_pipeline(FunctionTransformer(func=np.log), StandardScaler())
 
 column_trans = ColumnTransformer(
     [
         (
             "binned_numeric",
-            KBinsDiscretizer(
-                n_bins=10, quantile_method="averaged_inverted_cdf", random_state=0
-            ),
+            KBinsDiscretizer(n_bins=10, quantile_method="averaged_inverted_cdf", random_state=0),
             ["VehAge", "DrivAge"],
         ),
         (
@@ -464,21 +460,14 @@ print(scores)
 # the average claim amount per policy. For this, it needs to be combined with
 # a claims frequency model.
 
-print(
-    "Mean AvgClaim Amount per policy:              %.2f "
-    % df_train["AvgClaimAmount"].mean()
-)
+print("Mean AvgClaim Amount per policy:              %.2f " % df_train["AvgClaimAmount"].mean())
 print(
     "Mean AvgClaim Amount | NbClaim > 0:           %.2f"
     % df_train["AvgClaimAmount"][df_train["AvgClaimAmount"] > 0].mean()
 )
+print("Predicted Mean AvgClaim Amount | NbClaim > 0: %.2f" % glm_sev.predict(X_train).mean())
 print(
-    "Predicted Mean AvgClaim Amount | NbClaim > 0: %.2f"
-    % glm_sev.predict(X_train).mean()
-)
-print(
-    "Predicted Mean AvgClaim Amount (dummy) | NbClaim > 0: %.2f"
-    % dummy_sev.predict(X_train).mean()
+    "Predicted Mean AvgClaim Amount (dummy) | NbClaim > 0: %.2f" % dummy_sev.predict(X_train).mean()
 )
 
 # %%
@@ -545,9 +534,7 @@ plt.tight_layout()
 from sklearn.linear_model import TweedieRegressor
 
 glm_pure_premium = TweedieRegressor(power=1.9, alpha=0.1, solver="newton-cholesky")
-glm_pure_premium.fit(
-    X_train, df_train["PurePremium"], sample_weight=df_train["Exposure"]
-)
+glm_pure_premium.fit(X_train, df_train["PurePremium"], sample_weight=df_train["Exposure"])
 
 tweedie_powers = [1.5, 1.7, 1.8, 1.9, 1.99, 1.999, 1.9999]
 
@@ -606,9 +593,8 @@ for subset_label, X, df in [
             "predicted, frequency*severity model": np.sum(
                 exposure * glm_freq.predict(X) * glm_sev.predict(X)
             ),
-            "predicted, tweedie, power=%.2f" % glm_pure_premium.power: np.sum(
-                exposure * glm_pure_premium.predict(X)
-            ),
+            "predicted, tweedie, power=%.2f"
+            % glm_pure_premium.power: np.sum(exposure * glm_pure_premium.predict(X)),
         }
     )
 
@@ -672,9 +658,7 @@ for label, y_pred in [
     ("Frequency * Severity model", y_pred_product),
     ("Compound Poisson Gamma", y_pred_total),
 ]:
-    cum_exposure, cum_claims = lorenz_curve(
-        df_test["PurePremium"], y_pred, df_test["Exposure"]
-    )
+    cum_exposure, cum_claims = lorenz_curve(df_test["PurePremium"], y_pred, df_test["Exposure"])
     gini = 1 - 2 * auc(cum_exposure, cum_claims)
     label += " (Gini index: {:.3f})".format(gini)
     ax.plot(cum_exposure, cum_claims, linestyle="-", label=label)
@@ -691,9 +675,7 @@ ax.plot(cum_exposure, cum_claims, linestyle="-.", color="gray", label=label)
 ax.plot([0, 1], [0, 1], linestyle="--", color="black", label="Random baseline")
 ax.set(
     title="Lorenz Curves",
-    xlabel=(
-        "Cumulative proportion of exposure\n(ordered by model from safest to riskiest)"
-    ),
+    xlabel=("Cumulative proportion of exposure\n(ordered by model from safest to riskiest)"),
     ylabel="Cumulative proportion of claim amounts",
 )
 ax.legend(loc="upper left")

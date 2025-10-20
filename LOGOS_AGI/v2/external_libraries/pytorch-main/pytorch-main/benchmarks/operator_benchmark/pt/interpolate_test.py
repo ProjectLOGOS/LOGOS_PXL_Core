@@ -27,9 +27,7 @@ class InterpolateBenchmark(op_bench.TorchBenchmarkBase):
             if input_image.ndim == 4:
                 input_image = input_image.contiguous(memory_format=torch.channels_last)
             elif input_image.ndim == 5:
-                input_image = input_image.contiguous(
-                    memory_format=torch.channels_last_3d
-                )
+                input_image = input_image.contiguous(memory_format=torch.channels_last_3d)
             else:
                 raise ValueError(
                     f"Can not set channels_last to the input of {input_image.ndim} dims"

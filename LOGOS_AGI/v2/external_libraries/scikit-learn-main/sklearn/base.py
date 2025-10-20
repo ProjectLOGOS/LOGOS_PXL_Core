@@ -147,9 +147,7 @@ def _clone_parametrized(estimator, *, safe=True):
     # _sklearn_output_config is used by `set_output` to configure the output
     # container of an estimator.
     if hasattr(estimator, "_sklearn_output_config"):
-        new_object._sklearn_output_config = copy.deepcopy(
-            estimator._sklearn_output_config
-        )
+        new_object._sklearn_output_config = copy.deepcopy(estimator._sklearn_output_config)
     return new_object
 
 
@@ -275,9 +273,7 @@ class BaseEstimator(ReprHTMLMixin, _HTMLDocumentationLinkMixin, _MetadataRequest
 
         init_func = getattr(self.__init__, "deprecated_original", self.__init__)
         init_default_params = inspect.signature(init_func).parameters
-        init_default_params = {
-            name: param.default for name, param in init_default_params.items()
-        }
+        init_default_params = {name: param.default for name, param in init_default_params.items()}
 
         def is_non_default(param_name, param_value):
             """Finds the parameters that have been set by the user."""
@@ -292,11 +288,8 @@ class BaseEstimator(ReprHTMLMixin, _HTMLDocumentationLinkMixin, _MetadataRequest
                 init_default_params[param_name]
             ):
                 return True
-            if not np.array_equal(
-                param_value, init_default_params[param_name]
-            ) and not (
-                is_scalar_nan(init_default_params[param_name])
-                and is_scalar_nan(param_value)
+            if not np.array_equal(param_value, init_default_params[param_name]) and not (
+                is_scalar_nan(init_default_params[param_name]) and is_scalar_nan(param_value)
             ):
                 return True
 
@@ -1167,9 +1160,7 @@ class _UnstableArchMixin:
 
     def __sklearn_tags__(self):
         tags = super().__sklearn_tags__()
-        tags.non_deterministic = _IS_32BIT or platform.machine().startswith(
-            ("ppc", "powerpc")
-        )
+        tags.non_deterministic = _IS_32BIT or platform.machine().startswith(("ppc", "powerpc"))
         return tags
 
 
@@ -1350,17 +1341,13 @@ def _fit_context(*, prefer_skip_nested_validation):
             global_skip_validation = get_config()["skip_parameter_validation"]
 
             # we don't want to validate again for each call to partial_fit
-            partial_fit_and_fitted = (
-                fit_method.__name__ == "partial_fit" and _is_fitted(estimator)
-            )
+            partial_fit_and_fitted = fit_method.__name__ == "partial_fit" and _is_fitted(estimator)
 
             if not global_skip_validation and not partial_fit_and_fitted:
                 estimator._validate_params()
 
             with config_context(
-                skip_parameter_validation=(
-                    prefer_skip_nested_validation or global_skip_validation
-                )
+                skip_parameter_validation=(prefer_skip_nested_validation or global_skip_validation)
             ):
                 return fit_method(estimator, *args, **kwargs)
 

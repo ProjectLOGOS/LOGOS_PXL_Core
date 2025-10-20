@@ -37,5 +37,3 @@
 ```{eval-rst}
 .. autoclass:: sentence_transformers.datasets.NoDuplicatesDataLoader
 ```
-
-

@@ -168,8 +168,7 @@ def node_link_data(
     }
     if multigraph:
         data[edges] = [
-            {**d, source: u, target: v, key: k}
-            for u, v, k, d in G.edges(keys=True, data=True)
+            {**d, source: u, target: v, key: k} for u, v, k, d in G.edges(keys=True, data=True)
         ]
     else:
         data[edges] = [{**d, source: u, target: v} for u, v, d in G.edges(data=True)]
@@ -324,10 +323,6 @@ def node_link_graph(
             graph.add_edge(src, tgt, **edgedata)
         else:
             ky = d.get(key, None)
-            edgedata = {
-                str(k): v
-                for k, v in d.items()
-                if k != source and k != target and k != key
-            }
+            edgedata = {str(k): v for k, v in d.items() if k != source and k != target and k != key}
             graph.add_edge(src, tgt, ky, **edgedata)
     return graph

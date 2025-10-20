@@ -18,7 +18,7 @@ class HyperNode:
         self.initial_query = initial_query
         self.created_at = time.time()
         self.components: Dict[Color, Dict[str, Any]] = {}
-    
+
     def add_color_component(self, color: Color, data_payload: Dict, trinity_vector: Dict, coherence_status: bool, is_enriched: bool = False):
         """Adds or updates a linguistic component to the Hyper-Node."""
         self.components[color] = {
@@ -34,7 +34,7 @@ class HyperNode:
     def get_color_component(self, color: Color) -> Optional[Dict[str, Any]]:
         """Retrieves a specific linguistic component."""
         return self.components.get(color)
-        
+
     def get_all_components(self) -> List[Dict[str, Any]]:
         """Returns all current components of the thought."""
         return list(self.components.values())
@@ -47,7 +47,7 @@ class HyperNode:
             comp = data.copy()
             comp['color'] = color_enum.value
             serialized_components[color_enum.value] = comp
-            
+
         return {
             "goal_id": self.goal_id,
             "initial_query": self.initial_query,

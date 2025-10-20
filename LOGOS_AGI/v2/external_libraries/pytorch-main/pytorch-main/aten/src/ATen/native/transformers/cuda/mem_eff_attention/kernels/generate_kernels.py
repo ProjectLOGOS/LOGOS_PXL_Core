@@ -181,9 +181,7 @@ class BwdKernel:
     @property
     def name(self) -> str:
         dropout_suffix = "_dropout" if self.apply_dropout else ""
-        seqlen_aligned_suffix = (
-            "_seqaligned" if self.keys_queries_aligned_to_blocksizes else ""
-        )
+        seqlen_aligned_suffix = "_seqaligned" if self.keys_queries_aligned_to_blocksizes else ""
         return (
             f"fmha_cutlassB_{self.dtype}_{self._aligned_suffix}"
             f"_{self.block_i}x{self.block_j}_k{self.max_k}{dropout_suffix}{seqlen_aligned_suffix}_sm{self.sm_range[0]}"
@@ -338,13 +336,9 @@ def write_decl_impl(
 
     for (cat_dt, cat_sm, cat_sm_max), kernels in cat_to_kernels.items():
         declarations += f"// ======== {cat_dt} / sm{cat_sm} ========\n"
-        declarations += "\n".join(
-            k.cpp_impl.split("{")[0].rstrip() + ";" for k in kernels
-        )
+        declarations += "\n".join(k.cpp_impl.split("{")[0].rstrip() + ";" for k in kernels)
         dispatch_category_fn = f"dispatch_{family_name}_{cat_dt}_sm{cat_sm}"
-        declarations += (
-            f"\n\ntemplate <typename T> void {dispatch_category_fn}(T cb, int cc) {{\n"
-        )
+        declarations += f"\n\ntemplate <typename T> void {dispatch_category_fn}(T cb, int cc) {{\n"
         for k in kernels:
             _call = f"cb({k.cpp_class}(), {k.name});\n"
             if k.dispatch_cond is not None:

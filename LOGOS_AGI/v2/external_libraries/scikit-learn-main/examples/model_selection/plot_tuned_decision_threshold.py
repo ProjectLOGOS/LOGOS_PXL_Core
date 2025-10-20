@@ -170,9 +170,7 @@ ax.axvline(
 )
 ax.set_xlabel("Decision threshold")
 ax.legend(loc="upper right")
-_ = ax.set_title(
-    "Distribution of the decision threshold \nacross different cross-validation folds"
-)
+_ = ax.set_title("Distribution of the decision threshold \nacross different cross-validation folds")
 
 # %%
 # In average, a decision threshold around 0.32 maximizes the balanced accuracy, which is

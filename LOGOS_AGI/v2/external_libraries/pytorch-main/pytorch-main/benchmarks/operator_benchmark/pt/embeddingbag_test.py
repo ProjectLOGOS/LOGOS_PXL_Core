@@ -35,9 +35,7 @@ class EmbeddingBagBenchmark(op_bench.TorchBenchmarkBase):
         ).long()
         self.inputs = {
             "input": input,
-            "offset": torch.cat(
-                (offsets, torch.tensor([input.size(0)], dtype=torch.long)), 0
-            ),
+            "offset": torch.cat((offsets, torch.tensor([input.size(0)], dtype=torch.long)), 0),
         }
         self.set_module_name("embeddingbag")
 
@@ -46,9 +44,7 @@ class EmbeddingBagBenchmark(op_bench.TorchBenchmarkBase):
 
 
 op_bench.generate_pt_test(configs.embeddingbag_short_configs, EmbeddingBagBenchmark)
-op_bench.generate_pt_gradient_test(
-    configs.embeddingbag_short_configs, EmbeddingBagBenchmark
-)
+op_bench.generate_pt_gradient_test(configs.embeddingbag_short_configs, EmbeddingBagBenchmark)
 
 
 class EmbeddingBenchmark(op_bench.TorchBenchmarkBase):

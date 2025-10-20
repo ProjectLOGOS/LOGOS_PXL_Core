@@ -14,9 +14,7 @@ class TestBipartiteLinkAnalysis:
         cls.davis_southern_women_graph = nx.davis_southern_women_graph()
         cls.women_bipartite_set = {
             node
-            for node, bipartite in cls.davis_southern_women_graph.nodes(
-                data="bipartite"
-            )
+            for node, bipartite in cls.davis_southern_women_graph.nodes(data="bipartite")
             if bipartite == 0
         }
         cls.gnmk_random_graph = nx.bipartite.generators.gnmk_random_graph(
@@ -41,9 +39,7 @@ class TestBipartiteLinkAnalysis:
         product_nodes = ("p1", "p2", "p3")
         u1_query = {
             product: rating
-            for _, product, rating in item_recommendation_graph.edges(
-                nbunch="u1", data="rating"
-            )
+            for _, product, rating in item_recommendation_graph.edges(nbunch="u1", data="rating")
         }
         u1_birank_results = bipartite.birank(
             item_recommendation_graph,
@@ -70,9 +66,7 @@ class TestBipartiteLinkAnalysis:
         )
 
     def test_davis_birank(self):
-        scores = bipartite.birank(
-            self.davis_southern_women_graph, self.women_bipartite_set
-        )
+        scores = bipartite.birank(self.davis_southern_women_graph, self.women_bipartite_set)
         answer = {
             "Laura Mandeville": 0.07,
             "Olivia Carleton": 0.04,
@@ -171,15 +165,11 @@ class TestBipartiteLinkAnalysis:
     def test_birank_invalid_alpha_beta(self, damping_factor, value):
         kwargs = {damping_factor: value}
         with pytest.raises(nx.NetworkXAlgorithmError):
-            bipartite.birank(
-                self.davis_southern_women_graph, self.women_bipartite_set, **kwargs
-            )
+            bipartite.birank(self.davis_southern_women_graph, self.women_bipartite_set, **kwargs)
 
     def test_birank_power_iteration_failed_convergence(self):
         with pytest.raises(nx.PowerIterationFailedConvergence):
-            bipartite.birank(
-                self.davis_southern_women_graph, self.women_bipartite_set, max_iter=1
-            )
+            bipartite.birank(self.davis_southern_women_graph, self.women_bipartite_set, max_iter=1)
 
     @pytest.mark.parametrize(
         "personalization,alpha,beta",

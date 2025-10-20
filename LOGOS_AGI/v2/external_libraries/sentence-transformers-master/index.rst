@@ -15,7 +15,7 @@ Sentence Transformers was created by `UKPLab <http://www.ukp.tu-darmstadt.de/>`_
 Usage
 =====
 .. seealso::
-  
+
    See the `Quickstart <docs/quickstart.html>`_ for more quick information on how to use Sentence Transformers.
 
 Working with Sentence Transformer models is straightforward:
@@ -23,34 +23,34 @@ Working with Sentence Transformer models is straightforward:
 .. sidebar:: Installation
 
    You can install *sentence-transformers* using pip:
-   
+
    .. code-block:: python
-   
+
       pip install -U sentence-transformers
-   
+
    We recommend **Python 3.9+** and **PyTorch 1.11.0+**. See `installation <docs/installation.html>`_ for further installation options.
 
 .. tab:: Embedding Models
 
    .. code-block:: python
-   
+
       from sentence_transformers import SentenceTransformer
-   
+
       # 1. Load a pretrained Sentence Transformer model
       model = SentenceTransformer("all-MiniLM-L6-v2")
-   
+
       # The sentences to encode
       sentences = [
           "The weather is lovely today.",
           "It's so sunny outside!",
           "He drove to the stadium.",
       ]
-   
+
       # 2. Calculate embeddings by calling model.encode()
       embeddings = model.encode(sentences)
       print(embeddings.shape)
       # [3, 384]
-   
+
       # 3. Calculate the embedding similarities
       similarities = model.similarity(embeddings, embeddings)
       print(similarities)
@@ -61,12 +61,12 @@ Working with Sentence Transformer models is straightforward:
 .. tab:: Reranker Models
 
    .. code-block:: python
-   
+
       from sentence_transformers import CrossEncoder
-      
+
       # 1. Load a pretrained CrossEncoder model
       model = CrossEncoder("cross-encoder/ms-marco-MiniLM-L6-v2")
-      
+
       # The texts for which to predict similarity scores
       query = "How many people live in Berlin?"
       passages = [
@@ -74,15 +74,15 @@ Working with Sentence Transformer models is straightforward:
           "Berlin has a yearly total of about 135 million day visitors, making it one of the most-visited cities in the European Union.",
           "In 2013 around 600,000 Berliners were registered in one of the more than 2,300 sport and fitness clubs.",
       ]
-      
+
       # 2a. Either predict scores pairs of texts
       scores = model.predict([(query, passage) for passage in passages])
       print(scores)
       # => [8.607139 5.506266 6.352977]
-      
+
       # 2b. Or rank a list of passages for a query
       ranks = model.rank(query, passages, return_documents=True)
-      
+
       print("Query:", query)
       for rank in ranks:
           print(f"- #{rank['corpus_id']} ({rank['score']:.2f}): {rank['text']}")
@@ -96,24 +96,24 @@ Working with Sentence Transformer models is straightforward:
 .. tab:: Sparse Encoder Models
 
    .. code-block:: python
-   
+
       from sentence_transformers import SparseEncoder
-      
+
       # 1. Load a pretrained SparseEncoder model
       model = SparseEncoder("naver/splade-cocondenser-ensembledistil")
-      
+
       # The sentences to encode
       sentences = [
           "The weather is lovely today.",
           "It's so sunny outside!",
           "He drove to the stadium.",
       ]
-      
+
       # 2. Calculate sparse embeddings by calling model.encode()
       embeddings = model.encode(sentences)
       print(embeddings.shape)
       # [3, 30522] - sparse representation with vocabulary size dimensions
-      
+
       # 3. Calculate the embedding similarities
       similarities = model.similarity(embeddings, embeddings)
       print(similarities)
@@ -125,7 +125,7 @@ Working with Sentence Transformer models is straightforward:
       stats = SparseEncoder.sparsity(embeddings)
       print(f"Sparsity: {stats['sparsity_ratio']:.2%}")
       # Sparsity: 99.84%
-   
+
 What Next?
 ==========
 

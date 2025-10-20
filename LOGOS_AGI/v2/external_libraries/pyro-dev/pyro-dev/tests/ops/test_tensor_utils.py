@@ -28,9 +28,7 @@ pytestmark = pytest.mark.stage("unit")
 
 
 @pytest.mark.parametrize("batch_size", [1, 2, 3])
-@pytest.mark.parametrize(
-    "block_size", [torch.Size([2, 2]), torch.Size([3, 1]), torch.Size([4, 2])]
-)
+@pytest.mark.parametrize("block_size", [torch.Size([2, 2]), torch.Size([3, 1]), torch.Size([4, 2])])
 def test_block_diag_embed(batch_size, block_size):
     m = torch.randn(block_size).unsqueeze(0).expand((batch_size,) + block_size)
     b = block_diag_embed(m)
@@ -100,9 +98,7 @@ def test_periodic_cumsum(period, size, left_shape, right_shape):
     for t in range(period):
         assert_equal(actual[dots + (t,)], tensor[dots + (t,)])
     for t in range(period, size):
-        assert_close(
-            actual[dots + (t,)], tensor[dots + (t,)] + actual[dots + (t - period,)]
-        )
+        assert_close(actual[dots + (t,)], tensor[dots + (t,)] + actual[dots + (t - period,)])
 
 
 @pytest.mark.parametrize("m", [2, 3, 4, 5, 6, 10])

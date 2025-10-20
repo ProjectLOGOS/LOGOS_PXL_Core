@@ -65,9 +65,7 @@ class GPLVM(Parameterized):
             )
         self.base_model = base_model
 
-        self.X = PyroSample(
-            dist.Normal(base_model.X.new_zeros(base_model.X.shape), 1.0).to_event()
-        )
+        self.X = PyroSample(dist.Normal(base_model.X.new_zeros(base_model.X.shape), 1.0).to_event())
         self.autoguide("X", dist.Normal)
         self.X_loc.data = base_model.X
 

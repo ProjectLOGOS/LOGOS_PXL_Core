@@ -128,9 +128,7 @@ sorted_idx = result.importances_mean.argsort()
 # scikit-learn user you probably can write simpler code by using `labels=...`
 # (matplotlib < 3.9) or `tick_labels=...` (matplotlib >= 3.9).
 tick_labels_parameter_name = (
-    "tick_labels"
-    if parse_version(matplotlib.__version__) >= parse_version("3.9")
-    else "labels"
+    "tick_labels" if parse_version(matplotlib.__version__) >= parse_version("3.9") else "labels"
 )
 tick_labels_dict = {tick_labels_parameter_name: feature_names[sorted_idx]}
 ax.boxplot(result.importances[sorted_idx].T, vert=False, **tick_labels_dict)

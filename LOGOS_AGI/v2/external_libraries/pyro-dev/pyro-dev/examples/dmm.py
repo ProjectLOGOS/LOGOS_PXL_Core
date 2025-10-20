@@ -181,9 +181,7 @@ class DMM(nn.Module):
         )
 
         # if we're using normalizing flows, instantiate those too
-        self.iafs = [
-            affine_autoregressive(z_dim, hidden_dims=[iaf_dim]) for _ in range(num_iafs)
-        ]
+        self.iafs = [affine_autoregressive(z_dim, hidden_dims=[iaf_dim]) for _ in range(num_iafs)]
         self.iafs_modules = nn.ModuleList(self.iafs)
 
         # define a (trainable) parameters z_0 and z_q_0 that help define the probability
@@ -239,9 +237,7 @@ class DMM(nn.Module):
                 with poutine.scale(scale=annealing_factor):
                     z_t = pyro.sample(
                         "z_%d" % t,
-                        dist.Normal(z_loc, z_scale)
-                        .mask(mini_batch_mask[:, t - 1 : t])
-                        .to_event(1),
+                        dist.Normal(z_loc, z_scale).mask(mini_batch_mask[:, t - 1 : t]).to_event(1),
                     )
 
                 # compute the probabilities that parameterize the bernoulli likelihood
@@ -275,9 +271,7 @@ class DMM(nn.Module):
 
         # if on gpu we need the fully broadcast view of the rnn initial state
         # to be in contiguous gpu memory
-        h_0_contig = self.h_0.expand(
-            1, mini_batch.size(0), self.rnn.hidden_size
-        ).contiguous()
+        h_0_contig = self.h_0.expand(1, mini_batch.size(0), self.rnn.hidden_size).contiguous()
         # push the observed x's through the rnn;
         # rnn_output contains the hidden state at each time step
         rnn_output, _ = self.rnn(mini_batch_reversed, h_0_contig)
@@ -299,9 +293,7 @@ class DMM(nn.Module):
                 # parameterized by self.iafs to the base distribution defined in the previous line
                 # to yield a transformed distribution that we use for q(z_t|...)
                 if len(self.iafs) > 0:
-                    z_dist = TransformedDistribution(
-                        dist.Normal(z_loc, z_scale), self.iafs
-                    )
+                    z_dist = TransformedDistribution(dist.Normal(z_loc, z_scale), self.iafs)
                     assert z_dist.event_shape == (self.z_q_0.size(0),)
                     assert z_dist.batch_shape[-1:] == (len(mini_batch),)
                 else:
@@ -316,9 +308,7 @@ class DMM(nn.Module):
                 with pyro.poutine.scale(scale=annealing_factor):
                     if len(self.iafs) > 0:
                         # in output of normalizing flow, all dimensions are correlated (event shape is not empty)
-                        z_t = pyro.sample(
-                            "z_%d" % t, z_dist.mask(mini_batch_mask[:, t - 1])
-                        )
+                        z_t = pyro.sample("z_%d" % t, z_dist.mask(mini_batch_mask[:, t - 1]))
                     else:
                         # when no normalizing flow used, ".to_event(1)" indicates latent dimensions are independent
                         z_t = pyro.sample(
@@ -333,9 +323,7 @@ class DMM(nn.Module):
 # setup, training, and evaluation
 def main(args):
     # setup logging
-    logging.basicConfig(
-        level=logging.DEBUG, format="%(message)s", filename=args.log, filemode="w"
-    )
+    logging.basicConfig(level=logging.DEBUG, format="%(message)s", filename=args.log, filemode="w")
     console = logging.StreamHandler()
     console.setLevel(logging.INFO)
     logging.getLogger("").addHandler(console)
@@ -351,8 +339,7 @@ def main(args):
     N_train_data = len(training_seq_lengths)
     N_train_time_slices = float(torch.sum(training_seq_lengths))
     N_mini_batches = int(
-        N_train_data / args.mini_batch_size
-        + int(N_train_data % args.mini_batch_size > 0)
+        N_train_data / args.mini_batch_size + int(N_train_data % args.mini_batch_size > 0)
     )
 
     logging.info(
@@ -371,12 +358,7 @@ def main(args):
         rep_shape = torch.Size([x.size(0) * n_eval_samples]) + x.size()[1:]
         repeat_dims = [1] * len(x.size())
         repeat_dims[0] = n_eval_samples
-        return (
-            x.repeat(repeat_dims)
-            .reshape(n_eval_samples, -1)
-            .transpose(1, 0)
-            .reshape(rep_shape)
-        )
+        return x.repeat(repeat_dims).reshape(n_eval_samples, -1).transpose(1, 0).reshape(rep_shape)
 
     # get the validation/test data ready for the dmm: pack into sequences, etc.
     val_seq_lengths = rep(val_seq_lengths)
@@ -485,9 +467,7 @@ def main(args):
 
         # compute which sequences in the training set we should grab
         mini_batch_start = which_mini_batch * args.mini_batch_size
-        mini_batch_end = np.min(
-            [(which_mini_batch + 1) * args.mini_batch_size, N_train_data]
-        )
+        mini_batch_end = np.min([(which_mini_batch + 1) * args.mini_batch_size, N_train_data])
         mini_batch_indices = shuffled_indices[mini_batch_start:mini_batch_end]
         # grab a fully prepped mini-batch using the helper function in the data loader
         (
@@ -562,9 +542,7 @@ def main(args):
         # do evaluation on test and validation data and report results
         if val_test_frequency > 0 and epoch > 0 and epoch % val_test_frequency == 0:
             val_nll, test_nll = do_evaluation()
-            logging.info(
-                "[val/test epoch %04d]  %.4f  %.4f" % (epoch, val_nll, test_nll)
-            )
+            logging.info("[val/test epoch %04d]  %.4f  %.4f" % (epoch, val_nll, test_nll))
 
 
 # parse command-line arguments and execute the main method

@@ -233,12 +233,8 @@ for ax, (n, weight) in zip(axs.ravel(), enumerate(weights)):
 def scoring_on_bootstrap(estimator, X, y, rng, n_bootstrap=100):
     results_for_prevalence = defaultdict(list)
     for _ in range(n_bootstrap):
-        bootstrap_indices = rng.choice(
-            np.arange(X.shape[0]), size=X.shape[0], replace=True
-        )
-        for key, value in scoring(
-            estimator, X[bootstrap_indices], y[bootstrap_indices]
-        ).items():
+        bootstrap_indices = rng.choice(np.arange(X.shape[0]), size=X.shape[0], replace=True)
+        for key, value in scoring(estimator, X[bootstrap_indices], y[bootstrap_indices]).items():
             results_for_prevalence[key].append(value)
     return pd.DataFrame(results_for_prevalence)
 
@@ -250,16 +246,10 @@ results = defaultdict(list)
 n_bootstrap = 100
 rng = np.random.default_rng(seed=0)
 
-for prevalence, X, y in zip(
-    populations["prevalence"], populations["X"], populations["y"]
-):
-    results_for_prevalence = scoring_on_bootstrap(
-        estimator, X, y, rng, n_bootstrap=n_bootstrap
-    )
+for prevalence, X, y in zip(populations["prevalence"], populations["X"], populations["y"]):
+    results_for_prevalence = scoring_on_bootstrap(estimator, X, y, rng, n_bootstrap=n_bootstrap)
     results["prevalence"].append(prevalence)
-    results["metrics"].append(
-        results_for_prevalence.aggregate(["mean", "std"]).unstack()
-    )
+    results["metrics"].append(results_for_prevalence.aggregate(["mean", "std"]).unstack())
 
 results = pd.DataFrame(results["metrics"], index=results["prevalence"])
 results.index.name = "prevalence"
@@ -283,10 +273,8 @@ ax1.axhline(
 )
 ax1.fill_between(
     results.index,
-    results["positive_likelihood_ratio"]["mean"]
-    - results["positive_likelihood_ratio"]["std"],
-    results["positive_likelihood_ratio"]["mean"]
-    + results["positive_likelihood_ratio"]["std"],
+    results["positive_likelihood_ratio"]["mean"] - results["positive_likelihood_ratio"]["std"],
+    results["positive_likelihood_ratio"]["mean"] + results["positive_likelihood_ratio"]["std"],
     color="r",
     alpha=0.3,
 )
@@ -309,10 +297,8 @@ ax2.axhline(
 )
 ax2.fill_between(
     results.index,
-    results["negative_likelihood_ratio"]["mean"]
-    - results["negative_likelihood_ratio"]["std"],
-    results["negative_likelihood_ratio"]["mean"]
-    + results["negative_likelihood_ratio"]["std"],
+    results["negative_likelihood_ratio"]["mean"] - results["negative_likelihood_ratio"]["std"],
+    results["negative_likelihood_ratio"]["mean"] + results["negative_likelihood_ratio"]["std"],
     color="b",
     alpha=0.3,
 )

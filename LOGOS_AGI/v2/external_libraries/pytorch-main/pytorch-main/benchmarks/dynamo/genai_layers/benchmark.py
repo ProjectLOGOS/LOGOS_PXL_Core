@@ -116,13 +116,9 @@ Examples:
         help="Names of benchmarks to run (use --list to see available options)",
     )
 
-    parser.add_argument(
-        "--list", action="store_true", help="List all available benchmarks"
-    )
+    parser.add_argument("--list", action="store_true", help="List all available benchmarks")
 
-    parser.add_argument(
-        "--all", action="store_true", help="Run all available benchmarks"
-    )
+    parser.add_argument("--all", action="store_true", help="Run all available benchmarks")
 
     parser.add_argument(
         "--visualize",

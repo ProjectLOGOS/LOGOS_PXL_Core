@@ -16,22 +16,11 @@ from ..compat.numpy import DTYPE
 from . import stationarity as statest_lib
 from . import seasonality as seatest_lib
 
-__all__ = [
-    'is_constant',
-    'ndiffs',
-    'nsdiffs'
-]
+__all__ = ["is_constant", "ndiffs", "nsdiffs"]
 
-VALID_TESTS = {
-    'kpss': statest_lib.KPSSTest,
-    'adf': statest_lib.ADFTest,
-    'pp': statest_lib.PPTest
-}
+VALID_TESTS = {"kpss": statest_lib.KPSSTest, "adf": statest_lib.ADFTest, "pp": statest_lib.PPTest}
 
-VALID_STESTS = {
-    'ocsb': seatest_lib.OCSBTest,
-    'ch': seatest_lib.CHTest
-}
+VALID_STESTS = {"ocsb": seatest_lib.OCSBTest, "ch": seatest_lib.CHTest}
 
 
 def is_constant(x):
@@ -57,7 +46,7 @@ def is_constant(x):
     return (x == x[0]).all()
 
 
-def nsdiffs(x, m, max_D=2, test='ocsb', **kwargs):
+def nsdiffs(x, m, max_D=2, test="ocsb", **kwargs):
     """Estimate the seasonal differencing term, ``D``.
 
     Perform a test of seasonality for different levels of ``D`` to
@@ -92,11 +81,10 @@ def nsdiffs(x, m, max_D=2, test='ocsb', **kwargs):
         seasonally stationary. If the time series is constant, will return 0.
     """
     if max_D <= 0:
-        raise ValueError('max_D must be a positive integer')
+        raise ValueError("max_D must be a positive integer")
 
     # get the test - this validates m internally
-    testfunc = get_callable(test, VALID_STESTS)(m, **kwargs)\
-        .estimate_seasonal_differencing_term
+    testfunc = get_callable(test, VALID_STESTS)(m, **kwargs).estimate_seasonal_differencing_term
     x = check_endog(x, dtype=DTYPE, copy=False)
 
     if is_constant(x):
@@ -114,10 +102,11 @@ def nsdiffs(x, m, max_D=2, test='ocsb', **kwargs):
         # Issue 351: if the differenced array is now shorter than the seasonal
         # periodicity, we need to bail out now.
         if len(x) < m:
-            warnings.warn("Appropriate D value may not have been reached; "
-                          "length of seasonally-differenced array (%i) is "
-                          "shorter than m (%i). Using D=%i"
-                          % (len(x), m, D))
+            warnings.warn(
+                "Appropriate D value may not have been reached; "
+                "length of seasonally-differenced array (%i) is "
+                "shorter than m (%i). Using D=%i" % (len(x), m, D)
+            )
             return D
 
         dodiff = testfunc(x)
@@ -125,7 +114,7 @@ def nsdiffs(x, m, max_D=2, test='ocsb', **kwargs):
     return D
 
 
-def ndiffs(x, alpha=0.05, test='kpss', max_d=2, **kwargs):
+def ndiffs(x, alpha=0.05, test="kpss", max_d=2, **kwargs):
     """Estimate ARIMA differencing term, ``d``.
 
     Perform a test of stationarity for different levels of ``d`` to
@@ -164,7 +153,7 @@ def ndiffs(x, alpha=0.05, test='kpss', max_d=2, **kwargs):
            https://github.com/robjhyndman/forecast/blob/19b0711e554524bf6435b7524517715658c07699/R/arima.R#L132  # noqa: E501
     """
     if max_d <= 0:
-        raise ValueError('max_d must be a positive integer')
+        raise ValueError("max_d must be a positive integer")
 
     # get the test
     testfunc = get_callable(test, VALID_TESTS)(alpha, **kwargs).should_diff
@@ -176,14 +165,14 @@ def ndiffs(x, alpha=0.05, test='kpss', max_d=2, **kwargs):
         return d
 
     with ctx.except_and_reraise(
-            np.linalg.LinAlgError,
-            raise_err=ValueError,
-            raise_msg="Encountered exception in stationarity test (%r). "
-                      "This can occur in seasonal settings when a large "
-                      "enough `m` coupled with a large enough `D` difference "
-                      "the training array into too few samples for OLS "
-                      "(input contains %i samples). Try fitting on a larger "
-                      "training size" % (test, len(x)),
+        np.linalg.LinAlgError,
+        raise_err=ValueError,
+        raise_msg="Encountered exception in stationarity test (%r). "
+        "This can occur in seasonal settings when a large "
+        "enough `m` coupled with a large enough `D` difference "
+        "the training array into too few samples for OLS "
+        "(input contains %i samples). Try fitting on a larger "
+        "training size" % (test, len(x)),
     ):
         # get initial diff
         pval, dodiff = testfunc(x)

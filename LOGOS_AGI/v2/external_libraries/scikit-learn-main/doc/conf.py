@@ -357,8 +357,7 @@ html_js_files = [
 # Compile scss files into css files using sphinxcontrib-sass
 sass_src_dir, sass_out_dir = "scss", "css/styles"
 sass_targets = {
-    f"{file.stem}.scss": f"{file.stem}.css"
-    for file in Path(sass_src_dir).glob("*.scss")
+    f"{file.stem}.scss": f"{file.stem}.css" for file in Path(sass_src_dir).glob("*.scss")
 }
 
 # Additional CSS files, should be subset of the values of `sass_targets`
@@ -376,9 +375,7 @@ def add_js_css_files(app, pagename, templatename, context, doctree):
         # External: jQuery and DataTables
         app.add_js_file("https://code.jquery.com/jquery-3.7.0.js")
         app.add_js_file("https://cdn.datatables.net/2.0.0/js/dataTables.min.js")
-        app.add_css_file(
-            "https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.min.css"
-        )
+        app.add_css_file("https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.min.css")
         # Internal: API search initialization and styling
         app.add_js_file("scripts/api-search.js")
         app.add_css_file("styles/api-search.css")
@@ -420,13 +417,9 @@ html_context = {}
 # index.html
 release_highlights_dir = Path("..") / "examples" / "release_highlights"
 # Finds the highlight with the latest version number
-latest_highlights = sorted(release_highlights_dir.glob("plot_release_highlights_*.py"))[
-    -1
-]
+latest_highlights = sorted(release_highlights_dir.glob("plot_release_highlights_*.py"))[-1]
 latest_highlights = latest_highlights.with_suffix("").name
-html_context["release_highlights"] = (
-    f"auto_examples/release_highlights/{latest_highlights}"
-)
+html_context["release_highlights"] = f"auto_examples/release_highlights/{latest_highlights}"
 
 # get version from highlight name assuming highlights have the form
 # plot_release_highlights_0_22_0
@@ -445,9 +438,7 @@ redirects = {
         "auto_examples/model_selection/plot_permutation_tests_for_classification"
     ),
     "modules/model_persistence": "model_persistence",
-    "auto_examples/linear_model/plot_bayesian_ridge": (
-        "auto_examples/linear_model/plot_ard"
-    ),
+    "auto_examples/linear_model/plot_bayesian_ridge": ("auto_examples/linear_model/plot_ard"),
     "auto_examples/model_selection/grid_search_text_feature_extraction": (
         "auto_examples/model_selection/plot_grid_search_text_feature_extraction"
     ),
@@ -470,9 +461,7 @@ redirects = {
     "auto_examples/ensemble/plot_adaboost_hastie_10_2": (
         "auto_examples/ensemble/plot_adaboost_multiclass"
     ),
-    "auto_examples/decomposition/plot_pca_3d": (
-        "auto_examples/decomposition/plot_pca_iris"
-    ),
+    "auto_examples/decomposition/plot_pca_3d": ("auto_examples/decomposition/plot_pca_iris"),
     "auto_examples/exercises/plot_cv_digits": (
         "auto_examples/model_selection/plot_nested_cross_validation_iris"
     ),
@@ -482,21 +471,15 @@ redirects = {
     "auto_examples/linear_model/plot_lasso_coordinate_descent_path": (
         "auto_examples/linear_model/plot_lasso_lasso_lars_elasticnet_path"
     ),
-    "auto_examples/cluster/plot_color_quantization": (
-        "auto_examples/cluster/plot_face_compress"
-    ),
-    "auto_examples/cluster/plot_cluster_iris": (
-        "auto_examples/cluster/plot_kmeans_assumptions"
-    ),
+    "auto_examples/cluster/plot_color_quantization": ("auto_examples/cluster/plot_face_compress"),
+    "auto_examples/cluster/plot_cluster_iris": ("auto_examples/cluster/plot_kmeans_assumptions"),
     "auto_examples/ensemble/plot_forest_importances_faces": (
         "auto_examples/ensemble/plot_forest_importances"
     ),
     "auto_examples/ensemble/plot_voting_probas": (
         "auto_examples/ensemble/plot_voting_decision_regions"
     ),
-    "auto_examples/datasets/plot_iris_dataset": (
-        "auto_examples/decomposition/plot_pca_iris"
-    ),
+    "auto_examples/datasets/plot_iris_dataset": ("auto_examples/decomposition/plot_pca_iris"),
     "auto_examples/linear_model/plot_iris_logistic": (
         "auto_examples/linear_model/plot_logistic_multinomial"
     ),
@@ -571,9 +554,7 @@ intersphinx_mapping = {
 
 v = parse(release)
 if v.release is None:
-    raise ValueError(
-        "Ill-formed version: {!r}. Version should follow PEP440".format(version)
-    )
+    raise ValueError("Ill-formed version: {!r}. Version should follow PEP440".format(version))
 
 if v.is_devrelease:
     binder_branch = "main"
@@ -707,9 +688,7 @@ def notebook_modification_function(notebook_content, notebook_filename):
         code = "\n".join(code_lines)
         add_code_cell(dummy_notebook_content, code)
 
-    notebook_content["cells"] = (
-        dummy_notebook_content["cells"] + notebook_content["cells"]
-    )
+    notebook_content["cells"] = dummy_notebook_content["cells"] + notebook_content["cells"]
 
 
 default_global_config = sklearn.get_config()
@@ -942,8 +921,7 @@ linkcheck_ignore = [
     # https://github.com/sphinx-doc/sphinx/issues/9016 for more details about
     # the github example
     r"https://github.com/conda-forge/miniforge#miniforge",
-    r"https://github.com/joblib/threadpoolctl/"
-    "#setting-the-maximum-size-of-thread-pools",
+    r"https://github.com/joblib/threadpoolctl/" "#setting-the-maximum-size-of-thread-pools",
     r"https://stackoverflow.com/questions/5836335/"
     "consistently-create-same-random-numpy-array/5837352#comment6712034_5837352",
 ]
@@ -951,9 +929,7 @@ linkcheck_ignore = [
 # Use a browser-like user agent to avoid some "403 Client Error: Forbidden for
 # url" errors. This is taken from the variable navigator.userAgent inside a
 # browser console.
-user_agent = (
-    "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:100.0) Gecko/20100101 Firefox/100.0"
-)
+user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:100.0) Gecko/20100101 Firefox/100.0"
 
 # Use Github token from environment variable to avoid Github rate limits when
 # checking Github links
@@ -994,9 +970,9 @@ def infer_next_release_versions():
         all_previous_tag["final"] = stable_version.base_version
 
         # Bug-fix
-        all_version_full["bf"] = (
-            f"{stable_version.major}.{stable_version.minor}.{stable_version.micro + 1}"
-        )
+        all_version_full[
+            "bf"
+        ] = f"{stable_version.major}.{stable_version.minor}.{stable_version.micro + 1}"
         all_version_short["bf"] = f"{stable_version.major}.{stable_version.minor}"
         all_previous_tag["bf"] = last_stable_version.base_version
     except Exception as e:
@@ -1082,9 +1058,7 @@ if DEPRECATED_API_REFERENCE:
 
 for rst_template_name, rst_target_name, kwargs in rst_templates:
     # Read the corresponding template file into jinja2
-    with (Path(".") / f"{rst_template_name}.rst.template").open(
-        "r", encoding="utf-8"
-    ) as f:
+    with (Path(".") / f"{rst_template_name}.rst.template").open("r", encoding="utf-8") as f:
         t = jinja2.Template(f.read())
 
     # Render the template and write to the target

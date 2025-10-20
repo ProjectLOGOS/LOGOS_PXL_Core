@@ -75,9 +75,7 @@ class TestRelabel:
         degG = (d for n, d in G.degree())
         assert sorted(degH) == sorted(degG)
 
-        H = nx.convert_node_labels_to_integers(
-            G, ordering="sorted", label_attribute="label"
-        )
+        H = nx.convert_node_labels_to_integers(G, ordering="sorted", label_attribute="label")
         assert H.nodes[0]["label"] == "A"
         assert H.nodes[1]["label"] == "B"
         assert H.nodes[2]["label"] == "C"

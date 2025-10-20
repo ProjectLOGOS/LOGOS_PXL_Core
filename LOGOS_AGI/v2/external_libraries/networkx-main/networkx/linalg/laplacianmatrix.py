@@ -250,9 +250,7 @@ def normalized_laplacian_matrix(G, nodelist=None, weight="weight"):
 @not_implemented_for("undirected")
 @not_implemented_for("multigraph")
 @nx._dispatchable(edge_attrs="weight")
-def directed_laplacian_matrix(
-    G, nodelist=None, weight="weight", walk_type=None, alpha=0.95
-):
+def directed_laplacian_matrix(G, nodelist=None, weight="weight", walk_type=None, alpha=0.95):
     r"""Returns the directed Laplacian matrix of G.
 
     The graph directed Laplacian is the matrix
@@ -323,9 +321,7 @@ def directed_laplacian_matrix(
     import scipy as sp
 
     # NOTE: P has type ndarray if walk_type=="pagerank", else csr_array
-    P = _transition_matrix(
-        G, nodelist=nodelist, weight=weight, walk_type=walk_type, alpha=alpha
-    )
+    P = _transition_matrix(G, nodelist=nodelist, weight=weight, walk_type=walk_type, alpha=alpha)
 
     n, m = P.shape
 
@@ -418,9 +414,7 @@ def directed_combinatorial_laplacian_matrix(
     """
     import scipy as sp
 
-    P = _transition_matrix(
-        G, nodelist=nodelist, weight=weight, walk_type=walk_type, alpha=alpha
-    )
+    P = _transition_matrix(G, nodelist=nodelist, weight=weight, walk_type=walk_type, alpha=alpha)
 
     n, m = P.shape
 

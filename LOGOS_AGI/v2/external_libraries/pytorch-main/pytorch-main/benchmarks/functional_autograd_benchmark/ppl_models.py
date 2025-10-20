@@ -67,9 +67,7 @@ def get_robust_regression(device: torch.device) -> GetterReturnType:
     beta_value = beta.sample()
     beta_value.requires_grad_(True)
 
-    def forward(
-        nu_value: Tensor, sigma_unconstrained_value: Tensor, beta_value: Tensor
-    ) -> Tensor:
+    def forward(nu_value: Tensor, sigma_unconstrained_value: Tensor, beta_value: Tensor) -> Tensor:
         sigma_constrained_value = sigma_unconstrained_value.exp()
         mu = X.mm(beta_value)
 

@@ -681,9 +681,7 @@ def to_scipy_sparse_array(G, nodelist=None, dtype=None, weight="weight", format=
             G = G.subgraph(nodelist)
 
     index = dict(zip(nodelist, range(nlen)))
-    coefficients = zip(
-        *((index[u], index[v], wt) for u, v, wt in G.edges(data=weight, default=1))
-    )
+    coefficients = zip(*((index[u], index[v], wt) for u, v, wt in G.edges(data=weight, default=1)))
     try:
         row, col, data = coefficients
     except ValueError:
@@ -774,9 +772,7 @@ def _generate_weighted_edges(A):
 
 
 @nx._dispatchable(graphs=None, returns_graph=True)
-def from_scipy_sparse_array(
-    A, parallel_edges=False, create_using=None, edge_attribute="weight"
-):
+def from_scipy_sparse_array(A, parallel_edges=False, create_using=None, edge_attribute="weight"):
     """Creates a new graph from an adjacency matrix given as a SciPy sparse
     array.
 
@@ -1077,9 +1073,7 @@ def to_numpy_array(
     # Collect all edge weights and reduce with `multigraph_weights`
     if G.is_multigraph():
         if edge_attrs:
-            raise nx.NetworkXError(
-                "Structured arrays are not supported for MultiGraphs"
-            )
+            raise nx.NetworkXError("Structured arrays are not supported for MultiGraphs")
         d = defaultdict(list)
         for u, v, wt in G.edges(data=weight, default=1.0):
             d[(idx[u], idx[v])].append(wt)
@@ -1256,9 +1250,7 @@ def from_numpy_array(
     # handle numpy constructed data type
     if python_type == "void":
         # Sort the fields by their offset, then by dtype, then by name.
-        fields = sorted(
-            (offset, dtype, name) for name, (dtype, offset) in A.dtype.fields.items()
-        )
+        fields = sorted((offset, dtype, name) for name, (dtype, offset) in A.dtype.fields.items())
         triples = (
             (
                 u,
@@ -1288,9 +1280,7 @@ def from_numpy_array(
         if edge_attr in [False, None]:
             triples = chain(((u, v, {}) for d in range(A[u, v])) for (u, v) in edges)
         else:
-            triples = chain(
-                ((u, v, {edge_attr: 1}) for d in range(A[u, v])) for (u, v) in edges
-            )
+            triples = chain(((u, v, {edge_attr: 1}) for d in range(A[u, v])) for (u, v) in edges)
     else:  # basic data type
         if edge_attr in [False, None]:
             triples = ((u, v, {}) for u, v in edges)

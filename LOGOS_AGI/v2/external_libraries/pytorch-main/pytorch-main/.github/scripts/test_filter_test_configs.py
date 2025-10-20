@@ -265,9 +265,7 @@ class TestConfigFilter(TestCase):
         ]
 
         for case in testcases:
-            filtered_test_matrix = filter(
-                yaml.safe_load(case["test_matrix"]), mocked_labels
-            )
+            filtered_test_matrix = filter(yaml.safe_load(case["test_matrix"]), mocked_labels)
             self.assertEqual(case["expected"], json.dumps(filtered_test_matrix))
 
     def test_filter_with_test_config_label(self) -> None:
@@ -287,9 +285,7 @@ class TestConfigFilter(TestCase):
         ]
 
         for case in testcases:
-            filtered_test_matrix = filter(
-                yaml.safe_load(case["test_matrix"]), mocked_labels
-            )
+            filtered_test_matrix = filter(yaml.safe_load(case["test_matrix"]), mocked_labels)
             self.assertEqual(case["expected"], json.dumps(filtered_test_matrix))
 
     def test_filter_selected_test_configs(self) -> None:
@@ -328,9 +324,7 @@ class TestConfigFilter(TestCase):
 
         for case in testcases:
             selected_test_configs = {
-                v.strip().lower()
-                for v in case["selected_test_configs"].split(",")
-                if v.strip()
+                v.strip().lower() for v in case["selected_test_configs"].split(",") if v.strip()
             }
             filtered_test_matrix = filter_selected_test_configs(
                 yaml.safe_load(case["test_matrix"]), selected_test_configs
@@ -375,9 +369,7 @@ class TestConfigFilter(TestCase):
             test_matrix = yaml.safe_load(case["test_matrix"])
             scheduled_test_matrix = set_periodic_modes(test_matrix, job_name)
 
-            expected_modes = [
-                m for m, c in SUPPORTED_PERIODICAL_MODES.items() if c(job_name)
-            ]
+            expected_modes = [m for m, c in SUPPORTED_PERIODICAL_MODES.items() if c(job_name)]
             self.assertEqual(
                 len(test_matrix["include"]) * len(expected_modes),
                 len(scheduled_test_matrix["include"]),
@@ -774,21 +766,15 @@ class TestConfigFilter(TestCase):
     # test variations of close in PR_BODY
     def test_parse_reenabled_issues(self) -> None:
         pr_body = "closes #123 Close #143 ClOsE #345 closed #10283"
-        self.assertEqual(
-            parse_reenabled_issues(pr_body), ["123", "143", "345", "10283"]
-        )
+        self.assertEqual(parse_reenabled_issues(pr_body), ["123", "143", "345", "10283"])
 
         # test variations of fix
         pr_body = "fix #123 FixEd #143 fixes #345 FiXeD #10283"
-        self.assertEqual(
-            parse_reenabled_issues(pr_body), ["123", "143", "345", "10283"]
-        )
+        self.assertEqual(parse_reenabled_issues(pr_body), ["123", "143", "345", "10283"])
 
         # test variations of resolve
         pr_body = "resolve #123 resolveS #143 REsolved #345 RESOLVES #10283"
-        self.assertEqual(
-            parse_reenabled_issues(pr_body), ["123", "143", "345", "10283"]
-        )
+        self.assertEqual(parse_reenabled_issues(pr_body), ["123", "143", "345", "10283"])
 
         # test links
         pr_body = "closes https://github.com/pytorch/pytorch/issues/75198 fixes https://github.com/pytorch/pytorch/issues/75123"

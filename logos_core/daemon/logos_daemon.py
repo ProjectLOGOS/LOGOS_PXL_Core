@@ -30,25 +30,19 @@ from pathlib import Path
 import json
 
 try:
-    from ..unified_formalisms import UnifiedFormalismValidator
-    from ..reference_monitor import ReferenceMonitor
-    from .gap_detector import GapDetector
+    from logos_core.unified_formalisms import UnifiedFormalismValidator as UnifiedFormalisms
+    from logos_core.reference_monitor import ReferenceMonitor
+    from logos_core.daemon.gap_detector import GapDetector
 except ImportError:
-    # Fallback for standalone execution
-    class UnifiedFormalismValidator:
+    class UnifiedFormalisms:
         def __init__(self): pass
-        def authorize(self, action, state, props, provenance): 
-            return {"authorized": True, "action": action}
-    
+
     class ReferenceMonitor:
-        def __init__(self, config_path=None): pass
-        def require_proof_token(self, obligation, provenance):
-            return {"status": "mocked", "obligation": obligation}
-    
+        def __init__(self): pass
+
     class GapDetector:
         def __init__(self): pass
-        def detect_reasoning_gaps(self, proof_state):
-            return [{"type": "mock_gap", "severity": "medium", "location": "test.v:42"}]
+        def detect_gaps(self, **kwargs): return []
 
 
 @dataclass
@@ -94,12 +88,12 @@ class LogosDaemon:
 
         # Core components
         try:
-            self.unified_formalisms = UnifiedFormalismValidator()
+            self.unified_formalisms = UnifiedFormalisms()
             self.reference_monitor = ReferenceMonitor()
             self.gap_detector = GapDetector()
         except Exception as e:
             self.logger.warning(f"Using fallback components: {e}")
-            self.unified_formalisms = UnifiedFormalismValidator()
+            self.unified_formalisms = UnifiedFormalisms()
             self.reference_monitor = ReferenceMonitor()
             self.gap_detector = GapDetector()
 
@@ -107,6 +101,7 @@ class LogosDaemon:
         self._stop_event = threading.Event()
         self._daemon_thread: Optional[threading.Thread] = None
         self._lock = threading.RLock()
+        self._running = False
 
         # Metrics and telemetry
         self._telemetry_buffer: List[Dict[str, Any]] = []
@@ -157,6 +152,7 @@ class LogosDaemon:
                 self.status.is_running = True
                 self.status.start_time = datetime.now()
                 self.status.last_error = None
+                self._running = True
 
                 self._daemon_thread.start()
 
@@ -191,6 +187,7 @@ class LogosDaemon:
                     self._daemon_thread.join(timeout=30.0)
 
                 self.status.is_running = False
+                self._running = False
                 self._flush_telemetry()
 
                 self.logger.info("LOGOS Daemon stopped successfully")
@@ -281,11 +278,17 @@ class LogosDaemon:
             coherence_metrics = self._compute_coherence_metrics()
             self._record_telemetry("coherence_metrics", coherence_metrics)
 
-        # 5. Autonomous reasoning (if enabled and safe)
+        # 5. IEL evaluation and refinement (if enabled)
+        if hasattr(self, '_enable_iel_evaluation') and self._enable_iel_evaluation:
+            if self._should_run_iel_evaluation():
+                iel_evaluation_result = self._run_iel_evaluation_cycle()
+                self._record_telemetry("iel_evaluation_cycle", iel_evaluation_result)
+
+        # 6. Autonomous reasoning (if enabled and safe)
         if self.config.enable_autonomous_reasoning and self._is_autonomous_reasoning_safe():
             self._execute_bounded_autonomous_reasoning()
 
-        # 6. Flush telemetry periodically
+        # 7. Flush telemetry periodically
         if (datetime.now() - self._last_telemetry_flush).total_seconds() > 3600:
             self._flush_telemetry()
 
@@ -345,7 +348,7 @@ class LogosDaemon:
                 self.logger.info(f"Detected {len(gaps)} reasoning gaps")
                 with self._lock:
                     self.status.gaps_detected += len(gaps)
-                
+
                 # Emit gap detection events
                 for gap in gaps:
                     self._record_telemetry("gap_detected", gap)
@@ -390,6 +393,48 @@ class LogosDaemon:
 
         except Exception as e:
             self.logger.error(f"Autonomous reasoning failed: {e}")
+
+    def _should_run_iel_evaluation(self) -> bool:
+        """Determine if IEL evaluation should run this cycle"""
+        # Run every 6 hours (21600 seconds) or on first cycle
+        if not hasattr(self, '_last_iel_evaluation'):
+            return True
+
+        time_since_last = (datetime.now() - self._last_iel_evaluation).total_seconds()
+        return time_since_last >= 21600  # 6 hours
+
+    def _run_iel_evaluation_cycle(self) -> Dict[str, Any]:
+        """Execute complete IEL evaluation and refinement cycle"""
+        try:
+            from logos_core.meta_reasoning.iel_evaluator import IELEvaluator
+
+            self.logger.info("Starting IEL evaluation cycle...")
+            evaluator = IELEvaluator("registry/iel_registry.db")
+
+            # Evaluate all IELs
+            evaluation_results = evaluator.evaluate_all_iels("metrics/agi_cycle.jsonl")
+
+            # Rank by quality
+            ranked_iels = evaluator.rank_iels(evaluation_results, threshold=0.92)
+
+            # Record results
+            self._last_iel_evaluation = datetime.now()
+
+            result = {
+                "timestamp": datetime.now().isoformat(),
+                "total_iels_evaluated": len(evaluation_results),
+                "high_quality_iels": len(ranked_iels),
+                "evaluation_summary": evaluator._calculate_summary_stats(evaluation_results)
+            }
+
+            self.logger.info(f"IEL evaluation complete: {len(evaluation_results)} evaluated, "
+                           f"{len(ranked_iels)} high-quality")
+
+            return result
+
+        except Exception as e:
+            self.logger.error(f"IEL evaluation cycle failed: {e}")
+            return {"error": str(e), "timestamp": datetime.now().isoformat()}
 
     def _update_resource_usage(self) -> None:
         """Update current resource usage metrics"""
@@ -446,25 +491,34 @@ def main():
     """Main entry point for daemon command-line execution"""
     import argparse
     import sys
-    
+
     parser = argparse.ArgumentParser(description='LOGOS Daemon - Passive Background Verifier')
     parser.add_argument('--once', action='store_true', help='Run single cycle and exit')
+    parser.add_argument('--continuous', action='store_true', help='Run in continuous multi-cycle mode')
+    parser.add_argument('--interval', type=int, default=3600, help='Cycle interval in seconds (default: 3600)')
     parser.add_argument('--emit-gaps', action='store_true', help='Enable gap detection and emission')
+    parser.add_argument('--evaluate-iels', action='store_true', help='Enable automatic IEL evaluation and refinement')
     parser.add_argument('--out', default='metrics/agi_status.jsonl', help='Telemetry output file')
     parser.add_argument('--config', help='Configuration file path')
-    
+
     args = parser.parse_args()
-    
+
     # Create daemon configuration
     config = DaemonConfig(
         telemetry_output=args.out,
         enable_gap_detection=args.emit_gaps,
-        interval_sec=1 if args.once else 3600
+        interval_sec=1 if args.once else args.interval,
+        enable_autonomous_reasoning=args.evaluate_iels
     )
-    
+
     # Initialize daemon
     daemon = LogosDaemon(config)
-    
+
+    # Add IEL evaluation capability for continuous mode
+    if args.evaluate_iels:
+        daemon._enable_iel_evaluation = True
+        daemon.logger.info("IEL evaluation and refinement enabled")
+
     try:
         if args.once:
             # Single cycle execution
@@ -478,7 +532,7 @@ def main():
             print("Starting LOGOS daemon in continuous mode...")
             daemon.start()
             try:
-                while daemon._running:
+                while daemon.status.is_running:
                     time.sleep(1)
             except KeyboardInterrupt:
                 print("\nShutting down daemon...")

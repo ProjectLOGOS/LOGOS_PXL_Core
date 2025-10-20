@@ -8,13 +8,7 @@ from statsmodels.regression.linear_model import OLS, WLS
 
 
 def format_dict(d: dict[Any, Any]) -> str:
-    return (
-        str(d)
-        .replace(" ", "")
-        .replace("],", "],\n")
-        .replace(":", ":\n")
-        .replace("},", "},\n")
-    )
+    return str(d).replace(" ", "").replace("],", "],\n").replace(":", ":\n").replace("},", "},\n")
 
 
 class PvalueResult(NamedTuple):

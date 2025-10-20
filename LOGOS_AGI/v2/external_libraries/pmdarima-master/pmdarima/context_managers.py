@@ -2,7 +2,7 @@
 
 import contextlib
 
-__all__ = ['except_and_reraise']
+__all__ = ["except_and_reraise"]
 
 
 @contextlib.contextmanager
@@ -32,8 +32,5 @@ def except_and_reraise(*except_errs, raise_err=None, raise_msg=None):
     try:
         yield
     except except_errs as e:
-        message = "%s (raised from %s: %s)" \
-                  % (raise_msg,
-                     e.__class__.__name__,
-                     str(e))
+        message = "%s (raised from %s: %s)" % (raise_msg, e.__class__.__name__, str(e))
         raise raise_err(message)

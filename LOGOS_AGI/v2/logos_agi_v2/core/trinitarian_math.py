@@ -6,13 +6,13 @@ def person_relation(operation: str, agent_a: str, agent_b: str) -> str or bool:
     H∘F=S (Spirit operating on Father yields Son)
     """
     a, b = agent_a[0].upper(), agent_b[0].upper()
-    
+
     if operation == "compose":
         if (a, b) == ("F", "S"): return "H"
         if (a, b) == ("S", "H"): return "F"
         if (a, b) == ("H", "F"): return "S"
         if (a, b) == ("S", "F"): return "H"  # Simplified for commutativity in this model
-    
+
     if operation == "verify_closure":
         return (person_relation("compose", "F", "S") == "H" and
                 person_relation("compose", "S", "H") == "F" and

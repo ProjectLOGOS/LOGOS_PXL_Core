@@ -65,9 +65,7 @@ def make_estimator(name, categorical_columns=None, iforest_kw=None, lof_kw=None)
         if categorical_columns is None:
             preprocessor = None
         else:
-            ordinal_encoder = OrdinalEncoder(
-                handle_unknown="use_encoded_value", unknown_value=-1
-            )
+            ordinal_encoder = OrdinalEncoder(handle_unknown="use_encoded_value", unknown_value=-1)
             preprocessor = ColumnTransformer(
                 transformers=[
                     ("categorical", ordinal_encoder, categorical_columns),
@@ -123,9 +121,7 @@ import numpy as np
 from sklearn.datasets import fetch_kddcup99
 from sklearn.model_selection import train_test_split
 
-X, y = fetch_kddcup99(
-    subset="SA", percent10=True, random_state=42, return_X_y=True, as_frame=True
-)
+X, y = fetch_kddcup99(subset="SA", percent10=True, random_state=42, return_X_y=True, as_frame=True)
 y = (y != b"normal.").astype(np.int32)
 X, _, y, _ = train_test_split(X, y, train_size=0.1, stratify=y, random_state=42)
 
@@ -380,9 +376,7 @@ expected_anomaly_fraction = 0.02
 lof = LocalOutlierFactor(n_neighbors=int(n_samples * expected_anomaly_fraction))
 
 fig, ax = plt.subplots()
-for model_idx, (linestyle, preprocessor) in enumerate(
-    zip(linestyles, preprocessor_list)
-):
+for model_idx, (linestyle, preprocessor) in enumerate(zip(linestyles, preprocessor_list)):
     model = make_pipeline(preprocessor, lof)
     model.fit(X)
     y_score = model[-1].negative_outlier_factor_
@@ -431,9 +425,7 @@ n_samples, expected_anomaly_fraction = X.shape[0], 0.025
 lof = LocalOutlierFactor(n_neighbors=int(n_samples * expected_anomaly_fraction))
 
 fig, ax = plt.subplots()
-for model_idx, (linestyle, preprocessor) in enumerate(
-    zip(linestyles, preprocessor_list)
-):
+for model_idx, (linestyle, preprocessor) in enumerate(zip(linestyles, preprocessor_list)):
     model = make_pipeline(preprocessor, lof)
     model.fit(X)
     y_score = model[-1].negative_outlier_factor_
@@ -447,7 +439,5 @@ for model_idx, (linestyle, preprocessor) in enumerate(
         chance_level_kw={"linestyle": (0, (1, 10))},
         curve_kwargs=dict(linestyle=linestyle, linewidth=2),
     )
-ax.set_title(
-    "Fixed n_neighbors with varying preprocessing\non cardiotocography dataset"
-)
+ax.set_title("Fixed n_neighbors with varying preprocessing\non cardiotocography dataset")
 plt.show()

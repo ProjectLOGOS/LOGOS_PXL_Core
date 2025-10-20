@@ -291,9 +291,7 @@ class WeakKeyDictionaryTestCase(TestCase):
         for k in self.other:
             self.assertNotIn(k, d)
         # cmp
-        self.assertTrue(
-            p == p
-        )  # NB: don't use assertEqual, that doesn't actually use ==
+        self.assertTrue(p == p)  # NB: don't use assertEqual, that doesn't actually use ==
         self.assertTrue(d == d)
         self.assertTrue(p != d)
         self.assertTrue(d != p)
@@ -398,9 +396,7 @@ class WeakKeyDictionaryTestCase(TestCase):
 
     def test_getitem(self):
         d = self.reference
-        self.assertEqual(
-            d[next(iter(self.inmapping.keys()))], next(iter(self.inmapping.values()))
-        )
+        self.assertEqual(d[next(iter(self.inmapping.keys()))], next(iter(self.inmapping.values())))
 
         self.assertRaises(TypeError, d.__getitem__)
 
@@ -624,9 +620,7 @@ class WeakKeyDictionaryScriptObjectTestCase(TestCase):
         for k in self.other:
             self.assertNotIn(k, d)
         # cmp
-        self.assertTrue(
-            p == p
-        )  # NB: don't use assertEqual, that doesn't actually use ==
+        self.assertTrue(p == p)  # NB: don't use assertEqual, that doesn't actually use ==
         self.assertTrue(d == d)
         self.assertTrue(p != d)
         self.assertTrue(d != p)
@@ -731,9 +725,7 @@ class WeakKeyDictionaryScriptObjectTestCase(TestCase):
 
     def test_getitem(self):
         d = self.reference
-        self.assertEqual(
-            d[next(iter(self.inmapping.keys()))], next(iter(self.inmapping.values()))
-        )
+        self.assertEqual(d[next(iter(self.inmapping.keys()))], next(iter(self.inmapping.values())))
 
         self.assertRaises(TypeError, d.__getitem__)
 

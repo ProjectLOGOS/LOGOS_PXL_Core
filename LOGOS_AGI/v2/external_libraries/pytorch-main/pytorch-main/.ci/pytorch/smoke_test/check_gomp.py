@@ -22,17 +22,13 @@ def get_gomp_thread():
           together and may require adjustments for other setups.
     """
     python_path = Path(sys.executable).resolve()
-    python_prefix = (
-        python_path.parent.parent
-    )  # Typically goes to the Python installation root
+    python_prefix = python_path.parent.parent  # Typically goes to the Python installation root
 
     # Get the additional ABI flags (if any); it may be an empty string.
     abiflags = getattr(sys, "abiflags", "")
 
     # Construct the Python directory name correctly (e.g., "python3.13t").
-    python_version = (
-        f"python{sys.version_info.major}.{sys.version_info.minor}{abiflags}"
-    )
+    python_version = f"python{sys.version_info.major}.{sys.version_info.minor}{abiflags}"
 
     libtorch_cpu_path = (
         python_prefix
@@ -64,13 +60,9 @@ def get_gomp_thread():
 
 def main():
     omp_max_threads = get_gomp_thread()
-    print(
-        f"omp_max_threads after loading libgomp.so and libtorch_cpu.so: {omp_max_threads}"
-    )
+    print(f"omp_max_threads after loading libgomp.so and libtorch_cpu.so: {omp_max_threads}")
     if omp_max_threads == 1:
-        raise RuntimeError(
-            "omp_max_threads is 1. Check whether libgomp.so is loaded twice."
-        )
+        raise RuntimeError("omp_max_threads is 1. Check whether libgomp.so is loaded twice.")
 
 
 if __name__ == "__main__":

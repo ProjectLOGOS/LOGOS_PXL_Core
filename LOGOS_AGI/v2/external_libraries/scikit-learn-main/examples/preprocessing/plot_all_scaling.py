@@ -100,15 +100,11 @@ distributions = [
     ),
     (
         "Data after quantile transformation (uniform pdf)",
-        QuantileTransformer(
-            output_distribution="uniform", random_state=42
-        ).fit_transform(X),
+        QuantileTransformer(output_distribution="uniform", random_state=42).fit_transform(X),
     ),
     (
         "Data after quantile transformation (gaussian pdf)",
-        QuantileTransformer(
-            output_distribution="normal", random_state=42
-        ).fit_transform(X),
+        QuantileTransformer(output_distribution="normal", random_state=42).fit_transform(X),
     ),
     ("Data after sample-wise L2 normalizing", Normalizer().fit_transform(X)),
 ]
@@ -185,16 +181,12 @@ def plot_distribution(axes, X, y, hist_nbins=50, title="", x0_label="", x1_label
 
     # Histogram for axis X1 (feature 5)
     hist_X1.set_ylim(ax.get_ylim())
-    hist_X1.hist(
-        X[:, 1], bins=hist_nbins, orientation="horizontal", color="grey", ec="grey"
-    )
+    hist_X1.hist(X[:, 1], bins=hist_nbins, orientation="horizontal", color="grey", ec="grey")
     hist_X1.axis("off")
 
     # Histogram for axis X0 (feature 0)
     hist_X0.set_xlim(ax.get_xlim())
-    hist_X0.hist(
-        X[:, 0], bins=hist_nbins, orientation="vertical", color="grey", ec="grey"
-    )
+    hist_X0.hist(X[:, 0], bins=hist_nbins, orientation="vertical", color="grey", ec="grey")
     hist_X0.axis("off")
 
 

@@ -276,9 +276,7 @@ def phillips_ouliaris(
     """
     test_type_key = test_type.lower()
     if test_type_key not in ("za", "zt", "pu", "pz"):
-        raise ValueError(
-            f"Unknown test_type: {test_type}. Only Za, Zt, Pu and Pz are supported."
-        )
+        raise ValueError(f"Unknown test_type: {test_type}. Only Za, Zt, Pu and Pz are supported.")
     kernel = kernel.lower().replace("-", "").replace("_", "")
     if kernel not in KERNEL_ESTIMATORS:
         raise ValueError(KERNEL_ERR)
@@ -433,9 +431,7 @@ def phillips_ouliaris_cv(
         valid = ",".join(trends)
         raise ValueError(f"trend must by one of: {valid}")
     if not 2 <= num <= 13:
-        raise ValueError(
-            "The number of stochastic trends must be between 2 and 12 (inclusive)"
-        )
+        raise ValueError("The number of stochastic trends must be between 2 and 12 (inclusive)")
     key = (test_type_key, trend, num)
     tbl = CV_PARAMETERS[key]
     min_size = CV_TAU_MIN[key]
@@ -493,9 +489,7 @@ def phillips_ouliaris_pval(
         valid = ",".join(trends)
         raise ValueError(f"trend must by one of: {valid}")
     if not 2 <= num <= 13:
-        raise ValueError(
-            "The number of stochastic trends must be between 2 and 12 (inclusive)"
-        )
+        raise ValueError("The number of stochastic trends must be between 2 and 12 (inclusive)")
     key = (test_type_key, trend, num)
     if test_type_key in ("Pu", "Pz"):
         # These are upper tail, so we multiply by -1 to make lower tail

@@ -43,9 +43,7 @@ class IndexSelectBenchmark(op_bench.TorchBenchmarkBase):
         self.inputs = {
             "input_one": torch.rand(M, N, K, device=device),
             "dim": dim,
-            "index": torch.tensor(
-                numpy.random.randint(0, max_val, index_dim), device=device
-            ),
+            "index": torch.tensor(numpy.random.randint(0, max_val, index_dim), device=device),
         }
         self.set_module_name("index_select")
 

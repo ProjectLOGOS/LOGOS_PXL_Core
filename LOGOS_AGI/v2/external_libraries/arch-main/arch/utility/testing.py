@@ -71,6 +71,4 @@ class WaldTestStatistic:
         )
 
     def __repr__(self) -> str:
-        return (
-            self.__str__() + "\n" + self.__class__.__name__ + f", id: {hex(id(self))}"
-        )
+        return self.__str__() + "\n" + self.__class__.__name__ + f", id: {hex(id(self))}"

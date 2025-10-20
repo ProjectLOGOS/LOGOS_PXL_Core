@@ -23,7 +23,7 @@ In short, **DDP is generally recommended**. You can use DDP by running your norm
    ::
 
       torchrun --nproc_per_node=4 train_script.py
-   
+
 .. tab:: Via ``accelerate``
 
    |br|
@@ -31,11 +31,11 @@ In short, **DDP is generally recommended**. You can use DDP by running your norm
    - `accelerate documentation <https://huggingface.co/docs/accelerate/en/index>`_
 
    ::
-      
+
       accelerate launch --num_processes 4 train_script.py
 
 .. note::
-  
+
    When performing distributed training, you have to wrap your code in a ``main`` function and call it with ``if __name__ == "__main__":``. This is because each process will run the entire script, so you don't want to run the same code multiple times. Here is an example of how to do this::
 
       from sentence_transformers import SentenceTransformer, SentenceTransformerTrainingArguments, SentenceTransformerTrainer
@@ -49,7 +49,7 @@ In short, **DDP is generally recommended**. You can use DDP by running your norm
 
 .. note::
 
-   When using an `Evaluator <../training_overview.html#evaluator>`_, the evaluator only runs on the first device unlike the training and evaluation datasets, which are shared across all devices. 
+   When using an `Evaluator <../training_overview.html#evaluator>`_, the evaluator only runs on the first device unlike the training and evaluation datasets, which are shared across all devices.
 
 Comparison
 ----------

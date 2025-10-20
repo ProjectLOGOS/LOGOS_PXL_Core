@@ -20,9 +20,7 @@ class NoGitTagException(Exception):
 
 def get_pytorch_root() -> Path:
     return Path(
-        subprocess.check_output(["git", "rev-parse", "--show-toplevel"])
-        .decode("ascii")
-        .strip()
+        subprocess.check_output(["git", "rev-parse", "--show-toplevel"]).decode("ascii").strip()
     )
 
 
@@ -76,9 +74,7 @@ class PytorchVersion:
 
     def get_release_version(self) -> str:
         if not get_tag():
-            raise NoGitTagException(
-                "Not on a git tag, are you sure you want a release version?"
-            )
+            raise NoGitTagException("Not on a git tag, are you sure you want a release version?")
         return f"{get_tag()}{self.get_post_build_suffix()}"
 
     def get_nightly_version(self) -> str:
@@ -88,9 +84,7 @@ class PytorchVersion:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="Generate pytorch version for binary builds"
-    )
+    parser = argparse.ArgumentParser(description="Generate pytorch version for binary builds")
     parser.add_argument(
         "--no-build-suffix",
         action="store_true",
@@ -110,9 +104,7 @@ def main() -> None:
         default=os.environ.get("GPU_ARCH_VERSION", ""),
     )
     args = parser.parse_args()
-    version_obj = PytorchVersion(
-        args.gpu_arch_type, args.gpu_arch_version, args.no_build_suffix
-    )
+    version_obj = PytorchVersion(args.gpu_arch_type, args.gpu_arch_version, args.no_build_suffix)
     try:
         print(version_obj.get_release_version())
     except NoGitTagException:

@@ -99,9 +99,7 @@ def main(args):
     dataset = torch.utils.data.TensorDataset(covariates, data)
     if args.horovod:
         # Horovod requires a distributed sampler.
-        sampler = torch.utils.data.distributed.DistributedSampler(
-            dataset, hvd.size(), hvd.rank()
-        )
+        sampler = torch.utils.data.distributed.DistributedSampler(dataset, hvd.size(), hvd.rank())
     else:
         sampler = torch.utils.data.RandomSampler(dataset)
     config = {"batch_size": args.batch_size, "sampler": sampler}

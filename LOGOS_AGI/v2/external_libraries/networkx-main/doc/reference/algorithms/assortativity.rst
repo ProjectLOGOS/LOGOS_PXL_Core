@@ -58,4 +58,3 @@ Pairs
 
    node_attribute_xy
    node_degree_xy
-

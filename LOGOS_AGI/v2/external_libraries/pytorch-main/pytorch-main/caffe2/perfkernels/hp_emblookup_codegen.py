@@ -85,9 +85,11 @@ def unroll(uf, IndexType, InType, OutType, use_weights, isa, fused, use_offsets)
             + "        return false;\n"
             + "      }"
         )
-        code.append("""\
+        code.append(
+            """\
       int64_t end_offset = offsets[rangeIndex + 1];
-      int64_t length = end_offset - offsets[rangeIndex];""")
+      int64_t length = end_offset - offsets[rangeIndex];"""
+        )
         code.append(
             "      for ("
             + "int64_t"
@@ -286,9 +288,11 @@ def generic(IndexType, InType, OutType, use_weights, isa, fused, use_offsets):
             + "        return false;\n"
             + "      }"
         )
-        code.append("""\
+        code.append(
+            """\
       int64_t end_offset = offsets[rangeIndex + 1];
-      int64_t length = end_offset - offsets[rangeIndex];""")
+      int64_t length = end_offset - offsets[rangeIndex];"""
+        )
         code.append(
             "      for ("
             + "int64_t"
@@ -465,7 +469,9 @@ for o in options:
     prefix = "Fused8BitRowwise" if opts.fused else ""
     code.append("template <bool IS_WEIGHT_POSITIONAL>")
     if opts.use_offsets:
-        fn_base = f"{prefix}EmbeddingLookupIdx_{IndexTypeName}_{InTypeName}_{OutTypeName}"
+        fn_base = (
+            f"{prefix}EmbeddingLookupIdx_{IndexTypeName}_{InTypeName}_{OutTypeName}"
+        )
     else:
         fn_base = f"{prefix}EmbeddingLookup_{IndexTypeName}_{InTypeName}_{OutTypeName}"
     suffix = "__avx2_fma"
@@ -543,7 +549,15 @@ for o in options:
         if len(ret_string) <= 80:
             code.append(ret_string)
         else:
-            code.append("  return " + fn_base + suffix + "<" + extra_space + is_weight_positional + ">(")
+            code.append(
+                "  return "
+                + fn_base
+                + suffix
+                + "<"
+                + extra_space
+                + is_weight_positional
+                + ">("
+            )
         code.append("      block_size,")
         code.append("      output_size,")
         code.append("      index_size,")

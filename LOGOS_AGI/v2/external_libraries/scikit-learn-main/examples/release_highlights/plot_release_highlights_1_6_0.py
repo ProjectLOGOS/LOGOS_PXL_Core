@@ -49,10 +49,7 @@ start = time.time()
 threshold_classifier = FixedThresholdClassifier(
     estimator=FrozenEstimator(classifier), threshold=0.9
 ).fit(X, y)
-print(
-    f"Fitting the threshold classifier took {(time.time() - start) * 1_000:.2f} "
-    "milliseconds"
-)
+print(f"Fitting the threshold classifier took {(time.time() - start) * 1_000:.2f} " "milliseconds")
 
 # %%
 # Fitting the threshold classifier skipped fitting the inner `SGDClassifier`. For more

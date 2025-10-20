@@ -61,10 +61,7 @@ X["weather"].value_counts()
 # %%
 # Because of this rare category, we collapse it into `"rain"`.
 X["weather"] = (
-    X["weather"]
-    .astype(object)
-    .replace(to_replace="heavy_rain", value="rain")
-    .astype("category")
+    X["weather"].astype(object).replace(to_replace="heavy_rain", value="rain").astype("category")
 )
 
 # %%
@@ -135,9 +132,7 @@ for ax, (idx, df) in zip(axs, average_bike_rentals.groupby("year")):
     ax.set_xticklabels(xticklabels[xtick_start::xtick_period])
     ax.set_xlabel("")
     ax.set_ylabel("Average number of bike rentals")
-    ax.set_title(
-        f"Bike rental for {'2010 (train set)' if idx == 0.0 else '2011 (test set)'}"
-    )
+    ax.set_title(f"Bike rental for {'2010 (train set)' if idx == 0.0 else '2011 (test set)'}")
     ax.set_ylim(0, 1_000)
     ax.set_xlim(0, len(xticklabels))
     ax.legend(loc=2)
@@ -453,9 +448,7 @@ display = PartialDependenceDisplay.from_estimator(
     **common_params,
 )
 print(f"done in {time() - tic:.3f}s")
-_ = display.figure_.suptitle(
-    "1-way vs 2-way of numerical PDP using gradient boosting", fontsize=16
-)
+_ = display.figure_.suptitle("1-way vs 2-way of numerical PDP using gradient boosting", fontsize=16)
 
 # %%
 # The two-way partial dependence plot shows the dependence of the number of bike rentals
@@ -489,9 +482,7 @@ display = PartialDependenceDisplay.from_estimator(
     **common_params,
 )
 print(f"done in {time() - tic:.3f}s")
-_ = display.figure_.suptitle(
-    "1-way vs 2-way of numerical PDP using gradient boosting", fontsize=16
-)
+_ = display.figure_.suptitle("1-way vs 2-way of numerical PDP using gradient boosting", fontsize=16)
 
 # %%
 # The 1D partial dependence plots for the model constrained to not model feature

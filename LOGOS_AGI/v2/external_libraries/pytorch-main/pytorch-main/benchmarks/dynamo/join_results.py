@@ -34,9 +34,7 @@ def main():
         field = Path(inp).stem[len(prefix) :]
         fields.append(field)
         frames.append(
-            pd.read_csv(inp)
-            .filter(["name", args.field])
-            .rename(columns={args.field: field})
+            pd.read_csv(inp).filter(["name", args.field]).rename(columns={args.field: field})
         )
 
     df = frames[0]

@@ -51,12 +51,12 @@ class Benchmark(BenchmarkBase):
 
 def main():
     result_path = sys.argv[1]
-    Benchmark(
-        use_loop=False
-    ).enable_compile_time_instruction_count().collect_all().append_results(result_path)
-    Benchmark(
-        use_loop=True
-    ).enable_compile_time_instruction_count().collect_all().append_results(result_path)
+    Benchmark(use_loop=False).enable_compile_time_instruction_count().collect_all().append_results(
+        result_path
+    )
+    Benchmark(use_loop=True).enable_compile_time_instruction_count().collect_all().append_results(
+        result_path
+    )
 
 
 if __name__ == "__main__":

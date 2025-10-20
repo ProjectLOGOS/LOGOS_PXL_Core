@@ -22,5 +22,3 @@ parameters and the (internally generated) sampling scheme.
     Bootstraps for IID data <iid-bootstraps>
     Bootstraps for Time-series Data <timeseries-bootstraps>
     Background and References <background>
-
-

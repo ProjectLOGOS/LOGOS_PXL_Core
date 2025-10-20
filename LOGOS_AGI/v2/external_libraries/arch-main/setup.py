@@ -21,9 +21,7 @@ try:
 except ImportError:
     CYTHON_INSTALLED = False
     if CYTHON_COVERAGE:
-        raise ImportError(
-            "cython is required for cython coverage. Unset " "ARCH_CYTHON_COVERAGE"
-        )
+        raise ImportError("cython is required for cython coverage. Unset " "ARCH_CYTHON_COVERAGE")
 
 
 FAILED_COMPILER_WARNING = """
@@ -133,9 +131,7 @@ installed.
                 define_macros=macros,
             )
         )
-        extensions = cythonize(
-            ext_modules, force=CYTHON_COVERAGE, compiler_directives=directives
-        )
+        extensions = cythonize(ext_modules, force=CYTHON_COVERAGE, compiler_directives=directives)
 
     setup(
         name="arch",

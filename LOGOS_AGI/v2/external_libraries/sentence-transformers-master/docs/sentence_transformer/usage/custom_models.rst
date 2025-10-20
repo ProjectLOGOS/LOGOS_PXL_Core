@@ -37,7 +37,7 @@ Whenever a Sentence Transformer model is saved, three types of files are generat
       "max_seq_length": 4096,
       "do_lower_case": false
     }
-  
+
   means that the :class:`~sentence_transformers.models.Transformer` module will be initialized with ``max_seq_length=4096`` and ``do_lower_case=False``.
 
 As a result, if I call :meth:`SentenceTransformer.save_pretrained("local-all-MiniLM-L6-v2") <sentence_transformers.SentenceTransformer.save_pretrained>` on the ``model`` from the previous snippet, the following files are generated:
@@ -120,7 +120,7 @@ To be specific, these two snippets are identical::
 ::
 
    from sentence_transformers import models, SentenceTransformer
-   
+
    transformer = models.Transformer("bert-base-uncased")
    pooling = models.Pooling(transformer.get_word_embedding_dimension(), pooling_mode="mean")
    model = SentenceTransformer(modules=[transformer, pooling])
@@ -213,7 +213,7 @@ For example, we can create a custom pooling method by implementing a custom Modu
    Adding ``**kwargs`` to the ``__init__``, ``forward``, ``save``, ``load``, and ``tokenize`` methods is recommended to ensure that the methods reemain compatible with future updates to the Sentence Transformers library.
 
 This can now be used as a module in a Sentence Transformer model::
-   
+
    from sentence_transformers import models, SentenceTransformer
    from decay_pooling import DecayMeanPooling
 

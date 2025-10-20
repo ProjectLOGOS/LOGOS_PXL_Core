@@ -109,9 +109,7 @@ scores = pd.DataFrame(
 ax = scores.plot.kde(legend=True)
 ax.set_xlabel("Accuracy score")
 ax.set_xlim([0, 0.7])
-_ = ax.set_title(
-    "Density of the accuracy scores for the different multiclass strategies"
-)
+_ = ax.set_title("Density of the accuracy scores for the different multiclass strategies")
 
 # %%
 # At a first glance, we can see that the built-in strategy of the decision
@@ -154,9 +152,7 @@ scores = pd.DataFrame(
 ax = scores.plot.kde(legend=True)
 ax.set_xlabel("Accuracy score")
 ax.set_xlim([0, 0.7])
-_ = ax.set_title(
-    "Density of the accuracy scores for the different multiclass strategies"
-)
+_ = ax.set_title("Density of the accuracy scores for the different multiclass strategies")
 
 plt.show()
 

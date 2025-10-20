@@ -159,6 +159,4 @@ def tree_broadcast_time(G, node=None):
     b_T, b_C = tree_broadcast_center(G)
     if node is None:
         return b_T + sum(1 for _ in nx.bfs_layers(G, b_C)) - 1
-    return b_T + next(
-        d for d, layer in enumerate(nx.bfs_layers(G, b_C)) if node in layer
-    )
+    return b_T + next(d for d, layer in enumerate(nx.bfs_layers(G, b_C)) if node in layer)

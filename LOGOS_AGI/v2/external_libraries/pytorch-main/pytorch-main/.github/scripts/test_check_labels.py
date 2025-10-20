@@ -97,9 +97,7 @@ class TestCheckLabels(TestCase):
         "check_labels.delete_all_label_err_comments",
         side_effect=mock_delete_all_label_err_comments,
     )
-    @mock.patch(
-        "check_labels.add_label_err_comment", side_effect=mock_add_label_err_comment
-    )
+    @mock.patch("check_labels.add_label_err_comment", side_effect=mock_add_label_err_comment)
     def test_ci_comments_and_exit0_without_required_labels(
         self,
         mock_add_label_err_comment: Any,
@@ -121,9 +119,7 @@ class TestCheckLabels(TestCase):
         "check_labels.delete_all_label_err_comments",
         side_effect=mock_delete_all_label_err_comments,
     )
-    @mock.patch(
-        "check_labels.add_label_err_comment", side_effect=mock_add_label_err_comment
-    )
+    @mock.patch("check_labels.add_label_err_comment", side_effect=mock_add_label_err_comment)
     def test_ci_exit0_with_required_labels(
         self,
         mock_add_label_err_comment: Any,

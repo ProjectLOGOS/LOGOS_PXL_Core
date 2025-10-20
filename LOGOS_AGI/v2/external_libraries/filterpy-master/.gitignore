@@ -20,4 +20,3 @@ osx-64/
 filterpy/kalman/i.py
 filterpy/inprogress.py
 .pytest_cache
-

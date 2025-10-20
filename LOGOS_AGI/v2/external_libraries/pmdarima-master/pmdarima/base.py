@@ -52,8 +52,7 @@ class BaseARIMA(BaseEstimator, metaclass=ABCMeta):
     # TODO: remove kwargs from all of these
 
     @abc.abstractmethod
-    def predict(self, n_periods, X, return_conf_int=False, alpha=0.05,
-                **kwargs):
+    def predict(self, n_periods, X, return_conf_int=False, alpha=0.05, **kwargs):
         """Create forecasts on a fitted model"""
 
     @abc.abstractmethod

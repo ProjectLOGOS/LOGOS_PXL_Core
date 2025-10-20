@@ -391,9 +391,7 @@ def model_4(sequences, lengths, args, batch_size=None, include_prior=True):
         )
         probs_x = pyro.sample(
             "probs_x",
-            dist.Dirichlet(0.9 * torch.eye(hidden_dim) + 0.1)
-            .expand_by([hidden_dim])
-            .to_event(2),
+            dist.Dirichlet(0.9 * torch.eye(hidden_dim) + 0.1).expand_by([hidden_dim]).to_event(2),
         )
         probs_y = pyro.sample(
             "probs_y",
@@ -450,12 +448,8 @@ class TonesGenerator(nn.Module):
         # a bernoulli variable y. Whereas x will typically be enumerated, y will be observed.
         # We apply x_to_hidden independently from y_to_hidden, then broadcast the non-enumerated
         # y part up to the enumerated x part in the + operation.
-        x_onehot = y.new_zeros(x.shape[:-1] + (self.args.hidden_dim,)).scatter_(
-            -1, x, 1
-        )
-        y_conv = self.relu(self.conv(y.reshape(-1, 1, self.data_dim))).reshape(
-            y.shape[:-1] + (-1,)
-        )
+        x_onehot = y.new_zeros(x.shape[:-1] + (self.args.hidden_dim,)).scatter_(-1, x, 1)
+        y_conv = self.relu(self.conv(y.reshape(-1, 1, self.data_dim))).reshape(y.shape[:-1] + (-1,))
         h = self.relu(self.x_to_hidden(x_onehot) + self.y_to_hidden(y_conv))
         return self.hidden_to_logits(h)
 
@@ -662,9 +656,7 @@ def model_7(sequences, lengths, args, batch_size=None, include_prior=True):
 
 
 models = {
-    name[len("model_") :]: model
-    for name, model in globals().items()
-    if name.startswith("model_")
+    name[len("model_") :]: model for name, model in globals().items() if name.startswith("model_")
 }
 
 
@@ -678,9 +670,7 @@ def main(args):
     logging.info("-" * 40)
     model = models[args.model]
     logging.info(
-        "Training {} on {} sequences".format(
-            model.__name__, len(data["train"]["sequences"])
-        )
+        "Training {} on {} sequences".format(model.__name__, len(data["train"]["sequences"]))
     )
     sequences = data["train"]["sequences"]
     lengths = data["train"]["sequence_lengths"]
@@ -701,9 +691,7 @@ def main(args):
     # out the hidden state x. This is accomplished via an automatic guide that
     # learns point estimates of all of our conditional probability tables,
     # named probs_*.
-    guide = AutoDelta(
-        handlers.block(model, expose_fn=lambda msg: msg["name"].startswith("probs_"))
-    )
+    guide = AutoDelta(handlers.block(model, expose_fn=lambda msg: msg["name"].startswith("probs_")))
 
     # To help debug our tensor shapes, let's print the shape of each site's
     # distribution, value, and log_prob tensor. Note this information is
@@ -747,11 +735,7 @@ def main(args):
     else:
         if args.model == "7":
             assert args.funsor
-            Elbo = (
-                infer.JitTraceMarkovEnum_ELBO
-                if args.jit
-                else infer.TraceMarkovEnum_ELBO
-            )
+            Elbo = infer.JitTraceMarkovEnum_ELBO if args.jit else infer.TraceMarkovEnum_ELBO
         else:
             Elbo = infer.JitTraceEnum_ELBO if args.jit else infer.TraceEnum_ELBO
         if args.model == "0":
@@ -774,9 +758,7 @@ def main(args):
         logging.info("{: >5d}\t{}".format(step, loss / num_observations))
 
     if args.jit and args.time_compilation:
-        logging.debug(
-            "time to compile: {} s.".format(elbo._differentiable_loss.compile_time)
-        )
+        logging.debug("time to compile: {} s.".format(elbo._differentiable_loss.compile_time))
 
     # We evaluate on the entire training dataset,
     # excluding the prior term so our results are comparable across models.
@@ -792,9 +774,7 @@ def main(args):
 
     # Finally we evaluate on the test dataset.
     logging.info("-" * 40)
-    logging.info(
-        "Evaluating on {} test sequences".format(len(data["test"]["sequences"]))
-    )
+    logging.info("Evaluating on {} test sequences".format(len(data["test"]["sequences"])))
     sequences = data["test"]["sequences"][..., present_notes]
     lengths = data["test"]["sequence_lengths"]
     if args.truncate:
@@ -816,17 +796,13 @@ def main(args):
 
     # We expect models with higher capacity to perform better,
     # but eventually overfit to the training set.
-    capacity = sum(
-        value.reshape(-1).size(0) for value in pyro.get_param_store().values()
-    )
+    capacity = sum(value.reshape(-1).size(0) for value in pyro.get_param_store().values())
     logging.info("model_{} capacity = {} parameters".format(args.model, capacity))
 
 
 if __name__ == "__main__":
     assert pyro.__version__.startswith("1.9.1")
-    parser = argparse.ArgumentParser(
-        description="MAP Baum-Welch learning Bach Chorales"
-    )
+    parser = argparse.ArgumentParser(description="MAP Baum-Welch learning Bach Chorales")
     parser.add_argument(
         "-m",
         "--model",

@@ -45,9 +45,7 @@ class GithubRepo(NamedTuple):
     @classmethod
     def from_string(cls, repo_string: str) -> "GithubRepo":
         if "/" not in repo_string:
-            raise ValueError(
-                f"repo_string must be of the form 'owner/repo', not {repo_string}"
-            )
+            raise ValueError(f"repo_string must be of the form 'owner/repo', not {repo_string}")
 
         owner, name = repo_string.split("/")
         return cls(owner, name)
@@ -78,9 +76,7 @@ def upload_pytest_cache(
     """
 
     if not isinstance(pr_identifier, PRIdentifier):
-        raise ValueError(
-            f"pr_identifier must be of type PRIdentifier, not {type(pr_identifier)}"
-        )
+        raise ValueError(f"pr_identifier must be of type PRIdentifier, not {type(pr_identifier)}")
 
     if not bucket:
         bucket = BUCKET
@@ -114,18 +110,14 @@ def download_pytest_cache(
         bucket = BUCKET
 
     if not isinstance(pr_identifier, PRIdentifier):
-        raise ValueError(
-            f"pr_identifier must be of type PRIdentifier, not {type(pr_identifier)}"
-        )
+        raise ValueError(f"pr_identifier must be of type PRIdentifier, not {type(pr_identifier)}")
 
     obj_key_prefix = _get_s3_key_prefix(pr_identifier, repo, job_identifier)
 
     zip_download_dir = temp_dir / CACHE_ZIP_DOWNLOADS / obj_key_prefix
 
     # downloads the cache zips for all shards
-    downloads = download_s3_objects_with_prefix(
-        bucket, obj_key_prefix, zip_download_dir
-    )
+    downloads = download_s3_objects_with_prefix(bucket, obj_key_prefix, zip_download_dir)
 
     for downloaded_zip in downloads:
         # Unzip into random folder, then merge with the current cache
@@ -191,13 +183,9 @@ def _merge_pytest_caches(
             copy_file(source_file, dest_file)
 
     # Handle the v/cache/lastfailed file
-    _merge_lastfailed_files(
-        pytest_cache_dir_to_merge_from, pytest_cache_dir_to_merge_into
-    )
+    _merge_lastfailed_files(pytest_cache_dir_to_merge_from, pytest_cache_dir_to_merge_into)
 
-    _merge_additional_failures_files(
-        pytest_cache_dir_to_merge_from, pytest_cache_dir_to_merge_into
-    )
+    _merge_additional_failures_files(pytest_cache_dir_to_merge_from, pytest_cache_dir_to_merge_into)
 
 
 def _merge_lastfailed_files(source_pytest_cache: Path, dest_pytest_cache: Path) -> None:
@@ -242,13 +230,9 @@ def _merged_lastfailed_content(
     return to_lastfailed
 
 
-def _merge_additional_failures_files(
-    source_pytest_cache: Path, dest_pytest_cache: Path
-) -> None:
+def _merge_additional_failures_files(source_pytest_cache: Path, dest_pytest_cache: Path) -> None:
     # Simple cases where one of the files doesn't exist
-    source_lastfailed_file = (
-        source_pytest_cache / TD_HEURISTIC_PREVIOUSLY_FAILED_ADDITIONAL
-    )
+    source_lastfailed_file = source_pytest_cache / TD_HEURISTIC_PREVIOUSLY_FAILED_ADDITIONAL
     dest_lastfailed_file = dest_pytest_cache / TD_HEURISTIC_PREVIOUSLY_FAILED_ADDITIONAL
 
     if not source_lastfailed_file.exists():

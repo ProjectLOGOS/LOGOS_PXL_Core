@@ -96,15 +96,15 @@ print(f"Done in {toc - tic:.3f}s")
 from sklearn.feature_selection import SequentialFeatureSelector
 
 tic_fwd = time()
-sfs_forward = SequentialFeatureSelector(
-    ridge, n_features_to_select=2, direction="forward"
-).fit(X, y)
+sfs_forward = SequentialFeatureSelector(ridge, n_features_to_select=2, direction="forward").fit(
+    X, y
+)
 toc_fwd = time()
 
 tic_bwd = time()
-sfs_backward = SequentialFeatureSelector(
-    ridge, n_features_to_select=2, direction="backward"
-).fit(X, y)
+sfs_backward = SequentialFeatureSelector(ridge, n_features_to_select=2, direction="backward").fit(
+    X, y
+)
 toc_bwd = time()
 
 print(

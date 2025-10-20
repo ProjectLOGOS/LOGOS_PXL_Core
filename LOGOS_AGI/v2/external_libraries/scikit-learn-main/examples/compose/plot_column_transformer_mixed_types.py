@@ -92,9 +92,7 @@ preprocessor = ColumnTransformer(
 # %%
 # Append classifier to preprocessing pipeline.
 # Now we have a full prediction pipeline.
-clf = Pipeline(
-    steps=[("preprocessor", preprocessor), ("classifier", LogisticRegression())]
-)
+clf = Pipeline(steps=[("preprocessor", preprocessor), ("classifier", LogisticRegression())])
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
@@ -148,9 +146,7 @@ preprocessor = ColumnTransformer(
         ("cat", categorical_transformer, selector(dtype_include="category")),
     ]
 )
-clf = Pipeline(
-    steps=[("preprocessor", preprocessor), ("classifier", LogisticRegression())]
-)
+clf = Pipeline(steps=[("preprocessor", preprocessor), ("classifier", LogisticRegression())])
 
 
 clf.fit(X_train, y_train)
@@ -226,6 +222,5 @@ cv_results[
 # not used for hyperparameter tuning.
 #
 print(
-    "accuracy of the best model from randomized search: "
-    f"{search_cv.score(X_test, y_test):.3f}"
+    "accuracy of the best model from randomized search: " f"{search_cv.score(X_test, y_test):.3f}"
 )

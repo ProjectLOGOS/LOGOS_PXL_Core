@@ -101,9 +101,7 @@ def edge_boundary(G, nbunch1, nbunch2=None, data=False, keys=False, default=None
         return (e for e in edges if (e[0] in nset1) ^ (e[1] in nset1))
     nset2 = set(nbunch2)
     return (
-        e
-        for e in edges
-        if (e[0] in nset1 and e[1] in nset2) or (e[1] in nset1 and e[0] in nset2)
+        e for e in edges if (e[0] in nset1 and e[1] in nset2) or (e[1] in nset1 and e[0] in nset2)
     )
 
 

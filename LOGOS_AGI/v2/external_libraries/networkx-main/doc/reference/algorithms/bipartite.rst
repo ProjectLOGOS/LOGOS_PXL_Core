@@ -148,4 +148,3 @@ Link Analysis
    :toctree: generated/
 
    birank
-

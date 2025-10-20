@@ -36,7 +36,7 @@ SUBSYSTEM_INFO = {
     "description": "Pattern Recognition and Natural Language Processing",
     "capabilities": [
         "text_clustering",
-        "feature_extraction", 
+        "feature_extraction",
         "semantic_analysis",
         "pattern_recognition",
         "language_translation",
@@ -46,7 +46,7 @@ SUBSYSTEM_INFO = {
     "output_queues": ["task_result_queue"],
     "dependencies": [
         "scikit-learn",
-        "sentence-transformers", 
+        "sentence-transformers",
         "numpy",
         "nltk"
     ]

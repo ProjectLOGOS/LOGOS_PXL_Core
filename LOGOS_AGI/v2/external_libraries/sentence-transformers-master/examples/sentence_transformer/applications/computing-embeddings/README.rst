@@ -67,7 +67,7 @@ The method to calculate embeddings is :meth:`SentenceTransformer.encode <sentenc
 Prompt Templates
 ----------------
 
-Some models require using specific text *prompts* to achieve optimal performance. For example, with `intfloat/multilingual-e5-large <https://huggingface.co/intfloat/multilingual-e5-large>`_ you should prefix all queries with ``"query: "`` and all passages with ``"passage: "``. Another example is `BAAI/bge-large-en-v1.5 <https://huggingface.co/BAAI/bge-large-en-v1.5>`_, which performs best for retrieval when the input texts are prefixed with ``"Represent this sentence for searching relevant passages: "``. 
+Some models require using specific text *prompts* to achieve optimal performance. For example, with `intfloat/multilingual-e5-large <https://huggingface.co/intfloat/multilingual-e5-large>`_ you should prefix all queries with ``"query: "`` and all passages with ``"passage: "``. Another example is `BAAI/bge-large-en-v1.5 <https://huggingface.co/BAAI/bge-large-en-v1.5>`_, which performs best for retrieval when the input texts are prefixed with ``"Represent this sentence for searching relevant passages: "``.
 
 Sentence Transformer models can be initialized with ``prompts`` and ``default_prompt_name`` parameters:
 
@@ -147,7 +147,7 @@ Multi-Process / Multi-GPU Encoding
 
 You can encode input texts with more than one GPU (or with multiple processes on a CPU machine). It tends to help significantly with large datasets, but the overhead of starting multiple processes can be significant for smaller datasets.
 For an example, see: `computing_embeddings_multi_gpu.py <https://github.com/UKPLab/sentence-transformers/blob/master/examples/sentence_transformer/applications/computing-embeddings/computing_embeddings_multi_gpu.py>`_.
- 
+
 You can use :meth:`SentenceTransformer.encode() <sentence_transformers.SentenceTransformer.encode>` (or :meth:`SentenceTransformer.encode_query() <sentence_transformers.SentenceTransformer.encode_query>` or :meth:`SentenceTransformer.encode_document() <sentence_transformers.SentenceTransformer.encode_document>`) with either:
 
 - The ``device`` parameter, which can be set to e.g. ``"cuda:0"`` or ``"cpu"`` for single-process computations, but also a list of devices for multi-process or multi-gpu computations, e.g. ``["cuda:0", "cuda:1"]`` or ``["cpu", "cpu", "cpu", "cpu"]``::
@@ -177,7 +177,7 @@ You can use :meth:`SentenceTransformer.encode() <sentence_transformers.SentenceT
             embeddings = model.encode(inputs, pool=pool)
             # Don't forget to stop the pool after usage
             model.stop_multi_process_pool(pool)
-        
+
         if __name__ == "__main__":
             main()
 

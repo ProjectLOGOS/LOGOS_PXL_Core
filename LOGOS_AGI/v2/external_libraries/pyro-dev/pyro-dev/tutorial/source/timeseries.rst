@@ -9,4 +9,3 @@ __ github_
 
 .. literalinclude:: ../../examples/contrib/timeseries/gp_models.py
     :language: python
-

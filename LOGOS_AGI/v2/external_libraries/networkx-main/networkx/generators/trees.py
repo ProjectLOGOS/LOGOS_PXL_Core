@@ -450,9 +450,7 @@ def random_labeled_rooted_forest(n, *, seed=None):
         r = seed.randint(0, (n + 1) ** (n - 1) - 1)
         cum_sum = 0
         for k in range(1, n):
-            cum_sum += (factorial(n - 1) * n ** (n - k)) // (
-                factorial(k - 1) * factorial(n - k)
-            )
+            cum_sum += (factorial(n - 1) * n ** (n - k)) // (factorial(k - 1) * factorial(n - k))
             if r < cum_sum:
                 return k
 
@@ -593,9 +591,7 @@ def _select_jd_trees(n, cache_trees, seed):
     for d in range(n - 1, 0, -1):
         for j in range(1, (n - 1) // d + 1):
             cumsum += (
-                d
-                * _num_rooted_trees(n - j * d, cache_trees)
-                * _num_rooted_trees(d, cache_trees)
+                d * _num_rooted_trees(n - j * d, cache_trees) * _num_rooted_trees(d, cache_trees)
             )
             if p < cumsum:
                 return (j, d)
@@ -893,16 +889,12 @@ def random_unlabeled_rooted_forest(n, *, q=None, number_of_forests=None, seed=No
     cache_forests = [1]  # initial cache of number of rooted forests
 
     if number_of_forests is None:
-        g, nodes, rs = _random_unlabeled_rooted_forest(
-            n, q, cache_trees, cache_forests, seed
-        )
+        g, nodes, rs = _random_unlabeled_rooted_forest(n, q, cache_trees, cache_forests, seed)
         return _to_nx(g, nodes, roots=set(rs))
 
     res = []
     for i in range(number_of_forests):
-        g, nodes, rs = _random_unlabeled_rooted_forest(
-            n, q, cache_trees, cache_forests, seed
-        )
+        g, nodes, rs = _random_unlabeled_rooted_forest(n, q, cache_trees, cache_forests, seed)
         res.append(_to_nx(g, nodes, roots=set(rs)))
     return res
 

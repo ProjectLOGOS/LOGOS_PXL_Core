@@ -20,7 +20,7 @@ class AlignmentProtocol:
         action = payload.get('action')
         if action == 'use_tool' and payload.get('tool_name') not in self.allowed_tools:
             return False
-        
+
         # Example check: Prevent file system access outside a sandbox.
         if "file_path" in payload and not payload['file_path'].startswith('/sandbox/'):
             return False
@@ -33,5 +33,5 @@ class AlignmentProtocol:
         # Example check: Ensure logical proofs don't contain contradictions.
         if result.get('proof_valid') is False:
             # This might be an acceptable result, but the protocol could flag it for review.
-            pass 
+            pass
         return True

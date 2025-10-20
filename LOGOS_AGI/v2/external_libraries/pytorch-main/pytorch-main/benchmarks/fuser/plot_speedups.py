@@ -5,9 +5,7 @@ df = pandas.read_csv("perf.csv")
 
 ops = pandas.unique(df["operator"])
 nops = len(ops)
-pivot_op_shape = df.pivot_table(
-    values="time", index=["operator", "shape"], columns=["fuser"]
-)
+pivot_op_shape = df.pivot_table(values="time", index=["operator", "shape"], columns=["fuser"])
 pivot_speedups = (pivot_op_shape.T / pivot_op_shape["eager"]).T
 
 import matplotlib.pyplot as plt

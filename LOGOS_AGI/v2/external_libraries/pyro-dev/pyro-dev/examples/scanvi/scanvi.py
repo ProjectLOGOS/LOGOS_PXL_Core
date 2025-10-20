@@ -188,9 +188,7 @@ class SCANVI(nn.Module):
             z2_dim=self.latent_dim,
             hidden_dims=[50],
         )
-        self.x_decoder = XDecoder(
-            num_genes=num_genes, hidden_dims=[100], z2_dim=self.latent_dim
-        )
+        self.x_decoder = XDecoder(num_genes=num_genes, hidden_dims=[100], z2_dim=self.latent_dim)
         self.z2l_encoder = Z2LEncoder(
             num_genes=num_genes, z2_dim=self.latent_dim, hidden_dims=[100]
         )
@@ -220,14 +218,10 @@ class SCANVI(nn.Module):
         # We scale all sample statements by scale_factor so that the ELBO is normalized
         # wrt the number of datapoints and genes
         with pyro.plate("batch", len(x)), poutine.scale(scale=self.scale_factor):
-            z1 = pyro.sample(
-                "z1", dist.Normal(0, x.new_ones(self.latent_dim)).to_event(1)
-            )
+            z1 = pyro.sample("z1", dist.Normal(0, x.new_ones(self.latent_dim)).to_event(1))
             # Note that if y is None (i.e. y is unobserved) then y will be sampled;
             # otherwise y will be treated as observed.
-            y = pyro.sample(
-                "y", dist.OneHotCategorical(logits=x.new_zeros(self.num_labels)), obs=y
-            )
+            y = pyro.sample("y", dist.OneHotCategorical(logits=x.new_zeros(self.num_labels)), obs=y)
 
             z2_loc, z2_scale = self.z2_decoder(z1, y)
             z2 = pyro.sample("z2", dist.Normal(z2_loc, z2_scale).to_event(1))
@@ -381,24 +375,16 @@ def main(args):
         axes[0, 1].set_frame_on(False)
 
         # The remaining plots depict the inferred cell type probability for each of the four cell types
-        s10 = axes[1, 0].scatter(
-            umap1, umap2, s=1, c=y_probs[:, 0], marker=".", alpha=0.7
-        )
+        s10 = axes[1, 0].scatter(umap1, umap2, s=1, c=y_probs[:, 0], marker=".", alpha=0.7)
         axes[1, 0].set_title("Inferred CD8-Naive probability")
         fig.colorbar(s10, ax=axes[1, 0])
-        s11 = axes[1, 1].scatter(
-            umap1, umap2, s=1, c=y_probs[:, 1], marker=".", alpha=0.7
-        )
+        s11 = axes[1, 1].scatter(umap1, umap2, s=1, c=y_probs[:, 1], marker=".", alpha=0.7)
         axes[1, 1].set_title("Inferred CD4-Naive probability")
         fig.colorbar(s11, ax=axes[1, 1])
-        s20 = axes[2, 0].scatter(
-            umap1, umap2, s=1, c=y_probs[:, 2], marker=".", alpha=0.7
-        )
+        s20 = axes[2, 0].scatter(umap1, umap2, s=1, c=y_probs[:, 2], marker=".", alpha=0.7)
         axes[2, 0].set_title("Inferred CD4-Memory probability")
         fig.colorbar(s20, ax=axes[2, 0])
-        s21 = axes[2, 1].scatter(
-            umap1, umap2, s=1, c=y_probs[:, 3], marker=".", alpha=0.7
-        )
+        s21 = axes[2, 1].scatter(umap1, umap2, s=1, c=y_probs[:, 3], marker=".", alpha=0.7)
         axes[2, 1].set_title("Inferred CD4-Regulatory probability")
         fig.colorbar(s21, ax=axes[2, 1])
 
@@ -424,18 +410,10 @@ if __name__ == "__main__":
         help="which dataset to use",
         choices=["pbmc", "mock"],
     )
-    parser.add_argument(
-        "-bs", "--batch-size", default=100, type=int, help="mini-batch size"
-    )
-    parser.add_argument(
-        "-lr", "--learning-rate", default=0.005, type=float, help="learning rate"
-    )
-    parser.add_argument(
-        "--cuda", action="store_true", default=False, help="whether to use cuda"
-    )
-    parser.add_argument(
-        "--plot", action="store_true", default=False, help="whether to make a plot"
-    )
+    parser.add_argument("-bs", "--batch-size", default=100, type=int, help="mini-batch size")
+    parser.add_argument("-lr", "--learning-rate", default=0.005, type=float, help="learning rate")
+    parser.add_argument("--cuda", action="store_true", default=False, help="whether to use cuda")
+    parser.add_argument("--plot", action="store_true", default=False, help="whether to make a plot")
     args = parser.parse_args()
 
     main(args)

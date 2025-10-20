@@ -21,11 +21,7 @@ from .approx import approx
 # _arima.cpython-35m-darwin.so), import this absolutely and not relatively.
 from ._arima import C_tseries_pp_sum
 
-__all__ = [
-    'ADFTest',
-    'KPSSTest',
-    'PPTest'
-]
+__all__ = ["ADFTest", "KPSSTest", "PPTest"]
 
 
 class _BaseStationarityTest(BaseEstimator, metaclass=ABCMeta):
@@ -45,7 +41,8 @@ class _BaseStationarityTest(BaseEstimator, metaclass=ABCMeta):
 
         rows = [
             # so, if k=2, it'll be (x[1:n], x[:n-1])
-            x[j:n - i] for i, j in enumerate(range(k - 1, -1, -1))
+            x[j : n - i]
+            for i, j in enumerate(range(k - 1, -1, -1))
         ]
         return np.asarray(rows)
         # return np.array([x[1:], x[:m]])
@@ -57,6 +54,7 @@ class _DifferencingStationarityTest(_BaseStationarityTest, metaclass=ABCMeta):
     Phillips–Perron tests. These tests are used to determine whether a time
     series is stationary.
     """
+
     def __init__(self, alpha):
         self.alpha = alpha
 
@@ -132,10 +130,11 @@ class KPSSTest(_DifferencingStationarityTest):
     ----------
     .. [1] R's tseries KPSS test source code: http://bit.ly/2eJP1IU
     """
-    _valid = {'trend', 'null'}
+
+    _valid = {"trend", "null"}
     tablep = c(0.01, 0.025, 0.05, 0.10)
 
-    def __init__(self, alpha=0.05, null='level', lshort=True):
+    def __init__(self, alpha=0.05, null="level", lshort=True):
         super(KPSSTest, self).__init__(alpha=alpha)
 
         self.null = null
@@ -169,12 +168,12 @@ class KPSSTest(_DifferencingStationarityTest):
         null = self.null
 
         # fit a model on an arange to determine the residuals
-        if null == 'trend':
+        if null == "trend":
             t = np.arange(n).reshape(n, 1)
 
             # these numbers came out of the R code.. I've found 0 doc for these
             table = c(0.216, 0.176, 0.146, 0.119)
-        elif null == 'level':
+        elif null == "level":
             t = np.ones(n).reshape(n, 1)
 
             # these numbers came out of the R code.. I've found 0 doc for these
@@ -247,14 +246,17 @@ class ADFTest(_DifferencingStationarityTest):
     .. [1] https://wikipedia.org/wiki/Augmented_Dickey–Fuller_test
     .. [2] R's tseries ADF source code: https://bit.ly/2EnvM5V
     """
-    table = np.array([
-        (-4.38, -3.95, -3.60, -3.24, -1.14, -0.80, -0.50, -0.15),
-        (-4.15, -3.80, -3.50, -3.18, -1.19, -0.87, -0.58, -0.24),
-        (-4.04, -3.73, -3.45, -3.15, -1.22, -0.90, -0.62, -0.28),
-        (-3.99, -3.69, -3.43, -3.13, -1.23, -0.92, -0.64, -0.31),
-        (-3.98, -3.68, -3.42, -3.13, -1.24, -0.93, -0.65, -0.32),
-        (-3.96, -3.66, -3.41, -3.12, -1.25, -0.94, -0.66, -0.33)
-    ])
+
+    table = np.array(
+        [
+            (-4.38, -3.95, -3.60, -3.24, -1.14, -0.80, -0.50, -0.15),
+            (-4.15, -3.80, -3.50, -3.18, -1.19, -0.87, -0.58, -0.24),
+            (-4.04, -3.73, -3.45, -3.15, -1.22, -0.90, -0.62, -0.28),
+            (-3.99, -3.69, -3.43, -3.13, -1.23, -0.92, -0.64, -0.31),
+            (-3.98, -3.68, -3.42, -3.13, -1.24, -0.93, -0.65, -0.32),
+            (-3.96, -3.66, -3.41, -3.12, -1.25, -0.94, -0.66, -0.33),
+        ]
+    )
 
     tablen = table.shape[1]
     tableT = c(25, 50, 100, 250, 500, 100000)
@@ -265,7 +267,7 @@ class ADFTest(_DifferencingStationarityTest):
 
         self.k = k
         if k is not None and k < 0:
-            raise ValueError('k must be a positive integer (>= 0)')
+            raise ValueError("k must be a positive integer (>= 0)")
 
     @staticmethod
     def _ols(x, y, z, k):
@@ -281,9 +283,7 @@ class ADFTest(_DifferencingStationarityTest):
 
         # the array that will create the LM:
         _n = xt1.shape[0]  # row dim for predictors
-        X = np.hstack([np.ones(_n).reshape((_n, 1)),
-                       xt1.reshape((_n, 1)),
-                       tt.reshape((_n, 1))])
+        X = np.hstack([np.ones(_n).reshape((_n, 1)), xt1.reshape((_n, 1)), tt.reshape((_n, 1))])
 
         if k > 1:
             yt1 = z[:, 1:k]  # R had 2:k
@@ -293,7 +293,7 @@ class ADFTest(_DifferencingStationarityTest):
         # are using OLS from statsmodels rather than LR from sklearn. This is
         # because we need the std errors, and sklearn does not have a way to
         # store them.
-        return sm.OLS(yt, X, hasconst=True).fit(method='qr')
+        return sm.OLS(yt, X, hasconst=True).fit(method="qr")
 
     @staticmethod
     def _ols_std_error(res):
@@ -339,9 +339,12 @@ class ADFTest(_DifferencingStationarityTest):
         STAT = self._ols_std_error(res)
 
         # In the past we assigned to the np memory view which is slower
-        tableipl = np.array([
-            approx(self.tableT, self.table[:, i], xout=n, rule=2)[1]  # xt,yt
-            for i in range(self.tablen)])
+        tableipl = np.array(
+            [
+                approx(self.tableT, self.table[:, i], xout=n, rule=2)[1]  # xt,yt
+                for i in range(self.tablen)
+            ]
+        )
 
         # make sure to do 1 - x...
         _, interpol = approx(tableipl, self.tablep, xout=STAT, rule=2)
@@ -395,16 +398,19 @@ class PPTest(_DifferencingStationarityTest):
     ----------
     .. [1] R's tseries PP test source code: http://bit.ly/2wbzx6V
     """
-    table = -np.array([
-        (22.5, 25.7, 27.4, 28.4, 28.9, 29.5),
-        (19.9, 22.4, 23.6, 24.4, 24.8, 25.1),
-        (17.9, 19.8, 20.7, 21.3, 21.5, 21.8),
-        (15.6, 16.8, 17.5, 18.0, 18.1, 18.3),
-        (3.66, 3.71, 3.74, 3.75, 3.76, 3.77),
-        (2.51, 2.60, 2.62, 2.64, 2.65, 2.66),
-        (1.53, 1.66, 1.73, 1.78, 1.78, 1.79),
-        (0.43, 0.65, 0.75, 0.82, 0.84, 0.87)
-    ]).T
+
+    table = -np.array(
+        [
+            (22.5, 25.7, 27.4, 28.4, 28.9, 29.5),
+            (19.9, 22.4, 23.6, 24.4, 24.8, 25.1),
+            (17.9, 19.8, 20.7, 21.3, 21.5, 21.8),
+            (15.6, 16.8, 17.5, 18.0, 18.1, 18.3),
+            (3.66, 3.71, 3.74, 3.75, 3.76, 3.77),
+            (2.51, 2.60, 2.62, 2.64, 2.65, 2.66),
+            (1.53, 1.66, 1.73, 1.78, 1.78, 1.79),
+            (0.43, 0.65, 0.75, 0.82, 0.84, 0.87),
+        ]
+    ).T
 
     tablen = table.shape[1]
     tableT = c(25, 50, 100, 250, 500, 100000).astype(DTYPE)
@@ -468,10 +474,10 @@ class PPTest(_DifferencingStationarityTest):
         # define trm vals
         n2 = n * n
         syt11n = (yt1 * (np.arange(n) + 1)).sum()  # sum(yt1*(1:n))
-        trm1 = n2 * (n2 - 1) * (yt1 ** 2).sum() / 12.0
+        trm1 = n2 * (n2 - 1) * (yt1**2).sum() / 12.0
 
         # R code: # n*sum(yt1*(1:n))^2
-        trm2 = n * (syt11n ** 2)
+        trm2 = n * (syt11n**2)
 
         # R code: n*(n+1)*sum(yt1*(1:n))*sum(yt1)
         trm3 = n * (n + 1) * syt11n * yt1.sum()
@@ -480,11 +486,11 @@ class PPTest(_DifferencingStationarityTest):
 
         # if self.typ == 'alpha':
         alpha = coef[2]  # it's the last col...
-        STAT = n * (alpha - 1) - (n ** 6) / (24.0 * dx) * (ssqrtl - ssqru)
+        STAT = n * (alpha - 1) - (n**6) / (24.0 * dx) * (ssqrtl - ssqru)
 
-        tableipl = np.array([
-            approx(self.tableT, self.table[:, i], xout=n, rule=2)[1]
-            for i in range(self.tablen)])
+        tableipl = np.array(
+            [approx(self.tableT, self.table[:, i], xout=n, rule=2)[1] for i in range(self.tablen)]
+        )
 
         # we don't do 1 - pval, so check for GREATER THAN
         _, interpol = approx(tableipl, self.tablep, xout=STAT, rule=2)

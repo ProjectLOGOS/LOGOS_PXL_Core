@@ -40,4 +40,3 @@ most other python objects:
 
     # show they're the same
     np.allclose(pickle_preds, joblib_preds)
-

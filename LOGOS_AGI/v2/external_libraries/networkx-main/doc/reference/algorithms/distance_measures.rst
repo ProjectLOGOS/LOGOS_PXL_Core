@@ -16,5 +16,3 @@ Distance Measures
    periphery
    radius
    resistance_distance
-
-

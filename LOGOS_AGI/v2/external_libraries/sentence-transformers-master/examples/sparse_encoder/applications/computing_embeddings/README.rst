@@ -129,7 +129,7 @@ You can specify ``max_active_dims`` either when initializing the model or during
    Average non-zero dimensions: 56.33
    Sparsity percentage: 99.82%
    """
-   
+
    # Example of using max_active_dims during encoding to limit the active dimensions
    embeddings_limited = model.encode(sentences, max_active_dims=32)
    stats_limited = model.sparsity(embeddings_limited)
@@ -155,7 +155,7 @@ One of the key benefits of controlling sparsity with ``max_active_dims`` is redu
 
    def get_sparse_embedding_memory_size(tensor):
        # For sparse tensors, only count non-zero elements
-       return (tensor._values().element_size() * tensor._values().nelement() + 
+       return (tensor._values().element_size() * tensor._values().nelement() +
               tensor._indices().element_size() * tensor._indices().nelement())
 
    print(f"Original embeddings memory: {get_sparse_embedding_memory_size(embeddings) / 1024:.2f} KB")
@@ -206,14 +206,14 @@ When using SPLADE models, a key advantage is interpretability. You can easily vi
       1: Sentences are passed as a list of string. -> Top tokens:  ("string", 2.72), ("pass", 2.24), ("sentences", 2.15), ("passed", 2.07), ("sentence", 1.90), ("strings", 1.86), ("list", 1.84), ("lists", 1.49), ("as", 1.18), ("passing", 0.73)
       2: The quick brown fox jumps over the lazy dog. -> Top tokens:  ("lazy", 2.18), ("fox", 1.67), ("brown", 1.56), ("over", 1.52), ("dog", 1.50), ("quick", 1.49), ("jump", 1.39), ("dogs", 1.25), ("foxes", 0.99), ("jumping", 0.84)
    """
-   
+
 This interpretability helps in understanding why certain documents match or don't match in search applications, and provides transparency into the model's behavior.
 
 Multi-Process / Multi-GPU Encoding
 ----------------------------------
 
 You can encode input texts with more than one GPU (or with multiple processes on a CPU machine). It tends to help significantly with large datasets, but the overhead of starting multiple processes can be significant for smaller datasets.
- 
+
 You can use :meth:`SparseEncoder.encode() <sentence_transformers.sparse_encoder.SparseEncoder.encode>` (or :meth:`SparseEncoder.encode_query() <sentence_transformers.sparse_encoder.SparseEncoder.encode_query>` or :meth:`SparseEncoder.encode_document() <sentence_transformers.sparse_encoder.SparseEncoder.encode_document>`) with either:
 
 - The ``device`` parameter, which can be set to e.g. ``"cuda:0"`` or ``"cpu"`` for single-process computations, but also a list of devices for multi-process or multi-gpu computations, e.g. ``["cuda:0", "cuda:1"]`` or ``["cpu", "cpu", "cpu", "cpu"]``::
@@ -243,7 +243,7 @@ You can use :meth:`SparseEncoder.encode() <sentence_transformers.sparse_encoder.
             embeddings = model.encode(inputs, pool=pool)
             # Don't forget to stop the pool after usage
             model.stop_multi_process_pool(pool)
-        
+
         if __name__ == "__main__":
             main()
 

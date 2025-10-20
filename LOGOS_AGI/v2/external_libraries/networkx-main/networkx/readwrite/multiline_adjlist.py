@@ -81,9 +81,7 @@ def generate_multiline_adjlist(G, delimiter=" "):
         if G.is_multigraph():
             for s, nbrs in G.adjacency():
                 nbr_edges = [
-                    (u, data)
-                    for u, datadict in nbrs.items()
-                    for key, data in datadict.items()
+                    (u, data) for u, datadict in nbrs.items() for key, data in datadict.items()
                 ]
                 deg = len(nbr_edges)
                 yield str(s) + delimiter + str(deg)
@@ -254,9 +252,7 @@ def parse_multiline_adjlist(
             try:
                 u = nodetype(u)
             except BaseException as err:
-                raise TypeError(
-                    f"Failed to convert node ({u}) to type {nodetype}"
-                ) from err
+                raise TypeError(f"Failed to convert node ({u}) to type {nodetype}") from err
         G.add_node(u)
         for i in range(deg):
             while True:
@@ -280,9 +276,7 @@ def parse_multiline_adjlist(
                 try:
                     v = nodetype(v)
                 except BaseException as err:
-                    raise TypeError(
-                        f"Failed to convert node ({v}) to type {nodetype}"
-                    ) from err
+                    raise TypeError(f"Failed to convert node ({v}) to type {nodetype}") from err
             if edgetype is not None:
                 try:
                     edgedata = {"weight": edgetype(data)}

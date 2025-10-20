@@ -302,9 +302,7 @@ class TestMultilineAdjlist:
         fname = tmp_path / "adjlist.txt"
         nx.write_multiline_adjlist(G, fname)
         H = nx.read_multiline_adjlist(fname, nodetype=int, create_using=nx.MultiGraph())
-        H2 = nx.read_multiline_adjlist(
-            fname, nodetype=int, create_using=nx.MultiGraph()
-        )
+        H2 = nx.read_multiline_adjlist(fname, nodetype=int, create_using=nx.MultiGraph())
         assert H is not H2  # they should be different graphs
         assert nodes_equal(list(H), list(G))
         assert edges_equal(list(H.edges()), list(G.edges()))
@@ -313,12 +311,8 @@ class TestMultilineAdjlist:
         G = self.XDG
         fname = tmp_path / "adjlist.txt"
         nx.write_multiline_adjlist(G, fname)
-        H = nx.read_multiline_adjlist(
-            fname, nodetype=int, create_using=nx.MultiDiGraph()
-        )
-        H2 = nx.read_multiline_adjlist(
-            fname, nodetype=int, create_using=nx.MultiDiGraph()
-        )
+        H = nx.read_multiline_adjlist(fname, nodetype=int, create_using=nx.MultiDiGraph())
+        H2 = nx.read_multiline_adjlist(fname, nodetype=int, create_using=nx.MultiDiGraph())
         assert H is not H2  # they should be different graphs
         assert nodes_equal(list(H), list(G))
         assert edges_equal(list(H.edges()), list(G.edges()))

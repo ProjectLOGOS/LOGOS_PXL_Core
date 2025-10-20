@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
-__all__ = [
-    'ModelFitWarning'
-]
+__all__ = ["ModelFitWarning"]
 
 
 class ModelFitWarning(UserWarning):
@@ -13,4 +11,5 @@ class ModelFitWarning(UserWarning):
     warning emanates from an attempted model fit and originates from within
     the pmdarima package.
     """
+
     pass

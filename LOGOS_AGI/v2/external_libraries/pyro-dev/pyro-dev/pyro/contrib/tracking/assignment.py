@@ -67,9 +67,7 @@ class MarginalAssignment:
         if bp_iters is None:
             exists, assign = compute_marginals(exists_logits, assign_logits)
         else:
-            exists, assign = compute_marginals_bp(
-                exists_logits, assign_logits, bp_iters
-            )
+            exists, assign = compute_marginals_bp(exists_logits, assign_logits, bp_iters)
 
         # Wrap the results in Distribution objects.
         # This adds a final logit=0 element denoting spurious detection.
@@ -105,9 +103,7 @@ class MarginalAssignmentSparse:
         ``.batch_shape == (num_frames, num_detections)``.
     """
 
-    def __init__(
-        self, num_objects, num_detections, edges, exists_logits, assign_logits, bp_iters
-    ):
+    def __init__(self, num_objects, num_detections, edges, exists_logits, assign_logits, bp_iters):
         assert edges.dim() == 2, edges.shape
         assert edges.shape[0] == 2, edges.shape
         assert exists_logits.shape == (num_objects,), exists_logits.shape
@@ -216,16 +212,10 @@ def compute_marginals(exists_logits, assign_logits):
     dtype = exists_logits.dtype
     device = exists_logits.device
 
-    exists_probs = torch.zeros(
-        2, num_objects, dtype=dtype, device=device
-    )  # [not exist, exist]
-    assign_probs = torch.zeros(
-        num_detections, num_objects + 1, dtype=dtype, device=device
-    )
+    exists_probs = torch.zeros(2, num_objects, dtype=dtype, device=device)  # [not exist, exist]
+    assign_probs = torch.zeros(num_detections, num_objects + 1, dtype=dtype, device=device)
     for assign in itertools.product(range(num_objects + 1), repeat=num_detections):
-        assign_part = sum(
-            assign_logits[j, i] for j, i in enumerate(assign) if i < num_objects
-        )
+        assign_part = sum(assign_logits[j, i] for j, i in enumerate(assign) if i < num_objects)
         for exists in itertools.product(
             *[[1] if i in assign else [0, 1] for i in range(num_objects)]
         ):
@@ -262,14 +252,10 @@ def compute_marginals_bp(exists_logits, assign_logits, bp_iters):
     message_a_to_e = torch.zeros_like(assign_logits)
     for i in range(bp_iters):
         message_e_to_a = (
-            -(message_a_to_e - message_a_to_e.sum(0, True) - exists_logits)
-            .exp()
-            .log1p()
+            -(message_a_to_e - message_a_to_e.sum(0, True) - exists_logits).exp().log1p()
         )
         joint = (assign_logits + message_e_to_a).exp()
-        message_a_to_e = (
-            (assign_logits - torch.log1p(joint.sum(1, True) - joint)).exp().log1p()
-        )
+        message_a_to_e = (assign_logits - torch.log1p(joint.sum(1, True) - joint)).exp().log1p()
         warn_if_nan(message_e_to_a, "message_e_to_a iter {}".format(i))
         warn_if_nan(message_a_to_e, "message_a_to_e iter {}".format(i))
 
@@ -310,15 +296,11 @@ def compute_marginals_sparse_bp(
     message_a_to_e = torch.zeros_like(assign_logits)
     for i in range(bp_iters):
         message_e_to_a = (
-            -(message_a_to_e - sparse_sum(message_a_to_e, 0, True) - exists_factor)
-            .exp()
-            .log1p()
+            -(message_a_to_e - sparse_sum(message_a_to_e, 0, True) - exists_factor).exp().log1p()
         )
         joint = (assign_logits + message_e_to_a).exp()
         message_a_to_e = (
-            (assign_logits - torch.log1p(sparse_sum(joint, 1, True) - joint))
-            .exp()
-            .log1p()
+            (assign_logits - torch.log1p(sparse_sum(joint, 1, True) - joint)).exp().log1p()
         )
         warn_if_nan(message_e_to_a, "message_e_to_a iter {}".format(i))
         warn_if_nan(message_a_to_e, "message_a_to_e iter {}".format(i))
@@ -345,9 +327,7 @@ def compute_marginals_persistent(exists_logits, assign_logits):
 
     total = 0
     exists_probs = torch.zeros(num_objects, dtype=dtype, device=device)
-    assign_probs = torch.zeros(
-        num_frames, num_detections, num_objects, dtype=dtype, device=device
-    )
+    assign_probs = torch.zeros(num_frames, num_detections, num_objects, dtype=dtype, device=device)
     for exists in itertools.product([0, 1], repeat=num_objects):
         exists = [i for i, e in enumerate(exists) if e]
         exists_part = _exp(sum(exists_logits[i] for i in exists))
@@ -361,9 +341,7 @@ def compute_marginals_persistent(exists_logits, assign_logits):
                 for objects in itertools.combinations(exists, n):
                     for detections in itertools.permutations(range(num_detections), n):
                         assign = tuple(zip(objects, detections))
-                        assign_map[assign] = _exp(
-                            sum(assign_logits[t, j, i] for i, j in assign)
-                        )
+                        assign_map[assign] = _exp(sum(assign_logits[t, j, i] for i, j in assign))
             assign_parts.append(assign_map)
             assign_sums.append(sum(assign_map.values()))
 
@@ -386,9 +364,7 @@ def compute_marginals_persistent(exists_logits, assign_logits):
     return exists, assign
 
 
-def compute_marginals_persistent_bp(
-    exists_logits, assign_logits, bp_iters, bp_momentum=0.5
-):
+def compute_marginals_persistent_bp(exists_logits, assign_logits, bp_iters, bp_momentum=0.5):
     """
     This implements approximate inference of pairwise marginals via
     loopy belief propagation, adapting the approach of [1], [2].
@@ -429,9 +405,7 @@ def compute_marginals_persistent_bp(
         message_a_to_b = old * message_a_to_b + new * (
             assign_logits - (odds_a.sum(2, True) - odds_a).log1p()
         )
-        message_b_to_e = (
-            old * message_b_to_e + new * message_a_to_b.exp().sum(1).log1p()
-        )
+        message_b_to_e = old * message_b_to_e + new * message_a_to_b.exp().sum(1).log1p()
         message_e_to_b = old * message_e_to_b + new * (
             exists_logits + message_b_to_e.sum(0) - message_b_to_e
         )
@@ -439,10 +413,7 @@ def compute_marginals_persistent_bp(
         message_b_to_a = (
             old * message_b_to_a
             - new
-            * (
-                (-message_e_to_b).exp().unsqueeze(1)
-                + (1 + odds_b.sum(1, True) - odds_b)
-            ).log()
+            * ((-message_e_to_b).exp().unsqueeze(1) + (1 + odds_b.sum(1, True) - odds_b)).log()
         )
 
         warn_if_nan(message_a_to_b, "message_a_to_b iter {}".format(i))

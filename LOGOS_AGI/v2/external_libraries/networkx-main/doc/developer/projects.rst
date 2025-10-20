@@ -241,4 +241,3 @@ Completed Projects
    - Complexity;
 
    - Interested Mentors:
-

@@ -97,12 +97,8 @@ class TestKalmanFilter:
         )
 
         (x_filt, V_filt) = kf.filter(X=data.observations)
-        assert_array_almost_equal(
-            x_filt[:500], data.filtered_state_means[:500], decimal=7
-        )
-        assert_array_almost_equal(
-            V_filt[:500], data.filtered_state_covariances[:500], decimal=7
-        )
+        assert_array_almost_equal(x_filt[:500], data.filtered_state_means[:500], decimal=7)
+        assert_array_almost_equal(V_filt[:500], data.filtered_state_covariances[:500], decimal=7)
 
     def test_kalman_predict(self, kf_cls, data):
         kf = kf_cls(
@@ -117,9 +113,7 @@ class TestKalmanFilter:
         )
 
         x_smooth = kf.smooth(X=data.observations)[0]
-        assert_array_almost_equal(
-            x_smooth[:501], data.smoothed_state_means[:501], decimal=7
-        )
+        assert_array_almost_equal(x_smooth[:501], data.smoothed_state_means[:501], decimal=7)
 
     def test_kalman_fit(self, kf_cls, data):
         # check against MATLAB dataset

@@ -46,8 +46,7 @@ def _check_weights(weights, n_components, xp=None):
     if any(xp.less(weights, 0.0)) or any(xp.greater(weights, 1.0)):
         raise ValueError(
             "The parameter 'weights' should be in the range "
-            "[0, 1], but got max value %.5f, min value %.5f"
-            % (xp.min(weights), xp.max(weights))
+            "[0, 1], but got max value %.5f, min value %.5f" % (xp.min(weights), xp.max(weights))
         )
 
     # check normalization
@@ -95,12 +94,9 @@ def _check_precision_matrix(precision, covariance_type, xp=None):
     """Check a precision matrix is symmetric and positive-definite."""
     xp, _ = get_namespace(precision, xp=xp)
     if not (
-        xp.all(xpx.isclose(precision, precision.T))
-        and xp.all(xp.linalg.eigvalsh(precision) > 0.0)
+        xp.all(xpx.isclose(precision, precision.T)) and xp.all(xp.linalg.eigvalsh(precision) > 0.0)
     ):
-        raise ValueError(
-            "'%s precision' should be symmetric, positive-definite" % covariance_type
-        )
+        raise ValueError("'%s precision' should be symmetric, positive-definite" % covariance_type)
 
 
 def _check_precisions_full(precisions, covariance_type, xp=None):
@@ -147,9 +143,7 @@ def _check_precisions(precisions, covariance_type, n_components, n_features, xp=
         "diag": (n_components, n_features),
         "spherical": (n_components,),
     }
-    _check_shape(
-        precisions, precisions_shape[covariance_type], "%s precision" % covariance_type
-    )
+    _check_shape(precisions, precisions_shape[covariance_type], "%s precision" % covariance_type)
 
     _check_precisions = {
         "full": _check_precisions_full,
@@ -187,9 +181,7 @@ def _estimate_gaussian_covariances_full(resp, X, nk, means, reg_covar, xp=None):
     """
     xp, _, device_ = get_namespace_and_device(X, xp=xp)
     n_components, n_features = means.shape
-    covariances = xp.empty(
-        (n_components, n_features, n_features), device=device_, dtype=X.dtype
-    )
+    covariances = xp.empty((n_components, n_features, n_features), device=device_, dtype=X.dtype)
     for k in range(n_components):
         diff = X - means[k, :]
         covariances[k, :, :] = ((resp[:, k] * diff.T) @ diff) / nk[k]
@@ -428,16 +420,12 @@ def _compute_precision_cholesky_from_precisions(precisions, covariance_type, xp=
     if covariance_type == "full":
         precisions_cholesky = xp.stack(
             [
-                _flipudlr(
-                    _cholesky(_flipudlr(precisions[i, :, :], xp=xp), xp=xp), xp=xp
-                )
+                _flipudlr(_cholesky(_flipudlr(precisions[i, :, :], xp=xp), xp=xp), xp=xp)
                 for i in range(precisions.shape[0])
             ]
         )
     elif covariance_type == "tied":
-        precisions_cholesky = _flipudlr(
-            _cholesky(_flipudlr(precisions, xp=xp), xp=xp), xp=xp
-        )
+        precisions_cholesky = _flipudlr(_cholesky(_flipudlr(precisions, xp=xp), xp=xp), xp=xp)
     else:
         precisions_cholesky = xp.sqrt(precisions)
     return precisions_cholesky
@@ -798,14 +786,10 @@ class GaussianMixture(BaseMixture):
         _, n_features = X.shape
 
         if self.weights_init is not None:
-            self.weights_init = _check_weights(
-                self.weights_init, self.n_components, xp=xp
-            )
+            self.weights_init = _check_weights(self.weights_init, self.n_components, xp=xp)
 
         if self.means_init is not None:
-            self.means_init = _check_means(
-                self.means_init, self.n_components, n_features, xp=xp
-            )
+            self.means_init = _check_means(self.means_init, self.n_components, n_features, xp=xp)
 
         if self.precisions_init is not None:
             self.precisions_init = _check_precisions(
@@ -817,10 +801,7 @@ class GaussianMixture(BaseMixture):
             )
 
         allowed_init_params = ["random", "random_from_data"]
-        if (
-            get_config()["array_api_dispatch"]
-            and self.init_params not in allowed_init_params
-        ):
+        if get_config()["array_api_dispatch"] and self.init_params not in allowed_init_params:
             raise NotImplementedError(
                 f"Allowed `init_params` are {allowed_init_params} if "
                 f"'array_api_dispatch' is enabled. You passed "
@@ -833,9 +814,7 @@ class GaussianMixture(BaseMixture):
         # If all the initial parameters are all provided, then there is no need to run
         # the initialization.
         compute_resp = (
-            self.weights_init is None
-            or self.means_init is None
-            or self.precisions_init is None
+            self.weights_init is None or self.means_init is None or self.precisions_init is None
         )
         if compute_resp:
             super()._initialize_parameters(X, random_state, xp=xp)
@@ -971,9 +950,7 @@ class GaussianMixture(BaseMixture):
         bic : float
             The lower the better.
         """
-        return -2 * self.score(X) * X.shape[0] + self._n_parameters() * math.log(
-            X.shape[0]
-        )
+        return -2 * self.score(X) * X.shape[0] + self._n_parameters() * math.log(X.shape[0])
 
     def aic(self, X):
         """Akaike information criterion for the current model on the input X.

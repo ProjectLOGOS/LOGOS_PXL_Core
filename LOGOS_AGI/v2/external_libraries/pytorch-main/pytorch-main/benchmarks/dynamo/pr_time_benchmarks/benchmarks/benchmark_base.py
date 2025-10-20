@@ -230,10 +230,7 @@ class BenchmarkBase(ABC):
     def collect_all(self) -> Self:
         self._prepare_once()
         self.results = []
-        if (
-            self._enable_instruction_count
-            and self._enable_compile_time_instruction_count
-        ):
+        if self._enable_instruction_count and self._enable_compile_time_instruction_count:
             raise RuntimeError(
                 "not supported until we update the logger, both logs to the same field now"
             )

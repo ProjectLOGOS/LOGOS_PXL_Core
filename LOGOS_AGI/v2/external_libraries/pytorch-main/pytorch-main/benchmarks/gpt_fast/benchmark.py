@@ -294,9 +294,7 @@ def main(output_file=DEFAULT_OUTPUT_FILE, only_model=None):
         experiments = all_experiments.values()
     else:
         if only_model not in all_experiments:
-            print(
-                f"Unknown model: {only_model}, all available models: {all_experiments.keys()}"
-            )
+            print(f"Unknown model: {only_model}, all available models: {all_experiments.keys()}")
         # only run the specified model
         experiments = [all_experiments[only_model]]
     for func in experiments:

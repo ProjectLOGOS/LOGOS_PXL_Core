@@ -130,12 +130,8 @@ binary_configs_broadcast = op_bench.config_list(
 class BinaryOpBcastBenchmark(op_bench.TorchBenchmarkBase):
     def init(self, in_one, in_two, dtype, device, op_func):
         self.inputs = {
-            "in_one": torch.bernoulli(0.5 * torch.ones(in_one, device=device)).to(
-                dtype=dtype
-            ),
-            "in_two": torch.bernoulli(0.5 * torch.ones(in_two, device=device)).to(
-                dtype=dtype
-            ),
+            "in_one": torch.bernoulli(0.5 * torch.ones(in_one, device=device)).to(dtype=dtype),
+            "in_two": torch.bernoulli(0.5 * torch.ones(in_two, device=device)).to(dtype=dtype),
         }
         self.op_func = op_func
 

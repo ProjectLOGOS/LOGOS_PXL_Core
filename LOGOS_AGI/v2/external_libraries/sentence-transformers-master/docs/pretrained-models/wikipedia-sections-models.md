@@ -35,4 +35,3 @@ The models achieve a rather low performance on the STS benchmark dataset. The re
 However, it does not matter how far the negative example is away, it can be little or really far away. This makes this model rather bad for deciding if a pair is somewhat similar. It learns only to recognize similar pairs (high scores) and dissimilar pairs (low scores).
 
 However, this model works well for **fine-grained clustering**. 
-

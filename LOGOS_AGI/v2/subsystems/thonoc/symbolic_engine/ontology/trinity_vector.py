@@ -17,7 +17,7 @@ class TrinityVector:
 
     def to_tuple(self) -> Tuple[float, float, float]:
         return (self.existence, self.goodness, self.truth)
-    
+
     # aliasing to_tuple for consistency with OntologicalNode
     def as_tuple(self) -> Tuple[float, float, float]:
         return self.to_tuple()
@@ -31,7 +31,7 @@ class TrinityVector:
         g = min(1, c.imag if isinstance(c.imag, float) else 1)
         t = min(1, abs(c.imag))
         return cls(e, g, t)
-    
+
     # --- NEW METHODS REQUIRED BY OntologicalNode ---
     def calculate_coherence(self) -> float:
         """Calculates the coherence of the vector."""

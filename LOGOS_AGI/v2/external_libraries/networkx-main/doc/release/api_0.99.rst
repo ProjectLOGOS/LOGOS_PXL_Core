@@ -339,4 +339,3 @@ graphs and getting edge data via G[u][v] is quite fast.   You may also
 want to change G.neighbors(n) to G[n] which returns the dict keyed by
 neighbor nodes to the edge data.  It is faster for many purposes but
 does not work well when you are changing the graph.
-

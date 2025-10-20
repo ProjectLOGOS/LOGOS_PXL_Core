@@ -38,10 +38,7 @@ print(
     "Probability estimates for three data points:\n"
     f"{classifier.predict_proba(X_test[-3:]).round(3)}"
 )
-print(
-    "Predicted class for the same three data points:\n"
-    f"{classifier.predict(X_test[-3:])}"
-)
+print("Predicted class for the same three data points:\n" f"{classifier.predict(X_test[-3:])}")
 
 # %%
 # Now imagine you'd want to set a different decision threshold on the probability
@@ -85,9 +82,9 @@ print(
 from sklearn.calibration import CalibratedClassifierCV
 from sklearn.metrics import brier_score_loss
 
-calibrated_classifier = CalibratedClassifierCV(
-    estimator=FrozenEstimator(classifier)
-).fit(X_train, y_train)
+calibrated_classifier = CalibratedClassifierCV(estimator=FrozenEstimator(classifier)).fit(
+    X_train, y_train
+)
 
 prob_pos_clf = classifier.predict_proba(X_test)[:, 1]
 clf_score = brier_score_loss(y_test, prob_pos_clf)

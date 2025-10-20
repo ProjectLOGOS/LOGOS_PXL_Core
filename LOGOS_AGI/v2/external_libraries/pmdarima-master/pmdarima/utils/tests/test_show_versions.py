@@ -10,5 +10,5 @@ def test_show_versions():
 
 
 def test_show_versions_when_not_present():
-    deps = ['big-ol-fake-pkg']
-    assert _get_deps_info(deps=deps)['big-ol-fake-pkg'] is None
+    deps = ["big-ol-fake-pkg"]
+    assert _get_deps_info(deps=deps)["big-ol-fake-pkg"] is None

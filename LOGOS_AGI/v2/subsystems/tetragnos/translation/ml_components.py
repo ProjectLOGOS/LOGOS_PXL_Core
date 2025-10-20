@@ -31,10 +31,10 @@ class ClusterAnalyzer:
     def fit(self, features: np.ndarray) -> dict:
         if features.shape[0] < 2:
              return {'embedding_2d': features.tolist(), 'labels': [0] * features.shape[0]}
-        
+
         n_neighbors_val = min(features.shape[0] - 1, self.n_neighbors)
         if n_neighbors_val < 1: n_neighbors_val = 1
-            
+
         self.reducer = UMAP(n_neighbors=n_neighbors_val, n_components=self.n_components, min_dist=0.1)
         self.clusterer = DBSCAN(eps=self.eps, min_samples=self.min_samples)
 

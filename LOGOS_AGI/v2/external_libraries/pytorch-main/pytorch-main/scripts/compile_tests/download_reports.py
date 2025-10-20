@@ -64,9 +64,9 @@ def download_reports(commit_sha, configs=("dynamo39", "dynamo313", "eager313")):
     for config in configs:
         required_jobs.extend(list(CONFIGS[config]))
     for job in required_jobs:
-        assert job in workflow_jobs, (
-            f"{job} not found, is the commit_sha correct? has the job finished running? The GitHub API may take a couple minutes to update."
-        )
+        assert (
+            job in workflow_jobs
+        ), f"{job} not found, is the commit_sha correct? has the job finished running? The GitHub API may take a couple minutes to update."
 
     # This page lists all artifacts.
     listings = requests.get(

@@ -32,9 +32,7 @@ elastic_net = rho * l1 + (1 - rho) * l2
 plt.figure(figsize=(10, 10), dpi=100)
 ax = plt.gca()
 
-elastic_net_contour = plt.contour(
-    xx, yy, elastic_net, levels=[1], colors=elastic_net_color
-)
+elastic_net_contour = plt.contour(xx, yy, elastic_net, levels=[1], colors=elastic_net_color)
 l2_contour = plt.contour(xx, yy, l2, levels=[1], colors=l2_color)
 l1_contour = plt.contour(xx, yy, l1, levels=[1], colors=l1_color)
 ax.set_aspect("equal")

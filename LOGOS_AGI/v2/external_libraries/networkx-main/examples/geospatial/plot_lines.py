@@ -79,9 +79,7 @@ for i, facet in enumerate(ax):
         add_basemap(facet)
     except:
         pass
-nx.draw(
-    G_primal, {n: [n[0], n[1]] for n in list(G_primal.nodes)}, ax=ax[1], node_size=50
-)
+nx.draw(G_primal, {n: [n[0], n[1]] for n in list(G_primal.nodes)}, ax=ax[1], node_size=50)
 
 # %%
 # Construct the dual graph. momepy will store row attributes as node attributes and

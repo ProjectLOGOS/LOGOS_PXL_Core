@@ -199,9 +199,7 @@ def circular_layout(G, scale=1, center=None, dim=2, store_pos_as=None):
         # Discard the extra angle since it matches 0 radians.
         theta = np.linspace(0, 1, len(G) + 1)[:-1] * 2 * np.pi
         theta = theta.astype(np.float32)
-        pos = np.column_stack(
-            [np.cos(theta), np.sin(theta), np.zeros((len(G), paddims))]
-        )
+        pos = np.column_stack([np.cos(theta), np.sin(theta), np.zeros((len(G), paddims))])
         pos = rescale_layout(pos, scale=scale) + center
         pos = dict(zip(G, pos))
 
@@ -211,9 +209,7 @@ def circular_layout(G, scale=1, center=None, dim=2, store_pos_as=None):
     return pos
 
 
-def shell_layout(
-    G, nlist=None, rotate=None, scale=1, center=None, dim=2, store_pos_as=None
-):
+def shell_layout(G, nlist=None, rotate=None, scale=1, center=None, dim=2, store_pos_as=None):
     """Position nodes in concentric circles.
 
     Parameters
@@ -306,8 +302,7 @@ def shell_layout(
     for nodes in nlist:
         # Discard the last angle (endpoint=False) since 2*pi matches 0 radians
         theta = (
-            np.linspace(0, 2 * np.pi, len(nodes), endpoint=False, dtype=np.float32)
-            + first_theta
+            np.linspace(0, 2 * np.pi, len(nodes), endpoint=False, dtype=np.float32) + first_theta
         )
         pos = radius * np.column_stack([np.cos(theta), np.sin(theta)]) + center
         npos.update(zip(nodes, pos))
@@ -639,9 +634,7 @@ def spring_layout(
             # We must adjust k by domain size for layouts not near 1x1
             nnodes, _ = A.shape
             k = dom_size / np.sqrt(nnodes)
-        pos = _fruchterman_reingold(
-            A, k, pos_arr, fixed, iterations, threshold, dim, seed
-        )
+        pos = _fruchterman_reingold(A, k, pos_arr, fixed, iterations, threshold, dim, seed)
     if fixed is None and scale is not None:
         pos = rescale_layout(pos, scale=scale) + center
     pos = dict(zip(G, pos))
@@ -699,9 +692,7 @@ def _fruchterman_reingold(
         # enforce minimum distance of 0.01
         np.clip(distance, 0.01, None, out=distance)
         # displacement "force"
-        displacement = np.einsum(
-            "ijk,ij->ik", delta, (k * k / distance**2 - A * distance / k)
-        )
+        displacement = np.einsum("ijk,ij->ik", delta, (k * k / distance**2 - A * distance / k))
         # update positions
         length = np.linalg.norm(displacement, axis=-1)
         length = np.where(length < 0.01, 0.1, length)
@@ -791,9 +782,7 @@ def _sparse_fruchterman_reingold(
             # the adjacency matrix row
             Ai = A.getrowview(i).toarray()  # TODO: revisit w/ sparse 1D container
             # displacement "force"
-            displacement[:, i] += (
-                delta * (k * k / distance**2 - Ai * distance / k)
-            ).sum(axis=1)
+            displacement[:, i] += (delta * (k * k / distance**2 - Ai * distance / k)).sum(axis=1)
         # update positions
         length = np.sqrt((displacement**2).sum(axis=0))
         length = np.where(length < 0.01, 0.1, length)
@@ -806,9 +795,7 @@ def _sparse_fruchterman_reingold(
     return pos
 
 
-def _energy_fruchterman_reingold(
-    A, nnodes, k, pos, fixed, iterations, threshold, dim, gravity
-):
+def _energy_fruchterman_reingold(A, nnodes, k, pos, fixed, iterations, threshold, dim, gravity):
     # Entry point for NetworkX graph is fruchterman_reingold_layout()
     # energy-based version
     import numpy as np
@@ -1414,16 +1401,12 @@ def multipartite_layout(
     try:
         # check if subset_key is dict-like
         if len(G) != sum(len(nodes) for nodes in subset_key.values()):
-            raise nx.NetworkXError(
-                "all nodes must be in one subset of `subset_key` dict"
-            )
+            raise nx.NetworkXError("all nodes must be in one subset of `subset_key` dict")
     except AttributeError:
         # subset_key is not a dict, hence a string
         node_to_subset = nx.get_node_attributes(G, subset_key)
         if len(node_to_subset) != len(G):
-            raise nx.NetworkXError(
-                f"all nodes need a subset_key attribute: {subset_key}"
-            )
+            raise nx.NetworkXError(f"all nodes need a subset_key attribute: {subset_key}")
         subset_key = nx.utils.groups(node_to_subset)
 
     # Sort by layer, if possible
@@ -2024,9 +2007,7 @@ def bfs_layout(G, start, *, align="vertical", scale=1, center=None, store_pos_as
         )
 
     # Compute node positions with multipartite_layout
-    pos = multipartite_layout(
-        G, subset_key=layers, align=align, scale=scale, center=center
-    )
+    pos = multipartite_layout(G, subset_key=layers, align=align, scale=scale, center=center)
 
     if store_pos_as is not None:
         nx.set_node_attributes(G, pos, store_pos_as)

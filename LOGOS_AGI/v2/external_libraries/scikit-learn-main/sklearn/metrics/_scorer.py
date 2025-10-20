@@ -87,9 +87,7 @@ def _cached_call(cache, estimator, response_method, *args, **kwargs):
     if cache is not None and response_method in cache:
         return cache[response_method]
 
-    result, _ = _get_response_values(
-        estimator, *args, response_method=response_method, **kwargs
-    )
+    result, _ = _get_response_values(estimator, *args, response_method=response_method, **kwargs)
 
     if cache is not None:
         cache[response_method] = result
@@ -133,18 +131,14 @@ class _MultimetricScorer:
             # Only the ones having `sample_weight` in their signature will receive it.
             # This does not work for metadata other than sample_weight, and for those
             # users have to enable metadata routing.
-            common_kwargs = {
-                arg: value for arg, value in kwargs.items() if arg != "sample_weight"
-            }
+            common_kwargs = {arg: value for arg, value in kwargs.items() if arg != "sample_weight"}
             routed_params = Bunch(
                 **{name: Bunch(score=common_kwargs.copy()) for name in self._scorers}
             )
             if "sample_weight" in kwargs:
                 for name, scorer in self._scorers.items():
                     if scorer._accept_sample_weight():
-                        routed_params[name].score["sample_weight"] = kwargs[
-                            "sample_weight"
-                        ]
+                        routed_params[name].score["sample_weight"] = kwargs["sample_weight"]
 
         for name, scorer in self._scorers.items():
             try:
@@ -295,9 +289,7 @@ class _BaseScorer(_MetadataRequester):
         """
         # TODO (1.8): remove in 1.8 (scoring="max_error" has been deprecated in 1.6)
         if self._deprecation_msg is not None:
-            warnings.warn(
-                self._deprecation_msg, category=DeprecationWarning, stacklevel=2
-            )
+            warnings.warn(self._deprecation_msg, category=DeprecationWarning, stacklevel=2)
 
         _raise_for_params(kwargs, self, None)
 
@@ -316,9 +308,7 @@ class _BaseScorer(_MetadataRequester):
         _kwargs = set() if self._kwargs is None else set(self._kwargs.keys())
         overlap = _kwargs.intersection(kwargs.keys())
         if overlap:
-            warnings.warn(
-                f"{message} Overlapping parameters are: {overlap}", UserWarning
-            )
+            warnings.warn(f"{message} Overlapping parameters are: {overlap}", UserWarning)
 
     def set_score_request(self, **kwargs):
         """Set requested parameters by the scorer.
@@ -577,9 +567,7 @@ def _check_multimetric_scoring(estimator, scoring):
     )
 
     if isinstance(scoring, (list, tuple, set)):
-        err_msg = (
-            "The list/tuple elements must be unique strings of predefined scorers. "
-        )
+        err_msg = "The list/tuple elements must be unique strings of predefined scorers. "
         try:
             keys = set(scoring)
         except TypeError as e:
@@ -587,8 +575,7 @@ def _check_multimetric_scoring(estimator, scoring):
 
         if len(keys) != len(scoring):
             raise ValueError(
-                f"{err_msg} Duplicate elements were found in"
-                f" the given list. {scoring!r}"
+                f"{err_msg} Duplicate elements were found in" f" the given list. {scoring!r}"
             )
         elif len(keys) > 0:
             if not all(isinstance(k, str) for k in keys):
@@ -604,9 +591,7 @@ def _check_multimetric_scoring(estimator, scoring):
                         f"{err_msg} Non-string types were found "
                         f"in the given list. Got {scoring!r}"
                     )
-            scorers = {
-                scorer: check_scoring(estimator, scoring=scorer) for scorer in scoring
-            }
+            scorers = {scorer: check_scoring(estimator, scoring=scorer) for scorer in scoring}
         else:
             raise ValueError(f"{err_msg} Empty list was given. {scoring!r}")
 
@@ -614,15 +599,11 @@ def _check_multimetric_scoring(estimator, scoring):
         keys = set(scoring)
         if not all(isinstance(k, str) for k in keys):
             raise ValueError(
-                "Non-string types were found in the keys of "
-                f"the given dict. scoring={scoring!r}"
+                "Non-string types were found in the keys of " f"the given dict. scoring={scoring!r}"
             )
         if len(keys) == 0:
             raise ValueError(f"An empty dict was passed. {scoring!r}")
-        scorers = {
-            key: check_scoring(estimator, scoring=scorer)
-            for key, scorer in scoring.items()
-        }
+        scorers = {key: check_scoring(estimator, scoring=scorer) for key, scorer in scoring.items()}
     else:
         raise ValueError(err_msg_generic)
 
@@ -650,9 +631,7 @@ def _get_response_method_name(response_method):
     },
     prefer_skip_nested_validation=True,
 )
-def make_scorer(
-    score_func, *, response_method="default", greater_is_better=True, **kwargs
-):
+def make_scorer(score_func, *, response_method="default", greater_is_better=True, **kwargs):
     """Make a scorer from a performance metric or loss function.
 
     A scorer is a wrapper around an arbitrary metric or loss function that is called
@@ -743,31 +722,19 @@ deprecation_msg = (
 )
 max_error_scorer._deprecation_msg = deprecation_msg
 neg_mean_squared_error_scorer = make_scorer(mean_squared_error, greater_is_better=False)
-neg_mean_squared_log_error_scorer = make_scorer(
-    mean_squared_log_error, greater_is_better=False
-)
-neg_mean_absolute_error_scorer = make_scorer(
-    mean_absolute_error, greater_is_better=False
-)
+neg_mean_squared_log_error_scorer = make_scorer(mean_squared_log_error, greater_is_better=False)
+neg_mean_absolute_error_scorer = make_scorer(mean_absolute_error, greater_is_better=False)
 neg_mean_absolute_percentage_error_scorer = make_scorer(
     mean_absolute_percentage_error, greater_is_better=False
 )
-neg_median_absolute_error_scorer = make_scorer(
-    median_absolute_error, greater_is_better=False
-)
-neg_root_mean_squared_error_scorer = make_scorer(
-    root_mean_squared_error, greater_is_better=False
-)
+neg_median_absolute_error_scorer = make_scorer(median_absolute_error, greater_is_better=False)
+neg_root_mean_squared_error_scorer = make_scorer(root_mean_squared_error, greater_is_better=False)
 neg_root_mean_squared_log_error_scorer = make_scorer(
     root_mean_squared_log_error, greater_is_better=False
 )
-neg_mean_poisson_deviance_scorer = make_scorer(
-    mean_poisson_deviance, greater_is_better=False
-)
+neg_mean_poisson_deviance_scorer = make_scorer(mean_poisson_deviance, greater_is_better=False)
 
-neg_mean_gamma_deviance_scorer = make_scorer(
-    mean_gamma_deviance, greater_is_better=False
-)
+neg_mean_gamma_deviance_scorer = make_scorer(mean_gamma_deviance, greater_is_better=False)
 d2_absolute_error_scorer = make_scorer(d2_absolute_error_score)
 
 # Standard Classification Scores
@@ -804,18 +771,14 @@ average_precision_scorer = make_scorer(
     average_precision_score,
     response_method=("decision_function", "predict_proba"),
 )
-roc_auc_ovo_scorer = make_scorer(
-    roc_auc_score, response_method="predict_proba", multi_class="ovo"
-)
+roc_auc_ovo_scorer = make_scorer(roc_auc_score, response_method="predict_proba", multi_class="ovo")
 roc_auc_ovo_weighted_scorer = make_scorer(
     roc_auc_score,
     response_method="predict_proba",
     multi_class="ovo",
     average="weighted",
 )
-roc_auc_ovr_scorer = make_scorer(
-    roc_auc_score, response_method="predict_proba", multi_class="ovr"
-)
+roc_auc_ovr_scorer = make_scorer(roc_auc_score, response_method="predict_proba", multi_class="ovr")
 roc_auc_ovr_weighted_scorer = make_scorer(
     roc_auc_score,
     response_method="predict_proba",
@@ -1141,24 +1104,18 @@ class _CurveScorer(_BaseScorer):
             The potential thresholds used to compute the scores.
         """
         pos_label = self._get_pos_label()
-        y_score = method_caller(
-            estimator, self._response_method, X, pos_label=pos_label
-        )
+        y_score = method_caller(estimator, self._response_method, X, pos_label=pos_label)
 
         scoring_kwargs = {**self._kwargs, **kwargs}
         if isinstance(self._thresholds, Integral):
-            potential_thresholds = np.linspace(
-                np.min(y_score), np.max(y_score), self._thresholds
-            )
+            potential_thresholds = np.linspace(np.min(y_score), np.max(y_score), self._thresholds)
         else:
             potential_thresholds = np.asarray(self._thresholds)
         score_thresholds = [
             self._sign
             * self._score_func(
                 y_true,
-                _threshold_scores_to_class_labels(
-                    y_score, th, estimator.classes_, pos_label
-                ),
+                _threshold_scores_to_class_labels(y_score, th, estimator.classes_, pos_label),
                 **scoring_kwargs,
             )
             for th in potential_thresholds

@@ -68,9 +68,7 @@ def estimated_ape(ns, num_vi_steps):
         vi_parameters={
             "guide": guide,
             "optim": optim.Adam({"lr": 0.05}),
-            "loss": TraceEnum_ELBO(
-                strict_enumeration_warning=False
-            ).differentiable_loss,
+            "loss": TraceEnum_ELBO(strict_enumeration_warning=False).differentiable_loss,
             "num_steps": num_vi_steps,
         },
         is_parameters={"num_samples": 1},
@@ -128,8 +126,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="A/B test experiment design using VI")
     parser.add_argument("-n", "--num-vi-steps", nargs="?", default=5000, type=int)
     parser.add_argument("--num-bo-steps", nargs="?", default=5, type=int)
-    parser.add_argument(
-        "--seed", type=int, default=1, metavar="S", help="random seed (default: 1)"
-    )
+    parser.add_argument("--seed", type=int, default=1, metavar="S", help="random seed (default: 1)")
     args = parser.parse_args()
     main(args.num_vi_steps, args.num_bo_steps, args.seed)

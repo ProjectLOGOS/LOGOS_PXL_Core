@@ -29,15 +29,13 @@ def parse_args() -> Any:
     return parser.parse_args()
 
 
-def post_already_uptodate(
-    pr: GitHubPR, repo: GitRepo, onto_branch: str, dry_run: bool
-) -> None:
+def post_already_uptodate(pr: GitHubPR, repo: GitRepo, onto_branch: str, dry_run: bool) -> None:
     msg = f"Tried to rebase and push PR #{pr.pr_num}, but it was already up to date."
     def_branch = pr.default_branch()
     def_branch_fcn = f"refs/remotes/{repo.remote}/{def_branch}"
-    if onto_branch != def_branch_fcn and repo.rev_parse(
-        def_branch_fcn
-    ) != repo.rev_parse(onto_branch):
+    if onto_branch != def_branch_fcn and repo.rev_parse(def_branch_fcn) != repo.rev_parse(
+        onto_branch
+    ):
         def_branch_url = f"https://github.com/{pr.org}/{pr.project}/tree/{def_branch}"
         msg += f" Try rebasing against [{def_branch}]({def_branch_url}) by issuing:"
         msg += f"\n`@pytorchbot rebase -b {def_branch}`"
@@ -51,9 +49,7 @@ def post_already_uptodate(
     )
 
 
-def rebase_onto(
-    pr: GitHubPR, repo: GitRepo, onto_branch: str, dry_run: bool = False
-) -> bool:
+def rebase_onto(pr: GitHubPR, repo: GitRepo, onto_branch: str, dry_run: bool = False) -> bool:
     branch = f"pull/{pr.pr_num}/head"
     remote_url = f"https://github.com/{pr.info['headRepository']['nameWithOwner']}.git"
     refspec = f"{branch}:{pr.head_ref()}"
@@ -168,19 +164,14 @@ def rebase_ghstack_onto(
                         dry_run=dry_run,
                     )
 
-        if (
-            f"Skipped https://github.com/{org}/{project}/pull/{pr.pr_num}"
-            in push_result
-        ):
+        if f"Skipped https://github.com/{org}/{project}/pull/{pr.pr_num}" in push_result:
             post_already_uptodate(pr, repo, onto_branch, dry_run)
             return False
         return True
 
 
 def additional_rebase_failure_info(e: Exception) -> str:
-    if re.search(
-        r"remote: Permission to .* denied to .*\.\nfatal: unable to access", str(e)
-    ):
+    if re.search(r"remote: Permission to .* denied to .*\.\nfatal: unable to access", str(e)):
         return (
             "\nThis is likely because the author did not allow edits from maintainers on the PR or because the "
             "repo has additional permissions settings that mergebot does not qualify."
@@ -210,9 +201,7 @@ def main() -> None:
     pr = GitHubPR(org, project, args.pr_num)
     onto_branch = args.branch if args.branch else pr.default_branch()
     onto_branch = f"refs/remotes/{repo.remote}/{onto_branch}"
-    onto_branch_url = (
-        f"https://github.com/{org}/{project}/commit/{repo.rev_parse(onto_branch)}"
-    )
+    onto_branch_url = f"https://github.com/{org}/{project}/commit/{repo.rev_parse(onto_branch)}"
 
     msg = f"@pytorchbot started a rebase job onto [{onto_branch}]({onto_branch_url})."
     msg += f" Check the current status [here]({os.getenv('GH_RUN_URL')})"

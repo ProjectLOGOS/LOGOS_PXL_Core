@@ -60,9 +60,7 @@ import polars as pl
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
-df = pl.DataFrame(
-    {"height": [120, 140, 150, 110, 100], "pet": ["dog", "cat", "dog", "cat", "cat"]}
-)
+df = pl.DataFrame({"height": [120, 140, 150, 110, 100], "pet": ["dog", "cat", "dog", "cat", "cat"]})
 preprocessor = ColumnTransformer(
     [
         ("numerical", StandardScaler(), ["height"]),
@@ -131,9 +129,7 @@ PartialDependenceDisplay.from_estimator(
     line_kw={"linewidth": 4, "label": "constrained", "color": "tab:orange"},
     ax=disp.axes_,
 )
-disp.axes_[0, 0].plot(
-    X[:, 0], y, "o", alpha=0.5, zorder=-1, label="samples", color="tab:green"
-)
+disp.axes_[0, 0].plot(X[:, 0], y, "o", alpha=0.5, zorder=-1, label="samples", color="tab:green")
 disp.axes_[0, 0].set_ylim(-3, 3)
 disp.axes_[0, 0].set_xlim(-1, 1)
 disp.axes_[0, 0].legend()
@@ -179,9 +175,7 @@ groups = rng.randint(0, 10, size=n_samples)
 sample_weights = rng.rand(n_samples)
 estimator = Lasso().set_fit_request(sample_weight=True)
 hyperparameter_grid = {"alpha": [0.1, 0.5, 1.0, 2.0]}
-scoring_inner_cv = get_scorer("neg_mean_squared_error").set_score_request(
-    sample_weight=True
-)
+scoring_inner_cv = get_scorer("neg_mean_squared_error").set_score_request(sample_weight=True)
 inner_cv = GroupKFold(n_splits=5)
 
 grid_search = GridSearchCV(
@@ -192,9 +186,7 @@ grid_search = GridSearchCV(
 )
 
 outer_cv = GroupKFold(n_splits=5)
-scorers = {
-    "mse": get_scorer("neg_mean_squared_error").set_score_request(sample_weight=True)
-}
+scorers = {"mse": get_scorer("neg_mean_squared_error").set_score_request(sample_weight=True)}
 results = cross_validate(
     grid_search,
     X,

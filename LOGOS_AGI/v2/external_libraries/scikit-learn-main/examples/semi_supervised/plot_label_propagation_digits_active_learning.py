@@ -78,9 +78,7 @@ for i in range(max_iterations):
 
     # select up to 5 digit examples that the classifier is most uncertain about
     uncertainty_index = np.argsort(pred_entropies)[::-1]
-    uncertainty_index = uncertainty_index[
-        np.isin(uncertainty_index, unlabeled_indices)
-    ][:5]
+    uncertainty_index = uncertainty_index[np.isin(uncertainty_index, unlabeled_indices)][:5]
 
     # keep track of indices that we get labels for
     delete_indices = np.array([], dtype=int)
@@ -101,8 +99,7 @@ for i in range(max_iterations):
             sub = f.add_subplot(5, 5, index + 1 + (5 * i))
             sub.imshow(image, cmap=plt.cm.gray_r, interpolation="none")
             sub.set_title(
-                "predict: %i\ntrue: %i"
-                % (lp_model.transduction_[image_index], y[image_index]),
+                "predict: %i\ntrue: %i" % (lp_model.transduction_[image_index], y[image_index]),
                 size=10,
             )
             sub.axis("off")

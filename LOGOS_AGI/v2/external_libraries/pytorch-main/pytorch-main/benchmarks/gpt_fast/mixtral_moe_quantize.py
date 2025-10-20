@@ -97,17 +97,11 @@ class WeightOnlyInt8QuantHandler:
                         bit8_weight, scales, _ = dynamically_quantize_per_channel(
                             weight[expert_idx].float(), -128, 127, torch.int8
                         )
-                        bit8_weight_list.append(
-                            bit8_weight.reshape(1, intermediate_size, dim)
-                        )
+                        bit8_weight_list.append(bit8_weight.reshape(1, intermediate_size, dim))
                         scales_list.append(scales.reshape(1, intermediate_size))
 
-                    cur_state_dict[f"{fqn}.{weight_name}"] = torch.cat(
-                        bit8_weight_list, dim=0
-                    )
-                    cur_state_dict[f"{fqn}.{scales_name}"] = torch.cat(
-                        scales_list, dim=0
-                    )
+                    cur_state_dict[f"{fqn}.{weight_name}"] = torch.cat(bit8_weight_list, dim=0)
+                    cur_state_dict[f"{fqn}.{scales_name}"] = torch.cat(scales_list, dim=0)
 
         return cur_state_dict
 
@@ -135,9 +129,7 @@ class WeightOnlyInt8Linear(torch.nn.Module):
         super().__init__()
         self.in_features = in_features
         self.out_features = out_features
-        self.register_buffer(
-            "weight", torch.empty((out_features, in_features), dtype=target_dtype)
-        )
+        self.register_buffer("weight", torch.empty((out_features, in_features), dtype=target_dtype))
         self.register_buffer("scales", torch.ones(out_features, dtype=torch.bfloat16))
 
     def forward(self, input: torch.Tensor) -> torch.Tensor:
@@ -163,9 +155,7 @@ class ConditionalFeedForwardInt8(nn.Module):
         self.register_buffer(
             "scales1", torch.empty(num_experts, intermediate_size, dtype=torch.bfloat16)
         )
-        self.register_buffer(
-            "scales2", torch.empty(num_experts, dim, dtype=torch.bfloat16)
-        )
+        self.register_buffer("scales2", torch.empty(num_experts, dim, dtype=torch.bfloat16))
         self.register_buffer(
             "scales3", torch.empty(num_experts, intermediate_size, dtype=torch.bfloat16)
         )
@@ -175,13 +165,14 @@ class ConditionalFeedForwardInt8(nn.Module):
         w3_weights = self.w3.to(x.dtype)[expert_indices]  # [T, A, D, D]
         w2_weights = self.w2.to(x.dtype)[expert_indices]
         x1 = F.silu(
-            torch.einsum("ti,taoi -> tao", x, w1_weights)
-            * self.scales1[expert_indices].to(x.dtype)
+            torch.einsum("ti,taoi -> tao", x, w1_weights) * self.scales1[expert_indices].to(x.dtype)
         )
-        x3 = torch.einsum("ti, taoi -> tao", x, w3_weights) * self.scales3[
+        x3 = torch.einsum("ti, taoi -> tao", x, w3_weights) * self.scales3[expert_indices].to(
+            x.dtype
+        )
+        expert_outs = torch.einsum("tao, taio -> tai", (x1 * x3), w2_weights) * self.scales2[
             expert_indices
-        ].to(x.dtype)
-        expert_outs = torch.einsum(
-            "tao, taio -> tai", (x1 * x3), w2_weights
-        ) * self.scales2[expert_indices].to(x.dtype)  # [T, A, D, D]
+        ].to(
+            x.dtype
+        )  # [T, A, D, D]
         return expert_outs

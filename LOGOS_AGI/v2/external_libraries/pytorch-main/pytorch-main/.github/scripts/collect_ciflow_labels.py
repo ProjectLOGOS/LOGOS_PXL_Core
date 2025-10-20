@@ -27,9 +27,7 @@ def get_workflows_push_tags() -> set[str]:
 
 def filter_ciflow_tags(tags: set[str]) -> list[str]:
     "Return sorted list of ciflow tags"
-    return sorted(
-        tag[:-2] for tag in tags if tag.startswith("ciflow/") and tag.endswith("/*")
-    )
+    return sorted(tag[:-2] for tag in tags if tag.startswith("ciflow/") and tag.endswith("/*"))
 
 
 def read_probot_config() -> dict[str, Any]:

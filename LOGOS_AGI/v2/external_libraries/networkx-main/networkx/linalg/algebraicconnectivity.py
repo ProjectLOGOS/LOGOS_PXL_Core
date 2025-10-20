@@ -116,9 +116,7 @@ def _preprocess_graph(G, weight):
         )
         G = H
     if not G.is_multigraph():
-        edges = (
-            (u, v, abs(e.get(weight, 1.0))) for u, v, e in G.edges(data=True) if u != v
-        )
+        edges = ((u, v, abs(e.get(weight, 1.0))) for u, v, e in G.edges(data=True) if u != v)
     else:
         edges = (
             (u, v, sum(abs(e.get(weight, 1.0)) for e in G[u][v].values()))
@@ -275,9 +273,7 @@ def _get_fiedler_func(method):
             L = sp.sparse.csc_array(L, dtype=float)
             n = L.shape[0]
             if normalized:
-                D = sp.sparse.dia_array(
-                    (1.0 / np.sqrt(L.diagonal()), 0), shape=(n, n)
-                ).tocsc()
+                D = sp.sparse.dia_array((1.0 / np.sqrt(L.diagonal()), 0), shape=(n, n)).tocsc()
                 L = D @ L @ D
             if method == "lanczos" or n < 10:
                 # Avoid LOBPCG when n < 10 due to

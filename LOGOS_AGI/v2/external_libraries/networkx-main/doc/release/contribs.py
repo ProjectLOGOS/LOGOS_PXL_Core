@@ -5,9 +5,7 @@ import sys
 import shlex
 
 if len(sys.argv) < 2 or len(sys.argv) > 3:
-    print(
-        "Usage: ./contributors.py tag-of-previous-release tag-of-newer-release (optional)"
-    )
+    print("Usage: ./contributors.py tag-of-previous-release tag-of-newer-release (optional)")
     sys.exit(-1)
 
 tag = sys.argv[1]
@@ -49,9 +47,7 @@ print(f"A total of {num_commits} changes have been committed.\n")
 if compare_tag:
     commits = filter(
         None,
-        call(
-            f"git log --since='{tag_date}' --until='{compare_tag_date}' --pretty=%s --reverse"
-        ),
+        call(f"git log --since='{tag_date}' --until='{compare_tag_date}' --pretty=%s --reverse"),
     )
 else:
     commits = filter(
@@ -73,9 +69,7 @@ for merge, message in merges:
 print("\nMade by the following committers [alphabetical by last name]:\n")
 
 if compare_tag:
-    authors = call(
-        f"git log --since='{tag_date}' --until='{compare_tag_date}' --format=%aN"
-    )
+    authors = call(f"git log --since='{tag_date}' --until='{compare_tag_date}' --format=%aN")
 else:
     authors = call(f"git log --since='{tag_date}' --format=%aN")
 authors = [a.strip() for a in authors if a.strip()]

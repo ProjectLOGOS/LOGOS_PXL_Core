@@ -7,10 +7,10 @@ from ..base import UpdatableMixin
 from ...compat import check_is_fitted
 from ._fourier import C_fourier_terms
 
-__all__ = ['FourierFeaturizer']
+__all__ = ["FourierFeaturizer"]
 
-sinpi = (lambda x: np.sin(np.pi * x))
-cospi = (lambda x: np.cos(np.pi * x))
+sinpi = lambda x: np.sin(np.pi * x)
+cospi = lambda x: np.cos(np.pi * x)
 
 
 # Candidate for cythonization?
@@ -105,12 +105,9 @@ class FourierFeaturizer(BaseExogFeaturizer, UpdatableMixin):
         pfx = self._get_prefix()
         # E.g., ['FOURIER_S12-0', 'FOURIER_C12-0', ...]
         return [
-            '%s_%s%i-%i' % (
-                pfx,
-                "S" if i % 2 == 0 else "C",
-                self.m,
-                i // 2)
-            for i in range(X.shape[1])]
+            "%s_%s%i-%i" % (pfx, "S" if i % 2 == 0 else "C", self.m, i // 2)
+            for i in range(X.shape[1])
+        ]
 
     def fit(self, y, X=None):
         """Fit the transformer
@@ -138,8 +135,7 @@ class FourierFeaturizer(BaseExogFeaturizer, UpdatableMixin):
         if k is None:
             k = m // 2
         if 2 * k > m or k < 1:
-            raise ValueError("k must be a positive integer not greater "
-                             "than m//2")
+            raise ValueError("k must be a positive integer not greater " "than m//2")
 
         # Compute the periods of all Fourier terms. Since R allows multiple
         # seasonality and we do not, we can do this much more simply.

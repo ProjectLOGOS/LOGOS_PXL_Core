@@ -1,7 +1,7 @@
 # logos_agi_v1/services/database/db_service.py
 
-from dotenv import load_dotenv  
-load_dotenv()                   
+from dotenv import load_dotenv
+load_dotenv()
 
 import os
 import pika
@@ -14,7 +14,7 @@ from persistence_manager import PersistenceManager
 
 # --- Configuration ---
 logging.basicConfig(
-    level=logging.INFO, 
+    level=logging.INFO,
     format='%(asctime)s - %(levelname)s - DB_SERVICE - %(message)s',
     handlers=[
         logging.StreamHandler(sys.stdout),
@@ -37,17 +37,17 @@ class DatabaseService:
     Main database service that consumes messages from RabbitMQ queues
     and handles database operations through the PersistenceManager.
     """
-    
+
     def __init__(self):
         self.persistence_manager = PersistenceManager()
         self.connection = None
         self.channel = None
         self.is_running = False
-        
+
         # Setup graceful shutdown handling
         signal.signal(signal.SIGINT, self._signal_handler)
         signal.signal(signal.SIGTERM, self._signal_handler)
-        
+
         self._connect_to_rabbitmq()
         logging.info("DatabaseService initialized successfully.")
 
@@ -55,7 +55,7 @@ class DatabaseService:
         """Establishes connection to RabbitMQ with retries and proper error handling."""
         max_retries = 10
         retry_delay = 5
-        
+
         for attempt in range(1, max_retries + 1):
             try:
                 credentials = pika.PlainCredentials(RABBITMQ_USER, RABBITMQ_PASS)
@@ -66,16 +66,16 @@ class DatabaseService:
                     heartbeat=600,  # 10 minutes
                     blocked_connection_timeout=300  # 5 minutes
                 )
-                
+
                 self.connection = pika.BlockingConnection(parameters)
                 self.channel = self.connection.channel()
-                
+
                 # Setup queues and bindings
                 self._setup_queues()
-                
+
                 logging.info(f"Successfully connected to RabbitMQ at {RABBITMQ_HOST}:{RABBITMQ_PORT}")
                 return
-                
+
             except pika.exceptions.AMQPConnectionError as e:
                 logging.warning(f"Attempt {attempt}/{max_retries}: Failed to connect to RabbitMQ: {e}")
                 if attempt < max_retries:
@@ -93,30 +93,30 @@ class DatabaseService:
         try:
             # Write queue for database operations
             self.channel.queue_declare(
-                queue=DB_WRITE_QUEUE, 
+                queue=DB_WRITE_QUEUE,
                 durable=True,
                 arguments={'x-max-length': 10000}  # Prevent unbounded queue growth
             )
-            
+
             # Query queue for read operations (future expansion)
             self.channel.queue_declare(
-                queue=DB_QUERY_QUEUE, 
+                queue=DB_QUERY_QUEUE,
                 durable=True,
                 arguments={'x-max-length': 5000}
             )
-            
+
             # Response queue for query results
             self.channel.queue_declare(
-                queue=DB_RESPONSE_QUEUE, 
+                queue=DB_RESPONSE_QUEUE,
                 durable=True,
                 arguments={'x-max-length': 5000}
             )
-            
+
             # Set QoS to process one message at a time
             self.channel.basic_qos(prefetch_count=1)
-            
+
             logging.info("All database service queues declared successfully.")
-            
+
         except Exception as e:
             logging.error(f"Failed to setup queues: {e}")
             raise
@@ -124,7 +124,7 @@ class DatabaseService:
     def handle_write_request(self, ch, method, properties, body):
         """
         Callback function to handle incoming write requests on the write queue.
-        
+
         Expected message format:
         {
             "table": "table_name",
@@ -135,7 +135,7 @@ class DatabaseService:
         """
         start_time = time.time()
         request_id = "unknown"
-        
+
         try:
             # Parse message
             message = json.loads(body.decode('utf-8'))
@@ -143,15 +143,15 @@ class DatabaseService:
             table = message.get('table')
             data = message.get('data')
             operation = message.get('operation', 'save')
-            
+
             logging.info(f"Processing write request {request_id} for table '{table}', operation: {operation}")
-            
+
             # Validate required fields
             if not table:
                 raise ValueError("Missing required 'table' field in message")
             if not data and operation == 'save':
                 raise ValueError("Missing required 'data' field for save operation")
-            
+
             # Process the request based on operation type
             success = False
             if operation == 'save':
@@ -166,11 +166,11 @@ class DatabaseService:
                     raise ValueError("SQL statement required for execute operation")
             else:
                 raise ValueError(f"Unknown operation: {operation}")
-            
+
             if success:
                 processing_time = time.time() - start_time
                 logging.info(f"Successfully processed request {request_id} in {processing_time:.3f}s")
-                
+
                 # Log successful operations to system log
                 self.persistence_manager.log_system_event(
                     source="database_service",
@@ -184,7 +184,7 @@ class DatabaseService:
                 )
             else:
                 logging.error(f"Failed to process request {request_id}")
-                
+
         except json.JSONDecodeError as e:
             logging.error(f"Invalid JSON in request {request_id}: {e}")
         except ValueError as e:
@@ -201,7 +201,7 @@ class DatabaseService:
     def handle_query_request(self, ch, method, properties, body):
         """
         Callback function to handle incoming query requests.
-        
+
         Expected message format:
         {
             "query": "SELECT * FROM table WHERE condition = ?",
@@ -212,7 +212,7 @@ class DatabaseService:
         """
         start_time = time.time()
         request_id = "unknown"
-        
+
         try:
             # Parse message
             message = json.loads(body.decode('utf-8'))
@@ -220,16 +220,16 @@ class DatabaseService:
             query = message.get('query')
             params = message.get('params', ())
             reply_to = message.get('reply_to', DB_RESPONSE_QUEUE)
-            
+
             logging.info(f"Processing query request {request_id}")
-            
+
             if not query:
                 raise ValueError("Missing required 'query' field in message")
-            
+
             # Execute query
             results = self.persistence_manager.query(query, params)
             processing_time = time.time() - start_time
-            
+
             # Prepare response
             response = {
                 "request_id": request_id,
@@ -238,7 +238,7 @@ class DatabaseService:
                 "row_count": len(results),
                 "processing_time": processing_time
             }
-            
+
             # Send response
             self.channel.basic_publish(
                 exchange='',
@@ -249,14 +249,14 @@ class DatabaseService:
                     correlation_id=request_id
                 )
             )
-            
+
             logging.info(f"Query request {request_id} completed in {processing_time:.3f}s, returned {len(results)} rows")
-            
+
         except json.JSONDecodeError as e:
             logging.error(f"Invalid JSON in query request {request_id}: {e}")
         except Exception as e:
             logging.error(f"Error processing query request {request_id}: {e}")
-            
+
             # Send error response
             try:
                 error_response = {
@@ -265,7 +265,7 @@ class DatabaseService:
                     "error": str(e),
                     "processing_time": time.time() - start_time
                 }
-                
+
                 reply_to = message.get('reply_to', DB_RESPONSE_QUEUE) if 'message' in locals() else DB_RESPONSE_QUEUE
                 self.channel.basic_publish(
                     exchange='',
@@ -287,19 +287,19 @@ class DatabaseService:
         try:
             # Setup consumers
             self.channel.basic_consume(
-                queue=DB_WRITE_QUEUE, 
+                queue=DB_WRITE_QUEUE,
                 on_message_callback=self.handle_write_request
             )
-            
+
             self.channel.basic_consume(
-                queue=DB_QUERY_QUEUE, 
+                queue=DB_QUERY_QUEUE,
                 on_message_callback=self.handle_query_request
             )
-            
+
             self.is_running = True
             logging.info("Database Service is running and waiting for messages...")
             logging.info(f"Listening on queues: {DB_WRITE_QUEUE}, {DB_QUERY_QUEUE}")
-            
+
             # Log service startup
             self.persistence_manager.log_system_event(
                 source="database_service",
@@ -309,10 +309,10 @@ class DatabaseService:
                     "database_stats": self.persistence_manager.get_database_stats()
                 }
             )
-            
+
             # Start consuming
             self.channel.start_consuming()
-            
+
         except KeyboardInterrupt:
             logging.info("Received interrupt signal, shutting down gracefully...")
             self._shutdown()
@@ -329,7 +329,7 @@ class DatabaseService:
         """Gracefully shutdown the database service."""
         if self.is_running:
             self.is_running = False
-            
+
             # Log service shutdown
             try:
                 self.persistence_manager.log_system_event(
@@ -341,7 +341,7 @@ class DatabaseService:
                 )
             except Exception as e:
                 logging.error(f"Failed to log shutdown event: {e}")
-            
+
             # Stop consuming messages
             if self.channel and self.channel.is_open:
                 try:
@@ -349,7 +349,7 @@ class DatabaseService:
                     logging.info("Stopped consuming messages.")
                 except Exception as e:
                     logging.error(f"Error stopping consumer: {e}")
-            
+
             # Close connections
             if self.connection and self.connection.is_open:
                 try:
@@ -357,24 +357,24 @@ class DatabaseService:
                     logging.info("RabbitMQ connection closed.")
                 except Exception as e:
                     logging.error(f"Error closing connection: {e}")
-            
+
             # Close persistence manager
             try:
                 self.persistence_manager.close()
             except Exception as e:
                 logging.error(f"Error closing persistence manager: {e}")
-            
+
             logging.info("Database Service has shut down gracefully.")
 
 def main():
     """Main entry point for the database service."""
     try:
         logging.info("Starting Database Service...")
-        
+
         # Create and start the service
         db_service = DatabaseService()
         db_service.start_consuming()
-        
+
     except Exception as e:
         logging.error(f"Failed to start Database Service: {e}")
         sys.exit(1)

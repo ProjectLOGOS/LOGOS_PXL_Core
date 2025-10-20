@@ -8,5 +8,3 @@ GraphML
    write_graphml
    generate_graphml
    parse_graphml
-
-

@@ -110,9 +110,7 @@ class ForecastingModel(PyroModule, metaclass=_ForecastingModelMeta):
         assert isinstance(prediction, torch.Tensor)
         if noise_dist.event_dim == 0:
             if noise_dist.batch_shape[-2:] != prediction.shape[-2:]:
-                noise_dist = noise_dist.expand(
-                    noise_dist.batch_shape[:-2] + prediction.shape[-2:]
-                )
+                noise_dist = noise_dist.expand(noise_dist.batch_shape[:-2] + prediction.shape[-2:])
             noise_dist = noise_dist.to_event(2)
         elif noise_dist.event_dim == 1:
             if noise_dist.batch_shape[-1:] != prediction.shape[-2:-1]:
@@ -281,7 +279,7 @@ class Forecaster(nn.Module):
         num_particles=1,
         vectorize_particles=True,
         warm_start=False,
-        log_every=100
+        log_every=100,
     ):
         assert data.size(-2) == covariates.size(-2)
         super().__init__()
@@ -308,9 +306,7 @@ class Forecaster(nn.Module):
         if dct_gradients:
             model = MarkDCTParamMessenger("time")(model)
             guide = MarkDCTParamMessenger("time")(guide)
-        elbo = Trace_ELBO(
-            num_particles=num_particles, vectorize_particles=vectorize_particles
-        )
+        elbo = Trace_ELBO(num_particles=num_particles, vectorize_particles=vectorize_particles)
         elbo._guess_max_plate_nesting(model, guide, (data, covariates), {})
         elbo.max_plate_nesting = max(elbo.max_plate_nesting, 1)  # force a time plate
 
@@ -383,9 +379,7 @@ class Forecaster(nn.Module):
             with ExitStack() as stack:
                 if data.size(-2) < covariates.size(-2):
                     stack.enter_context(PrefixReplayMessenger(tr.trace))
-                    stack.enter_context(
-                        PrefixConditionMessenger(self.model._prefix_condition_data)
-                    )
+                    stack.enter_context(PrefixConditionMessenger(self.model._prefix_condition_data))
                 else:
                     stack.enter_context(poutine.replay(trace=tr.trace))
                 with pyro.plate("particles", num_samples, dim=dim):
@@ -436,7 +430,7 @@ class HMCForecaster(nn.Module):
         time_reparam=None,
         dense_mass=False,
         jit_compile=False,
-        max_tree_depth=10
+        max_tree_depth=10,
     ):
         assert data.size(-2) == covariates.size(-2)
         super().__init__()
@@ -466,9 +460,7 @@ class HMCForecaster(nn.Module):
         )
         mcmc.run(data, covariates)
         # conditions to compute rhat
-        if (num_chains == 1 and num_samples >= 4) or (
-            num_chains > 1 and num_samples >= 2
-        ):
+        if (num_chains == 1 and num_samples >= 4) or (num_chains > 1 and num_samples >= 2):
             mcmc.summary()
 
         # inspect the model with particles plate = 1, so that we can reshape samples to
@@ -531,16 +523,12 @@ class HMCForecaster(nn.Module):
             for name, node in list(self._trace.nodes.items()):
                 sample = self._samples[name].index_select(0, indices)
                 node["value"] = sample.reshape(
-                    (num_samples,)
-                    + (1,) * (node["value"].dim() - sample.dim())
-                    + sample.shape[1:]
+                    (num_samples,) + (1,) * (node["value"].dim() - sample.dim()) + sample.shape[1:]
                 )
 
             with ExitStack() as stack:
                 if data.size(-2) < covariates.size(-2):
                     stack.enter_context(PrefixReplayMessenger(self._trace))
-                    stack.enter_context(
-                        PrefixConditionMessenger(self.model._prefix_condition_data)
-                    )
+                    stack.enter_context(PrefixConditionMessenger(self.model._prefix_condition_data))
                 with pyro.plate("particles", num_samples, dim=dim):
                     return self.model(data, covariates)

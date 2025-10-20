@@ -144,15 +144,13 @@ def main():
         "--tool",
         nargs="?",
         default="timeit",
-        help="Profile using tool. One of following should be specified:"
-        ' ["timeit", "cprofile"]',
+        help="Profile using tool. One of following should be specified:" ' ["timeit", "cprofile"]',
     )
     parser.add_argument(
         "--batch_sizes",
         nargs="*",
         type=int,
-        help="Batch size of tensor - max of 4 values allowed. "
-        "Default = [10000, 100000]",
+        help="Batch size of tensor - max of 4 values allowed. " "Default = [10000, 100000]",
     )
     parser.add_argument(
         "--dists",

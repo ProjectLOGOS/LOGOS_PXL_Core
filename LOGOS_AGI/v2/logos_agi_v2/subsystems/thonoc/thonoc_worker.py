@@ -14,7 +14,7 @@ class AxiomaticProofEngine:
     def __init__(self, lambda_engine, validator):
         self.lambda_engine = lambda_engine
         self.validator = validator
-    
+
     def construct_proof(self, claim, counter_claims=None):
         """Generate formal proof for logical claim."""
         return {
@@ -28,7 +28,7 @@ class LambdaEngine:
     """Lambda calculus computation engine."""
     def __init__(self):
         self.expression_cache = {}
-    
+
     def evaluate(self, expression):
         """Evaluate lambda expression."""
         return f"λ-result: {expression}"
@@ -42,11 +42,11 @@ class UnifiedFormalismValidator:
 class ThonocWorker:
     def __init__(self, rabbitmq_host='rabbitmq'):
         self.logger = logging.getLogger("THONOC_WORKER")
-        
+
         validator = UnifiedFormalismValidator()
         lambda_engine = LambdaEngine()
         self.proof_engine = AxiomaticProofEngine(lambda_engine, validator)
-        
+
         self.connection, self.channel = self._connect_rabbitmq(rabbitmq_host)
         self._setup_queues()
 
@@ -77,23 +77,23 @@ class ThonocWorker:
         try:
             task_type = task.get('type')
             payload = task.get('payload', {})
-            
+
             if task_type == 'construct_proof':
                 claim = payload['claim']
                 counters = payload.get('counter_claims', [])
                 result_payload = self.proof_engine.construct_proof(claim, counters)
                 status = 'success'
-            
+
             elif task_type == 'assign_consequence':
                 outcome = payload.get('outcome', {})
                 prob = outcome.get('probability', 0)
-                
+
                 if prob == 0: meta_status = {"possibility": False, "necessity": False}
                 elif prob == 1: meta_status = {"possibility": True, "necessity": True}
                 else: meta_status = {"possibility": True, "necessity": False}
-                
+
                 base_consequence = f"Outcome '{outcome.get('description')}' leads to a state of {outcome.get('alignment')}"
-                
+
                 result_payload = {
                     "full_consequence": f"{base_consequence} | Possibility={meta_status['possibility']}, Necessity={meta_status['necessity']}"
                 }

@@ -50,9 +50,7 @@ classification_datasets = [
     (X_digits_binary, y_digits_binary),
 ]
 
-X_reg, y_reg = make_regression(
-    n_samples=200, n_features=10, bias=20.0, noise=100.0, random_state=7
-)
+X_reg, y_reg = make_regression(n_samples=200, n_features=10, bias=20.0, noise=100.0, random_state=7)
 y_reg = scale(y_reg)
 regression_datasets = [(X_reg, y_reg)]
 
@@ -75,9 +73,7 @@ def test_alpha():
         mlp = MLPClassifier(hidden_layer_sizes=10, alpha=alpha, random_state=1)
         with ignore_warnings(category=ConvergenceWarning):
             mlp.fit(X, y)
-        alpha_vectors.append(
-            np.array([absolute_sum(mlp.coefs_[0]), absolute_sum(mlp.coefs_[1])])
-        )
+        alpha_vectors.append(np.array([absolute_sum(mlp.coefs_[0]), absolute_sum(mlp.coefs_[1])]))
 
     for i in range(len(alpha_values) - 1):
         assert (alpha_vectors[i] > alpha_vectors[i + 1]).all()
@@ -125,9 +121,7 @@ def test_fit():
     mlp.best_loss_ = np.inf
     mlp.loss_curve_ = []
     mlp._no_improvement_count = 0
-    mlp._intercept_velocity = [
-        np.zeros_like(intercepts) for intercepts in mlp.intercepts_
-    ]
+    mlp._intercept_velocity = [np.zeros_like(intercepts) for intercepts in mlp.intercepts_]
     mlp._coef_velocity = [np.zeros_like(coefs) for coefs in mlp.coefs_]
 
     mlp.partial_fit(X, y, classes=[0, 1])
@@ -364,9 +358,7 @@ def test_learning_rate_warmstart():
 def test_multilabel_classification():
     # Test that multi-label classification works as expected.
     # test fit method
-    X, y = make_multilabel_classification(
-        n_samples=50, random_state=0, return_indicator=True
-    )
+    X, y = make_multilabel_classification(n_samples=50, random_state=0, return_indicator=True)
     mlp = MLPClassifier(
         solver="lbfgs",
         hidden_layer_sizes=50,
@@ -436,9 +428,7 @@ def test_partial_fit_classification():
         with ignore_warnings(category=ConvergenceWarning):
             mlp.fit(X, y)
         pred1 = mlp.predict(X)
-        mlp = MLPClassifier(
-            solver="sgd", random_state=1, alpha=1e-5, learning_rate_init=0.2
-        )
+        mlp = MLPClassifier(solver="sgd", random_state=1, alpha=1e-5, learning_rate_init=0.2)
         for i in range(100):
             mlp.partial_fit(X, y, classes=np.unique(y))
         pred2 = mlp.predict(X)
@@ -574,9 +564,7 @@ def test_predict_proba_multiclass():
 def test_predict_proba_multilabel():
     # Test that predict_proba works as expected for multilabel.
     # Multilabel should not use softmax which makes probabilities sum to 1
-    X, Y = make_multilabel_classification(
-        n_samples=50, random_state=0, return_indicator=True
-    )
+    X, Y = make_multilabel_classification(n_samples=50, random_state=0, return_indicator=True)
     n_samples, n_classes = Y.shape
 
     clf = MLPClassifier(solver="lbfgs", hidden_layer_sizes=30, random_state=0)
@@ -685,9 +673,7 @@ def test_early_stopping(MLPEstimator):
     X = X_digits_binary[:100]
     y = y_digits_binary[:100]
     tol = 0.2
-    mlp_estimator = MLPEstimator(
-        tol=tol, max_iter=3000, solver="sgd", early_stopping=True
-    )
+    mlp_estimator = MLPEstimator(tol=tol, max_iter=3000, solver="sgd", early_stopping=True)
     mlp_estimator.fit(X, y)
     assert mlp_estimator.max_iter > mlp_estimator.n_iter_
 
@@ -702,9 +688,7 @@ def test_early_stopping(MLPEstimator):
 
     # check that the attributes `validation_scores_` and `best_validation_score_`
     # are set to None when `early_stopping=False`
-    mlp_estimator = MLPEstimator(
-        tol=tol, max_iter=3000, solver="sgd", early_stopping=False
-    )
+    mlp_estimator = MLPEstimator(tol=tol, max_iter=3000, solver="sgd", early_stopping=False)
     mlp_estimator.fit(X, y)
     assert mlp_estimator.validation_scores_ is None
     assert mlp_estimator.best_validation_score_ is None
@@ -762,9 +746,7 @@ def test_warm_start_full_iteration(MLPEstimator):
     # warm started estimator.
     X, y = X_iris, y_iris
     max_iter = 3
-    clf = MLPEstimator(
-        hidden_layer_sizes=2, solver="sgd", warm_start=True, max_iter=max_iter
-    )
+    clf = MLPEstimator(hidden_layer_sizes=2, solver="sgd", warm_start=True, max_iter=max_iter)
     with warnings.catch_warnings():
         warnings.simplefilter("ignore", ConvergenceWarning)
         clf.fit(X, y)
@@ -807,9 +789,7 @@ def test_n_iter_no_change_inf():
     # fit
     n_iter_no_change = np.inf
     max_iter = 3000
-    clf = MLPClassifier(
-        tol=tol, max_iter=max_iter, solver="sgd", n_iter_no_change=n_iter_no_change
-    )
+    clf = MLPClassifier(tol=tol, max_iter=max_iter, solver="sgd", n_iter_no_change=n_iter_no_change)
     clf.fit(X, y)
 
     # validate n_iter_no_change doesn't cause early stopping
@@ -825,9 +805,7 @@ def test_early_stopping_stratified():
     y = [0, 0, 0, 1]
 
     mlp = MLPClassifier(early_stopping=True)
-    with pytest.raises(
-        ValueError, match="The least populated class in y has only 1 member"
-    ):
+    with pytest.raises(ValueError, match="The least populated class in y has only 1 member"):
         mlp.fit(X, y)
 
 
@@ -873,9 +851,7 @@ def test_mlp_param_dtypes(dtype, Estimator):
     # Checks if input dtype is used for network parameters
     # and predictions
     X, y = X_digits.astype(dtype), y_digits
-    mlp = Estimator(
-        alpha=1e-5, hidden_layer_sizes=(5, 3), random_state=1, max_iter=50, tol=1e-1
-    )
+    mlp = Estimator(alpha=1e-5, hidden_layer_sizes=(5, 3), random_state=1, max_iter=50, tol=1e-1)
     mlp.fit(X[:300], y[:300])
     pred = mlp.predict(X[300:])
 
@@ -938,9 +914,7 @@ def test_preserve_feature_names(Estimator):
 @pytest.mark.parametrize("MLPEstimator", [MLPClassifier, MLPRegressor])
 def test_mlp_warm_start_with_early_stopping(MLPEstimator):
     """Check that early stopping works with warm start."""
-    mlp = MLPEstimator(
-        max_iter=10, random_state=0, warm_start=True, early_stopping=True
-    )
+    mlp = MLPEstimator(max_iter=10, random_state=0, warm_start=True, early_stopping=True)
     with warnings.catch_warnings():
         warnings.simplefilter("ignore", ConvergenceWarning)
         mlp.fit(X_iris, y_iris)

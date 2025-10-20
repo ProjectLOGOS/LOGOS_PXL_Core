@@ -128,9 +128,7 @@ def main(args):
 
     # setup MNIST data loaders
     # train_loader, test_loader
-    train_loader, test_loader = setup_data_loaders(
-        MNIST, use_cuda=args.cuda, batch_size=256
-    )
+    train_loader, test_loader = setup_data_loaders(MNIST, use_cuda=args.cuda, batch_size=256)
 
     # setup the VAE
     vae = VAE(use_cuda=args.cuda)
@@ -166,10 +164,7 @@ def main(args):
         normalizer_train = len(train_loader.dataset)
         total_epoch_loss_train = epoch_loss / normalizer_train
         train_elbo[epoch] = total_epoch_loss_train
-        print(
-            "[epoch %03d]  average training loss: %.4f"
-            % (epoch, total_epoch_loss_train)
-        )
+        print("[epoch %03d]  average training loss: %.4f" % (epoch, total_epoch_loss_train))
 
         if epoch % args.test_frequency == 0:
             # initialize loss accumulator
@@ -204,9 +199,7 @@ def main(args):
             normalizer_test = len(test_loader.dataset)
             total_epoch_loss_test = test_loss / normalizer_test
             test_elbo[epoch] = total_epoch_loss_test
-            print(
-                "[epoch %03d]  average test loss: %.4f" % (epoch, total_epoch_loss_test)
-            )
+            print("[epoch %03d]  average test loss: %.4f" % (epoch, total_epoch_loss_test))
             plot_llk(train_elbo, test_elbo)
 
         if epoch == args.tsne_iter:
@@ -229,12 +222,8 @@ if __name__ == "__main__":
         type=int,
         help="how often we evaluate the test set",
     )
-    parser.add_argument(
-        "-lr", "--learning-rate", default=1.0e-3, type=float, help="learning rate"
-    )
-    parser.add_argument(
-        "--cuda", action="store_true", default=False, help="whether to use cuda"
-    )
+    parser.add_argument("-lr", "--learning-rate", default=1.0e-3, type=float, help="learning rate")
+    parser.add_argument("--cuda", action="store_true", default=False, help="whether to use cuda")
     parser.add_argument(
         "--jit", action="store_true", default=False, help="whether to use PyTorch jit"
     )

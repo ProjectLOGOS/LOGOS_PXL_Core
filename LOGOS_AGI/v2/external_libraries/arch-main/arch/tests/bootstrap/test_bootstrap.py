@@ -232,13 +232,9 @@ def test_conf_int_basic(bs_setup):
 
     ci = bs.conf_int(bs_setup.func, reps=num_bootstrap, size=0.90, method="basic")
     bs.reset()
-    ci_u = bs.conf_int(
-        bs_setup.func, tail="upper", reps=num_bootstrap, size=0.95, method="basic"
-    )
+    ci_u = bs.conf_int(bs_setup.func, tail="upper", reps=num_bootstrap, size=0.95, method="basic")
     bs.reset()
-    ci_l = bs.conf_int(
-        bs_setup.func, tail="lower", reps=num_bootstrap, size=0.95, method="basic"
-    )
+    ci_l = bs.conf_int(bs_setup.func, tail="lower", reps=num_bootstrap, size=0.95, method="basic")
     bs.reset()
     results = np.zeros((num_bootstrap, 2))
     count = 0
@@ -300,13 +296,9 @@ def test_conf_int_norm(bs_setup):
 
     ci = bs.conf_int(bs_setup.func, reps=num_bootstrap, size=0.90, method="norm")
     bs.reset()
-    ci_u = bs.conf_int(
-        bs_setup.func, tail="upper", reps=num_bootstrap, size=0.95, method="var"
-    )
+    ci_u = bs.conf_int(bs_setup.func, tail="upper", reps=num_bootstrap, size=0.95, method="var")
     bs.reset()
-    ci_l = bs.conf_int(
-        bs_setup.func, tail="lower", reps=num_bootstrap, size=0.95, method="cov"
-    )
+    ci_l = bs.conf_int(bs_setup.func, tail="lower", reps=num_bootstrap, size=0.95, method="cov")
     bs.reset()
     cov = bs.cov(bs_setup.func, reps=num_bootstrap)
     mu = bs_setup.func(bs_setup.x)
@@ -378,9 +370,7 @@ def test_studentized(bs_setup, seed):
     assert_allclose(ci, ci_direct)
 
     bs.reset()
-    ci = bs.conf_int(
-        bs_setup.func, reps=num_bootstrap, method="studentized", studentize_reps=50
-    )
+    ci = bs.conf_int(bs_setup.func, reps=num_bootstrap, method="studentized", studentize_reps=50)
 
     bs.reset()
     base = bs_setup.func(bs_setup.x)
@@ -648,20 +638,14 @@ def test_str(bs_setup, seed):
     assert_equal(bs._repr_html(), expected)
 
     bs = StationaryBootstrap(10, bs_setup.y_series, bs_setup.x_df, seed=seed)
-    expected = (
-        "Stationary Bootstrap(block size: 10, no. pos. "
-        "inputs: 2, no. keyword inputs: 0)"
-    )
+    expected = "Stationary Bootstrap(block size: 10, no. pos. " "inputs: 2, no. keyword inputs: 0)"
     assert_equal(str(bs), expected)
     expected = expected[:-1] + ", ID: " + hex(id(bs)) + ")"
     assert_equal(bs.__repr__(), expected)
 
-    bs = CircularBlockBootstrap(
-        block_size=20, y=bs_setup.y_series, x=bs_setup.x_df, seed=seed
-    )
+    bs = CircularBlockBootstrap(block_size=20, y=bs_setup.y_series, x=bs_setup.x_df, seed=seed)
     expected = (
-        "Circular Block Bootstrap(block size: 20, no. pos. "
-        "inputs: 0, no. keyword inputs: 2)"
+        "Circular Block Bootstrap(block size: 20, no. pos. " "inputs: 0, no. keyword inputs: 2)"
     )
     assert_equal(str(bs), expected)
     expected = expected[:-1] + ", ID: " + hex(id(bs)) + ")"
@@ -677,12 +661,9 @@ def test_str(bs_setup, seed):
     )
     assert_equal(bs._repr_html(), expected)
 
-    bs = MovingBlockBootstrap(
-        block_size=20, y=bs_setup.y_series, x=bs_setup.x_df, seed=seed
-    )
+    bs = MovingBlockBootstrap(block_size=20, y=bs_setup.y_series, x=bs_setup.x_df, seed=seed)
     expected = (
-        "Moving Block Bootstrap(block size: 20, no. pos. "
-        "inputs: 0, no. keyword inputs: 2)"
+        "Moving Block Bootstrap(block size: 20, no. pos. " "inputs: 0, no. keyword inputs: 2)"
     )
     assert_equal(str(bs), expected)
     expected = expected[:-1] + ", ID: " + hex(id(bs)) + ")"
@@ -700,15 +681,11 @@ def test_str(bs_setup, seed):
 
 
 def test_uneven_sampling(bs_setup, seed):
-    bs = MovingBlockBootstrap(
-        block_size=31, y=bs_setup.y_series, x=bs_setup.x_df, seed=seed
-    )
+    bs = MovingBlockBootstrap(block_size=31, y=bs_setup.y_series, x=bs_setup.x_df, seed=seed)
     for _, kw in bs.bootstrap(10):
         assert kw["y"].shape == bs_setup.y_series.shape
         assert kw["x"].shape == bs_setup.x_df.shape
-    bs = CircularBlockBootstrap(
-        block_size=31, y=bs_setup.y_series, x=bs_setup.x_df, seed=seed
-    )
+    bs = CircularBlockBootstrap(block_size=31, y=bs_setup.y_series, x=bs_setup.x_df, seed=seed)
     for _, kw in bs.bootstrap(10):
         assert kw["y"].shape == bs_setup.y_series.shape
         assert kw["x"].shape == bs_setup.x_df.shape
@@ -761,9 +738,7 @@ def test_bca_against_bcajack():
         sample = x.mean(axis=0)
         return sample[1] / sample[0]
 
-    arch_ci = arch_bs.conf_int(
-        func=func, reps=b, size=confidence_interval_size, method="bca"
-    )
+    arch_ci = arch_bs.conf_int(func=func, reps=b, size=confidence_interval_size, method="bca")
 
     # # callable from R
     # @ri.rternalize

@@ -56,9 +56,7 @@ def generate_data(small_test, include_stop, device):
         mult_dat = 10
 
     seqs = ["BABBA"] * mult_dat + ["BAAB"] * mult_dat + ["BABBB"] * mult_dat
-    dataset = BiosequenceDataset(
-        seqs, "list", "AB", include_stop=include_stop, device=device
-    )
+    dataset = BiosequenceDataset(seqs, "list", "AB", include_stop=include_stop, device=device)
 
     return dataset
 
@@ -139,9 +137,7 @@ def main(args):
         plt.ylabel("loss")
         if not args.no_save:
             plt.savefig(
-                os.path.join(
-                    args.out_folder, "ProfileHMM_plot.loss_{}.pdf".format(time_stamp)
-                )
+                os.path.join(args.out_folder, "ProfileHMM_plot.loss_{}.pdf".format(time_stamp))
             )
 
         plt.figure(figsize=(6, 6))
@@ -175,9 +171,7 @@ def main(args):
 
     if not args.no_save:
         pyro.get_param_store().save(
-            os.path.join(
-                args.out_folder, "ProfileHMM_results.params_{}.out".format(time_stamp)
-            )
+            os.path.join(args.out_folder, "ProfileHMM_results.params_{}.out".format(time_stamp))
         )
         with open(
             os.path.join(
@@ -187,13 +181,9 @@ def main(args):
             "w",
         ) as ow:
             ow.write("train_lp,test_lp,train_perplex,test_perplex\n")
-            ow.write(
-                "{},{},{},{}\n".format(train_lp, test_lp, train_perplex, test_perplex)
-            )
+            ow.write("{},{},{},{}\n".format(train_lp, test_lp, train_perplex, test_perplex))
         with open(
-            os.path.join(
-                args.out_folder, "ProfileHMM_results.input_{}.txt".format(time_stamp)
-            ),
+            os.path.join(args.out_folder, "ProfileHMM_results.input_{}.txt".format(time_stamp)),
             "w",
         ) as ow:
             ow.write("[args]\n")
@@ -221,9 +211,7 @@ if __name__ == "__main__":
     )
     parser.add_argument("-r", "--rng-seed", default=0, type=int)
     parser.add_argument("--rng-data-seed", default=0, type=int)
-    parser.add_argument(
-        "-f", "--file", default=None, type=str, help="Input file (fasta format)."
-    )
+    parser.add_argument("-f", "--file", default=None, type=str, help="Input file (fasta format).")
     parser.add_argument(
         "-a",
         "--alphabet",
@@ -278,27 +266,21 @@ if __name__ == "__main__":
     parser.add_argument(
         "-e", "--n-epochs", default=10, type=int, help="Number of epochs of training."
     )
-    parser.add_argument(
-        "--no-plots", default=False, action="store_true", help="Make plots."
-    )
+    parser.add_argument("--no-plots", default=False, action="store_true", help="Make plots.")
     parser.add_argument(
         "--no-save",
         default=False,
         action="store_true",
         help="Do not save plots and results.",
     )
-    parser.add_argument(
-        "-outf", "--out-folder", default=".", help="Folder to save plots."
-    )
+    parser.add_argument("-outf", "--out-folder", default=".", help="Folder to save plots.")
     parser.add_argument(
         "--split",
         default=0.2,
         type=float,
         help=("Fraction of dataset to holdout for testing"),
     )
-    parser.add_argument(
-        "--jit", default=False, action="store_true", help="JIT compile the ELBO."
-    )
+    parser.add_argument("--jit", default=False, action="store_true", help="JIT compile the ELBO.")
     parser.add_argument("--cuda", default=False, action="store_true", help="Use GPU.")
     parser.add_argument(
         "--cpu-data",

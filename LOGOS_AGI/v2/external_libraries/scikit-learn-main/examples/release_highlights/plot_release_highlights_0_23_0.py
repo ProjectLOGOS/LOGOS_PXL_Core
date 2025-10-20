@@ -162,9 +162,7 @@ PartialDependenceDisplay.from_estimator(
     line_kw={"linewidth": 4, "label": "constrained", "color": "tab:orange"},
     ax=disp.axes_,
 )
-disp.axes_[0, 0].plot(
-    X[:, 0], y, "o", alpha=0.5, zorder=-1, label="samples", color="tab:green"
-)
+disp.axes_[0, 0].plot(X[:, 0], y, "o", alpha=0.5, zorder=-1, label="samples", color="tab:green")
 disp.axes_[0, 0].set_ylim(-3, 3)
 disp.axes_[0, 0].set_xlim(-1, 1)
 plt.legend()

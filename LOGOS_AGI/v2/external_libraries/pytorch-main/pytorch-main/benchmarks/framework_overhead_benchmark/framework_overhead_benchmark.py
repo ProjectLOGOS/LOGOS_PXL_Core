@@ -47,15 +47,11 @@ def benchmark_simple_fn(args, config, module_config, module_type, result):
         result:         dictionary instance to be populated with the benchmark result (latency per iter).
     """
     print(f"Benchmarking {module_type.__name__}")
-    f_name = (
-        module_config.pt_fn.__name__ + ":Num Operands=" + str(module_config.num_params)
-    )
+    f_name = module_config.pt_fn.__name__ + ":Num Operands=" + str(module_config.num_params)
     graph_mode_str = "Graph mode" + ":" + str(module_config.graph_mode)
     result_key = ",".join((f_name, graph_mode_str))
     module = WrapperModule(module_type, module_config, args.debug, args.save)
-    latency_per_iter_ms = benchmark_module(
-        config, module, args.use_throughput_benchmark
-    )
+    latency_per_iter_ms = benchmark_module(config, module, args.use_throughput_benchmark)
     result[result_key] = latency_per_iter_ms
 
 
@@ -78,9 +74,7 @@ def main():
         dest="eager_mode",
         action="store_true",
     )
-    parser.add_argument(
-        "--num-warmup-iters", "--num_warmup_iters", type=int, default=100
-    )
+    parser.add_argument("--num-warmup-iters", "--num_warmup_iters", type=int, default=100)
     parser.add_argument("--num-iters", "--num_iters", type=int, default=1000)
     args = parser.parse_args()
 

@@ -45,9 +45,7 @@ from sklearn.covariance import ShrunkCovariance, empirical_covariance, log_likel
 
 # spanning a range of possible shrinkage coefficient values
 shrinkages = np.logspace(-2, 0, 30)
-negative_logliks = [
-    -ShrunkCovariance(shrinkage=s).fit(X_train).score(X_test) for s in shrinkages
-]
+negative_logliks = [-ShrunkCovariance(shrinkage=s).fit(X_train).score(X_test) for s in shrinkages]
 
 # under the ground-truth model, which we would not have access to in real
 # settings
@@ -129,9 +127,7 @@ plt.vlines(
     label="Ledoit-Wolf estimate",
 )
 # OAS likelihood
-plt.vlines(
-    oa.shrinkage_, ymin, -loglik_oa, color="purple", linewidth=3, label="OAS estimate"
-)
+plt.vlines(oa.shrinkage_, ymin, -loglik_oa, color="purple", linewidth=3, label="OAS estimate")
 # best CV estimator likelihood
 plt.vlines(
     cv.best_estimator_.shrinkage,

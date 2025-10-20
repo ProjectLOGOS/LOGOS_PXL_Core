@@ -101,9 +101,7 @@ for name, name2, log in chunker(entries, 3):
 
     # Attempt to extract out useful information from the traceback
 
-    log = log.split(
-        "The above exception was the direct cause of the following exception"
-    )[0]
+    log = log.split("The above exception was the direct cause of the following exception")[0]
     split = log.split("Traceback (most recent call last)", maxsplit=1)
     if len(split) == 2:
         log = split[1]
@@ -119,9 +117,7 @@ for name, name2, log in chunker(entries, 3):
         context = m.group(3)
         explain = f"{m.group(4)}"
     else:
-        m = re.search(
-            r'File "([^"]+)", line ([0-9]+), in .+\n +(.+)\nAssertionError', log
-        )
+        m = re.search(r'File "([^"]+)", line ([0-9]+), in .+\n +(.+)\nAssertionError', log)
         if m is not None:
             r = "FAIL"
             component = f"{normalize_file(m.group(1))}:{m.group(2)}"

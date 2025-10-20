@@ -93,9 +93,7 @@ fig.tight_layout()
 from sklearn.inspection import permutation_importance
 
 start_time = time.time()
-result = permutation_importance(
-    forest, X_test, y_test, n_repeats=10, random_state=42, n_jobs=2
-)
+result = permutation_importance(forest, X_test, y_test, n_repeats=10, random_state=42, n_jobs=2)
 elapsed_time = time.time() - start_time
 print(f"Elapsed time to compute the importances: {elapsed_time:.3f} seconds")
 

@@ -80,12 +80,12 @@ app.add_middleware(
 
 class MessageBroker:
     """RabbitMQ connection manager for request routing."""
-    
+
     def __init__(self):
         self.connection = None
         self.channel = None
         self.connect()
-    
+
     def connect(self):
         """Establish RabbitMQ connection."""
         try:
@@ -97,29 +97,29 @@ class MessageBroker:
                 )
             )
             self.channel = self.connection.channel()
-            
+
             # Declare target queue
             self.channel.queue_declare(queue=LOGOS_NEXUS_REQUESTS, durable=True)
-            
+
             logger.info("Message broker connected")
-            
+
         except Exception as e:
             logger.error(f"Message broker connection failed: {e}")
             raise
-    
+
     def publish_request(self, request_data: Dict[str, Any]) -> bool:
         """Publish request to Logos Nexus for safety validation.
-        
+
         Args:
             request_data: Request payload for processing
-            
+
         Returns:
             True if publication successful, False otherwise
         """
         try:
             if not self.connection or self.connection.is_closed:
                 self.connect()
-            
+
             self.channel.basic_publish(
                 exchange='',
                 routing_key=LOGOS_NEXUS_REQUESTS,
@@ -129,14 +129,14 @@ class MessageBroker:
                     correlation_id=request_data.get('request_id')
                 )
             )
-            
+
             logger.info(f"Request {request_data['request_id']} published to Logos Nexus")
             return True
-            
+
         except Exception as e:
             logger.error(f"Request publication failed: {e}")
             return False
-    
+
     def close(self):
         """Close message broker connection."""
         if self.connection and not self.connection.is_closed:
@@ -149,7 +149,7 @@ broker = MessageBroker()
 async def startup_event():
     """Initialize API gateway on startup."""
     logger.info("Keryx API Gateway starting...")
-    
+
 @app.on_event("shutdown")
 async def shutdown_event():
     """Clean up resources on shutdown."""
@@ -188,26 +188,26 @@ async def system_status():
 @app.post("/submit_goal")
 async def submit_goal(goal: GoalSubmission, request: Request):
     """Submit goal for processing through LOGOS AGI system.
-    
+
     Critical Safety Implementation:
     - Routes ALL requests to logos_nexus_requests queue
     - Ensures Trinity-grounded validation via Logos Nexus
     - No direct worker access permitted
-    
+
     Args:
         goal: Goal submission with content and metadata
         request: FastAPI request context
-        
+
     Returns:
         202 Accepted response with task tracking ID
     """
     try:
         # Generate unique request identifier
         task_id = f"req_{uuid.uuid4().hex[:12]}"
-        
+
         # Extract client information
         client_ip = request.client.host if request.client else "unknown"
-        
+
         # Construct request payload for Logos Nexus
         request_payload = {
             "request_id": task_id,
@@ -222,16 +222,16 @@ async def submit_goal(goal: GoalSubmission, request: Request):
             "requester_id": goal.requester_id or f"api_user_{client_ip}",
             "timestamp": datetime.utcnow().isoformat()
         }
-        
+
         # CRITICAL: Route to Logos Nexus for safety validation
         publication_success = broker.publish_request(request_payload)
-        
+
         if not publication_success:
             raise HTTPException(
                 status_code=503,
                 detail="Service temporarily unavailable - message broker error"
             )
-        
+
         # Return fire-and-forget acknowledgment
         return JSONResponse(
             status_code=202,
@@ -243,7 +243,7 @@ async def submit_goal(goal: GoalSubmission, request: Request):
                 "note": "Request routed through safety validation pipeline"
             }
         )
-        
+
     except HTTPException:
         raise
     except Exception as e:
@@ -256,11 +256,11 @@ async def submit_goal(goal: GoalSubmission, request: Request):
 @app.post("/submit_query")
 async def submit_query(goal: GoalSubmission, request: Request):
     """Submit query for analysis (alias for submit_goal with query type).
-    
+
     Args:
         goal: Query submission with content and metadata
         request: FastAPI request context
-        
+
     Returns:
         202 Accepted response with task tracking ID
     """
@@ -326,7 +326,7 @@ async def general_exception_handler(request: Request, exc: Exception):
 def main():
     """Start Keryx API Gateway service."""
     logger.info(f"Starting Keryx API Gateway on {API_HOST}:{API_PORT}")
-    
+
     uvicorn.run(
         app,
         host=API_HOST,

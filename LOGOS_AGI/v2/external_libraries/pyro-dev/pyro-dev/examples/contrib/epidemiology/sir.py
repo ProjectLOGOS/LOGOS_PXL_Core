@@ -43,9 +43,7 @@ def Model(args, data):
                 args.population, args.incubation_time, args.recovery_time, data
             )
         else:
-            return SimpleSEIRModel(
-                args.population, args.incubation_time, args.recovery_time, data
-            )
+            return SimpleSEIRModel(args.population, args.incubation_time, args.recovery_time, data)
     else:
         if args.concentration < math.inf:
             return SuperspreadingSIRModel(args.population, args.recovery_time, data)
@@ -87,16 +85,12 @@ def generate_data(args):
     if obs_sum < min_obs:
         raise ValueError(
             "Failed to generate >={} observations. "
-            "Try decreasing --min-obs-portion (currently {}).".format(
-                min_obs, args.min_obs_portion
-            )
+            "Try decreasing --min-obs-portion (currently {}).".format(min_obs, args.min_obs_portion)
         )
     else:
         raise ValueError(
             "Failed to generate <={} observations. "
-            "Try increasing --max-obs-portion (currently {}).".format(
-                max_obs, args.max_obs_portion
-            )
+            "Try increasing --max-obs-portion (currently {}).".format(max_obs, args.max_obs_portion)
         )
 
 
@@ -233,9 +227,7 @@ def evaluate(args, model, samples):
 
         covariates = [("R1", unconstrain(constraints.positive, samples["R0"]))]
         if not args.heterogeneous:
-            covariates.append(
-                ("rho", unconstrain(constraints.unit_interval, samples["rho"]))
-            )
+            covariates.append(("rho", unconstrain(constraints.unit_interval, samples["rho"])))
         if "k" in samples:
             covariates.append(("k", unconstrain(constraints.positive, samples["k"])))
         constraint = constraints.interval(-0.5, model.population + 0.5)
@@ -335,9 +327,7 @@ def main(args):
 
 if __name__ == "__main__":
     assert pyro.__version__.startswith("1.9.1")
-    parser = argparse.ArgumentParser(
-        description="Compartmental epidemiology modeling using HMC"
-    )
+    parser = argparse.ArgumentParser(description="Compartmental epidemiology modeling using HMC")
     parser.add_argument("-p", "--population", default=1000, type=float)
     parser.add_argument("-m", "--min-obs-portion", default=0.01, type=float)
     parser.add_argument("-M", "--max-obs-portion", default=0.99, type=float)

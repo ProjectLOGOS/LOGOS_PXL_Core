@@ -138,9 +138,7 @@ if __name__ == "__main__":
         for i in range(EX_NUM):
             print(f"Experiment Number {i + 1} of {EX_NUM} (trend {tr})")
             now = datetime.datetime.now()
-            parallel, p_func, n_jobs = parallel_func(
-                wrapper, n_jobs=NUM_JOBS, verbose=2
-            )
+            parallel, p_func, n_jobs = parallel_func(wrapper, n_jobs=NUM_JOBS, verbose=2)
             out = parallel(p_func(t, tr, EX_SIZE, seed=seeds[i]) for t in T)
             quantiles = [np.percentile(x, percentiles) for x in out]
             results[:, :, i] = np.array(quantiles).T

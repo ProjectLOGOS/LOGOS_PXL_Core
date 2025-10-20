@@ -8,7 +8,7 @@ import warnings
 from ...compat import check_is_fitted
 from .base import BaseEndogTransformer
 
-__all__ = ['BoxCoxEndogTransformer']
+__all__ = ["BoxCoxEndogTransformer"]
 
 
 class BoxCoxEndogTransformer(BaseEndogTransformer):
@@ -42,8 +42,8 @@ class BoxCoxEndogTransformer(BaseEndogTransformer):
         if values are truncated, invertibility will not be preserved, and the
         transformed array may not be perfectly inverse-transformed.
     """
-    def __init__(self, lmbda=None, lmbda2=0, neg_action="raise", floor=1e-16):
 
+    def __init__(self, lmbda=None, lmbda2=0, neg_action="raise", floor=1e-16):
         self.lmbda = lmbda
         self.lmbda2 = lmbda2
         self.neg_action = neg_action
@@ -111,7 +111,7 @@ class BoxCoxEndogTransformer(BaseEndogTransformer):
         y, exog = self._check_y_X(y, X)
         y += lam2
 
-        neg_mask = y <= 0.
+        neg_mask = y <= 0.0
         if neg_mask.any():
             action = self.neg_action
             msg = "Negative or zero values present in y"
@@ -123,7 +123,7 @@ class BoxCoxEndogTransformer(BaseEndogTransformer):
 
         if lam1 == 0:
             return np.log(y), exog
-        return (y ** lam1 - 1) / lam1, exog
+        return (y**lam1 - 1) / lam1, exog
 
     def inverse_transform(self, y, X=None):
         """Inverse transform a transformed array
@@ -161,6 +161,6 @@ class BoxCoxEndogTransformer(BaseEndogTransformer):
             return np.exp(y) - lam2, exog
 
         numer = y * lam1  # remove denominator
-        numer += 1.  # add 1 back to it
-        de_exp = numer ** (1. / lam1)  # de-exponentiate
+        numer += 1.0  # add 1 back to it
+        de_exp = numer ** (1.0 / lam1)  # de-exponentiate
         return de_exp - lam2, exog

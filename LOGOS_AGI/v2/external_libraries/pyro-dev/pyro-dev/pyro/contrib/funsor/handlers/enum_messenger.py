@@ -26,17 +26,13 @@ funsor.set_backend("torch")
 
 @functools.singledispatch
 def _get_support_value(funsor_dist, name, **kwargs):
-    raise ValueError(
-        "Could not extract point from {} at name {}".format(funsor_dist, name)
-    )
+    raise ValueError("Could not extract point from {} at name {}".format(funsor_dist, name))
 
 
 @_get_support_value.register(funsor.cnf.Contraction)
 def _get_support_value_contraction(funsor_dist, name, **kwargs):
     delta_terms = [
-        v
-        for v in funsor_dist.terms
-        if isinstance(v, funsor.delta.Delta) and name in v.fresh
+        v for v in funsor_dist.terms if isinstance(v, funsor.delta.Delta) and name in v.fresh
     ]
     assert len(delta_terms) == 1
     return _get_support_value(delta_terms[0], name, **kwargs)
@@ -77,9 +73,7 @@ def _enum_strategy_default(dist, msg):
 
 def _enum_strategy_diagonal(dist, msg):
     sample_dim_name = "{}__PARTICLES".format(msg["name"])
-    sample_inputs = OrderedDict(
-        {sample_dim_name: funsor.Bint[msg["infer"]["num_samples"]]}
-    )
+    sample_inputs = OrderedDict({sample_dim_name: funsor.Bint[msg["infer"]["num_samples"]]})
     plate_names = frozenset(f.name for f in msg["cond_indep_stack"] if f.vectorized)
     ancestor_names = frozenset(
         k
@@ -102,9 +96,7 @@ def _enum_strategy_diagonal(dist, msg):
 
 def _enum_strategy_mixture(dist, msg):
     sample_dim_name = "{}__PARTICLES".format(msg["name"])
-    sample_inputs = OrderedDict(
-        {sample_dim_name: funsor.Bint[msg["infer"]["num_samples"]]}
-    )
+    sample_inputs = OrderedDict({sample_dim_name: funsor.Bint[msg["infer"]["num_samples"]]})
     plate_names = frozenset(f.name for f in msg["cond_indep_stack"] if f.vectorized)
     ancestor_names = frozenset(
         k
@@ -121,8 +113,7 @@ def _enum_strategy_mixture(dist, msg):
                 logits=funsor.Tensor(
                     # TODO avoid use of torch.zeros here in favor of funsor.ops.new_zeros
                     torch.zeros((1,)).expand(
-                        tuple(v.dtype for v in plate_inputs.values())
-                        + (dist.inputs[name].dtype,)
+                        tuple(v.dtype for v in plate_inputs.values()) + (dist.inputs[name].dtype,)
                     ),
                     plate_inputs,
                 ),
@@ -145,9 +136,7 @@ def _enum_strategy_mixture(dist, msg):
 
 def _enum_strategy_full(dist, msg):
     sample_dim_name = "{}__PARTICLES".format(msg["name"])
-    sample_inputs = OrderedDict(
-        {sample_dim_name: funsor.Bint[msg["infer"]["num_samples"]]}
-    )
+    sample_inputs = OrderedDict({sample_dim_name: funsor.Bint[msg["infer"]["num_samples"]]})
     sampled_dist = dist.sample(msg["name"], sample_inputs)
     sampled_dist -= math.log(msg["infer"]["num_samples"])
     return sampled_dist
@@ -169,10 +158,7 @@ def enumerate_site(dist, msg):
         msg["infer"].get("expand", False) or msg["infer"].get("tmc") == "full"
     ):
         return _enum_strategy_full(dist, msg)
-    elif (
-        msg["infer"]["num_samples"] > 1
-        and msg["infer"].get("tmc", "diagonal") == "diagonal"
-    ):
+    elif msg["infer"]["num_samples"] > 1 and msg["infer"].get("tmc", "diagonal") == "diagonal":
         return _enum_strategy_diagonal(dist, msg)
     elif msg["infer"]["num_samples"] > 1 and msg["infer"]["tmc"] == "mixture":
         return _enum_strategy_mixture(dist, msg)
@@ -197,9 +183,7 @@ class EnumMessenger(NamedMessenger):
         if "funsor" not in msg:
             msg["funsor"] = {}
 
-        unsampled_log_measure = to_funsor(msg["fn"], output=funsor.Real)(
-            value=msg["name"]
-        )
+        unsampled_log_measure = to_funsor(msg["fn"], output=funsor.Real)(value=msg["name"])
         msg["funsor"]["log_measure"] = enumerate_site(unsampled_log_measure, msg)
         msg["funsor"]["value"] = _get_support_value(
             msg["funsor"]["log_measure"],
@@ -239,16 +223,14 @@ def queue(
     def wrapper(wrapped):
         def _fn(*args, **kwargs):
             for i in range(max_tries):
-                assert (
-                    not queue.empty()
-                ), "trying to get() from an empty queue will deadlock"
+                assert not queue.empty(), "trying to get() from an empty queue will deadlock"
 
                 next_trace = queue.get()
                 try:
                     ftr = TraceMessenger()(
-                        EscapeMessenger(
-                            escape_fn=functools.partial(escape_fn, next_trace)
-                        )(ReplayMessenger(trace=next_trace)(wrapped))
+                        EscapeMessenger(escape_fn=functools.partial(escape_fn, next_trace))(
+                            ReplayMessenger(trace=next_trace)(wrapped)
+                        )
                     )
                     return ftr(*args, **kwargs)
                 except pyro.poutine.runtime.NonlocalExit as site_container:

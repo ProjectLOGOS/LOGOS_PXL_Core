@@ -3,7 +3,7 @@
 import functools
 import warnings
 
-__all__ = ['deprecated']
+__all__ = ["deprecated"]
 
 
 def deprecated(use_instead, notes=None):
@@ -28,16 +28,16 @@ def deprecated(use_instead, notes=None):
     def wrapped_func(func):
         @functools.wraps(func)
         def _inner(*args, **kwargs):
-            warnings.simplefilter('always', DeprecationWarning)  # un-filter
-            msg = ("{0} is deprecated and will be removed in a future "
-                   "release of pmdarima. Use {1} instead.{2}"
-                   .format(func.__name__, use_instead, notes))
+            warnings.simplefilter("always", DeprecationWarning)  # un-filter
+            msg = (
+                "{0} is deprecated and will be removed in a future "
+                "release of pmdarima. Use {1} instead.{2}".format(func.__name__, use_instead, notes)
+            )
 
-            warnings.warn(
-                msg,
-                category=DeprecationWarning,
-                stacklevel=2)
-            warnings.simplefilter('default', DeprecationWarning)  # re-filter
+            warnings.warn(msg, category=DeprecationWarning, stacklevel=2)
+            warnings.simplefilter("default", DeprecationWarning)  # re-filter
             return func(*args, **kwargs)
+
         return _inner
+
     return wrapped_func

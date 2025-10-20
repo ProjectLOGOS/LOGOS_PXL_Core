@@ -37,9 +37,7 @@ class CIFlowConfig:
     def __post_init__(self) -> None:
         if not self.isolated_workflow:
             if LABEL_CIFLOW_PERIODIC not in self.labels:
-                self.labels.add(
-                    LABEL_CIFLOW_TRUNK if not self.unstable else LABEL_CIFLOW_UNSTABLE
-                )
+                self.labels.add(LABEL_CIFLOW_TRUNK if not self.unstable else LABEL_CIFLOW_UNSTABLE)
 
 
 class Config(TypedDict):
@@ -78,8 +76,7 @@ class BinaryBuildWorkflow:
 
     def generate_workflow_file(self, workflow_template: jinja2.Template) -> None:
         output_file_path = (
-            GITHUB_DIR
-            / f"workflows/generated-{self.build_environment}-{self.branches}.yml"
+            GITHUB_DIR / f"workflows/generated-{self.build_environment}-{self.branches}.yml"
         )
         with open(output_file_path, "w") as output_file:
             GENERATED = "generated"  # Note that please keep the variable GENERATED otherwise phabricator will hide the whole file
@@ -109,9 +106,7 @@ LINUX_BINARY_BUILD_WORFKLOWS = [
     BinaryBuildWorkflow(
         os=OperatingSystem.LINUX,
         package_type="manywheel",
-        build_configs=generate_binary_build_matrix.generate_wheels_matrix(
-            OperatingSystem.LINUX
-        ),
+        build_configs=generate_binary_build_matrix.generate_wheels_matrix(OperatingSystem.LINUX),
         ciflow_config=CIFlowConfig(
             labels={LABEL_CIFLOW_BINARIES, LABEL_CIFLOW_BINARIES_WHEEL},
             isolated_workflow=True,
@@ -214,9 +209,7 @@ WINDOWS_BINARY_BUILD_WORKFLOWS = [
     BinaryBuildWorkflow(
         os=OperatingSystem.WINDOWS,
         package_type="wheel",
-        build_configs=generate_binary_build_matrix.generate_wheels_matrix(
-            OperatingSystem.WINDOWS
-        ),
+        build_configs=generate_binary_build_matrix.generate_wheels_matrix(OperatingSystem.WINDOWS),
         ciflow_config=CIFlowConfig(
             labels={LABEL_CIFLOW_BINARIES, LABEL_CIFLOW_BINARIES_WHEEL},
             isolated_workflow=True,

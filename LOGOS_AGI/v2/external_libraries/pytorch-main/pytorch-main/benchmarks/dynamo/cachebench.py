@@ -98,12 +98,8 @@ def _run_torchbench_model(
     model: str,
 ) -> None:
     cur_file = os.path.abspath(__file__)
-    torchbench_file = os.path.join(
-        os.path.dirname(cur_file), BENCHMARK_FILE[cmd_args.benchmark]
-    )
-    assert os.path.exists(torchbench_file), (
-        f"Torchbench does not exist at {torchbench_file}"
-    )
+    torchbench_file = os.path.join(os.path.dirname(cur_file), BENCHMARK_FILE[cmd_args.benchmark])
+    assert os.path.exists(torchbench_file), f"Torchbench does not exist at {torchbench_file}"
 
     dynamic = cmd_args.dynamic
     dynamic_args = ["--dynamic-shapes", "--dynamic-batch-only"] if dynamic else []
@@ -124,9 +120,7 @@ def _run_torchbench_model(
 
     logger.info(f"Command: {args}")  # noqa: G004
     try:
-        cold_compile_t, warm_compile_t = _run_torchbench_from_args(
-            cmd_args, model, args
-        )
+        cold_compile_t, warm_compile_t = _run_torchbench_from_args(cmd_args, model, args)
         speedup_pct = (1 - (sum(warm_compile_t) / sum(cold_compile_t))) * 100
         results.append(
             RunResult(

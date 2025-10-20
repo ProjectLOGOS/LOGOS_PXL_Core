@@ -13,7 +13,6 @@ wineind = pm.datasets.load_wineind()
 
 
 class TestFourierREquivalency:
-
     # The following R code is what we want to reproduce:
     #   > set.seed(99)
     #   > n = 20
@@ -27,40 +26,54 @@ class TestFourierREquivalency:
     #   [2,] 0.5877853 -0.809017 -0.9510565  0.309017
 
     y = pm.c(
-        0.24729584, 0.54632480, 0.18782870, 0.57719184, -0.19617125,
-        0.32267403, -0.63051185, 0.75629093, -0.06411691, -0.96090867,
-        -0.37910238, 1.32155036, 1.18338768, -2.04188735, -2.54093410,
-        0.53359913, 0.17264767, -1.14502766, 1.13196478, 0.93762046)
+        0.24729584,
+        0.54632480,
+        0.18782870,
+        0.57719184,
+        -0.19617125,
+        0.32267403,
+        -0.63051185,
+        0.75629093,
+        -0.06411691,
+        -0.96090867,
+        -0.37910238,
+        1.32155036,
+        1.18338768,
+        -2.04188735,
+        -2.54093410,
+        0.53359913,
+        0.17264767,
+        -1.14502766,
+        1.13196478,
+        0.93762046,
+    )
 
-    expected = np.array([
-        [0.9510565, 0.309017, 0.5877853, -0.809017],
-        [0.5877853, -0.809017, -0.9510565, 0.309017],
-        [-0.5877853, -0.809017, 0.9510565, 0.309017],
-        [-0.9510565, 0.309017, -0.5877853, -0.809017],
-        [0.0000000, 1.000000, 0.0000000, 1.000000],
-        [0.9510565, 0.309017, 0.5877853, -0.809017],
-        [0.5877853, -0.809017, -0.9510565, 0.309017],
-        [-0.5877853, -0.809017, 0.9510565, 0.309017],
-        [-0.9510565, 0.309017, -0.5877853, -0.809017],
-        [0.0000000, 1.000000, 0.0000000, 1.000000],
-        [0.9510565, 0.309017, 0.5877853, -0.809017],
-        [0.5877853, -0.809017, -0.9510565, 0.309017],
-        [-0.5877853, -0.809017, 0.9510565, 0.309017],
-        [-0.9510565, 0.309017, -0.5877853, -0.809017],
-        [0.0000000, 1.000000, 0.0000000, 1.000000],
-        [0.9510565, 0.309017, 0.5877853, -0.809017],
-        [0.5877853, -0.809017, -0.9510565, 0.309017],
-        [-0.5877853, -0.809017, 0.9510565, 0.309017],
-        [-0.9510565, 0.309017, -0.5877853, -0.809017],
-        [0.0000000, 1.000000, 0.0000000, 1.000000],
-    ])
-
-    @pytest.mark.parametrize(
-        'X', [
-            None,
-            np.random.rand(y.shape[0], 3)
+    expected = np.array(
+        [
+            [0.9510565, 0.309017, 0.5877853, -0.809017],
+            [0.5877853, -0.809017, -0.9510565, 0.309017],
+            [-0.5877853, -0.809017, 0.9510565, 0.309017],
+            [-0.9510565, 0.309017, -0.5877853, -0.809017],
+            [0.0000000, 1.000000, 0.0000000, 1.000000],
+            [0.9510565, 0.309017, 0.5877853, -0.809017],
+            [0.5877853, -0.809017, -0.9510565, 0.309017],
+            [-0.5877853, -0.809017, 0.9510565, 0.309017],
+            [-0.9510565, 0.309017, -0.5877853, -0.809017],
+            [0.0000000, 1.000000, 0.0000000, 1.000000],
+            [0.9510565, 0.309017, 0.5877853, -0.809017],
+            [0.5877853, -0.809017, -0.9510565, 0.309017],
+            [-0.5877853, -0.809017, 0.9510565, 0.309017],
+            [-0.9510565, 0.309017, -0.5877853, -0.809017],
+            [0.0000000, 1.000000, 0.0000000, 1.000000],
+            [0.9510565, 0.309017, 0.5877853, -0.809017],
+            [0.5877853, -0.809017, -0.9510565, 0.309017],
+            [-0.5877853, -0.809017, 0.9510565, 0.309017],
+            [-0.9510565, 0.309017, -0.5877853, -0.809017],
+            [0.0000000, 1.000000, 0.0000000, 1.000000],
         ]
     )
+
+    @pytest.mark.parametrize("X", [None, np.random.rand(y.shape[0], 3)])
     def test_r_equivalency(self, X):
         y = self.y
         expected = self.expected
@@ -69,7 +82,7 @@ class TestFourierREquivalency:
         _, xreg = trans.transform(y, X)
 
         # maybe subset
-        if hasattr(xreg, 'iloc'):
+        if hasattr(xreg, "iloc"):
             xreg = xreg.values
         assert_array_almost_equal(expected, xreg[:, -4:])
 
@@ -87,22 +100,23 @@ def test_hyndman_blog():
     # https://robjhyndman.com/hyndsight/longseasonality/
     n = 2000
     m = 200
-    y = np.random.RandomState(1).normal(size=n) + \
-        (np.arange(1, n + 1) % 100 / 30)
+    y = np.random.RandomState(1).normal(size=n) + (np.arange(1, n + 1) % 100 / 30)
 
     trans = FourierFeaturizer(m=m, k=5).fit(y)
     _, xreg = trans.transform(y)
 
-    arima = pm.auto_arima(y,
-                          X=xreg,
-                          seasonal=False,
-                          maxiter=1,  # very short
-                          start_p=4,
-                          max_p=5,
-                          d=0,
-                          max_q=1,
-                          start_q=0,
-                          simple_differencing=True)  # type: pm.ARIMA
+    arima = pm.auto_arima(
+        y,
+        X=xreg,
+        seasonal=False,
+        maxiter=1,  # very short
+        start_p=4,
+        max_p=5,
+        d=0,
+        max_q=1,
+        start_q=0,
+        simple_differencing=True,
+    )  # type: pm.ARIMA
 
     # Show we can forecast 10 in the future
     _, xreg_test = trans.transform(y, n_periods=10)
@@ -112,8 +126,7 @@ def test_hyndman_blog():
 def test_update_transform():
     n = 150
     m = 10
-    y = np.random.RandomState(1).normal(size=n) + \
-        (np.arange(1, n + 1) % 100 / 30)
+    y = np.random.RandomState(1).normal(size=n) + (np.arange(1, n + 1) % 100 / 30)
 
     train, test = y[:100], y[100:]
 
@@ -138,11 +151,11 @@ def test_value_error_check():
     feat = FourierFeaturizer(m=12)
     with pytest.raises(ValueError) as ve:
         feat._check_y_X(wineind, None, null_allowed=False)
-    assert 'non-None' in pytest_error_str(ve)
+    assert "non-None" in pytest_error_str(ve)
 
 
 def test_value_error_on_fit():
     feat = FourierFeaturizer(m=12, k=8)
     with pytest.raises(ValueError) as ve:
         feat.fit_transform(wineind)
-    assert 'k must be' in pytest_error_str(ve)
+    assert "k must be" in pytest_error_str(ve)

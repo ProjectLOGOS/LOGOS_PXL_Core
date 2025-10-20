@@ -224,9 +224,7 @@ def garch_core_python(
             sigma2[t] += parameters[loc] * 0.5 * backcast
         else:
             sigma2[t] += (
-                parameters[loc]
-                * (np.abs(resids[t - 1 - j]) ** power)
-                * (resids[t - 1 - j] < 0)
+                parameters[loc] * (np.abs(resids[t - 1 - j]) ** power) * (resids[t - 1 - j] < 0)
             )
         loc += 1
     for j in range(q):
@@ -298,9 +296,7 @@ def garch_recursion_python(
             if (t - 1 - j) < 0:
                 sigma2[t] += parameters[loc] * 0.5 * backcast
             else:
-                sigma2[t] += (
-                    parameters[loc] * fresids[t - 1 - j] * (sresids[t - 1 - j] < 0)
-                )
+                sigma2[t] += parameters[loc] * fresids[t - 1 - j] * (sresids[t - 1 - j] < 0)
             loc += 1
         for j in range(q):
             if (t - 1 - j) < 0:
@@ -368,9 +364,7 @@ def egarch_recursion_python(
         loc += 1
         for j in range(p):
             if (t - 1 - j) >= 0:
-                lnsigma2[t] += parameters[loc] * (
-                    abs_std_resids[t - 1 - j] - SQRT2_OV_PI
-                )
+                lnsigma2[t] += parameters[loc] * (abs_std_resids[t - 1 - j] - SQRT2_OV_PI)
             loc += 1
         for j in range(o):
             if (t - 1 - j) >= 0:
@@ -446,9 +440,7 @@ def midas_recursion_python(
         sigma2[t] = omega
         for i in range(m):
             if (t - i - 1) >= 0:
-                sigma2[t] += (aw[i] + gw[i] * (resids[t - i - 1] < 0)) * resids2[
-                    t - i - 1
-                ]
+                sigma2[t] += (aw[i] + gw[i] * (resids[t - i - 1] < 0)) * resids2[t - i - 1]
             else:
                 sigma2[t] += (aw[i] + 0.5 * gw[i]) * backcast
         if sigma2[t] < var_bounds[t, 0]:
@@ -866,8 +858,7 @@ class EWMAUpdater(VolatilityUpdater, metaclass=AbstractDocStringInheritor):
             sigma2[t] += self.backcast
         else:
             sigma2[t] += (
-                self.params[1] * resids[t - 1] * resids[t - 1]
-                + self.params[2] * sigma2[t - 1]
+                self.params[1] * resids[t - 1] * resids[t - 1] + self.params[2] * sigma2[t - 1]
             )
         sigma2[t] = bounds_check(sigma2[t], var_bounds[t])
 
@@ -889,9 +880,7 @@ class MIDASUpdater(VolatilityUpdater, metaclass=AbstractDocStringInheritor):
         theta = theta if theta > self.DOUBLE_EPS else self.DOUBLE_EPS
         j = 1.0
         for i in range(m):
-            self.weights[i] = np.exp(
-                gammaln(theta + j) - gammaln(j + 1) - gammaln(theta)
-            )
+            self.weights[i] = np.exp(gammaln(theta + j) - gammaln(j + 1) - gammaln(theta))
             j += 1.0
         for i in range(m):
             sum_w += self.weights[i]
@@ -933,9 +922,9 @@ class MIDASUpdater(VolatilityUpdater, metaclass=AbstractDocStringInheritor):
         sigma2[t] = omega
         for i in range(self.m):
             if (t - i - 1) >= 0:
-                sigma2[t] += (
-                    self.aw[i] + self.gw[i] * (resids[t - i - 1] < 0)
-                ) * self.resids2[t - i - 1]
+                sigma2[t] += (self.aw[i] + self.gw[i] * (resids[t - i - 1] < 0)) * self.resids2[
+                    t - i - 1
+                ]
             else:
                 sigma2[t] += (self.aw[i] + 0.5 * self.gw[i]) * self.backcast
 
@@ -1070,9 +1059,7 @@ class EGARCHUpdater(VolatilityUpdater, metaclass=AbstractDocStringInheritor):
         loc = 1
         for j in range(self.p):
             if (t - 1 - j) >= 0:
-                self.lnsigma2[t] += parameters[loc] * (
-                    self.abs_std_resids[t - 1 - j] - SQRT2_OV_PI
-                )
+                self.lnsigma2[t] += parameters[loc] * (self.abs_std_resids[t - 1 - j] - SQRT2_OV_PI)
             loc += 1
         for j in range(self.o):
             if (t - 1 - j) >= 0:
@@ -1117,9 +1104,7 @@ class ARCHInMeanRecursion:
         gamma = mean_parameters[k]
 
         for t in range(nobs):
-            self.volatility_updater.update(
-                t, variance_params, resids, sigma2, var_bounds
-            )
+            self.volatility_updater.update(t, variance_params, resids, sigma2, var_bounds)
             resids[t] = y[t]
             for i in range(k):
                 resids[t] -= x[t, i] * mean_parameters[i]

@@ -96,9 +96,7 @@ classifiers = [
         },
     ),
     (
-        make_pipeline(
-            StandardScaler(), GradientBoostingClassifier(n_estimators=5, random_state=0)
-        ),
+        make_pipeline(StandardScaler(), GradientBoostingClassifier(n_estimators=5, random_state=0)),
         {"gradientboostingclassifier__learning_rate": np.logspace(-2, 0, 5)},
     ),
     (
@@ -123,9 +121,7 @@ datasets = [
     ),
 ]
 
-fig, axes = plt.subplots(
-    nrows=len(datasets), ncols=len(classifiers) + 1, figsize=(21, 9)
-)
+fig, axes = plt.subplots(nrows=len(datasets), ncols=len(classifiers) + 1, figsize=(21, 9))
 
 cm_piyg = plt.cm.PiYG
 cm_bright = ListedColormap(["#b30065", "#178000"])
@@ -135,9 +131,7 @@ for ds_cnt, (X, y) in enumerate(datasets):
     print(f"\ndataset {ds_cnt}\n---------")
 
     # split into training and test part
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.5, random_state=42
-    )
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_state=42)
 
     # create the grid for background colors
     x_min, x_max = X[:, 0].min() - 0.5, X[:, 0].max() + 0.5
@@ -151,9 +145,7 @@ for ds_cnt, (X, y) in enumerate(datasets):
     # plot the training points
     ax.scatter(X_train[:, 0], X_train[:, 1], c=y_train, cmap=cm_bright, edgecolors="k")
     # and testing points
-    ax.scatter(
-        X_test[:, 0], X_test[:, 1], c=y_test, cmap=cm_bright, alpha=0.6, edgecolors="k"
-    )
+    ax.scatter(X_test[:, 0], X_test[:, 1], c=y_test, cmap=cm_bright, alpha=0.6, edgecolors="k")
     ax.set_xlim(xx.min(), xx.max())
     ax.set_ylim(yy.min(), yy.max())
     ax.set_xticks(())
@@ -181,9 +173,7 @@ for ds_cnt, (X, y) in enumerate(datasets):
         ax.contourf(xx, yy, Z, cmap=cm_piyg, alpha=0.8)
 
         # plot the training points
-        ax.scatter(
-            X_train[:, 0], X_train[:, 1], c=y_train, cmap=cm_bright, edgecolors="k"
-        )
+        ax.scatter(X_train[:, 0], X_train[:, 1], c=y_train, cmap=cm_bright, edgecolors="k")
         # and testing points
         ax.scatter(
             X_test[:, 0],

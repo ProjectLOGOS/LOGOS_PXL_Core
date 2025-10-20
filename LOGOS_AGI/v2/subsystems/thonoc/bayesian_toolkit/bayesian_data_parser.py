@@ -26,7 +26,7 @@ class BayesianDataHandler:
             meta = {
                 'model_version':'1.0',
                 'last_updated': datetime.now().isoformat(),
-                'performance_metrics': {}, 
+                'performance_metrics': {},
                 'model_parameters': {}
             }
             self.save_metadata(meta)

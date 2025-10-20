@@ -172,17 +172,11 @@ evaluate_model_and_store("mixed_target", mixed_pipe)
 import matplotlib.pyplot as plt
 import pandas as pd
 
-results_df = (
-    pd.DataFrame(results).set_index("preprocessor").sort_values("rmse_test_mean")
-)
+results_df = pd.DataFrame(results).set_index("preprocessor").sort_values("rmse_test_mean")
 
-fig, (ax1, ax2) = plt.subplots(
-    1, 2, figsize=(12, 8), sharey=True, constrained_layout=True
-)
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 8), sharey=True, constrained_layout=True)
 xticks = range(len(results_df))
-name_to_color = dict(
-    zip((r["preprocessor"] for r in results), ["C0", "C1", "C2", "C3", "C4"])
-)
+name_to_color = dict(zip((r["preprocessor"] for r in results), ["C0", "C1", "C2", "C3", "C4"]))
 
 for subset, ax in zip(["test", "train"], [ax1, ax2]):
     mean, std = f"rmse_{subset}_mean", f"rmse_{subset}_std"

@@ -9,4 +9,3 @@ __ github_
 
 .. literalinclude:: ../../examples/contrib/epidemiology/sir.py
     :language: python
-

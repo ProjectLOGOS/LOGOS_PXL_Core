@@ -83,9 +83,7 @@ class MixtureOfDiagNormalsSharedCovariance(TorchDistribution):
         super().__init__(batch_shape=batch_shape, event_shape=(self.dim,))
 
     def expand(self, batch_shape, _instance=None):
-        new = self._get_checked_instance(
-            MixtureOfDiagNormalsSharedCovariance, _instance
-        )
+        new = self._get_checked_instance(MixtureOfDiagNormalsSharedCovariance, _instance)
         new.batch_mode = True
         batch_shape = torch.Size(batch_shape)
         new.dim = self.dim
@@ -106,15 +104,11 @@ class MixtureOfDiagNormalsSharedCovariance(TorchDistribution):
         return new
 
     def log_prob(self, value):
-        coord_scale = (
-            self.coord_scale.unsqueeze(-2) if self.batch_mode else self.coord_scale
-        )
+        coord_scale = self.coord_scale.unsqueeze(-2) if self.batch_mode else self.coord_scale
         epsilon = (value.unsqueeze(-2) - self.locs) / coord_scale  # L B K D
         eps_sqr = 0.5 * torch.pow(epsilon, 2.0).sum(-1)  # L B K
         eps_sqr_min = torch.min(eps_sqr, -1)[0]  # L B
-        result = self.categorical.logits + (
-            -eps_sqr + eps_sqr_min.unsqueeze(-1)
-        )  # L B K
+        result = self.categorical.logits + (-eps_sqr + eps_sqr_min.unsqueeze(-1))  # L B K
         result = torch.logsumexp(result, dim=-1)  # L B
         result = result - (0.5 * math.log(2.0 * math.pi) * float(self.dim))
         result = result - (torch.log(self.coord_scale).sum(-1))
@@ -166,9 +160,7 @@ class _MixDiagNormalSharedCovarianceSample(Function):
 
         mu_ll_ab = (locs_tilde.unsqueeze(-2) * mu_ab).sum(-1)  # b k j
         z_ll_ab = (z_tilde.unsqueeze(-2).unsqueeze(-2) * mu_ab).sum(-1)  # l b k j
-        z_perp_ab = (
-            z_tilde.unsqueeze(-2).unsqueeze(-2) - z_ll_ab.unsqueeze(-1) * mu_ab
-        )  # l b k j i
+        z_perp_ab = z_tilde.unsqueeze(-2).unsqueeze(-2) - z_ll_ab.unsqueeze(-1) * mu_ab  # l b k j i
         z_perp_ab_sqr = torch.pow(z_perp_ab, 2.0).sum(-1)  # l b k j
 
         epsilons = z_tilde.unsqueeze(-2) - locs_tilde  # l b j i
@@ -189,22 +181,14 @@ class _MixDiagNormalSharedCovarianceSample(Function):
         logits_grad *= torch.exp(-0.5 * z_perp_ab_sqr)  # l b k j
 
         #                 bi      lbi                               bkji
-        mu_ab_sigma_g = ((coord_scale * g).unsqueeze(-2).unsqueeze(-2) * mu_ab).sum(
-            -1
-        )  # l b k j
+        mu_ab_sigma_g = ((coord_scale * g).unsqueeze(-2).unsqueeze(-2) * mu_ab).sum(-1)  # l b k j
         logits_grad *= -mu_ab_sigma_g * pis.unsqueeze(-2)  # l b k j
-        logits_grad = pis * sum_leftmost(
-            logits_grad.sum(-1) / q_tot, -(1 + batch_dims)
-        )  # b k
+        logits_grad = pis * sum_leftmost(logits_grad.sum(-1) / q_tot, -(1 + batch_dims))  # b k
         logits_grad *= math.sqrt(0.5 * math.pi)
 
         #           b j                 l b j 1   l b i             l b 1 1
-        prefactor = (
-            pis.unsqueeze(-1) * q_j_prime * g.unsqueeze(-2) / q_tot_prime
-        )  # l b j i
+        prefactor = pis.unsqueeze(-1) * q_j_prime * g.unsqueeze(-2) / q_tot_prime  # l b j i
         locs_grad = sum_leftmost(prefactor, -(2 + batch_dims))  # b j i
-        coord_scale_grad = sum_leftmost(prefactor * epsilons, -(2 + batch_dims)).sum(
-            -2
-        )  # b i
+        coord_scale_grad = sum_leftmost(prefactor * epsilons, -(2 + batch_dims)).sum(-2)  # b i
 
         return locs_grad, coord_scale_grad, logits_grad, None, None, None

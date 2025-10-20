@@ -32,9 +32,7 @@ class TestDuplicationDivergenceGraph:
         assert list(G.degree()) == [(0, 2), (1, 3), (2, 2), (3, 3), (4, 1), (5, 1)]
 
     def test_minimum_desired_nodes(self):
-        with pytest.raises(
-            nx.NetworkXError, match=".*n must be greater than or equal to 2"
-        ):
+        with pytest.raises(nx.NetworkXError, match=".*n must be greater than or equal to 2"):
             nx.duplication_divergence_graph(1, p=1)
 
     def test_create_using(self):

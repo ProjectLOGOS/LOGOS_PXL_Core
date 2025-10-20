@@ -62,8 +62,7 @@ node_colors = [d["color"] for _, d in original_graph.nodes(data=True)]
 
 edge_type_visual_weight_lookup = {"Weak": 1.0, "Strong": 3.0}
 edge_weights = [
-    edge_type_visual_weight_lookup[d["type"]]
-    for _, _, d in original_graph.edges(data=True)
+    edge_type_visual_weight_lookup[d["type"]] for _, _, d in original_graph.edges(data=True)
 ]
 
 nx.draw_networkx(
@@ -72,9 +71,7 @@ nx.draw_networkx(
 
 node_attributes = ("color",)
 edge_attributes = ("type",)
-summary_graph = nx.snap_aggregation(
-    original_graph, node_attributes, edge_attributes, prefix="S-"
-)
+summary_graph = nx.snap_aggregation(original_graph, node_attributes, edge_attributes, prefix="S-")
 
 plt.subplot(1, 2, 2)
 

@@ -7,25 +7,25 @@ import time
 
 class UnifiedFormalismValidator:
     """Unified validation system for formal operations."""
-    
+
     def __init__(self):
         self.active_tokens = {}
         self.validation_rules = []
-    
+
     def validate_agi_operation(self, payload):
         """Validate AGI operation against formal constraints."""
         operation = payload.get("operation", "unknown")
         entity = payload.get("entity", "unknown")
-        
+
         # Basic safety checks
         dangerous_ops = ["self_destruct", "harm_humans", "lie", "deceive"]
         is_authorized = operation not in dangerous_ops
-        
+
         token = None
         if is_authorized:
             token = f"avt_LOCKED_{int(time.time())}"
             self.active_tokens[token] = {"operation": operation, "issued": time.time()}
-        
+
         return {
             "authorized": is_authorized,
             "reason": "Operation validated" if is_authorized else f"Blocked dangerous operation: {operation}",
@@ -34,11 +34,11 @@ class UnifiedFormalismValidator:
 
 class ModalProposition:
     """Modal logic proposition representation."""
-    
+
     def __init__(self, statement: str):
         self.statement = statement
         self.modal_operator = self._extract_modal_operator(statement)
-    
+
     def _extract_modal_operator(self, statement: str) -> str:
         """Extract modal operator from statement."""
         statement_lower = statement.lower()

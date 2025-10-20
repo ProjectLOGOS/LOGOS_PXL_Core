@@ -64,9 +64,7 @@ def loss_instance_name(param):
         return str(param)
 
 
-def random_y_true_raw_prediction(
-    loss, n_samples, y_bound=(-100, 100), raw_bound=(-5, 5), seed=42
-):
+def random_y_true_raw_prediction(loss, n_samples, y_bound=(-100, 100), raw_bound=(-5, 5), seed=42):
     """Random generate y_true and raw_prediction in valid range."""
     rng = np.random.RandomState(seed)
     if loss.is_multiclass:
@@ -84,9 +82,7 @@ def random_y_true_raw_prediction(
             low = np.amax([low, raw_bound[0]])
             high = np.amin([high, raw_bound[1]])
             raw_bound = (low, high)
-        raw_prediction = rng.uniform(
-            low=raw_bound[0], high=raw_bound[1], size=n_samples
-        )
+        raw_prediction = rng.uniform(low=raw_bound[0], high=raw_bound[1], size=n_samples)
         # generate a y_true in valid range
         low, high = _inclusive_low_high(loss.interval_y_true)
         low = max(low, y_bound[0])
@@ -351,9 +347,7 @@ def test_loss_on_specific_values(
 ):
     """Test losses, gradients and hessians at specific values."""
     loss1 = loss(y_true=np.array([y_true]), raw_prediction=np.array([raw_prediction]))
-    grad1 = loss.gradient(
-        y_true=np.array([y_true]), raw_prediction=np.array([raw_prediction])
-    )
+    grad1 = loss.gradient(y_true=np.array([y_true]), raw_prediction=np.array([raw_prediction]))
     loss2, grad2 = loss.loss_gradient(
         y_true=np.array([y_true]), raw_prediction=np.array([raw_prediction])
     )
@@ -778,9 +772,7 @@ def test_loss_of_perfect_prediction(loss, sample_weight):
         raw_prediction=raw_prediction,
         sample_weight=sample_weight,
     )
-    constant_term = loss.constant_to_optimal_zero(
-        y_true=y_true, sample_weight=sample_weight
-    )
+    constant_term = loss.constant_to_optimal_zero(y_true=y_true, sample_weight=sample_weight)
     # Comparing loss_value + constant_term to zero would result in large
     # round-off errors.
     assert_allclose(loss_value, -constant_term, atol=1e-14, rtol=1e-15)
@@ -913,9 +905,9 @@ def test_derivatives(loss, x0, y_true):
         The constant term is such that the minimum function value is zero,
         which is required by the Newton method.
         """
-        return loss.loss(
-            y_true=y_true, raw_prediction=x
-        ) + loss.constant_to_optimal_zero(y_true=y_true)
+        return loss.loss(y_true=y_true, raw_prediction=x) + loss.constant_to_optimal_zero(
+            y_true=y_true
+        )
 
     def fprime(x: np.ndarray) -> np.ndarray:
         return loss.gradient(y_true=y_true, raw_prediction=x)
@@ -1353,6 +1345,4 @@ def test_tweedie_log_identity_consistency(p):
         y_true=y_true, raw_prediction=y_pred
     )
     assert_allclose(gradient_log, y_pred * gradient_identity)
-    assert_allclose(
-        hessian_log, y_pred * gradient_identity + y_pred**2 * hessian_identity
-    )
+    assert_allclose(hessian_log, y_pred * gradient_identity + y_pred**2 * hessian_identity)

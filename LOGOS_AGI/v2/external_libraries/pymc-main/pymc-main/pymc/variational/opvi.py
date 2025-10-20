@@ -710,9 +710,9 @@ class Group(WithMemoization):
 
     @classmethod
     def register(cls, sbcls):
-        assert frozenset(sbcls.__param_spec__) not in cls.__param_registry, (
-            "Duplicate __param_spec__"
-        )
+        assert (
+            frozenset(sbcls.__param_spec__) not in cls.__param_registry
+        ), "Duplicate __param_spec__"
         cls.__param_registry[frozenset(sbcls.__param_spec__)] = sbcls
         assert sbcls.short_name not in cls.__name_registry, "Duplicate short_name"
         cls.__name_registry[sbcls.short_name] = sbcls
@@ -1009,12 +1009,14 @@ class Group(WithMemoization):
     @overload
     def set_size_and_deterministic(
         self, node: Variable, s, d: bool, more_replacements: dict | None = None
-    ) -> Variable: ...
+    ) -> Variable:
+        ...
 
     @overload
     def set_size_and_deterministic(
         self, node: list[Variable], s, d: bool, more_replacements: dict | None = None
-    ) -> list[Variable]: ...
+    ) -> list[Variable]:
+        ...
 
     @pytensor.config.change_flags(compute_test_value="off")
     def set_size_and_deterministic(

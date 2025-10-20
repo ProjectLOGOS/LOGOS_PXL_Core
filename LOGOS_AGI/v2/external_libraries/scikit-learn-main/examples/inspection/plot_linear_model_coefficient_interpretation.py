@@ -254,9 +254,7 @@ plt.subplots_adjust(left=0.3)
 # This is visible if we compare the standard deviations of different
 # features.
 
-X_train_preprocessed = pd.DataFrame(
-    model[:-1].transform(X_train), columns=feature_names
-)
+X_train_preprocessed = pd.DataFrame(model[:-1].transform(X_train), columns=feature_names)
 
 X_train_preprocessed.std(axis=0).plot.barh(figsize=(9, 7))
 plt.title("Feature ranges")

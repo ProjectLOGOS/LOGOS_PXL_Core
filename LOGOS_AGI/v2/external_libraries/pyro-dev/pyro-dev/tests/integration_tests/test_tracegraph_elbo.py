@@ -44,9 +44,9 @@ class NormalNormalTests(TestCase):
         self.sum_data = self.data[0] + self.data[1] + self.data[2] + self.data[3]
         self.analytic_lam_n = self.lam0 + self.n_data.expand_as(self.lam) * self.lam
         self.analytic_log_sig_n = -0.5 * torch.log(self.analytic_lam_n)
-        self.analytic_loc_n = self.sum_data * (
-            self.lam / self.analytic_lam_n
-        ) + self.loc0 * (self.lam0 / self.analytic_lam_n)
+        self.analytic_loc_n = self.sum_data * (self.lam / self.analytic_lam_n) + self.loc0 * (
+            self.lam0 / self.analytic_lam_n
+        )
 
     def test_elbo_reparameterized(self):
         self.do_elbo_test(True, 1500, 0.02)
@@ -78,9 +78,7 @@ class NormalNormalTests(TestCase):
 
         def guide():
             loc_q = pyro.param("loc_q", self.analytic_loc_n.expand(2) + 0.334)
-            log_sig_q = pyro.param(
-                "log_sig_q", self.analytic_log_sig_n.expand(2) - 0.29
-            )
+            log_sig_q = pyro.param("log_sig_q", self.analytic_log_sig_n.expand(2) - 0.29)
             sig_q = torch.exp(log_sig_q)
             with pyro.plate("plate", 2):
                 loc_latent = pyro.sample("loc_latent", Normal(loc_q, sig_q))
@@ -96,8 +94,7 @@ class NormalNormalTests(TestCase):
             log_sig_error = param_mse("log_sig_q", self.analytic_log_sig_n)
             if k % 250 == 0:
                 logger.debug(
-                    "loc error, log(scale) error:  %.4f, %.4f"
-                    % (loc_error, log_sig_error)
+                    "loc error, log(scale) error:  %.4f, %.4f" % (loc_error, log_sig_error)
                 )
 
         assert_equal(0.0, loc_error, prec=prec)
@@ -114,9 +111,9 @@ class NormalNormalNormalTests(TestCase):
         self.data = torch.tensor([[-0.1, 0.3], [0.00, 0.4], [0.20, 0.5], [0.10, 0.7]])
         self.analytic_lam_n = self.lam0 + float(len(self.data)) * self.lam
         self.analytic_log_sig_n = -0.5 * torch.log(self.analytic_lam_n)
-        self.analytic_loc_n = self.data.sum(0) * (
-            self.lam / self.analytic_lam_n
-        ) + self.loc0 * (self.lam0 / self.analytic_lam_n)
+        self.analytic_loc_n = self.data.sum(0) * (self.lam / self.analytic_lam_n) + self.loc0 * (
+            self.lam0 / self.analytic_lam_n
+        )
 
     def test_elbo_reparameterized(self):
         self.do_elbo_test(True, True, 3000, 0.02, 0.002, False, False)
@@ -186,9 +183,7 @@ class NormalNormalNormalTests(TestCase):
                     h = self.sigmoid(self.lin1(x))
                     return self.lin2(h)
 
-            loc_prime_baseline = pyro.module(
-                "loc_prime_baseline", VanillaBaselineNN(2, 5)
-            )
+            loc_prime_baseline = pyro.module("loc_prime_baseline", VanillaBaselineNN(2, 5))
         else:
             loc_prime_baseline = None
 
@@ -213,24 +208,16 @@ class NormalNormalNormalTests(TestCase):
         # note that the exact posterior is not mean field!
         def guide():
             loc_q = pyro.param("loc_q", self.analytic_loc_n.expand(2) + 0.334)
-            log_sig_q = pyro.param(
-                "log_sig_q", self.analytic_log_sig_n.expand(2) - 0.29
-            )
+            log_sig_q = pyro.param("log_sig_q", self.analytic_log_sig_n.expand(2) - 0.29)
             loc_q_prime = pyro.param("loc_q_prime", torch.tensor([-0.34, 0.52]))
             kappa_q = pyro.param("kappa_q", torch.tensor([0.74]))
-            log_sig_q_prime = pyro.param(
-                "log_sig_q_prime", -0.5 * torch.log(1.2 * self.lam0)
-            )
+            log_sig_q_prime = pyro.param("log_sig_q_prime", -0.5 * torch.log(1.2 * self.lam0))
             sig_q, sig_q_prime = torch.exp(log_sig_q), torch.exp(log_sig_q_prime)
             with pyro.plate("plate", 2):
                 loc_latent = pyro.sample(
                     "loc_latent",
                     Normal2(loc_q, sig_q),
-                    infer=dict(
-                        baseline=dict(
-                            use_decaying_avg_baseline=use_decaying_avg_baseline
-                        )
-                    ),
+                    infer=dict(baseline=dict(use_decaying_avg_baseline=use_decaying_avg_baseline)),
                 )
                 pyro.sample(
                     "loc_latent_prime",
@@ -261,9 +248,7 @@ class NormalNormalNormalTests(TestCase):
             log_sig_error = param_mse("log_sig_q", self.analytic_log_sig_n)
             loc_prime_error = param_mse("loc_q_prime", 0.5 * self.loc0)
             kappa_error = param_mse("kappa_q", 0.5 * torch.ones(1))
-            log_sig_prime_error = param_mse(
-                "log_sig_q_prime", -0.5 * torch.log(2.0 * self.lam0)
-            )
+            log_sig_prime_error = param_mse("log_sig_q_prime", -0.5 * torch.log(2.0 * self.lam0))
 
             if k % 500 == 0:
                 logger.debug("errors:  %.4f, %.4f" % (loc_error, log_sig_error))
@@ -287,9 +272,7 @@ class BernoulliBetaTests(TestCase):
         self.n_data = float(len(self.data))
         data_sum = self.data.sum()
         self.alpha_n = self.alpha0 + data_sum  # posterior alpha
-        self.beta_n = (
-            self.beta0 - data_sum + torch.tensor(self.n_data)
-        )  # posterior beta
+        self.beta_n = self.beta0 - data_sum + torch.tensor(self.n_data)  # posterior beta
         self.log_alpha_n = torch.log(self.alpha_n)
         self.log_beta_n = torch.log(self.beta_n)
 
@@ -301,8 +284,7 @@ class BernoulliBetaTests(TestCase):
 
     def do_elbo_test(self, reparameterized, n_steps, beta1, lr):
         logger.info(
-            " - - - - - DO BETA-BERNOULLI ELBO TEST [repa = %s] - - - - - "
-            % reparameterized
+            " - - - - - DO BETA-BERNOULLI ELBO TEST [repa = %s] - - - - - " % reparameterized
         )
         pyro.clear_param_store()
         Beta = dist.Beta if reparameterized else fakes.NonreparameterizedBeta
@@ -334,9 +316,7 @@ class BernoulliBetaTests(TestCase):
             alpha_error = param_abs_error("alpha_q_log", self.log_alpha_n)
             beta_error = param_abs_error("beta_q_log", self.log_beta_n)
             if k % 500 == 0:
-                logger.debug(
-                    "alpha_error, beta_error: %.4f, %.4f" % (alpha_error, beta_error)
-                )
+                logger.debug("alpha_error, beta_error: %.4f, %.4f" % (alpha_error, beta_error))
 
         assert_equal(0.0, alpha_error, prec=0.03)
         assert_equal(0.0, beta_error, prec=0.04)
@@ -364,8 +344,7 @@ class ExponentialGammaTests(TestCase):
 
     def do_elbo_test(self, reparameterized, n_steps, beta1, lr):
         logger.info(
-            " - - - - - DO EXPONENTIAL-GAMMA ELBO TEST [repa = %s] - - - - - "
-            % reparameterized
+            " - - - - - DO EXPONENTIAL-GAMMA ELBO TEST [repa = %s] - - - - - " % reparameterized
         )
         pyro.clear_param_store()
         Gamma = dist.Gamma if reparameterized else fakes.NonreparameterizedGamma
@@ -396,9 +375,7 @@ class ExponentialGammaTests(TestCase):
             alpha_error = param_abs_error("alpha_q_log", self.log_alpha_n)
             beta_error = param_abs_error("beta_q_log", self.log_beta_n)
             if k % 500 == 0:
-                logger.debug(
-                    "alpha_error, beta_error: %.4f, %.4f" % (alpha_error, beta_error)
-                )
+                logger.debug("alpha_error, beta_error: %.4f, %.4f" % (alpha_error, beta_error))
 
         assert_equal(0.0, alpha_error, prec=0.04)
         assert_equal(0.0, beta_error, prec=0.04)
@@ -429,9 +406,9 @@ class RaoBlackwellizationTests(TestCase):
             self.data.append(data_in)
         self.analytic_lam_n = self.lam0 + self.n_data.expand_as(self.lam) * self.lam
         self.analytic_log_sig_n = -0.5 * torch.log(self.analytic_lam_n)
-        self.analytic_loc_n = self.sum_data * (
-            self.lam / self.analytic_lam_n
-        ) + self.loc0 * (self.lam0 / self.analytic_lam_n)
+        self.analytic_loc_n = self.sum_data * (self.lam / self.analytic_lam_n) + self.loc0 * (
+            self.lam0 / self.analytic_lam_n
+        )
 
     # this tests rao-blackwellization in elbo for nested sequential plates
     def test_nested_iplate_in_elbo(self, n_steps=4000):
@@ -440,9 +417,7 @@ class RaoBlackwellizationTests(TestCase):
         def model():
             loc_latent = pyro.sample(
                 "loc_latent",
-                fakes.NonreparameterizedNormal(
-                    self.loc0, torch.pow(self.lam0, -0.5)
-                ).to_event(1),
+                fakes.NonreparameterizedNormal(self.loc0, torch.pow(self.lam0, -0.5)).to_event(1),
             )
             for i in pyro.plate("outer", self.n_outer):
                 for j in pyro.plate("inner_%d" % i, self.n_inner):
@@ -454,9 +429,7 @@ class RaoBlackwellizationTests(TestCase):
 
         def guide():
             loc_q = pyro.param("loc_q", self.analytic_loc_n.expand(2) + 0.234)
-            log_sig_q = pyro.param(
-                "log_sig_q", self.analytic_log_sig_n.expand(2) - 0.27
-            )
+            log_sig_q = pyro.param("log_sig_q", self.analytic_log_sig_n.expand(2) - 0.27)
             sig_q = torch.exp(log_sig_q)
             pyro.sample(
                 "loc_latent",
@@ -486,8 +459,7 @@ class RaoBlackwellizationTests(TestCase):
             log_sig_error = param_mse("log_sig_q", self.analytic_log_sig_n)
             if k % 500 == 0:
                 logger.debug(
-                    "loc error, log(scale) error:  %.4f, %.4f"
-                    % (loc_error, log_sig_error)
+                    "loc error, log(scale) error:  %.4f, %.4f" % (loc_error, log_sig_error)
                 )
 
         assert_equal(0.0, loc_error, prec=0.04)
@@ -501,9 +473,7 @@ class RaoBlackwellizationTests(TestCase):
             n_superfluous_top=1, n_superfluous_bottom=1, n_steps=2000, lr=0.0113
         )
 
-    def _test_plate_in_elbo(
-        self, n_superfluous_top, n_superfluous_bottom, n_steps, lr=0.0012
-    ):
+    def _test_plate_in_elbo(self, n_superfluous_top, n_superfluous_bottom, n_steps, lr=0.0012):
         pyro.clear_param_store()
         self.data_tensor = torch.zeros(9, 2)
         for _out in range(self.n_outer):
@@ -518,9 +488,7 @@ class RaoBlackwellizationTests(TestCase):
         def model():
             loc_latent = pyro.sample(
                 "loc_latent",
-                fakes.NonreparameterizedNormal(
-                    self.loc0, torch.pow(self.lam0, -0.5)
-                ).to_event(1),
+                fakes.NonreparameterizedNormal(self.loc0, torch.pow(self.lam0, -0.5)).to_event(1),
             )
 
             for i in pyro.plate("outer", 3):
@@ -538,9 +506,7 @@ class RaoBlackwellizationTests(TestCase):
                         obs=x_i,
                     )
                     assert obs_i.shape == (4 - i, 2)
-                    for k in range(
-                        n_superfluous_top, n_superfluous_top + n_superfluous_bottom
-                    ):
+                    for k in range(n_superfluous_top, n_superfluous_top + n_superfluous_bottom):
                         z_i_k = pyro.sample(
                             "z_%d_%d" % (i, k),
                             fakes.NonreparameterizedNormal(0, 1).expand_by([4 - i]),
@@ -556,9 +522,7 @@ class RaoBlackwellizationTests(TestCase):
 
         def guide():
             loc_q = pyro.param("loc_q", self.analytic_loc_n.expand(2) + 0.094)
-            log_sig_q = pyro.param(
-                "log_sig_q", self.analytic_log_sig_n.expand(2) - 0.07
-            )
+            log_sig_q = pyro.param("log_sig_q", self.analytic_log_sig_n.expand(2) - 0.07)
             sig_q = torch.exp(log_sig_q)
             trivial_baseline = pyro.module("loc_baseline", pt_loc_baseline)
             baseline_value = trivial_baseline(torch.ones(1)).squeeze()
@@ -576,9 +540,7 @@ class RaoBlackwellizationTests(TestCase):
                             pt_superfluous_baselines[3 * k + i],
                         )
                         baseline_value = z_baseline(loc_latent.detach())
-                        mean_i = pyro.param(
-                            "mean_%d_%d" % (i, k), 0.5 * torch.ones(4 - i)
-                        )
+                        mean_i = pyro.param("mean_%d_%d" % (i, k), 0.5 * torch.ones(4 - i))
                         z_i_k = pyro.sample(
                             "z_%d_%d" % (i, k),
                             fakes.NonreparameterizedNormal(mean_i, 1),
@@ -604,15 +566,9 @@ class RaoBlackwellizationTests(TestCase):
             if n_superfluous_top > 0 or n_superfluous_bottom > 0:
                 superfluous_errors = []
                 for k in range(n_superfluous_top + n_superfluous_bottom):
-                    mean_0_error = torch.sum(
-                        torch.pow(pyro.param("mean_0_%d" % k), 2.0)
-                    )
-                    mean_1_error = torch.sum(
-                        torch.pow(pyro.param("mean_1_%d" % k), 2.0)
-                    )
-                    mean_2_error = torch.sum(
-                        torch.pow(pyro.param("mean_2_%d" % k), 2.0)
-                    )
+                    mean_0_error = torch.sum(torch.pow(pyro.param("mean_0_%d" % k), 2.0))
+                    mean_1_error = torch.sum(torch.pow(pyro.param("mean_1_%d" % k), 2.0))
+                    mean_2_error = torch.sum(torch.pow(pyro.param("mean_2_%d" % k), 2.0))
                     superfluous_error = torch.max(
                         torch.max(mean_0_error, mean_1_error), mean_2_error
                     )
@@ -620,8 +576,7 @@ class RaoBlackwellizationTests(TestCase):
 
             if step % 500 == 0:
                 logger.debug(
-                    "loc error, log(scale) error:  %.4f, %.4f"
-                    % (loc_error, log_sig_error)
+                    "loc error, log(scale) error:  %.4f, %.4f" % (loc_error, log_sig_error)
                 )
                 if n_superfluous_top > 0 or n_superfluous_bottom > 0:
                     logger.debug("superfluous error: %.4f" % np.max(superfluous_errors))

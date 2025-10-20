@@ -101,7 +101,7 @@ Streaming Statistics
     :undoc-members:
     :show-inheritance:
     :member-order: bysource
- 
+
 State Space Model and GP Utilities
 ----------------------------------
 

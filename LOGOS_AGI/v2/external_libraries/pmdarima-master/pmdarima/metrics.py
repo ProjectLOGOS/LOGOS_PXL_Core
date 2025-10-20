@@ -3,7 +3,7 @@
 from .utils import check_endog
 import numpy as np
 
-__all__ = ['smape']
+__all__ = ["smape"]
 
 
 def smape(y_true, y_pred):
@@ -44,7 +44,7 @@ def smape(y_true, y_pred):
     References
     ----------
     .. [1] https://en.wikipedia.org/wiki/Symmetric_mean_absolute_percentage_error
-    """    # noqa: E501
+    """  # noqa: E501
     y_true = check_endog(
         y_true,
         copy=False,

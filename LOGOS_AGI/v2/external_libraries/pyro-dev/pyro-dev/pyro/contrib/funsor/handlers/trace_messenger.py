@@ -41,9 +41,7 @@ class TraceMessenger(OrigTraceMessenger):
         if self.pack_online:
             if "fn" not in msg["funsor"]:
                 fn_masked = _mask_fn(msg["fn"], msg["mask"])
-                msg["funsor"]["fn"] = to_funsor(fn_masked, funsor.Real)(
-                    value=msg["name"]
-                )
+                msg["funsor"]["fn"] = to_funsor(fn_masked, funsor.Real)(value=msg["name"])
             if "value" not in msg["funsor"]:
                 # value_output = funsor.Reals[getattr(msg["fn"], "event_shape", ())]
                 msg["funsor"]["value"] = to_funsor(
@@ -66,14 +64,10 @@ class TraceMessenger(OrigTraceMessenger):
         else:
             # this logic has the same side effect on the _DIM_STACK as the above,
             # but does not perform any tensor or funsor operations.
-            msg["funsor"]["dim_to_name"] = _DIM_STACK.names_from_batch_shape(
-                msg["fn"].batch_shape
-            )
+            msg["funsor"]["dim_to_name"] = _DIM_STACK.names_from_batch_shape(msg["fn"].batch_shape)
             msg["funsor"]["dim_to_name"].update(
                 _DIM_STACK.names_from_batch_shape(
-                    msg["value"].shape[
-                        : len(msg["value"]).shape - len(msg["fn"].event_shape)
-                    ]
+                    msg["value"].shape[: len(msg["value"]).shape - len(msg["fn"].event_shape)]
                 )
             )
         return super()._pyro_post_sample(msg)

@@ -56,16 +56,12 @@ def xval(lhs: np.ndarray, rhs: np.ndarray, log: bool = True, folds: int = 5) -> 
             sm_log = OLS(log_lhs[locs], rhs[locs, :3]).fit()
             sigma2 = (sm_log.resid**2).mean()
             predictions[pred_loc, 2] = sgn * np.exp(pred_rhs[:, :3] @ sm_log.params)
-            predictions[pred_loc, 3] = sgn * np.exp(
-                pred_rhs[:, :3] @ sm_log.params + sigma2 / 2
-            )
+            predictions[pred_loc, 3] = sgn * np.exp(pred_rhs[:, :3] @ sm_log.params + sigma2 / 2)
 
             lg_log = OLS(log_lhs[locs], rhs[locs]).fit()
             sigma2 = (lg_log.resid**2).mean()
             predictions[pred_loc, 4] = sgn * np.exp(pred_rhs @ lg_log.params)
-            predictions[pred_loc, 5] = sgn * np.exp(
-                pred_rhs @ lg_log.params + sigma2 / 2
-            )
+            predictions[pred_loc, 5] = sgn * np.exp(pred_rhs @ lg_log.params + sigma2 / 2)
     errors = lhs[:, None] - predictions
     best = int(np.argmin(errors.var(0)))
     WINS[best] += 1

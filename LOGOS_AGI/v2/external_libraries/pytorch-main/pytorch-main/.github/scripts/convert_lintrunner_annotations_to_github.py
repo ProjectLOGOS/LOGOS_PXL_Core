@@ -26,9 +26,7 @@ class GitHubAnnotation(NamedTuple):
 
 
 PYTORCH_ROOT = Path(
-    subprocess.check_output(["git", "rev-parse", "--show-toplevel"])
-    .decode("ascii")
-    .strip()
+    subprocess.check_output(["git", "rev-parse", "--show-toplevel"]).decode("ascii").strip()
 )
 
 annotations = []

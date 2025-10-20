@@ -31,45 +31,53 @@ MIN_PYTHON = (3, 9)
 builtins.__PMDARIMA_SETUP__ = True
 
 # metadata
-DISTNAME = 'pmdarima'
-PYPIDIST = 'pmdarima'
-GIT_REPO_NAME = 'pmdarima'
+DISTNAME = "pmdarima"
+PYPIDIST = "pmdarima"
+GIT_REPO_NAME = "pmdarima"
 DESCRIPTION = "Python's forecast::auto.arima equivalent"
 
 # Get the long desc
 with open("README.md", "r") as fh:
     LONG_DESCRIPTION = fh.read()
 
-MAINTAINER = 'Taylor G. Smith'
-MAINTAINER_GIT = 'tgsmith61591'
-MAINTAINER_EMAIL = 'taylor.smith@alkaline-ml.com'
-LICENSE = 'MIT'
-URL = 'http://alkaline-ml.com/pmdarima'
-DOWNLOAD_URL = 'https://pypi.org/project/pmdarima/#files'
+MAINTAINER = "Taylor G. Smith"
+MAINTAINER_GIT = "tgsmith61591"
+MAINTAINER_EMAIL = "taylor.smith@alkaline-ml.com"
+LICENSE = "MIT"
+URL = "http://alkaline-ml.com/pmdarima"
+DOWNLOAD_URL = "https://pypi.org/project/pmdarima/#files"
 PROJECT_URLS = {
-    'Bug Tracker': 'https://github.com/alkaline-ml/pmdarima/issues',
-    'Documentation': URL,
-    'Source Code': 'https://github.com/alkaline-ml/pmdarima'
+    "Bug Tracker": "https://github.com/alkaline-ml/pmdarima/issues",
+    "Documentation": URL,
+    "Source Code": "https://github.com/alkaline-ml/pmdarima",
 }
 
 # import restricted version of pmdarima that does not need the compiled code
 import pmdarima
+
 VERSION = pmdarima.__version__  # will be 0.0.0 unless tagging
 
 # get the installation requirements:
-with open('requirements.txt') as req:
+with open("requirements.txt") as req:
     REQUIREMENTS = [l for l in req.read().split(os.linesep) if l]
     print(f"Requirements: {REQUIREMENTS}")
 
 # Optional setuptools features
 SETUPTOOLS_COMMANDS = {  # this is a set literal, not a dict
-    'develop', 'release', 'bdist_egg', 'bdist_rpm',
-    'bdist_wininst', 'install_egg_info', 'build_sphinx',
-    'egg_info', 'easy_install', 'upload', 'bdist_wheel',
-    '--single-version-externally-managed',
-
+    "develop",
+    "release",
+    "bdist_egg",
+    "bdist_rpm",
+    "bdist_wininst",
+    "install_egg_info",
+    "build_sphinx",
+    "egg_info",
+    "easy_install",
+    "upload",
+    "bdist_wheel",
+    "--single-version-externally-managed",
     # scikit does NOT do this:
-    'sdist,'
+    "sdist,",
 }
 
 if SETUPTOOLS_COMMANDS.intersection(sys.argv):
@@ -77,12 +85,12 @@ if SETUPTOOLS_COMMANDS.intersection(sys.argv):
     # option for setup.py is invalid.
     import setuptools  # noqa
 
-    print('Adding extra setuptools args')
+    print("Adding extra setuptools args")
     extra_setuptools_args = dict(
         zip_safe=False,  # the package can run out of an .egg file
         include_package_data=True,
         data_files=[
-            ('pmdarima', ['pmdarima/VERSION']),
+            ("pmdarima", ["pmdarima/VERSION"]),
         ],
         # scikit does this:
         # extras_require={
@@ -102,31 +110,30 @@ class CleanCommand(Clean):
         Clean.run(self)
         # Remove c files if we are not within a sdist package
         cwd = os.path.abspath(os.path.dirname(__file__))
-        remove_c_files = not os.path.exists(os.path.join(cwd, 'PKG-INFO'))
+        remove_c_files = not os.path.exists(os.path.join(cwd, "PKG-INFO"))
         if remove_c_files:
-            print('Will remove generated .c files')
-        if os.path.exists('build'):
-            shutil.rmtree('build')
+            print("Will remove generated .c files")
+        if os.path.exists("build"):
+            shutil.rmtree("build")
         for dirpath, dirnames, filenames in os.walk(DISTNAME):
             for filename in filenames:
-                if any(filename.endswith(suffix) for suffix in
-                       (".so", ".pyd", ".dll", ".pyc")):
-                    print(f'Removing file: {filename}')
+                if any(filename.endswith(suffix) for suffix in (".so", ".pyd", ".dll", ".pyc")):
+                    print(f"Removing file: {filename}")
                     os.unlink(os.path.join(dirpath, filename))
                     continue
                 extension = os.path.splitext(filename)[1]
-                if remove_c_files and extension in ['.c', '.cpp']:
-                    pyx_file = str.replace(filename, extension, '.pyx')
+                if remove_c_files and extension in [".c", ".cpp"]:
+                    pyx_file = str.replace(filename, extension, ".pyx")
                     if os.path.exists(os.path.join(dirpath, pyx_file)):
                         os.unlink(os.path.join(dirpath, filename))
             for dirname in dirnames:
-                if dirname == '__pycache__':
+                if dirname == "__pycache__":
                     absdir = os.path.join(dirpath, dirname)
-                    print(f'Removing directory: {absdir}')
+                    print(f"Removing directory: {absdir}")
                     shutil.rmtree(absdir)
 
 
-cmdclass = {'clean': CleanCommand}
+cmdclass = {"clean": CleanCommand}
 
 # build_ext has to be imported after setuptools
 try:
@@ -134,16 +141,16 @@ try:
     from numpy.distutils.command.build_ext import build_ext  # noqa
 
     # This is the preferred way to check numpy version: https://git.io/JtEIb
-    if sys.platform == 'darwin' and np.lib.NumpyVersion(np.__version__) >= '1.20.0':
+    if sys.platform == "darwin" and np.lib.NumpyVersion(np.__version__) >= "1.20.0":
         # https://numpy.org/devdocs/user/building.html#disabling-atlas-and-other-accelerated-libraries
-        os.environ['NPY_BLAS_ORDER'] = ''
-        os.environ['NPY_LAPACK_ORDER'] = ''
+        os.environ["NPY_BLAS_ORDER"] = ""
+        os.environ["NPY_LAPACK_ORDER"] = ""
 
     class build_ext_subclass(build_ext):
         def build_extensions(self):
             build_ext.build_extensions(self)
 
-    cmdclass['build_ext'] = build_ext_subclass
+    cmdclass["build_ext"] = build_ext_subclass
 
 except ImportError:
     # Numpy should not be a dependency just to be able to introspect
@@ -154,9 +161,9 @@ except ImportError:
 # with that currently. Maybe in the future...
 
 
-def configuration(parent_package='', top_path=None):
-    if os.path.exists('MANIFEST'):
-        os.remove('MANIFEST')
+def configuration(parent_package="", top_path=None):
+    if os.path.exists("MANIFEST"):
+        os.remove("MANIFEST")
 
     # we know numpy is a valid import now
     from numpy.distutils.misc_util import Configuration
@@ -166,10 +173,12 @@ def configuration(parent_package='', top_path=None):
 
     # Avoid non-useful msg
     # "Ignoring attempt to set 'name' (from ... "
-    config.set_options(ignore_setup_xxx_py=True,
-                       assume_default_configuration=True,
-                       delegate_options_to_subpackages=True,
-                       quiet=True)
+    config.set_options(
+        ignore_setup_xxx_py=True,
+        assume_default_configuration=True,
+        delegate_options_to_subpackages=True,
+        quiet=True,
+    )
 
     # Cython is required by config.add_subpackage, so check that we have the
     # correct version of Cython
@@ -189,103 +198,100 @@ def check_package_status(package, min_version):
     try:
         module = importlib.import_module(package)
         package_version = module.__version__
-        package_status['up_to_date'] = Version(
-            package_version) >= Version(min_version)
-        package_status['version'] = package_version
+        package_status["up_to_date"] = Version(package_version) >= Version(min_version)
+        package_status["version"] = package_version
     except ImportError:
         traceback.print_exc()
-        package_status['up_to_date'] = False
-        package_status['version'] = ""
+        package_status["up_to_date"] = False
+        package_status["version"] = ""
 
-    req_str = "pmdarima requires {} >= {}.\n".format(
-        package, min_version)
+    req_str = "pmdarima requires {} >= {}.\n".format(package, min_version)
 
-    if package_status['up_to_date'] is False:
-        if package_status['version']:
-            raise ImportError("Your installation of {} "
-                              "{} is out-of-date.\n{}"
-                              .format(package, package_status['version'],
-                                      req_str))
+    if package_status["up_to_date"] is False:
+        if package_status["version"]:
+            raise ImportError(
+                "Your installation of {} "
+                "{} is out-of-date.\n{}".format(package, package_status["version"], req_str)
+            )
         else:
-            raise ImportError("{} is not "
-                              "installed.\n{}"
-                              .format(package, req_str))
+            raise ImportError("{} is not " "installed.\n{}".format(package, req_str))
 
 
 def do_setup():
     # setup the config
-    metadata = dict(name=PYPIDIST,
-                    # packages=[DISTNAME],
-                    maintainer=MAINTAINER,
-                    maintainer_email=MAINTAINER_EMAIL,
-                    description=DESCRIPTION,
-                    license=LICENSE,
-                    url=URL,
-                    download_url=DOWNLOAD_URL,
-                    project_urls=PROJECT_URLS,
-                    version=VERSION,
-                    long_description=LONG_DESCRIPTION,
-                    long_description_content_type="text/markdown",
-                    classifiers=[
-                        'Intended Audience :: Science/Research',
-                        'Intended Audience :: Developers',
-                        'Intended Audience :: Financial and Insurance Industry',
-                        'Programming Language :: C',
-                        'Programming Language :: Python',
-                        'Topic :: Software Development',
-                        'Topic :: Scientific/Engineering',
-                        'Operating System :: Microsoft :: Windows',
-                        'Operating System :: POSIX',
-                        'Operating System :: Unix',
-                        'Operating System :: MacOS',
-                        'Programming Language :: Python :: 3',
-                        'Programming Language :: Python :: 3.9',
-                        'Programming Language :: Python :: 3.10',
-                        'Programming Language :: Python :: 3.11',
-                        'Programming Language :: Python :: 3.12',
-                        ('Programming Language :: Python :: '
-                         'Implementation :: CPython'),
-                    ],
-                    cmdclass=cmdclass,
-                    python_requires=f'>={MIN_PYTHON[0]}.{MIN_PYTHON[1]}',
-                    install_requires=REQUIREMENTS,
-                    # Adapted from: https://github.com/inmanta/inmanta/pull/83
-                    # See also: https://github.com/pypa/setuptools/issues/3197
-                    packages=find_packages(),
-                    # We have a MANIFEST.in, so I'm not convinced this is fully
-                    # necessary, but better to be safe since we've had sdist
-                    # problems in the past...
-                    package_data=dict(
-                        DISTNAME=[
-                            '*',
-                            'pmdarima/*',
-                            'pmdarima/VERSION',
-                            'pmdarima/__check_build/*',
-                            'pmdarima/_build_utils/*',
-                            'pmdarima/arima/*',
-                            'pmdarima/arima/tests/data/*',
-                            'pmdarima/compat/*',
-                            'pmdarima/datasets/*',
-                            'pmdarima/datasets/data/*',
-                            'pmdarima/model_selection/*',
-                            'pmdarima/preprocessing/*',
-                            'pmdarima/preprocessing/endog/*',
-                            'pmdarima/preprocessing/exog/*',
-                            'pmdarima/tests/*',
-                            'pmdarima/utils/*',
-                        ]
-                    ),
-                    keywords='arima timeseries forecasting pyramid pmdarima '
-                             'pyramid-arima scikit-learn statsmodels',
-                    **extra_setuptools_args)
+    metadata = dict(
+        name=PYPIDIST,
+        # packages=[DISTNAME],
+        maintainer=MAINTAINER,
+        maintainer_email=MAINTAINER_EMAIL,
+        description=DESCRIPTION,
+        license=LICENSE,
+        url=URL,
+        download_url=DOWNLOAD_URL,
+        project_urls=PROJECT_URLS,
+        version=VERSION,
+        long_description=LONG_DESCRIPTION,
+        long_description_content_type="text/markdown",
+        classifiers=[
+            "Intended Audience :: Science/Research",
+            "Intended Audience :: Developers",
+            "Intended Audience :: Financial and Insurance Industry",
+            "Programming Language :: C",
+            "Programming Language :: Python",
+            "Topic :: Software Development",
+            "Topic :: Scientific/Engineering",
+            "Operating System :: Microsoft :: Windows",
+            "Operating System :: POSIX",
+            "Operating System :: Unix",
+            "Operating System :: MacOS",
+            "Programming Language :: Python :: 3",
+            "Programming Language :: Python :: 3.9",
+            "Programming Language :: Python :: 3.10",
+            "Programming Language :: Python :: 3.11",
+            "Programming Language :: Python :: 3.12",
+            ("Programming Language :: Python :: " "Implementation :: CPython"),
+        ],
+        cmdclass=cmdclass,
+        python_requires=f">={MIN_PYTHON[0]}.{MIN_PYTHON[1]}",
+        install_requires=REQUIREMENTS,
+        # Adapted from: https://github.com/inmanta/inmanta/pull/83
+        # See also: https://github.com/pypa/setuptools/issues/3197
+        packages=find_packages(),
+        # We have a MANIFEST.in, so I'm not convinced this is fully
+        # necessary, but better to be safe since we've had sdist
+        # problems in the past...
+        package_data=dict(
+            DISTNAME=[
+                "*",
+                "pmdarima/*",
+                "pmdarima/VERSION",
+                "pmdarima/__check_build/*",
+                "pmdarima/_build_utils/*",
+                "pmdarima/arima/*",
+                "pmdarima/arima/tests/data/*",
+                "pmdarima/compat/*",
+                "pmdarima/datasets/*",
+                "pmdarima/datasets/data/*",
+                "pmdarima/model_selection/*",
+                "pmdarima/preprocessing/*",
+                "pmdarima/preprocessing/endog/*",
+                "pmdarima/preprocessing/exog/*",
+                "pmdarima/tests/*",
+                "pmdarima/utils/*",
+            ]
+        ),
+        keywords="arima timeseries forecasting pyramid pmdarima "
+        "pyramid-arima scikit-learn statsmodels",
+        **extra_setuptools_args,
+    )
 
     if len(sys.argv) == 1 or (
-            len(sys.argv) >= 2 and ('--help' in sys.argv[1:] or
-                                    sys.argv[1] in ('--help-commands',
-                                                    'egg_info',
-                                                    'dist_info',
-                                                    '--version',
-                                                    'clean'))):
+        len(sys.argv) >= 2
+        and (
+            "--help" in sys.argv[1:]
+            or sys.argv[1] in ("--help-commands", "egg_info", "dist_info", "--version", "clean")
+        )
+    ):
         # For these actions, NumPy is not required, so we can import the
         # setuptools module. However this is not preferable... the moment
         # setuptools is imported, it monkey-patches distutils' setup and
@@ -296,12 +302,13 @@ def do_setup():
         # be on the system yet
         try:
             from setuptools import setup
+
             print("Setting up with setuptools")
         except ImportError:
             print("Setting up with distutils")
             from distutils.core import setup
 
-        metadata['version'] = VERSION
+        metadata["version"] = VERSION
 
     else:
         if sys.version_info < MIN_PYTHON:
@@ -310,15 +317,14 @@ def do_setup():
                 # on older versions of python
                 "pmdarima requires Python {0}.{1} or later. The current "
                 "Python version is {2} installed in {3}.".format(
-                    MIN_PYTHON[0], MIN_PYTHON[1],
-                    platform.python_version(),
-                    sys.executable
+                    MIN_PYTHON[0], MIN_PYTHON[1], platform.python_version(), sys.executable
                 )
             )
 
         # for sdist, use setuptools so we get the long_description_content_type
-        if 'sdist' in sys.argv or IS_PYTHON_312:
+        if "sdist" in sys.argv or IS_PYTHON_312:
             from setuptools import setup
+
             print("Setting up with setuptools")
 
             # Needs to be unset when building sdist
@@ -331,42 +337,43 @@ def do_setup():
                 import numpy
 
                 include_dirs = [numpy.get_include()]
-                metadata['ext_modules'] = [
+                metadata["ext_modules"] = [
                     Extension(
-                        name='pmdarima.arima._arima',
-                        sources=['pmdarima/arima/_arima.pyx'],
-                        include_dirs=include_dirs
+                        name="pmdarima.arima._arima",
+                        sources=["pmdarima/arima/_arima.pyx"],
+                        include_dirs=include_dirs,
                     ),
                     Extension(
-                        name='pmdarima.preprocessing.exog._fourier',
-                        sources=['pmdarima/preprocessing/exog/_fourier.pyx'],
-                        include_dirs=include_dirs
+                        name="pmdarima.preprocessing.exog._fourier",
+                        sources=["pmdarima/preprocessing/exog/_fourier.pyx"],
+                        include_dirs=include_dirs,
                     ),
                     Extension(
-                        name='pmdarima.utils._array',
-                        sources=['pmdarima/utils/_array.pyx'],
-                        include_dirs=include_dirs
+                        name="pmdarima.utils._array",
+                        sources=["pmdarima/utils/_array.pyx"],
+                        include_dirs=include_dirs,
                     ),
                     Extension(
-                        name='pmdarima.__check_build._check_build',
-                        sources=['pmdarima/__check_build/_check_build.pyx'],
-                        include_dirs=include_dirs
-                    )
+                        name="pmdarima.__check_build._check_build",
+                        sources=["pmdarima/__check_build/_check_build.pyx"],
+                        include_dirs=include_dirs,
+                    ),
                 ]
         else:
             # we should only need numpy for building. Everything else can be
             # collected via install_requires above
-            check_package_status('numpy', '1.16')
+            check_package_status("numpy", "1.16")
 
             from numpy.distutils.core import setup
+
             print("Setting up with numpy.distutils.core")
 
         # add the config to the metadata
-        metadata['configuration'] = configuration
+        metadata["configuration"] = configuration
 
     # call setup on the dict
     setup(**metadata)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     do_setup()

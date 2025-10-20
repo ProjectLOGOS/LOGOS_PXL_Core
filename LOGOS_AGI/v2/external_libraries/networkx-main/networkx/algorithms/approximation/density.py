@@ -162,9 +162,7 @@ def _fista(G, iterations):
     tk = 1.0  # Momentum term
 
     # 5. Precompute Edge Source Indices
-    edge_src_indices = np.array(
-        [node_to_idx[u] for u, _ in bidirectional_edges], dtype=np.int32
-    )
+    edge_src_indices = np.array([node_to_idx[u] for u, _ in bidirectional_edges], dtype=np.int32)
 
     # 6. Compute Learning Rate
     max_degree = max(deg for _, deg in G.degree)
@@ -188,11 +186,7 @@ def _fista(G, iterations):
         clamped_x = np.clip(new_xuv, 0.0, 1.0)  # Clamp x_{uv} between 0 and 1
 
         # Update y using the FISTA update formula (similar to gradient descent)
-        y = (
-            clamped_x
-            + ((tk - 1.0) / tknew) * (clamped_x - x)
-            + (tk / tknew) * (clamped_x - y)
-        )
+        y = clamped_x + ((tk - 1.0) / tknew) * (clamped_x - x) + (tk / tknew) * (clamped_x - y)
 
         # Update x
         x = clamped_x

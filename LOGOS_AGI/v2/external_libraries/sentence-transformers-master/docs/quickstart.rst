@@ -225,4 +225,3 @@ Consider reading one of the following sections next:
 * `Sparse Encoder > Usage <./sparse_encoder/usage/usage.html>`_
 * `Sparse Encoder > Pretrained Models <./sparse_encoder/pretrained_models.html>`_
 * `Sparse Encoder > Vector Database Integration <../examples/sparse_encoder/applications/semantic_search/README.html#vector-database-search>`_
-

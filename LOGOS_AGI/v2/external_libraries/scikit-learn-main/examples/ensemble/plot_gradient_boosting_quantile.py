@@ -108,9 +108,7 @@ plt.plot(xx, f(xx), "black", linewidth=3, label=r"$f(x) = x\,\sin(x)$")
 plt.plot(X_test, y_test, "b.", markersize=10, label="Test observations")
 plt.plot(xx, y_med, "tab:orange", linewidth=3, label="Predicted median")
 plt.plot(xx, y_pred, "tab:green", linewidth=3, label="Predicted mean")
-plt.fill_between(
-    xx.ravel(), y_lower, y_upper, alpha=0.4, label="Predicted 90% interval"
-)
+plt.fill_between(xx.ravel(), y_lower, y_upper, alpha=0.4, label="Predicted 90% interval")
 plt.xlabel("$x$")
 plt.ylabel("$f(x)$")
 plt.ylim(-10, 25)
@@ -311,9 +309,7 @@ y_upper = search_95p.predict(xx)
 fig = plt.figure(figsize=(10, 10))
 plt.plot(xx, f(xx), "black", linewidth=3, label=r"$f(x) = x\,\sin(x)$")
 plt.plot(X_test, y_test, "b.", markersize=10, label="Test observations")
-plt.fill_between(
-    xx.ravel(), y_lower, y_upper, alpha=0.4, label="Predicted 90% interval"
-)
+plt.fill_between(xx.ravel(), y_lower, y_upper, alpha=0.4, label="Predicted 90% interval")
 plt.xlabel("$x$")
 plt.ylabel("$f(x)$")
 plt.ylim(-10, 25)

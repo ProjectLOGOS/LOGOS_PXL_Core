@@ -6,9 +6,7 @@ from collections.abc import Iterable
 from packaging.version import Version
 import statsmodels as sm
 
-__all__ = [
-    'bind_df_model'
-]
+__all__ = ["bind_df_model"]
 
 _sm_version = sm.__version__
 
@@ -27,11 +25,16 @@ def bind_df_model(model_fit, arima_results):
     arima_results : ModelResultsWrapper
         The results wrapper.
     """
-    if not hasattr(arima_results, 'df_model'):
-        df_model = model_fit.k_exog + model_fit.k_trend + \
-            model_fit.k_ar + model_fit.k_ma + \
-            model_fit.k_seasonal_ar + model_fit.k_seasonal_ma
-        setattr(arima_results, 'df_model', df_model)
+    if not hasattr(arima_results, "df_model"):
+        df_model = (
+            model_fit.k_exog
+            + model_fit.k_trend
+            + model_fit.k_ar
+            + model_fit.k_ma
+            + model_fit.k_seasonal_ar
+            + model_fit.k_seasonal_ma
+        )
+        setattr(arima_results, "df_model", df_model)
 
 
 def check_seasonal_order(order):

@@ -148,7 +148,8 @@ def block(
     expose: Optional[List[str]] = None,
     hide_types: Optional[List[str]] = None,
     expose_types: Optional[List[str]] = None,
-) -> BlockMessenger: ...
+) -> BlockMessenger:
+    ...
 
 
 @overload
@@ -162,7 +163,8 @@ def block(
     expose: Optional[List[str]] = None,
     hide_types: Optional[List[str]] = None,
     expose_types: Optional[List[str]] = None,
-) -> Callable[_P, _T]: ...
+) -> Callable[_P, _T]:
+    ...
 
 
 @_make_handler(BlockMessenger)
@@ -176,25 +178,29 @@ def block(  # type: ignore[empty-body]
     expose: Optional[List[str]] = None,
     hide_types: Optional[List[str]] = None,
     expose_types: Optional[List[str]] = None,
-) -> Union[BlockMessenger, Callable[_P, _T]]: ...
+) -> Union[BlockMessenger, Callable[_P, _T]]:
+    ...
 
 
 @overload
 def broadcast(
     fn: None = ...,
-) -> BroadcastMessenger: ...
+) -> BroadcastMessenger:
+    ...
 
 
 @overload
 def broadcast(
     fn: Callable[_P, _T],
-) -> Callable[_P, _T]: ...
+) -> Callable[_P, _T]:
+    ...
 
 
 @_make_handler(BroadcastMessenger)
 def broadcast(  # type: ignore[empty-body]
     fn: Optional[Callable[_P, _T]] = None,
-) -> Union[BroadcastMessenger, Callable[_P, _T]]: ...
+) -> Union[BroadcastMessenger, Callable[_P, _T]]:
+    ...
 
 
 @overload
@@ -202,7 +208,8 @@ def collapse(
     fn: None = ...,
     *args: Any,
     **kwargs: Any,
-) -> CollapseMessenger: ...
+) -> CollapseMessenger:
+    ...
 
 
 @overload
@@ -210,7 +217,8 @@ def collapse(
     fn: Callable[_P, _T],
     *args: Any,
     **kwargs: Any,
-) -> Callable[_P, _T]: ...
+) -> Callable[_P, _T]:
+    ...
 
 
 @_make_handler(CollapseMessenger)
@@ -218,88 +226,101 @@ def collapse(  # type: ignore[empty-body]
     fn: Optional[Callable[_P, _T]] = None,
     *args: Any,
     **kwargs: Any,
-) -> Union[CollapseMessenger, Callable[_P, _T]]: ...
+) -> Union[CollapseMessenger, Callable[_P, _T]]:
+    ...
 
 
 @overload
 def condition(
     data: Union[Dict[str, "torch.Tensor"], "Trace"],
-) -> ConditionMessenger: ...
+) -> ConditionMessenger:
+    ...
 
 
 @overload
 def condition(
     fn: Callable[_P, _T],
     data: Union[Dict[str, "torch.Tensor"], "Trace"],
-) -> Callable[_P, _T]: ...
+) -> Callable[_P, _T]:
+    ...
 
 
 @_make_handler(ConditionMessenger)
 def condition(  # type: ignore[empty-body]
     fn: Callable[_P, _T],
     data: Union[Dict[str, "torch.Tensor"], "Trace"],
-) -> Union[ConditionMessenger, Callable[_P, _T]]: ...
+) -> Union[ConditionMessenger, Callable[_P, _T]]:
+    ...
 
 
 @overload
 def do(
     data: Dict[str, Union["torch.Tensor", "numbers.Number"]],
-) -> DoMessenger: ...
+) -> DoMessenger:
+    ...
 
 
 @overload
 def do(
     fn: Callable[_P, _T],
     data: Dict[str, Union["torch.Tensor", "numbers.Number"]],
-) -> Callable[_P, _T]: ...
+) -> Callable[_P, _T]:
+    ...
 
 
 @_make_handler(DoMessenger)
 def do(  # type: ignore[empty-body]
     fn: Callable[_P, _T],
     data: Dict[str, Union["torch.Tensor", "numbers.Number"]],
-) -> Union[DoMessenger, Callable[_P, _T]]: ...
+) -> Union[DoMessenger, Callable[_P, _T]]:
+    ...
 
 
 @overload
 def enum(
     fn: None = ...,
     first_available_dim: Optional[int] = None,
-) -> EnumMessenger: ...
+) -> EnumMessenger:
+    ...
 
 
 @overload
 def enum(
     fn: Callable[_P, _T],
     first_available_dim: Optional[int] = None,
-) -> Callable[_P, _T]: ...
+) -> Callable[_P, _T]:
+    ...
 
 
 @_make_handler(EnumMessenger)
 def enum(  # type: ignore[empty-body]
     fn: Optional[Callable[_P, _T]] = None,
     first_available_dim: Optional[int] = None,
-) -> Union[EnumMessenger, Callable[_P, _T]]: ...
+) -> Union[EnumMessenger, Callable[_P, _T]]:
+    ...
 
 
 @overload
 def escape(
     escape_fn: Callable[["Message"], bool],
-) -> EscapeMessenger: ...
+) -> EscapeMessenger:
+    ...
 
 
 @overload
 def escape(
     fn: Callable[_P, _T],
     escape_fn: Callable[["Message"], bool],
-) -> Callable[_P, _T]: ...
+) -> Callable[_P, _T]:
+    ...
 
 
 @_make_handler(EscapeMessenger)
 def escape(  # type: ignore[empty-body]
     fn: Callable[_P, _T],
     escape_fn: Callable[["Message"], bool],
-) -> Union[EscapeMessenger, Callable[_P, _T]]: ...
+) -> Union[EscapeMessenger, Callable[_P, _T]]:
+    ...
 
 
 @overload
@@ -307,7 +328,8 @@ def equalize(
     sites: Union[str, List[str]],
     type: Optional[str],
     keep_dist: Optional[bool],
-) -> EqualizeMessenger: ...
+) -> EqualizeMessenger:
+    ...
 
 
 @overload
@@ -316,7 +338,8 @@ def equalize(
     sites: Union[str, List[str]],
     type: Optional[str],
     keep_dist: Optional[bool],
-) -> Callable[_P, _T]: ...
+) -> Callable[_P, _T]:
+    ...
 
 
 @_make_handler(EqualizeMessenger)
@@ -325,87 +348,100 @@ def equalize(  # type: ignore[empty-body]
     sites: Union[str, List[str]],
     type: Optional[str],
     keep_dist: Optional[bool],
-) -> Union[EqualizeMessenger, Callable[_P, _T]]: ...
+) -> Union[EqualizeMessenger, Callable[_P, _T]]:
+    ...
 
 
 @overload
 def infer_config(
     config_fn: Callable[["Message"], "InferDict"],
-) -> InferConfigMessenger: ...
+) -> InferConfigMessenger:
+    ...
 
 
 @overload
 def infer_config(
     fn: Callable[_P, _T],
     config_fn: Callable[["Message"], "InferDict"],
-) -> Callable[_P, _T]: ...
+) -> Callable[_P, _T]:
+    ...
 
 
 @_make_handler(InferConfigMessenger)
 def infer_config(  # type: ignore[empty-body]
     fn: Callable[_P, _T],
     config_fn: Callable[["Message"], "InferDict"],
-) -> Union[InferConfigMessenger, Callable[_P, _T]]: ...
+) -> Union[InferConfigMessenger, Callable[_P, _T]]:
+    ...
 
 
 @overload
 def lift(
     prior: Union[Callable, "Distribution", Dict[str, Union["Distribution", Callable]]],
-) -> LiftMessenger: ...
+) -> LiftMessenger:
+    ...
 
 
 @overload
 def lift(
     fn: Callable[_P, _T],
     prior: Union[Callable, "Distribution", Dict[str, Union["Distribution", Callable]]],
-) -> Callable[_P, _T]: ...
+) -> Callable[_P, _T]:
+    ...
 
 
 @_make_handler(LiftMessenger)
 def lift(  # type: ignore[empty-body]
     fn: Callable[_P, _T],
     prior: Union[Callable, "Distribution", Dict[str, Union["Distribution", Callable]]],
-) -> Union[LiftMessenger, Callable[_P, _T]]: ...
+) -> Union[LiftMessenger, Callable[_P, _T]]:
+    ...
 
 
 @overload
 def mask(
     mask: Union[bool, "torch.BoolTensor"],
-) -> MaskMessenger: ...
+) -> MaskMessenger:
+    ...
 
 
 @overload
 def mask(
     fn: Callable[_P, _T],
     mask: Union[bool, "torch.BoolTensor"],
-) -> Callable[_P, _T]: ...
+) -> Callable[_P, _T]:
+    ...
 
 
 @_make_handler(MaskMessenger)
 def mask(  # type: ignore[empty-body]
     fn: Callable[_P, _T],
     mask: Union[bool, "torch.BoolTensor"],
-) -> Union[MaskMessenger, Callable[_P, _T]]: ...
+) -> Union[MaskMessenger, Callable[_P, _T]]:
+    ...
 
 
 @overload
 def reparam(
     config: Union[Dict[str, "Reparam"], Callable[["Message"], Optional["Reparam"]]],
-) -> ReparamMessenger: ...
+) -> ReparamMessenger:
+    ...
 
 
 @overload
 def reparam(
     fn: Callable[_P, _T],
     config: Union[Dict[str, "Reparam"], Callable[["Message"], Optional["Reparam"]]],
-) -> ReparamHandler[_P, _T]: ...
+) -> ReparamHandler[_P, _T]:
+    ...
 
 
 @_make_handler(ReparamMessenger)
 def reparam(  # type: ignore[empty-body]
     fn: Callable[_P, _T],
     config: Union[Dict[str, "Reparam"], Callable[["Message"], Optional["Reparam"]]],
-) -> Union[ReparamMessenger, ReparamHandler[_P, _T]]: ...
+) -> Union[ReparamMessenger, ReparamHandler[_P, _T]]:
+    ...
 
 
 @overload
@@ -413,7 +449,8 @@ def replay(
     fn: None = ...,
     trace: Optional["Trace"] = None,
     params: Optional[Dict[str, "torch.Tensor"]] = None,
-) -> ReplayMessenger: ...
+) -> ReplayMessenger:
+    ...
 
 
 @overload
@@ -421,7 +458,8 @@ def replay(
     fn: Callable[_P, _T],
     trace: Optional["Trace"] = None,
     params: Optional[Dict[str, "torch.Tensor"]] = None,
-) -> Callable[_P, _T]: ...
+) -> Callable[_P, _T]:
+    ...
 
 
 @_make_handler(ReplayMessenger)
@@ -429,67 +467,77 @@ def replay(  # type: ignore[empty-body]
     fn: Optional[Callable[_P, _T]] = None,
     trace: Optional["Trace"] = None,
     params: Optional[Dict[str, "torch.Tensor"]] = None,
-) -> Union[ReplayMessenger, Callable[_P, _T]]: ...
+) -> Union[ReplayMessenger, Callable[_P, _T]]:
+    ...
 
 
 @overload
 def scale(
     scale: Union[float, "torch.Tensor"],
-) -> ScaleMessenger: ...
+) -> ScaleMessenger:
+    ...
 
 
 @overload
 def scale(
     fn: Callable[_P, _T],
     scale: Union[float, "torch.Tensor"],
-) -> Callable[_P, _T]: ...
+) -> Callable[_P, _T]:
+    ...
 
 
 @_make_handler(ScaleMessenger)
 def scale(  # type: ignore[empty-body]
     fn: Callable[_P, _T],
     scale: Union[float, "torch.Tensor"],
-) -> Union[ScaleMessenger, Callable[_P, _T]]: ...
+) -> Union[ScaleMessenger, Callable[_P, _T]]:
+    ...
 
 
 @overload
 def seed(
     rng_seed: int,
-) -> SeedMessenger: ...
+) -> SeedMessenger:
+    ...
 
 
 @overload
 def seed(
     fn: Callable[_P, _T],
     rng_seed: int,
-) -> Callable[_P, _T]: ...
+) -> Callable[_P, _T]:
+    ...
 
 
 @_make_handler(SeedMessenger)
 def seed(  # type: ignore[empty-body]
     fn: Callable[_P, _T],
     rng_seed: int,
-) -> Union[SeedMessenger, Callable[_P, _T]]: ...
+) -> Union[SeedMessenger, Callable[_P, _T]]:
+    ...
 
 
 @overload
 def substitute(
     data: Dict[str, "torch.Tensor"],
-) -> SubstituteMessenger: ...
+) -> SubstituteMessenger:
+    ...
 
 
 @overload
 def substitute(
     fn: Callable[_P, _T],
     data: Dict[str, "torch.Tensor"],
-) -> Callable[_P, _T]: ...
+) -> Callable[_P, _T]:
+    ...
 
 
 @_make_handler(SubstituteMessenger)
 def substitute(  # type: ignore[empty-body]
     fn: Callable[_P, _T],
     data: Dict[str, "torch.Tensor"],
-) -> Union[SubstituteMessenger, Callable[_P, _T]]: ...
+) -> Union[SubstituteMessenger, Callable[_P, _T]]:
+    ...
 
 
 @overload
@@ -497,7 +545,8 @@ def trace(
     fn: None = ...,
     graph_type: Optional[Literal["flat", "dense"]] = None,
     param_only: Optional[bool] = None,
-) -> TraceMessenger: ...
+) -> TraceMessenger:
+    ...
 
 
 @overload
@@ -505,7 +554,8 @@ def trace(
     fn: Callable[_P, _T],
     graph_type: Optional[Literal["flat", "dense"]] = None,
     param_only: Optional[bool] = None,
-) -> TraceHandler[_P, _T]: ...
+) -> TraceHandler[_P, _T]:
+    ...
 
 
 @_make_handler(TraceMessenger)
@@ -513,25 +563,29 @@ def trace(  # type: ignore[empty-body]
     fn: Optional[Callable[_P, _T]] = None,
     graph_type: Optional[Literal["flat", "dense"]] = None,
     param_only: Optional[bool] = None,
-) -> Union[TraceMessenger, TraceHandler[_P, _T]]: ...
+) -> Union[TraceMessenger, TraceHandler[_P, _T]]:
+    ...
 
 
 @overload
 def uncondition(
     fn: None = ...,
-) -> UnconditionMessenger: ...
+) -> UnconditionMessenger:
+    ...
 
 
 @overload
 def uncondition(
     fn: Callable[_P, _T] = ...,
-) -> Callable[_P, _T]: ...
+) -> Callable[_P, _T]:
+    ...
 
 
 @_make_handler(UnconditionMessenger)
 def uncondition(  # type: ignore[empty-body]
     fn: Optional[Callable[_P, _T]] = None,
-) -> Union[UnconditionMessenger, Callable[_P, _T]]: ...
+) -> Union[UnconditionMessenger, Callable[_P, _T]]:
+    ...
 
 
 #########################################
@@ -613,7 +667,8 @@ def markov(
     keep: bool = False,
     dim: Optional[int] = None,
     name: Optional[str] = None,
-) -> MarkovMessenger: ...
+) -> MarkovMessenger:
+    ...
 
 
 @overload
@@ -623,7 +678,8 @@ def markov(
     keep: bool = False,
     dim: Optional[int] = None,
     name: Optional[str] = None,
-) -> MarkovMessenger: ...
+) -> MarkovMessenger:
+    ...
 
 
 @overload
@@ -633,7 +689,8 @@ def markov(
     keep: bool = False,
     dim: Optional[int] = None,
     name: Optional[str] = None,
-) -> Callable[_P, _T]: ...
+) -> Callable[_P, _T]:
+    ...
 
 
 def markov(

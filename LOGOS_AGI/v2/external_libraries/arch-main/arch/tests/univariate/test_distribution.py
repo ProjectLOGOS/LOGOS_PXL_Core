@@ -99,10 +99,7 @@ class TestDistributions:
                 1
                 + 1
                 / (eta - 2)
-                * (
-                    (const_b * resids + const_a)
-                    / (1 + np.sign(resids + const_a / const_b) * lam)
-                )
+                * ((const_b * resids + const_a) / (1 + np.sign(resids + const_a / const_b) * lam))
                 ** 2
             )
             ** power
@@ -148,9 +145,7 @@ class TestDistributions:
         pdf *= np.exp(-(1 / 2) * np.abs(x / (c * sigma)) ** nu)
         ll2 = np.log(pdf).sum()
         assert_almost_equal(ll1, ll2)
-        lls1 = dist.loglikelihood(
-            np.array([nu]), self.resids, self.sigma2, individual=True
-        )
+        lls1 = dist.loglikelihood(np.array([nu]), self.resids, self.sigma2, individual=True)
         assert_almost_equal(lls1, np.log(pdf))
 
         assert_equal(dist.num_params, 1)

@@ -52,25 +52,19 @@ print("Computing regularization path using the lasso...")
 alphas_lasso, coefs_lasso, _ = lasso_path(X, y, eps=eps)
 
 print("Computing regularization path using the positive lasso...")
-alphas_positive_lasso, coefs_positive_lasso, _ = lasso_path(
-    X, y, eps=eps, positive=True
-)
+alphas_positive_lasso, coefs_positive_lasso, _ = lasso_path(X, y, eps=eps, positive=True)
 
 print("Computing regularization path using the LARS...")
 alphas_lars, _, coefs_lars = lars_path(X, y, method="lasso")
 
 print("Computing regularization path using the positive LARS...")
-alphas_positive_lars, _, coefs_positive_lars = lars_path(
-    X, y, method="lasso", positive=True
-)
+alphas_positive_lars, _, coefs_positive_lars = lars_path(X, y, method="lasso", positive=True)
 
 print("Computing regularization path using the elastic net...")
 alphas_enet, coefs_enet, _ = enet_path(X, y, eps=eps, l1_ratio=0.8)
 
 print("Computing regularization path using the positive elastic net...")
-alphas_positive_enet, coefs_positive_enet, _ = enet_path(
-    X, y, eps=eps, l1_ratio=0.8, positive=True
-)
+alphas_positive_enet, coefs_positive_enet, _ = enet_path(X, y, eps=eps, l1_ratio=0.8, positive=True)
 
 # Display results
 

@@ -90,14 +90,11 @@ for chain in chains:
 
 Y_pred_chains = np.array([chain.predict_proba(X_test) for chain in chains])
 chain_jaccard_scores = [
-    jaccard_score(Y_test, Y_pred_chain >= 0.5, average="samples")
-    for Y_pred_chain in Y_pred_chains
+    jaccard_score(Y_test, Y_pred_chain >= 0.5, average="samples") for Y_pred_chain in Y_pred_chains
 ]
 
 Y_pred_ensemble = Y_pred_chains.mean(axis=0)
-ensemble_jaccard_score = jaccard_score(
-    Y_test, Y_pred_ensemble >= 0.5, average="samples"
-)
+ensemble_jaccard_score = jaccard_score(Y_test, Y_pred_ensemble >= 0.5, average="samples")
 
 # %%
 # Plot results

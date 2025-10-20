@@ -71,9 +71,9 @@ class VariationalGP(GPModel):
         whiten=False,
         jitter=1e-6,
     ):
-        assert isinstance(
-            X, torch.Tensor
-        ), "X needs to be a torch Tensor instead of a {}".format(type(X))
+        assert isinstance(X, torch.Tensor), "X needs to be a torch Tensor instead of a {}".format(
+            type(X)
+        )
         if y is not None:
             assert isinstance(
                 y, torch.Tensor
@@ -110,18 +110,14 @@ class VariationalGP(GPModel):
             identity = eye_like(self.X, N)
             pyro.sample(
                 self._pyro_get_fullname("f"),
-                dist.MultivariateNormal(zero_loc, scale_tril=identity).to_event(
-                    zero_loc.dim() - 1
-                ),
+                dist.MultivariateNormal(zero_loc, scale_tril=identity).to_event(zero_loc.dim() - 1),
             )
             f_scale_tril = Lff.matmul(self.f_scale_tril)
             f_loc = Lff.matmul(self.f_loc.unsqueeze(-1)).squeeze(-1)
         else:
             pyro.sample(
                 self._pyro_get_fullname("f"),
-                dist.MultivariateNormal(zero_loc, scale_tril=Lff).to_event(
-                    zero_loc.dim() - 1
-                ),
+                dist.MultivariateNormal(zero_loc, scale_tril=Lff).to_event(zero_loc.dim() - 1),
             )
             f_scale_tril = self.f_scale_tril
             f_loc = self.f_loc

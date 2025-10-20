@@ -211,12 +211,10 @@ def bench(rnn_runners, group_name, print_json=False, sep=" ", **params):
 
     return {
         group_name: {
-            k: {"avg": v.avg_fwd, "std": v.std_fwd, "info": v.info_fwd}
-            for k, v in results.items()
+            k: {"avg": v.avg_fwd, "std": v.std_fwd, "info": v.info_fwd} for k, v in results.items()
         },
         f"{group_name}-backward": {
-            k: {"avg": v.avg_bwd, "std": v.std_bwd, "info": v.info_bwd}
-            for k, v in results.items()
+            k: {"avg": v.avg_bwd, "std": v.std_bwd, "info": v.info_bwd} for k, v in results.items()
         },
     }
 
@@ -344,9 +342,7 @@ if __name__ == "__main__":
                 "WARNING: some of the variable sequence length lstms are "
                 "very unoptimized and therefore take forever to run."
             )
-        results.update(
-            bench_group(vlrnns, "variable-length sequence LSTM", "vl_lstm", bench_args)
-        )
+        results.update(bench_group(vlrnns, "variable-length sequence LSTM", "vl_lstm", bench_args))
 
     if "rnns" in args.group:
         results.update(bench_group(rnns, "LSTM", "lstm", bench_args))

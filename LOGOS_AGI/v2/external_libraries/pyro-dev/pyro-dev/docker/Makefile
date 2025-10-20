@@ -159,5 +159,3 @@ lab-gpu: ##
 	docker run --gpus=all --init -it -p 8888:8888 --user ${USER} \
 	-v ${HOST_WORK_DIR}:${DOCKER_WORK_DIR} \
 	${IMG_NAME} jupyter lab --port=8888 --no-browser --ip=0.0.0.0
-
-

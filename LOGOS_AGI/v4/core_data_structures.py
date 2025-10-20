@@ -5,7 +5,7 @@
 Core Data Structures for LOGOS AGI
 Fundamental data types and structures used throughout the system
 
-File: core/data_structures.py  
+File: core/data_structures.py
 Author: LOGOS AGI Development Team
 Version: 2.0.0
 Date: 2025-01-28
@@ -78,7 +78,7 @@ class SystemMessage:
     payload: Dict[str, Any] = field(default_factory=dict)
     correlation_id: Optional[str] = None
     priority: ProcessingPriority = ProcessingPriority.NORMAL
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for serialization"""
         return {
@@ -91,7 +91,7 @@ class SystemMessage:
             "correlation_id": self.correlation_id,
             "priority": self.priority.value
         }
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> 'SystemMessage':
         """Create from dictionary"""
@@ -116,7 +116,7 @@ class OperationResult:
     execution_time: float = 0.0
     timestamp: float = field(default_factory=time.time)
     metadata: Dict[str, Any] = field(default_factory=dict)
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for serialization"""
         return {
@@ -139,13 +139,13 @@ class ValidationToken:
     validated_at: Optional[float] = None
     validated_by: Optional[str] = None
     validation_data: Dict[str, Any] = field(default_factory=dict)
-    
+
     def validate(self, validator_id: str):
         """Mark token as validated"""
         self.status = ValidationStatus.VALIDATED
         self.validated_by = validator_id
         self.validated_at = time.time()
-    
+
     def reject(self, reason: str):
         """Mark token as rejected"""
         self.status = ValidationStatus.REJECTED
@@ -165,12 +165,12 @@ class TaskDescriptor:
     assigned_to: Optional[str] = None
     dependencies: List[str] = field(default_factory=list)
     estimated_duration: Optional[float] = None
-    
+
     def add_dependency(self, task_id: str):
         """Add dependency on another task"""
         if task_id not in self.dependencies:
             self.dependencies.append(task_id)
-    
+
     def can_execute(self, completed_tasks: set) -> bool:
         """Check if task can execute given completed dependencies"""
         return all(dep_id in completed_tasks for dep_id in self.dependencies)
@@ -186,11 +186,11 @@ class SystemMetrics:
     error_rate: float = 0.0
     response_time: float = 0.0
     custom_metrics: Dict[str, float] = field(default_factory=dict)
-    
+
     def add_metric(self, name: str, value: float):
         """Add custom metric"""
         self.custom_metrics[name] = value
-    
+
     def to_summary(self) -> Dict[str, Any]:
         """Convert to summary dictionary"""
         return {
@@ -210,7 +210,7 @@ class SystemMetrics:
         }
 
 # =========================================================================
-# III. LOGOS-SPECIFIC DATA STRUCTURES  
+# III. LOGOS-SPECIFIC DATA STRUCTURES
 # =========================================================================
 
 @dataclass
@@ -225,7 +225,7 @@ class LogosQuery:
     priority: ProcessingPriority = ProcessingPriority.NORMAL
     timeout: float = 30.0
     metadata: Dict[str, Any] = field(default_factory=dict)
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for serialization"""
         return {
@@ -239,7 +239,7 @@ class LogosQuery:
             "timeout": self.timeout,
             "metadata": self.metadata
         }
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> 'LogosQuery':
         """Create from dictionary"""
@@ -266,7 +266,7 @@ class SubsystemStatus:
     error_count: int = 0
     metrics: Optional[SystemMetrics] = None
     capabilities: List[str] = field(default_factory=list)
-    
+
     def is_healthy(self) -> bool:
         """Check if subsystem is healthy"""
         time_since_heartbeat = time.time() - self.last_heartbeat
@@ -274,7 +274,7 @@ class SubsystemStatus:
             self.state == SystemState.OPERATIONAL and
             time_since_heartbeat < 60.0  # Within last minute
         )
-    
+
     def update_heartbeat(self):
         """Update heartbeat timestamp"""
         self.last_heartbeat = time.time()
@@ -291,7 +291,7 @@ class KnowledgeItem:
     created_at: float = field(default_factory=time.time)
     tags: List[str] = field(default_factory=list)
     relationships: Dict[str, List[str]] = field(default_factory=dict)
-    
+
     def add_relationship(self, relationship_type: str, related_item_id: str):
         """Add relationship to another knowledge item"""
         if relationship_type not in self.relationships:
@@ -309,7 +309,7 @@ class TrinityVector:
     existence: float = 0.0
     goodness: float = 0.0
     truth: float = 0.0
-    
+
     def __post_init__(self):
         """Normalize vector to unit sphere"""
         magnitude = self.magnitude()
@@ -317,15 +317,15 @@ class TrinityVector:
             self.existence /= magnitude
             self.goodness /= magnitude
             self.truth /= magnitude
-    
+
     def magnitude(self) -> float:
         """Calculate vector magnitude"""
         return (self.existence**2 + self.goodness**2 + self.truth**2)**0.5
-    
+
     def trinity_product(self) -> float:
         """Calculate Trinity product: E × G × T"""
         return abs(self.existence * self.goodness * self.truth)
-    
+
     def dot_product(self, other: 'TrinityVector') -> float:
         """Calculate dot product with another Trinity vector"""
         return (
@@ -333,7 +333,7 @@ class TrinityVector:
             self.goodness * other.goodness +
             self.truth * other.truth
         )
-    
+
     def to_tuple(self) -> Tuple[float, float, float]:
         """Convert to tuple"""
         return (self.existence, self.goodness, self.truth)
@@ -346,11 +346,11 @@ class FractalPosition:
     dimension: float = 2.0
     iteration_count: int = 0
     converged: bool = False
-    
+
     def to_complex(self) -> complex:
         """Convert to complex number"""
         return complex(self.real, self.imaginary)
-    
+
     def distance_from_origin(self) -> float:
         """Calculate distance from origin"""
         return (self.real**2 + self.imaginary**2)**0.5
@@ -371,7 +371,7 @@ class WorkflowStep:
     dependencies: List[str] = field(default_factory=list)
     assigned_subsystem: Optional[SubsystemType] = None
     estimated_duration: float = 0.0
-    
+
     def can_execute(self, completed_steps: set) -> bool:
         """Check if step can execute"""
         return all(dep in completed_steps for dep in self.dependencies)
@@ -386,11 +386,11 @@ class Workflow:
     created_at: float = field(default_factory=time.time)
     created_by: str = ""
     version: str = "1.0"
-    
+
     def add_step(self, step: WorkflowStep):
         """Add step to workflow"""
         self.steps.append(step)
-    
+
     def get_ready_steps(self, completed_steps: set) -> List[WorkflowStep]:
         """Get steps that are ready to execute"""
         return [step for step in self.steps if step.can_execute(completed_steps)]
@@ -416,7 +416,7 @@ def generate_secure_hash(data: Any) -> str:
         data_str = json.dumps(data, sort_keys=True)
     else:
         data_str = str(data)
-    
+
     return hashlib.sha256(data_str.encode()).hexdigest()
 
 def create_correlation_id() -> str:
@@ -426,11 +426,11 @@ def create_correlation_id() -> str:
 def validate_json_schema(data: Dict[str, Any], required_fields: List[str]) -> Tuple[bool, List[str]]:
     """Validate JSON data against required schema"""
     missing_fields = []
-    
+
     for field in required_fields:
         if field not in data:
             missing_fields.append(field)
-    
+
     return len(missing_fields) == 0, missing_fields
 
 def serialize_for_transmission(obj: Any) -> str:
@@ -446,7 +446,7 @@ def deserialize_from_transmission(data: str, target_type: type = dict) -> Any:
     """Deserialize object from network transmission"""
     try:
         parsed_data = json.loads(data)
-        
+
         if target_type == dict:
             return parsed_data
         elif hasattr(target_type, 'from_dict') and isinstance(parsed_data, dict):
@@ -463,32 +463,32 @@ def deserialize_from_transmission(data: str, target_type: type = dict) -> Any:
 __all__ = [
     # Enums
     'SystemState',
-    'ProcessingPriority', 
+    'ProcessingPriority',
     'ValidationStatus',
     'SubsystemType',
     'QueryType',
-    
+
     # Core data structures
     'SystemMessage',
     'OperationResult',
     'ValidationToken',
     'TaskDescriptor',
     'SystemMetrics',
-    
+
     # LOGOS-specific structures
     'LogosQuery',
     'SubsystemStatus',
     'KnowledgeItem',
-    
+
     # Trinity structures
     'TrinityVector',
     'FractalPosition',
-    
+
     # Workflow structures
     'WorkflowStep',
     'Workflow',
     'EventNotification',
-    
+
     # Utility functions
     'generate_secure_hash',
     'create_correlation_id',

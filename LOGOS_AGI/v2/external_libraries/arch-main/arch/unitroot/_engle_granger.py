@@ -100,9 +100,7 @@ def engle_granger(
     num_x = setup.x.shape[1]
     cv = engle_granger_cv(trend, num_x, nobs)
     pv = engle_granger_pval(stat, trend, num_x)
-    return EngleGrangerTestResults(
-        stat, pv, cv, order=num_x, adf=adf, xsection=xsection
-    )
+    return EngleGrangerTestResults(stat, pv, cv, order=num_x, adf=adf, xsection=xsection)
 
 
 class EngleGrangerTestResults(ResidualCointegrationTestResult):
@@ -144,9 +142,7 @@ class EngleGrangerTestResults(ResidualCointegrationTestResult):
         adf: ADF | None = None,
         xsection: RegressionResults | None = None,
     ) -> None:
-        super().__init__(
-            stat, pvalue, crit_vals, null, alternative, trend, order, xsection
-        )
+        super().__init__(stat, pvalue, crit_vals, null, alternative, trend, order, xsection)
         self.name = "Engle-Granger Cointegration Test"
         assert adf is not None
         self._adf = adf
@@ -260,8 +256,7 @@ def engle_granger_cv(trend: str, num_x: int, nobs: int) -> pd.Series:
         raise ValueError(f"Trend must by one of: {valid}")
     if not 1 <= num_x <= 12:
         raise ValueError(
-            "The number of cross-sectional variables must be between 1 and "
-            "12 (inclusive)"
+            "The number of cross-sectional variables must be between 1 and " "12 (inclusive)"
         )
     tbl = CV_PARAMETERS[trend]
 
@@ -297,8 +292,7 @@ def engle_granger_pval(stat: float, trend: str, num_x: int) -> float:
         raise ValueError(f"Trend must by one of: {valid}")
     if not 1 <= num_x <= 12:
         raise ValueError(
-            "The number of cross-sectional variables must be between 1 and "
-            "12 (inclusive)"
+            "The number of cross-sectional variables must be between 1 and " "12 (inclusive)"
         )
     key = (trend, num_x)
     if stat > TAU_MAX[key]:

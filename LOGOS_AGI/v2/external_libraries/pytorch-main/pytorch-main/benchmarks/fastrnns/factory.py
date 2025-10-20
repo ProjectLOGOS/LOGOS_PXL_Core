@@ -32,9 +32,7 @@ fastrnns.bench times the forward and backward invocations.
 """
 
 
-ModelDef = namedtuple(
-    "ModelDef", ["inputs", "params", "forward", "backward_setup", "backward"]
-)
+ModelDef = namedtuple("ModelDef", ["inputs", "params", "forward", "backward_setup", "backward"])
 
 
 def lstm_backward_setup(lstm_outputs, seed=None):
@@ -85,9 +83,7 @@ def lnlstm_creator(script=True, decompose_layernorm=False, **kwargs):
     hidden_size = kwargs["hiddenSize"]
     seq_len = kwargs["seqLength"]
     batch_size = kwargs["miniBatch"]
-    ge = script_lnlstm(
-        input_size, hidden_size, 1, decompose_layernorm=decompose_layernorm
-    ).cuda()
+    ge = script_lnlstm(input_size, hidden_size, 1, decompose_layernorm=decompose_layernorm).cuda()
 
     input = torch.randn(seq_len, batch_size, input_size, device="cuda")
     states = [
@@ -285,9 +281,7 @@ def varlen_lstm_factory(cell, script):
             inputs = sequences[batch].unbind(0)
 
             for seq_idx in range(len(inputs)):
-                hy, cy = cell(
-                    inputs[seq_idx].unsqueeze(0), (hy, cy), w_ih, w_hh, b_ih, b_hh
-                )
+                hy, cy = cell(inputs[seq_idx].unsqueeze(0), (hy, cy), w_ih, w_hh, b_ih, b_hh)
                 output += [hy]
             outputs += [torch.stack(output)]
             hx_outs += [hy.unsqueeze(0)]

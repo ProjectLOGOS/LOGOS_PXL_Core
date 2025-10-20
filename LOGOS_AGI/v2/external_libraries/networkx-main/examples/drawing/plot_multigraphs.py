@@ -35,9 +35,7 @@ def draw_labeled_multigraph(G, attr_name, ax=None):
     pos = nx.shell_layout(G)
     nx.draw_networkx_nodes(G, pos, ax=ax)
     nx.draw_networkx_labels(G, pos, font_size=20, ax=ax)
-    nx.draw_networkx_edges(
-        G, pos, edge_color="grey", connectionstyle=connectionstyle, ax=ax
-    )
+    nx.draw_networkx_edges(G, pos, edge_color="grey", connectionstyle=connectionstyle, ax=ax)
 
     labels = {
         tuple(edge): f"{attr_name}={attrs[attr_name]}"

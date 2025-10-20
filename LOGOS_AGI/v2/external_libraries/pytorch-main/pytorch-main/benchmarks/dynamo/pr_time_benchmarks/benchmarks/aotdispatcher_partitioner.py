@@ -17,7 +17,9 @@ class Benchmark(BenchmarkBase):
         return f"{self.category()}_{self.device()}"
 
     def description(self):
-        return "partitioner benchmark 1 input and 100 weights, mix of recompute and non-recompute ops"
+        return (
+            "partitioner benchmark 1 input and 100 weights, mix of recompute and non-recompute ops"
+        )
 
     def _prepare_once(self):
         self.weights = [torch.randn(16, 16, requires_grad=True) for _ in range(100)]
@@ -44,9 +46,7 @@ def main():
     ]
 
     for benchmark in all:
-        benchmark.enable_compile_time_instruction_count().collect_all().append_results(
-            result_path
-        )
+        benchmark.enable_compile_time_instruction_count().collect_all().append_results(result_path)
 
 
 if __name__ == "__main__":

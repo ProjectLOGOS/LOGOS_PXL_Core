@@ -107,9 +107,7 @@ def test_garch(setup, initial_value):
     state = setup.rng.get_state()
     rng = Normal(seed=RandomState())
     rng.generator.set_state(state)
-    sim_data = garch.simulate(
-        parameters, setup.t, rng.simulate([]), initial_value=initial_value
-    )
+    sim_data = garch.simulate(parameters, setup.t, rng.simulate([]), initial_value=initial_value)
     setup.rng.set_state(state)
     e = setup.rng.standard_normal(setup.t + 500)
     initial_value = 1.0
@@ -227,9 +225,7 @@ def test_arch(setup, initial_value):
     var_bounds = arch.variance_bounds(setup.resids)
     arch.compute_variance(parameters, setup.resids, setup.sigma2, backcast, var_bounds)
     cond_var_direct = np.zeros_like(setup.sigma2)
-    rec.arch_recursion(
-        parameters, setup.resids, cond_var_direct, 1, setup.t, backcast, var_bounds
-    )
+    rec.arch_recursion(parameters, setup.resids, cond_var_direct, 1, setup.t, backcast, var_bounds)
     assert_allclose(setup.sigma2, cond_var_direct)
 
     a, b = arch.constraints()
@@ -240,9 +236,7 @@ def test_arch(setup, initial_value):
     state = setup.rng.get_state()
     rng = Normal(seed=RandomState())
     rng.generator.set_state(state)
-    sim_data = arch.simulate(
-        parameters, setup.t, rng.simulate([]), initial_value=initial_value
-    )
+    sim_data = arch.simulate(parameters, setup.t, rng.simulate([]), initial_value=initial_value)
     setup.rng.set_state(state)
     e = setup.rng.standard_normal(setup.t + 500)
     initial_value = 1.0
@@ -335,9 +329,7 @@ def test_harch(setup, initial_value):
     state = setup.rng.get_state()
     rng = Normal(seed=RandomState())
     rng.generator.set_state(state)
-    sim_data = harch.simulate(
-        parameters, setup.t, rng.simulate([]), initial_value=initial_value
-    )
+    sim_data = harch.simulate(parameters, setup.t, rng.simulate([]), initial_value=initial_value)
     setup.rng.set_state(state)
     e = setup.rng.standard_normal(setup.t + 500)
     sigma2 = np.zeros(setup.t + 500)
@@ -371,9 +363,7 @@ def test_harch(setup, initial_value):
                 shock22 += data[t - i - 1] if t - i - 1 >= 0 else backcast
             shock22 = shock22 / 22.0
 
-        sigma2[t] += (
-            parameters[1] * shock1 + parameters[2] * shock5 + parameters[3] * shock22
-        )
+        sigma2[t] += parameters[1] * shock1 + parameters[2] * shock5 + parameters[3] * shock22
 
         data[t] = e[t] * np.sqrt(sigma2[t])
     data = data[500:]
@@ -492,9 +482,7 @@ def test_garch_no_symmetric(setup):
     data = np.zeros(setup.t + 500)
     for t in range(setup.t + 500):
         sigma2[t] = parameters[0]
-        shock = (
-            0.5 * initial_value if t == 0 else data[t - 1] ** 2.0 * (data[t - 1] < 0)
-        )
+        shock = 0.5 * initial_value if t == 0 else data[t - 1] ** 2.0 * (data[t - 1] < 0)
         sigma2[t] += parameters[1] * shock
         lagged_value = initial_value if t == 0 else sigma2[t - 1]
         sigma2[t] += parameters[2] * lagged_value
@@ -561,9 +549,7 @@ def test_garch_no_lagged_vol(setup):
         sigma2[t] = parameters[0]
         shock = initial_value if t == 0 else data[t - 1] ** 2.0
         sigma2[t] += parameters[1] * shock
-        shock = (
-            0.5 * initial_value if t == 0 else (data[t - 1] ** 2.0) * (data[t - 1] < 0)
-        )
+        shock = 0.5 * initial_value if t == 0 else (data[t - 1] ** 2.0) * (data[t - 1] < 0)
         sigma2[t] += parameters[2] * shock
         data[t] = e[t] * np.sqrt(sigma2[t])
     data = data[500:]
@@ -594,9 +580,7 @@ def test_arch_multiple_lags(setup):
     parameters = np.array([0.25, 0.17, 0.16, 0.15, 0.14, 0.13])
     arch.compute_variance(parameters, setup.resids, setup.sigma2, backcast, var_bounds)
     cond_var_direct = np.zeros_like(setup.sigma2)
-    rec.arch_recursion(
-        parameters, setup.resids, cond_var_direct, 5, setup.t, backcast, var_bounds
-    )
+    rec.arch_recursion(parameters, setup.resids, cond_var_direct, 5, setup.t, backcast, var_bounds)
     assert_allclose(setup.sigma2, cond_var_direct)
 
     a, b = arch.constraints()
@@ -860,9 +844,7 @@ def test_ewma_estimated(setup, initial_value):
     rng = Normal(seed=RandomState())
     rng.generator.set_state(state)
     lam = parameters[-1]
-    sim_data = ewma.simulate(
-        [lam], setup.t, rng.simulate([]), initial_value=initial_value
-    )
+    sim_data = ewma.simulate([lam], setup.t, rng.simulate([]), initial_value=initial_value)
     setup.rng.set_state(state)
     e = setup.rng.standard_normal(setup.t + 500)
     initial_value = 1.0
@@ -913,9 +895,7 @@ def test_riskmetrics(setup, initial_value):
     assert isinstance(state, tuple)
     rng = Normal(seed=RandomState())
     rng.generator.set_state(state)
-    sim_data = rm06.simulate(
-        parameters, setup.t, rng.simulate([]), initial_value=initial_value
-    )
+    sim_data = rm06.simulate(parameters, setup.t, rng.simulate([]), initial_value=initial_value)
     assert isinstance(sim_data, tuple)
     assert len(sim_data) == 2
     assert isinstance(sim_data[0], np.ndarray)
@@ -948,9 +928,7 @@ def test_egarch(setup, initial_value):
 
     var_bounds = egarch.variance_bounds(setup.resids)
     parameters = np.array([0.1, 0.1, -0.1, 0.95])
-    egarch.compute_variance(
-        parameters, setup.resids, setup.sigma2, backcast, var_bounds
-    )
+    egarch.compute_variance(parameters, setup.resids, setup.sigma2, backcast, var_bounds)
     cond_var_direct = np.zeros_like(setup.sigma2)
     lnsigma2 = np.empty(setup.t)
     std_resids = np.empty(setup.t)
@@ -980,9 +958,7 @@ def test_egarch(setup, initial_value):
     state = setup.rng.get_state()
     rng = Normal(seed=RandomState())
     rng.generator.set_state(state)
-    sim_data = egarch.simulate(
-        parameters, setup.t, rng.simulate([]), initial_value=initial_value
-    )
+    sim_data = egarch.simulate(parameters, setup.t, rng.simulate([]), initial_value=initial_value)
     setup.rng.set_state(state)
     e = setup.rng.standard_normal(setup.t + 500)
     initial_value = 0.1 / (1 - 0.95)
@@ -1043,9 +1019,7 @@ def test_egarch_100(setup):
 
     var_bounds = egarch.variance_bounds(setup.resids)
     parameters = np.array([0.1, 0.4])
-    egarch.compute_variance(
-        parameters, setup.resids, setup.sigma2, backcast, var_bounds
-    )
+    egarch.compute_variance(parameters, setup.resids, setup.sigma2, backcast, var_bounds)
     cond_var_direct = np.zeros_like(setup.sigma2)
     lnsigma2 = np.empty(setup.t)
     std_resids = np.empty(setup.t)
@@ -1205,9 +1179,7 @@ def test_midas_symmetric(setup, initial_value):
     state = setup.rng.get_state()
     rng = Normal(seed=RandomState())
     rng.generator.set_state(state)
-    sim_data = midas.simulate(
-        parameters, setup.t, rng.simulate([]), initial_value=initial_value
-    )
+    sim_data = midas.simulate(parameters, setup.t, rng.simulate([]), initial_value=initial_value)
     setup.rng.set_state(state)
     e = setup.rng.standard_normal(setup.t + 500)
     initial_value = 1.0
@@ -1359,9 +1331,7 @@ def test_figarch(setup, initial_value):
     assert_almost_equal(backcast, np.sum((setup.resids[:75] ** 2) * (w / w.sum())))
     var_bounds = figarch.variance_bounds(setup.resids)
     parameters = np.array([1, 0.2, 0.4, 0.2])
-    figarch.compute_variance(
-        parameters, setup.resids, setup.sigma2, backcast, var_bounds
-    )
+    figarch.compute_variance(parameters, setup.resids, setup.sigma2, backcast, var_bounds)
 
     cond_var_direct = np.zeros_like(setup.sigma2)
     fresids = setup.resids**2
@@ -1564,9 +1534,7 @@ def test_aparch(setup, initial_value):
     assert_almost_equal(backcast, np.sum((setup.resids[:75] ** 2) * (w / w.sum())))
     var_bounds = aparch.variance_bounds(setup.resids)
     parameters = np.array([0.1, 0.1, -0.5, 0.8, 1.2])
-    aparch.compute_variance(
-        parameters, setup.resids, setup.sigma2, backcast, var_bounds
-    )
+    aparch.compute_variance(parameters, setup.resids, setup.sigma2, backcast, var_bounds)
     cond_var_direct = np.zeros_like(setup.sigma2)
     rec.aparch_recursion(
         parameters,
@@ -1602,9 +1570,7 @@ def test_aparch(setup, initial_value):
     state = setup.rng.get_state()
     rng = Normal(seed=RandomState())
     rng.generator.set_state(state)
-    sim_data = aparch.simulate(
-        parameters, setup.t, rng.simulate([]), initial_value=initial_value
-    )
+    sim_data = aparch.simulate(parameters, setup.t, rng.simulate([]), initial_value=initial_value)
     setup.rng.set_state(state)
     e = setup.rng.standard_normal(setup.t + 500)
     initial_value = 1.0
@@ -1662,9 +1628,7 @@ def test_aparch_delta(setup):
     assert_almost_equal(backcast, np.sum((setup.resids[:75] ** 2) * (w / w.sum())))
     var_bounds = aparch.variance_bounds(setup.resids)
     parameters = np.array([0.1, 0.1, -0.5, 0.8])
-    aparch.compute_variance(
-        parameters, setup.resids, setup.sigma2, backcast, var_bounds
-    )
+    aparch.compute_variance(parameters, setup.resids, setup.sigma2, backcast, var_bounds)
     cond_var_direct = np.zeros_like(setup.sigma2)
     rec_parameters = np.array([0.1, 0.1, -0.5, 0.8, delta])
     rec.aparch_recursion(
@@ -1750,9 +1714,7 @@ def test_aparch_against_garch(setup):
     parameters = np.array([0.1, 0.1, 0.8])
     garch.compute_variance(parameters, setup.resids, setup.sigma2, backcast, var_bounds)
     aparch_sigma2 = setup.sigma2.copy()
-    aparch.compute_variance(
-        parameters, setup.resids, aparch_sigma2, backcast, var_bounds
-    )
+    aparch.compute_variance(parameters, setup.resids, aparch_sigma2, backcast, var_bounds)
     assert_allclose(setup.sigma2, aparch_sigma2)
 
 

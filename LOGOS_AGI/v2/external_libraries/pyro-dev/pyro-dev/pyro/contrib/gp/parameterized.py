@@ -138,9 +138,7 @@ class Parameterized(PyroModule):
             raise ValueError("There is no prior for parameter: {}".format(name))
 
         if dist_constructor not in [dist.Delta, dist.Normal, dist.MultivariateNormal]:
-            raise NotImplementedError(
-                "Unsupported distribution type: {}".format(dist_constructor)
-            )
+            raise NotImplementedError("Unsupported distribution type: {}".format(dist_constructor))
 
         # delete old guide
         if name in self._guides:

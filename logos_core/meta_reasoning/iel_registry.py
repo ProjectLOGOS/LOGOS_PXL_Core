@@ -679,7 +679,7 @@ def main():
     import argparse
     import sys
     import os
-    
+
     parser = argparse.ArgumentParser(description='LOGOS IEL Registry')
     parser.add_argument('--add', help='Add IEL file to registry')
     parser.add_argument('--sig', help='Signature file for IEL')
@@ -687,36 +687,38 @@ def main():
     parser.add_argument('--reload', action='store_true', help='Reload runtime with new IELs')
     parser.add_argument('--list', action='store_true', help='List registered IELs')
     parser.add_argument('--verify', help='Verify specific IEL by ID')
-    
+    parser.add_argument('--prune', action='store_true', help='Prune underperforming IELs')
+    parser.add_argument('--below', type=float, default=0.85, help='Quality threshold for pruning (default: 0.85)')
+
     args = parser.parse_args()
-    
+
     try:
         # Initialize registry
         os.makedirs(os.path.dirname(args.registry), exist_ok=True)
-        
+
         # Create registry config
         config = RegistryConfig()
         config.database_path = args.registry.replace('.json', '.db')
-        
+
         registry = IELRegistry(config)
-        
+
         if args.add and args.sig:
             # Add IEL to registry
             with open(args.add, 'r') as f:
                 iel_content = f.read()
-            
+
             with open(args.sig, 'r') as f:
                 sig_data = json.load(f)
-            
+
             # Extract rule name from IEL content
             import re
             rule_match = re.search(r'Lemma\s+(\w+)', iel_content)
             rule_name = rule_match.group(1) if rule_match else "unknown_rule"
-            
+
             # Extract premises and conclusion from IEL content
             premise_match = re.search(r'.*?->\s*(.*)', iel_content.replace('\n', ' '))
             conclusion = premise_match.group(1) if premise_match else "auto_generated_conclusion"
-            
+
             # Create IEL candidate
             candidate = IELCandidate(
                 id=hashlib.sha256(f"{rule_name}_{datetime.now().isoformat()}".encode()).hexdigest()[:12],
@@ -732,10 +734,10 @@ def main():
                 consistency_score=0.9,
                 safety_score=0.95
             )
-            
+
             # Register the candidate
             success = registry.register_candidate(candidate)
-            
+
             if success:
                 print(f"Successfully registered IEL candidate: {candidate.rule_name}")
                 print(f"Domain: {candidate.domain}")
@@ -744,14 +746,14 @@ def main():
             else:
                 print("Failed to register IEL candidate")
                 sys.exit(1)
-                
+
         elif args.list:
             # List all registered IELs
             entries = registry.list_iels()
             print(f"Registry contains {len(entries)} IEL entries:")
             for entry in entries:
                 print(f"  {entry.id}: {entry.rule_name} ({entry.status})")
-                
+
         elif args.verify:
             # Verify specific IEL
             entry = registry.get_iel(args.verify)
@@ -763,16 +765,42 @@ def main():
             else:
                 print(f"IEL {args.verify} not found")
                 sys.exit(1)
-                
+
         elif args.reload:
             # Reload runtime (mock implementation)
             print("Runtime reload requested...")
             print("Hot-loading new IELs into runtime...")
             print("IEL registry reload: COMPLETED")
-            
+
+        elif args.prune:
+            # Prune underperforming IELs
+            try:
+                from logos_core.meta_reasoning.iel_evaluator import IELEvaluator
+
+                print(f"Pruning IELs below quality threshold: {args.below}")
+
+                # Get evaluator and run evaluation
+                evaluator = IELEvaluator(args.registry.replace('.json', '.db'))
+                evaluation_results = evaluator.evaluate_all_iels()
+
+                pruned_count = 0
+                for iel_id, evaluation in evaluation_results.items():
+                    if evaluation['overall_score'] < args.below:
+                        # Revoke underperforming IEL
+                        success = registry.revoke_iel(iel_id, f"Quality score {evaluation['overall_score']} below threshold {args.below}")
+                        if success:
+                            pruned_count += 1
+                            print(f"  Pruned: {iel_id} (score: {evaluation['overall_score']})")
+
+                print(f"Pruning complete: {pruned_count} IELs removed from active registry")
+
+            except ImportError as e:
+                print(f"Error: IEL evaluator not available: {e}")
+                sys.exit(1)
+
         else:
             parser.print_help()
-            
+
     except Exception as e:
         print(f"Error: {e}")
         sys.exit(1)

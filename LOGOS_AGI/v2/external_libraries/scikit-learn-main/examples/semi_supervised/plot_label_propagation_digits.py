@@ -81,9 +81,7 @@ print(classification_report(true_labels, predicted_labels))
 # Confusion matrix
 from sklearn.metrics import ConfusionMatrixDisplay
 
-ConfusionMatrixDisplay.from_predictions(
-    true_labels, predicted_labels, labels=lp_model.classes_
-)
+ConfusionMatrixDisplay.from_predictions(true_labels, predicted_labels, labels=lp_model.classes_)
 
 # %%
 # Plot the most uncertain predictions
@@ -110,9 +108,7 @@ for index, image_index in enumerate(uncertainty_index):
     sub.imshow(image, cmap=plt.cm.gray_r)
     plt.xticks([])
     plt.yticks([])
-    sub.set_title(
-        "predict: %i\ntrue: %i" % (lp_model.transduction_[image_index], y[image_index])
-    )
+    sub.set_title("predict: %i\ntrue: %i" % (lp_model.transduction_[image_index], y[image_index]))
 
 f.suptitle("Learning with small amount of labeled data")
 plt.show()

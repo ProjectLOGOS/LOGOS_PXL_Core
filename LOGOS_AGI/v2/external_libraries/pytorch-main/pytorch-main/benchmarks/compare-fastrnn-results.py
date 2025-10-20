@@ -24,9 +24,7 @@ def get_times(json_data):
 parser = argparse.ArgumentParser("compare two pytest jsons")
 parser.add_argument("base", help="base json file")
 parser.add_argument("diff", help="diff json file")
-parser.add_argument(
-    "--format", default="md", type=str, help="output format (csv, md, json, table)"
-)
+parser.add_argument("--format", default="md", type=str, help="output format (csv, md, json, table)")
 args = parser.parse_args()
 
 with open(args.base) as base:

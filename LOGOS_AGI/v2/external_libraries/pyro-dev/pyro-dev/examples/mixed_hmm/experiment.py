@@ -41,9 +41,7 @@ def run_expt(args):
     optim = args["optim"]
     lr = args["learnrate"]
     timesteps = args["timesteps"]
-    schedule = (
-        [] if not args["schedule"] else [int(i) for i in args["schedule"].split(",")]
-    )
+    schedule = [] if not args["schedule"] else [int(i) for i in args["schedule"].split(",")]
     random_effects = {"group": args["group"], "individual": args["individual"]}
 
     pyro.set_rng_seed(seed)  # reproducible random effect parameter init
@@ -63,9 +61,7 @@ def run_expt(args):
         loss_fn = TraceEnum_ELBO(max_plate_nesting=2).differentiable_loss
         with pyro.poutine.trace(param_only=True) as param_capture:
             loss_fn(model, guide)
-        params = [
-            site["value"].unconstrained() for site in param_capture.trace.nodes.values()
-        ]
+        params = [site["value"].unconstrained() for site in param_capture.trace.nodes.values()]
         optimizer = torch.optim.Adam(params, lr=lr)
 
         if schedule:
@@ -95,9 +91,7 @@ def run_expt(args):
         loss_fn = TraceEnum_ELBO(max_plate_nesting=2).differentiable_loss
         with pyro.poutine.trace(param_only=True) as param_capture:
             loss_fn(model, guide)
-        params = [
-            site["value"].unconstrained() for site in param_capture.trace.nodes.values()
-        ]
+        params = [site["value"].unconstrained() for site in param_capture.trace.nodes.values()]
         optimizer = torch.optim.LBFGS(params, lr=lr)
 
         if schedule:
@@ -141,18 +135,12 @@ def run_expt(args):
 
     if args["resultsdir"] is not None and os.path.exists(args["resultsdir"]):
         re_str = "g" + (
-            "n"
-            if args["group"] is None
-            else "d" if args["group"] == "discrete" else "c"
+            "n" if args["group"] is None else "d" if args["group"] == "discrete" else "c"
         )
         re_str += "i" + (
-            "n"
-            if args["individual"] is None
-            else "d" if args["individual"] == "discrete" else "c"
+            "n" if args["individual"] is None else "d" if args["individual"] == "discrete" else "c"
         )
-        results_filename = "expt_{}_{}_{}.json".format(
-            dataset, re_str, str(uuid.uuid4().hex)[0:5]
-        )
+        results_filename = "expt_{}_{}_{}.json".format(dataset, re_str, str(uuid.uuid4().hex)[0:5])
         with open(os.path.join(args["resultsdir"], results_filename), "w") as f:
             json.dump(results, f)
 

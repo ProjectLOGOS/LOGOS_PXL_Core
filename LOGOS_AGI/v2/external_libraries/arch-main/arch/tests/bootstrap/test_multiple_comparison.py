@@ -41,18 +41,14 @@ def spa_data():
     benchmark_series = pd.Series(benchmark, index=index)
     benchmark_df = pd.DataFrame(benchmark, index=index)
     models_df = pd.DataFrame(models, index=index)
-    return SPAData(
-        rng, k, t, benchmark, models, index, benchmark_series, benchmark_df, models_df
-    )
+    return SPAData(rng, k, t, benchmark, models, index, benchmark_series, benchmark_df, models_df)
 
 
 def test_equivalence(spa_data):
     spa = SPA(spa_data.benchmark, spa_data.models, block_size=10, reps=100, seed=23456)
     spa.compute()
     numpy_pvalues = spa.pvalues
-    spa = SPA(
-        spa_data.benchmark_df, spa_data.models_df, block_size=10, reps=100, seed=23456
-    )
+    spa = SPA(spa_data.benchmark_df, spa_data.models_df, block_size=10, reps=100, seed=23456)
     spa.compute()
     pandas_pvalues = spa.pvalues
     assert_series_equal(numpy_pvalues, pandas_pvalues)
@@ -69,14 +65,10 @@ def test_variances_and_selection(spa_data):
     kernel_weights = np.zeros(t)
     p = 1 / 10.0
     for i in range(1, t):
-        kernel_weights[i] = ((1.0 - (i / t)) * ((1 - p) ** i)) + (
-            (i / t) * ((1 - p) ** (t - i))
-        )
+        kernel_weights[i] = ((1.0 - (i / t)) * ((1 - p) ** i)) + ((i / t) * ((1 - p) ** (t - i)))
     direct_vars = (demeaned**2).sum(0) / t
     for i in range(1, t):
-        direct_vars += (
-            2 * kernel_weights[i] * (demeaned[: t - i, :] * demeaned[i:, :]).sum(0) / t
-        )
+        direct_vars += 2 * kernel_weights[i] * (demeaned[: t - i, :] * demeaned[i:, :]).sum(0) / t
     assert_allclose(direct_vars, variances)
 
     selection_criteria = -1.0 * np.sqrt((direct_vars / t) * 2 * np.log(np.log(t)))
@@ -157,9 +149,7 @@ def test_str_repr(spa_data):
     expected = "SPA(studentization: none, bootstrap: " + str(spa.bootstrap) + ")"
     assert_equal(str(spa), expected)
 
-    spa = SPA(
-        spa_data.benchmark, spa_data.models, nested=True, bootstrap="moving_block"
-    )
+    spa = SPA(spa_data.benchmark, spa_data.models, nested=True, bootstrap="moving_block")
     expected = "SPA(studentization: bootstrap, bootstrap: " + str(spa.bootstrap) + ")"
     assert_equal(str(spa), expected)
 
@@ -223,9 +213,7 @@ class TestStepM:
         stepm.compute()
 
         adj_models = self.models_df - linspace(-2.0, 2.0, self.k)
-        stepm_pandas = StepM(
-            self.benchmark_series, adj_models, size=0.20, reps=200, seed=23456
-        )
+        stepm_pandas = StepM(self.benchmark_series, adj_models, size=0.20, reps=200, seed=23456)
         stepm_pandas.compute()
         assert isinstance(stepm_pandas.superior_models, list)
         members = adj_models.columns.isin(stepm_pandas.superior_models)
@@ -364,14 +352,10 @@ class TestMCS:
             removed = list(indices[np.isfinite(indices)])
             include = list(set(list(range(10))).difference(removed))
             include.sort()
-            pval, drop_index = r_step(
-                losses[:, np.array(include)], mcs._bootstrap_indices
-            )
+            pval, drop_index = r_step(losses[:, np.array(include)], mcs._bootstrap_indices)
             pvals[i] = pval if i == 0 else np.max([pvals[i - 1], pval])
             indices[i] = include[drop_index]
-        direct = pd.DataFrame(
-            pvals, index=np.array(indices, dtype=np.int64), columns=["Pvalue"]
-        )
+        direct = pd.DataFrame(pvals, index=np.array(indices, dtype=np.int64), columns=["Pvalue"])
         direct.index.name = "Model index"
         assert_frame_equal(mcs.pvalues.iloc[:m], direct)
 
@@ -407,14 +391,10 @@ class TestMCS:
             removed = list(indices[np.isfinite(indices)])
             include = list(set(list(range(10))).difference(removed))
             include.sort()
-            pval, drop_index, _ = max_step(
-                losses[:, np.array(include)], mcs._bootstrap_indices
-            )
+            pval, drop_index, _ = max_step(losses[:, np.array(include)], mcs._bootstrap_indices)
             pvals[i] = pval if i == 0 else np.max([pvals[i - 1], pval])
             indices[i] = include[drop_index]
-        direct = pd.DataFrame(
-            pvals, index=np.array(indices, dtype=np.int64), columns=["Pvalue"]
-        )
+        direct = pd.DataFrame(pvals, index=np.array(indices, dtype=np.int64), columns=["Pvalue"])
         direct.index.name = "Model index"
         assert_frame_equal(mcs.pvalues.iloc[:m], direct)
 

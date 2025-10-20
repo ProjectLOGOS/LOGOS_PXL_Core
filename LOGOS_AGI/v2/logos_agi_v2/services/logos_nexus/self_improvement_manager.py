@@ -37,7 +37,7 @@ class SelfImprovementManager:
         if syntax_check['status'] == 'error':
             self.logger.critical(f"AST CHECK FAILED. Patch is not valid Python. REJECTING. Reason: {syntax_check['message']}")
             return {"status": "rejected", "reason": "AST validation failed."}
-        
+
         self.logger.info("AST check passed. Performing final meta-attestation...")
 
         validation_payload = {
@@ -45,7 +45,7 @@ class SelfImprovementManager:
             "operation": "apply_self_patch", "entity": "AGI_source_code", "context": {}
         }
         validation_result = self.logos_nexus.validator.validate_agi_operation(validation_payload)
-        
+
         if not validation_result["authorized"]:
             self.logger.critical(f"META-ATTESTATION FAILED. REJECTING. Reason: {validation_result['reason']}")
             return {"status": "rejected", "reason": "Proposed patch failed OBDC validation."}

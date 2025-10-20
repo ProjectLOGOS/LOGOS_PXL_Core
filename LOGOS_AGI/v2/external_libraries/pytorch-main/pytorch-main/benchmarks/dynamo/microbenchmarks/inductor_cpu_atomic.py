@@ -36,19 +36,13 @@ def test_total_time(shapes, types):
         inductor_result = inductor_scatter_add(dst, src, index)
         torch.testing.assert_close(torch_result, inductor_result)
 
-        torch_ms = (
-            time_with_torch_timer(torch_scatter_add, (dst, src, index)).mean * 1000
-        )
-        inductor_ms = (
-            time_with_torch_timer(inductor_scatter_add, (dst, src, index)).mean * 1000
-        )
+        torch_ms = time_with_torch_timer(torch_scatter_add, (dst, src, index)).mean * 1000
+        inductor_ms = time_with_torch_timer(inductor_scatter_add, (dst, src, index)).mean * 1000
         torch_worst_ms = (
-            time_with_torch_timer(torch_scatter_add, (dst, src, worst_index)).mean
-            * 1000
+            time_with_torch_timer(torch_scatter_add, (dst, src, worst_index)).mean * 1000
         )
         inductor_worst_ms = (
-            time_with_torch_timer(inductor_scatter_add, (dst, src, worst_index)).mean
-            * 1000
+            time_with_torch_timer(inductor_scatter_add, (dst, src, worst_index)).mean * 1000
         )
 
         print(torch_ms, inductor_ms, torch_worst_ms, inductor_worst_ms, sep="; ")

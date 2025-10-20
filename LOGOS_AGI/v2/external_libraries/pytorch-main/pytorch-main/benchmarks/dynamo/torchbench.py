@@ -276,17 +276,9 @@ class TorchBenchmarkRunner(BenchmarkRunner):
         )
         if cant_change_batch_size:
             batch_size = None
-        if (
-            batch_size is None
-            and is_training
-            and model_name in self._batch_size["training"]
-        ):
+        if batch_size is None and is_training and model_name in self._batch_size["training"]:
             batch_size = self._batch_size["training"][model_name]
-        elif (
-            batch_size is None
-            and not is_training
-            and model_name in self._batch_size["inference"]
-        ):
+        elif batch_size is None and not is_training and model_name in self._batch_size["inference"]:
             batch_size = self._batch_size["inference"][model_name]
 
         # Control the memory footprint for few models
@@ -345,18 +337,14 @@ class TorchBenchmarkRunner(BenchmarkRunner):
             _reassign_parameters(model)
 
         # Models that must be in train mode while training
-        if is_training and (
-            not use_eval_mode or model_name in self._config["only_training"]
-        ):
+        if is_training and (not use_eval_mode or model_name in self._config["only_training"]):
             model.train()
         else:
             model.eval()
         gc.collect()
         batch_size = benchmark.batch_size
         if model_name == "torchrec_dlrm":
-            batch_namedtuple = namedtuple(
-                "Batch", "dense_features sparse_features labels"
-            )
+            batch_namedtuple = namedtuple("Batch", "dense_features sparse_features labels")
             example_inputs = tuple(
                 batch_namedtuple(
                     dense_features=batch.dense_features,

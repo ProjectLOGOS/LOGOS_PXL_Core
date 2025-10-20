@@ -302,9 +302,7 @@ print(
 # Let's compute and plot the posterior:
 
 # initialize random variable
-t_post = t(
-    df, loc=np.mean(differences), scale=corrected_std(differences, n_train, n_test)
-)
+t_post = t(df, loc=np.mean(differences), scale=corrected_std(differences, n_train, n_test))
 
 # %%
 # Let's plot the posterior distribution:
@@ -445,9 +443,7 @@ cred_int_df
 from itertools import combinations
 from math import factorial
 
-n_comparisons = factorial(len(model_scores)) / (
-    factorial(2) * factorial(len(model_scores) - 2)
-)
+n_comparisons = factorial(len(model_scores)) / (factorial(2) * factorial(len(model_scores) - 2))
 pairwise_t_test = []
 
 for model_i, model_k in combinations(range(len(model_scores)), 2):
@@ -490,9 +486,7 @@ for model_i, model_k in combinations(range(len(model_scores)), 2):
     model_i_scores = model_scores.iloc[model_i].values
     model_k_scores = model_scores.iloc[model_k].values
     differences = model_i_scores - model_k_scores
-    t_post = t(
-        df, loc=np.mean(differences), scale=corrected_std(differences, n_train, n_test)
-    )
+    t_post = t(df, loc=np.mean(differences), scale=corrected_std(differences, n_train, n_test))
     worse_prob = t_post.cdf(rope_interval[0])
     better_prob = 1 - t_post.cdf(rope_interval[1])
     rope_prob = t_post.cdf(rope_interval[1]) - t_post.cdf(rope_interval[0])

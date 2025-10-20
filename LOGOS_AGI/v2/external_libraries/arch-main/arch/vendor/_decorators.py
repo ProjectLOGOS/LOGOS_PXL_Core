@@ -84,9 +84,7 @@ def deprecate_kwarg(
     should raise warning
     """
     if mapping is not None and not hasattr(mapping, "get") and not callable(mapping):
-        raise TypeError(
-            "mapping from old to new argument values must be dict or callable!"
-        )
+        raise TypeError("mapping from old to new argument values must be dict or callable!")
 
     def _deprecate_kwarg(func: F) -> F:
         @wraps(func)

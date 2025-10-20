@@ -199,9 +199,7 @@ def main(argv):
 
         struct_members.append(f"  {ret}(*{short_name})({args});")
 
-        load_functions.append(
-            f'    *(void**)&nnapi_.{short_name} = dlsym(handle, "{name}");'
-        )
+        load_functions.append(f'    *(void**)&nnapi_.{short_name} = dlsym(handle, "{name}");')
         load_functions.append(f"    check_nnapi_.{short_name} = check_{short_name};")
 
         call_args = "".join(re.findall(r"\w+(?:,|$)", args))

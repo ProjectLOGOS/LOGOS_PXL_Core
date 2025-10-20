@@ -324,9 +324,7 @@ class FixedThresholdClassifier(BaseThresholdClassifier):
             check_is_fitted(self.estimator)
             return self.estimator.classes_
         except NotFittedError:
-            raise AttributeError(
-                "The underlying estimator is not fitted yet."
-            ) from NotFittedError
+            raise AttributeError("The underlying estimator is not fitted yet.") from NotFittedError
 
     def _fit(self, X, y, **params):
         """Fit the classifier.
@@ -736,9 +734,7 @@ class TunedThresholdClassifierCV(BaseThresholdClassifier):
             try:
                 check_is_fitted(self.estimator, "classes_")
             except NotFittedError as exc:
-                raise NotFittedError(
-                    """When cv='prefit', `estimator` must be fitted."""
-                ) from exc
+                raise NotFittedError("""When cv='prefit', `estimator` must be fitted.""") from exc
             cv = self.cv
         else:
             cv = check_cv(self.cv, y=y, classifier=True)
@@ -798,22 +794,14 @@ class TunedThresholdClassifierCV(BaseThresholdClassifier):
             )
 
         # find the global min and max thresholds across all folds
-        min_threshold = min(
-            split_thresholds.min() for split_thresholds in cv_thresholds
-        )
-        max_threshold = max(
-            split_thresholds.max() for split_thresholds in cv_thresholds
-        )
+        min_threshold = min(split_thresholds.min() for split_thresholds in cv_thresholds)
+        max_threshold = max(split_thresholds.max() for split_thresholds in cv_thresholds)
         if isinstance(self.thresholds, Integral):
-            decision_thresholds = np.linspace(
-                min_threshold, max_threshold, num=self.thresholds
-            )
+            decision_thresholds = np.linspace(min_threshold, max_threshold, num=self.thresholds)
         else:
             decision_thresholds = np.asarray(self.thresholds)
 
-        objective_scores = _mean_interpolated_score(
-            decision_thresholds, cv_thresholds, cv_scores
-        )
+        objective_scores = _mean_interpolated_score(decision_thresholds, cv_thresholds, cv_scores)
         best_idx = objective_scores.argmax()
         self.best_score_ = objective_scores[best_idx]
         self.best_threshold_ = decision_thresholds[best_idx]

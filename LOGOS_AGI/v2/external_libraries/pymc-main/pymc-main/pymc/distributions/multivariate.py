@@ -2486,7 +2486,9 @@ class ICAR(Continuous):
         N = pt.shape(W)[-2]
         node1, node2 = pt.eq(pt.tril(W), 1).nonzero()
 
-        pairwise_difference = (-1 / (2 * sigma**2)) * pt.sum(pt.square(value[node1] - value[node2]))
+        pairwise_difference = (-1 / (2 * sigma**2)) * pt.sum(
+            pt.square(value[node1] - value[node2])
+        )
         zero_sum = (
             -0.5 * pt.pow(pt.sum(value) / (zero_sum_stdev * N), 2)
             - pt.log(pt.sqrt(2.0 * np.pi))
@@ -2800,9 +2802,9 @@ class ZeroSumNormal(Distribution):
 
         support_shape = pt.as_tensor(support_shape, dtype="int64", ndim=1)
 
-        assert n_zerosum_axes == pt.get_vector_length(support_shape), (
-            "support_shape has to be as long as n_zerosum_axes"
-        )
+        assert n_zerosum_axes == pt.get_vector_length(
+            support_shape
+        ), "support_shape has to be as long as n_zerosum_axes"
 
         return super().dist([sigma, support_shape], **kwargs)
 

@@ -32,8 +32,7 @@ print(f"pmdarima version: {pm.__version__}")
 
 # Load the data and split it into separate pieces
 y, X = load_date_example()
-y_train, y_test, X_train, X_test = \
-    model_selection.train_test_split(y, X, test_size=20)
+y_train, y_test, X_train, X_test = model_selection.train_test_split(y, X, test_size=20)
 
 # We can examine traits about the time series:
 pm.tsdisplay(y_train, lag_max=10)
@@ -47,20 +46,24 @@ n_diffs = arima.ndiffs(y_train, max_d=5)
 date_feat = preprocessing.DateFeaturizer(
     column_name="date",  # the name of the date feature in the X matrix
     with_day_of_week=True,
-    with_day_of_month=True)
+    with_day_of_month=True,
+)
 
 _, X_train_feats = date_feat.fit_transform(y_train, X_train)
 print(f"Head of generated X features:\n{repr(X_train_feats.head())}")
 
 # We can plug this X featurizer into a pipeline:
-pipe = pipeline.Pipeline([
-    ('date', date_feat),
-    ('arima', arima.AutoARIMA(d=n_diffs,
-                              trace=3,
-                              stepwise=True,
-                              suppress_warnings=True,
-                              seasonal=False))
-])
+pipe = pipeline.Pipeline(
+    [
+        ("date", date_feat),
+        (
+            "arima",
+            arima.AutoARIMA(
+                d=n_diffs, trace=3, stepwise=True, suppress_warnings=True, seasonal=False
+            ),
+        ),
+    ]
+)
 
 pipe.fit(y_train, X_train)
 
@@ -73,13 +76,12 @@ ax = fig.add_subplot(1, 1, 1)
 n_train = y_train.shape[0]
 x = np.arange(n_train + forecasts.shape[0])
 
-ax.plot(x[:n_train], y_train, color='blue', label='Training Data')
-ax.plot(x[n_train:], forecasts, color='green', marker='o',
-        label='Predicted')
-ax.plot(x[n_train:], y_test, color='red', label='Actual')
-ax.legend(loc='lower left', borderaxespad=0.5)
-ax.set_title('Predicted Foo')
-ax.set_ylabel('# Foo')
+ax.plot(x[:n_train], y_train, color="blue", label="Training Data")
+ax.plot(x[n_train:], forecasts, color="green", marker="o", label="Predicted")
+ax.plot(x[n_train:], y_test, color="red", label="Actual")
+ax.legend(loc="lower left", borderaxespad=0.5)
+ax.set_title("Predicted Foo")
+ax.set_ylabel("# Foo")
 
 plt.show()
 

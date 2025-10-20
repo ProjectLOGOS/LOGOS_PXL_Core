@@ -80,9 +80,7 @@ def _final_estimator_has(attr):
     return check
 
 
-def _cached_transform(
-    sub_pipeline, *, cache, param_name, param_value, transform_params
-):
+def _cached_transform(sub_pipeline, *, cache, param_name, param_value, transform_params):
     """Transform a parameter value using a sub-pipeline and cache the result.
 
     Parameters
@@ -111,8 +109,7 @@ def _cached_transform(
         # validation sets.
         if isinstance(param_value, tuple):
             cache[param_name] = tuple(
-                sub_pipeline.transform(element, **transform_params)
-                for element in param_value
+                sub_pipeline.transform(element, **transform_params) for element in param_value
             )
         else:
             cache[param_name] = sub_pipeline.transform(param_value, **transform_params)
@@ -345,11 +342,7 @@ class Pipeline(_BaseComposition):
                 )
 
         # We allow last estimator to be None as an identity transformation
-        if (
-            estimator is not None
-            and estimator != "passthrough"
-            and not hasattr(estimator, "fit")
-        ):
+        if estimator is not None and estimator != "passthrough" and not hasattr(estimator, "fit"):
             raise TypeError(
                 "Last step of Pipeline should implement fit "
                 "or be the string 'passthrough'. "
@@ -395,9 +388,7 @@ class Pipeline(_BaseComposition):
         if isinstance(ind, slice):
             if ind.step not in (1, None):
                 raise ValueError("Pipeline slicing only supports a step of 1")
-            return self.__class__(
-                self.steps[ind], memory=self.memory, verbose=self.verbose
-            )
+            return self.__class__(self.steps[ind], memory=self.memory, verbose=self.verbose)
         try:
             name, est = self.steps[ind]
         except TypeError:
@@ -503,12 +494,7 @@ class Pipeline(_BaseComposition):
             Parameters to be passed to the step. The ones which should be
             transformed are transformed.
         """
-        if (
-            self.transform_input is None
-            or not all_params
-            or not step_params
-            or step_idx == 0
-        ):
+        if self.transform_input is None or not all_params or not step_params or step_idx == 0:
             # we only need to process step_params if transform_input is set
             # and metadata is given by the user.
             return step_params
@@ -519,10 +505,7 @@ class Pipeline(_BaseComposition):
         transform_params = {
             key: value
             for key, value in all_params.items()
-            if key
-            in sub_metadata_routing.consumes(
-                method="transform", params=all_params.keys()
-            )
+            if key in sub_metadata_routing.consumes(method="transform", params=all_params.keys())
         }
         transformed_params = dict()  # this is to be returned
         transformed_cache = dict()  # used to transform each param once
@@ -566,9 +549,7 @@ class Pipeline(_BaseComposition):
 
         fit_transform_one_cached = memory.cache(_fit_transform_one)
 
-        for step_idx, name, transformer in self._iter(
-            with_final=False, filter_passthrough=False
-        ):
+        for step_idx, name, transformer in self._iter(with_final=False, filter_passthrough=False):
             if transformer is None or transformer == "passthrough":
                 with _print_elapsed_time("Pipeline", self._log_message(step_idx)):
                     continue
@@ -728,9 +709,7 @@ class Pipeline(_BaseComposition):
                 all_params=params,
             )
             if hasattr(last_step, "fit_transform"):
-                return last_step.fit_transform(
-                    Xt, y, **last_step_params["fit_transform"]
-                )
+                return last_step.fit_transform(Xt, y, **last_step_params["fit_transform"])
             else:
                 return last_step.fit(Xt, y, **last_step_params["fit"]).transform(
                     Xt, **last_step_params["transform"]
@@ -792,9 +771,7 @@ class Pipeline(_BaseComposition):
             routed_params = process_routing(self, "predict", **params)
             for _, name, transform in self._iter(with_final=False):
                 Xt = transform.transform(Xt, **routed_params[name].transform)
-            return self.steps[-1][1].predict(
-                Xt, **routed_params[self.steps[-1][0]].predict
-            )
+            return self.steps[-1][1].predict(Xt, **routed_params[self.steps[-1][0]].predict)
 
     @available_if(_final_estimator_has("fit_predict"))
     @_fit_context(
@@ -852,9 +829,7 @@ class Pipeline(_BaseComposition):
 
         params_last_step = routed_params[self.steps[-1][0]]
         with _print_elapsed_time("Pipeline", self._log_message(len(self.steps) - 1)):
-            y_pred = self.steps[-1][1].fit_predict(
-                Xt, y, **params_last_step.get("fit_predict", {})
-            )
+            y_pred = self.steps[-1][1].fit_predict(Xt, y, **params_last_step.get("fit_predict", {}))
         return y_pred
 
     @available_if(_final_estimator_has("predict_proba"))
@@ -952,9 +927,7 @@ class Pipeline(_BaseComposition):
 
             Xt = X
             for _, name, transform in self._iter(with_final=False):
-                Xt = transform.transform(
-                    Xt, **routed_params.get(name, {}).get("transform", {})
-                )
+                Xt = transform.transform(Xt, **routed_params.get(name, {}).get("transform", {}))
             return self.steps[-1][1].decision_function(
                 Xt,
                 **routed_params.get(self.steps[-1][0], {}).get("decision_function", {}),
@@ -1044,9 +1017,7 @@ class Pipeline(_BaseComposition):
             )
 
     def _can_transform(self):
-        return self._final_estimator == "passthrough" or hasattr(
-            self._final_estimator, "transform"
-        )
+        return self._final_estimator == "passthrough" or hasattr(self._final_estimator, "transform")
 
     @available_if(_can_transform)
     def transform(self, X, **params):
@@ -1135,9 +1106,7 @@ class Pipeline(_BaseComposition):
             routed_params = process_routing(self, "inverse_transform", **params)
             reverse_iter = reversed(list(self._iter()))
             for _, name, transform in reverse_iter:
-                X = transform.inverse_transform(
-                    X, **routed_params[name].inverse_transform
-                )
+                X = transform.inverse_transform(X, **routed_params[name].inverse_transform)
             return X
 
     @available_if(_final_estimator_has("score"))
@@ -1189,16 +1158,12 @@ class Pipeline(_BaseComposition):
                 return self.steps[-1][1].score(Xt, y, **score_params)
 
             # metadata routing is enabled.
-            routed_params = process_routing(
-                self, "score", sample_weight=sample_weight, **params
-            )
+            routed_params = process_routing(self, "score", sample_weight=sample_weight, **params)
 
             Xt = X
             for _, name, transform in self._iter(with_final=False):
                 Xt = transform.transform(Xt, **routed_params[name].transform)
-            return self.steps[-1][1].score(
-                Xt, y, **routed_params[self.steps[-1][0]].score
-            )
+            return self.steps[-1][1].score(Xt, y, **routed_params[self.steps[-1][0]].score)
 
     @property
     def classes_(self):
@@ -1213,9 +1178,7 @@ class Pipeline(_BaseComposition):
 
         try:
             if self.steps[0][1] is not None and self.steps[0][1] != "passthrough":
-                tags.input_tags.pairwise = get_tags(
-                    self.steps[0][1]
-                ).input_tags.pairwise
+                tags.input_tags.pairwise = get_tags(self.steps[0][1]).input_tags.pairwise
             # WARNING: the sparse tag can be incorrect.
             # Some Pipelines accepting sparse data are wrongly tagged sparse=False.
             # For example Pipeline([PCA(), estimator]) accepts sparse data
@@ -1319,9 +1282,7 @@ class Pipeline(_BaseComposition):
             # Is an estimator
             return f"{name}: {est.__class__.__name__}"
 
-        names, estimators = zip(
-            *[(_get_name(name, est), est) for name, est in self.steps]
-        )
+        names, estimators = zip(*[(_get_name(name, est), est) for name, est in self.steps])
         name_details = [str(est) for est in estimators]
         return _VisualBlock(
             "serial",
@@ -1388,9 +1349,7 @@ class Pipeline(_BaseComposition):
         if hasattr(final_est, "fit_transform"):
             method_mapping.add(caller="fit_transform", callee="fit_transform")
         else:
-            method_mapping.add(caller="fit", callee="fit").add(
-                caller="fit", callee="transform"
-            )
+            method_mapping.add(caller="fit", callee="fit").add(caller="fit", callee="transform")
         (
             method_mapping.add(caller="fit", callee="fit")
             .add(caller="predict", callee="predict")
@@ -1524,9 +1483,7 @@ def _transform_one(transformer, X, y, weight, params):
     return res * weight
 
 
-def _fit_transform_one(
-    transformer, X, y, weight, message_clsname="", message=None, params=None
-):
+def _fit_transform_one(transformer, X, y, weight, message_clsname="", message=None, params=None):
     """
     Fits ``transformer`` to ``X`` and ``y``. The transformed result is returned
     with the fitted transformer. If ``weight`` is not ``None``, the result will
@@ -1816,9 +1773,7 @@ class FeatureUnion(TransformerMixin, _BaseComposition):
             feature_names_out = trans.get_feature_names_out(input_features)
             transformer_with_feature_names_out.append((name, feature_names_out))
 
-        return self._add_prefix_for_feature_names_out(
-            transformer_with_feature_names_out
-        )
+        return self._add_prefix_for_feature_names_out(transformer_with_feature_names_out)
 
     def _add_prefix_for_feature_names_out(self, transformer_with_feature_names_out):
         """Add prefix for feature names out that includes the transformer names.
@@ -1848,9 +1803,7 @@ class FeatureUnion(TransformerMixin, _BaseComposition):
         feature_names_count = Counter(
             chain.from_iterable(s for _, s in transformer_with_feature_names_out)
         )
-        top_6_overlap = [
-            name for name, count in feature_names_count.most_common(6) if count > 1
-        ]
+        top_6_overlap = [name for name, count in feature_names_count.most_common(6) if count > 1]
         top_6_overlap.sort()
         if top_6_overlap:
             if len(top_6_overlap) == 6:
@@ -2137,9 +2090,7 @@ class FeatureUnion(TransformerMixin, _BaseComposition):
         return tags
 
 
-def make_union(
-    *transformers, n_jobs=None, verbose=False, verbose_feature_names_out=True
-):
+def make_union(*transformers, n_jobs=None, verbose=False, verbose_feature_names_out=True):
     """Construct a :class:`FeatureUnion` from the given transformers.
 
     This is a shorthand for the :class:`FeatureUnion` constructor; it does not

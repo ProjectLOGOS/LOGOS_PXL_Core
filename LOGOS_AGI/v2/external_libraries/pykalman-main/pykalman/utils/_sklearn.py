@@ -82,9 +82,9 @@ def check_random_state(seed):
         return np.random.RandomState(seed)
     if isinstance(seed, np.random.RandomState):
         return seed
-    raise ValueError(
-        "{0} cannot be used to seed a numpy.random.RandomState" + " instance"
-    ).format(seed)
+    raise ValueError("{0} cannot be used to seed a numpy.random.RandomState" + " instance").format(
+        seed
+    )
 
 
 class Bunch(dict):

@@ -1586,7 +1586,8 @@ class Model(WithMemoization, metaclass=ContextMeta):
         mode=None,
         point_fn: Literal[True] = True,
         **kwargs,
-    ) -> PointFunc: ...
+    ) -> PointFunc:
+        ...
 
     @overload
     def compile_fn(
@@ -1597,7 +1598,8 @@ class Model(WithMemoization, metaclass=ContextMeta):
         mode=None,
         point_fn: Literal[False],
         **kwargs,
-    ) -> Function: ...
+    ) -> Function:
+        ...
 
     def compile_fn(
         self,

@@ -99,9 +99,7 @@ class ReutersParser(HTMLParser):
 
     def end_reuters(self):
         self.body = re.sub(r"\s+", r" ", self.body)
-        self.docs.append(
-            {"title": self.title, "body": self.body, "topics": self.topics}
-        )
+        self.docs.append({"title": self.title, "body": self.body, "topics": self.topics})
         self._reset()
 
     def start_title(self, attributes):
@@ -188,9 +186,7 @@ def stream_reuters_documents(data_path=None):
 # Create the vectorizer and limit the number of features to a reasonable
 # maximum
 
-vectorizer = HashingVectorizer(
-    decode_error="ignore", n_features=2**18, alternate_sign=False
-)
+vectorizer = HashingVectorizer(decode_error="ignore", n_features=2**18, alternate_sign=False)
 
 
 # Iterator over parsed Reuters SGML files.

@@ -21,14 +21,10 @@ def _log_beta_1(alpha, value, is_sparse):
         result = torch.zeros_like(value)
         value = value[mask]
         alpha = alpha[mask]
-        result[mask] = (
-            torch.lgamma(1 + value) + torch.lgamma(alpha) - torch.lgamma(value + alpha)
-        )
+        result[mask] = torch.lgamma(1 + value) + torch.lgamma(alpha) - torch.lgamma(value + alpha)
         return result
     else:
-        return (
-            torch.lgamma(1 + value) + torch.lgamma(alpha) - torch.lgamma(value + alpha)
-        )
+        return torch.lgamma(1 + value) + torch.lgamma(alpha) - torch.lgamma(value + alpha)
 
 
 class BetaBinomial(TorchDistribution):
@@ -62,9 +58,7 @@ class BetaBinomial(TorchDistribution):
     # plus arithmetic. Recommended values are between 0.1 and 0.01.
     approx_log_prob_tol = 0.0
 
-    def __init__(
-        self, concentration1, concentration0, total_count=1, validate_args=None
-    ):
+    def __init__(self, concentration1, concentration0, total_count=1, validate_args=None):
         concentration1, concentration0, total_count = broadcast_all(
             concentration1, concentration0, total_count
         )
@@ -102,11 +96,7 @@ class BetaBinomial(TorchDistribution):
         a = self.concentration1
         b = self.concentration0
         tol = self.approx_log_prob_tol
-        return (
-            log_binomial(n, k, tol)
-            + log_beta(k + a, n - k + b, tol)
-            - log_beta(a, b, tol)
-        )
+        return log_binomial(n, k, tol) + log_beta(k + a, n - k + b, tol) - log_beta(a, b, tol)
 
     @property
     def mean(self):
@@ -158,9 +148,7 @@ class DirichletMultinomial(TorchDistribution):
     }
     support = Multinomial.support
 
-    def __init__(
-        self, concentration, total_count=1, is_sparse=False, validate_args=None
-    ):
+    def __init__(self, concentration, total_count=1, is_sparse=False, validate_args=None):
         batch_shape = concentration.shape[:-1]
         event_shape = concentration.shape[-1:]
         if isinstance(total_count, numbers.Number):
@@ -200,9 +188,7 @@ class DirichletMultinomial(TorchDistribution):
         probs = self._dirichlet.sample(sample_shape)
         total_count = int(self.total_count.max())
         if not self.total_count.min() == total_count:
-            raise NotImplementedError(
-                "Inhomogeneous total count not supported by `sample`."
-            )
+            raise NotImplementedError("Inhomogeneous total count not supported by `sample`.")
         return Multinomial(total_count, probs).sample()
 
     def log_prob(self, value):

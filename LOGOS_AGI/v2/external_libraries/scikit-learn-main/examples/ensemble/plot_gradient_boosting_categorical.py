@@ -110,9 +110,7 @@ one_hot_encoder = make_column_transformer(
     remainder="passthrough",
 )
 
-hist_one_hot = make_pipeline(
-    one_hot_encoder, HistGradientBoostingRegressor(random_state=42)
-)
+hist_one_hot = make_pipeline(one_hot_encoder, HistGradientBoostingRegressor(random_state=42))
 hist_one_hot
 
 # %%
@@ -138,9 +136,7 @@ ordinal_encoder = make_column_transformer(
     verbose_feature_names_out=False,
 )
 
-hist_ordinal = make_pipeline(
-    ordinal_encoder, HistGradientBoostingRegressor(random_state=42)
-)
+hist_ordinal = make_pipeline(ordinal_encoder, HistGradientBoostingRegressor(random_state=42))
 hist_ordinal
 
 # %%
@@ -156,9 +152,7 @@ hist_ordinal
 # this one, we let the :class:`~ensemble.HistGradientBoostingRegressor` detect
 # which features are categorical from the DataFrame columns' dtypes.
 
-hist_native = HistGradientBoostingRegressor(
-    random_state=42, categorical_features="from_dtype"
-)
+hist_native = HistGradientBoostingRegressor(random_state=42, categorical_features="from_dtype")
 hist_native
 
 # %%

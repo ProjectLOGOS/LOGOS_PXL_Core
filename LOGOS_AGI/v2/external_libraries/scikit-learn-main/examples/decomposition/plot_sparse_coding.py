@@ -76,9 +76,7 @@ estimators = [
 lw = 2
 
 plt.figure(figsize=(13, 6))
-for subplot, (D, title) in enumerate(
-    zip((D_fixed, D_multi), ("fixed width", "multiple widths"))
-):
+for subplot, (D, title) in enumerate(zip((D_fixed, D_multi), ("fixed width", "multiple widths"))):
     plt.subplot(1, 2, subplot + 1)
     plt.title("Sparse coding against %s dictionary" % title)
     plt.plot(y, lw=lw, linestyle="--", label="Original signal")
@@ -102,9 +100,7 @@ for subplot, (D, title) in enumerate(
         )
 
     # Soft thresholding debiasing
-    coder = SparseCoder(
-        dictionary=D, transform_algorithm="threshold", transform_alpha=20
-    )
+    coder = SparseCoder(dictionary=D, transform_algorithm="threshold", transform_alpha=20)
     x = coder.transform(y.reshape(1, -1))
     _, idx = (x != 0).nonzero()
     x[0, idx], _, _, _ = np.linalg.lstsq(D[idx, :].T, y, rcond=None)

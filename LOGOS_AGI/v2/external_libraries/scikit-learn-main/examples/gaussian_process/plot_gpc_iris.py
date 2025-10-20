@@ -58,9 +58,7 @@ for i, clf in enumerate((gpc_rbf_isotropic, gpc_rbf_anisotropic)):
     plt.ylim(yy.min(), yy.max())
     plt.xticks(())
     plt.yticks(())
-    plt.title(
-        "%s, LML: %.3f" % (titles[i], clf.log_marginal_likelihood(clf.kernel_.theta))
-    )
+    plt.title("%s, LML: %.3f" % (titles[i], clf.log_marginal_likelihood(clf.kernel_.theta)))
 
 plt.tight_layout()
 plt.show()

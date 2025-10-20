@@ -24,9 +24,7 @@ for trend in TRENDS:
             all_results.append(data["results"])
     results = np.hstack(all_results)
     cols = TIME_SERIES_LENGTHS.tolist() * len(data_files)
-    results_df = pd.DataFrame(
-        results, index=pd.Index(PERCENTILES / 100.0), columns=cols
-    )
+    results_df = pd.DataFrame(results, index=pd.Index(PERCENTILES / 100.0), columns=cols)
 
     cv_approx = estimate_cv_regression(results_df, critical_values)
     adf_z_cv_approx[trend] = [cv_approx[cv] for cv in critical_values]

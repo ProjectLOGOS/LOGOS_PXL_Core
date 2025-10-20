@@ -421,7 +421,9 @@ class TestMatchesScipy:
     def test_kumaraswamy(self):
         # Scipy does not have a built-in Kumaraswamy
         def scipy_log_pdf(value, a, b):
-            return np.log(a) + np.log(b) + (a - 1) * np.log(value) + (b - 1) * np.log(1 - value**a)
+            return (
+                np.log(a) + np.log(b) + (a - 1) * np.log(value) + (b - 1) * np.log(1 - value**a)
+            )
 
         def log1mexp(x):
             return np.log1p(-np.exp(x)) if x < np.log(0.5) else np.log(-np.expm1(x))
@@ -1924,7 +1926,9 @@ class TestHalfStudentT(BaseTestDistributionRandom):
     pymc_dist_params = {"nu": 5.0, "sigma": 2.0}
     expected_rv_op_params = {"nu": 5.0, "sigma": 2.0}
     reference_dist_params = {"df": 5.0, "loc": 0, "scale": 2.0}
-    reference_dist = lambda self: ft.partial(self.halfstudentt_rng_fn, rng=self.get_random_state())  # noqa: E731
+    reference_dist = lambda self: ft.partial(
+        self.halfstudentt_rng_fn, rng=self.get_random_state()
+    )  # noqa: E731
     checks_to_run = [
         "check_pymc_params_match_rv_op",
         "check_pymc_draws_match_reference",
@@ -2158,7 +2162,9 @@ class TestLogitNormal(BaseTestDistributionRandom):
     pymc_dist_params = {"mu": 5.0, "sigma": 10.0}
     expected_rv_op_params = {"mu": 5.0, "sigma": 10.0}
     reference_dist_params = {"loc": 5.0, "scale": 10.0}
-    reference_dist = lambda self: ft.partial(self.logit_normal_rng_fn, rng=self.get_random_state())  # noqa: E731
+    reference_dist = lambda self: ft.partial(
+        self.logit_normal_rng_fn, rng=self.get_random_state()
+    )  # noqa: E731
     checks_to_run = [
         "check_pymc_params_match_rv_op",
         "check_pymc_draws_match_reference",
@@ -2229,7 +2235,9 @@ class TestBeta(BaseTestDistributionRandom):
     expected_rv_op_params = {"alpha": 2.0, "beta": 5.0}
     reference_dist_params = {"a": 2.0, "b": 5.0}
     size = 15
-    reference_dist = lambda self: ft.partial(clipped_beta_rvs, random_state=self.get_random_state())  # noqa: E731
+    reference_dist = lambda self: ft.partial(
+        clipped_beta_rvs, random_state=self.get_random_state()
+    )  # noqa: E731
     checks_to_run = [
         "check_pymc_params_match_rv_op",
         "check_pymc_draws_match_reference",
@@ -2447,7 +2455,9 @@ class TestPolyaGamma(BaseTestDistributionRandom):
     pymc_dist_params = {"h": 1.0, "z": 0.0}
     expected_rv_op_params = {"h": 1.0, "z": 0.0}
     reference_dist_params = {"h": 1.0, "z": 0.0}
-    reference_dist = lambda self: ft.partial(self.polyagamma_rng_fn, rng=self.get_random_state())  # noqa: E731
+    reference_dist = lambda self: ft.partial(
+        self.polyagamma_rng_fn, rng=self.get_random_state()
+    )  # noqa: E731
     checks_to_run = [
         "check_pymc_params_match_rv_op",
         "check_pymc_draws_match_reference",
@@ -2468,7 +2478,9 @@ class TestInterpolated(BaseTestDistributionRandom):
     pymc_dist_params = {"x_points": x_points, "pdf_points": pdf_points}
     reference_dist_params = {"mu": mu, "sigma": sigma}
 
-    reference_dist = lambda self: ft.partial(self.interpolated_rng_fn, rng=self.get_random_state())  # noqa: E731
+    reference_dist = lambda self: ft.partial(
+        self.interpolated_rng_fn, rng=self.get_random_state()
+    )  # noqa: E731
     checks_to_run = [
         "check_rv_size",
         "check_draws",

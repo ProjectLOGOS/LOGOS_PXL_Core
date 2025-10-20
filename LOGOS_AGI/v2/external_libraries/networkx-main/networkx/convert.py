@@ -98,9 +98,7 @@ def to_networkx_graph(data, create_using=None, multigraph_input=False):
             )
         except Exception as err1:
             if multigraph_input is True:
-                raise nx.NetworkXError(
-                    f"converting multigraph_input raised:\n{type(err1)}: {err1}"
-                )
+                raise nx.NetworkXError(f"converting multigraph_input raised:\n{type(err1)}: {err1}")
             try:
                 return from_dict_of_lists(data, create_using=create_using)
             except Exception as err2:
@@ -133,9 +131,7 @@ def to_networkx_graph(data, create_using=None, multigraph_input=False):
                     raise nx.NetworkXError(msg) from err
             else:
                 try:
-                    return nx.from_pandas_edgelist(
-                        data, edge_attr=True, create_using=create_using
-                    )
+                    return nx.from_pandas_edgelist(data, edge_attr=True, create_using=create_using)
                 except Exception as err:
                     msg = "Input is not a correct Pandas DataFrame edge-list."
                     raise nx.NetworkXError(msg) from err
@@ -164,9 +160,7 @@ def to_networkx_graph(data, create_using=None, multigraph_input=False):
             try:
                 return nx.from_scipy_sparse_array(data, create_using=create_using)
             except Exception as err:
-                raise nx.NetworkXError(
-                    "Input is not a correct scipy sparse array type."
-                ) from err
+                raise nx.NetworkXError("Input is not a correct scipy sparse array type.") from err
     except ImportError:
         pass
 
@@ -244,9 +238,7 @@ def from_dict_of_lists(d, create_using=None):
                     G.add_edge(node, nbr)
             seen[node] = 1  # don't allow reverse edge to show up
     else:
-        G.add_edges_from(
-            ((node, nbr) for node, nbrlist in d.items() for nbr in nbrlist)
-        )
+        G.add_edges_from(((node, nbr) for node, nbrlist in d.items() for nbr in nbrlist))
     return G
 
 
@@ -424,18 +416,14 @@ def from_dict_of_dicts(d, create_using=None, multigraph_input=False):
                 for u, nbrs in d.items():
                     for v, datadict in nbrs.items():
                         if (u, v) not in seen:
-                            G.add_edges_from(
-                                (u, v, key, data) for key, data in datadict.items()
-                            )
+                            G.add_edges_from((u, v, key, data) for key, data in datadict.items())
                             seen.add((v, u))
             else:
                 seen = set()  # don't add both directions of undirected graph
                 for u, nbrs in d.items():
                     for v, datadict in nbrs.items():
                         if (u, v) not in seen:
-                            G.add_edges_from(
-                                (u, v, data) for key, data in datadict.items()
-                            )
+                            G.add_edges_from((u, v, data) for key, data in datadict.items())
                             seen.add((v, u))
 
     else:  # not a multigraph to multigraph transfer
@@ -451,9 +439,7 @@ def from_dict_of_dicts(d, create_using=None, multigraph_input=False):
                         G[u][v][0].update(data)
                     seen.add((v, u))
         else:
-            G.add_edges_from(
-                ((u, v, data) for u, nbrs in d.items() for v, data in nbrs.items())
-            )
+            G.add_edges_from(((u, v, data) for u, nbrs in d.items() for v, data in nbrs.items()))
     return G
 
 

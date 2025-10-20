@@ -13,9 +13,7 @@ Microbenchmarks for Conv1d and ConvTranspose1d operators.
 
 class Conv1dBenchmark(op_bench.TorchBenchmarkBase):
     def init(self, IC, OC, kernel, stride, N, L, device):
-        self.inputs = {
-            "input": torch.rand(N, IC, L, device=device, requires_grad=self.auto_set())
-        }
+        self.inputs = {"input": torch.rand(N, IC, L, device=device, requires_grad=self.auto_set())}
         self.conv1d = nn.Conv1d(IC, OC, kernel, stride=stride).to(device=device)
         self.set_module_name("Conv1d")
 
@@ -26,9 +24,7 @@ class Conv1dBenchmark(op_bench.TorchBenchmarkBase):
 class ConvTranspose1dBenchmark(op_bench.TorchBenchmarkBase):
     def init(self, IC, OC, kernel, stride, N, L, device):
         self.inputs = {"input": torch.rand(N, IC, L, device=device)}
-        self.convtranspose1d = nn.ConvTranspose1d(IC, OC, kernel, stride=stride).to(
-            device=device
-        )
+        self.convtranspose1d = nn.ConvTranspose1d(IC, OC, kernel, stride=stride).to(device=device)
         self.set_module_name("ConvTranspose1d")
 
     def forward(self, input):
@@ -54,9 +50,9 @@ Microbenchmarks for Conv2d, ConvTranspose2d, and Conv2dPointwise operators.
 class Conv2dBenchmark(op_bench.TorchBenchmarkBase):
     def init(self, IC, OC, kernel, stride, N, H, W, G, pad, device):
         self.inputs = {"input": torch.rand(N, IC, H, W, device=device)}
-        self.conv2d = nn.Conv2d(
-            IC, OC, kernel, stride=stride, groups=G, padding=pad
-        ).to(device=device)
+        self.conv2d = nn.Conv2d(IC, OC, kernel, stride=stride, groups=G, padding=pad).to(
+            device=device
+        )
         self.set_module_name("Conv2d")
 
     def forward(self, input):
@@ -79,9 +75,7 @@ class Conv2dPointwiseBenchmark(op_bench.TorchBenchmarkBase):
     def init(self, IC, OC, stride, N, H, W, G, pad, device):
         self.inputs = {"input": torch.rand(N, IC, H, W, device=device)}
         # Use 1 as kernel for pointwise convolution
-        self.conv2d = nn.Conv2d(IC, OC, 1, stride=stride, groups=G, padding=pad).to(
-            device=device
-        )
+        self.conv2d = nn.Conv2d(IC, OC, 1, stride=stride, groups=G, padding=pad).to(device=device)
         self.set_module_name("Conv2dPointwise")
 
     def forward(self, input):
@@ -119,9 +113,7 @@ class Conv3dBenchmark(op_bench.TorchBenchmarkBase):
 class ConvTranspose3dBenchmark(op_bench.TorchBenchmarkBase):
     def init(self, IC, OC, kernel, stride, N, D, H, W, device):
         self.inputs = {"input": torch.rand(N, IC, D, H, W, device=device)}
-        self.convtranspose3d = nn.ConvTranspose3d(IC, OC, kernel, stride=stride).to(
-            device=device
-        )
+        self.convtranspose3d = nn.ConvTranspose3d(IC, OC, kernel, stride=stride).to(device=device)
         self.set_module_name("ConvTranspose3d")
 
     def forward(self, input):

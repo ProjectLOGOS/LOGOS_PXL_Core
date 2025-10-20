@@ -22,9 +22,7 @@ import networkx as nx
 
 
 def pytest_addoption(parser):
-    parser.addoption(
-        "--runslow", action="store_true", default=False, help="run slow tests"
-    )
+    parser.addoption("--runslow", action="store_true", default=False, help="run slow tests")
     parser.addoption(
         "--backend",
         action="store",
@@ -107,18 +105,14 @@ def set_warnings():
         category=UserWarning,
         message=r"Exited (at iteration \d+|postprocessing) with accuracies.*",
     )
-    warnings.filterwarnings(
-        "ignore", category=DeprecationWarning, message="\n\nThe `normalized`"
-    )
+    warnings.filterwarnings("ignore", category=DeprecationWarning, message="\n\nThe `normalized`")
     warnings.filterwarnings(
         "ignore", category=DeprecationWarning, message="\n\n`compute_v_structures"
     )
     warnings.filterwarnings(
         "ignore", category=DeprecationWarning, message="Keyword argument 'link'"
     )
-    warnings.filterwarnings(
-        "ignore", category=DeprecationWarning, message="maybe_regular_expander"
-    )
+    warnings.filterwarnings("ignore", category=DeprecationWarning, message="maybe_regular_expander")
 
 
 @pytest.fixture(autouse=True)

@@ -188,12 +188,9 @@ class FunctionTransformer(TransformerMixin, BaseEstimator):
             dtypes = X.dtypes
 
         # Not all dtypes are numpy dtypes, they can be pandas dtypes as well
-        if not all(
-            isinstance(d, np.dtype) and np.issubdtype(d, np.number) for d in dtypes
-        ):
+        if not all(isinstance(d, np.dtype) and np.issubdtype(d, np.number) for d in dtypes):
             raise ValueError(
-                "'check_inverse' is only supported when all the elements in `X` is"
-                " numerical."
+                "'check_inverse' is only supported when all the elements in `X` is" " numerical."
             )
 
         if not _allclose_dense_sparse(X[idx_selected], X_round_trip):
@@ -269,15 +266,11 @@ class FunctionTransformer(TransformerMixin, BaseEstimator):
                 # * `func` preserved the column names between the input and the output
                 # * the input column names are all numbers
                 # * the output is requested to be a DataFrame (pandas or polars)
-                feature_names_in = getattr(
-                    X, "feature_names_in_", _get_feature_names(X)
-                )
+                feature_names_in = getattr(X, "feature_names_in_", _get_feature_names(X))
                 same_feature_names_in_out = feature_names_in is not None and list(
                     feature_names_in
                 ) == list(out.columns)
-                not_all_str_columns = not all(
-                    isinstance(col, str) for col in out.columns
-                )
+                not_all_str_columns = not all(isinstance(col, str) for col in out.columns)
                 if same_feature_names_in_out or not_all_str_columns:
                     adapter = _get_adapter_from_container(out)
                     out = adapter.create_container(

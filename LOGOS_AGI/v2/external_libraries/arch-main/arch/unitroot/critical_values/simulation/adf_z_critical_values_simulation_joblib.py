@@ -68,9 +68,7 @@ def single_experiment(trend: str, gen: Generator, file_name: str) -> None:
     """
 
     res = np.zeros(EX_SIZE)
-    output: np.ndarray = np.zeros(
-        (len(cast(np.ndarray, PERCENTILES)), len(TIME_SERIES_LENGTHS))
-    )
+    output: np.ndarray = np.zeros((len(cast(np.ndarray, PERCENTILES)), len(TIME_SERIES_LENGTHS)))
     for col, nobs in enumerate(TIME_SERIES_LENGTHS):
         remaining = EX_SIZE
         finished = 0
@@ -130,15 +128,10 @@ if __name__ == "__main__":
     random.shuffle(jobs)
     nremconfig = len(jobs)
     nconfig = len(children)
-    print(
-        f"Total configurations: {BLUE}{nconfig}{RESET}, "
-        f"Remaining: {RED}{nremconfig}{RESET}"
-    )
+    print(f"Total configurations: {BLUE}{nconfig}{RESET}, " f"Remaining: {RED}{nremconfig}{RESET}")
     print(f"Running on {BLUE}{njobs}{RESET} CPUs")
     if njobs > 1:
-        Parallel(verbose=50, n_jobs=njobs)(
-            delayed(single_experiment)(t, g, f) for t, g, f in jobs
-        )
+        Parallel(verbose=50, n_jobs=njobs)(delayed(single_experiment)(t, g, f) for t, g, f in jobs)
     else:
         for job in jobs:
             single_experiment(*job)

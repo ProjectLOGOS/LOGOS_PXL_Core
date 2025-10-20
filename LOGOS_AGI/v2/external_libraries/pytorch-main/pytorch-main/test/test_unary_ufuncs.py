@@ -131,9 +131,7 @@ class TestUnaryUfuncs(TestCase):
 
     # Helper for comparing torch tensors and numpy arrays
     # TODO: should this or assertEqual also validate that strides are equal?
-    def assertEqualHelper(
-        self, actual, expected, msg, *, dtype, exact_dtype=True, **kwargs
-    ):
+    def assertEqualHelper(self, actual, expected, msg, *, dtype, exact_dtype=True, **kwargs):
         assert isinstance(actual, torch.Tensor)
 
         # Some NumPy functions return scalars, not arrays
@@ -164,9 +162,7 @@ class TestUnaryUfuncs(TestCase):
                             torch.float64,
                         )
                     else:
-                        self.fail(
-                            f"Expected dtype {expected.dtype} but got {actual.dtype}!"
-                        )
+                        self.fail(f"Expected dtype {expected.dtype} but got {actual.dtype}!")
 
             self.assertEqual(
                 actual,
@@ -181,12 +177,8 @@ class TestUnaryUfuncs(TestCase):
     # Tests that the function and its (array-accepting) reference produce the same
     #   values on given tensors
     def _test_reference_numerics(self, dtype, op, tensors, equal_nan=True):
-        def _helper_reference_numerics(
-            expected, actual, msg, exact_dtype, equal_nan=True
-        ):
-            if not torch.can_cast(
-                numpy_to_torch_dtype_dict[expected.dtype.type], dtype
-            ):
+        def _helper_reference_numerics(expected, actual, msg, exact_dtype, equal_nan=True):
+            if not torch.can_cast(numpy_to_torch_dtype_dict[expected.dtype.type], dtype):
                 exact_dtype = False
 
             if dtype in [torch.uint8, torch.int8, torch.bool]:
@@ -257,9 +249,7 @@ class TestUnaryUfuncs(TestCase):
 
             exact_dtype = True
             if isinstance(actual, torch.Tensor):
-                _helper_reference_numerics(
-                    expected, actual, msg, exact_dtype, equal_nan
-                )
+                _helper_reference_numerics(expected, actual, msg, exact_dtype, equal_nan)
             else:
                 for x, y in zip(expected, actual):
                     # testing multi-outputs results
@@ -394,9 +384,7 @@ class TestUnaryUfuncs(TestCase):
             non_contig = op(non_contig, **torch_kwargs)
             for i in range(3):
                 non_contig_i = pytree.tree_map(lambda x: x[i], non_contig)
-                self.assertEqual(
-                    contig, non_contig_i, msg="non-contiguous expand[" + str(i) + "]"
-                )
+                self.assertEqual(contig, non_contig_i, msg="non-contiguous expand[" + str(i) + "]")
 
     @ops(unary_ufuncs)
     def test_contig_size1(self, device, dtype, op):
@@ -445,9 +433,7 @@ class TestUnaryUfuncs(TestCase):
 
         all_outs = [op(slice, **torch_kwargs) for slice in input]
         if is_iterable_of_tensors(actual):
-            expected = [
-                torch.stack([out[i] for out in all_outs]) for i in range(len(actual))
-            ]
+            expected = [torch.stack([out[i] for out in all_outs]) for i in range(len(actual))]
         else:
             expected = torch.stack(all_outs)
 
@@ -525,13 +511,9 @@ class TestUnaryUfuncs(TestCase):
         value_dtype = torch.tensor([], dtype=dtype).real.dtype
 
         def gen_tensor(a):
-            return torch.view_as_complex(
-                torch.tensor(a, dtype=value_dtype, device=device)
-            )
+            return torch.view_as_complex(torch.tensor(a, dtype=value_dtype, device=device))
 
-        for extremal, kwarg_name in zip(
-            ["nan", "inf", "-inf"], ["nan", "posinf", "neginf"]
-        ):
+        for extremal, kwarg_name in zip(["nan", "inf", "-inf"], ["nan", "posinf", "neginf"]):
             a = gen_tensor([123, float(extremal)])
             res = torch.nan_to_num(a, **{kwarg_name: 12})
             res_check = gen_tensor([123, 12])
@@ -573,17 +555,13 @@ class TestUnaryUfuncs(TestCase):
             (1 / 4, -math.pi / 2 - 3 * math.log(2) - euler),
             (
                 1 / 6,
-                -math.pi * math.sqrt(3) / 2
-                - 2 * math.log(2)
-                - 3 * math.log(3) / 2
-                - euler,
+                -math.pi * math.sqrt(3) / 2 - 2 * math.log(2) - 3 * math.log(3) / 2 - euler,
             ),
             (
                 1 / 8,
                 -math.pi / 2
                 - 4 * math.log(2)
-                - (math.pi + math.log(2 + math.sqrt(2)) - math.log(2 - math.sqrt(2)))
-                / math.sqrt(2)
+                - (math.pi + math.log(2 + math.sqrt(2)) - math.log(2 - math.sqrt(2))) / math.sqrt(2)
                 - euler,
             ),
         ]
@@ -639,9 +617,7 @@ class TestUnaryUfuncs(TestCase):
         for dtype in floating_types_and(torch.half):
             input = make_tensor((50, 50), dtype=dtype, device=device)
 
-            dtypes = list(
-                all_types_and_complex_and(torch.bool, torch.half, torch.bfloat16)
-            )
+            dtypes = list(all_types_and_complex_and(torch.bool, torch.half, torch.bfloat16))
             dtypes.remove(dtype)
             for mantissa_dtype in dtypes:
                 mantissa = torch.empty_like(input, dtype=mantissa_dtype)
@@ -693,9 +669,7 @@ class TestUnaryUfuncs(TestCase):
         random_vals = []
         for multiplier in (-1, 1, -10, 10, -100, 100):
             for _ in range(10):
-                random_vals.append(
-                    complex(random() * multiplier, random() * multiplier)
-                )
+                random_vals.append(complex(random() * multiplier, random() * multiplier))
 
         for vals in (random_vals, []):
             a = np.array(vals, dtype=torch_to_numpy_dtype_dict[dtype])
@@ -711,9 +685,7 @@ class TestUnaryUfuncs(TestCase):
                 self.assertEqual(np_result, torch_result, exact_dtype=True)
 
                 # Tests float out
-                float_dtype = (
-                    torch.float32 if dtype is torch.complex64 else torch.float64
-                )
+                float_dtype = torch.float32 if dtype is torch.complex64 else torch.float64
                 np_float_out = np_fn(a).astype(torch_to_numpy_dtype_dict[float_dtype])
                 float_out = torch.empty_like(t, dtype=float_dtype)
                 torch_fn(t, out=float_out)
@@ -774,9 +746,7 @@ class TestUnaryUfuncs(TestCase):
                 with self.assertRaisesRegex(RuntimeError, "single memory location"):
                     inplace_op(*inputs)
 
-    def unary_check_input_output_mem_overlap(
-        self, data, sz, op, expected_failure=False
-    ):
+    def unary_check_input_output_mem_overlap(self, data, sz, op, expected_failure=False):
         def _test(op, output, input):
             output_exp = torch.empty_like(output)
             op(input, out=output_exp)
@@ -935,9 +905,7 @@ class TestUnaryUfuncs(TestCase):
     def test_hardshrink_edge_cases(self, device, dtype) -> None:
         def h(values, l_expected):
             for l, expected in l_expected.items():
-                values_tensor = torch.tensor(
-                    [float(v) for v in values], dtype=dtype, device=device
-                )
+                values_tensor = torch.tensor([float(v) for v in values], dtype=dtype, device=device)
                 expected_tensor = torch.tensor(
                     [float(v) for v in expected], dtype=dtype, device=device
                 )
@@ -973,9 +941,7 @@ class TestUnaryUfuncs(TestCase):
         b = torch.exp(torch.ones(1, dtype=dtype, device=device))
         self.assertEqual(a, b.expand(2**31))
 
-    @precisionOverride(
-        {torch.bfloat16: 1e-2, torch.float: 0.0002, torch.double: 0.0002}
-    )
+    @precisionOverride({torch.bfloat16: 1e-2, torch.float: 0.0002, torch.double: 0.0002})
     @dtypes(torch.float, torch.double, torch.bfloat16)
     def test_hardswish(self, device, dtype):
         inputValues = [-1000, -4, -3, -2, 0, 2, 3, 4, 1000]
@@ -987,18 +953,14 @@ class TestUnaryUfuncs(TestCase):
         expectedOutputTensor = torch.tensor(expectedOutput, dtype=dtype, device=device)
 
         # normal
-        self.assertEqual(
-            torch.nn.functional.hardswish(inputTensor), expectedOutputTensor
-        )
+        self.assertEqual(torch.nn.functional.hardswish(inputTensor), expectedOutputTensor)
 
         # inplace
         inputTensorCpy = inputTensor.detach().clone()
         torch.nn.functional.hardswish(inputTensorCpy, inplace=True)
         self.assertEqual(inputTensorCpy, expectedOutputTensor)
 
-    @precisionOverride(
-        {torch.bfloat16: 1e-2, torch.float: 0.0002, torch.double: 0.0002}
-    )
+    @precisionOverride({torch.bfloat16: 1e-2, torch.float: 0.0002, torch.double: 0.0002})
     @dtypes(torch.float, torch.double, torch.bfloat16)
     def test_hardsigmoid(self, device, dtype):
         inputValues = [-1000, -4, -3, -2, 0, 2, 3, 4, 1000]
@@ -1019,16 +981,12 @@ class TestUnaryUfuncs(TestCase):
             torch.tensor(expectedOutput, dtype=dtype, device=device),
         )
 
-    @precisionOverride(
-        {torch.bfloat16: 1e-2, torch.float: 0.0002, torch.double: 0.0002}
-    )
+    @precisionOverride({torch.bfloat16: 1e-2, torch.float: 0.0002, torch.double: 0.0002})
     @dtypes(torch.float, torch.double, torch.bfloat16)
     def test_hardsigmoid_backward(self, device, dtype):
         inputValues = [-3.0, 3.0, -2.0, 2.0, -6.0, 6.0]
         expectedValues = [0.0, 0.0, 1.0 / 6.0, 1.0 / 6.0, 0.0, 0.0]
-        inputTensor = torch.tensor(
-            inputValues, dtype=dtype, device=device
-        ).requires_grad_()
+        inputTensor = torch.tensor(inputValues, dtype=dtype, device=device).requires_grad_()
         expetedTensor = torch.tensor(expectedValues, dtype=dtype, device=device)
         out = torch.nn.functional.hardsigmoid(inputTensor)
         out.backward(torch.ones_like(inputTensor))
@@ -1051,9 +1009,7 @@ class TestUnaryUfuncs(TestCase):
         rtol = 1e-6
 
         input = torch.from_numpy(input_np).clone().contiguous().to(device)
-        self.assertEqual(
-            torch.nn.functional.silu(input), expected_output, atol=atol, rtol=rtol
-        )
+        self.assertEqual(torch.nn.functional.silu(input), expected_output, atol=atol, rtol=rtol)
         self.assertEqual(
             torch.nn.functional.silu(input, inplace=True),
             expected_output,
@@ -1089,9 +1045,7 @@ class TestUnaryUfuncs(TestCase):
         ]
 
         for inp, out in inp_outs:
-            res = torch.nn.functional.silu(
-                torch.tensor(inp, dtype=dtype, device=device)
-            )
+            res = torch.nn.functional.silu(torch.tensor(inp, dtype=dtype, device=device))
             self.assertFalse(torch.any(torch.isnan(res)))
             self.assertEqual(res.real, out.real, atol=atol, rtol=rtol)
             self.assertEqual(res.imag, out.imag, atol=atol, rtol=rtol)
@@ -1138,9 +1092,7 @@ class TestUnaryUfuncs(TestCase):
         rtol = 1e-6
 
         input = torch.from_numpy(input_np).clone().contiguous().to(device)
-        self.assertEqual(
-            torch.nn.functional.mish(input), expected_output, atol=atol, rtol=rtol
-        )
+        self.assertEqual(torch.nn.functional.mish(input), expected_output, atol=atol, rtol=rtol)
         self.assertEqual(
             torch.nn.functional.mish(input, inplace=True),
             expected_output,
@@ -1224,11 +1176,7 @@ class TestUnaryUfuncs(TestCase):
     def test_threshold(self, device, dtype):
         if dtype != torch.uint8 and dtype != torch.float16 and not dtype.is_complex:
             # 100 is wide enough to use AVX2 instructions for all types
-            x = (
-                torch.randn(100, dtype=torch.float, device=device)
-                .sign()
-                .to(dtype=dtype)
-            )
+            x = torch.randn(100, dtype=torch.float, device=device).sign().to(dtype=dtype)
             y = torch.threshold(x, 0, 0)
             self.assertTrue(y.le(0).any())
 
@@ -1265,9 +1213,7 @@ class TestUnaryUfuncs(TestCase):
         # test igamma for reasonable range of values
         loglo = -4  # approx 0.018
         loghi = 4  # approx 54.6
-        self._helper_test_igamma(
-            loglo, loghi, device, dtype, torch.igamma, scipy.special.gammainc
-        )
+        self._helper_test_igamma(loglo, loghi, device, dtype, torch.igamma, scipy.special.gammainc)
 
     @dtypesIfCPU(torch.float16, torch.bfloat16, torch.float32, torch.float64)
     @dtypes(torch.float32, torch.float64)
@@ -1519,9 +1465,7 @@ class TestUnaryUfuncs(TestCase):
         t = torch.tensor(vals, device=device)
         for torch_op in (torch.isposinf, torch.isneginf):
             out = torch.empty_like(t, dtype=dtype)
-            with self.assertRaisesRegex(
-                RuntimeError, "does not support non-boolean outputs"
-            ):
+            with self.assertRaisesRegex(RuntimeError, "does not support non-boolean outputs"):
                 torch_op(t, out=out)
 
     def test_nonzero_empty(self, device):
@@ -1606,18 +1550,14 @@ class TestUnaryUfuncs(TestCase):
         static_size = 1
         out_tensor = torch.empty((10, 10, 10, 10), dtype=torch.long, device=device)
         ref = torch.tensor([[0]], device=device)
-        self.assertEqual(
-            torch.nonzero_static(input_tensor, size=static_size, out=out_tensor), ref
-        )
+        self.assertEqual(torch.nonzero_static(input_tensor, size=static_size, out=out_tensor), ref)
         self.assertEqual(out_tensor, ref)
 
         # nonzero_static.out: out resize (enlarge)
         input_tensor = torch.tensor([8], device=device)
         static_size = 1
         out_tensor = torch.empty((0), dtype=torch.long, device=device)
-        self.assertEqual(
-            torch.nonzero_static(input_tensor, size=static_size, out=out_tensor), ref
-        )
+        self.assertEqual(torch.nonzero_static(input_tensor, size=static_size, out=out_tensor), ref)
         self.assertEqual(out_tensor, ref)
 
         # 0 rank
@@ -1625,9 +1565,7 @@ class TestUnaryUfuncs(TestCase):
         static_size = 2
         self.assertEqual(
             torch.nonzero_static(input_tensor, size=static_size),
-            torch.empty(
-                (static_size, input_tensor.dim()), device=device, dtype=torch.long
-            ),
+            torch.empty((static_size, input_tensor.dim()), device=device, dtype=torch.long),
         )
 
         # 0 size
@@ -1635,9 +1573,7 @@ class TestUnaryUfuncs(TestCase):
         static_size = 0
         self.assertEqual(
             torch.nonzero_static(input_tensor, size=static_size),
-            torch.empty(
-                (static_size, input_tensor.dim()), device=device, dtype=torch.long
-            ),
+            torch.empty((static_size, input_tensor.dim()), device=device, dtype=torch.long),
         )
 
         # 1D input
@@ -1652,9 +1588,7 @@ class TestUnaryUfuncs(TestCase):
         static_size = 2
         self.assertEqual(
             torch.nonzero_static(input_tensor, size=static_size),
-            torch.tensor(
-                [[0], [-1]], device=device
-            ),  # padded with default fill_value "-1"
+            torch.tensor([[0], [-1]], device=device),  # padded with default fill_value "-1"
         )
 
         # 2D input
@@ -1683,9 +1617,7 @@ class TestUnaryUfuncs(TestCase):
         )
 
         # 3D input
-        input_tensor = torch.tensor(
-            [[[0, 0], [0, -3]], [[0, 0], [5, 0]]], device=device
-        )
+        input_tensor = torch.tensor([[[0, 0], [0, -3]], [[0, 0], [5, 0]]], device=device)
         static_size = 4
         fill_value = -999
         self.assertEqual(

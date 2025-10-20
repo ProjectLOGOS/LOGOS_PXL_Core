@@ -13,12 +13,10 @@ class StackFrame:
 
     def __init__(self, name_to_dim, dim_to_name, history=1, keep=False):
         assert isinstance(name_to_dim, OrderedDict) and all(
-            isinstance(name, str) and isinstance(dim, int)
-            for name, dim in name_to_dim.items()
+            isinstance(name, str) and isinstance(dim, int) for name, dim in name_to_dim.items()
         )
         assert isinstance(dim_to_name, OrderedDict) and all(
-            isinstance(name, str) and isinstance(dim, int)
-            for dim, name in dim_to_name.items()
+            isinstance(name, str) and isinstance(dim, int) for dim, name in dim_to_name.items()
         )
         self.name_to_dim = name_to_dim
         self.dim_to_name = dim_to_name
@@ -171,14 +169,10 @@ class DimStack:
             if fresh_dim < self.MAX_DIM or (
                 dim_type == DimType.VISIBLE and fresh_dim <= self._first_available_dim
             ):
-                raise ValueError(
-                    "Ran out of free dims during allocation for {}".format(name)
-                )
+                raise ValueError("Ran out of free dims during allocation for {}".format(name))
 
             return name, fresh_dim
-        raise ValueError(
-            "{} and {} not a valid name-dim pair".format(key, value_request)
-        )
+        raise ValueError("{} and {} not a valid name-dim pair".format(key, value_request))
 
     def allocate(self, key_to_value_request):
         # step 1: split into fresh and non-fresh
@@ -207,9 +201,7 @@ class DimStack:
             if value_request.dim_type != DimType.VISIBLE or any(
                 key in frame for frame in self.current_read_env
             ):
-                _, fresh_key = self._genvalue(
-                    fresh_value, DimRequest(key, value_request.dim_type)
-                )
+                _, fresh_key = self._genvalue(fresh_value, DimRequest(key, value_request.dim_type))
             else:
                 fresh_key = key
             for frame in (

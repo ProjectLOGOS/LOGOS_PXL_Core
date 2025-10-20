@@ -43,9 +43,7 @@ class ShortSummaryDocumenter(ModuleLevelDocumenter):
                 docstrings.append([])
             # Get the first non-empty line of the processed docstring; this could lead
             # to unexpected results if the object does not have a short summary line.
-            short_summary = next(
-                (s for s in self.process_doc(docstrings) if s), "<no summary>"
-            )
+            short_summary = next((s for s in self.process_doc(docstrings) if s), "<no summary>")
             self.add_line(short_summary, sourcename, 0)
 
 

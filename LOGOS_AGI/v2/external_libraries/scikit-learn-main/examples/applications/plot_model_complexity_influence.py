@@ -78,9 +78,7 @@ def generate_data(case):
         X, y = datasets.fetch_20newsgroups_vectorized(subset="all", return_X_y=True)
         train_size = 0.4  # to make the example run faster
 
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, train_size=train_size, random_state=0
-    )
+    X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=train_size, random_state=0)
 
     data = {"X_train": X_train, "X_test": X_test, "y_train": y_train, "y_test": y_test}
     return data
@@ -123,9 +121,7 @@ def benchmark_influence(conf):
             y_pred = estimator.predict(conf["data"]["X_test"])
         elapsed_time = (time.time() - start_time) / float(conf["n_samples"])
         prediction_times.append(elapsed_time)
-        pred_score = conf["prediction_performance_computer"](
-            conf["data"]["y_test"], y_pred
-        )
+        pred_score = conf["prediction_performance_computer"](conf["data"]["y_test"], y_pred)
         prediction_powers.append(pred_score)
         print(
             "Complexity: %d | %s: %.4f | Pred. Time: %fs\n"
@@ -263,13 +259,10 @@ def plot_influence(conf, mse_values, prediction_times, complexities):
     ax2.yaxis.label.set_color(line2.get_color())
     ax2.tick_params(axis="y", colors=line2.get_color())
 
-    plt.legend(
-        (line1, line2), ("prediction error", "prediction latency"), loc="upper center"
-    )
+    plt.legend((line1, line2), ("prediction error", "prediction latency"), loc="upper center")
 
     plt.title(
-        "Influence of varying '%s' on %s"
-        % (conf["changing_param"], conf["estimator"].__name__)
+        "Influence of varying '%s' on %s" % (conf["changing_param"], conf["estimator"].__name__)
     )
 
 

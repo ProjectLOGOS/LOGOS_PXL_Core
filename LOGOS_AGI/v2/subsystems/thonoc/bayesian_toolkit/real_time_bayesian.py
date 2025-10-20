@@ -58,18 +58,18 @@ def predictive_refinement(query: str, tier: int = 1) -> List[Dict]:
 def run_BERT_pipeline(priors_path: str, query: str) -> Tuple[bool, str]:
     priors = load_priors(priors_path)
     attempt_log = []
-    
+
     for i in range(MAX_ITERATIONS):
         tier = 1 if i == 0 else 2
         raw_data = predictive_refinement(query, tier=tier)
         filtered = filter_and_score(raw_data)
-        
+
         if not filtered:
             attempt_log.append(f"Attempt {i+1}: No valid priors passed EGTC threshold.")
             continue
-        
+
         average_confidence = sum(dp["confidence"] for dp in filtered) / len(filtered)
-        
+
         if average_confidence >= CONFIDENCE_THRESHOLD:
             for dp in filtered:
                 priors[dp["label"]] = {

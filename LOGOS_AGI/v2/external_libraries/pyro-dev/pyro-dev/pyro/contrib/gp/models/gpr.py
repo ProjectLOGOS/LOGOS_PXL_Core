@@ -67,9 +67,9 @@ class GPRegression(GPModel):
     """
 
     def __init__(self, X, y, kernel, noise=None, mean_function=None, jitter=1e-6):
-        assert isinstance(
-            X, torch.Tensor
-        ), "X needs to be a torch Tensor instead of a {}".format(type(X))
+        assert isinstance(X, torch.Tensor), "X needs to be a torch Tensor instead of a {}".format(
+            type(X)
+        )
         if y is not None:
             assert isinstance(
                 y, torch.Tensor
@@ -207,9 +207,7 @@ class GPRegression(GPModel):
             if not noiseless:
                 cov = cov + noise
 
-            ynew = torchdist.Normal(
-                loc + self.mean_function(xnew), cov.sqrt()
-            ).rsample()
+            ynew = torchdist.Normal(loc + self.mean_function(xnew), cov.sqrt()).rsample()
 
             # Update kernel matrix
             N = outside_vars["N"]

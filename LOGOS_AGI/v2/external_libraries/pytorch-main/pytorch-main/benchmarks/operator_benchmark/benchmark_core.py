@@ -52,9 +52,7 @@ def _register_test(*test_metainfo):
     BENCHMARK_TESTER.append(test_metainfo)
 
 
-def _create_test(
-    bench_op_obj, orig_test_attrs, tags, OperatorTestCase, run_backward, bwd_input
-):
+def _create_test(bench_op_obj, orig_test_attrs, tags, OperatorTestCase, run_backward, bwd_input):
     """Create tests with the benchmark backend.
     Args:
         bench_op_obj: an object which instantiated from a subclass of
@@ -77,9 +75,7 @@ def _create_test(
     return OperatorTestCase(bench_op_obj, test_config)
 
 
-def _build_test(
-    configs, bench_op, OperatorTestCase, run_backward, op_name_function=None
-):
+def _build_test(configs, bench_op, OperatorTestCase, run_backward, op_name_function=None):
     """Generate PyTorch/Caffe2 tests of operators with different inputs.
     Args:
         configs: a dictionary that has the input shapes
@@ -147,9 +143,7 @@ def _build_test(
         # which use auto_set().
         if op._num_inputs_require_grads > 0:
             input_name = "all"
-        yield _create_test(
-            op, test_attrs, tags, OperatorTestCase, run_backward, input_name
-        )
+        yield _create_test(op, test_attrs, tags, OperatorTestCase, run_backward, input_name)
 
         # This for loop is only used when auto_set is used.
         # _pass_count counts how many times init has been called.
@@ -164,9 +158,7 @@ def _build_test(
             new_op.init(**init_dict)
             # Input name index will start from input1
             input_name = i + 1
-            yield _create_test(
-                new_op, test_attrs, tags, OperatorTestCase, run_backward, input_name
-            )
+            yield _create_test(new_op, test_attrs, tags, OperatorTestCase, run_backward, input_name)
 
 
 class BenchmarkRunner:
@@ -283,9 +275,9 @@ class BenchmarkRunner:
                 if c in open_to_close.keys():
                     curr_brackets.append(c)
                 elif c in open_to_close.values():
-                    assert curr_brackets and open_to_close[curr_brackets[-1]] == c, (
-                        "ERROR: not able to parse the string!"
-                    )
+                    assert (
+                        curr_brackets and open_to_close[curr_brackets[-1]] == c
+                    ), "ERROR: not able to parse the string!"
                     curr_brackets.pop()
                 elif c == "," and (not curr_brackets):
                     break_idxs.append(i)
@@ -370,9 +362,7 @@ class BenchmarkRunner:
             # Print out the time spent in each epoch in ms
             if self.args.report_aibench:
                 mode = "JIT" if self.use_jit else "Eager"
-                test_name = "_".join(
-                    [test_case.framework, test_case.test_config.test_name, mode]
-                )
+                test_name = "_".join([test_case.framework, test_case.test_config.test_name, mode])
                 print(
                     "PyTorchObserver "
                     + json.dumps(
@@ -400,9 +390,7 @@ class BenchmarkRunner:
         return cmd_flag is None or test_flag[:1].lower() in cmd_flag
 
     def _check_keep_list(self, test_flag, cmd_flag_list):
-        return cmd_flag_list is None or any(
-            test_flag == cmd_flag for cmd_flag in cmd_flag_list
-        )
+        return cmd_flag_list is None or any(test_flag == cmd_flag for cmd_flag in cmd_flag_list)
 
     def _check_skip(self, test_module, cmd_flag):
         return cmd_flag is None or (test_module not in cmd_flag)
@@ -413,9 +401,7 @@ class BenchmarkRunner:
         op_test_config = test_case.test_config
 
         operators = (
-            benchmark_utils.process_arg_list(self.args.operators)
-            if self.args.operators
-            else None
+            benchmark_utils.process_arg_list(self.args.operators) if self.args.operators else None
         )
 
         # Filter framework, operator, test_name, tag, forward_only
@@ -431,8 +417,7 @@ class BenchmarkRunner:
                 or self._check_keep(op_test_config.tag, self.args.tag_filter)
             )
             and (
-                not self.args.forward_only
-                or op_test_config.run_backward != self.args.forward_only
+                not self.args.forward_only or op_test_config.run_backward != self.args.forward_only
             )
             and (
                 self.args.device == "None"
@@ -539,9 +524,7 @@ class BenchmarkRunner:
                     dtype=dtype,
                     extra_info={"input_config": input_config},
                 ),
-                model=ModelInfo(
-                    name=test_name, type="micro-benchmark", origins=["pytorch"]
-                ),
+                model=ModelInfo(name=test_name, type="micro-benchmark", origins=["pytorch"]),
                 metric=MetricInfo(
                     name="latency",
                     unit="us",
@@ -589,9 +572,7 @@ class BenchmarkRunner:
                 # requirement.
                 np.random.seed(seed=hash(full_test_id) & ((1 << 32) - 1))
 
-                print(
-                    f"# Benchmarking {test_case.framework}: {test_case.op_bench.module_name()}"
-                )
+                print(f"# Benchmarking {test_case.framework}: {test_case.op_bench.module_name()}")
 
                 if op_test_config.run_backward:
                     launch_func = self._launch_backward
@@ -599,14 +580,10 @@ class BenchmarkRunner:
                     launch_func = self._launch_forward
 
                 # Warmup
-                launch_func(
-                    test_case, self.args.warmup_iterations, print_per_iter=False
-                )
+                launch_func(test_case, self.args.warmup_iterations, print_per_iter=False)
                 # Actual Execution
                 reported_time = [
-                    self._measure_time(
-                        launch_func, test_case, self.iters, self.print_per_iter
-                    )
+                    self._measure_time(launch_func, test_case, self.iters, self.print_per_iter)
                     for _ in range(self.num_runs)
                 ]
                 self._print_perf_result(reported_time, test_case)
@@ -629,9 +606,7 @@ class BenchmarkRunner:
                     ],
                 )
                 if self.args.output_json or self.args.output_json_for_dashboard:
-                    perf_list.append(
-                        self._perf_result_to_dict(reported_time, test_case)
-                    )
+                    perf_list.append(self._perf_result_to_dict(reported_time, test_case))
 
         if self.args.output_json_for_dashboard:
             self._output_json(perf_list, self.args.output_json_for_dashboard)

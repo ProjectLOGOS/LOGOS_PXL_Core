@@ -4,7 +4,7 @@
 (* Generated: 2025-10-19T22:24:32.533827 *)
 (* Confidence: 0.60 *)
 
-Lemma gap_fill_mock_gap : 
+Lemma gap_fill_mock_gap :
   P1 -> P2 -> C1.
 Proof.
   (* Proof obligations: *)

@@ -21,9 +21,7 @@ def model_names(filename: str) -> set[str]:
     return names
 
 
-TIMM_MODEL_NAMES = model_names(
-    os.path.join(os.path.dirname(__file__), "timm_models_list.txt")
-)
+TIMM_MODEL_NAMES = model_names(os.path.join(os.path.dirname(__file__), "timm_models_list.txt"))
 HF_MODELS_FILE_NAME = model_names(
     os.path.join(os.path.dirname(__file__), "huggingface_models_list.txt")
 )

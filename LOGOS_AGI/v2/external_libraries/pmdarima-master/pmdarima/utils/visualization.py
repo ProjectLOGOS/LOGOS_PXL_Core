@@ -27,11 +27,11 @@ except ImportError:
     mpl = None
 
 __all__ = [
-    'autocorr_plot',
-    'decomposed_plot',
-    'plot_acf',
-    'plot_pacf',
-    'tsdisplay',
+    "autocorr_plot",
+    "decomposed_plot",
+    "plot_acf",
+    "plot_pacf",
+    "tsdisplay",
 ]
 
 
@@ -40,7 +40,8 @@ def _err_for_no_mpl():
         # Per Issue #47:
         raise ImportError(
             "You do not have matplotlib installed. In order to "
-            "create plots, you'll need to pip install matplotlib!")
+            "create plots, you'll need to pip install matplotlib!"
+        )
 
 
 def _get_plt():
@@ -90,7 +91,7 @@ def decomposed_plot(decomposed_tuple, figure_kwargs=None, show=True):
 
     fig, axes = mpl.subplots(4, 1, sharex=True, **figure_kwargs)
 
-    y_labels = ['data', 'trend', 'seasonal', 'random']
+    y_labels = ["data", "trend", "seasonal", "random"]
 
     for ax in axes.flat:
         ax.set(ylabel=y_labels.pop(0))
@@ -143,9 +144,20 @@ def autocorr_plot(series, show=True):
     return _show_or_return(res, show)
 
 
-def plot_acf(series, ax=None, lags=None, alpha=None, use_vlines=True,
-             unbiased=False, fft=True, title='Autocorrelation',
-             zero=True, vlines_kwargs=None, show=True, **kwargs):
+def plot_acf(
+    series,
+    ax=None,
+    lags=None,
+    alpha=None,
+    use_vlines=True,
+    unbiased=False,
+    fft=True,
+    title="Autocorrelation",
+    zero=True,
+    vlines_kwargs=None,
+    show=True,
+    **kwargs,
+):
     """Plot a series' auto-correlation as a line plot.
 
     A wrapper method for the statsmodels ``plot_acf`` method.
@@ -218,16 +230,35 @@ def plot_acf(series, ax=None, lags=None, alpha=None, use_vlines=True,
     """
     _err_for_no_mpl()
     res = tsaplots.plot_acf(
-        x=series, ax=ax, lags=lags, alpha=alpha, use_vlines=use_vlines,
-        unbiased=unbiased, fft=fft, title=title, zero=zero,
-        vlines_kwargs=vlines_kwargs, **kwargs)
+        x=series,
+        ax=ax,
+        lags=lags,
+        alpha=alpha,
+        use_vlines=use_vlines,
+        unbiased=unbiased,
+        fft=fft,
+        title=title,
+        zero=zero,
+        vlines_kwargs=vlines_kwargs,
+        **kwargs,
+    )
 
     return _show_or_return(res, show)
 
 
-def plot_pacf(series, ax=None, lags=None, alpha=None, method='yw',
-              use_vlines=True, title='Partial Autocorrelation', zero=True,
-              vlines_kwargs=None, show=True, **kwargs):
+def plot_pacf(
+    series,
+    ax=None,
+    lags=None,
+    alpha=None,
+    method="yw",
+    use_vlines=True,
+    title="Partial Autocorrelation",
+    zero=True,
+    vlines_kwargs=None,
+    show=True,
+    **kwargs,
+):
     """Plot a series' partial auto-correlation as a line plot.
 
     A wrapper method for the statsmodels ``plot_pacf`` method.
@@ -305,16 +336,32 @@ def plot_pacf(series, ax=None, lags=None, alpha=None, method='yw',
     """
     _err_for_no_mpl()
     res = tsaplots.plot_pacf(
-        x=series, ax=ax, lags=lags, alpha=alpha, method=method,
-        use_vlines=use_vlines, title=title, zero=zero,
-        vlines_kwargs=vlines_kwargs, **kwargs)
+        x=series,
+        ax=ax,
+        lags=lags,
+        alpha=alpha,
+        method=method,
+        use_vlines=use_vlines,
+        title=title,
+        zero=zero,
+        vlines_kwargs=vlines_kwargs,
+        **kwargs,
+    )
 
     return _show_or_return(res, show)
 
 
-def tsdisplay(y, lag_max=50, figsize=(8, 6), title=None, bins=25,
-              series_kwargs=None, acf_kwargs=None, hist_kwargs=None,
-              show=True):
+def tsdisplay(
+    y,
+    lag_max=50,
+    figsize=(8, 6),
+    title=None,
+    bins=25,
+    series_kwargs=None,
+    acf_kwargs=None,
+    hist_kwargs=None,
+    show=True,
+):
     """Display the time series and some of its key statistics
 
     The equivalent of R's ``forecast::tsdisplay``, showing the series, the
@@ -376,15 +423,12 @@ def tsdisplay(y, lag_max=50, figsize=(8, 6), title=None, bins=25,
     y = check_endog(y, copy=False, preserve_series=True)
 
     if lag_max >= y.shape[0]:
-        raise ValueError(
-            f"lag_max ({lag_max}) must be < length of the "
-            f"series ({y.shape[0]})"
-        )
+        raise ValueError(f"lag_max ({lag_max}) must be < length of the " f"series ({y.shape[0]})")
 
     # ax0 is simply the series itself
     x0 = np.arange(y.shape[0])
     xlabs = None
-    if hasattr(y, 'index'):
+    if hasattr(y, "index"):
         xlabs = y.index.tolist()
         y = y.values
     series_kwargs = {} if not series_kwargs else series_kwargs
@@ -398,7 +442,7 @@ def tsdisplay(y, lag_max=50, figsize=(8, 6), title=None, bins=25,
 
     # ax1 is the ACF, so we can just use our ACF plotting func
     acf_kwargs = {} if not acf_kwargs else acf_kwargs
-    plot_acf(y, ax=ax1, show=False, title='ACF', lags=lag_max, **acf_kwargs)
+    plot_acf(y, ax=ax1, show=False, title="ACF", lags=lag_max, **acf_kwargs)
 
     # ax2 is simply the histogram
     hist_kwargs = {} if not hist_kwargs else hist_kwargs

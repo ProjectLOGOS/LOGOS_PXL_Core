@@ -896,9 +896,7 @@ class argmap:
             The decorated file
 
         """
-        sig, wrapped_name, functions, mapblock, finallys, mutable_args = self.assemble(
-            f
-        )
+        sig, wrapped_name, functions, mapblock, finallys, mutable_args = self.assemble(f)
 
         call = f"{sig.call_sig.format(wrapped_name)}#"
         mut_args = f"{sig.args} = list({sig.args})" if mutable_args else ""
@@ -1050,9 +1048,7 @@ class argmap:
                 mapblock.append("try:")
                 finallys = ["finally:", f"{final}()#", "#", finallys]
         else:
-            mapblock.extend(
-                f"{name} = {fname}({name})" for name in map(get_name, self._args)
-            )
+            mapblock.extend(f"{name} = {fname}({name})" for name in map(get_name, self._args))
 
         return sig, wrapped_name, functions, mapblock, finallys, mutable_args
 
@@ -1108,13 +1104,7 @@ class argmap:
             if prev == param.POSITIONAL_ONLY != kind:
                 # the last token was position-only, but this one isn't
                 def_sig.append("/")
-            if (
-                param.VAR_POSITIONAL
-                != prev
-                != param.KEYWORD_ONLY
-                == kind
-                != param.VAR_POSITIONAL
-            ):
+            if param.VAR_POSITIONAL != prev != param.KEYWORD_ONLY == kind != param.VAR_POSITIONAL:
                 # param is the first keyword-only arg and isn't starred
                 def_sig.append("*")
 

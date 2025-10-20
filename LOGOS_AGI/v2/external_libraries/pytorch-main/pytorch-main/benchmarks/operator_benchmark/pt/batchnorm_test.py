@@ -53,9 +53,7 @@ batchnorm_configs_long = cudnn_benchmark_configs(
 class BatchNormBenchmark(op_bench.TorchBenchmarkBase):
     def init(self, M, N, K, device, training, cudnn):
         self.inputs = {
-            "input_one": torch.rand(
-                M, N, K, device=device, requires_grad=self.auto_set()
-            ),
+            "input_one": torch.rand(M, N, K, device=device, requires_grad=self.auto_set()),
             "mean": torch.rand(N, device=device),
             "var": torch.rand(N, device=device),
             "weight": torch.rand(N, device=device),
@@ -70,9 +68,7 @@ class BatchNormBenchmark(op_bench.TorchBenchmarkBase):
             return F.batch_norm(input_one, mean, var, weight, bias, training)
 
 
-op_bench.generate_pt_test(
-    batchnorm_configs_short + batchnorm_configs_long, BatchNormBenchmark
-)
+op_bench.generate_pt_test(batchnorm_configs_short + batchnorm_configs_long, BatchNormBenchmark)
 op_bench.generate_pt_gradient_test(
     batchnorm_configs_short + batchnorm_configs_long, BatchNormBenchmark
 )

@@ -122,9 +122,7 @@ def test_y_score_and_y_pred_specified_error(pyplot):
     y_score = np.array([0.1, 0.4, 0.35, 0.8])
     y_pred = np.array([0.2, 0.3, 0.5, 0.1])
 
-    with pytest.raises(
-        ValueError, match="`y_pred` and `y_score` cannot be both specified"
-    ):
+    with pytest.raises(ValueError, match="`y_pred` and `y_score` cannot be both specified"):
         DetCurveDisplay.from_predictions(y_true, y_score=y_score, y_pred=y_pred)
 
     with pytest.warns(FutureWarning, match="y_pred was deprecated in 1.8"):

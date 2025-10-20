@@ -1,0 +1,54 @@
+{
+  "report_metadata": {
+    "generated_at": "2025-10-19T23:16:10.474087",
+    "report_type": "autonomous_iel_telemetry_aggregate",
+    "version": "1.0"
+  },
+  "summary": {
+    "total_cycles": 1,
+    "date_range": {
+      "start": "2025-10-19T22:22:12.863621",
+      "end": "2025-10-19T22:22:12.863621",
+      "duration_days": 0
+    },
+    "system_health": {
+      "uptime_percentage": 100.0,
+      "error_rate": 0.0,
+      "total_errors": 0
+    }
+  },
+  "performance_metrics": {
+    "iel_evaluation": {
+      "avg_gaps_per_cycle": 1,
+      "avg_iels_per_cycle": 0.0,
+      "avg_quality_score": 0.0,
+      "quality_trend": "stable",
+      "throughput_iels_per_hour": 0.0
+    },
+    "resource_usage": {
+      "avg_memory_usage_mb": 0.0,
+      "max_memory_usage_mb": 0.0,
+      "avg_cpu_usage_percent": 0.0,
+      "max_cpu_usage_percent": 0.0
+    },
+    "efficiency": {
+      "avg_cycle_duration_sec": 0.0,
+      "refinement_success_rate": 1.0
+    }
+  },
+  "detailed_cycles": [
+    {
+      "cycle_id": "gap_cycle_1760926932",
+      "timestamp": "2025-10-19T22:22:12.863621",
+      "gaps_detected": 1,
+      "iels_evaluated": 0,
+      "high_quality_iels": 0,
+      "quality_score": 0.0,
+      "duration_sec": 0.0,
+      "errors": 0
+    }
+  ],
+  "recommendations": [
+    "Low throughput detected. Optimize evaluation pipeline for better performance."
+  ]
+}

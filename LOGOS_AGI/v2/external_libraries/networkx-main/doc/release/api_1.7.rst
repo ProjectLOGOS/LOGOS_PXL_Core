@@ -21,4 +21,3 @@ https://networkx.lanl.gov/trac/query?status=closed&group=milestone&milestone=net
 Other
 -----
 * Untested bipartite_random_regular_graph() removed.
-

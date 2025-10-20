@@ -9,5 +9,3 @@ __ github_
 
 .. literalinclude:: ../../examples/contrib/epidemiology/regional.py
     :language: python
-
-

@@ -208,9 +208,7 @@ def parse_pajek(lines):
             for i in range(int(nnodes)):
                 l = next(lines)
                 try:
-                    splitline = [
-                        x.decode("utf-8") for x in shlex.split(str(l).encode("utf-8"))
-                    ]
+                    splitline = [x.decode("utf-8") for x in shlex.split(str(l).encode("utf-8"))]
                 except AttributeError:
                     splitline = shlex.split(str(l))
                 id, label = splitline[0:2]
@@ -220,9 +218,7 @@ def parse_pajek(lines):
                 G.nodes[label]["id"] = id
                 try:
                     x, y, shape = splitline[2:5]
-                    G.nodes[label].update(
-                        {"x": float(x), "y": float(y), "shape": shape}
-                    )
+                    G.nodes[label].update({"x": float(x), "y": float(y), "shape": shape})
                 except:
                     pass
                 extra_attr = zip(splitline[5::2], splitline[6::2])
@@ -236,9 +232,7 @@ def parse_pajek(lines):
                 G = G.to_directed()
             for l in lines:
                 try:
-                    splitline = [
-                        x.decode("utf-8") for x in shlex.split(str(l).encode("utf-8"))
-                    ]
+                    splitline = [x.decode("utf-8") for x in shlex.split(str(l).encode("utf-8"))]
                 except AttributeError:
                     splitline = shlex.split(str(l))
 

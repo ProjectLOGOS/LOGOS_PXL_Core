@@ -104,9 +104,7 @@ from sklearn.naive_bayes import GaussianNB
 # For a fair comparison, we should run a hyper-parameter search for all the
 # classifiers but we don't do it here for the sake of keeping the example code
 # concise and fast to execute.
-lr = LogisticRegressionCV(
-    Cs=np.logspace(-6, 6, 101), cv=10, scoring="neg_log_loss", max_iter=1_000
-)
+lr = LogisticRegressionCV(Cs=np.logspace(-6, 6, 101), cv=10, scoring="neg_log_loss", max_iter=1_000)
 gnb = GaussianNB()
 svc = NaivelyCalibratedLinearSVC(C=1.0)
 rfc = RandomForestClassifier(random_state=42)

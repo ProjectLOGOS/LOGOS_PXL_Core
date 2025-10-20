@@ -27,15 +27,12 @@ def test_default_get_feature_names():
     feat = RandomExogFeaturizer()
     y_trans, X = feat.fit_transform(wineind)
     assert y_trans is wineind
-    assert X.columns.tolist() == \
-        ['RND_0', 'RND_1', 'RND_2', 'RND_3']
+    assert X.columns.tolist() == ["RND_0", "RND_1", "RND_2", "RND_3"]
 
 
 def test_default_get_feature_names_with_X():
     feat = RandomExogFeaturizer()
-    X = pd.DataFrame.from_records(
-        np.random.rand(wineind.shape[0], 2), columns=['a', 'b'])
+    X = pd.DataFrame.from_records(np.random.rand(wineind.shape[0], 2), columns=["a", "b"])
     y_trans, X_trans = feat.fit_transform(wineind, X)
     assert y_trans is wineind
-    assert X_trans.columns.tolist() == \
-        ['a', 'b', 'RND_0', 'RND_1', 'RND_2', 'RND_3']
+    assert X_trans.columns.tolist() == ["a", "b", "RND_0", "RND_1", "RND_2", "RND_3"]

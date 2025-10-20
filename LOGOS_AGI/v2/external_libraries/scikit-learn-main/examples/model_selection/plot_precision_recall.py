@@ -182,9 +182,7 @@ Y = label_binarize(y, classes=[0, 1, 2])
 n_classes = Y.shape[1]
 
 # Split into training and test
-X_train, X_test, Y_train, Y_test = train_test_split(
-    X, Y, test_size=0.5, random_state=random_state
-)
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.5, random_state=random_state)
 
 # %%
 # We use :class:`~sklearn.multiclass.OneVsRestClassifier` for multi-label
@@ -212,9 +210,7 @@ for i in range(n_classes):
     average_precision[i] = average_precision_score(Y_test[:, i], y_score[:, i])
 
 # A "micro-average": quantifying score on all classes jointly
-precision["micro"], recall["micro"], _ = precision_recall_curve(
-    Y_test.ravel(), y_score.ravel()
-)
+precision["micro"], recall["micro"], _ = precision_recall_curve(Y_test.ravel(), y_score.ravel())
 average_precision["micro"] = average_precision_score(Y_test, y_score, average="micro")
 
 # %%
@@ -264,9 +260,7 @@ for i, color in zip(range(n_classes), colors):
         precision=precision[i],
         average_precision=average_precision[i],
     )
-    display.plot(
-        ax=ax, name=f"Precision-recall for class {i}", color=color, despine=True
-    )
+    display.plot(ax=ax, name=f"Precision-recall for class {i}", color=color, despine=True)
 
 # add the legend for the iso-f1 curves
 handles, labels = display.ax_.get_legend_handles_labels()

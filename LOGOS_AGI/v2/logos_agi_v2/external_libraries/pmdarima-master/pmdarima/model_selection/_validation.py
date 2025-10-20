@@ -283,7 +283,7 @@ def cross_val_predict(
         First column contains all one-step-ahead-predictions, second column all
         two-step-ahead-predictions etc. Further metrics can then be calculated
         as desired.
-    
+
 
     Examples
     --------

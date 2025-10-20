@@ -343,8 +343,7 @@ def maybe_regular_expander(n, d, *, create_using=None, max_tries=100, seed=None)
     import warnings
 
     warnings.warn(
-        "maybe_regular_expander is deprecated, "
-        "use `maybe_regular_expander_graph` instead.",
+        "maybe_regular_expander is deprecated, " "use `maybe_regular_expander_graph` instead.",
         category=DeprecationWarning,
         stacklevel=2,
     )
@@ -425,9 +424,7 @@ def is_regular_expander(G, *, epsilon=0):
 
 @nx.utils.decorators.np_random_state("seed")
 @nx._dispatchable(graphs=None, returns_graph=True)
-def random_regular_expander_graph(
-    n, d, *, epsilon=0, create_using=None, max_tries=100, seed=None
-):
+def random_regular_expander_graph(n, d, *, epsilon=0, create_using=None, max_tries=100, seed=None):
     r"""Returns a random regular expander graph on $n$ nodes with degree $d$.
 
     An expander graph is a sparse graph with strong connectivity properties. [1]_
@@ -492,8 +489,6 @@ def random_regular_expander_graph(
         )
 
         if iterations == 0:
-            raise nx.NetworkXError(
-                "Too many iterations in random_regular_expander_graph"
-            )
+            raise nx.NetworkXError("Too many iterations in random_regular_expander_graph")
 
     return G

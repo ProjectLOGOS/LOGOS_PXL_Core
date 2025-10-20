@@ -202,9 +202,7 @@ def test_classification_report_output_dict_empty_input():
 def test_classification_report_zero_division_warning(zero_division):
     y_true, y_pred = ["a", "b", "c"], ["a", "b", "d"]
     with warnings.catch_warnings(record=True) as record:
-        classification_report(
-            y_true, y_pred, zero_division=zero_division, output_dict=True
-        )
+        classification_report(y_true, y_pred, zero_division=zero_division, output_dict=True)
         if zero_division == "warn":
             assert len(record) > 1
             for item in record:
@@ -337,16 +335,12 @@ def test_precision_recall_f_extra_labels():
         with pytest.raises(ValueError):
             recall_score(y_true_bin, y_pred_bin, labels=np.arange(6), average=average)
         with pytest.raises(ValueError):
-            recall_score(
-                y_true_bin, y_pred_bin, labels=np.arange(-1, 4), average=average
-            )
+            recall_score(y_true_bin, y_pred_bin, labels=np.arange(-1, 4), average=average)
 
     # tests non-regression on issue #10307
     y_true = np.array([[0, 1, 1], [1, 0, 0]])
     y_pred = np.array([[1, 1, 1], [1, 0, 1]])
-    p, r, f, _ = precision_recall_fscore_support(
-        y_true, y_pred, average="samples", labels=[0, 1]
-    )
+    p, r, f, _ = precision_recall_fscore_support(y_true, y_pred, average="samples", labels=[0, 1])
     assert_almost_equal(np.array([p, r, f]), np.array([3 / 4, 1, 5 / 6]))
 
 
@@ -474,9 +468,7 @@ def test_precision_recall_f_unused_pos_label():
         "positive class."
     )
     with pytest.warns(UserWarning, match=msg):
-        precision_recall_fscore_support(
-            [1, 2, 1], [1, 2, 2], pos_label=2, average="macro"
-        )
+        precision_recall_fscore_support([1, 2, 1], [1, 2, 2], pos_label=2, average="macro")
 
 
 def test_confusion_matrix_binary():
@@ -519,16 +511,12 @@ def test_multilabel_confusion_matrix_multiclass():
     def test(y_true, y_pred, string_type=False):
         # compute confusion matrix with default labels introspection
         cm = multilabel_confusion_matrix(y_true, y_pred)
-        assert_array_equal(
-            cm, [[[47, 4], [5, 19]], [[38, 6], [28, 3]], [[30, 25], [2, 18]]]
-        )
+        assert_array_equal(cm, [[[47, 4], [5, 19]], [[38, 6], [28, 3]], [[30, 25], [2, 18]]])
 
         # compute confusion matrix with explicit label ordering
         labels = ["0", "2", "1"] if string_type else [0, 2, 1]
         cm = multilabel_confusion_matrix(y_true, y_pred, labels=labels)
-        assert_array_equal(
-            cm, [[[47, 4], [5, 19]], [[30, 25], [2, 18]], [[38, 6], [28, 3]]]
-        )
+        assert_array_equal(cm, [[[47, 4], [5, 19]], [[30, 25], [2, 18]], [[38, 6], [28, 3]]])
 
         # compute confusion matrix with super set of present labels
         labels = ["0", "2", "1", "3"] if string_type else [0, 2, 1, 3]
@@ -583,9 +571,7 @@ def test_multilabel_confusion_matrix_multilabel(csc_container, csr_container):
     assert_array_equal(cm, [[[0, 0], [1, 1]], [[1, 1], [0, 0]], [[0, 1], [1, 0]]])
 
     # test support for sample_weight with sample_wise
-    cm = multilabel_confusion_matrix(
-        y_true, y_pred, sample_weight=sample_weight, samplewise=True
-    )
+    cm = multilabel_confusion_matrix(y_true, y_pred, sample_weight=sample_weight, samplewise=True)
     assert_array_equal(cm, [[[2, 0], [2, 2]], [[1, 1], [0, 1]], [[0, 3], [6, 0]]])
 
 
@@ -597,9 +583,7 @@ def test_multilabel_confusion_matrix_errors():
     with pytest.raises(ValueError, match="inconsistent numbers of samples"):
         multilabel_confusion_matrix(y_true, y_pred, sample_weight=[1, 2])
     with pytest.raises(ValueError, match="Sample weights must be 1D array or scalar"):
-        multilabel_confusion_matrix(
-            y_true, y_pred, sample_weight=[[1, 2, 3], [2, 3, 4], [3, 4, 5]]
-        )
+        multilabel_confusion_matrix(y_true, y_pred, sample_weight=[[1, 2, 3], [2, 3, 4], [3, 4, 5]])
 
     # Bad labels
     err_msg = r"All labels must be in \[0, n labels\)"
@@ -780,9 +764,7 @@ def test_likelihood_ratios_replace_undefined_by_worst():
     y_true = np.array([1, 1, 0])
     y_pred = np.array([1, 0, 0])
 
-    positive_likelihood_ratio, _ = class_likelihood_ratios(
-        y_true, y_pred, replace_undefined_by=1
-    )
+    positive_likelihood_ratio, _ = class_likelihood_ratios(y_true, y_pred, replace_undefined_by=1)
     assert positive_likelihood_ratio == pytest.approx(1.0)
 
     # This data causes tn=0 (0 true negatives) in the confusion_matrix and a division
@@ -790,9 +772,7 @@ def test_likelihood_ratios_replace_undefined_by_worst():
     y_true = np.array([1, 0, 0])
     y_pred = np.array([1, 1, 1])
 
-    _, negative_likelihood_ratio = class_likelihood_ratios(
-        y_true, y_pred, replace_undefined_by=1
-    )
+    _, negative_likelihood_ratio = class_likelihood_ratios(y_true, y_pred, replace_undefined_by=1)
     assert negative_likelihood_ratio == pytest.approx(1.0)
 
 
@@ -815,9 +795,7 @@ def test_likelihood_ratios_wrong_dict_replace_undefined_by(replace_undefined_by)
 
     msg = "The dictionary passed as `replace_undefined_by` needs to be in the form"
     with pytest.raises(ValueError, match=msg):
-        class_likelihood_ratios(
-            y_true, y_pred, replace_undefined_by=replace_undefined_by
-        )
+        class_likelihood_ratios(y_true, y_pred, replace_undefined_by=replace_undefined_by)
 
 
 @pytest.mark.parametrize(
@@ -902,9 +880,7 @@ def test_cohen_kappa():
     y2 = np.array([0] * 50 + [1] * 40 + [2] * 10)
     assert_almost_equal(cohen_kappa_score(y1, y2), 0.9315, decimal=4)
     assert_almost_equal(cohen_kappa_score(y1, y2, weights="linear"), 0.9412, decimal=4)
-    assert_almost_equal(
-        cohen_kappa_score(y1, y2, weights="quadratic"), 0.9541, decimal=4
-    )
+    assert_almost_equal(cohen_kappa_score(y1, y2, weights="quadratic"), 0.9541, decimal=4)
 
 
 def test_cohen_kappa_score_error_wrong_label():
@@ -912,9 +888,7 @@ def test_cohen_kappa_score_error_wrong_label():
     labels = [1, 2]
     y1 = np.array(["a"] * 5 + ["b"] * 5)
     y2 = np.array(["b"] * 10)
-    with pytest.raises(
-        ValueError, match="At least one label in `labels` must be present in `y1`"
-    ):
+    with pytest.raises(ValueError, match="At least one label in `labels` must be present in `y1`"):
         cohen_kappa_score(y1, y2, labels=labels)
 
 
@@ -967,9 +941,7 @@ def test_matthews_corrcoef_against_numpy_corrcoef(global_random_seed):
     y_true = rng.randint(0, 2, size=20)
     y_pred = rng.randint(0, 2, size=20)
 
-    assert_almost_equal(
-        matthews_corrcoef(y_true, y_pred), np.corrcoef(y_true, y_pred)[0, 1], 10
-    )
+    assert_almost_equal(matthews_corrcoef(y_true, y_pred), np.corrcoef(y_true, y_pred)[0, 1], 10)
 
 
 def test_matthews_corrcoef_against_jurman(global_random_seed):
@@ -993,15 +965,13 @@ def test_matthews_corrcoef_against_jurman(global_random_seed):
     )
     cov_ytyt = sum(
         [
-            C[:, k].sum()
-            * np.sum([C[g, f] for f in range(N) for g in range(N) if f != k])
+            C[:, k].sum() * np.sum([C[g, f] for f in range(N) for g in range(N) if f != k])
             for k in range(N)
         ]
     )
     cov_ypyp = np.sum(
         [
-            C[k, :].sum()
-            * np.sum([C[f, g] for f in range(N) for g in range(N) if f != k])
+            C[k, :].sum() * np.sum([C[f, g] for f in range(N) for g in range(N) if f != k])
             for k in range(N)
         ]
     )
@@ -1088,18 +1058,14 @@ def test_matthews_corrcoef_multiclass(global_random_seed):
     y_true = [0, 0, 1, 1, 2]
     y_pred = [1, 1, 0, 0, 2]
     sample_weight = [1, 1, 1, 1, 0]
-    assert_almost_equal(
-        matthews_corrcoef(y_true, y_pred, sample_weight=sample_weight), -1
-    )
+    assert_almost_equal(matthews_corrcoef(y_true, y_pred, sample_weight=sample_weight), -1)
 
     # For the zero vector case, the corrcoef cannot be calculated and should
     # output 0
     y_true = [0, 0, 1, 2]
     y_pred = [0, 0, 1, 2]
     sample_weight = [1, 1, 0, 0]
-    assert_almost_equal(
-        matthews_corrcoef(y_true, y_pred, sample_weight=sample_weight), 0.0
-    )
+    assert_almost_equal(matthews_corrcoef(y_true, y_pred, sample_weight=sample_weight), 0.0)
 
 
 @pytest.mark.parametrize("n_points", [100, 10000])
@@ -1185,9 +1151,7 @@ def test_precision_recall_f1_score_multiclass():
         fbeta_score(y_true, y_pred, average="samples", beta=0.5)
 
     # same prediction but with and explicit label ordering
-    p, r, f, s = precision_recall_fscore_support(
-        y_true, y_pred, labels=[0, 2, 1], average=None
-    )
+    p, r, f, s = precision_recall_fscore_support(y_true, y_pred, labels=[0, 2, 1], average=None)
     assert_array_almost_equal(p, [0.83, 0.41, 0.33], 2)
     assert_array_almost_equal(r, [0.79, 0.90, 0.10], 2)
     assert_array_almost_equal(f, [0.81, 0.57, 0.15], 2)
@@ -1276,9 +1240,7 @@ def test_confusion_matrix_error(labels, err_msg):
         confusion_matrix(y_true, y_pred, labels=labels)
 
 
-@pytest.mark.parametrize(
-    "labels", (None, [0, 1], [0, 1, 2]), ids=["None", "binary", "multiclass"]
-)
+@pytest.mark.parametrize("labels", (None, [0, 1], [0, 1, 2]), ids=["None", "binary", "multiclass"])
 def test_confusion_matrix_on_zero_length_input(labels):
     expected_n_classes = len(labels) if labels else 0
     expected = np.zeros((expected_n_classes, expected_n_classes), dtype=int)
@@ -1655,12 +1617,8 @@ def test_multilabel_jaccard_score(recwarn):
     assert_almost_equal(jaccard_score(y_true, y_pred, average="micro"), 3.0 / 5)
     # average='samples'
     assert_almost_equal(jaccard_score(y_true, y_pred, average="samples"), 7.0 / 12)
-    assert_almost_equal(
-        jaccard_score(y_true, y_pred, average="samples", labels=[0, 2]), 1.0 / 2
-    )
-    assert_almost_equal(
-        jaccard_score(y_true, y_pred, average="samples", labels=[1, 2]), 1.0 / 2
-    )
+    assert_almost_equal(jaccard_score(y_true, y_pred, average="samples", labels=[0, 2]), 1.0 / 2)
+    assert_almost_equal(jaccard_score(y_true, y_pred, average="samples", labels=[1, 2]), 1.0 / 2)
     # average=None
     assert_array_equal(
         jaccard_score(y_true, y_pred, average=None), np.array([1.0 / 2, 1.0, 1.0 / 2])
@@ -1685,10 +1643,7 @@ def test_multilabel_jaccard_score(recwarn):
     )
 
     with pytest.warns(UndefinedMetricWarning, match=msg):
-        assert (
-            jaccard_score(np.array([[0, 1]]), np.array([[0, 1]]), average="macro")
-            == 0.5
-        )
+        assert jaccard_score(np.array([[0, 1]]), np.array([[0, 1]]), average="macro") == 0.5
 
     msg = (
         "Jaccard is ill-defined and being set to 0.0 in samples "
@@ -1749,10 +1704,7 @@ def test_average_binary_jaccard_score(recwarn):
     # tp=0, fp=0, fn=1, tn=0
     assert jaccard_score([1], [0], average="binary") == 0.0
     # tp=0, fp=0, fn=0, tn=1
-    msg = (
-        "Jaccard is ill-defined and being set to 0.0 due to "
-        "no true or predicted samples"
-    )
+    msg = "Jaccard is ill-defined and being set to 0.0 due to " "no true or predicted samples"
     with pytest.warns(UndefinedMetricWarning, match=msg):
         assert jaccard_score([0, 0], [0, 0], average="binary") == 0.0
 
@@ -1761,9 +1713,7 @@ def test_average_binary_jaccard_score(recwarn):
     y_true = np.array([1, 0, 1, 1, 0])
     y_pred = np.array([1, 0, 1, 1, 1])
     assert_almost_equal(jaccard_score(y_true, y_pred, average="binary"), 3.0 / 4)
-    assert_almost_equal(
-        jaccard_score(y_true, y_pred, average="binary", pos_label=0), 1.0 / 2
-    )
+    assert_almost_equal(jaccard_score(y_true, y_pred, average="binary", pos_label=0), 1.0 / 2)
 
     assert not list(recwarn)
 
@@ -1790,9 +1740,7 @@ def test_jaccard_score_zero_division_set_value(zero_division, expected_score):
     y_pred = np.array([[0, 0, 0], [0, 0, 0]])
     with warnings.catch_warnings():
         warnings.simplefilter("error", UndefinedMetricWarning)
-        score = jaccard_score(
-            y_true, y_pred, average="samples", zero_division=zero_division
-        )
+        score = jaccard_score(y_true, y_pred, average="samples", zero_division=zero_division)
     assert score == pytest.approx(expected_score)
 
 
@@ -1826,9 +1774,7 @@ def test_precision_recall_f1_score_multilabel_1():
     assert_almost_equal(r, 0.5)
     assert_almost_equal(f, 2.5 / 1.5 * 0.25)
     assert s is None
-    assert_almost_equal(
-        fbeta_score(y_true, y_pred, beta=2, average="macro"), np.mean(f2)
-    )
+    assert_almost_equal(fbeta_score(y_true, y_pred, beta=2, average="macro"), np.mean(f2))
 
     # Check micro
     p, r, f, s = precision_recall_fscore_support(y_true, y_pred, average="micro")
@@ -1899,9 +1845,7 @@ def test_precision_recall_f1_score_multilabel_2():
     assert_almost_equal(r, 0.125)
     assert_almost_equal(f, 2 / 12)
     assert s is None
-    assert_almost_equal(
-        fbeta_score(y_true, y_pred, beta=2, average="macro"), np.mean(f2)
-    )
+    assert_almost_equal(fbeta_score(y_true, y_pred, beta=2, average="macro"), np.mean(f2))
 
     p, r, f, s = precision_recall_fscore_support(y_true, y_pred, average="weighted")
     assert_almost_equal(p, 2 / 4)
@@ -1923,9 +1867,7 @@ def test_precision_recall_f1_score_multilabel_2():
     assert_almost_equal(r, 1 / 6)
     assert_almost_equal(f, 2 / 4 * 1 / 3)
     assert s is None
-    assert_almost_equal(
-        fbeta_score(y_true, y_pred, beta=2, average="samples"), 0.1666, 2
-    )
+    assert_almost_equal(fbeta_score(y_true, y_pred, beta=2, average="samples"), 0.1666, 2)
 
 
 @pytest.mark.filterwarnings(r"ignore::sklearn.exceptions.UndefinedMetricWarning")
@@ -1933,9 +1875,7 @@ def test_precision_recall_f1_score_multilabel_2():
     "zero_division, zero_division_expected",
     [("warn", 0), (0, 0), (1, 1), (np.nan, np.nan)],
 )
-def test_precision_recall_f1_score_with_an_empty_prediction(
-    zero_division, zero_division_expected
-):
+def test_precision_recall_f1_score_with_an_empty_prediction(zero_division, zero_division_expected):
     y_true = np.array([[0, 1, 0, 0], [1, 0, 0, 0], [0, 1, 1, 0]])
     y_pred = np.array([[0, 0, 0, 0], [0, 0, 0, 1], [0, 1, 1, 0]])
 
@@ -1988,9 +1928,7 @@ def test_precision_recall_f1_score_with_an_empty_prediction(
     assert_almost_equal(f, 2 / 3 / (2 / 3 + 0.5))
     assert s is None
     assert_almost_equal(
-        fbeta_score(
-            y_true, y_pred, beta=2, average="micro", zero_division=zero_division
-        ),
+        fbeta_score(y_true, y_pred, beta=2, average="micro", zero_division=zero_division),
         (1 + 4) * p * r / (4 * p + r),
     )
 
@@ -2003,9 +1941,7 @@ def test_precision_recall_f1_score_with_an_empty_prediction(
     assert_almost_equal(f, (2 * 2 / 3 + 1) / values_to_average)
     assert s is None
     assert_almost_equal(
-        fbeta_score(
-            y_true, y_pred, beta=2, average="weighted", zero_division=zero_division
-        ),
+        fbeta_score(y_true, y_pred, beta=2, average="weighted", zero_division=zero_division),
         _nanaverage(f2, weights=support),
     )
 
@@ -2019,9 +1955,7 @@ def test_precision_recall_f1_score_with_an_empty_prediction(
     assert s is None
     expected_result = 0.333
     assert_almost_equal(
-        fbeta_score(
-            y_true, y_pred, beta=2, average="samples", zero_division=zero_division
-        ),
+        fbeta_score(y_true, y_pred, beta=2, average="samples", zero_division=zero_division),
         expected_result,
         2,
     )
@@ -2110,9 +2044,7 @@ def test_precision_recall_f1_no_labels_average_none(zero_division):
             beta=1.0,
             zero_division=zero_division,
         )
-        fbeta = fbeta_score(
-            y_true, y_pred, beta=1.0, average=None, zero_division=zero_division
-        )
+        fbeta = fbeta_score(y_true, y_pred, beta=1.0, average=None, zero_division=zero_division)
 
     zero_division = np.float64(zero_division)
     assert_array_almost_equal(p, [zero_division, zero_division, zero_division], 2)
@@ -2136,9 +2068,7 @@ def test_precision_recall_f1_no_labels_average_none_warn():
     # |y_hat_i| = [0, 0, 0]
 
     with pytest.warns(UndefinedMetricWarning):
-        p, r, f, s = precision_recall_fscore_support(
-            y_true, y_pred, average=None, beta=1
-        )
+        p, r, f, s = precision_recall_fscore_support(y_true, y_pred, average=None, beta=1)
 
     assert_array_almost_equal(p, [0, 0, 0], 2)
     assert_array_almost_equal(r, [0, 0, 0], 2)
@@ -2619,9 +2549,7 @@ def test_hinge_loss_multiclass_missing_labels_with_labels_none():
             [-2.36, -0.79, -0.27, +0.24],
         ]
     )
-    error_message = (
-        "Please include all labels in y_true or pass labels as third argument"
-    )
+    error_message = "Please include all labels in y_true or pass labels as third argument"
     with pytest.raises(ValueError, match=error_message):
         hinge_loss(y_true, pred_decision)
 
@@ -2707,9 +2635,7 @@ def test_hinge_loss_multiclass_missing_labels_only_two_unq_in_y_true():
     )
     np.clip(dummy_losses, 0, None, out=dummy_losses)
     dummy_hinge_loss = np.mean(dummy_losses)
-    assert_almost_equal(
-        hinge_loss(y_true, pred_decision, labels=labels), dummy_hinge_loss
-    )
+    assert_almost_equal(hinge_loss(y_true, pred_decision, labels=labels), dummy_hinge_loss)
 
 
 def test_hinge_loss_multiclass_invariance_lists():
@@ -2774,8 +2700,7 @@ def test_log_loss():
     y_pred = [[0.9, 0.1, 0.0], [0.1, 0.9, 0.0], [0.1, 0.1, 0.8]]
     labels = ["a", "c", "d"]
     error_str = (
-        "y_true contains values {'b'} not belonging to the passed "
-        "labels ['a', 'c', 'd']."
+        "y_true contains values {'b'} not belonging to the passed " "labels ['a', 'c', 'd']."
     )
     with pytest.raises(ValueError, match=re.escape(error_str)):
         log_loss(y_true, y_pred, labels=labels)
@@ -2905,15 +2830,9 @@ def test_brier_score_loss_binary():
     assert_almost_equal(brier_score_loss(y_true_reshaped, y_prob_reshaped), true_score)
 
     # check scale_by_half argument
-    assert_almost_equal(
-        brier_score_loss(y_true, y_prob, scale_by_half="auto"), true_score
-    )
-    assert_almost_equal(
-        brier_score_loss(y_true, y_prob, scale_by_half=True), true_score
-    )
-    assert_almost_equal(
-        brier_score_loss(y_true, y_prob, scale_by_half=False), 2 * true_score
-    )
+    assert_almost_equal(brier_score_loss(y_true, y_prob, scale_by_half="auto"), true_score)
+    assert_almost_equal(brier_score_loss(y_true, y_prob, scale_by_half=True), true_score)
+    assert_almost_equal(brier_score_loss(y_true, y_prob, scale_by_half=False), 2 * true_score)
 
     # calculate correctly when there's only one class in y_true
     assert_almost_equal(brier_score_loss([-1], [0.4]), 0.4**2)
@@ -2938,25 +2857,19 @@ def test_brier_score_loss_multiclass():
     )
 
     assert_almost_equal(
-        brier_score_loss(
-            [1, 0, 2], [[0.2, 0.7, 0.1], [0.6, 0.2, 0.2], [0.6, 0.1, 0.3]]
-        ),
+        brier_score_loss([1, 0, 2], [[0.2, 0.7, 0.1], [0.6, 0.2, 0.2], [0.6, 0.1, 0.3]]),
         0.41333333,
     )
 
     # check perfect predictions for 3 classes
     assert_almost_equal(
-        brier_score_loss(
-            [0, 1, 2], [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
-        ),
+        brier_score_loss([0, 1, 2], [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]),
         0,
     )
 
     # check perfectly incorrect predictions for 3 classes
     assert_almost_equal(
-        brier_score_loss(
-            [0, 1, 2], [[0.0, 1.0, 0.0], [1.0, 0.0, 0.0], [1.0, 0.0, 0.0]]
-        ),
+        brier_score_loss([0, 1, 2], [[0.0, 1.0, 0.0], [1.0, 0.0, 0.0], [1.0, 0.0, 0.0]]),
         2,
     )
 
@@ -3071,9 +2984,7 @@ def test_balanced_accuracy_score_unseen():
     ],
 )
 def test_balanced_accuracy_score(y_true, y_pred):
-    macro_recall = recall_score(
-        y_true, y_pred, average="macro", labels=np.unique(y_true)
-    )
+    macro_recall = recall_score(y_true, y_pred, average="macro", labels=np.unique(y_true))
     with ignore_warnings():
         # Warnings are tested in test_balanced_accuracy_score_unseen
         balanced = balanced_accuracy_score(y_true, y_pred)
@@ -3095,9 +3006,7 @@ def test_balanced_accuracy_score(y_true, y_pred):
         brier_score_loss,
     ],
 )
-@pytest.mark.parametrize(
-    "classes", [(False, True), (0, 1), (0.0, 1.0), ("zero", "one")]
-)
+@pytest.mark.parametrize("classes", [(False, True), (0, 1), (0.0, 1.0), ("zero", "one")])
 def test_classification_metric_pos_label_types(metric, classes):
     """Check that the metric works with different types of `pos_label`.
 
@@ -3191,9 +3100,7 @@ def test_d2_log_loss_score():
     sample_weight = np.array([2, 1, 3, 4, 3, 1])
     y_pred_null[:, 0] = sample_weight[:3].sum() / sample_weight.sum()
     y_pred_null[:, 1] = sample_weight[3:].sum() / sample_weight.sum()
-    d2_score = d2_log_loss_score(
-        y_true=y_true, y_pred=y_pred, sample_weight=sample_weight
-    )
+    d2_score = d2_log_loss_score(y_true=y_true, y_pred=y_pred, sample_weight=sample_weight)
     log_likelihood = log_loss(
         y_true=y_true,
         y_pred=y_pred,
@@ -3271,9 +3178,7 @@ def test_d2_log_loss_score():
     d2_score_string = d2_log_loss_score(y_true_string, y_pred)
     assert d2_score_string == 0
     sample_weight = [2, 2, 2, 2]
-    d2_score_with_sample_weight = d2_log_loss_score(
-        y_true, y_pred, sample_weight=sample_weight
-    )
+    d2_score_with_sample_weight = d2_log_loss_score(y_true, y_pred, sample_weight=sample_weight)
     assert d2_score_with_sample_weight == 0
 
     # check that the d2 scores seem correct when more than 2
@@ -3326,14 +3231,10 @@ def test_d2_log_loss_score_missing_labels():
     # - weighted average of 1s is 0
     # - weighted average of 2s is (1.4 + 0.7) / 3 = 0.7
     y_pred_null = np.tile([0.3, 0, 0.7], (4, 1))
-    log_loss_null = log_loss(
-        y_true, y_pred_null, sample_weight=sample_weight, labels=labels
-    )
+    log_loss_null = log_loss(y_true, y_pred_null, sample_weight=sample_weight, labels=labels)
 
     expected_d2_score = 1 - log_loss_obs / log_loss_null
-    d2_score = d2_log_loss_score(
-        y_true, y_pred, sample_weight=sample_weight, labels=labels
-    )
+    d2_score = d2_log_loss_score(y_true, y_pred, sample_weight=sample_weight, labels=labels)
     assert_allclose(d2_score, expected_d2_score)
 
 

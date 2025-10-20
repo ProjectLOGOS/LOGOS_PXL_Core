@@ -45,8 +45,7 @@ def test_poisson_loss(global_random_seed):
     pl = HalfPoissonLoss()
     loss_ref = (
         pl(y_true=y_true, raw_prediction=y_raw, sample_weight=sw)
-        + pl.constant_to_optimal_zero(y_true=y_true, sample_weight=sw).mean()
-        / sw.mean()
+        + pl.constant_to_optimal_zero(y_true=y_true, sample_weight=sw).mean() / sw.mean()
     )
 
     assert loss == pytest.approx(loss_ref, rel=1e-12)

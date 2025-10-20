@@ -64,8 +64,7 @@ def visibility_graph(series):
         offset = t2 - slope * n2
 
         obstructed = any(
-            t >= slope * n + offset
-            for n, t in enumerate(series[n1 + 1 : n2], start=n1 + 1)
+            t >= slope * n + offset for n, t in enumerate(series[n1 + 1 : n2], start=n1 + 1)
         )
 
         if not obstructed:

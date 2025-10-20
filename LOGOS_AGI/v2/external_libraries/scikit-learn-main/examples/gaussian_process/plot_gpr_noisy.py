@@ -200,9 +200,7 @@ plt.show()
 kernel = 1.0 * RBF(length_scale=1e1, length_scale_bounds=(1e-2, 1e3)) + WhiteKernel(
     noise_level=1, noise_level_bounds=(1e-10, 1e1)
 )
-gpr = GaussianProcessRegressor(
-    kernel=kernel, alpha=0.0, n_restarts_optimizer=10, random_state=0
-)
+gpr = GaussianProcessRegressor(kernel=kernel, alpha=0.0, n_restarts_optimizer=10, random_state=0)
 gpr.fit(X_train, y_train)
 y_mean, y_std = gpr.predict(X, return_std=True)
 

@@ -42,9 +42,9 @@ y = X_1d * np.cos(X_1d) + rng.normal(scale=X_1d / 3)
 quantiles = [0.95, 0.5, 0.05]
 parameters = dict(loss="quantile", max_bins=32, max_iter=50)
 hist_quantiles = {
-    f"quantile={quantile:.2f}": HistGradientBoostingRegressor(
-        **parameters, quantile=quantile
-    ).fit(X, y)
+    f"quantile={quantile:.2f}": HistGradientBoostingRegressor(**parameters, quantile=quantile).fit(
+        X, y
+    )
     for quantile in quantiles
 }
 
@@ -74,9 +74,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
-X, y = fetch_openml(
-    "titanic", version=1, as_frame=True, return_X_y=True, parser="pandas"
-)
+X, y = fetch_openml("titanic", version=1, as_frame=True, return_X_y=True, parser="pandas")
 numeric_features = ["age", "fare"]
 numeric_transformer = make_pipeline(SimpleImputer(strategy="median"), StandardScaler())
 categorical_features = ["embarked", "pclass"]
@@ -120,9 +118,7 @@ import numpy as np
 
 from sklearn.preprocessing import OneHotEncoder
 
-X = np.array(
-    [["dog"] * 5 + ["cat"] * 20 + ["rabbit"] * 10 + ["snake"] * 3], dtype=object
-).T
+X = np.array([["dog"] * 5 + ["cat"] * 20 + ["rabbit"] * 10 + ["snake"] * 3], dtype=object).T
 enc = OneHotEncoder(min_frequency=6, sparse_output=False).fit(X)
 enc.infrequent_categories_
 
@@ -234,7 +230,5 @@ ax[0].scatter(km.cluster_centers_[:, 0], km.cluster_centers_[:, 1], s=20, c="r")
 ax[0].set_title("KMeans")
 
 ax[1].scatter(X[:, 0], X[:, 1], s=10, c=bisect_km.labels_)
-ax[1].scatter(
-    bisect_km.cluster_centers_[:, 0], bisect_km.cluster_centers_[:, 1], s=20, c="r"
-)
+ax[1].scatter(bisect_km.cluster_centers_[:, 0], bisect_km.cluster_centers_[:, 1], s=20, c="r")
 _ = ax[1].set_title("BisectingKMeans")

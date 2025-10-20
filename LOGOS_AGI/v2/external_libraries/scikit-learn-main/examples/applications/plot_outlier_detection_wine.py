@@ -43,9 +43,7 @@ from sklearn.svm import OneClassSVM
 
 estimators = {
     "Empirical Covariance": EllipticEnvelope(support_fraction=1.0, contamination=0.25),
-    "Robust Covariance (Minimum Covariance Determinant)": EllipticEnvelope(
-        contamination=0.25
-    ),
+    "Robust Covariance (Minimum Covariance Determinant)": EllipticEnvelope(contamination=0.25),
     "OCSVM": OneClassSVM(nu=0.25, gamma=0.35),
 }
 

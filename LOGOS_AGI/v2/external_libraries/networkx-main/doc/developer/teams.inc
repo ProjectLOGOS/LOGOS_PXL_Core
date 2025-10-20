@@ -498,4 +498,3 @@ Steering Council
      </a>
      <div class="team-member-handle">@stefanv</div>
    </div>
-

@@ -66,9 +66,7 @@ df
 
 df["Frequency"] = df["ClaimNb"] / df["Exposure"]
 
-print(
-    "Average Frequency = {}".format(np.average(df["Frequency"], weights=df["Exposure"]))
-)
+print("Average Frequency = {}".format(np.average(df["Frequency"], weights=df["Exposure"])))
 
 print(
     "Fraction of exposure with zero claims = {0:.1%}".format(
@@ -101,18 +99,14 @@ from sklearn.preprocessing import (
     StandardScaler,
 )
 
-log_scale_transformer = make_pipeline(
-    FunctionTransformer(np.log, validate=False), StandardScaler()
-)
+log_scale_transformer = make_pipeline(FunctionTransformer(np.log, validate=False), StandardScaler())
 
 linear_model_preprocessor = ColumnTransformer(
     [
         ("passthrough_numeric", "passthrough", ["BonusMalus"]),
         (
             "binned_numeric",
-            KBinsDiscretizer(
-                n_bins=10, quantile_method="averaged_inverted_cdf", random_state=0
-            ),
+            KBinsDiscretizer(n_bins=10, quantile_method="averaged_inverted_cdf", random_state=0),
             ["VehAge", "DrivAge"],
         ),
         ("log_scaled_numeric", log_scale_transformer, ["Density"]),
@@ -169,15 +163,11 @@ def score_estimator(estimator, df_test):
 
     print(
         "MSE: %.3f"
-        % mean_squared_error(
-            df_test["Frequency"], y_pred, sample_weight=df_test["Exposure"]
-        )
+        % mean_squared_error(df_test["Frequency"], y_pred, sample_weight=df_test["Exposure"])
     )
     print(
         "MAE: %.3f"
-        % mean_absolute_error(
-            df_test["Frequency"], y_pred, sample_weight=df_test["Exposure"]
-        )
+        % mean_absolute_error(df_test["Frequency"], y_pred, sample_weight=df_test["Exposure"])
     )
 
     # Ignore non-positive predictions, as they are invalid for
@@ -255,9 +245,7 @@ poisson_glm = Pipeline(
         ("regressor", PoissonRegressor(alpha=1e-12, solver="newton-cholesky")),
     ]
 )
-poisson_glm.fit(
-    df_train, df_train["Frequency"], regressor__sample_weight=df_train["Exposure"]
-)
+poisson_glm.fit(df_train, df_train["Frequency"], regressor__sample_weight=df_train["Exposure"])
 
 print("PoissonRegressor evaluation:")
 score_estimator(poisson_glm, df_test)
@@ -306,9 +294,7 @@ poisson_gbrt = Pipeline(
         ),
     ]
 )
-poisson_gbrt.fit(
-    df_train, df_train["Frequency"], regressor__sample_weight=df_train["Exposure"]
-)
+poisson_gbrt.fit(df_train, df_train["Frequency"], regressor__sample_weight=df_train["Exposure"])
 
 print("Poisson Gradient Boosted Trees evaluation:")
 score_estimator(poisson_gbrt, df_test)
@@ -341,9 +327,7 @@ for row_idx, label, df in zip(range(2), ["train", "test"], [df_train, df_test]):
     for idx, model in enumerate([ridge_glm, poisson_glm, poisson_gbrt]):
         y_pred = model.predict(df)
 
-        pd.Series(y_pred).hist(
-            bins=np.linspace(-1, 4, n_bins), ax=axes[row_idx, idx + 1]
-        )
+        pd.Series(y_pred).hist(bins=np.linspace(-1, 4, n_bins), ax=axes[row_idx, idx + 1])
         axes[row_idx, idx + 1].set(
             title=model[-1].__class__.__name__,
             yscale="log",
@@ -511,9 +495,7 @@ fig, ax = plt.subplots(figsize=(8, 8))
 
 for model in [dummy, ridge_glm, poisson_glm, poisson_gbrt]:
     y_pred = model.predict(df_test)
-    cum_exposure, cum_claims = lorenz_curve(
-        df_test["Frequency"], y_pred, df_test["Exposure"]
-    )
+    cum_exposure, cum_claims = lorenz_curve(df_test["Frequency"], y_pred, df_test["Exposure"])
     gini = 1 - 2 * auc(cum_exposure, cum_claims)
     label = "{} (Gini: {:.2f})".format(model[-1], gini)
     ax.plot(cum_exposure, cum_claims, linestyle="-", label=label)

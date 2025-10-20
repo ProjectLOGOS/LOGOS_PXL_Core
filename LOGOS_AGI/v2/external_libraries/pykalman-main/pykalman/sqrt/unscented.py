@@ -398,9 +398,7 @@ def unscented_filter_correct(
     )
 
     # Calculate E[x_t | z_{0:t}], Var(x_t | z_{0:t})
-    moments_filt = _unscented_correct(
-        sigma_pair, moments_pred, obs_moments_pred, observation
-    )
+    moments_filt = _unscented_correct(sigma_pair, moments_pred, obs_moments_pred, observation)
     return moments_filt
 
 
@@ -542,9 +540,7 @@ def _additive_unscented_smoother(mu_filt, sigma2_filt, f, Q):
         smoother_gain = linalg.lstsq(moments_pred.covariance, smoother_gain)[0]
         smoother_gain = smoother_gain.T
 
-        mu_smooth[t] = mu_filt[t] + smoother_gain.dot(
-            mu_smooth[t + 1] - moments_pred.mean
-        )
+        mu_smooth[t] = mu_filt[t] + smoother_gain.dot(mu_smooth[t + 1] - moments_pred.mean)
         U = cholupdate(moments_pred.covariance, sigma2_smooth[t + 1], -1.0)
         sigma2_smooth[t] = cholupdate(sigma2_filt[t], smoother_gain.dot(U.T).T, -1.0)
 
@@ -714,12 +710,8 @@ class AdditiveUnscentedKalmanFilter(AUKF):
                 f = arr[0]
             return f
 
-        transition_function = default_function(
-            transition_function, transition_functions
-        )
-        observation_function = default_function(
-            observation_function, observation_functions
-        )
+        transition_function = default_function(transition_function, transition_functions)
+        observation_function = default_function(observation_function, observation_functions)
         transition_covariance = _arg_or_default(
             transition_covariance, transition_cov, 2, "transition_covariance"
         )
@@ -762,9 +754,7 @@ class AdditiveUnscentedKalmanFilter(AUKF):
             sigma2_observation=observation_covariance2,
         )
 
-        next_filtered_state_covariance = _reconstruct_covariances(
-            next_filtered_state_covariance2
-        )
+        next_filtered_state_covariance = _reconstruct_covariances(next_filtered_state_covariance2)
 
         return (next_filtered_state_mean, next_filtered_state_covariance)
 

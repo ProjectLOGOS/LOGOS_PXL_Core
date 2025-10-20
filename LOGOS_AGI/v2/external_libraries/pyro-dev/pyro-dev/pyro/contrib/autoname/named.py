@@ -110,9 +110,7 @@ class Object:
     @functools.wraps(pyro.sample)
     def sample_(self, fn, *args, **kwargs):
         if not self._is_placeholder:
-            raise RuntimeError(
-                "Cannot .sample_ an initialized named.Object {}".format(self)
-            )
+            raise RuntimeError("Cannot .sample_ an initialized named.Object {}".format(self))
         value = pyro.sample(str(self), fn, *args, **kwargs)
         self._set_value(value)
         return value
@@ -165,9 +163,7 @@ class List(list):
         :rtype: named.Object
         """
         if self._name is None:
-            raise RuntimeError(
-                "Cannot .add() to a named.List before storing it in a named.Object"
-            )
+            raise RuntimeError("Cannot .add() to a named.List before storing it in a named.Object")
         i = len(self)
         value = Object("{}[{}]".format(self._name, i))
         super(Object, value).__setattr__(
@@ -180,9 +176,7 @@ class List(list):
         name = "{}[{}]".format(self._name, pos)
         if isinstance(value, Object):
             raise RuntimeError(
-                "Cannot store named.Object {} in named.Dict {}".format(
-                    value, self._name
-                )
+                "Cannot store named.Object {} in named.Dict {}".format(value, self._name)
             )
         elif isinstance(value, (List, Dict)):
             value._set_name(name)
@@ -244,9 +238,7 @@ class Dict(dict):
                 raise RuntimeError("Cannot overwrite {}".format(name))
         if isinstance(value, Object):
             raise RuntimeError(
-                "Cannot store named.Object {} in named.Dict {}".format(
-                    value, self._name
-                )
+                "Cannot store named.Object {} in named.Dict {}".format(value, self._name)
             )
         elif isinstance(value, (List, Dict)):
             value._set_name(name)

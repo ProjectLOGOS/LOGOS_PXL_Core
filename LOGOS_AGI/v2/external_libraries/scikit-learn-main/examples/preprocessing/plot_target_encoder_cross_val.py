@@ -67,9 +67,9 @@ X_shuffled = rng.permutation(X_informative)
 # for samples which should generally be removed from machine learning datasets.
 # In this example, we generate them to show how :class:`TargetEncoder`'s default
 # :term:`cross fitting` behavior mitigates the overfitting issue automatically.
-X_near_unique_categories = rng.choice(
-    int(0.9 * n_samples), size=n_samples, replace=True
-).reshape(-1, 1)
+X_near_unique_categories = rng.choice(int(0.9 * n_samples), size=n_samples, replace=True).reshape(
+    -1, 1
+)
 
 # %%
 # Finally, we assemble the dataset and perform a train test split:
@@ -172,9 +172,7 @@ print(
 # uninformative extremely high cardinality ("near_unique") and medium
 # cardinality ("shuffled") features than when the model used
 # :term:`cross fitting` to encode the features.
-coefs_no_cf = pd.Series(
-    model_no_cf.coef_, index=model_no_cf.feature_names_in_
-).sort_values()
+coefs_no_cf = pd.Series(model_no_cf.coef_, index=model_no_cf.feature_names_in_).sort_values()
 ax = coefs_no_cf.plot(kind="barh")
 _ = ax.set(
     title="Target encoded without cross fitting",

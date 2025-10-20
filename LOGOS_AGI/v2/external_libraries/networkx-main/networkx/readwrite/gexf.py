@@ -275,9 +275,7 @@ class GEXF:
 class GEXFWriter(GEXF):
     # class for writing GEXF format files
     # use write_gexf() function
-    def __init__(
-        self, graph=None, encoding="utf-8", prettyprint=True, version="1.2draft"
-    ):
+    def __init__(self, graph=None, encoding="utf-8", prettyprint=True, version="1.2draft"):
         self.construct_types()
         self.prettyprint = prettyprint
         self.encoding = encoding
@@ -587,9 +585,7 @@ class GEXFWriter(GEXF):
             shape = viz.get("shape")
             if shape is not None:
                 if shape.startswith("http"):
-                    e = Element(
-                        f"{{{self.NS_VIZ}}}shape", value="image", uri=str(shape)
-                    )
+                    e = Element(f"{{{self.NS_VIZ}}}shape", value="image", uri=str(shape))
                 else:
                     e = Element(f"{{{self.NS_VIZ}}}shape", value=str(shape))
                 element.append(e)
@@ -652,9 +648,7 @@ class GEXFWriter(GEXF):
             elif isinstance(start_or_end, int):
                 timeformat = "long"
             else:
-                raise nx.NetworkXError(
-                    "timeformat should be of the type int, float or str"
-                )
+                raise nx.NetworkXError("timeformat should be of the type int, float or str")
             self.graph_element.set("timeformat", timeformat)
             # If Graph mode is static, alter to dynamic
             if self.graph_element.get("mode") == "static":

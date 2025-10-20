@@ -218,7 +218,7 @@ def C_canova_hansen_sd_test(INTP ltrunc,
         # This is a gigantic bottleneck, but I can't think of any better way
         # to solve it, and even R's auto ARIMA chokes on big CH tests. See:
         # https://stackoverflow.com/questions/53981660/efficiently-sum-complex-matrix-products-with-numpy
-        Omnw = sum(np.matmul(FhatauxT[:, k + 1:], 
+        Omnw = sum(np.matmul(FhatauxT[:, k + 1:],
                              Fhataux[:Ne - (k + 1), :]) * wnw[k]
                    for k in range(ltrunc))
 

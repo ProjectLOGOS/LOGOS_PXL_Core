@@ -256,9 +256,7 @@ class DiagNormalNet(nn.Module):
     def forward(self, x):
         loc_scale = self.fc(x)
         loc = loc_scale[..., : self.dim].clamp(min=-1e2, max=1e2)
-        scale = (
-            nn.functional.softplus(loc_scale[..., self.dim :]).add(1e-3).clamp(max=1e2)
-        )
+        scale = nn.functional.softplus(loc_scale[..., self.dim :]).add(1e-3).clamp(max=1e2)
         return loc, scale
 
 
@@ -380,15 +378,13 @@ class Guide(PyroModule):
         # layers are shared for t in {0,1}, but the final layer is split
         # between the two t values.
         self.y_nn = FullyConnected(
-            [config["feature_dim"]]
-            + [config["hidden_dim"]] * (config["num_layers"] - 1),
+            [config["feature_dim"]] + [config["hidden_dim"]] * (config["num_layers"] - 1),
             final_activation=nn.ELU(),
         )
         self.y0_nn = OutcomeNet([config["hidden_dim"]])
         self.y1_nn = OutcomeNet([config["hidden_dim"]])
         self.z_nn = FullyConnected(
-            [1 + config["feature_dim"]]
-            + [config["hidden_dim"]] * (config["num_layers"] - 1),
+            [1 + config["feature_dim"]] + [config["hidden_dim"]] * (config["num_layers"] - 1),
             final_activation=nn.ELU(),
         )
         self.z0_nn = DiagNormalNet([config["hidden_dim"], config["latent_dim"]])
@@ -596,9 +592,7 @@ class CEVAE(nn.Module):
                 x = self.whiten(x)
                 loss = svi.step(x, t, y, size=len(dataset)) / len(dataset)
                 if log_every and len(losses) % log_every == 0:
-                    logger.debug(
-                        "step {: >5d} loss = {:0.6g}".format(len(losses), loss)
-                    )
+                    logger.debug("step {: >5d} loss = {:0.6g}".format(len(losses), loss))
                 assert not torch_isnan(loss)
                 losses.append(loss)
         return losses

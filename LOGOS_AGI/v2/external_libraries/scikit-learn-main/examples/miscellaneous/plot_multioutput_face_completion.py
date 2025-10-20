@@ -46,9 +46,7 @@ y_test = test[:, n_pixels // 2 :]
 
 # Fit estimators
 ESTIMATORS = {
-    "Extra trees": ExtraTreesRegressor(
-        n_estimators=10, max_features=32, random_state=0
-    ),
+    "Extra trees": ExtraTreesRegressor(n_estimators=10, max_features=32, random_state=0),
     "K-nn": KNeighborsRegressor(),
     "Linear regression": LinearRegression(),
     "Ridge": RidgeCV(),
@@ -75,9 +73,7 @@ for i in range(n_faces):
         sub = plt.subplot(n_faces, n_cols, i * n_cols + 1, title="true faces")
 
     sub.axis("off")
-    sub.imshow(
-        true_face.reshape(image_shape), cmap=plt.cm.gray, interpolation="nearest"
-    )
+    sub.imshow(true_face.reshape(image_shape), cmap=plt.cm.gray, interpolation="nearest")
 
     for j, est in enumerate(sorted(ESTIMATORS)):
         completed_face = np.hstack((X_test[i], y_test_predict[est][i]))

@@ -63,9 +63,7 @@ def optimize_templates(N, occurrence_count, benchmark_logs, verbose=False):
 
     # Variables to select specific timing option for each shape
     selection_vars = {
-        (shape, "cublas"): pulp.LpVariable(
-            f"Select_{shape}_cublas", 0, 1, pulp.LpBinary
-        )
+        (shape, "cublas"): pulp.LpVariable(f"Select_{shape}_cublas", 0, 1, pulp.LpBinary)
         for shape in occurrence_count
     }
     for shape in occurrence_count:
@@ -97,9 +95,7 @@ def optimize_templates(N, occurrence_count, benchmark_logs, verbose=False):
     for shape in occurrence_count:
         # Get cuBLAS time
         cublas_times = [
-            timing["time"]
-            for timing in benchmark_logs[shape]
-            if timing["type"] == "cublas"
+            timing["time"] for timing in benchmark_logs[shape] if timing["type"] == "cublas"
         ]
         min_cublas_time = min(cublas_times)
 
@@ -130,10 +126,7 @@ def optimize_templates(N, occurrence_count, benchmark_logs, verbose=False):
         prob += (
             pulp.lpSum(
                 [selection_vars[(shape, "cublas")]]
-                + [
-                    selection_vars[(shape, template)]
-                    for triton_time, template in triton_options
-                ]
+                + [selection_vars[(shape, template)] for triton_time, template in triton_options]
             )
             == 1
         )
@@ -164,13 +157,10 @@ def optimize_templates(N, occurrence_count, benchmark_logs, verbose=False):
 
     # Output the selected templates and their configurations
     selected_templates = [
-        template
-        for template in triton_templates
-        if pulp.value(template_vars[template]) == 1
+        template for template in triton_templates if pulp.value(template_vars[template]) == 1
     ]
     total_time = sum(
-        pulp.value(min_time_vars[shape]) * occurrence_count[shape]
-        for shape in occurrence_count
+        pulp.value(min_time_vars[shape]) * occurrence_count[shape] for shape in occurrence_count
     )
 
     # Print the values of the decision variables after solving

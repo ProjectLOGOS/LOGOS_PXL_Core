@@ -81,9 +81,7 @@ clf_weights = SVC(gamma=1)
 clf_weights.fit(X, y, sample_weight=sample_weight_modified)
 
 fig, axes = plt.subplots(1, 2, figsize=(14, 6))
-plot_decision_function(
-    clf_no_weights, sample_weight_constant, axes[0], "Constant weights"
-)
+plot_decision_function(clf_no_weights, sample_weight_constant, axes[0], "Constant weights")
 plot_decision_function(clf_weights, sample_weight_modified, axes[1], "Modified weights")
 
 plt.show()

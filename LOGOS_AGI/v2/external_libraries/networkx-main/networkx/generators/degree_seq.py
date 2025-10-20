@@ -590,18 +590,14 @@ def directed_havel_hakimi_graph(in_deg_sequence, out_deg_sequence, create_using=
         if n < nin:
             in_deg = in_deg_sequence[n]
         if in_deg < 0 or out_deg < 0:
-            raise nx.NetworkXError(
-                "Invalid degree sequences. Sequence values must be positive."
-            )
+            raise nx.NetworkXError("Invalid degree sequences. Sequence values must be positive.")
         sumin, sumout, maxin = sumin + in_deg, sumout + out_deg, max(maxin, in_deg)
         if in_deg > 0:
             stubheap.append((-1 * out_deg, -1 * in_deg, n))
         elif out_deg > 0:
             zeroheap.append((-1 * out_deg, n))
     if sumin != sumout:
-        raise nx.NetworkXError(
-            "Invalid degree sequences. Sequences must have equal sums."
-        )
+        raise nx.NetworkXError("Invalid degree sequences. Sequences must have equal sums.")
     heapq.heapify(stubheap)
     heapq.heapify(zeroheap)
 
@@ -851,9 +847,7 @@ class DegreeSequenceRandomGraph:
         # build potential remaining edges and choose with rejection sampling
         potential_edges = combinations(self.remaining_degree, 2)
         # build auxiliary graph of potential edges not already in graph
-        H = nx.Graph(
-            [(u, v) for (u, v) in potential_edges if not self.graph.has_edge(u, v)]
-        )
+        H = nx.Graph([(u, v) for (u, v) in potential_edges if not self.graph.has_edge(u, v)])
         rng = self.rng
         while self.remaining_degree:
             if not self.suitable_edge():

@@ -112,25 +112,19 @@ def predict(args, model, truth):
     median = S2I.median(dim=0).values
     lines = ["Median prediction of new infections (starting on day 0):"]
     for r in range(args.num_regions):
-        lines.append(
-            "Region {}: {}".format(r, " ".join(map(str, map(int, median[:, r]))))
-        )
+        lines.append("Region {}: {}".format(r, " ".join(map(str, map(int, median[:, r])))))
     logging.info("\n".join(lines))
 
     # Optionally plot the latent and forecasted series of new infections.
     if args.plot:
         import matplotlib.pyplot as plt
 
-        fig, axes = plt.subplots(
-            args.num_regions, sharex=True, figsize=(6, 1 + args.num_regions)
-        )
+        fig, axes = plt.subplots(args.num_regions, sharex=True, figsize=(6, 1 + args.num_regions))
         time = torch.arange(args.duration + args.forecast)
         p05 = S2I.kthvalue(int(round(0.5 + 0.05 * args.num_samples)), dim=0).values
         p95 = S2I.kthvalue(int(round(0.5 + 0.95 * args.num_samples)), dim=0).values
         for r, ax in enumerate(axes):
-            ax.fill_between(
-                time, p05[:, r], p95[:, r], color="red", alpha=0.3, label="90% CI"
-            )
+            ax.fill_between(time, p05[:, r], p95[:, r], color="red", alpha=0.3, label="90% CI")
             ax.plot(time, median[:, r], "r-", label="median")
             ax.plot(time[: args.duration], model.data[:, r], "k.", label="observed")
             ax.plot(time, truth[:, r], "k--", label="truth")

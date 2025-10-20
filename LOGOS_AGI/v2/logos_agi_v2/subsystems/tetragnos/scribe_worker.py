@@ -21,15 +21,15 @@ class TetragnosScribeWorker:
                 # 1. Harvest Data: In a real system, this would query the database
                 # for recently completed Hyper-Nodes.
                 # completed_hyper_nodes = self.db_client.get_completed_nodes(limit=10)
-                
+
                 # For now, we simulate finding one.
                 time.sleep(30) # Run every 30 seconds
                 self.logger.info("Scribe waking up to check for new data...")
-                
+
                 # 2. Forge Glyph for each completed thought
                 # for node in completed_hyper_nodes:
                 #    self.forge_glyph(node)
-                
+
                 self.logger.info("Scribe going back to sleep.")
 
             except Exception as e:
@@ -48,11 +48,11 @@ class TetragnosScribeWorker:
         # Use the semantic vectors (if available) as the points to analyze
         # This is a conceptual step; requires vector data in the payloads
         points_to_analyze = [comp['data_payload'].get('embedding') for comp in components if 'embedding' in comp['data_payload']]
-        
+
         if len(points_to_analyze) > 1:
             # 3. Find the semantic center of gravity
             glyph_data = self.cluster_analyzer.fit(points_to_analyze)
-            
+
             # 4. Save the Glyph to the database
             # self.db_client.store_glyph(concept=hyper_node_data['initial_query'], glyph=glyph_data)
             self.logger.info(f"Successfully forged and stored new Glyph for concept: '{hyper_node_data['initial_query']}'")

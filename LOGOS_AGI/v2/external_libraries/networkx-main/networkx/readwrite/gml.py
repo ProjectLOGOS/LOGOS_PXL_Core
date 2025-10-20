@@ -766,9 +766,7 @@ def generate_gml(G, stringizer=None):
                     try:
                         value = stringizer(value)
                     except ValueError as err:
-                        raise NetworkXError(
-                            f"{value!r} cannot be converted into a string"
-                        ) from err
+                        raise NetworkXError(f"{value!r} cannot be converted into a string") from err
                 if not isinstance(value, str):
                     raise NetworkXError(f"{value!r} is not a string")
                 yield indent + key + ' "' + escape(value) + '"'

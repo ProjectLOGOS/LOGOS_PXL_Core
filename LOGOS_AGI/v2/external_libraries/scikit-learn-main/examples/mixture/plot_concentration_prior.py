@@ -94,9 +94,7 @@ def plot_results(ax1, ax2, estimator, X, y, title, plot_title=False):
 random_state, n_components, n_features = 2, 3, 2
 colors = np.array(["#0072B2", "#F0E442", "#D55E00"])
 
-covars = np.array(
-    [[[0.7, 0.0], [0.0, 0.1]], [[0.5, 0.0], [0.0, 0.1]], [[0.5, 0.0], [0.0, 0.1]]]
-)
+covars = np.array([[[0.7, 0.0], [0.0, 0.1]], [[0.5, 0.0], [0.0, 0.1]], [[0.5, 0.0], [0.0, 0.1]]])
 samples = np.array([200, 500, 200])
 means = np.array([[0.0, -0.70], [0.0, 0.0], [0.0, 0.70]])
 
@@ -133,19 +131,14 @@ estimators = [
 # Generate data
 rng = np.random.RandomState(random_state)
 X = np.vstack(
-    [
-        rng.multivariate_normal(means[j], covars[j], samples[j])
-        for j in range(n_components)
-    ]
+    [rng.multivariate_normal(means[j], covars[j], samples[j]) for j in range(n_components)]
 )
 y = np.concatenate([np.full(samples[j], j, dtype=int) for j in range(n_components)])
 
 # Plot results in two different figures
 for title, estimator, concentrations_prior in estimators:
     plt.figure(figsize=(4.7 * 3, 8))
-    plt.subplots_adjust(
-        bottom=0.04, top=0.90, hspace=0.05, wspace=0.05, left=0.03, right=0.99
-    )
+    plt.subplots_adjust(bottom=0.04, top=0.90, hspace=0.05, wspace=0.05, left=0.03, right=0.99)
 
     gs = gridspec.GridSpec(3, len(concentrations_prior))
     for k, concentration in enumerate(concentrations_prior):

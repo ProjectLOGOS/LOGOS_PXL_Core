@@ -39,7 +39,7 @@ The PyTorch backend is the default backend for Cross Encoders. If you don't spec
 .. code-block:: python
 
    from sentence_transformers import CrossEncoder
-   
+
    model = CrossEncoder("cross-encoder/ms-marco-MiniLM-L6-v2")
 
    query = "Which planet is known as the Red Planet?"
@@ -62,7 +62,7 @@ If you're using a GPU, then you can use the following options to speed up your i
    .. code-block:: python
 
       from sentence_transformers import CrossEncoder
-      
+
       model = CrossEncoder("cross-encoder/ms-marco-MiniLM-L6-v2", model_kwargs={"torch_dtype": "float16"})
       # or: model.half()
 
@@ -84,7 +84,7 @@ If you're using a GPU, then you can use the following options to speed up your i
    .. code-block:: python
 
       from sentence_transformers import CrossEncoder
-      
+
       model = CrossEncoder("cross-encoder/ms-marco-MiniLM-L6-v2", model_kwargs={"torch_dtype": "bfloat16"})
       # or: model.bfloat16()
 
@@ -119,7 +119,7 @@ To convert a model to ONNX format, you can use the following code:
    from sentence_transformers import CrossEncoder
 
    model = CrossEncoder("cross-encoder/ms-marco-MiniLM-L6-v2", backend="onnx")
-   
+
    query = "Which planet is known as the Red Planet?"
    passages = [
       "Venus is often called Earth's twin because of its similar size and proximity.",
@@ -131,7 +131,7 @@ To convert a model to ONNX format, you can use the following code:
    scores = model.predict([(query, passage) for passage in passages])
    print(scores)
 
-If the model path or repository already contains a model in ONNX format, Sentence Transformers will automatically use it. Otherwise, it will convert the model to the ONNX format. 
+If the model path or repository already contains a model in ONNX format, Sentence Transformers will automatically use it. Otherwise, it will convert the model to the ONNX format.
 
 .. note::
 
@@ -151,7 +151,7 @@ All keyword arguments passed via ``model_kwargs`` will be passed on to :meth:`OR
 
       model = CrossEncoder("path/to/my/model", backend="onnx")
       model.save_pretrained("path/to/my/model")
-   
+
    or with :meth:`model.push_to_hub() <sentence_transformers.cross_encoder.CrossEncoder.push_to_hub>` if your model was from the Hugging Face Hub:
 
    .. code-block:: python
@@ -201,7 +201,7 @@ See this example for exporting a model with :doc:`optimization level 3 <optimum:
           model_kwargs={"file_name": "onnx/model_O3.onnx"},
           revision=f"refs/pr/{pull_request_nr}"
       )
-   
+
    Once the pull request gets merged::
 
       from sentence_transformers import CrossEncoder
@@ -275,7 +275,7 @@ See this example for quantizing a model to ``int8`` with :doc:`avx512_vnni <opti
           model_kwargs={"file_name": "onnx/model_qint8_avx512_vnni.onnx"},
           revision=f"refs/pr/{pull_request_nr}",
       )
-   
+
    Once the pull request gets merged::
 
       from sentence_transformers import CrossEncoder
@@ -356,7 +356,7 @@ If the model path or repository already contains a model in OpenVINO format, Sen
 
       model = CrossEncoder("path/to/my/model", backend="openvino")
       model.save_pretrained("path/to/my/model")
-   
+
    or with :meth:`model.push_to_hub() <sentence_transformers.cross_encoder.CrossEncoder.push_to_hub>` if your model was from the Hugging Face Hub:
 
    .. code-block:: python
@@ -568,7 +568,7 @@ Recommendations
 Based on the benchmarks, this flowchart should help you decide which backend to use for your model:
 
 .. mermaid::
-   
+
    %%{init: {
       "theme": "neutral",
       "flowchart": {

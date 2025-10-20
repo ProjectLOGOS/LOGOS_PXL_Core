@@ -59,7 +59,7 @@ class __array_namespace_info__:
 
     """
 
-    __module__ = 'cupy'
+    __module__ = "cupy"
 
     def capabilities(self):
         """

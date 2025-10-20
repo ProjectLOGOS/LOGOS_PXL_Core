@@ -91,8 +91,7 @@ class TestCheckpoint(TestCase):
         model.zero_grad()
         out.sum().backward()
         grad_not_checkpointed = {
-            name: param.grad.detach().clone()
-            for name, param in model.named_parameters()
+            name: param.grad.detach().clone() for name, param in model.named_parameters()
         }
         input_grad_not_checkpointed = input.grad.detach().clone()
         for model_to_compare in module_lists_to_compare:
@@ -108,8 +107,7 @@ class TestCheckpoint(TestCase):
             model.zero_grad()
             out.sum().backward()
             grad_checkpointed = {
-                name: param.grad.detach().clone()
-                for name, param in model.named_parameters()
+                name: param.grad.detach().clone() for name, param in model.named_parameters()
             }
             input_grad_checkpointed = detached.grad.detach().clone()
             # compare outputs as well as the gradients of input and parameters
@@ -140,9 +138,7 @@ class TestCheckpoint(TestCase):
                 for m in modules:
                     self.assertEqual(m.counter, 0)
                 input_var = torch.randn(3, 4, requires_grad=True)
-                out = checkpoint_sequential(
-                    modules, 2, input_var, use_reentrant=use_reentrant
-                )
+                out = checkpoint_sequential(modules, 2, input_var, use_reentrant=use_reentrant)
                 for m in modules:
                     self.assertEqual(m.counter, 1)
                 out.sum().backward()
@@ -167,9 +163,7 @@ class TestCheckpoint(TestCase):
         chunks = 2
         modules = list(model.children())
         out = checkpoint_sequential(modules, chunks, input_var, use_reentrant=True)
-        with self.assertRaisesRegex(
-            RuntimeError, "torch.utils.checkpoint is incompatible"
-        ):
+        with self.assertRaisesRegex(RuntimeError, "torch.utils.checkpoint is incompatible"):
             torch.autograd.grad(
                 outputs=[out],
                 grad_outputs=[torch.ones(1, 5)],
@@ -184,9 +178,7 @@ class TestCheckpoint(TestCase):
             inputs=[input_var],
             create_graph=True,
         )
-        out_checkpoint = checkpoint_sequential(
-            modules, chunks, input_var, use_reentrant=False
-        )
+        out_checkpoint = checkpoint_sequential(modules, chunks, input_var, use_reentrant=False)
         # check outputs are the same
         self.assertEqual(out_checkpoint, out)
         grads_checkpoint = torch.autograd.grad(
@@ -485,9 +477,7 @@ class TestCheckpoint(TestCase):
         non_retain_stats = _do_test(lambda fn: fn(x).backward(), True)
 
         # In a retain_grad backward, buffers get preserved
-        _unused_retain_stats = _do_test(
-            lambda fn: fn(x).backward(retain_graph=True), False
-        )
+        _unused_retain_stats = _do_test(lambda fn: fn(x).backward(retain_graph=True), False)
 
         # In a regular backward with checkpoint, buffers get eagerly freed
         checkpoint_non_retain_stats = _do_test(
@@ -496,9 +486,7 @@ class TestCheckpoint(TestCase):
 
         # In a retain_grad backward with checkpoint, buffers get eagerly freed
         checkpoint_retain_stats = _do_test(
-            lambda fn: checkpoint(fn, x, use_reentrant=False).backward(
-                retain_graph=True
-            ),
+            lambda fn: checkpoint(fn, x, use_reentrant=False).backward(retain_graph=True),
             True,
         )
 
@@ -635,9 +623,7 @@ class TestDataLoaderUtils(TestCase):
 test_dir = os.path.abspath(os.path.dirname(str(__file__)))
 
 
-@unittest.skipIf(
-    "SKIP_TEST_BOTTLENECK" in os.environ.keys(), "SKIP_TEST_BOTTLENECK is set"
-)
+@unittest.skipIf("SKIP_TEST_BOTTLENECK" in os.environ.keys(), "SKIP_TEST_BOTTLENECK is set")
 class TestBottleneck(TestCase):
     def _run(self, command, timeout=30):
         """Returns (return-code, stdout, stderr)"""
@@ -681,9 +667,7 @@ class TestBottleneck(TestCase):
         )
 
         # This should succeed
-        rc, out, err = self._run_bottleneck(
-            "bottleneck_test/test_args.py", "--foo foo --bar bar"
-        )
+        rc, out, err = self._run_bottleneck("bottleneck_test/test_args.py", "--foo foo --bar bar")
         self.assertEqual(
             rc,
             0,
@@ -697,29 +681,19 @@ class TestBottleneck(TestCase):
 
     def _check_environment_summary(self, output):
         results = re.search("Environment Summary", output)
-        self.assertIsNotNone(
-            results, self._fail_msg("Should have Environment Summary", output)
-        )
+        self.assertIsNotNone(results, self._fail_msg("Should have Environment Summary", output))
 
         # Up to five lines away from the heading, there should be the version number
-        results = re.search(
-            r"Environment Summary.*(\n.*){,5}\nPyTorch \d+\.\d+", output
-        )
-        self.assertIsNotNone(
-            results, self._fail_msg("Should have PyTorch version", output)
-        )
+        results = re.search(r"Environment Summary.*(\n.*){,5}\nPyTorch \d+\.\d+", output)
+        self.assertIsNotNone(results, self._fail_msg("Should have PyTorch version", output))
 
     def _check_cprof_summary(self, output):
         results = re.search("cProfile output", output)
-        self.assertIsNotNone(
-            results, self._fail_msg("Should have cProfile output", output)
-        )
+        self.assertIsNotNone(results, self._fail_msg("Should have cProfile output", output))
 
         # This assumes that after the cProfile output section we have
         # the autograd profiler output
-        results = re.search(
-            r"cProfile output.*(\n.*){6,50}\n.*autograd profiler output", output
-        )
+        results = re.search(r"cProfile output.*(\n.*){6,50}\n.*autograd profiler output", output)
         self.assertIsNotNone(
             results,
             self._fail_msg(
@@ -748,14 +722,10 @@ class TestBottleneck(TestCase):
     def _check_cuda(self, output):
         if HAS_CUDA:
             results = re.search("CUDA mode", output)
-            self.assertIsNotNone(
-                results, self._fail_msg("Should tell users CUDA", output)
-            )
+            self.assertIsNotNone(results, self._fail_msg("Should tell users CUDA", output))
         else:
             results = re.search("CUDA mode", output)
-            self.assertIsNone(
-                results, self._fail_msg("Should not tell users about CUDA", output)
-            )
+            self.assertIsNone(results, self._fail_msg("Should not tell users about CUDA", output))
 
     @unittest.skipIf(HAS_CUDA, "CPU-only test")
     def test_bottleneck_cpu_only(self):
@@ -979,9 +949,7 @@ class TestStandaloneCPPJIT(TestCase):
             )
 
             ext = ".exe" if IS_WINDOWS else ""
-            self.assertEqual(
-                exec_path, os.path.join(build_dir, f"standalone_load_test{ext}")
-            )
+            self.assertEqual(exec_path, os.path.join(build_dir, f"standalone_load_test{ext}"))
 
             for shell in [True, False]:
                 r = subprocess.run(
@@ -1164,9 +1132,7 @@ def f(x):
             )
 
     def test_captured_traceback(self):
-        self.assertIn(
-            "test_captured_traceback", "".join(CapturedTraceback.extract().format())
-        )
+        self.assertIn("test_captured_traceback", "".join(CapturedTraceback.extract().format()))
 
     def test_captured_traceback_format_all(self):
         rs = CapturedTraceback.format_all(

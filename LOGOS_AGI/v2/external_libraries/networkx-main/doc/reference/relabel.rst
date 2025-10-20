@@ -12,5 +12,3 @@ Relabeling
 
    convert_node_labels_to_integers
    relabel_nodes
-
-

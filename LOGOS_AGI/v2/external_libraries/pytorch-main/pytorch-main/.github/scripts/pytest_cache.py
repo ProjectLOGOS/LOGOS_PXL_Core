@@ -14,14 +14,10 @@ TEMP_DIR = "./tmp"  # a backup location in case one isn't provided
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
-        description="Upload this job's the pytest cache to S3"
-    )
+    parser = argparse.ArgumentParser(description="Upload this job's the pytest cache to S3")
 
     mode = parser.add_mutually_exclusive_group(required=True)
-    mode.add_argument(
-        "--upload", action="store_true", help="Upload the pytest cache to S3"
-    )
+    mode.add_argument("--upload", action="store_true", help="Upload the pytest cache to S3")
     mode.add_argument(
         "--download",
         action="store_true",
@@ -54,12 +50,8 @@ def parse_args() -> argparse.Namespace:
         required=False,
         help="The github repository we're running in, in the format 'owner/repo-name'",
     )
-    parser.add_argument(
-        "--temp_dir", required=False, help="Directory to store temp files"
-    )
-    parser.add_argument(
-        "--bucket", required=False, help="The S3 bucket to upload the cache to"
-    )
+    parser.add_argument("--temp_dir", required=False, help="Directory to store temp files")
+    parser.add_argument("--bucket", required=False, help="The S3 bucket to upload the cache to")
 
     args = parser.parse_args()
 

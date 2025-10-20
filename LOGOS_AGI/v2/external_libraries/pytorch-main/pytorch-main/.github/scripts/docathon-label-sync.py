@@ -27,9 +27,7 @@ def main() -> None:
     issue_number = int(re.findall(r"#(\d{1,6})", pull_request_body)[0])
     issue = repo.get_issue(issue_number)
     issue_labels = issue.labels
-    docathon_label_present = any(
-        label.name == "docathon-h1-2025" for label in issue_labels
-    )
+    docathon_label_present = any(label.name == "docathon-h1-2025" for label in issue_labels)
 
     # if the issue has a docathon label, add all labels from the issue to the PR.
     if not docathon_label_present:
@@ -38,9 +36,7 @@ def main() -> None:
     pull_request_labels = pull_request.get_labels()
     pull_request_label_names = [label.name for label in pull_request_labels]
     issue_label_names = [label.name for label in issue_labels]
-    labels_to_add = [
-        label for label in issue_label_names if label not in pull_request_label_names
-    ]
+    labels_to_add = [label for label in issue_label_names if label not in pull_request_label_names]
     if not labels_to_add:
         print("The pull request already has the same labels.")
         return

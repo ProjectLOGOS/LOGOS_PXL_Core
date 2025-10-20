@@ -60,4 +60,3 @@ __ github_
 
 .. literalinclude:: ../../examples/sir_hmc.py
     :language: python
-

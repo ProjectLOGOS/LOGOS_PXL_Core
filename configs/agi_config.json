@@ -4,7 +4,7 @@
     "environment": "development",
     "description": "LOGOS AGI v1.0 Enhancement Framework Configuration"
   },
-  
+
   "daemon_config": {
     "interval_sec": 3600,
     "max_self_extension_per_cycle": 1,
@@ -15,7 +15,7 @@
     "telemetry_output": "metrics/agi_status.jsonl",
     "max_memory_mb": 512,
     "max_cpu_percent": 10.0,
-    
+
     "logging": {
       "level": "INFO",
       "file": "logs/daemon.log",
@@ -23,7 +23,7 @@
       "backup_count": 5
     }
   },
-  
+
   "coherence_config": {
     "history_retention_hours": 168,
     "snapshot_interval_minutes": 5,
@@ -36,7 +36,7 @@
       "runtime_weight": 0.3
     },
     "enable_adaptive_weights": true,
-    
+
     "optimization": {
       "method": "hill_climbing",
       "max_iterations": 50,
@@ -48,7 +48,7 @@
       "rollback_on_degradation": true
     }
   },
-  
+
   "iel_governance": {
     "registry": {
       "database_path": "data/iel_registry.db",
@@ -57,7 +57,7 @@
       "max_pending_iels": 100,
       "auto_backup_interval": 3600
     },
-    
+
     "generation": {
       "max_candidates_per_gap": 3,
       "min_confidence_threshold": 0.4,
@@ -67,7 +67,7 @@
       "safety_check_level": "strict",
       "require_proof_obligations": true
     },
-    
+
     "signing": {
       "key_storage_path": "keys/iel_signing/",
       "signature_algorithm": "rsa_pss",
@@ -79,21 +79,21 @@
       "emergency_revocation_enabled": true
     }
   },
-  
+
   "safety_constraints": {
     "formal_verification": {
       "require_formal_verification": true,
       "verification_timeout_seconds": 300,
       "proof_gate_policy": "strict"
     },
-    
+
     "resource_limits": {
       "max_memory_mb": 512,
       "max_cpu_percent": 10.0,
       "max_concurrent_operations": 3,
       "disk_usage_limit_gb": 10.0
     },
-    
+
     "autonomous_operation": {
       "max_self_extensions_per_hour": 1,
       "max_self_extensions_per_day": 8,
@@ -101,7 +101,7 @@
       "enable_emergency_stop": true,
       "failsafe_mode_timeout_hours": 24
     },
-    
+
     "rate_limits": {
       "iel_generation_per_hour": 10,
       "verification_requests_per_hour": 50,
@@ -109,7 +109,7 @@
       "api_requests_per_minute": 60
     }
   },
-  
+
   "integration": {
     "adaptive_interface": {
       "host": "0.0.0.0",
@@ -120,28 +120,28 @@
       "api_key_required": false,
       "rate_limiting": true
     },
-    
+
     "websocket": {
       "enable_telemetry_stream": true,
       "max_connections": 100,
       "heartbeat_interval_seconds": 30,
       "connection_timeout_seconds": 300
     },
-    
+
     "external_systems": {
       "allow_external_verification": false,
       "require_secure_communication": true,
       "enable_monitoring_integration": true
     }
   },
-  
+
   "telemetry": {
     "enable_telemetry": true,
     "collection_interval_minutes": 5,
     "retention_days": 90,
     "output_format": "jsonl",
     "compression": true,
-    
+
     "metrics": {
       "coherence_metrics": true,
       "daemon_metrics": true,
@@ -149,7 +149,7 @@
       "error_metrics": true,
       "policy_metrics": true
     },
-    
+
     "export": {
       "enable_prometheus": false,
       "prometheus_port": 9090,
@@ -157,7 +157,7 @@
       "export_interval_minutes": 1
     }
   },
-  
+
   "audit": {
     "enable_audit_trail": true,
     "audit_log_path": "logs/audit.log",
@@ -166,21 +166,21 @@
     "log_policy_violations": true,
     "log_parameter_changes": true,
     "log_verification_results": true,
-    
+
     "compliance": {
       "enable_compliance_reporting": true,
       "report_interval_hours": 24,
       "report_output_path": "reports/compliance/"
     }
   },
-  
+
   "backup_recovery": {
     "enable_automatic_backups": true,
     "backup_interval_hours": 6,
     "backup_retention_days": 30,
     "backup_path": "backups/",
     "compression": true,
-    
+
     "rollback": {
       "enable_quick_rollback": true,
       "rollback_window_hours": 72,
@@ -189,14 +189,14 @@
       "emergency_restore_timeout_minutes": 15
     }
   },
-  
+
   "development": {
     "debug_mode": true,
     "verbose_logging": true,
     "enable_test_mode": false,
     "mock_external_services": true,
     "development_relaxed_constraints": true,
-    
+
     "testing": {
       "enable_unit_tests": true,
       "enable_integration_tests": true,
@@ -204,11 +204,11 @@
       "mock_verification_results": false
     }
   },
-  
+
   "notifications": {
     "enable_notifications": true,
     "channels": ["email", "logs", "webhook"],
-    
+
     "email": {
       "smtp_server": "localhost",
       "smtp_port": 587,
@@ -220,14 +220,14 @@
         "development_team": ["dev@organization.com"]
       }
     },
-    
+
     "webhook": {
       "enable_webhook": false,
       "webhook_url": "https://hooks.organization.com/logos-agi",
       "timeout_seconds": 30,
       "retry_attempts": 3
     },
-    
+
     "alert_triggers": {
       "emergency_stop": true,
       "coherence_degradation": true,
@@ -238,7 +238,7 @@
       "daemon_errors": true
     }
   },
-  
+
   "performance": {
     "optimization": {
       "enable_performance_optimization": true,
@@ -247,14 +247,14 @@
       "worker_threads": 4,
       "async_operations": true
     },
-    
+
     "monitoring": {
       "enable_performance_monitoring": true,
       "collect_detailed_metrics": true,
       "performance_alert_threshold": 1000,
       "latency_percentiles": [50, 90, 95, 99]
     },
-    
+
     "scaling": {
       "auto_scaling_enabled": false,
       "min_instances": 1,
@@ -263,7 +263,7 @@
       "memory_scale_threshold": 80.0
     }
   },
-  
+
   "metadata": {
     "config_version": "1.0.0",
     "created_date": "2024-10-19",
@@ -271,14 +271,14 @@
     "last_modified": "2024-10-19",
     "environment": "development",
     "deployment_target": "local",
-    
+
     "documentation": {
       "config_documentation": "docs/configuration.md",
       "api_documentation": "docs/api.md",
       "deployment_guide": "docs/deployment.md",
       "troubleshooting_guide": "docs/troubleshooting.md"
     },
-    
+
     "validation": {
       "schema_version": "1.0.0",
       "required_components": [

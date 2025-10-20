@@ -58,9 +58,7 @@ class Distribution(metaclass=ABCMeta):
         elif isinstance(_seed, (RandomState, Generator)):
             self._generator = _seed
         else:
-            raise TypeError(
-                "seed must by a NumPy Generator or RandomState or int, if not None."
-            )
+            raise TypeError("seed must by a NumPy Generator or RandomState or int, if not None.")
 
     @property
     def name(self) -> str:
@@ -83,9 +81,7 @@ class Distribution(metaclass=ABCMeta):
             return empty(0)
         for p, n, b in zip(params, self.name, bounds):
             if not (b[0] <= p <= b[1]):
-                raise ValueError(
-                    f"{n} does not satisfy the bounds requirement of ({b[0]}, {b[1]})"
-                )
+                raise ValueError(f"{n} does not satisfy the bounds requirement of ({b[0]}, {b[1]})")
         return asarray(params)
 
     @property
@@ -273,9 +269,7 @@ class Distribution(metaclass=ABCMeta):
         """
 
     @abstractmethod
-    def moment(
-        self, n: int, parameters: Sequence[float] | ArrayLike1D | None = None
-    ) -> float:
+    def moment(self, n: int, parameters: Sequence[float] | ArrayLike1D | None = None) -> float:
         """
         Moment of order n
 
@@ -453,9 +447,7 @@ class Normal(Distribution, metaclass=AbstractDocStringInheritor):
         else:
             return ppf
 
-    def moment(
-        self, n: int, parameters: Sequence[float] | ArrayLike1D | None = None
-    ) -> float:
+    def moment(self, n: int, parameters: Sequence[float] | ArrayLike1D | None = None) -> float:
         if n < 0:
             return nan
 
@@ -594,9 +586,7 @@ class StudentsT(Distribution, metaclass=AbstractDocStringInheritor):
         parameters = ensure1d(parameters, "parameters", False)
         if parameters[0] <= 2.0:
             raise ValueError("The shape parameter must be larger than 2")
-        self._parameters = ensure1d(parameters, "parameters", series=False).astype(
-            float
-        )
+        self._parameters = ensure1d(parameters, "parameters", series=False).astype(float)
         return self._simulator
 
     def parameter_names(self) -> list[str]:
@@ -623,9 +613,7 @@ class StudentsT(Distribution, metaclass=AbstractDocStringInheritor):
         var = nu / (nu - 2)
         return stats.t(nu, scale=1.0 / sqrt(var)).ppf(_pits)
 
-    def moment(
-        self, n: int, parameters: Sequence[float] | ArrayLike1D | None = None
-    ) -> float:
+    def moment(self, n: int, parameters: Sequence[float] | ArrayLike1D | None = None) -> float:
         if n < 0:
             return nan
         parameters = self._check_constraints(parameters)
@@ -855,12 +843,8 @@ class SkewStudent(Distribution, metaclass=AbstractDocStringInheritor):
         if parameters[0] <= 2.0:
             raise ValueError("The shape parameter must be larger than 2")
         if abs(parameters[1]) > 1.0:
-            raise ValueError(
-                "The skew parameter must be smaller than 1 in absolute value"
-            )
-        self._parameters = ensure1d(parameters, "parameters", series=False).astype(
-            float
-        )
+            raise ValueError("The skew parameter must be smaller than 1 in absolute value")
+        self._parameters = ensure1d(parameters, "parameters", series=False).astype(float)
         return self._simulator
 
     def parameter_names(self) -> list[str]:
@@ -920,9 +904,7 @@ class SkewStudent(Distribution, metaclass=AbstractDocStringInheritor):
         """
         eta = parameters[0]
         # return gamma((eta+1)/2) / ((pi*(eta-2))**.5 * gamma(eta/2))
-        return float(
-            gammaln((eta + 1) / 2) - gammaln(eta / 2) - log(pi * (eta - 2)) / 2
-        )
+        return float(gammaln((eta + 1) / 2) - gammaln(eta / 2) - log(pi * (eta - 2)) / 2)
 
     def cdf(
         self,
@@ -978,9 +960,7 @@ class SkewStudent(Distribution, metaclass=AbstractDocStringInheritor):
         assert isinstance(icdf, ndarray)
         return icdf
 
-    def moment(
-        self, n: int, parameters: Sequence[float] | ArrayLike1D | None = None
-    ) -> float:
+    def moment(self, n: int, parameters: Sequence[float] | ArrayLike1D | None = None) -> float:
         parameters = self._check_constraints(parameters)
         eta, lam = parameters
 
@@ -1036,9 +1016,7 @@ class SkewStudent(Distribution, metaclass=AbstractDocStringInheritor):
                 (1 - lam)
                 * (loc ** (n - k))
                 * (lscale**k)
-                * StudentsT._ord_t_partial_moment(
-                    k, z=(lbound - loc) / lscale, nu=float(eta)
-                )
+                * StudentsT._ord_t_partial_moment(k, z=(lbound - loc) / lscale, nu=float(eta))
             )
 
             if z > loc:
@@ -1047,9 +1025,7 @@ class SkewStudent(Distribution, metaclass=AbstractDocStringInheritor):
                     * (loc ** (n - k))
                     * (rscale**k)
                     * (
-                        StudentsT._ord_t_partial_moment(
-                            k, z=(z - loc) / rscale, nu=float(eta)
-                        )
+                        StudentsT._ord_t_partial_moment(k, z=(z - loc) / rscale, nu=float(eta))
                         - StudentsT._ord_t_partial_moment(k, z=0.0, nu=float(eta))
                     )
                 )
@@ -1187,9 +1163,7 @@ class GeneralizedError(Distribution, metaclass=AbstractDocStringInheritor):
         parameters = ensure1d(parameters, "parameters", False)
         if parameters[0] <= 1.0:
             raise ValueError("The shape parameter must be larger than 1")
-        self._parameters = ensure1d(parameters, "parameters", series=False).astype(
-            float
-        )
+        self._parameters = ensure1d(parameters, "parameters", series=False).astype(float)
         return self._simulator
 
     def parameter_names(self) -> list[str]:
@@ -1217,9 +1191,7 @@ class GeneralizedError(Distribution, metaclass=AbstractDocStringInheritor):
         _resids = ensure1d(resids, "resids", series=False).astype(float)
         return stats.gennorm(nu, scale=1.0 / sqrt(var)).cdf(_resids)
 
-    def moment(
-        self, n: int, parameters: Sequence[float] | ArrayLike1D | None = None
-    ) -> float:
+    def moment(self, n: int, parameters: Sequence[float] | ArrayLike1D | None = None) -> float:
         if n < 0:
             return nan
 
@@ -1274,13 +1246,7 @@ class GeneralizedError(Distribution, metaclass=AbstractDocStringInheritor):
 
         # integral over (-inf, min(z,0))
         lz = abs(min(z, 0)) ** beta
-        lterm = (
-            w
-            * ((-1) ** n)
-            * (1 / beta)
-            * gamma((n + 1) / beta)
-            * gammaincc((n + 1) / beta, lz)
-        )
+        lterm = w * ((-1) ** n) * (1 / beta) * gamma((n + 1) / beta) * gammaincc((n + 1) / beta, lz)
 
         # remaining integral
         rz = max(0, z) ** beta

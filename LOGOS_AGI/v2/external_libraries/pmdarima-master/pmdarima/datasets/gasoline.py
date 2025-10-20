@@ -5,11 +5,9 @@ import pandas as pd
 from ..compat.numpy import DTYPE
 from ._base import fetch_from_web_or_disk
 
-__all__ = [
-    'load_gasoline'
-]
+__all__ = ["load_gasoline"]
 
-url = 'http://alkaline-ml.com/datasets/gasoline.csv'
+url = "http://alkaline-ml.com/datasets/gasoline.csv"
 
 
 def load_gasoline(as_series=False, dtype=DTYPE):
@@ -63,7 +61,7 @@ def load_gasoline(as_series=False, dtype=DTYPE):
     rslt : array-like, shape=(n_samples,)
         The gasoline dataset. There are 745 examples.
     """  # noqa
-    rslt = fetch_from_web_or_disk(url, 'gasoline', cache=True).astype(dtype)
+    rslt = fetch_from_web_or_disk(url, "gasoline", cache=True).astype(dtype)
     if not as_series:
         return rslt
 

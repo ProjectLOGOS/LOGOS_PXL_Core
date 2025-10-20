@@ -25,10 +25,10 @@ import warnings as _warnings
 # We only create a VERSION file in CI/CD on tagged commits.
 # For local development, or non-tagged commits, we will use 0.0.0
 try:
-    version_path = Path(__file__).parent / 'VERSION'
+    version_path = Path(__file__).parent / "VERSION"
     __version__ = version_path.read_text().strip()
 except FileNotFoundError:
-    __version__ = '0.0.0'
+    __version__ = "0.0.0"
 
 try:
     # this var is injected in the setup build to enable
@@ -41,8 +41,7 @@ except NameError:
 if __PMDARIMA_SETUP__:
     import sys
 
-    sys.stderr.write('Partial import of pmdarima during the build process.%s'
-                     % _os.linesep)
+    sys.stderr.write("Partial import of pmdarima during the build process.%s" % _os.linesep)
 else:
     # check that the build completed properly. This prints an informative
     # message in the case that any of the C code was not properly compiled.
@@ -50,8 +49,7 @@ else:
 
     # Stuff we want at top-level
     from .arima import auto_arima, ARIMA, AutoARIMA, StepwiseContext, decompose
-    from .utils import acf, autocorr_plot, c, pacf, plot_acf, plot_pacf, \
-        tsdisplay
+    from .utils import acf, autocorr_plot, c, pacf, plot_acf, plot_pacf, tsdisplay
     from .utils._show_versions import show_versions
 
     # Need these namespaces at the top so they can be used like:
@@ -67,27 +65,26 @@ else:
 
     __all__ = [
         # Namespaces we want exposed at top:
-        'arima',
-        'compat',
-        'context_managers',
-        'datasets',
-        'decorators',
-        'model_selection',
-        'preprocessing',
-        'utils',
-
+        "arima",
+        "compat",
+        "context_managers",
+        "datasets",
+        "decorators",
+        "model_selection",
+        "preprocessing",
+        "utils",
         # Functions & non-modules at top level
-        'ARIMA',
-        'acf',
-        'autocorr_plot',
-        'auto_arima',
-        'c',
-        'decompose',
-        'pacf',
-        'plot_acf',
-        'plot_pacf',
-        'show_versions',
-        'StepwiseContext',
+        "ARIMA",
+        "acf",
+        "autocorr_plot",
+        "auto_arima",
+        "c",
+        "decompose",
+        "pacf",
+        "plot_acf",
+        "plot_pacf",
+        "show_versions",
+        "StepwiseContext",
     ]
 
     _min_version = (3, 6)
@@ -97,13 +94,16 @@ else:
             "pmdarima is not built or tested against versions of python "
             "older than {0}.{1}. Your python version ({2}.{3}.{4}) is "
             "not guaranteed to be supported".format(
-                _min_version[0], _min_version[1],
-                _py_version.major, _py_version.minor, _py_version.micro,
+                _min_version[0],
+                _min_version[1],
+                _py_version.major,
+                _py_version.minor,
+                _py_version.micro,
             )
         )
 
     # https://www.dev2qa.com/how-to-check-if-python-is-32-or-64-bit-windows
-    if struct.calcsize('P') * 8 != 64:
+    if struct.calcsize("P") * 8 != 64:
         _warnings.warn(
             "pmdarima support for 32-bit systems is ending with Python 3.10."
             "Your system is not guaranteed to work going forward"
@@ -123,6 +123,6 @@ def setup_module(module):
     import numpy as np
     import random
 
-    _random_seed = int(np.random.uniform() * (2 ** 31 - 1))
+    _random_seed = int(np.random.uniform() * (2**31 - 1))
     np.random.seed(_random_seed)
     random.seed(_random_seed)

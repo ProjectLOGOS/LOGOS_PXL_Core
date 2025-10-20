@@ -11,9 +11,7 @@ def main(args):
     failed = []
 
     for name in actual["name"]:
-        actual_memory_compression = float(
-            actual.loc[actual["name"] == name]["compression_ratio"]
-        )
+        actual_memory_compression = float(actual.loc[actual["name"] == name]["compression_ratio"])
         try:
             expected_memory_compression = float(
                 expected.loc[expected["name"] == name]["compression_ratio"]

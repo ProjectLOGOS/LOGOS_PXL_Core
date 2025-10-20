@@ -292,9 +292,7 @@ class TestEdgeSubGraph:
 
     def test_correct_edges(self):
         """Tests that the subgraph has the correct edges."""
-        assert edges_equal(
-            [(0, 1, "edge01"), (3, 4, "edge34")], self.H.edges.data("name")
-        )
+        assert edges_equal([(0, 1, "edge01"), (3, 4, "edge34")], self.H.edges.data("name"))
 
     def test_add_node(self):
         """Tests that adding a node to the original graph does not

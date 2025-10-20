@@ -26,19 +26,20 @@ class MockPlottable:
 
 # ACF/PACF
 class MockTSAPlots:
-    plot_acf = plot_pacf = (lambda **kwargs: MockPlottable())
+    plot_acf = plot_pacf = lambda **kwargs: MockPlottable()
 
 
 # TODO: can we get this to work eventually?
 if False:
-    @pytest.mark.parametrize('show', [True, False])
-    def test_visualizations(show):
-        with patch('statsmodels.graphics.tsaplots', MockTSAPlots):
 
+    @pytest.mark.parametrize("show", [True, False])
+    def test_visualizations(show):
+        with patch("statsmodels.graphics.tsaplots", MockTSAPlots):
             # Have to import AFTER tha patch, since the pm.__init__ will
             # promptly import the visualization suite, which overwrites the
             # patch
             from pmdarima.utils import visualization
+
             dataset = np.random.RandomState(42).rand(150)
 
             # ac_plot = pm.autocorr_plot(dataset, show=show)

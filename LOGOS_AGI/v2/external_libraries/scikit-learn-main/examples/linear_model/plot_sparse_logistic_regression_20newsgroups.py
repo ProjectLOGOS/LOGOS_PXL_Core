@@ -104,14 +104,8 @@ for model in models:
     models[model]["densities"] = densities
     models[model]["accuracies"] = accuracies
     print("Test accuracy for model %s: %.4f" % (model, accuracies[-1]))
-    print(
-        "%% non-zero coefficients for model %s, per class:\n %s"
-        % (model, densities[-1])
-    )
-    print(
-        "Run time (%i epochs) for model %s:%.2f"
-        % (model_params["iters"][-1], model, times[-1])
-    )
+    print("%% non-zero coefficients for model %s, per class:\n %s" % (model, densities[-1]))
+    print("Run time (%i epochs) for model %s:%.2f" % (model_params["iters"][-1], model, times[-1]))
 
 fig = plt.figure()
 ax = fig.add_subplot(111)

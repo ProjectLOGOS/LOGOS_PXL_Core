@@ -21,14 +21,10 @@ def millify(n):
     millified : str
         The number abbreviated to the nearest thousand, million, etc.
     """
-    millnames = ['', 'k', 'M', 'B', 'T']
+    millnames = ["", "k", "M", "B", "T"]
     n = float(n)
     millidx = max(
-        0,
-        min(
-            len(millnames) - 1,
-            int(math.floor(0 if n == 0 else math.log10(abs(n)) / 3))
-        )
+        0, min(len(millnames) - 1, int(math.floor(0 if n == 0 else math.log10(abs(n)) / 3)))
     )
     final_num = float(n / 10 ** (3 * millidx))
     one_decimal = round(final_num, 1)
@@ -38,9 +34,11 @@ def millify(n):
     #  - 967123  -> 967k
     #  - 1000123 -> 1M
     #  - 1100123 -> 1.1M
-    final_output = one_decimal if n > 1e6 and not one_decimal.is_integer() else int(round(final_num, 0))
+    final_output = (
+        one_decimal if n > 1e6 and not one_decimal.is_integer() else int(round(final_num, 0))
+    )
 
-    return f'{final_output}{millnames[millidx]}'
+    return f"{final_output}{millnames[millidx]}"
 
 
 def get_default_value(downloads):
@@ -65,51 +63,46 @@ def get_default_value(downloads):
 # Used to calculate downloads for the last week
 today = date.today()
 last_week = today - timedelta(days=7)
-DATE_FORMAT = '%Y-%m-%d'
+DATE_FORMAT = "%Y-%m-%d"
 
 # Open a session to save time
 session = requests.Session()
 
 # Get the data for both the legacy namespace and our current one
-pyramid_arima = json.loads(session.get('https://api.pepy.tech/api/projects/pyramid-arima').text)
-pmdarima = json.loads(session.get('https://api.pepy.tech/api/projects/pmdarima').text)
+pyramid_arima = json.loads(session.get("https://api.pepy.tech/api/projects/pyramid-arima").text)
+pmdarima = json.loads(session.get("https://api.pepy.tech/api/projects/pmdarima").text)
 
 # Sum up pmdarima and pyramid-arima downloads to the past week
 pmdarima_downloads = 0
-default_pmdarima_value = get_default_value(pmdarima['downloads'])
+default_pmdarima_value = get_default_value(pmdarima["downloads"])
 for i in range(7):
-    pmdarima_downloads += pmdarima['downloads'].get(
-        (last_week + timedelta(days=i)).strftime(DATE_FORMAT),
-        default_pmdarima_value
+    pmdarima_downloads += pmdarima["downloads"].get(
+        (last_week + timedelta(days=i)).strftime(DATE_FORMAT), default_pmdarima_value
     )
 
 pyramid_arima_downloads = 0
-default_pyramid_arima_value = get_default_value(pyramid_arima['downloads'])
+default_pyramid_arima_value = get_default_value(pyramid_arima["downloads"])
 for i in range(7):
-    pyramid_arima_downloads += pyramid_arima['downloads'].get(
-        (last_week + timedelta(days=i)).strftime(DATE_FORMAT),
-        default_pyramid_arima_value
+    pyramid_arima_downloads += pyramid_arima["downloads"].get(
+        (last_week + timedelta(days=i)).strftime(DATE_FORMAT), default_pyramid_arima_value
     )
 
 # Millify the totals
-total_downloads = millify(pyramid_arima['total_downloads'] + pmdarima['total_downloads'])
+total_downloads = millify(pyramid_arima["total_downloads"] + pmdarima["total_downloads"])
 weekly_downloads = millify(pmdarima_downloads + pyramid_arima_downloads)
 
-data = {
-    'total': total_downloads,
-    'weekly': weekly_downloads
-}
+data = {"total": total_downloads, "weekly": weekly_downloads}
 
 request = session.post(
-    url='https://store.zapier.com/api/records',
-    headers={
-        'X-Secret': os.getenv('ZAPIER_SHA')
-    },
-    data=json.dumps(data)
+    url="https://store.zapier.com/api/records",
+    headers={"X-Secret": os.getenv("ZAPIER_SHA")},
+    data=json.dumps(data),
 )
 request.raise_for_status()
 
-print(f"""
+print(
+    f"""
 New total downloads: {data['total']}
 New weekly downloads: {data['weekly']}
-""")
+"""
+)

@@ -186,9 +186,7 @@ def main(args):
 
     # 4(a). Fit a BNAF autoguide
     logging.info("\nFitting a BNAF autoguide ...")
-    guide = AutoNormalizingFlow(
-        model, partial(iterated, args.num_flows, block_autoregressive)
-    )
+    guide = AutoNormalizingFlow(model, partial(iterated, args.num_flows, block_autoregressive))
     fit_guide(guide, args)
     with pyro.plate("N", args.num_samples):
         guide_samples = guide()["x"].detach().cpu().numpy()
@@ -233,12 +231,8 @@ def main(args):
 
 if __name__ == "__main__":
     assert pyro.__version__.startswith("1.9.1")
-    parser = argparse.ArgumentParser(
-        description="Example illustrating NeuTra Reparametrizer"
-    )
-    parser.add_argument(
-        "-n", "--num-steps", default=10000, type=int, help="number of SVI steps"
-    )
+    parser = argparse.ArgumentParser(description="Example illustrating NeuTra Reparametrizer")
+    parser.add_argument("-n", "--num-steps", default=10000, type=int, help="number of SVI steps")
     parser.add_argument(
         "-lr",
         "--learning-rate",
@@ -271,12 +265,8 @@ if __name__ == "__main__":
     parser.add_argument(
         "--num-flows", default=1, type=int, help="number of flows in the BNAF autoguide"
     )
-    parser.add_argument(
-        "--x-lim", default="-3,3", type=str, help="x limits for the plots"
-    )
-    parser.add_argument(
-        "--y-lim", default="0,8", type=str, help="y limits for the plots"
-    )
+    parser.add_argument("--x-lim", default="-3,3", type=str, help="x limits for the plots")
+    parser.add_argument("--y-lim", default="0,8", type=str, help="y limits for the plots")
 
     args = parser.parse_args()
     main(args)

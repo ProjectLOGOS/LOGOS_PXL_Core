@@ -21,21 +21,21 @@ from ..warnings import ModelFitWarning
 from ..compat.sklearn import safe_indexing
 
 __all__ = [
-    'cross_validate',
-    'cross_val_predict',
-    'cross_val_score',
+    "cross_validate",
+    "cross_val_predict",
+    "cross_val_score",
 ]
 
 
 _valid_scoring = {
-    'mean_absolute_error': mean_absolute_error,
-    'mean_squared_error': mean_squared_error,
-    'smape': metrics.smape,
+    "mean_absolute_error": mean_absolute_error,
+    "mean_squared_error": mean_squared_error,
+    "smape": metrics.smape,
 }
 
 _valid_averaging = {
-    'mean': np.nanmean,
-    'median': np.nanmedian,
+    "mean": np.nanmean,
+    "median": np.nanmedian,
 }
 
 
@@ -47,10 +47,8 @@ def _check_callables(x, dct, varname):
             return dct[x]
         except KeyError:
             valid_keys = list(dct.keys())
-            raise ValueError('%s can be a callable or a string in %s'
-                             % (varname, str(valid_keys)))
-    raise TypeError('expected a callable or a string, but got %r (type=%s)'
-                    % (x, type(x)))
+            raise ValueError("%s can be a callable or a string in %s" % (varname, str(valid_keys)))
+    raise TypeError("expected a callable or a string, but got %r (type=%s)" % (x, type(x)))
 
 
 def _check_averaging(method):
@@ -71,12 +69,11 @@ def _safe_split(y, X, train, test):
     return y_train, y_test, X_train, X_test
 
 
-def _fit_and_score(fold, estimator, y, X, scorer, train, test, verbose,
-                   error_score):
+def _fit_and_score(fold, estimator, y, X, scorer, train, test, verbose, error_score):
     """Fit estimator and compute scores for a given dataset split."""
-    msg = 'fold=%i' % fold
+    msg = "fold=%i" % fold
     if verbose > 1:
-        print("[CV] %s %s" % (msg, (64 - len(msg)) * '.'))
+        print("[CV] %s %s" % (msg, (64 - len(msg)) * "."))
 
     start_time = time.time()
     y_train, y_test, X_train, X_test = _safe_split(y, X, train, test)
@@ -87,15 +84,16 @@ def _fit_and_score(fold, estimator, y, X, scorer, train, test, verbose,
     except Exception as e:
         fit_time = time.time() - start_time
         score_time = 0.0
-        if error_score == 'raise':
+        if error_score == "raise":
             raise
         else:
             test_scores = error_score
-            warnings.warn("Estimator fit failed. The score on this train-test "
-                          "partition will be set to %f. Details: \n%s"
-                          % (error_score,
-                             format_exception_only(type(e), e)[0]),
-                          ModelFitWarning)
+            warnings.warn(
+                "Estimator fit failed. The score on this train-test "
+                "partition will be set to %f. Details: \n%s"
+                % (error_score, format_exception_only(type(e), e)[0]),
+                ModelFitWarning,
+            )
 
     else:
         fit_time = time.time() - start_time
@@ -116,9 +114,9 @@ def _fit_and_score(fold, estimator, y, X, scorer, train, test, verbose,
 
 def _fit_and_predict(fold, estimator, y, X, train, test, verbose):
     """Fit estimator and compute scores for a given dataset split."""
-    msg = 'fold=%i' % fold
+    msg = "fold=%i" % fold
     if verbose > 1:
-        print("[CV] %s %s" % (msg, (64 - len(msg)) * '.'))
+        print("[CV] %s %s" % (msg, (64 - len(msg)) * "."))
 
     start_time = time.time()
     y_train, _, X_train, X_test = _safe_split(y, X, train, test)
@@ -190,29 +188,31 @@ def cross_validate(
 
     # validate the error score
     if not (error_score == "raise" or isinstance(error_score, numbers.Number)):
-        raise ValueError('error_score should be the string "raise" or a '
-                         'numeric value')
+        raise ValueError('error_score should be the string "raise" or a ' "numeric value")
 
     # TODO: in the future we might consider joblib for parallelizing, but it
     #   . could cause cross threads in parallelism..
 
     results = [
-        _fit_and_score(fold,
-                       base.clone(estimator),
-                       y,
-                       X,
-                       scorer=scoring,
-                       train=train,
-                       test=test,
-                       verbose=verbose,
-                       error_score=error_score)
-        for fold, (train, test) in enumerate(cv.split(y, X))]
+        _fit_and_score(
+            fold,
+            base.clone(estimator),
+            y,
+            X,
+            scorer=scoring,
+            train=train,
+            test=test,
+            verbose=verbose,
+            error_score=error_score,
+        )
+        for fold, (train, test) in enumerate(cv.split(y, X))
+    ]
     scores, fit_times, score_times = list(zip(*results))
 
     ret = {
-        'test_score': np.array(scores),
-        'fit_time': np.array(fit_times),
-        'score_time': np.array(score_times),
+        "test_score": np.array(scores),
+        "fit_time": np.array(fit_times),
+        "score_time": np.array(score_times),
     }
     return ret
 
@@ -283,7 +283,7 @@ def cross_val_predict(
         First column contains all one-step-ahead-predictions, second column all
         two-step-ahead-predictions etc. Further metrics can then be calculated
         as desired.
-    
+
 
     Examples
     --------
@@ -320,19 +320,23 @@ def cross_val_predict(
     #         60, 61, 62, 63]),
     #  array([64, 65, 66, 67]))  <~~ 64 vs. 61
     if cv.step > cv.horizon:
-        raise ValueError("CV step cannot be > CV horizon, or there will be a "
-                         "gap in predictions between folds")
+        raise ValueError(
+            "CV step cannot be > CV horizon, or there will be a " "gap in predictions between folds"
+        )
 
     # clone estimator to make sure all folds are independent
     prediction_blocks = [
-        _fit_and_predict(fold,
-                         base.clone(estimator),
-                         y,
-                         X,
-                         train=train,
-                         test=test,
-                         verbose=verbose,)  # TODO: fit params?
-        for fold, (train, test) in enumerate(cv.split(y, X))]
+        _fit_and_predict(
+            fold,
+            base.clone(estimator),
+            y,
+            X,
+            train=train,
+            test=test,
+            verbose=verbose,
+        )  # TODO: fit params?
+        for fold, (train, test) in enumerate(cv.split(y, X))
+    ]
 
     # Unlike normal CV, time series CV might have different folds (windows)
     # forecasting the same time step. In this stage, we build a matrix of
@@ -406,4 +410,4 @@ def cross_val_score(
         verbose=verbose,
         error_score=error_score,
     )
-    return cv_results['test_score']
+    return cv_results["test_score"]

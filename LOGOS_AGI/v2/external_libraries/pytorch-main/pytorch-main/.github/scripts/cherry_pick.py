@@ -24,12 +24,8 @@ def parse_args() -> Any:
     from argparse import ArgumentParser
 
     parser = ArgumentParser("cherry pick a landed PR onto a release branch")
-    parser.add_argument(
-        "--onto-branch", type=str, required=True, help="the target release branch"
-    )
-    parser.add_argument(
-        "--github-actor", type=str, required=True, help="all the world's a stage"
-    )
+    parser.add_argument("--onto-branch", type=str, required=True, help="the target release branch")
+    parser.add_argument("--github-actor", type=str, required=True, help="all the world's a stage")
     parser.add_argument(
         "--classification",
         choices=["regression", "critical", "fixnewfeature", "docs", "release"],
@@ -65,9 +61,7 @@ def get_release_version(onto_branch: str) -> Optional[str]:
     return m.group("version") if m else ""
 
 
-def get_tracker_issues(
-    org: str, project: str, onto_branch: str
-) -> list[dict[str, Any]]:
+def get_tracker_issues(org: str, project: str, onto_branch: str) -> list[dict[str, Any]]:
     """
     Find the tracker issue from the repo. The tracker issue needs to have the title
     like [VERSION] Release Tracker following the convention on PyTorch
@@ -98,9 +92,7 @@ def cherry_pick(
     Create a local branch to cherry pick the commit and submit it as a pull request
     """
     current_branch = repo.current_branch()
-    cherry_pick_branch = create_cherry_pick_branch(
-        github_actor, repo, pr, commit_sha, onto_branch
-    )
+    cherry_pick_branch = create_cherry_pick_branch(github_actor, repo, pr, commit_sha, onto_branch)
 
     try:
         org, project = repo.gh_owner_and_name()
@@ -138,7 +130,9 @@ def cherry_pick(
         if fixes:
             msg += f" and it is linked with issue {fixes}."
         elif classification in REQUIRES_ISSUE:
-            msg += f" and it is recommended to link a {classification} cherry pick PR with an issue."
+            msg += (
+                f" and it is recommended to link a {classification} cherry pick PR with an issue."
+            )
 
         if tracker_issues_comments:
             msg += " The following tracker issues are updated:\n"
@@ -207,9 +201,7 @@ def submit_pr(
 
         cherry_pick_pr = response.get("html_url", "")
         if not cherry_pick_pr:
-            raise RuntimeError(
-                f"Fail to find the cherry pick PR: {json.dumps(response)}"
-            )
+            raise RuntimeError(f"Fail to find the cherry pick PR: {json.dumps(response)}")
 
         return str(cherry_pick_pr)
 
@@ -240,9 +232,7 @@ def post_pr_comment(
             if line
         )
 
-    comment = "\n".join(
-        (f"### Cherry picking #{pr_num}", f"{msg}", "", f"{internal_debugging}")
-    )
+    comment = "\n".join((f"### Cherry picking #{pr_num}", f"{msg}", "", f"{internal_debugging}"))
     return gh_post_pr_comment(org, project, pr_num, comment, dry_run)
 
 
@@ -286,9 +276,7 @@ def main() -> None:
     try:
         commit_sha = get_merge_commit_sha(repo, pr)
         if not commit_sha:
-            raise RuntimeError(
-                f"Refuse to cherry pick #{pr_num} because it hasn't been merged yet"
-            )
+            raise RuntimeError(f"Refuse to cherry pick #{pr_num} because it hasn't been merged yet")
 
         cherry_pick(
             args.github_actor,

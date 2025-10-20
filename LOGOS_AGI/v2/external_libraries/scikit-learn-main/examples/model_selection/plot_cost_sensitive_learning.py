@@ -175,9 +175,7 @@ def credit_gain_score(y, y_pred, neg_label, pos_label):
     return np.sum(cm * gain_matrix)
 
 
-scoring["credit_gain"] = make_scorer(
-    credit_gain_score, neg_label=neg_label, pos_label=pos_label
-)
+scoring["credit_gain"] = make_scorer(credit_gain_score, neg_label=neg_label, pos_label=pos_label)
 # %%
 # Vanilla predictive model
 # ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -186,9 +184,9 @@ scoring["credit_gain"] = make_scorer(
 # that natively handles categorical features and missing values.
 from sklearn.ensemble import HistGradientBoostingClassifier
 
-model = HistGradientBoostingClassifier(
-    categorical_features="from_dtype", random_state=0
-).fit(X_train, y_train)
+model = HistGradientBoostingClassifier(categorical_features="from_dtype", random_state=0).fit(
+    X_train, y_train
+)
 model
 
 # %%
@@ -542,10 +540,8 @@ amount = credit_card.frame["Amount"].to_numpy()
 # %%
 from sklearn.model_selection import train_test_split
 
-data_train, data_test, target_train, target_test, amount_train, amount_test = (
-    train_test_split(
-        data, target, amount, stratify=target, test_size=0.5, random_state=42
-    )
+data_train, data_test, target_train, target_test, amount_train, amount_test = train_test_split(
+    data, target, amount, stratify=target, test_size=0.5, random_state=42
 )
 
 # %%
@@ -555,9 +551,7 @@ from sklearn.dummy import DummyClassifier
 
 always_accept_policy = DummyClassifier(strategy="constant", constant=0)
 always_accept_policy.fit(data_train, target_train)
-benefit = business_scorer(
-    always_accept_policy, data_test, target_test, amount=amount_test
-)
+benefit = business_scorer(always_accept_policy, data_test, target_test, amount=amount_test)
 print(f"Benefit of the 'always accept' policy: {benefit:,.2f}€")
 
 # %%
@@ -566,9 +560,7 @@ print(f"Benefit of the 'always accept' policy: {benefit:,.2f}€")
 # transactions as fraudulent.
 always_reject_policy = DummyClassifier(strategy="constant", constant=1)
 always_reject_policy.fit(data_train, target_train)
-benefit = business_scorer(
-    always_reject_policy, data_test, target_test, amount=amount_test
-)
+benefit = business_scorer(always_reject_policy, data_test, target_test, amount=amount_test)
 print(f"Benefit of the 'always reject' policy: {benefit:,.2f}€")
 
 
@@ -673,9 +665,7 @@ model_fixed_threshold = FixedThresholdClassifier(
 )
 
 # %%
-business_score = business_scorer(
-    model_fixed_threshold, data_test, target_test, amount=amount_test
-)
+business_score = business_scorer(model_fixed_threshold, data_test, target_test, amount=amount_test)
 print(f"Benefit of logistic regression with a tuned threshold:  {business_score:,.2f}€")
 
 # %%

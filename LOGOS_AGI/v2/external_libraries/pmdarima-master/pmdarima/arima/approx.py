@@ -15,25 +15,17 @@ from ..compat.numpy import DTYPE
 # _arima.cpython-35m-darwin.so), import this absolutely and not relatively.
 from pmdarima.arima._arima import C_Approx
 
-__all__ = [
-    'approx'
-]
+__all__ = ["approx"]
 
 # the ints get passed to C code
-VALID_APPROX = {
-    'constant': 2,
-    'linear': 1
-}
+VALID_APPROX = {"constant": 2, "linear": 1}
 
 # get the valid tie funcs
-VALID_TIES = {
-    'ordered': None,  # never really used...
-    'mean': np.average
-}
+VALID_TIES = {"ordered": None, "mean": np.average}  # never really used...
 
 # identity function defined once to avoid multiple lambda calls
 # littered throughout
-_identity = (lambda t: t)
+_identity = lambda t: t
 
 
 def _regularize(x, y, ties):
@@ -52,18 +44,15 @@ def _regularize(x, y, ties):
     ties : str
         One of {'ordered', 'mean'}, handles the ties.
     """
-    x, y = [
-        check_endog(arr, dtype=DTYPE, preserve_series=False)
-        for arr in (x, y)
-    ]
+    x, y = [check_endog(arr, dtype=DTYPE, preserve_series=False) for arr in (x, y)]
 
     nx = x.shape[0]
     if nx != y.shape[0]:
-        raise ValueError('array dim mismatch: %i != %i' % (nx, y.shape[0]))
+        raise ValueError("array dim mismatch: %i != %i" % (nx, y.shape[0]))
 
     # manipulate x if needed. if ties is 'ordered' we assume that x is
     # already ordered and everything has been handled already...
-    if ties != 'ordered':
+    if ties != "ordered":
         o = np.argsort(x)
 
         # keep ordered with one another
@@ -95,8 +84,7 @@ def _regularize(x, y, ties):
     return x, y
 
 
-def approx(x, y, xout, method='linear', rule=1, f=0, yleft=None,
-           yright=None, ties='mean'):
+def approx(x, y, xout, method="linear", rule=1, f=0, yleft=None, yright=None, ties="mean"):
     """Linearly interpolate points.
 
     Return a list of points which (linearly) interpolate given data points,
@@ -147,7 +135,7 @@ def approx(x, y, xout, method='linear', rule=1, f=0, yleft=None,
         Handling of tied ``x`` values. Choices are "mean" or "ordered".
     """
     if method not in VALID_APPROX:
-        raise ValueError('method must be one of %r' % VALID_APPROX)
+        raise ValueError("method must be one of %r" % VALID_APPROX)
 
     # make sure xout is an array
     xout = c(xout).astype(np.float64)  # ensure double
@@ -165,9 +153,8 @@ def approx(x, y, xout, method='linear', rule=1, f=0, yleft=None,
     # if len 1? (we've already handled where the size is 0, since we check that
     # in the _regularize function when we call c1d)
     if nx == 1:
-        if method_key == 'linear':
-            raise ValueError('need at least two points to '
-                             'linearly interpolate')
+        if method_key == "linear":
+            raise ValueError("need at least two points to " "linearly interpolate")
 
     # get yleft, yright
     if yleft is None:

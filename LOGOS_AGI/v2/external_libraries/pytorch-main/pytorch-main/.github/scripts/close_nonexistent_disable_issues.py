@@ -70,9 +70,7 @@ CLOSING_COMMENT = (
     "re-open this issue."
 )
 
-DISABLED_TESTS_JSON = (
-    "https://ossci-metrics.s3.amazonaws.com/disabled-tests-condensed.json"
-)
+DISABLED_TESTS_JSON = "https://ossci-metrics.s3.amazonaws.com/disabled-tests-condensed.json"
 
 
 @retries_decorator()
@@ -149,9 +147,7 @@ def check_if_exists(
         return True, "found in logs"
 
     # Query DB to see if the test is there
-    count = query_db(
-        TEST_EXISTS_QUERY, {"name": f"{name}%", "classname": f"{classname}%"}
-    )
+    count = query_db(TEST_EXISTS_QUERY, {"name": f"{name}%", "classname": f"{classname}%"})
     if len(count) == 0:
         return False, "not found"
     return True, "found in DB"

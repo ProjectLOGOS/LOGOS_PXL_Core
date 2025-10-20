@@ -38,7 +38,7 @@ class Variable(LogosExpr):
     def __init__(self, name: str, onto_type: OntologicalType):
         self.name=name; self.onto_type=onto_type
     def _to_string(self): return f"{self.name}:{self.onto_type.value}"
-    def to_dict(self): 
+    def to_dict(self):
         return {"type":"var","name":self.name,"onto_type":self.onto_type.value}
     @classmethod
     def from_dict(cls,data):

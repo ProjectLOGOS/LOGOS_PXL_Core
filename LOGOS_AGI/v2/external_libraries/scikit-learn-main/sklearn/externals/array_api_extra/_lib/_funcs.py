@@ -41,7 +41,8 @@ def apply_where(  # type: ignore[explicit-any,decorated-any] # numpydoc ignore=G
     /,
     *,
     xp: ModuleType | None = None,
-) -> Array: ...
+) -> Array:
+    ...
 
 
 @overload
@@ -53,7 +54,8 @@ def apply_where(  # type: ignore[explicit-any,decorated-any] # numpydoc ignore=G
     *,
     fill_value: Array | complex,
     xp: ModuleType | None = None,
-) -> Array: ...
+) -> Array:
+    ...
 
 
 def apply_where(  # type: ignore[explicit-any] # numpydoc ignore=PR01,PR02
@@ -543,9 +545,14 @@ def isclose(
         out = apply_where(
             xp.isinf(a) | xp.isinf(b),
             (a, b),
-            lambda a, b: mxp.isinf(a) & mxp.isinf(b) & (mxp.sign(a) == mxp.sign(b)),  # pyright: ignore[reportUnknownArgumentType]
+            lambda a, b: mxp.isinf(a)
+            & mxp.isinf(b)
+            & (
+                mxp.sign(a) == mxp.sign(b)
+            ),  # pyright: ignore[reportUnknownArgumentType]
             # Note: inf <= inf is True!
-            lambda a, b: mxp.abs(a - b) <= (atol + rtol * mxp.abs(b)),  # pyright: ignore[reportUnknownArgumentType]
+            lambda a, b: mxp.abs(a - b)
+            <= (atol + rtol * mxp.abs(b)),  # pyright: ignore[reportUnknownArgumentType]
             xp=xp,
         )
         if equal_nan:

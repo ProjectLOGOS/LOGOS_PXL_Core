@@ -563,9 +563,7 @@ def graphs_equal(graph1, graph2):
         True if graphs are equal, False otherwise.
     """
     return (
-        graph1.adj == graph2.adj
-        and graph1.nodes == graph2.nodes
-        and graph1.graph == graph2.graph
+        graph1.adj == graph2.adj and graph1.nodes == graph2.nodes and graph1.graph == graph2.graph
     )
 
 

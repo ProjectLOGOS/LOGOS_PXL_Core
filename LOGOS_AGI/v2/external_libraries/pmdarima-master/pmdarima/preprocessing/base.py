@@ -9,9 +9,7 @@ import abc
 from ..compat.numpy import DTYPE
 from ..utils import check_exog, check_endog
 
-__all__ = [
-    "BaseTransformer"
-]
+__all__ = ["BaseTransformer"]
 
 
 class BaseTransformer(BaseEstimator, TransformerMixin, metaclass=abc.ABCMeta):
@@ -28,6 +26,7 @@ class BaseTransformer(BaseEstimator, TransformerMixin, metaclass=abc.ABCMeta):
     avoid any data leakage, while ``transform`` may be applied to any dataset
     of the same schema.
     """
+
     @staticmethod
     def _check_y_X(y, X):
         """Validate input"""

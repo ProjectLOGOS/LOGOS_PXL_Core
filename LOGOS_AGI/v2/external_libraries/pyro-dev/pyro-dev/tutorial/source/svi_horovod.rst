@@ -21,4 +21,3 @@ __ github_
 
 .. literalinclude:: ../../examples/svi_horovod.py
     :language: python
-

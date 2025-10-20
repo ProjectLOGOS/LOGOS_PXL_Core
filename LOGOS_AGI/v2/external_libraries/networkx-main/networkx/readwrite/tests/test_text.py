@@ -139,9 +139,7 @@ def test_generate_network_text_directed_multi_tree():
     ).strip()
     assert ret == target
 
-    ret = "\n".join(
-        nx.generate_network_text(forest, sources=[0, 14, 7], ascii_only=True)
-    )
+    ret = "\n".join(nx.generate_network_text(forest, sources=[0, 14, 7], ascii_only=True))
 
     target = dedent(
         """
@@ -1449,15 +1447,11 @@ def test_write_network_text_vertical_chains():
     write("--- Undirected UTF ---")
     nx.write_network_text(graph1, path=write, end="", vertical_chains=True)
     write("--- Undirected ASCI ---")
-    nx.write_network_text(
-        graph1, path=write, end="", vertical_chains=True, ascii_only=True
-    )
+    nx.write_network_text(graph1, path=write, end="", vertical_chains=True, ascii_only=True)
     write("--- Directed UTF ---")
     nx.write_network_text(graph2, path=write, end="", vertical_chains=True)
     write("--- Directed ASCI ---")
-    nx.write_network_text(
-        graph2, path=write, end="", vertical_chains=True, ascii_only=True
-    )
+    nx.write_network_text(graph2, path=write, end="", vertical_chains=True, ascii_only=True)
 
     text = "\n".join(lines)
     target = dedent(
@@ -1691,9 +1685,7 @@ def generate_test_graphs():
             if num_nodes > 0:
                 for p in [0.1, 0.3, 0.5, 0.7, 0.9]:
                     for seed in range(num_randomized):
-                        graph = nx.erdos_renyi_graph(
-                            num_nodes, p, directed=directed, seed=rng
-                        )
+                        graph = nx.erdos_renyi_graph(num_nodes, p, directed=directed, seed=rng)
                         yield graph
 
                 yield nx.complete_graph(num_nodes, cls)
@@ -1710,13 +1702,7 @@ def generate_test_graphs():
 
 @pytest.mark.parametrize(
     ("vertical_chains", "ascii_only"),
-    tuple(
-        [
-            (vertical_chains, ascii_only)
-            for vertical_chains in [0, 1]
-            for ascii_only in [0, 1]
-        ]
-    ),
+    tuple([(vertical_chains, ascii_only) for vertical_chains in [0, 1] for ascii_only in [0, 1]]),
 )
 def test_network_text_round_trip(vertical_chains, ascii_only):
     """
@@ -1729,9 +1715,7 @@ def test_network_text_round_trip(vertical_chains, ascii_only):
     for graph in generate_test_graphs():
         graph = nx.relabel_nodes(graph, {n: str(n) for n in graph.nodes})
         lines = list(
-            nx.generate_network_text(
-                graph, vertical_chains=vertical_chains, ascii_only=ascii_only
-            )
+            nx.generate_network_text(graph, vertical_chains=vertical_chains, ascii_only=ascii_only)
         )
         new = _parse_network_text(lines)
         try:

@@ -3,9 +3,7 @@ import operator_benchmark as op_bench
 import torch
 
 
-add_configs = op_bench.cross_product_configs(
-    M=[8, 1], N=[8, 2], K=[8, 4], tags=["short"]
-)
+add_configs = op_bench.cross_product_configs(M=[8, 1], N=[8, 2], K=[8, 4], tags=["short"])
 
 
 # This benchmark uses the auto_set to automatically set requires_grad

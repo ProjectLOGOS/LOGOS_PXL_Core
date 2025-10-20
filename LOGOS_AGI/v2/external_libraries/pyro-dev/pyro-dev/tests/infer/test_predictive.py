@@ -31,12 +31,8 @@ def one_hot_model(pseudocounts, classes=None):
 
 
 def beta_guide(num_trials):
-    phi_c0 = pyro.param(
-        "phi_c0", num_trials.new_tensor(5.0).expand([num_trials.size(0)])
-    )
-    phi_c1 = pyro.param(
-        "phi_c1", num_trials.new_tensor(5.0).expand([num_trials.size(0)])
-    )
+    phi_c0 = pyro.param("phi_c0", num_trials.new_tensor(5.0).expand([num_trials.size(0)]))
+    phi_c1 = pyro.param("phi_c1", num_trials.new_tensor(5.0).expand([num_trials.size(0)]))
     with pyro.plate("data", num_trials.size(0)):
         phi_posterior = dist.Beta(concentration0=phi_c0, concentration1=phi_c1)
         pyro.sample("phi", phi_posterior)
@@ -75,40 +71,30 @@ def test_posterior_predictive_svi_manual_guide(
     if predictive is Predictive:
         marginal_return_vals = posterior_predictive(num_trials)["_RETURN"]
     else:
-        weighed_samples = posterior_predictive(
-            num_trials, model_guide=conditioned_model
-        )
+        weighed_samples = posterior_predictive(num_trials, model_guide=conditioned_model)
         marginal_return_vals = weighed_samples.samples["_RETURN"]
         assert marginal_return_vals.shape[:1] == weighed_samples.log_weights.shape
         # Resample weighed samples
         resampler = MHResampler(posterior_predictive)
         num_mh_steps = 10
         for mh_step_count in range(num_mh_steps):
-            resampled_weighed_samples = resampler(
-                num_trials, model_guide=conditioned_model
-            )
+            resampled_weighed_samples = resampler(num_trials, model_guide=conditioned_model)
         resampled_marginal_return_vals = resampled_weighed_samples.samples["_RETURN"]
         # Calculate CDF quantiles
         quantile_test_point = 0.95
-        quantile_test_point_value = quantile(
-            marginal_return_vals, [quantile_test_point]
-        )[0]
+        quantile_test_point_value = quantile(marginal_return_vals, [quantile_test_point])[0]
         weighed_quantile_test_point_value = weighed_quantile(
             marginal_return_vals, [quantile_test_point], weighed_samples.log_weights
         )[0]
         resampled_quantile_test_point_value = quantile(
             resampled_marginal_return_vals, [quantile_test_point]
         )[0]
+        logging.info("Unweighed quantile at test point is: " + str(quantile_test_point_value))
         logging.info(
-            "Unweighed quantile at test point is: " + str(quantile_test_point_value)
+            "Weighed quantile at test point is:   " + str(weighed_quantile_test_point_value)
         )
         logging.info(
-            "Weighed quantile at test point is:   "
-            + str(weighed_quantile_test_point_value)
-        )
-        logging.info(
-            "Resampled quantile at test point is: "
-            + str(resampled_quantile_test_point_value)
+            "Resampled quantile at test point is: " + str(resampled_quantile_test_point_value)
         )
         # Weighed and resampled quantiles should match
         assert_close(
@@ -141,9 +127,7 @@ def test_posterior_predictive_svi_auto_delta_guide(parallel, predictive):
     svi = SVI(conditioned_model, guide, optim.Adam(dict(lr=1.0)), Trace_ELBO())
     for i in range(1000):
         svi.step(num_trials)
-    posterior_predictive = predictive(
-        model, guide=guide, num_samples=10000, parallel=parallel
-    )
+    posterior_predictive = predictive(model, guide=guide, num_samples=10000, parallel=parallel)
     if predictive is Predictive:
         marginal_return_vals = posterior_predictive.get_samples(num_trials)["obs"]
     else:
@@ -166,13 +150,11 @@ def test_posterior_predictive_svi_auto_diag_normal_guide(return_trace, predictiv
     svi = SVI(conditioned_model, guide, optim.Adam(dict(lr=0.1)), Trace_ELBO())
     for i in range(1000):
         svi.step(num_trials)
-    posterior_predictive = predictive(
-        model, guide=guide, num_samples=10000, parallel=True
-    )
+    posterior_predictive = predictive(model, guide=guide, num_samples=10000, parallel=True)
     if return_trace:
-        marginal_return_vals = posterior_predictive.get_vectorized_trace(
-            num_trials
-        ).nodes["obs"]["value"]
+        marginal_return_vals = posterior_predictive.get_vectorized_trace(num_trials).nodes["obs"][
+            "value"
+        ]
     else:
         if predictive is Predictive:
             marginal_return_vals = posterior_predictive.get_samples(num_trials)["obs"]
@@ -253,9 +235,7 @@ def test_deterministic(with_plate, event_shape, predictive):
     for i in range(100):
         svi.step(y)
 
-    actual = predictive(
-        model, guide=guide, return_sites=["x2", "x3"], num_samples=1000
-    )()
+    actual = predictive(model, guide=guide, return_sites=["x2", "x3"], num_samples=1000)()
     if predictive is WeighedPredictive:
         assert actual.samples["x2"].shape[:1] == actual.log_weights.shape
         assert actual.samples["x3"].shape[:1] == actual.log_weights.shape

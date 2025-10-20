@@ -16,4 +16,3 @@ Version 3
 - Redefined ``hold_back`` to only accept integers so that is simply defined
   the number of observations held back. This number is now held out of the
   sample irrespective of the value of ``first_obs``.
-

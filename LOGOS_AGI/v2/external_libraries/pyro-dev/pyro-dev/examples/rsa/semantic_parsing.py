@@ -22,9 +22,7 @@ torch.set_default_dtype(torch.float64)
 def Marginal(fn=None, **kwargs):
     if fn is None:
         return lambda _fn: Marginal(_fn, **kwargs)
-    return memoize(
-        lambda *args: HashingMarginal(BestFirstSearch(fn, **kwargs).run(*args))
-    )
+    return memoize(lambda *args: HashingMarginal(BestFirstSearch(fn, **kwargs).run(*args)))
 
 
 ###################################################################
@@ -125,9 +123,7 @@ class AllMeaning(Meaning):
     def sem(self, world):
         def f1(P):
             def f2(Q):
-                return (
-                    len(list(filter(lambda *args: not Q(*args), filter(P, world)))) == 0
-                )
+                return len(list(filter(lambda *args: not Q(*args), filter(P, world)))) == 0
 
             return f2
 
@@ -278,9 +274,7 @@ def combine_meanings(meanings, c=0):
 
 
 def meaning(utterance):
-    defined = filter(
-        lambda w: "" != w.syn(), list(map(lexical_meaning, utterance.split(" ")))
-    )
+    defined = filter(lambda w: "" != w.syn(), list(map(lexical_meaning, utterance.split(" "))))
     return combine_meanings(list(defined))
 
 

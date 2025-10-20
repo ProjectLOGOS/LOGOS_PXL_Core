@@ -397,15 +397,11 @@ torch.testing._internal.fake_config_module3.e_func = _warnings.warn""",
 
     def test_invalid_config_int(self):
         with self.assertRaises(AssertionError):
-            _ConfigEntry(
-                Config(default=2, env_name_default="FAKE_DISABLE", value_type=int)
-            )
+            _ConfigEntry(Config(default=2, env_name_default="FAKE_DISABLE", value_type=int))
 
     def test_invalid_config_float(self):
         with self.assertRaises(AssertionError):
-            _ConfigEntry(
-                Config(default=2, env_name_force="FAKE_DISABLE", value_type=float)
-            )
+            _ConfigEntry(Config(default=2, env_name_force="FAKE_DISABLE", value_type=float))
 
 
 if __name__ == "__main__":

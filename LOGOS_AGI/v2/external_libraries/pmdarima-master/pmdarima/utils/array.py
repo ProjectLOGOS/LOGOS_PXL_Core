@@ -12,15 +12,7 @@ import pandas as pd
 from ..compat import DTYPE
 from ._array import C_intgrt_vec
 
-__all__ = [
-    'as_series',
-    'c',
-    'check_endog',
-    'check_exog',
-    'diff',
-    'diff_inv',
-    'is_iterable'
-]
+__all__ = ["as_series", "c", "check_endog", "check_exog", "diff", "diff_inv", "is_iterable"]
 
 
 def as_series(x, **kwargs):
@@ -227,7 +219,7 @@ def check_exog(X, dtype=DTYPE, copy=True, force_all_finite=True):
     X : pd.DataFrame or np.ndarray, shape=(n_samples, n_features)
         Either a 2-d numpy array or pd.DataFrame
     """
-    if hasattr(X, 'ndim') and X.ndim != 2:
+    if hasattr(X, "ndim") and X.ndim != 2:
         raise ValueError("Must be a 2-d array or dataframe")
 
     if isinstance(X, pd.DataFrame):
@@ -252,14 +244,14 @@ def _diff_vector(x, lag):
     # compute the lag for a vector (not a matrix)
     n = x.shape[0]
     lag = min(n, lag)  # if lag > n, then we just want an empty array back
-    return x[lag: n] - x[: n-lag]  # noqa: E226
+    return x[lag:n] - x[: n - lag]  # noqa: E226
 
 
 def _diff_matrix(x, lag):
     # compute the lag for a matrix (not a vector)
     m, _ = x.shape
     lag = min(m, lag)  # if lag > n, then we just want an empty array back
-    return x[lag: m, :] - x[: m-lag, :]  # noqa: E226
+    return x[lag:m, :] - x[: m - lag, :]  # noqa: E226
 
 
 def diff(x, lag=1, differences=1):
@@ -328,7 +320,7 @@ def diff(x, lag=1, differences=1):
     .. [1] https://stat.ethz.ch/R-manual/R-devel/library/base/html/diff.html
     """
     if any(v < 1 for v in (lag, differences)):
-        raise ValueError('lag and differences must be positive (> 0) integers')
+        raise ValueError("lag and differences must be positive (> 0) integers")
 
     x = skval.check_array(x, ensure_2d=False, dtype=DTYPE, copy=False)
     fun = _diff_vector if x.ndim == 1 else _diff_matrix
@@ -368,11 +360,12 @@ def _diff_inv_vector(x, lag, differences, xi):
         # R code:               diff(xi, lag=lag, differences=1L)),
         # R code:               lag, 1L, xi[1L:lag])
         return diff_inv(
-            x=diff_inv(x=x, lag=lag, differences=differences - 1,
-                       xi=diff(x=xi, lag=lag, differences=1)),
+            x=diff_inv(
+                x=x, lag=lag, differences=differences - 1, xi=diff(x=xi, lag=lag, differences=1)
+            ),
             lag=lag,
             differences=1,
-            xi=xi[:lag]  # R: xi[1L:lag]
+            xi=xi[:lag],  # R: xi[1L:lag]
         )
 
 
@@ -482,14 +475,13 @@ def diff_inv(x, lag=1, differences=1, xi=None):
     # R code: if (lag < 1L || differences < 1L)
     # R code: stop ("bad value for 'lag' or 'differences'")
     if any(v < 1 for v in (lag, differences)):
-        raise ValueError('lag and differences must be positive (> 0) integers')
+        raise ValueError("lag and differences must be positive (> 0) integers")
 
     if x.ndim == 1:
         return _diff_inv_vector(x, lag, differences, xi)
     elif x.ndim == 2:
         return _diff_inv_matrix(x, lag, differences, xi)
-    raise ValueError("only vector and matrix inverse differencing "
-                     "are supported")
+    raise ValueError("only vector and matrix inverse differencing " "are supported")
 
 
 def is_iterable(x):
@@ -535,4 +527,4 @@ def is_iterable(x):
     """
     if isinstance(x, str):
         return False
-    return hasattr(x, '__iter__')
+    return hasattr(x, "__iter__")

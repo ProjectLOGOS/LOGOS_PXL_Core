@@ -1,9 +1,11 @@
 from collections import defaultdict
 
+
 class SCM:
     """
     Structural Causal Model with async fit capability.
     """
+
     def __init__(self, dag=None):
         self.dag = dag or {}
         self.parameters = {}
@@ -21,11 +23,11 @@ class SCM:
         if len(data) > 50 and not self.dag:
             print("[SCM] Performing causal discovery...")
             df = pd.DataFrame(data)
-            df = df.apply(pd.to_numeric, errors='coerce').dropna()
+            df = df.apply(pd.to_numeric, errors="coerce").dropna()
             if not df.empty:
                 cg = pc(df.to_numpy(), alpha=0.05, ci_test=fisherz, verbose=False)
                 # This learned graph could be used to update self.dag
-        
+
         counts = {}
         for node, parents in self.dag.items():
             counts[node] = defaultdict(lambda: defaultdict(int))
@@ -35,10 +37,11 @@ class SCM:
                     val = sample.get(node)
                     if val is not None:
                         counts[node][key][val] += 1
-            
+
             self.parameters[node] = {
                 key: {v: c / sum(freq.values()) for v, c in freq.items()}
-                for key, freq in counts[node].items() if sum(freq.values()) > 0
+                for key, freq in counts[node].items()
+                if sum(freq.values()) > 0
             }
         return True
 
@@ -49,16 +52,16 @@ class SCM:
         return new
 
     def counterfactual(self, query: dict):
-        target = query.get('target')
-        do = query.get('do', {})
-        
+        target = query.get("target")
+        do = query.get("do", {})
+
         if target in do:
             return 1.0
-            
+
         params = self.parameters.get(target, {})
         if not params:
             return 0.0
-            
+
         total_prob = sum(sum(dist.values()) for dist in params.values())
         num_outcomes = sum(len(dist) for dist in params.values())
         return total_prob / num_outcomes if num_outcomes > 0 else 0.0

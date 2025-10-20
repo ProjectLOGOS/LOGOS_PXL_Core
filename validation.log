@@ -2,7 +2,7 @@
 2025-10-19 18:59:24,952 - INFO - Running: docker --version
 2025-10-19 18:59:24,956 - INFO - Running: docker-compose --version
 2025-10-19 18:59:24,969 - ERROR - Critical failure in Environment, stopping validation
-2025-10-19 18:59:24,971 - INFO - 
+2025-10-19 18:59:24,971 - INFO -
 ============================================================
 2025-10-19 18:59:24,971 - INFO - LOGOS v7 VALIDATION REPORT
 2025-10-19 18:59:24,972 - INFO - ============================================================
@@ -13,6 +13,6 @@
 2025-10-19 18:59:24,980 - INFO - Success Rate: 0.0%
 2025-10-19 18:59:24,984 - ERROR - Failed tests:
 2025-10-19 18:59:24,984 - ERROR -   - Environment Validation: Environment validation failed
-2025-10-19 18:59:24,984 - INFO - 
+2025-10-19 18:59:24,984 - INFO -
 Detailed report saved to: validation_report.json
 2025-10-19 18:59:24,984 - INFO - ============================================================

@@ -22,23 +22,23 @@ class OntologicalType(Enum):
 
 class FunctionType:
     """Function type constructor."""
-    
+
     def __init__(self, domain: OntologicalType, codomain: Union[OntologicalType, 'FunctionType']):
         """Initialize function type.
-        
+
         Args:
             domain: Input type
             codomain: Output type
         """
         self.domain = domain
         self.codomain = codomain
-    
+
     def __str__(self) -> str:
         """Return string representation."""
         domain_str = self.domain.value
         codomain_str = str(self.codomain)
         return f"{domain_str} → {codomain_str}"
-    
+
     def __eq__(self, other) -> bool:
         """Check equality with another type."""
         if not isinstance(other, FunctionType):
@@ -65,12 +65,12 @@ class FractalPosition:
     in_set: bool
     final_z: Tuple[float, float] = field(default_factory=lambda: (0.0, 0.0))
     escape_radius: float = 2.0
-    
+
     @property
     def complex(self) -> complex:
         """Get position as complex number."""
         return complex(self.c_real, self.c_imag)
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary representation."""
         return {
@@ -81,7 +81,7 @@ class FractalPosition:
             "final_z": self.final_z,
             "escape_radius": self.escape_radius
         }
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> 'FractalPosition':
         """Create from dictionary representation."""
@@ -106,7 +106,7 @@ class ProcessingResult:
     lambda_expr: Optional[Any] = None
     entailments: List[Any] = field(default_factory=list)
     summary: str = ""
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary representation."""
         return {
@@ -119,12 +119,12 @@ class ProcessingResult:
             "entailments": [str(e) for e in self.entailments],
             "summary": self.summary
         }
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> 'ProcessingResult':
         """Create from dictionary representation."""
         fractal_pos_data = data.get("fractal_position", {})
-        
+
         return cls(
             query=data.get("query", ""),
             trinity_vector=data.get("trinity_vector", (0.5, 0.5, 0.5)),
@@ -145,7 +145,7 @@ class OntologicalRelation:
     relation_type: str
     strength: float
     metadata: Dict[str, Any] = field(default_factory=dict)
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary representation."""
         return {
@@ -155,7 +155,7 @@ class OntologicalRelation:
             "strength": self.strength,
             "metadata": self.metadata
         }
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> 'OntologicalRelation':
         """Create from dictionary representation."""
@@ -170,10 +170,10 @@ class OntologicalRelation:
 
 def format_trinity_vector(trinity: Tuple[float, float, float]) -> str:
     """Format trinity vector as string.
-    
+
     Args:
         trinity: Trinity vector (existence, goodness, truth)
-        
+
     Returns:
         Formatted string representation
     """
@@ -183,11 +183,11 @@ def format_trinity_vector(trinity: Tuple[float, float, float]) -> str:
 
 def format_modal_status(status: ModalStatus, coherence: float) -> str:
     """Format modal status as string with coherence.
-    
+
     Args:
         status: Modal status
         coherence: Coherence value
-        
+
     Returns:
         Formatted string representation
     """
@@ -201,5 +201,5 @@ def format_modal_status(status: ModalStatus, coherence: float) -> str:
         icon = "¬◇"  # Negated diamond
     else:
         icon = "?"
-    
+
     return f"{icon} {status.value.capitalize()} (coherence: {coherence:.3f})"

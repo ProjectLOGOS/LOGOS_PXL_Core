@@ -121,9 +121,7 @@ print("X shape: {}\ny shape: {}".format(X.shape, y.shape))
 from sklearn.ensemble import HistGradientBoostingRegressor
 from sklearn.model_selection import train_test_split
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
-)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 model = HistGradientBoostingRegressor().fit(X_train, y_train)
 
@@ -314,15 +312,11 @@ gbrt_mean_poisson = HistGradientBoostingRegressor(loss="poisson", max_iter=max_i
 gbrt_mean_poisson.fit(X_train, y_train)
 mean_predictions = gbrt_mean_poisson.predict(X_test)
 
-gbrt_median = HistGradientBoostingRegressor(
-    loss="quantile", quantile=0.5, max_iter=max_iter
-)
+gbrt_median = HistGradientBoostingRegressor(loss="quantile", quantile=0.5, max_iter=max_iter)
 gbrt_median.fit(X_train, y_train)
 median_predictions = gbrt_median.predict(X_test)
 
-gbrt_percentile_5 = HistGradientBoostingRegressor(
-    loss="quantile", quantile=0.05, max_iter=max_iter
-)
+gbrt_percentile_5 = HistGradientBoostingRegressor(loss="quantile", quantile=0.05, max_iter=max_iter)
 gbrt_percentile_5.fit(X_train, y_train)
 percentile_5_predictions = gbrt_percentile_5.predict(X_test)
 

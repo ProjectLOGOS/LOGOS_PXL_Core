@@ -117,9 +117,7 @@ for pair in ([0, 1], [0, 2], [2, 3]):
         # filled contour plot
         x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
         y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
-        xx, yy = np.meshgrid(
-            np.arange(x_min, x_max, plot_step), np.arange(y_min, y_max, plot_step)
-        )
+        xx, yy = np.meshgrid(np.arange(x_min, x_max, plot_step), np.arange(y_min, y_max, plot_step))
 
         # Plot either a single DecisionTreeClassifier or alpha blend the
         # decision surfaces of the ensemble of classifiers
@@ -146,9 +144,9 @@ for pair in ([0, 1], [0, 2], [2, 3]):
             np.arange(x_min, x_max, plot_step_coarser),
             np.arange(y_min, y_max, plot_step_coarser),
         )
-        Z_points_coarser = model.predict(
-            np.c_[xx_coarser.ravel(), yy_coarser.ravel()]
-        ).reshape(xx_coarser.shape)
+        Z_points_coarser = model.predict(np.c_[xx_coarser.ravel(), yy_coarser.ravel()]).reshape(
+            xx_coarser.shape
+        )
         cs_points = plt.scatter(
             xx_coarser,
             yy_coarser,

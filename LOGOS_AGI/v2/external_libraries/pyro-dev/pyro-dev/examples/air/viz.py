@@ -30,9 +30,7 @@ def arr2img(arr):
 def img2arr(img):
     # assumes color image
     # returns an array suitable for sending to visdom
-    return (
-        np.array(img.getdata(), np.uint8).reshape(img.size + (3,)).transpose((2, 0, 1))
-    )
+    return np.array(img.getdata(), np.uint8).reshape(img.size + (3,)).transpose((2, 0, 1))
 
 
 def colors(k):

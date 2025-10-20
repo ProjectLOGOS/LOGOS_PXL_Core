@@ -63,9 +63,7 @@ X, y = diabetes.data, diabetes.target
 # this case however, there are many other options (see
 # :class:`~sklearn.ensemble.GradientBoostingRegressor` ).
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.1, random_state=13
-)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=13)
 
 params = {
     "n_estimators": 500,
@@ -108,9 +106,7 @@ plt.plot(
     "b-",
     label="Training Set Deviance",
 )
-plt.plot(
-    np.arange(params["n_estimators"]) + 1, test_score, "r-", label="Test Set Deviance"
-)
+plt.plot(np.arange(params["n_estimators"]) + 1, test_score, "r-", label="Test Set Deviance")
 plt.legend(loc="upper right")
 plt.xlabel("Boosting Iterations")
 plt.ylabel("Deviance")
@@ -142,9 +138,7 @@ plt.barh(pos, feature_importance[sorted_idx], align="center")
 plt.yticks(pos, np.array(diabetes.feature_names)[sorted_idx])
 plt.title("Feature Importance (MDI)")
 
-result = permutation_importance(
-    reg, X_test, y_test, n_repeats=10, random_state=42, n_jobs=2
-)
+result = permutation_importance(reg, X_test, y_test, n_repeats=10, random_state=42, n_jobs=2)
 sorted_idx = result.importances_mean.argsort()
 plt.subplot(1, 2, 2)
 
@@ -153,13 +147,9 @@ plt.subplot(1, 2, 2)
 # scikit-learn user you probably can write simpler code by using `labels=...`
 # (matplotlib < 3.9) or `tick_labels=...` (matplotlib >= 3.9).
 tick_labels_parameter_name = (
-    "tick_labels"
-    if parse_version(matplotlib.__version__) >= parse_version("3.9")
-    else "labels"
+    "tick_labels" if parse_version(matplotlib.__version__) >= parse_version("3.9") else "labels"
 )
-tick_labels_dict = {
-    tick_labels_parameter_name: np.array(diabetes.feature_names)[sorted_idx]
-}
+tick_labels_dict = {tick_labels_parameter_name: np.array(diabetes.feature_names)[sorted_idx]}
 plt.boxplot(result.importances[sorted_idx].T, vert=False, **tick_labels_dict)
 plt.title("Permutation Importance (test set)")
 fig.tight_layout()

@@ -23,8 +23,7 @@ def get_callable(key, dct):
     fun = dct.get(key, None)
 
     if not isinstance(key, str) or fun is None:  # ah, that's no fun :(
-        raise ValueError('key must be a string in one in %r, but got %r'
-                         % (dct, key))
+        raise ValueError("key must be a string in one in %r, but got %r" % (dct, key))
     return fun
 
 

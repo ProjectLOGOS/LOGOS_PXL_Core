@@ -29,9 +29,7 @@ try:
         except ImportError:
             pass  # Can't assign a policy which doesn't exist.
         else:
-            if not isinstance(
-                asyncio.get_event_loop_policy(), WindowsSelectorEventLoopPolicy
-            ):
+            if not isinstance(asyncio.get_event_loop_policy(), WindowsSelectorEventLoopPolicy):
                 asyncio.set_event_loop_policy(WindowsSelectorEventLoopPolicy())
 
 except ImportError:  # pragma: no cover

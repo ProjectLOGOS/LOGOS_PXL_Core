@@ -7,12 +7,7 @@ from sklearn.base import BaseEstimator
 from sklearn.utils.validation import indexable
 from sklearn.model_selection import train_test_split as tts
 
-__all__ = [
-    'check_cv',
-    'train_test_split',
-    'RollingForecastCV',
-    'SlidingWindowForecastCV'
-]
+__all__ = ["check_cv", "train_test_split", "RollingForecastCV", "SlidingWindowForecastCV"]
 
 
 def train_test_split(*arrays, test_size=None, train_size=None):
@@ -61,12 +56,7 @@ def train_test_split(*arrays, test_size=None, train_size=None):
     >>> from numpy.testing import assert_array_equal
     >>> assert_array_equal(y, np.concatenate([y_train, y_test]))
     """
-    return tts(
-        *arrays,
-        shuffle=False,
-        stratify=None,
-        test_size=test_size,
-        train_size=train_size)
+    return tts(*arrays, shuffle=False, stratify=None, test_size=test_size, train_size=train_size)
 
 
 class BaseTSCrossValidator(BaseEstimator, metaclass=abc.ABCMeta):
@@ -75,6 +65,7 @@ class BaseTSCrossValidator(BaseEstimator, metaclass=abc.ABCMeta):
     Based on the scikit-learn base cross-validator with alterations to fit the
     time series interface.
     """
+
     def __init__(self, h, step):
         if h < 1:
             raise ValueError("h must be a positive value")
@@ -211,6 +202,7 @@ class RollingForecastCV(BaseTSCrossValidator):
     ----------
     .. [1] https://robjhyndman.com/hyndsight/tscv/
     """
+
     def __init__(self, h=1, step=1, initial=None):
         super().__init__(h, step)
         self.initial = initial
@@ -224,12 +216,13 @@ class RollingForecastCV(BaseTSCrossValidator):
 
         if initial is not None:
             if initial < 1:
-                raise ValueError("Initial training size must be a positive "
-                                 "integer")
+                raise ValueError("Initial training size must be a positive " "integer")
             elif initial + h > n_samples:
-                raise ValueError("The initial training size + forecasting "
-                                 "horizon would exceed the length of the "
-                                 "given timeseries!")
+                raise ValueError(
+                    "The initial training size + forecasting "
+                    "horizon would exceed the length of the "
+                    "given timeseries!"
+                )
         else:
             # if it's 1, we have another problem..
             initial = max(1, n_samples // 3)
@@ -243,8 +236,8 @@ class RollingForecastCV(BaseTSCrossValidator):
             if window_end + h > n_samples:
                 break
 
-            train_indices = all_indices[window_start: window_end]
-            test_indices = all_indices[window_end: window_end + h]
+            train_indices = all_indices[window_start:window_end]
+            test_indices = all_indices[window_end : window_end + h]
             window_end += step
 
             yield train_indices, test_indices
@@ -313,6 +306,7 @@ class SlidingWindowForecastCV(BaseTSCrossValidator):
     ----------
     .. [1] https://robjhyndman.com/hyndsight/tscv/
     """
+
     def __init__(self, h=1, step=1, window_size=None):
         super().__init__(h, step)
         self.window_size = window_size
@@ -326,9 +320,11 @@ class SlidingWindowForecastCV(BaseTSCrossValidator):
 
         if window_size is not None:
             if window_size + h > n_samples:
-                raise ValueError("The window_size + forecasting "
-                                 "horizon would exceed the length of the "
-                                 "given timeseries!")
+                raise ValueError(
+                    "The window_size + forecasting "
+                    "horizon would exceed the length of the "
+                    "given timeseries!"
+                )
         else:
             # TODO: what's a good sane default for this?
             window_size = max(3, n_samples // 5)
@@ -343,8 +339,8 @@ class SlidingWindowForecastCV(BaseTSCrossValidator):
             if window_end + h > n_samples:
                 break
 
-            train_indices = indices[window_start: window_end]
-            test_indices = indices[window_end: window_end + h]
+            train_indices = indices[window_start:window_end]
+            test_indices = indices[window_end : window_end + h]
             window_start += step
 
             yield train_indices, test_indices
@@ -363,6 +359,8 @@ def check_cv(cv=None):
     """
     cv = RollingForecastCV() if cv is None else cv
     if not isinstance(cv, BaseTSCrossValidator):
-        raise TypeError("cv should be an instance of BaseTSCrossValidator or "
-                        "None, but got %r (type=%s)" % (cv, type(cv)))
+        raise TypeError(
+            "cv should be an instance of BaseTSCrossValidator or "
+            "None, but got %r (type=%s)" % (cv, type(cv))
+        )
     return cv

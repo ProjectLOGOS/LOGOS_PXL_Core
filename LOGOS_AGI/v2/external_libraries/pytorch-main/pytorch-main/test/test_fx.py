@@ -24,10 +24,26 @@ from math import sqrt
 from torch.multiprocessing import Process
 from torch.testing import FileCheck
 from torch.testing._internal.common_methods_invocations import op_db
-from torch.testing._internal.common_device_type import ops, onlyCPU, instantiate_device_type_tests
+from torch.testing._internal.common_device_type import (
+    ops,
+    onlyCPU,
+    instantiate_device_type_tests,
+)
 import torch.utils._pytree as pytree
 import torch.fx._pytree as fx_pytree
-from torch.fx import symbolic_trace, Proxy, Node, GraphModule, Interpreter, Tracer, Transformer, Graph, wrap, PH, CodeGen
+from torch.fx import (
+    symbolic_trace,
+    Proxy,
+    Node,
+    GraphModule,
+    Interpreter,
+    Tracer,
+    Transformer,
+    Graph,
+    wrap,
+    PH,
+    CodeGen,
+)
 from torch.fx.node import Target, Argument, ArgumentT, _format_arg
 from torch.fx.passes import shape_prop
 from torch.fx.immutable_collections import immutable_dict, immutable_list
@@ -726,16 +742,16 @@ class TestFX(JitTestCase):
 
         graph = tracer.trace(M())
         # saving the original list because we will insert new nodes as a part of a test
-        stack_traces = "\n".join([node.meta.get("stack_trace", "") for node in graph.nodes])
-        FileCheck().check_count(
-            "c = a + b", 1, exactly=True
-        ).run(stack_traces.strip())
-        FileCheck().check_count(
-            "c = foo(a, c)", 1, exactly=True
-        ).run(stack_traces.strip())
-        FileCheck().check_count(
-            "return a * b", 1, exactly=True
-        ).run(stack_traces.strip())
+        stack_traces = "\n".join(
+            [node.meta.get("stack_trace", "") for node in graph.nodes]
+        )
+        FileCheck().check_count("c = a + b", 1, exactly=True).run(stack_traces.strip())
+        FileCheck().check_count("c = foo(a, c)", 1, exactly=True).run(
+            stack_traces.strip()
+        )
+        FileCheck().check_count("return a * b", 1, exactly=True).run(
+            stack_traces.strip()
+        )
 
     def test_stack_traces_with_transformer(self):
         class M(torch.nn.Module):
@@ -1275,9 +1291,21 @@ class TestFX(JitTestCase):
             "placeholder"
         ).check("getitem").check("call_function").check("param").check(
             "get_attr"
-        ).check("add").check("call_function").check("linear").check(
+        ).check(
+            "add"
+        ).check(
+            "call_function"
+        ).check(
+            "linear"
+        ).check(
             "call_module"
-        ).check("clamp").check("call_method").run(all_formatted)
+        ).check(
+            "clamp"
+        ).check(
+            "call_method"
+        ).run(
+            all_formatted
+        )
 
     def test_print_graph(self):
         op: torch._ops.OpOverload = torch.ops.aten.relu.default
@@ -1285,13 +1313,15 @@ class TestFX(JitTestCase):
 
         graph: torch.fx.Graph = torch.fx.Graph()
         a: torch.fx.Node = graph.create_node("placeholder", "x")
-        b: torch.fx.Node = graph.create_node("call_function", op, (a,), type_expr=type_name)
-        c: torch.fx.Node = graph.create_node("call_function", op, (b,), type_expr=type_name)
+        b: torch.fx.Node = graph.create_node(
+            "call_function", op, (a,), type_expr=type_name
+        )
+        c: torch.fx.Node = graph.create_node(
+            "call_function", op, (b,), type_expr=type_name
+        )
         graph.output((b, c))
 
-        gm: torch.fx.GraphModule = torch.fx.GraphModule(
-            torch.nn.Module(), graph
-        )
+        gm: torch.fx.GraphModule = torch.fx.GraphModule(torch.nn.Module(), graph)
         gm.graph.lint()
         text = gm.print_readable(False)
         assert 2 == text.count("_torch__ops_aten_aten_relu_")
@@ -2284,14 +2314,15 @@ class TestFX(JitTestCase):
         )
         output: torch.fx.Node = graph.output(b)
 
-        self.assertTrue('list[float]' in str(graph))
+        self.assertTrue("list[float]" in str(graph))
 
     def test_typename_print_pre_pep585(self):
-        graph : torch.fx.Graph = torch.fx.Graph()
-        x : torch.fx.Node = graph.create_node('placeholder', 'x')
-        b : torch.fx.Node = graph.create_node('call_function', target=torch.relu, args=(x,),
-                                              type_expr=typing.List[float])  # noqa: UP006
-        output : torch.fx.Node = graph.output(b)
+        graph: torch.fx.Graph = torch.fx.Graph()
+        x: torch.fx.Node = graph.create_node("placeholder", "x")
+        b: torch.fx.Node = graph.create_node(
+            "call_function", target=torch.relu, args=(x,), type_expr=typing.List[float]
+        )  # noqa: UP006
+        output: torch.fx.Node = graph.output(b)
 
         self.assertTrue("typing.List[float]" in str(graph))
 
@@ -3765,7 +3796,9 @@ class TestFX(JitTestCase):
     @unittest.skipIf(sys.version_info > (3, 11), "Does not work in 3.11")
     def test_annotations_empty_tuple(self):
         class Foo(torch.nn.Module):
-            def forward(self, x: typing.Tuple[()], y: typing.Tuple[str, typing.Tuple[()]]):  # noqa: UP006
+            def forward(
+                self, x: typing.Tuple[()], y: typing.Tuple[str, typing.Tuple[()]]
+            ):  # noqa: UP006
                 return "foo"
 
         traced = torch.fx.symbolic_trace(Foo())
@@ -4422,15 +4455,17 @@ class TestFXAPIBackwardCompatibility(JitTestCase):
             if len(contained) > 0 and contained[0] is not Ellipsis:
                 return f'Callable[[{", ".join(contained_type_annots[:-1])}], {contained_type_annots[-1]}]'
             else:
-                return f'Callable{contained_type_str}'
+                return f"Callable{contained_type_str}"
 
         if t is ArgumentT:
             # ArgumentT is a TypeVar bound to torch.fx.node.Argument
-            return f'torch.fx.node.Argument{contained_type_str}'
+            return f"torch.fx.node.Argument{contained_type_str}"
 
-        raise RuntimeError(f'Unrecognized type {t} used in BC-compatible type signature {sig_str}.'
-                           f'Please add support for this type and confirm with the '
-                           f'FX team that your signature change is valid.')
+        raise RuntimeError(
+            f"Unrecognized type {t} used in BC-compatible type signature {sig_str}."
+            f"Please add support for this type and confirm with the "
+            f"FX team that your signature change is valid."
+        )
 
         raise RuntimeError(
             f"Unrecognized type {t} used in BC-compatible type signature {sig_str}."

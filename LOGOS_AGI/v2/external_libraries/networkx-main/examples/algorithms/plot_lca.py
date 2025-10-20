@@ -51,9 +51,7 @@ for (children, ancestor), (child_clr, anc_clr) in zip(ancestors, clr_pairs):
 # Plot tree
 plt.figure(figsize=(15, 15))
 plt.title("Visualize Lowest Common Ancestors of node pairs")
-nx.draw_networkx_nodes(
-    G, pos, node_color=node_colors, node_size=2000, edgecolors=node_edge_colors
-)
+nx.draw_networkx_nodes(G, pos, node_color=node_colors, node_size=2000, edgecolors=node_edge_colors)
 nx.draw_networkx_edges(G, pos)
 nx.draw_networkx_labels(G, pos, font_size=15)
 plt.show()

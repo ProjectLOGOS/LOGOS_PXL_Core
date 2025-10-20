@@ -420,10 +420,11 @@ class TestBundledInputs(TestCase):
         inflated = loaded.get_all_bundled_inputs()
         self.assertEqual(len(inflated[0]), len(small_inputs))
 
-        methods, _ = (
-            torch.utils.bundled_inputs._get_bundled_inputs_attributes_and_methods(
-                loaded
-            )
+        (
+            methods,
+            _,
+        ) = torch.utils.bundled_inputs._get_bundled_inputs_attributes_and_methods(
+            loaded
         )
 
         # One Function (forward)

@@ -169,8 +169,7 @@ class TestSteinerTree:
             ):
                 S = steiner_tree(G, term_nodes, method=method)
                 assert any(
-                    edges_equal(list(S.edges(data=True)), valid_tree)
-                    for valid_tree in valid_trees
+                    edges_equal(list(S.edges(data=True)), valid_tree) for valid_tree in valid_trees
                 )
 
     def test_multigraph_steiner_tree(self):
@@ -230,9 +229,7 @@ def test_steiner_tree_methods(method):
 
 def test_steiner_tree_method_invalid():
     G = nx.star_graph(4)
-    with pytest.raises(
-        ValueError, match="invalid_method is not a valid choice for an algorithm."
-    ):
+    with pytest.raises(ValueError, match="invalid_method is not a valid choice for an algorithm."):
         nx.approximation.steiner_tree(G, terminal_nodes=[1, 3], method="invalid_method")
 
 

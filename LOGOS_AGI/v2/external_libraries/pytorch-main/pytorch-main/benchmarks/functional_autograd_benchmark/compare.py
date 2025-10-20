@@ -5,9 +5,7 @@ from utils import from_markdown_table, to_markdown_table
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        "Main script to compare results from the benchmarks"
-    )
+    parser = argparse.ArgumentParser("Main script to compare results from the benchmarks")
     parser.add_argument(
         "--before",
         type=str,

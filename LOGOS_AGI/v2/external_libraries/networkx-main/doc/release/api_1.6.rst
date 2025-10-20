@@ -128,4 +128,3 @@ Other
   and
 
   average_neighbor_degree(G, source='out', target='out')
-

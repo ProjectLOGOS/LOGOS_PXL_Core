@@ -74,9 +74,7 @@ set_config(enable_metadata_routing=True)
 def check_metadata(obj, **kwargs):
     for key, value in kwargs.items():
         if value is not None:
-            print(
-                f"Received {key} of length = {len(value)} in {obj.__class__.__name__}."
-            )
+            print(f"Received {key} of length = {len(value)} in {obj.__class__.__name__}.")
         else:
             print(f"{key} is None in {obj.__class__.__name__}.")
 
@@ -205,9 +203,7 @@ class MetaClassifier(MetaEstimatorMixin, ClassifierMixin, BaseEstimator):
         # then we validate the given metadata,
         request_router.validate_metadata(params=predict_params, method="predict")
         # and then prepare the input to the underlying `predict` method.
-        routed_params = request_router.route_params(
-            params=predict_params, caller="predict"
-        )
+        routed_params = request_router.route_params(params=predict_params, caller="predict")
         return self.estimator_.predict(X, **routed_params.estimator.predict)
 
 
@@ -230,9 +226,7 @@ class MetaClassifier(MetaEstimatorMixin, ClassifierMixin, BaseEstimator):
 # Next, we illustrate the different behaviors and notably the type of errors
 # raised.
 
-meta_est = MetaClassifier(
-    estimator=ExampleClassifier().set_fit_request(sample_weight=True)
-)
+meta_est = MetaClassifier(estimator=ExampleClassifier().set_fit_request(sample_weight=True))
 meta_est.fit(X, y, sample_weight=my_weights)
 
 # %%
@@ -316,9 +310,7 @@ print_routing(meta_est)
 # In order to understand how aliases work in meta-estimators, imagine our
 # meta-estimator inside another one:
 
-meta_meta_est = MetaClassifier(estimator=meta_est).fit(
-    X, y, aliased_sample_weight=my_weights
-)
+meta_meta_est = MetaClassifier(estimator=meta_est).fit(X, y, aliased_sample_weight=my_weights)
 
 # %%
 # In the above example, this is how the ``fit`` method of `meta_meta_est`
@@ -393,9 +385,7 @@ class RouterConsumerClassifier(MetaEstimatorMixin, ClassifierMixin, BaseEstimato
         # we validate the given metadata,
         request_router.validate_metadata(params=predict_params, method="predict")
         # and then prepare the input to the underlying ``predict`` method.
-        routed_params = request_router.route_params(
-            params=predict_params, caller="predict"
-        )
+        routed_params = request_router.route_params(params=predict_params, caller="predict")
         return self.estimator_.predict(X, **routed_params.estimator.predict)
 
 
@@ -508,12 +498,8 @@ class SimplePipeline(ClassifierMixin, BaseEstimator):
     def fit(self, X, y, **fit_params):
         routed_params = process_routing(self, "fit", **fit_params)
 
-        self.transformer_ = clone(self.transformer).fit(
-            X, y, **routed_params.transformer.fit
-        )
-        X_transformed = self.transformer_.transform(
-            X, **routed_params.transformer.transform
-        )
+        self.transformer_ = clone(self.transformer).fit(X, y, **routed_params.transformer.fit)
+        X_transformed = self.transformer_.transform(X, **routed_params.transformer.transform)
 
         self.classifier_ = clone(self.classifier).fit(
             X_transformed, y, **routed_params.classifier.fit
@@ -523,12 +509,8 @@ class SimplePipeline(ClassifierMixin, BaseEstimator):
     def predict(self, X, **predict_params):
         routed_params = process_routing(self, "predict", **predict_params)
 
-        X_transformed = self.transformer_.transform(
-            X, **routed_params.transformer.transform
-        )
-        return self.classifier_.predict(
-            X_transformed, **routed_params.classifier.predict
-        )
+        X_transformed = self.transformer_.transform(X, **routed_params.transformer.transform)
+        return self.classifier_.predict(X_transformed, **routed_params.classifier.predict)
 
 
 # %%
@@ -590,9 +572,7 @@ pipe = SimplePipeline(
     # and we want the meta-estimator to receive sample_weight as well
     .set_fit_request(sample_weight=True),
 )
-pipe.fit(X, y, sample_weight=my_weights, groups=my_groups).predict(
-    X[:3], groups=my_groups
-)
+pipe.fit(X, y, sample_weight=my_weights, groups=my_groups).predict(X[:3], groups=my_groups)
 
 # %%
 # Deprecation / Default Value Change
@@ -642,9 +622,7 @@ class WeightedMetaRegressor(MetaEstimatorMixin, RegressorMixin, BaseEstimator):
         self.estimator = estimator
 
     def fit(self, X, y, sample_weight=None, **fit_params):
-        routed_params = process_routing(
-            self, "fit", sample_weight=sample_weight, **fit_params
-        )
+        routed_params = process_routing(self, "fit", sample_weight=sample_weight, **fit_params)
         check_metadata(self, sample_weight=sample_weight)
         self.estimator_ = clone(self.estimator).fit(X, y, **routed_params.estimator.fit)
 
@@ -666,9 +644,9 @@ class WeightedMetaRegressor(MetaEstimatorMixin, RegressorMixin, BaseEstimator):
 # there is a warning raised when fitted.
 
 with warnings.catch_warnings(record=True) as record:
-    WeightedMetaRegressor(
-        estimator=LinearRegression().set_fit_request(sample_weight=False)
-    ).fit(X, y, sample_weight=my_weights)
+    WeightedMetaRegressor(estimator=LinearRegression().set_fit_request(sample_weight=False)).fit(
+        X, y, sample_weight=my_weights
+    )
 for w in record:
     print(w.message)
 

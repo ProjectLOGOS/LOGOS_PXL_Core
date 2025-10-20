@@ -75,8 +75,7 @@ for i, threshold in enumerate(x_values):
 
         # The amount of labeled samples that at the end of fitting
         amount_labeled[i, fold] = (
-            total_samples
-            - np.unique(self_training_clf.labeled_iter_, return_counts=True)[1][0]
+            total_samples - np.unique(self_training_clf.labeled_iter_, return_counts=True)[1][0]
         )
         # The last iteration the classifier labeled a sample in
         amount_iterations[i, fold] = np.max(self_training_clf.labeled_iter_)
@@ -86,9 +85,7 @@ for i, threshold in enumerate(x_values):
 
 
 ax1 = plt.subplot(211)
-ax1.errorbar(
-    x_values, scores.mean(axis=1), yerr=scores.std(axis=1), capsize=2, color="b"
-)
+ax1.errorbar(x_values, scores.mean(axis=1), yerr=scores.std(axis=1), capsize=2, color="b")
 ax1.set_ylabel("Accuracy", color="b")
 ax1.tick_params("y", colors="b")
 

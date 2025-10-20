@@ -58,10 +58,10 @@ class LogosNexus:
             query = data.get('query')
             task_id = data.get('task_id', str(uuid.uuid4()))
             self.logger.info(f"Received external request [{task_id}]: '{query}'")
-            
+
             validation_req = {"proposition": ModalProposition(query), "operation": "evaluate", "entity": "external_goal", "context": {}}
             result = self.validator.validate_agi_operation(validation_req)
-            
+
             if result.get("authorized"):
                 self.logger.info(f"Request [{task_id}] PASSED TLM validation.")
                 goal = self.goal_manager.propose_goal(name=query, source="external")
@@ -98,7 +98,7 @@ class LogosNexus:
     def start(self):
         consumer_thread = Thread(target=self.start_consuming, daemon=True)
         consumer_thread.start()
-        
+
         autonomous_thread = Thread(target=self.run_autonomous_loop, daemon=True)
         autonomous_thread.start()
 

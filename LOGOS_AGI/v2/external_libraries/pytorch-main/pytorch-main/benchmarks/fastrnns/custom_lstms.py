@@ -282,9 +282,7 @@ class BidirLSTMLayer(jit.ScriptModule):
 
 
 def init_stacked_lstm(num_layers, layer, first_layer_args, other_layer_args):
-    layers = [layer(*first_layer_args)] + [
-        layer(*other_layer_args) for _ in range(num_layers - 1)
-    ]
+    layers = [layer(*first_layer_args)] + [layer(*other_layer_args) for _ in range(num_layers - 1)]
     return nn.ModuleList(layers)
 
 
@@ -293,9 +291,7 @@ class StackedLSTM(jit.ScriptModule):
 
     def __init__(self, num_layers, layer, first_layer_args, other_layer_args):
         super().__init__()
-        self.layers = init_stacked_lstm(
-            num_layers, layer, first_layer_args, other_layer_args
-        )
+        self.layers = init_stacked_lstm(num_layers, layer, first_layer_args, other_layer_args)
 
     @jit.script_method
     def forward(
@@ -323,9 +319,7 @@ class StackedLSTM2(jit.ScriptModule):
 
     def __init__(self, num_layers, layer, first_layer_args, other_layer_args):
         super().__init__()
-        self.layers = init_stacked_lstm(
-            num_layers, layer, first_layer_args, other_layer_args
-        )
+        self.layers = init_stacked_lstm(num_layers, layer, first_layer_args, other_layer_args)
 
     @jit.script_method
     def forward(
@@ -351,9 +345,7 @@ class StackedLSTMWithDropout(jit.ScriptModule):
 
     def __init__(self, num_layers, layer, first_layer_args, other_layer_args):
         super().__init__()
-        self.layers = init_stacked_lstm(
-            num_layers, layer, first_layer_args, other_layer_args
-        )
+        self.layers = init_stacked_lstm(num_layers, layer, first_layer_args, other_layer_args)
         # Introduces a Dropout layer on the outputs of each LSTM layer except
         # the last layer, with dropout probability = 0.4.
         self.num_layers = num_layers
@@ -476,9 +468,7 @@ def test_script_stacked_bidir_rnn(seq_len, batch, input_size, hidden_size, num_l
     assert (custom_state[1] - lstm_out_state[1]).abs().max() < 1e-5
 
 
-def test_script_stacked_lstm_dropout(
-    seq_len, batch, input_size, hidden_size, num_layers
-):
+def test_script_stacked_lstm_dropout(seq_len, batch, input_size, hidden_size, num_layers):
     inp = torch.randn(seq_len, batch, input_size)
     states = [
         LSTMState(torch.randn(batch, hidden_size), torch.randn(batch, hidden_size))

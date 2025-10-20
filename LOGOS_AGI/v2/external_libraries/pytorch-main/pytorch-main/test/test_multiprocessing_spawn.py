@@ -15,8 +15,9 @@ from torch.testing._internal.common_utils import (
     run_tests,
     TestCase,
     parametrize,
-    instantiate_parametrized_tests
+    instantiate_parametrized_tests,
 )
+
 
 def _test_success_func(i):
     pass
@@ -93,6 +94,7 @@ def _test_nested(i, pids_queue, nested_child_sleep, start_method):
     # Kill self. This should take down the child processes as well.
     os.kill(os.getpid(), signal.SIGTERM)
 
+
 @instantiate_parametrized_tests
 class _TestMultiProcessing:
     start_method = None
@@ -101,7 +103,9 @@ class _TestMultiProcessing:
         mp.start_processes(_test_success_func, nprocs=2, start_method=self.start_method)
 
     def test_success_non_blocking(self):
-        mp_context = mp.start_processes(_test_success_func, nprocs=2, join=False, start_method=self.start_method)
+        mp_context = mp.start_processes(
+            _test_success_func, nprocs=2, join=False, start_method=self.start_method
+        )
 
         # After all processes (nproc=2) have joined it must return True
         mp_context.join(timeout=None)
@@ -111,7 +115,12 @@ class _TestMultiProcessing:
     def test_first_argument_index(self):
         context = mp.get_context(self.start_method)
         queue = context.SimpleQueue()
-        mp.start_processes(_test_success_single_arg_func, args=(queue,), nprocs=2, start_method=self.start_method)
+        mp.start_processes(
+            _test_success_single_arg_func,
+            args=(queue,),
+            nprocs=2,
+            start_method=self.start_method,
+        )
         self.assertEqual([0, 1], sorted([queue.get(), queue.get()]))
 
     def test_exception_single(self):
@@ -121,14 +130,21 @@ class _TestMultiProcessing:
                 Exception,
                 f"\nValueError: legitimate exception from process {i:d}$",
             ):
-                mp.start_processes(_test_exception_single_func, args=(i,), nprocs=nprocs, start_method=self.start_method)
+                mp.start_processes(
+                    _test_exception_single_func,
+                    args=(i,),
+                    nprocs=nprocs,
+                    start_method=self.start_method,
+                )
 
     def test_exception_all(self):
         with self.assertRaisesRegex(
             Exception,
             "\nValueError: legitimate exception from process (0|1)$",
         ):
-            mp.start_processes(_test_exception_all_func, nprocs=2, start_method=self.start_method)
+            mp.start_processes(
+                _test_exception_all_func, nprocs=2, start_method=self.start_method
+            )
 
     def test_terminate_signal(self):
         # SIGABRT is aliased with SIGIOT
@@ -143,17 +159,25 @@ class _TestMultiProcessing:
             message = "process 0 terminated with exit code 22"
 
         with self.assertRaisesRegex(Exception, message):
-            mp.start_processes(_test_terminate_signal_func, nprocs=2, start_method=self.start_method)
+            mp.start_processes(
+                _test_terminate_signal_func, nprocs=2, start_method=self.start_method
+            )
 
     @parametrize("grace_period", [None, 5])
     def test_terminate_exit(self, grace_period):
         exitcode = 123
-        ctx = mp.start_processes(_test_terminate_exit_func, args=(exitcode,), nprocs=2, start_method=self.start_method, join=False)
+        ctx = mp.start_processes(
+            _test_terminate_exit_func,
+            args=(exitcode,),
+            nprocs=2,
+            start_method=self.start_method,
+            join=False,
+        )
         pid1 = ctx.processes[1].pid
         with self.assertRaisesRegex(
             Exception,
             f"process 0 terminated with exit code {exitcode:d}",
-        ), self.assertLogs(level='WARNING') as logs:
+        ), self.assertLogs(level="WARNING") as logs:
             while not ctx.join(grace_period=grace_period):
                 pass
         if grace_period is None:
@@ -174,7 +198,12 @@ class _TestMultiProcessing:
             Exception,
             "ValueError: legitimate exception",
         ):
-            mp.start_processes(_test_success_first_then_exception_func, args=(exitcode,), nprocs=2, start_method=self.start_method)
+            mp.start_processes(
+                _test_success_first_then_exception_func,
+                args=(exitcode,),
+                nprocs=2,
+                start_method=self.start_method,
+            )
 
     @unittest.skipIf(
         sys.platform != "linux",
@@ -211,8 +240,9 @@ class _TestMultiProcessing:
             self.assertLess(time.time() - start, nested_child_sleep / 2)
             time.sleep(0.1)
 
+
 class SpawnTest(TestCase, _TestMultiProcessing):
-    start_method = 'spawn'
+    start_method = "spawn"
 
     def test_exception_raises(self):
         with self.assertRaises(mp.ProcessRaisedException):
@@ -236,7 +266,7 @@ class SpawnTest(TestCase, _TestMultiProcessing):
     "Fork is only available on Unix",
 )
 class ForkTest(TestCase, _TestMultiProcessing):
-    start_method = 'fork'
+    start_method = "fork"
 
 
 @unittest.skipIf(
@@ -264,10 +294,8 @@ class ParallelForkServerShouldWorkTest(TestCase, _TestMultiProcessing):
     "Fork is only available on Unix",
 )
 class ParallelForkServerPerfTest(TestCase):
-
     def test_forkserver_perf(self):
-
-        start_method = 'forkserver'
+        start_method = "forkserver"
         expensive = Expensive()
         nprocs = 4
         orig_paralell_env_val = os.environ.get(mp.ENV_VAR_PARALLEL_START)
@@ -315,5 +343,5 @@ class ErrorTest(TestCase):
             pickle.loads(pickle.dumps(error))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     run_tests()

@@ -65,5 +65,5 @@ class BayesianMLModel:
                         for k,val in evidence.items()]) or 0.5
 
     def _marginal(self, evidence):
-        return sum(self.state.priors[h]*self.update_belief(h,evidence).prediction 
+        return sum(self.state.priors[h]*self.update_belief(h,evidence).prediction
                    for h in self.state.priors)

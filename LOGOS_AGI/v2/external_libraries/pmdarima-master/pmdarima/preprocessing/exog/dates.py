@@ -7,9 +7,7 @@ import pandas as pd
 
 import warnings
 
-__all__ = [
-    "DateFeaturizer"
-]
+__all__ = ["DateFeaturizer"]
 
 # TODO: future usecases might include with_hour_of_day
 
@@ -82,8 +80,7 @@ class DateFeaturizer(BaseExogFeaturizer):
     .. [1] https://robjhyndman.com/hyndsight/monthly-seasonality/
     """
 
-    def __init__(self, column_name, with_day_of_week=True,
-                 with_day_of_month=True, prefix=None):
+    def __init__(self, column_name, with_day_of_week=True, with_day_of_month=True, prefix=None):
         super().__init__(prefix=prefix)
 
         self.column_name = column_name
@@ -94,16 +91,12 @@ class DateFeaturizer(BaseExogFeaturizer):
         # exog must be a pd.DataFrame, and the column_name must be a timestamp
         if not isinstance(X, pd.DataFrame):
             raise TypeError(
-                f"X must be a DataFrame to use the DateFeaturizer, but got "
-                f"type={type(X)}"
+                f"X must be a DataFrame to use the DateFeaturizer, but got " f"type={type(X)}"
             )
 
         name = self.column_name
-        if not (name in X.columns and
-                'datetime64' in X[name].dtype.name):
-            raise ValueError("column '%s' must exist in exog as a "
-                             "pd.Timestamp type"
-                             % name)
+        if not (name in X.columns and "datetime64" in X[name].dtype.name):
+            raise ValueError("column '%s' must exist in exog as a " "pd.Timestamp type" % name)
 
     def _get_prefix(self):
         pfx = self.prefix
@@ -120,10 +113,10 @@ class DateFeaturizer(BaseExogFeaturizer):
         # comments here: https://stackoverflow.com/a/9847269/3015734
         # E.g., ['DATE-WEEKDAY-0', 'DATE-WEEKDAY-1', ...]
         if self.with_day_of_week:
-            out += ['%s-WEEKDAY-%i' % (pfx, i) for i in range(7)]
+            out += ["%s-WEEKDAY-%i" % (pfx, i) for i in range(7)]
 
         if self.with_day_of_month:
-            out += ['%s-DAY-OF-MONTH' % pfx]
+            out += ["%s-DAY-OF-MONTH" % pfx]
 
         return out
 
@@ -148,8 +141,7 @@ class DateFeaturizer(BaseExogFeaturizer):
         # of friendly validation to make sure that at least _something_ will
         # happen in this transformer.
         if not (self.with_day_of_month or self.with_day_of_week):
-            warnings.warn("DateTransformer will have no effect given disabled "
-                          "parameters")
+            warnings.warn("DateTransformer will have no effect given disabled " "parameters")
 
         return self
 
@@ -195,6 +187,5 @@ class DateFeaturizer(BaseExogFeaturizer):
 
         # stack along axis 1
         if right_side is not None:
-            X = self._safe_hstack(X.drop(self.column_name, axis=1),
-                                  right_side)
+            X = self._safe_hstack(X.drop(self.column_name, axis=1), right_side)
         return y, X

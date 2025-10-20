@@ -17,7 +17,7 @@ class PersistenceManager:
     Handles all low-level SQLite operations with thread-safety.
     Supports ontological nodes, goals, system logs, semantic glyphs, and relations.
     """
-    
+
     def __init__(self, db_file=DB_FILE):
         self.db_file = db_file
         self.lock = threading.Lock()
@@ -37,7 +37,7 @@ class PersistenceManager:
             try:
                 conn = self._get_connection()
                 cursor = conn.cursor()
-                
+
                 # System log table for all system events/data
                 cursor.execute('''
                     CREATE TABLE IF NOT EXISTS system_log (
@@ -48,7 +48,7 @@ class PersistenceManager:
                         log_level TEXT DEFAULT 'INFO'
                     )
                 ''')
-                
+
                 # Goals table for AGI goal management
                 cursor.execute('''
                     CREATE TABLE IF NOT EXISTS goals (
@@ -114,11 +114,11 @@ class PersistenceManager:
 
                 # Create indexes for performance optimization
                 self._create_indexes(cursor)
-                
+
                 conn.commit()
                 conn.close()
                 logging.info("Database initialized successfully with all tables and indexes.")
-                
+
             except Exception as e:
                 logging.error(f"Failed to initialize database: {e}")
                 raise
@@ -140,7 +140,7 @@ class PersistenceManager:
             "CREATE INDEX IF NOT EXISTS idx_glyphs_usage ON semantic_glyphs (usage_count DESC, last_accessed DESC)",
             "CREATE INDEX IF NOT EXISTS idx_glyphs_validation ON semantic_glyphs (validation_status, coherence_score DESC)"
         ]
-        
+
         for index_sql in indexes:
             try:
                 cursor.execute(index_sql)
@@ -151,28 +151,28 @@ class PersistenceManager:
         """
         Saves a dictionary of data to a specified table.
         Uses INSERT OR REPLACE for upsert functionality.
-        
+
         Args:
             table_name: Name of the target table
             data_dict: Dictionary containing the data to save
-            
+
         Returns:
             bool: True if successful, False otherwise
         """
         if not self._validate_table_name(table_name):
             logging.error(f"Invalid table name: {table_name}")
             return False
-            
+
         with self.lock:
             conn = self._get_connection()
             try:
                 cursor = conn.cursor()
-                
+
                 # Prepare data for insertion
                 columns = list(data_dict.keys())
                 placeholders = ['?' for _ in columns]
                 values = []
-                
+
                 # Convert complex objects to JSON strings
                 for key, value in data_dict.items():
                     if isinstance(value, (dict, list)):
@@ -181,18 +181,18 @@ class PersistenceManager:
                         values.append(None)
                     else:
                         values.append(value)
-                
+
                 # Build and execute SQL
                 columns_str = ', '.join(columns)
                 placeholders_str = ', '.join(placeholders)
                 sql = f"INSERT OR REPLACE INTO {table_name} ({columns_str}) VALUES ({placeholders_str})"
-                
+
                 cursor.execute(sql, values)
                 conn.commit()
-                
+
                 logging.info(f"Successfully saved data to table '{table_name}' with {len(data_dict)} fields.")
                 return True
-                
+
             except sqlite3.Error as e:
                 logging.error(f"Database error saving to '{table_name}': {e}")
                 conn.rollback()
@@ -207,11 +207,11 @@ class PersistenceManager:
     def query(self, sql: str, params: Tuple = ()) -> List[Dict[str, Any]]:
         """
         Execute a SELECT query and return results as list of dictionaries.
-        
+
         Args:
             sql: SQL query string
             params: Query parameters tuple
-            
+
         Returns:
             List of dictionaries representing query results
         """
@@ -221,7 +221,7 @@ class PersistenceManager:
                 conn.row_factory = sqlite3.Row  # Enable column access by name
                 cursor = conn.cursor()
                 cursor.execute(sql, params)
-                
+
                 results = []
                 for row in cursor.fetchall():
                     row_dict = dict(row)
@@ -233,9 +233,9 @@ class PersistenceManager:
                             except json.JSONDecodeError:
                                 pass  # Keep as string if not valid JSON
                     results.append(row_dict)
-                
+
                 return results
-                
+
             except sqlite3.Error as e:
                 logging.error(f"Database query error: {e}")
                 return []
@@ -248,11 +248,11 @@ class PersistenceManager:
     def execute(self, sql: str, params: Tuple = ()) -> bool:
         """
         Execute a non-SELECT SQL statement (INSERT, UPDATE, DELETE).
-        
+
         Args:
             sql: SQL statement string
             params: Statement parameters tuple
-            
+
         Returns:
             bool: True if successful, False otherwise
         """
@@ -262,10 +262,10 @@ class PersistenceManager:
                 cursor = conn.cursor()
                 cursor.execute(sql, params)
                 conn.commit()
-                
+
                 logging.info(f"Successfully executed SQL statement. Rows affected: {cursor.rowcount}")
                 return True
-                
+
             except sqlite3.Error as e:
                 logging.error(f"Database execution error: {e}")
                 conn.rollback()
@@ -307,11 +307,11 @@ class PersistenceManager:
         """Get basic statistics about database content."""
         stats = {}
         tables = ['system_log', 'goals', 'nodes', 'relations', 'semantic_glyphs']
-        
+
         for table in tables:
             results = self.query(f"SELECT COUNT(*) as count FROM {table}")
             stats[table] = results[0]['count'] if results else 0
-        
+
         return stats
 
     def _validate_table_name(self, table_name: str) -> bool:
@@ -328,10 +328,10 @@ class PersistenceManager:
                 source.backup(backup)
                 backup.close()
                 source.close()
-                
+
             logging.info(f"Database backed up to: {backup_path}")
             return True
-            
+
         except Exception as e:
             logging.error(f"Database backup failed: {e}")
             return False

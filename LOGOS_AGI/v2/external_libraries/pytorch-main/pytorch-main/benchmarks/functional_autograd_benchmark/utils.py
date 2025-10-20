@@ -76,9 +76,7 @@ def load_weights(mod: nn.Module, names: list[str], params: tuple[Tensor, ...]) -
 
 
 # Utilities to read/write markdown table-like content.
-def to_markdown_table(
-    res: TimingResultType, header: Optional[tuple[str, ...]] = None
-) -> str:
+def to_markdown_table(res: TimingResultType, header: Optional[tuple[str, ...]] = None) -> str:
     if header is None:
         header = ("model", "task", "mean", "var")
     out = ""

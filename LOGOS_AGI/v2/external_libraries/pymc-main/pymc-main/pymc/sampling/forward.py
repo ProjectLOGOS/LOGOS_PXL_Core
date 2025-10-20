@@ -95,7 +95,8 @@ def get_constant_coords(trace_coords: dict[str, np.ndarray], model: Model) -> se
             and np.all(coord == current_coord)
         ) or (
             # Coord was defined without values (only length)
-            current_coord is None and len(coord) == current_length
+            current_coord is None
+            and len(coord) == current_length
         ):
             constant_coords.add(dim)
     return constant_coords
@@ -375,7 +376,10 @@ def sample_prior_predictive(
     idata_kwargs: dict | None = None,
     compile_kwargs: dict | None = None,
     samples: int | None = None,
-) -> InferenceData: ...
+) -> InferenceData:
+    ...
+
+
 @overload
 def sample_prior_predictive(
     draws: int = 500,
@@ -386,7 +390,10 @@ def sample_prior_predictive(
     idata_kwargs: dict | None = None,
     compile_kwargs: dict | None = None,
     samples: int | None = None,
-) -> dict[str, np.ndarray]: ...
+) -> dict[str, np.ndarray]:
+    ...
+
+
 def sample_prior_predictive(
     draws: int = 500,
     model: Model | None = None,
@@ -510,7 +517,10 @@ def sample_posterior_predictive(
     predictions: bool = False,
     idata_kwargs: dict | None = None,
     compile_kwargs: dict | None = None,
-) -> InferenceData: ...
+) -> InferenceData:
+    ...
+
+
 @overload
 def sample_posterior_predictive(
     trace,
@@ -525,7 +535,10 @@ def sample_posterior_predictive(
     predictions: bool = False,
     idata_kwargs: dict | None = None,
     compile_kwargs: dict | None = None,
-) -> dict[str, np.ndarray]: ...
+) -> dict[str, np.ndarray]:
+    ...
+
+
 def sample_posterior_predictive(
     trace,
     model: Model | None = None,

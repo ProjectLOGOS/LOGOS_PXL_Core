@@ -41,9 +41,7 @@ clustering_algorithms = {
 }
 
 # Make subplots for each variant
-fig, axs = plt.subplots(
-    len(clustering_algorithms), len(n_clusters_list), figsize=(12, 5)
-)
+fig, axs = plt.subplots(len(clustering_algorithms), len(n_clusters_list), figsize=(12, 5))
 
 axs = axs.T
 

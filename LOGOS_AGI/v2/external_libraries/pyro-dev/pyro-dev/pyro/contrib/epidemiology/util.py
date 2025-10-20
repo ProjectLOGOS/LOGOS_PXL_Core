@@ -348,9 +348,7 @@ def quantize(name, x_real, min, max, num_quant_bins=4):
 
     probs = compute_bin_probs(x_real - lb, num_quant_bins=num_quant_bins)
 
-    q = pyro.sample(
-        "Q_" + name, dist.Categorical(probs), infer={"enumerate": "parallel"}
-    )
+    q = pyro.sample("Q_" + name, dist.Categorical(probs), infer={"enumerate": "parallel"})
     q = q.type_as(x_real) - (num_quant_bins // 2 - 1)
 
     x = lb + q

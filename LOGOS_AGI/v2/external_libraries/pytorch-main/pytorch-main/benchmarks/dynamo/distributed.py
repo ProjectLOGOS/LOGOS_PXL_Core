@@ -89,21 +89,15 @@ def run_model(args, model, inputs, key):
             log.warning("disabling inductor cudagraphs for compatibility with FSDP")
 
         def print_compile(gm, ex):
-            print(
-                f"print_compile:\n{str(gm.graph)}\n-----------------------------------------"
-            )
+            print(f"print_compile:\n{str(gm.graph)}\n-----------------------------------------")
             return gm
 
-        dynamo_ctx = dynamo.optimize(
-            print_compile if args.dynamo == "print" else args.dynamo
-        )
+        dynamo_ctx = dynamo.optimize(print_compile if args.dynamo == "print" else args.dynamo)
         model = dynamo_ctx(model)
 
     # warmup
     _ = timed(model, model_iter_fn, inputs, times=3, return_result=False)
-    t_total = timed(
-        model, model_iter_fn, inputs, times=args.repeat, return_result=False
-    )
+    t_total = timed(model, model_iter_fn, inputs, times=args.repeat, return_result=False)
     if args.torchviz:
         torchviz_model(args, model, inputs, rank)
     if args.profile:
@@ -123,9 +117,7 @@ if __name__ == "__main__":
     )
     parser.add_argument("--verbose", action="store_true")
     parser.add_argument("--batch-size", "--batch_size", default=None)
-    parser.add_argument(
-        "--torchviz", action="store_true", help="Dump autograd graph with torchviz"
-    )
+    parser.add_argument("--torchviz", action="store_true", help="Dump autograd graph with torchviz")
     parser.add_argument("--profile", action="store_true", help="Run the profiler")
     parser.add_argument(
         "--trace-file", "--trace_file", default="profile.json", help="Run the profiler"

@@ -124,9 +124,7 @@ class EKFState:
         pred_cov = F.mm(self._cov).mm(F.transpose(-1, -2)) + Q
 
         if destination_time is None and destination_frame_num is None:
-            raise ValueError(
-                "destination_time or destination_frame_num must be specified!"
-            )
+            raise ValueError("destination_time or destination_frame_num must be specified!")
 
         return EKFState(
             self._dynamic_model,
@@ -147,9 +145,7 @@ class EKFState:
         :return: Innovation mean and covariance of hypothetical update.
         :rtype: tuple(``torch.Tensor``, ``torch.Tensor``)
         """
-        assert (
-            self._time == measurement.time
-        ), "State time and measurement time must be aligned!"
+        assert self._time == measurement.time, "State time and measurement time must be aligned!"
 
         # Compute innovation.
         x_pv = self._dynamic_model.mean2pv(self._mean)
@@ -220,8 +216,6 @@ class EKFState:
 
         pred_mean = x
         pred_cov = P
-        state = EKFState(
-            self._dynamic_model, pred_mean, pred_cov, self._time, self._frame_num
-        )
+        state = EKFState(self._dynamic_model, pred_mean, pred_cov, self._time, self._frame_num)
 
         return state, (dz, S)

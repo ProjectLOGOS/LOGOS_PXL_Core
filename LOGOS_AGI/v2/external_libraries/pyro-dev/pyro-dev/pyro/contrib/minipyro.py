@@ -231,9 +231,7 @@ def param(
             PARAM_STORE[name] = unconstrained_value, constraint
 
         # Transform from unconstrained space to constrained space.
-        constrained_value = torch.distributions.transform_to(constraint)(
-            unconstrained_value
-        )
+        constrained_value = torch.distributions.transform_to(constraint)(unconstrained_value)
         constrained_value.unconstrained = weakref.ref(unconstrained_value)
         return constrained_value
 
@@ -376,9 +374,7 @@ class JitTrace_ELBO:
             self._param_trace = tr
 
         # Augment args with reads from the global param store.
-        unconstrained_params = tuple(
-            param(name).unconstrained() for name in self._param_trace
-        )
+        unconstrained_params = tuple(param(name).unconstrained() for name in self._param_trace)
         params_and_args = unconstrained_params + args
 
         # On first call, create a compiled elbo.
@@ -387,9 +383,7 @@ class JitTrace_ELBO:
             def compiled(*params_and_args):
                 unconstrained_params = params_and_args[: len(self._param_trace)]
                 args = params_and_args[len(self._param_trace) :]
-                for name, unconstrained_param in zip(
-                    self._param_trace, unconstrained_params
-                ):
+                for name, unconstrained_param in zip(self._param_trace, unconstrained_params):
                     constrained_param = param(name)  # assume param has been initialized
                     assert constrained_param.unconstrained() is unconstrained_param
                     self._param_trace[name]["value"] = constrained_param
@@ -398,8 +392,6 @@ class JitTrace_ELBO:
             with validation_enabled(False), warnings.catch_warnings():
                 if self.ignore_jit_warnings:
                     warnings.filterwarnings("ignore", category=torch.jit.TracerWarning)
-                self._compiled = torch.jit.trace(
-                    compiled, params_and_args, check_trace=False
-                )
+                self._compiled = torch.jit.trace(compiled, params_and_args, check_trace=False)
 
         return self._compiled(*params_and_args)

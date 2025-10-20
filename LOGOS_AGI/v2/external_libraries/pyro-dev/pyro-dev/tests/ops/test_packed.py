@@ -12,9 +12,7 @@ from pyro.ops import packed
 from tests.common import assert_equal
 
 EXAMPLE_DIMS = [
-    "".join(dims)
-    for num_dims in range(5)
-    for dims in itertools.permutations("abcd"[:num_dims])
+    "".join(dims) for num_dims in range(5) for dims in itertools.permutations("abcd"[:num_dims])
 ]
 
 

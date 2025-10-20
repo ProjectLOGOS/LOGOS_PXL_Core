@@ -17,7 +17,7 @@ http = urllib3.PoolManager()
 def get_data_path():
     """Get the absolute path to the ``data`` directory"""
     dataset_dir = abspath(dirname(__file__))
-    data_dir = join(dataset_dir, 'data')
+    data_dir = join(dataset_dir, "data")
     return data_dir
 
 
@@ -37,7 +37,7 @@ def fetch_from_web_or_disk(url, key, cache=True, dtype=DTYPE):
     os.makedirs(disk_cache_path, exist_ok=True)
 
     # See if it's already there
-    data_path = join(disk_cache_path, key + '.csv.gz')
+    data_path = join(disk_cache_path, key + ".csv.gz")
     if os.path.exists(data_path):
         rslt = np.loadtxt(data_path).ravel()
 
@@ -45,10 +45,9 @@ def fetch_from_web_or_disk(url, key, cache=True, dtype=DTYPE):
         r = None
         rslt = None
         try:
-            r = http.request('GET', url)
+            r = http.request("GET", url)
             # rank 1 because it's a time series
-            rslt = np.asarray(
-                r.data.decode('utf-8').split('\n'), dtype=dtype)
+            rslt = np.asarray(r.data.decode("utf-8").split("\n"), dtype=dtype)
 
         finally:
             if rslt is not None:
@@ -80,6 +79,6 @@ def load_date_example():
     """Loads a nondescript dated example for internal use"""
     X = _load_tarfile("dated.tar.gz")
     # make sure it's a date time
-    X['date'] = pd.to_datetime(X['date'])
-    y = X.pop('y')
+    X["date"] = pd.to_datetime(X["date"])
+    y = X.pop("y")
     return y, X

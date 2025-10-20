@@ -105,9 +105,7 @@ def test_display_node_position():
     nx.set_node_attributes(G, {n: (n, n) for n in G.nodes()}, "pos")
     canvas = plt.figure().add_subplot(111)
     nx.display(G, canvas=canvas, node_pos="pos")
-    assert np.all(
-        canvas.get_children()[0].get_offsets().data == [[0, 0], [1, 1], [2, 2], [3, 3]]
-    )
+    assert np.all(canvas.get_children()[0].get_offsets().data == [[0, 0], [1, 1], [2, 2], [3, 3]])
     plt.close()
 
 
@@ -119,11 +117,7 @@ def test_display_line_collection():
     canvas = plt.figure().add_subplot(111)
     nx.display(G, canvas=canvas, edge_arrowsize=10)
     # There should only be one line collection in any given visualization
-    lc = [
-        l
-        for l in canvas.get_children()
-        if isinstance(l, mpl.collections.LineCollection)
-    ][0]
+    lc = [l for l in canvas.get_children() if isinstance(l, mpl.collections.LineCollection)][0]
     assert len(lc.get_paths()) == sum([1 for u, v in G.edges() if (u + v) % 2])
     plt.close()
 
@@ -147,16 +141,12 @@ def test_display_edge_single_color(edge_color, expected, graph_type):
     nx.display(G, edge_color=edge_color, canvas=canvas)
     if G.is_directed():
         colors = [
-            f.get_fc()
-            for f in canvas.get_children()
-            if isinstance(f, mpl.patches.FancyArrowPatch)
+            f.get_fc() for f in canvas.get_children() if isinstance(f, mpl.patches.FancyArrowPatch)
         ]
     else:
-        colors = [
-            l
-            for l in canvas.collections
-            if isinstance(l, mpl.collections.LineCollection)
-        ][0].get_colors()
+        colors = [l for l in canvas.collections if isinstance(l, mpl.collections.LineCollection)][
+            0
+        ].get_colors()
     assert all(mpl.colors.same_color(c, expected) for c in colors)
     plt.close()
 
@@ -170,14 +160,12 @@ def test_display_edge_multiple_colors(graph_type):
     expected = ["red", "blue"]
     if G.is_directed():
         colors = [
-            f.get_fc()
-            for f in ax.get_children()
-            if isinstance(f, mpl.patches.FancyArrowPatch)
+            f.get_fc() for f in ax.get_children() if isinstance(f, mpl.patches.FancyArrowPatch)
         ]
     else:
-        colors = [
-            l for l in ax.collections if isinstance(l, mpl.collections.LineCollection)
-        ][0].get_colors()
+        colors = [l for l in ax.collections if isinstance(l, mpl.collections.LineCollection)][
+            0
+        ].get_colors()
     assert mpl.colors.same_color(colors, expected)
     plt.close()
 
@@ -198,9 +186,7 @@ def test_display_edge_position(graph_type):
         line_collection = [
             l for l in ax.collections if isinstance(l, mpl.collections.LineCollection)
         ][0]
-        end_points = [
-            (p.vertices[0, :], p.vertices[-1, :]) for p in line_collection.get_paths()
-        ]
+        end_points = [(p.vertices[0, :], p.vertices[-1, :]) for p in line_collection.get_paths()]
     expected = [((0, 0), (1, 1)), ((1, 1), (2, 2))]
     # Use the threshold to account for slight shifts in FancyArrowPatch margins to
     # avoid covering the arrow head with the node.
@@ -224,9 +210,7 @@ def test_display_position_function():
     ax = plt.figure().add_subplot(111)
     nx.display(G, node_pos=fixed_layout, canvas=ax)
     # rebuild the position dictionary from the canvas
-    act_pos = {
-        n: tuple(p) for n, p in zip(G.nodes(), ax.get_children()[0].get_offsets().data)
-    }
+    act_pos = {n: tuple(p) for n, p in zip(G.nodes(), ax.get_children()[0].get_offsets().data)}
     for n in G.nodes():
         assert all(pos[n] == act_pos[n])
     plt.close()
@@ -250,11 +234,9 @@ def test_display_edge_colormaps(graph_type):
             if isinstance(f, mpl.patches.FancyArrowPatch)
         ]
     else:
-        colors = [
-            l
-            for l in canvas.collections
-            if isinstance(l, mpl.collections.LineCollection)
-        ][0].get_colors()
+        colors = [l for l in canvas.collections if isinstance(l, mpl.collections.LineCollection)][
+            0
+        ].get_colors()
     assert mpl.colors.same_color(expected[0], G.edges[0, 1]["color"])
     assert mpl.colors.same_color(expected[1], G.edges[1, 2]["color"])
     assert mpl.colors.same_color(expected, colors)
@@ -272,9 +254,9 @@ def test_display_node_colormaps(graph_type):
     mapper = mpl.cm.ScalarMappable(cmap=cmap)
     mapper.set_clim(0, 1)
     expected = [mapper.to_rgba(0), mapper.to_rgba(0.5), mapper.to_rgba(1)]
-    colors = [
-        s for s in canvas.collections if isinstance(s, mpl.collections.PathCollection)
-    ][0].get_edgecolors()
+    colors = [s for s in canvas.collections if isinstance(s, mpl.collections.PathCollection)][
+        0
+    ].get_edgecolors()
     assert mpl.colors.same_color(expected[0], G.nodes[0]["color"])
     assert mpl.colors.same_color(expected[1], G.nodes[1]["color"])
     assert mpl.colors.same_color(expected[2], G.nodes[2]["color"])
@@ -304,11 +286,9 @@ def test_display_edge_width(param_value, expected, graph_type):
         ]
     else:
         widths = list(
-            [
-                l
-                for l in canvas.collections
-                if isinstance(l, mpl.collections.LineCollection)
-            ][0].get_linewidths()
+            [l for l in canvas.collections if isinstance(l, mpl.collections.LineCollection)][
+                0
+            ].get_linewidths()
         )
     assert widths == expected
 
@@ -339,9 +319,7 @@ def test_display_edge_style(param_value, expected, graph_type):
         styles = [
             linestyles[(s[0], tuple(s[1]) if s[1] is not None else None)]
             for s in [
-                l
-                for l in canvas.collections
-                if isinstance(l, mpl.collections.LineCollection)
+                l for l in canvas.collections if isinstance(l, mpl.collections.LineCollection)
             ][0].get_linestyles()
         ]
     assert styles == expected
@@ -410,9 +388,7 @@ def test_display_raises_for_bad_arg():
 
 def test_display_arrow_size():
     G = nx.path_graph(4, create_using=nx.DiGraph)
-    nx.set_edge_attributes(
-        G, {(u, v): (u + v + 2) ** 2 for u, v in G.edges()}, "arrowsize"
-    )
+    nx.set_edge_attributes(G, {(u, v): (u + v + 2) ** 2 for u, v in G.edges()}, "arrowsize")
     ax = plt.axes()
     nx.display(G, canvas=ax)
     assert [9, 25, 49] == [
@@ -466,9 +442,7 @@ def test_display_edge_margins(node_shape):
     nx.set_node_attributes(G, {0: (0, 0), 1: (1, 1)}, "pos")
     # Get the default patches from the regular visualization
     nx.display(G, canvas=ax, node_shape=node_shape)
-    default_arrow = [
-        f for f in ax.get_children() if isinstance(f, mpl.patches.FancyArrowPatch)
-    ][0]
+    default_arrow = [f for f in ax.get_children() if isinstance(f, mpl.patches.FancyArrowPatch)][0]
     default_extent = default_arrow.get_extents().corners()[::2, 0]
     # Now plot again with margins
     ax = plt.figure().add_subplot(111)
@@ -479,9 +453,7 @@ def test_display_edge_margins(node_shape):
         edge_target_margin=100,
         node_shape=node_shape,
     )
-    padded_arrow = [
-        f for f in ax.get_children() if isinstance(f, mpl.patches.FancyArrowPatch)
-    ][0]
+    padded_arrow = [f for f in ax.get_children() if isinstance(f, mpl.patches.FancyArrowPatch)][0]
     padded_extent = padded_arrow.get_extents().corners()[::2, 0]
 
     # With padding, the left-most extent of the edge should be further to the right
@@ -510,9 +482,7 @@ def test_display_self_loop():
     G.add_edge(0, 0)
     nx.set_node_attributes(G, {0: (0, 0)}, "pos")
     nx.display(G, canvas=ax)
-    arrow = [
-        f for f in ax.get_children() if isinstance(f, mpl.patches.FancyArrowPatch)
-    ][0]
+    arrow = [f for f in ax.get_children() if isinstance(f, mpl.patches.FancyArrowPatch)][0]
     bbox = arrow.get_extents()
     print(bbox.width)
     print(bbox.height)
@@ -591,9 +561,7 @@ def test_draw_bipartite():
 
 def test_edge_colormap():
     colors = range(barbell.number_of_edges())
-    nx.draw_spring(
-        barbell, edge_color=colors, width=4, edge_cmap=plt.cm.Blues, with_labels=True
-    )
+    nx.draw_spring(barbell, edge_color=colors, width=4, edge_cmap=plt.cm.Blues, with_labels=True)
     # plt.show()
 
 
@@ -668,9 +636,7 @@ def test_edge_color_tuple_interpretation():
         for fap in drawn_edges:
             assert mpl.colors.same_color(fap.get_edgecolor(), ec)
         # Fewer than 3 edges
-        drawn_edges = nx.draw_networkx_edges(
-            G, pos, edgelist=[(0, 1), (1, 2)], edge_color=ec
-        )
+        drawn_edges = nx.draw_networkx_edges(G, pos, edgelist=[(0, 1), (1, 2)], edge_color=ec)
         for fap in drawn_edges:
             assert mpl.colors.same_color(fap.get_edgecolor(), ec)
 
@@ -692,9 +658,7 @@ def test_edge_color_tuple_interpretation():
     drawn_edges = nx.draw_networkx_edges(
         G, pos, edgelist=[(0, 1), (1, 2), (2, 3)], edge_color=(0, 0, 1)
     )
-    assert mpl.colors.same_color(
-        drawn_edges[0].get_edgecolor(), drawn_edges[1].get_edgecolor()
-    )
+    assert mpl.colors.same_color(drawn_edges[0].get_edgecolor(), drawn_edges[1].get_edgecolor())
     for fap in drawn_edges:
         assert not mpl.colors.same_color(fap.get_edgecolor(), "blue")
 
@@ -702,12 +666,8 @@ def test_edge_color_tuple_interpretation():
     drawn_edges = nx.draw_networkx_edges(
         G, pos, edgelist=[(0, 1), (1, 2), (2, 3), (3, 4)], edge_color=(0, 0, 1, 1)
     )
-    assert mpl.colors.same_color(
-        drawn_edges[0].get_edgecolor(), drawn_edges[1].get_edgecolor()
-    )
-    assert mpl.colors.same_color(
-        drawn_edges[2].get_edgecolor(), drawn_edges[3].get_edgecolor()
-    )
+    assert mpl.colors.same_color(drawn_edges[0].get_edgecolor(), drawn_edges[1].get_edgecolor())
+    assert mpl.colors.same_color(drawn_edges[2].get_edgecolor(), drawn_edges[3].get_edgecolor())
     for fap in drawn_edges:
         assert not mpl.colors.same_color(fap.get_edgecolor(), "blue")
 
@@ -927,9 +887,7 @@ def test_labels_and_colors():
     G = nx.cubical_graph()
     pos = nx.spring_layout(G)  # positions for all nodes
     # nodes
-    nx.draw_networkx_nodes(
-        G, pos, nodelist=[0, 1, 2, 3], node_color="r", node_size=500, alpha=0.75
-    )
+    nx.draw_networkx_nodes(G, pos, nodelist=[0, 1, 2, 3], node_color="r", node_size=500, alpha=0.75)
     nx.draw_networkx_nodes(
         G,
         pos,
@@ -1002,12 +960,8 @@ def test_draw_empty_nodes_return_values():
     G = nx.Graph([(1, 2), (2, 3)])
     DG = nx.DiGraph([(1, 2), (2, 3)])
     pos = nx.circular_layout(G)
-    assert isinstance(
-        nx.draw_networkx_nodes(G, pos, nodelist=[]), mpl.collections.PathCollection
-    )
-    assert isinstance(
-        nx.draw_networkx_nodes(DG, pos, nodelist=[]), mpl.collections.PathCollection
-    )
+    assert isinstance(nx.draw_networkx_nodes(G, pos, nodelist=[]), mpl.collections.PathCollection)
+    assert isinstance(nx.draw_networkx_nodes(DG, pos, nodelist=[]), mpl.collections.PathCollection)
 
     # drawing empty edges used to return an empty LineCollection or empty list.
     # Now it is always an empty list (because edges are now lists of FancyArrows)
@@ -1046,9 +1000,7 @@ def test_multiple_node_shapes(subplots):
     fig, ax = subplots
     G = nx.path_graph(4)
     nx.draw(G, node_shape=["o", "h", "s", "^"], ax=ax)
-    scatters = [
-        s for s in ax.get_children() if isinstance(s, mpl.collections.PathCollection)
-    ]
+    scatters = [s for s in ax.get_children() if isinstance(s, mpl.collections.PathCollection)]
     assert len(scatters) == 4
 
 
@@ -1063,11 +1015,7 @@ def test_individualized_font_attributes(subplots):
     )
     for n, t in zip(
         G.nodes(),
-        [
-            t
-            for t in ax.get_children()
-            if isinstance(t, mpl.text.Text) and len(t.get_text()) > 0
-        ],
+        [t for t in ax.get_children() if isinstance(t, mpl.text.Text) and len(t.get_text()) > 0],
     ):
         expected = "black" if n % 2 else "red"
 
@@ -1081,15 +1029,11 @@ def test_individualized_edge_attributes(subplots):
     arrowstyles = ["-|>" if (u + v) % 2 == 0 else "-[" for u, v in G.edges()]
     arrowsizes = [10 * (u % 2 + v % 2) + 10 for u, v in G.edges()]
     nx.draw(G, ax=ax, arrows=True, arrowstyle=arrowstyles, arrowsize=arrowsizes)
-    arrows = [
-        f for f in ax.get_children() if isinstance(f, mpl.patches.FancyArrowPatch)
-    ]
+    arrows = [f for f in ax.get_children() if isinstance(f, mpl.patches.FancyArrowPatch)]
     for e, a in zip(G.edges(), arrows):
         assert a.get_mutation_scale() == 10 * (e[0] % 2 + e[1] % 2) + 10
         expected = (
-            mpl.patches.ArrowStyle.BracketB
-            if sum(e) % 2
-            else mpl.patches.ArrowStyle.CurveFilledB
+            mpl.patches.ArrowStyle.BracketB if sum(e) % 2 else mpl.patches.ArrowStyle.CurveFilledB
         )
         assert isinstance(a.get_arrowstyle(), expected)
 
@@ -1102,9 +1046,7 @@ def test_error_invalid_kwds():
 def test_draw_networkx_arrowsize_incorrect_size():
     G = nx.DiGraph([(0, 1), (0, 2), (0, 3), (1, 3)])
     arrowsize = [1, 2, 3]
-    with pytest.raises(
-        ValueError, match="arrowsize should have the same length as edgelist"
-    ):
+    with pytest.raises(ValueError, match="arrowsize should have the same length as edgelist"):
         nx.draw(G, arrowsize=arrowsize)
 
 
@@ -1127,9 +1069,7 @@ def test_draw_edges_arrowstyle(arrowstyle):
     pos = {0: (0, 0), 1: (0, 1), 2: (1, 0)}
     edges = nx.draw_networkx_edges(G, pos=pos, arrowstyle=arrowstyle)
 
-    arrowstyle = (
-        itertools.repeat(arrowstyle) if isinstance(arrowstyle, str) else arrowstyle
-    )
+    arrowstyle = itertools.repeat(arrowstyle) if isinstance(arrowstyle, str) else arrowstyle
 
     arrow_objects = {
         "-|>": mpl.patches.ArrowStyle.CurveFilledB,
@@ -1343,9 +1283,7 @@ def test_draw_networkx_arrows_default_directed(drawing_func, subplots):
     G = nx.path_graph(3, create_using=nx.DiGraph)
     fig, ax = subplots
     drawing_func(G, ax=ax)
-    assert not any(
-        isinstance(c, mpl.collections.LineCollection) for c in ax.collections
-    )
+    assert not any(isinstance(c, mpl.collections.LineCollection) for c in ax.collections)
     assert ax.patches
 
 
@@ -1515,9 +1453,7 @@ def test_hide_ticks(method, hide_ticks, subplots):
         assert bool(axis.get_ticklabels()) != hide_ticks
 
 
-@pytest.mark.parametrize(
-    "style", ["angle", "angle3", "arc", "arc3,rad=0.0", "bar,fraction=0.1"]
-)
+@pytest.mark.parametrize("style", ["angle", "angle3", "arc", "arc3,rad=0.0", "bar,fraction=0.1"])
 def test_edge_label_all_connectionstyles(subplots, style):
     """
     Check that FancyArrowPatches with all `connectionstyle`s are supported
@@ -1529,9 +1465,7 @@ def test_edge_label_all_connectionstyles(subplots, style):
     pos = {n: (n, 0) for n in G}
 
     name = style.split(",")[0]
-    labels = nx.draw_networkx_edge_labels(
-        G, pos, edge_labels={edge: "edge"}, connectionstyle=style
-    )
+    labels = nx.draw_networkx_edge_labels(G, pos, edge_labels={edge: "edge"}, connectionstyle=style)
 
     hmid = (pos[0][0] + pos[1][0]) / 2
     vmid = (pos[0][1] + pos[1][1]) / 2

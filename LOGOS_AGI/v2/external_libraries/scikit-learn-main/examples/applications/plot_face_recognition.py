@@ -52,9 +52,7 @@ print("n_classes: %d" % n_classes)
 # %%
 # Split into a training set and a test and keep 25% of the data for testing.
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.25, random_state=42
-)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
 
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
@@ -66,9 +64,7 @@ X_test = scaler.transform(X_test)
 
 n_components = 150
 
-print(
-    "Extracting the top %d eigenfaces from %d faces" % (n_components, X_train.shape[0])
-)
+print("Extracting the top %d eigenfaces from %d faces" % (n_components, X_train.shape[0]))
 t0 = time()
 pca = PCA(n_components=n_components, svd_solver="randomized", whiten=True).fit(X_train)
 print("done in %0.3fs" % (time() - t0))
@@ -91,9 +87,7 @@ param_grid = {
     "C": loguniform(1e3, 1e5),
     "gamma": loguniform(1e-4, 1e-1),
 }
-clf = RandomizedSearchCV(
-    SVC(kernel="rbf", class_weight="balanced"), param_grid, n_iter=10
-)
+clf = RandomizedSearchCV(SVC(kernel="rbf", class_weight="balanced"), param_grid, n_iter=10)
 clf = clf.fit(X_train_pca, y_train)
 print("done in %0.3fs" % (time() - t0))
 print("Best estimator found by grid search:")
@@ -142,9 +136,7 @@ def title(y_pred, y_test, target_names, i):
     return "predicted: %s\ntrue:      %s" % (pred_name, true_name)
 
 
-prediction_titles = [
-    title(y_pred, y_test, target_names, i) for i in range(y_pred.shape[0])
-]
+prediction_titles = [title(y_pred, y_test, target_names, i) for i in range(y_pred.shape[0])]
 
 plot_gallery(X_test, prediction_titles, h, w)
 # %%

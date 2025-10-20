@@ -26,6 +26,7 @@ class BaseExogFeaturizer(BaseExogTransformer, metaclass=abc.ABCMeta):
     prefix : str or None, optional (default=None)
         The feature prefix
     """
+
     def __init__(self, prefix=None):
         self.prefix = prefix
 
@@ -35,7 +36,7 @@ class BaseExogFeaturizer(BaseExogTransformer, metaclass=abc.ABCMeta):
 
     def _get_feature_names(self, X):
         pfx = self._get_prefix()
-        return ['%s_%i' % (pfx, i) for i in range(X.shape[1])]
+        return ["%s_%i" % (pfx, i) for i in range(X.shape[1])]
 
     def _safe_hstack(self, X, features):
         """H-stack dataframes or np.ndarrays"""

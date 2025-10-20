@@ -50,9 +50,7 @@ class TestEdgelist:
 
         bytesIO = io.BytesIO(s)
         G = bipartite.read_edgelist(bytesIO, nodetype=int, data=True)
-        assert edges_equal(
-            G.edges(data=True), [(1, 2, {"weight": 2.0}), (2, 3, {"weight": 3.0})]
-        )
+        assert edges_equal(G.edges(data=True), [(1, 2, {"weight": 2.0}), (2, 3, {"weight": 3.0})])
 
     def test_write_edgelist_1(self):
         fh = io.BytesIO()
@@ -205,17 +203,13 @@ class TestEdgelist:
         # keys are not of same length
         with pytest.raises(IndexError):
             lines = ["1 2 3 4", "2 3 4"]
-            G = bipartite.parse_edgelist(
-                lines, nodetype=int, data=[("weight", int), ("key", int)]
-            )
+            G = bipartite.parse_edgelist(lines, nodetype=int, data=[("weight", int), ("key", int)])
 
         # Exception raised when edge data is not
         # convertible to specified data type
         with pytest.raises(TypeError, match=".*Failed to convert key data"):
             lines = ["1 2 3 a", "2 3 4 b"]
-            G = bipartite.parse_edgelist(
-                lines, nodetype=int, data=[("weight", int), ("key", int)]
-            )
+            G = bipartite.parse_edgelist(lines, nodetype=int, data=[("weight", int), ("key", int)])
 
 
 def test_bipartite_edgelist_consistent_strip_handling():
@@ -230,9 +224,7 @@ def test_bipartite_edgelist_consistent_strip_handling():
     Note the trailing \\t in the last line, which indicates the existence of
     an empty data field.
     """
-    lines = io.StringIO(
-        "A\tB\tinteraction\t2\nB\tC\tinteraction\t4\nC\tA\tinteraction\t"
-    )
+    lines = io.StringIO("A\tB\tinteraction\t2\nB\tC\tinteraction\t4\nC\tA\tinteraction\t")
     descr = [("type", str), ("weight", str)]
     # Should not raise
     G = nx.bipartite.parse_edgelist(lines, delimiter="\t", data=descr)

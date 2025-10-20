@@ -55,9 +55,7 @@ class _ConditionalInverseTransformModule(ConditionalTransformModule):
         return self._transform.condition(context).inv
 
 
-class ConditionalComposeTransformModule(
-    ConditionalTransformModule, torch.nn.ModuleList
-):
+class ConditionalComposeTransformModule(ConditionalTransformModule, torch.nn.ModuleList):
     """
     Conditional analogue of :class:`~pyro.distributions.torch_transform.ComposeTransformModule` .
 
@@ -82,11 +80,7 @@ class ConditionalComposeTransformModule(
 
     def __init__(self, transforms, cache_size: int = 0):
         self.transforms = [
-            (
-                ConstantConditionalTransform(t)
-                if not isinstance(t, ConditionalTransform)
-                else t
-            )
+            (ConstantConditionalTransform(t) if not isinstance(t, ConditionalTransform) else t)
             for t in transforms
         ]
         super().__init__()
@@ -99,9 +93,9 @@ class ConditionalComposeTransformModule(
                 self.append(t)
 
     def condition(self, context: torch.Tensor) -> ComposeTransformModule:
-        return ComposeTransformModule(
-            [t.condition(context) for t in self.transforms]
-        ).with_cache(self._cache_size)
+        return ComposeTransformModule([t.condition(context) for t in self.transforms]).with_cache(
+            self._cache_size
+        )
 
 
 class ConstantConditionalDistribution(ConditionalDistribution):
@@ -133,11 +127,7 @@ class ConditionalTransformedDistribution(ConditionalDistribution):
             else ConstantConditionalDistribution(base_dist)
         )
         self.transforms = [
-            (
-                t
-                if isinstance(t, ConditionalTransform)
-                else ConstantConditionalTransform(t)
-            )
+            (t if isinstance(t, ConditionalTransform) else ConstantConditionalTransform(t))
             for t in transforms
         ]
 

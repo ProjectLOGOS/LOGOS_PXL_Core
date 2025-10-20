@@ -1,0 +1,71 @@
+{
+  "ranking_timestamp": "2025-10-19T23:16:00.000000",
+  "threshold": 0.92,
+  "total_candidates": 3,
+  "qualified_candidates": 1,
+  "ranked_iels": [
+    {
+      "iel_id": "iel_candidate_002",
+      "file_path": "build/refined_candidate.v",
+      "timestamp": "2025-10-19T23:15:00.000000",
+      "proof_metrics": {
+        "syntax_score": 0.95,
+        "structure_score": 0.93,
+        "completeness_score": 0.7
+      },
+      "coherence_metrics": {
+        "overall_coherence": 0.9525
+      },
+      "performance_metrics": {
+        "complexity_score": 0.88,
+        "efficiency_score": 0.9,
+        "maintainability_score": 0.92
+      },
+      "overall_score": 0.923,
+      "classification": "excellent",
+      "rank": 1
+    }
+  ],
+  "rejected_iels": [
+    {
+      "iel_id": "iel_candidate_001",
+      "file_path": "build/candidate_iel.v",
+      "timestamp": "2025-10-19T23:15:00.000000",
+      "proof_metrics": {
+        "syntax_score": 0.85,
+        "structure_score": 0.9,
+        "completeness_score": 0.8
+      },
+      "coherence_metrics": {
+        "overall_coherence": 0.8875
+      },
+      "performance_metrics": {
+        "complexity_score": 0.75,
+        "efficiency_score": 0.8,
+        "maintainability_score": 0.85
+      },
+      "overall_score": 0.843,
+      "classification": "good"
+    },
+    {
+      "iel_id": "iel_candidate_003",
+      "file_path": "build/low_quality.v",
+      "timestamp": "2025-10-19T23:15:00.000000",
+      "proof_metrics": {
+        "syntax_score": 0.3,
+        "structure_score": 0.2,
+        "completeness_score": 0.1
+      },
+      "coherence_metrics": {
+        "overall_coherence": 0.325
+      },
+      "performance_metrics": {
+        "complexity_score": 0.6,
+        "efficiency_score": 0.2,
+        "maintainability_score": 0.1
+      },
+      "overall_score": 0.298,
+      "classification": "poor"
+    }
+  ]
+}

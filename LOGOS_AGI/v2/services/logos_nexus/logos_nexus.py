@@ -24,7 +24,7 @@ class LogosNexus:
         self.channel = self.connection.channel()
         self._setup_queues()
         self.self_improvement_manager = SelfImprovementManager(self.channel)
-        
+
         # In-memory state (a real system would persist this more robustly)
         self.active_goals = {}
         self.system_priorities = [] # List of goal_ids ordered by priority
@@ -80,7 +80,7 @@ class LogosNexus:
                 'priority': goal_data.get('priority', 5)
             }
             self._publish_to_db('goals', db_record)
-            
+
             # 3. Formulate and dispatch a strategic task to Archon Nexus
             strategic_task = {
                 'task_id': f"strat_{goal_id}",
@@ -88,7 +88,7 @@ class LogosNexus:
                 'type': 'ANALYZE_AND_PLAN',
                 'prompt': f"Formulate a high-level plan to achieve the following goal: {goal_data['goal_description']}"
             }
-            
+
             self.channel.basic_publish(
                 exchange='',
                 routing_key=STRATEGIC_TASK_QUEUE,
@@ -99,7 +99,7 @@ class LogosNexus:
 
         except Exception as e:
             logging.error(f"Error processing new goal: {e}")
-        
+
         ch.basic_ack(delivery_tag=method.delivery_tag)
 
     def start_main_loop(self):
@@ -107,22 +107,22 @@ class LogosNexus:
         # Start a separate thread for consuming messages so the main loop isn't blocked.
         consumer_thread = Thread(target=self.start_consuming, daemon=True)
         consumer_thread.start()
-        
+
         logging.info("Logos Nexus Main Loop started. Monitoring system state.")
         while True:
             # This loop represents the "consciousness" or "will" of the AGI.
             # It reviews priorities, checks system health, and initiates meta-level tasks.
-            
+
             # For example, trigger the self-improvement cycle every 60 seconds
             time.sleep(60)
             logging.info("Main loop tick: Initiating self-improvement analysis.")
             self.self_improvement_manager.run_analysis_cycle()
-            
+
     def start_consuming(self):
         """Starts consuming goals from the goal_queue."""
         self.channel.basic_qos(prefetch_count=1)
         self.channel.basic_consume(queue=GOAL_QUEUE, on_message_callback=self.process_new_goal)
-        
+
         logging.info("Logos Nexus is now consuming goals from the queue.")
         try:
             self.channel.start_consuming()

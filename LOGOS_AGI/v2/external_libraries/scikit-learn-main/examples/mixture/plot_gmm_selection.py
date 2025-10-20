@@ -82,9 +82,7 @@ param_grid = {
     "n_components": range(1, 7),
     "covariance_type": ["spherical", "tied", "diag", "full"],
 }
-grid_search = GridSearchCV(
-    GaussianMixture(), param_grid=param_grid, scoring=gmm_bic_score
-)
+grid_search = GridSearchCV(GaussianMixture(), param_grid=param_grid, scoring=gmm_bic_score)
 grid_search.fit(X)
 
 # %%

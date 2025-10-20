@@ -14,7 +14,7 @@ class Planner:
 
         for var, target_val in goal.items():
             intervention = {var: target_val}
-            
+
             prob = current_state_scm.do(intervention).counterfactual({
                 'target': var,
                 'do': intervention,
@@ -26,5 +26,5 @@ class Planner:
                 current_state_scm = current_state_scm.do(intervention)
             else:
                 plan.append({"action": "note", "details": f"Intervention {intervention} is unlikely to succeed.", "confidence": prob})
-        
+
         return plan

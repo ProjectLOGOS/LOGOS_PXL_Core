@@ -107,18 +107,10 @@ def generate_data(args):
 
         # Concatenate sequential time series into tensors.
         obs = torch.stack(
-            [
-                site["value"]
-                for name, site in tr.trace.nodes.items()
-                if re.match("obs_[0-9]+", name)
-            ]
+            [site["value"] for name, site in tr.trace.nodes.items() if re.match("obs_[0-9]+", name)]
         )
         S2I = torch.stack(
-            [
-                site["value"]
-                for name, site in tr.trace.nodes.items()
-                if re.match("S2I_[0-9]+", name)
-            ]
+            [site["value"] for name, site in tr.trace.nodes.items() if re.match("S2I_[0-9]+", name)]
         )
         assert len(obs) == len(empty_data)
 
@@ -175,12 +167,8 @@ def reparameterized_discrete_model(args, data):
         # When reparameterizing to a factor graph, we ignored density via
         # .mask(False). Thus distributions are used only for initialization.
         S_prev, I_prev = S_curr, I_curr
-        S_curr = pyro.sample(
-            "S_{}".format(t), dist.Binomial(args.population, 0.5).mask(False)
-        )
-        I_curr = pyro.sample(
-            "I_{}".format(t), dist.Binomial(args.population, 0.5).mask(False)
-        )
+        S_curr = pyro.sample("S_{}".format(t), dist.Binomial(args.population, 0.5).mask(False))
+        I_curr = pyro.sample("I_{}".format(t), dist.Binomial(args.population, 0.5).mask(False))
 
         # Now we reverse the computation.
         S2I = S_prev - S_curr
@@ -307,17 +295,11 @@ def continuous_model(args, data):
     # Sample reparameterizing variables.
     S_aux = pyro.sample(
         "S_aux",
-        dist.Uniform(-0.5, args.population + 0.5)
-        .mask(False)
-        .expand(data.shape)
-        .to_event(1),
+        dist.Uniform(-0.5, args.population + 0.5).mask(False).expand(data.shape).to_event(1),
     )
     I_aux = pyro.sample(
         "I_aux",
-        dist.Uniform(-0.5, args.population + 0.5)
-        .mask(False)
-        .expand(data.shape)
-        .to_event(1),
+        dist.Uniform(-0.5, args.population + 0.5).mask(False).expand(data.shape).to_event(1),
     )
 
     # Sequentially sample time-local variables.
@@ -419,26 +401,18 @@ def vectorized_model(args, data):
     # Sample reparameterizing variables.
     S_aux = pyro.sample(
         "S_aux",
-        dist.Uniform(-0.5, args.population + 0.5)
-        .mask(False)
-        .expand(data.shape)
-        .to_event(1),
+        dist.Uniform(-0.5, args.population + 0.5).mask(False).expand(data.shape).to_event(1),
     )
     I_aux = pyro.sample(
         "I_aux",
-        dist.Uniform(-0.5, args.population + 0.5)
-        .mask(False)
-        .expand(data.shape)
-        .to_event(1),
+        dist.Uniform(-0.5, args.population + 0.5).mask(False).expand(data.shape).to_event(1),
     )
 
     # Manually enumerate.
     S_curr, S_logp = quantize_enumerate(S_aux, min=0, max=args.population)
     I_curr, I_logp = quantize_enumerate(I_aux, min=0, max=args.population)
     # Truncate final value from the right then pad initial value onto the left.
-    S_prev = torch.nn.functional.pad(
-        S_curr[:-1], (0, 0, 1, 0), value=args.population - 1
-    )
+    S_prev = torch.nn.functional.pad(S_curr[:-1], (0, 0, 1, 0), value=args.population - 1)
     I_prev = torch.nn.functional.pad(I_curr[:-1], (0, 0, 1, 0), value=1)
     # Reshape to support broadcasting, similar to EnumMessenger.
     T = len(data)
@@ -538,9 +512,7 @@ def predict(args, data, samples, truth=None):
     with poutine.trace() as tr:
         model(args, data)
     samples = OrderedDict(
-        (name, site["value"])
-        for name, site in tr.trace.nodes.items()
-        if site["type"] == "sample"
+        (name, site["value"]) for name, site in tr.trace.nodes.items() if site["type"] == "sample"
     )
 
     # Next we'll run the forward generative process in discrete_model. This
@@ -552,9 +524,7 @@ def predict(args, data, samples, truth=None):
     with poutine.trace() as tr:
         model(args, extended_data)
     samples = OrderedDict(
-        (name, site["value"])
-        for name, site in tr.trace.nodes.items()
-        if site["type"] == "sample"
+        (name, site["value"]) for name, site in tr.trace.nodes.items() if site["type"] == "sample"
     )
 
     # Finally we'll concatenate the sequentially sampled values into contiguous
@@ -642,9 +612,7 @@ if __name__ == "__main__":
     parser.add_argument("-R0", "--basic-reproduction-number", default=1.5, type=float)
     parser.add_argument("-tau", "--recovery-time", default=7.0, type=float)
     parser.add_argument("-rho", "--response-rate", default=0.5, type=float)
-    parser.add_argument(
-        "-e", "--enum", action="store_true", help="use the full enumeration model"
-    )
+    parser.add_argument("-e", "--enum", action="store_true", help="use the full enumeration model")
     parser.add_argument(
         "-s",
         "--sequential",

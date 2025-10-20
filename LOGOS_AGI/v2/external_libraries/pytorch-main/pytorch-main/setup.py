@@ -1027,13 +1027,15 @@ def get_cmake_cache_vars() -> defaultdict[str, CMakeValue]:
         return defaultdict(lambda: False)
 
 
-def configure_extension_build() -> tuple[
-    list[Extension],  # ext_modules
-    dict[str, type[Command]],  # cmdclass
-    list[str],  # packages
-    dict[str, list[str]],  # entry_points
-    list[str],  # extra_install_requires
-]:
+def configure_extension_build() -> (
+    tuple[
+        list[Extension],  # ext_modules
+        dict[str, type[Command]],  # cmdclass
+        list[str],  # packages
+        dict[str, list[str]],  # entry_points
+        list[str],  # extra_install_requires
+    ]
+):
     r"""Configures extension build options according to system environment and user's choice.
 
     Returns:
