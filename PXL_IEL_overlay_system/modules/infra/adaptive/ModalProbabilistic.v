@@ -20,7 +20,9 @@ Design Principles:
 *)
 
 From Coq Require Import Reals QArith Lia.
-Require Import ArithmoPraxis_Probability.
+From Coq Require Import Classical.
+From Coq Require Import Lists.List.
+Import ListNotations.
 
 (** * Modal Probabilistic Framework *)
 

@@ -1,0 +1,7 @@
+DIGEST 247c398739371a9e5b2afe7ecef81755
+Frefined_iel_001
+R219:242 Coq.Logic.Classical_Prop <> <> lib
+R260:274 Coq.Arith.Arith <> <> lib
+prf 332:356 <> refined_iel_candidate_001
+R450:453 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R380:383 Coq.Init.Logic <> ::type_scope:x_'/\'_x not

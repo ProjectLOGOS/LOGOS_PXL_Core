@@ -1,8 +1,30 @@
 (* ChronoMappings.v - PXL Canonical Bijective Mappings *)
 
 From Coq Require Import Program.
-From PXLs.IEL.Infra.ChronoPraxis.Substrate Require Import ChronoAxioms.
-From PXLs.IEL.Infra.ChronoPraxis.Substrate Require Import Bijection.
+Require Import ChronoAxioms.
+
+(* Define Bijection record locally since import is not available *)
+Record Bijection (A B : Type) : Type := {
+  f : A -> B;
+  g : B -> A;
+  gf : forall x, g (f x) = x;
+  fg : forall y, f (g y) = y
+}.
+
+Arguments f {A B}.
+Arguments g {A B}.
+
+(* Composition of bijections *)
+Definition compose_bij {A B C : Type} (bij1 : Bijection A B) (bij2 : Bijection B C) : Bijection A C := {|
+  f := fun x => f bij2 (f bij1 x);
+  g := fun y => g bij1 (g bij2 y);
+  gf := fun x => eq_trans (f_equal (g bij1) (fg bij2 (f bij1 x))) (gf bij1 x);
+  fg := fun y => eq_trans (f_equal (f bij2) (gf bij1 (g bij2 y))) (fg bij2 y)
+|}.
+
+(* Forward and backward functions *)
+Definition forward {A B : Type} (bij : Bijection A B) : A -> B := f bij.
+Definition backward {A B : Type} (bij : Bijection A B) : B -> A := g bij.
 
 Set Implicit Arguments.
 Set Primitive Projections.

@@ -1,6 +1,5 @@
 (** Test file for Boolean logic compilation *)
 From Coq Require Import Arith Bool String Lists.List.
-From IEL.ArithmoPraxis.Core Require Import ModalWrap Numbers.
 
 Module TestBoolean.
   (** Propositional formulas *)
