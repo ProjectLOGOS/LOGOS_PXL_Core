@@ -86,9 +86,7 @@ class _BaseDataSparsiferTestCase(TestCase):
         return sparsifier
 
     def check_constructor(self, data_list, data_with_config, defaults, **kwargs):
-        sparsifier = self._make_sparsifier(
-            data_list, data_with_config, defaults=defaults, **kwargs
-        )
+        sparsifier = self._make_sparsifier(data_list, data_with_config, defaults=defaults, **kwargs)
         self.assertEqual(
             len(sparsifier.data_groups),
             len(data_list) + len(data_with_config),
@@ -105,9 +103,7 @@ class _BaseDataSparsiferTestCase(TestCase):
             self.assertEqual(sparsifier.data_groups[name], config)
 
     def check_step(self, data_list, data_with_config, defaults, **kwargs):
-        sparsifier = self._make_sparsifier(
-            data_list, data_with_config, defaults=defaults, **kwargs
-        )
+        sparsifier = self._make_sparsifier(data_list, data_with_config, defaults=defaults, **kwargs)
         all_data = data_list + data_with_config
 
         # Check data and mask before doing the step
@@ -138,9 +134,7 @@ class _BaseDataSparsiferTestCase(TestCase):
             assert sparsifier.state[name]["step_count"] == 3
 
     def check_squash_mask(self, data_list, data_with_config, defaults, **kwargs):
-        sparsifier = self._make_sparsifier(
-            data_list, data_with_config, defaults=defaults, **kwargs
-        )
+        sparsifier = self._make_sparsifier(data_list, data_with_config, defaults=defaults, **kwargs)
         all_data = data_list + data_with_config
         for some_data in all_data:
             name, _, _ = self._get_name_data_config(some_data)
@@ -151,21 +145,15 @@ class _BaseDataSparsiferTestCase(TestCase):
 
         for some_data in all_data:
             name, _, _ = self._get_name_data_config(some_data)
-            assert not is_parametrized(
-                sparsifier._container, name
-            )  # not parametrized anymore
+            assert not is_parametrized(sparsifier._container, name)  # not parametrized anymore
             with self.assertRaises(ValueError):
                 sparsifier.get_data(name, return_original=True)
 
     def check_add_data(self, data_list, data_with_config, defaults, **kwargs):
-        sparsifier = self._make_sparsifier(
-            data_list, data_with_config, defaults=defaults, **kwargs
-        )
+        sparsifier = self._make_sparsifier(data_list, data_with_config, defaults=defaults, **kwargs)
         all_data = data_list + data_with_config
         for some_data in all_data:
-            name1, data1, config = self._get_name_data_config(
-                some_data, defaults=defaults
-            )
+            name1, data1, config = self._get_name_data_config(some_data, defaults=defaults)
             data1 = sparsifier._extract_weight(data1)
             data1_old = copy.deepcopy(data1)
             assert torch.all(data1 == sparsifier.get_data(name=name1))
@@ -179,9 +167,7 @@ class _BaseDataSparsiferTestCase(TestCase):
             sparsifier.add_data(name=name1, data=data2)
             assert torch.all(data2 == sparsifier.get_data(name=name1))
 
-            assert torch.all(
-                sparsifier.get_mask(name1) == mask
-            )  # mask should not change
+            assert torch.all(sparsifier.get_mask(name1) == mask)  # mask should not change
             assert torch.all(data1_old == data1)
 
             assert (
@@ -215,9 +201,7 @@ class _BaseDataSparsiferTestCase(TestCase):
             assert "mask" in sparsifier1.state[name]
             mask1, mask2 = state1[name]["mask"], sparsifier2.state[name]["mask"]
             assert mask1.is_sparse and not mask2.is_sparse
-            assert torch.all(
-                mask1.to_dense() == mask2
-            )  # mask1 is stored as sparse coo now
+            assert torch.all(mask1.to_dense() == mask2)  # mask1 is stored as sparse coo now
 
             # compare data_groups
             dg1, dg2 = sparsifier1.data_groups, sparsifier2.data_groups
@@ -227,9 +211,7 @@ class _BaseDataSparsiferTestCase(TestCase):
             # compare container
             container1, container2 = sparsifier1._container, sparsifier2._container
             assert torch.all(getattr(container1, name) == getattr(container2, name))
-            assert is_parametrized(container1, name) == is_parametrized(
-                container2, name
-            )
+            assert is_parametrized(container1, name) == is_parametrized(container2, name)
             if is_parametrized(container1, name):
                 param1 = getattr(container1.parametrizations, name)[0]
                 param2 = getattr(container2.parametrizations, name)[0]
@@ -246,19 +228,14 @@ class _BaseDataSparsiferTestCase(TestCase):
 
         This test modifies the data and asserts that data in the sparsifier is changed as well
         """
-        sparsifier = self._make_sparsifier(
-            data_list, data_with_config, defaults=defaults, **kwargs
-        )
+        sparsifier = self._make_sparsifier(data_list, data_with_config, defaults=defaults, **kwargs)
         all_data = data_list + data_with_config
         for some_data in all_data:
             name, data, _ = self._get_name_data_config(some_data)
             weight = sparsifier._extract_weight(data)
             weight.data = weight + torch.randn(*weight.shape)
             contained_data = sparsifier.get_data(name=name)
-            assert (
-                weight.data.storage().data_ptr()
-                == contained_data.data.storage().data_ptr()
-            )
+            assert weight.data.storage().data_ptr() == contained_data.data.storage().data_ptr()
             assert torch.all(contained_data == weight)
 
 
@@ -282,9 +259,7 @@ class _NormDataSparsifierTestCase(_BaseDataSparsiferTestCase):
         self.check_state_dict(data_list, data_with_config, defaults, **kwargs)
         self.check_step(data_list, data_with_config, defaults, norm_type=norm_type)
         self.check_step_2_of_4(norm_type=norm_type)
-        self.check_sparsity_level(
-            data_list, data_with_config, defaults, norm_type=norm_type
-        )
+        self.check_sparsity_level(data_list, data_with_config, defaults, norm_type=norm_type)
         self.check_memory_reference(data_list, data_with_config, defaults, **kwargs)
 
     @staticmethod
@@ -301,9 +276,7 @@ class _NormDataSparsifierTestCase(_BaseDataSparsiferTestCase):
 
         height, width = tensor_shape[-2], tensor_shape[-1]
         block_height, block_width = sparse_block_shape
-        number_blocks = math.ceil(height / block_height) * math.ceil(
-            width / block_width
-        )
+        number_blocks = math.ceil(height / block_height) * math.ceil(width / block_width)
         values_per_block = block_height * block_width
 
         if zeros_per_block == 0:
@@ -312,9 +285,7 @@ class _NormDataSparsifierTestCase(_BaseDataSparsiferTestCase):
             # min value assumes zeros_per_block is 1
             min_values_sparsified = round(number_blocks * sparsity_level)
             # max value assumes actual zeros_per_block
-            max_values_sparsified = min_values_sparsified * min(
-                values_per_block, zeros_per_block
-            )
+            max_values_sparsified = min_values_sparsified * min(values_per_block, zeros_per_block)
             lower_bound = min_values_sparsified / (height * width)
             upper_bound = min(1.0, max_values_sparsified / (height * width))
 
@@ -377,9 +348,7 @@ class _NormDataSparsifierTestCase(_BaseDataSparsiferTestCase):
         }
         data_list = [("test_data", torch.randn(4, 4))]
 
-        sparsifier = DataNormSparsifier(
-            data_list=data_list, norm=norm_type, **default_config
-        )
+        sparsifier = DataNormSparsifier(data_list=data_list, norm=norm_type, **default_config)
         sparsifier.step()
 
         for some_data in data_list:
@@ -394,9 +363,7 @@ class _NormDataSparsifierTestCase(_BaseDataSparsiferTestCase):
                     assert (block[:2] == 0).all()
                     assert (block[2:] != 0).all()
 
-    def check_sparsity_level(
-        self, data_list, data_with_config, defaults, norm_type="L1"
-    ):
+    def check_sparsity_level(self, data_list, data_with_config, defaults, norm_type="L1"):
         sparsity_levels = [-1.0, 0.0, 0.5, 1.0, 2.0]
         sparse_block_shapes = [(1, 1), (1, 4), (2, 2), (4, 1)]
         zeros_per_blocks = [0, 1, 2, 3, 4]
@@ -715,10 +682,7 @@ class TestQuantizationUtils(TestCase):
         )
 
         assert type(model.emb1) == torch.ao.nn.quantized.modules.embedding_ops.Embedding
-        assert (
-            type(model.embbag1)
-            == torch.ao.nn.quantized.modules.embedding_ops.EmbeddingBag
-        )
+        assert type(model.embbag1) == torch.ao.nn.quantized.modules.embedding_ops.EmbeddingBag
         assert type(model.emb_seq[0] == nn.Embedding)
         assert type(model.emb_seq[1] == nn.EmbeddingBag)
         assert type(model.linear1) == nn.Linear
@@ -754,16 +718,9 @@ class TestQuantizationUtils(TestCase):
         )
 
         assert type(model.emb1) == torch.ao.nn.quantized.modules.embedding_ops.Embedding
-        assert (
-            type(model.embbag1)
-            == torch.ao.nn.quantized.modules.embedding_ops.EmbeddingBag
-        )
-        assert type(
-            model.emb_seq[0] == torch.ao.nn.quantized.modules.embedding_ops.Embedding
-        )
-        assert type(
-            model.emb_seq[1] == torch.ao.nn.quantized.modules.embedding_ops.EmbeddingBag
-        )
+        assert type(model.embbag1) == torch.ao.nn.quantized.modules.embedding_ops.EmbeddingBag
+        assert type(model.emb_seq[0] == torch.ao.nn.quantized.modules.embedding_ops.Embedding)
+        assert type(model.emb_seq[1] == torch.ao.nn.quantized.modules.embedding_ops.EmbeddingBag)
         assert type(model.linear1) == nn.Linear  # not quantized
         assert type(model.linear2) == nn.Linear  # not quantized
 
@@ -773,9 +730,7 @@ class TestQuantizationUtils(TestCase):
         dequant_emb_seq_1 = torch.dequantize(model.emb_seq[1].weight())
 
         # higher threshold as quantization occurs before sparsity
-        threshold = (
-            1  # zero points seem to have higher magnitude with sparsity occurring after
-        )
+        threshold = 1  # zero points seem to have higher magnitude with sparsity occurring after
 
         sl_emb1 = (torch.abs(dequant_emb1) < threshold).float().mean()
         sl_embbag1 = (torch.abs(dequant_embbag1) < threshold).float().mean()

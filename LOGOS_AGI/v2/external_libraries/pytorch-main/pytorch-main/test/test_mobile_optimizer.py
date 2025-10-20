@@ -52,13 +52,9 @@ class TestOptimizer(TestCase):
         conv_bias_shape = output_channels
 
         input_data = torch.rand((batch_size, input_channels, height, width))
-        conv_weight = torch.rand(
-            (output_channels, input_channels_per_group, kernel_h, kernel_w)
-        )
+        conv_weight = torch.rand((output_channels, input_channels_per_group, kernel_h, kernel_w))
         conv_bias = torch.rand(output_channels)
-        result = F.conv2d(
-            input_data, conv_weight, conv_bias, strides, paddings, dilations, groups
-        )
+        result = F.conv2d(input_data, conv_weight, conv_bias, strides, paddings, dilations, groups)
         weight_output_dim = 24
         linear_input_shape = result.shape[1]
         linear_weight_shape = (weight_output_dim, linear_input_shape)
@@ -128,9 +124,7 @@ class TestOptimizer(TestCase):
         initial_result = scripted_model(input_data)
         initial_foo_result = scripted_model.foo(input_data)
 
-        optimized_scripted_model = optimize_for_mobile(
-            scripted_model, preserved_methods=["foo"]
-        )
+        optimized_scripted_model = optimize_for_mobile(scripted_model, preserved_methods=["foo"])
         optimized_result = optimized_scripted_model(input_data)
         optimized_foo_result = optimized_scripted_model.foo(input_data)
 
@@ -151,9 +145,7 @@ class TestOptimizer(TestCase):
         ).run(
             optimized_scripted_model.graph
         )
-        torch.testing.assert_close(
-            initial_result, optimized_result, rtol=1e-2, atol=1e-3
-        )
+        torch.testing.assert_close(initial_result, optimized_result, rtol=1e-2, atol=1e-3)
 
         FileCheck().check_not("Tensor = aten::conv2d").check_not(
             "Tensor = prim::CallFunction"
@@ -172,13 +164,9 @@ class TestOptimizer(TestCase):
         ).run(
             optimized_scripted_model.foo.graph
         )
-        torch.testing.assert_close(
-            initial_foo_result, optimized_foo_result, rtol=1e-2, atol=1e-3
-        )
+        torch.testing.assert_close(initial_foo_result, optimized_foo_result, rtol=1e-2, atol=1e-3)
 
-        optimization_blocklist_no_prepack = {
-            MobileOptimizerType.INSERT_FOLD_PREPACK_OPS
-        }
+        optimization_blocklist_no_prepack = {MobileOptimizerType.INSERT_FOLD_PREPACK_OPS}
         optimized_scripted_model_no_prepack = optimize_for_mobile(
             scripted_model, optimization_blocklist_no_prepack
         )
@@ -186,9 +174,7 @@ class TestOptimizer(TestCase):
 
         FileCheck().check_count("Tensor = aten::conv2d", 1, exactly=True).check_not(
             "prepacked::linear_clamp_run"
-        ).check_not("prepacked::conv2d_clamp_run").run(
-            optimized_scripted_model_no_prepack.graph
-        )
+        ).check_not("prepacked::conv2d_clamp_run").run(optimized_scripted_model_no_prepack.graph)
         torch.testing.assert_close(
             initial_result, optimized_result_no_prepack, rtol=1e-2, atol=1e-3
         )
@@ -198,13 +184,11 @@ class TestOptimizer(TestCase):
         bn_scripted_module.eval()
 
         self.assertEqual(len(torch.jit.export_opnames(bn_scripted_module)), 11)
-        FileCheck().check_count(
-            'prim::CallMethod[name="forward"]', 2, exactly=True
-        ).run(str(get_forward(bn_scripted_module._c).graph))
+        FileCheck().check_count('prim::CallMethod[name="forward"]', 2, exactly=True).run(
+            str(get_forward(bn_scripted_module._c).graph)
+        )
 
-        optimization_blocklist_no_prepack = {
-            MobileOptimizerType.INSERT_FOLD_PREPACK_OPS
-        }
+        optimization_blocklist_no_prepack = {MobileOptimizerType.INSERT_FOLD_PREPACK_OPS}
         bn_fold_scripted_module = optimize_for_mobile(
             bn_scripted_module, optimization_blocklist_no_prepack
         )
@@ -295,12 +279,10 @@ class TestOptimizer(TestCase):
         optimized_scripted_model = optimize_for_mobile(m, preserved_methods=["foo"])
         optimized_result = optimized_scripted_model.foo(input_data)
 
-        FileCheck().check_not("dropout.__").check_count(
-            "aten::_add_relu(", 1, exactly=True
-        ).run(optimized_scripted_model.foo.graph)
-        torch.testing.assert_close(
-            initial_result, optimized_result, rtol=1e-2, atol=1e-3
+        FileCheck().check_not("dropout.__").check_count("aten::_add_relu(", 1, exactly=True).run(
+            optimized_scripted_model.foo.graph
         )
+        torch.testing.assert_close(initial_result, optimized_result, rtol=1e-2, atol=1e-3)
 
         class BNTestNoForwardModule(torch.nn.Module):
             def __init__(self) -> None:
@@ -319,19 +301,15 @@ class TestOptimizer(TestCase):
         bn_no_forward_scripted_module = torch.jit.script(bn_test_no_forward_module)
         bn_no_forward_scripted_module.eval()
 
-        self.assertEqual(
-            len(torch.jit.export_opnames(bn_no_forward_scripted_module)), 11
+        self.assertEqual(len(torch.jit.export_opnames(bn_no_forward_scripted_module)), 11)
+        FileCheck().check_count('prim::CallMethod[name="forward"]', 2, exactly=True).run(
+            bn_no_forward_scripted_module.foo.graph
         )
-        FileCheck().check_count(
-            'prim::CallMethod[name="forward"]', 2, exactly=True
-        ).run(bn_no_forward_scripted_module.foo.graph)
 
         bn_fold_no_forward_scripted_module = optimize_for_mobile(
             bn_no_forward_scripted_module, preserved_methods=["foo"]
         )
-        self.assertEqual(
-            len(torch.jit.export_opnames(bn_fold_no_forward_scripted_module)), 1
-        )
+        self.assertEqual(len(torch.jit.export_opnames(bn_fold_no_forward_scripted_module)), 1)
         bn_input = torch.rand(1, 1, 6, 6)
         torch.testing.assert_close(
             bn_no_forward_scripted_module.foo(bn_input),
@@ -410,38 +388,22 @@ class TestOptimizer(TestCase):
 
         def get_lint_count_by_type(lint_type, module_lint_List):
             return len(
-                [
-                    lint_dict
-                    for lint_dict in module_lint_List
-                    if lint_dict["name"] == lint_type.name
-                ]
+                [lint_dict for lint_dict in module_lint_List if lint_dict["name"] == lint_type.name]
             )
 
         test_module = torch.jit.script(MyTestModule())
         test_module_lint_list = generate_mobile_module_lints(test_module)
         self.assertEqual(len(test_module_lint_list), 4)
-        self.assertEqual(
-            get_lint_count_by_type(LintCode.BUNDLED_INPUT, test_module_lint_list), 1
-        )
-        self.assertEqual(
-            get_lint_count_by_type(LintCode.DROPOUT, test_module_lint_list), 1
-        )
-        self.assertEqual(
-            get_lint_count_by_type(LintCode.REQUIRES_GRAD, test_module_lint_list), 2
-        )
+        self.assertEqual(get_lint_count_by_type(LintCode.BUNDLED_INPUT, test_module_lint_list), 1)
+        self.assertEqual(get_lint_count_by_type(LintCode.DROPOUT, test_module_lint_list), 1)
+        self.assertEqual(get_lint_count_by_type(LintCode.REQUIRES_GRAD, test_module_lint_list), 2)
 
         bn_module = torch.jit.script(MyBNModule())
         bn_module_lint_list = generate_mobile_module_lints(bn_module)
         self.assertEqual(len(bn_module_lint_list), 4)
-        self.assertEqual(
-            get_lint_count_by_type(LintCode.BUNDLED_INPUT, bn_module_lint_list), 1
-        )
-        self.assertEqual(
-            get_lint_count_by_type(LintCode.BATCHNORM, bn_module_lint_list), 1
-        )
-        self.assertEqual(
-            get_lint_count_by_type(LintCode.REQUIRES_GRAD, bn_module_lint_list), 2
-        )
+        self.assertEqual(get_lint_count_by_type(LintCode.BUNDLED_INPUT, bn_module_lint_list), 1)
+        self.assertEqual(get_lint_count_by_type(LintCode.BATCHNORM, bn_module_lint_list), 1)
+        self.assertEqual(get_lint_count_by_type(LintCode.REQUIRES_GRAD, bn_module_lint_list), 2)
 
         bi_module = torch.jit.script(MyBundledInputModule())
         torch.utils.bundled_inputs.augment_model_with_bundled_inputs(
@@ -525,9 +487,7 @@ class TestOptimizer(TestCase):
                 return x
 
             def fuse_model(self):
-                torch.ao.quantization.fuse_modules(
-                    self, [["conv2", "relu"]], inplace=True
-                )
+                torch.ao.quantization.fuse_modules(self, [["conv2", "relu"]], inplace=True)
 
         class Child(nn.Module):
             def __init__(self) -> None:

@@ -29,36 +29,40 @@ import uvicorn
 
 # Configuration
 SERVICE_NAME = "KERYX_API"
-API_HOST = os.getenv('API_HOST', '0.0.0.0')
-API_PORT = int(os.getenv('API_PORT', '5000'))
-RABBITMQ_HOST = os.getenv('RABBITMQ_HOST', 'rabbitmq')
-RABBITMQ_PORT = int(os.getenv('RABBITMQ_PORT', '5672'))
+API_HOST = os.getenv("API_HOST", "0.0.0.0")
+API_PORT = int(os.getenv("API_PORT", "5000"))
+RABBITMQ_HOST = os.getenv("RABBITMQ_HOST", "rabbitmq")
+RABBITMQ_PORT = int(os.getenv("RABBITMQ_PORT", "5672"))
 
 # Queue configuration - CRITICAL SAFETY REQUIREMENT
-LOGOS_NEXUS_REQUESTS = 'logos_nexus_requests'
+LOGOS_NEXUS_REQUESTS = "logos_nexus_requests"
 
 # Logging setup
 logging.basicConfig(
-    level=logging.INFO,
-    format=f'%(asctime)s - %(levelname)s - {SERVICE_NAME} - %(message)s'
+    level=logging.INFO, format=f"%(asctime)s - %(levelname)s - {SERVICE_NAME} - %(message)s"
 )
 logger = logging.getLogger(SERVICE_NAME)
+
 
 # Request models
 class GoalSubmission(BaseModel):
     """External goal submission request model."""
+
     content: str = Field(..., min_length=1, max_length=2000, description="Goal description")
     type: str = Field(default="query", description="Request type classification")
     context: Dict[str, Any] = Field(default_factory=dict, description="Additional context")
     requester_id: Optional[str] = Field(default=None, description="Requester identification")
 
+
 class APIResponse(BaseModel):
     """Standard API response model."""
+
     status: str
     message: str
     task_id: Optional[str] = None
     timestamp: str
     data: Optional[Dict[str, Any]] = None
+
 
 # FastAPI application
 app = FastAPI(
@@ -66,7 +70,7 @@ app = FastAPI(
     description="External API gateway for LOGOS AGI system",
     version="2.0.0",
     docs_url="/docs",
-    redoc_url="/redoc"
+    redoc_url="/redoc",
 )
 
 # CORS configuration
@@ -77,6 +81,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 class MessageBroker:
     """RabbitMQ connection manager for request routing."""
@@ -90,11 +95,7 @@ class MessageBroker:
         """Establish RabbitMQ connection."""
         try:
             self.connection = pika.BlockingConnection(
-                pika.ConnectionParameters(
-                    host=RABBITMQ_HOST,
-                    port=RABBITMQ_PORT,
-                    heartbeat=600
-                )
+                pika.ConnectionParameters(host=RABBITMQ_HOST, port=RABBITMQ_PORT, heartbeat=600)
             )
             self.channel = self.connection.channel()
 
@@ -121,13 +122,13 @@ class MessageBroker:
                 self.connect()
 
             self.channel.basic_publish(
-                exchange='',
+                exchange="",
                 routing_key=LOGOS_NEXUS_REQUESTS,
                 body=json.dumps(request_data),
                 properties=pika.BasicProperties(
                     delivery_mode=2,  # Persistent message
-                    correlation_id=request_data.get('request_id')
-                )
+                    correlation_id=request_data.get("request_id"),
+                ),
             )
 
             logger.info(f"Request {request_data['request_id']} published to Logos Nexus")
@@ -142,19 +143,23 @@ class MessageBroker:
         if self.connection and not self.connection.is_closed:
             self.connection.close()
 
+
 # Global message broker instance
 broker = MessageBroker()
+
 
 @app.on_event("startup")
 async def startup_event():
     """Initialize API gateway on startup."""
     logger.info("Keryx API Gateway starting...")
 
+
 @app.on_event("shutdown")
 async def shutdown_event():
     """Clean up resources on shutdown."""
     logger.info("Keryx API Gateway shutting down...")
     broker.close()
+
 
 @app.get("/health")
 async def health_check():
@@ -166,9 +171,10 @@ async def health_check():
         data={
             "service": SERVICE_NAME,
             "version": "2.0.0",
-            "broker_connected": broker.connection and not broker.connection.is_closed
-        }
+            "broker_connected": broker.connection and not broker.connection.is_closed,
+        },
     )
+
 
 @app.get("/status")
 async def system_status():
@@ -179,11 +185,14 @@ async def system_status():
         timestamp=datetime.utcnow().isoformat(),
         data={
             "gateway_status": "active",
-            "message_broker": "connected" if broker.connection and not broker.connection.is_closed else "disconnected",
+            "message_broker": "connected"
+            if broker.connection and not broker.connection.is_closed
+            else "disconnected",
             "target_queue": LOGOS_NEXUS_REQUESTS,
-            "safety_routing": "enabled"
-        }
+            "safety_routing": "enabled",
+        },
     )
+
 
 @app.post("/submit_goal")
 async def submit_goal(goal: GoalSubmission, request: Request):
@@ -217,10 +226,10 @@ async def submit_goal(goal: GoalSubmission, request: Request):
                 **goal.context,
                 "client_ip": client_ip,
                 "api_gateway": SERVICE_NAME,
-                "submission_time": datetime.utcnow().isoformat()
+                "submission_time": datetime.utcnow().isoformat(),
             },
             "requester_id": goal.requester_id or f"api_user_{client_ip}",
-            "timestamp": datetime.utcnow().isoformat()
+            "timestamp": datetime.utcnow().isoformat(),
         }
 
         # CRITICAL: Route to Logos Nexus for safety validation
@@ -228,8 +237,7 @@ async def submit_goal(goal: GoalSubmission, request: Request):
 
         if not publication_success:
             raise HTTPException(
-                status_code=503,
-                detail="Service temporarily unavailable - message broker error"
+                status_code=503, detail="Service temporarily unavailable - message broker error"
             )
 
         # Return fire-and-forget acknowledgment
@@ -240,18 +248,16 @@ async def submit_goal(goal: GoalSubmission, request: Request):
                 "message": "Goal submitted for processing",
                 "task_id": task_id,
                 "timestamp": datetime.utcnow().isoformat(),
-                "note": "Request routed through safety validation pipeline"
-            }
+                "note": "Request routed through safety validation pipeline",
+            },
         )
 
     except HTTPException:
         raise
     except Exception as e:
         logger.error(f"Goal submission error: {e}")
-        raise HTTPException(
-            status_code=500,
-            detail=f"Internal server error: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
+
 
 @app.post("/submit_query")
 async def submit_query(goal: GoalSubmission, request: Request):
@@ -268,6 +274,7 @@ async def submit_query(goal: GoalSubmission, request: Request):
     goal.type = "query"
     return await submit_goal(goal, request)
 
+
 @app.get("/info")
 async def system_info():
     """System information endpoint."""
@@ -283,7 +290,7 @@ async def system_info():
                 "Trinity-grounded validation",
                 "Formal system verification",
                 "Principle-based authorization",
-                "Comprehensive audit logging"
+                "Comprehensive audit logging",
             ],
             "submission_flow": [
                 "External request received",
@@ -291,10 +298,11 @@ async def system_info():
                 "Safety validation applied",
                 "Workflow planning initiated",
                 "Distributed execution",
-                "Result synthesis"
-            ]
-        }
+                "Result synthesis",
+            ],
+        },
     )
+
 
 # Error handlers
 @app.exception_handler(HTTPException)
@@ -306,9 +314,10 @@ async def http_exception_handler(request: Request, exc: HTTPException):
             "status": "error",
             "message": exc.detail,
             "timestamp": datetime.utcnow().isoformat(),
-            "path": str(request.url)
-        }
+            "path": str(request.url),
+        },
     )
+
 
 @app.exception_handler(Exception)
 async def general_exception_handler(request: Request, exc: Exception):
@@ -319,21 +328,17 @@ async def general_exception_handler(request: Request, exc: Exception):
         content={
             "status": "error",
             "message": "Internal server error",
-            "timestamp": datetime.utcnow().isoformat()
-        }
+            "timestamp": datetime.utcnow().isoformat(),
+        },
     )
+
 
 def main():
     """Start Keryx API Gateway service."""
     logger.info(f"Starting Keryx API Gateway on {API_HOST}:{API_PORT}")
 
-    uvicorn.run(
-        app,
-        host=API_HOST,
-        port=API_PORT,
-        log_level="info",
-        access_log=True
-    )
+    uvicorn.run(app, host=API_HOST, port=API_PORT, log_level="info", access_log=True)
+
 
 if __name__ == "__main__":
     main()

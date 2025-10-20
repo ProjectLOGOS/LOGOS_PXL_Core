@@ -343,9 +343,7 @@ class AutoGaussianDense(AutoGaussian):
             index2 = torch.zeros(precision_shape, dtype=torch.long)
 
             # Collect local offsets and create index1 for info_vec blockwise.
-            upstreams = [
-                u for u in self.dependencies[d] if not self._factors[u]["is_observed"]
-            ]
+            upstreams = [u for u in self.dependencies[d] if not self._factors[u]["is_observed"]]
             local_offsets = {}
             pos = 0
             for u in upstreams:
@@ -376,9 +374,9 @@ class AutoGaussianDense(AutoGaussian):
                 u_stop = u_start + u_index.size(-1)
                 v_start = local_offsets[v]
                 v_stop = v_start + v_index.size(-1)
-                index2[
-                    ..., u_start:u_stop, v_start:v_stop
-                ] = self._dense_size * u_index.unsqueeze(-1) + v_index.unsqueeze(-2)
+                index2[..., u_start:u_stop, v_start:v_stop] = self._dense_size * u_index.unsqueeze(
+                    -1
+                ) + v_index.unsqueeze(-2)
 
             self._dense_scatter[d] = index1.reshape(-1), index2.reshape(-1)
 
@@ -435,9 +433,7 @@ class AutoGaussianDense(AutoGaussian):
         info_vec = flat_info_vec
         precision = flat_precision.reshape(self._dense_size, self._dense_size)
         scale_tril = _precision_to_scale_tril(precision)
-        loc = (
-            scale_tril @ (scale_tril.transpose(-1, -2) @ info_vec.unsqueeze(-1))
-        ).squeeze(-1)
+        loc = (scale_tril @ (scale_tril.transpose(-1, -2) @ info_vec.unsqueeze(-1))).squeeze(-1)
         return dist.MultivariateNormal(loc, scale_tril=scale_tril)
 
 
@@ -503,9 +499,7 @@ class AutoGaussianFunsor(AutoGaussian):
         plate_to_dim.update({f.name: f.dim for f in particle_plates})
         factors = {}
         for d, inputs in self._funsor_factor_inputs.items():
-            batch_shape = torch.Size(
-                p.size for p in sorted(self._plates[d], key=lambda p: p.dim)
-            )
+            batch_shape = torch.Size(p.size for p in sorted(self._plates[d], key=lambda p: p.dim))
             white_vec = attrgetter(d)(self.white_vecs)
             prec_sqrt = attrgetter(d)(self.prec_sqrts)
             factors[d] = funsor.gaussian.Gaussian(
@@ -545,9 +539,7 @@ class AutoGaussianFunsor(AutoGaussian):
         if am_i_wrapped() and poutine.get_mask() is not False:
             log_prob = funsor.to_data(log_prob, name_to_dim=plate_to_dim)
             pyro.factor(f"_{self._pyro_name}_latent", log_prob, has_rsample=True)
-        samples = {
-            k: funsor.to_data(v, name_to_dim=plate_to_dim) for k, v in samples.items()
-        }
+        samples = {k: funsor.to_data(v, name_to_dim=plate_to_dim) for k, v in samples.items()}
         return samples
 
 

@@ -319,9 +319,7 @@ class TestStaticModule(TestCase):
         torch_graph = torch.jit.script(fork_wait_graph4)
         static_runtime_module = StaticModule(torch_graph)
         output_ref = torch_graph(input, num_forks, num_child_forks)
-        output_test = static_runtime_module.runAsync(
-            (input, num_forks, num_child_forks), {}
-        )
+        output_test = static_runtime_module.runAsync((input, num_forks, num_child_forks), {})
         output_test.wait()
         torch.testing.assert_close(output_test.value(), output_ref)
 
@@ -431,9 +429,7 @@ class TestStaticModule(TestCase):
         attention_a = StaticModule(attention)
 
         attention_a.benchmark([src, src, src, src_mask], {}, 2, 2)
-        metrics = attention_a.benchmark_individual_ops(
-            [src, src, src, src_mask], {}, 2, 2
-        )
+        metrics = attention_a.benchmark_individual_ops([src, src, src, src_mask], {}, 2, 2)
 
     def test_mlp(self):
         # Arguments taken from benchmark script, ./bench/dlrm_s_benchmark.sh

@@ -8,10 +8,7 @@ import warnings
 
 from statsmodels.tsa.stattools import acf as sm_acf, pacf as sm_pacf
 
-__all__ = [
-    'acf',
-    'pacf'
-]
+__all__ = ["acf", "pacf"]
 
 # TODO: remove all explicit args/kwargs, making them *args, **kwargs
 
@@ -42,6 +39,7 @@ def inheritdoc(parent):
     >>> print(b(2))
     4
     """
+
     def wrapper(func):
         # Assign the parent docstring to the child
         func.__doc__ = parent.__doc__
@@ -49,7 +47,9 @@ def inheritdoc(parent):
         @wraps(func)
         def caller(*args, **kwargs):
             return func(*args, **kwargs)
+
         return caller
+
     return wrapper
 
 
@@ -60,7 +60,7 @@ def acf(
     qstat=False,
     fft=None,
     alpha=None,
-    missing='none',
+    missing="none",
     adjusted=False,
 ):
     return sm_acf(
@@ -75,13 +75,13 @@ def acf(
 
 
 @inheritdoc(parent=sm_pacf)
-def pacf(x, nlags=None, method='ywadjusted', alpha=None):
+def pacf(x, nlags=None, method="ywadjusted", alpha=None):
     # Handle kwarg deprecation in statsmodels 0.13.0
     if "unbiased" in method:
         warnings.warn(
             "The `*unbiased` methods have been deprecated in "
             "statsmodels >= 0.13.0. Please use `*adjusted` instead.",
-            DeprecationWarning
+            DeprecationWarning,
         )
         method = method.replace("unbiased", "adjusted")
     elif method in ("ydu", "ywu", "ldu"):
@@ -89,7 +89,7 @@ def pacf(x, nlags=None, method='ywadjusted', alpha=None):
             "The `ydu`, `ywu`, and `ldu` methods have been deprecated in "
             "statsmodels >= 0.13.0. Please use `yda`, `ywa`, and `lda` "
             "instead.",
-            DeprecationWarning
+            DeprecationWarning,
         )
         method = method.replace("u", "a")
 

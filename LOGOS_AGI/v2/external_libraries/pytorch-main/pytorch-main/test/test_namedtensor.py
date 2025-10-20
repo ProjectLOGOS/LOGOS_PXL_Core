@@ -90,9 +90,7 @@ class TestNamedTensor(TestCase):
     def _test_name_inference(
         self, op, args=(), expected_names=(), device="cpu", maybe_raises_regex=None
     ):
-        casted_args = [
-            arg.to(device) if isinstance(arg, torch.Tensor) else arg for arg in args
-        ]
+        casted_args = [arg.to(device) if isinstance(arg, torch.Tensor) else arg for arg in args]
         if maybe_raises_regex is not None:
             with self.assertRaisesRegex(RuntimeError, maybe_raises_regex):
                 result = op(*args)
@@ -143,9 +141,7 @@ class TestNamedTensor(TestCase):
         with self.assertRaisesRegex(TypeError, "invalid combination of arguments"):
             x = factory(2, 1, names="N", device=device)
 
-        with self.assertRaisesRegex(
-            RuntimeError, "construct a tensor with duplicate names"
-        ):
+        with self.assertRaisesRegex(RuntimeError, "construct a tensor with duplicate names"):
             x = factory(2, 1, 1, names=("N", "C", "N"), device=device)
 
         names64 = ["A" * i for i in range(1, 65)]
@@ -252,17 +248,13 @@ class TestNamedTensor(TestCase):
             output = x.index_fill_("C", torch.tensor([0, 1], device=device), 5)
             self.assertEqual(output.names, expected_names)
 
-            output = x.index_fill_(
-                "C", torch.tensor([0, 1], device=device), torch.tensor(4.0)
-            )
+            output = x.index_fill_("C", torch.tensor([0, 1], device=device), torch.tensor(4.0))
             self.assertEqual(output.names, expected_names)
 
             output = x.index_fill("C", torch.tensor([0, 1], device=device), 5)
             self.assertEqual(output.names, expected_names)
 
-            output = x.index_fill(
-                "C", torch.tensor([0, 1], device=device), torch.tensor(4.0)
-            )
+            output = x.index_fill("C", torch.tensor([0, 1], device=device), torch.tensor(4.0))
             self.assertEqual(output.names, expected_names)
 
     def test_equal(self):
@@ -270,15 +262,9 @@ class TestNamedTensor(TestCase):
             tensor = torch.randn(2, 3, device=device)
             other = tensor.clone()
 
-            self.assertTrue(
-                torch.equal(tensor.rename("N", "C"), other.rename("N", "C"))
-            )
-            self.assertFalse(
-                torch.equal(tensor.rename("M", "C"), other.rename("N", "C"))
-            )
-            self.assertFalse(
-                torch.equal(tensor.rename(None, "C"), other.rename("N", "C"))
-            )
+            self.assertTrue(torch.equal(tensor.rename("N", "C"), other.rename("N", "C")))
+            self.assertFalse(torch.equal(tensor.rename("M", "C"), other.rename("N", "C")))
+            self.assertFalse(torch.equal(tensor.rename(None, "C"), other.rename("N", "C")))
 
     def test_squeeze(self):
         x = create("N:3,C:1,H:1,W:1")
@@ -318,19 +304,11 @@ class TestNamedTensor(TestCase):
         for device in get_all_device_types():
             named_tensor_1d = torch.zeros(2, 3, 5, device=device, names=list("ABC"))
             named_tensor_2d = torch.zeros(2, 3, 5, 7, device=device, names=list("ABCD"))
-            named_tensor_3d = torch.zeros(
-                2, 3, 5, 7, 9, device=device, names=list("ABCDE")
-            )
+            named_tensor_3d = torch.zeros(2, 3, 5, 7, 9, device=device, names=list("ABCDE"))
 
-            self.assertEqual(
-                F.max_pool1d(named_tensor_1d, 2).names, named_tensor_1d.names
-            )
-            self.assertEqual(
-                F.max_pool2d(named_tensor_2d, [2, 2]).names, named_tensor_2d.names
-            )
-            self.assertEqual(
-                F.max_pool3d(named_tensor_3d, [2, 2, 2]).names, named_tensor_3d.names
-            )
+            self.assertEqual(F.max_pool1d(named_tensor_1d, 2).names, named_tensor_1d.names)
+            self.assertEqual(F.max_pool2d(named_tensor_2d, [2, 2]).names, named_tensor_2d.names)
+            self.assertEqual(F.max_pool3d(named_tensor_3d, [2, 2, 2]).names, named_tensor_3d.names)
 
             check_tuple_return(
                 F.max_pool1d_with_indices, [named_tensor_1d, 2], named_tensor_1d.names
@@ -420,9 +398,7 @@ class TestNamedTensor(TestCase):
         with self.assertRaisesRegex(RuntimeError, "duplicate names"):
             tensor.rename("N", "N")
 
-        with self.assertRaisesRegex(
-            RuntimeError, "either positional args or keyword args"
-        ):
+        with self.assertRaisesRegex(RuntimeError, "either positional args or keyword args"):
             tensor.rename(None, N="batch")
 
         # rename returns a view on the tensor
@@ -439,37 +415,25 @@ class TestNamedTensor(TestCase):
 
         # Check that it works with unnamed tensors
         self.assertEqual(unnamed_tensor.rename("...").names, unnamed_tensor.names)
-        self.assertEqual(
-            unnamed_tensor.rename("...", "H", "W").names, [None, None, "H", "W"]
-        )
-        self.assertEqual(
-            unnamed_tensor.rename("N", "...", "W").names, ["N", None, None, "W"]
-        )
-        self.assertEqual(
-            unnamed_tensor.rename("N", "C", "...").names, ["N", "C", None, None]
-        )
+        self.assertEqual(unnamed_tensor.rename("...", "H", "W").names, [None, None, "H", "W"])
+        self.assertEqual(unnamed_tensor.rename("N", "...", "W").names, ["N", None, None, "W"])
+        self.assertEqual(unnamed_tensor.rename("N", "C", "...").names, ["N", "C", None, None])
 
         # Check that it works with named tensors
         self.assertEqual(named_tensor.rename("...").names, named_tensor.names)
-        self.assertEqual(
-            named_tensor.rename("...", "width").names, ["N", "C", "H", "width"]
-        )
+        self.assertEqual(named_tensor.rename("...", "width").names, ["N", "C", "H", "width"])
         self.assertEqual(
             named_tensor.rename("batch", "channels", "...", "width").names,
             ["batch", "channels", "H", "width"],
         )
-        self.assertEqual(
-            named_tensor.rename("batch", "...").names, ["batch", "C", "H", "W"]
-        )
+        self.assertEqual(named_tensor.rename("batch", "...").names, ["batch", "C", "H", "W"])
 
         # Test empty glob
         self.assertEqual(
             unnamed_tensor.rename("...", None, None, None, None).names,
             [None, None, None, None],
         )
-        self.assertEqual(
-            named_tensor.rename("N", "C", "H", "...", "W").names, ["N", "C", "H", "W"]
-        )
+        self.assertEqual(named_tensor.rename("N", "C", "H", "...", "W").names, ["N", "C", "H", "W"])
 
         # Multiple globs throw
         with self.assertRaisesRegex(RuntimeError, "More than one "):
@@ -489,9 +453,7 @@ class TestNamedTensor(TestCase):
         with self.assertRaisesRegex(RuntimeError, "dim 'B' does not exist"):
             named_tensor.rename(H="height", B="batch")
 
-        self.assertEqual(
-            named_tensor.rename(N="batch").data_ptr(), named_tensor.data_ptr()
-        )
+        self.assertEqual(named_tensor.rename(N="batch").data_ptr(), named_tensor.data_ptr())
         self.assertEqual(named_tensor.rename(N="batch").names, ["batch", "C", "H", "W"])
         self.assertEqual(
             named_tensor.rename(N="batch", H="height").names,
@@ -642,9 +604,7 @@ class TestNamedTensor(TestCase):
             tensor = torch.randn(
                 3, 1, 2, 7, names=("M", "N", "first_group", "features"), device=device
             )
-            other = torch.randn(
-                5, 11, 7, names=("N", "second_group", "features"), device=device
-            )
+            other = torch.randn(5, 11, 7, names=("N", "second_group", "features"), device=device)
             result = torch.cdist(tensor, other)
             self.assertEqual(result.names, ["M", "N", "first_group", "second_group"])
 
@@ -753,13 +713,9 @@ class TestNamedTensor(TestCase):
             # TODO: dynamo will throw a slightly different
             # error message because it's adding fake tensors
             # `must match the size of` portion is the dynamo error
-            with self.assertRaisesRegex(
-                RuntimeError, "do not match|must match the size of"
-            ):
+            with self.assertRaisesRegex(RuntimeError, "do not match|must match the size of"):
                 op(a, d)
-            with self.assertRaisesRegex(
-                RuntimeError, "do not match|must match the size of"
-            ):
+            with self.assertRaisesRegex(RuntimeError, "do not match|must match the size of"):
                 op(a, b)
 
         def test_wildcard(op):
@@ -806,9 +762,7 @@ class TestNamedTensor(TestCase):
             return [Function(name, lambda a, b: getattr(a, name)(b, *args, **kwargs))]
 
         def function(name, *args, **kwargs):
-            return [
-                Function(name, lambda a, b: getattr(torch, name)(a, b, *args, **kwargs))
-            ]
+            return [Function(name, lambda a, b: getattr(torch, name)(a, b, *args, **kwargs))]
 
         def out_function(name, *args, **kwargs):
             out_fn = getattr(torch, name)
@@ -1054,16 +1008,8 @@ class TestNamedTensor(TestCase):
             method("softmax", dim="D"),
             method("log_softmax", dim=1),
             method("log_softmax", dim="D"),
-            [
-                Function(
-                    "F.dropout(inplace)", lambda t: F.dropout(t, p=0.5, inplace=True)
-                )
-            ],
-            [
-                Function(
-                    "F.dropout(outplace)", lambda t: F.dropout(t, p=0.5, inplace=False)
-                )
-            ],
+            [Function("F.dropout(inplace)", lambda t: F.dropout(t, p=0.5, inplace=True))],
+            [Function("F.dropout(outplace)", lambda t: F.dropout(t, p=0.5, inplace=False))],
         ]
         tests = flatten(tests)
 
@@ -1226,9 +1172,7 @@ class TestNamedTensor(TestCase):
         # test args: namedtensor, str, namedshape
         self.assertTrue(
             torch.equal(
-                torch.ones(2, 4, names=("A", "B")).unflatten(
-                    "B", (("B1", 2), ("B2", 2))
-                ),
+                torch.ones(2, 4, names=("A", "B")).unflatten("B", (("B1", 2), ("B2", 2))),
                 torch.ones(2, 2, 2, names=("A", "B1", "B2")),
             )
         )
@@ -1331,17 +1275,13 @@ class TestNamedTensor(TestCase):
             if op.__name__ in ops_support_dim_none:
                 check_output(op(t, None), [])
             else:
-                with self.assertRaisesRegex(
-                    RuntimeError, "Please look up dimensions by name"
-                ):
+                with self.assertRaisesRegex(RuntimeError, "Please look up dimensions by name"):
                     op(t, None)
             with self.assertRaisesRegex(RuntimeError, "Name 'H' not found"):
                 op(t, "H")
 
         def test_autograd_supports_dimname_overload(op, device):
-            t = torch.empty(
-                2, 3, 5, names=("N", "C", "L"), device=device, requires_grad=True
-            )
+            t = torch.empty(2, 3, 5, names=("N", "C", "L"), device=device, requires_grad=True)
             sum_all_outputs(op(t, "C")).backward()
             self.assertIsNotNone(t.grad)
 
@@ -1355,9 +1295,7 @@ class TestNamedTensor(TestCase):
             check_output(op(t, [1, 2]), ["N"])
             check_output(op(t, [0, -1]), ["C"])
             check_output(op(t, ["C", "L"]), ["N"])
-            with self.assertRaisesRegex(
-                RuntimeError, "Please look up dimensions by name"
-            ):
+            with self.assertRaisesRegex(RuntimeError, "Please look up dimensions by name"):
                 op(t, [None, "C"])
 
         def test_out_variant(op, output_lambda, device):
@@ -1727,9 +1665,7 @@ class TestNamedTensor(TestCase):
         self.assertEqual(output.names, ["C", None, None, None])
         self.assertEqual(output.shape, [7, 2, 3, 5])
 
-        with self.assertRaisesRegex(
-            RuntimeError, "order of dimensions cannot contain a None"
-        ):
+        with self.assertRaisesRegex(RuntimeError, "order of dimensions cannot contain a None"):
             partially_named.align_to("C", None, "...")
 
         # Input order partially named
@@ -2290,9 +2226,7 @@ class TestNamedTensor(TestCase):
             base.clone().backward(named_grad)
             self.assertEqual(len(warns), 1)
             self.assertTrue(
-                str(warns[0].message).startswith(
-                    "Autograd was passed a named grad tensor"
-                )
+                str(warns[0].message).startswith("Autograd was passed a named grad tensor")
             )
 
     def test_nyi_dimname_overload_msg(self):
@@ -2359,9 +2293,7 @@ class TestNamedTensor(TestCase):
 
     def test_support_device_named_grad(self):
         named_tensor = torch.randn(3, 3, device="meta")
-        with self.assertRaisesRegex(
-            RuntimeError, "NYI: named tensors only support CPU, CUDA"
-        ):
+        with self.assertRaisesRegex(RuntimeError, "NYI: named tensors only support CPU, CUDA"):
             named_tensor.rename_("N", "C")
             named_tensor.names = ["N", "C"]
             named_tensor = torch.randn(3, 3, device="meta", names=["N", "C"])

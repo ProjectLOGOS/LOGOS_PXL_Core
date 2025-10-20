@@ -82,9 +82,7 @@ class Omniglot(data.Dataset):
     def _check_exists(self):
         return os.path.exists(
             os.path.join(self.root, self.processed_folder, "images_evaluation")
-        ) and os.path.exists(
-            os.path.join(self.root, self.processed_folder, "images_background")
-        )
+        ) and os.path.exists(os.path.join(self.root, self.processed_folder, "images_background"))
 
     def download(self):
         import urllib
@@ -169,9 +167,7 @@ class OmniglotNShot:
                 ),
             )
 
-            temp = (
-                {}
-            )  # {label:img1, img2..., 20 imgs, label2: img1, img2,... in total, 1623 label}
+            temp = {}  # {label:img1, img2..., 20 imgs, label2: img1, img2,... in total, 1623 label}
             for img, label in self.x:
                 if label in temp.keys():
                     temp[label].append(img)
@@ -186,9 +182,7 @@ class OmniglotNShot:
                 self.x.append(np.array(imgs))
 
             # as different class may have different number of imgs
-            self.x = np.array(self.x).astype(
-                np.float64
-            )  # [[20 imgs],..., 1623 classes in total]
+            self.x = np.array(self.x).astype(np.float64)  # [[20 imgs],..., 1623 classes in total]
             # each character contains 20 imgs
             print("data shape:", self.x.shape)  # [1623, 20, 84, 84, 1]
             temp = []  # Free memory
@@ -222,9 +216,7 @@ class OmniglotNShot:
         print("DB: train", self.x_train.shape, "test", self.x_test.shape)
 
         self.datasets_cache = {
-            "train": self.load_data_cache(
-                self.datasets["train"]
-            ),  # current epoch data cached
+            "train": self.load_data_cache(self.datasets["train"]),  # current epoch data cached
             "test": self.load_data_cache(self.datasets["test"]),
         }
 
@@ -266,9 +258,7 @@ class OmniglotNShot:
                 selected_cls = np.random.choice(data_pack.shape[0], self.n_way, False)
 
                 for j, cur_class in enumerate(selected_cls):
-                    selected_img = np.random.choice(
-                        20, self.k_shot + self.k_query, False
-                    )
+                    selected_img = np.random.choice(20, self.k_shot + self.k_query, False)
 
                     # meta-training and meta-test
                     x_spt.append(data_pack[cur_class][selected_img[: self.k_shot]])
@@ -310,8 +300,7 @@ class OmniglotNShot:
             y_qrys = np.array(y_qrys).astype(int).reshape(self.batchsz, querysz)
 
             x_spts, y_spts, x_qrys, y_qrys = (
-                torch.from_numpy(z).to(self.device)
-                for z in [x_spts, y_spts, x_qrys, y_qrys]
+                torch.from_numpy(z).to(self.device) for z in [x_spts, y_spts, x_qrys, y_qrys]
             )
 
             data_cache.append([x_spts, y_spts, x_qrys, y_qrys])

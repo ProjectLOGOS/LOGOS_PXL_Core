@@ -270,9 +270,7 @@ def sort(
     stable: bool = True,
     **kwargs,
 ) -> Array:
-    return torch.sort(
-        x, dim=axis, descending=descending, stable=stable, **kwargs
-    ).values
+    return torch.sort(x, dim=axis, descending=descending, stable=stable, **kwargs).values
 
 
 def _normalize_axes(axis, ndim):
@@ -354,9 +352,7 @@ def prod(
     # torch.prod doesn't support multiple axes
     # (https://github.com/pytorch/pytorch/issues/56586).
     if isinstance(axis, tuple):
-        return _reduce_multiple_axes(
-            torch.prod, x, axis, keepdims=keepdims, dtype=dtype, **kwargs
-        )
+        return _reduce_multiple_axes(torch.prod, x, axis, keepdims=keepdims, dtype=dtype, **kwargs)
     if axis is None:
         # torch doesn't support keepdims with axis=None
         # (https://github.com/pytorch/pytorch/issues/71209)
@@ -476,9 +472,7 @@ def std(
     if isinstance(correction, float):
         _correction = int(correction)
         if correction != _correction:
-            raise NotImplementedError(
-                "float correction in torch std() is not yet supported"
-            )
+            raise NotImplementedError("float correction in torch std() is not yet supported")
     else:
         _correction = correction
 
@@ -571,9 +565,7 @@ def permute_dims(x: Array, /, axes: Tuple[int, ...]) -> Array:
 # The axis parameter doesn't work for flip() and roll()
 # https://github.com/pytorch/pytorch/issues/71210. Also torch.flip() doesn't
 # accept axis=None
-def flip(
-    x: Array, /, *, axis: Optional[Union[int, Tuple[int, ...]]] = None, **kwargs
-) -> Array:
+def flip(x: Array, /, *, axis: Optional[Union[int, Tuple[int, ...]]] = None, **kwargs) -> Array:
     if axis is None:
         axis = tuple(range(x.ndim))
     # torch.flip doesn't accept dim as an int but the method does
@@ -648,9 +640,7 @@ def where(
 
 
 # torch.reshape doesn't have the copy keyword
-def reshape(
-    x: Array, /, shape: Tuple[int, ...], *, copy: Optional[bool] = None, **kwargs
-) -> Array:
+def reshape(x: Array, /, shape: Tuple[int, ...], *, copy: Optional[bool] = None, **kwargs) -> Array:
     if copy is not None:
         raise NotImplementedError("torch.reshape doesn't yet support the copy keyword")
     return torch.reshape(x, shape, **kwargs)
@@ -715,9 +705,7 @@ def linspace(
     **kwargs,
 ) -> Array:
     if not endpoint:
-        return torch.linspace(
-            start, stop, num + 1, dtype=dtype, device=device, **kwargs
-        )[:-1]
+        return torch.linspace(start, stop, num + 1, dtype=dtype, device=device, **kwargs)[:-1]
     return torch.linspace(start, stop, num, dtype=dtype, device=device, **kwargs)
 
 

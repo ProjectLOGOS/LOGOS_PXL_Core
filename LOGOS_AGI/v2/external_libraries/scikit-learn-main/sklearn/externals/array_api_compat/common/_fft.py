@@ -195,15 +195,11 @@ def rfftfreq(
     return res
 
 
-def fftshift(
-    x: Array, /, xp: Namespace, *, axes: int | Sequence[int] | None = None
-) -> Array:
+def fftshift(x: Array, /, xp: Namespace, *, axes: int | Sequence[int] | None = None) -> Array:
     return xp.fft.fftshift(x, axes=axes)
 
 
-def ifftshift(
-    x: Array, /, xp: Namespace, *, axes: int | Sequence[int] | None = None
-) -> Array:
+def ifftshift(x: Array, /, xp: Namespace, *, axes: int | Sequence[int] | None = None) -> Array:
     return xp.fft.ifftshift(x, axes=axes)
 
 

@@ -37,9 +37,7 @@ assert torch.get_default_dtype() is torch.float32
 
 class TestScatterGather(TestCase):
     # Fills an index tensor with valid indices
-    def _fill_indices(
-        self, idx, dim, dim_size, elems_per_row, m, n, o, unique_indices=True
-    ):
+    def _fill_indices(self, idx, dim, dim_size, elems_per_row, m, n, o, unique_indices=True):
         for i in range(1 if dim == 0 else m):
             for j in range(1 if dim == 1 else n):
                 for k in range(1 if dim == 2 else o):
@@ -94,9 +92,9 @@ class TestScatterGather(TestCase):
             for dim in (0, 1):
                 max_ind = src.shape[dim]
                 ind0 = torch.randint(max_ind, (num_ind,), device=device)
-                ind_discontig0 = torch.empty(
-                    num_ind * 2, device=device, dtype=torch.int64
-                )[::2].copy_(ind0)
+                ind_discontig0 = torch.empty(num_ind * 2, device=device, dtype=torch.int64)[
+                    ::2
+                ].copy_(ind0)
                 shape_ind = [1] * src.ndim
                 shape_ind[dim] = ind0.shape[0]
                 shape_out = list(src.shape)
@@ -107,18 +105,14 @@ class TestScatterGather(TestCase):
                 ref = src[ind0] if dim == 0 else src[:, ind0]
                 self.assertEqual(res, ref, atol=0, rtol=0)
                 if res.device.type == "cuda":
-                    ref_cpu = (
-                        src.cpu()[ind0.cpu()] if dim == 0 else src.cpu()[:, ind0.cpu()]
-                    )
+                    ref_cpu = src.cpu()[ind0.cpu()] if dim == 0 else src.cpu()[:, ind0.cpu()]
                     self.assertEqual(res.cpu(), ref_cpu, atol=0, rtol=0)
                 res = torch.gather(src, dim=dim, index=ind_discontig)
                 self.assertEqual(res, ref, atol=0, rtol=0)
                 res_ind = src[ind_discontig0] if dim == 0 else src[:, ind_discontig0]
                 self.assertEqual(res_ind, ref, atol=0, rtol=0)
                 res_ind_neg = (
-                    src[ind0 - src.shape[dim]]
-                    if dim == 0
-                    else src[:, ind0 - src.shape[1]]
+                    src[ind0 - src.shape[dim]] if dim == 0 else src[:, ind0 - src.shape[1]]
                 )
                 self.assertEqual(res_ind_neg, ref, atol=0, rtol=0)
                 res = torch.gather(discontig, dim=dim, index=ind)
@@ -148,9 +142,7 @@ class TestScatterGather(TestCase):
         src = torch.tensor(((False, True), (True, True)), device=device, dtype=dtype)
         idx = torch.tensor(((0, 0), (1, 0)), device=device, dtype=torch.long)
         actual = torch.gather(src, 1, idx)
-        expected = torch.tensor(
-            ((False, False), (True, True)), device=device, dtype=dtype
-        )
+        expected = torch.tensor(((False, False), (True, True)), device=device, dtype=dtype)
         self.assertEqual(actual, expected, atol=0, rtol=0)
 
     @parametrize("sparse_grad", [False, True])
@@ -183,9 +175,7 @@ class TestScatterGather(TestCase):
         idx_size = [m, n, o]
         idx_size[dim] = elems_per_row
         idx = torch.empty(tuple(idx_size), device=device, dtype=torch.long)
-        self._fill_indices(
-            idx, dim, ([m, n, o])[dim], elems_per_row, m, n, o, unique_indices
-        )
+        self._fill_indices(idx, dim, ([m, n, o])[dim], elems_per_row, m, n, o, unique_indices)
 
         if is_scalar:
             src = random.random()
@@ -338,12 +328,8 @@ class TestScatterGather(TestCase):
                 m, n = 30, 40
                 idx = torch.zeros(m, n, device=device, dtype=torch.long)
                 src = torch.ones(m, n, device=device, dtype=dtype)
-                res0 = torch.zeros(m, n, device=device, dtype=dtype).scatter_add_(
-                    0, idx, src
-                )
-                res1 = torch.zeros(m, n, device=device, dtype=dtype).scatter_add_(
-                    1, idx, src
-                )
+                res0 = torch.zeros(m, n, device=device, dtype=dtype).scatter_add_(0, idx, src)
+                res1 = torch.zeros(m, n, device=device, dtype=dtype).scatter_add_(1, idx, src)
 
                 self.assertEqual(
                     res0[0, :],
@@ -359,9 +345,7 @@ class TestScatterGather(TestCase):
                 )
 
     # FIXME: discrepancy between bool ReduceAdd on CUDA and CPU (a + b on CPU and buggy a && b on CUDA)
-    @dtypes(
-        *get_all_dtypes(include_half=True, include_bfloat16=True, include_bool=False)
-    )
+    @dtypes(*get_all_dtypes(include_half=True, include_bfloat16=True, include_bool=False))
     def test_scatter_reduce_sum(self, device, dtype):
         for include_self in (True, False):
             for deterministic in [False, True]:
@@ -397,9 +381,7 @@ class TestScatterGather(TestCase):
                 include_self=include_self,
             )
 
-    @dtypes(
-        *get_all_dtypes(include_half=True, include_bfloat16=True, include_bool=False)
-    )
+    @dtypes(*get_all_dtypes(include_half=True, include_bfloat16=True, include_bool=False))
     @dtypesIfCUDA(
         *get_all_dtypes(
             include_half=True,
@@ -422,9 +404,7 @@ class TestScatterGather(TestCase):
                         include_self=include_self,
                     )
 
-    @dtypes(
-        *get_all_dtypes(include_half=True, include_bfloat16=True, include_complex=False)
-    )
+    @dtypes(*get_all_dtypes(include_half=True, include_bfloat16=True, include_complex=False))
     @dtypesIfCUDA(
         *get_all_dtypes(
             include_half=True,
@@ -463,9 +443,7 @@ class TestScatterGather(TestCase):
                     expected_result[1] = 0
                 self.assertEqual(input, expected_result)
 
-    @dtypes(
-        *get_all_dtypes(include_half=True, include_bfloat16=True, include_complex=False)
-    )
+    @dtypes(*get_all_dtypes(include_half=True, include_bfloat16=True, include_complex=False))
     @dtypesIfCUDA(
         *get_all_dtypes(
             include_half=True,

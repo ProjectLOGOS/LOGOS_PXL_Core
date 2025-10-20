@@ -42,25 +42,26 @@ from sklearn.pipeline import Pipeline
 
 # Configuration
 SUBSYSTEM_NAME = "TETRAGNOS"
-RABBITMQ_HOST = os.getenv('RABBITMQ_HOST', 'rabbitmq')
-RABBITMQ_PORT = int(os.getenv('RABBITMQ_PORT', '5672'))
-TASK_QUEUE = 'tetragnos_task_queue'
-RESULT_QUEUE = 'task_result_queue'
+RABBITMQ_HOST = os.getenv("RABBITMQ_HOST", "rabbitmq")
+RABBITMQ_PORT = int(os.getenv("RABBITMQ_PORT", "5672"))
+TASK_QUEUE = "tetragnos_task_queue"
+RESULT_QUEUE = "task_result_queue"
 
 # Model configuration
-DEFAULT_MODEL = 'all-MiniLM-L6-v2'
+DEFAULT_MODEL = "all-MiniLM-L6-v2"
 EMBEDDING_CACHE_SIZE = 10000
 MAX_BATCH_SIZE = 32
 
 # Logging setup
 logging.basicConfig(
     level=logging.INFO,
-    format=f'%(asctime)s - %(levelname)s - {SUBSYSTEM_NAME}_WORKER - %(message)s',
+    format=f"%(asctime)s - %(levelname)s - {SUBSYSTEM_NAME}_WORKER - %(message)s",
     handlers=[
         logging.StreamHandler(sys.stdout),
-        logging.FileHandler('/app/logs/tetragnos_worker.log', mode='a')
-    ]
+        logging.FileHandler("/app/logs/tetragnos_worker.log", mode="a"),
+    ],
 )
+
 
 class AdvancedSemanticEngine:
     """High-performance semantic analysis engine using SentenceTransformers."""
@@ -119,7 +120,7 @@ class AdvancedSemanticEngine:
                 list(texts_to_encode),
                 batch_size=batch_size,
                 show_progress_bar=False,
-                convert_to_numpy=True
+                convert_to_numpy=True,
             )
 
             # Store new embeddings
@@ -146,6 +147,7 @@ class AdvancedSemanticEngine:
         """
         return cosine_similarity(embeddings)
 
+
 class AdvancedClusteringEngine:
     """Sophisticated clustering engine with multiple algorithms and optimization."""
 
@@ -153,7 +155,7 @@ class AdvancedClusteringEngine:
         self.logger = logging.getLogger("CLUSTERING_ENGINE")
         self.scaler = StandardScaler()
 
-    def adaptive_clustering(self, embeddings: np.ndarray, method: str = 'auto') -> Dict[str, Any]:
+    def adaptive_clustering(self, embeddings: np.ndarray, method: str = "auto") -> Dict[str, Any]:
         """Perform adaptive clustering with automatic algorithm selection.
 
         Args:
@@ -163,17 +165,17 @@ class AdvancedClusteringEngine:
         Returns:
             Comprehensive clustering results with metadata
         """
-        if method == 'auto':
+        if method == "auto":
             method = self._select_optimal_method(embeddings)
 
         # Normalize embeddings for clustering
         normalized_embeddings = self.scaler.fit_transform(embeddings)
 
-        if method == 'dbscan':
+        if method == "dbscan":
             return self._dbscan_clustering(normalized_embeddings)
-        elif method == 'hierarchical':
+        elif method == "hierarchical":
             return self._hierarchical_clustering(normalized_embeddings)
-        elif method == 'kmeans':
+        elif method == "kmeans":
             return self._kmeans_clustering(normalized_embeddings)
         else:
             raise ValueError(f"Unsupported clustering method: {method}")
@@ -190,11 +192,11 @@ class AdvancedClusteringEngine:
         n_samples, n_features = embeddings.shape
 
         if n_samples < 50:
-            return 'hierarchical'  # Better for small datasets
+            return "hierarchical"  # Better for small datasets
         elif n_samples > 10000:
-            return 'kmeans'  # Scalable for large datasets
+            return "kmeans"  # Scalable for large datasets
         else:
-            return 'dbscan'  # Robust for medium datasets
+            return "dbscan"  # Robust for medium datasets
 
     def _dbscan_clustering(self, embeddings: np.ndarray) -> Dict[str, Any]:
         """DBSCAN clustering with automatic parameter tuning."""
@@ -202,58 +204,51 @@ class AdvancedClusteringEngine:
         eps = self._estimate_eps(embeddings)
         min_samples = max(2, int(np.log2(len(embeddings))))
 
-        clusterer = DBSCAN(eps=eps, min_samples=min_samples, metric='cosine')
+        clusterer = DBSCAN(eps=eps, min_samples=min_samples, metric="cosine")
         cluster_labels = clusterer.fit_predict(embeddings)
 
         return {
-            'algorithm': 'dbscan',
-            'labels': cluster_labels.tolist(),
-            'n_clusters': len(set(cluster_labels)) - (1 if -1 in cluster_labels else 0),
-            'n_noise': np.sum(cluster_labels == -1),
-            'parameters': {'eps': eps, 'min_samples': min_samples},
-            'silhouette_score': self._compute_silhouette_score(embeddings, cluster_labels)
+            "algorithm": "dbscan",
+            "labels": cluster_labels.tolist(),
+            "n_clusters": len(set(cluster_labels)) - (1 if -1 in cluster_labels else 0),
+            "n_noise": np.sum(cluster_labels == -1),
+            "parameters": {"eps": eps, "min_samples": min_samples},
+            "silhouette_score": self._compute_silhouette_score(embeddings, cluster_labels),
         }
 
     def _hierarchical_clustering(self, embeddings: np.ndarray) -> Dict[str, Any]:
         """Agglomerative hierarchical clustering with linkage optimization."""
         # Determine optimal number of clusters using elbow method
-        optimal_k = self._find_optimal_k(embeddings, max_k=min(20, len(embeddings)//2))
+        optimal_k = self._find_optimal_k(embeddings, max_k=min(20, len(embeddings) // 2))
 
         clusterer = AgglomerativeClustering(
-            n_clusters=optimal_k,
-            linkage='ward',
-            metric='euclidean'
+            n_clusters=optimal_k, linkage="ward", metric="euclidean"
         )
         cluster_labels = clusterer.fit_predict(embeddings)
 
         return {
-            'algorithm': 'hierarchical',
-            'labels': cluster_labels.tolist(),
-            'n_clusters': optimal_k,
-            'parameters': {'linkage': 'ward', 'metric': 'euclidean'},
-            'silhouette_score': self._compute_silhouette_score(embeddings, cluster_labels)
+            "algorithm": "hierarchical",
+            "labels": cluster_labels.tolist(),
+            "n_clusters": optimal_k,
+            "parameters": {"linkage": "ward", "metric": "euclidean"},
+            "silhouette_score": self._compute_silhouette_score(embeddings, cluster_labels),
         }
 
     def _kmeans_clustering(self, embeddings: np.ndarray) -> Dict[str, Any]:
         """K-means clustering with automatic K selection."""
-        optimal_k = self._find_optimal_k(embeddings, max_k=min(20, len(embeddings)//2))
+        optimal_k = self._find_optimal_k(embeddings, max_k=min(20, len(embeddings) // 2))
 
-        clusterer = KMeans(
-            n_clusters=optimal_k,
-            init='k-means++',
-            n_init=10,
-            random_state=42
-        )
+        clusterer = KMeans(n_clusters=optimal_k, init="k-means++", n_init=10, random_state=42)
         cluster_labels = clusterer.fit_predict(embeddings)
 
         return {
-            'algorithm': 'kmeans',
-            'labels': cluster_labels.tolist(),
-            'n_clusters': optimal_k,
-            'centroids': clusterer.cluster_centers_.tolist(),
-            'parameters': {'init': 'k-means++', 'n_init': 10},
-            'silhouette_score': self._compute_silhouette_score(embeddings, cluster_labels),
-            'inertia': clusterer.inertia_
+            "algorithm": "kmeans",
+            "labels": cluster_labels.tolist(),
+            "n_clusters": optimal_k,
+            "centroids": clusterer.cluster_centers_.tolist(),
+            "parameters": {"init": "k-means++", "n_init": 10},
+            "silhouette_score": self._compute_silhouette_score(embeddings, cluster_labels),
+            "inertia": clusterer.inertia_,
         }
 
     def _estimate_eps(self, embeddings: np.ndarray) -> float:
@@ -261,9 +256,9 @@ class AdvancedClusteringEngine:
         from sklearn.neighbors import NearestNeighbors
 
         k = 4  # Standard heuristic
-        nbrs = NearestNeighbors(n_neighbors=k, metric='cosine').fit(embeddings)
+        nbrs = NearestNeighbors(n_neighbors=k, metric="cosine").fit(embeddings)
         distances, _ = nbrs.kneighbors(embeddings)
-        distances = np.sort(distances[:, k-1], axis=0)
+        distances = np.sort(distances[:, k - 1], axis=0)
 
         # Find knee point in distance curve
         diffs = np.diff(distances)
@@ -276,7 +271,7 @@ class AdvancedClusteringEngine:
         k_range = range(2, max_k + 1)
 
         for k in k_range:
-            kmeans = KMeans(n_clusters=k, init='k-means++', n_init=10, random_state=42)
+            kmeans = KMeans(n_clusters=k, init="k-means++", n_init=10, random_state=42)
             kmeans.fit(embeddings)
             inertias.append(kmeans.inertia_)
 
@@ -296,9 +291,10 @@ class AdvancedClusteringEngine:
             return -1.0  # Invalid clustering
 
         try:
-            return silhouette_score(embeddings, labels, metric='cosine')
+            return silhouette_score(embeddings, labels, metric="cosine")
         except:
             return -1.0
+
 
 class AdvancedFeatureExtractor:
     """Multi-modal feature extraction with dimensionality reduction."""
@@ -306,9 +302,7 @@ class AdvancedFeatureExtractor:
     def __init__(self):
         self.logger = logging.getLogger("FEATURE_EXTRACTOR")
         self.tfidf_vectorizer = TfidfVectorizer(
-            max_features=10000,
-            ngram_range=(1, 3),
-            stop_words='english'
+            max_features=10000, ngram_range=(1, 3), stop_words="english"
         )
 
     def extract_comprehensive_features(self, texts: List[str]) -> Dict[str, Any]:
@@ -321,11 +315,11 @@ class AdvancedFeatureExtractor:
             Multi-modal feature analysis results
         """
         results = {
-            'statistical_features': self._extract_statistical_features(texts),
-            'linguistic_features': self._extract_linguistic_features(texts),
-            'tfidf_features': self._extract_tfidf_features(texts),
-            'n_documents': len(texts),
-            'extraction_timestamp': datetime.utcnow().isoformat()
+            "statistical_features": self._extract_statistical_features(texts),
+            "linguistic_features": self._extract_linguistic_features(texts),
+            "tfidf_features": self._extract_tfidf_features(texts),
+            "n_documents": len(texts),
+            "extraction_timestamp": datetime.utcnow().isoformat(),
         }
 
         return results
@@ -336,20 +330,20 @@ class AdvancedFeatureExtractor:
         word_counts = [len(text.split()) for text in texts]
 
         return {
-            'char_length_stats': {
-                'mean': np.mean(lengths),
-                'std': np.std(lengths),
-                'min': np.min(lengths),
-                'max': np.max(lengths),
-                'median': np.median(lengths)
+            "char_length_stats": {
+                "mean": np.mean(lengths),
+                "std": np.std(lengths),
+                "min": np.min(lengths),
+                "max": np.max(lengths),
+                "median": np.median(lengths),
             },
-            'word_count_stats': {
-                'mean': np.mean(word_counts),
-                'std': np.std(word_counts),
-                'min': np.min(word_counts),
-                'max': np.max(word_counts),
-                'median': np.median(word_counts)
-            }
+            "word_count_stats": {
+                "mean": np.mean(word_counts),
+                "std": np.std(word_counts),
+                "min": np.min(word_counts),
+                "max": np.max(word_counts),
+                "median": np.median(word_counts),
+            },
         }
 
     def _extract_linguistic_features(self, texts: List[str]) -> Dict[str, Any]:
@@ -358,25 +352,29 @@ class AdvancedFeatureExtractor:
 
         for text in texts:
             words = text.split()
-            sentences = text.split('.')
+            sentences = text.split(".")
 
             # Basic linguistic metrics
             avg_word_length = np.mean([len(word) for word in words]) if words else 0
-            avg_sentence_length = np.mean([len(sent.split()) for sent in sentences]) if sentences else 0
+            avg_sentence_length = (
+                np.mean([len(sent.split()) for sent in sentences]) if sentences else 0
+            )
 
-            features.append({
-                'avg_word_length': avg_word_length,
-                'avg_sentence_length': avg_sentence_length,
-                'vocabulary_richness': len(set(words)) / len(words) if words else 0
-            })
+            features.append(
+                {
+                    "avg_word_length": avg_word_length,
+                    "avg_sentence_length": avg_sentence_length,
+                    "vocabulary_richness": len(set(words)) / len(words) if words else 0,
+                }
+            )
 
         return {
-            'per_document_features': features,
-            'aggregate_features': {
-                'avg_word_length_mean': np.mean([f['avg_word_length'] for f in features]),
-                'avg_sentence_length_mean': np.mean([f['avg_sentence_length'] for f in features]),
-                'vocabulary_richness_mean': np.mean([f['vocabulary_richness'] for f in features])
-            }
+            "per_document_features": features,
+            "aggregate_features": {
+                "avg_word_length_mean": np.mean([f["avg_word_length"] for f in features]),
+                "avg_sentence_length_mean": np.mean([f["avg_sentence_length"] for f in features]),
+                "vocabulary_richness_mean": np.mean([f["vocabulary_richness"] for f in features]),
+            },
         }
 
     def _extract_tfidf_features(self, texts: List[str]) -> Dict[str, Any]:
@@ -391,14 +389,16 @@ class AdvancedFeatureExtractor:
             top_features = [(feature_names[i], feature_scores[i]) for i in top_indices]
 
             return {
-                'matrix_shape': tfidf_matrix.shape,
-                'n_features': len(feature_names),
-                'top_features': top_features,
-                'sparsity': 1.0 - (tfidf_matrix.nnz / (tfidf_matrix.shape[0] * tfidf_matrix.shape[1]))
+                "matrix_shape": tfidf_matrix.shape,
+                "n_features": len(feature_names),
+                "top_features": top_features,
+                "sparsity": 1.0
+                - (tfidf_matrix.nnz / (tfidf_matrix.shape[0] * tfidf_matrix.shape[1])),
             }
         except Exception as e:
             self.logger.error(f"TF-IDF extraction failed: {e}")
-            return {'error': str(e)}
+            return {"error": str(e)}
+
 
 class TetragnosCore:
     """Advanced TETRAGNOS reasoning core with external library integration."""
@@ -439,31 +439,33 @@ class TetragnosCore:
 
             execution_time = time.time() - start_time
 
-            result.update({
-                'execution_time': execution_time,
-                'task_id': payload.get('task_id', f'tetragnos_{self.task_count}'),
-                'subsystem': 'tetragnos',
-                'status': 'completed',
-                'timestamp': datetime.utcnow().isoformat()
-            })
+            result.update(
+                {
+                    "execution_time": execution_time,
+                    "task_id": payload.get("task_id", f"tetragnos_{self.task_count}"),
+                    "subsystem": "tetragnos",
+                    "status": "completed",
+                    "timestamp": datetime.utcnow().isoformat(),
+                }
+            )
 
             return result
 
         except Exception as e:
             self.logger.error(f"Task execution failed: {e}", exc_info=True)
             return {
-                'task_id': payload.get('task_id', f'tetragnos_{self.task_count}'),
-                'subsystem': 'tetragnos',
-                'status': 'failed',
-                'error': str(e),
-                'execution_time': time.time() - start_time,
-                'timestamp': datetime.utcnow().isoformat()
+                "task_id": payload.get("task_id", f"tetragnos_{self.task_count}"),
+                "subsystem": "tetragnos",
+                "status": "failed",
+                "error": str(e),
+                "execution_time": time.time() - start_time,
+                "timestamp": datetime.utcnow().isoformat(),
             }
 
     def _cluster_texts_advanced(self, payload: Dict[str, Any]) -> Dict[str, Any]:
         """Advanced text clustering using SentenceTransformers and multiple algorithms."""
-        texts = payload.get('texts', [])
-        method = payload.get('method', 'auto')
+        texts = payload.get("texts", [])
+        method = payload.get("method", "auto")
 
         if not texts:
             raise ValueError("No texts provided for clustering")
@@ -475,22 +477,22 @@ class TetragnosCore:
         clustering_result = self.clustering_engine.adaptive_clustering(embeddings, method)
 
         # Add cluster interpretability
-        cluster_summaries = self._generate_cluster_summaries(texts, clustering_result['labels'])
+        cluster_summaries = self._generate_cluster_summaries(texts, clustering_result["labels"])
 
         return {
-            'clustering_result': clustering_result,
-            'cluster_summaries': cluster_summaries,
-            'embedding_stats': {
-                'shape': embeddings.shape,
-                'cache_hits': self.semantic_engine.cache_hits,
-                'cache_misses': self.semantic_engine.cache_misses
-            }
+            "clustering_result": clustering_result,
+            "cluster_summaries": cluster_summaries,
+            "embedding_stats": {
+                "shape": embeddings.shape,
+                "cache_hits": self.semantic_engine.cache_hits,
+                "cache_misses": self.semantic_engine.cache_misses,
+            },
         }
 
     def _extract_features_advanced(self, payload: Dict[str, Any]) -> Dict[str, Any]:
         """Advanced feature extraction with multiple modalities."""
-        texts = payload.get('texts', [])
-        include_embeddings = payload.get('include_embeddings', False)
+        texts = payload.get("texts", [])
+        include_embeddings = payload.get("include_embeddings", False)
 
         if not texts:
             raise ValueError("No texts provided for feature extraction")
@@ -501,16 +503,16 @@ class TetragnosCore:
         # Optionally include semantic embeddings
         if include_embeddings:
             embeddings = self.semantic_engine.encode_texts(texts)
-            features['semantic_embeddings'] = {
-                'shape': embeddings.shape,
-                'dimensionality': embeddings.shape[1]
+            features["semantic_embeddings"] = {
+                "shape": embeddings.shape,
+                "dimensionality": embeddings.shape[1],
             }
 
-        return {'features': features}
+        return {"features": features}
 
     def _compute_semantic_similarity(self, payload: Dict[str, Any]) -> Dict[str, Any]:
         """Compute semantic similarity matrix using transformer embeddings."""
-        texts = payload.get('texts', [])
+        texts = payload.get("texts", [])
 
         if not texts:
             raise ValueError("No texts provided for similarity computation")
@@ -519,16 +521,16 @@ class TetragnosCore:
         similarity_matrix = self.semantic_engine.compute_similarity_matrix(embeddings)
 
         return {
-            'similarity_matrix': similarity_matrix.tolist(),
-            'matrix_shape': similarity_matrix.shape,
-            'max_similarity': float(np.max(similarity_matrix)),
-            'min_similarity': float(np.min(similarity_matrix)),
-            'mean_similarity': float(np.mean(similarity_matrix))
+            "similarity_matrix": similarity_matrix.tolist(),
+            "matrix_shape": similarity_matrix.shape,
+            "max_similarity": float(np.max(similarity_matrix)),
+            "min_similarity": float(np.min(similarity_matrix)),
+            "mean_similarity": float(np.mean(similarity_matrix)),
         }
 
     def _analyze_patterns_advanced(self, payload: Dict[str, Any]) -> Dict[str, Any]:
         """Advanced pattern analysis combining multiple techniques."""
-        texts = payload.get('texts', [])
+        texts = payload.get("texts", [])
 
         if not texts:
             raise ValueError("No texts provided for pattern analysis")
@@ -539,29 +541,29 @@ class TetragnosCore:
         clustering = self.clustering_engine.adaptive_clustering(embeddings)
 
         return {
-            'pattern_analysis': {
-                'semantic_patterns': clustering,
-                'linguistic_patterns': features['linguistic_features'],
-                'statistical_patterns': features['statistical_features']
+            "pattern_analysis": {
+                "semantic_patterns": clustering,
+                "linguistic_patterns": features["linguistic_features"],
+                "statistical_patterns": features["statistical_features"],
             },
-            'insights': self._generate_pattern_insights(texts, embeddings, clustering)
+            "insights": self._generate_pattern_insights(texts, embeddings, clustering),
         }
 
     def _translate_text_advanced(self, payload: Dict[str, Any]) -> Dict[str, Any]:
         """Advanced text translation with semantic preservation analysis."""
-        text = payload.get('text', '')
-        target_language = payload.get('target_language', 'en')
+        text = payload.get("text", "")
+        target_language = payload.get("target_language", "en")
 
         # Placeholder for advanced translation - would integrate with translation models
         # For now, return identity translation with semantic analysis
         original_embedding = self.semantic_engine.encode_texts([text])
 
         return {
-            'original_text': text,
-            'translated_text': text,  # Placeholder
-            'target_language': target_language,
-            'semantic_preservation_score': 1.0,  # Placeholder
-            'original_embedding_shape': original_embedding.shape
+            "original_text": text,
+            "translated_text": text,  # Placeholder
+            "target_language": target_language,
+            "semantic_preservation_score": 1.0,  # Placeholder
+            "original_embedding_shape": original_embedding.shape,
         }
 
     def _generate_cluster_summaries(self, texts: List[str], labels: List[int]) -> Dict[str, Any]:
@@ -577,30 +579,33 @@ class TetragnosCore:
         for cluster_id, cluster_texts in clusters.items():
             if cluster_id == -1:  # Noise cluster in DBSCAN
                 summaries[cluster_id] = {
-                    'size': len(cluster_texts),
-                    'label': 'noise',
-                    'sample_texts': cluster_texts[:3]
+                    "size": len(cluster_texts),
+                    "label": "noise",
+                    "sample_texts": cluster_texts[:3],
                 }
             else:
                 summaries[cluster_id] = {
-                    'size': len(cluster_texts),
-                    'sample_texts': cluster_texts[:3],
-                    'avg_length': np.mean([len(text) for text in cluster_texts])
+                    "size": len(cluster_texts),
+                    "sample_texts": cluster_texts[:3],
+                    "avg_length": np.mean([len(text) for text in cluster_texts]),
                 }
 
         return summaries
 
-    def _generate_pattern_insights(self, texts: List[str], embeddings: np.ndarray, clustering: Dict[str, Any]) -> Dict[str, Any]:
+    def _generate_pattern_insights(
+        self, texts: List[str], embeddings: np.ndarray, clustering: Dict[str, Any]
+    ) -> Dict[str, Any]:
         """Generate high-level insights from pattern analysis."""
         return {
-            'diversity_score': float(np.mean(np.std(embeddings, axis=0))),
-            'clustering_quality': clustering.get('silhouette_score', -1),
-            'optimal_clusters': clustering.get('n_clusters', 0),
-            'text_complexity': {
-                'avg_length': np.mean([len(text) for text in texts]),
-                'length_variance': np.var([len(text) for text in texts])
-            }
+            "diversity_score": float(np.mean(np.std(embeddings, axis=0))),
+            "clustering_quality": clustering.get("silhouette_score", -1),
+            "optimal_clusters": clustering.get("n_clusters", 0),
+            "text_complexity": {
+                "avg_length": np.mean([len(text) for text in texts]),
+                "length_variance": np.var([len(text) for text in texts]),
+            },
         }
+
 
 class TetragnosWorker:
     """Advanced TETRAGNOS worker with external library integration."""
@@ -640,7 +645,7 @@ class TetragnosWorker:
                 host=RABBITMQ_HOST,
                 port=RABBITMQ_PORT,
                 heartbeat=600,
-                blocked_connection_timeout=300
+                blocked_connection_timeout=300,
             )
         )
 
@@ -655,9 +660,7 @@ class TetragnosWorker:
 
         # Setup consumer
         self.channel.basic_consume(
-            queue=TASK_QUEUE,
-            on_message_callback=self._process_task,
-            auto_ack=False
+            queue=TASK_QUEUE, on_message_callback=self._process_task, auto_ack=False
         )
 
         self.logger.info("TETRAGNOS Worker ready for advanced ML tasks")
@@ -677,10 +680,10 @@ class TetragnosWorker:
         """Process incoming task with advanced ML capabilities."""
         try:
             # Parse task
-            task_data = json.loads(body.decode('utf-8'))
-            task_id = task_data.get('task_id', str(uuid.uuid4()))
-            task_type = task_data.get('task_type', 'unknown')
-            payload = task_data.get('payload', {})
+            task_data = json.loads(body.decode("utf-8"))
+            task_id = task_data.get("task_id", str(uuid.uuid4()))
+            task_type = task_data.get("task_type", "unknown")
+            payload = task_data.get("payload", {})
 
             self.logger.info(f"Processing advanced task {task_id}: {task_type}")
 
@@ -700,11 +703,11 @@ class TetragnosWorker:
 
             # Send error result
             error_result = {
-                'task_id': task_data.get('task_id', 'unknown'),
-                'subsystem': 'tetragnos',
-                'status': 'failed',
-                'error': str(e),
-                'timestamp': datetime.utcnow().isoformat()
+                "task_id": task_data.get("task_id", "unknown"),
+                "subsystem": "tetragnos",
+                "status": "failed",
+                "error": str(e),
+                "timestamp": datetime.utcnow().isoformat(),
             }
 
             self._publish_result(error_result)
@@ -714,18 +717,20 @@ class TetragnosWorker:
         """Publish task result to result queue."""
         try:
             self.channel.basic_publish(
-                exchange='',
+                exchange="",
                 routing_key=RESULT_QUEUE,
                 body=json.dumps(result),
-                properties=pika.BasicProperties(delivery_mode=2)  # Persistent
+                properties=pika.BasicProperties(delivery_mode=2),  # Persistent
             )
         except Exception as e:
             self.logger.error(f"Failed to publish result: {e}")
+
 
 def main():
     """Main entry point for TETRAGNOS advanced worker."""
     worker = TetragnosWorker()
     worker.start()
+
 
 if __name__ == "__main__":
     main()

@@ -143,9 +143,7 @@ This module provides several features, including:
 """
 __author__ = "Renato de Pontes Pereira, Matthias Feurer, Joel Nothman"
 __author_email__ = (
-    "renato.ppontes@gmail.com, "
-    "feurerm@informatik.uni-freiburg.de, "
-    "joel.nothman@gmail.com"
+    "renato.ppontes@gmail.com, " "feurerm@informatik.uni-freiburg.de, " "joel.nothman@gmail.com"
 )
 __version__ = "2.4.0"
 
@@ -383,9 +381,7 @@ class BadNominalValue(ArffException):
 
     def __init__(self, value):
         super().__init__()
-        self.message = (
-            "Data value %s not found in nominal declaration, " % value
-        ) + "at line %d."
+        self.message = ("Data value %s not found in nominal declaration, " % value) + "at line %d."
 
 
 class BadNominalFormatting(ArffException):
@@ -393,9 +389,7 @@ class BadNominalFormatting(ArffException):
 
     def __init__(self, value):
         super().__init__()
-        self.message = (
-            'Nominal data value "%s" not properly quoted in line ' % value
-        ) + "%d."
+        self.message = ('Nominal data value "%s" not properly quoted in line ' % value) + "%d."
 
 
 class BadNumericalValue(ArffException):
@@ -488,9 +482,7 @@ class DenseGeneratorData:
                 if values and max(values) >= len(conversors):
                     raise BadDataFormat(row)
                 # XXX: int 0 is used for implicit values, not '0'
-                values = [
-                    values[i] if i in values else 0 for i in range(len(conversors))
-                ]
+                values = [values[i] if i in values else 0 for i in range(len(conversors))]
             else:
                 if len(values) != len(conversors):
                     raise BadDataFormat(row)
@@ -591,9 +583,7 @@ class COOData:
 
         # Check if the rows are sorted
         if not all(row[i] <= row[i + 1] for i in range(len(row) - 1)):
-            raise ValueError(
-                "liac-arff can only output COO matrices with " "sorted rows."
-            )
+            raise ValueError("liac-arff can only output COO matrices with " "sorted rows.")
 
         for v, col, row in zip(data, col, row):
             if row > current_row:
@@ -930,9 +920,7 @@ class ArffDecoder:
             progressively`_.
         """
         try:
-            return self._decode(
-                s, encode_nominal=encode_nominal, matrix_type=return_type
-            )
+            return self._decode(s, encode_nominal=encode_nominal, matrix_type=return_type)
         except ArffException as e:
             e.line = self._current_line
             raise e
@@ -1065,8 +1053,7 @@ class ArffEncoder:
             # Verify attribute name is not used twice
             if attr[0] in attribute_names:
                 raise BadObject(
-                    'Trying to use attribute name "%s" for the '
-                    "second time." % str(attr[0])
+                    'Trying to use attribute name "%s" for the ' "second time." % str(attr[0])
                 )
             else:
                 attribute_names.add(attr[0])

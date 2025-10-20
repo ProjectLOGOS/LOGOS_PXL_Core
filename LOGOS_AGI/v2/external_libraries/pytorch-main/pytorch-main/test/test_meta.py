@@ -197,9 +197,7 @@ class TestMetaConverter(TestCase):
         self.assertMetadataMatches(m, x)
 
     def test_channels_last_leaf(self):
-        x = torch.empty(
-            2, 3, 4, 5, memory_format=torch.channels_last, requires_grad=True
-        )
+        x = torch.empty(2, 3, 4, 5, memory_format=torch.channels_last, requires_grad=True)
         to_meta = MetaConverter()
         m = to_meta(x)
 
@@ -210,9 +208,7 @@ class TestMetaConverter(TestCase):
         self.assertMetadataMatches(m, x)
 
     def test_channels_last_non_leaf(self):
-        x = torch.empty(
-            2, 3, 4, 5, memory_format=torch.channels_last, requires_grad=True
-        )
+        x = torch.empty(2, 3, 4, 5, memory_format=torch.channels_last, requires_grad=True)
         y = x + 2
 
         # sanity
@@ -444,9 +440,7 @@ def assert_ref_meta_equal(test_case, func, meta_rs, rs, msg_callable):
 
         if not isinstance(r, torch.Tensor):
             continue
-        test_assert(
-            isinstance(meta_r, torch.Tensor), f"but real {i}th result is Tensor"
-        )
+        test_assert(isinstance(meta_r, torch.Tensor), f"but real {i}th result is Tensor")
         test_assert(
             meta_r.dtype == r.dtype,
             f"for element {i}, was {meta_r.dtype} but real dtype was {r.dtype}",
@@ -527,9 +521,7 @@ def print_seen():
         if failed_reasons[op]:
             reasons = "  # " + ", ".join(sorted(failed_reasons[op]))
         if expected_failures_dtypes:
-            expected_failures.append(
-                f"    {ops}: {fmt_dtypes(expected_failures_dtypes)},{reasons}"
-            )
+            expected_failures.append(f"    {ops}: {fmt_dtypes(expected_failures_dtypes)},{reasons}")
         if skips_dtypes:
             skips.append(f"    {ops}: {fmt_dtypes(skips_dtypes)},")
     expected_failures.sort()
@@ -619,10 +611,7 @@ def run_meta_crossref(
             flat_new_args = []
             for a, ma in zip(flat_args, flat_meta_args):
                 flat_new_args.append(
-                    a
-                    if isinstance(a, torch.Tensor)
-                    and a.dtype in [torch.int8, torch.bool]
-                    else ma
+                    a if isinstance(a, torch.Tensor) and a.dtype in [torch.int8, torch.bool] else ma
                 )
             meta_args = (meta_args[0], tree_unflatten(flat_new_args, spec))
         elif func in (
@@ -963,9 +952,7 @@ class MetaCrossRefFunctionMode(torch.overrides.TorchFunctionMode):
 
         if self.dtype in meta_function_skips.get(func, set()):
             test_expect = TestExpect.SKIP
-        elif self.dtype in meta_function_device_skips[self.device_type].get(
-            func, set()
-        ):
+        elif self.dtype in meta_function_device_skips[self.device_type].get(func, set()):
             test_expect = TestExpect.SKIP
         elif self.dtype in meta_function_expected_failures.get(func, set()):
             test_expect = TestExpect.XFAILURE
@@ -973,16 +960,16 @@ class MetaCrossRefFunctionMode(torch.overrides.TorchFunctionMode):
             func, set()
         ):
             test_expect = TestExpect.XFAILURE
-        elif meta_function_expected_failures_conditional.get(
-            func, lambda *_, **__: False
-        )(self.dtype, *args, **kwargs):
+        elif meta_function_expected_failures_conditional.get(func, lambda *_, **__: False)(
+            self.dtype, *args, **kwargs
+        ):
             test_expect = TestExpect.XFAILURE
         elif (
             not self.inplace
             and self.dtype
-            in meta_function_device_expected_failures_only_outplace[
-                self.device_type
-            ].get(func, set())
+            in meta_function_device_expected_failures_only_outplace[self.device_type].get(
+                func, set()
+            )
         ):
             test_expect = TestExpect.XFAILURE
         else:
@@ -1320,11 +1307,7 @@ def get_strided_args(args):
 
     strided_args = []
     for arg in args:
-        if (
-            isinstance(arg, torch.Tensor)
-            and not arg.is_sparse_csr
-            and arg.is_contiguous()
-        ):
+        if isinstance(arg, torch.Tensor) and not arg.is_sparse_csr and arg.is_contiguous():
             strided_arg_variants = get_strided_variants(arg)
         else:
             strided_arg_variants = [arg]
@@ -1394,9 +1377,7 @@ class MetaCrossRefDispatchMode(torch.utils._python_dispatch.TorchDispatchMode):
 
             # Number of outputs must match
             candidate_out_names = [
-                out_arg.name
-                for out_arg in candidate_ol_args[-num_outputs:]
-                if out_arg.is_out
+                out_arg.name for out_arg in candidate_ol_args[-num_outputs:] if out_arg.is_out
             ]
             if len(candidate_out_names) != num_outputs:
                 continue
@@ -1431,9 +1412,7 @@ class MetaCrossRefDispatchMode(torch.utils._python_dispatch.TorchDispatchMode):
     def _get_expected_test_result(self, func: OpOverload):
         if self.dtype in meta_dispatch_skips.get(func, set()):
             test_expect = TestExpect.SKIP
-        elif self.dtype in meta_dispatch_device_skips[self.device_type].get(
-            func, set()
-        ):
+        elif self.dtype in meta_dispatch_device_skips[self.device_type].get(func, set()):
             test_expect = TestExpect.SKIP
         elif self.dtype in meta_dispatch_expected_failures.get(func, set()):
             test_expect = TestExpect.XFAILURE
@@ -1545,9 +1524,7 @@ class TestMeta(TestCase):
         for sample_input in samples:
             args = [sample_input.input] + list(sample_input.args)
             kwargs = sample_input.kwargs
-            with MetaCrossRefFunctionMode(
-                self, dtype=dtype, device=device, inplace=False
-            ):
+            with MetaCrossRefFunctionMode(self, dtype=dtype, device=device, inplace=False):
                 expected = func(*args, **kwargs)
                 if isinstance(expected, torch.Tensor) and op.supports_out:
                     func(*args, **kwargs, out=expected)
@@ -1592,9 +1569,7 @@ class TestMeta(TestCase):
                 continue
             args = [sample_input.input] + list(sample_input.args)
             kwargs = sample_input.kwargs
-            with MetaCrossRefFunctionMode(
-                self, dtype=dtype, device=device, inplace=True
-            ):
+            with MetaCrossRefFunctionMode(self, dtype=dtype, device=device, inplace=True):
                 expected = func(*args, **kwargs)
 
     def _run_dispatch_meta_test(
@@ -1647,44 +1622,32 @@ class TestMeta(TestCase):
                 ):
                     expected = func(*args, **kwargs)
 
-                    if (
-                        not inplace
-                        and isinstance(expected, torch.Tensor)
-                        and op.supports_out
-                    ):
+                    if not inplace and isinstance(expected, torch.Tensor) and op.supports_out:
                         func(*args, **kwargs, out=expected)
 
     @skipIfCrossRef
     @suppress_warnings
     @ops(itertools.chain(op_db, foreach_op_db))
     def test_dispatch_meta_outplace(self, device, dtype, op):
-        self._run_dispatch_meta_test(
-            device, dtype, op, symbolic_meta=False, inplace=False
-        )
+        self._run_dispatch_meta_test(device, dtype, op, symbolic_meta=False, inplace=False)
 
     @skipIfCrossRef
     @suppress_warnings
     @ops(itertools.chain(op_db, foreach_op_db))
     def test_dispatch_meta_inplace(self, device, dtype, op):
-        self._run_dispatch_meta_test(
-            device, dtype, op, symbolic_meta=False, inplace=True
-        )
+        self._run_dispatch_meta_test(device, dtype, op, symbolic_meta=False, inplace=True)
 
     @skipIfCrossRef
     @suppress_warnings
     @ops(itertools.chain(op_db, foreach_op_db))
     def test_dispatch_symbolic_meta_outplace(self, device, dtype, op):
-        self._run_dispatch_meta_test(
-            device, dtype, op, symbolic_meta=True, inplace=False
-        )
+        self._run_dispatch_meta_test(device, dtype, op, symbolic_meta=True, inplace=False)
 
     @skipIfCrossRef
     @suppress_warnings
     @ops(itertools.chain(op_db, foreach_op_db))
     def test_dispatch_symbolic_meta_inplace(self, device, dtype, op):
-        self._run_dispatch_meta_test(
-            device, dtype, op, symbolic_meta=True, inplace=True
-        )
+        self._run_dispatch_meta_test(device, dtype, op, symbolic_meta=True, inplace=True)
 
     @skipIfCrossRef
     @suppress_warnings
@@ -1731,25 +1694,19 @@ class TestMeta(TestCase):
         )
 
         def sample_input(op, device, dtype, requires_grad, **kwargs):
-            yield SampleInput(
-                make_arg((S,), dtype=dtype), make_arg((S,), dtype=torch.float16)
-            )
+            yield SampleInput(make_arg((S,), dtype=dtype), make_arg((S,), dtype=torch.float16))
 
         op = copy.copy(op)
         op.sample_inputs_func = sample_input
 
-        self._run_dispatch_meta_test(
-            device, dtype, op, symbolic_meta=True, inplace=False
-        )
+        self._run_dispatch_meta_test(device, dtype, op, symbolic_meta=True, inplace=False)
 
     def test_empty_quantized(self):
         r = torch.empty(2**52, device="meta", dtype=torch.qint8)
         self.assertEqual(r.device.type, "meta")
 
     def test_nan_to_num(self):
-        t = torch.tensor(
-            [float("nan"), float("inf"), -float("inf"), 3.14], device="meta"
-        )
+        t = torch.tensor([float("nan"), float("inf"), -float("inf"), 3.14], device="meta")
         r = t.nan_to_num()
         self.assertEqual(r.device.type, "meta")
 
@@ -1776,9 +1733,7 @@ class TestMeta(TestCase):
     def test_meta_autograd_no_error(self):
         with torch.library._scoped_library("meta_test", "DEF") as lib:
             with torch.library._scoped_library("meta_test", "IMPL", "CPU") as impl_cpu:
-                with torch.library._scoped_library(
-                    "meta_test", "IMPL", "Meta"
-                ) as impl_meta:
+                with torch.library._scoped_library("meta_test", "IMPL", "Meta") as impl_meta:
 
                     def foo_impl(x):
                         return x + 1
@@ -1815,8 +1770,7 @@ class TestMeta(TestCase):
         assertEqualShapes(grads[2], expected_shapes[2])
 
         out_kwargs = {
-            f"out{i}": torch.empty(0, device=device, dtype=dtype)
-            for i in range(len(output_mask))
+            f"out{i}": torch.empty(0, device=device, dtype=dtype) for i in range(len(output_mask))
         }
 
         # test call with out parameters
@@ -1899,9 +1853,7 @@ class TestMeta(TestCase):
             with self.subTest(sample=sample):
                 grad_out = torch.ones_like(sample.input)
                 N, C = sample.input.shape[:2]
-                HxW = torch.prod(
-                    torch.as_tensor(sample.input.shape[2:]), dtype=torch.int32
-                ).item()
+                HxW = torch.prod(torch.as_tensor(sample.input.shape[2:]), dtype=torch.int32).item()
                 group = sample.args[0]
                 mean = torch.zeros((N, group), device=device, dtype=dtype)
                 rstd = torch.zeros((N, group), device=device, dtype=dtype)
@@ -1924,9 +1876,7 @@ class TestMeta(TestCase):
                 )
 
     @onlyCPU
-    @parametrize(
-        "output_mask", list(itertools.product([True], [True, False], [True, False]))
-    )
+    @parametrize("output_mask", list(itertools.product([True], [True, False], [True, False])))
     def test_batch_norm_backward(self, output_mask):
         from torch.testing._internal.common_methods_invocations import (
             sample_inputs_batch_norm,
@@ -2035,9 +1985,7 @@ class TestMeta(TestCase):
 
         for kwargs in kwargss:
             ref_out = aten._fused_moving_avg_obs_fq_helper.default(*args, **kwargs)
-            meta_out = aten._fused_moving_avg_obs_fq_helper.default(
-                *meta_args, **kwargs
-            )
+            meta_out = aten._fused_moving_avg_obs_fq_helper.default(*meta_args, **kwargs)
 
             self.assertEqual(ref_out[0].size(), meta_out[0].size())
             self.assertEqual(ref_out[0].stride(), meta_out[0].stride())
@@ -2058,22 +2006,14 @@ class TestMeta(TestCase):
     def test_quantized_embedding_bag(self):
         tab_shape = [8, 128]
         emb_size, ind_len, off_len = tab_shape[0], 32, 33
-        f_table = torch.from_numpy(
-            (np.random.random_sample(tab_shape) + 1).astype(np.float32)
-        )
+        f_table = torch.from_numpy((np.random.random_sample(tab_shape) + 1).astype(np.float32))
         q_table = torch.ops.quantized.embedding_bag_byte_prepack(f_table)
-        indices = torch.from_numpy(
-            np.random.randint(low=0, high=emb_size, size=ind_len)
-        ).int()
+        indices = torch.from_numpy(np.random.randint(low=0, high=emb_size, size=ind_len)).int()
         max_length = len(indices) // (off_len - 1)
         if max_length > 20:
             max_length = 20
-        np_lengths = np.random.randint(0, max_length + 1, size=off_len - 1).astype(
-            np.int32
-        )
-        offsets = torch.cat(
-            [torch.zeros([1]), torch.cumsum(torch.from_numpy(np_lengths), 0)]
-        ).int()
+        np_lengths = np.random.randint(0, max_length + 1, size=off_len - 1).astype(np.int32)
+        offsets = torch.cat([torch.zeros([1]), torch.cumsum(torch.from_numpy(np_lengths), 0)]).int()
 
         eb = torch.ops.quantized.embedding_bag_byte_rowwise_offsets(
             q_table.to(device="meta"),
@@ -2222,16 +2162,14 @@ class TestMeta(TestCase):
         grad_weight = torch.ops.aten._embedding_bag_per_sample_weights_backward.default(
             grad, weight, indices, offsets, offset2bag, mode, padding_idx
         )
-        meta_grad_weight = (
-            torch.ops.aten._embedding_bag_per_sample_weights_backward.default(
-                grad.to("meta"),
-                weight.to("meta"),
-                indices.to("meta"),
-                offsets.to("meta"),
-                offset2bag.to("meta"),
-                mode,
-                padding_idx,
-            )
+        meta_grad_weight = torch.ops.aten._embedding_bag_per_sample_weights_backward.default(
+            grad.to("meta"),
+            weight.to("meta"),
+            indices.to("meta"),
+            offsets.to("meta"),
+            offset2bag.to("meta"),
+            mode,
+            padding_idx,
         )
         self.assertEqual(grad_weight.to("meta"), meta_grad_weight)
 
@@ -2269,9 +2207,7 @@ class TestMeta(TestCase):
         res_shape = [[batch_size, num_embeddings, ed + 8] for ed in embedding_dim]
         for ed, rs in zip(embedding_dim, res_shape):
             weight = torch.randn(batch_size, num_embeddings, ed, dtype=torch.float32)
-            res = torch.ops.quantized.embedding_bag_byte_prepack(
-                weight.to(device="meta")
-            )
+            res = torch.ops.quantized.embedding_bag_byte_prepack(weight.to(device="meta"))
             self.assertEqual(res.shape, rs)
             self.assertEqual(res.dtype, torch.float32)
             self.assertEqual(res.untyped_storage().data_ptr(), 0)
@@ -2282,12 +2218,8 @@ class TestMeta(TestCase):
         embedding_dim = [128, 256, 512]
         res_shape = [[batch_size, num_embeddings, ed] for ed in embedding_dim]
         for ed, rs in zip(embedding_dim, res_shape):
-            packed_weight = torch.randn(
-                batch_size, num_embeddings, ed + 8, dtype=torch.float32
-            )
-            res = torch.ops.quantized.embedding_bag_byte_unpack(
-                packed_weight.to(device="meta")
-            )
+            packed_weight = torch.randn(batch_size, num_embeddings, ed + 8, dtype=torch.float32)
+            res = torch.ops.quantized.embedding_bag_byte_unpack(packed_weight.to(device="meta"))
             self.assertEqual(res.shape, rs)
             self.assertEqual(res.dtype, torch.float32)
             self.assertEqual(res.untyped_storage().data_ptr(), 0)
@@ -2383,9 +2315,7 @@ def print_op_str_if_not_supported(op_str):
     op = OperatorName.parse(op_str)
     packet = getattr(torch.ops.aten, str(op.name))
     overload = getattr(packet, op.overload_name if op.overload_name else "default")
-    if any(
-        overload in d for d in [meta_dispatch_skips, meta_dispatch_device_skips["cuda"]]
-    ):
+    if any(overload in d for d in [meta_dispatch_skips, meta_dispatch_device_skips["cuda"]]):
         print(f"{overload}  # SKIP")
     if any(
         overload in d
@@ -2402,11 +2332,7 @@ if __name__ == "__main__":
     if COMPARE_XLA is not None:
         with open(COMPARE_XLA) as f:
             d = yaml.load(f, Loader=YamlLoader)
-            ops = (
-                d.get("full_codegen", [])
-                + d.get("supported", [])
-                + d.get("autograd", [])
-            )
+            ops = d.get("full_codegen", []) + d.get("supported", []) + d.get("autograd", [])
             for op_str in ops:
                 print_op_str_if_not_supported(op_str)
         sys.exit(0)

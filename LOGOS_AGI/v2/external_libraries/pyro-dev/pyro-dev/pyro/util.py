@@ -145,9 +145,7 @@ def warn_if_nan(
 
     if isinstance(value, torch.Tensor) and value.requires_grad:
         value.register_hook(
-            lambda x: warn_if_nan(
-                x, "backward " + msg, filename=filename, lineno=lineno
-            )
+            lambda x: warn_if_nan(x, "backward " + msg, filename=filename, lineno=lineno)
         )
 
     if torch_isnan(value):
@@ -224,9 +222,7 @@ def warn_if_inf(
         )
 
     if (not allow_posinf) and (
-        value == math.inf
-        if isinstance(value, numbers.Number)
-        else (value == math.inf).any()
+        value == math.inf if isinstance(value, numbers.Number) else (value == math.inf).any()
     ):
         assert isinstance(lineno, int)
         warnings.warn_explicit(
@@ -236,9 +232,7 @@ def warn_if_inf(
             lineno,
         )
     if (not allow_neginf) and (
-        value == -math.inf
-        if isinstance(value, numbers.Number)
-        else (value == -math.inf).any()
+        value == -math.inf if isinstance(value, numbers.Number) else (value == -math.inf).any()
     ):
         assert isinstance(lineno, int)
         warnings.warn_explicit(
@@ -272,8 +266,7 @@ def save_visualization(trace: "Trace", graph_output: str) -> None:
         save_visualization(trace, 'output')
     """
     warnings.warn(
-        "`save_visualization` function is deprecated and will be removed in "
-        "a future version."
+        "`save_visualization` function is deprecated and will be removed in " "a future version."
     )
 
     import graphviz
@@ -329,9 +322,7 @@ def check_traces_match(trace1: "Trace", trace2: "Trace") -> None:
             shape2 = site2["fn"].shape(*site2["args"], **site2["kwargs"])
             if shape1 != shape2:
                 raise ValueError(
-                    "Site dims disagree at site '{}': {} vs {}".format(
-                        name, shape1, shape2
-                    )
+                    "Site dims disagree at site '{}': {} vs {}".format(name, shape1, shape2)
                 )
 
 
@@ -382,9 +373,7 @@ def check_model_guide_match(
         if name not in guide_vars
     )
     if aux_vars & model_vars:
-        warnings.warn(
-            "Found auxiliary vars in the model: {}".format(aux_vars & model_vars)
-        )
+        warnings.warn("Found auxiliary vars in the model: {}".format(aux_vars & model_vars))
     if not (guide_vars <= model_vars | aux_vars):
         warnings.warn(
             "Found non-auxiliary vars in guide but not model, "
@@ -408,9 +397,7 @@ def check_model_guide_match(
         model_site = model_trace.nodes[name]
         guide_site = guide_trace.nodes[name]
 
-        if hasattr(model_site["fn"], "event_dim") and hasattr(
-            guide_site["fn"], "event_dim"
-        ):
+        if hasattr(model_site["fn"], "event_dim") and hasattr(guide_site["fn"], "event_dim"):
             if model_site["fn"].event_dim != guide_site["fn"].event_dim:
                 raise ValueError(
                     "Model and guide event_dims disagree at site '{}': {} vs {}".format(
@@ -419,12 +406,8 @@ def check_model_guide_match(
                 )
 
         if hasattr(model_site["fn"], "shape") and hasattr(guide_site["fn"], "shape"):
-            model_shape = model_site["fn"].shape(
-                *model_site["args"], **model_site["kwargs"]
-            )
-            guide_shape = guide_site["fn"].shape(
-                *guide_site["args"], **guide_site["kwargs"]
-            )
+            model_shape = model_site["fn"].shape(*model_site["args"], **model_site["kwargs"])
+            guide_shape = guide_site["fn"].shape(*guide_site["args"], **guide_site["kwargs"])
             if model_shape == guide_shape:
                 continue
 
@@ -464,9 +447,7 @@ def check_model_guide_match(
     )
     if not (guide_vars <= model_vars):
         warnings.warn(
-            "Found plate statements in guide but not model: {}".format(
-                guide_vars - model_vars
-            )
+            "Found plate statements in guide but not model: {}".format(guide_vars - model_vars)
         )
 
     # Check factor statements in guide specify has_rsample.
@@ -496,9 +477,7 @@ def check_site_shape(site: "Message", max_plate_nesting: int) -> None:
             # Use the specified plate dimension, which counts from the right.
             assert f.dim < 0
             if len(expected_shape) < -f.dim:
-                extra_shape: List[Optional[int]] = [None] * (
-                    -f.dim - len(expected_shape)
-                )
+                extra_shape: List[Optional[int]] = [None] * (-f.dim - len(expected_shape))
                 expected_shape = extra_shape + expected_shape
             if expected_shape[f.dim] is not None:
                 raise ValueError(
@@ -520,9 +499,7 @@ def check_site_shape(site: "Message", max_plate_nesting: int) -> None:
             "\n  ".join(
                 [
                     'at site "{}", plate stack overflow'.format(site["name"]),
-                    "Try increasing max_plate_nesting to at least {}".format(
-                        len(expected_shape)
-                    ),
+                    "Try increasing max_plate_nesting to at least {}".format(len(expected_shape)),
                 ]
             )
         )
@@ -555,10 +532,7 @@ def check_site_shape(site: "Message", max_plate_nesting: int) -> None:
         assert isinstance(site["fn"], TorchDistributionMixin)
     enum_dim = site["infer"].get("_enumerate_dim")
     if enum_dim is not None:
-        if (
-            len(site["fn"].batch_shape) >= -enum_dim
-            and site["fn"].batch_shape[enum_dim] != 1
-        ):
+        if len(site["fn"].batch_shape) >= -enum_dim and site["fn"].batch_shape[enum_dim] != 1:
             raise ValueError(
                 "\n  ".join(
                     [
@@ -596,9 +570,7 @@ def check_traceenum_requirements(model_trace: "Trace", guide_trace: "Trace") -> 
     )
     for role, trace in [("model", model_trace), ("guide", guide_trace)]:
         plate_counters: Dict[str, Dict[str, int]] = {}  # for sequential plates only
-        enumerated_contexts: Dict[
-            FrozenSet["CondIndepStackFrame"], Set[str]
-        ] = defaultdict(set)
+        enumerated_contexts: Dict[FrozenSet["CondIndepStackFrame"], Set[str]] = defaultdict(set)
         for name, site in trace.nodes.items():
             if site["type"] != "sample":
                 continue
@@ -612,9 +584,7 @@ def check_traceenum_requirements(model_trace: "Trace", guide_trace: "Trace") -> 
                 if not (context < enumerated_context):
                     continue
                 names_list = sorted(
-                    n
-                    for n in names
-                    if not _are_independent(plate_counter, plate_counters[n])
+                    n for n in names if not _are_independent(plate_counter, plate_counters[n])
                 )
                 if not names_list:
                     continue
@@ -622,9 +592,7 @@ def check_traceenum_requirements(model_trace: "Trace", guide_trace: "Trace") -> 
                 warnings.warn(
                     "\n  ".join(
                         [
-                            'at {} site "{}", possibly invalid dependency.'.format(
-                                role, name
-                            ),
+                            'at {} site "{}", possibly invalid dependency.'.format(role, name),
                             'Expected site "{}" to precede sites "{}"'.format(
                                 name, '", "'.join(sorted(names_list))
                             ),
@@ -651,8 +619,7 @@ def check_if_enumerated(guide_trace: "Trace") -> None:
         warnings.warn(
             "\n".join(
                 [
-                    "Found sample sites configured for enumeration:"
-                    ", ".join(enumerated_sites),
+                    "Found sample sites configured for enumeration:" ", ".join(enumerated_sites),
                     "If you want to enumerate sites, you need to use TraceEnum_ELBO instead.",
                 ]
             )

@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # This is used (with minor differences) in both the class and the function
-_AUTO_ARIMA_DOCSTR = \
-    """Automatically discover the optimal order for an ARIMA model.
+_AUTO_ARIMA_DOCSTR = """Automatically discover the optimal order for an ARIMA model.
 
     The auto-ARIMA process seeks to identify the most optimal
     parameters for an ``ARIMA`` model, settling on a single fitted ARIMA model.

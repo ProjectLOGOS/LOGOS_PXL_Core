@@ -69,9 +69,7 @@ def download_reports(commit_sha, configs=("dynamo39", "dynamo313", "eager313")):
         ), f"{job} not found, is the commit_sha correct? has the job finished running? The GitHub API may take a couple minutes to update."
 
     # This page lists all artifacts.
-    listings = requests.get(
-        f"https://hud.pytorch.org/api/artifacts/s3/{workflow_run_id}"
-    ).json()
+    listings = requests.get(f"https://hud.pytorch.org/api/artifacts/s3/{workflow_run_id}").json()
 
     def download_report(job_name, subdir):
         job_id = workflow_jobs[job_name]

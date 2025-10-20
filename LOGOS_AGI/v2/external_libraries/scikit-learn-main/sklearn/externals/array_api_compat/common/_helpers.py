@@ -119,8 +119,7 @@ def is_numpy_array(x: object) -> TypeGuard[npt.NDArray[Any]]:
     # TODO: Should we reject ndarray subclasses?
     cls = cast(Hashable, type(x))
     return (
-        _issubclass_fast(cls, "numpy", "ndarray")
-        or _issubclass_fast(cls, "numpy", "generic")
+        _issubclass_fast(cls, "numpy", "ndarray") or _issubclass_fast(cls, "numpy", "generic")
     ) and not _is_jax_zero_gradient_array(x)
 
 
@@ -283,9 +282,7 @@ def is_array_api_obj(
     is_dask_array
     is_jax_array
     """
-    return hasattr(x, "__array_namespace__") or _is_array_api_cls(
-        cast(Hashable, type(x))
-    )
+    return hasattr(x, "__array_namespace__") or _is_array_api_cls(cast(Hashable, type(x)))
 
 
 @lru_cache(100)
@@ -632,9 +629,7 @@ def array_namespace(
             namespaces.add(sparse)
         elif hasattr(x, "__array_namespace__"):
             if use_compat is True:
-                raise ValueError(
-                    "The given array does not have an array-api-compat wrapper"
-                )
+                raise ValueError("The given array does not have an array-api-compat wrapper")
             x = cast("SupportsArrayNamespace[Any]", x)
             namespaces.add(x.__array_namespace__(api_version=api_version))
         elif isinstance(x, (bool, int, float, complex, type(None))):
@@ -872,9 +867,7 @@ def to_device(x: Array, device: Device, /, *, stream: int | Any | None = None) -
         # cupy does not yet have to_device
         return _cupy_to_device(x, device, stream=stream)
     elif is_torch_array(x):
-        return _torch_to_device(
-            x, device, stream=stream
-        )  # pyright: ignore[reportArgumentType]
+        return _torch_to_device(x, device, stream=stream)  # pyright: ignore[reportArgumentType]
     elif is_dask_array(x):
         if stream is not None:
             raise ValueError("The stream argument to to_device() is not supported")

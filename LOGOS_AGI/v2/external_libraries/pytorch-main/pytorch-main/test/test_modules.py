@@ -150,9 +150,7 @@ class TestModule(TestCase):
                     for mock in [parameter_new.mock, register_buffer.mock]:
                         for call_args, call_kwargs in mock.call_args_list:
                             call_tensors = get_tensors_from(call_args, call_kwargs)
-                            if len(
-                                call_tensors
-                            ) > 0 and not constructor_tensors.intersection(
+                            if len(call_tensors) > 0 and not constructor_tensors.intersection(
                                 call_tensors
                             ):
                                 module_creates_params_or_buffers = True
@@ -169,20 +167,12 @@ class TestModule(TestCase):
                 }
             )
 
-            if issubclass(
-                module_info.module_cls, torch.nn.modules.lazy.LazyModuleMixin
-            ):
+            if issubclass(module_info.module_cls, torch.nn.modules.lazy.LazyModuleMixin):
                 # Ensure device and dtype are passed to all UninitializedParameters and UninitializedBuffers.
                 uninit_param_new = mock_wrapper(torch.nn.UninitializedParameter.__new__)
-                with patch.object(
-                    torch.nn.UninitializedParameter, "__new__", uninit_param_new
-                ):
-                    uninit_buffer_new = mock_wrapper(
-                        torch.nn.UninitializedBuffer.__new__
-                    )
-                    with patch.object(
-                        torch.nn.UninitializedBuffer, "__new__", uninit_buffer_new
-                    ):
+                with patch.object(torch.nn.UninitializedParameter, "__new__", uninit_param_new):
+                    uninit_buffer_new = mock_wrapper(torch.nn.UninitializedBuffer.__new__)
+                    with patch.object(torch.nn.UninitializedBuffer, "__new__", uninit_buffer_new):
                         m = module_cls(*args, **kwargs)
                         m.train(training)
                         uninit_param_new.mock.assert_has_calls(
@@ -222,9 +212,7 @@ class TestModule(TestCase):
             requires_grad=False,
             training=training,
         )
-        for module_input_device, module_input_cpu in zip(
-            module_inputs_device, module_inputs_cpu
-        ):
+        for module_input_device, module_input_cpu in zip(module_inputs_device, module_inputs_cpu):
             if module_input_device.forward_input is None:
                 continue
 
@@ -262,9 +250,7 @@ class TestModule(TestCase):
                         if isinstance(objs, (tuple, list)):
                             return type(objs)(_to_device1(item) for item in objs)
                         elif isinstance(objs, dict):
-                            return {
-                                name: _to_device1(item) for name, item in objs.items()
-                            }
+                            return {name: _to_device1(item) for name, item in objs.items()}
                         elif isinstance(objs, torch.Tensor):
                             return objs.cuda(1)
                         else:
@@ -276,9 +262,7 @@ class TestModule(TestCase):
                     m.cuda(1)
                     with torch.cuda.device(1):
                         m(*input_device_1_args, **input_device_1_kwargs)
-                    self._assert_module_parameters_and_buffer_are(
-                        m, torch.device("cuda:1"), dtype
-                    )
+                    self._assert_module_parameters_and_buffer_are(m, torch.device("cuda:1"), dtype)
 
     @modules(module_db)
     def test_repr(self, device, dtype, module_info, training):
@@ -508,9 +492,7 @@ class TestModule(TestCase):
                 module_input.forward_input.args,
                 module_input.forward_input.kwargs,
             )
-            if not (
-                _can_be_noncontiguous(input_args) or _can_be_noncontiguous(input_kwargs)
-            ):
+            if not (_can_be_noncontiguous(input_args) or _can_be_noncontiguous(input_kwargs)):
                 continue
 
             # === Instantiate the module. ===
@@ -534,15 +516,11 @@ class TestModule(TestCase):
                     grad_output = tuple(
                         self._traverse_obj(
                             o,
-                            lambda o: o.clone().detach_().normal_()
-                            if o.requires_grad
-                            else None,
+                            lambda o: o.clone().detach_().normal_() if o.requires_grad else None,
                         )
                         for o in default_output
                     )
-                    flattened_default_output = torch.utils._pytree.tree_leaves(
-                        default_output
-                    )
+                    flattened_default_output = torch.utils._pytree.tree_leaves(default_output)
                     flattened_grad_output = torch.utils._pytree.tree_leaves(grad_output)
                     for o, g_o in zip(flattened_default_output, flattened_grad_output):
                         if o.requires_grad:
@@ -554,9 +532,7 @@ class TestModule(TestCase):
             default_param_grad = deepcopy([p.grad for p in m.parameters()])
 
             # === Construct non-contiguous tensors ===
-            nc_input_args, nc_input_kwargs = _make_non_contiguous(
-                (input_args, input_kwargs)
-            )
+            nc_input_args, nc_input_kwargs = _make_non_contiguous((input_args, input_kwargs))
             nc_grad_output = _make_non_contiguous(grad_output)
 
             # === Compare results with non-contiguous and contiguous tensors ===
@@ -574,23 +550,15 @@ class TestModule(TestCase):
                         out.backward(g_out_copy, retain_graph=True)
                     else:
                         flattened_out = torch.utils._pytree.tree_leaves(out)
-                        flattened_g_out_copy = torch.utils._pytree.tree_leaves(
-                            g_out_copy
-                        )
+                        flattened_g_out_copy = torch.utils._pytree.tree_leaves(g_out_copy)
                         for o, g_o in zip(flattened_out, flattened_g_out_copy):
                             if o.requires_grad:
                                 o.backward(g_o, retain_graph=True)
 
-                input_args_grad, input_kwargs_grad = self._get_grads(
-                    (in_args, in_kwargs)
-                )
+                input_args_grad, input_kwargs_grad = self._get_grads((in_args, in_kwargs))
                 self.assertEqual(out, default_output)
-                self.assertEqual(
-                    input_args_grad, default_input_args_grad, atol=1e-4, rtol=0
-                )
-                self.assertEqual(
-                    input_kwargs_grad, default_input_kwargs_grad, atol=1e-4, rtol=0
-                )
+                self.assertEqual(input_args_grad, default_input_args_grad, atol=1e-4, rtol=0)
+                self.assertEqual(input_kwargs_grad, default_input_kwargs_grad, atol=1e-4, rtol=0)
 
                 param_grad = [p.grad for p in m.parameters()]
                 self.assertEqual(param_grad, default_param_grad)
@@ -630,9 +598,7 @@ class TestModule(TestCase):
                 module_input.forward_input.args,
                 module_input.forward_input.kwargs,
             )
-            if issubclass(
-                module_info.module_cls, torch.nn.modules.lazy.LazyModuleMixin
-            ):
+            if issubclass(module_info.module_cls, torch.nn.modules.lazy.LazyModuleMixin):
                 with torch.no_grad():
                     m(*input_args, **input_kwargs)
 
@@ -651,9 +617,7 @@ class TestModule(TestCase):
                 )
                 new_input_args = input_and_params[: len(input_args)]
                 kwarg_args = input_and_params[-len(kwarg_tensors) :]
-                new_kwargs = {
-                    name: obj for (name, _), obj in zip(kwarg_tensors, kwarg_args)
-                }
+                new_kwargs = {name: obj for (name, _), obj in zip(kwarg_tensors, kwarg_args)}
 
                 with freeze_rng_state():
                     output = m(*new_input_args, **new_kwargs, **other_kwargs)
@@ -686,18 +650,14 @@ class TestModule(TestCase):
 
             for p, old in zip(params, old_params_requires_grad):
                 p.requires_grad = old
-                grad_input = (
-                    input_args + params + tuple(obj for (_, obj) in kwarg_tensors)
-                )
+                grad_input = input_args + params + tuple(obj for (_, obj) in kwarg_tensors)
                 flat_input, flat_spec = torch.utils._pytree.tree_flatten(grad_input)
                 do_check(flat_input)
                 p.requires_grad = False
 
             for (_, obj), old in zip(kwarg_tensors, old_kwargs_requires_grad):
                 obj.requires_grad = old
-                grad_input = (
-                    input_args + params + tuple(obj for (_, obj) in kwarg_tensors)
-                )
+                grad_input = input_args + params + tuple(obj for (_, obj) in kwarg_tensors)
                 flat_input, flat_spec = torch.utils._pytree.tree_flatten(grad_input)
                 do_check(flat_input)
                 obj.requires_grad = False
@@ -706,9 +666,7 @@ class TestModule(TestCase):
     def test_grad(self, device, dtype, module_info, training):
         self._test_gradients_helper(device, dtype, module_info, training, gradcheck)
 
-    @modules(
-        [m for m in module_db if m.supports_gradgrad], allowed_dtypes=[torch.double]
-    )
+    @modules([m for m in module_db if m.supports_gradgrad], allowed_dtypes=[torch.double])
     def test_gradgrad(self, device, dtype, module_info, training):
         self._test_gradients_helper(device, dtype, module_info, training, gradgradcheck)
 
@@ -807,9 +765,7 @@ class TestModule(TestCase):
                 gpu_grad_input = self._get_grads(gpu_forward_args)
                 self.assertEqual(cpu_grad_input, gpu_grad_input)
 
-                for cpu_p, gpu_p in zip(
-                    cpu_module.parameters(), gpu_module.parameters()
-                ):
+                for cpu_p, gpu_p in zip(cpu_module.parameters(), gpu_module.parameters()):
                     self.assertEqual(cpu_p.grad, gpu_p.grad)
 
                 cpu_grad_kwarg_input = self._get_grads(cpu_forward_kwargs)
@@ -822,9 +778,7 @@ class TestModule(TestCase):
                 else:
                     flatten_cpu_outputs = torch.utils._pytree.tree_leaves(cpu_outputs)
                     flatten_gpu_outputs = torch.utils._pytree.tree_leaves(gpu_outputs)
-                    for cpu_output, gpu_output in zip(
-                        flatten_cpu_outputs, flatten_gpu_outputs
-                    ):
+                    for cpu_output, gpu_output in zip(flatten_cpu_outputs, flatten_gpu_outputs):
                         if cpu_output.requires_grad:
                             check_backward(cpu_output, gpu_output)
 
@@ -903,10 +857,7 @@ class TestModule(TestCase):
                 d = output.dim()
                 if d == 4 and (
                     (input_mem_format == torch.channels_last)
-                    or (
-                        module_mem_format == torch.channels_last
-                        and module_memformat_affects_out
-                    )
+                    or (module_mem_format == torch.channels_last and module_memformat_affects_out)
                 ):
                     self.assertTrue(
                         output.numel() == 0
@@ -915,8 +866,7 @@ class TestModule(TestCase):
                 elif d == 5 and (
                     (input_mem_format == torch.channels_last_3d)
                     or (
-                        module_mem_format == torch.channels_last_3d
-                        and module_memformat_affects_out
+                        module_mem_format == torch.channels_last_3d and module_memformat_affects_out
                     )
                 ):
                     self.assertTrue(
@@ -960,9 +910,7 @@ class TestModule(TestCase):
                 desired_outputs = m(*args, **kwargs)
                 # === Do backward pass. ===
                 ref_diff_outputs = tuple(
-                    t
-                    for t in torch.utils._pytree.tree_leaves(desired_outputs)
-                    if _req_grad(t)
+                    t for t in torch.utils._pytree.tree_leaves(desired_outputs) if _req_grad(t)
                 )
                 if training and len(ref_diff_outputs) > 0:
                     params = tuple(p for p in m.parameters())
@@ -971,9 +919,7 @@ class TestModule(TestCase):
                         for t in torch.utils._pytree.tree_leaves((args, kwargs, params))
                         if _req_grad(t)
                     )
-                    ref_grad_outputs = tuple(
-                        torch.rand_like(t) for t in ref_diff_outputs
-                    )
+                    ref_grad_outputs = tuple(torch.rand_like(t) for t in ref_diff_outputs)
                     ref_grad_inputs = torch.autograd.grad(
                         ref_diff_outputs,
                         ref_diff_inputs,
@@ -982,27 +928,19 @@ class TestModule(TestCase):
 
                 for input_mem_format in input_mem_formats:
                     # === Change memformat of input. ===
-                    d_args = _to_mem_format(
-                        input_mem_format, module_input.forward_input.args
-                    )
-                    d_kwargs = _to_mem_format(
-                        input_mem_format, module_input.forward_input.kwargs
-                    )
+                    d_args = _to_mem_format(input_mem_format, module_input.forward_input.args)
+                    d_kwargs = _to_mem_format(input_mem_format, module_input.forward_input.kwargs)
 
                     # See https://github.com/pytorch/pytorch/issues/107861
                     # When inductor tests are turned on, the setting of requires_grad will be lost
                     for t1, t2 in zip(
                         torch.utils._pytree.tree_leaves(d_args),
-                        torch.utils._pytree.tree_leaves(
-                            module_input.forward_input.args
-                        ),
+                        torch.utils._pytree.tree_leaves(module_input.forward_input.args),
                     ):
                         t1.requires_grad_(t2.requires_grad)
                     for t1, t2 in zip(
                         torch.utils._pytree.tree_leaves(d_kwargs),
-                        torch.utils._pytree.tree_leaves(
-                            module_input.forward_input.kwargs
-                        ),
+                        torch.utils._pytree.tree_leaves(module_input.forward_input.kwargs),
                     ):
                         t1.requires_grad_(t2.requires_grad)
 
@@ -1025,28 +963,20 @@ class TestModule(TestCase):
                             input_mem_format != torch.contiguous_format
                             or module_mem_format != torch.contiguous_format
                         ):
-                            self.assertEqual(
-                                outputs, desired_outputs, rtol=rtol, atol=atol
-                            )
+                            self.assertEqual(outputs, desired_outputs, rtol=rtol, atol=atol)
 
                         # === Check mem format of output. ===
-                        _check_out_mem_format(
-                            outputs, input_mem_format, module_mem_format
-                        )
+                        _check_out_mem_format(outputs, input_mem_format, module_mem_format)
 
                         # === Do backward pass. ===
                         diff_outputs = tuple(
-                            t
-                            for t in torch.utils._pytree.tree_leaves(outputs)
-                            if _req_grad(t)
+                            t for t in torch.utils._pytree.tree_leaves(outputs) if _req_grad(t)
                         )
                         if training and len(diff_outputs) > 0:
                             params = tuple(p for p in m.parameters())
                             diff_inputs = tuple(
                                 t
-                                for t in torch.utils._pytree.tree_leaves(
-                                    (args, kwargs, params)
-                                )
+                                for t in torch.utils._pytree.tree_leaves((args, kwargs, params))
                                 if _req_grad(t)
                             )
                             grad_outputs = tuple(
@@ -1064,14 +994,10 @@ class TestModule(TestCase):
                                 input_mem_format != torch.contiguous_format
                                 or module_mem_format != torch.contiguous_format
                             ):
-                                self.assertEqual(
-                                    grad_inputs, ref_grad_inputs, rtol=rtol, atol=atol
-                                )
+                                self.assertEqual(grad_inputs, ref_grad_inputs, rtol=rtol, atol=atol)
 
                             # === Check mem format of grad_inputs. ===
-                            _check_out_mem_format(
-                                grad_inputs, input_mem_format, module_mem_format
-                            )
+                            _check_out_mem_format(grad_inputs, input_mem_format, module_mem_format)
 
     # Test whether train and eval modes differ for each module. Use to verify
     # that the ModuleInfo entry flag is correct.
@@ -1167,9 +1093,7 @@ class TestModule(TestCase):
                 self.assertTrue(p_meta.is_meta)
                 assert_metadata_eq(self.assertEqual, p_meta, p_cpu)
 
-    @modules(
-        [module for module in module_db if module.module_error_inputs_func is not None]
-    )
+    @modules([module for module in module_db if module.module_error_inputs_func is not None])
     def test_errors(self, device, dtype, module_info, training):
         module_cls = module_info.module_cls
         error_inputs = module_info.module_error_inputs_func(
@@ -1186,9 +1110,7 @@ class TestModule(TestCase):
                 module_input.constructor_input.kwargs,
             )
             if error_input.error_on == ModuleErrorEnum.CONSTRUCTION_ERROR:
-                with self.assertRaisesRegex(
-                    error_input.error_type, error_input.error_regex
-                ):
+                with self.assertRaisesRegex(error_input.error_type, error_input.error_regex):
                     m = module_cls(*c_args, **c_kwargs)
             elif error_input.error_on == ModuleErrorEnum.FORWARD_ERROR:
                 m = module_cls(*c_args, **c_kwargs)
@@ -1196,9 +1118,7 @@ class TestModule(TestCase):
                     module_input.forward_input.args,
                     module_input.forward_input.kwargs,
                 )
-                with self.assertRaisesRegex(
-                    error_input.error_type, error_input.error_regex
-                ):
+                with self.assertRaisesRegex(error_input.error_type, error_input.error_regex):
                     m(*fw_args, **fw_kwargs)
             else:
                 raise NotImplementedError(f"Unknown error type {error_input.error_on}")
@@ -1281,30 +1201,22 @@ class TestModule(TestCase):
 
                 m.to(device=device_, dtype=dtype_)
 
-                self.assertTrue(
-                    all(isinstance(p, torch.nn.Parameter) for p in m.parameters())
-                )
+                self.assertTrue(all(isinstance(p, torch.nn.Parameter) for p in m.parameters()))
                 self.assertTrue(all(p.device.type == device_ for p in m.parameters()))
                 self.assertTrue(all(p.dtype == dtype_ for p in m.parameters()))
                 p_ids_after = [id(p) for p in m.parameters()]
                 p_cdatas_after = [p._cdata for p in m.parameters()]
 
                 if set_grad:
-                    self.assertTrue(
-                        all(p.grad.device.type == device_ for p in m.parameters())
-                    )
+                    self.assertTrue(all(p.grad.device.type == device_ for p in m.parameters()))
                     self.assertTrue(all(p.grad.dtype == dtype_ for p in m.parameters()))
                     g_ids_after = [id(p.grad) for p in m.parameters()]
                     g_cdatas_after = [p.grad._cdata for p in m.parameters()]
 
                 if swap:
                     # id same, ._cdata differs --> swapped cdata of THPVariable
-                    self.assertTrue(
-                        all(a == b for a, b in zip(p_ids_before, p_ids_after))
-                    )
-                    self.assertTrue(
-                        all(a != b for a, b in zip(p_cdatas_before, p_cdatas_after))
-                    )
+                    self.assertTrue(all(a == b for a, b in zip(p_ids_before, p_ids_after)))
+                    self.assertTrue(all(a != b for a, b in zip(p_cdatas_before, p_cdatas_after)))
                     if set_grad:
                         self.assertTrue(
                             all(
@@ -1314,19 +1226,13 @@ class TestModule(TestCase):
                         )
                 else:
                     # id and _cdata remain the same --> .data setting
-                    self.assertTrue(
-                        all(a == b for a, b in zip(p_cdatas_before, p_cdatas_after))
-                    )
-                    self.assertTrue(
-                        all(a == b for a, b in zip(p_ids_before, p_ids_after))
-                    )
+                    self.assertTrue(all(a == b for a, b in zip(p_cdatas_before, p_cdatas_after)))
+                    self.assertTrue(all(a == b for a, b in zip(p_ids_before, p_ids_after)))
                     if set_grad:
                         self.assertTrue(
                             all(a == b for a, b in zip(g_cdatas_before, g_cdatas_after))
                         )
-                        self.assertTrue(
-                            all(a == b for a, b in zip(g_ids_before, g_ids_after))
-                        )
+                        self.assertTrue(all(a == b for a, b in zip(g_ids_before, g_ids_after)))
 
     @modules(
         [module for module in module_db if not module.is_lazy],
@@ -1362,9 +1268,7 @@ class TestModule(TestCase):
             p_cdatas_before = [p._cdata for p in m.parameters()]
             m.to_empty(device=device_)
 
-            self.assertTrue(
-                all(isinstance(p, torch.nn.Parameter) for p in m.parameters())
-            )
+            self.assertTrue(all(isinstance(p, torch.nn.Parameter) for p in m.parameters()))
             self.assertTrue(all(p.device == device_ for p in m.parameters()))
             self.assertTrue(all(p.dtype == dtype for p in m.parameters()))
             p_ids_after = [id(p) for p in m.parameters()]
@@ -1373,17 +1277,13 @@ class TestModule(TestCase):
             if swap:
                 # id same, ._cdata differs --> swapped cdata of THPVariable
                 self.assertTrue(all(a == b for a, b in zip(p_ids_before, p_ids_after)))
-                self.assertTrue(
-                    all(a != b for a, b in zip(p_cdatas_before, p_cdatas_after))
-                )
+                self.assertTrue(all(a != b for a, b in zip(p_cdatas_before, p_cdatas_after)))
             else:
                 # id and ._cdata differ
                 # meta and device have different shallow copy types, so this will create a new
                 # parameter and assign it to the module
                 self.assertTrue(all(a != b for a, b in zip(p_ids_before, p_ids_after)))
-                self.assertTrue(
-                    all(a != b for a, b in zip(p_cdatas_before, p_cdatas_after))
-                )
+                self.assertTrue(all(a != b for a, b in zip(p_cdatas_before, p_cdatas_after)))
 
 
 instantiate_device_type_tests(TestModule, globals(), allow_mps=True)

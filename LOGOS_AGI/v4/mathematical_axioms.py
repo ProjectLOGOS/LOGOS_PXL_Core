@@ -26,18 +26,22 @@ from abc import ABC, abstractmethod
 # I. FOUNDATIONAL AXIOM SYSTEM
 # =========================================================================
 
+
 class AxiomType(Enum):
     """Types of mathematical axioms"""
-    EXISTENCE = "existence"       # Axioms of being and existence
-    IDENTITY = "identity"         # Axioms of identity and equality
-    CAUSATION = "causation"       # Axioms of cause and effect
-    TRINITY = "trinity"          # Trinity-specific axioms
-    LOGICAL = "logical"          # Logical axioms
-    MATHEMATICAL = "mathematical" # Pure mathematical axioms
+
+    EXISTENCE = "existence"  # Axioms of being and existence
+    IDENTITY = "identity"  # Axioms of identity and equality
+    CAUSATION = "causation"  # Axioms of cause and effect
+    TRINITY = "trinity"  # Trinity-specific axioms
+    LOGICAL = "logical"  # Logical axioms
+    MATHEMATICAL = "mathematical"  # Pure mathematical axioms
+
 
 @dataclass
 class Axiom:
     """Mathematical axiom with Trinity grounding"""
+
     axiom_id: str
     name: str
     statement: str
@@ -49,6 +53,7 @@ class Axiom:
     def __post_init__(self):
         if self.dependencies is None:
             self.dependencies = []
+
 
 class AxiomSystem:
     """Complete axiom system for Trinity-grounded mathematics"""
@@ -62,132 +67,160 @@ class AxiomSystem:
         """Initialize the foundational axiom system"""
 
         # Existence Axioms
-        self.add_axiom(Axiom(
-            axiom_id="E1",
-            name="Axiom of Existence",
-            statement="Something exists rather than nothing",
-            axiom_type=AxiomType.EXISTENCE,
-            formal_expression="∃x: x exists",
-            proof_sketch="Self-evident by the fact of our reasoning about existence"
-        ))
+        self.add_axiom(
+            Axiom(
+                axiom_id="E1",
+                name="Axiom of Existence",
+                statement="Something exists rather than nothing",
+                axiom_type=AxiomType.EXISTENCE,
+                formal_expression="∃x: x exists",
+                proof_sketch="Self-evident by the fact of our reasoning about existence",
+            )
+        )
 
-        self.add_axiom(Axiom(
-            axiom_id="E2",
-            name="Axiom of Self-Existence",
-            statement="If something exists, it exists as itself",
-            axiom_type=AxiomType.EXISTENCE,
-            formal_expression="∀x: exists(x) → x = x",
-            dependencies=["E1"]
-        ))
+        self.add_axiom(
+            Axiom(
+                axiom_id="E2",
+                name="Axiom of Self-Existence",
+                statement="If something exists, it exists as itself",
+                axiom_type=AxiomType.EXISTENCE,
+                formal_expression="∀x: exists(x) → x = x",
+                dependencies=["E1"],
+            )
+        )
 
         # Identity Axioms
-        self.add_axiom(Axiom(
-            axiom_id="I1",
-            name="Reflexivity of Identity",
-            statement="Everything is identical to itself",
-            axiom_type=AxiomType.IDENTITY,
-            formal_expression="∀x: x = x"
-        ))
+        self.add_axiom(
+            Axiom(
+                axiom_id="I1",
+                name="Reflexivity of Identity",
+                statement="Everything is identical to itself",
+                axiom_type=AxiomType.IDENTITY,
+                formal_expression="∀x: x = x",
+            )
+        )
 
-        self.add_axiom(Axiom(
-            axiom_id="I2",
-            name="Symmetry of Identity",
-            statement="If x equals y, then y equals x",
-            axiom_type=AxiomType.IDENTITY,
-            formal_expression="∀x,y: (x = y) → (y = x)",
-            dependencies=["I1"]
-        ))
+        self.add_axiom(
+            Axiom(
+                axiom_id="I2",
+                name="Symmetry of Identity",
+                statement="If x equals y, then y equals x",
+                axiom_type=AxiomType.IDENTITY,
+                formal_expression="∀x,y: (x = y) → (y = x)",
+                dependencies=["I1"],
+            )
+        )
 
-        self.add_axiom(Axiom(
-            axiom_id="I3",
-            name="Transitivity of Identity",
-            statement="If x equals y and y equals z, then x equals z",
-            axiom_type=AxiomType.IDENTITY,
-            formal_expression="∀x,y,z: (x = y ∧ y = z) → x = z",
-            dependencies=["I1", "I2"]
-        ))
+        self.add_axiom(
+            Axiom(
+                axiom_id="I3",
+                name="Transitivity of Identity",
+                statement="If x equals y and y equals z, then x equals z",
+                axiom_type=AxiomType.IDENTITY,
+                formal_expression="∀x,y,z: (x = y ∧ y = z) → x = z",
+                dependencies=["I1", "I2"],
+            )
+        )
 
         # Trinity Axioms
-        self.add_axiom(Axiom(
-            axiom_id="T1",
-            name="Trinity Unity Axiom",
-            statement="The Trinity is one in essence and three in persons",
-            axiom_type=AxiomType.TRINITY,
-            formal_expression="Unity(Trinity) ∧ Persons(Trinity) = 3",
-            proof_sketch="Fundamental metaphysical reality"
-        ))
+        self.add_axiom(
+            Axiom(
+                axiom_id="T1",
+                name="Trinity Unity Axiom",
+                statement="The Trinity is one in essence and three in persons",
+                axiom_type=AxiomType.TRINITY,
+                formal_expression="Unity(Trinity) ∧ Persons(Trinity) = 3",
+                proof_sketch="Fundamental metaphysical reality",
+            )
+        )
 
-        self.add_axiom(Axiom(
-            axiom_id="T2",
-            name="Trinity Optimization Axiom",
-            statement="All optimization functions minimize at n=3 (Trinity structure)",
-            axiom_type=AxiomType.TRINITY,
-            formal_expression="∀O: min(O(n)) at n = 3",
-            dependencies=["T1"]
-        ))
+        self.add_axiom(
+            Axiom(
+                axiom_id="T2",
+                name="Trinity Optimization Axiom",
+                statement="All optimization functions minimize at n=3 (Trinity structure)",
+                axiom_type=AxiomType.TRINITY,
+                formal_expression="∀O: min(O(n)) at n = 3",
+                dependencies=["T1"],
+            )
+        )
 
-        self.add_axiom(Axiom(
-            axiom_id="T3",
-            name="Trinity Product Axiom",
-            statement="The Trinity product E×G×T is maximized when E=G=T=1/3",
-            axiom_type=AxiomType.TRINITY,
-            formal_expression="max(E×G×T) when E=G=T=1/3, subject to E+G+T=1",
-            dependencies=["T1", "T2"]
-        ))
+        self.add_axiom(
+            Axiom(
+                axiom_id="T3",
+                name="Trinity Product Axiom",
+                statement="The Trinity product E×G×T is maximized when E=G=T=1/3",
+                axiom_type=AxiomType.TRINITY,
+                formal_expression="max(E×G×T) when E=G=T=1/3, subject to E+G+T=1",
+                dependencies=["T1", "T2"],
+            )
+        )
 
         # Logical Axioms
-        self.add_axiom(Axiom(
-            axiom_id="L1",
-            name="Law of Non-Contradiction",
-            statement="Nothing can be both true and false simultaneously",
-            axiom_type=AxiomType.LOGICAL,
-            formal_expression="∀P: ¬(P ∧ ¬P)"
-        ))
+        self.add_axiom(
+            Axiom(
+                axiom_id="L1",
+                name="Law of Non-Contradiction",
+                statement="Nothing can be both true and false simultaneously",
+                axiom_type=AxiomType.LOGICAL,
+                formal_expression="∀P: ¬(P ∧ ¬P)",
+            )
+        )
 
-        self.add_axiom(Axiom(
-            axiom_id="L2",
-            name="Law of Excluded Middle",
-            statement="Every proposition is either true or false",
-            axiom_type=AxiomType.LOGICAL,
-            formal_expression="∀P: P ∨ ¬P",
-            dependencies=["L1"]
-        ))
+        self.add_axiom(
+            Axiom(
+                axiom_id="L2",
+                name="Law of Excluded Middle",
+                statement="Every proposition is either true or false",
+                axiom_type=AxiomType.LOGICAL,
+                formal_expression="∀P: P ∨ ¬P",
+                dependencies=["L1"],
+            )
+        )
 
         # Causation Axioms
-        self.add_axiom(Axiom(
-            axiom_id="C1",
-            name="Principle of Causation",
-            statement="Every effect has a cause",
-            axiom_type=AxiomType.CAUSATION,
-            formal_expression="∀e: Effect(e) → ∃c: Cause(c,e)"
-        ))
+        self.add_axiom(
+            Axiom(
+                axiom_id="C1",
+                name="Principle of Causation",
+                statement="Every effect has a cause",
+                axiom_type=AxiomType.CAUSATION,
+                formal_expression="∀e: Effect(e) → ∃c: Cause(c,e)",
+            )
+        )
 
-        self.add_axiom(Axiom(
-            axiom_id="C2",
-            name="Trinity Causation Principle",
-            statement="All causation respects Trinity structure (Existence, Goodness, Truth)",
-            axiom_type=AxiomType.CAUSATION,
-            formal_expression="∀c,e: Cause(c,e) → TrinityCompliant(c,e)",
-            dependencies=["C1", "T1"]
-        ))
+        self.add_axiom(
+            Axiom(
+                axiom_id="C2",
+                name="Trinity Causation Principle",
+                statement="All causation respects Trinity structure (Existence, Goodness, Truth)",
+                axiom_type=AxiomType.CAUSATION,
+                formal_expression="∀c,e: Cause(c,e) → TrinityCompliant(c,e)",
+                dependencies=["C1", "T1"],
+            )
+        )
 
         # Mathematical Axioms
-        self.add_axiom(Axiom(
-            axiom_id="M1",
-            name="Peano Axiom 1",
-            statement="Zero is a natural number",
-            axiom_type=AxiomType.MATHEMATICAL,
-            formal_expression="0 ∈ ℕ"
-        ))
+        self.add_axiom(
+            Axiom(
+                axiom_id="M1",
+                name="Peano Axiom 1",
+                statement="Zero is a natural number",
+                axiom_type=AxiomType.MATHEMATICAL,
+                formal_expression="0 ∈ ℕ",
+            )
+        )
 
-        self.add_axiom(Axiom(
-            axiom_id="M2",
-            name="Trinity-Grounded Infinity",
-            statement="Infinity exists but is grounded in the Trinity",
-            axiom_type=AxiomType.MATHEMATICAL,
-            formal_expression="∞ exists ∧ TrinityGrounded(∞)",
-            dependencies=["T1", "M1"]
-        ))
+        self.add_axiom(
+            Axiom(
+                axiom_id="M2",
+                name="Trinity-Grounded Infinity",
+                statement="Infinity exists but is grounded in the Trinity",
+                axiom_type=AxiomType.MATHEMATICAL,
+                formal_expression="∞ exists ∧ TrinityGrounded(∞)",
+                dependencies=["T1", "M1"],
+            )
+        )
 
         self.logger.info(f"Initialized {len(self.axioms)} foundational axioms")
 
@@ -211,7 +244,7 @@ class AxiomSystem:
             "no_contradictions": self._check_contradictions(),
             "dependency_satisfaction": self._check_dependencies(),
             "trinity_coherence": self._check_trinity_coherence(),
-            "logical_completeness": self._check_logical_completeness()
+            "logical_completeness": self._check_logical_completeness(),
         }
 
         overall_consistent = all(consistency_checks.values())
@@ -219,7 +252,7 @@ class AxiomSystem:
         return {
             "consistent": overall_consistent,
             "checks": consistency_checks,
-            "total_axioms": len(self.axioms)
+            "total_axioms": len(self.axioms),
         }
 
     def _check_contradictions(self) -> bool:
@@ -230,7 +263,7 @@ class AxiomSystem:
         statements = [axiom.statement.lower() for axiom in self.axioms.values()]
 
         for i, stmt1 in enumerate(statements):
-            for stmt2 in statements[i+1:]:
+            for stmt2 in statements[i + 1 :]:
                 if self._are_contradictory_statements(stmt1, stmt2):
                     self.logger.warning(f"Potential contradiction detected: {stmt1} vs {stmt2}")
                     return False
@@ -245,7 +278,7 @@ class AxiomSystem:
             ("exists", "not exist"),
             ("true", "false"),
             ("something", "nothing"),
-            ("is", "is not")
+            ("is", "is not"),
         ]
 
         for pos, neg in contradictions:
@@ -297,9 +330,11 @@ class AxiomSystem:
         """Get all axioms of a specific type"""
         return [axiom for axiom in self.axioms.values() if axiom.axiom_type == axiom_type]
 
+
 # =========================================================================
 # II. TRINITY MATHEMATICAL STRUCTURES
 # =========================================================================
+
 
 class TrinityMathematics:
     """Mathematical operations grounded in Trinity axioms"""
@@ -327,11 +362,11 @@ class TrinityMathematics:
         # Implementation of O(n) = I_SIGN(n) + I_MIND(n) + I_MESH(n)
         # Constants derived from Trinity principles
         K0 = 415.0  # Base complexity constant
-        K1 = 1.0    # Mesh complexity constant
+        K1 = 1.0  # Mesh complexity constant
 
-        i_sign = K0 * (n ** 1.0)  # Linear complexity
-        i_mind = K0 * (n ** 2.0)  # Quadratic complexity
-        i_mesh = K1 * (n ** 1.5)  # Mesh complexity
+        i_sign = K0 * (n**1.0)  # Linear complexity
+        i_mind = K0 * (n**2.0)  # Quadratic complexity
+        i_mesh = K1 * (n**1.5)  # Mesh complexity
 
         return i_sign + i_mind + i_mesh
 
@@ -351,31 +386,35 @@ class TrinityMathematics:
             "optimal_n": optimal_n,
             "trinity_optimal": optimal_n == 3,
             "results": results,
-            "axiom_verified": optimal_n == 3
+            "axiom_verified": optimal_n == 3,
         }
 
     def trinity_distance(self, point: Tuple[float, float, float]) -> float:
         """Calculate distance from Trinity center (1/3, 1/3, 1/3)"""
 
         existence, goodness, truth = point
-        trinity_center = (1/3, 1/3, 1/3)
+        trinity_center = (1 / 3, 1 / 3, 1 / 3)
 
         return math.sqrt(
-            (existence - trinity_center[0])**2 +
-            (goodness - trinity_center[1])**2 +
-            (truth - trinity_center[2])**2
+            (existence - trinity_center[0]) ** 2
+            + (goodness - trinity_center[1]) ** 2
+            + (truth - trinity_center[2]) ** 2
         )
 
-    def normalize_to_trinity(self, existence: float, goodness: float, truth: float) -> Tuple[float, float, float]:
+    def normalize_to_trinity(
+        self, existence: float, goodness: float, truth: float
+    ) -> Tuple[float, float, float]:
         """Normalize values to Trinity proportions (sum = 1)"""
 
         total = existence + goodness + truth
         if total == 0:
-            return (1/3, 1/3, 1/3)  # Default Trinity balance
+            return (1 / 3, 1 / 3, 1 / 3)  # Default Trinity balance
 
-        return (existence/total, goodness/total, truth/total)
+        return (existence / total, goodness / total, truth / total)
 
-    def is_trinity_balanced(self, existence: float, goodness: float, truth: float, tolerance: float = 0.1) -> bool:
+    def is_trinity_balanced(
+        self, existence: float, goodness: float, truth: float, tolerance: float = 0.1
+    ) -> bool:
         """Check if values are Trinity-balanced within tolerance"""
 
         normalized = self.normalize_to_trinity(existence, goodness, truth)
@@ -383,9 +422,11 @@ class TrinityMathematics:
 
         return distance <= tolerance
 
+
 # =========================================================================
 # III. ONTOLOGICAL PROOF SYSTEM
 # =========================================================================
+
 
 class OntologicalProof:
     """Proof object for ontological mathematical theorems"""
@@ -412,6 +453,7 @@ class OntologicalProof:
         self.valid = len(self.proof_steps) > 0 and len(self.axioms_used) > 0
         return self.valid
 
+
 class OntologicalProofSystem:
     """System for generating and verifying ontological proofs"""
 
@@ -424,8 +466,7 @@ class OntologicalProofSystem:
         """Prove that Trinity structure is optimal"""
 
         proof = OntologicalProof(
-            "Trinity structure (n=3) is optimal for all optimization functions",
-            ["T1", "T2", "T3"]
+            "Trinity structure (n=3) is optimal for all optimization functions", ["T1", "T2", "T3"]
         )
 
         proof.add_step("Given: Trinity Unity Axiom (T1)")
@@ -436,7 +477,7 @@ class OntologicalProofSystem:
         verification = self.trinity_math.verify_trinity_optimality()
         proof.add_step(f"Result: minimum at n = {verification['optimal_n']}")
 
-        if verification['trinity_optimal']:
+        if verification["trinity_optimal"]:
             proof.add_step("Therefore: Trinity structure is optimal ∎")
             proof.valid = True
         else:
@@ -449,8 +490,7 @@ class OntologicalProofSystem:
         """Prove that all mathematical objects must be existence-grounded"""
 
         proof = OntologicalProof(
-            "All mathematical objects must be grounded in existence",
-            ["E1", "E2", "T1"]
+            "All mathematical objects must be grounded in existence", ["E1", "E2", "T1"]
         )
 
         proof.add_step("Given: Axiom of Existence (E1) - Something exists")
@@ -467,8 +507,7 @@ class OntologicalProofSystem:
         """Prove that evil (privation of good) cannot be optimized"""
 
         proof = OntologicalProof(
-            "Evil (privation of good) cannot be computationally optimized",
-            ["T1", "T3", "E1"]
+            "Evil (privation of good) cannot be computationally optimized", ["T1", "T3", "E1"]
         )
 
         proof.add_step("Given: Trinity structure requires Existence, Goodness, and Truth")
@@ -482,21 +521,23 @@ class OntologicalProofSystem:
         proof.valid = True
         return proof
 
+
 # =========================================================================
 # IV. MODULE EXPORTS
 # =========================================================================
 
 __all__ = [
-    'AxiomType',
-    'Axiom',
-    'AxiomSystem',
-    'TrinityMathematics',
-    'OntologicalProof',
-    'OntologicalProofSystem'
+    "AxiomType",
+    "Axiom",
+    "AxiomSystem",
+    "TrinityMathematics",
+    "OntologicalProof",
+    "OntologicalProofSystem",
 ]
 
 # Create global axiom system instance
 _global_axiom_system = None
+
 
 def get_global_axiom_system() -> AxiomSystem:
     """Get the global axiom system instance"""
@@ -504,6 +545,7 @@ def get_global_axiom_system() -> AxiomSystem:
     if _global_axiom_system is None:
         _global_axiom_system = AxiomSystem()
     return _global_axiom_system
+
 
 def verify_mathematical_foundations() -> Dict[str, Any]:
     """Verify the complete mathematical foundation system"""
@@ -530,13 +572,16 @@ def verify_mathematical_foundations() -> Dict[str, Any]:
         "existence_proof_valid": existence_proof.valid,
         "privation_proof_valid": privation_proof.valid,
         "total_axioms": len(axiom_system.axioms),
-        "foundations_sound": all([
-            consistency["consistent"],
-            trinity_verification["trinity_optimal"],
-            trinity_proof.valid,
-            existence_proof.valid,
-            privation_proof.valid
-        ])
+        "foundations_sound": all(
+            [
+                consistency["consistent"],
+                trinity_verification["trinity_optimal"],
+                trinity_proof.valid,
+                existence_proof.valid,
+                privation_proof.valid,
+            ]
+        ),
     }
+
 
 # --- END OF FILE core/mathematics/ontological_axioms.py ---

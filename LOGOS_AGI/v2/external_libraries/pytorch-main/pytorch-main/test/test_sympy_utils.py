@@ -348,9 +348,7 @@ class TestValueRanges(TestCase):
                         continue
                     with self.subTest(a0=a0, b0=b0):
                         ref_r = getattr(ValueRangeAnalysis, fn)(a, b)
-                        r = getattr(ReferenceAnalysis, fn)(
-                            sympy.Integer(a0), sympy.Integer(b0)
-                        )
+                        r = getattr(ReferenceAnalysis, fn)(sympy.Integer(a0), sympy.Integer(b0))
                         if r.is_finite:
                             self.assertIn(r, ref_r)
 
@@ -388,9 +386,7 @@ class TestValueRanges(TestCase):
 
 
 class TestSympyInterp(TestCase):
-    @parametrize(
-        "fn", UNARY_OPS + BINARY_OPS + UNARY_BOOL_OPS + BINARY_BOOL_OPS + COMPARE_OPS
-    )
+    @parametrize("fn", UNARY_OPS + BINARY_OPS + UNARY_BOOL_OPS + BINARY_BOOL_OPS + COMPARE_OPS)
     def test_interp(self, fn):
         # SymPy does not implement truncation for Expressions
         if fn in ("div", "truncdiv", "minimum", "maximum", "mod"):
@@ -425,14 +421,10 @@ class TestSympyInterp(TestCase):
                 ref_r = getattr(ReferenceAnalysis, fn)(*sargs)
                 # Yes, I know this is a long-winded way of saying xreplace; the
                 # point is to test sympy_interp
-                r = sympy_interp(
-                    ReferenceAnalysis, dict(zip(symbols, sargs)), sympy_expr
-                )
+                r = sympy_interp(ReferenceAnalysis, dict(zip(symbols, sargs)), sympy_expr)
                 self.assertEqual(ref_r, r)
 
-    @parametrize(
-        "fn", UNARY_OPS + BINARY_OPS + UNARY_BOOL_OPS + BINARY_BOOL_OPS + COMPARE_OPS
-    )
+    @parametrize("fn", UNARY_OPS + BINARY_OPS + UNARY_BOOL_OPS + BINARY_BOOL_OPS + COMPARE_OPS)
     def test_python_interp_fx(self, fn):
         # These never show up from symbolic_shapes
         if fn in ("log", "exp"):
@@ -486,29 +478,21 @@ class TestSympyInterp(TestCase):
                 if arity == 1:
 
                     def trace_f(px):
-                        return sympy_interp(
-                            PythonReferenceAnalysis, {x: px}, sympy_expr
-                        )
+                        return sympy_interp(PythonReferenceAnalysis, {x: px}, sympy_expr)
 
                 else:
 
                     def trace_f(px, py):
-                        return sympy_interp(
-                            PythonReferenceAnalysis, {x: px, y: py}, sympy_expr
-                        )
+                        return sympy_interp(PythonReferenceAnalysis, {x: px, y: py}, sympy_expr)
 
                 gm = fx.symbolic_trace(trace_f)
 
                 self.assertEqual(
-                    sympy_interp(
-                        PythonReferenceAnalysis, dict(zip(symbols, args)), sympy_expr
-                    ),
+                    sympy_interp(PythonReferenceAnalysis, dict(zip(symbols, args)), sympy_expr),
                     gm(*args),
                 )
 
-    @parametrize(
-        "fn", UNARY_OPS + BINARY_OPS + UNARY_BOOL_OPS + BINARY_BOOL_OPS + COMPARE_OPS
-    )
+    @parametrize("fn", UNARY_OPS + BINARY_OPS + UNARY_BOOL_OPS + BINARY_BOOL_OPS + COMPARE_OPS)
     def test_tensor_interp(self, fn):
         # Skip operations not implemented or not applicable for tensors
         if fn in ("div", "truncdiv", "int_truediv", "mod", "round_decimal"):
@@ -543,9 +527,7 @@ class TestSympyInterp(TestCase):
 
             with self.subTest(args=args):
                 tensor_args = [
-                    torch.tensor(
-                        a, dtype=torch.double if isinstance(a, float) else torch.int64
-                    )
+                    torch.tensor(a, dtype=torch.double if isinstance(a, float) else torch.int64)
                     for a in args
                 ]
 
@@ -561,10 +543,7 @@ class TestSympyInterp(TestCase):
 
                     # Ensure both results are of the same dtype for comparison
                     if direct_result.dtype != interp_result.dtype:
-                        if (
-                            direct_result.dtype == torch.bool
-                            or interp_result.dtype == torch.bool
-                        ):
+                        if direct_result.dtype == torch.bool or interp_result.dtype == torch.bool:
                             direct_result = direct_result.to(torch.bool)
                             interp_result = interp_result.to(torch.bool)
                         else:
@@ -572,9 +551,7 @@ class TestSympyInterp(TestCase):
                             interp_result = interp_result.to(torch.double)
 
                     self.assertTrue(
-                        torch.allclose(
-                            direct_result, interp_result, rtol=1e-5, atol=1e-8
-                        ),
+                        torch.allclose(direct_result, interp_result, rtol=1e-5, atol=1e-8),
                         f"Mismatch for {fn}{args}: direct={direct_result}, interp={interp_result}",
                     )
 
@@ -677,8 +654,7 @@ class TestSympySolve(TestCase):
             r = try_solve(source, thing, **kwargs)
 
             self.assertTrue(
-                (r is None and expected is None)
-                or (r is not None and expected is not None)
+                (r is None and expected is None) or (r is not None and expected is not None)
             )
 
             if r is not None:
@@ -783,9 +759,7 @@ class TestSympySolve(TestCase):
             r_op = op
 
         self._test_cases([special_case, *cases], a, r_op)
-        self._test_cases(
-            [(special_case[0], None), *cases], a, r_op, floordiv_inequality=False
-        )
+        self._test_cases([(special_case[0], None), *cases], a, r_op, floordiv_inequality=False)
 
     def test_floordiv_eq_simplify(self):
         from sympy import Eq, Le, Lt

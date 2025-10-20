@@ -497,9 +497,7 @@ class TestAutocast(JitTestCase):
         class TestModule(torch.nn.Module):
             def __init__(self, N, M):
                 super().__init__()
-                self.weight = torch.nn.Parameter(
-                    torch.rand((N, M), dtype=torch.float32)
-                )
+                self.weight = torch.nn.Parameter(torch.rand((N, M), dtype=torch.float32))
                 self.linear = torch.nn.Linear(N, M).float()
 
             def forward(self, input):
@@ -580,18 +578,10 @@ class TestAutocast(JitTestCase):
 
         x = torch.randn(5, 5, device="cuda", dtype=torch.float32)
         y = torch.randn(5, 5, device="cuda", dtype=torch.float32)
-        self._test_autocast(
-            t_autocast_cpu, "aten::_autocast_to_reduced_precision", x, y
-        )
-        self._test_autocast(
-            t_autocast_cuda, "aten::_autocast_to_reduced_precision", x, y
-        )
-        self._test_autocast(
-            t_cuda_amp_autocast, "aten::_autocast_to_reduced_precision", x, y
-        )
-        self._test_autocast(
-            t_cpu_amp_autocast, "aten::_autocast_to_reduced_precision", x, y
-        )
+        self._test_autocast(t_autocast_cpu, "aten::_autocast_to_reduced_precision", x, y)
+        self._test_autocast(t_autocast_cuda, "aten::_autocast_to_reduced_precision", x, y)
+        self._test_autocast(t_cuda_amp_autocast, "aten::_autocast_to_reduced_precision", x, y)
+        self._test_autocast(t_cpu_amp_autocast, "aten::_autocast_to_reduced_precision", x, y)
 
     @unittest.skipIf(True, "we need to provide dtype argument at this moment")
     @unittest.skipIf(not TEST_CUDA, "No cuda")
@@ -608,12 +598,8 @@ class TestAutocast(JitTestCase):
 
         x = torch.randn(5, 5, device="cuda", dtype=torch.float32)
         y = torch.randn(5, 5, device="cuda", dtype=torch.float32)
-        self._test_autocast(
-            t_autocast_cpu, "aten::_autocast_to_reduced_precision", x, y
-        )
-        self._test_autocast(
-            t_autocast_cuda, "aten::_autocast_to_reduced_precision", x, y
-        )
+        self._test_autocast(t_autocast_cpu, "aten::_autocast_to_reduced_precision", x, y)
+        self._test_autocast(t_autocast_cuda, "aten::_autocast_to_reduced_precision", x, y)
 
     @unittest.skipIf(not TEST_CUDA, "No cuda")
     def test_autocast_mixed_dtypes(self):
@@ -629,9 +615,7 @@ class TestAutocast(JitTestCase):
         cpu1 = torch.randn(5, 5, device="cpu", dtype=torch.float32)
         cuda0 = torch.randn(5, 5, device="cuda", dtype=torch.float32)
         cuda1 = torch.randn(5, 5, device="cuda", dtype=torch.float32)
-        self._test_autocast(
-            t, "aten::_autocast_to_reduced_precision", cpu0, cpu1, cuda0, cuda1
-        )
+        self._test_autocast(t, "aten::_autocast_to_reduced_precision", cpu0, cpu1, cuda0, cuda1)
 
     @unittest.skipIf(not TEST_CUDA, "No cuda")
     def test_jit_executor_under_autocast(self):
@@ -653,14 +637,10 @@ class TestAutocast(JitTestCase):
                 )
 
         with torch.autocast("cpu", torch.bfloat16):
-            self._test_autocast(
-                t, "aten::_autocast_to_reduced_precision", cpu0, cpu1, cuda0, cuda1
-            )
+            self._test_autocast(t, "aten::_autocast_to_reduced_precision", cpu0, cpu1, cuda0, cuda1)
 
         with torch.autocast("cuda", torch.float16):
-            self._test_autocast(
-                t, "aten::_autocast_to_reduced_precision", cpu0, cpu1, cuda0, cuda1
-            )
+            self._test_autocast(t, "aten::_autocast_to_reduced_precision", cpu0, cpu1, cuda0, cuda1)
 
         # no cast op should be observed when executing outside autocast context
         self._test_autocast(t, None, cpu0, cpu1, cuda0, cuda1)
@@ -866,9 +846,7 @@ class TestJitTraceAutocast(JitTestCase):
     def test_generate_autocast_jit_trace_model(self):
         def test_generate_autocast_jit_trace_model(model, x):
             model.eval()
-            with torch.autocast(
-                device_type="cpu", cache_enabled=False
-            ), torch.no_grad():
+            with torch.autocast(device_type="cpu", cache_enabled=False), torch.no_grad():
                 traced_model = torch.jit.trace(model, x)
             traced_model = torch.jit.freeze(traced_model)
 
@@ -878,9 +856,7 @@ class TestJitTraceAutocast(JitTestCase):
     def test_nchw_autocast_jit_trace_model(self):
         def test_nchw_autocast_jit_trace_model(model, x):
             model.eval()
-            with torch.autocast(
-                device_type="cpu", cache_enabled=False
-            ), torch.no_grad():
+            with torch.autocast(device_type="cpu", cache_enabled=False), torch.no_grad():
                 traced_model = torch.jit.trace(model, x)
             traced_model = torch.jit.freeze(traced_model)
             with torch.no_grad():
@@ -896,12 +872,8 @@ class TestJitTraceAutocast(JitTestCase):
         def test_nhwc_autocast_jit_trace_model(model, x):
             model = model.to(memory_format=torch.channels_last)
             model.eval()
-            with torch.autocast(
-                device_type="cpu", cache_enabled=False
-            ), torch.no_grad():
-                traced_model = torch.jit.trace(
-                    model, x.to(memory_format=torch.channels_last)
-                )
+            with torch.autocast(device_type="cpu", cache_enabled=False), torch.no_grad():
+                traced_model = torch.jit.trace(model, x.to(memory_format=torch.channels_last))
             traced_model = torch.jit.freeze(traced_model)
             with torch.no_grad():
                 y = traced_model(x.clone().to(memory_format=torch.channels_last))
@@ -939,9 +911,7 @@ class TestJitTraceAutocast(JitTestCase):
                 self.assertTrue(c.dtype, torch.float32)
                 self.assertTrue(c2.dtype, torch.float32)
                 traced_graph = traced.graph_for(a, b)
-                self.assertTrue(
-                    any(n.kind() == "aten::to" for n in traced_graph.nodes())
-                )
+                self.assertTrue(any(n.kind() == "aten::to" for n in traced_graph.nodes()))
 
     def test_script_autocast_cpu(self):
         def fn(x):
@@ -959,9 +929,7 @@ class TestJitTraceAutocast(JitTestCase):
         with torch.autocast(device_type="cpu", enabled=True):
             self.assertEqual(fn_s(x), fn(x))
 
-        self.assertTrue(
-            any("is_autocast_cpu_enabled" in x.kind() for x in fn_s.graph.nodes())
-        )
+        self.assertTrue(any("is_autocast_cpu_enabled" in x.kind() for x in fn_s.graph.nodes()))
 
     @unittest.skipIf(not TEST_CUDA, "No cuda")
     def test_script_autocast_cuda(self):
@@ -980,9 +948,7 @@ class TestJitTraceAutocast(JitTestCase):
         with torch.autocast(device_type="cuda", enabled=True):
             self.assertEqual(fn_s(x), fn(x))
 
-        self.assertTrue(
-            any("is_autocast_enabled" in x.kind() for x in fn_s.graph.nodes())
-        )
+        self.assertTrue(any("is_autocast_enabled" in x.kind() for x in fn_s.graph.nodes()))
 
     def test_scripted_aliasing(self):
         # torch.is_autocast_enabled should not be able to move inside of the autocast context.
@@ -1011,9 +977,7 @@ class TestJitTraceAutocast(JitTestCase):
         )
 
     def test_script_autocast_enable_and_check(self):
-        def fn(
-            x, y
-        ) -> tuple[torch.Tensor, bool, torch.Tensor, bool, torch.Tensor, bool]:
+        def fn(x, y) -> tuple[torch.Tensor, bool, torch.Tensor, bool, torch.Tensor, bool]:
             b1 = torch.is_autocast_cpu_enabled()
             v1 = torch.mm(x, y)
             with torch.autocast(device_type="cpu", enabled=True):

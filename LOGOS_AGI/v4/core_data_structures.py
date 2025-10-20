@@ -23,38 +23,48 @@ from enum import Enum
 # I. FOUNDATIONAL ENUMS
 # =========================================================================
 
+
 class SystemState(Enum):
     """Overall system operational states"""
+
     INITIALIZING = "initializing"
     OPERATIONAL = "operational"
     DEGRADED = "degraded"
     ERROR = "error"
     SHUTDOWN = "shutdown"
 
+
 class ProcessingPriority(Enum):
     """Processing priority levels"""
+
     LOW = 1
     NORMAL = 2
     HIGH = 3
     CRITICAL = 4
     EMERGENCY = 5
 
+
 class ValidationStatus(Enum):
     """Validation status for operations"""
+
     PENDING = "pending"
     VALIDATED = "validated"
     REJECTED = "rejected"
     ERROR = "error"
 
+
 class SubsystemType(Enum):
     """Types of subsystems in LOGOS architecture"""
-    LOGOS = "logos"           # Central orchestrator
-    TETRAGNOS = "tetragnos"   # Pattern recognizer
-    TELOS = "telos"           # Scientist/causal reasoner
-    THONOC = "thonoc"         # Logician
+
+    LOGOS = "logos"  # Central orchestrator
+    TETRAGNOS = "tetragnos"  # Pattern recognizer
+    TELOS = "telos"  # Scientist/causal reasoner
+    THONOC = "thonoc"  # Logician
+
 
 class QueryType(Enum):
     """Types of queries that can be processed"""
+
     GENERAL = "general"
     LOGICAL = "logical"
     CAUSAL = "causal"
@@ -63,13 +73,16 @@ class QueryType(Enum):
     THEOLOGICAL = "theological"
     MATHEMATICAL = "mathematical"
 
+
 # =========================================================================
 # II. CORE MESSAGING STRUCTURES
 # =========================================================================
 
+
 @dataclass
 class SystemMessage:
     """Base message structure for inter-service communication"""
+
     message_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     message_type: str = ""
     source_service: str = ""
@@ -89,11 +102,11 @@ class SystemMessage:
             "timestamp": self.timestamp,
             "payload": self.payload,
             "correlation_id": self.correlation_id,
-            "priority": self.priority.value
+            "priority": self.priority.value,
         }
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> 'SystemMessage':
+    def from_dict(cls, data: Dict[str, Any]) -> "SystemMessage":
         """Create from dictionary"""
         return cls(
             message_id=data.get("message_id", str(uuid.uuid4())),
@@ -103,12 +116,14 @@ class SystemMessage:
             timestamp=data.get("timestamp", time.time()),
             payload=data.get("payload", {}),
             correlation_id=data.get("correlation_id"),
-            priority=ProcessingPriority(data.get("priority", ProcessingPriority.NORMAL.value))
+            priority=ProcessingPriority(data.get("priority", ProcessingPriority.NORMAL.value)),
         )
+
 
 @dataclass
 class OperationResult:
     """Result of a system operation"""
+
     operation_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     success: bool = False
     result_data: Any = None
@@ -126,12 +141,14 @@ class OperationResult:
             "error_message": self.error_message,
             "execution_time": self.execution_time,
             "timestamp": self.timestamp,
-            "metadata": self.metadata
+            "metadata": self.metadata,
         }
+
 
 @dataclass
 class ValidationToken:
     """Token for operation validation"""
+
     token_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     operation_data: Dict[str, Any] = field(default_factory=dict)
     status: ValidationStatus = ValidationStatus.PENDING
@@ -152,9 +169,11 @@ class ValidationToken:
         self.validation_data["rejection_reason"] = reason
         self.validated_at = time.time()
 
+
 @dataclass
 class TaskDescriptor:
     """Descriptor for computational tasks"""
+
     task_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     task_type: str = ""
     description: str = ""
@@ -175,9 +194,11 @@ class TaskDescriptor:
         """Check if task can execute given completed dependencies"""
         return all(dep_id in completed_tasks for dep_id in self.dependencies)
 
+
 @dataclass
 class SystemMetrics:
     """System performance and health metrics"""
+
     component_name: str
     timestamp: float = field(default_factory=time.time)
     cpu_usage: float = 0.0
@@ -200,22 +221,25 @@ class SystemMetrics:
                 "cpu_usage": self.cpu_usage,
                 "memory_usage": self.memory_usage,
                 "ops_per_second": self.operations_per_second,
-                "response_time": self.response_time
+                "response_time": self.response_time,
             },
             "health": {
                 "error_rate": self.error_rate,
-                "status": "healthy" if self.error_rate < 0.05 else "degraded"
+                "status": "healthy" if self.error_rate < 0.05 else "degraded",
             },
-            "custom": self.custom_metrics
+            "custom": self.custom_metrics,
         }
+
 
 # =========================================================================
 # III. LOGOS-SPECIFIC DATA STRUCTURES
 # =========================================================================
 
+
 @dataclass
 class LogosQuery:
     """Standard query format for LOGOS system"""
+
     query_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     query_text: str = ""
     query_type: QueryType = QueryType.GENERAL
@@ -237,11 +261,11 @@ class LogosQuery:
             "created_at": self.created_at,
             "priority": self.priority.value,
             "timeout": self.timeout,
-            "metadata": self.metadata
+            "metadata": self.metadata,
         }
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> 'LogosQuery':
+    def from_dict(cls, data: Dict[str, Any]) -> "LogosQuery":
         """Create from dictionary"""
         return cls(
             query_id=data.get("query_id", str(uuid.uuid4())),
@@ -252,12 +276,14 @@ class LogosQuery:
             created_at=data.get("created_at", time.time()),
             priority=ProcessingPriority(data.get("priority", ProcessingPriority.NORMAL.value)),
             timeout=data.get("timeout", 30.0),
-            metadata=data.get("metadata", {})
+            metadata=data.get("metadata", {}),
         )
+
 
 @dataclass
 class SubsystemStatus:
     """Status information for a subsystem"""
+
     subsystem_type: SubsystemType
     state: SystemState = SystemState.INITIALIZING
     last_heartbeat: float = field(default_factory=time.time)
@@ -271,17 +297,19 @@ class SubsystemStatus:
         """Check if subsystem is healthy"""
         time_since_heartbeat = time.time() - self.last_heartbeat
         return (
-            self.state == SystemState.OPERATIONAL and
-            time_since_heartbeat < 60.0  # Within last minute
+            self.state == SystemState.OPERATIONAL
+            and time_since_heartbeat < 60.0  # Within last minute
         )
 
     def update_heartbeat(self):
         """Update heartbeat timestamp"""
         self.last_heartbeat = time.time()
 
+
 @dataclass
 class KnowledgeItem:
     """Structured knowledge item"""
+
     item_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     content: str = ""
     item_type: str = "fact"  # fact, rule, principle, theorem, etc.
@@ -299,13 +327,16 @@ class KnowledgeItem:
         if related_item_id not in self.relationships[relationship_type]:
             self.relationships[relationship_type].append(related_item_id)
 
+
 # =========================================================================
 # IV. TRINITY-SPECIFIC DATA STRUCTURES
 # =========================================================================
 
+
 @dataclass
 class TrinityVector:
     """Three-dimensional vector for Trinity operations"""
+
     existence: float = 0.0
     goodness: float = 0.0
     truth: float = 0.0
@@ -320,27 +351,29 @@ class TrinityVector:
 
     def magnitude(self) -> float:
         """Calculate vector magnitude"""
-        return (self.existence**2 + self.goodness**2 + self.truth**2)**0.5
+        return (self.existence**2 + self.goodness**2 + self.truth**2) ** 0.5
 
     def trinity_product(self) -> float:
         """Calculate Trinity product: E × G × T"""
         return abs(self.existence * self.goodness * self.truth)
 
-    def dot_product(self, other: 'TrinityVector') -> float:
+    def dot_product(self, other: "TrinityVector") -> float:
         """Calculate dot product with another Trinity vector"""
         return (
-            self.existence * other.existence +
-            self.goodness * other.goodness +
-            self.truth * other.truth
+            self.existence * other.existence
+            + self.goodness * other.goodness
+            + self.truth * other.truth
         )
 
     def to_tuple(self) -> Tuple[float, float, float]:
         """Convert to tuple"""
         return (self.existence, self.goodness, self.truth)
 
+
 @dataclass
 class FractalPosition:
     """Position in fractal space"""
+
     real: float = 0.0
     imaginary: float = 0.0
     dimension: float = 2.0
@@ -353,15 +386,18 @@ class FractalPosition:
 
     def distance_from_origin(self) -> float:
         """Calculate distance from origin"""
-        return (self.real**2 + self.imaginary**2)**0.5
+        return (self.real**2 + self.imaginary**2) ** 0.5
+
 
 # =========================================================================
 # V. WORKFLOW STRUCTURES
 # =========================================================================
 
+
 @dataclass
 class WorkflowStep:
     """Single step in a workflow"""
+
     step_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     step_name: str = ""
     step_type: str = ""
@@ -376,9 +412,11 @@ class WorkflowStep:
         """Check if step can execute"""
         return all(dep in completed_steps for dep in self.dependencies)
 
+
 @dataclass
 class Workflow:
     """Complete workflow definition"""
+
     workflow_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     name: str = ""
     description: str = ""
@@ -395,9 +433,11 @@ class Workflow:
         """Get steps that are ready to execute"""
         return [step for step in self.steps if step.can_execute(completed_steps)]
 
+
 @dataclass
 class EventNotification:
     """System event notification"""
+
     event_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     event_type: str = ""
     source: str = ""
@@ -406,9 +446,11 @@ class EventNotification:
     severity: str = "info"  # debug, info, warning, error, critical
     tags: List[str] = field(default_factory=list)
 
+
 # =========================================================================
 # VI. UTILITY FUNCTIONS
 # =========================================================================
+
 
 def generate_secure_hash(data: Any) -> str:
     """Generate secure hash of data"""
@@ -419,11 +461,15 @@ def generate_secure_hash(data: Any) -> str:
 
     return hashlib.sha256(data_str.encode()).hexdigest()
 
+
 def create_correlation_id() -> str:
     """Create correlation ID for tracking related operations"""
     return f"corr_{int(time.time())}_{str(uuid.uuid4())[:8]}"
 
-def validate_json_schema(data: Dict[str, Any], required_fields: List[str]) -> Tuple[bool, List[str]]:
+
+def validate_json_schema(
+    data: Dict[str, Any], required_fields: List[str]
+) -> Tuple[bool, List[str]]:
     """Validate JSON data against required schema"""
     missing_fields = []
 
@@ -433,14 +479,16 @@ def validate_json_schema(data: Dict[str, Any], required_fields: List[str]) -> Tu
 
     return len(missing_fields) == 0, missing_fields
 
+
 def serialize_for_transmission(obj: Any) -> str:
     """Serialize object for network transmission"""
-    if hasattr(obj, 'to_dict'):
+    if hasattr(obj, "to_dict"):
         return json.dumps(obj.to_dict())
     elif isinstance(obj, (dict, list, str, int, float, bool)):
         return json.dumps(obj)
     else:
         return json.dumps(str(obj))
+
 
 def deserialize_from_transmission(data: str, target_type: type = dict) -> Any:
     """Deserialize object from network transmission"""
@@ -449,12 +497,13 @@ def deserialize_from_transmission(data: str, target_type: type = dict) -> Any:
 
         if target_type == dict:
             return parsed_data
-        elif hasattr(target_type, 'from_dict') and isinstance(parsed_data, dict):
+        elif hasattr(target_type, "from_dict") and isinstance(parsed_data, dict):
             return target_type.from_dict(parsed_data)
         else:
             return parsed_data
     except json.JSONDecodeError:
         return None
+
 
 # =========================================================================
 # VII. MODULE EXPORTS
@@ -462,39 +511,34 @@ def deserialize_from_transmission(data: str, target_type: type = dict) -> Any:
 
 __all__ = [
     # Enums
-    'SystemState',
-    'ProcessingPriority',
-    'ValidationStatus',
-    'SubsystemType',
-    'QueryType',
-
+    "SystemState",
+    "ProcessingPriority",
+    "ValidationStatus",
+    "SubsystemType",
+    "QueryType",
     # Core data structures
-    'SystemMessage',
-    'OperationResult',
-    'ValidationToken',
-    'TaskDescriptor',
-    'SystemMetrics',
-
+    "SystemMessage",
+    "OperationResult",
+    "ValidationToken",
+    "TaskDescriptor",
+    "SystemMetrics",
     # LOGOS-specific structures
-    'LogosQuery',
-    'SubsystemStatus',
-    'KnowledgeItem',
-
+    "LogosQuery",
+    "SubsystemStatus",
+    "KnowledgeItem",
     # Trinity structures
-    'TrinityVector',
-    'FractalPosition',
-
+    "TrinityVector",
+    "FractalPosition",
     # Workflow structures
-    'WorkflowStep',
-    'Workflow',
-    'EventNotification',
-
+    "WorkflowStep",
+    "Workflow",
+    "EventNotification",
     # Utility functions
-    'generate_secure_hash',
-    'create_correlation_id',
-    'validate_json_schema',
-    'serialize_for_transmission',
-    'deserialize_from_transmission'
+    "generate_secure_hash",
+    "create_correlation_id",
+    "validate_json_schema",
+    "serialize_for_transmission",
+    "deserialize_from_transmission",
 ]
 
 # --- END OF FILE core/data_structures.py ---

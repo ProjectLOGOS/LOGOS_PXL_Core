@@ -406,15 +406,11 @@ def effectful(
 
 
 @overload
-def effectful(
-    fn: Callable[_P, _T] = ..., type: Optional[str] = ...
-) -> Callable[..., _T]:
+def effectful(fn: Callable[_P, _T] = ..., type: Optional[str] = ...) -> Callable[..., _T]:
     ...
 
 
-def effectful(
-    fn: Optional[Callable[_P, _T]] = None, type: Optional[str] = None
-) -> Callable:
+def effectful(fn: Optional[Callable[_P, _T]] = None, type: Optional[str] = None) -> Callable:
     """
     :param fn: function or callable that performs an effectful computation
     :param str type: the type label of the operation, e.g. `"sample"`

@@ -66,9 +66,7 @@ class Experiment:
         return self.config.get_entries() + self.results.get_entries()
 
 
-def generate_inputs(
-    batch_size, q_sequence_length, kv_sequence_length, embed_dim, dtype, device
-):
+def generate_inputs(batch_size, q_sequence_length, kv_sequence_length, embed_dim, dtype, device):
     q_shape = (batch_size, q_sequence_length, embed_dim)
     kv_shape = (batch_size, kv_sequence_length, embed_dim)
 
@@ -88,15 +86,9 @@ class CompositeMHA(torch.nn.Module):
             self.head_dim * num_heads == self.embed_dim
         ), "embed_dim must be divisible by num_heads"
 
-        self.q_proj_weight = Parameter(
-            torch.empty((embed_dim, embed_dim), **factory_kwargs)
-        )
-        self.k_proj_weight = Parameter(
-            torch.empty((embed_dim, embed_dim), **factory_kwargs)
-        )
-        self.v_proj_weight = Parameter(
-            torch.empty((embed_dim, embed_dim), **factory_kwargs)
-        )
+        self.q_proj_weight = Parameter(torch.empty((embed_dim, embed_dim), **factory_kwargs))
+        self.k_proj_weight = Parameter(torch.empty((embed_dim, embed_dim), **factory_kwargs))
+        self.v_proj_weight = Parameter(torch.empty((embed_dim, embed_dim), **factory_kwargs))
         self.out_proj = Parameter(torch.empty((embed_dim, embed_dim), **factory_kwargs))
         self.num_heads = num_heads
 
@@ -111,15 +103,13 @@ class CompositeMHA(torch.nn.Module):
         key_projected = F.linear(key, self.k_proj_weight)
         value_projected = F.linear(value, self.v_proj_weight)
 
-        query = query.view(
-            query_projected.size(0), -1, self.num_heads, self.head_dim
-        ).transpose(1, 2)
-        key = key.view(
-            key_projected.size(0), -1, self.num_heads, self.head_dim
-        ).transpose(1, 2)
-        value = value.view(
-            value_projected.size(0), -1, self.num_heads, self.head_dim
-        ).transpose(1, 2)
+        query = query.view(query_projected.size(0), -1, self.num_heads, self.head_dim).transpose(
+            1, 2
+        )
+        key = key.view(key_projected.size(0), -1, self.num_heads, self.head_dim).transpose(1, 2)
+        value = value.view(value_projected.size(0), -1, self.num_heads, self.head_dim).transpose(
+            1, 2
+        )
 
         attn = torch.nn.functional.scaled_dot_product_attention(
             query,
@@ -142,9 +132,7 @@ class CompositeMHA(torch.nn.Module):
 
 def run_single_experiment(config: ExperimentConfig) -> ExperimentResults:
     device = torch.device("cuda")
-    composite_mha = CompositeMHA(
-        config.num_heads, config.embed_dim, device, config.dtype
-    )
+    composite_mha = CompositeMHA(config.num_heads, config.embed_dim, device, config.dtype)
     composite_mha.reset_parameters()
     query, key, value = generate_inputs(
         config.batch_size,
@@ -154,9 +142,7 @@ def run_single_experiment(config: ExperimentConfig) -> ExperimentResults:
         config.dtype,
         device,
     )
-    attn_mask = CausalBias(
-        CausalVariant.LOWER_RIGHT, config.q_seq_len, config.k_seq_len
-    )
+    attn_mask = CausalBias(CausalVariant.LOWER_RIGHT, config.q_seq_len, config.k_seq_len)
     attn_mask_tensor = attn_mask._materialize(device)
 
     materialized_mask_time = benchmark_torch_function_in_microseconds(

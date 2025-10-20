@@ -126,9 +126,7 @@ class TestScript(JitTestCase):
             test_str_center_error("error")
             test_ljust("error")
 
-        def test_count() -> (
-            tuple[int, int, int, int, int, int, int, int, int, int, int, int]
-        ):
+        def test_count() -> tuple[int, int, int, int, int, int, int, int, int, int, int, int]:
             return (
                 "hello".count("h"),
                 "hello".count("h", 0, 1),
@@ -381,9 +379,7 @@ class TestScript(JitTestCase):
             s = "test"
             return s.split("")
 
-        self.checkScriptRaisesRegex(
-            test_split_empty_separator, (), Exception, "empty separator"
-        )
+        self.checkScriptRaisesRegex(test_split_empty_separator, (), Exception, "empty separator")
 
         def test_rsplit() -> (
             tuple[

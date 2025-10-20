@@ -256,16 +256,12 @@ def k_edge_augmentation(G, k, avail=None, weight=None, partial=False):
                 raise nx.NetworkXUnfeasible("no available edges")
             aug_edges = []
         elif k == 1:
-            aug_edges = one_edge_augmentation(
-                G, avail=avail, weight=weight, partial=partial
-            )
+            aug_edges = one_edge_augmentation(G, avail=avail, weight=weight, partial=partial)
         elif k == 2:
             aug_edges = bridge_augmentation(G, avail=avail, weight=weight)
         else:
             # raise NotImplementedError(f'not implemented for k>2. k={k}')
-            aug_edges = greedy_k_edge_augmentation(
-                G, k=k, avail=avail, weight=weight, seed=0
-            )
+            aug_edges = greedy_k_edge_augmentation(G, k=k, avail=avail, weight=weight, seed=0)
         # Do eager evaluation so we can catch any exceptions
         # Before executing partial code.
         yield from list(aug_edges)
@@ -277,9 +273,7 @@ def k_edge_augmentation(G, k, avail=None, weight=None, partial=False):
             else:
                 # If we can't k-edge-connect the entire graph, try to
                 # k-edge-connect as much as possible
-                aug_edges = partial_k_edge_augmentation(
-                    G, k=k, avail=avail, weight=weight
-                )
+                aug_edges = partial_k_edge_augmentation(G, k=k, avail=avail, weight=weight)
             yield from aug_edges
         else:
             raise
@@ -353,10 +347,7 @@ def partial_k_edge_augmentation(G, k, avail, weight=None):
     # Find which parts of the graph can be k-edge-connected
     H = G.copy()
     H.add_edges_from(
-        (
-            (u, v, {"weight": w, "generator": (u, v)})
-            for (u, v), w in zip(avail, avail_w)
-        )
+        ((u, v, {"weight": w, "generator": (u, v)}) for (u, v), w in zip(avail, avail_w))
     )
     k_edge_subgraphs = list(nx.k_edge_subgraphs(H, k=k))
 
@@ -367,9 +358,7 @@ def partial_k_edge_augmentation(G, k, avail, weight=None):
             C = H.subgraph(nodes).copy()
             # Find the internal edges that were available
             sub_avail = {
-                d["generator"]: d["weight"]
-                for (u, v, d) in C.edges(data=True)
-                if "generator" in d
+                d["generator"]: d["weight"] for (u, v, d) in C.edges(data=True) if "generator" in d
             }
             # Remove potential augmenting edges
             C.remove_edges_from(sub_avail.keys())
@@ -436,9 +425,7 @@ def one_edge_augmentation(G, avail=None, weight=None, partial=False):
     if avail is None:
         return unconstrained_one_edge_augmentation(G)
     else:
-        return weighted_one_edge_augmentation(
-            G, avail=avail, weight=weight, partial=partial
-        )
+        return weighted_one_edge_augmentation(G, avail=avail, weight=weight, partial=partial)
 
 
 @not_implemented_for("multigraph")
@@ -677,8 +664,7 @@ def weighted_one_edge_augmentation(G, avail, weight=None, partial=False):
     candidate_mapping = _lightest_meta_edges(mapping, avail_uv, avail_w)
     # nx.set_edge_attributes(C, name='weight', values=0)
     C.add_edges_from(
-        (mu, mv, {"weight": w, "generator": uv})
-        for (mu, mv), uv, w in candidate_mapping
+        (mu, mv, {"weight": w, "generator": uv}) for (mu, mv), uv, w in candidate_mapping
     )
     # Find MST of the meta graph
     meta_mst = nx.minimum_spanning_tree(C)
@@ -830,10 +816,7 @@ def unconstrained_bridge_augmentation(G):
     for k, v in C.graph["mapping"].items():
         inverse[v].append(k)
     # sort so we choose minimum degree nodes first
-    inverse = {
-        mu: sorted(mapped, key=lambda u: (G.degree(u), u))
-        for mu, mapped in inverse.items()
-    }
+    inverse = {mu: sorted(mapped, key=lambda u: (G.degree(u), u)) for mu, mapped in inverse.items()}
 
     # For each meta-edge, map back to an arbitrary pair in the original graph
     G2 = G.copy()
@@ -940,8 +923,7 @@ def weighted_bridge_augmentation(G, avail, weight=None):
     mapping = C.graph["mapping"]
     # Choose the minimum weight feasible edge in each group
     meta_to_wuv = {
-        (mu, mv): (w, uv)
-        for (mu, mv), uv, w in _lightest_meta_edges(mapping, avail_uv, avail_w)
+        (mu, mv): (w, uv) for (mu, mv), uv, w in _lightest_meta_edges(mapping, avail_uv, avail_w)
     }
 
     # Mapping of terms from (Khuller and Thurimella):
@@ -973,9 +955,7 @@ def weighted_bridge_augmentation(G, avail, weight=None):
 
     # The LCA of mu and mv in T is the shared ancestor of mu and mv that is
     # located farthest from the root.
-    lca_gen = nx.tree_all_pairs_lowest_common_ancestor(
-        TR, root=root, pairs=meta_to_wuv.keys()
-    )
+    lca_gen = nx.tree_all_pairs_lowest_common_ancestor(TR, root=root, pairs=meta_to_wuv.keys())
 
     for (mu, mv), lca in lca_gen:
         w, uv = meta_to_wuv[(mu, mv)]
@@ -1090,9 +1070,7 @@ def collapse(G, grouped_nodes):
     remaining = set(G.nodes())
     for i, group in enumerate(grouped_nodes):
         group = set(group)
-        assert remaining.issuperset(
-            group
-        ), "grouped nodes must exist in G and be disjoint"
+        assert remaining.issuperset(group), "grouped nodes must exist in G and be disjoint"
         remaining.difference_update(group)
         members[i] = group
         mapping.update((n, i) for n in group)
@@ -1103,9 +1081,7 @@ def collapse(G, grouped_nodes):
         mapping.update((n, i) for n in group)
     number_of_groups = i + 1
     C.add_nodes_from(range(number_of_groups))
-    C.add_edges_from(
-        (mapping[u], mapping[v]) for u, v in G.edges() if mapping[u] != mapping[v]
-    )
+    C.add_edges_from((mapping[u], mapping[v]) for u, v in G.edges() if mapping[u] != mapping[v])
     # Add a list of members (ie original nodes) to each node (ie scc) in C.
     nx.set_node_attributes(C, name="members", values=members)
     # Add mapping dict as graph attribute

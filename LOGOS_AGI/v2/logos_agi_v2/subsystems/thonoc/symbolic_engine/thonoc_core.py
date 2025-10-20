@@ -15,6 +15,7 @@ import time
 import logging
 from typing import Dict, Any, Optional, List, Tuple
 
+
 class ThonocMathematicalCore:
     """Mathematical computation engine for symbolic operations."""
 
@@ -29,9 +30,10 @@ class ThonocMathematicalCore:
     def symbolic_evaluate(self, expression: str) -> float:
         """Evaluate symbolic mathematical expressions."""
         try:
-            return eval(expression.replace('^', '**'))
+            return eval(expression.replace("^", "**"))
         except:
             return 0.0
+
 
 class FractalNavigator:
     """Fractal space navigation and computation system."""
@@ -50,17 +52,18 @@ class FractalNavigator:
         orbit = [z_initial]
         z = z_initial
         for _ in range(self.max_iterations):
-            z = z*z + z_initial
+            z = z * z + z_initial
             orbit.append(z)
             if abs(z) > self.escape_radius:
                 break
         return orbit
 
+
 class ModalInferenceEngine:
     """Modal logic inference and reasoning system."""
 
     def __init__(self):
-        self.modal_operators = ['necessary', 'possible', 'impossible']
+        self.modal_operators = ["necessary", "possible", "impossible"]
         self.inference_rules = {}
 
     def infer(self, data: Dict[str, Any]) -> Dict[str, Any]:
@@ -70,6 +73,7 @@ class ModalInferenceEngine:
     def validate_proposition(self, proposition: str) -> bool:
         """Validate logical proposition structure."""
         return len(proposition) > 0
+
 
 class TrinityPredictionEngine:
     """Trinity-based prediction and forecasting system."""
@@ -85,6 +89,7 @@ class TrinityPredictionEngine:
     def update_priors(self, evidence: Dict[str, Any]) -> bool:
         """Update Bayesian priors with new evidence."""
         return True
+
 
 class FractalKnowledgeStore:
     """Persistent fractal-indexed knowledge storage system."""
@@ -104,6 +109,7 @@ class FractalKnowledgeStore:
         """Retrieve knowledge by fractal index."""
         return self.index.get(key)
 
+
 class ThonocVerifier:
     """Verification system for logical consistency and validity."""
 
@@ -118,9 +124,6 @@ class ThonocVerifier:
         """Validate Trinity vector coherence."""
         return all(0 <= v <= 1 for v in trinity_vector.values())
 
-
-
-
     def _load_config(self, path):
         # This is a placeholder for a more robust config strategy
         if path:
@@ -130,9 +133,9 @@ class ThonocVerifier:
             except FileNotFoundError:
                 logging.warning(f"Config file not found at {path}. Using defaults.")
         return {
-            "fractal": {"max_iterations":100, "escape_radius":2.0},
+            "fractal": {"max_iterations": 100, "escape_radius": 2.0},
             "prediction": {"prior_path": "config/bayes_priors.json"},
-            "storage": {"storage_path": "knowledge_store.jsonl"}
+            "storage": {"storage_path": "knowledge_store.jsonl"},
         }
 
     # --- THIS IS YOUR ORIGINAL METHOD ---
@@ -155,9 +158,11 @@ class ThonocVerifier:
 
         # 5) Store & ID
         node_id = self.knowledge_store.store_node(
-            query=query, trinity_vector=tr_vec,
-            fractal_position=pos, modal_status=mod["status"],
-            prediction=preds
+            query=query,
+            trinity_vector=tr_vec,
+            fractal_position=pos,
+            modal_status=mod["status"],
+            prediction=preds,
         )
 
         return {
@@ -167,7 +172,7 @@ class ThonocVerifier:
             "fractal_position": pos,
             "modal_status": mod,
             "prediction": preds,
-            "timestamp": time.time()
+            "timestamp": time.time(),
         }
 
     # --- THIS IS THE NEW ADAPTER METHOD FOR THE WORKER ---
@@ -175,25 +180,27 @@ class ThonocVerifier:
         """
         Adapter method to connect the worker's payload to the core logic.
         """
-        action = payload.get('action')
+        action = payload.get("action")
         logging.info(f"ThonocCore received action: {action}")
 
         # The worker receives tasks from Archon Nexus. We map them to
         # the appropriate methods in this class.
-        if action == 'process_natural_language_query':
-            query = payload.get('query')
+        if action == "process_natural_language_query":
+            query = payload.get("query")
             if not query:
-                raise ValueError("Payload for 'process_natural_language_query' must contain a 'query'.")
+                raise ValueError(
+                    "Payload for 'process_natural_language_query' must contain a 'query'."
+                )
             return self.process_query(query)
 
-        elif action == 'run_unit_tests':
-            code_ref = payload.get('code_input_ref', 'no code reference provided')
+        elif action == "run_unit_tests":
+            code_ref = payload.get("code_input_ref", "no code reference provided")
             logging.info(f"Simulating running unit tests for code from task {code_ref}.")
             return {"test_status": "passed", "coverage": "98%"}
 
         else:
             # As a fallback, we can treat a generic 'prompt' as a query
-            prompt = payload.get('prompt')
+            prompt = payload.get("prompt")
             if prompt:
                 logging.warning(f"No specific action found. Treating generic prompt as a query.")
                 return self.process_query(prompt)

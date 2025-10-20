@@ -98,9 +98,7 @@ class TestSubclass(TestCase):
                 # Serialization should preserve both custom type and "parameter-ness".
                 self.assertIsInstance(x_loaded, nn.Parameter)
 
-    @skipIfTorchDynamo(
-        "Visible only with functorch as functorch monkeypatches tensor str"
-    )
+    @skipIfTorchDynamo("Visible only with functorch as functorch monkeypatches tensor str")
     @parametrize_tensor_cls
     @parametrize("as_param", [False, True])
     def test_repr(self, tensor_cls, as_param):

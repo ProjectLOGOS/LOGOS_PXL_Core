@@ -238,9 +238,7 @@ def trace(
     dtype: DType | None = None,
     **kwargs: object,
 ) -> Array:
-    return xp.asarray(
-        xp.trace(x, offset=offset, dtype=dtype, axis1=-2, axis2=-1, **kwargs)
-    )
+    return xp.asarray(xp.trace(x, offset=offset, dtype=dtype, axis1=-2, axis2=-1, **kwargs))
 
 
 __all__ = [

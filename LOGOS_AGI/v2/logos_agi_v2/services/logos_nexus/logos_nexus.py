@@ -8,15 +8,17 @@ import logging
 from threading import Thread
 from self_improvement_manager import SelfImprovementManager
 from dotenv import load_dotenv
+
 load_dotenv()
 
 # --- Basic Configuration ---
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - LOGOS - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - LOGOS - %(message)s")
 
-RABBITMQ_HOST = os.getenv('RABBITMQ_HOST', 'rabbitmq')
-GOAL_QUEUE = 'goal_queue'            # Receives new goals from Keryx
-STRATEGIC_TASK_QUEUE = 'strategic_task_queue' # Sends tasks to Archon
-DB_WRITE_QUEUE = 'db_write_queue'    # Sends data to be saved by DB Service
+RABBITMQ_HOST = os.getenv("RABBITMQ_HOST", "rabbitmq")
+GOAL_QUEUE = "goal_queue"  # Receives new goals from Keryx
+STRATEGIC_TASK_QUEUE = "strategic_task_queue"  # Sends tasks to Archon
+DB_WRITE_QUEUE = "db_write_queue"  # Sends data to be saved by DB Service
+
 
 class LogosNexus:
     def __init__(self):
@@ -27,7 +29,7 @@ class LogosNexus:
 
         # In-memory state (a real system would persist this more robustly)
         self.active_goals = {}
-        self.system_priorities = [] # List of goal_ids ordered by priority
+        self.system_priorities = []  # List of goal_ids ordered by priority
 
     def _connect_to_rabbitmq(self):
         # Retry logic for startup robustness
@@ -37,7 +39,9 @@ class LogosNexus:
                 logging.info("Logos Nexus successfully connected to RabbitMQ.")
                 return connection
             except pika.exceptions.AMQPConnectionError as e:
-                logging.warning(f"Attempt {i+1}/10: Logos Nexus failed to connect to RabbitMQ: {e}. Retrying in 5s...")
+                logging.warning(
+                    f"Attempt {i+1}/10: Logos Nexus failed to connect to RabbitMQ: {e}. Retrying in 5s..."
+                )
                 time.sleep(5)
         logging.error("Logos Nexus could not connect to RabbitMQ. Exiting.")
         exit(1)
@@ -51,49 +55,49 @@ class LogosNexus:
 
     def _publish_to_db(self, table, data):
         """Helper to send a write request to the database service."""
-        message = {'table': table, 'data': data}
+        message = {"table": table, "data": data}
         self.channel.basic_publish(
-            exchange='',
+            exchange="",
             routing_key=DB_WRITE_QUEUE,
             body=json.dumps(message),
-            properties=pika.BasicProperties(delivery_mode=2)
+            properties=pika.BasicProperties(delivery_mode=2),
         )
 
     def process_new_goal(self, ch, method, properties, body):
         """Callback for handling incoming goals from the Keryx API."""
         try:
             goal_data = json.loads(body)
-            goal_id = goal_data['goal_id']
+            goal_id = goal_data["goal_id"]
             logging.info(f"Received new goal {goal_id}: '{goal_data['goal_description']}'")
 
             # 1. Update internal state
             self.active_goals[goal_id] = goal_data
             # Simple priority insertion - could be more complex
             self.system_priorities.append(goal_id)
-            self.system_priorities.sort(key=lambda gid: self.active_goals[gid].get('priority', 5))
+            self.system_priorities.sort(key=lambda gid: self.active_goals[gid].get("priority", 5))
 
             # 2. Persist the new goal's status
             db_record = {
-                'goal_id': goal_id,
-                'status': 'acknowledged',
-                'description': goal_data['goal_description'],
-                'priority': goal_data.get('priority', 5)
+                "goal_id": goal_id,
+                "status": "acknowledged",
+                "description": goal_data["goal_description"],
+                "priority": goal_data.get("priority", 5),
             }
-            self._publish_to_db('goals', db_record)
+            self._publish_to_db("goals", db_record)
 
             # 3. Formulate and dispatch a strategic task to Archon Nexus
             strategic_task = {
-                'task_id': f"strat_{goal_id}",
-                'goal_id': goal_id,
-                'type': 'ANALYZE_AND_PLAN',
-                'prompt': f"Formulate a high-level plan to achieve the following goal: {goal_data['goal_description']}"
+                "task_id": f"strat_{goal_id}",
+                "goal_id": goal_id,
+                "type": "ANALYZE_AND_PLAN",
+                "prompt": f"Formulate a high-level plan to achieve the following goal: {goal_data['goal_description']}",
             }
 
             self.channel.basic_publish(
-                exchange='',
+                exchange="",
                 routing_key=STRATEGIC_TASK_QUEUE,
                 body=json.dumps(strategic_task),
-                properties=pika.BasicProperties(delivery_mode=2)
+                properties=pika.BasicProperties(delivery_mode=2),
             )
             logging.info(f"Dispatched strategic task for goal {goal_id} to Archon Nexus.")
 
@@ -130,6 +134,6 @@ class LogosNexus:
             logging.error(f"Consumer unexpectedly stopped: {e}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     logos = LogosNexus()
     logos.start_main_loop()

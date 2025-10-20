@@ -21,9 +21,7 @@ def unroll(num_unrolls, IndexType, InType, OutType):
                     f"          svld1uh_u32({pred}, reinterpret_cast<const uint16_t*>(&ip{i}[k]))));"
                 )
             for i in range(num_unrolls):
-                code.append(
-                    f"        output = svmla_x({pred}, output, input{i}, wgt{i});"
-                )
+                code.append(f"        output = svmla_x({pred}, output, input{i}, wgt{i});")
         elif InType == "at::BFloat16":
             for i in range(num_unrolls):
                 code.append(
@@ -31,9 +29,7 @@ def unroll(num_unrolls, IndexType, InType, OutType):
                     f"          svld1uh_u32({pred}, reinterpret_cast<const uint16_t*>(&ip{i}[k])), 16));"
                 )
             for i in range(num_unrolls):
-                code.append(
-                    f"        output = svmla_x({pred}, output, input{i}, wgt{i});"
-                )
+                code.append(f"        output = svmla_x({pred}, output, input{i}, wgt{i});")
         elif InType == "uint8_t":
             code.append(f"        output = svadd_x({pred}, output, bio);")
             for i in range(num_unrolls):
@@ -41,9 +37,7 @@ def unroll(num_unrolls, IndexType, InType, OutType):
                     f"        auto input{i} = svcvt_f32_x({pred}, svld1ub_u32({pred}, &ip{i}[k]));"
                 )
             for i in range(num_unrolls):
-                code.append(
-                    f"        output = svmla_x({pred}, output, input{i}, wgt{i});"
-                )
+                code.append(f"        output = svmla_x({pred}, output, input{i}, wgt{i});")
         else:
             raise ValueError(f'Unknown datatype "{InType}"')
 
@@ -193,13 +187,10 @@ def main():
 
         # inner loop
         code.append(
-            "    if (pos != offsets[i] - offsets[0]) {\n"
-            + "      return false;\n"
-            + "    }"
+            "    if (pos != offsets[i] - offsets[0]) {\n" + "      return false;\n" + "    }"
         )
         code.append(
-            "    int64_t start_offset = offsets[i];\n"
-            + "    int64_t end_offset = offsets[i + 1];"
+            "    int64_t start_offset = offsets[i];\n" + "    int64_t end_offset = offsets[i + 1];"
         )
         code.append("    int64_t j = start_offset;")
 
@@ -215,16 +206,12 @@ def main():
         code.append("      svbool_t pg;")
         code.append("      int64_t j = 0;")
         code.append("      while (j + vLen - 1 < block_size) {")
-        code.append(
-            "        svst1(svAll, &op[j], svmul_x(svAll, svld1(svAll, &op[j]), len_inv));"
-        )
+        code.append("        svst1(svAll, &op[j], svmul_x(svAll, svld1(svAll, &op[j]), len_inv));")
         code.append("        j += vLen;")
         code.append("      }")
         code.append("      if (j < block_size) {")
         code.append("        pg = svwhilelt_b32_s64(j, block_size);")
-        code.append(
-            "        svst1(pg, &op[j], svmul_x(pg, svld1(pg, &op[j]), len_inv));"
-        )
+        code.append("        svst1(pg, &op[j], svmul_x(pg, svld1(pg, &op[j]), len_inv));")
         code.append("      }")
         code.append("    }")
 
@@ -238,20 +225,12 @@ def main():
 
             # Resolve the Lint warnings: Limit of 80 characters in one line.
             extra_space = "\n      "
-            ret_string = (
-                "  return " + fn_base + suffix + "<" + is_weight_positional + ">("
-            )
+            ret_string = "  return " + fn_base + suffix + "<" + is_weight_positional + ">("
             if len(ret_string) <= 80:
                 code.append(ret_string)
             else:
                 code.append(
-                    "  return "
-                    + fn_base
-                    + suffix
-                    + "<"
-                    + extra_space
-                    + is_weight_positional
-                    + ">("
+                    "  return " + fn_base + suffix + "<" + extra_space + is_weight_positional + ">("
                 )
 
             code.append("      block_size,")

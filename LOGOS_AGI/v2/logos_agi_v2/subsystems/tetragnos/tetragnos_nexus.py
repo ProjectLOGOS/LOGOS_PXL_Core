@@ -1,5 +1,6 @@
 from typing import Dict, Any
 
+
 class TetragnosNexus:  # Your existing class
     def __init__(self):
         # Add Trinity integration
@@ -11,7 +12,7 @@ class TetragnosNexus:  # Your existing class
         # Add Trinity computation
         result = self.trinity_integration.trinity_compute(
             operation=self._process_translation,
-            input_data={"text": input_text, "domain": target_domain}
+            input_data={"text": input_text, "domain": target_domain},
         )
 
         if result is None:
@@ -21,22 +22,19 @@ class TetragnosNexus:  # Your existing class
 
     def _process_translation(self, enhanced_data):
         # Your existing logic
-        text = enhanced_data.get('text') or enhanced_data.get('original_data', {}).get('text')
-        domain = enhanced_data.get('domain') or enhanced_data.get('original_data', {}).get('domain')
+        text = enhanced_data.get("text") or enhanced_data.get("original_data", {}).get("text")
+        domain = enhanced_data.get("domain") or enhanced_data.get("original_data", {}).get("domain")
 
         # existing processing
         return self.your_existing_translation_logic(text, domain)
+
 
 class TrinityNexusIntegration:
     """Trinity integration system for enhanced subsystem coordination."""
 
     def __init__(self, component_name: str):
         self.component = component_name
-        self.trinity_state = {
-            "existence": 0.33,
-            "goodness": 0.33,
-            "truth": 0.34
-        }
+        self.trinity_state = {"existence": 0.33, "goodness": 0.33, "truth": 0.34}
         self.validation_active = True
 
     def trinity_compute(self, operation, input_data):
@@ -47,7 +45,7 @@ class TrinityNexusIntegration:
                 "original_data": input_data,
                 "trinity_enhancement": self.trinity_state,
                 "component": self.component,
-                "validation_timestamp": time.time()
+                "validation_timestamp": time.time(),
             }
 
             # Execute operation with enhancement
@@ -63,7 +61,7 @@ class TrinityNexusIntegration:
             return {
                 "status": "trinity_computation_error",
                 "error": str(e),
-                "component": self.component
+                "component": self.component,
             }
 
     def _validate_trinity_coherence(self, result):

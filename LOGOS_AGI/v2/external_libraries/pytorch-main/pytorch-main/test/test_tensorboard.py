@@ -144,9 +144,7 @@ class TestTensorBoardPyTorchNumpy(BaseTestCase):
 
             # CUDA variable
             if torch.cuda.is_available():
-                self.assertIsInstance(
-                    make_np(torch.autograd.Variable(tensor).cuda()), np.ndarray
-                )
+                self.assertIsInstance(make_np(torch.autograd.Variable(tensor).cuda()), np.ndarray)
 
         # python primitive type
         self.assertIsInstance(make_np(0), np.ndarray)
@@ -291,9 +289,7 @@ class TestTensorBoardWriter(BaseTestCase):
             sample_rate = 44100
 
             n_iter = 0
-            writer.add_hparams(
-                {"lr": 0.1, "bsize": 1}, {"hparam/accuracy": 10, "hparam/loss": 10}
-            )
+            writer.add_hparams({"lr": 0.1, "bsize": 1}, {"hparam/accuracy": 10, "hparam/loss": 10})
             writer.add_scalar("data/scalar_systemtime", 0.1, n_iter)
             writer.add_scalar("data/scalar_customtime", 0.2, n_iter, walltime=n_iter)
             writer.add_scalar("data/new_style", 0.2, n_iter, new_style=True)
@@ -337,12 +333,8 @@ class TestTensorBoardWriter(BaseTestCase):
                 n_iter,
             )
 
-            v = np.array(
-                [[[1, 1, 1], [-1, -1, 1], [1, -1, -1], [-1, 1, -1]]], dtype=float
-            )
-            c = np.array(
-                [[[255, 0, 0], [0, 255, 0], [0, 0, 255], [255, 0, 255]]], dtype=int
-            )
+            v = np.array([[[1, 1, 1], [-1, -1, 1], [1, -1, -1], [-1, 1, -1]]], dtype=float)
+            c = np.array([[[255, 0, 0], [0, 255, 0], [0, 0, 255], [255, 0, 255]]], dtype=int)
             f = np.array([[[0, 2, 3], [0, 3, 1], [0, 1, 2], [1, 3, 2]]], dtype=int)
             writer.add_mesh("my_mesh", vertices=v, colors=c, faces=f)
 
@@ -380,9 +372,7 @@ class TestTensorBoardEmbedding(BaseTestCase):
         all_labels = torch.tensor([33.0, 44.0, 55.0])
         all_images = torch.zeros(3, 3, 5, 5)
 
-        w.add_embedding(
-            all_features, metadata=all_labels, label_img=all_images, global_step=2
-        )
+        w.add_embedding(all_features, metadata=all_labels, label_img=all_images, global_step=2)
 
         dataset_label = ["test"] * 2 + ["train"] * 2
         all_labels = list(zip(all_labels, dataset_label))
@@ -401,9 +391,7 @@ class TestTensorBoardEmbedding(BaseTestCase):
         all_labels = torch.tensor([33.0, 44.0, 55.0])
         all_images = torch.zeros((3, 3, 5, 5), dtype=torch.float64)
 
-        w.add_embedding(
-            all_features, metadata=all_labels, label_img=all_images, global_step=2
-        )
+        w.add_embedding(all_features, metadata=all_labels, label_img=all_images, global_step=2)
 
         dataset_label = ["test"] * 2 + ["train"] * 2
         all_labels = list(zip(all_labels, dataset_label))
@@ -436,9 +424,7 @@ class TestTensorBoardSummary(BaseTestCase):
         """
         test_image = np.random.rand(3, 32, 32).astype(np.float32)
         scale_factor = summary._calc_scale_factor(test_image)
-        self.assertEqual(
-            scale_factor, 255, msg="Values are in [0, 1], scale factor should be 255"
-        )
+        self.assertEqual(scale_factor, 255, msg="Values are in [0, 1], scale factor should be 255")
 
     def test_list_input(self):
         with self.assertRaises(Exception):
@@ -450,15 +436,11 @@ class TestTensorBoardSummary(BaseTestCase):
 
     def test_image_with_boxes(self):
         self.assertImageProto(
-            summary.image_boxes(
-                "dummy", tensor_N(shape=(3, 32, 32)), np.array([[10, 10, 40, 40]])
-            )
+            summary.image_boxes("dummy", tensor_N(shape=(3, 32, 32)), np.array([[10, 10, 40, 40]]))
         )
 
     def test_image_with_one_channel(self):
-        self.assertImageProto(
-            summary.image("dummy", tensor_N(shape=(1, 8, 8)), dataformats="CHW")
-        )
+        self.assertImageProto(summary.image("dummy", tensor_N(shape=(1, 8, 8)), dataformats="CHW"))
 
     def test_image_with_one_channel_batched(self):
         self.assertImageProto(
@@ -471,9 +453,7 @@ class TestTensorBoardSummary(BaseTestCase):
         )
 
     def test_image_without_channel(self):
-        self.assertImageProto(
-            summary.image("dummy", tensor_N(shape=(8, 8)), dataformats="HW")
-        )
+        self.assertImageProto(summary.image("dummy", tensor_N(shape=(8, 8)), dataformats="HW"))
 
     def test_video(self):
         try:
@@ -511,18 +491,14 @@ class TestTensorBoardSummary(BaseTestCase):
         IS_MACOS, "Skipping on mac, see https://github.com/pytorch/pytorch/pull/109349 "
     )
     def test_histogram_fd(self):
-        self.assertProto(
-            summary.histogram("dummy", tensor_N(shape=(1024,)), bins="fd", max_bins=5)
-        )
+        self.assertProto(summary.histogram("dummy", tensor_N(shape=(1024,)), bins="fd", max_bins=5))
 
     @unittest.skipIf(
         IS_MACOS, "Skipping on mac, see https://github.com/pytorch/pytorch/pull/109349 "
     )
     def test_histogram_doane(self):
         self.assertProto(
-            summary.histogram(
-                "dummy", tensor_N(shape=(1024,)), bins="doane", max_bins=5
-            )
+            summary.histogram("dummy", tensor_N(shape=(1024,)), bins="doane", max_bins=5)
         )
 
     def test_custom_scalars(self):
@@ -542,9 +518,7 @@ class TestTensorBoardSummary(BaseTestCase):
     )
     def test_mesh(self):
         v = np.array([[[1, 1, 1], [-1, -1, 1], [1, -1, -1], [-1, 1, -1]]], dtype=float)
-        c = np.array(
-            [[[255, 0, 0], [0, 255, 0], [0, 0, 255], [255, 0, 255]]], dtype=int
-        )
+        c = np.array([[[255, 0, 0], [0, 255, 0], [0, 0, 255], [255, 0, 255]]], dtype=int)
         f = np.array([[[0, 2, 3], [0, 3, 1], [0, 1, 2], [1, 3, 2]]], dtype=int)
         mesh = summary.mesh("my_mesh", vertices=v, colors=c, faces=f, config_dict=None)
         self.assertProto(mesh)
@@ -572,9 +546,7 @@ def get_expected_file(function_ptr):
     # Use realpath to follow symlinks appropriately.
     test_dir = os.path.dirname(os.path.realpath(test_file))
     functionName = function_ptr.id().split(".")[-1]
-    return os.path.join(
-        test_dir, "expect", "TestTensorBoard." + functionName + ".expect"
-    )
+    return os.path.join(test_dir, "expect", "TestTensorBoard." + functionName + ".expect")
 
 
 def read_expected_content(function_ptr):
@@ -619,9 +591,7 @@ class TestTensorBoardPytorchGraph(BaseTestCase):
             self.assertEqual(expected_node.op, actual_node.op)
             self.assertEqual(expected_node.input, actual_node.input)
             self.assertEqual(expected_node.device, actual_node.device)
-            self.assertEqual(
-                sorted(expected_node.attr.keys()), sorted(actual_node.attr.keys())
-            )
+            self.assertEqual(sorted(expected_node.attr.keys()), sorted(actual_node.attr.keys()))
 
     def test_nested_nn_squential(self):
         dummy_input = torch.randn(2, 3)
@@ -667,9 +637,7 @@ class TestTensorBoardPytorchGraph(BaseTestCase):
             self.assertEqual(expected_node.op, actual_node.op)
             self.assertEqual(expected_node.input, actual_node.input)
             self.assertEqual(expected_node.device, actual_node.device)
-            self.assertEqual(
-                sorted(expected_node.attr.keys()), sorted(actual_node.attr.keys())
-            )
+            self.assertEqual(sorted(expected_node.attr.keys()), sorted(actual_node.attr.keys()))
 
     def test_pytorch_graph_dict_input(self):
         class Model(torch.nn.Module):
@@ -874,9 +842,7 @@ class TestTensorProtoSummary(BaseTestCase):
     def test_int_tensor_proto(self):
         int_values = [1, 2, 3]
         actual_proto = (
-            tensor_proto("dummy", torch.tensor(int_values, dtype=torch.int32))
-            .value[0]
-            .tensor
+            tensor_proto("dummy", torch.tensor(int_values, dtype=torch.int32)).value[0].tensor
         )
         self.assertEqual(actual_proto.int_val, int_values)
         self.assertTrue(actual_proto.dtype == DataType.DT_INT32)

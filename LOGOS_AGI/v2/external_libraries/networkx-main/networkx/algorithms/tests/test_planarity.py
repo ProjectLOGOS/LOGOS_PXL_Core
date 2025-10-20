@@ -300,12 +300,8 @@ class TestLRPlanarity:
         assert isinstance(U, nx.Graph)
         assert all((d == {} for _, _, d in U.edges(data=True)))
 
-    @pytest.mark.parametrize(
-        "reciprocal, as_view", [(True, True), (True, False), (False, True)]
-    )
-    def test_planar_embedding_to_undirected_invalid_parameters(
-        self, reciprocal, as_view
-    ):
+    @pytest.mark.parametrize("reciprocal, as_view", [(True, True), (True, False), (False, True)])
+    def test_planar_embedding_to_undirected_invalid_parameters(self, reciprocal, as_view):
         G = nx.Graph([(0, 1), (1, 2), (2, 3), (3, 0), (0, 2)])
         is_planar, P = nx.check_planarity(G)
         assert is_planar
@@ -350,9 +346,7 @@ def check_embedding(G, embedding):
         if edge[0] != edge[1]:
             g_edges.add((edge[0], edge[1]))
             g_edges.add((edge[1], edge[0]))
-    assert g_edges == set(
-        embedding.edges
-    ), "Bad embedding. Edges don't match the original graph."
+    assert g_edges == set(embedding.edges), "Bad embedding. Edges don't match the original graph."
 
 
 def check_counterexample(G, sub_graph):
@@ -410,23 +404,16 @@ class TestPlanarEmbeddingClass:
     def test_add_half_edge(self):
         embedding = nx.PlanarEmbedding()
         embedding.add_half_edge(0, 1)
-        with pytest.raises(
-            nx.NetworkXException, match="Invalid clockwise reference node."
-        ):
+        with pytest.raises(nx.NetworkXException, match="Invalid clockwise reference node."):
             embedding.add_half_edge(0, 2, cw=3)
-        with pytest.raises(
-            nx.NetworkXException, match="Invalid counterclockwise reference node."
-        ):
+        with pytest.raises(nx.NetworkXException, match="Invalid counterclockwise reference node."):
             embedding.add_half_edge(0, 2, ccw=3)
-        with pytest.raises(
-            nx.NetworkXException, match="Only one of cw/ccw can be specified."
-        ):
+        with pytest.raises(nx.NetworkXException, match="Only one of cw/ccw can be specified."):
             embedding.add_half_edge(0, 2, cw=1, ccw=1)
         with pytest.raises(
             nx.NetworkXException,
             match=(
-                r"Node already has out-half-edge\(s\), either"
-                " cw or ccw reference node required."
+                r"Node already has out-half-edge\(s\), either" " cw or ccw reference node required."
             ),
         ):
             embedding.add_half_edge(0, 2)
@@ -528,9 +515,7 @@ class TestPlanarEmbeddingClass:
         assert face == [1, 2]
 
     def test_unsuccessful_face_traversal(self):
-        embedding = nx.PlanarEmbedding(
-            {1: {2: {"cw": 3, "ccw": 2}}, 2: {1: {"cw": 3, "ccw": 1}}}
-        )
+        embedding = nx.PlanarEmbedding({1: {2: {"cw": 3, "ccw": 2}}, 2: {1: {"cw": 3, "ccw": 1}}})
         with pytest.raises(nx.NetworkXException):
             embedding.traverse_face(1, 2)
 

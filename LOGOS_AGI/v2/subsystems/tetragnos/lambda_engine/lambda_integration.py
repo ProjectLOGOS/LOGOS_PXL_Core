@@ -11,16 +11,22 @@ Dependencies: typing, thonoc_translation_engine, lambda_engine
 from typing import Dict, List, Tuple, Optional, Union, Any
 import json
 
+
 class LambdaEngine:
-    def __init__(self): pass
+    def __init__(self):
+        pass
+
 
 class LambdaExpr:
-    def __init__(self, expr): self.expr = expr
+    def __init__(self, expr):
+        self.expr = expr
+
 
 # Placeholder for 3PDN Translation Engine imports
 # from thonoc_translation_engine import TranslationEngine, TranslationResult
 
 # --- Lambda to 3PDN Translation ---
+
 
 class PDNBridge:
     """Bridge between Lambda engine and 3PDN Translation Engine."""
@@ -55,11 +61,7 @@ class PDNBridge:
         ontological = self._map_to_ontological(semantic)
 
         # Construct 3PDN representation
-        return {
-            "SIGN": self._expr_to_sign(expr),
-            "MIND": semantic,
-            "BRIDGE": ontological
-        }
+        return {"SIGN": self._expr_to_sign(expr), "MIND": semantic, "BRIDGE": ontological}
 
     def _extract_types(self, expr: LambdaExpr) -> Dict[str, Any]:
         """Extract type information from lambda expression.
@@ -83,7 +85,7 @@ class PDNBridge:
             return {
                 "type": "function",
                 "domain": expr_type.domain.value,
-                "codomain": expr_type.codomain.value
+                "codomain": expr_type.codomain.value,
             }
 
         return {"type": "unknown"}
@@ -103,7 +105,7 @@ class PDNBridge:
             "epistemic": 0.0,
             "causal": 0.0,
             "modal": 0.0,
-            "logical": 0.0
+            "logical": 0.0,
         }
 
         # If simple type, map directly
@@ -179,11 +181,7 @@ class PDNBridge:
         goodness = min(max(goodness, 0), 1)
         truth = min(max(truth, 0), 1)
 
-        return {
-            "existence": existence,
-            "goodness": goodness,
-            "truth": truth
-        }
+        return {"existence": existence, "goodness": goodness, "truth": truth}
 
     def _expr_to_sign(self, expr: LambdaExpr) -> List[str]:
         """Convert expression to SIGN layer (tokens).
@@ -198,7 +196,7 @@ class PDNBridge:
         expr_str = str(expr)
 
         # Basic tokenization (can be enhanced)
-        tokens = expr_str.replace('(', ' ( ').replace(')', ' ) ').replace('.', ' . ').split()
+        tokens = expr_str.replace("(", " ( ").replace(")", " ) ").replace(".", " . ").split()
 
         return tokens
 
@@ -219,10 +217,7 @@ class PDNBridge:
 
         # Determine primary dimension
         primary_dim = max(
-            ("existence", existence),
-            ("goodness", goodness),
-            ("truth", truth),
-            key=lambda x: x[1]
+            ("existence", existence), ("goodness", goodness), ("truth", truth), key=lambda x: x[1]
         )[0]
 
         # Create variable based on primary dimension
@@ -268,8 +263,8 @@ class PDNBridge:
                 "layers": {
                     "sign": ["example", "query", "tokens"],
                     "mind": [{"category": "ontological", "confidence": 0.8}],
-                    "bridge": [{"dimension": "existence", "value": 0.7}]
-                }
+                    "bridge": [{"dimension": "existence", "value": 0.7}],
+                },
             }
 
         # Convert translation to lambda expression
@@ -300,17 +295,23 @@ class PDNBridge:
 
         elif isinstance(expr, Application):
             if isinstance(expr.func, SufficientReason):
-                if (expr.func.source_type == OntologicalType.EXISTENCE and
-                    expr.func.target_type == OntologicalType.GOODNESS):
+                if (
+                    expr.func.source_type == OntologicalType.EXISTENCE
+                    and expr.func.target_type == OntologicalType.GOODNESS
+                ):
                     return "existence implies goodness"
-                elif (expr.func.source_type == OntologicalType.GOODNESS and
-                      expr.func.target_type == OntologicalType.TRUTH):
+                elif (
+                    expr.func.source_type == OntologicalType.GOODNESS
+                    and expr.func.target_type == OntologicalType.TRUTH
+                ):
                     return "goodness implies truth"
 
         # Default fallback
         return f"logical expression: {expr_str}"
 
+
 # --- 3PDN Bottleneck Interface ---
+
 
 class PDNBottleneckSolver:
     """Solutions for the 3PDN bottleneck using Lambda targets."""
@@ -346,7 +347,7 @@ class PDNBottleneckSolver:
             "original_translation": translation,
             "optimized_lambda": str(optimized_expr),
             "optimized_3pdn": optimized_3pdn,
-            "improvement_metrics": self._calculate_improvement(translation, optimized_3pdn)
+            "improvement_metrics": self._calculate_improvement(translation, optimized_3pdn),
         }
 
     def _optimize_lambda(self, expr: LambdaExpr) -> LambdaExpr:
@@ -365,7 +366,9 @@ class PDNBottleneckSolver:
         # For now, just return the original expression
         return expr
 
-    def _calculate_improvement(self, original: Dict[str, Any], optimized: Dict[str, Any]) -> Dict[str, float]:
+    def _calculate_improvement(
+        self, original: Dict[str, Any], optimized: Dict[str, Any]
+    ) -> Dict[str, float]:
         """Calculate improvement metrics.
 
         Args:
@@ -380,8 +383,9 @@ class PDNBottleneckSolver:
             "precision_improvement": 0.2,
             "recall_improvement": 0.15,
             "coherence_improvement": 0.25,
-            "computational_efficiency": 0.3
+            "computational_efficiency": 0.3,
         }
+
 
 # Example usage
 if __name__ == "__main__":

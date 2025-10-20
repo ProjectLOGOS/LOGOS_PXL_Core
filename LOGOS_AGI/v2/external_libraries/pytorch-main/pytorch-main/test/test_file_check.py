@@ -27,11 +27,9 @@ check_source_highlighted
 ~~~~~~~~~~~~~~~~~~~~~~~~
 check_regex
 """
-        FileCheck().check("check").check_not("check_not").check_same(
-            "check_same"
-        ).check_next("check_next").check_count("check_count", 1).check_dag(
-            "check_dag"
-        ).check_source_highlighted(
+        FileCheck().check("check").check_not("check_not").check_same("check_same").check_next(
+            "check_next"
+        ).check_count("check_count", 1).check_dag("check_dag").check_source_highlighted(
             "check_source_highlighted"
         ).check_regex(
             r"check_.+"

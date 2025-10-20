@@ -399,9 +399,7 @@ JIT_EXECUTOR_TESTS = [
 INDUCTOR_TESTS = [test for test in TESTS if test.startswith(INDUCTOR_TEST_PREFIX)]
 DISTRIBUTED_TESTS = [test for test in TESTS if test.startswith(DISTRIBUTED_TEST_PREFIX)]
 TORCH_EXPORT_TESTS = [test for test in TESTS if test.startswith("export")]
-AOT_DISPATCH_TESTS = [
-    test for test in TESTS if test.startswith("functorch/test_aotdispatch")
-]
+AOT_DISPATCH_TESTS = [test for test in TESTS if test.startswith("functorch/test_aotdispatch")]
 FUNCTORCH_TESTS = [test for test in TESTS if test.startswith("functorch")]
 ONNX_TESTS = [test for test in TESTS if test.startswith("onnx")]
 
@@ -490,9 +488,7 @@ def run_test(
     # pytest-cpp atm. We also don't have support to disable C++ test yet, so it's ok
     # to just return successfully here
     if is_cpp_test and RERUN_DISABLED_TESTS:
-        print_to_stderr(
-            "Skipping C++ tests when running under RERUN_DISABLED_TESTS mode"
-        )
+        print_to_stderr("Skipping C++ tests when running under RERUN_DISABLED_TESTS mode")
         return 0
 
     if is_cpp_test:
@@ -510,9 +506,7 @@ def run_test(
         unittest_args.append(f"-{'v' * options.verbose}")  # in case of pytest
 
     if test_file in RUN_PARALLEL_BLOCKLIST:
-        unittest_args = [
-            arg for arg in unittest_args if not arg.startswith("--run-parallel")
-        ]
+        unittest_args = [arg for arg in unittest_args if not arg.startswith("--run-parallel")]
 
     if extra_unittest_args:
         assert isinstance(extra_unittest_args, list)
@@ -575,9 +569,7 @@ def run_test(
                 test_file.replace(f"{CPP_TEST_PREFIX}/", ""),
             )
 
-        argv = [
-            cpp_test if sys.platform != "win32" else cpp_test + ".exe"
-        ] + unittest_args
+        argv = [cpp_test if sys.platform != "win32" else cpp_test + ".exe"] + unittest_args
     else:
         # Can't call `python -m unittest test_*` here because it doesn't run code
         # in `if __name__ == '__main__': `. So call `python test_*.py` instead.
@@ -605,9 +597,7 @@ def run_test(
         else THRESHOLD * 6
         if IS_SLOW
         else THRESHOLD * 3
-        if should_retry
-        and isinstance(test_module, ShardedTest)
-        and test_module.time is not None
+        if should_retry and isinstance(test_module, ShardedTest) and test_module.time is not None
         else THRESHOLD * 3
         if is_cpp_test
         else None
@@ -651,9 +641,7 @@ def run_test(
             ret_code = 0 if ret_code == 5 else ret_code
 
     if options.pipe_logs and print_log:
-        handle_log_file(
-            test_module, log_path, failed=(ret_code != 0), was_rerun=was_rerun
-        )
+        handle_log_file(test_module, log_path, failed=(ret_code != 0), was_rerun=was_rerun)
     return ret_code
 
 
@@ -672,9 +660,7 @@ def install_cpp_extensions(cpp_extensions_test_dir, env=os.environ):
 
     install_directory = ""
     # install directory is the one that is named site-packages
-    for root, directories, _ in os.walk(
-        os.path.join(cpp_extensions_test_dir, "install")
-    ):
+    for root, directories, _ in os.walk(os.path.join(cpp_extensions_test_dir, "install")):
         for directory in directories:
             if "-packages" in directory:
                 install_directory = os.path.join(root, directory)
@@ -747,9 +733,7 @@ def run_test_retries(
 
         # Read what just failed/ran
         try:
-            with open(
-                REPO_ROOT / ".pytest_cache/v/cache/stepcurrent" / stepcurrent_key
-            ) as f:
+            with open(REPO_ROOT / ".pytest_cache/v/cache/stepcurrent" / stepcurrent_key) as f:
                 current_failure = f.read()
         except FileNotFoundError:
             print_to_file(
@@ -766,9 +750,7 @@ def run_test_retries(
             # Rerunning the previously failing test succeeded, so now we can
             # skip it and move on
             sc_command = f"--scs={stepcurrent_key}"
-            print_to_file(
-                "Test succeeeded in new process, continuing with the rest of the tests"
-            )
+            print_to_file("Test succeeeded in new process, continuing with the rest of the tests")
         elif num_failures[current_failure] >= 3:
             if not continue_through_error:
                 print_to_file("Stopping at first consistent failure")
@@ -800,9 +782,7 @@ def run_test_retries(
 
 
 def run_test_with_subprocess(test_module, test_directory, options):
-    return run_test(
-        test_module, test_directory, options, extra_unittest_args=["--subprocess"]
-    )
+    return run_test(test_module, test_directory, options, extra_unittest_args=["--subprocess"])
 
 
 def _test_cpp_extensions_aot(test_directory, options, use_ninja):
@@ -928,9 +908,10 @@ def run_test_with_openreg(test_module, test_directory, options):
 
 def test_distributed(test_module, test_directory, options):
     # MPI tests are broken with Python-3.9
-    mpi_available = subprocess.call(
-        "command -v mpiexec", shell=True
-    ) == 0 and sys.version_info < (3, 9)
+    mpi_available = subprocess.call("command -v mpiexec", shell=True) == 0 and sys.version_info < (
+        3,
+        9,
+    )
     if options.verbose and not mpi_available:
         print_to_stderr("MPI not available -- MPI backend tests will be skipped")
 
@@ -947,9 +928,7 @@ def test_distributed(test_module, test_directory, options):
             init_method = "file" if with_init_file else "env"
             if options.verbose:
                 with_init = f"with {init_method} init_method"
-                print_to_stderr(
-                    f"Running distributed tests for the {backend} backend {with_init}"
-                )
+                print_to_stderr(f"Running distributed tests for the {backend} backend {with_init}")
             old_environ = dict(os.environ)
             os.environ["TEMP_DIR"] = tmp_dir
             os.environ["BACKEND"] = backend
@@ -1038,11 +1017,7 @@ def run_doctests(test_module, test_directory, options):
     if enabled["cuda"] == "auto" and torch.cuda.is_available():
         enabled["cuda"] = True
 
-    if (
-        enabled["cuda1"] == "auto"
-        and torch.cuda.is_available()
-        and torch.cuda.device_count() > 1
-    ):
+    if enabled["cuda1"] == "auto" and torch.cuda.is_available() and torch.cuda.device_count() > 1:
         enabled["cuda1"] = True
 
     if enabled["lapack"] == "auto" and torch._C.has_lapack:
@@ -1139,16 +1114,12 @@ def sanitize_file_name(file: str):
     return file.replace("\\", ".").replace("/", ".").replace(" ", "_")
 
 
-def handle_log_file(
-    test: ShardedTest, file_path: str, failed: bool, was_rerun: bool
-) -> None:
+def handle_log_file(test: ShardedTest, file_path: str, failed: bool, was_rerun: bool) -> None:
     test = str(test)
     with open(file_path, errors="ignore") as f:
         full_text = f.read()
 
-    new_file = "test/test-reports/" + sanitize_file_name(
-        f"{test}_{os.urandom(8).hex()}_.log"
-    )
+    new_file = "test/test-reports/" + sanitize_file_name(f"{test}_{os.urandom(8).hex()}_.log")
     os.rename(file_path, REPO_ROOT / new_file)
 
     if not failed and not was_rerun and "=== RERUNS ===" not in full_text:
@@ -1411,8 +1382,7 @@ def parse_args():
         and not IS_MACOS
         and "xpu" not in BUILD_ENVIRONMENT
         and "onnx" not in BUILD_ENVIRONMENT
-        and os.environ.get("GITHUB_WORKFLOW", "slow")
-        in ("trunk", "pull", "rocm", "rocm-mi300"),
+        and os.environ.get("GITHUB_WORKFLOW", "slow") in ("trunk", "pull", "rocm", "rocm-mi300"),
     )
     parser.add_argument(
         "--shard",
@@ -1492,15 +1462,11 @@ def parse_args():
     return args
 
 
-def exclude_tests(
-    exclude_list, selected_tests, exclude_message=None, exact_match=False
-):
+def exclude_tests(exclude_list, selected_tests, exclude_message=None, exact_match=False):
     for exclude_test in exclude_list:
         tests_copy = selected_tests[:]
         for test in tests_copy:
-            if (
-                not exact_match and test.startswith(exclude_test)
-            ) or test == exclude_test:
+            if (not exact_match and test.startswith(exclude_test)) or test == exclude_test:
                 if exclude_message is not None:
                     print_to_stderr(f"Excluding {test} {exclude_message}")
                 selected_tests.remove(test)
@@ -1532,9 +1498,7 @@ def get_selected_tests(options) -> list[str]:
 
     # filter if there's JIT only and distributed only test options
     if options.jit:
-        selected_tests = list(
-            filter(lambda test_name: "jit" in test_name, selected_tests)
-        )
+        selected_tests = list(filter(lambda test_name: "jit" in test_name, selected_tests))
 
     if options.distributed_tests:
         selected_tests = list(
@@ -1543,9 +1507,7 @@ def get_selected_tests(options) -> list[str]:
 
     # Filter to only run core tests when --core option is specified
     if options.core:
-        selected_tests = list(
-            filter(lambda test_name: test_name in CORE_TEST_LIST, selected_tests)
-        )
+        selected_tests = list(filter(lambda test_name: test_name in CORE_TEST_LIST, selected_tests))
 
     # Filter to only run functorch tests when --functorch option is specified
     if options.functorch:
@@ -1563,9 +1525,7 @@ def get_selected_tests(options) -> list[str]:
         )
 
     if options.cpp:
-        selected_tests = list(
-            filter(lambda test_name: test_name in CPP_TESTS, selected_tests)
-        )
+        selected_tests = list(filter(lambda test_name: test_name in CPP_TESTS, selected_tests))
     else:
         # Exclude all C++ tests otherwise as they are still handled differently
         # than Python test at the moment
@@ -1780,9 +1740,7 @@ class TestFailure(NamedTuple):
     message: str
 
 
-def run_test_module(
-    test: ShardedTest, test_directory: str, options
-) -> Optional[TestFailure]:
+def run_test_module(test: ShardedTest, test_directory: str, options) -> Optional[TestFailure]:
     try:
         maybe_set_hip_visible_devies()
 
@@ -1821,9 +1779,7 @@ def run_tests(
     # parallel = in parallel with other files
     # serial = this file on it's own.  The file might still be run in parallel with itself (ex test_ops)
     selected_tests_parallel = [x for x in selected_tests if not must_serial(x)]
-    selected_tests_serial = [
-        x for x in selected_tests if x not in selected_tests_parallel
-    ]
+    selected_tests_serial = [x for x in selected_tests if x not in selected_tests_parallel]
 
     # NB: This is a hack to make conftest.py and files it depends on available
     # on CPP_TESTS_DIR. We should see if the file could be turned into a
@@ -1865,11 +1821,7 @@ def run_tests(
                 options_clone.pytest = True
             failure = run_test_module(test, test_directory, options_clone)
             test_failed = handle_complete(failure)
-            if (
-                test_failed
-                and not options.continue_through_error
-                and not RERUN_DISABLED_TESTS
-            ):
+            if test_failed and not options.continue_through_error and not RERUN_DISABLED_TESTS:
                 raise RuntimeError(failure.message + keep_going_message)
 
         # Run tests marked as serial first
@@ -1880,11 +1832,7 @@ def run_tests(
             options_clone.additional_args.extend(["-m", "serial"])
             failure = run_test_module(test, test_directory, options_clone)
             test_failed = handle_complete(failure)
-            if (
-                test_failed
-                and not options.continue_through_error
-                and not RERUN_DISABLED_TESTS
-            ):
+            if test_failed and not options.continue_through_error and not RERUN_DISABLED_TESTS:
                 raise RuntimeError(failure.message + keep_going_message)
 
         # This is used later to constrain memory per proc on the GPU. On ROCm
@@ -1898,11 +1846,7 @@ def run_tests(
 
         def parallel_test_completion_callback(failure):
             test_failed = handle_complete(failure)
-            if (
-                test_failed
-                and not options.continue_through_error
-                and not RERUN_DISABLED_TESTS
-            ):
+            if test_failed and not options.continue_through_error and not RERUN_DISABLED_TESTS:
                 pool.terminate()
 
         for test in selected_tests_parallel:
@@ -1980,9 +1924,7 @@ def main():
         sharded_tests: list[ShardedTest]
         failures: list[TestFailure]
 
-        def __init__(
-            self, name: str, raw_tests: Sequence[TestRun], should_sort_shard: bool
-        ):
+        def __init__(self, name: str, raw_tests: Sequence[TestRun], should_sort_shard: bool):
             self.name = name
             self.failures = []
             self.time, self.sharded_tests = do_sharding(
@@ -2035,9 +1977,7 @@ def main():
     try:
         # Actually run the tests
         start_time = time.time()
-        run_tests(
-            test_batch.sharded_tests, test_directory, options, test_batch.failures
-        )
+        run_tests(test_batch.sharded_tests, test_directory, options, test_batch.failures)
         elapsed_time = time.time() - start_time
         print_to_stderr(
             f"Running test batch '{test_batch.name}' cost {round(elapsed_time, 2)} seconds"
@@ -2070,9 +2010,7 @@ def main():
                         **test_stats,
                     },
                 )
-            gen_additional_test_failures_file(
-                [test.test_file for test, _ in all_failures]
-            )
+            gen_additional_test_failures_file([test.test_file for test, _ in all_failures])
 
     if len(all_failures):
         for _, err in all_failures:

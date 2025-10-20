@@ -73,12 +73,8 @@ class TestMetalRewritePass(TestCase):
         class Conv2D(torch.nn.Module):
             def __init__(self) -> None:
                 super().__init__()
-                self.weight = torch.nn.Parameter(
-                    torch.rand(conv_weight_shape), requires_grad=False
-                )
-                self.bias = torch.nn.Parameter(
-                    torch.rand(conv_bias_shape), requires_grad=False
-                )
+                self.weight = torch.nn.Parameter(torch.rand(conv_weight_shape), requires_grad=False)
+                self.bias = torch.nn.Parameter(torch.rand(conv_bias_shape), requires_grad=False)
                 self.strides = strides
                 self.paddings = paddings
                 self.dilations = dilations
@@ -101,19 +97,13 @@ class TestMetalRewritePass(TestCase):
             "metal_prepack::conv2d_prepack": 1,
             "metal_prepack::conv2d_run": 1,
         }
-        TestMetalRewritePass.validate_transformed_module(
-            Conv2D(), pattern_count_map, data_shape
-        )
+        TestMetalRewritePass.validate_transformed_module(Conv2D(), pattern_count_map, data_shape)
 
         class Conv2DRelu(torch.nn.Module):
             def __init__(self) -> None:
                 super().__init__()
-                self.weight = torch.nn.Parameter(
-                    torch.rand(conv_weight_shape), requires_grad=False
-                )
-                self.bias = torch.nn.Parameter(
-                    torch.rand(conv_bias_shape), requires_grad=False
-                )
+                self.weight = torch.nn.Parameter(torch.rand(conv_weight_shape), requires_grad=False)
+                self.bias = torch.nn.Parameter(torch.rand(conv_bias_shape), requires_grad=False)
                 self.strides = strides
                 self.paddings = paddings
                 self.dilations = dilations
@@ -159,12 +149,8 @@ class TestMetalRewritePass(TestCase):
         class Conv2DHardtanh(torch.nn.Module):
             def __init__(self) -> None:
                 super().__init__()
-                self.weight = torch.nn.Parameter(
-                    torch.rand(conv_weight_shape), requires_grad=False
-                )
-                self.bias = torch.nn.Parameter(
-                    torch.rand(conv_bias_shape), requires_grad=False
-                )
+                self.weight = torch.nn.Parameter(torch.rand(conv_weight_shape), requires_grad=False)
+                self.bias = torch.nn.Parameter(torch.rand(conv_bias_shape), requires_grad=False)
                 self.strides = strides
                 self.paddings = paddings
                 self.dilations = dilations

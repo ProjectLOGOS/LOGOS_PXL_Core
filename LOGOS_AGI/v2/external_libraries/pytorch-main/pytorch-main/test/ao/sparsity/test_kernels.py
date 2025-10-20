@@ -104,9 +104,7 @@ class TestQuantizedSparseKernels(TestCase):
                 Y_scale = 1.1234
                 Y_zp = 5
                 W_prepack_dense = dense_prepack(W_q, float_bias)
-                W_prepack_sparse = sparse_prepack(
-                    W_q, float_bias, row_block_size, col_block_size
-                )
+                W_prepack_sparse = sparse_prepack(W_q, float_bias, row_block_size, col_block_size)
 
                 if dynamic_mode:
                     Y = sparse_qlinear_dynamic(X_fp32, W_prepack_sparse)
@@ -155,9 +153,7 @@ def _sparse_layer_test_helper(
     mask = torch.randint(0, 2, W_fp32.shape)
     W_fp32 *= mask
     with override_cpu_allocator_for_qnnpack(qengine_is_qnnpack()):
-        X_q = torch.quantize_per_tensor(
-            X_fp32, scale=X_scale, zero_point=X_zp, dtype=torch.quint8
-        )
+        X_q = torch.quantize_per_tensor(X_fp32, scale=X_scale, zero_point=X_zp, dtype=torch.quint8)
         X_fp32 = X_q.dequantize()
 
         W_q = torch.quantize_per_tensor(W_fp32, W_scale, W_zp, torch.qint8)
@@ -205,9 +201,7 @@ def _sparse_layer_test_helper(
 
         # need to determine whether dynamic quantization is being performed since
         # input dtype will be different at the end
-        is_dynamic = isinstance(
-            qmodule_to_check.activation_post_process, tq.PlaceholderObserver
-        )
+        is_dynamic = isinstance(qmodule_to_check.activation_post_process, tq.PlaceholderObserver)
 
         tq.convert(sqmodel, inplace=True, mapping=sparse_mapping)
         tq.convert(qmodel, inplace=True, mapping=ref_mapping)
@@ -218,16 +212,10 @@ def _sparse_layer_test_helper(
         qmodule_to_check = fqn_to_module(qmodel, fqn_to_check)
 
         # check that the modules were converted as expected
-        assert isinstance(
-            sqmodule_to_check, sqmodule_expected_converted_class
-        ), "Convert failed"
-        assert isinstance(
-            qmodule_to_check, qmodule_expected_converted_class
-        ), "Mapping failed"
+        assert isinstance(sqmodule_to_check, sqmodule_expected_converted_class), "Convert failed"
+        assert isinstance(qmodule_to_check, qmodule_expected_converted_class), "Mapping failed"
 
-        row_block_size, col_block_size = sqmodel.linear._packed_params._weight_bias()[
-            2:
-        ]
+        row_block_size, col_block_size = sqmodel.linear._packed_params._weight_bias()[2:]
         assert row_block_size == 1 and col_block_size == 4
 
         # only run during serialization/deserialization tests

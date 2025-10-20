@@ -16,27 +16,19 @@ class PruningOpTest(TestCase):
     # represents the importance of a row.
     # We mask a row if its indicator value is less than the threshold.
     def _generate_rowwise_mask(self, embedding_rows):
-        indicator = torch.from_numpy(
-            (np.random.random_sample(embedding_rows)).astype(np.float32)
-        )
+        indicator = torch.from_numpy((np.random.random_sample(embedding_rows)).astype(np.float32))
         threshold = float(np.random.random_sample())
-        mask = torch.BoolTensor(
-            [True if val >= threshold else False for val in indicator]
-        )
+        mask = torch.BoolTensor([True if val >= threshold else False for val in indicator])
         return mask
 
-    def _test_rowwise_prune_op(
-        self, embedding_rows, embedding_dims, indices_type, weights_dtype
-    ):
+    def _test_rowwise_prune_op(self, embedding_rows, embedding_dims, indices_type, weights_dtype):
         embedding_weights = None
         if weights_dtype in [torch.int8, torch.int16, torch.int32, torch.int64]:
             embedding_weights = torch.randint(
                 0, 100, (embedding_rows, embedding_dims), dtype=weights_dtype
             )
         else:
-            embedding_weights = torch.rand(
-                (embedding_rows, embedding_dims), dtype=weights_dtype
-            )
+            embedding_weights = torch.rand((embedding_rows, embedding_dims), dtype=weights_dtype)
         mask = self._generate_rowwise_mask(embedding_rows)
 
         def get_pt_result(embedding_weights, mask, indices_type):
@@ -83,12 +75,8 @@ class PruningOpTest(TestCase):
             ]
         ),
     )
-    def test_rowwise_prune_op_32bit_indices(
-        self, embedding_rows, embedding_dims, weights_dtype
-    ):
-        self._test_rowwise_prune_op(
-            embedding_rows, embedding_dims, torch.int, weights_dtype
-        )
+    def test_rowwise_prune_op_32bit_indices(self, embedding_rows, embedding_dims, weights_dtype):
+        self._test_rowwise_prune_op(embedding_rows, embedding_dims, torch.int, weights_dtype)
 
     @skipIfTorchDynamo()
     @given(
@@ -106,12 +94,8 @@ class PruningOpTest(TestCase):
             ]
         ),
     )
-    def test_rowwise_prune_op_64bit_indices(
-        self, embedding_rows, embedding_dims, weights_dtype
-    ):
-        self._test_rowwise_prune_op(
-            embedding_rows, embedding_dims, torch.int64, weights_dtype
-        )
+    def test_rowwise_prune_op_64bit_indices(self, embedding_rows, embedding_dims, weights_dtype):
+        self._test_rowwise_prune_op(embedding_rows, embedding_dims, torch.int64, weights_dtype)
 
 
 if __name__ == "__main__":

@@ -18,6 +18,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 try:
     import pika
+
     PIKA_AVAILABLE = True
 except ImportError:
     PIKA_AVAILABLE = False
@@ -25,23 +26,25 @@ except ImportError:
 
 # Test configuration
 TEST_CONFIG = {
-    'rabbitmq_host': 'localhost',
-    'rabbitmq_port': 5672,
-    'test_timeout': 30,  # seconds
-    'max_workers': 3,
-    'log_level': 'INFO'
+    "rabbitmq_host": "localhost",
+    "rabbitmq_port": 5672,
+    "test_timeout": 30,  # seconds
+    "max_workers": 3,
+    "log_level": "INFO",
 }
 
 # Setup logging
 logging.basicConfig(
-    level=getattr(logging, TEST_CONFIG['log_level']),
-    format='%(asctime)s - %(levelname)s - TEST - %(message)s'
+    level=getattr(logging, TEST_CONFIG["log_level"]),
+    format="%(asctime)s - %(levelname)s - TEST - %(message)s",
 )
 logger = logging.getLogger(__name__)
+
 
 @dataclass
 class TestResult:
     """Test result data structure."""
+
     test_name: str
     subsystem: str
     task_type: str
@@ -49,6 +52,7 @@ class TestResult:
     response_time: float
     error_message: Optional[str] = None
     result_data: Optional[Dict[str, Any]] = None
+
 
 class WorkerTestSuite:
     """Comprehensive test suite for worker subsystems."""
@@ -66,12 +70,12 @@ class WorkerTestSuite:
             return False
 
         try:
-            credentials = pika.PlainCredentials('guest', 'guest')
+            credentials = pika.PlainCredentials("guest", "guest")
             parameters = pika.ConnectionParameters(
-                host=TEST_CONFIG['rabbitmq_host'],
-                port=TEST_CONFIG['rabbitmq_port'],
+                host=TEST_CONFIG["rabbitmq_host"],
+                port=TEST_CONFIG["rabbitmq_port"],
                 credentials=credentials,
-                heartbeat=300
+                heartbeat=300,
             )
 
             self.connection = pika.BlockingConnection(parameters)
@@ -103,14 +107,14 @@ class WorkerTestSuite:
         """Send a task message to a worker queue."""
         try:
             self.channel.basic_publish(
-                exchange='',
+                exchange="",
                 routing_key=queue_name,
                 body=json.dumps(task_message),
                 properties=pika.BasicProperties(
                     delivery_mode=2,  # Persistent
                     reply_to=self.response_queue,
-                    correlation_id=task_message['task_id']
-                )
+                    correlation_id=task_message["task_id"],
+                ),
             )
             return True
         except Exception as e:
@@ -124,16 +128,15 @@ class WorkerTestSuite:
         while time.time() - start_time < timeout:
             try:
                 method, properties, body = self.channel.basic_get(
-                    queue=self.response_queue,
-                    auto_ack=True
+                    queue=self.response_queue, auto_ack=True
                 )
 
                 if method is None:
                     time.sleep(0.1)
                     continue
 
-                response = json.loads(body.decode('utf-8'))
-                if response.get('task_id') == task_id:
+                response = json.loads(body.decode("utf-8"))
+                if response.get("task_id") == task_id:
                     return response
 
             except Exception as e:
@@ -148,33 +151,33 @@ class WorkerTestSuite:
         start_time = time.time()
 
         task_message = {
-            'task_id': task_id,
-            'type': 'cluster_texts',
-            'payload': {
-                'texts': [
+            "task_id": task_id,
+            "type": "cluster_texts",
+            "payload": {
+                "texts": [
                     "Machine learning is a subset of artificial intelligence",
                     "Deep learning uses neural networks with multiple layers",
                     "Natural language processing helps computers understand text",
                     "Computer vision enables machines to interpret images",
-                    "Reinforcement learning trains agents through rewards"
+                    "Reinforcement learning trains agents through rewards",
                 ],
-                'method': 'kmeans',
-                'n_clusters': 3
-            }
+                "method": "kmeans",
+                "n_clusters": 3,
+            },
         }
 
         try:
-            if not self.send_task_message('tetragnos_task_queue', task_message):
+            if not self.send_task_message("tetragnos_task_queue", task_message):
                 return TestResult(
                     test_name="tetragnos_cluster_texts",
                     subsystem="TETRAGNOS",
                     task_type="cluster_texts",
                     success=False,
                     response_time=0.0,
-                    error_message="Failed to send task message"
+                    error_message="Failed to send task message",
                 )
 
-            response = self.wait_for_response(task_id, TEST_CONFIG['test_timeout'])
+            response = self.wait_for_response(task_id, TEST_CONFIG["test_timeout"])
             response_time = time.time() - start_time
 
             if response is None:
@@ -184,11 +187,12 @@ class WorkerTestSuite:
                     task_type="cluster_texts",
                     success=False,
                     response_time=response_time,
-                    error_message="No response received within timeout"
+                    error_message="No response received within timeout",
                 )
 
-            success = (response.get('status') == 'success' and
-                      'clusters' in response.get('result', {}))
+            success = response.get("status") == "success" and "clusters" in response.get(
+                "result", {}
+            )
 
             return TestResult(
                 test_name="tetragnos_cluster_texts",
@@ -196,8 +200,8 @@ class WorkerTestSuite:
                 task_type="cluster_texts",
                 success=success,
                 response_time=response_time,
-                result_data=response.get('result'),
-                error_message=None if success else response.get('result', {}).get('error')
+                result_data=response.get("result"),
+                error_message=None if success else response.get("result", {}).get("error"),
             )
 
         except Exception as e:
@@ -207,7 +211,7 @@ class WorkerTestSuite:
                 task_type="cluster_texts",
                 success=False,
                 response_time=time.time() - start_time,
-                error_message=str(e)
+                error_message=str(e),
             )
 
     def test_telos_predict_outcomes(self) -> TestResult:
@@ -216,37 +220,30 @@ class WorkerTestSuite:
         start_time = time.time()
 
         task_message = {
-            'task_id': task_id,
-            'type': 'predict_outcomes',
-            'payload': {
-                'current_state': {
-                    'temperature': 25.0,
-                    'humidity': 60.0,
-                    'pressure': 1013.25
-                },
-                'interventions': [
-                    {
-                        'id': 'increase_temperature',
-                        'parameters': {'temperature': 30.0}
-                    }
+            "task_id": task_id,
+            "type": "predict_outcomes",
+            "payload": {
+                "current_state": {"temperature": 25.0, "humidity": 60.0, "pressure": 1013.25},
+                "interventions": [
+                    {"id": "increase_temperature", "parameters": {"temperature": 30.0}}
                 ],
-                'target_variables': ['humidity', 'pressure'],
-                'horizon': 1
-            }
+                "target_variables": ["humidity", "pressure"],
+                "horizon": 1,
+            },
         }
 
         try:
-            if not self.send_task_message('telos_task_queue', task_message):
+            if not self.send_task_message("telos_task_queue", task_message):
                 return TestResult(
                     test_name="telos_predict_outcomes",
                     subsystem="TELOS",
                     task_type="predict_outcomes",
                     success=False,
                     response_time=0.0,
-                    error_message="Failed to send task message"
+                    error_message="Failed to send task message",
                 )
 
-            response = self.wait_for_response(task_id, TEST_CONFIG['test_timeout'])
+            response = self.wait_for_response(task_id, TEST_CONFIG["test_timeout"])
             response_time = time.time() - start_time
 
             if response is None:
@@ -256,11 +253,12 @@ class WorkerTestSuite:
                     task_type="predict_outcomes",
                     success=False,
                     response_time=response_time,
-                    error_message="No response received within timeout"
+                    error_message="No response received within timeout",
                 )
 
-            success = (response.get('status') == 'success' and
-                      'predictions' in response.get('result', {}))
+            success = response.get("status") == "success" and "predictions" in response.get(
+                "result", {}
+            )
 
             return TestResult(
                 test_name="telos_predict_outcomes",
@@ -268,8 +266,8 @@ class WorkerTestSuite:
                 task_type="predict_outcomes",
                 success=success,
                 response_time=response_time,
-                result_data=response.get('result'),
-                error_message=None if success else response.get('result', {}).get('error')
+                result_data=response.get("result"),
+                error_message=None if success else response.get("result", {}).get("error"),
             )
 
         except Exception as e:
@@ -279,7 +277,7 @@ class WorkerTestSuite:
                 task_type="predict_outcomes",
                 success=False,
                 response_time=time.time() - start_time,
-                error_message=str(e)
+                error_message=str(e),
             )
 
     def test_thonoc_construct_proof(self) -> TestResult:
@@ -288,27 +286,27 @@ class WorkerTestSuite:
         start_time = time.time()
 
         task_message = {
-            'task_id': task_id,
-            'type': 'construct_proof',
-            'payload': {
-                'claim': '(p ∨ ¬p)',  # Law of excluded middle - should be provable
-                'counter_claims': ['¬(p ∨ ¬p)'],  # Contradiction
-                'method': 'axiomatic'
-            }
+            "task_id": task_id,
+            "type": "construct_proof",
+            "payload": {
+                "claim": "(p ∨ ¬p)",  # Law of excluded middle - should be provable
+                "counter_claims": ["¬(p ∨ ¬p)"],  # Contradiction
+                "method": "axiomatic",
+            },
         }
 
         try:
-            if not self.send_task_message('thonoc_task_queue', task_message):
+            if not self.send_task_message("thonoc_task_queue", task_message):
                 return TestResult(
                     test_name="thonoc_construct_proof",
                     subsystem="THONOC",
                     task_type="construct_proof",
                     success=False,
                     response_time=0.0,
-                    error_message="Failed to send task message"
+                    error_message="Failed to send task message",
                 )
 
-            response = self.wait_for_response(task_id, TEST_CONFIG['test_timeout'])
+            response = self.wait_for_response(task_id, TEST_CONFIG["test_timeout"])
             response_time = time.time() - start_time
 
             if response is None:
@@ -318,11 +316,12 @@ class WorkerTestSuite:
                     task_type="construct_proof",
                     success=False,
                     response_time=response_time,
-                    error_message="No response received within timeout"
+                    error_message="No response received within timeout",
                 )
 
-            success = (response.get('status') == 'success' and
-                      'proof_result' in response.get('result', {}))
+            success = response.get("status") == "success" and "proof_result" in response.get(
+                "result", {}
+            )
 
             return TestResult(
                 test_name="thonoc_construct_proof",
@@ -330,8 +329,8 @@ class WorkerTestSuite:
                 task_type="construct_proof",
                 success=success,
                 response_time=response_time,
-                result_data=response.get('result'),
-                error_message=None if success else response.get('result', {}).get('error')
+                result_data=response.get("result"),
+                error_message=None if success else response.get("result", {}).get("error"),
             )
 
         except Exception as e:
@@ -341,7 +340,7 @@ class WorkerTestSuite:
                 task_type="construct_proof",
                 success=False,
                 response_time=time.time() - start_time,
-                error_message=str(e)
+                error_message=str(e),
             )
 
     def test_thonoc_assign_consequence(self) -> TestResult:
@@ -350,34 +349,34 @@ class WorkerTestSuite:
         start_time = time.time()
 
         task_message = {
-            'task_id': task_id,
-            'type': 'assign_consequence',
-            'payload': {
-                'outcome': {
-                    'description': 'Implementing new safety protocols',
-                    'probability': 0.85,
-                    'type': 'policy_change',
-                    'alignment': 'positive'
+            "task_id": task_id,
+            "type": "assign_consequence",
+            "payload": {
+                "outcome": {
+                    "description": "Implementing new safety protocols",
+                    "probability": 0.85,
+                    "type": "policy_change",
+                    "alignment": "positive",
                 },
-                'context': {
-                    'domain': 'workplace_safety',
-                    'stakeholders': ['employees', 'management']
-                }
-            }
+                "context": {
+                    "domain": "workplace_safety",
+                    "stakeholders": ["employees", "management"],
+                },
+            },
         }
 
         try:
-            if not self.send_task_message('thonoc_task_queue', task_message):
+            if not self.send_task_message("thonoc_task_queue", task_message):
                 return TestResult(
                     test_name="thonoc_assign_consequence",
                     subsystem="THONOC",
                     task_type="assign_consequence",
                     success=False,
                     response_time=0.0,
-                    error_message="Failed to send task message"
+                    error_message="Failed to send task message",
                 )
 
-            response = self.wait_for_response(task_id, TEST_CONFIG['test_timeout'])
+            response = self.wait_for_response(task_id, TEST_CONFIG["test_timeout"])
             response_time = time.time() - start_time
 
             if response is None:
@@ -387,11 +386,12 @@ class WorkerTestSuite:
                     task_type="assign_consequence",
                     success=False,
                     response_time=response_time,
-                    error_message="No response received within timeout"
+                    error_message="No response received within timeout",
                 )
 
-            success = (response.get('status') == 'success' and
-                      'consequence_assignment' in response.get('result', {}))
+            success = response.get(
+                "status"
+            ) == "success" and "consequence_assignment" in response.get("result", {})
 
             return TestResult(
                 test_name="thonoc_assign_consequence",
@@ -399,8 +399,8 @@ class WorkerTestSuite:
                 task_type="assign_consequence",
                 success=success,
                 response_time=response_time,
-                result_data=response.get('result'),
-                error_message=None if success else response.get('result', {}).get('error')
+                result_data=response.get("result"),
+                error_message=None if success else response.get("result", {}).get("error"),
             )
 
         except Exception as e:
@@ -410,7 +410,7 @@ class WorkerTestSuite:
                 task_type="assign_consequence",
                 success=False,
                 response_time=time.time() - start_time,
-                error_message=str(e)
+                error_message=str(e),
             )
 
     def run_unit_tests(self) -> List[TestResult]:
@@ -421,51 +421,60 @@ class WorkerTestSuite:
         # Test 1: Configuration validation
         try:
             from shared.worker_config import validate_config, WorkerType
+
             config_valid = validate_config()
 
-            unit_results.append(TestResult(
-                test_name="config_validation",
-                subsystem="SHARED",
-                task_type="validation",
-                success=config_valid,
-                response_time=0.0,
-                error_message=None if config_valid else "Configuration validation failed"
-            ))
+            unit_results.append(
+                TestResult(
+                    test_name="config_validation",
+                    subsystem="SHARED",
+                    task_type="validation",
+                    success=config_valid,
+                    response_time=0.0,
+                    error_message=None if config_valid else "Configuration validation failed",
+                )
+            )
 
         except Exception as e:
-            unit_results.append(TestResult(
-                test_name="config_validation",
-                subsystem="SHARED",
-                task_type="validation",
-                success=False,
-                response_time=0.0,
-                error_message=str(e)
-            ))
+            unit_results.append(
+                TestResult(
+                    test_name="config_validation",
+                    subsystem="SHARED",
+                    task_type="validation",
+                    success=False,
+                    response_time=0.0,
+                    error_message=str(e),
+                )
+            )
 
         # Test 2: Worker imports
         for subsystem, module_name in [
             ("TETRAGNOS", "subsystems.tetragnos"),
             ("TELOS", "subsystems.telos"),
-            ("THONOC", "subsystems.thonoc")
+            ("THONOC", "subsystems.thonoc"),
         ]:
             try:
                 __import__(module_name)
-                unit_results.append(TestResult(
-                    test_name=f"{subsystem.lower()}_import",
-                    subsystem=subsystem,
-                    task_type="import",
-                    success=True,
-                    response_time=0.0
-                ))
+                unit_results.append(
+                    TestResult(
+                        test_name=f"{subsystem.lower()}_import",
+                        subsystem=subsystem,
+                        task_type="import",
+                        success=True,
+                        response_time=0.0,
+                    )
+                )
             except Exception as e:
-                unit_results.append(TestResult(
-                    test_name=f"{subsystem.lower()}_import",
-                    subsystem=subsystem,
-                    task_type="import",
-                    success=False,
-                    response_time=0.0,
-                    error_message=str(e)
-                ))
+                unit_results.append(
+                    TestResult(
+                        test_name=f"{subsystem.lower()}_import",
+                        subsystem=subsystem,
+                        task_type="import",
+                        success=False,
+                        response_time=0.0,
+                        error_message=str(e),
+                    )
+                )
 
         return unit_results
 
@@ -487,29 +496,35 @@ class WorkerTestSuite:
                 self.test_tetragnos_cluster_texts,
                 self.test_telos_predict_outcomes,
                 self.test_thonoc_construct_proof,
-                self.test_thonoc_assign_consequence
+                self.test_thonoc_assign_consequence,
             ]
 
             results = []
-            with ThreadPoolExecutor(max_workers=TEST_CONFIG['max_workers']) as executor:
-                future_to_test = {executor.submit(test): test.__name__ for test in integration_tests}
+            with ThreadPoolExecutor(max_workers=TEST_CONFIG["max_workers"]) as executor:
+                future_to_test = {
+                    executor.submit(test): test.__name__ for test in integration_tests
+                }
 
                 for future in as_completed(future_to_test):
                     test_name = future_to_test[future]
                     try:
                         result = future.result()
                         results.append(result)
-                        logger.info(f"Completed test: {test_name} - {'PASS' if result.success else 'FAIL'}")
+                        logger.info(
+                            f"Completed test: {test_name} - {'PASS' if result.success else 'FAIL'}"
+                        )
                     except Exception as e:
                         logger.error(f"Test {test_name} raised exception: {e}")
-                        results.append(TestResult(
-                            test_name=test_name,
-                            subsystem="UNKNOWN",
-                            task_type="unknown",
-                            success=False,
-                            response_time=0.0,
-                            error_message=str(e)
-                        ))
+                        results.append(
+                            TestResult(
+                                test_name=test_name,
+                                subsystem="UNKNOWN",
+                                task_type="unknown",
+                                success=False,
+                                response_time=0.0,
+                                error_message=str(e),
+                            )
+                        )
 
             return results
 
@@ -538,13 +553,15 @@ class WorkerTestSuite:
         failed_tests = total_tests - passed_tests
 
         summary = {
-            'total_tests': total_tests,
-            'passed': passed_tests,
-            'failed': failed_tests,
-            'success_rate': (passed_tests / total_tests * 100) if total_tests > 0 else 0,
-            'total_time': total_time,
-            'average_response_time': sum(r.response_time for r in all_results) / len(all_results) if all_results else 0,
-            'test_results': all_results
+            "total_tests": total_tests,
+            "passed": passed_tests,
+            "failed": failed_tests,
+            "success_rate": (passed_tests / total_tests * 100) if total_tests > 0 else 0,
+            "total_time": total_time,
+            "average_response_time": sum(r.response_time for r in all_results) / len(all_results)
+            if all_results
+            else 0,
+            "test_results": all_results,
         }
 
         # Log summary
@@ -558,9 +575,12 @@ class WorkerTestSuite:
         # Log failed tests
         for result in all_results:
             if not result.success:
-                logger.error(f"FAILED: {result.test_name} ({result.subsystem}) - {result.error_message}")
+                logger.error(
+                    f"FAILED: {result.test_name} ({result.subsystem}) - {result.error_message}"
+                )
 
         return summary
+
 
 def main():
     """Main test runner."""
@@ -568,8 +588,9 @@ def main():
     summary = test_suite.run_all_tests()
 
     # Exit with appropriate code
-    exit_code = 0 if summary['failed'] == 0 else 1
+    exit_code = 0 if summary["failed"] == 0 else 1
     return exit_code
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     exit(main())

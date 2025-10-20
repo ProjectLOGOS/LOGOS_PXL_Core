@@ -223,9 +223,7 @@ def __torch_function__(self, orig, cls, args, kwargs=empty_dict):
 
         def wrap(t):
             if isinstance(t, TensorLike):
-                return Tensor.from_positional(
-                    t, result_levels, device_holding_tensor is not None
-                )
+                return Tensor.from_positional(t, result_levels, device_holding_tensor is not None)
             return t
 
         return tree_map(wrap, result)
@@ -326,9 +324,7 @@ def _patcharg(name, offset, args, kwargs, value):
         kwargs[name] = value
 
 
-def _wrap(
-    orig, dim_offset=0, keepdim_offset=1, dim_name="dim", single_dim=False, reduce=True
-):
+def _wrap(orig, dim_offset=0, keepdim_offset=1, dim_name="dim", single_dim=False, reduce=True):
     from . import Dim, Tensor, TensorLike
 
     def fn(self, *args, **kwargs):
@@ -339,9 +335,7 @@ def _wrap(
                 return Tensor.from_batched(
                     orig(self._batchtensor, *args, **kwargs), self._has_device
                 )
-        keepdim = (
-            _getarg("keepdim", keepdim_offset, args, kwargs, False) if reduce else False
-        )
+        keepdim = _getarg("keepdim", keepdim_offset, args, kwargs, False) if reduce else False
         t, levels = self._tensor, llist(self._levels)
         dims = _dims(dim, self._batchtensor.ndim, keepdim, single_dim)
         dim_indices = tuple(levels.index(d) for d in dims)
@@ -458,9 +452,7 @@ def t__getitem__(self, input):
         expanding_ndims = ndim - dims_indexed
         obj = input[expanding_object]
         if obj is ...:
-            input[expanding_object : expanding_object + 1] = [
-                no_slice
-            ] * expanding_ndims
+            input[expanding_object : expanding_object + 1] = [no_slice] * expanding_ndims
         else:
             obj.bind_len(expanding_ndims)
     # flatten the dimslists into the indexing
@@ -640,6 +632,5 @@ def split(self, split_size_or_sections, dim=0):
             total_bound_size == size
         ), f"result dimensions do not match original: {total_bound_size} vs {size} ({split_size_or_sections})"
     return tuple(
-        t.index(dim, d)
-        for d, t in zip(split_size_or_sections, _orig_split(self, sizes, dim=dim))
+        t.index(dim, d) for d, t in zip(split_size_or_sections, _orig_split(self, sizes, dim=dim))
     )

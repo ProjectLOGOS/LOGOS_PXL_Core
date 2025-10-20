@@ -13,19 +13,24 @@ import json
 import logging
 
 # Import from other modules (adjust paths as needed)
-from ..core.lambda_engine import LogosExpr, Variable, Value, Application, SufficientReason, LambdaEngine
+from ..core.lambda_engine import (
+    LogosExpr,
+    Variable,
+    Value,
+    Application,
+    SufficientReason,
+    LambdaEngine,
+)
 from ..ontology.trinity_vector import TrinityVector
 from ..utils.data_structures import OntologicalType
 
 logger = logging.getLogger(__name__)
 
+
 class TranslationResult:
     """Holds results of 3PDN translation."""
 
-    def __init__(self,
-                query: str,
-                trinity_vector: TrinityVector,
-                layers: Dict[str, Any] = None):
+    def __init__(self, query: str, trinity_vector: TrinityVector, layers: Dict[str, Any] = None):
         """Initialize translation result.
 
         Args:
@@ -36,9 +41,9 @@ class TranslationResult:
         self.query = query
         self.trinity_vector = trinity_vector
         self.layers = layers or {
-            "SIGN": [],       # Lexical/token layer
-            "MIND": {},       # Semantic/meaning layer
-            "BRIDGE": {}      # Ontological mapping layer
+            "SIGN": [],  # Lexical/token layer
+            "MIND": {},  # Semantic/meaning layer
+            "BRIDGE": {},  # Ontological mapping layer
         }
 
     def to_dict(self) -> Dict[str, Any]:
@@ -46,11 +51,11 @@ class TranslationResult:
         return {
             "query": self.query,
             "trinity_vector": self.trinity_vector.to_dict(),
-            "layers": self.layers
+            "layers": self.layers,
         }
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> 'TranslationResult':
+    def from_dict(cls, data: Dict[str, Any]) -> "TranslationResult":
         """Create from dictionary representation."""
         trinity_data = data.get("trinity_vector", {})
         if isinstance(trinity_data, dict):
@@ -61,8 +66,9 @@ class TranslationResult:
         return cls(
             query=data.get("query", ""),
             trinity_vector=trinity_vector,
-            layers=data.get("layers", {})
+            layers=data.get("layers", {}),
         )
+
 
 class PDNBridge:
     """Bridge between natural language and Lambda Logos."""
@@ -85,7 +91,7 @@ class PDNBridge:
             "epistemic": ["know", "truth", "knowledge", "believe", "fact"],
             "causal": ["cause", "effect", "result", "origin", "create"],
             "modal": ["necessary", "possible", "impossible", "contingent"],
-            "logical": ["follows", "entails", "implies", "contradicts"]
+            "logical": ["follows", "entails", "implies", "contradicts"],
         }
 
         logger.info("PDN Bridge initialized")
@@ -121,10 +127,12 @@ class PDNBridge:
             "sr_eg": sr_eg,
             "sr_gt": sr_gt,
             "existence_implies_goodness": eg_app,
-            "goodness_implies_truth": gt_app
+            "goodness_implies_truth": gt_app,
         }
 
-    def natural_to_lambda(self, query: str, translation_result: Optional[Dict[str, Any]] = None) -> Tuple[LogosExpr, Dict[str, Any]]:
+    def natural_to_lambda(
+        self, query: str, translation_result: Optional[Dict[str, Any]] = None
+    ) -> Tuple[LogosExpr, Dict[str, Any]]:
         """Convert natural language to Lambda expression.
 
         Args:
@@ -166,15 +174,11 @@ class PDNBridge:
         trinity_vector = TrinityVector(
             existence=bridge_layer.get("existence", 0.5),
             goodness=bridge_layer.get("goodness", 0.5),
-            truth=bridge_layer.get("truth", 0.5)
+            truth=bridge_layer.get("truth", 0.5),
         )
 
         # Create layers dictionary
-        layers = {
-            "SIGN": sign_layer,
-            "MIND": mind_layer,
-            "BRIDGE": bridge_layer
-        }
+        layers = {"SIGN": sign_layer, "MIND": mind_layer, "BRIDGE": bridge_layer}
 
         return TranslationResult(query, trinity_vector, layers)
 
@@ -190,7 +194,7 @@ class PDNBridge:
         # Tokenize and normalize
         tokens = [
             token.lower()
-            for token in re.findall(r'\b\w+\b', query)
+            for token in re.findall(r"\b\w+\b", query)
             if len(token) > 1 and token.lower() not in ["the", "a", "an", "is", "are", "to"]
         ]
 
@@ -212,7 +216,7 @@ class PDNBridge:
             "epistemic": 0.0,
             "causal": 0.0,
             "modal": 0.0,
-            "logical": 0.0
+            "logical": 0.0,
         }
 
         # Count matches in each category
@@ -243,11 +247,7 @@ class PDNBridge:
             Ontological dimension values
         """
         # Initialize dimensions with neutral values
-        dimensions = {
-            "existence": 0.5,
-            "goodness": 0.5,
-            "truth": 0.5
-        }
+        dimensions = {"existence": 0.5, "goodness": 0.5, "truth": 0.5}
 
         # Apply semantic category weights to dimensions
         # Ontological primarily affects existence
@@ -294,7 +294,7 @@ class PDNBridge:
             trinity = (
                 trinity_data.get("existence", 0.5),
                 trinity_data.get("goodness", 0.5),
-                trinity_data.get("truth", 0.5)
+                trinity_data.get("truth", 0.5),
             )
         else:
             trinity = trinity_data
@@ -348,11 +348,15 @@ class PDNBridge:
                 return f"the value {expr.value}"
 
         elif isinstance(expr, SufficientReason):
-            if (expr.source_type == OntologicalType.EXISTENCE and
-                expr.target_type == OntologicalType.GOODNESS):
+            if (
+                expr.source_type == OntologicalType.EXISTENCE
+                and expr.target_type == OntologicalType.GOODNESS
+            ):
                 return "the principle that existence implies goodness"
-            elif (expr.source_type == OntologicalType.GOODNESS and
-                  expr.target_type == OntologicalType.TRUTH):
+            elif (
+                expr.source_type == OntologicalType.GOODNESS
+                and expr.target_type == OntologicalType.TRUTH
+            ):
                 return "the principle that goodness implies truth"
             else:
                 return f"a sufficient reason operator from {expr.source_type.value} to {expr.target_type.value}"
@@ -395,17 +399,13 @@ class PDNBridge:
 
         # Create 3PDN representation
         return {
-            "layers": {
-                "SIGN": self._expr_to_sign(expr),
-                "MIND": semantic,
-                "BRIDGE": ontological
-            },
+            "layers": {"SIGN": self._expr_to_sign(expr), "MIND": semantic, "BRIDGE": ontological},
             "trinity_vector": (
                 ontological.get("existence", 0.5),
                 ontological.get("goodness", 0.5),
-                ontological.get("truth", 0.5)
+                ontological.get("truth", 0.5),
             ),
-            "expr": str(expr)
+            "expr": str(expr),
         }
 
     def _extract_type_info(self, expr: LogosExpr) -> Dict[str, Any]:
@@ -425,22 +425,14 @@ class PDNBridge:
             return {"type": "simple", "value": expr.onto_type}
 
         elif isinstance(expr, SufficientReason):
-            return {
-                "type": "sr",
-                "source": expr.source_type,
-                "target": expr.target_type
-            }
+            return {"type": "sr", "source": expr.source_type, "target": expr.target_type}
 
         elif isinstance(expr, Application):
             # Recursive type extraction
             func_type = self._extract_type_info(expr.func)
             arg_type = self._extract_type_info(expr.arg)
 
-            return {
-                "type": "application",
-                "func_type": func_type,
-                "arg_type": arg_type
-            }
+            return {"type": "application", "func_type": func_type, "arg_type": arg_type}
 
         # Default type info
         return {"type": "unknown"}
@@ -461,7 +453,7 @@ class PDNBridge:
             "epistemic": 0.0,
             "causal": 0.0,
             "modal": 0.0,
-            "logical": 0.0
+            "logical": 0.0,
         }
 
         # Map simple types directly
@@ -522,11 +514,7 @@ class PDNBridge:
             Ontological dimension values
         """
         # Initialize with neutral values
-        ontological = {
-            "existence": 0.5,
-            "goodness": 0.5,
-            "truth": 0.5
-        }
+        ontological = {"existence": 0.5, "goodness": 0.5, "truth": 0.5}
 
         # Apply semantic weights to dimensions
         if semantic.get("ontological", 0) > 0:
@@ -561,10 +549,11 @@ class PDNBridge:
         """
         # Convert to string and tokenize
         expr_str = str(expr)
-        tokens = expr_str.replace('(', ' ( ').replace(')', ' ) ').replace('.', ' . ').split()
+        tokens = expr_str.replace("(", " ( ").replace(")", " ) ").replace(".", " . ").split()
 
         # Filter and clean
         return [token for token in tokens if token.strip()]
+
 
 class PDNBottleneckSolver:
     """Specialized tooling for addressing the 3PDN bottleneck."""
@@ -577,7 +566,9 @@ class PDNBottleneckSolver:
         """
         self.bridge = bridge
 
-    def create_lambda_target(self, query: str, translation_result: Dict[str, Any]) -> Dict[str, Any]:
+    def create_lambda_target(
+        self, query: str, translation_result: Dict[str, Any]
+    ) -> Dict[str, Any]:
         """Create optimized Lambda target from translation result.
 
         Args:
@@ -593,17 +584,13 @@ class PDNBottleneckSolver:
             trinity = (
                 trinity_data.get("existence", 0.5),
                 trinity_data.get("goodness", 0.5),
-                trinity_data.get("truth", 0.5)
+                trinity_data.get("truth", 0.5),
             )
         else:
             trinity = trinity_data
 
         # Determine strongest dimensions (top 2)
-        dims = [
-            ("existence", trinity[0]),
-            ("goodness", trinity[1]),
-            ("truth", trinity[2])
-        ]
+        dims = [("existence", trinity[0]), ("goodness", trinity[1]), ("truth", trinity[2])]
         dims.sort(key=lambda x: x[1], reverse=True)
 
         # Create Lambda target based on dimensions
@@ -638,8 +625,10 @@ class PDNBottleneckSolver:
             "query": query,
             "trinity_vector": trinity,
             "lambda_expr": str(target),
-            "lambda_dict": self.bridge.lambda_engine.expr_to_dict(target) if self.bridge.lambda_engine else {},
-            "natural": self.bridge.lambda_to_natural(target)
+            "lambda_dict": self.bridge.lambda_engine.expr_to_dict(target)
+            if self.bridge.lambda_engine
+            else {},
+            "natural": self.bridge.lambda_to_natural(target),
         }
 
         return target_data

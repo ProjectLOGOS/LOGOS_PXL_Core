@@ -60,9 +60,7 @@ class ParamStoreDict:
         """
         initialize ParamStore data structures
         """
-        self._params: Dict[
-            str, torch.Tensor
-        ] = {}  # dictionary from param name to param
+        self._params: Dict[str, torch.Tensor] = {}  # dictionary from param name to param
         self._param_to_name: Dict[
             torch.Tensor, str
         ] = {}  # dictionary from unconstrained param to param name

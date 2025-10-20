@@ -120,9 +120,7 @@ def apply_masked_reduction_along_dim(op, input, *args, **kwargs):
             shape.append(input.shape[i])
 
     # keepdim=True version of the output, filled with nan or 0:
-    output = input.new_full(
-        shape, float("nan") if dtype.is_floating_point else 0, dtype=dtype
-    )
+    output = input.new_full(shape, float("nan") if dtype.is_floating_point else 0, dtype=dtype)
 
     # apply op to all elementary slices:
     if mask is None:
@@ -466,9 +464,7 @@ class TestMasked(TestCase):
         if tmp.layout == torch.sparse_coo:
             expected_sparse = torch.sparse_coo_tensor(
                 tmp.indices(),
-                torch.where(
-                    tmp.values() != Z, tmp.values(), tmp.values().new_full([], 0)
-                ),
+                torch.where(tmp.values() != Z, tmp.values(), tmp.values().new_full([], 0)),
                 input.shape,
             )
             outmask = torch.sparse_coo_tensor(
@@ -480,9 +476,7 @@ class TestMasked(TestCase):
             expected_sparse = torch.sparse_csr_tensor(
                 tmp.crow_indices(),
                 tmp.col_indices(),
-                torch.where(
-                    tmp.values() != Z, tmp.values(), tmp.values().new_full([], 0)
-                ),
+                torch.where(tmp.values() != Z, tmp.values(), tmp.values().new_full([], 0)),
                 input.shape,
             )
             outmask = torch.sparse_csr_tensor(
@@ -499,12 +493,8 @@ class TestMasked(TestCase):
         # check invariance:
         #  torch.where(mask.to_dense(), input.to_dense(), fill_value)
         #    == where(mask, input, fill_value).to_dense(fill_value)
-        expected = torch.where(
-            mask.to_dense(), input.to_dense(), torch.full(input.shape, F)
-        )
-        dense = torch.where(
-            outmask.to_dense(), sparse.to_dense(), torch.full(sparse.shape, F)
-        )
+        expected = torch.where(mask.to_dense(), input.to_dense(), torch.full(input.shape, F))
+        dense = torch.where(outmask.to_dense(), sparse.to_dense(), torch.full(sparse.shape, F))
         self.assertEqual(dense, expected)
 
 

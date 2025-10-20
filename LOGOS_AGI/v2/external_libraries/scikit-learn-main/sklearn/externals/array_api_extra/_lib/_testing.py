@@ -24,9 +24,7 @@ from ._utils._typing import Array
 __all__ = ["xp_assert_close", "xp_assert_equal"]
 
 
-def _check_ns_shape_dtype(
-    actual: Array, desired: Array
-) -> ModuleType:  # numpydoc ignore=RT03
+def _check_ns_shape_dtype(actual: Array, desired: Array) -> ModuleType:  # numpydoc ignore=RT03
     """
     Assert that namespace, shape and dtype of the two arrays match.
 
@@ -168,9 +166,7 @@ def xp_assert_close(
         rtol = 1e-7
 
     if is_cupy_namespace(xp):
-        xp.testing.assert_allclose(
-            actual, desired, rtol=rtol, atol=atol, err_msg=err_msg
-        )
+        xp.testing.assert_allclose(actual, desired, rtol=rtol, atol=atol, err_msg=err_msg)
     elif is_torch_namespace(xp):
         xp.testing.assert_close(
             actual, desired, rtol=rtol, atol=atol, equal_nan=True, msg=err_msg or None

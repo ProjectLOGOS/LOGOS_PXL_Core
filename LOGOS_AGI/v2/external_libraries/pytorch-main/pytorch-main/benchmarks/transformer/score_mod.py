@@ -49,9 +49,7 @@ class ExperimentConfig:
     backends: list[str]
 
     def __post_init__(self):
-        assert (
-            len(self.shape) == 6
-        ), "Shape must be of length 6"  # [B, Hq, M, Hkv, N, D]
+        assert len(self.shape) == 6, "Shape must be of length 6"  # [B, Hq, M, Hkv, N, D]
 
     def asdict(self):
         # Convert the dataclass instance to a dictionary
@@ -106,45 +104,19 @@ def generate_inputs(
 
     assert q_heads % kv_heads == 0
 
-    make_q = partial(
-        torch.rand, q_shape, device=device, dtype=dtype, requires_grad=requires_grad
-    )
-    make_kv = partial(
-        torch.rand, kv_shape, device=device, dtype=dtype, requires_grad=requires_grad
-    )
+    make_q = partial(torch.rand, q_shape, device=device, dtype=dtype, requires_grad=requires_grad)
+    make_kv = partial(torch.rand, kv_shape, device=device, dtype=dtype, requires_grad=requires_grad)
 
     if nested_tensors:
-        query = (
-            make_q()
-            .view(1, q_sequence_length * batch_size, q_heads, head_dim)
-            .transpose(1, 2)
-        )
-        key = (
-            make_kv()
-            .view(1, batch_size * kv_sequence_length, kv_heads, head_dim)
-            .transpose(1, 2)
-        )
+        query = make_q().view(1, q_sequence_length * batch_size, q_heads, head_dim).transpose(1, 2)
+        key = make_kv().view(1, batch_size * kv_sequence_length, kv_heads, head_dim).transpose(1, 2)
         value = (
-            make_kv()
-            .view(1, batch_size * kv_sequence_length, kv_heads, head_dim)
-            .transpose(1, 2)
+            make_kv().view(1, batch_size * kv_sequence_length, kv_heads, head_dim).transpose(1, 2)
         )
     else:
-        query = (
-            make_q()
-            .view(batch_size, q_sequence_length, q_heads, head_dim)
-            .transpose(1, 2)
-        )
-        key = (
-            make_kv()
-            .view(batch_size, kv_sequence_length, kv_heads, head_dim)
-            .transpose(1, 2)
-        )
-        value = (
-            make_kv()
-            .view(batch_size, kv_sequence_length, kv_heads, head_dim)
-            .transpose(1, 2)
-        )
+        query = make_q().view(batch_size, q_sequence_length, q_heads, head_dim).transpose(1, 2)
+        key = make_kv().view(batch_size, kv_sequence_length, kv_heads, head_dim).transpose(1, 2)
+        value = make_kv().view(batch_size, kv_sequence_length, kv_heads, head_dim).transpose(1, 2)
     return query, key, value
 
 
@@ -157,9 +129,7 @@ def generate_jagged_inputs(
 ):
     B, Hq, M, Hkv, N, D = shape
 
-    def offsets_to_lengths(
-        offsets: torch.Tensor, device: Union[str, torch.device]
-    ) -> torch.tensor:
+    def offsets_to_lengths(offsets: torch.Tensor, device: Union[str, torch.device]) -> torch.tensor:
         """Converts a list of offsets to a list of lengths. Reverse op of attn_gym.masks.document_mask.length_to_offsets
 
         Args:
@@ -249,12 +219,8 @@ def run_single_backend_sdpa(
                 )
             if config.attn_type in ["document_mask"]:
                 flatten_o_eager = torch.cat(torch.unbind(out_eager.transpose(1, 2)))
-                flatten_o_compile = out_compile.transpose(1, 2).flatten(
-                    start_dim=0, end_dim=1
-                )
-                torch.testing.assert_close(
-                    flatten_o_eager, flatten_o_compile, atol=1e-2, rtol=1e-2
-                )
+                flatten_o_compile = out_compile.transpose(1, 2).flatten(start_dim=0, end_dim=1)
+                torch.testing.assert_close(flatten_o_eager, flatten_o_compile, atol=1e-2, rtol=1e-2)
             elif not (
                 config.attn_type in ["rel", "alibi"]
                 and config.dtype in [torch.float16, torch.bfloat16]
@@ -324,17 +290,14 @@ def run_single_backend_FA(
             out_FA_updated = out_FA
 
         if not (
-            config.attn_type in ["rel", "alibi"]
-            and config.dtype in [torch.float16, torch.bfloat16]
+            config.attn_type in ["rel", "alibi"] and config.dtype in [torch.float16, torch.bfloat16]
         ):
             torch.testing.assert_close(
                 out_FA_updated, out_compile.transpose(1, 2), atol=1e-2, rtol=1e-2
             )
 
     if FA:
-        forward_FA_time = benchmark_torch_function_in_microseconds(
-            FA, q=q_FA, k=k_FA, v=v_FA
-        )
+        forward_FA_time = benchmark_torch_function_in_microseconds(FA, q=q_FA, k=k_FA, v=v_FA)
     else:
         forward_FA_time = float("nan")
 
@@ -460,34 +423,19 @@ def calculate_speedup(
         raise ValueError(f"Invalid type {type}")
 
 
-def calculate_bandwidth(
-    config: ExperimentConfig, results: ExperimentResults, type: str
-) -> float:
+def calculate_bandwidth(config: ExperimentConfig, results: ExperimentResults, type: str) -> float:
     B, Hq, M, Hkv, N, D = config.shape
     sparsity = results.sparsity if M == 1 else 0.0
     if type == "fwd":
         batch_size, q_heads, q_seq_len, kv_heads, kv_seq_len, head_dim = config.shape
         query_size = (
-            batch_size
-            * q_heads
-            * q_seq_len
-            * head_dim
-            * torch.finfo(config.dtype).bits
-            / 8
+            batch_size * q_heads * q_seq_len * head_dim * torch.finfo(config.dtype).bits / 8
         )
         kv_size = (
-            batch_size
-            * kv_heads
-            * kv_seq_len
-            * head_dim
-            * torch.finfo(config.dtype).bits
-            / 8
-            * 2
+            batch_size * kv_heads * kv_seq_len * head_dim * torch.finfo(config.dtype).bits / 8 * 2
         )
         output_size = query_size
-        total_size = (
-            query_size + kv_size * (1 - sparsity) + output_size
-        ) / 1e9  # In GB
+        total_size = (query_size + kv_size * (1 - sparsity) + output_size) / 1e9  # In GB
         time_in_seconds = results.fwd_time / 1e6
         return total_size / time_in_seconds / 1e3
     else:
@@ -506,10 +454,7 @@ def calculate_tflops(config: ExperimentConfig, results: ExperimentResults) -> fl
 
 def get_average_speedups(results: list[Experiment], type: str, backend: str):
     # Calculate speedups
-    speedups = [
-        calculate_speedup(r.results["compiled"], r.results[backend], type)
-        for r in results
-    ]
+    speedups = [calculate_speedup(r.results["compiled"], r.results[backend], type) for r in results]
 
     # Find indices of max and min speedups
     max_speedup_index = np.nanargmax(speedups)
@@ -565,13 +510,10 @@ def print_results(results: list[Experiment], save_path: Optional[str] = None):
     # Calculate mem + computational throughput
     if results[0].config.cal_bandwidth:
         fwd_bandwidth = [
-            calculate_bandwidth(r.config, r.results["compiled"], type="fwd")
-            for r in results
+            calculate_bandwidth(r.config, r.results["compiled"], type="fwd") for r in results
         ]
         table_data["fwd_mem_bw (TB/s)"] = fwd_bandwidth
-        fwd_tflops = [
-            calculate_tflops(r.config, r.results["compiled"]) for r in results
-        ]
+        fwd_tflops = [calculate_tflops(r.config, r.results["compiled"]) for r in results]
         table_data["TFlops/s"] = fwd_tflops
 
     print(tabulate(table_data, headers="keys", tablefmt="github", floatfmt=".3f"))
@@ -590,11 +532,7 @@ def print_results(results: list[Experiment], save_path: Optional[str] = None):
             print(f"BWD Speedups vs. {backend}".center(125, "="))
             print("\n")
             average_data = get_average_speedups(results, type="bwd", backend=backend)
-            print(
-                tabulate(
-                    average_data, headers="keys", tablefmt="github", floatfmt=".3f"
-                )
-            )
+            print(tabulate(average_data, headers="keys", tablefmt="github", floatfmt=".3f"))
 
     if save_path is not None:
         with open(save_path, "w", newline="") as csvfile:
@@ -776,9 +714,7 @@ def get_kernel_options(attn_type: str, shape: tuple[int]):
     }
 
     return (
-        kernel_opt_decoding_dict[attn_type]
-        if is_decoding
-        else kernel_opt_training_dict[attn_type]
+        kernel_opt_decoding_dict[attn_type] if is_decoding else kernel_opt_training_dict[attn_type]
     )
 
 
@@ -823,9 +759,7 @@ def generate_FA_callable(
         try:
             from flash_attn import flash_attn_func, flash_attn_varlen_func
         except ImportError:
-            print(
-                "Flash attention 2 is not installed. Please install it to run fav2 backend. "
-            )
+            print("Flash attention 2 is not installed. Please install it to run fav2 backend. ")
             raise
     elif backend == "fav3":
         try:
@@ -834,9 +768,7 @@ def generate_FA_callable(
                 flash_attn_varlen_func,
             )
         except ImportError:
-            print(
-                "Flash attention 3 is not installed. Please install it to run fav3 backend. "
-            )
+            print("Flash attention 3 is not installed. Please install it to run fav3 backend. ")
             raise
     else:
         print("Unknown backend " + backend)
@@ -881,17 +813,13 @@ def generate_FA_callable(
     return FA_dict[attn_type]
 
 
-def generate_FD_callable(
-    attn_type: str, shape: tuple[int], dtype: torch.dtype
-) -> Callable | None:
+def generate_FD_callable(attn_type: str, shape: tuple[int], dtype: torch.dtype) -> Callable | None:
     if dtype not in [torch.float16, torch.bfloat16]:
         return None
     try:
         from flash_attn import flash_attn_with_kvcache
     except ImportError:
-        print(
-            "Flash attention 2 is not installed. Please install it to run fakv backend. "
-        )
+        print("Flash attention 2 is not installed. Please install it to run fakv backend. ")
         raise
 
     B, Hq, M, Hkv, N, D = shape
@@ -912,9 +840,7 @@ def generate_FD_callable(
         "causal": partial(flash_attn_with_kvcache_renamed, cache_seqlens=N // 2),
         "rel": None,
         "head_bias": None,
-        "alibi": partial(
-            flash_attn_with_kvcache_renamed, cache_seqlens=N // 2, **FA_kwargs
-        ),
+        "alibi": partial(flash_attn_with_kvcache_renamed, cache_seqlens=N // 2, **FA_kwargs),
         "sliding_window": partial(
             flash_attn_with_kvcache_renamed,
             cache_seqlens=N // 2,
@@ -965,35 +891,23 @@ def generate_eager_sdpa(
     if attn_type == "sliding_window" or attn_type == "prefix_lm":
         attn_mask = create_mask(block_mask.mask_mod, 1, 1, M, N, device="cuda")
     elif attn_type == "rel":
-        attn_mask = generate_attn_mask_linear_score_mod(
-            [1, 1, M, N], block_mask, score_mod, dtype
-        )
+        attn_mask = generate_attn_mask_linear_score_mod([1, 1, M, N], block_mask, score_mod, dtype)
     elif attn_type == "head_bias":
         h = torch.arange(Hq, dtype=int, device="cuda")
         attn_mask = (2 * h[None, :, None, None]).broadcast_to(1, Hq, M, N).to(dtype)
     elif attn_type == "alibi":
-        attn_mask = generate_attn_mask_linear_score_mod(
-            [1, Hq, M, N], block_mask, score_mod, dtype
-        )
+        attn_mask = generate_attn_mask_linear_score_mod([1, Hq, M, N], block_mask, score_mod, dtype)
     else:
         attn_mask = None
 
     sdpa_dict = {
-        "noop": partial(
-            F.scaled_dot_product_attention, is_causal=False, enable_gqa=(Hq != Hkv)
-        ),
-        "causal": partial(
-            F.scaled_dot_product_attention, is_causal=True, enable_gqa=(Hq != Hkv)
-        ),
-        "rel": partial(
-            F.scaled_dot_product_attention, is_causal=False, enable_gqa=(Hq != Hkv)
-        ),
+        "noop": partial(F.scaled_dot_product_attention, is_causal=False, enable_gqa=(Hq != Hkv)),
+        "causal": partial(F.scaled_dot_product_attention, is_causal=True, enable_gqa=(Hq != Hkv)),
+        "rel": partial(F.scaled_dot_product_attention, is_causal=False, enable_gqa=(Hq != Hkv)),
         "head_bias": partial(
             F.scaled_dot_product_attention, is_causal=False, enable_gqa=(Hq != Hkv)
         ),
-        "alibi": partial(
-            F.scaled_dot_product_attention, is_causal=False, enable_gqa=(Hq != Hkv)
-        ),
+        "alibi": partial(F.scaled_dot_product_attention, is_causal=False, enable_gqa=(Hq != Hkv)),
         "sliding_window": partial(
             F.scaled_dot_product_attention, is_causal=False, enable_gqa=(Hq != Hkv)
         ),
@@ -1014,11 +928,7 @@ def generate_eager_sdpa(
             F.scaled_dot_product_attention, is_causal=False, enable_gqa=(Hq != Hkv)
         )
 
-    return (
-        partial(sdpa_dict[attn_type], attn_mask=attn_mask)
-        if sdpa_dict[attn_type]
-        else None
-    )
+    return partial(sdpa_dict[attn_type], attn_mask=attn_mask) if sdpa_dict[attn_type] else None
 
 
 def generate_experiment_configs(
@@ -1060,9 +970,7 @@ def generate_experiment_configs(
     ):
         if kv_cache_size:
             head_size_bytes = torch.finfo(dtype).bits / 8 * head_dim
-            bsz = int(
-                (bsz * 1024 * 1024) // (kv_heads * kv_seq_len * head_size_bytes * 2)
-            )
+            bsz = int((bsz * 1024 * 1024) // (kv_heads * kv_seq_len * head_size_bytes * 2))
             if bsz <= 0:
                 continue
 
@@ -1140,9 +1048,7 @@ if __name__ == "__main__":
 
     parser.add_argument("-dtype", type=str, help="dtype", default="bfloat16")
 
-    parser.add_argument(
-        "-b", type=int, nargs="+", help="batch sizes", default=[2, 8, 16]
-    )
+    parser.add_argument("-b", type=int, nargs="+", help="batch sizes", default=[2, 8, 16])
     parser.add_argument(
         "-nh",
         type=heads_input_type,
@@ -1161,9 +1067,7 @@ if __name__ == "__main__":
         help="score mods: noop, causal, rel, head_bias, alibi, sliding_window, document_mask, prefix_lm, softcap",
         default=["noop", "causal", "alibi", "sliding_window"],
     )
-    parser.add_argument(
-        "--max-autotune", action="store_true", help="Turn on max-autotune"
-    )
+    parser.add_argument("--max-autotune", action="store_true", help="Turn on max-autotune")
     parser.add_argument(
         "--decoding",
         action="store_true",

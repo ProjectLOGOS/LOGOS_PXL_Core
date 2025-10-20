@@ -178,9 +178,7 @@ class TestPrims(TestCase):
             gm = make_fx(func)(a)
 
         # Check that all call_function nodes are prims
-        call_function_nodes = list(
-            filter(lambda n: n.op == "call_function", gm.graph.nodes)
-        )
+        call_function_nodes = list(filter(lambda n: n.op == "call_function", gm.graph.nodes))
         all_prims_namespace = all(
             node.target.name().startswith("prims") for node in call_function_nodes
         )
@@ -256,9 +254,7 @@ class TestPrims(TestCase):
                 expected = torch.empty(
                     shape, device=device, dtype=dtype, memory_format=memory_format
                 )
-                actual = refs.empty(
-                    shape, device=device, dtype=dtype, memory_format=memory_format
-                )
+                actual = refs.empty(shape, device=device, dtype=dtype, memory_format=memory_format)
                 self.assertEqual(expected.stride(), actual.stride())
 
                 # tests clone
@@ -268,9 +264,7 @@ class TestPrims(TestCase):
                 self.assertEqual(expected.stride(), actual.stride())
 
                 # tests contiguous
-                a = torch.testing.make_tensor(
-                    shape, device=device, dtype=dtype, noncontiguous=True
-                )
+                a = torch.testing.make_tensor(shape, device=device, dtype=dtype, noncontiguous=True)
                 expected = a.contiguous(memory_format=memory_format)
                 actual = refs.contiguous(a, memory_format=memory_format)
                 self.assertEqual(expected.stride(), actual.stride())
@@ -292,9 +286,7 @@ class TestPrims(TestCase):
     @dtypes(torch.float32)
     def test_philox_rand(self, device, dtype):
         sizes = (1000, 1000000)  # offsets of 4 and 8
-        repeats = (
-            2  # Checks multiple rand calls results with multiple philox_rand calls
-        )
+        repeats = 2  # Checks multiple rand calls results with multiple philox_rand calls
         for size in sizes:
             torch.cuda.manual_seed(123)
             references = []

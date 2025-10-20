@@ -60,38 +60,60 @@ except ImportError:
         THONOC = "thonoc"
 
     TASK_TYPE_MAPPINGS = {
-        WorkerType.TETRAGNOS: ['cluster_texts', 'translate_text', 'extract_features', 'analyze_patterns', 'semantic_similarity'],
-        WorkerType.TELOS: ['predict_outcomes', 'causal_retrodiction', 'analyze_intervention', 'forecast_series', 'test_hypothesis', 'build_causal_model'],
-        WorkerType.THONOC: ['construct_proof', 'assign_consequence', 'evaluate_lambda', 'modal_reasoning', 'consistency_check', 'theorem_proving']
+        WorkerType.TETRAGNOS: [
+            "cluster_texts",
+            "translate_text",
+            "extract_features",
+            "analyze_patterns",
+            "semantic_similarity",
+        ],
+        WorkerType.TELOS: [
+            "predict_outcomes",
+            "causal_retrodiction",
+            "analyze_intervention",
+            "forecast_series",
+            "test_hypothesis",
+            "build_causal_model",
+        ],
+        WorkerType.THONOC: [
+            "construct_proof",
+            "assign_consequence",
+            "evaluate_lambda",
+            "modal_reasoning",
+            "consistency_check",
+            "theorem_proving",
+        ],
     }
 
-    RABBITMQ_CONFIG = {'host': 'rabbitmq', 'port': 5672, 'heartbeat': 600}
+    RABBITMQ_CONFIG = {"host": "rabbitmq", "port": 5672, "heartbeat": 600}
 
 # Configuration
 SERVICE_NAME = "ARCHON_NEXUS"
-RABBITMQ_HOST = RABBITMQ_CONFIG.get('host', 'rabbitmq')
-RABBITMQ_PORT = RABBITMQ_CONFIG.get('port', 5672)
+RABBITMQ_HOST = RABBITMQ_CONFIG.get("host", "rabbitmq")
+RABBITMQ_PORT = RABBITMQ_CONFIG.get("port", 5672)
 
 # Queue configuration
-ARCHON_GOALS_QUEUE = 'archon_goals'
-TASK_RESULT_QUEUE = 'task_result_queue'
-TETRAGNOS_QUEUE = 'tetragnos_task_queue'
-TELOS_QUEUE = 'telos_task_queue'
-THONOC_QUEUE = 'thonoc_task_queue'
-DB_WRITE_QUEUE = 'db_write_queue'
+ARCHON_GOALS_QUEUE = "archon_goals"
+TASK_RESULT_QUEUE = "task_result_queue"
+TETRAGNOS_QUEUE = "tetragnos_task_queue"
+TELOS_QUEUE = "telos_task_queue"
+THONOC_QUEUE = "thonoc_task_queue"
+DB_WRITE_QUEUE = "db_write_queue"
 
 # Logging setup
 logging.basicConfig(
     level=logging.INFO,
-    format=f'%(asctime)s - %(levelname)s - {SERVICE_NAME} - %(message)s',
+    format=f"%(asctime)s - %(levelname)s - {SERVICE_NAME} - %(message)s",
     handlers=[
         logging.StreamHandler(sys.stdout),
-        logging.FileHandler('/app/logs/archon_nexus.log', mode='a')
-    ]
+        logging.FileHandler("/app/logs/archon_nexus.log", mode="a"),
+    ],
 )
+
 
 class WorkflowStatus(Enum):
     """Workflow execution status."""
+
     PENDING = "pending"
     PLANNING = "planning"
     EXECUTING = "executing"
@@ -99,8 +121,10 @@ class WorkflowStatus(Enum):
     FAILED = "failed"
     CANCELLED = "cancelled"
 
+
 class TaskStatus(Enum):
     """Individual task status."""
+
     PENDING = "pending"
     READY = "ready"
     EXECUTING = "executing"
@@ -108,9 +132,11 @@ class TaskStatus(Enum):
     FAILED = "failed"
     SKIPPED = "skipped"
 
+
 @dataclass
 class TaskNode:
     """Represents a single task in a workflow DAG."""
+
     task_id: str
     task_type: str
     subsystem: str
@@ -124,9 +150,11 @@ class TaskNode:
     retry_count: int = 0
     max_retries: int = 3
 
+
 @dataclass
 class WorkflowExecution:
     """Represents a complete workflow execution."""
+
     workflow_id: str
     goal_description: str
     status: WorkflowStatus = WorkflowStatus.PENDING
@@ -138,6 +166,7 @@ class WorkflowExecution:
     result: Optional[Dict[str, Any]] = None
     error: Optional[str] = None
 
+
 class WorkflowArchitect:
     """Designs workflow DAGs for complex goals."""
 
@@ -146,7 +175,9 @@ class WorkflowArchitect:
         self.validator = validator
 
     @validate_with_principles
-    def design_workflow(self, goal_description: str, context: Dict[str, Any] = None) -> WorkflowExecution:
+    def design_workflow(
+        self, goal_description: str, context: Dict[str, Any] = None
+    ) -> WorkflowExecution:
         """Design a DAG workflow for achieving the given goal."""
 
         workflow_id = f"wf_{uuid.uuid4().hex[:8]}"
@@ -157,19 +188,21 @@ class WorkflowArchitect:
             "entity": "workflow_goal",
             "proposition": goal_description,
             "operation": "design_workflow",
-            "context": context or {}
+            "context": context or {},
         }
 
         validation_result = self.validator.validate_agi_operation(validation_request)
 
         if not validation_result.get("authorized", False):
-            raise ValueError(f"Goal validation failed: {validation_result.get('reason', 'Unknown')}")
+            raise ValueError(
+                f"Goal validation failed: {validation_result.get('reason', 'Unknown')}"
+            )
 
         # Create workflow execution
         workflow = WorkflowExecution(
             workflow_id=workflow_id,
             goal_description=goal_description,
-            status=WorkflowStatus.PLANNING
+            status=WorkflowStatus.PLANNING,
         )
 
         # Decompose goal into tasks based on type analysis
@@ -195,7 +228,7 @@ class WorkflowArchitect:
         goal_lower = goal_description.lower()
 
         # Analysis phase - understanding the goal
-        if any(keyword in goal_lower for keyword in ['analyze', 'understand', 'examine', 'study']):
+        if any(keyword in goal_lower for keyword in ["analyze", "understand", "examine", "study"]):
             # Start with text analysis
             analysis_task = TaskNode(
                 task_id=f"task_{uuid.uuid4().hex[:8]}",
@@ -204,13 +237,13 @@ class WorkflowArchitect:
                 payload={
                     "text": goal_description,
                     "analysis_type": "comprehensive",
-                    "context": context
-                }
+                    "context": context,
+                },
             )
             tasks.append(analysis_task)
 
         # Prediction/modeling phase
-        if any(keyword in goal_lower for keyword in ['predict', 'forecast', 'model', 'simulate']):
+        if any(keyword in goal_lower for keyword in ["predict", "forecast", "model", "simulate"]):
             prediction_task = TaskNode(
                 task_id=f"task_{uuid.uuid4().hex[:8]}",
                 task_type="predict_outcomes",
@@ -218,13 +251,13 @@ class WorkflowArchitect:
                 payload={
                     "query": goal_description,
                     "prediction_type": "causal",
-                    "context": context
-                }
+                    "context": context,
+                },
             )
             tasks.append(prediction_task)
 
         # Reasoning/proof phase
-        if any(keyword in goal_lower for keyword in ['prove', 'verify', 'reason', 'logic']):
+        if any(keyword in goal_lower for keyword in ["prove", "verify", "reason", "logic"]):
             reasoning_task = TaskNode(
                 task_id=f"task_{uuid.uuid4().hex[:8]}",
                 task_type="modal_reasoning",
@@ -232,8 +265,8 @@ class WorkflowArchitect:
                 payload={
                     "proposition": goal_description,
                     "reasoning_type": "modal",
-                    "context": context
-                }
+                    "context": context,
+                },
             )
             tasks.append(reasoning_task)
 
@@ -245,20 +278,20 @@ class WorkflowArchitect:
                     task_id=f"task_{uuid.uuid4().hex[:8]}",
                     task_type="analyze_patterns",
                     subsystem="tetragnos",
-                    payload={"query": goal_description, "context": context}
+                    payload={"query": goal_description, "context": context},
                 ),
                 TaskNode(
                     task_id=f"task_{uuid.uuid4().hex[:8]}",
                     task_type="test_hypothesis",
                     subsystem="telos",
-                    payload={"hypothesis": goal_description, "context": context}
+                    payload={"hypothesis": goal_description, "context": context},
                 ),
                 TaskNode(
                     task_id=f"task_{uuid.uuid4().hex[:8]}",
                     task_type="consistency_check",
                     subsystem="thonoc",
-                    payload={"statement": goal_description, "context": context}
-                )
+                    payload={"statement": goal_description, "context": context},
+                ),
             ]
 
         return tasks
@@ -276,6 +309,7 @@ class WorkflowArchitect:
             # Add dependency edge
             workflow.dag.add_edge(current_task.task_id, next_task.task_id)
             next_task.dependencies.add(current_task.task_id)
+
 
 class AgentOrchestrator:
     """Orchestrates the execution of workflow tasks across subsystems."""
@@ -338,15 +372,11 @@ class AgentOrchestrator:
             "task_type": task.task_type,
             "payload": task.payload,
             "workflow_id": workflow.workflow_id,
-            "timestamp": task.start_time.isoformat()
+            "timestamp": task.start_time.isoformat(),
         }
 
         # Determine target queue based on subsystem
-        queue_map = {
-            "tetragnos": TETRAGNOS_QUEUE,
-            "telos": TELOS_QUEUE,
-            "thonoc": THONOC_QUEUE
-        }
+        queue_map = {"tetragnos": TETRAGNOS_QUEUE, "telos": TELOS_QUEUE, "thonoc": THONOC_QUEUE}
 
         target_queue = queue_map.get(task.subsystem)
 
@@ -357,13 +387,12 @@ class AgentOrchestrator:
         try:
             # Publish task to worker queue
             self.channel.basic_publish(
-                exchange='',
+                exchange="",
                 routing_key=target_queue,
                 body=json.dumps(task_message),
                 properties=pika.BasicProperties(
-                    delivery_mode=2,  # Make message persistent
-                    correlation_id=task.task_id
-                )
+                    delivery_mode=2, correlation_id=task.task_id  # Make message persistent
+                ),
             )
 
             self.logger.info(f"Task {task.task_id} published to {target_queue}")
@@ -374,7 +403,7 @@ class AgentOrchestrator:
     def handle_task_result(self, result_data: Dict[str, Any]):
         """Handle task completion result from workers."""
 
-        task_id = result_data.get('task_id')
+        task_id = result_data.get("task_id")
         workflow_id = self.task_to_workflow.get(task_id)
 
         if not workflow_id or workflow_id not in self.active_workflows:
@@ -390,9 +419,9 @@ class AgentOrchestrator:
 
         # Update task with result
         task.end_time = datetime.utcnow()
-        task.result = result_data.get('result')
+        task.result = result_data.get("result")
 
-        if result_data.get('status') == 'success':
+        if result_data.get("status") == "success":
             task.status = TaskStatus.COMPLETED
             self.logger.info(f"Task {task_id} completed successfully")
 
@@ -400,7 +429,7 @@ class AgentOrchestrator:
             self._continue_workflow_execution(workflow)
 
         else:
-            error_msg = result_data.get('error', 'Unknown error')
+            error_msg = result_data.get("error", "Unknown error")
             self._handle_task_error(task, workflow, error_msg)
 
     def _handle_task_error(self, task: TaskNode, workflow: WorkflowExecution, error_msg: str):
@@ -412,7 +441,9 @@ class AgentOrchestrator:
         if task.retry_count < task.max_retries:
             task.retry_count += 1
             task.status = TaskStatus.PENDING
-            self.logger.warning(f"Task {task.task_id} failed, retrying ({task.retry_count}/{task.max_retries}): {error_msg}")
+            self.logger.warning(
+                f"Task {task.task_id} failed, retrying ({task.retry_count}/{task.max_retries}): {error_msg}"
+            )
 
             # Retry the task
             self._execute_task(task, workflow)
@@ -442,7 +473,9 @@ class AgentOrchestrator:
 
             if all_completed:
                 # Check if any tasks failed
-                failed_tasks = [task for task in workflow.tasks.values() if task.status == TaskStatus.FAILED]
+                failed_tasks = [
+                    task for task in workflow.tasks.values() if task.status == TaskStatus.FAILED
+                ]
 
                 if failed_tasks:
                     error_msg = f"Workflow failed due to {len(failed_tasks)} failed tasks"
@@ -451,7 +484,9 @@ class AgentOrchestrator:
                     # All tasks completed successfully
                     self._complete_workflow(workflow, WorkflowStatus.COMPLETED)
 
-    def _complete_workflow(self, workflow: WorkflowExecution, status: WorkflowStatus, error_msg: str = None):
+    def _complete_workflow(
+        self, workflow: WorkflowExecution, status: WorkflowStatus, error_msg: str = None
+    ):
         """Complete workflow execution."""
 
         workflow.status = status
@@ -465,12 +500,10 @@ class AgentOrchestrator:
                 "goal": workflow.goal_description,
                 "status": "completed",
                 "task_results": {
-                    task_id: task.result
-                    for task_id, task in workflow.tasks.items()
-                    if task.result
+                    task_id: task.result for task_id, task in workflow.tasks.items() if task.result
                 },
                 "execution_time": (workflow.completed_at - workflow.started_at).total_seconds(),
-                "task_count": len(workflow.tasks)
+                "task_count": len(workflow.tasks),
             }
 
             self.logger.info(f"Workflow {workflow.workflow_id} completed successfully")
@@ -483,6 +516,7 @@ class AgentOrchestrator:
 
         # Keep workflow in memory for a while for status queries
         # In production, this would be persisted to database
+
 
 class ArchonNexus:
     """Main Archon Nexus service class."""
@@ -498,12 +532,12 @@ class ArchonNexus:
 
         # Service state
         self.system_status = {
-            'service_name': SERVICE_NAME,
-            'status': 'initializing',
-            'started_at': datetime.utcnow().isoformat(),
-            'workflows_processed': 0,
-            'active_workflows': 0,
-            'last_activity': datetime.utcnow().isoformat()
+            "service_name": SERVICE_NAME,
+            "status": "initializing",
+            "started_at": datetime.utcnow().isoformat(),
+            "workflows_processed": 0,
+            "active_workflows": 0,
+            "last_activity": datetime.utcnow().isoformat(),
         }
 
         # Setup signal handlers
@@ -527,8 +561,8 @@ class ArchonNexus:
                     pika.ConnectionParameters(
                         host=RABBITMQ_HOST,
                         port=RABBITMQ_PORT,
-                        heartbeat=RABBITMQ_CONFIG.get('heartbeat', 600),
-                        blocked_connection_timeout=300
+                        heartbeat=RABBITMQ_CONFIG.get("heartbeat", 600),
+                        blocked_connection_timeout=300,
                     )
                 )
                 channel = connection.channel()
@@ -537,7 +571,9 @@ class ArchonNexus:
                 return connection, channel
 
             except pika.exceptions.AMQPConnectionError as e:
-                self.logger.warning(f"RabbitMQ connection attempt {attempt + 1}/{max_retries} failed: {e}")
+                self.logger.warning(
+                    f"RabbitMQ connection attempt {attempt + 1}/{max_retries} failed: {e}"
+                )
                 if attempt < max_retries - 1:
                     time.sleep(retry_delay)
                 else:
@@ -552,7 +588,7 @@ class ArchonNexus:
             TETRAGNOS_QUEUE,
             TELOS_QUEUE,
             THONOC_QUEUE,
-            DB_WRITE_QUEUE
+            DB_WRITE_QUEUE,
         ]
 
         for queue in queues:
@@ -565,16 +601,12 @@ class ArchonNexus:
         # Consumer for goal requests
         self.channel.basic_qos(prefetch_count=1)
         self.channel.basic_consume(
-            queue=ARCHON_GOALS_QUEUE,
-            on_message_callback=self._handle_goal_message,
-            auto_ack=False
+            queue=ARCHON_GOALS_QUEUE, on_message_callback=self._handle_goal_message, auto_ack=False
         )
 
         # Consumer for task results
         self.channel.basic_consume(
-            queue=TASK_RESULT_QUEUE,
-            on_message_callback=self._handle_result_message,
-            auto_ack=False
+            queue=TASK_RESULT_QUEUE, on_message_callback=self._handle_result_message, auto_ack=False
         )
 
         self.logger.info("Message consumers setup complete")
@@ -583,9 +615,9 @@ class ArchonNexus:
         """Handle incoming goal messages from Logos Nexus."""
 
         try:
-            goal_data = json.loads(body.decode('utf-8'))
-            goal_description = goal_data.get('query') or goal_data.get('goal')
-            context = goal_data.get('context', {})
+            goal_data = json.loads(body.decode("utf-8"))
+            goal_description = goal_data.get("query") or goal_data.get("goal")
+            context = goal_data.get("context", {})
 
             self.logger.info(f"Received goal: {goal_description}")
 
@@ -595,9 +627,9 @@ class ArchonNexus:
             # Execute the workflow
             self.agent_orchestrator.execute_workflow(workflow)
 
-            self.system_status['workflows_processed'] += 1
-            self.system_status['active_workflows'] += 1
-            self.system_status['last_activity'] = datetime.utcnow().isoformat()
+            self.system_status["workflows_processed"] += 1
+            self.system_status["active_workflows"] += 1
+            self.system_status["last_activity"] = datetime.utcnow().isoformat()
 
             ch.basic_ack(delivery_tag=method.delivery_tag)
 
@@ -609,16 +641,16 @@ class ArchonNexus:
         """Handle task result messages from workers."""
 
         try:
-            result_data = json.loads(body.decode('utf-8'))
+            result_data = json.loads(body.decode("utf-8"))
 
             # Pass result to orchestrator
             self.agent_orchestrator.handle_task_result(result_data)
 
             # Update system status
-            if result_data.get('workflow_completed'):
-                self.system_status['active_workflows'] -= 1
+            if result_data.get("workflow_completed"):
+                self.system_status["active_workflows"] -= 1
 
-            self.system_status['last_activity'] = datetime.utcnow().isoformat()
+            self.system_status["last_activity"] = datetime.utcnow().isoformat()
 
             ch.basic_ack(delivery_tag=method.delivery_tag)
 
@@ -642,7 +674,7 @@ class ArchonNexus:
             self._setup_queues()
             self._setup_consumers()
 
-            self.system_status['status'] = 'running'
+            self.system_status["status"] = "running"
             self.logger.info("Archon Nexus service started successfully")
 
             # Start consuming messages
@@ -659,7 +691,7 @@ class ArchonNexus:
 
         except Exception as e:
             self.logger.error(f"Error starting service: {e}")
-            self.system_status['status'] = 'error'
+            self.system_status["status"] = "error"
             raise
         finally:
             self.stop()
@@ -669,13 +701,14 @@ class ArchonNexus:
 
         self.logger.info("Stopping Archon Nexus service...")
 
-        self.system_status['status'] = 'stopping'
+        self.system_status["status"] = "stopping"
 
         if self.connection and not self.connection.is_closed:
             self.connection.close()
 
-        self.system_status['status'] = 'stopped'
+        self.system_status["status"] = "stopped"
         self.logger.info("Archon Nexus service stopped")
+
 
 def main():
     """Main entry point."""
@@ -688,6 +721,7 @@ def main():
     except Exception as e:
         service.logger.error(f"Service failed: {e}")
         sys.exit(1)
+
 
 if __name__ == "__main__":
     main()

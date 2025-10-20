@@ -49,9 +49,7 @@ class TestBundledInputs(TestCase):
             # Quantized uniform tensor.
             (torch.quantize_per_tensor(torch.zeros(4, 8, 32, 32), 1, 0, torch.qint8),),
         ]
-        torch.utils.bundled_inputs.augment_model_with_bundled_inputs(
-            sm, samples, get_expr
-        )
+        torch.utils.bundled_inputs.augment_model_with_bundled_inputs(sm, samples, get_expr)
         # print(get_expr[0])
         # print(sm._generate_bundled_inputs.code)
 
@@ -108,9 +106,7 @@ class TestBundledInputs(TestCase):
 
             sm = torch.jit.script(SingleTensorModel())
             with self.assertRaisesRegex(Exception, "Bundled input argument"):
-                torch.utils.bundled_inputs.augment_model_with_bundled_inputs(
-                    sm, [(sample,)]
-                )
+                torch.utils.bundled_inputs.augment_model_with_bundled_inputs(sm, [(sample,)])
 
         # Plain old big tensor.
         check_tensor(torch.randn(1 << 16))
@@ -284,9 +280,7 @@ class TestBundledInputs(TestCase):
                 return arg
 
         m = torch.jit.script(SingleTensorModel())
-        torch.utils.bundled_inputs.augment_model_with_bundled_inputs(
-            m, inputs=[(torch.ones(1),)]
-        )
+        torch.utils.bundled_inputs.augment_model_with_bundled_inputs(m, inputs=[(torch.ones(1),)])
         with self.assertRaisesRegex(
             Exception, "Models can only be augmented with bundled inputs once."
         ):
@@ -300,9 +294,7 @@ class TestBundledInputs(TestCase):
                 return arg
 
         m = torch.jit.script(SingleTensorModel())
-        bundled_model = torch.utils.bundled_inputs.bundle_inputs(
-            m, inputs=[(torch.ones(1),)]
-        )
+        bundled_model = torch.utils.bundled_inputs.bundle_inputs(m, inputs=[(torch.ones(1),)])
         with self.assertRaises(AttributeError):
             m.get_all_bundled_inputs()
         self.assertEqual(bundled_model.get_all_bundled_inputs(), [(torch.ones(1),)])
@@ -362,9 +354,7 @@ class TestBundledInputs(TestCase):
         def bundle_optional_dict_of_randn(template):
             return torch.utils.bundled_inputs.InflatableArg(
                 value=(
-                    None
-                    if template is None
-                    else {k: condensed(v) for (k, v) in template.items()}
+                    None if template is None else {k: condensed(v) for (k, v) in template.items()}
                 ),
                 fmt="{}",
                 fmt_fn="""
@@ -423,17 +413,13 @@ class TestBundledInputs(TestCase):
         (
             methods,
             _,
-        ) = torch.utils.bundled_inputs._get_bundled_inputs_attributes_and_methods(
-            loaded
-        )
+        ) = torch.utils.bundled_inputs._get_bundled_inputs_attributes_and_methods(loaded)
 
         # One Function (forward)
         # two bundled inputs (big_inputs and small_inputs)
         # two args which have InflatableArg with fmt_fn
         # 1 * 2 * 2 = 4
-        self.assertEqual(
-            sum(method.startswith("_inflate_helper") for method in methods), 4
-        )
+        self.assertEqual(sum(method.startswith("_inflate_helper") for method in methods), 4)
 
 
 if __name__ == "__main__":

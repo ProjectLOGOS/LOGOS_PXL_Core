@@ -1,13 +1,15 @@
-# LOGOS Tool Router v2.0.0 - Deployment Checklist
+# 🚀 LOGOS AGI Framework - Complete Deployment Guide
 
-## ✅ IMMEDIATE ROLLOUT CHECKLIST
+## ✅ AUTONOMOUS AGI SYSTEM DEPLOYMENT
 
-### 1. Enable HMAC Signing (Production Security)
+### 1. **Clone Autonomous AGI Framework from GitHub**
+
 ```bash
-# Generate strong secret (32+ characters)
-export SIGNING_SECRET=$(openssl rand -base64 32)
+git clone https://github.com/ProjectLOGOS/LOGOS_PXL_Core.git
+cd LOGOS_PXL_Core
 
-# Deploy with signing enabled
+# Switch to latest AGI branch
+git checkout feature/agi-enhancements
 docker compose up -d tool-router
 
 # Test signed request

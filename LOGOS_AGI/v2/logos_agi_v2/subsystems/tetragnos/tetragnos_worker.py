@@ -8,18 +8,23 @@ from .ml_components import FeatureExtractor, ClusterAnalyzer
 
 # --- Worker-Specific Configuration ---
 SUBSYSTEM_NAME = "Tetragnos"
-RABBITMQ_HOST = os.getenv('RABBITMQ_HOST', 'rabbitmq')
-TASK_QUEUE = 'tetragnos_task_queue'
-RESULT_QUEUE = 'task_result_queue'
+RABBITMQ_HOST = os.getenv("RABBITMQ_HOST", "rabbitmq")
+TASK_QUEUE = "tetragnos_task_queue"
+RESULT_QUEUE = "task_result_queue"
 
 # --- Logging Setup ---
-logging.basicConfig(level=logging.INFO, format=f'%(asctime)s - %(levelname)s - {SUBSYSTEM_NAME}_WORKER - %(message)s')
+logging.basicConfig(
+    level=logging.INFO,
+    format=f"%(asctime)s - %(levelname)s - {SUBSYSTEM_NAME}_WORKER - %(message)s",
+)
+
 
 class TetragnosCore:
     """
     This class encapsulates the core logic of the Tetragnos subsystem,
     acting as the internal "nexus" that the worker service exposes.
     """
+
     def __init__(self):
         self.logger = logging.getLogger("TETRAGNOS_CORE")
         self.feature_extractor = FeatureExtractor()
@@ -31,7 +36,7 @@ class TetragnosCore:
         Main execution entry point for Tetragnos logic.
         Routes tasks to the appropriate internal method.
         """
-        if task_type == 'cluster_texts':
+        if task_type == "cluster_texts":
             return self.perform_text_clustering(payload)
         else:
             raise ValueError(f"Unknown task type for Tetragnos: {task_type}")
@@ -41,9 +46,11 @@ class TetragnosCore:
         Performs semantic feature extraction and clustering on a list of texts.
         This is the primary function of Tetragnos.
         """
-        texts = payload.get('texts')
+        texts = payload.get("texts")
         if not texts or not isinstance(texts, list):
-            raise ValueError("Payload for 'cluster_texts' must contain a non-empty list of strings in the 'texts' key.")
+            raise ValueError(
+                "Payload for 'cluster_texts' must contain a non-empty list of strings in the 'texts' key."
+            )
 
         self.logger.info(f"Performing clustering on {len(texts)} documents.")
 
@@ -53,11 +60,14 @@ class TetragnosCore:
         # 2. Find clusters and patterns in the embedding space
         cluster_results = self.cluster_analyzer.fit(features)
 
-        self.logger.info(f"Clustering complete. Found {len(set(cluster_results['labels'])) - 1} clusters.")
+        self.logger.info(
+            f"Clustering complete. Found {len(set(cluster_results['labels'])) - 1} clusters."
+        )
         return cluster_results
 
+
 class TetragnosWorker:
-    def __init__(self, rabbitmq_host='rabbitmq'):
+    def __init__(self, rabbitmq_host="rabbitmq"):
         self.logger = logging.getLogger("TETRAGNOS_WORKER")
         self.core_logic = TetragnosCore()
         self.connection, self.channel = self._connect_rabbitmq(rabbitmq_host)
@@ -71,7 +81,9 @@ class TetragnosWorker:
                 self.logger.info("Tetragnos worker connected to RabbitMQ.")
                 return connection, channel
             except pika.exceptions.AMQPConnectionError:
-                self.logger.warning(f"Tetragnos worker could not connect to RabbitMQ. Retrying in 5s...")
+                self.logger.warning(
+                    f"Tetragnos worker could not connect to RabbitMQ. Retrying in 5s..."
+                )
                 time.sleep(5)
         raise ConnectionError("Tetragnos worker could not connect to RabbitMQ")
 
@@ -81,37 +93,39 @@ class TetragnosWorker:
 
     def process_task(self, ch, method, properties, body):
         task = json.loads(body)
-        task_id = task.get('task_id', 'unknown')
-        workflow_id = task.get('workflow_id', 'unknown')
-        logging.info(f"Received task {task_id} for workflow {workflow_id} of type {task.get('type')}")
+        task_id = task.get("task_id", "unknown")
+        workflow_id = task.get("workflow_id", "unknown")
+        logging.info(
+            f"Received task {task_id} for workflow {workflow_id} of type {task.get('type')}"
+        )
 
         result_payload = {}
-        status = 'failure'
+        status = "failure"
 
         try:
-            task_type = task.get('type')
-            payload = task.get('payload', {})
+            task_type = task.get("type")
+            payload = task.get("payload", {})
 
             # Delegate the task to the core logic engine
             result_payload = self.core_logic.execute(task_type, payload)
-            status = 'success'
+            status = "success"
         except Exception as e:
             self.logger.error(f"Error processing task {task_id}: {e}", exc_info=True)
-            result_payload = {'error': str(e)}
+            result_payload = {"error": str(e)}
 
         response = {
-            'subsystem': SUBSYSTEM_NAME,
-            'task_id': task_id,
-            'workflow_id': workflow_id,
-            'status': status,
-            'result': result_payload
+            "subsystem": SUBSYSTEM_NAME,
+            "task_id": task_id,
+            "workflow_id": workflow_id,
+            "status": status,
+            "result": result_payload,
         }
 
         self.channel.basic_publish(
-            exchange='',
+            exchange="",
             routing_key=RESULT_QUEUE,
             body=json.dumps(response),
-            properties=pika.BasicProperties(delivery_mode=2)
+            properties=pika.BasicProperties(delivery_mode=2),
         )
         ch.basic_ack(delivery_tag=method.delivery_tag)
         self.logger.info(f"Finished and published result for task {task_id}.")
@@ -119,12 +133,17 @@ class TetragnosWorker:
     def start(self):
         self.channel.basic_qos(prefetch_count=1)
         self.channel.basic_consume(queue=TASK_QUEUE, on_message_callback=self.process_task)
-        self.logger.info(f"{SUBSYSTEM_NAME} worker started and is waiting for tasks on queue '{TASK_QUEUE}'.")
+        self.logger.info(
+            f"{SUBSYSTEM_NAME} worker started and is waiting for tasks on queue '{TASK_QUEUE}'."
+        )
         self.channel.start_consuming()
 
-if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    worker = TetragnosWorker(os.getenv('RABBITMQ_HOST', 'rabbitmq'))
+
+if __name__ == "__main__":
+    logging.basicConfig(
+        level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    )
+    worker = TetragnosWorker(os.getenv("RABBITMQ_HOST", "rabbitmq"))
     worker.start()
 
     """Enhanced TETRAGNOS Worker with ML Components Integration
@@ -142,6 +161,7 @@ import time
 import logging
 from typing import Dict, Any, List, Optional
 
+
 # Missing ML Components (CREATE THESE)
 class FeatureExtractor:
     """Semantic feature extraction using sentence transformers."""
@@ -149,7 +169,8 @@ class FeatureExtractor:
     def __init__(self):
         try:
             from sentence_transformers import SentenceTransformer
-            self.model = SentenceTransformer('all-MiniLM-L6-v2')
+
+            self.model = SentenceTransformer("all-MiniLM-L6-v2")
             self.fitted = False
         except ImportError:
             self.model = None
@@ -162,18 +183,20 @@ class FeatureExtractor:
             return {
                 "embeddings": embeddings.tolist(),
                 "feature_count": embeddings.shape[1],
-                "document_count": len(texts)
+                "document_count": len(texts),
             }
         else:
             # Fallback: TF-IDF features
             from sklearn.feature_extraction.text import TfidfVectorizer
+
             vectorizer = TfidfVectorizer(max_features=384)
             features = vectorizer.fit_transform(texts)
             return {
                 "embeddings": features.toarray().tolist(),
                 "feature_count": features.shape[1],
-                "document_count": len(texts)
+                "document_count": len(texts),
             }
+
 
 class ClusterAnalyzer:
     """Semantic clustering with pattern detection."""
@@ -181,6 +204,7 @@ class ClusterAnalyzer:
     def __init__(self):
         from sklearn.cluster import KMeans
         from sklearn.metrics import silhouette_score
+
         self.kmeans = None
         self.optimal_k = None
 
@@ -214,8 +238,9 @@ class ClusterAnalyzer:
             "cluster_centers": self.kmeans.cluster_centers_.tolist(),
             "cluster_count": best_k,
             "silhouette_score": best_score,
-            "inertia": self.kmeans.inertia_
+            "inertia": self.kmeans.inertia_,
         }
+
 
 # ENHANCED ALIGNMENT PROTOCOL
 class TetragnosAlignmentProtocol:
@@ -226,13 +251,13 @@ class TetragnosAlignmentProtocol:
             "ignore previous instructions",
             "generate harmful",
             "bypass safety",
-            "malicious content"
+            "malicious content",
         ]
         self.safety_threshold = 0.8
 
     def validate_input(self, payload: Dict[str, Any]) -> Dict[str, Any]:
         """Validate input safety and appropriateness."""
-        texts = payload.get('texts', [])
+        texts = payload.get("texts", [])
         if not isinstance(texts, list):
             return {"valid": False, "reason": "Invalid input format"}
 

@@ -67,9 +67,7 @@ class TestMkldnnFusion(JitTestCase):
         class M(nn.Module):
             def __init__(self, in_channels, out_channels, bias, **kwargs):
                 super().__init__()
-                self.conv = torch.nn.Conv2d(
-                    in_channels, out_channels, bias=bias, **kwargs
-                )
+                self.conv = torch.nn.Conv2d(in_channels, out_channels, bias=bias, **kwargs)
 
             def forward(self, x):
                 res = self.conv(x)
@@ -112,9 +110,7 @@ class TestMkldnnFusion(JitTestCase):
         class M(nn.Module):
             def __init__(self, unary_fn, in_channels, out_channels, bias, **kwargs):
                 super().__init__()
-                self.conv = torch.nn.Conv2d(
-                    in_channels, out_channels, bias=bias, **kwargs
-                )
+                self.conv = torch.nn.Conv2d(in_channels, out_channels, bias=bias, **kwargs)
                 self.unary = unary_fn
 
             def forward(self, x):
@@ -136,9 +132,7 @@ class TestMkldnnFusion(JitTestCase):
 
                         graph = self._check_model(m, x)
                         if enabled:
-                            self.assertFused(
-                                graph, ["aten::conv2d", "aten::" + unary_fn.__name__]
-                            )
+                            self.assertFused(graph, ["aten::conv2d", "aten::" + unary_fn.__name__])
                             self.assertGraphContainsExactly(graph, FUSION_GROUP, 1)
                         else:
                             self.assertGraphContains(graph, kind="aten::conv2d")
@@ -200,12 +194,8 @@ class TestMkldnnFusion(JitTestCase):
                 nn.Hardtanh(min_val=-0.5, max_val=4, inplace=False),
                 scalars=[-0.5, 4],
             ),
-            "gelu_none": PointwisePostOp(
-                "gelu", nn.GELU(approximate="none"), algorithm="none"
-            ),
-            "gelu_tanh": PointwisePostOp(
-                "gelu", nn.GELU(approximate="tanh"), algorithm="tanh"
-            ),
+            "gelu_none": PointwisePostOp("gelu", nn.GELU(approximate="none"), algorithm="none"),
+            "gelu_tanh": PointwisePostOp("gelu", nn.GELU(approximate="tanh"), algorithm="tanh"),
         }
         return unary_list
 
@@ -222,9 +212,7 @@ class TestMkldnnFusion(JitTestCase):
         class M(nn.Module):
             def __init__(self, unary_fn, in_channels, out_channels, bias, **kwargs):
                 super().__init__()
-                self.linear = torch.nn.Linear(
-                    in_channels, out_channels, bias=bias, **kwargs
-                )
+                self.linear = torch.nn.Linear(in_channels, out_channels, bias=bias, **kwargs)
                 self.unary = unary_fn
 
             def forward(self, x):
@@ -240,9 +228,7 @@ class TestMkldnnFusion(JitTestCase):
             )
             for (input_shape, input_stride), bias in options:
                 with torch.no_grad():
-                    mod = M(
-                        pointwise_info.pointwise_module, input_shape[-1], 10, bias
-                    ).eval()
+                    mod = M(pointwise_info.pointwise_module, input_shape[-1], 10, bias).eval()
                     v = torch.randn(input_shape)
                     if input_stride is not None:
                         v = v.as_strided(input_shape, input_stride)
@@ -287,9 +273,7 @@ class TestMkldnnFusion(JitTestCase):
         input_shapes = {2: (112, 112), 3: (55, 55, 55)}
         for pointwise_info in self._unary_list().values():
             for dim in [2, 3]:
-                channels_last = (
-                    torch.channels_last if dim == 2 else torch.channels_last_3d
-                )
+                channels_last = torch.channels_last if dim == 2 else torch.channels_last_3d
                 options = itertools.product(
                     [True, False],
                     [1, 2],
@@ -300,9 +284,7 @@ class TestMkldnnFusion(JitTestCase):
                     oC = 32 * groups
                     iC = 3 * groups
                     x_shape = (1, iC) + input_shapes[dim]
-                    x = torch.randn(x_shape, dtype=torch.float32).to(
-                        memory_format=memory_format
-                    )
+                    x = torch.randn(x_shape, dtype=torch.float32).to(memory_format=memory_format)
                     mod = M(
                         pointwise_info.pointwise_module,
                         dim,
@@ -365,9 +347,7 @@ class TestMkldnnFusion(JitTestCase):
         input_shapes = {2: (112, 112), 3: (22, 22, 22)}
         for pointwise_name, pointwise_fn in self._binary_list().items():
             for dim in [2, 3]:
-                channels_last = (
-                    torch.channels_last if dim == 2 else torch.channels_last_3d
-                )
+                channels_last = torch.channels_last if dim == 2 else torch.channels_last_3d
                 options = itertools.product(
                     [False, True],
                     [True, False],
@@ -379,12 +359,8 @@ class TestMkldnnFusion(JitTestCase):
                     oC = 32 * groups
                     iC = 3 * groups
                     x_shape = (1, iC) + input_shapes[dim]
-                    x = torch.randn(x_shape, dtype=torch.float32).to(
-                        memory_format=memory_format
-                    )
-                    mod = M(
-                        pointwise_fn, dim, iC, oC, dilation, groups, bias, kernel_size=3
-                    )
+                    x = torch.randn(x_shape, dtype=torch.float32).to(memory_format=memory_format)
+                    mod = M(pointwise_fn, dim, iC, oC, dilation, groups, bias, kernel_size=3)
                     mod = mod.to(memory_format=memory_format).eval()
                     other = torch.randn_like(mod.conv(x))
                     with torch.no_grad():
@@ -435,9 +411,7 @@ class TestMkldnnFusion(JitTestCase):
         class M(nn.Module):
             def __init__(self, binary_fn, in_channels, out_channels, bias, **kwargs):
                 super().__init__()
-                self.linear = torch.nn.Linear(
-                    in_channels, out_channels, bias=bias, **kwargs
-                )
+                self.linear = torch.nn.Linear(in_channels, out_channels, bias=bias, **kwargs)
                 self.binary = binary_fn
 
             def forward(self, x, other):
@@ -468,9 +442,7 @@ class TestMkldnnFusion(JitTestCase):
 
     def test_conv_transpose_unary_fusion_ops(self):
         class M(nn.Module):
-            def __init__(
-                self, unary_fn, dim, in_channels, out_channels, kernel_size, **kwargs
-            ):
+            def __init__(self, unary_fn, dim, in_channels, out_channels, kernel_size, **kwargs):
                 super().__init__()
                 self.conv_transpose = CONV_TRANSPOSE_MODULES[dim](
                     in_channels, out_channels, kernel_size, **kwargs
@@ -486,9 +458,7 @@ class TestMkldnnFusion(JitTestCase):
         kernel_size = 3
         for pointwise_info in self._unary_list().values():
             for dim in [2]:
-                channels_last = (
-                    torch.channels_last if dim == 2 else torch.channels_last_3d
-                )
+                channels_last = torch.channels_last if dim == 2 else torch.channels_last_3d
                 options = itertools.product(
                     [True, False],
                     [1, 2],
@@ -500,9 +470,7 @@ class TestMkldnnFusion(JitTestCase):
                     oC = 32 * groups
                     iC = 3 * groups
                     x_shape = (1, iC) + input_shapes[dim]
-                    x = torch.randn(x_shape, dtype=torch.float32).to(
-                        memory_format=memory_format
-                    )
+                    x = torch.randn(x_shape, dtype=torch.float32).to(memory_format=memory_format)
                     mod = M(
                         pointwise_info.pointwise_module,
                         dim,
@@ -521,16 +489,14 @@ class TestMkldnnFusion(JitTestCase):
                         algorithm = pointwise_info.algorithm
 
                         if prepack_weight:
-                            packed_weight = (
-                                torch.ops.mkldnn._reorder_convolution_transpose_weight(
-                                    mod.conv_transpose.weight,
-                                    mod.conv_transpose.padding,
-                                    mod.conv_transpose.output_padding,
-                                    mod.conv_transpose.stride,
-                                    mod.conv_transpose.dilation,
-                                    mod.conv_transpose.groups,
-                                    x.size(),
-                                )
+                            packed_weight = torch.ops.mkldnn._reorder_convolution_transpose_weight(
+                                mod.conv_transpose.weight,
+                                mod.conv_transpose.padding,
+                                mod.conv_transpose.output_padding,
+                                mod.conv_transpose.stride,
+                                mod.conv_transpose.dilation,
+                                mod.conv_transpose.groups,
+                                x.size(),
                             )
                             mod.conv_transpose.weight = torch.nn.Parameter(
                                 packed_weight,

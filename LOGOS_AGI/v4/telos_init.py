@@ -25,10 +25,7 @@ __subsystem__ = "TELOS"
 
 from .telos_worker import TelosWorker, TelosCoreEngine
 
-__all__ = [
-    "TelosWorker",
-    "TelosCoreEngine"
-]
+__all__ = ["TelosWorker", "TelosCoreEngine"]
 
 # Subsystem metadata
 SUBSYSTEM_INFO = {
@@ -42,15 +39,9 @@ SUBSYSTEM_INFO = {
         "intervention_analysis",
         "time_series_forecasting",
         "hypothesis_testing",
-        "counterfactual_reasoning"
+        "counterfactual_reasoning",
     ],
     "input_queues": ["telos_task_queue"],
     "output_queues": ["task_result_queue"],
-    "dependencies": [
-        "scikit-learn",
-        "causal-learn",
-        "scipy",
-        "numpy",
-        "statsmodels"
-    ]
+    "dependencies": ["scikit-learn", "causal-learn", "scipy", "numpy", "statsmodels"],
 }

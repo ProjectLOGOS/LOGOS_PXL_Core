@@ -40,13 +40,9 @@ def generate_callgrind_artifacts() -> None:
     """
     print("Regenerating callgrind artifact.")
 
-    stats_no_data = benchmark_utils.Timer("y = torch.ones(())").collect_callgrind(
-        number=1000
-    )
+    stats_no_data = benchmark_utils.Timer("y = torch.ones(())").collect_callgrind(number=1000)
 
-    stats_with_data = benchmark_utils.Timer("y = torch.ones((1,))").collect_callgrind(
-        number=1000
-    )
+    stats_with_data = benchmark_utils.Timer("y = torch.ones((1,))").collect_callgrind(number=1000)
 
     user = os.getenv("USER")
 
@@ -112,12 +108,8 @@ def load_callgrind_artifacts() -> (
         built_with_debug_symbols=True,
         baseline_inclusive_stats=baseline_inclusive,
         baseline_exclusive_stats=baseline_exclusive,
-        stmt_inclusive_stats=to_function_counts(
-            artifacts["ones_no_data_inclusive"], True
-        ),
-        stmt_exclusive_stats=to_function_counts(
-            artifacts["ones_no_data_exclusive"], False
-        ),
+        stmt_inclusive_stats=to_function_counts(artifacts["ones_no_data_inclusive"], True),
+        stmt_exclusive_stats=to_function_counts(artifacts["ones_no_data_exclusive"], False),
         stmt_callgrind_out=None,
     )
 
@@ -127,12 +119,8 @@ def load_callgrind_artifacts() -> (
         built_with_debug_symbols=True,
         baseline_inclusive_stats=baseline_inclusive,
         baseline_exclusive_stats=baseline_exclusive,
-        stmt_inclusive_stats=to_function_counts(
-            artifacts["ones_with_data_inclusive"], True
-        ),
-        stmt_exclusive_stats=to_function_counts(
-            artifacts["ones_with_data_exclusive"], False
-        ),
+        stmt_inclusive_stats=to_function_counts(artifacts["ones_with_data_inclusive"], True),
+        stmt_exclusive_stats=to_function_counts(artifacts["ones_with_data_exclusive"], False),
         stmt_callgrind_out=None,
     )
 
@@ -145,9 +133,7 @@ class MyModule(torch.nn.Module):
 
 
 class TestBenchmarkUtils(TestCase):
-    def regularizeAndAssertExpectedInline(
-        self, x: Any, expect: str, indent: int = 12
-    ) -> None:
+    def regularizeAndAssertExpectedInline(self, x: Any, expect: str, indent: int = 12) -> None:
         x_str: str = re.sub(
             "object at 0x[0-9a-fA-F]+>",
             "object at 0xXXXXXXXXXXXX>",
@@ -557,9 +543,7 @@ class TestBenchmarkUtils(TestCase):
         assert isinstance(stats, tuple)
 
         # Check that the repeats are at least somewhat repeatable. (within 10 instructions per iter)
-        counts = collections.Counter(
-            [s.counts(denoise=True) // 10_000 * 10_000 for s in stats]
-        )
+        counts = collections.Counter([s.counts(denoise=True) // 10_000 * 10_000 for s in stats])
         self.assertGreater(
             max(counts.values()),
             1,
@@ -590,9 +574,7 @@ class TestBenchmarkUtils(TestCase):
         counts = [s.counts() for s in stats]
 
         self.assertGreater(min(counts), 0, "No stats were collected")
-        self.assertEqual(
-            min(counts), max(counts), "C++ Callgrind should be deterministic"
-        )
+        self.assertEqual(min(counts), max(counts), "C++ Callgrind should be deterministic")
 
         for s in stats:
             self.assertEqual(
@@ -606,9 +588,7 @@ class TestBenchmarkUtils(TestCase):
 
         # NB: Unlike the example above, there is no expectation that all
         #     repeats will be identical.
-        counts = collections.Counter(
-            [s.counts(denoise=True) // 10_000 * 10_000 for s in stats]
-        )
+        counts = collections.Counter([s.counts(denoise=True) // 10_000 * 10_000 for s in stats])
         self.assertGreater(max(counts.values()), 1, repr(counts))
 
     def test_manipulate_callgrind_stats(self):
@@ -628,9 +608,7 @@ class TestBenchmarkUtils(TestCase):
             (stats_with_data.stats() - stats_no_data.stats())._data,
         )
 
-        deltas = stats_with_data.as_standardized().delta(
-            stats_no_data.as_standardized()
-        )
+        deltas = stats_with_data.as_standardized().delta(stats_no_data.as_standardized())
 
         def custom_transforms(fn: str):
             fn = re.sub(re.escape("/usr/include/c++/8/bits/"), "", fn)
@@ -890,9 +868,7 @@ class TestBenchmarkUtils(TestCase):
         # special_case_fn()
         class _MockTimer_2(self._MockTimer):
             _function_costs = tuple(
-                (f"fn({i}, {j})", costs[2][0] + costs[2][1] * i * j)
-                for i, j in sizes
-                if i == j
+                (f"fn({i}, {j})", costs[2][0] + costs[2][1] * i * j) for i, j in sizes if i == j
             )
 
         class MockTimer_2(benchmark_utils.Timer):
@@ -1015,9 +991,7 @@ class TestBenchmarkUtils(TestCase):
     def test_fuzzer(self):
         fuzzer = benchmark_utils.Fuzzer(
             parameters=[
-                benchmark_utils.FuzzedParameter(
-                    "n", minval=1, maxval=16, distribution="loguniform"
-                )
+                benchmark_utils.FuzzedParameter("n", minval=1, maxval=16, distribution="loguniform")
             ],
             tensors=[benchmark_utils.FuzzedTensor("x", size=("n",))],
             seed=0,

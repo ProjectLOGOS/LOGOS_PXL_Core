@@ -64,9 +64,7 @@ def warmup_forward(f, *args):
 @skipIf(GRAPH_EXECUTOR == ProfilingMode.LEGACY, "skip due to SIGIOT failures, #67646")
 class TestFuser(JitTestCase):
     def assertAllFused(self, graph, except_for=()):
-        diff_graphs = [
-            n for n in graph.nodes() if n.kind() == "prim::DifferentiableGraph"
-        ]
+        diff_graphs = [n for n in graph.nodes() if n.kind() == "prim::DifferentiableGraph"]
         if len(diff_graphs) > 0:
             self.assertEqual(len(diff_graphs), 1)
             graph = diff_graphs[0].g("Subgraph")
@@ -78,12 +76,8 @@ class TestFuser(JitTestCase):
             "prim::BailOut",
             "prim::TupleConstruct",
         } | set(except_for)
-        self.assertTrue(
-            all(node.kind() in allowed_nodes for node in graph.nodes()), f"got {graph}"
-        )
-        self.assertTrue(
-            [node.kind() for node in graph.nodes()].count("prim::FusionGroup") == 1
-        )
+        self.assertTrue(all(node.kind() in allowed_nodes for node in graph.nodes()), f"got {graph}")
+        self.assertTrue([node.kind() for node in graph.nodes()].count("prim::FusionGroup") == 1)
 
     def _test_fused_abs(self, device="cpu"):
         def func(x):
@@ -167,9 +161,7 @@ class TestFuser(JitTestCase):
         self.assertAllFused(ge.graph_for(*inputs))
 
     @unittest.skipIf(not RUN_CUDA, "fuser requires CUDA")
-    @unittest.skipIf(
-        GRAPH_EXECUTOR != ProfilingMode.LEGACY, "no bfloat support with profiling on"
-    )
+    @unittest.skipIf(GRAPH_EXECUTOR != ProfilingMode.LEGACY, "no bfloat support with profiling on")
     def test_cuda_bfloat16(self):
         def foo(x, y):
             return (x + y).relu()
@@ -181,9 +173,7 @@ class TestFuser(JitTestCase):
 
     @unittest.skipIf(not RUN_CUDA, "fuser requires CUDA")
     @unittest.skipIf(not RUN_CUDA_HALF, "no half support")
-    @unittest.skipIf(
-        GRAPH_EXECUTOR != ProfilingMode.LEGACY, "no half support with profiling on"
-    )
+    @unittest.skipIf(GRAPH_EXECUTOR != ProfilingMode.LEGACY, "no half support with profiling on")
     def test_cuda_half(self):
         x = torch.randn(4, 4, dtype=torch.half, device="cuda")
         y = torch.randn(4, 4, dtype=torch.half, device="cuda")
@@ -310,9 +300,9 @@ class TestFuser(JitTestCase):
 
         ge = self.checkTrace(f, (x, y))
         graph = ge.graph_for(x, y)
-        FileCheck().check("broadcast_tensors").check(
-            "with prim::FusionGroup_"
-        ).check_count("ConstantChunk", 2, exactly=True).run(str(graph))
+        FileCheck().check("broadcast_tensors").check("with prim::FusionGroup_").check_count(
+            "ConstantChunk", 2, exactly=True
+        ).run(str(graph))
 
     @unittest.skipIf(not RUN_CUDA, "fuser requires CUDA")
     def test_chunk_motion_deduplicates_inputs(self):
@@ -403,14 +393,10 @@ class TestFuser(JitTestCase):
             with enable_profiling_mode_for_profiling_tests():
                 warmup_backward(c.sum())
             graph = backward_graph(s)
-            self.assertAllFused(
-                graph, except_for={"aten::Float", "aten::_grad_sum_to_size"}
-            )
+            self.assertAllFused(graph, except_for={"aten::Float", "aten::_grad_sum_to_size"})
 
     @unittest.skipIf(not RUN_CUDA, "fuser requires CUDA")
-    @unittest.skipIf(
-        GRAPH_EXECUTOR != ProfilingMode.LEGACY, "no half support with profiling on"
-    )
+    @unittest.skipIf(GRAPH_EXECUTOR != ProfilingMode.LEGACY, "no half support with profiling on")
     def test_dropout(self):
         def func(x):
             x = torch.nn.functional.dropout(x)
@@ -605,9 +591,7 @@ class TestFuser(JitTestCase):
                 self.assertNotIn(node_not_in_graph, rep)
                 self.assertIn(node_not_in_graph, rep_noopt)
 
-            fusion_groups = [
-                node for node in graph.nodes() if node.kind() == "prim::FusionGroup"
-            ]
+            fusion_groups = [node for node in graph.nodes() if node.kind() == "prim::FusionGroup"]
             self.assertEqual(len(fusion_groups), 1)
             fused_graph = str(fusion_groups[0].g("Subgraph"))
             for node_in_fusegraph in in_fusegraph:
@@ -696,9 +680,7 @@ class TestFuser(JitTestCase):
 
     @unittest.skipIf(IS_SANDCASTLE, "NYI: fuser CPU support for Sandcastle")
     @enable_cpu_fuser
-    @unittest.skip(
-        "temporarily disabled because fusion was restricted in fixing #22833"
-    )
+    @unittest.skip("temporarily disabled because fusion was restricted in fixing #22833")
     def test_fuser_iou(self):
         # This checks if most of Intersection over Union is fused.
         # In particular, the backward contains many _grad_sum_to_size.
@@ -796,9 +778,7 @@ class TestFuser(JitTestCase):
         # There are 3 FusionGroups. Because they have the same graph, they
         # should reuse the same KernelSpec in the KernelSpec cache.
         ge = self.checkScript(fn, inputs)
-        self.assertGraphContainsExactly(
-            ge.graph_for(*inputs), "prim::FusionGroup", 3, True
-        )
+        self.assertGraphContainsExactly(ge.graph_for(*inputs), "prim::FusionGroup", 3, True)
         new_cache_size = torch._C._jit_debug_fuser_num_cached_kernel_specs()
         # XXX: This assumes that the same kernel isn't already used by another test
         self.assertEqual(new_cache_size - prev_cache_size, 1)
@@ -826,17 +806,15 @@ class TestFuser(JitTestCase):
         )
         self.assertTrue(len(strip_profiling_nodes(forward_graph.nodes())) == 2)
         # Everything is differentiable but TupleConstruct return
-        FileCheck().check("DifferentiableGraph").check_next(
-            "TupleConstruct"
-        ).check_next("return").run(str(forward_graph))
+        FileCheck().check("DifferentiableGraph").check_next("TupleConstruct").check_next(
+            "return"
+        ).run(str(forward_graph))
 
         with enable_profiling_mode_for_profiling_tests(True):
             hy, cy = module(*inputs)
             warmup_backward((hy + cy).sum())
             backward = backward_graph(module)
-        self.assertAllFused(
-            backward, except_for=("aten::t", "aten::mm", "aten::_grad_sum_to_size")
-        )
+        self.assertAllFused(backward, except_for=("aten::t", "aten::mm", "aten::_grad_sum_to_size"))
 
     @unittest.skipIf(not RUN_CUDA, "fuser requires CUDA")
     # By default, on Ampere or later GPUs, LSTM computes float tensors at TF32 precision.
@@ -882,13 +860,9 @@ class TestFuser(JitTestCase):
         ge = self.checkTrace(LSTMCellF, inputs)
         graph = ge.graph_for(*inputs)
         # .check_not("aten::add") don't get pulled into FusionGroup because of BailOuts
-        FileCheck().check_not("Chunk").check_not("aten::sigmoid").check_not(
-            "aten::tanh"
-        ).check("FusionGroup").check_next("TupleConstruct").check_next(
-            "return"
-        ).check_not(
-            "FusionGroup_2"
-        ).run(
+        FileCheck().check_not("Chunk").check_not("aten::sigmoid").check_not("aten::tanh").check(
+            "FusionGroup"
+        ).check_next("TupleConstruct").check_next("return").check_not("FusionGroup_2").run(
             str(graph)
         )
 
@@ -920,16 +894,14 @@ class TestFuser(JitTestCase):
         self.assertGraphContainsExactly(
             forward_graph, "prim::FusionGroup", 1, consider_subgraphs=True
         )
-        FileCheck().check("DifferentiableGraph").check_next(
-            "TupleConstruct"
-        ).check_next("return").check("FusionGroup").run(str(forward_graph))
+        FileCheck().check("DifferentiableGraph").check_next("TupleConstruct").check_next(
+            "return"
+        ).check("FusionGroup").run(str(forward_graph))
         hy, cy = module(*inputs)
         warmup_backward((hy + cy).sum())
 
     @unittest.skipIf(not RUN_CUDA, "fuser requires CUDA")
-    @unittest.skipIf(
-        GRAPH_EXECUTOR == ProfilingMode.LEGACY, "borked on the legacy executor"
-    )
+    @unittest.skipIf(GRAPH_EXECUTOR == ProfilingMode.LEGACY, "borked on the legacy executor")
     def test_rand_cuda(self):
         class M(torch.jit.ScriptModule):
             __constants__ = ["d"]
@@ -985,9 +957,7 @@ class TestFuser(JitTestCase):
         )
 
     @unittest.skipIf(not RUN_CUDA, "fuser requires CUDA")
-    @unittest.skipIf(
-        GRAPH_EXECUTOR == ProfilingMode.LEGACY, "borked on the legacy executor"
-    )
+    @unittest.skipIf(GRAPH_EXECUTOR == ProfilingMode.LEGACY, "borked on the legacy executor")
     def test_rand_broadcast_cuda(self):
         def fn_test_rand(x, y):
             r = torch.rand_like(y)
@@ -1074,14 +1044,10 @@ class TestFuser(JitTestCase):
         y = torch.randn(4, 4, dtype=torch.double)
 
         script_f = self.checkScript(f, (x, y))
-        self.assertAllFused(
-            script_f.graph_for(x, y), except_for={"prim::TupleConstruct"}
-        )
+        self.assertAllFused(script_f.graph_for(x, y), except_for={"prim::TupleConstruct"})
 
     @unittest.skipIf(not RUN_CUDA, "fuser requires CUDA")
-    @unittest.skipIf(
-        GRAPH_EXECUTOR != ProfilingMode.LEGACY, "no half support with profiling on"
-    )
+    @unittest.skipIf(GRAPH_EXECUTOR != ProfilingMode.LEGACY, "no half support with profiling on")
     def test_grad_sum_to_size_elimination(self):
         def my_broadcasted_cell(a, b, c):
             return (a + b) + c
@@ -1109,9 +1075,7 @@ class TestFuser(JitTestCase):
             args = s2 if i < 1 else s1, s2 if i < 2 else s1, s2
             args = [a.detach_().requires_grad_() for a in args]
             # recompile, so we don't trigger bailouts
-            module = self.checkScript(
-                my_broadcasted_cell, args, profiling=ProfilingMode.PROFILING
-            )
+            module = self.checkScript(my_broadcasted_cell, args, profiling=ProfilingMode.PROFILING)
             res = module(s2 if i < 1 else s1, s2 if i < 2 else s1, s2)
             warmup_backward(res.sum(), args)
             grads = torch.autograd.grad(res.sum(), args)
@@ -1127,13 +1091,7 @@ class TestFuser(JitTestCase):
                     old_plans.add(str(backward))
             num_grads = 1 if i > 0 else 0
             self.assertEqual(
-                len(
-                    [
-                        n
-                        for n in backward.nodes()
-                        if n.kind() == "aten::_grad_sum_to_size"
-                    ]
-                ),
+                len([n for n in backward.nodes() if n.kind() == "aten::_grad_sum_to_size"]),
                 num_grads,
             )
 

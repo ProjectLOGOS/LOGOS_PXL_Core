@@ -235,8 +235,7 @@ import sys
 
 if sys.platform == "win32" and sys.maxsize.bit_length() == 31:
     print(
-        "32-bit Windows Python runtime is not supported. "
-        "Please switch to 64-bit Python.",
+        "32-bit Windows Python runtime is not supported. " "Please switch to 64-bit Python.",
         file=sys.stderr,
     )
     sys.exit(-1)
@@ -315,9 +314,7 @@ def str2bool(value: str | None) -> bool:
     if not value:
         return False
     if not isinstance(value, str):
-        raise ValueError(
-            f"Expected a string value for boolean conversion, got {type(value)}"
-        )
+        raise ValueError(f"Expected a string value for boolean conversion, got {type(value)}")
     value = value.strip().lower()
     if value in (
         "1",
@@ -416,16 +413,12 @@ sys.argv = filtered_args
 
 if VERBOSE_SCRIPT:
 
-    def report(
-        *args: Any, file: IO[str] = sys.stderr, flush: bool = True, **kwargs: Any
-    ) -> None:
+    def report(*args: Any, file: IO[str] = sys.stderr, flush: bool = True, **kwargs: Any) -> None:
         print(*args, file=file, flush=flush, **kwargs)
 
 else:
 
-    def report(
-        *args: Any, file: IO[str] = sys.stderr, flush: bool = True, **kwargs: Any
-    ) -> None:
+    def report(*args: Any, file: IO[str] = sys.stderr, flush: bool = True, **kwargs: Any) -> None:
         pass
 
     # Make distutils respect --quiet too
@@ -446,14 +439,12 @@ if IS_WINDOWS:
     # Fix virtualenv builds
     if not CMAKE_PYTHON_LIBRARY.exists():
         CMAKE_PYTHON_LIBRARY = (
-            Path(sys.base_prefix)
-            / "libs"
-            / f"python{sysconfig.get_config_var('VERSION')}.lib"
+            Path(sys.base_prefix) / "libs" / f"python{sysconfig.get_config_var('VERSION')}.lib"
         )
 else:
-    CMAKE_PYTHON_LIBRARY = Path(
-        sysconfig.get_config_var("LIBDIR")
-    ) / sysconfig.get_config_var("INSTSONAME")
+    CMAKE_PYTHON_LIBRARY = Path(sysconfig.get_config_var("LIBDIR")) / sysconfig.get_config_var(
+        "INSTSONAME"
+    )
 
 
 ################################################################################
@@ -487,9 +478,7 @@ def get_submodule_folders() -> list[Path]:
         return default_modules_path
     with git_modules_file.open(encoding="utf-8") as f:
         return [
-            CWD / line.partition("=")[-1].strip()
-            for line in f
-            if line.strip().startswith("path")
+            CWD / line.partition("=")[-1].strip() for line in f if line.strip().startswith("path")
         ]
 
 
@@ -501,9 +490,7 @@ def check_submodules() -> None:
             sys.exit(1)
 
     def not_exists_or_empty(folder: Path) -> bool:
-        return not folder.exists() or (
-            folder.is_dir() and next(folder.iterdir(), None) is None
-        )
+        return not folder.exists() or (folder.is_dir() and next(folder.iterdir(), None) is None)
 
     if str2bool(os.getenv("USE_SYSTEM_LIBS")):
         return
@@ -513,9 +500,7 @@ def check_submodules() -> None:
         try:
             report(" --- Trying to initialize submodules")
             start = time.time()
-            subprocess.check_call(
-                ["git", "submodule", "update", "--init", "--recursive"], cwd=CWD
-            )
+            subprocess.check_call(["git", "submodule", "update", "--init", "--recursive"], cwd=CWD)
             end = time.time()
             report(f" --- Submodule initialization took {end - start:.2f} sec")
         except Exception:
@@ -644,9 +629,7 @@ def check_pydep(importname: str, module: str) -> None:
     try:
         importlib.import_module(importname)
     except ImportError as e:
-        raise RuntimeError(
-            missing_pydep.format(importname=importname, module=module)
-        ) from e
+        raise RuntimeError(missing_pydep.format(importname=importname, module=module)) from e
 
 
 class build_ext(setuptools.command.build_ext.build_ext):
@@ -733,9 +716,7 @@ class build_ext(setuptools.command.build_ext.build_ext):
         if not omp_cflags:
             return
         for include_dir in [
-            Path(f.removeprefix("-I"))
-            for f in omp_cflags.split(" ")
-            if f.startswith("-I")
+            Path(f.removeprefix("-I")) for f in omp_cflags.split(" ") if f.startswith("-I")
         ]:
             omp_h = include_dir / "omp.h"
             if not omp_h.exists():
@@ -773,9 +754,7 @@ class build_ext(setuptools.command.build_ext.build_ext):
             if cmake_cache_vars["USE_MKLDNN_ACL"]:
                 report("-- Using Compute Library for the Arm architecture with MKLDNN")
             else:
-                report(
-                    "-- Not using Compute Library for the Arm architecture with MKLDNN"
-                )
+                report("-- Not using Compute Library for the Arm architecture with MKLDNN")
             if cmake_cache_vars["USE_MKLDNN_CBLAS"]:
                 report("-- Using CBLAS in MKLDNN")
             else:
@@ -818,11 +797,7 @@ class build_ext(setuptools.command.build_ext.build_ext):
         # Do not use clang to compile extensions if `-fstack-clash-protection` is defined
         # in system CFLAGS
         c_flags = os.getenv("CFLAGS", "")
-        if (
-            IS_LINUX
-            and "-fstack-clash-protection" in c_flags
-            and "clang" in os.getenv("CC", "")
-        ):
+        if IS_LINUX and "-fstack-clash-protection" in c_flags and "clang" in os.getenv("CC", ""):
             os.environ["CC"] = str(os.environ["CC"])
 
         super().run()
@@ -897,9 +872,7 @@ class build_ext(setuptools.command.build_ext.build_ext):
         ninja_files = (CWD / BUILD_DIR).glob("*compile_commands.json")
         cmake_files = (CWD / "torch" / "lib" / "build").glob("*/compile_commands.json")
         all_commands = [
-            entry
-            for f in itertools.chain(ninja_files, cmake_files)
-            for entry in load(f)
+            entry for f in itertools.chain(ninja_files, cmake_files) for entry in load(f)
         ]
 
         # cquery does not like c++ compiles that start with gcc.
@@ -1105,9 +1078,7 @@ def configure_extension_build() -> (
     pytorch_extra_install_requires = os.getenv("PYTORCH_EXTRA_INSTALL_REQUIREMENTS")
     if pytorch_extra_install_requires:
         report(f"pytorch_extra_install_requirements: {pytorch_extra_install_requires}")
-        extra_install_requires.extend(
-            map(str.strip, pytorch_extra_install_requires.split("|"))
-        )
+        extra_install_requires.extend(map(str.strip, pytorch_extra_install_requires.split("|")))
 
     # Cross-compile for M1
     if IS_DARWIN:
@@ -1116,9 +1087,7 @@ def configure_extension_build() -> (
             macos_sysroot_path = os.getenv("CMAKE_OSX_SYSROOT")
             if macos_sysroot_path is None:
                 macos_sysroot_path = (
-                    subprocess.check_output(
-                        ["xcrun", "--show-sdk-path", "--sdk", "macosx"]
-                    )
+                    subprocess.check_output(["xcrun", "--show-sdk-path", "--sdk", "macosx"])
                     .decode("utf-8")
                     .strip()
                 )
@@ -1243,17 +1212,11 @@ def main() -> None:
         install_requires += [f"{LIBTORCH_PKG_NAME}=={TORCH_VERSION}"]
 
     if str2bool(os.getenv("USE_PRIORITIZED_TEXT_FOR_LD")):
-        gen_linker_script(
-            filein="cmake/prioritized_text.txt", fout="cmake/linker_script.ld"
-        )
+        gen_linker_script(filein="cmake/prioritized_text.txt", fout="cmake/linker_script.ld")
         linker_script_path = os.path.abspath("cmake/linker_script.ld")
         os.environ["LDFLAGS"] = os.getenv("LDFLAGS", "") + f" -T{linker_script_path}"
-        os.environ["CFLAGS"] = (
-            os.getenv("CFLAGS", "") + " -ffunction-sections -fdata-sections"
-        )
-        os.environ["CXXFLAGS"] = (
-            os.getenv("CXXFLAGS", "") + " -ffunction-sections -fdata-sections"
-        )
+        os.environ["CFLAGS"] = os.getenv("CFLAGS", "") + " -ffunction-sections -fdata-sections"
+        os.environ["CXXFLAGS"] = os.getenv("CXXFLAGS", "") + " -ffunction-sections -fdata-sections"
     elif platform.system() == "Linux" and platform.processor() == "aarch64":
         print_box(
             """

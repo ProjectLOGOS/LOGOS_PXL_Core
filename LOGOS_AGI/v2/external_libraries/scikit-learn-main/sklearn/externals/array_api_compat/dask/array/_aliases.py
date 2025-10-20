@@ -168,14 +168,10 @@ def asarray(
             if copy is False:
                 raise ValueError("Unable to avoid copy when changing dtype")
             obj = obj.astype(dtype)
-        return (
-            obj.copy() if copy else obj
-        )  # pyright: ignore[reportAttributeAccessIssue]
+        return obj.copy() if copy else obj  # pyright: ignore[reportAttributeAccessIssue]
 
     if copy is False:
-        raise ValueError(
-            "Unable to avoid copy when converting a non-dask object to dask"
-        )
+        raise ValueError("Unable to avoid copy when converting a non-dask object to dask")
 
     # copy=None to be uniform across dask < 2024.12 and >= 2024.12
     # see https://github.com/dask/dask/pull/11524/

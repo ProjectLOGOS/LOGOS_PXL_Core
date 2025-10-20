@@ -276,9 +276,7 @@ def lazy_apply(  # type: ignore[valid-type]  # numpydoc ignore=GL07,SA04
         # Shield kwargs from being coerced into JAX arrays.
         # jax.pure_callback calls jax.jit under the hood, but without the chance of
         # passing static_argnames / static_argnums.
-        wrapped = _lazy_apply_wrapper(
-            partial(func, **kwargs), as_numpy, multi_output, xp
-        )
+        wrapped = _lazy_apply_wrapper(partial(func, **kwargs), as_numpy, multi_output, xp)
 
         # suppress unused-ignore to run mypy in -e lint as well as -e dev
         out = cast(  # type: ignore[bad-cast,unused-ignore]
@@ -286,9 +284,7 @@ def lazy_apply(  # type: ignore[valid-type]  # numpydoc ignore=GL07,SA04
             jax.pure_callback(
                 wrapped,
                 tuple(
-                    jax.ShapeDtypeStruct(
-                        shape, dtype
-                    )  # pyright: ignore[reportUnknownArgumentType]
+                    jax.ShapeDtypeStruct(shape, dtype)  # pyright: ignore[reportUnknownArgumentType]
                     for shape, dtype in zip(shapes, dtypes, strict=True)
                 ),
                 *args,

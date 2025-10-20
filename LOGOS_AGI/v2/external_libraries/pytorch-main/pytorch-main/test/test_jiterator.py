@@ -149,7 +149,9 @@ class TestPythonJiterator(TestCase):
 
         input_string = ",".join([f"T i{i}" for i in range(num_inputs)])
         function_body = "+".join([f"i{i}" for i in range(num_inputs)])
-        code_string = f"template <typename T> T my_kernel({input_string}) {{ return {function_body}; }}"
+        code_string = (
+            f"template <typename T> T my_kernel({input_string}) {{ return {function_body}; }}"
+        )
         jitted_fn = create_jit_fn(code_string)
 
         def ref_fn(*inputs):
@@ -169,7 +171,9 @@ class TestPythonJiterator(TestCase):
         for i in range(num_outputs):
             function_body += f"out{i} = input + {i};\n"
         # NB: return type must be void, otherwise ROCm silently fails
-        code_string = f"template <typename T> void my_kernel(T input, {output_string}) {{ {function_body} }}"
+        code_string = (
+            f"template <typename T> void my_kernel(T input, {output_string}) {{ {function_body} }}"
+        )
 
         jitted_fn = create_multi_output_jit_fn(code_string, num_outputs)
 

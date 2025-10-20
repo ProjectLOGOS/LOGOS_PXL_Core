@@ -272,10 +272,7 @@ def broadcast_shapes(*shapes: tuple[float | None, ...]) -> tuple[int | None, ...
         none_size = None in sizes or math.nan in sizes
         sizes -= {1, None, math.nan}
         if len(sizes) > 1:
-            msg = (
-                "shape mismatch: objects cannot be broadcast to a single shape: "
-                f"{shapes}."
-            )
+            msg = "shape mismatch: objects cannot be broadcast to a single shape: " f"{shapes}."
             raise ValueError(msg)
         out.append(None if none_size else cast(int, sizes.pop()) if sizes else 1)
 
@@ -350,9 +347,7 @@ def cov(m: Array, /, *, xp: ModuleType | None = None) -> Array:
         xp = array_namespace(m)
 
     m = xp.asarray(m, copy=True)
-    dtype = (
-        xp.float64 if xp.isdtype(m.dtype, "integral") else xp.result_type(m, xp.float64)
-    )
+    dtype = xp.float64 if xp.isdtype(m.dtype, "integral") else xp.result_type(m, xp.float64)
 
     m = atleast_nd(m, ndim=2, xp=xp)
     m = xp.astype(m, dtype)
@@ -376,9 +371,7 @@ def cov(m: Array, /, *, xp: ModuleType | None = None) -> Array:
     return xp.squeeze(c, axis=axes)
 
 
-def create_diagonal(
-    x: Array, /, *, offset: int = 0, xp: ModuleType | None = None
-) -> Array:
+def create_diagonal(x: Array, /, *, offset: int = 0, xp: ModuleType | None = None) -> Array:
     """
     Construct a diagonal array.
 
@@ -512,9 +505,7 @@ def expand_dims(
         axis = (axis,)
     ndim = a.ndim + len(axis)
     if axis != () and (min(axis) < -ndim or max(axis) >= ndim):
-        err_msg = (
-            f"a provided axis position is out of bounds for array of dimension {a.ndim}"
-        )
+        err_msg = f"a provided axis position is out of bounds for array of dimension {a.ndim}"
         raise IndexError(err_msg)
     axis = tuple(dim % ndim for dim in axis)
     if len(set(axis)) != len(axis):
@@ -547,9 +538,7 @@ def isclose(
             (a, b),
             lambda a, b: mxp.isinf(a)
             & mxp.isinf(b)
-            & (
-                mxp.sign(a) == mxp.sign(b)
-            ),  # pyright: ignore[reportUnknownArgumentType]
+            & (mxp.sign(a) == mxp.sign(b)),  # pyright: ignore[reportUnknownArgumentType]
             # Note: inf <= inf is True!
             lambda a, b: mxp.abs(a - b)
             <= (atol + rtol * mxp.abs(b)),  # pyright: ignore[reportUnknownArgumentType]

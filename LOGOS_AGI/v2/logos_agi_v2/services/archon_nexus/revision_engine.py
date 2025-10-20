@@ -6,7 +6,10 @@ import json
 # This is a conceptual placeholder. A real implementation would be far more complex,
 # likely involving machine learning model updates, knowledge graph adjustments, etc.
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - REVISION_ENGINE - %(message)s')
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - REVISION_ENGINE - %(message)s"
+)
+
 
 class RevisionEngine:
     """
@@ -15,6 +18,7 @@ class RevisionEngine:
     - Can we update our world model based on the result?
     - Was the generated plan effective?
     """
+
     def __init__(self):
         logging.info("Revision Engine initialized.")
         # In a real system, this would connect to a knowledge graph,
@@ -24,15 +28,15 @@ class RevisionEngine:
         """
         Receives a result dictionary and performs analysis.
         """
-        task_id = result_data.get('task_id')
-        status = result_data.get('status')
-        result_payload = result_data.get('result')
+        task_id = result_data.get("task_id")
+        status = result_data.get("status")
+        result_payload = result_data.get("result")
 
         logging.info(f"Processing result for task {task_id} with status '{status}'.")
 
-        if status == 'success':
+        if status == "success":
             self.learn_from_success(task_id, result_payload)
-        elif status == 'failure':
+        elif status == "failure":
             self.learn_from_failure(task_id, result_payload)
         else:
             logging.warning(f"Unknown status '{status}' for task {task_id}. No action taken.")
@@ -62,7 +66,7 @@ class RevisionEngine:
         # - Was it a bad prompt?
         # - A faulty tool?
         # - An incorrect assumption in the world model?
-        error_message = payload.get('error', 'No error message provided.')
+        error_message = payload.get("error", "No error message provided.")
         logging.warning(f"Task {task_id} FAILED: {error_message}. Analyzing for corrective action.")
 
         # Pseudocode for a real system:

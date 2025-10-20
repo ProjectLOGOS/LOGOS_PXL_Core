@@ -31,7 +31,4 @@ __author__ = "LOGOS AGI Development Team"
 from .persistence_manager import PersistenceManager
 from .db_service import DatabaseService
 
-__all__ = [
-    "PersistenceManager",
-    "DatabaseService"
-]
+__all__ = ["PersistenceManager", "DatabaseService"]

@@ -111,25 +111,14 @@ def _make_handler(msngr_cls, module=None):
     def handler_decorator(func):
         @functools.wraps(func)
         def handler(fn=None, *args, **kwargs):
-            if fn is not None and not (
-                callable(fn) or isinstance(fn, collections.abc.Iterable)
-            ):
-                raise ValueError(
-                    f"{fn} is not callable, did you mean to pass it as a keyword arg?"
-                )
+            if fn is not None and not (callable(fn) or isinstance(fn, collections.abc.Iterable)):
+                raise ValueError(f"{fn} is not callable, did you mean to pass it as a keyword arg?")
             msngr = msngr_cls(*args, **kwargs)
-            return (
-                functools.update_wrapper(msngr(fn), fn, updated=())
-                if fn is not None
-                else msngr
-            )
+            return functools.update_wrapper(msngr(fn), fn, updated=()) if fn is not None else msngr
 
-        handler.__doc__ = (
-            """Convenient wrapper of :class:`~pyro.poutine.{}.{}` \n\n""".format(
-                func.__name__ + "_messenger", msngr_cls.__name__
-            )
-            + (msngr_cls.__doc__ if msngr_cls.__doc__ else "")
-        )
+        handler.__doc__ = """Convenient wrapper of :class:`~pyro.poutine.{}.{}` \n\n""".format(
+            func.__name__ + "_messenger", msngr_cls.__name__
+        ) + (msngr_cls.__doc__ if msngr_cls.__doc__ else "")
         if module is not None:
             handler.__module__ = module
         return handler
@@ -633,9 +622,7 @@ def queue(
     def wrapper(wrapped):
         def _fn(*args, **kwargs):
             for i in range(max_tries):
-                assert (
-                    not queue.empty()
-                ), "trying to get() from an empty queue will deadlock"
+                assert not queue.empty(), "trying to get() from an empty queue will deadlock"
 
                 next_trace = queue.get()
                 try:
@@ -727,8 +714,8 @@ def markov(
         return MarkovMessenger(history=history, keep=keep, dim=dim, name=name)
     if not callable(fn):
         # Used as a generator
-        return MarkovMessenger(
-            history=history, keep=keep, dim=dim, name=name
-        ).generator(iterable=fn)
+        return MarkovMessenger(history=history, keep=keep, dim=dim, name=name).generator(
+            iterable=fn
+        )
     # Used as a decorator with bound args
     return MarkovMessenger(history=history, keep=keep, dim=dim, name=name)(fn)

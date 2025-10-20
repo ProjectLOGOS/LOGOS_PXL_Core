@@ -84,9 +84,7 @@ class TestNativeFunctions(TestCase):
     @skipIfTorchDynamo("Not a suitable test for TorchDynamo")
     def test_optional_floatlist(self):
         self.do_test_optional_floatlist_with_module(FloatListWrapperModule())
-        self.do_test_optional_floatlist_with_module(
-            torch.jit.script(FloatListWrapperModule())
-        )
+        self.do_test_optional_floatlist_with_module(torch.jit.script(FloatListWrapperModule()))
 
         traced_none = self.trace_optional_floatlist(None)
         traced_list = self.trace_optional_floatlist([5.1, 4.1])
@@ -106,17 +104,13 @@ class TestNativeFunctions(TestCase):
         with self.assertRaisesRegex(TypeError, "must be tuple of floats, not list"):
             FloatListWrapperModule()(torch.zeros(1), ["hi"])
 
-        with self.assertRaisesRegex(
-            RuntimeError, "value of type .* instead found type"
-        ):
+        with self.assertRaisesRegex(RuntimeError, "value of type .* instead found type"):
             torch.jit.script(FloatListWrapperModule())(torch.zeros(1), ["hi"])
 
         with self.assertRaisesRegex(TypeError, "must be .* Tensor"):
             FloatListWrapperModule()(torch.zeros(1), torch.zeros(1))
 
-        with self.assertRaisesRegex(
-            RuntimeError, "value of type .* instead found type"
-        ):
+        with self.assertRaisesRegex(RuntimeError, "value of type .* instead found type"):
             torch.jit.script(FloatListWrapperModule())(torch.zeros(1), torch.zeros(1))
 
     #
@@ -145,9 +139,7 @@ class TestNativeFunctions(TestCase):
     @skipIfTorchDynamo("Not a suitable test for TorchDynamo")
     def test_optional_intlist(self):
         self.do_test_optional_intlist_with_module(IntListWrapperModule())
-        self.do_test_optional_intlist_with_module(
-            torch.jit.script(IntListWrapperModule())
-        )
+        self.do_test_optional_intlist_with_module(torch.jit.script(IntListWrapperModule()))
 
         traced_none = self.trace_optional_intlist(None)
         traced_list = self.trace_optional_intlist([5, 4])
@@ -167,17 +159,13 @@ class TestNativeFunctions(TestCase):
         with self.assertRaisesRegex(TypeError, "must be .* but found"):
             IntListWrapperModule()(torch.zeros(1), [0.5])
 
-        with self.assertRaisesRegex(
-            RuntimeError, "value of type .* instead found type"
-        ):
+        with self.assertRaisesRegex(RuntimeError, "value of type .* instead found type"):
             torch.jit.script(IntListWrapperModule())(torch.zeros(1), [0.5])
 
         with self.assertRaisesRegex(TypeError, "must be .* Tensor"):
             IntListWrapperModule()(torch.zeros(1), torch.zeros(1))
 
-        with self.assertRaisesRegex(
-            RuntimeError, "value of type .* instead found type"
-        ):
+        with self.assertRaisesRegex(RuntimeError, "value of type .* instead found type"):
             torch.jit.script(IntListWrapperModule())(torch.zeros(1), torch.zeros(1))
 
     #
@@ -209,9 +197,7 @@ class TestNativeFunctions(TestCase):
             x = torch._C._nn._test_optional_filled_intlist(
                 torch.tensor([1, 1], dtype=torch.int), (n, n)
             )
-            y = torch._C._nn._test_optional_filled_intlist(
-                torch.tensor([1, 1], dtype=torch.int), n
-            )
+            y = torch._C._nn._test_optional_filled_intlist(torch.tensor([1, 1], dtype=torch.int), n)
             return x, y
 
         # eager

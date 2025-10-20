@@ -9,18 +9,20 @@ from sympy import symbols, Function, Not, And, Or, Implies
 from typing import Dict, List, Tuple, Optional, Union
 import math
 
+
 # Define the fundamental ontological constants
 class TrinityConstants:
     """Constants representing the fundamental trinitarian properties"""
+
     # Symbolic representation of trinity dimensions
-    E = symbols('𝔼')  # Existence
-    G = symbols('𝔾')  # Goodness
-    T = symbols('𝕋')  # Truth
+    E = symbols("𝔼")  # Existence
+    G = symbols("𝔾")  # Goodness
+    T = symbols("𝕋")  # Truth
 
     # Modal operators (from LOGOS_MODAL_OPERATORS)
-    Necessary = Function('□')
-    Possible = Function('◇')
-    Impossible = lambda x: Not(Function('◇')(x))
+    Necessary = Function("□")
+    Possible = Function("◇")
+    Impossible = lambda x: Not(Function("◇")(x))
 
     # Logical operators
     Entails = lambda x, y: Implies(x, y)
@@ -32,14 +34,16 @@ class TrinityConstants:
     @staticmethod
     def axiom_PSR():
         """Principle of Sufficient Reason"""
-        x = symbols('x')
-        return Necessary(Implies(E(x), symbols('HasSufficientReason')(x)))
+        x = symbols("x")
+        return Necessary(Implies(E(x), symbols("HasSufficientReason")(x)))
 
     @staticmethod
     def axiom_PPI():
         """Principle of Perfect Intelligence"""
-        return Necessary(Implies(TrinityConstants.PERFECT_BEING,
-                                 symbols('OmniscientOmnipotentOmnibenevolent')))
+        return Necessary(
+            Implies(TrinityConstants.PERFECT_BEING, symbols("OmniscientOmnipotentOmnibenevolent"))
+        )
+
 
 class TrinityLogic:
     """Implementation of the trinitarian logic system"""
@@ -82,7 +86,7 @@ class TrinityLogic:
         return (
             self.evaluate_existence(proposition),
             self.evaluate_goodness(proposition),
-            self.evaluate_truth(proposition)
+            self.evaluate_truth(proposition),
         )
 
     def trinity_coherence(self, e: float, g: float, t: float) -> float:
@@ -129,7 +133,7 @@ class TrinityLogic:
         Perfect being has e=g=t=1.0
         """
         # Distance from perfect being (1,1,1)
-        distance = math.sqrt((1-e)**2 + (1-g)**2 + (1-t)**2)
+        distance = math.sqrt((1 - e) ** 2 + (1 - g) ** 2 + (1 - t) ** 2)
 
         # Normalize to 0-1 scale (0=perfect, 1=maximally imperfect)
         normalized_distance = distance / math.sqrt(3)
@@ -153,6 +157,7 @@ class TrinityLogic:
         else:
             return "Impossible"
 
+
 class LambdaCalculusEngine:
     """Engine for processing λ-calculus expressions in LOGOS"""
 
@@ -165,19 +170,15 @@ class LambdaCalculusEngine:
         Format: λx:𝔻.expr where 𝔻 is a domain (𝔼, 𝔾, or 𝕋)
         """
         # This is a simplified parser
-        if not expr_str.startswith('λ'):
+        if not expr_str.startswith("λ"):
             raise ValueError("Expression must start with λ")
 
         # Extract variable and domain
-        var_domain_part, body = expr_str[1:].split('.', 1)
-        var, domain = var_domain_part.split(':')
+        var_domain_part, body = expr_str[1:].split(".", 1)
+        var, domain = var_domain_part.split(":")
 
         # Translate domain string to symbol
-        domain_map = {
-            '𝔼': TrinityConstants.E,
-            '𝔾': TrinityConstants.G,
-            '𝕋': TrinityConstants.T
-        }
+        domain_map = {"𝔼": TrinityConstants.E, "𝔾": TrinityConstants.G, "𝕋": TrinityConstants.T}
 
         domain_sym = domain_map.get(domain)
         if domain_sym is None:
@@ -203,6 +204,7 @@ class LambdaCalculusEngine:
 
         # Apply substitution
         return self.trinity.apply_lambda_calculus(body_expr, var_sym, val)
+
 
 class OntologicalFilter:
     """

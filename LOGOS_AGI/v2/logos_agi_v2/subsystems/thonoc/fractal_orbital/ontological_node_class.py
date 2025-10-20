@@ -8,15 +8,20 @@ import json
 from enum import Enum
 from .ontology.trinity_vector import TrinityVector
 
+
 class CategoryType(Enum):
     """Node category types."""
+
     MATERIAL = "MATERIAL"
     METAPHYSICAL = "METAPHYSICAL"
 
+
 class DomainType(Enum):
     """Ontological domain types."""
+
     LOGICAL = "LOGICAL"
     TRANSCENDENTAL = "TRANSCENDENTAL"
+
 
 class OntologicalNode:
     """Node in ontological fractal space with 3PDN dimensional mapping."""
@@ -33,7 +38,11 @@ class OntologicalNode:
 
         # Core categorization
         self.category = CategoryType.MATERIAL if self.c.imag == 0 else CategoryType.METAPHYSICAL
-        self.trinitarian_domain = DomainType.LOGICAL if self.category == CategoryType.MATERIAL else DomainType.TRANSCENDENTAL
+        self.trinitarian_domain = (
+            DomainType.LOGICAL
+            if self.category == CategoryType.MATERIAL
+            else DomainType.TRANSCENDENTAL
+        )
         self.invariant_value = 3 if self.trinitarian_domain == DomainType.LOGICAL else 1
 
         # Orbital properties
@@ -49,11 +58,7 @@ class OntologicalNode:
         self.timestamps = {"created": time.time(), "updated": time.time()}
 
         # Data payload
-        self.data_payload = {
-            "label": None,
-            "semantic_props": {},
-            "metadata": {}
-        }
+        self.data_payload = {"label": None, "semantic_props": {}, "metadata": {}}
 
     def _generate_id(self, c_value: complex) -> str:
         """Generate unique ID for node based on complex coordinates.
@@ -104,7 +109,7 @@ class OntologicalNode:
             "type": orbit_type,
             "escape_value": abs(z),
             "final_z": (z.real, z.imag),
-            "lyapunov_exponent": lyapunov
+            "lyapunov_exponent": lyapunov,
         }
 
     def _calculate_lyapunov_exponent(self, orbit: List[complex]) -> float:
@@ -122,7 +127,7 @@ class OntologicalNode:
         # Calculate derivatives along orbit
         derivatives = []
         for i in range(1, len(orbit)):
-            z = orbit[i-1]
+            z = orbit[i - 1]
             derivative = abs(2 * z)
             if derivative > 0:
                 derivatives.append(math.log(derivative))
@@ -183,12 +188,7 @@ class OntologicalNode:
         status = modal_result.get("status", "impossible")
 
         # Initialize modal status tracking
-        modal_status = {
-            "necessary": [],
-            "actual": [],
-            "possible": [],
-            "impossible": []
-        }
+        modal_status = {"necessary": [], "actual": [], "possible": [], "impossible": []}
 
         # Add node ID to corresponding status
         if status in modal_status:
@@ -216,7 +216,9 @@ class OntologicalNode:
         if status in self.modal_status:
             self.modal_status[status].append(self.node_id)
 
-    def add_relationship(self, relation_type: str, target_node_id: str, metadata: Dict[str, Any] = None) -> None:
+    def add_relationship(
+        self, relation_type: str, target_node_id: str, metadata: Dict[str, Any] = None
+    ) -> None:
         """Add relationship to another node.
 
         Args:
@@ -264,26 +266,24 @@ class OntologicalNode:
         """
         return {
             "node_id": self.node_id,
-            "c_value": {
-                "real": self.c.real,
-                "imag": self.c.imag
-            },
+            "c_value": {"real": self.c.real, "imag": self.c.imag},
             "category": self.category.value,
             "domain": self.trinitarian_domain.value,
             "invariant_value": self.invariant_value,
             "orbit_properties": {
-                k: v for k, v in self.orbit_properties.items()
-                if k != 'orbit'  # Exclude orbit for efficiency
+                k: v
+                for k, v in self.orbit_properties.items()
+                if k != "orbit"  # Exclude orbit for efficiency
             },
             "trinity_vector": self.trinity_vector.to_tuple(),
             "modal_status": self.modal_status,
             "data_payload": self.data_payload,
             "relationships": self.relationships,
-            "timestamps": self.timestamps
+            "timestamps": self.timestamps,
         }
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> 'OntologicalNode':
+    def from_dict(cls, data: Dict[str, Any]) -> "OntologicalNode":
         """Create node from dictionary representation.
 
         Args:
@@ -294,8 +294,7 @@ class OntologicalNode:
         """
         # Create base node from complex value
         c_value = complex(
-            data.get("c_value", {}).get("real", 0),
-            data.get("c_value", {}).get("imag", 0)
+            data.get("c_value", {}).get("real", 0), data.get("c_value", {}).get("imag", 0)
         )
         node = cls(c_value)
 
@@ -331,16 +330,16 @@ class OntologicalNode:
         stability = self.orbit_properties.get("in_set", False)
         stability_factor = 0.9 if stability else 0.5
 
-        domain_factor = .9 if self.trinitarian_domain == DomainType.TRANSCENDENTAL else 0.7
+        domain_factor = 0.9 if self.trinitarian_domain == DomainType.TRANSCENDENTAL else 0.7
 
         # Compute necessity score
         necessity = (
-            (e * 0.3) +  # Existence component
-            (g * 0.2) +  # Goodness component
-            (t * 0.3) +  # Truth component
-            (coherence * 0.1) +  # Coherence component
-            (stability_factor * 0.05) +  # Stability component
-            (domain_factor * 0.05)  # Domain component
+            (e * 0.3)
+            + (g * 0.2)  # Existence component
+            + (t * 0.3)  # Goodness component
+            + (coherence * 0.1)  # Truth component
+            + (stability_factor * 0.05)  # Coherence component
+            + (domain_factor * 0.05)  # Stability component  # Domain component
         )
 
         return max(0.0, min(1.0, necessity))

@@ -97,9 +97,7 @@ def process_failures():
             s = f"{op.name}.{op.variant_test_name}"
         return s.replace(".", "_")
 
-    remap_opinfo = {
-        create_normalized_name(op): (op.name, op.variant_test_name) for op in op_db
-    }
+    remap_opinfo = {create_normalized_name(op): (op.name, op.variant_test_name) for op in op_db}
 
     print("symbolic_tensor_failures = {")
     for failure, reason in failures:
@@ -251,19 +249,13 @@ def forward(self, a_1):
 
     def test_isolated_graphmodule(self):
         def is_any_sum(gm):
-            return any(
-                node.target == torch.ops.aten.sum.default for node in gm.graph.nodes
-            )
+            return any(node.target == torch.ops.aten.sum.default for node in gm.graph.nodes)
 
         def is_any_digamma(gm):
-            return any(
-                node.target == torch.ops.aten.digamma.default for node in gm.graph.nodes
-            )
+            return any(node.target == torch.ops.aten.digamma.default for node in gm.graph.nodes)
 
         def is_any_sigmoid(gm):
-            return any(
-                node.target == torch.ops.aten.sigmoid.default for node in gm.graph.nodes
-            )
+            return any(node.target == torch.ops.aten.sigmoid.default for node in gm.graph.nodes)
 
         def inner(x):
             return torch.sum(x)
@@ -368,9 +360,7 @@ def forward(self, a_1):
 
         traced = make_fx(f2_logging_tensor)(torch.randn(3))
         self.assertFalse(is_any_sum(traced))
-        self.assertFalse(
-            is_any_sigmoid(traced)
-        )  # this fails, sigmoid is traced with LoggingTensor
+        self.assertFalse(is_any_sigmoid(traced))  # this fails, sigmoid is traced with LoggingTensor
         self.assertTrue(is_any_digamma(traced))
 
     # See https://github.com/pytorch/pytorch/issues/97541
@@ -393,9 +383,7 @@ def forward(self, x_1):
             y.copy_(x)
             return y
 
-        def _new_zeros_decomp(
-            inp, size, dtype=None, layout=None, device=None, pin_memory=None
-        ):
+        def _new_zeros_decomp(inp, size, dtype=None, layout=None, device=None, pin_memory=None):
             return torch.zeros(size, dtype=inp.dtype, device=inp.device)
 
         factory_func_decomp = {torch.ops.aten.new_zeros.default: _new_zeros_decomp}
@@ -499,9 +487,7 @@ def forward(self, x_1):
 
         # default behavior should trace factory functions
         traced = make_fx(f, tracing_mode=self.tracing_mode)(torch.randn(3))
-        self.assertTrue(
-            any(node.target == aten.randn.default for node in traced.graph.nodes)
-        )
+        self.assertTrue(any(node.target == aten.randn.default for node in traced.graph.nodes))
 
     def test_pre_dispatch_functionalization(self):
         def f(x):
@@ -567,15 +553,9 @@ def forward(self, x_1):
             y.unsqueeze_(0)
             return y
 
-        traced = make_fx(f, tracing_mode=self.tracing_mode)(
-            torch.randn(3, requires_grad=True)
-        )
+        traced = make_fx(f, tracing_mode=self.tracing_mode)(torch.randn(3, requires_grad=True))
         self.assertEqual(
-            [
-                tuple(node.meta["val"].shape)
-                for node in traced.graph.nodes
-                if "val" in node.meta
-            ],
+            [tuple(node.meta["val"].shape) for node in traced.graph.nodes if "val" in node.meta],
             [(3,), (3,), (1, 3)],
         )
 
@@ -659,25 +639,18 @@ def forward(self, x_1):
             return torch.nn.functional.silu(x)
 
         x = torch.rand((4, 4))
-        fx_module = make_fx(
-            fn, tracing_mode=self.tracing_mode, decomposition_table=None
-        )(x)
+        fx_module = make_fx(fn, tracing_mode=self.tracing_mode, decomposition_table=None)(x)
 
         found_silu = False
         for n in fx_module.graph.nodes:
-            if (
-                n.target == torch.ops.aten.silu
-                or n.target == torch.ops.aten.silu.default
-            ):
+            if n.target == torch.ops.aten.silu or n.target == torch.ops.aten.silu.default:
                 found_silu = True
 
         self.assertTrue(found_silu)
 
         new_graph = torch.fx.Graph()
         silu_decomp_table = {
-            torch.ops.aten.silu.default: decomposition_table[
-                torch.ops.aten.silu.default
-            ]
+            torch.ops.aten.silu.default: decomposition_table[torch.ops.aten.silu.default]
         }
         DecompositionInterpreter(
             fx_module,
@@ -824,18 +797,12 @@ def forward(self, x_1):
                 return NotImplemented
             return beta * a + alpha * (b @ c)
 
-        decomposed_fx = make_fx(f, decomposition_table={aten.addmm.default: addmm})(
-            *inps
-        )
+        decomposed_fx = make_fx(f, decomposition_table={aten.addmm.default: addmm})(*inps)
 
         self.assertEqual(fx_g(*inps), decomposed_fx(*inps))
+        self.assertEqual(len([n for n in fx_g.graph.nodes if n.target == aten.addmm.default]), 2)
         self.assertEqual(
-            len([n for n in fx_g.graph.nodes if n.target == aten.addmm.default]), 2
-        )
-        self.assertEqual(
-            len(
-                [n for n in decomposed_fx.graph.nodes if n.target == aten.addmm.default]
-            ),
+            len([n for n in decomposed_fx.graph.nodes if n.target == aten.addmm.default]),
             1,
         )
 
@@ -848,13 +815,9 @@ def forward(self, x_1):
         def nop(x):
             return x.cos()
 
-        traced = make_fx(f, decomposition_table={torch.ops.aten.t.default: nop})(
-            torch.randn(5)
-        )
+        traced = make_fx(f, decomposition_table={torch.ops.aten.t.default: nop})(torch.randn(5))
         self.assertEqual(
-            len(
-                [n for n in traced.graph.nodes if n.target == torch.ops.aten.t.default]
-            ),
+            len([n for n in traced.graph.nodes if n.target == torch.ops.aten.t.default]),
             0,
         )
 
@@ -981,9 +944,7 @@ class TestFakeProxyTensor(TestCase):
         max_exp_avg_sqs = [torch.randn(10, 10) for _ in range(10)]
         state_steps = [torch.tensor(0) for _ in range(10)]
 
-        def fused_adam(
-            params, grads, exp_avgs, exp_avg_sqs, max_exp_avg_sqs, state_steps
-        ):
+        def fused_adam(params, grads, exp_avgs, exp_avg_sqs, max_exp_avg_sqs, state_steps):
             (new_params, _, _, _, _) = aten._fused_adam.default(
                 params,
                 grads,
@@ -1054,13 +1015,9 @@ def forward(self, x_1):
 
         existing_fake_mode = FakeTensorMode()
         with existing_fake_mode:
-            out = make_fx(f, tracing_mode="real")(
-                torch.tensor([[1, 1, 1, 1, 1, 1, 1, 1]])
-            )
+            out = make_fx(f, tracing_mode="real")(torch.tensor([[1, 1, 1, 1, 1, 1, 1, 1]]))
 
-        fake_mode = detect_fake_mode(
-            [node.meta.get("val", None) for node in out.graph.nodes]
-        )
+        fake_mode = detect_fake_mode([node.meta.get("val", None) for node in out.graph.nodes])
         self.assertEqual(fake_mode, existing_fake_mode)
 
 
@@ -1152,9 +1109,7 @@ def forward(self, x_1, y_1):
         def f(x, y):
             x.resize_(y.size(0))
 
-        r = str(
-            make_fx(f, tracing_mode="symbolic")(torch.empty(0), torch.empty(2)).code
-        ).strip()
+        r = str(make_fx(f, tracing_mode="symbolic")(torch.empty(0), torch.empty(2)).code).strip()
         self.assertExpectedInline(
             r,
             """\
@@ -1168,9 +1123,7 @@ def forward(self, x_1, y_1):
         def f(x, y):
             return torch.functional.broadcast_shapes(x.size(), y.size()[0])
 
-        r = str(
-            make_fx(f, tracing_mode="symbolic")(torch.empty(3, 1), torch.empty(5)).code
-        ).strip()
+        r = str(make_fx(f, tracing_mode="symbolic")(torch.empty(3, 1), torch.empty(5)).code).strip()
         self.assertExpectedInline(
             r,
             """\
@@ -1182,9 +1135,7 @@ def forward(self, x_1, y_1):
 
     def test_deduped_shape(self):
         def f(s0, s1, x, y):
-            return torch.functional.broadcast_shapes(
-                x.size(), y.size()[0]
-            ), torch.empty(x.shape[0])
+            return torch.functional.broadcast_shapes(x.size(), y.size()[0]), torch.empty(x.shape[0])
 
         x = torch.empty(3, 1)
         y = torch.empty(5)
@@ -1195,9 +1146,7 @@ def forward(self, x_1, y_1):
         with FakeTensorMode(shape_env=shape_env, static_shapes=False) as fake_mode:
             x = fake_mode.from_tensor(x)
             y = fake_mode.from_tensor(y)
-            r = str(
-                make_fx(f, tracing_mode="real")(x.shape[0], y.shape[0], x, y).code
-            ).strip()
+            r = str(make_fx(f, tracing_mode="real")(x.shape[0], y.shape[0], x, y).code).strip()
             self.assertExpectedInline(
                 r,
                 """\
@@ -1208,9 +1157,7 @@ def forward(self, s0_1, s1_1, x_1, y_1):
 
     def test_non_deduped_shape(self):
         def f(x, y):
-            return torch.functional.broadcast_shapes(
-                x.size(), y.size()[0]
-            ), torch.empty(x.shape[0])
+            return torch.functional.broadcast_shapes(x.size(), y.size()[0]), torch.empty(x.shape[0])
 
         x = torch.empty(3, 1)
         y = torch.empty(5)
@@ -1341,9 +1288,7 @@ def forward(self, x_1):
             return y.repeat_interleave(x, dim=0, output_size=s)
 
         r = str(
-            make_fx(f, tracing_mode="symbolic")(
-                torch.tensor([2, 3]), torch.randn(2)
-            ).code
+            make_fx(f, tracing_mode="symbolic")(torch.tensor([2, 3]), torch.randn(2)).code
         ).strip()
         self.assertExpectedInline(
             r,
@@ -1377,9 +1322,7 @@ def forward(self, x_1):
             beam_size = 1
             generate_size = 64
             max_len = src_len + generate_size
-            tokens = (
-                torch.zeros(bsz * beam_size, max_len).to(src_tokens).long().fill_(0)
-            )
+            tokens = torch.zeros(bsz * beam_size, max_len).to(src_tokens).long().fill_(0)
             tokens[:, :start_step] = src_tokens.repeat_interleave(beam_size, 0)
             return tokens
 
@@ -1478,9 +1421,7 @@ def forward(self, a_1):
             r = a.item()
             return torch.empty(r)
 
-        r = str(
-            make_fx(f, tracing_mode="symbolic")(torch.randint(5, (1,))).code
-        ).strip()
+        r = str(make_fx(f, tracing_mode="symbolic")(torch.randint(5, (1,))).code).strip()
         self.assertExpectedInline(
             r,
             """\
@@ -1575,9 +1516,7 @@ def forward(self, crop_camera_1, mask_1):
     def test_unbacked_slice(self):
         def f(x, m):
             x = x[m]
-            return x[
-                slice(None, None, None), slice(None, None, None), slice(None, 2, None)
-            ]
+            return x[slice(None, None, None), slice(None, None, None), slice(None, 2, None)]
 
         make_fx(f, tracing_mode="symbolic")(
             torch.randn((12, 3, 3)), torch.randint(0, 2, (12,), dtype=torch.bool)
@@ -1652,9 +1591,7 @@ def forward(self, a_1):
             z = torch.zeros(x.item())
             return z + y
 
-        r = str(
-            make_fx(f, tracing_mode="symbolic")(torch.tensor(10), torch.randn(10)).code
-        ).strip()
+        r = str(make_fx(f, tracing_mode="symbolic")(torch.tensor(10), torch.randn(10)).code).strip()
         self.assertExpectedInline(
             r,
             """\
@@ -1704,9 +1641,7 @@ def forward(self, x_1, y_1):
             else:
                 return y + 2
 
-        r = str(
-            make_fx(f, tracing_mode="symbolic")(torch.tensor(10), torch.randn(10)).code
-        ).strip()
+        r = str(make_fx(f, tracing_mode="symbolic")(torch.tensor(10), torch.randn(10)).code).strip()
         self.assertExpectedInline(
             r,
             """\
@@ -1790,9 +1725,7 @@ def forward(self, x_1, y_1):
             return torch.split(values, sizes)
 
         r = str(
-            make_fx(f, tracing_mode="symbolic")(
-                torch.tensor([2, 3, 4]), torch.randn(9)
-            ).code
+            make_fx(f, tracing_mode="symbolic")(torch.tensor([2, 3, 4]), torch.randn(9)).code
         ).strip()
         self.assertExpectedInline(
             r,
@@ -1895,9 +1828,7 @@ def forward(self, a_1):
 
         functional_call._orig_mod = foo
 
-        gm_with_stack = make_fx(functional_call, record_module_stack=True)(
-            torch.randn(4, 4)
-        )
+        gm_with_stack = make_fx(functional_call, record_module_stack=True)(torch.randn(4, 4))
         found = False
         for node in gm_with_stack.graph.nodes:
             if "nn_module_stack" in node.meta:
@@ -1938,9 +1869,9 @@ def forward(self, a_1):
         )
 
         r = str(
-            make_fx(
-                f, tracing_mode="symbolic", decomposition_table=decomposition_table
-            )(torch.empty(4)).code
+            make_fx(f, tracing_mode="symbolic", decomposition_table=decomposition_table)(
+                torch.empty(4)
+            ).code
         ).strip()
         self.assertExpectedInline(
             r,
@@ -1966,9 +1897,7 @@ def forward(self, a_1):
         gm = self._test_dynamic(f, [(1, 6), (8, 1)], test_inputs)
         self.assertTrue(eval_guards(gm, torch.randn(1, 10), torch.randn(6, 1)))
         self.assertFalse(eval_guards(gm, torch.randn(1, 2), torch.randn(4, 1)))
-        self.assertExpectedInline(
-            show_guards(gm), """2*L['b'].size()[0]*L['a'].size()[1] > 20"""
-        )
+        self.assertExpectedInline(show_guards(gm), """2*L['b'].size()[0]*L['a'].size()[1] > 20""")
 
     def test_new_empty(self):
         def f(a, b):
@@ -2023,9 +1952,7 @@ def forward(self, x_1):
         fx_g = make_fx(f, tracing_mode="symbolic")(torch.randn(5), torch.randn(4))
         meta_c = _get_node(fx_g, lambda x: x.target == aten.new_empty.default)
         meta_d = _get_node(fx_g, lambda x: x.target == operator.add)
-        self.assertTrue(
-            meta_c.meta["val"].shape[0].node.expr == meta_d.meta["val"].node.expr
-        )
+        self.assertTrue(meta_c.meta["val"].shape[0].node.expr == meta_d.meta["val"].node.expr)
 
     def test_metadata_fresh(self):
         def f(x):
@@ -2164,12 +2091,8 @@ L['a'].size()[1] <= 18""",
         self.assertEqual(fx_g(*inp), f(*inp))
 
     def _assert_no_guards(self, fx_g, free_symbols):
-        assert (
-            _get_free_symbols(fx_g.shape_env) == free_symbols
-        ), fx_g.shape_env.var_to_val
-        assert (
-            len(fx_g.shape_env.get_nontrivial_guards()) == 0
-        ), fx_g.shape_env.format_guards()
+        assert _get_free_symbols(fx_g.shape_env) == free_symbols, fx_g.shape_env.var_to_val
+        assert len(fx_g.shape_env.get_nontrivial_guards()) == 0, fx_g.shape_env.format_guards()
 
     def test_guards_equal(self):
         def f(a, b):
@@ -2287,18 +2210,14 @@ fake_tensor_failures = set()
 
 symbolic_tensor_failures = {
     xfail("combinations", ""),
-    xfail(
-        "geqrf", ""
-    ),  # aten.geqrf.default - couldn't find symbolic meta function/decomposition
+    xfail("geqrf", ""),  # aten.geqrf.default - couldn't find symbolic meta function/decomposition
     xfail(
         "histogram", ""
     ),  # Could not run 'aten::histogram.bin_ct' with arguments from the 'Meta' backend. This c...
     xfail(
         "histogramdd", ""
     ),  # aten._histogramdd_bin_edges.default - couldn't find symbolic meta function/decomposition
-    xfail(
-        "nanquantile", ""
-    ),  # Could not run 'aten::equal' with arguments from the 'Meta' backend.
+    xfail("nanquantile", ""),  # Could not run 'aten::equal' with arguments from the 'Meta' backend.
     xfail(
         "nn.functional.binary_cross_entropy", ""
     ),  # aten.new_empty.default - couldn't find symbolic meta function/decom...
@@ -2308,9 +2227,7 @@ symbolic_tensor_failures = {
     xfail(
         "nn.functional.ctc_loss"
     ),  # aten._ctc_loss.Tensor - couldn't find symbolic meta function/decomposition
-    xfail(
-        "quantile", ""
-    ),  # Could not run 'aten::equal' with arguments from the 'Meta' backend.
+    xfail("quantile", ""),  # Could not run 'aten::equal' with arguments from the 'Meta' backend.
     xfail(
         "max_pool2d_with_indices_backward", ""
     ),  # Expected a value of type 'List[int]' for argument 'kernel_size' but...
@@ -2372,9 +2289,7 @@ def _get_safe_inplace(inplace_variant):
     return _fn
 
 
-def _test_make_fx_helper(
-    self, device, dtype, op, tracing_mode, inplace=False, out=False
-):
+def _test_make_fx_helper(self, device, dtype, op, tracing_mode, inplace=False, out=False):
     fn = _get_safe_inplace(op.get_inplace()) if inplace else op.op
     sample_inputs_itr = op.sample_inputs(device, dtype, requires_grad=False)
 

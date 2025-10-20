@@ -1229,9 +1229,7 @@ class TestTorchFunctionWarning(TestCase):
                 pass
 
         a = StandaloneTorchFunctionClass()
-        with self.assertWarnsRegex(
-            DeprecationWarning, "as a plain method is deprecated"
-        ):
+        with self.assertWarnsRegex(DeprecationWarning, "as a plain method is deprecated"):
             # Function that handles torch_function on the python side
             torch.nn.functional.dropout(a)
         with self.assertWarnsRegex(UserWarning, "as a plain method is deprecated"):
@@ -1244,9 +1242,7 @@ class TestTorchFunctionWarning(TestCase):
                 pass
 
         b = TensorSubclassTorchFunctionClass()
-        with self.assertWarnsRegex(
-            DeprecationWarning, "as a plain method is deprecated"
-        ):
+        with self.assertWarnsRegex(DeprecationWarning, "as a plain method is deprecated"):
             # Function that handles torch_function on the python side
             torch.nn.functional.dropout(b)
         with self.assertWarnsRegex(UserWarning, "as a plain method is deprecated"):
@@ -1287,12 +1283,8 @@ class TestTorchFunctionMode(TestCase):
             self.assertEqual(torch.tensor([1]), -1)
             self.assertEqual(torch.sparse_coo_tensor(1, 1, 1), -1)
             self.assertEqual(torch.sparse_csr_tensor(1, 1, 1), -1)
-            self.assertEqual(
-                torch.sparse_coo_tensor(1, 1, (1, 1), check_invariants=False), -1
-            )
-            self.assertEqual(
-                torch.sparse_csr_tensor(1, 1, 1, (1, 1), check_invariants=False), -1
-            )
+            self.assertEqual(torch.sparse_coo_tensor(1, 1, (1, 1), check_invariants=False), -1)
+            self.assertEqual(torch.sparse_csr_tensor(1, 1, 1, (1, 1), check_invariants=False), -1)
             self.assertEqual(torch.as_tensor([1]), -1)
 
     def test_modes_handle_first(self):
@@ -1734,8 +1726,7 @@ class TestTorchFunctionMode(TestCase):
 
             def get_stack():
                 return [
-                    torch._C._get_function_stack_at(i)
-                    for i in range(_len_torch_function_stack())
+                    torch._C._get_function_stack_at(i) for i in range(_len_torch_function_stack())
                 ]
 
             base_mode = BaseTorchFunctionMode()

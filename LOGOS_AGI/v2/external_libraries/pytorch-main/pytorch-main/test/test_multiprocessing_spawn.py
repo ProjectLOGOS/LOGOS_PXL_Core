@@ -142,9 +142,7 @@ class _TestMultiProcessing:
             Exception,
             "\nValueError: legitimate exception from process (0|1)$",
         ):
-            mp.start_processes(
-                _test_exception_all_func, nprocs=2, start_method=self.start_method
-            )
+            mp.start_processes(_test_exception_all_func, nprocs=2, start_method=self.start_method)
 
     def test_terminate_signal(self):
         # SIGABRT is aliased with SIGIOT

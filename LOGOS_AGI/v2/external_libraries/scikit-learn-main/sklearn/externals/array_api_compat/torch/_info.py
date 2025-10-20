@@ -162,9 +162,7 @@ class __array_namespace_info__:
         # value here because this error doesn't represent a different default
         # per-device.
         default_floating = torch.get_default_dtype()
-        default_complex = (
-            torch.complex64 if default_floating == torch.float32 else torch.complex128
-        )
+        default_complex = torch.complex64 if default_floating == torch.float32 else torch.complex128
         default_integral = torch.int64
         return {
             "real floating": default_floating,
@@ -350,10 +348,7 @@ class __array_namespace_info__:
             # The error message is something like:
             # "Expected one of cpu, cuda, ipu, xpu, mkldnn, opengl, opencl, ideep, hip, ve, fpga, ort, xla, lazy, vulkan, mps, meta, hpu, mtia, privateuseone device type at start of device string: notadevice"
             devices_names = (
-                e.args[0]
-                .split("Expected one of ")[1]
-                .split(" device type")[0]
-                .split(", ")
+                e.args[0].split("Expected one of ")[1].split(" device type")[0].split(", ")
             )
 
         # Next we need to check for different indices for different devices.

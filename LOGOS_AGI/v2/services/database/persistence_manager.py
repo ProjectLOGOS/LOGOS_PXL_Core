@@ -7,7 +7,10 @@ import threading
 
 # --- Basic Configuration ---
 DB_FILE = "/data/logos_agi.db"  # Path inside the Docker container
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - PERSISTENCE - %(message)s')
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - PERSISTENCE - %(message)s"
+)
+
 
 class PersistenceManager:
     """
@@ -15,6 +18,7 @@ class PersistenceManager:
     This implementation uses SQLite for simplicity.
     It's designed to be thread-safe for use by the DatabaseService.
     """
+
     def __init__(self, db_file=DB_FILE):
         self.db_file = db_file
         self.lock = threading.Lock()
@@ -33,17 +37,20 @@ class PersistenceManager:
 
                 # Example table: A generic log for all system events/data
                 # We store data as a JSON blob for maximum flexibility in this prototype stage.
-                cursor.execute('''
+                cursor.execute(
+                    """
                     CREATE TABLE IF NOT EXISTS system_log (
                         id INTEGER PRIMARY KEY AUTOINCREMENT,
                         timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
                         source TEXT NOT NULL,
                         log_data TEXT NOT NULL
                     )
-                ''')
+                """
+                )
 
                 # Example table: Goals
-                cursor.execute('''
+                cursor.execute(
+                    """
                     CREATE TABLE IF NOT EXISTS goals (
                         goal_id TEXT PRIMARY KEY,
                         status TEXT NOT NULL,
@@ -53,7 +60,8 @@ class PersistenceManager:
                         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
                         updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
                     )
-                ''')
+                """
+                )
 
                 conn.commit()
                 conn.close()
@@ -75,9 +83,11 @@ class PersistenceManager:
                 if not table_name.isalnum():
                     raise ValueError("Invalid table name")
 
-                columns = ', '.join(data_dict.keys())
-                placeholders = ', '.join(['?'] * len(data_dict))
-                values = [json.dumps(v) if isinstance(v, (dict, list)) else v for v in data_dict.values()]
+                columns = ", ".join(data_dict.keys())
+                placeholders = ", ".join(["?"] * len(data_dict))
+                values = [
+                    json.dumps(v) if isinstance(v, (dict, list)) else v for v in data_dict.values()
+                ]
 
                 # Using INSERT OR REPLACE for simplicity (requires a PRIMARY KEY in the data)
                 # A more robust solution would use INSERT... ON CONFLICT DO UPDATE
@@ -100,14 +110,14 @@ class PersistenceManager:
         """
         with self.lock:
             conn = self._get_connection()
-            conn.row_factory = sqlite3.Row # To get dict-like rows
+            conn.row_factory = sqlite3.Row  # To get dict-like rows
             try:
                 cursor = conn.cursor()
 
                 if not table_name.isalnum():
                     raise ValueError("Invalid table name")
 
-                query_clauses = ' AND '.join([f"{key} = ?" for key in query_dict.keys()])
+                query_clauses = " AND ".join([f"{key} = ?" for key in query_dict.keys()])
                 values = list(query_dict.values())
 
                 sql = f"SELECT * FROM {table_name} WHERE {query_clauses}"

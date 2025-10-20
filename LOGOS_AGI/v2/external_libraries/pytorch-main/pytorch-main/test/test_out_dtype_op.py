@@ -42,9 +42,7 @@ class TestOutDtypeOp(TestCase):
         gm = make_fx(torch.func.functionalize(M(weight)))(x)
         self.assertTrue(torch.allclose(m(x), gm(x)))
 
-        FileCheck().check("torch.ops.higher_order.out_dtype").check(
-            "aten.mm.default"
-        ).run(gm.code)
+        FileCheck().check("torch.ops.higher_order.out_dtype").check("aten.mm.default").run(gm.code)
         self.assertTrue(torch.allclose(m(x), gm(x)))
         for node in gm.graph.nodes:
             if node.op == "call_function" and node.target is out_dtype:
@@ -66,9 +64,9 @@ class TestOutDtypeOp(TestCase):
         m = M(weight)
         x = torch.randint(-128, 127, (5, 5), dtype=torch.int8)
         ep = torch.export.export(m, (x,), strict=True)
-        FileCheck().check("torch.ops.higher_order.out_dtype").check(
-            "aten.mm.default"
-        ).run(ep.graph_module.code)
+        FileCheck().check("torch.ops.higher_order.out_dtype").check("aten.mm.default").run(
+            ep.graph_module.code
+        )
         self.assertTrue(torch.allclose(m(x), ep.module()(x)))
         for node in ep.graph.nodes:
             if node.op == "call_function" and node.target is out_dtype:
@@ -137,9 +135,7 @@ class TestOutDtypeOp(TestCase):
         def f(x, y):
             return out_dtype(torch.add, torch.int32, x, y)
 
-        with self.assertRaisesRegex(
-            ValueError, "out_dtype's first argument must be an OpOverload"
-        ):
+        with self.assertRaisesRegex(ValueError, "out_dtype's first argument must be an OpOverload"):
             f(
                 torch.randint(-128, 127, (5, 5), dtype=torch.int8),
                 torch.randint(-128, 127, (5, 5), dtype=torch.int8),

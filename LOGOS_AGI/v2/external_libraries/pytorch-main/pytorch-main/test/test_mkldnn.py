@@ -73,26 +73,16 @@ class TestMkldnn(TestCase):
                 for dtype2 in convert_dtypes[dtype1]:
                     cpu_tensor_2 = mkldnn_tensor.to_dense(dtype2)
                     self.assertEqual(cpu_tensor_2.dtype, dtype2)
-                    atol = (
-                        1e-5
-                        if dtype1 == torch.float and dtype2 == torch.float
-                        else 1e-2
-                    )
-                    self.assertEqual(
-                        cpu_tensor, cpu_tensor_2.float(), atol=atol, rtol=0
-                    )
+                    atol = 1e-5 if dtype1 == torch.float and dtype2 == torch.float else 1e-2
+                    self.assertEqual(cpu_tensor, cpu_tensor_2.float(), atol=atol, rtol=0)
 
                 self.assertEqual(mkldnn_tensor.device, torch.device("cpu"))
                 self.assertEqual(mkldnn_tensor.size(), torch.Size([1, 2, 3, 4]))
                 self.assertEqual(mkldnn_tensor.numel(), cpu_tensor.numel())
                 if dtype1 == torch.float:
-                    self.assertEqual(
-                        mkldnn_tensor.element_size(), cpu_tensor.element_size()
-                    )
+                    self.assertEqual(mkldnn_tensor.element_size(), cpu_tensor.element_size())
                 else:
-                    self.assertEqual(
-                        mkldnn_tensor.element_size(), cpu_tensor.element_size() / 2
-                    )
+                    self.assertEqual(mkldnn_tensor.element_size(), cpu_tensor.element_size() / 2)
                 self.assertRaisesRegex(
                     RuntimeError,
                     "Cannot access data pointer of Tensor that doesn't have storage",
@@ -168,9 +158,7 @@ class TestMkldnn(TestCase):
                 self.assertEqual(mkldnn_tensor.device, torch.device("cpu"))
                 self.assertEqual(mkldnn_tensor.size(), cpu_tensor.size())
                 self.assertEqual(mkldnn_tensor.numel(), cpu_tensor.numel())
-                self.assertEqual(
-                    mkldnn_tensor.element_size(), cpu_tensor.element_size()
-                )
+                self.assertEqual(mkldnn_tensor.element_size(), cpu_tensor.element_size())
                 self.assertRaisesRegex(
                     RuntimeError,
                     "Cannot access data pointer of Tensor that doesn't have storage",
@@ -213,20 +201,14 @@ class TestMkldnn(TestCase):
             torch.long,
         ]:
             with self.assertRaises(RuntimeError):
-                torch.randn(
-                    1, 2, 3, 4, dtype=dtype, device=torch.device("cpu")
-                ).to_mkldnn()
+                torch.randn(1, 2, 3, 4, dtype=dtype, device=torch.device("cpu")).to_mkldnn()
             if torch.cuda.is_available():
                 with self.assertRaises(RuntimeError):
-                    torch.randn(
-                        1, 2, 3, 4, dtype=dtype, device=torch.device("cuda")
-                    ).to_mkldnn()
+                    torch.randn(1, 2, 3, 4, dtype=dtype, device=torch.device("cuda")).to_mkldnn()
         # supported type with gpu
         if torch.cuda.is_available():
             with self.assertRaises(RuntimeError):
-                torch.randn(
-                    1, 2, 3, 4, dtype=torch.float, device=torch.device("cuda")
-                ).to_mkldnn()
+                torch.randn(1, 2, 3, 4, dtype=torch.float, device=torch.device("cuda")).to_mkldnn()
         # some factory functions
         for creator in [torch.ones, torch.randn, torch.rand]:
             with self.assertRaises(RuntimeError):
@@ -283,9 +265,7 @@ class TestMkldnn(TestCase):
         )  # bias
         for pad, st, dil, gr, w, b in options:
             with self.assertRaises(RuntimeError) as _:
-                torch.mkldnn_convolution(
-                    input, w, b, [pad] * 2, [st] * 2, [dil] * 2, gr
-                )
+                torch.mkldnn_convolution(input, w, b, [pad] * 2, [st] * 2, [dil] * 2, gr)
 
     def test_autograd_to_mkldnn(self):
         # MKLDNN only supports float32
@@ -339,9 +319,7 @@ class TestMkldnn(TestCase):
         self.assertTrue(
             "layout=torch._mkldnn"
             in str(
-                torch.randn(
-                    (1, 2, 3, 4), dtype=torch.float, device=torch.device("cpu")
-                ).to_mkldnn()
+                torch.randn((1, 2, 3, 4), dtype=torch.float, device=torch.device("cpu")).to_mkldnn()
             )
         )
 
@@ -382,9 +360,7 @@ class TestMkldnn(TestCase):
             if not train or (train and dim != 1):
                 y_mkldnn = mkldnn_conv(x2).to_dense()
                 if self.precision != 0:
-                    self.assertEqual(
-                        y_aten, y_mkldnn, atol=self.precision, rtol=self.precision
-                    )
+                    self.assertEqual(y_aten, y_mkldnn, atol=self.precision, rtol=self.precision)
                 else:
                     self.assertEqual(y_aten, y_mkldnn)
             if not train:
@@ -395,9 +371,7 @@ class TestMkldnn(TestCase):
                 loss2.backward()
                 self.assertTrue(x2.grad.is_mkldnn)
                 self.assertEqual(x1.grad, x2.grad.to_dense())
-                self.assertEqual(
-                    conv.weight.grad, mkldnn_conv.weight.grad, atol=1e-3, rtol=1e-3
-                )
+                self.assertEqual(conv.weight.grad, mkldnn_conv.weight.grad, atol=1e-3, rtol=1e-3)
                 if bias:
                     self.assertEqual(conv.bias.grad, mkldnn_conv.bias.grad)
 
@@ -445,9 +419,9 @@ class TestMkldnn(TestCase):
                 groups=groups,
             ).float()
             x_lower = x.to(dtype=dtype)
-            if (
-                dtype == torch.bfloat16 and torch.ops.mkldnn._is_mkldnn_bf16_supported()
-            ) or (dtype == torch.half and torch.ops.mkldnn._is_mkldnn_fp16_supported()):
+            if (dtype == torch.bfloat16 and torch.ops.mkldnn._is_mkldnn_bf16_supported()) or (
+                dtype == torch.half and torch.ops.mkldnn._is_mkldnn_fp16_supported()
+            ):
                 mkldnn_conv = mkldnn_utils.to_mkldnn(copy.deepcopy(conv))
                 mkldnn_conv_lower = mkldnn_utils.to_mkldnn(copy.deepcopy(conv), dtype)
                 y = mkldnn_conv(x.to_mkldnn()).to_dense()
@@ -459,12 +433,8 @@ class TestMkldnn(TestCase):
                     torch.half: r"fp16 path needs the cpu support avx_ne_convert or avx512_fp16",
                 }
                 with self.assertRaisesRegex(RuntimeError, msg[dtype]):
-                    mkldnn_conv_lower = mkldnn_utils.to_mkldnn(
-                        copy.deepcopy(conv), dtype
-                    )
-                    y_lower = mkldnn_conv_lower(x_lower.to_mkldnn()).to_dense(
-                        torch.float32
-                    )
+                    mkldnn_conv_lower = mkldnn_utils.to_mkldnn(copy.deepcopy(conv), dtype)
+                    y_lower = mkldnn_conv_lower(x_lower.to_mkldnn()).to_dense(torch.float32)
             # test thnn impl
             conv_lower = copy.deepcopy(conv).to(dtype=dtype)
             conv_ref = copy.deepcopy(conv_lower).float()
@@ -478,27 +448,19 @@ class TestMkldnn(TestCase):
     @dtypes(torch.float16, torch.bfloat16)
     def test_conv_deconv_1d_lower_precision(self, dtype):
         self._test_conv_deconv_lower_precision_base(1, torch.nn.Conv1d, dtype=dtype)
-        self._test_conv_deconv_lower_precision_base(
-            1, torch.nn.ConvTranspose1d, dtype=dtype
-        )
+        self._test_conv_deconv_lower_precision_base(1, torch.nn.ConvTranspose1d, dtype=dtype)
 
     @dtypes(torch.float16, torch.bfloat16)
     def test_conv_deconv_2d_lower_precision(self, dtype):
         self._test_conv_deconv_lower_precision_base(2, torch.nn.Conv2d, dtype=dtype)
-        self._test_conv_deconv_lower_precision_base(
-            2, torch.nn.ConvTranspose2d, dtype=dtype
-        )
+        self._test_conv_deconv_lower_precision_base(2, torch.nn.ConvTranspose2d, dtype=dtype)
 
     @dtypes(torch.float16, torch.bfloat16)
     def test_conv_deconv_3d_lower_precision(self, dtype):
         self._test_conv_deconv_lower_precision_base(3, torch.nn.Conv3d, dtype=dtype)
-        self._test_conv_deconv_lower_precision_base(
-            3, torch.nn.ConvTranspose3d, dtype=dtype
-        )
+        self._test_conv_deconv_lower_precision_base(3, torch.nn.ConvTranspose3d, dtype=dtype)
 
-    def _test_conv_deconv_nhwc_base(
-        self, conv_module, weight_memory_format, dtype, prec=None
-    ):
+    def _test_conv_deconv_nhwc_base(self, conv_module, weight_memory_format, dtype, prec=None):
         input_shapes = {2: (55, 55), 3: (14, 14, 14)}
         options = itertools.product([True, False], [True, False], [1, 2], [1, 4])
         if conv_module in [torch.nn.Conv2d, torch.nn.ConvTranspose2d]:
@@ -541,13 +503,9 @@ class TestMkldnn(TestCase):
                 y1.sum().backward()
                 y2.sum().backward()
                 self.assertTrue(x2.grad.is_contiguous(memory_format=cl_format))
-                self.assertEqual(
-                    conv1.weight.grad, conv2.weight.grad, atol=1e-3, rtol=1e-3
-                )
+                self.assertEqual(conv1.weight.grad, conv2.weight.grad, atol=1e-3, rtol=1e-3)
                 if bias:
-                    self.assertEqual(
-                        conv1.bias.grad, conv2.bias.grad, atol=prec, rtol=prec
-                    )
+                    self.assertEqual(conv1.bias.grad, conv2.bias.grad, atol=prec, rtol=prec)
                 self.assertEqual(x1.grad, x2.grad, atol=prec, rtol=prec)
 
     @reduced_f32_on_and_off()
@@ -555,9 +513,7 @@ class TestMkldnn(TestCase):
         self._test_conv_deconv_nhwc_base(
             torch.nn.Conv2d, torch.contiguous_format, dtype=torch.float32
         )
-        self._test_conv_deconv_nhwc_base(
-            torch.nn.Conv2d, torch.channels_last, dtype=torch.float32
-        )
+        self._test_conv_deconv_nhwc_base(torch.nn.Conv2d, torch.channels_last, dtype=torch.float32)
         self._test_conv_deconv_nhwc_base(
             torch.nn.Conv3d, torch.contiguous_format, dtype=torch.float32
         )
@@ -574,18 +530,10 @@ class TestMkldnn(TestCase):
             torch.float16: torch.ops.mkldnn._is_mkldnn_fp16_supported,
         }
         if support_checks[dtype]():
-            self._test_conv_deconv_nhwc_base(
-                torch.nn.Conv2d, torch.contiguous_format, dtype=dtype
-            )
-            self._test_conv_deconv_nhwc_base(
-                torch.nn.Conv2d, torch.channels_last, dtype=dtype
-            )
-            self._test_conv_deconv_nhwc_base(
-                torch.nn.Conv3d, torch.contiguous_format, dtype=dtype
-            )
-            self._test_conv_deconv_nhwc_base(
-                torch.nn.Conv3d, torch.channels_last_3d, dtype=dtype
-            )
+            self._test_conv_deconv_nhwc_base(torch.nn.Conv2d, torch.contiguous_format, dtype=dtype)
+            self._test_conv_deconv_nhwc_base(torch.nn.Conv2d, torch.channels_last, dtype=dtype)
+            self._test_conv_deconv_nhwc_base(torch.nn.Conv3d, torch.contiguous_format, dtype=dtype)
+            self._test_conv_deconv_nhwc_base(torch.nn.Conv3d, torch.channels_last_3d, dtype=dtype)
 
         # BF16/FP16 fallback implementations are divided into two parts im2col+gemm,
         # and the number of data type conversions in the middle is more than that of onednn's direct conv,
@@ -723,9 +671,7 @@ class TestMkldnn(TestCase):
 
             if train:
                 self.assertEqual(x.grad, x_ref.grad)
-                self.assertEqual(
-                    conv.weight.grad, conv_ref.weight.grad, atol=1e-3, rtol=1e-3
-                )
+                self.assertEqual(conv.weight.grad, conv_ref.weight.grad, atol=1e-3, rtol=1e-3)
                 if bias:
                     self.assertEqual(conv.bias.grad, conv_ref.bias.grad)
 
@@ -847,9 +793,7 @@ class TestMkldnn(TestCase):
             loss1.backward()
             loss2.backward()
             self.assertEqual(y1, y2.to(torch.float32), atol=1e-1, rtol=0)
-            self.assertEqual(
-                x1.grad.to_dense(), x2.grad.to_dense(torch.float32), atol=1e-2, rtol=0
-            )
+            self.assertEqual(x1.grad.to_dense(), x2.grad.to_dense(torch.float32), atol=1e-2, rtol=0)
         else:
             msg = r"bf16 path needs the cpu support avx512bw, avx512vl and avx512dq"
             self.assertRaisesRegex(RuntimeError, msg, lambda: m(x2))
@@ -904,9 +848,7 @@ class TestMkldnn(TestCase):
             loss.backward()
             loss_bf16 = y_bf16.sum()
             loss_bf16.backward()
-            self.assertEqual(
-                x_fp32.grad.to_dense(), x_bf16.grad.to_dense(torch.float32)
-            )
+            self.assertEqual(x_fp32.grad.to_dense(), x_bf16.grad.to_dense(torch.float32))
         else:
             x_bf16 = torch.randn(size, dtype=torch.bfloat16).requires_grad_()
             m_bf16 = mkldnn_utils.to_mkldnn(torch.nn.PReLU(), torch.bfloat16)
@@ -977,9 +919,7 @@ class TestMkldnn(TestCase):
                     self.assertEqual(y, y_bf16, atol=0.1, rtol=1e-3)
                 else:
                     msg = f"mkldnn_max_pool{dim:d}d: bf16 path needs the cpu support avx512bw, avx512vl and avx512dq"
-                    self.assertRaisesRegex(
-                        RuntimeError, msg, lambda: max_pool(x_bf16.to_mkldnn())
-                    )
+                    self.assertRaisesRegex(RuntimeError, msg, lambda: max_pool(x_bf16.to_mkldnn()))
 
     def test_max_pool2d_bf16(self):
         N = torch.randint(3, 10, (1,)).item()
@@ -1089,9 +1029,7 @@ class TestMkldnn(TestCase):
                 self.assertEqual(y, y_bf16, atol=1e-1, rtol=1e-3)
             else:
                 msg = f"mkldnn_avg_pool{dim:d}d: bf16 path needs the cpu support avx512bw, avx512vl and avx512dq"
-                self.assertRaisesRegex(
-                    RuntimeError, msg, lambda: avg_pool(x_bf16.to_mkldnn())
-                )
+                self.assertRaisesRegex(RuntimeError, msg, lambda: avg_pool(x_bf16.to_mkldnn()))
 
     def test_avg_pool2d_bf16(self):
         N = torch.randint(3, 10, (1,)).item()
@@ -1201,14 +1139,10 @@ class TestMkldnn(TestCase):
             loss2.backward()
             self.assertEqual(y1, y2)
             self.assertEqual(x1.grad, x2.grad.to_dense())
-            self.assertEqual(
-                bn.weight.grad, mkldnn_bn.weight.grad, rtol=1e-3, atol=1e-3
-            )
+            self.assertEqual(bn.weight.grad, mkldnn_bn.weight.grad, rtol=1e-3, atol=1e-3)
             if track_running_stats:
                 self.assertEqual(bn.running_mean, mkldnn_bn.running_mean)
-                self.assertEqual(
-                    bn.running_var, mkldnn_bn.running_var, rtol=1e-5, atol=1e-5
-                )
+                self.assertEqual(bn.running_var, mkldnn_bn.running_var, rtol=1e-5, atol=1e-5)
 
     def test_batch_norm_2d(self):
         N = torch.randint(3, 10, (1,)).item()
@@ -1237,9 +1171,7 @@ class TestMkldnn(TestCase):
                 self.assertEqual(y, y_bf16, atol=1e-1, rtol=1e-3)
             else:
                 msg = "mkldnn_batch_norm: bf16 path needs the cpu support avx512bw, avx512vl and avx512dq"
-                self.assertRaisesRegex(
-                    RuntimeError, msg, lambda: bn(x_bf16.to_mkldnn())
-                )
+                self.assertRaisesRegex(RuntimeError, msg, lambda: bn(x_bf16.to_mkldnn()))
 
     def test_batch_norm_2d_bf16(self):
         N = torch.randint(3, 10, (1,)).item()
@@ -1266,9 +1198,7 @@ class TestMkldnn(TestCase):
         # add
         self.assertEqual(x + y, (mx + my).to_dense())
 
-        self.assertEqual(
-            torch.add(x, y, alpha=alpha), torch.add(mx, my, alpha=alpha).to_dense()
-        )
+        self.assertEqual(torch.add(x, y, alpha=alpha), torch.add(mx, my, alpha=alpha).to_dense())
 
         # add_
         x += y
@@ -1369,9 +1299,7 @@ class TestMkldnn(TestCase):
     @xfailIfTorchDynamo
     def test_view(self):
         x = torch.randn(3, 4, 5, dtype=torch.float32).to_mkldnn()
-        self.assertRaisesRegex(
-            RuntimeError, "Change to use reshape", lambda: x.view(x.size(0), -1)
-        )
+        self.assertRaisesRegex(RuntimeError, "Change to use reshape", lambda: x.view(x.size(0), -1))
 
     def test_reshape(self):
         x = torch.randn(3, 4, 5, dtype=torch.float32) * 10
@@ -1699,13 +1627,9 @@ class TestMkldnn(TestCase):
             ) in itertools.product(*params_list):
                 num_directions = 2 if bidirectional else 1
                 if batch_first:
-                    input = torch.randn(
-                        batch_size, seq_len, input_size, dtype=torch.float32
-                    )
+                    input = torch.randn(batch_size, seq_len, input_size, dtype=torch.float32)
                 else:
-                    input = torch.randn(
-                        seq_len, batch_size, input_size, dtype=torch.float32
-                    )
+                    input = torch.randn(seq_len, batch_size, input_size, dtype=torch.float32)
                 h = torch.randn(
                     num_layers * num_directions,
                     batch_size,
@@ -1876,9 +1800,7 @@ class TestMkldnn(TestCase):
             scale_a = torch.randn(1, device=device)
             scale_b = torch.randn(1, device=device)
             scale_out = torch.randn(1, device=device)
-            out_fp32 = torch.mm(
-                x_fp8.to(torch.float) * scale_a, y_fp8.to(torch.float) * scale_b
-            )
+            out_fp32 = torch.mm(x_fp8.to(torch.float) * scale_a, y_fp8.to(torch.float) * scale_b)
             if out_dtype in (torch.float8_e4m3fn, torch.float8_e5m2):
                 out_emulated = (out_fp32 / scale_out).to(out_dtype)
             else:

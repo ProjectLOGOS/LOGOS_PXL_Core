@@ -95,9 +95,7 @@ def asarray(
         else:
             res = cp.array(obj, dtype=dtype, copy=copy, **kwargs)
             if not copy and res is not obj:
-                raise ValueError(
-                    "Unable to avoid copy while creating an array as requested"
-                )
+                raise ValueError("Unable to avoid copy while creating an array as requested")
             return res
 
 

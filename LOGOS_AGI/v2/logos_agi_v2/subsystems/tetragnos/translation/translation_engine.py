@@ -17,12 +17,14 @@ try:
     from nltk.tokenize import word_tokenize
     from nltk.corpus import stopwords
     from nltk.stem import WordNetLemmatizer
+
     NLTK_AVAILABLE = True
 except ImportError:
     NLTK_AVAILABLE = False
 
 try:
     import spacy
+
     SPACY_AVAILABLE = True
 except ImportError:
     SPACY_AVAILABLE = False
@@ -33,6 +35,7 @@ from ..ontology.trinity_vector import TrinityVector
 from ..utils.data_structures import OntologicalType
 
 logger = logging.getLogger(__name__)
+
 
 class TranslationEngine:
     """Main translation engine for natural language processing."""
@@ -61,7 +64,7 @@ class TranslationEngine:
         if NLTK_AVAILABLE:
             try:
                 self.lemmatizer = WordNetLemmatizer()
-                self.stop_words = set(stopwords.words('english'))
+                self.stop_words = set(stopwords.words("english"))
                 logger.info("Loaded NLTK components")
             except:
                 logger.warning("Failed to load NLTK components")
@@ -83,20 +86,56 @@ class TranslationEngine:
         # Default keyword mappings
         return {
             "existence": [
-                "exist", "being", "reality", "substance", "exists", "real",
-                "actual", "physical", "concrete", "material", "presence",
-                "manifestation", "occurrence", "phenomenon", "emerge"
+                "exist",
+                "being",
+                "reality",
+                "substance",
+                "exists",
+                "real",
+                "actual",
+                "physical",
+                "concrete",
+                "material",
+                "presence",
+                "manifestation",
+                "occurrence",
+                "phenomenon",
+                "emerge",
             ],
             "goodness": [
-                "good", "moral", "ethical", "right", "virtue", "justice",
-                "fair", "beneficial", "valuable", "worthy", "excellent",
-                "noble", "honorable", "righteous", "benevolent"
+                "good",
+                "moral",
+                "ethical",
+                "right",
+                "virtue",
+                "justice",
+                "fair",
+                "beneficial",
+                "valuable",
+                "worthy",
+                "excellent",
+                "noble",
+                "honorable",
+                "righteous",
+                "benevolent",
             ],
             "truth": [
-                "true", "truth", "knowledge", "fact", "correct", "accurate",
-                "valid", "genuine", "authentic", "legitimate", "verifiable",
-                "provable", "evident", "certain", "definite"
-            ]
+                "true",
+                "truth",
+                "knowledge",
+                "fact",
+                "correct",
+                "accurate",
+                "valid",
+                "genuine",
+                "authentic",
+                "legitimate",
+                "verifiable",
+                "provable",
+                "evident",
+                "certain",
+                "definite",
+            ],
         }
 
     def set_pdn_bridge(self, bridge: PDNBridge) -> None:
@@ -132,15 +171,11 @@ class TranslationEngine:
         trinity_vector = TrinityVector(
             existence=bridge_layer.get("existence", 0.5),
             goodness=bridge_layer.get("goodness", 0.5),
-            truth=bridge_layer.get("truth", 0.5)
+            truth=bridge_layer.get("truth", 0.5),
         )
 
         # Create layers dictionary
-        layers = {
-            "SIGN": sign_layer,
-            "MIND": mind_layer,
-            "BRIDGE": bridge_layer
-        }
+        layers = {"SIGN": sign_layer, "MIND": mind_layer, "BRIDGE": bridge_layer}
 
         return TranslationResult(query, trinity_vector, layers)
 
@@ -159,7 +194,7 @@ class TranslationEngine:
             "lemmas": [],
             "pos_tags": [],
             "entities": [],
-            "dependencies": []
+            "dependencies": [],
         }
 
         # Use spaCy if available
@@ -213,11 +248,7 @@ class TranslationEngine:
                 continue
 
             # Create sign item
-            sign_item = {
-                "token": token,
-                "lemma": lemma,
-                "pos": pos_tags.get(token, "")
-            }
+            sign_item = {"token": token, "lemma": lemma, "pos": pos_tags.get(token, "")}
 
             # Add ontological dimensions
             sign_item["dimensions"] = self._get_token_dimensions(lemma.lower())
@@ -235,11 +266,7 @@ class TranslationEngine:
         Returns:
             Dimension scores
         """
-        dimensions = {
-            "existence": 0.0,
-            "goodness": 0.0,
-            "truth": 0.0
-        }
+        dimensions = {"existence": 0.0, "goodness": 0.0, "truth": 0.0}
 
         # Check each dimension
         for dim, keywords in self.ontological_keywords.items():
@@ -250,7 +277,9 @@ class TranslationEngine:
 
         return dimensions
 
-    def _extract_mind_layer(self, sign_layer: List[Dict[str, Any]], processed_data: Dict[str, Any]) -> Dict[str, Any]:
+    def _extract_mind_layer(
+        self, sign_layer: List[Dict[str, Any]], processed_data: Dict[str, Any]
+    ) -> Dict[str, Any]:
         """Extract MIND layer from SIGN layer.
 
         Args:
@@ -267,15 +296,11 @@ class TranslationEngine:
             "epistemic": 0.0,
             "causal": 0.0,
             "modal": 0.0,
-            "logical": 0.0
+            "logical": 0.0,
         }
 
         # Calculate dimension aggregates
-        dim_totals = {
-            "existence": 0.0,
-            "goodness": 0.0,
-            "truth": 0.0
-        }
+        dim_totals = {"existence": 0.0, "goodness": 0.0, "truth": 0.0}
 
         for item in sign_layer:
             for dim, score in item["dimensions"].items():
@@ -302,7 +327,9 @@ class TranslationEngine:
 
         return categories
 
-    def _enhance_with_linguistic_features(self, categories: Dict[str, float], processed_data: Dict[str, Any]) -> None:
+    def _enhance_with_linguistic_features(
+        self, categories: Dict[str, float], processed_data: Dict[str, Any]
+    ) -> None:
         """Enhance mind categories with linguistic features.
 
         Args:
@@ -352,11 +379,7 @@ class TranslationEngine:
             BRIDGE layer representation (ontological dimensions)
         """
         # Initialize dimensions with neutral values
-        dimensions = {
-            "existence": 0.5,
-            "goodness": 0.5,
-            "truth": 0.5
-        }
+        dimensions = {"existence": 0.5, "goodness": 0.5, "truth": 0.5}
 
         # Primary mappings
         dimensions["existence"] += 0.4 * mind_layer.get("ontological", 0)
@@ -407,10 +430,13 @@ class TranslationEngine:
         """
         # Basic query classification
         is_question = query.endswith("?")
-        has_modal = any(word in query.lower() for word in
-                        ["can", "could", "may", "might", "must", "should", "would"])
-        has_negation = any(word in query.lower() for word in
-                          ["not", "no", "never", "nothing", "nowhere", "none"])
+        has_modal = any(
+            word in query.lower()
+            for word in ["can", "could", "may", "might", "must", "should", "would"]
+        )
+        has_negation = any(
+            word in query.lower() for word in ["not", "no", "never", "nothing", "nowhere", "none"]
+        )
 
         # Identify query focus
         focus = self._identify_query_focus(query)
@@ -419,7 +445,7 @@ class TranslationEngine:
             "is_question": is_question,
             "has_modal": has_modal,
             "has_negation": has_negation,
-            "focus": focus
+            "focus": focus,
         }
 
     def _identify_query_focus(self, query: str) -> str:
@@ -434,18 +460,24 @@ class TranslationEngine:
         lower_query = query.lower()
 
         # Check for existence focus
-        if any(word in lower_query for word in
-              ["exist", "exists", "existing", "existed", "real", "reality"]):
+        if any(
+            word in lower_query
+            for word in ["exist", "exists", "existing", "existed", "real", "reality"]
+        ):
             return "existence"
 
         # Check for moral/goodness focus
-        if any(word in lower_query for word in
-              ["good", "bad", "right", "wrong", "moral", "ethical", "just"]):
+        if any(
+            word in lower_query
+            for word in ["good", "bad", "right", "wrong", "moral", "ethical", "just"]
+        ):
             return "goodness"
 
         # Check for truth/knowledge focus
-        if any(word in lower_query for word in
-              ["true", "truth", "know", "knowledge", "fact", "correct"]):
+        if any(
+            word in lower_query
+            for word in ["true", "truth", "know", "knowledge", "fact", "correct"]
+        ):
             return "truth"
 
         # Default is unknown

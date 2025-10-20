@@ -125,9 +125,7 @@ class TestFuture(TestCase):
     def test_mark_future_twice(self) -> None:
         fut = Future[int]()
         fut.set_result(1)
-        with self.assertRaisesRegex(
-            RuntimeError, "Future can only be marked completed once"
-        ):
+        with self.assertRaisesRegex(RuntimeError, "Future can only be marked completed once"):
             fut.set_result(1)
 
     def test_pickle_future(self):

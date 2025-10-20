@@ -63,9 +63,7 @@ except ModuleNotFoundError:
 REFERENCE_NORM_MODES = (
     (None, "forward", "backward", "ortho")
     if version.parse(np.__version__) >= version.parse("1.20.0")
-    and (
-        not has_scipy_fft or version.parse(scipy.__version__) >= version.parse("1.6.0")
-    )
+    and (not has_scipy_fft or version.parse(scipy.__version__) >= version.parse("1.6.0"))
     else (None, "ortho")
 )
 
@@ -151,9 +149,7 @@ def skip_helper_for_fft(device, dtype):
     if device_type == "cpu":
         raise unittest.SkipTest("half and complex32 are not supported on CPU")
     if not SM53OrLater:
-        raise unittest.SkipTest(
-            "half and complex32 are only supported on CUDA device with SM>53"
-        )
+        raise unittest.SkipTest("half and complex32 are only supported on CUDA device with SM>53")
 
 
 # Tests of functions related to Fourier analysis in the torch.fft namespace
@@ -286,9 +282,7 @@ class TestFFT(TestCase):
                     # manually promote `x` to complex32
                     x = x.to(torch.complex32)
                 # For real input, ifft(fft(x)) will convert to complex
-                self.assertEqual(
-                    x, y, exact_dtype=(forward != torch.fft.fft or x.is_complex())
-                )
+                self.assertEqual(x, y, exact_dtype=(forward != torch.fft.fft or x.is_complex()))
 
     # Note: NumPy will throw a ValueError for an empty input
     @onlyNativeDeviceTypes
@@ -326,9 +320,7 @@ class TestFFT(TestCase):
         with self.assertRaisesRegex(RuntimeError, "rfft expects a real input tensor"):
             torch.fft.rfft(t)
 
-        with self.assertRaisesRegex(
-            RuntimeError, "rfftn expects a real-valued input tensor"
-        ):
+        with self.assertRaisesRegex(RuntimeError, "rfftn expects a real-valued input tensor"):
             torch.fft.rfftn(t)
 
         with self.assertRaisesRegex(RuntimeError, "ihfft expects a real input tensor"):
@@ -408,7 +400,9 @@ class TestFFT(TestCase):
         if dtype is torch.half and device_type == "cuda" and TEST_WITH_ROCM:
             err_msg = default_msg
         elif dtype is torch.half and device_type == "cuda" and not SM53OrLater:
-            err_msg = "cuFFT doesn't support signals of half type with compute capability less than SM_53"
+            err_msg = (
+                "cuFFT doesn't support signals of half type with compute capability less than SM_53"
+            )
         else:
             err_msg = default_msg
         with self.assertRaisesRegex(RuntimeError, err_msg):
@@ -606,9 +600,7 @@ class TestFFT(TestCase):
             if dtype is torch.half:
                 shape = tuple(itertools.islice(itertools.cycle((2, 4, 8)), input_ndim))
             else:
-                shape = tuple(
-                    itertools.islice(itertools.cycle(range(4, 9)), input_ndim)
-                )
+                shape = tuple(itertools.islice(itertools.cycle(range(4, 9)), input_ndim))
             expect = torch.randn(*shape, device=device, dtype=dtype)
             input = torch.fft.ifftn(expect, dim=dim, norm="ortho")
 
@@ -649,9 +641,7 @@ class TestFFT(TestCase):
             if dtype is torch.half:
                 shape = tuple(itertools.islice(itertools.cycle((2, 4, 8)), input_ndim))
             else:
-                shape = tuple(
-                    itertools.islice(itertools.cycle(range(4, 9)), input_ndim)
-                )
+                shape = tuple(itertools.islice(itertools.cycle(range(4, 9)), input_ndim))
 
             input = torch.randn(*shape, device=device, dtype=dtype)
             expect = torch.fft.ifftn(input, dim=dim, norm="ortho")
@@ -854,9 +844,7 @@ class TestFFT(TestCase):
     @dtypes(torch.float, torch.double)
     def test_fftshift_frequencies(self, device, dtype):
         for n in range(10, 15):
-            sorted_fft_freqs = torch.arange(
-                -(n // 2), n - (n // 2), device=device, dtype=dtype
-            )
+            sorted_fft_freqs = torch.arange(-(n // 2), n - (n // 2), device=device, dtype=dtype)
             x = torch.fft.fftfreq(n, d=1 / n, device=device, dtype=dtype)
 
             # Test fftshift sorts the fftfreq output
@@ -894,9 +882,7 @@ class TestFFT(TestCase):
                 res = torch.fft.fftn(x, dim=dim, norm=norm)
                 rec = torch.fft.ifftn(res, dim=dim, norm=norm)
                 x_complex = torch.complex(x, torch.zeros_like(x))
-                self.assertEqual(
-                    x_complex, rec, atol=1e-8, rtol=0, msg="fft and ifft (from real)"
-                )
+                self.assertEqual(x_complex, rec, atol=1e-8, rtol=0, msg="fft and ifft (from real)")
 
         # contiguous case
         _test_real((100,), 1)
@@ -925,9 +911,7 @@ class TestFFT(TestCase):
 
         _test_complex((100,), 1, lambda x: x.expand(100, 100))
         _test_complex((20, 90, 110), 2, lambda x: x[:, 5:85].narrow(2, 5, 100))
-        _test_complex(
-            (40, 60, 3, 80), 3, lambda x: x.transpose(2, 0).select(0, 2)[5:55, :, 10:]
-        )
+        _test_complex((40, 60, 3, 80), 3, lambda x: x.transpose(2, 0).select(0, 2)[5:55, :, 10:])
         _test_complex((30, 55, 50, 22), 3, lambda x: x[:, 3:53, 15:40, 1:21])
 
     @skipCPUIfNoFFT
@@ -981,9 +965,7 @@ class TestFFT(TestCase):
             # Test that different GPU has different cache
             x0 = torch.randn(2, 3, 3, device=devices[0])
             x1 = x0.to(devices[1])
-            self.assertEqual(
-                torch.fft.rfftn(x0, dim=(-2, -1)), torch.fft.rfftn(x1, dim=(-2, -1))
-            )
+            self.assertEqual(torch.fft.rfftn(x0, dim=(-2, -1)), torch.fft.rfftn(x1, dim=(-2, -1)))
             # If a plan is used across different devices, the following line (or
             # the assert above) would trigger illegal memory access. Other ways
             # to trigger the error include
@@ -994,12 +976,8 @@ class TestFFT(TestCase):
             # Test that un-indexed `torch.backends.cuda.cufft_plan_cache` uses current device
             with plan_cache_max_size(devices[0], 10):
                 with plan_cache_max_size(devices[1], 11):
-                    self.assertEqual(
-                        torch.backends.cuda.cufft_plan_cache[0].max_size, 10
-                    )
-                    self.assertEqual(
-                        torch.backends.cuda.cufft_plan_cache[1].max_size, 11
-                    )
+                    self.assertEqual(torch.backends.cuda.cufft_plan_cache[0].max_size, 10)
+                    self.assertEqual(torch.backends.cuda.cufft_plan_cache[1].max_size, 11)
 
                     self.assertEqual(
                         torch.backends.cuda.cufft_plan_cache.max_size, 10
@@ -1016,12 +994,8 @@ class TestFFT(TestCase):
                 self.assertEqual(torch.backends.cuda.cufft_plan_cache[0].max_size, 10)
                 with torch.cuda.device(devices[1]):
                     with plan_cache_max_size(None, 11):  # default is cuda:1
-                        self.assertEqual(
-                            torch.backends.cuda.cufft_plan_cache[0].max_size, 10
-                        )
-                        self.assertEqual(
-                            torch.backends.cuda.cufft_plan_cache[1].max_size, 11
-                        )
+                        self.assertEqual(torch.backends.cuda.cufft_plan_cache[0].max_size, 10)
+                        self.assertEqual(torch.backends.cuda.cufft_plan_cache[1].max_size, 11)
 
                         self.assertEqual(
                             torch.backends.cuda.cufft_plan_cache.max_size, 11
@@ -1114,9 +1088,7 @@ class TestFFT(TestCase):
                 )
                 # NB: librosa defaults to np.complex64 output, no matter what
                 # the input dtype
-                ref_result = librosa_stft(
-                    x, n_fft, hop_length, win_length, window, center
-                )
+                ref_result = librosa_stft(x, n_fft, hop_length, win_length, window, center)
                 self.assertEqual(
                     result,
                     ref_result,
@@ -1138,9 +1110,7 @@ class TestFFT(TestCase):
             else:
                 self.assertRaises(
                     expected_error,
-                    lambda: x.stft(
-                        n_fft, hop_length, win_length, window, center=center
-                    ),
+                    lambda: x.stft(n_fft, hop_length, win_length, window, center=center),
                 )
 
         for center in [True, False]:
@@ -1272,9 +1242,7 @@ class TestFFT(TestCase):
             }
 
             # Functional interface
-            x_stft = torch.stft(
-                x, pad_mode=pad_mode, return_complex=True, **common_kwargs
-            )
+            x_stft = torch.stft(x, pad_mode=pad_mode, return_complex=True, **common_kwargs)
             x_roundtrip = torch.istft(
                 x_stft,
                 return_complex=dtype.is_complex,
@@ -1492,9 +1460,7 @@ class TestFFT(TestCase):
     @skipCPUIfNoFFT
     def test_stft_requires_complex(self, device):
         x = torch.rand(100)
-        with self.assertRaisesRegex(
-            RuntimeError, "stft requires the return_complex parameter"
-        ):
+        with self.assertRaisesRegex(RuntimeError, "stft requires the return_complex parameter"):
             y = x.stft(10, pad_mode="constant")
 
     @onlyNativeDeviceTypes
@@ -1595,9 +1561,7 @@ class TestFFT(TestCase):
                 for i in range(num_trials):
                     original = torch.randn(*sizes, dtype=dtype, device=device)
                     stft = torch.stft(original, return_complex=True, **stft_kwargs)
-                    inversed = torch.istft(
-                        stft, length=original.size(1), **istft_kwargs
-                    )
+                    inversed = torch.istft(stft, length=original.size(1), **istft_kwargs)
                     self.assertEqual(
                         inversed,
                         original,
@@ -1678,18 +1642,14 @@ class TestFFT(TestCase):
                     UserWarning,
                     "The length of signal is shorter than the length parameter.",
                 ):
-                    inversed = torch.istft(
-                        stft, length=original.size(-1), **istft_kwargs
-                    )
+                    inversed = torch.istft(stft, length=original.size(-1), **istft_kwargs)
                 n_frames = stft.size(-1)
                 if stft_kwargs["center"] is True:
-                    len_expected = stft_kwargs["n_fft"] // 2 + stft_kwargs[
-                        "hop_length"
-                    ] * (n_frames - 1)
-                else:
-                    len_expected = stft_kwargs["n_fft"] + stft_kwargs["hop_length"] * (
+                    len_expected = stft_kwargs["n_fft"] // 2 + stft_kwargs["hop_length"] * (
                         n_frames - 1
                     )
+                else:
+                    len_expected = stft_kwargs["n_fft"] + stft_kwargs["hop_length"] * (n_frames - 1)
                 # trim the original for case when constructed signal is shorter than original
                 padding = inversed[..., len_expected:]
                 inversed = inversed[..., :len_expected]
@@ -1903,12 +1863,8 @@ class TestFFT(TestCase):
         i_single = torch.istft(single, n_fft=4, length=4)
         i_multi = torch.istft(multi, n_fft=4, length=4)
 
-        self.assertEqual(
-            i_original.repeat(1, 1), i_single, atol=1e-6, rtol=0, exact_dtype=True
-        )
-        self.assertEqual(
-            i_original.repeat(4, 1), i_multi, atol=1e-6, rtol=0, exact_dtype=True
-        )
+        self.assertEqual(i_original.repeat(1, 1), i_single, atol=1e-6, rtol=0, exact_dtype=True)
+        self.assertEqual(i_original.repeat(4, 1), i_multi, atol=1e-6, rtol=0, exact_dtype=True)
 
     @onlyCUDA
     @skipIf(not TEST_MKL, "Test requires MKL")

@@ -17,6 +17,7 @@ from typing import Dict, List, Tuple, Optional, Union, Any
 import json
 import math
 
+
 class BayesianTrinityInferencer:
     """Inferencer for trinitarian vectors using Bayesian prior probabilities."""
 
@@ -38,7 +39,7 @@ class BayesianTrinityInferencer:
             Prior probabilities dictionary
         """
         try:
-            with open(path, 'r') as f:
+            with open(path, "r") as f:
                 return json.load(f)
         except (IOError, json.JSONDecodeError) as e:
             # Default minimal priors on failure
@@ -46,12 +47,10 @@ class BayesianTrinityInferencer:
             return {
                 "existence": {"E": 0.7, "G": 0.5, "T": 0.6},
                 "goodness": {"E": 0.6, "G": 0.9, "T": 0.7},
-                "truth": {"E": 0.6, "G": 0.7, "T": 0.9}
+                "truth": {"E": 0.6, "G": 0.7, "T": 0.9},
             }
 
-    def infer(self,
-             keywords: List[str],
-             weights: Optional[List[float]] = None) -> Dict[str, Any]:
+    def infer(self, keywords: List[str], weights: Optional[List[float]] = None) -> Dict[str, Any]:
         """Infer trinity vector and complex value from keywords.
 
         Args:
@@ -113,16 +112,14 @@ class BayesianTrinityInferencer:
         # c = complex(e * t, g) maps (existence * truth) → real component, goodness → imaginary
         c = complex(e * t, g)
 
-        return {
-            "trinity": trinity,
-            "c": c,
-            "source_terms": matched_terms
-        }
+        return {"trinity": trinity, "c": c, "source_terms": matched_terms}
 
-    def infer_with_coherence(self,
-                           keywords: List[str],
-                           weights: Optional[List[float]] = None,
-                           enforce_coherence: bool = True) -> Dict[str, Any]:
+    def infer_with_coherence(
+        self,
+        keywords: List[str],
+        weights: Optional[List[float]] = None,
+        enforce_coherence: bool = True,
+    ) -> Dict[str, Any]:
         """Infer trinity vector with coherence enforcement.
 
         Args:
@@ -160,14 +157,16 @@ class BayesianTrinityInferencer:
         result["coherence"] = {
             "original": original_coherence,
             "ideal_goodness": ideal_g,
-            "adjusted": enforce_coherence and g < ideal_g
+            "adjusted": enforce_coherence and g < ideal_g,
         }
 
         return result
 
-    def infer_trinity_path(self,
-                          keyword_sequence: List[List[str]],
-                          weights_sequence: Optional[List[List[float]]] = None) -> List[Dict[str, Any]]:
+    def infer_trinity_path(
+        self,
+        keyword_sequence: List[List[str]],
+        weights_sequence: Optional[List[List[float]]] = None,
+    ) -> List[Dict[str, Any]]:
         """Infer sequence of trinity vectors from keyword progression.
 
         Args:
@@ -198,7 +197,9 @@ class BayesianTrinityInferencer:
 
         return path
 
-    def compute_trinity_distance(self, t1: Tuple[float, float, float], t2: Tuple[float, float, float]) -> float:
+    def compute_trinity_distance(
+        self, t1: Tuple[float, float, float], t2: Tuple[float, float, float]
+    ) -> float:
         """Compute Euclidean distance between trinity vectors.
 
         Args:
@@ -208,8 +209,4 @@ class BayesianTrinityInferencer:
         Returns:
             Distance metric in trinity space
         """
-        return math.sqrt(
-            (t1[0] - t2[0])**2 +
-            (t1[1] - t2[1])**2 +
-            (t1[2] - t2[2])**2
-        )
+        return math.sqrt((t1[0] - t2[0]) ** 2 + (t1[1] - t2[1]) ** 2 + (t1[2] - t2[2]) ** 2)

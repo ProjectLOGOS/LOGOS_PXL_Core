@@ -291,9 +291,7 @@ class CountingDaskScheduler(SchedulerGetCallable):
         return dask.get(dsk, keys, **kwargs)  # type: ignore[attr-defined,no-untyped-call] # pyright: ignore[reportPrivateImportUsage]
 
 
-def _dask_wrap(
-    func: Callable[P, T], n: int
-) -> Callable[P, T]:  # numpydoc ignore=PR01,RT01
+def _dask_wrap(func: Callable[P, T], n: int) -> Callable[P, T]:  # numpydoc ignore=PR01,RT01
     """
     Wrap `func` to raise if it attempts to call `dask.compute` more than `n` times.
 
@@ -313,9 +311,7 @@ def _dask_wrap(
     @wraps(func)
     def wrapper(*args: P.args, **kwargs: P.kwargs) -> T:  # numpydoc ignore=GL08
         scheduler = CountingDaskScheduler(n, msg)
-        with dask.config.set(
-            {"scheduler": scheduler}
-        ):  # pyright: ignore[reportPrivateImportUsage]
+        with dask.config.set({"scheduler": scheduler}):  # pyright: ignore[reportPrivateImportUsage]
             out = func(*args, **kwargs)
 
         # Block until the graph materializes and reraise exceptions. This allows

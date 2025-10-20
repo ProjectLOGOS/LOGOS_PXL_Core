@@ -178,12 +178,8 @@ class SerializationMixin:
         b += [a[0].storage()]  # 4
         b += [a[0].reshape(-1)[1:4].storage()]  # 5
         b += [torch.arange(1, 11).int()]  # 6
-        t1 = torch.FloatTensor().set_(
-            a[0].reshape(-1)[1:4].clone().storage(), 0, (3,), (1,)
-        )
-        t2 = torch.FloatTensor().set_(
-            a[0].reshape(-1)[1:4].clone().storage(), 0, (3,), (1,)
-        )
+        t1 = torch.FloatTensor().set_(a[0].reshape(-1)[1:4].clone().storage(), 0, (3,), (1,))
+        t2 = torch.FloatTensor().set_(a[0].reshape(-1)[1:4].clone().storage(), 0, (3,), (1,))
         b += [(t1.storage(), t1.storage(), t2.storage())]  # 7
         b += [a[0].reshape(-1)[0:2].storage()]  # 8
         return b
@@ -281,9 +277,7 @@ class SerializationMixin:
         self.assertEqual(loaded_utf8, [utf8_str, torch.zeros(1, dtype=torch.float), 2])
         buf.seek(0)
         loaded_bytes = torch.load(buf, weights_only=weights_only, encoding="bytes")
-        self.assertEqual(
-            loaded_bytes, [utf8_bytes, torch.zeros(1, dtype=torch.float), 2]
-        )
+        self.assertEqual(loaded_bytes, [utf8_bytes, torch.zeros(1, dtype=torch.float), 2])
 
     def test_serialization(self):
         self._test_serialization(False)
@@ -343,9 +337,7 @@ class SerializationMixin:
             f.seek(0)
             with self.assertRaisesRegex(ValueError, "supports dill >="):
                 # weights_only=False as this is legacy code that saves the model
-                x2 = torch.load(
-                    f, pickle_module=dill, encoding="utf-8", weights_only=False
-                )
+                x2 = torch.load(f, pickle_module=dill, encoding="utf-8", weights_only=False)
 
     def test_pickle_module(self):
         class ThrowingUnpickler(pickle.Unpickler):
@@ -461,9 +453,7 @@ class SerializationMixin:
     @unittest.skipIf(True, "Temporary skip due to gh-153143")
     def test_serialization_sparse_invalid_legacy_ctor(self):
         # This is set in test class setup but would not be check when running user code
-        prev_invariant_check_enabled = (
-            torch.sparse.check_sparse_tensor_invariants.is_enabled()
-        )
+        prev_invariant_check_enabled = torch.sparse.check_sparse_tensor_invariants.is_enabled()
         try:
             torch.sparse.check_sparse_tensor_invariants.disable()
             x = torch.zeros(3, 3)
@@ -486,9 +476,7 @@ class SerializationMixin:
                     )
 
             with tempfile.NamedTemporaryFile() as f:
-                sd = {
-                    "spoofed_legacy_ctor": LegacyCtorSerializationSpoofer(x_legacy_ctor)
-                }
+                sd = {"spoofed_legacy_ctor": LegacyCtorSerializationSpoofer(x_legacy_ctor)}
                 torch.save(sd, f)
                 for weights_only in (True,):
                     f.seek(0)
@@ -587,9 +575,7 @@ class SerializationMixin:
         b = [a[i % 2] for i in range(4)]
         b += [a[0].storage()]
         b += [a[0].reshape(-1)[1:4].clone().storage()]
-        path = download_file(
-            "https://download.pytorch.org/test_data/legacy_serialized.pt"
-        )
+        path = download_file("https://download.pytorch.org/test_data/legacy_serialized.pt")
         if weights_only:
             with self.assertRaisesRegex(
                 RuntimeError,
@@ -657,9 +643,7 @@ class SerializationMixin:
                 self.assertEqual(len(warns), 0)
 
     def test_serialization_map_location(self):
-        test_file_path = download_file(
-            "https://download.pytorch.org/test_data/gpu_tensors.pt"
-        )
+        test_file_path = download_file("https://download.pytorch.org/test_data/gpu_tensors.pt")
 
         def map_location(storage, loc):
             return storage
@@ -711,27 +695,21 @@ class SerializationMixin:
 
         check_map_locations(cpu_map_locations, torch.float, torch.device("cpu"))
         if torch.cuda.is_available():
-            check_map_locations(
-                gpu_0_map_locations, torch.float, torch.device("cuda", 0)
-            )
+            check_map_locations(gpu_0_map_locations, torch.float, torch.device("cuda", 0))
             check_map_locations(
                 gpu_last_map_locations,
                 torch.float,
                 torch.device("cuda", torch.cuda.device_count() - 1),
             )
         if torch.xpu.is_available():
-            check_map_locations(
-                xpu_0_map_locations, torch.float, torch.device("xpu", 0)
-            )
+            check_map_locations(xpu_0_map_locations, torch.float, torch.device("xpu", 0))
             check_map_locations(
                 xpu_last_map_locations,
                 torch.float,
                 torch.device("xpu", torch.xpu.device_count() - 1),
             )
 
-    @unittest.skipIf(
-        torch.cuda.is_available(), "Testing torch.load on CPU-only machine"
-    )
+    @unittest.skipIf(torch.cuda.is_available(), "Testing torch.load on CPU-only machine")
     def test_load_nonexistent_device(self):
         # Setup: create a serialized file object with a 'cuda:0' restore location
         # The following was generated by saving a torch.randn(2, device='cuda') tensor.
@@ -928,19 +906,17 @@ class SerializationMixin:
         ):
             a = torch.tensor([], dtype=dtype, device=device)
 
-            for other_dtype in all_types_and_complex_and(
-                torch.half, torch.bfloat16, torch.bool
-            ):
-                s = torch.TypedStorage(
-                    wrap_storage=a.storage().untyped(), dtype=other_dtype
-                )
+            for other_dtype in all_types_and_complex_and(torch.half, torch.bfloat16, torch.bool):
+                s = torch.TypedStorage(wrap_storage=a.storage().untyped(), dtype=other_dtype)
                 save_load_check(a, s)
                 save_load_check(a.storage(), s)
                 b = torch.tensor([], dtype=other_dtype, device=device)
                 save_load_check(a, b)
 
     def test_save_different_dtype_error(self):
-        error_msg = r"Cannot save multiple tensors or storages that view the same data as different types"
+        error_msg = (
+            r"Cannot save multiple tensors or storages that view the same data as different types"
+        )
 
         devices = ["cpu"]
         if torch.cuda.is_available():
@@ -963,9 +939,7 @@ class SerializationMixin:
                 torch.save([a.storage(), a.imag.storage()], f)
 
             a = torch.randn(10, device=device)
-            s_bytes = torch.TypedStorage(
-                wrap_storage=a.storage().untyped(), dtype=torch.uint8
-            )
+            s_bytes = torch.TypedStorage(wrap_storage=a.storage().untyped(), dtype=torch.uint8)
 
             with self.assertRaisesRegex(RuntimeError, error_msg):
                 torch.save([a, s_bytes], f)
@@ -994,9 +968,7 @@ class SerializationMixin:
         sd = {"t_v2": t_v2, "tt": tt}
         sd_zeroed = {
             "t_v2": torch.zeros(2, 3, device=t_device),
-            "tt": TwoTensor(
-                torch.zeros(2, device=t_device), torch.zeros(2, device=t_device)
-            ),
+            "tt": TwoTensor(torch.zeros(2, device=t_device), torch.zeros(2, device=t_device)),
         }
 
         with BytesIOContext() as f:
@@ -1070,14 +1042,10 @@ class TestBothSerialization(TestCase):
             x_old_load = torch.load(f_old, weights_only=weights_only)
             self.assertEqual(x_old_load, x_new_load)
 
-        with AlwaysWarnTypedStorageRemoval(True), warnings.catch_warnings(
-            record=True
-        ) as w:
+        with AlwaysWarnTypedStorageRemoval(True), warnings.catch_warnings(record=True) as w:
             with tempfile.NamedTemporaryFile() as f_new, tempfile.NamedTemporaryFile() as f_old:
                 test(f_new, f_old)
-            self.assertTrue(
-                len(w) == 0, msg=f"Expected no warnings but got {[str(x) for x in w]}"
-            )
+            self.assertTrue(len(w) == 0, msg=f"Expected no warnings but got {[str(x) for x in w]}")
 
 
 class TestOldSerialization(TestCase, SerializationMixin):
@@ -1356,9 +1324,7 @@ class TestSerialization(TestCase, SerializationMixin):
             self.assertIsNone(torch.load(f, weights_only=False))
             f.seek(0)
             # Safe load should assert
-            with self.assertRaisesRegex(
-                pickle.UnpicklingError, "Unsupported global: GLOBAL print"
-            ):
+            with self.assertRaisesRegex(pickle.UnpicklingError, "Unsupported global: GLOBAL print"):
                 torch.load(f, weights_only=True)
             with torch.serialization.safe_globals([print]):
                 f.seek(0)
@@ -1438,9 +1404,7 @@ class TestSerialization(TestCase, SerializationMixin):
 
     def test_weights_only_safe_globals_blocklist(self):
         module = "nt" if IS_WINDOWS else "posix"
-        error_msg = (
-            f"unsupported GLOBAL {module}.execv whose module {module} is blocked"
-        )
+        error_msg = f"unsupported GLOBAL {module}.execv whose module {module} is blocked"
         with BytesIOContext() as f:
             torch.save(os.execv, f)
             f.seek(0)
@@ -1860,12 +1824,8 @@ class TestSerialization(TestCase, SerializationMixin):
 
         try:
             set_default_load_endianness(LoadEndianness.LITTLE)
-            lstm_le_no_bom_little.load_state_dict(
-                torch.load(buf_le_no_bom), strict=True
-            )
-            lstm_be_no_bom_little.load_state_dict(
-                torch.load(buf_be_no_bom), strict=True
-            )
+            lstm_le_no_bom_little.load_state_dict(torch.load(buf_le_no_bom), strict=True)
+            lstm_be_no_bom_little.load_state_dict(torch.load(buf_be_no_bom), strict=True)
         finally:
             set_default_load_endianness(current_load_endian)
 
@@ -1882,9 +1842,7 @@ class TestSerialization(TestCase, SerializationMixin):
         self.assertEqual(lstm_le_bom.state_dict(), lstm_be_bom.state_dict())
         self.assertNotEqual(lstm_le_no_bom.state_dict(), lstm_be_no_bom.state_dict())
         self.assertEqual(lstm_le_no_bom_little.state_dict(), lstm_le_bom.state_dict())
-        self.assertNotEqual(
-            lstm_be_no_bom_little.state_dict(), lstm_be_bom.state_dict()
-        )
+        self.assertNotEqual(lstm_be_no_bom_little.state_dict(), lstm_be_bom.state_dict())
         self.assertNotEqual(lstm_le_no_bom_big.state_dict(), lstm_le_bom.state_dict())
         self.assertEqual(lstm_be_no_bom_big.state_dict(), lstm_be_bom.state_dict())
 
@@ -4494,9 +4452,7 @@ class TestSerialization(TestCase, SerializationMixin):
         model_non_mmap_state_dict = DummyModel()
         model_non_mmap_state_dict.load_state_dict(result_non_mmap)
         input = torch.randn(4, 3)
-        self.assertEqual(
-            model_mmap_state_dict(input), model_non_mmap_state_dict(input.clone())
-        )
+        self.assertEqual(model_mmap_state_dict(input), model_non_mmap_state_dict(input.clone()))
 
     @unittest.skipIf(not torch.cuda.is_available(), "CUDA is unavailable")
     def test_serialization_mmap_loading_with_map_location(self):
@@ -4563,9 +4519,7 @@ class TestSerialization(TestCase, SerializationMixin):
                 self.assertNotEqual(sd_loaded2["weight"], sd["weight"])
                 self.assertEqual(sd_loaded2["weight"][0][0].item(), 0)
                 self.assertEqual(sd_loaded2["weight"], sd_loaded["weight"])
-            self.assertTrue(
-                torch.serialization.get_default_mmap_options() == MAP_PRIVATE
-            )
+            self.assertTrue(torch.serialization.get_default_mmap_options() == MAP_PRIVATE)
 
     @parametrize(
         "dtype",
@@ -4594,9 +4548,7 @@ class TestSerialization(TestCase, SerializationMixin):
                 val1, val2, check_dtype = 1, 2, torch.int64
             y["odd"][0] = torch.tensor(val1, dtype=dtype)
             y["even"][0] = torch.tensor(val2, dtype=dtype)
-            self.assertEqual(
-                y["x"][:2].to(dtype=check_dtype), torch.tensor([val2, val1])
-            )
+            self.assertEqual(y["x"][:2].to(dtype=check_dtype), torch.tensor([val2, val1]))
 
     @parametrize("byte_literals", (b"byte", bytearray(b"bytearray")))
     @parametrize("weights_only", (True, False))
@@ -4685,16 +4637,12 @@ class TestSerialization(TestCase, SerializationMixin):
         sd_expected = {
             "t_v2": torch.zeros(2, 3, device=t_device),
             "t_v3": torch.zeros(2, 3, dtype=torch.complex32, device=t_device),
-            "tt": TwoTensor(
-                torch.zeros(2, device=t_device), torch.zeros(2, device=t_device)
-            ),
+            "tt": TwoTensor(torch.zeros(2, device=t_device), torch.zeros(2, device=t_device)),
         }
 
         if not materialize_fake:
             sd["st"] = st
-            sd_expected["st"] = torch.sparse_coo_tensor(
-                torch.zeros(2, 3), torch.zeros(3), (2, 4)
-            )
+            sd_expected["st"] = torch.sparse_coo_tensor(torch.zeros(2, 3), torch.zeros(3), (2, 4))
 
         with BytesIOContext() as f:
             with skip_data(materialize_fake_tensors=materialize_fake):
@@ -4710,9 +4658,7 @@ class TestSerialization(TestCase, SerializationMixin):
                     False,
                 )
             )
-            self.assertFalse(
-                getattr(torch.serialization._serialization_tls, "skip_data", False)
-            )
+            self.assertFalse(getattr(torch.serialization._serialization_tls, "skip_data", False))
 
         # Test that without materialize_fake_tensor, behavior for fake_tensors is not altered by ctx
         if not materialize_fake:
@@ -4738,12 +4684,10 @@ class TestSerialization(TestCase, SerializationMixin):
             f.seek(0)
             sd_loaded = torch.load(f, weights_only=True)
             self.assertTrue(
-                id(sd_loaded["t_view"].untyped_storage())
-                == id(sd_loaded["t"].untyped_storage())
+                id(sd_loaded["t_view"].untyped_storage()) == id(sd_loaded["t"].untyped_storage())
             )
             self.assertTrue(
-                id(sd_loaded["t_slice"].untyped_storage())
-                == id(sd_loaded["t"].untyped_storage())
+                id(sd_loaded["t_slice"].untyped_storage()) == id(sd_loaded["t"].untyped_storage())
             )
 
     def test_skip_data_serialization_error_cases(self):
@@ -4787,9 +4731,7 @@ class TestSerialization(TestCase, SerializationMixin):
                 old_value = os.environ[env_var] if env_var in os.environ else None
                 os.environ[env_var] = "1"
                 # if weights_only is explicitly set, TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD cannot override it
-                with self.assertRaisesRegex(
-                    pickle.UnpicklingError, "Weights only load failed"
-                ):
+                with self.assertRaisesRegex(pickle.UnpicklingError, "Weights only load failed"):
                     m = torch.load(f, weights_only=not force_weights_only)
                 with ctx(*args):
                     m = torch.load(f, weights_only=None)
@@ -4804,9 +4746,7 @@ class TestSerialization(TestCase, SerializationMixin):
     @parametrize("filename", (True, False))
     def test_crc32_options(self, compute_crc32, filename):
         # test both path and buffer case
-        file_creation_func = (
-            TemporaryFileName if filename else tempfile.NamedTemporaryFile
-        )
+        file_creation_func = TemporaryFileName if filename else tempfile.NamedTemporaryFile
         sd = torch.nn.Linear(3, 5).state_dict()
         with file_creation_func() as f:
             try:
@@ -4865,20 +4805,12 @@ class TestSerialization(TestCase, SerializationMixin):
                 self.assertEqual(set(unsafe_globals), set())
             f.seek(0)
             try:
-                old_get_allowed_globals = (
-                    torch._weights_only_unpickler._get_allowed_globals
-                )
-                torch._weights_only_unpickler._get_allowed_globals = (
-                    lambda: dict()
-                )  # noqa: PIE807
-                unsafe_all_globals = (
-                    torch.serialization.get_unsafe_globals_in_checkpoint(f)
-                )
+                old_get_allowed_globals = torch._weights_only_unpickler._get_allowed_globals
+                torch._weights_only_unpickler._get_allowed_globals = lambda: dict()  # noqa: PIE807
+                unsafe_all_globals = torch.serialization.get_unsafe_globals_in_checkpoint(f)
                 self.assertEqual(set(unsafe_all_globals), expected_all_global_strs)
             finally:
-                torch._weights_only_unpickler._get_allowed_globals = (
-                    old_get_allowed_globals
-                )
+                torch._weights_only_unpickler._get_allowed_globals = old_get_allowed_globals
 
     @parametrize("should_import", [False, True])
     def test_load_njt_weights_only(self, should_import):
@@ -4897,9 +4829,7 @@ class TestSerialization(TestCase, SerializationMixin):
             )
             self._attempt_load_from_subprocess(filename, import_string, err_msg)
 
-    @parametrize(
-        "dtype", all_types_and_complex_and(torch.half, torch.bfloat16, torch.bool)
-    )
+    @parametrize("dtype", all_types_and_complex_and(torch.half, torch.bfloat16, torch.bool))
     @parametrize("weights_only", [True, False])
     def test_save_load_preserves_dtype(self, dtype, weights_only):
         class MyModule(torch.nn.Module):
@@ -4976,9 +4906,7 @@ class TestSerialization(TestCase, SerializationMixin):
             torch.save(sd, f)
             f.seek(0)
             with torch.serialization._open_file_like(f, "rb") as opened_file:
-                with torch.serialization._open_zipfile_reader(
-                    opened_file
-                ) as opened_zipfile:
+                with torch.serialization._open_zipfile_reader(opened_file) as opened_zipfile:
                     self.assertTrue(opened_zipfile.has_record(".format_version"))
                     self.assertEqual(opened_zipfile.get_record(".format_version"), b"1")
 
@@ -4990,9 +4918,7 @@ class TestSerialization(TestCase, SerializationMixin):
             f.seek(0)
             with FakeTensorMode():
                 sd_fake = torch.load(f)
-            self.assertEqual(
-                sd_fake["weight"].untyped_storage()._checkpoint_offset, 832
-            )
+            self.assertEqual(sd_fake["weight"].untyped_storage()._checkpoint_offset, 832)
             self.assertEqual(sd_fake["bias"].untyped_storage()._checkpoint_offset, 1344)
 
         storage_alignment_before = serialization_config.save.storage_alignment
@@ -5003,12 +4929,8 @@ class TestSerialization(TestCase, SerializationMixin):
                 f.seek(0)
                 with FakeTensorMode():
                     sd_fake = torch.load(f)
-                self.assertEqual(
-                    sd_fake["weight"].untyped_storage()._checkpoint_offset, 20480
-                )
-                self.assertEqual(
-                    sd_fake["bias"].untyped_storage()._checkpoint_offset, 24576
-                )
+                self.assertEqual(sd_fake["weight"].untyped_storage()._checkpoint_offset, 20480)
+                self.assertEqual(sd_fake["bias"].untyped_storage()._checkpoint_offset, 24576)
                 f.seek(0)
                 sd_loaded = torch.load(f)
                 self.assertEqual(sd_loaded, sd)
@@ -5040,13 +4962,9 @@ class TestSerialization(TestCase, SerializationMixin):
             model_mmap_state_dict.load_state_dict(result, assign=True)
             model_non_mmap_state_dict.load_state_dict(result_non_mmap, assign=True)
             inp = torch.randn(4, 4)
-            self.assertEqual(
-                model_mmap_state_dict(inp), model_non_mmap_state_dict(inp.clone())
-            )
+            self.assertEqual(model_mmap_state_dict(inp), model_non_mmap_state_dict(inp.clone()))
         finally:
-            serialization_config.load.calculate_storage_offsets = (
-                calculate_offsets_before
-            )
+            serialization_config.load.calculate_storage_offsets = calculate_offsets_before
 
     def test_serialization_uintx_intx(self):
         torch.serialization.add_safe_globals([UInt4Tensor, Int4Tensor])
@@ -5238,9 +5156,7 @@ class TestSubclassSerialization(TestCase):
             try:
                 torch.serialization.add_safe_globals([TwoTensor])
                 expected_safe_globals = set(safe_globals_before + [TwoTensor])
-                self.assertEqual(
-                    set(torch.serialization.get_safe_globals()), expected_safe_globals
-                )
+                self.assertEqual(set(torch.serialization.get_safe_globals()), expected_safe_globals)
                 sd = torch.load(f, weights_only=True)
                 self.assertEqual(sd["t"], t)
                 self.assertEqual(sd["p"], p)
@@ -5274,9 +5190,7 @@ class TestSubclassSerialization(TestCase):
                     f.seek(0)
                     torch.load(f, weights_only=True)
                 expected_safe_globals = set(safe_globals_before + [TestEmptySubclass])
-                self.assertEqual(
-                    set(torch.serialization.get_safe_globals()), expected_safe_globals
-                )
+                self.assertEqual(set(torch.serialization.get_safe_globals()), expected_safe_globals)
                 f.seek(0)
                 with self.assertRaisesRegex(
                     pickle.UnpicklingError,

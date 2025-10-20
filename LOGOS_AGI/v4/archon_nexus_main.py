@@ -33,13 +33,16 @@ try:
     from core.principles import PrincipleEngine
     from shared.worker_config import RABBITMQ_CONFIG
 except ImportError:
+
     class UnifiedFormalismValidator:
         def validate_agi_operation(self, request):
             return {"authorized": True, "token": f"avt_{uuid.uuid4().hex}"}
+
     class PrincipleEngine:
         def validate_principle_adherence(self, operation):
             return {"valid": True, "violations": []}
-    RABBITMQ_CONFIG = {'host': 'rabbitmq', 'port': 5672, 'heartbeat': 600}
+
+    RABBITMQ_CONFIG = {"host": "rabbitmq", "port": 5672, "heartbeat": 600}
 
 # Service modules
 from .workflow_architect import WorkflowArchitect, WorkflowExecution
@@ -47,26 +50,27 @@ from .agent_orchestrator import AgentOrchestrator
 
 # Configuration
 SERVICE_NAME = "ARCHON_NEXUS"
-RABBITMQ_HOST = RABBITMQ_CONFIG.get('host', 'rabbitmq')
-RABBITMQ_PORT = RABBITMQ_CONFIG.get('port', 5672)
+RABBITMQ_HOST = RABBITMQ_CONFIG.get("host", "rabbitmq")
+RABBITMQ_PORT = RABBITMQ_CONFIG.get("port", 5672)
 
 # Queue configuration
-ARCHON_GOALS_QUEUE = 'archon_goals'
-TASK_RESULT_QUEUE = 'task_result_queue'
-TETRAGNOS_QUEUE = 'tetragnos_task_queue'
-TELOS_QUEUE = 'telos_task_queue'
-THONOC_QUEUE = 'thonoc_task_queue'
-DB_WRITE_QUEUE = 'db_write_queue'
+ARCHON_GOALS_QUEUE = "archon_goals"
+TASK_RESULT_QUEUE = "task_result_queue"
+TETRAGNOS_QUEUE = "tetragnos_task_queue"
+TELOS_QUEUE = "telos_task_queue"
+THONOC_QUEUE = "thonoc_task_queue"
+DB_WRITE_QUEUE = "db_write_queue"
 
 # Logging setup
 logging.basicConfig(
     level=logging.INFO,
-    format=f'%(asctime)s - %(levelname)s - {SERVICE_NAME} - %(message)s',
+    format=f"%(asctime)s - %(levelname)s - {SERVICE_NAME} - %(message)s",
     handlers=[
         logging.StreamHandler(sys.stdout),
-        logging.FileHandler('/app/logs/archon_nexus.log', mode='a')
-    ]
+        logging.FileHandler("/app/logs/archon_nexus.log", mode="a"),
+    ],
 )
+
 
 class ArchonNexus:
     """Primary planning service for distributed goal execution.
@@ -96,12 +100,12 @@ class ArchonNexus:
 
         # Service state
         self.system_status = {
-            'service_name': SERVICE_NAME,
-            'status': 'initializing',
-            'started_at': datetime.utcnow().isoformat(),
-            'workflows_processed': 0,
-            'active_workflows': 0,
-            'last_activity': datetime.utcnow().isoformat()
+            "service_name": SERVICE_NAME,
+            "status": "initializing",
+            "started_at": datetime.utcnow().isoformat(),
+            "workflows_processed": 0,
+            "active_workflows": 0,
+            "last_activity": datetime.utcnow().isoformat(),
         }
 
         self.shutdown_event = threading.Event()
@@ -126,8 +130,8 @@ class ArchonNexus:
                     pika.ConnectionParameters(
                         host=RABBITMQ_HOST,
                         port=RABBITMQ_PORT,
-                        heartbeat=RABBITMQ_CONFIG.get('heartbeat', 600),
-                        blocked_connection_timeout=300
+                        heartbeat=RABBITMQ_CONFIG.get("heartbeat", 600),
+                        blocked_connection_timeout=300,
                     )
                 )
                 channel = connection.channel()
@@ -145,8 +149,12 @@ class ArchonNexus:
     def _setup_queues(self):
         """Configure required message queues."""
         queues = [
-            ARCHON_GOALS_QUEUE, TASK_RESULT_QUEUE, TETRAGNOS_QUEUE,
-            TELOS_QUEUE, THONOC_QUEUE, DB_WRITE_QUEUE
+            ARCHON_GOALS_QUEUE,
+            TASK_RESULT_QUEUE,
+            TETRAGNOS_QUEUE,
+            TELOS_QUEUE,
+            THONOC_QUEUE,
+            DB_WRITE_QUEUE,
         ]
 
         for queue in queues:
@@ -158,16 +166,12 @@ class ArchonNexus:
         # Goal request consumer
         self.channel.basic_qos(prefetch_count=1)
         self.channel.basic_consume(
-            queue=ARCHON_GOALS_QUEUE,
-            on_message_callback=self._handle_goal_message,
-            auto_ack=False
+            queue=ARCHON_GOALS_QUEUE, on_message_callback=self._handle_goal_message, auto_ack=False
         )
 
         # Task result consumer
         self.channel.basic_consume(
-            queue=TASK_RESULT_QUEUE,
-            on_message_callback=self._handle_result_message,
-            auto_ack=False
+            queue=TASK_RESULT_QUEUE, on_message_callback=self._handle_result_message, auto_ack=False
         )
 
         self.logger.info("Message consumers configured")
@@ -175,9 +179,9 @@ class ArchonNexus:
     def _handle_goal_message(self, ch, method, properties, body):
         """Process incoming goal for workflow design and execution."""
         try:
-            goal_data = json.loads(body.decode('utf-8'))
-            goal_description = goal_data.get('query') or goal_data.get('goal')
-            context = goal_data.get('context', {})
+            goal_data = json.loads(body.decode("utf-8"))
+            goal_description = goal_data.get("query") or goal_data.get("goal")
+            context = goal_data.get("context", {})
 
             self.logger.info(f"Processing goal: {goal_description}")
 
@@ -194,9 +198,9 @@ class ArchonNexus:
             self.agent_orchestrator.execute_workflow(workflow)
 
             # Update system metrics
-            self.system_status['workflows_processed'] += 1
-            self.system_status['active_workflows'] += 1
-            self.system_status['last_activity'] = datetime.utcnow().isoformat()
+            self.system_status["workflows_processed"] += 1
+            self.system_status["active_workflows"] += 1
+            self.system_status["last_activity"] = datetime.utcnow().isoformat()
 
             ch.basic_ack(delivery_tag=method.delivery_tag)
 
@@ -207,16 +211,16 @@ class ArchonNexus:
     def _handle_result_message(self, ch, method, properties, body):
         """Process task result from worker subsystems."""
         try:
-            result_data = json.loads(body.decode('utf-8'))
+            result_data = json.loads(body.decode("utf-8"))
 
             # Forward to orchestrator for workflow state management
             self.agent_orchestrator.handle_task_result(result_data)
 
             # Update metrics on workflow completion
-            if result_data.get('workflow_completed'):
-                self.system_status['active_workflows'] -= 1
+            if result_data.get("workflow_completed"):
+                self.system_status["active_workflows"] -= 1
 
-            self.system_status['last_activity'] = datetime.utcnow().isoformat()
+            self.system_status["last_activity"] = datetime.utcnow().isoformat()
 
             ch.basic_ack(delivery_tag=method.delivery_tag)
 
@@ -226,15 +230,19 @@ class ArchonNexus:
 
     def get_system_status(self) -> Dict[str, Any]:
         """Generate comprehensive system status report."""
-        orchestrator_status = self.agent_orchestrator.get_orchestrator_status() if self.agent_orchestrator else {}
+        orchestrator_status = (
+            self.agent_orchestrator.get_orchestrator_status() if self.agent_orchestrator else {}
+        )
 
         status = dict(self.system_status)
-        status.update({
-            'orchestrator_metrics': orchestrator_status,
-            'validator_status': 'operational',
-            'workflow_architect_status': 'operational',
-            'timestamp': datetime.utcnow().isoformat()
-        })
+        status.update(
+            {
+                "orchestrator_metrics": orchestrator_status,
+                "validator_status": "operational",
+                "workflow_architect_status": "operational",
+                "timestamp": datetime.utcnow().isoformat(),
+            }
+        )
 
         return status
 
@@ -253,7 +261,7 @@ class ArchonNexus:
             self._setup_queues()
             self._setup_consumers()
 
-            self.system_status['status'] = 'running'
+            self.system_status["status"] = "running"
             self.logger.info("Archon Nexus service operational")
 
             # Message processing loop
@@ -270,7 +278,7 @@ class ArchonNexus:
 
         except Exception as e:
             self.logger.error(f"Service startup error: {e}")
-            self.system_status['status'] = 'error'
+            self.system_status["status"] = "error"
             raise
         finally:
             self.stop()
@@ -279,14 +287,15 @@ class ArchonNexus:
         """Terminate Archon Nexus service with cleanup."""
         self.logger.info("Stopping Archon Nexus service...")
 
-        self.system_status['status'] = 'stopping'
+        self.system_status["status"] = "stopping"
 
         # Close connections
         if self.connection and not self.connection.is_closed:
             self.connection.close()
 
-        self.system_status['status'] = 'stopped'
+        self.system_status["status"] = "stopped"
         self.logger.info("Archon Nexus service terminated")
+
 
 def main():
     """Service entry point."""
@@ -299,6 +308,7 @@ def main():
     except Exception as e:
         service.logger.error(f"Service failed: {e}")
         sys.exit(1)
+
 
 if __name__ == "__main__":
     main()

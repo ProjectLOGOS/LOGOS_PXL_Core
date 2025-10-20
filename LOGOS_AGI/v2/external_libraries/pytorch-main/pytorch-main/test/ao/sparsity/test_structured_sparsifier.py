@@ -183,10 +183,7 @@ class TestBaseStructuredSparsifier(TestCase):
             for module in modules:
                 assert module.weight.device.type == device.type
                 total = module.parametrizations.weight[0].mask.numel()
-                assert (
-                    module.parametrizations.weight[0].mask.count_nonzero()
-                    == total - mask
-                )
+                assert module.parametrizations.weight[0].mask.count_nonzero() == total - mask
 
     def _test_constructor_on_device(self, model, device):
         self.assertRaisesRegex(
@@ -262,9 +259,7 @@ class TestBaseStructuredSparsifier(TestCase):
         for device in DEVICES:
             for model, shape, config in zip(models, shapes, configs):
                 model = model.to(device)
-                self._test_prepare_conv2d_on_device(
-                    model, shape, config, torch.device(device)
-                )
+                self._test_prepare_conv2d_on_device(model, shape, config, torch.device(device))
 
     def _test_step_linear_on_device(self, model, device):
         model = model.to(device)
@@ -316,9 +311,7 @@ class TestBaseStructuredSparsifier(TestCase):
         configs = [None, None, None, None, None]
         for device in DEVICES:
             for model, shape, config in zip(models, shapes, configs):
-                self._test_step_conv2d_on_device(
-                    model, shape, config, torch.device(device)
-                )
+                self._test_step_conv2d_on_device(model, shape, config, torch.device(device))
 
     def _check_pruner_pruned(self, model, pruner, device):
         for config in pruner.groups:
@@ -326,9 +319,7 @@ class TestBaseStructuredSparsifier(TestCase):
             assert not hasattr(module, "parametrizations")
             assert not hasattr(module, "mask")
 
-    def _test_linear_on_device(
-        self, model, config, expected_shape, device, also_prune_bias
-    ):
+    def _test_linear_on_device(self, model, config, expected_shape, device, also_prune_bias):
         model = model.to(device)
         model.eval()
         num_original_params = sum(p.numel() for p in model.parameters())
@@ -464,9 +455,7 @@ class TestBaseStructuredSparsifier(TestCase):
                     also_prune_bias,
                 )
 
-    def _test_conv2d_on_device(
-        self, model, config, x, expected_shape, device, also_prune_bias
-    ):
+    def _test_conv2d_on_device(self, model, config, x, expected_shape, device, also_prune_bias):
         model = model.to(device)
         num_original_params = sum(p.numel() for p in model.parameters())
         model.eval()
@@ -923,9 +912,7 @@ class TestFPGMPruner(TestCase):
             """
             weights = torch.tensor([3.0, 2.0, 0.1])  # Weight weights for each filter
             weights = weights[:, None, None, None]  # broadcasting
-            self.conv2d1.weight.data.copy_(
-                torch.ones(self.conv2d1.weight.shape) * weights
-            )
+            self.conv2d1.weight.data.copy_(torch.ones(self.conv2d1.weight.shape) * weights)
 
             # Second Convolutional Layer
             self.conv2d2 = nn.Conv2d(
@@ -933,9 +920,7 @@ class TestFPGMPruner(TestCase):
             )
             weights = torch.tensor([6.0, 7.0, 0.4, 0.5])
             weights = weights[:, None, None, None]
-            self.conv2d2.weight.data.copy_(
-                torch.ones(self.conv2d2.weight.shape) * weights
-            )
+            self.conv2d2.weight.data.copy_(torch.ones(self.conv2d2.weight.shape) * weights)
 
         def forward(self, x):
             x = self.conv2d1(x)
@@ -995,13 +980,9 @@ class TestFPGMPruner(TestCase):
         the distance should therefore be:
             [11.7000, 8.7000, 14.4000]
         """
-        expected_dist_matrix_conv1 = torch.cdist(
-            flattened_filters, flattened_filters, p=2
-        )
+        expected_dist_matrix_conv1 = torch.cdist(flattened_filters, flattened_filters, p=2)
         expected_dist_conv1 = torch.sum(torch.abs(expected_dist_matrix_conv1), 1)
-        assert torch.isclose(
-            dist_conv1, expected_dist_conv1, rtol=1e-05, atol=1e-07
-        ).all()
+        assert torch.isclose(dist_conv1, expected_dist_conv1, rtol=1e-05, atol=1e-07).all()
 
     def _test_update_mask_on_single_layer(self, expected_conv1, device):
         """Test that pruning is conducted based on the pair-wise distance measurement instead of absolute norm value"""
@@ -1014,8 +995,7 @@ class TestFPGMPruner(TestCase):
         pruner.enable_mask_update = True
         pruner.step()
         assert (
-            pruner.groups[0]["module"].parametrizations.weight[0].mask[-1].item()
-            is not False
+            pruner.groups[0]["module"].parametrizations.weight[0].mask[-1].item() is not False
         ), "do not prune the least-norm filter"
 
         # fusion step
@@ -1037,9 +1017,7 @@ class TestFPGMPruner(TestCase):
             pruned_model.conv2d1.weight, expected_conv1, rtol=1e-05, atol=1e-07
         ).all()
 
-    def _test_update_mask_on_multiple_layer(
-        self, expected_conv1, expected_conv2, device
-    ):
+    def _test_update_mask_on_multiple_layer(self, expected_conv1, expected_conv2, device):
         # the second setting
         model = TestFPGMPruner.SimpleConvFPGM().to(device)
         x = torch.ones((1, 1, 32, 32), device=device)
@@ -1085,9 +1063,7 @@ class TestFPGMPruner(TestCase):
 
         for device in DEVICES:
             self._test_update_mask_on_single_layer(expected_conv1, device)
-            self._test_update_mask_on_multiple_layer(
-                expected_conv1, expected_conv2, device
-            )
+            self._test_update_mask_on_multiple_layer(expected_conv1, expected_conv2, device)
 
 
 if __name__ == "__main__":

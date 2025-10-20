@@ -29,19 +29,25 @@ from core.principles import PrincipleEngine
 # I. LAMBDA EXPRESSION FOUNDATIONS
 # =========================================================================
 
+
 class ExpressionType(Enum):
     """Types of lambda expressions"""
+
     VARIABLE = "variable"
     ABSTRACTION = "abstraction"  # λx.M
     APPLICATION = "application"  # M N
     CONSTANT = "constant"
     TRINITY_COMBINATOR = "trinity_combinator"
 
+
 @dataclass
 class LambdaExpression(ABC):
     """Abstract base class for lambda expressions"""
+
     expression_id: str = field(default_factory=lambda: f"expr_{int(time.time())}_{id(object())}")
-    trinity_grounding: TrinityVector = field(default_factory=lambda: TrinityVector(1/3, 1/3, 1/3))
+    trinity_grounding: TrinityVector = field(
+        default_factory=lambda: TrinityVector(1 / 3, 1 / 3, 1 / 3)
+    )
     created_at: float = field(default_factory=time.time)
 
     @abstractmethod
@@ -55,18 +61,20 @@ class LambdaExpression(ABC):
         pass
 
     @abstractmethod
-    def substitute(self, var: str, replacement: 'LambdaExpression') -> 'LambdaExpression':
+    def substitute(self, var: str, replacement: "LambdaExpression") -> "LambdaExpression":
         """Substitute variable with replacement expression"""
         pass
 
     @abstractmethod
-    def alpha_equivalent(self, other: 'LambdaExpression') -> bool:
+    def alpha_equivalent(self, other: "LambdaExpression") -> bool:
         """Check alpha equivalence with another expression"""
         pass
+
 
 @dataclass
 class Variable(LambdaExpression):
     """Lambda variable"""
+
     name: str = ""
 
     def to_string(self) -> str:
@@ -83,9 +91,11 @@ class Variable(LambdaExpression):
     def alpha_equivalent(self, other: LambdaExpression) -> bool:
         return isinstance(other, Variable) and self.name == other.name
 
+
 @dataclass
 class Abstraction(LambdaExpression):
     """Lambda abstraction (λx.M)"""
+
     parameter: str = ""
     body: Optional[LambdaExpression] = None
 
@@ -108,16 +118,14 @@ class Abstraction(LambdaExpression):
             replacement_free_vars = replacement.free_variables()
             if self.parameter in replacement_free_vars:
                 # Need α-conversion to avoid capture
-                new_param = self._generate_fresh_variable(replacement_free_vars | self.body.free_variables())
-                new_body = self.body.substitute(self.parameter, Variable(new_param))
-                return Abstraction(
-                    parameter=new_param,
-                    body=new_body.substitute(var, replacement)
+                new_param = self._generate_fresh_variable(
+                    replacement_free_vars | self.body.free_variables()
                 )
+                new_body = self.body.substitute(self.parameter, Variable(new_param))
+                return Abstraction(parameter=new_param, body=new_body.substitute(var, replacement))
             else:
                 return Abstraction(
-                    parameter=self.parameter,
-                    body=self.body.substitute(var, replacement)
+                    parameter=self.parameter, body=self.body.substitute(var, replacement)
                 )
 
         return self
@@ -140,18 +148,18 @@ class Abstraction(LambdaExpression):
             return self.body == other.body
 
         # α-equivalence: rename bound variables to fresh names and compare
-        fresh_var = self._generate_fresh_variable(
-            self.free_variables() | other.free_variables()
-        )
+        fresh_var = self._generate_fresh_variable(self.free_variables() | other.free_variables())
 
         self_renamed = self.body.substitute(self.parameter, Variable(fresh_var))
         other_renamed = other.body.substitute(other.parameter, Variable(fresh_var))
 
         return self_renamed.alpha_equivalent(other_renamed)
 
+
 @dataclass
 class Application(LambdaExpression):
     """Lambda application (M N)"""
+
     function: Optional[LambdaExpression] = None
     argument: Optional[LambdaExpression] = None
 
@@ -172,32 +180,31 @@ class Application(LambdaExpression):
         new_function = self.function.substitute(var, replacement) if self.function else None
         new_argument = self.argument.substitute(var, replacement) if self.argument else None
 
-        return Application(
-            function=new_function,
-            argument=new_argument
-        )
+        return Application(function=new_function, argument=new_argument)
 
     def alpha_equivalent(self, other: LambdaExpression) -> bool:
         if not isinstance(other, Application):
             return False
 
-        func_equiv = (
-            (self.function is None and other.function is None) or
-            (self.function is not None and other.function is not None and
-             self.function.alpha_equivalent(other.function))
+        func_equiv = (self.function is None and other.function is None) or (
+            self.function is not None
+            and other.function is not None
+            and self.function.alpha_equivalent(other.function)
         )
 
-        arg_equiv = (
-            (self.argument is None and other.argument is None) or
-            (self.argument is not None and other.argument is not None and
-             self.argument.alpha_equivalent(other.argument))
+        arg_equiv = (self.argument is None and other.argument is None) or (
+            self.argument is not None
+            and other.argument is not None
+            and self.argument.alpha_equivalent(other.argument)
         )
 
         return func_equiv and arg_equiv
 
+
 @dataclass
 class Constant(LambdaExpression):
     """Lambda constant value"""
+
     value: Any = None
     value_type: str = "unknown"
 
@@ -213,9 +220,11 @@ class Constant(LambdaExpression):
     def alpha_equivalent(self, other: LambdaExpression) -> bool:
         return isinstance(other, Constant) and self.value == other.value
 
+
 # =========================================================================
 # II. TRINITY COMBINATORS
 # =========================================================================
+
 
 class TrinityCombinator(LambdaExpression):
     """Special combinators based on Trinity structure"""
@@ -245,7 +254,7 @@ class TrinityCombinator(LambdaExpression):
 
         elif self.combinator_type == "TRINITY":
             # Trinity combinator: λf.λg.λh.λx.f(g(h(x))) (three-way composition)
-            self.trinity_grounding = TrinityVector(1/3, 1/3, 1/3)
+            self.trinity_grounding = TrinityVector(1 / 3, 1 / 3, 1 / 3)
             self.implementation = lambda f: lambda g: lambda h: lambda x: f(g(h(x)))
 
         else:
@@ -261,29 +270,35 @@ class TrinityCombinator(LambdaExpression):
         return self  # Combinators are closed terms
 
     def alpha_equivalent(self, other: LambdaExpression) -> bool:
-        return (isinstance(other, TrinityCombinator) and
-                self.combinator_type == other.combinator_type)
+        return (
+            isinstance(other, TrinityCombinator) and self.combinator_type == other.combinator_type
+        )
+
 
 # =========================================================================
 # III. REDUCTION STRATEGIES
 # =========================================================================
 
+
 class ReductionStrategy(Enum):
     """Lambda calculus reduction strategies"""
-    CALL_BY_NAME = "call_by_name"           # Outermost reduction
-    CALL_BY_VALUE = "call_by_value"         # Innermost reduction
-    NORMAL_ORDER = "normal_order"           # Leftmost-outermost
-    APPLICATIVE_ORDER = "applicative_order" # Leftmost-innermost
-    TRINITY_ORDER = "trinity_order"         # Trinity-grounded reduction
+
+    CALL_BY_NAME = "call_by_name"  # Outermost reduction
+    CALL_BY_VALUE = "call_by_value"  # Innermost reduction
+    NORMAL_ORDER = "normal_order"  # Leftmost-outermost
+    APPLICATIVE_ORDER = "applicative_order"  # Leftmost-innermost
+    TRINITY_ORDER = "trinity_order"  # Trinity-grounded reduction
+
 
 @dataclass
 class ReductionStep:
     """Single step in lambda reduction"""
+
     step_number: int
     expression_before: LambdaExpression
     expression_after: LambdaExpression
     reduction_type: str  # β-reduction, α-conversion, etc.
-    position: str = ""   # Position in expression tree
+    position: str = ""  # Position in expression tree
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -291,8 +306,9 @@ class ReductionStep:
             "before": self.expression_before.to_string(),
             "after": self.expression_after.to_string(),
             "reduction_type": self.reduction_type,
-            "position": self.position
+            "position": self.position,
         }
+
 
 class LambdaReducer:
     """Lambda calculus reduction engine"""
@@ -328,7 +344,7 @@ class LambdaReducer:
                 step_number=step_count + 1,
                 expression_before=current_expr,
                 expression_after=reduced_expr,
-                reduction_type=reduction_type
+                reduction_type=reduction_type,
             )
 
             steps.append(step)
@@ -344,7 +360,9 @@ class LambdaReducer:
 
         return current_expr, steps
 
-    def _find_next_reduction(self, expr: LambdaExpression) -> Optional[Tuple[LambdaExpression, str]]:
+    def _find_next_reduction(
+        self, expr: LambdaExpression
+    ) -> Optional[Tuple[LambdaExpression, str]]:
         """Find next reduction based on strategy"""
 
         if self.strategy == ReductionStrategy.NORMAL_ORDER:
@@ -356,7 +374,9 @@ class LambdaReducer:
         else:
             return self._find_leftmost_outermost_reduction(expr)
 
-    def _find_leftmost_outermost_reduction(self, expr: LambdaExpression) -> Optional[Tuple[LambdaExpression, str]]:
+    def _find_leftmost_outermost_reduction(
+        self, expr: LambdaExpression
+    ) -> Optional[Tuple[LambdaExpression, str]]:
         """Find leftmost outermost reduction (normal order)"""
 
         if isinstance(expr, Application):
@@ -388,7 +408,9 @@ class LambdaReducer:
 
         return None  # No reduction possible
 
-    def _find_leftmost_innermost_reduction(self, expr: LambdaExpression) -> Optional[Tuple[LambdaExpression, str]]:
+    def _find_leftmost_innermost_reduction(
+        self, expr: LambdaExpression
+    ) -> Optional[Tuple[LambdaExpression, str]]:
         """Find leftmost innermost reduction (applicative order)"""
 
         if isinstance(expr, Application):
@@ -404,7 +426,10 @@ class LambdaReducer:
                 func_reduction = self._find_leftmost_innermost_reduction(expr.function)
                 if func_reduction is not None:
                     reduced_func, reduction_type = func_reduction
-                    return Application(function=reduced_func, argument=expr.argument), reduction_type
+                    return (
+                        Application(function=reduced_func, argument=expr.argument),
+                        reduction_type,
+                    )
 
             # Finally, if both are in normal form, try β-reduction
             if isinstance(expr.function, Abstraction) and expr.function.body is not None:
@@ -421,7 +446,9 @@ class LambdaReducer:
 
         return None
 
-    def _find_trinity_guided_reduction(self, expr: LambdaExpression) -> Optional[Tuple[LambdaExpression, str]]:
+    def _find_trinity_guided_reduction(
+        self, expr: LambdaExpression
+    ) -> Optional[Tuple[LambdaExpression, str]]:
         """Find reduction guided by Trinity principles"""
 
         # Priority order: Truth > Goodness > Existence (for logical soundness)
@@ -440,7 +467,9 @@ class LambdaReducer:
         reduced_expr, reduction_type, _ = reductions[0]
         return reduced_expr, reduction_type
 
-    def _collect_trinity_reductions(self, expr: LambdaExpression, reductions: List, path: List[str]):
+    def _collect_trinity_reductions(
+        self, expr: LambdaExpression, reductions: List, path: List[str]
+    ):
         """Collect all possible reductions with Trinity scores"""
 
         if isinstance(expr, Application):
@@ -460,11 +489,15 @@ class LambdaReducer:
             if expr.body is not None:
                 self._collect_trinity_reductions(expr.body, reductions, path + ["body"])
 
-    def _calculate_trinity_score(self, original: LambdaExpression, reduced: LambdaExpression) -> float:
+    def _calculate_trinity_score(
+        self, original: LambdaExpression, reduced: LambdaExpression
+    ) -> float:
         """Calculate Trinity score for reduction"""
 
         # Existence: Does reduction preserve essential structure?
-        existence_score = 1.0 if len(reduced.free_variables()) <= len(original.free_variables()) else 0.5
+        existence_score = (
+            1.0 if len(reduced.free_variables()) <= len(original.free_variables()) else 0.5
+        )
 
         # Goodness: Does reduction simplify (reduce complexity)?
         original_complexity = self._calculate_complexity(original)
@@ -475,9 +508,11 @@ class LambdaReducer:
         truth_score = 1.0  # Assume all valid λ-calculus reductions preserve truth
 
         # Weighted Trinity score
-        return (existence_score * self.existence_weight +
-                goodness_score * self.goodness_weight +
-                truth_score * self.truth_weight)
+        return (
+            existence_score * self.existence_weight
+            + goodness_score * self.goodness_weight
+            + truth_score * self.truth_weight
+        )
 
     def _calculate_complexity(self, expr: LambdaExpression) -> int:
         """Calculate expression complexity"""
@@ -498,9 +533,11 @@ class LambdaReducer:
         else:
             return 0
 
+
 # =========================================================================
 # IV. LAMBDA ENGINE
 # =========================================================================
+
 
 class LambdaEngine:
     """Complete lambda calculus engine with Trinity grounding"""
@@ -526,19 +563,19 @@ class LambdaEngine:
             expr_str = expression_string.strip()
 
             # Handle basic patterns
-            if expr_str.startswith('#'):
+            if expr_str.startswith("#"):
                 # Trinity combinator
                 combinator_type = expr_str[1:]
                 expr = TrinityCombinator(combinator_type)
             elif expr_str.isidentifier():
                 # Variable
                 expr = Variable(expr_str)
-            elif expr_str.startswith('λ') or expr_str.startswith('\\'):
+            elif expr_str.startswith("λ") or expr_str.startswith("\\"):
                 # Abstraction (simplified)
-                dot_pos = expr_str.find('.')
+                dot_pos = expr_str.find(".")
                 if dot_pos > 0:
                     param = expr_str[1:dot_pos].strip()
-                    body_str = expr_str[dot_pos+1:].strip()
+                    body_str = expr_str[dot_pos + 1 :].strip()
                     body = self.parse_expression(body_str)
                     expr = Abstraction(parameter=param, body=body)
                 else:
@@ -592,12 +629,12 @@ class LambdaEngine:
                 "existence": expr.trinity_grounding.existence,
                 "goodness": expr.trinity_grounding.goodness,
                 "truth": expr.trinity_grounding.truth,
-                "trinity_product": expr.trinity_grounding.trinity_product()
+                "trinity_product": expr.trinity_grounding.trinity_product(),
             },
             "validation": validation_result,
             "complexity": self.reducer._calculate_complexity(expr),
             "free_variables": list(expr.free_variables()),
-            "evaluation_timestamp": time.time()
+            "evaluation_timestamp": time.time(),
         }
 
     def _validate_expression(self, expr: LambdaExpression) -> Dict[str, Any]:
@@ -609,13 +646,15 @@ class LambdaEngine:
             "proposition": expr.to_string(),
             "context": {
                 "expression_type": type(expr).__name__,
-                "trinity_grounding": expr.trinity_grounding.to_tuple()
-            }
+                "trinity_grounding": expr.trinity_grounding.to_tuple(),
+            },
         }
 
         return self.principle_engine.evaluate_operation(operation_data)
 
-    def create_trinity_expression(self, existence_expr: str, goodness_expr: str, truth_expr: str) -> LambdaExpression:
+    def create_trinity_expression(
+        self, existence_expr: str, goodness_expr: str, truth_expr: str
+    ) -> LambdaExpression:
         """Create Trinity-structured lambda expression"""
 
         # Parse component expressions
@@ -632,17 +671,13 @@ class LambdaEngine:
         # Apply Trinity combinator: TRINITY e_expr g_expr t_expr
         result = Application(
             function=Application(
-                function=Application(
-                    function=trinity_combinator,
-                    argument=e_expr
-                ),
-                argument=g_expr
+                function=Application(function=trinity_combinator, argument=e_expr), argument=g_expr
             ),
-            argument=t_expr
+            argument=t_expr,
         )
 
         # Set Trinity grounding
-        result.trinity_grounding = TrinityVector(1/3, 1/3, 1/3)
+        result.trinity_grounding = TrinityVector(1 / 3, 1 / 3, 1 / 3)
 
         return result
 
@@ -657,30 +692,32 @@ class LambdaEngine:
             "trinity_weights": {
                 "existence": self.reducer.existence_weight,
                 "goodness": self.reducer.goodness_weight,
-                "truth": self.reducer.truth_weight
-            }
+                "truth": self.reducer.truth_weight,
+            },
         }
+
 
 # =========================================================================
 # V. MODULE EXPORTS
 # =========================================================================
 
 __all__ = [
-    'ExpressionType',
-    'LambdaExpression',
-    'Variable',
-    'Abstraction',
-    'Application',
-    'Constant',
-    'TrinityCombinator',
-    'ReductionStrategy',
-    'ReductionStep',
-    'LambdaReducer',
-    'LambdaEngine'
+    "ExpressionType",
+    "LambdaExpression",
+    "Variable",
+    "Abstraction",
+    "Application",
+    "Constant",
+    "TrinityCombinator",
+    "ReductionStrategy",
+    "ReductionStep",
+    "LambdaReducer",
+    "LambdaEngine",
 ]
 
 # Create global lambda engine instance
 _global_lambda_engine = None
+
 
 def get_global_lambda_engine() -> LambdaEngine:
     """Get the global lambda engine instance"""
@@ -689,10 +726,12 @@ def get_global_lambda_engine() -> LambdaEngine:
         _global_lambda_engine = LambdaEngine()
     return _global_lambda_engine
 
+
 def evaluate_lambda_expression(expression: str) -> Dict[str, Any]:
     """High-level API for lambda expression evaluation"""
 
     engine = get_global_lambda_engine()
     return engine.evaluate(expression)
+
 
 # --- END OF FILE core/lambda_calculus.py ---

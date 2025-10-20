@@ -1,0 +1,38 @@
+# LOGOS AGI Framework - Complete Dependency Lock
+# Generated for Production Deployment
+# Phase 2→3 Bridge: Autonomous Self-Improvement System
+
+# Core Framework Dependencies
+fastapi>=0.115.0
+uvicorn>=0.30.6
+pydantic>=2.8.2
+requests>=2.32.3
+openai>=1.0.0
+
+# LOGOS AGI v1.0 Enhancement Dependencies
+cryptography>=41.0.0       # For IEL signing and verification
+websockets>=11.0.0         # For real-time telemetry streaming
+psutil>=5.9.0              # For system resource monitoring
+sqlalchemy>=2.0.0          # For IEL registry database
+pyyaml>=6.0.0              # For policy configuration
+scipy>=1.11.0              # For coherence optimization algorithms
+numpy>=1.24.0              # For numerical computations
+
+# Development and Testing
+pytest>=8.1
+pytest-asyncio>=0.23.8
+httpx>=0.27.2
+respx>=0.21.1
+coverage>=7.6.1
+ruff>=0.6.8
+black>=24.8.0
+mypy>=1.11.2
+types-requests>=2.32.0.20240914
+pre-commit>=3.8.0
+
+# Additional AI/ML Dependencies
+scikit-learn>=1.3.0       # For machine learning algorithms
+matplotlib>=3.7.0         # For visualization and plotting
+pandas>=2.0.0             # For data manipulation
+networkx>=3.1             # For graph algorithms
+sympy>=1.12               # For symbolic mathematics

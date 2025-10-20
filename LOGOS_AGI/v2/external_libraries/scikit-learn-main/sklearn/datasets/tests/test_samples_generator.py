@@ -146,9 +146,7 @@ def test_make_classification_informative_features():
             for cluster, cls in zip(cluster_index, y):
                 clusters_by_class[cls].add(cluster)
             for clusters in clusters_by_class.values():
-                assert (
-                    len(clusters) == n_clusters_per_class
-                ), "Wrong number of clusters per class"
+                assert len(clusters) == n_clusters_per_class, "Wrong number of clusters per class"
             assert len(clusters_by_class) == n_classes, "Wrong number of classes"
 
             assert_array_almost_equal(
@@ -173,9 +171,7 @@ def test_make_classification_informative_features():
                             np.abs(centroid) / class_sep,
                             np.ones(n_informative),
                             decimal=5,
-                            err_msg=(
-                                "Clusters should not be centered on hypercube vertices"
-                            ),
+                            err_msg=("Clusters should not be centered on hypercube vertices"),
                         )
 
     with pytest.raises(ValueError):
@@ -436,9 +432,7 @@ def test_make_blobs_n_samples_list_with_centers(global_random_seed):
         assert_almost_equal((X[y == i] - ctr).std(), std, 1, "Unexpected std")
 
 
-@pytest.mark.parametrize(
-    "n_samples", [[5, 3, 0], np.array([5, 3, 0]), tuple([5, 3, 0])]
-)
+@pytest.mark.parametrize("n_samples", [[5, 3, 0], np.array([5, 3, 0]), tuple([5, 3, 0])])
 def test_make_blobs_n_samples_centers_none(n_samples):
     centers = None
     X, y = make_blobs(n_samples=n_samples, centers=centers, random_state=0)
@@ -475,17 +469,13 @@ def test_make_blobs_error():
     )
     with pytest.raises(ValueError, match=wrong_std_msg):
         make_blobs(n_samples, centers=centers, cluster_std=cluster_stds[:-1])
-    wrong_type_msg = "Parameter `centers` must be array-like. Got {!r} instead".format(
-        3
-    )
+    wrong_type_msg = "Parameter `centers` must be array-like. Got {!r} instead".format(3)
     with pytest.raises(ValueError, match=wrong_type_msg):
         make_blobs(n_samples, centers=3)
 
 
 def test_make_friedman1(global_random_seed):
-    X, y = make_friedman1(
-        n_samples=5, n_features=10, noise=0.0, random_state=global_random_seed
-    )
+    X, y = make_friedman1(n_samples=5, n_features=10, noise=0.0, random_state=global_random_seed)
 
     assert X.shape == (5, 10), "X shape mismatch"
     assert y.shape == (5,), "y shape mismatch"
@@ -516,9 +506,7 @@ def test_make_friedman3(global_random_seed):
     assert X.shape == (5, 4), "X shape mismatch"
     assert y.shape == (5,), "y shape mismatch"
 
-    assert_array_almost_equal(
-        y, np.arctan((X[:, 1] * X[:, 2] - 1 / (X[:, 1] * X[:, 3])) / X[:, 0])
-    )
+    assert_array_almost_equal(y, np.arctan((X[:, 1] * X[:, 2] - 1 / (X[:, 1] * X[:, 3])) / X[:, 0]))
 
 
 def test_make_low_rank_matrix():
@@ -575,9 +563,7 @@ def test_make_spd_matrix(global_random_seed):
 
 
 @pytest.mark.parametrize("norm_diag", [True, False])
-@pytest.mark.parametrize(
-    "sparse_format", [None, "bsr", "coo", "csc", "csr", "dia", "dok", "lil"]
-)
+@pytest.mark.parametrize("sparse_format", [None, "bsr", "coo", "csc", "csr", "dia", "dok", "lil"])
 def test_make_sparse_spd_matrix(norm_diag, sparse_format, global_random_seed):
     n_dim = 5
     X = make_sparse_spd_matrix(
@@ -610,9 +596,7 @@ def test_make_sparse_spd_matrix(norm_diag, sparse_format, global_random_seed):
 
 @pytest.mark.parametrize("hole", [False, True])
 def test_make_swiss_roll(global_random_seed, hole):
-    X, t = make_swiss_roll(
-        n_samples=5, noise=0.0, random_state=global_random_seed, hole=hole
-    )
+    X, t = make_swiss_roll(n_samples=5, noise=0.0, random_state=global_random_seed, hole=hole)
 
     assert X.shape == (5, 3)
     assert t.shape == (5,)
@@ -630,9 +614,7 @@ def test_make_s_curve(global_random_seed):
 
 
 def test_make_biclusters():
-    X, rows, cols = make_biclusters(
-        shape=(100, 100), n_clusters=4, shuffle=True, random_state=0
-    )
+    X, rows, cols = make_biclusters(shape=(100, 100), n_clusters=4, shuffle=True, random_state=0)
     assert X.shape == (100, 100), "X shape mismatch"
     assert rows.shape == (4, 100), "rows shape mismatch"
     assert cols.shape == (
@@ -643,9 +625,7 @@ def test_make_biclusters():
     assert_all_finite(rows)
     assert_all_finite(cols)
 
-    X2, _, _ = make_biclusters(
-        shape=(100, 100), n_clusters=4, shuffle=True, random_state=0
-    )
+    X2, _, _ = make_biclusters(shape=(100, 100), n_clusters=4, shuffle=True, random_state=0)
     assert_array_almost_equal(X, X2)
 
 
@@ -660,19 +640,13 @@ def test_make_checkerboard():
         100,
     ), "columns shape mismatch"
 
-    X, rows, cols = make_checkerboard(
-        shape=(100, 100), n_clusters=2, shuffle=True, random_state=0
-    )
+    X, rows, cols = make_checkerboard(shape=(100, 100), n_clusters=2, shuffle=True, random_state=0)
     assert_all_finite(X)
     assert_all_finite(rows)
     assert_all_finite(cols)
 
-    X1, _, _ = make_checkerboard(
-        shape=(100, 100), n_clusters=2, shuffle=True, random_state=0
-    )
-    X2, _, _ = make_checkerboard(
-        shape=(100, 100), n_clusters=2, shuffle=True, random_state=0
-    )
+    X1, _, _ = make_checkerboard(shape=(100, 100), n_clusters=2, shuffle=True, random_state=0)
+    X2, _, _ = make_checkerboard(shape=(100, 100), n_clusters=2, shuffle=True, random_state=0)
     assert_array_almost_equal(X1, X2)
 
 
@@ -681,16 +655,12 @@ def test_make_moons(global_random_seed):
     for x, label in zip(X, y):
         center = [0.0, 0.0] if label == 0 else [1.0, 0.5]
         dist_sqr = ((x - center) ** 2).sum()
-        assert_almost_equal(
-            dist_sqr, 1.0, err_msg="Point is not on expected unit circle"
-        )
+        assert_almost_equal(dist_sqr, 1.0, err_msg="Point is not on expected unit circle")
 
 
 def test_make_moons_unbalanced():
     X, y = make_moons(n_samples=(7, 5))
-    assert (
-        np.sum(y == 0) == 7 and np.sum(y == 1) == 5
-    ), "Number of samples in a moon is wrong"
+    assert np.sum(y == 0) == 7 and np.sum(y == 1) == 5, "Number of samples in a moon is wrong"
     assert X.shape == (12, 2), "X shape mismatch"
     assert y.shape == (12,), "y shape mismatch"
 
@@ -715,9 +685,7 @@ def test_make_circles():
             dist_sqr = ((x - center) ** 2).sum()
             dist_exp = 1.0 if label == 0 else factor**2
             dist_exp = 1.0 if label == 0 else factor**2
-            assert_almost_equal(
-                dist_sqr, dist_exp, err_msg="Point is not on expected circle"
-            )
+            assert_almost_equal(dist_sqr, dist_exp, err_msg="Point is not on expected circle")
 
         assert X[y == 0].shape == (
             n_outer,

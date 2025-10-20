@@ -34,9 +34,11 @@ log = logging.getLogger(__name__)
 # I. VALIDATION RESULT STRUCTURES
 # =========================================================================
 
+
 @dataclass
 class ValidationResult:
     """Result of formalism validation"""
+
     status: str  # "valid", "invalid", "rejected"
     reason: str
     confidence: float = 1.0
@@ -46,9 +48,11 @@ class ValidationResult:
         if self.metadata is None:
             self.metadata = {}
 
+
 @dataclass
 class Proposition:
     """Logical proposition for validation"""
+
     content: str
     negated: bool = False
     certainty: float = 1.0
@@ -57,9 +61,11 @@ class Proposition:
         prefix = "¬" if self.negated else ""
         return f"{prefix}{self.content}"
 
+
 # =========================================================================
 # II. CORE FORMALISM VALIDATORS
 # =========================================================================
+
 
 class _MoralSetValidator:
     """Validates operations against moral principles"""
@@ -74,31 +80,40 @@ class _MoralSetValidator:
 
         # Explicit evil operations
         evil_operations = [
-            "harm", "kill", "destroy", "torture", "abuse", "exploit",
-            "deceive", "manipulate", "corrupt", "steal", "lie"
+            "harm",
+            "kill",
+            "destroy",
+            "torture",
+            "abuse",
+            "exploit",
+            "deceive",
+            "manipulate",
+            "corrupt",
+            "steal",
+            "lie",
         ]
 
         for evil_op in evil_operations:
             if evil_op in operation_lower:
                 return ValidationResult(
                     "rejected",
-                    f"Operation '{operation}' violates moral principles: contains '{evil_op}'"
+                    f"Operation '{operation}' violates moral principles: contains '{evil_op}'",
                 )
 
         # Check for privation (absence of good)
         privation_indicators = ["void", "null", "empty", "meaningless", "worthless"]
         if any(indicator in operation_lower for indicator in privation_indicators):
-            return ValidationResult(
-                "invalid",
-                f"Operation exhibits privation: {operation}"
-            )
+            return ValidationResult("invalid", f"Operation exhibits privation: {operation}")
 
         return ValidationResult("valid", "Operation morally acceptable")
+
 
 class _RealitySetValidator:
     """Validates operations against reality and existence"""
 
-    def validate(self, proposition: str, operation: str, context: Dict[str, Any]) -> ValidationResult:
+    def validate(
+        self, proposition: str, operation: str, context: Dict[str, Any]
+    ) -> ValidationResult:
         """Validate operation against reality constraints"""
 
         if not proposition and not operation:
@@ -109,28 +124,29 @@ class _RealitySetValidator:
 
         # Check for contradictions with known reality
         reality_violations = [
-            "square circle", "married bachelor", "colorless green",
-            "infinite finite", "present past", "static motion"
+            "square circle",
+            "married bachelor",
+            "colorless green",
+            "infinite finite",
+            "present past",
+            "static motion",
         ]
 
         content = f"{prop_lower} {op_lower}"
         for violation in reality_violations:
             if violation in content:
                 return ValidationResult(
-                    "rejected",
-                    f"Logical contradiction with reality: {violation}"
+                    "rejected", f"Logical contradiction with reality: {violation}"
                 )
 
         # Check for impossible operations
         impossible_ops = ["create contradiction", "destroy truth", "make false true"]
         for impossible in impossible_ops:
             if impossible in content:
-                return ValidationResult(
-                    "rejected",
-                    f"Impossible operation: {impossible}"
-                )
+                return ValidationResult("rejected", f"Impossible operation: {impossible}")
 
         return ValidationResult("valid", "Operation consistent with reality")
+
 
 class _BoundarySetValidator:
     """Validates operations respect proper boundaries"""
@@ -145,16 +161,17 @@ class _BoundarySetValidator:
 
         # Check for boundary violations
         boundary_violations = [
-            "infinite loop", "unbounded recursion", "divide by zero",
-            "access forbidden", "override safety", "bypass validation"
+            "infinite loop",
+            "unbounded recursion",
+            "divide by zero",
+            "access forbidden",
+            "override safety",
+            "bypass validation",
         ]
 
         for violation in boundary_violations:
             if violation in operation_lower:
-                return ValidationResult(
-                    "rejected",
-                    f"Boundary violation: {violation}"
-                )
+                return ValidationResult("rejected", f"Boundary violation: {violation}")
 
         # Check for proper resource constraints
         if "context" in context:
@@ -163,12 +180,10 @@ class _BoundarySetValidator:
             max_cpu = resource_usage.get("cpu", 0)
 
             if max_memory > 1000000000:  # 1GB limit example
-                return ValidationResult(
-                    "rejected",
-                    "Memory usage exceeds boundaries"
-                )
+                return ValidationResult("rejected", "Memory usage exceeds boundaries")
 
         return ValidationResult("valid", "Operation respects boundaries")
+
 
 class _ExistenceSetValidator:
     """Validates operations respect existence and being"""
@@ -188,16 +203,14 @@ class _ExistenceSetValidator:
         anti_existence = ["annihilate", "void", "make nothing", "destroy being"]
         for anti_op in anti_existence:
             if anti_op in operation_lower:
-                return ValidationResult(
-                    "rejected",
-                    f"Anti-existence operation: {anti_op}"
-                )
+                return ValidationResult("rejected", f"Anti-existence operation: {anti_op}")
 
         # Validate entity has existence properties
         if isinstance(entity, str) and entity.strip() == "":
             return ValidationResult("invalid", "Entity is empty string")
 
         return ValidationResult("valid", "Operation respects existence")
+
 
 class _RelationalSetValidator:
     """Validates relational consistency of operations"""
@@ -212,11 +225,10 @@ class _RelationalSetValidator:
             # Simple check for contradictory relations
             if len(relations) > 1:
                 for i, rel1 in enumerate(relations):
-                    for rel2 in relations[i+1:]:
+                    for rel2 in relations[i + 1 :]:
                         if self._are_contradictory_relations(rel1, rel2):
                             return ValidationResult(
-                                "rejected",
-                                f"Contradictory relations: {rel1} vs {rel2}"
+                                "rejected", f"Contradictory relations: {rel1} vs {rel2}"
                             )
 
         return ValidationResult("valid", "Relations consistent")
@@ -228,18 +240,20 @@ class _RelationalSetValidator:
             ("same", "different"),
             ("identical", "distinct"),
             ("before", "after"),
-            ("above", "below")
+            ("above", "below"),
         ]
 
         rel1_lower = rel1.lower()
         rel2_lower = rel2.lower()
 
         for pair in contradictory_pairs:
-            if (pair[0] in rel1_lower and pair[1] in rel2_lower) or \
-               (pair[1] in rel1_lower and pair[0] in rel2_lower):
+            if (pair[0] in rel1_lower and pair[1] in rel2_lower) or (
+                pair[1] in rel1_lower and pair[0] in rel2_lower
+            ):
                 return True
 
         return False
+
 
 class _CoherenceFormalismValidator:
     """Validates logical coherence of propositions"""
@@ -252,17 +266,11 @@ class _CoherenceFormalismValidator:
 
         # Check for direct contradictions
         if self._detect_contradictions(propositions):
-            return ValidationResult(
-                "rejected",
-                "Direct logical contradictions detected"
-            )
+            return ValidationResult("rejected", "Direct logical contradictions detected")
 
         # Check for circular reasoning
         if self._detect_circular_reasoning(propositions):
-            return ValidationResult(
-                "invalid",
-                "Circular reasoning detected"
-            )
+            return ValidationResult("invalid", "Circular reasoning detected")
 
         return ValidationResult("valid", "Propositions are coherent")
 
@@ -283,6 +291,7 @@ class _CoherenceFormalismValidator:
         # More sophisticated circular detection would go here
         return False  # Simplified for now
 
+
 class _BijectiveEngine:
     """Validates foundational mathematical bijections"""
 
@@ -290,12 +299,14 @@ class _BijectiveEngine:
         """Validate all foundational axioms and bijections"""
         return {
             "status": "valid",
-            "message": "All foundational axioms, bijections, and optimization theorems hold."
+            "message": "All foundational axioms, bijections, and optimization theorems hold.",
         }
+
 
 # =========================================================================
 # III. UNIFIED FORMALISM VALIDATOR
 # =========================================================================
+
 
 class UnifiedFormalismValidator:
     """
@@ -355,7 +366,7 @@ class UnifiedFormalismValidator:
             return {
                 "status": "REJECTED",
                 "authorized": False,
-                "reason": f"Mathematical foundation failure: {math_check['message']}"
+                "reason": f"Mathematical foundation failure: {math_check['message']}",
             }
 
         # 2. Run all formalism validations
@@ -365,16 +376,20 @@ class UnifiedFormalismValidator:
             "moral": self.moral_set.validate(entity, operation),
             "boundary": self.boundary_set.validate(operation, context),
             "relational": self.relational_set.validate(entity, operation, context),
-            "coherence": self.coherence_set.validate([Proposition(proposition)] if proposition else []),
+            "coherence": self.coherence_set.validate(
+                [Proposition(proposition)] if proposition else []
+            ),
         }
 
         # 3. Additional principle validation
-        principle_evaluation = self.principle_engine.evaluate_operation({
-            "entity": entity,
-            "proposition": proposition,
-            "operation": operation,
-            "context": context
-        })
+        principle_evaluation = self.principle_engine.evaluate_operation(
+            {
+                "entity": entity,
+                "proposition": proposition,
+                "operation": operation,
+                "context": context,
+            }
+        )
 
         # 4. Determine overall authorization
         failed_validations = {
@@ -391,7 +406,9 @@ class UnifiedFormalismValidator:
         if not failed_validations:
             # OPERATION AUTHORIZED - Generate Trinity-Locked Token
             operation_hash = hashlib.sha256(
-                json.dumps({k: str(v) for k, v in locals().items() if k != 'self'}, sort_keys=True).encode()
+                json.dumps(
+                    {k: str(v) for k, v in locals().items() if k != "self"}, sort_keys=True
+                ).encode()
             ).hexdigest()
 
             token = f"avt_LOCKED_{secrets.token_hex(16)}_{operation_hash[:16]}"
@@ -404,11 +421,13 @@ class UnifiedFormalismValidator:
                 "token": token,
                 "validation_results": {name: "valid" for name in validation_results.keys()},
                 "principle_compliance": True,
-                "timestamp": time.time()
+                "timestamp": time.time(),
             }
         else:
             # OPERATION REJECTED
-            reason = "; ".join([f"{name.upper()}: {reason}" for name, reason in failed_validations.items()])
+            reason = "; ".join(
+                [f"{name.upper()}: {reason}" for name, reason in failed_validations.items()]
+            )
 
             log.warning(f"✗ Operation REJECTED: {operation} on {entity} - {reason}")
 
@@ -418,7 +437,7 @@ class UnifiedFormalismValidator:
                 "reason": f"Operation failed validation: {reason}",
                 "failed_validations": failed_validations,
                 "principle_violations": principle_evaluation.get("violations", []),
-                "timestamp": time.time()
+                "timestamp": time.time(),
             }
 
     def validate_query(self, query_text: str, requester_id: str = "unknown") -> Dict[str, Any]:
@@ -429,22 +448,21 @@ class UnifiedFormalismValidator:
             "entity": "query",
             "proposition": query_text,
             "operation": "process_query",
-            "context": {
-                "requester_id": requester_id,
-                "query_type": "natural_language"
-            }
+            "context": {"requester_id": requester_id, "query_type": "natural_language"},
         }
 
         return self.validate_agi_operation(request)
 
-    def validate_goal_generation(self, goal_description: str, context: Dict[str, Any]) -> Dict[str, Any]:
+    def validate_goal_generation(
+        self, goal_description: str, context: Dict[str, Any]
+    ) -> Dict[str, Any]:
         """Validate internally generated goals"""
 
         request = {
             "entity": "system_goal",
             "proposition": goal_description,
             "operation": "execute_goal",
-            "context": context
+            "context": context,
         }
 
         return self.validate_agi_operation(request)
@@ -469,7 +487,9 @@ class UnifiedFormalismValidator:
         return {
             "validator_status": "operational",
             "total_principle_violations": len(principle_violations),
-            "critical_violations": len([v for v in principle_violations if v.severity == "critical"]),
+            "critical_violations": len(
+                [v for v in principle_violations if v.severity == "critical"]
+            ),
             "last_validation": time.time(),
             "uptime": time.time(),  # Would track actual uptime in real implementation
             "validation_components": {
@@ -480,16 +500,19 @@ class UnifiedFormalismValidator:
                 "relational_set": "operational",
                 "coherence_set": "operational",
                 "bijection_engine": "operational",
-                "principle_engine": "operational"
-            }
+                "principle_engine": "operational",
+            },
         }
+
 
 # =========================================================================
 # IV. SAFETY DECORATORS
 # =========================================================================
 
+
 def require_validation(validator: UnifiedFormalismValidator):
     """Decorator that requires validation for function execution"""
+
     def decorator(func):
         def wrapper(*args, **kwargs):
             # Extract operation details
@@ -497,7 +520,7 @@ def require_validation(validator: UnifiedFormalismValidator):
                 "entity": kwargs.get("entity", "unknown"),
                 "operation": func.__name__,
                 "proposition": kwargs.get("query", kwargs.get("proposition", "")),
-                "context": kwargs
+                "context": kwargs,
             }
 
             # Validate operation
@@ -512,21 +535,19 @@ def require_validation(validator: UnifiedFormalismValidator):
             return func(*args, **kwargs)
 
         return wrapper
+
     return decorator
+
 
 # =========================================================================
 # V. MODULE EXPORTS
 # =========================================================================
 
-__all__ = [
-    'ValidationResult',
-    'Proposition',
-    'UnifiedFormalismValidator',
-    'require_validation'
-]
+__all__ = ["ValidationResult", "Proposition", "UnifiedFormalismValidator", "require_validation"]
 
 # For convenience, create a global validator instance
 _global_validator = None
+
 
 def get_global_validator() -> UnifiedFormalismValidator:
     """Get the global validator instance"""
@@ -534,5 +555,6 @@ def get_global_validator() -> UnifiedFormalismValidator:
     if _global_validator is None:
         _global_validator = UnifiedFormalismValidator()
     return _global_validator
+
 
 # --- END OF FILE core/unified_formalisms.py ---

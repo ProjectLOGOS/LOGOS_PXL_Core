@@ -11,6 +11,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+
 def run_pc_causal_discovery(data, alpha=0.05):
     """
     Performs causal discovery using the PC algorithm.
@@ -27,6 +28,7 @@ def run_pc_causal_discovery(data, alpha=0.05):
     GraphUtils.to_nx_graph(cg.G, labels=range(data.shape[1]))  # Visual inspection placeholder
     logger.info("PC algorithm completed.")
     return cg
+
 
 def simulate_example_data(n_samples=1000):
     """

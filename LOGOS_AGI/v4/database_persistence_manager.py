@@ -9,7 +9,10 @@ from typing import Any, Dict, List, Optional, Tuple
 
 # --- Basic Configuration ---
 DB_FILE = "/data/logos_agi.db"  # Path inside the Docker container
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - PERSISTENCE - %(message)s')
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - PERSISTENCE - %(message)s"
+)
+
 
 class PersistenceManager:
     """
@@ -39,7 +42,8 @@ class PersistenceManager:
                 cursor = conn.cursor()
 
                 # System log table for all system events/data
-                cursor.execute('''
+                cursor.execute(
+                    """
                     CREATE TABLE IF NOT EXISTS system_log (
                         id INTEGER PRIMARY KEY AUTOINCREMENT,
                         timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -47,10 +51,12 @@ class PersistenceManager:
                         log_data TEXT NOT NULL,
                         log_level TEXT DEFAULT 'INFO'
                     )
-                ''')
+                """
+                )
 
                 # Goals table for AGI goal management
-                cursor.execute('''
+                cursor.execute(
+                    """
                     CREATE TABLE IF NOT EXISTS goals (
                         goal_id TEXT PRIMARY KEY,
                         status TEXT NOT NULL,
@@ -60,10 +66,12 @@ class PersistenceManager:
                         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
                         updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
                     )
-                ''')
+                """
+                )
 
                 # Ontological nodes table for fractal knowledge representation
-                cursor.execute('''
+                cursor.execute(
+                    """
                     CREATE TABLE IF NOT EXISTS nodes (
                         id TEXT PRIMARY KEY,
                         query TEXT NOT NULL,
@@ -75,10 +83,12 @@ class PersistenceManager:
                         metadata TEXT, -- JSON blob for additional data
                         FOREIGN KEY (parent_id) REFERENCES nodes(id)
                     )
-                ''')
+                """
+                )
 
                 # Relations table for node relationships
-                cursor.execute('''
+                cursor.execute(
+                    """
                     CREATE TABLE IF NOT EXISTS relations (
                         src TEXT NOT NULL,
                         tgt TEXT NOT NULL,
@@ -90,10 +100,12 @@ class PersistenceManager:
                         FOREIGN KEY (src) REFERENCES nodes(id),
                         FOREIGN KEY (tgt) REFERENCES nodes(id)
                     )
-                ''')
+                """
+                )
 
                 # Semantic glyphs table for complex semantic representations
-                cursor.execute('''
+                cursor.execute(
+                    """
                     CREATE TABLE IF NOT EXISTS semantic_glyphs (
                         glyph_id TEXT PRIMARY KEY,
                         center_x REAL NOT NULL,
@@ -110,7 +122,8 @@ class PersistenceManager:
                         coherence_score REAL DEFAULT 0.0,
                         metaphysical_coordinates TEXT DEFAULT '{}' -- JSON object
                     )
-                ''')
+                """
+                )
 
                 # Create indexes for performance optimization
                 self._create_indexes(cursor)
@@ -138,7 +151,7 @@ class PersistenceManager:
             "CREATE INDEX IF NOT EXISTS idx_glyphs_spatial ON semantic_glyphs (center_x, center_y)",
             "CREATE INDEX IF NOT EXISTS idx_glyphs_complexity ON semantic_glyphs (semantic_complexity)",
             "CREATE INDEX IF NOT EXISTS idx_glyphs_usage ON semantic_glyphs (usage_count DESC, last_accessed DESC)",
-            "CREATE INDEX IF NOT EXISTS idx_glyphs_validation ON semantic_glyphs (validation_status, coherence_score DESC)"
+            "CREATE INDEX IF NOT EXISTS idx_glyphs_validation ON semantic_glyphs (validation_status, coherence_score DESC)",
         ]
 
         for index_sql in indexes:
@@ -170,7 +183,7 @@ class PersistenceManager:
 
                 # Prepare data for insertion
                 columns = list(data_dict.keys())
-                placeholders = ['?' for _ in columns]
+                placeholders = ["?" for _ in columns]
                 values = []
 
                 # Convert complex objects to JSON strings
@@ -183,14 +196,16 @@ class PersistenceManager:
                         values.append(value)
 
                 # Build and execute SQL
-                columns_str = ', '.join(columns)
-                placeholders_str = ', '.join(placeholders)
+                columns_str = ", ".join(columns)
+                placeholders_str = ", ".join(placeholders)
                 sql = f"INSERT OR REPLACE INTO {table_name} ({columns_str}) VALUES ({placeholders_str})"
 
                 cursor.execute(sql, values)
                 conn.commit()
 
-                logging.info(f"Successfully saved data to table '{table_name}' with {len(data_dict)} fields.")
+                logging.info(
+                    f"Successfully saved data to table '{table_name}' with {len(data_dict)} fields."
+                )
                 return True
 
             except sqlite3.Error as e:
@@ -227,7 +242,7 @@ class PersistenceManager:
                     row_dict = dict(row)
                     # Try to parse JSON fields
                     for key, value in row_dict.items():
-                        if isinstance(value, str) and value.startswith(('{', '[')):
+                        if isinstance(value, str) and value.startswith(("{", "[")):
                             try:
                                 row_dict[key] = json.loads(value)
                             except json.JSONDecodeError:
@@ -263,7 +278,9 @@ class PersistenceManager:
                 cursor.execute(sql, params)
                 conn.commit()
 
-                logging.info(f"Successfully executed SQL statement. Rows affected: {cursor.rowcount}")
+                logging.info(
+                    f"Successfully executed SQL statement. Rows affected: {cursor.rowcount}"
+                )
                 return True
 
             except sqlite3.Error as e:
@@ -289,34 +306,34 @@ class PersistenceManager:
     def log_system_event(self, source: str, data: Dict[str, Any], level: str = "INFO") -> bool:
         """Convenience method to log system events."""
         log_entry = {
-            'source': source,
-            'log_data': json.dumps(data),
-            'log_level': level,
-            'timestamp': time.time()
+            "source": source,
+            "log_data": json.dumps(data),
+            "log_level": level,
+            "timestamp": time.time(),
         }
-        return self.save('system_log', log_entry)
+        return self.save("system_log", log_entry)
 
     def update_glyph_usage(self, glyph_id: str) -> bool:
         """Update usage statistics for a semantic glyph."""
         return self.execute(
             "UPDATE semantic_glyphs SET usage_count = usage_count + 1, last_accessed = ? WHERE glyph_id = ?",
-            (time.time(), glyph_id)
+            (time.time(), glyph_id),
         )
 
     def get_database_stats(self) -> Dict[str, int]:
         """Get basic statistics about database content."""
         stats = {}
-        tables = ['system_log', 'goals', 'nodes', 'relations', 'semantic_glyphs']
+        tables = ["system_log", "goals", "nodes", "relations", "semantic_glyphs"]
 
         for table in tables:
             results = self.query(f"SELECT COUNT(*) as count FROM {table}")
-            stats[table] = results[0]['count'] if results else 0
+            stats[table] = results[0]["count"] if results else 0
 
         return stats
 
     def _validate_table_name(self, table_name: str) -> bool:
         """Validate table name to prevent SQL injection."""
-        allowed_tables = {'system_log', 'goals', 'nodes', 'relations', 'semantic_glyphs'}
+        allowed_tables = {"system_log", "goals", "nodes", "relations", "semantic_glyphs"}
         return table_name in allowed_tables
 
     def backup_database(self, backup_path: str) -> bool:

@@ -61,8 +61,7 @@ class RegularFuncWrapper:
             # regular func. (Strangely, it is not a keyword only argument to the
             # foreach func)
             return [
-                self.func(*i, value=scalars[idx], **kwargs)
-                for idx, i in enumerate(zip(*inputs))
+                self.func(*i, value=scalars[idx], **kwargs) for idx, i in enumerate(zip(*inputs))
             ]
         if len(inputs) == 2 and isinstance(inputs[1], (Number, torch.Tensor)):
             # binary op with tensorlist and scalar.
@@ -87,8 +86,7 @@ class ForeachFuncWrapper:
             is_cuda
             and not skip_profiler_check
             and torch.autograd.kineto_available()
-            and torch.profiler.ProfilerActivity.CUDA
-            in torch.profiler.supported_activities()
+            and torch.profiler.ProfilerActivity.CUDA in torch.profiler.supported_activities()
         ):
             with torch.profiler.profile() as p:
                 actual = self.func(*inputs, **kwargs)
@@ -221,12 +219,8 @@ class TestForeach(TestCase):
         ):
             ref_kwargs = sample.kwargs
             # div promotes ints to floats, so we cannot go on the fastpath there
-            div_slowpath = (
-                dtype in integral_types_and(torch.bool) and op.name == "_foreach_div"
-            )
-            expect_fastpath = not (
-                noncontiguous or sample.disable_fastpath or div_slowpath
-            )
+            div_slowpath = dtype in integral_types_and(torch.bool) and op.name == "_foreach_div"
+            expect_fastpath = not (noncontiguous or sample.disable_fastpath or div_slowpath)
             ref_input, ctxmgr = sample.input, nullcontext()
             if inplace:
                 with torch.no_grad():
@@ -259,16 +253,10 @@ class TestForeach(TestCase):
         alpha,
         scalar_self_arg: bool,
     ):
-        ref_inputs = (
-            [[t.detach().clone() for t in inputs[0]], inputs[1]]
-            if is_inplace
-            else inputs
-        )
+        ref_inputs = [[t.detach().clone() for t in inputs[0]], inputs[1]] if is_inplace else inputs
         try:
             with (
-                InplaceForeachVersionBumpCheck(self, inputs[0])
-                if op.is_inplace
-                else nullcontext()
+                InplaceForeachVersionBumpCheck(self, inputs[0]) if op.is_inplace else nullcontext()
             ):
                 actual = op(inputs, self.is_cuda, is_fastpath)
         except RuntimeError as e:
@@ -346,28 +334,20 @@ class TestForeach(TestCase):
                 )
                 if op.supports_autograd and dtype == torch.float32:
                     transformed_sample = sample.transform(
-                        get_transform_func(
-                            len(sample.input), dtype, device, is_fastpath
-                        )
+                        get_transform_func(len(sample.input), dtype, device, is_fastpath)
                     )
                     tensors = transformed_sample.input
                     (rhs_arg,) = transformed_sample.args
                     ref_tensors, ref_rhs_arg = clone(tensors), clone(rhs_arg)
                     sum(
-                        wrapped_op(
-                            [rhs_arg, tensors], is_cuda=False, expect_fastpath=False
-                        )
+                        wrapped_op([rhs_arg, tensors], is_cuda=False, expect_fastpath=False)
                     ).mean().backward()
                     sum(ref.func(ref_rhs_arg, t) for t in ref_tensors).mean().backward()
-                    self.assertEqual(
-                        [t.grad for t in tensors], [t.grad for t in ref_tensors]
-                    )
+                    self.assertEqual([t.grad for t in tensors], [t.grad for t in ref_tensors])
 
     @ops(foreach_pointwise_op_db)
     @parametrize("is_fastpath", (True, False))
-    def test_pointwise_op_with_tensor_of_scalarlist_overload(
-        self, device, dtype, op, is_fastpath
-    ):
+    def test_pointwise_op_with_tensor_of_scalarlist_overload(self, device, dtype, op, is_fastpath):
         for sample in op.sample_inputs(
             device,
             dtype,
@@ -383,9 +363,7 @@ class TestForeach(TestCase):
             scalars = kwargs.pop("scalars", None)
 
             if is_fastpath and scalars:
-                sample = sample.transform(
-                    lambda t: t.detach().clone() if torch.is_tensor(t) else t
-                )
+                sample = sample.transform(lambda t: t.detach().clone() if torch.is_tensor(t) else t)
                 inputs = [sample.input, *sample.args]
                 tensor_values = torch.tensor(scalars)
                 # 1D Tensor of scalars
@@ -512,11 +490,7 @@ class TestForeach(TestCase):
             else inputs
         )
         try:
-            with (
-                InplaceForeachVersionBumpCheck(self, inputs[0])
-                if is_inplace
-                else nullcontext()
-            ):
+            with InplaceForeachVersionBumpCheck(self, inputs[0]) if is_inplace else nullcontext():
                 actual = op(inputs, self.is_cuda, is_fastpath, **kwargs)
         except RuntimeError as e:
             with self.assertRaisesRegex(type(e), re.escape(str(e).splitlines()[0])):
@@ -533,9 +507,7 @@ class TestForeach(TestCase):
                 # Match with error messages from regular non-foreach reference if no
                 # custom error message was provided.
                 if custom_values_err is None:
-                    with self.assertRaisesRegex(
-                        type(e), re.escape(str(e).splitlines()[0])
-                    ):
+                    with self.assertRaisesRegex(type(e), re.escape(str(e).splitlines()[0])):
                         ref(ref_inputs, **kwargs)
                 else:
                     self.assertEqual(re.escape(str(e)), re.escape(custom_values_err))
@@ -564,16 +536,14 @@ class TestForeach(TestCase):
     def test_foreach_check_stride_ignore_dims_of_one(self, device, dtype):
         # default tensor stride is (9, 9, 3, 1).
         tensor = torch.ones((2, 1, 3, 3), device=device, dtype=dtype)
-        strided_tensor = torch.ones(
-            (2, 1, 3, 3), device=device, dtype=dtype
-        ).as_strided((2, 1, 3, 3), (9, 1, 3, 1))
+        strided_tensor = torch.ones((2, 1, 3, 3), device=device, dtype=dtype).as_strided(
+            (2, 1, 3, 3), (9, 1, 3, 1)
+        )
         left_inputs = [tensor, strided_tensor]
         right_inputs = [strided_tensor, tensor]
         compare_result = tensor + strided_tensor
         foreach_add_check_ = ForeachFuncWrapper(torch._foreach_add)
-        out = foreach_add_check_(
-            (left_inputs, right_inputs), is_cuda=True, expect_fastpath=True
-        )
+        out = foreach_add_check_((left_inputs, right_inputs), is_cuda=True, expect_fastpath=True)
         for res in out:
             self.assertEqual(res, compare_result)
 
@@ -631,9 +601,7 @@ class TestForeach(TestCase):
 
         # Empty lists
         for fop in ops_to_test:
-            with self.assertRaisesRegex(
-                RuntimeError, "Tensor list must have at least one tensor."
-            ):
+            with self.assertRaisesRegex(RuntimeError, "Tensor list must have at least one tensor."):
                 fop(tensors1, tensors2)
 
         # One empty list
@@ -690,10 +658,7 @@ class TestForeach(TestCase):
                 RuntimeError, "Expected all tensors to be on the same device"
             ):
                 foreach_op([tensor1], [tensor2])
-            if (
-                dtype in integral_types_and(torch.bool)
-                and foreach_op == torch._foreach_div
-            ):
+            if dtype in integral_types_and(torch.bool) and foreach_op == torch._foreach_div:
                 with self.assertRaisesRegex(RuntimeError, "result type"):
                     foreach_op_([tensor1], [tensor2])
             else:
@@ -760,12 +725,8 @@ class TestForeach(TestCase):
         )
 
         # non contiguous
-        tensor1 = make_tensor(
-            (5, 2, 1, 3), device=device, dtype=dtype, noncontiguous=True
-        )
-        tensor2 = make_tensor(
-            (5, 2, 1, 3), device=device, dtype=dtype, noncontiguous=True
-        )
+        tensor1 = make_tensor((5, 2, 1, 3), device=device, dtype=dtype, noncontiguous=True)
+        tensor2 = make_tensor((5, 2, 1, 3), device=device, dtype=dtype, noncontiguous=True)
         self.assertFalse(tensor1.is_contiguous())
         self.assertFalse(tensor2.is_contiguous())
         inputs = ([tensor1], [tensor2])
@@ -792,9 +753,7 @@ class TestForeach(TestCase):
 
         # sliced tensor
         tensor1 = make_tensor((5, 2, 1, 3), device=device, dtype=dtype)
-        tensor2 = make_tensor((5, 2, 1, 3 * 7), device=device, dtype=dtype)[
-            :, :, :, ::7
-        ]
+        tensor2 = make_tensor((5, 2, 1, 3 * 7), device=device, dtype=dtype)[:, :, :, ::7]
         inputs = ([tensor1], [tensor2])
         self._binary_test(
             dtype,
@@ -837,9 +796,7 @@ class TestForeach(TestCase):
             ],
         )
         op, ref, inplace_op, inplace_ref = self._get_funcs(op)
-        self._binary_test(
-            dtype, op, ref, inputs, True, False, alpha=None, scalar_self_arg=False
-        )
+        self._binary_test(dtype, op, ref, inputs, True, False, alpha=None, scalar_self_arg=False)
         self._binary_test(
             dtype,
             inplace_op,
@@ -1008,9 +965,7 @@ class TestForeach(TestCase):
         # make sure that the min. of squared L2 norm value per tensor is greater than the max value of `dtype`.
         self.assertTrue(scaler * scaler * N > max_value)
         fn, ref_fn, *_ = self._get_funcs(op)
-        actual = fn(
-            inputs, is_cuda=True, expect_fastpath=True, ord=ord, zero_size=False
-        )
+        actual = fn(inputs, is_cuda=True, expect_fastpath=True, ord=ord, zero_size=False)
         expect = ref_fn(inputs, ord=ord)
 
         if dtype == torch.float16:
@@ -1018,10 +973,7 @@ class TestForeach(TestCase):
             self.assertFalse(any(torch.isinf(e) for e in expect))
         else:
             self.assertTrue(
-                all(
-                    inputs[0][i].numel() == 0 or torch.isinf(e)
-                    for i, e in enumerate(expect)
-                )
+                all(inputs[0][i].numel() == 0 or torch.isinf(e) for i, e in enumerate(expect))
             )
         self.assertEqual(expect, actual, equal_nan=False)
 
@@ -1035,9 +987,7 @@ class TestForeach(TestCase):
 
         N = 600
         indices_with_empty_tensors = (
-            set()
-            if not intersperse_empty_tensors
-            else {200, 300, 301, 400, 401, 402, 404, 598}
+            set() if not intersperse_empty_tensors else {200, 300, 301, 400, 401, 402, 404, 598}
         )
         tensorlist = [
             make_tensor((2, 3), dtype=dtype, device=device, noncontiguous=False)
@@ -1091,13 +1041,9 @@ class TestForeach(TestCase):
         kwargs = {}
         if op.name == "_foreach_norm":
             kwargs["ord"] = 2
-            disable_fastpath = dtype not in floating_types_and(
-                torch.half, torch.bfloat16
-            )
+            disable_fastpath = dtype not in floating_types_and(torch.half, torch.bfloat16)
 
-        tensorlist = [
-            make_tensor((N,), dtype=dtype, device=device, noncontiguous=False)
-        ]
+        tensorlist = [make_tensor((N,), dtype=dtype, device=device, noncontiguous=False)]
         # foreach_max cannot handle empty tensors as max over empty is undefined
         if w_empty and op.name != "_foreach_max":
             tensorlist += [
@@ -1108,17 +1054,12 @@ class TestForeach(TestCase):
         wrapped_op, ref, _, _ = self._get_funcs(op)
         self.assertEqual(
             ref(inputs, **kwargs),
-            wrapped_op(
-                inputs, self.is_cuda, not disable_fastpath, zero_size=False, **kwargs
-            ),
+            wrapped_op(inputs, self.is_cuda, not disable_fastpath, zero_size=False, **kwargs),
         )
 
     @onlyCUDA
     @ops(
-        foreach_unary_op_db
-        + foreach_binary_op_db
-        + foreach_pointwise_op_db
-        + foreach_other_op_db,
+        foreach_unary_op_db + foreach_binary_op_db + foreach_pointwise_op_db + foreach_other_op_db,
         dtypes=(torch.float,),
     )
     def test_inplace_foreach_leaf_check_and_grad_fn(self, device, dtype, op):
@@ -1128,9 +1069,7 @@ class TestForeach(TestCase):
 
         sample = next(
             iter(
-                op.sample_inputs(
-                    dtype=dtype, device=device, num_input_tensors=[2], same_size=True
-                )
+                op.sample_inputs(dtype=dtype, device=device, num_input_tensors=[2], same_size=True)
             )
         )
         sample.input[0].requires_grad_(True)
@@ -1140,10 +1079,7 @@ class TestForeach(TestCase):
         with self.assertRaisesRegex(RuntimeError, "a leaf Variable that requires grad"):
             inplace_op(sample.input, *sample.args)
 
-        _tensors = [
-            t.detach().clone().requires_grad_(i == 0)
-            for i, t in enumerate(sample.input)
-        ]
+        _tensors = [t.detach().clone().requires_grad_(i == 0) for i, t in enumerate(sample.input)]
         tensors = [t.clone() for t in _tensors]
         inplace_op(tensors, *sample.args)
         self.assertIsNotNone(tensors[0].grad_fn)
@@ -1218,21 +1154,15 @@ class TestForeach(TestCase):
             self.assertIsNone(ref())
 
         func = self._get_funcs(op)[0]
-        for sample in op.sample_inputs(
-            device, dtype, requires_grad=True, num_input_tensors=[1]
-        ):
+        for sample in op.sample_inputs(device, dtype, requires_grad=True, num_input_tensors=[1]):
             for key in ("is_fastpath", "disable_fastpath"):
                 if key in sample.kwargs:
                     del sample.kwargs[key]
             # note: `_foreach_pow.Scalar` and `_foreach_pow.ScalarList` don't depend on `result`
             # see: https://github.com/pytorch/pytorch/blob/5403c777/tools/autograd/derivatives.yaml#L3048-L3049
             if op.name == "_foreach_pow":
-                if (
-                    isinstance(sample.args[0], list)
-                    and isinstance(sample.args[0][0], Number)
-                ) or (
-                    isinstance(sample.args[0], Number)
-                    and not isinstance(sample.args[0], float)
+                if (isinstance(sample.args[0], list) and isinstance(sample.args[0][0], Number)) or (
+                    isinstance(sample.args[0], Number) and not isinstance(sample.args[0], float)
                 ):
                     continue
                 if isinstance(sample.args[0], float):
@@ -1287,9 +1217,7 @@ class TestForeach(TestCase):
 
     @onlyCUDA
     def test_div_reciprocal(self):
-        expect_m, expect_e = torch.frexp(
-            torch.div(torch.tensor(0.1, device="cuda"), 10.0)
-        )
+        expect_m, expect_e = torch.frexp(torch.div(torch.tensor(0.1, device="cuda"), 10.0))
         actual_m, actual_e = torch.frexp(
             torch._foreach_div([torch.tensor(0.1, device="cuda")], [10.0])[0]
         )
@@ -1299,22 +1227,14 @@ class TestForeach(TestCase):
     @onlyCUDA
     def test_0dim_tensor_overload_exception(self):
         # check exceptions of fast path
-        tensors = [
-            make_tensor((2, 2), dtype=torch.float, device="cuda") for _ in range(2)
-        ]
+        tensors = [make_tensor((2, 2), dtype=torch.float, device="cuda") for _ in range(2)]
         with self.assertRaisesRegex(RuntimeError, "scalar tensor expected to be on"):
             torch._foreach_add(tensors, torch.tensor(1.0, device="cpu"), alpha=1.0)
 
-        tensors = [
-            make_tensor((2, 2), dtype=torch.float, device=d) for d in ("cpu", "cuda")
-        ]
-        with self.assertRaisesRegex(
-            RuntimeError, "scalar tensor expected to be 0 dim but"
-        ):
+        tensors = [make_tensor((2, 2), dtype=torch.float, device=d) for d in ("cpu", "cuda")]
+        with self.assertRaisesRegex(RuntimeError, "scalar tensor expected to be 0 dim but"):
             torch._foreach_mul(tensors, torch.tensor([1.0, 1.0], device="cuda"))
-        with self.assertRaisesRegex(
-            RuntimeError, "scalar tensor expected to be 0 dim but"
-        ):
+        with self.assertRaisesRegex(RuntimeError, "scalar tensor expected to be 0 dim but"):
             torch._foreach_add(tensors, torch.tensor([1.0, 1.0], device="cuda"))
 
     @onlyCUDA
@@ -1354,13 +1274,8 @@ class TestForeach(TestCase):
                     continue
                 self_tensors = [t.clone() for t in sample.input]
                 src_tensors = [t.to(src_dtype) for t in self_tensors]
-                out = foreach_copy_(
-                    (self_tensors, src_tensors), is_cuda=True, expect_fastpath=True
-                )
-                ref_out = [
-                    torch.empty_like(t).copy_(s)
-                    for t, s in zip(self_tensors, src_tensors)
-                ]
+                out = foreach_copy_((self_tensors, src_tensors), is_cuda=True, expect_fastpath=True)
+                ref_out = [torch.empty_like(t).copy_(s) for t, s in zip(self_tensors, src_tensors)]
                 for t, ref_t in zip(out, ref_out):
                     self.assertTrue(torch.equal(t, ref_t))
 
@@ -1419,19 +1334,13 @@ class TestForeach(TestCase):
         dtypes=OpDTypes.supported,
         allowed_dtypes=(torch.float64, torch.complex128),
     )
-    @parametrize(
-        "inplace", (False, True), name_fn=lambda x: "inplace" if x else "outplace"
-    )
+    @parametrize("inplace", (False, True), name_fn=lambda x: "inplace" if x else "outplace")
     def test_autodiff(self, device, dtype, op, inplace):
         if (not inplace) and not op.supports_out:
             self.skipTest("out-of-place not implemented")
         if inplace and op.has_no_in_place:
             self.skipTest("in-place not implemented")
-        if not (
-            op.supports_autograd
-            or op.supports_inplace_autograd
-            or op.supports_forward_ad
-        ):
+        if not (op.supports_autograd or op.supports_inplace_autograd or op.supports_forward_ad):
             self.skipTest("neither reverse mode nor forward mode supported")
 
         # note(crcrpar): without this, some unary functions fail, unlike inplace and/or complex.
@@ -1471,32 +1380,20 @@ class TestForeach(TestCase):
                 # Call `clone` to avoid inplace modifications likewise
                 # `torch.testing._internal.common_utils.TestGradients._get_safe_inplace`
                 def inplace_func(*tensorlist):
-                    kwargs = (
-                        {"alpha": sample.kwargs["alpha"]}
-                        if "alpha" in sample.kwargs
-                        else {}
-                    )
-                    op.inplace_variant(
-                        tuple(t.clone() for t in tensorlist), *sample.args, **kwargs
-                    )
+                    kwargs = {"alpha": sample.kwargs["alpha"]} if "alpha" in sample.kwargs else {}
+                    op.inplace_variant(tuple(t.clone() for t in tensorlist), *sample.args, **kwargs)
                     return tensorlist
 
                 func = inplace_func
             else:
 
                 def outplace_func(*tensorlist):
-                    kwargs = (
-                        {"alpha": sample.kwargs["alpha"]}
-                        if "alpha" in sample.kwargs
-                        else {}
-                    )
+                    kwargs = {"alpha": sample.kwargs["alpha"]} if "alpha" in sample.kwargs else {}
                     return op.method_variant(tensorlist, *sample.args, **kwargs)
 
                 func = outplace_func
 
-            working_sample, err_msg_pattern = check_autodiff_sample(
-                op, sample, dtype, inplace
-            )
+            working_sample, err_msg_pattern = check_autodiff_sample(op, sample, dtype, inplace)
 
             def call_gradcheck():
                 gradcheck(
@@ -1531,11 +1428,7 @@ class TestForeach(TestCase):
 
                 _inputs = [t.detach().clone().requires_grad_() for t in sample.input]
                 inputs = [t.clone() for t in _inputs]
-                kwargs = (
-                    {"alpha": sample.kwargs["alpha"]}
-                    if "alpha" in sample.kwargs
-                    else {}
-                )
+                kwargs = {"alpha": sample.kwargs["alpha"]} if "alpha" in sample.kwargs else {}
                 op.inplace_variant(inputs, *sample.args, **kwargs)
 
                 self.assertEqual(len({t.grad_fn for t in inputs}), len(inputs))
@@ -1572,10 +1465,7 @@ def check_autodiff_sample(op, sample, dtype, is_inplace):
     if op.name == "_foreach_abs" and is_inplace and dtype == torch.complex128:
         return False, "In-place abs is not supported for complex tensors."
     if op.name == "_foreach_sub" and (
-        (
-            isinstance(sample.args[-1], list)
-            and any(isinstance(a, bool) for a in sample.args[-1])
-        )
+        (isinstance(sample.args[-1], list) and any(isinstance(a, bool) for a in sample.args[-1]))
         or isinstance(sample.args[-1], bool)
     ):
         return False, _BOOL_SUB_ERR_MSG
@@ -1586,10 +1476,7 @@ def check_autodiff_sample(op, sample, dtype, is_inplace):
             "this is not supported. Tensor is of size [] while the given forward gradient is of size [1",
         )
     rhs_arg_has_complex_number = sample.args and (
-        (
-            isinstance(sample.args[-1], list)
-            and any(isinstance(a, complex) for a in sample.args[-1])
-        )
+        (isinstance(sample.args[-1], list) and any(isinstance(a, complex) for a in sample.args[-1]))
         or (isinstance(sample.args[-1], complex))
     )
     if rhs_arg_has_complex_number and dtype == torch.float64:

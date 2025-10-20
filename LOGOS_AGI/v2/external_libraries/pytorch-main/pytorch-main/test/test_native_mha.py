@@ -20,9 +20,7 @@ from torch.testing._internal.common_utils import (
 
 class TestMHADeviceType(TestCase):
     @torch.no_grad()
-    def _test_transform_bias_rescale_qkv_impl(
-        self, device, dtype, use_nt, use_padding=False
-    ):
+    def _test_transform_bias_rescale_qkv_impl(self, device, dtype, use_nt, use_padding=False):
         tests = [
             (64, 4, 16, 8),
             # dim_per_head = 12 does not divide evenly by CPU vectorization length of 8
@@ -37,9 +35,7 @@ class TestMHADeviceType(TestCase):
         for embed_dim, num_heads, bs, sl in tests:
             with self.subTest(embed_dim=embed_dim, num_heads=num_heads, bs=bs, sl=sl):
                 torch.manual_seed(9343)
-                dense_x = x = (
-                    torch.randn(bs, sl, 3 * embed_dim, device=device, dtype=dtype) * 10
-                )
+                dense_x = x = torch.randn(bs, sl, 3 * embed_dim, device=device, dtype=dtype) * 10
                 if use_padding:
                     x[0][-1] = torch.full(x[0][-1].shape, float("-Inf"))
                 if use_nt:
@@ -47,18 +43,14 @@ class TestMHADeviceType(TestCase):
                     if use_padding:
                         xs[0] = xs[0][:-1]
                     x = torch.nested.nested_tensor(xs, device=device, dtype=dtype)
-                qkv = torch.nn.Linear(
-                    embed_dim, 3 * embed_dim, device=device, dtype=dtype
-                )
+                qkv = torch.nn.Linear(embed_dim, 3 * embed_dim, device=device, dtype=dtype)
 
                 # We have to use inference_mode here because q/k/v are
                 # all views of the same Tensor, which autograd doesn't
                 # like. This is fine because this function is only
                 # exposed to Python for purposes of writing this test.
                 with torch.inference_mode():
-                    (q, k, v) = torch._transform_bias_rescale_qkv(
-                        x, qkv.bias, num_heads=num_heads
-                    )
+                    (q, k, v) = torch._transform_bias_rescale_qkv(x, qkv.bias, num_heads=num_heads)
 
                     def simple_transform_bias_rescale_qkv(qkv, bias):
                         (q, k, v) = torch.split(qkv, embed_dim, dim=-1)
@@ -138,42 +130,27 @@ class TestMHADeviceType(TestCase):
         if use_padding:
             if pad_all:
                 for q_i in q:
-                    q_i[-1] = torch.zeros_like(
-                        q[0][-1], device=device, dtype=torch.float32
-                    )
+                    q_i[-1] = torch.zeros_like(q[0][-1], device=device, dtype=torch.float32)
                 mask = torch.zeros(q.shape[:-1], device=device, dtype=torch.bool)
                 for mask_i in mask:
                     mask_i[-1] = True
             else:
-                q[0][-1] = torch.zeros_like(
-                    q[0][-1], device=device, dtype=torch.float32
-                )
+                q[0][-1] = torch.zeros_like(q[0][-1], device=device, dtype=torch.float32)
                 mask = torch.zeros(q.shape[:-1], device=device, dtype=torch.bool)
                 mask[0][-1] = True
         if mode == "self":
             k = q
             v = q
         elif mode == "encdec":
-            k = (
-                6 * torch.rand(bs, sl, embed_dim, device=device, dtype=torch.float32)
-                - 3
-            )
+            k = 6 * torch.rand(bs, sl, embed_dim, device=device, dtype=torch.float32) - 3
             v = k
         elif mode == "generic":
-            k = (
-                6 * torch.rand(bs, sl, embed_dim, device=device, dtype=torch.float32)
-                - 3
-            )
-            v = (
-                6 * torch.rand(bs, sl, embed_dim, device=device, dtype=torch.float32)
-                - 3
-            )
+            k = 6 * torch.rand(bs, sl, embed_dim, device=device, dtype=torch.float32) - 3
+            v = 6 * torch.rand(bs, sl, embed_dim, device=device, dtype=torch.float32) - 3
         else:
             self.fail(f"invalid mode `{mode}`!")
 
-        qkv = torch.nn.Linear(
-            embed_dim, 3 * embed_dim, device=device, dtype=torch.float32
-        )
+        qkv = torch.nn.Linear(embed_dim, 3 * embed_dim, device=device, dtype=torch.float32)
         native_qkv = copy.deepcopy(qkv).to(dtype=dtype)
 
         proj = torch.nn.Linear(embed_dim, embed_dim, device=device, dtype=torch.float32)
@@ -240,17 +217,11 @@ class TestMHADeviceType(TestCase):
             if mode == "self":
                 k = v = q
             elif mode == "encdec":
-                k = torch.nested.nested_tensor(
-                    torch.unbind(k), device=device, dtype=dtype
-                )
+                k = torch.nested.nested_tensor(torch.unbind(k), device=device, dtype=dtype)
                 v = k
             else:
-                k = torch.nested.nested_tensor(
-                    torch.unbind(k), device=device, dtype=dtype
-                )
-                v = torch.nested.nested_tensor(
-                    torch.unbind(v), device=device, dtype=dtype
-                )
+                k = torch.nested.nested_tensor(torch.unbind(k), device=device, dtype=dtype)
+                v = torch.nested.nested_tensor(torch.unbind(v), device=device, dtype=dtype)
 
         native_q = q.to(dtype=dtype)
         native_k = k.to(dtype=dtype)
@@ -302,9 +273,7 @@ class TestMHADeviceType(TestCase):
                         )
 
         if dtype == torch.half:
-            torch.testing.assert_close(
-                ypt, ynpt.to(torch.float32), atol=1e-3, rtol=1e-3
-            )
+            torch.testing.assert_close(ypt, ynpt.to(torch.float32), atol=1e-3, rtol=1e-3)
         else:
             # High rtol seems necessary for
             # test_native_multihead_attention_cpu_float32 on Windows,

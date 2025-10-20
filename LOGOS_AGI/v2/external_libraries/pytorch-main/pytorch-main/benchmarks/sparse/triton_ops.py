@@ -3,9 +3,7 @@ from torch._inductor.runtime.benchmarking import benchmarker
 
 
 def create_blocked_tensor(B, M, N, blocksize, sparsity, dtype, device):
-    assert (
-        sparsity <= 1.0 and sparsity >= 0.0
-    ), "sparsity should be a value between 0 and 1"
+    assert sparsity <= 1.0 and sparsity >= 0.0, "sparsity should be a value between 0 and 1"
     assert M % blocksize[0] == 0
     assert N % blocksize[1] == 0
     shape = (B, M // blocksize[0], N // blocksize[1])[int(B == 0) :]
@@ -18,9 +16,7 @@ def create_blocked_tensor(B, M, N, blocksize, sparsity, dtype, device):
         A.flatten()[nonzero_indices[selected_nonzeros]] = 0
     elif actual_nnz < expected_nnz:
         zero_indices = (A == 0).flatten().nonzero()
-        selected_zeros = torch.randperm(zero_indices.shape[0])[
-            : expected_nnz - actual_nnz
-        ]
+        selected_zeros = torch.randperm(zero_indices.shape[0])[: expected_nnz - actual_nnz]
         A.flatten()[zero_indices[selected_zeros]] = 1
     A = torch.repeat_interleave(A, blocksize[0], dim=-2)
     A = torch.repeat_interleave(A, blocksize[1], dim=-1)
@@ -52,9 +48,7 @@ def test_bsr_dense_mm(x, y, **meta):
     from torch.sparse._triton_ops import bsr_dense_mm
 
     def test_func(x=x, y=y):
-        return bsr_dense_mm(
-            x, y, meta=dict(GROUP_SIZE_ROW=4, num_stages=1, num_warps=4)
-        )
+        return bsr_dense_mm(x, y, meta=dict(GROUP_SIZE_ROW=4, num_stages=1, num_warps=4))
 
     return _test_worker(test_func)
 
@@ -71,9 +65,7 @@ def test_bsr_dense_mm_with_meta(x, y, **meta):
 def test_bsr_scatter_mm2(x, y, **meta):
     from torch.sparse._triton_ops import bsr_scatter_mm, bsr_scatter_mm_indices_data
 
-    indices_data = bsr_scatter_mm_indices_data(
-        x, y, indices_format="scatter_mm", **meta
-    )
+    indices_data = bsr_scatter_mm_indices_data(x, y, indices_format="scatter_mm", **meta)
 
     def test_func(x=x, y=y):
         return bsr_scatter_mm(x, y, indices_data=indices_data)
@@ -205,9 +197,7 @@ if __name__ == "__main__":
     if args.star > 0:
         import torch.sparse._triton_ops
 
-        assert {len(m_list), len(n_list), len(k_list), len(bm_list), len(bk_list)} == {
-            1
-        }
+        assert {len(m_list), len(n_list), len(k_list), len(bm_list), len(bk_list)} == {1}
         m = m_list[0]
         n = n_list[0] or m
         k = k_list[0] or m
@@ -308,9 +298,9 @@ if __name__ == "__main__":
         if sparsity > 1 or sparsity < 0:
             continue
 
-        x = create_blocked_tensor(
-            b, m, k, blocksize, sparsity, dtype, device
-        ).to_sparse_bsr(blocksize)
+        x = create_blocked_tensor(b, m, k, blocksize, sparsity, dtype, device).to_sparse_bsr(
+            blocksize
+        )
 
         # recompute sparsity
         sparsity = 1 - bk * bm * x._nnz() / (m * k)
@@ -366,9 +356,7 @@ if __name__ == "__main__":
                     ),
                 ).get(op, {})
 
-                meta_str = ";".join(
-                    f"{k}={v}" for k, v in meta.items() if v is not None
-                )
+                meta_str = ";".join(f"{k}={v}" for k, v in meta.items() if v is not None)
                 time_ms_lst = []
                 performance_tflops_lst = []
                 for r in range(args.repeat):
@@ -398,10 +386,7 @@ if __name__ == "__main__":
                         if target_performance is None:
                             target_performance = performance_tflops
                     elif target_performance is not None:
-                        if (
-                            abs(1 - performance_tflops / target_performance)
-                            < performance_rtol
-                        ):
+                        if abs(1 - performance_tflops / target_performance) < performance_rtol:
                             mark += " @@@"
                     if best_tflops < performance_tflops:
                         best_tflops = performance_tflops

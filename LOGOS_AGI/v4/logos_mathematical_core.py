@@ -35,9 +35,11 @@ logger = logging.getLogger(__name__)
 # I. FOUNDATIONAL QUATERNION MATHEMATICS
 # =========================================================================
 
+
 @dataclass
 class Quaternion:
     """Trinity-grounded quaternion representation"""
+
     w: float = 0.0  # Scalar part
     x: float = 0.0  # i component (Existence axis)
     y: float = 0.0  # j component (Goodness axis)
@@ -56,11 +58,11 @@ class Quaternion:
         """Calculate quaternion magnitude"""
         return math.sqrt(self.w**2 + self.x**2 + self.y**2 + self.z**2)
 
-    def conjugate(self) -> 'Quaternion':
+    def conjugate(self) -> "Quaternion":
         """Return quaternion conjugate"""
         return Quaternion(self.w, -self.x, -self.y, -self.z)
 
-    def multiply(self, other: 'Quaternion') -> 'Quaternion':
+    def multiply(self, other: "Quaternion") -> "Quaternion":
         """Quaternion multiplication"""
         w = self.w * other.w - self.x * other.x - self.y * other.y - self.z * other.z
         x = self.w * other.x + self.x * other.w + self.y * other.z - self.z * other.y
@@ -80,9 +82,11 @@ class Quaternion:
         """Calculate Trinity product: E × G × T"""
         return abs(self.x * self.y * self.z)
 
+
 # =========================================================================
 # II. TRINITY OPTIMIZATION THEOREM
 # =========================================================================
+
 
 class TrinityOptimizer:
     """Implements the Trinity Optimization Theorem: O(n) minimized at n=3"""
@@ -93,32 +97,26 @@ class TrinityOptimizer:
         # Trinity optimization parameters
         self.K0 = 415.0  # Base complexity constant
         self.alpha = 1.0  # Sign complexity scaling
-        self.beta = 2.0   # Mind complexity scaling
-        self.K1 = 1.0     # Mesh complexity constant
+        self.beta = 2.0  # Mind complexity scaling
+        self.K1 = 1.0  # Mesh complexity constant
         self.gamma = 1.5  # Mesh complexity scaling
 
     def compute_optimization_function(self, n: int) -> Dict[str, float]:
         """Compute O(n) = I_SIGN(n) + I_MIND(n) + I_MESH(n)"""
 
         # I_SIGN(n) = K0 * n^alpha
-        i_sign = self.K0 * (n ** self.alpha)
+        i_sign = self.K0 * (n**self.alpha)
 
         # I_MIND(n) = K0 * n^beta
-        i_mind = self.K0 * (n ** self.beta)
+        i_mind = self.K0 * (n**self.beta)
 
         # I_MESH(n) = K1 * n^gamma
-        i_mesh = self.K1 * (n ** self.gamma)
+        i_mesh = self.K1 * (n**self.gamma)
 
         # Total optimization function
         o_n = i_sign + i_mind + i_mesh
 
-        return {
-            "n": n,
-            "I_SIGN": i_sign,
-            "I_MIND": i_mind,
-            "I_MESH": i_mesh,
-            "O_n": o_n
-        }
+        return {"n": n, "I_SIGN": i_sign, "I_MIND": i_mind, "I_MESH": i_mesh, "O_n": o_n}
 
     def verify_trinity_optimization(self) -> Dict[str, Any]:
         """Verify that O(n) is minimized at n=3"""
@@ -135,23 +133,28 @@ class TrinityOptimizer:
         # Verify Trinity optimality
         trinity_optimal = optimal_n == 3
 
-        self.logger.info(f"Trinity Optimization Verification: n={optimal_n}, Trinity optimal: {trinity_optimal}")
+        self.logger.info(
+            f"Trinity Optimization Verification: n={optimal_n}, Trinity optimal: {trinity_optimal}"
+        )
 
         return {
             "theorem_verified": trinity_optimal,
             "optimal_n": optimal_n,
             "min_value": min_result["O_n"],
             "all_results": results,
-            "mathematical_proof": trinity_optimal
+            "mathematical_proof": trinity_optimal,
         }
+
 
 # =========================================================================
 # III. TRINITY FRACTAL SYSTEM
 # =========================================================================
 
+
 @dataclass
 class OrbitAnalysis:
     """Analysis of fractal orbit behavior"""
+
     converged: bool = False
     escaped: bool = False
     iterations: int = 0
@@ -169,6 +172,7 @@ class OrbitAnalysis:
             return 0.5  # Neutral score for escape
         else:
             return 0.0  # Low score for indeterminate behavior
+
 
 class TrinityFractalSystem:
     """Trinity-grounded fractal mathematics"""
@@ -207,7 +211,7 @@ class TrinityFractalSystem:
                     iterations=i,
                     final_magnitude=magnitude,
                     orbit_points=orbit_points,
-                    fractal_dimension=self._calculate_fractal_dimension(orbit_points)
+                    fractal_dimension=self._calculate_fractal_dimension(orbit_points),
                 )
 
         # Check convergence
@@ -220,7 +224,7 @@ class TrinityFractalSystem:
             iterations=self.max_iterations,
             final_magnitude=final_magnitude,
             orbit_points=orbit_points,
-            fractal_dimension=self._calculate_fractal_dimension(orbit_points)
+            fractal_dimension=self._calculate_fractal_dimension(orbit_points),
         )
 
     def _calculate_fractal_dimension(self, orbit_points: List[complex]) -> float:
@@ -229,7 +233,9 @@ class TrinityFractalSystem:
             return 1.0
 
         # Simple fractal dimension approximation
-        distances = [abs(orbit_points[i+1] - orbit_points[i]) for i in range(len(orbit_points)-1)]
+        distances = [
+            abs(orbit_points[i + 1] - orbit_points[i]) for i in range(len(orbit_points) - 1)
+        ]
 
         if not distances or max(distances) == 0:
             return 1.0
@@ -242,9 +248,11 @@ class TrinityFractalSystem:
         dimension = 1.0 + abs(avg_log_distance) / math.log(2.0)
         return min(dimension, 3.0)  # Cap at 3D for Trinity space
 
+
 # =========================================================================
 # IV. OBDC KERNEL (Orthogonal Dual-Bijection Confluence)
 # =========================================================================
+
 
 class OBDCKernel:
     """Orthogonal Dual-Bijection Confluence mathematical kernel"""
@@ -253,23 +261,11 @@ class OBDCKernel:
         self.logger = logging.getLogger(__name__)
 
         # OBDC operational matrices (3x3 for Trinity)
-        self.existence_matrix = np.array([
-            [1, 0, 0],
-            [0, 1, 0],
-            [0, 0, 1]
-        ])
+        self.existence_matrix = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])
 
-        self.goodness_matrix = np.array([
-            [0, 1, 0],
-            [1, 0, 0],
-            [0, 0, 1]
-        ])
+        self.goodness_matrix = np.array([[0, 1, 0], [1, 0, 0], [0, 0, 1]])
 
-        self.truth_matrix = np.array([
-            [0, 0, 1],
-            [0, 1, 0],
-            [1, 0, 0]
-        ])
+        self.truth_matrix = np.array([[0, 0, 1], [0, 1, 0], [1, 0, 0]])
 
     def verify_commutation(self) -> Dict[str, Any]:
         """Verify OBDC commutation relationships"""
@@ -277,17 +273,15 @@ class OBDCKernel:
         # Test Trinity matrices commutation
         eg_comm = np.allclose(
             self.existence_matrix @ self.goodness_matrix,
-            self.goodness_matrix @ self.existence_matrix
+            self.goodness_matrix @ self.existence_matrix,
         )
 
         et_comm = np.allclose(
-            self.existence_matrix @ self.truth_matrix,
-            self.truth_matrix @ self.existence_matrix
+            self.existence_matrix @ self.truth_matrix, self.truth_matrix @ self.existence_matrix
         )
 
         gt_comm = np.allclose(
-            self.goodness_matrix @ self.truth_matrix,
-            self.truth_matrix @ self.goodness_matrix
+            self.goodness_matrix @ self.truth_matrix, self.truth_matrix @ self.goodness_matrix
         )
 
         overall_commutation = eg_comm and et_comm and gt_comm
@@ -298,7 +292,7 @@ class OBDCKernel:
             "existence_goodness_commute": eg_comm,
             "existence_truth_commute": et_comm,
             "goodness_truth_commute": gt_comm,
-            "overall_commutation": overall_commutation
+            "overall_commutation": overall_commutation,
         }
 
     def validate_unity_trinity_invariants(self) -> Dict[str, Any]:
@@ -317,22 +311,27 @@ class OBDCKernel:
 
         invariants_valid = det_unity and identity_preserved
 
-        self.logger.info(f"Unity/Trinity Invariants: det_unity={det_unity}, identity={identity_preserved}")
+        self.logger.info(
+            f"Unity/Trinity Invariants: det_unity={det_unity}, identity={identity_preserved}"
+        )
 
         return {
             "determinant_unity": det_unity,
             "identity_preserved": identity_preserved,
             "invariants_valid": invariants_valid,
-            "determinants": {"existence": det_e, "goodness": det_g, "truth": det_t}
+            "determinants": {"existence": det_e, "goodness": det_g, "truth": det_t},
         }
+
 
 # =========================================================================
 # V. TRINITY-LOCKED-MATHEMATICAL (TLM) TOKEN MANAGER
 # =========================================================================
 
+
 @dataclass
 class TLMToken:
     """Trinity-Locked-Mathematical validation token"""
+
     token_id: str
     operation_hash: str
     existence_validated: bool = False
@@ -357,9 +356,10 @@ class TLMToken:
             "existence": self.existence_validated,
             "goodness": self.goodness_validated,
             "truth": self.truth_validated,
-            "created_at": self.created_at
+            "created_at": self.created_at,
         }
         return hashlib.sha256(json.dumps(token_data, sort_keys=True).encode()).hexdigest()
+
 
 class TLMManager:
     """Trinity-Locked-Mathematical token management system"""
@@ -380,10 +380,7 @@ class TLMManager:
         token_id = f"tlm_{secrets.token_hex(16)}"
 
         # Create token
-        token = TLMToken(
-            token_id=token_id,
-            operation_hash=operation_hash
-        )
+        token = TLMToken(token_id=token_id, operation_hash=operation_hash)
 
         # Store token
         self.active_tokens[token_id] = token
@@ -433,9 +430,11 @@ class TLMManager:
 
         return token.is_trinity_locked()
 
+
 # =========================================================================
 # VI. INTEGRATED MATHEMATICAL CORE
 # =========================================================================
+
 
 class LOGOSMathematicalCore:
     """Integrated mathematical core for LOGOS AGI system"""
@@ -494,7 +493,9 @@ class LOGOSMathematicalCore:
         """Check if mathematical core is operational"""
         return self._bootstrap_verified
 
-    def create_trinity_quaternion(self, existence: float, goodness: float, truth: float) -> Quaternion:
+    def create_trinity_quaternion(
+        self, existence: float, goodness: float, truth: float
+    ) -> Quaternion:
         """Create Trinity-grounded quaternion"""
         return Quaternion(0.0, existence, goodness, truth)
 
@@ -528,24 +529,26 @@ class LOGOSMathematicalCore:
             "validation_details": {
                 "existence": existence_valid,
                 "goodness": goodness_valid,
-                "truth": truth_valid
-            }
+                "truth": truth_valid,
+            },
         }
+
 
 # =========================================================================
 # VII. MODULE EXPORTS AND MAIN
 # =========================================================================
 
 __all__ = [
-    'Quaternion',
-    'TrinityOptimizer',
-    'TrinityFractalSystem',
-    'OrbitAnalysis',
-    'OBDCKernel',
-    'TLMToken',
-    'TLMManager',
-    'LOGOSMathematicalCore'
+    "Quaternion",
+    "TrinityOptimizer",
+    "TrinityFractalSystem",
+    "OrbitAnalysis",
+    "OBDCKernel",
+    "TLMToken",
+    "TLMManager",
+    "LOGOSMathematicalCore",
 ]
+
 
 def main():
     """Main demonstration function"""
@@ -575,6 +578,7 @@ def main():
 
     else:
         print("✗ Mathematical core bootstrap failed")
+
 
 if __name__ == "__main__":
     main()

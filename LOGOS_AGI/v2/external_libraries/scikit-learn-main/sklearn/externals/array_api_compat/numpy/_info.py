@@ -181,8 +181,7 @@ class __array_namespace_info__:
         """
         if device not in ["cpu", None]:
             raise ValueError(
-                'Device not understood. Only "cpu" is allowed, but received:'
-                f" {device}"
+                'Device not understood. Only "cpu" is allowed, but received:' f" {device}"
             )
         return {
             "real floating": dtype(float64),
@@ -253,8 +252,7 @@ class __array_namespace_info__:
         """
         if device not in ["cpu", None]:
             raise ValueError(
-                'Device not understood. Only "cpu" is allowed, but received:'
-                f" {device}"
+                'Device not understood. Only "cpu" is allowed, but received:' f" {device}"
             )
         if kind is None:
             return {

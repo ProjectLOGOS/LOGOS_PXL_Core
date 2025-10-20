@@ -15,9 +15,11 @@ from datetime import datetime, timezone
 import time
 import uuid
 
+
 @dataclass
 class AsyncTask:
     """Represents an asynchronous task for processing."""
+
     task_id: str
     task_type: str
     payload: Dict[str, Any]
@@ -28,6 +30,7 @@ class AsyncTask:
     def __post_init__(self):
         if self.created_at is None:
             self.created_at = datetime.now(timezone.utc)
+
 
 class AsyncDispatcher:
     """Production async dispatcher for THONOC subsystem."""
@@ -42,7 +45,7 @@ class AsyncDispatcher:
         self.running = False
 
         # Trinity-grounded parameters
-        self.trinity_ratio = 1/3
+        self.trinity_ratio = 1 / 3
         self.divine_scale = 1.732  # sqrt(3)
 
     async def start(self):
@@ -108,7 +111,9 @@ class AsyncDispatcher:
                 "task": task,
                 "result": validated_result,
                 "completed_at": datetime.now(timezone.utc),
-                "trinity_compliant": validated_result.get("trinity_validation", {}).get("compliant", False)
+                "trinity_compliant": validated_result.get("trinity_validation", {}).get(
+                    "compliant", False
+                ),
             }
 
             # Execute callback if provided
@@ -131,7 +136,7 @@ class AsyncDispatcher:
             "trinity": 3,
             "ratio": self.trinity_ratio,
             "divine_scale": self.divine_scale,
-            "processing_timestamp": time.time()
+            "processing_timestamp": time.time(),
         }
 
         # Preserve original payload
@@ -145,7 +150,7 @@ class AsyncDispatcher:
             return {
                 "error": "Result must maintain Trinity structure",
                 "original_result": result,
-                "trinity_validation": {"compliant": False, "reason": "non_dict_result"}
+                "trinity_validation": {"compliant": False, "reason": "non_dict_result"},
             }
 
         # Calculate Trinity coherence score
@@ -156,7 +161,7 @@ class AsyncDispatcher:
             "compliant": coherence_score >= self.trinity_ratio,
             "coherence_score": coherence_score,
             "validated_at": datetime.now(timezone.utc).isoformat(),
-            "mathematical_proof_grounded": True
+            "mathematical_proof_grounded": True,
         }
 
         return result
@@ -197,10 +202,10 @@ class AsyncDispatcher:
                 "fractal_processed": True,
                 "trinity_bounded": True,
                 "divine_scale_applied": trinity_context.get("divine_scale", 1.0),
-                "convergence_achieved": True
+                "convergence_achieved": True,
             },
             "payload": payload["original_payload"],
-            "mathematical_proof_grounded": True
+            "mathematical_proof_grounded": True,
         }
 
     async def _process_bayesian_update(self, payload: Dict[str, Any]) -> Dict[str, Any]:
@@ -215,15 +220,11 @@ class AsyncDispatcher:
             "result": {
                 "bayesian_updated": True,
                 "trinity_priors_applied": True,
-                "posterior_distribution": {
-                    "existence": 0.95,
-                    "truth": 0.92,
-                    "goodness": 0.89
-                },
-                "unity_preserved": trinity_context.get("unity", 1.0) == 1.0
+                "posterior_distribution": {"existence": 0.95, "truth": 0.92, "goodness": 0.89},
+                "unity_preserved": trinity_context.get("unity", 1.0) == 1.0,
             },
             "payload": payload["original_payload"],
-            "mathematical_proof_grounded": True
+            "mathematical_proof_grounded": True,
         }
 
     async def _process_modal_inference(self, payload: Dict[str, Any]) -> Dict[str, Any]:
@@ -238,13 +239,13 @@ class AsyncDispatcher:
                 "necessity_analysis": {
                     "divine_existence": "necessary",
                     "trinity_unity": "necessary",
-                    "created_contingents": "possible"
+                    "created_contingents": "possible",
                 },
                 "s5_modal_logic_applied": True,
-                "trinity_modal_coherent": True
+                "trinity_modal_coherent": True,
             },
             "payload": payload["original_payload"],
-            "mathematical_proof_grounded": True
+            "mathematical_proof_grounded": True,
         }
 
     async def _process_trinity_validation(self, payload: Dict[str, Any]) -> Dict[str, Any]:
@@ -260,14 +261,16 @@ class AsyncDispatcher:
                 "trinity_validation_complete": True,
                 "unity_check": trinity_context.get("unity", 1.0) == 1.0,
                 "trinity_check": trinity_context.get("trinity", 3) == 3,
-                "ratio_check": abs(trinity_context.get("ratio", 1/3) - 1/3) < 0.001,
-                "mathematical_consistency": True
+                "ratio_check": abs(trinity_context.get("ratio", 1 / 3) - 1 / 3) < 0.001,
+                "mathematical_consistency": True,
             },
             "payload": payload["original_payload"],
-            "mathematical_proof_grounded": True
+            "mathematical_proof_grounded": True,
         }
 
-    async def _process_generic_task(self, payload: Dict[str, Any], task_type: str) -> Dict[str, Any]:
+    async def _process_generic_task(
+        self, payload: Dict[str, Any], task_type: str
+    ) -> Dict[str, Any]:
         """Process generic task with Trinity enhancement."""
         await asyncio.sleep(0.1)  # Simulate processing time
 
@@ -277,10 +280,10 @@ class AsyncDispatcher:
             "result": {
                 "generic_processing_complete": True,
                 "trinity_enhanced": True,
-                "task_type": task_type
+                "task_type": task_type,
             },
             "payload": payload["original_payload"],
-            "mathematical_proof_grounded": True
+            "mathematical_proof_grounded": True,
         }
 
     def get_status(self) -> Dict[str, Any]:
@@ -293,9 +296,9 @@ class AsyncDispatcher:
             "max_workers": self.max_workers,
             "trinity_parameters": {
                 "trinity_ratio": self.trinity_ratio,
-                "divine_scale": self.divine_scale
+                "divine_scale": self.divine_scale,
             },
-            "mathematical_proof_status": "verified"
+            "mathematical_proof_status": "verified",
         }
 
     def get_completion_statistics(self) -> Dict[str, Any]:
@@ -304,7 +307,8 @@ class AsyncDispatcher:
             return {"status": "no_completed_tasks"}
 
         trinity_compliant_count = sum(
-            1 for task_data in self.completed_tasks.values()
+            1
+            for task_data in self.completed_tasks.values()
             if task_data.get("trinity_compliant", False)
         )
 
@@ -312,11 +316,11 @@ class AsyncDispatcher:
             "total_completed": len(self.completed_tasks),
             "trinity_compliant": trinity_compliant_count,
             "trinity_compliance_rate": trinity_compliant_count / len(self.completed_tasks),
-            "task_types_processed": list(set(
-                task_data["task"].task_type
-                for task_data in self.completed_tasks.values()
-            ))
+            "task_types_processed": list(
+                set(task_data["task"].task_type for task_data in self.completed_tasks.values())
+            ),
         }
+
 
 # Test the implementation
 async def test_async_dispatcher():
@@ -331,7 +335,7 @@ async def test_async_dispatcher():
         AsyncTask(str(uuid.uuid4()), "fractal_computation", {"data": "test1"}, priority=1),
         AsyncTask(str(uuid.uuid4()), "bayesian_update", {"data": "test2"}, priority=2),
         AsyncTask(str(uuid.uuid4()), "modal_inference", {"data": "test3"}, priority=3),
-        AsyncTask(str(uuid.uuid4()), "trinity_validation", {"data": "test4"}, priority=0)
+        AsyncTask(str(uuid.uuid4()), "trinity_validation", {"data": "test4"}, priority=0),
     ]
 
     for task in tasks:
@@ -350,6 +354,8 @@ async def test_async_dispatcher():
     await dispatcher.stop()
     return len(dispatcher.completed_tasks) == len(tasks)
 
+
 if __name__ == "__main__":
     import asyncio
+
     asyncio.run(test_async_dispatcher())

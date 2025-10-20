@@ -1,17 +1,21 @@
 from collections import defaultdict
+
 try:
     from causallearn.search.ConstraintBased.PC import pc
     from causallearn.utils.cit import fisherz
+
     CAUSALLEARN_AVAILABLE = True
 except ImportError:
     CAUSALLEARN_AVAILABLE = False
     pc = None
     fisherz = None
 
+
 class SCM:
     """
     Structural Causal Model with async fit capability.
     """
+
     def __init__(self, dag=None):
         self.dag = dag or {}
         self.parameters = {}
@@ -29,7 +33,7 @@ class SCM:
         if len(data) > 50 and not self.dag:
             print("[SCM] Performing causal discovery...")
             df = pd.DataFrame(data)
-            df = df.apply(pd.to_numeric, errors='coerce').dropna()
+            df = df.apply(pd.to_numeric, errors="coerce").dropna()
             if not df.empty:
                 cg = pc(df.to_numpy(), alpha=0.05, ci_test=fisherz, verbose=False)
                 # This learned graph could be used to update self.dag
@@ -46,7 +50,8 @@ class SCM:
 
             self.parameters[node] = {
                 key: {v: c / sum(freq.values()) for v, c in freq.items()}
-                for key, freq in counts[node].items() if sum(freq.values()) > 0
+                for key, freq in counts[node].items()
+                if sum(freq.values()) > 0
             }
         return True
 
@@ -57,8 +62,8 @@ class SCM:
         return new
 
     def counterfactual(self, query: dict):
-        target = query.get('target')
-        do = query.get('do', {})
+        target = query.get("target")
+        do = query.get("do", {})
 
         if target in do:
             return 1.0

@@ -4,13 +4,7 @@ from torch import *  # noqa: F403
 import torch
 
 for n in dir(torch):
-    if (
-        n.startswith("_")
-        or n.endswith("_")
-        or "cuda" in n
-        or "cpu" in n
-        or "backward" in n
-    ):
+    if n.startswith("_") or n.endswith("_") or "cuda" in n or "cpu" in n or "backward" in n:
         continue
     exec(f"{n} = torch.{n}")
 del n

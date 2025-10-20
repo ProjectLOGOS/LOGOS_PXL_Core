@@ -94,13 +94,10 @@ def dims(lists=0):
         else:
             assert unpack.opname == "UNPACK_SEQUENCE"
             ndims = unpack.argval
-            names = tuple(
-                extract_name(instructions[first + 1 + i]) for i in range(ndims)
-            )
+            names = tuple(extract_name(instructions[first + 1 + i]) for i in range(ndims))
             first_list = len(names) - lists
             _cache[key] = lambda: tuple(
-                Dim(n) if i < first_list else DimList(name=n)
-                for i, n in enumerate(names)
+                Dim(n) if i < first_list else DimList(name=n) for i, n in enumerate(names)
             )
     return _cache[key]()
 

@@ -25,9 +25,7 @@ class BaseTestClass(JitTestCase):
         super().setUp()
         self.tensorexpr_options = TensorExprTestOptions()
         self.devices = ["cpu"] if not torch.cuda.is_available() else ["cpu", "cuda"]
-        self.dtypes = (
-            [torch.float32, torch.bfloat16] if LLVM_ENABLED else [torch.float32]
-        )
+        self.dtypes = [torch.float32, torch.bfloat16] if LLVM_ENABLED else [torch.float32]
 
     def tearDown(self):
         self.tensorexpr_options.restore()
@@ -64,9 +62,7 @@ class TestTensorExprFuser(BaseTestClass):
             bbb = torch.add(aaa, z)
             return bbb
 
-        traced = torch.jit.trace(
-            easy, (torch.rand(1024), torch.rand(1024), torch.rand(1024))
-        )
+        traced = torch.jit.trace(easy, (torch.rand(1024), torch.rand(1024), torch.rand(1024)))
 
         a = torch.rand(1024)
         b = torch.rand(1024)
@@ -178,9 +174,7 @@ class TestTensorExprFuser(BaseTestClass):
             d = c + a
             return d
 
-        traced = torch.jit.trace(
-            easy, (torch.rand(1024), torch.rand(1024), torch.rand(1024))
-        )
+        traced = torch.jit.trace(easy, (torch.rand(1024), torch.rand(1024), torch.rand(1024)))
 
         a = torch.rand(1024)
         b = torch.rand(1024)
@@ -206,9 +200,7 @@ class TestTensorExprFuser(BaseTestClass):
             return d
 
         shape = 32, 32
-        traced = torch.jit.trace(
-            easy, (torch.rand(shape), torch.rand(shape), torch.rand(shape))
-        )
+        traced = torch.jit.trace(easy, (torch.rand(shape), torch.rand(shape), torch.rand(shape)))
 
         a = torch.rand(shape)
         b = torch.rand(shape)
@@ -230,9 +222,7 @@ class TestTensorExprFuser(BaseTestClass):
             return b
 
         N = 32
-        traced = torch.jit.trace(
-            easy, (torch.rand(N, N), torch.rand(N), torch.rand(N, N))
-        )
+        traced = torch.jit.trace(easy, (torch.rand(N, N), torch.rand(N), torch.rand(N, N)))
 
         a = torch.rand(N, N)
         b = torch.rand(N)
@@ -320,9 +310,7 @@ class TestTensorExprFuser(BaseTestClass):
             bbb = torch.sub(aaa, z)
             return bbb
 
-        traced = torch.jit.trace(
-            easy, (torch.rand(1024), torch.rand(1024), torch.rand(1024))
-        )
+        traced = torch.jit.trace(easy, (torch.rand(1024), torch.rand(1024), torch.rand(1024)))
 
         a = torch.rand(1024)
         b = torch.rand(1024)
@@ -917,9 +905,7 @@ class TestTensorExprFuser(BaseTestClass):
             test_hardtanh,
             test_sigmoid,
         }
-        fn_dev_dtype = itertools.product(
-            gpu_only_fns.union(fns), self.devices, self.dtypes
-        )
+        fn_dev_dtype = itertools.product(gpu_only_fns.union(fns), self.devices, self.dtypes)
 
         torch.manual_seed(0)
         for torch_fn, dev, data_type in fn_dev_dtype:
@@ -1117,17 +1103,13 @@ class TestTensorExprFuser(BaseTestClass):
                 x = warmup_and_run_forward(traced, *values)
                 self.assertLastGraphAllFused()
                 ref = foo(*values)
-                np.testing.assert_allclose(
-                    ref.cpu().float().numpy(), x.cpu().float().numpy()
-                )
+                np.testing.assert_allclose(ref.cpu().float().numpy(), x.cpu().float().numpy())
 
             # Test channels-last
             for _cur_dim in range(4):
                 _dim = _cur_dim
                 values = [
-                    torch.randn((2, 3, 4, 5), device=device).to(
-                        memory_format=torch.channels_last
-                    )
+                    torch.randn((2, 3, 4, 5), device=device).to(memory_format=torch.channels_last)
                     for _ in range(10)
                 ]
                 traced = torch.jit.trace(foo, values)
@@ -1187,9 +1169,7 @@ class TestTensorExprFuser(BaseTestClass):
             M = 16
             Ns = [128, 16, 1]
             dtypes = [torch.half, torch.float32, torch.double]
-            values = [
-                torch.randn(M, N, device=device, dtype=dt) for N, dt in zip(Ns, dtypes)
-            ]
+            values = [torch.randn(M, N, device=device, dtype=dt) for N, dt in zip(Ns, dtypes)]
             traced = torch.jit.trace(foo, values)
 
             x = warmup_and_run_forward(traced, *values)
@@ -1283,9 +1263,7 @@ class TestTensorExprFuser(BaseTestClass):
             b = y[0:512:2]
             return a + b
 
-        traced = torch.jit.trace(
-            easy, (torch.ones(1024, 1024), torch.zeros(1024, 1024))
-        )
+        traced = torch.jit.trace(easy, (torch.ones(1024, 1024), torch.zeros(1024, 1024)))
 
         a = torch.ones(1024, 1024)
         x = traced(a, a)
@@ -1338,9 +1316,7 @@ class TestTensorExprFuser(BaseTestClass):
                 res = traced(inp, inp)
                 # Use eager mode as reference.
                 ref = test(inp, inp)
-                np.testing.assert_allclose(
-                    ref, res.cpu().numpy(), rtol=1e-06, atol=1e-06
-                )
+                np.testing.assert_allclose(ref, res.cpu().numpy(), rtol=1e-06, atol=1e-06)
                 torch._C._jit_set_texpr_reductions_enabled(old)
 
     def test_softmax_cpu(self):
@@ -1736,9 +1712,7 @@ class TestTensorExprFuser(BaseTestClass):
 
             for data_type in self.dtypes:
                 a = torch.rand(20, 20, dtype=data_type, device=device)
-                b = torch.rand(20 * 29, dtype=data_type, device=device).as_strided(
-                    [20], [29]
-                )
+                b = torch.rand(20 * 29, dtype=data_type, device=device).as_strided([20], [29])
                 c = torch.ones(20, dtype=torch.int64, device=device)
                 traced = torch.jit.trace(foo, (a, b, c))
                 ref = foo(a, b, c)
@@ -1783,15 +1757,9 @@ class TestTensorExprFuser(BaseTestClass):
         for strategy in ["STATIC", "DYNAMIC"]:
             old_strategy = torch.jit.set_fusion_strategy([(strategy, 10)])
             for _func, _shape, _mem_layouts, _permute in configs:
-                a = torch.rand(_shape, dtype=torch.float32).to(
-                    memory_format=_mem_layouts[0]
-                )
-                b = torch.rand(_shape, dtype=torch.float32).to(
-                    memory_format=_mem_layouts[1]
-                )
-                c = torch.rand(_shape, dtype=torch.float32).to(
-                    memory_format=_mem_layouts[2]
-                )
+                a = torch.rand(_shape, dtype=torch.float32).to(memory_format=_mem_layouts[0])
+                b = torch.rand(_shape, dtype=torch.float32).to(memory_format=_mem_layouts[1])
+                c = torch.rand(_shape, dtype=torch.float32).to(memory_format=_mem_layouts[2])
                 run_foo_case(_func, a, b, c)
 
                 a = a.permute(dims=_permute)

@@ -51,9 +51,7 @@ def unroll(uf, IndexType, InType, OutType, use_weights, isa, fused, use_offsets)
                 f"            reinterpret_cast<const char*>(&ip_next_T0[{regid:d}]), _MM_HINT_T0);"
             )
         else:
-            code.append(
-                f"        // skip unnecessary prefetch of (&ip_next_T0[{regid:d}])"
-            )
+            code.append(f"        // skip unnecessary prefetch of (&ip_next_T0[{regid:d}])")
 
         return code
 
@@ -62,15 +60,11 @@ def unroll(uf, IndexType, InType, OutType, use_weights, isa, fused, use_offsets)
 
     if use_offsets:
         code.append(
-            "    for ("
-            + IndexType
-            + " rangeIndex = 0; rangeIndex < output_size; ++rangeIndex) {"
+            "    for (" + IndexType + " rangeIndex = 0; rangeIndex < output_size; ++rangeIndex) {"
         )
     else:
         code.append(
-            "    for ("
-            + IndexType
-            + " rangeIndex = 0; rangeIndex < output_size; ++rangeIndex) {"
+            "    for (" + IndexType + " rangeIndex = 0; rangeIndex < output_size; ++rangeIndex) {"
         )
 
     code.append("      " + OutType + "* op = &out[rangeIndex * block_size];")
@@ -108,17 +102,13 @@ def unroll(uf, IndexType, InType, OutType, use_weights, isa, fused, use_offsets)
         )
     code.append("        const " + IndexType + " idx = indices[dataInd];")
     code.append(
-        "        if (idx < 0 || idx >= data_size) {\n"
-        + "          return false;\n"
-        + "        }"
+        "        if (idx < 0 || idx >= data_size) {\n" + "          return false;\n" + "        }"
     )
 
     if InType == "uint8_t":
         code.append("        " + OutType + " wgt = 1.f;")
         code.append("        if (weights) {")
-        code.append(
-            "          wgt = weights[IS_WEIGHT_POSITIONAL ? (dataInd - start) : dataInd];"
-        )
+        code.append("          wgt = weights[IS_WEIGHT_POSITIONAL ? (dataInd - start) : dataInd];")
         code.append("        }")
         if fused:
             code.append(
@@ -134,9 +124,7 @@ def unroll(uf, IndexType, InType, OutType, use_weights, isa, fused, use_offsets)
     else:
         code.append("        " + OutType + " wgt = 1.f;")
         code.append("        if (weights) {")
-        code.append(
-            "          wgt = weights[IS_WEIGHT_POSITIONAL ? (dataInd - start) : dataInd];"
-        )
+        code.append("          wgt = weights[IS_WEIGHT_POSITIONAL ? (dataInd - start) : dataInd];")
         code.append("        }")
     code.append("        __m256 vwgt = _mm256_set1_ps(wgt);")
 
@@ -155,10 +143,7 @@ def unroll(uf, IndexType, InType, OutType, use_weights, isa, fused, use_offsets)
         + "        }"
     )
 
-    code.append(
-        f"        const {InType}* ip_next_T0 = "
-        "&input[idx_pref_T0 * fused_block_size];"
-    )
+    code.append(f"        const {InType}* ip_next_T0 = " "&input[idx_pref_T0 * fused_block_size];")
 
     for i in range(0, uf):
         j = 8 * i
@@ -180,9 +165,7 @@ def unroll(uf, IndexType, InType, OutType, use_weights, isa, fused, use_offsets)
     if use_offsets:
         code.append("        __m256 vlen_inv = _mm256_set1_ps(1.0f / length);")
     else:
-        code.append(
-            "        __m256 vlen_inv = _mm256_set1_ps(1.0f / lengths[rangeIndex]);"
-        )
+        code.append("        __m256 vlen_inv = _mm256_set1_ps(1.0f / lengths[rangeIndex]);")
     for i in range(0, uf):
         j = 8 * i
         code.append(
@@ -259,15 +242,11 @@ def generic(IndexType, InType, OutType, use_weights, isa, fused, use_offsets):
 
     if use_offsets:
         code.append(
-            "    for ("
-            + IndexType
-            + " rangeIndex = 0; rangeIndex < output_size; ++rangeIndex) {"
+            "    for (" + IndexType + " rangeIndex = 0; rangeIndex < output_size; ++rangeIndex) {"
         )
     else:
         code.append(
-            "    for ("
-            + IndexType
-            + " rangeIndex = 0; rangeIndex < output_size; ++rangeIndex) {"
+            "    for (" + IndexType + " rangeIndex = 0; rangeIndex < output_size; ++rangeIndex) {"
         )
 
     code.append("      " + OutType + "* op = &out[rangeIndex * block_size];")
@@ -311,17 +290,13 @@ def generic(IndexType, InType, OutType, use_weights, isa, fused, use_offsets):
         )
     code.append("        const " + IndexType + " idx = indices[dataInd];")
     code.append(
-        "        if (idx < 0 || idx >= data_size) {\n"
-        + "          return false;\n"
-        + "        }"
+        "        if (idx < 0 || idx >= data_size) {\n" + "          return false;\n" + "        }"
     )
 
     if InType == "uint8_t":
         code.append("        " + OutType + " wgt = 1.f;")
         code.append("        if (weights) {")
-        code.append(
-            "          wgt = weights[IS_WEIGHT_POSITIONAL ? (dataInd - start) : dataInd];"
-        )
+        code.append("          wgt = weights[IS_WEIGHT_POSITIONAL ? (dataInd - start) : dataInd];")
         code.append("        }")
         if fused:
             code.append(
@@ -337,9 +312,7 @@ def generic(IndexType, InType, OutType, use_weights, isa, fused, use_offsets):
     else:
         code.append("        " + OutType + " wgt = 1.f;")
         code.append("        if (weights) {")
-        code.append(
-            "          wgt = weights[IS_WEIGHT_POSITIONAL ? (dataInd - start) : dataInd];"
-        )
+        code.append("          wgt = weights[IS_WEIGHT_POSITIONAL ? (dataInd - start) : dataInd];")
         code.append("        }")
     code.append("        __m256 vwgt = _mm256_set1_ps(wgt);")
 
@@ -357,10 +330,7 @@ def generic(IndexType, InType, OutType, use_weights, isa, fused, use_offsets):
         + "          return false;\n"
         + "        }"
     )
-    code.append(
-        f"        const {InType}* ip_next_T0 = "
-        "&input[idx_pref_T0 * fused_block_size];"
-    )
+    code.append(f"        const {InType}* ip_next_T0 = " "&input[idx_pref_T0 * fused_block_size];")
 
     # compute and store main loop
     code.append("        j = 0;")
@@ -469,9 +439,7 @@ for o in options:
     prefix = "Fused8BitRowwise" if opts.fused else ""
     code.append("template <bool IS_WEIGHT_POSITIONAL>")
     if opts.use_offsets:
-        fn_base = (
-            f"{prefix}EmbeddingLookupIdx_{IndexTypeName}_{InTypeName}_{OutTypeName}"
-        )
+        fn_base = f"{prefix}EmbeddingLookupIdx_{IndexTypeName}_{InTypeName}_{OutTypeName}"
     else:
         fn_base = f"{prefix}EmbeddingLookup_{IndexTypeName}_{InTypeName}_{OutTypeName}"
     suffix = "__avx2_fma"
@@ -512,29 +480,19 @@ for o in options:
     # code.append("printf(\"calling " + fn + "\\n\");");
 
     code.append("  if (block_size == 128) {")
-    code += unroll(
-        16, IndexType, InType, OutType, True, "AVX2", opts.fused, opts.use_offsets
-    )
+    code += unroll(16, IndexType, InType, OutType, True, "AVX2", opts.fused, opts.use_offsets)
     code.append("  } else if (block_size == 64) {")
-    code += unroll(
-        8, IndexType, InType, OutType, True, "AVX2", opts.fused, opts.use_offsets
-    )
+    code += unroll(8, IndexType, InType, OutType, True, "AVX2", opts.fused, opts.use_offsets)
     code.append("  } else if (block_size == 32) {")
-    code += unroll(
-        4, IndexType, InType, OutType, True, "AVX2", opts.fused, opts.use_offsets
-    )
+    code += unroll(4, IndexType, InType, OutType, True, "AVX2", opts.fused, opts.use_offsets)
     code.append("  } else if (block_size == 16) {")
-    code += unroll(
-        2, IndexType, InType, OutType, True, "AVX2", opts.fused, opts.use_offsets
-    )
+    code += unroll(2, IndexType, InType, OutType, True, "AVX2", opts.fused, opts.use_offsets)
     code.append("  } else {")
     code.append("    // generic code")
     code.append(
         "    // NOLINTNEXTLINE(modernize-avoid-c-arrays,cppcoreguidelines-avoid-magic-numbers,cppcoreguidelines-avoid-c-arrays)"
     )
-    code += generic(
-        IndexType, InType, OutType, True, "AVX2", opts.fused, opts.use_offsets
-    )
+    code += generic(IndexType, InType, OutType, True, "AVX2", opts.fused, opts.use_offsets)
     code.append("  }")
     code.append("  return dataInd == index_size;")
 
@@ -550,13 +508,7 @@ for o in options:
             code.append(ret_string)
         else:
             code.append(
-                "  return "
-                + fn_base
-                + suffix
-                + "<"
-                + extra_space
-                + is_weight_positional
-                + ">("
+                "  return " + fn_base + suffix + "<" + extra_space + is_weight_positional + ">("
             )
         code.append("      block_size,")
         code.append("      output_size,")

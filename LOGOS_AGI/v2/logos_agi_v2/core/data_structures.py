@@ -14,6 +14,7 @@ from dataclasses import dataclass, field
 
 class OntologicalType(Enum):
     """Ontological dimensions in trinitarian framework."""
+
     EXISTENCE = "𝔼"
     GOODNESS = "𝔾"
     TRUTH = "𝕋"
@@ -23,7 +24,7 @@ class OntologicalType(Enum):
 class FunctionType:
     """Function type constructor."""
 
-    def __init__(self, domain: OntologicalType, codomain: Union[OntologicalType, 'FunctionType']):
+    def __init__(self, domain: OntologicalType, codomain: Union[OntologicalType, "FunctionType"]):
         """Initialize function type.
 
         Args:
@@ -43,12 +44,12 @@ class FunctionType:
         """Check equality with another type."""
         if not isinstance(other, FunctionType):
             return False
-        return (self.domain == other.domain and
-                self.codomain == other.codomain)
+        return self.domain == other.domain and self.codomain == other.codomain
 
 
 class ModalStatus(Enum):
     """Modal status classifications."""
+
     NECESSARY = "necessary"
     ACTUAL = "actual"
     POSSIBLE = "possible"
@@ -59,6 +60,7 @@ class ModalStatus(Enum):
 @dataclass
 class FractalPosition:
     """Position in fractal space."""
+
     c_real: float
     c_imag: float
     iterations: int
@@ -79,11 +81,11 @@ class FractalPosition:
             "iterations": self.iterations,
             "in_set": self.in_set,
             "final_z": self.final_z,
-            "escape_radius": self.escape_radius
+            "escape_radius": self.escape_radius,
         }
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> 'FractalPosition':
+    def from_dict(cls, data: Dict[str, Any]) -> "FractalPosition":
         """Create from dictionary representation."""
         return cls(
             c_real=data.get("c_real", 0.0),
@@ -91,13 +93,14 @@ class FractalPosition:
             iterations=data.get("iterations", 0),
             in_set=data.get("in_set", False),
             final_z=data.get("final_z", (0.0, 0.0)),
-            escape_radius=data.get("escape_radius", 2.0)
+            escape_radius=data.get("escape_radius", 2.0),
         )
 
 
 @dataclass
 class ProcessingResult:
     """Result of query processing."""
+
     query: str
     trinity_vector: Tuple[float, float, float]
     modal_status: ModalStatus
@@ -117,11 +120,11 @@ class ProcessingResult:
             "fractal_position": self.fractal_position.to_dict(),
             "lambda_expr": str(self.lambda_expr) if self.lambda_expr else None,
             "entailments": [str(e) for e in self.entailments],
-            "summary": self.summary
+            "summary": self.summary,
         }
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> 'ProcessingResult':
+    def from_dict(cls, data: Dict[str, Any]) -> "ProcessingResult":
         """Create from dictionary representation."""
         fractal_pos_data = data.get("fractal_position", {})
 
@@ -132,14 +135,15 @@ class ProcessingResult:
             coherence=data.get("coherence", 0.0),
             fractal_position=FractalPosition.from_dict(fractal_pos_data),
             lambda_expr=None,  # Cannot reconstruct lambda expression from string
-            entailments=[],    # Cannot reconstruct entailments
-            summary=data.get("summary", "")
+            entailments=[],  # Cannot reconstruct entailments
+            summary=data.get("summary", ""),
         )
 
 
 @dataclass
 class OntologicalRelation:
     """Relation between ontological nodes."""
+
     source_id: str
     target_id: str
     relation_type: str
@@ -153,18 +157,18 @@ class OntologicalRelation:
             "target_id": self.target_id,
             "relation_type": self.relation_type,
             "strength": self.strength,
-            "metadata": self.metadata
+            "metadata": self.metadata,
         }
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> 'OntologicalRelation':
+    def from_dict(cls, data: Dict[str, Any]) -> "OntologicalRelation":
         """Create from dictionary representation."""
         return cls(
             source_id=data.get("source_id", ""),
             target_id=data.get("target_id", ""),
             relation_type=data.get("relation_type", ""),
             strength=data.get("strength", 0.0),
-            metadata=data.get("metadata", {})
+            metadata=data.get("metadata", {}),
         )
 
 

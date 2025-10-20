@@ -78,9 +78,7 @@ class JitLlgaTestCase(JitTestCase):
         with torch.no_grad(), torch._jit_internal._disable_emit_hooks():
             if dtype == torch.bfloat16:
                 # We rely upon eager-mode AMP support for BF16
-                with torch.autocast(
-                    device_type="cpu", cache_enabled=False, dtype=torch.bfloat16
-                ):
+                with torch.autocast(device_type="cpu", cache_enabled=False, dtype=torch.bfloat16):
                     traced = torch.jit.trace(m, x)
                     if isinstance(m, torch.nn.Module):
                         traced = torch.jit.freeze(traced)
@@ -146,9 +144,7 @@ def get_eltwise_fn(name):
         raise NameError(f"Eltwise function {name} not found")
 
 
-@unittest.skipIf(
-    IS_AVX512_UNSUPPORTED, "This test fails for BF16 on machines without AVX512."
-)
+@unittest.skipIf(IS_AVX512_UNSUPPORTED, "This test fails for BF16 on machines without AVX512.")
 @unittest.skipIf(LLGA_NOT_ENABLED, "MKL-DNN build is disabled")
 class TestOp(JitLlgaTestCase):
     @onlyCPU
@@ -428,9 +424,7 @@ class TestOp(JitLlgaTestCase):
         self.assertEqual(m(x), traced(x))
 
 
-@unittest.skipIf(
-    IS_AVX512_UNSUPPORTED, "This test fails for BF16 on machines without AVX512."
-)
+@unittest.skipIf(IS_AVX512_UNSUPPORTED, "This test fails for BF16 on machines without AVX512.")
 @unittest.skipIf(LLGA_NOT_ENABLED, "MKL-DNN build is disabled")
 class TestFusionPattern(JitLlgaTestCase):
     @onlyCPU
@@ -622,9 +616,7 @@ class TestFusionPattern(JitLlgaTestCase):
         x = torch.rand(1, 32, 28, 28)
         _, graph = self.checkTrace(m, [x], dtype)
         self.assertGraphContainsExactly(graph, LLGA_FUSION_GROUP, 1)
-        self.assertFused(
-            graph, ["aten::_convolution", "aten::batch_norm", "aten::relu"]
-        )
+        self.assertFused(graph, ["aten::_convolution", "aten::batch_norm", "aten::relu"])
 
     @onlyCPU
     @dtypes(torch.float32, torch.bfloat16)
@@ -867,9 +859,7 @@ class TestDynamoAOT(JitTestCase):
         torch._dynamo.reset()
 
 
-@unittest.skipIf(
-    IS_AVX512_UNSUPPORTED, "This test fails for BF16 on machines without AVX512."
-)
+@unittest.skipIf(IS_AVX512_UNSUPPORTED, "This test fails for BF16 on machines without AVX512.")
 @unittest.skipIf(LLGA_NOT_ENABLED, "MKL-DNN build is disabled")
 class TestModel(JitLlgaTestCase):
     @skipIfNoTorchVision

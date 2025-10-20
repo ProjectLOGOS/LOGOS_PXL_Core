@@ -221,15 +221,11 @@ class __array_namespace_info__:
         }
 
     @overload
-    def dtypes(
-        self, /, *, device: _Device | None = None, kind: None = None
-    ) -> DTypesAll:
+    def dtypes(self, /, *, device: _Device | None = None, kind: None = None) -> DTypesAll:
         ...
 
     @overload
-    def dtypes(
-        self, /, *, device: _Device | None = None, kind: L["bool"]
-    ) -> DTypesBool:
+    def dtypes(self, /, *, device: _Device | None = None, kind: L["bool"]) -> DTypesBool:
         ...
 
     @overload
@@ -245,15 +241,11 @@ class __array_namespace_info__:
         ...
 
     @overload
-    def dtypes(
-        self, /, *, device: _Device | None = None, kind: L["integral"]
-    ) -> DTypesIntegral:
+    def dtypes(self, /, *, device: _Device | None = None, kind: L["integral"]) -> DTypesIntegral:
         ...
 
     @overload
-    def dtypes(
-        self, /, *, device: _Device | None = None, kind: L["real floating"]
-    ) -> DTypesReal:
+    def dtypes(self, /, *, device: _Device | None = None, kind: L["real floating"]) -> DTypesReal:
         ...
 
     @overload
@@ -263,9 +255,7 @@ class __array_namespace_info__:
         ...
 
     @overload
-    def dtypes(
-        self, /, *, device: _Device | None = None, kind: L["numeric"]
-    ) -> DTypesNumeric:
+    def dtypes(self, /, *, device: _Device | None = None, kind: L["numeric"]) -> DTypesNumeric:
         ...
 
     def dtypes(

@@ -28,24 +28,30 @@ from core.data_structures import SystemState, ValidationStatus, ProcessingPriori
 # I. FOUNDATIONAL PRINCIPLES
 # =========================================================================
 
+
 class PrincipleType(Enum):
     """Types of governing principles"""
-    ONTOLOGICAL = "ontological"     # Being and existence
-    LOGICAL = "logical"             # Reasoning and inference
-    MORAL = "moral"                 # Good and evil
-    EPISTEMIC = "epistemic"         # Knowledge and truth
-    OPERATIONAL = "operational"     # System behavior
+
+    ONTOLOGICAL = "ontological"  # Being and existence
+    LOGICAL = "logical"  # Reasoning and inference
+    MORAL = "moral"  # Good and evil
+    EPISTEMIC = "epistemic"  # Knowledge and truth
+    OPERATIONAL = "operational"  # System behavior
+
 
 class PrincipleScope(Enum):
     """Scope of principle application"""
-    UNIVERSAL = "universal"         # Applies to all operations
-    SUBSYSTEM = "subsystem"         # Applies to specific subsystem
-    OPERATION = "operation"         # Applies to specific operation type
-    CONTEXT = "context"             # Applies in specific contexts
+
+    UNIVERSAL = "universal"  # Applies to all operations
+    SUBSYSTEM = "subsystem"  # Applies to specific subsystem
+    OPERATION = "operation"  # Applies to specific operation type
+    CONTEXT = "context"  # Applies in specific contexts
+
 
 @dataclass
 class PrincipleViolation:
     """Record of principle violation"""
+
     principle_id: str
     violation_description: str
     severity: str  # minor, major, critical
@@ -53,11 +59,18 @@ class PrincipleViolation:
     context: Dict[str, Any]
     remediation_suggested: Optional[str] = None
 
+
 class Principle(ABC):
     """Abstract base class for all principles"""
 
-    def __init__(self, principle_id: str, name: str, description: str,
-                 principle_type: PrincipleType, scope: PrincipleScope):
+    def __init__(
+        self,
+        principle_id: str,
+        name: str,
+        description: str,
+        principle_type: PrincipleType,
+        scope: PrincipleScope,
+    ):
         self.principle_id = principle_id
         self.name = name
         self.description = description
@@ -75,20 +88,23 @@ class Principle(ABC):
         """
         pass
 
-    def create_violation(self, description: str, severity: str,
-                        context: Dict[str, Any]) -> PrincipleViolation:
+    def create_violation(
+        self, description: str, severity: str, context: Dict[str, Any]
+    ) -> PrincipleViolation:
         """Create violation record"""
         return PrincipleViolation(
             principle_id=self.principle_id,
             violation_description=description,
             severity=severity,
             timestamp=time.time(),
-            context=context
+            context=context,
         )
+
 
 # =========================================================================
 # II. TRINITY PRINCIPLES
 # =========================================================================
+
 
 class TrinityExistencePrinciple(Principle):
     """Principle ensuring operations respect existence and being"""
@@ -99,7 +115,7 @@ class TrinityExistencePrinciple(Principle):
             name="Trinity Existence Principle",
             description="All operations must be grounded in existence and being",
             principle_type=PrincipleType.ONTOLOGICAL,
-            scope=PrincipleScope.UNIVERSAL
+            scope=PrincipleScope.UNIVERSAL,
         )
 
     def evaluate(self, operation_data: Dict[str, Any]) -> Tuple[bool, Optional[str]]:
@@ -126,6 +142,7 @@ class TrinityExistencePrinciple(Principle):
 
         return True, None
 
+
 class TrinityGoodnessPrinciple(Principle):
     """Principle ensuring operations align with goodness"""
 
@@ -135,7 +152,7 @@ class TrinityGoodnessPrinciple(Principle):
             name="Trinity Goodness Principle",
             description="All operations must be oriented toward goodness",
             principle_type=PrincipleType.MORAL,
-            scope=PrincipleScope.UNIVERSAL
+            scope=PrincipleScope.UNIVERSAL,
         )
 
     def evaluate(self, operation_data: Dict[str, Any]) -> Tuple[bool, Optional[str]]:
@@ -146,8 +163,18 @@ class TrinityGoodnessPrinciple(Principle):
 
         # Check for explicitly evil operations
         evil_operations = [
-            "harm", "damage", "destroy", "corrupt", "deceive", "manipulate",
-            "exploit", "abuse", "torture", "kill", "steal", "lie"
+            "harm",
+            "damage",
+            "destroy",
+            "corrupt",
+            "deceive",
+            "manipulate",
+            "exploit",
+            "abuse",
+            "torture",
+            "kill",
+            "steal",
+            "lie",
         ]
 
         operation_lower = operation.lower()
@@ -159,8 +186,18 @@ class TrinityGoodnessPrinciple(Principle):
 
         # Check for positive goodness indicators
         goodness_indicators = [
-            "help", "assist", "heal", "protect", "serve", "benefit",
-            "improve", "enhance", "support", "care", "love", "create"
+            "help",
+            "assist",
+            "heal",
+            "protect",
+            "serve",
+            "benefit",
+            "improve",
+            "enhance",
+            "support",
+            "care",
+            "love",
+            "create",
         ]
 
         has_goodness = any(
@@ -171,6 +208,7 @@ class TrinityGoodnessPrinciple(Principle):
         # Neutral operations are acceptable, but explicit evil is not
         return True, None
 
+
 class TrinityTruthPrinciple(Principle):
     """Principle ensuring operations respect truth"""
 
@@ -180,7 +218,7 @@ class TrinityTruthPrinciple(Principle):
             name="Trinity Truth Principle",
             description="All operations must be grounded in truth",
             principle_type=PrincipleType.EPISTEMIC,
-            scope=PrincipleScope.UNIVERSAL
+            scope=PrincipleScope.UNIVERSAL,
         )
 
     def evaluate(self, operation_data: Dict[str, Any]) -> Tuple[bool, Optional[str]]:
@@ -198,8 +236,7 @@ class TrinityTruthPrinciple(Principle):
             prop_lower = proposition.lower()
 
             # Simple contradiction detection
-            if ("true" in prop_lower and "false" in prop_lower and
-                "same" in prop_lower):
+            if "true" in prop_lower and "false" in prop_lower and "same" in prop_lower:
                 return False, "Proposition contains logical contradiction"
 
             # Check for undefined terms being asserted as true
@@ -210,9 +247,11 @@ class TrinityTruthPrinciple(Principle):
         # Truth principle satisfied if no explicit falsehood detected
         return True, None
 
+
 # =========================================================================
 # III. LOGICAL PRINCIPLES
 # =========================================================================
+
 
 class NonContradictionPrinciple(Principle):
     """Principle of non-contradiction (¬(P ∧ ¬P))"""
@@ -223,7 +262,7 @@ class NonContradictionPrinciple(Principle):
             name="Non-Contradiction Principle",
             description="Nothing can be both true and false simultaneously",
             principle_type=PrincipleType.LOGICAL,
-            scope=PrincipleScope.UNIVERSAL
+            scope=PrincipleScope.UNIVERSAL,
         )
 
     def evaluate(self, operation_data: Dict[str, Any]) -> Tuple[bool, Optional[str]]:
@@ -252,6 +291,7 @@ class NonContradictionPrinciple(Principle):
 
         return True, None
 
+
 class ExcludedMiddlePrinciple(Principle):
     """Principle of excluded middle (P ∨ ¬P)"""
 
@@ -261,7 +301,7 @@ class ExcludedMiddlePrinciple(Principle):
             name="Excluded Middle Principle",
             description="Every proposition is either true or false",
             principle_type=PrincipleType.LOGICAL,
-            scope=PrincipleScope.UNIVERSAL
+            scope=PrincipleScope.UNIVERSAL,
         )
 
     def evaluate(self, operation_data: Dict[str, Any]) -> Tuple[bool, Optional[str]]:
@@ -279,7 +319,7 @@ class ExcludedMiddlePrinciple(Principle):
             "neither true nor false",
             "both true and false",
             "undefined truth value",
-            "partially true"
+            "partially true",
         ]
 
         for violation in middle_violations:
@@ -288,9 +328,11 @@ class ExcludedMiddlePrinciple(Principle):
 
         return True, None
 
+
 # =========================================================================
 # IV. OPERATIONAL PRINCIPLES
 # =========================================================================
+
 
 class TrinityOptimalityPrinciple(Principle):
     """Principle that operations should optimize for Trinity (n=3)"""
@@ -301,7 +343,7 @@ class TrinityOptimalityPrinciple(Principle):
             name="Trinity Optimality Principle",
             description="Operations should be structured for Trinity optimization",
             principle_type=PrincipleType.OPERATIONAL,
-            scope=PrincipleScope.UNIVERSAL
+            scope=PrincipleScope.UNIVERSAL,
         )
 
     def evaluate(self, operation_data: Dict[str, Any]) -> Tuple[bool, Optional[str]]:
@@ -315,7 +357,7 @@ class TrinityOptimalityPrinciple(Principle):
             len(structure.get("components", [])) == 3,
             "existence" in str(operation_data).lower(),
             "goodness" in str(operation_data).lower(),
-            "truth" in str(operation_data).lower()
+            "truth" in str(operation_data).lower(),
         ]
 
         # Operation should have some Trinity alignment
@@ -326,6 +368,7 @@ class TrinityOptimalityPrinciple(Principle):
 
         return True, None
 
+
 class CoherencePrinciple(Principle):
     """Principle ensuring operational coherence"""
 
@@ -335,7 +378,7 @@ class CoherencePrinciple(Principle):
             name="Coherence Principle",
             description="Operations must be internally coherent",
             principle_type=PrincipleType.OPERATIONAL,
-            scope=PrincipleScope.UNIVERSAL
+            scope=PrincipleScope.UNIVERSAL,
         )
 
     def evaluate(self, operation_data: Dict[str, Any]) -> Tuple[bool, Optional[str]]:
@@ -357,9 +400,11 @@ class CoherencePrinciple(Principle):
 
         return True, None
 
+
 # =========================================================================
 # V. PRINCIPLE ENGINE
 # =========================================================================
+
 
 class PrincipleEngine:
     """Central engine for principle evaluation and enforcement"""
@@ -401,15 +446,13 @@ class PrincipleEngine:
                 results[principle_id] = {
                     "compliant": compliant,
                     "principle_name": principle.name,
-                    "violation_reason": violation_reason
+                    "violation_reason": violation_reason,
                 }
 
                 if not compliant:
                     all_compliant = False
                     violation = principle.create_violation(
-                        violation_reason or "Principle violation",
-                        "major",
-                        operation_data
+                        violation_reason or "Principle violation", "major", operation_data
                     )
                     violations.append(violation)
                     self.violations.append(violation)
@@ -419,7 +462,7 @@ class PrincipleEngine:
                 results[principle_id] = {
                     "compliant": False,
                     "principle_name": principle.name,
-                    "violation_reason": f"Evaluation error: {e}"
+                    "violation_reason": f"Evaluation error: {e}",
                 }
                 all_compliant = False
 
@@ -427,7 +470,7 @@ class PrincipleEngine:
             "overall_compliant": all_compliant,
             "principle_results": results,
             "violations": [v.__dict__ for v in violations],
-            "evaluation_timestamp": time.time()
+            "evaluation_timestamp": time.time(),
         }
 
     def get_violations(self, severity: Optional[str] = None) -> List[PrincipleViolation]:
@@ -440,12 +483,15 @@ class PrincipleEngine:
         """Clear violation history"""
         self.violations.clear()
 
+
 # =========================================================================
 # VI. DECORATORS FOR PRINCIPLE ENFORCEMENT
 # =========================================================================
 
+
 def validate_with_principles(engine: PrincipleEngine):
     """Decorator to validate function calls with principles"""
+
     def decorator(func: Callable):
         @wraps(func)
         def wrapper(*args, **kwargs):
@@ -454,7 +500,7 @@ def validate_with_principles(engine: PrincipleEngine):
                 "operation": func.__name__,
                 "entity": kwargs.get("entity", "unknown"),
                 "proposition": kwargs.get("proposition", ""),
-                "context": kwargs
+                "context": kwargs,
             }
 
             # Evaluate principles
@@ -467,10 +513,13 @@ def validate_with_principles(engine: PrincipleEngine):
             return func(*args, **kwargs)
 
         return wrapper
+
     return decorator
+
 
 def require_trinity_grounding(func: Callable):
     """Decorator requiring Trinity grounding for operations"""
+
     @wraps(func)
     def wrapper(*args, **kwargs):
         # Check for Trinity grounding
@@ -485,38 +534,33 @@ def require_trinity_grounding(func: Callable):
 
     return wrapper
 
+
 # =========================================================================
 # VII. MODULE EXPORTS
 # =========================================================================
 
 __all__ = [
     # Enums
-    'PrincipleType',
-    'PrincipleScope',
-
+    "PrincipleType",
+    "PrincipleScope",
     # Base classes
-    'Principle',
-    'PrincipleViolation',
-
+    "Principle",
+    "PrincipleViolation",
     # Trinity principles
-    'TrinityExistencePrinciple',
-    'TrinityGoodnessPrinciple',
-    'TrinityTruthPrinciple',
-
+    "TrinityExistencePrinciple",
+    "TrinityGoodnessPrinciple",
+    "TrinityTruthPrinciple",
     # Logical principles
-    'NonContradictionPrinciple',
-    'ExcludedMiddlePrinciple',
-
+    "NonContradictionPrinciple",
+    "ExcludedMiddlePrinciple",
     # Operational principles
-    'TrinityOptimalityPrinciple',
-    'CoherencePrinciple',
-
+    "TrinityOptimalityPrinciple",
+    "CoherencePrinciple",
     # Engine
-    'PrincipleEngine',
-
+    "PrincipleEngine",
     # Decorators
-    'validate_with_principles',
-    'require_trinity_grounding'
+    "validate_with_principles",
+    "require_trinity_grounding",
 ]
 
 # --- END OF FILE core/principles.py ---

@@ -278,9 +278,7 @@ class TestFXExperimental(JitTestCase):
                     if i % 2 == 0:
                         y.append(self.embedding_layers[i](c[i], offset))
                     else:
-                        y.append(
-                            self.embedding_layers[i](torch.randint(10, (8,)), offset)
-                        )
+                        y.append(self.embedding_layers[i](torch.randint(10, (8,)), offset))
                 z = torch.cat([x] + y, dim=1)
                 p = self.top_layers(z)
                 return p
@@ -381,9 +379,7 @@ class TestFXExperimental(JitTestCase):
             for node in fx_module.graph.nodes:
                 if node.op not in {"output", "placeholder", "get_attr"}:
                     if node.size_bytes.total_size == node.size_bytes.output_size:
-                        node_to_latency_mapping[node] = NodeLatency(
-                            node.size_bytes.total_size, 1
-                        )
+                        node_to_latency_mapping[node] = NodeLatency(node.size_bytes.total_size, 1)
                     else:
                         node_to_latency_mapping[node] = NodeLatency(
                             node.size_bytes.total_size, node.size_bytes.output_size
@@ -529,9 +525,7 @@ class TestFXExperimental(JitTestCase):
         traced = symbolic_trace(rn18)
         fused = optimization.fuse(traced)
 
-        self.assertTrue(
-            all(not isinstance(m, torch.nn.BatchNorm2d) for m in fused.modules())
-        )
+        self.assertTrue(all(not isinstance(m, torch.nn.BatchNorm2d) for m in fused.modules()))
 
         N, C, H, W = 20, 3, 224, 224
         inp = torch.randn(N, C, H, W)
@@ -559,9 +553,7 @@ class TestFXExperimental(JitTestCase):
         inp = torch.randn([1, 32, 50, 50])
 
         # bn need not be folded in conv
-        self.assertTrue(
-            any(isinstance(m, torch.nn.BatchNorm2d) for m in fused.modules())
-        )
+        self.assertTrue(any(isinstance(m, torch.nn.BatchNorm2d) for m in fused.modules()))
         self.assertEqual(fused(inp), model(inp))
 
     def test_conv_bn_fusion_mixed_dtype(self):
@@ -592,9 +584,7 @@ class TestFXExperimental(JitTestCase):
         fused = optimization.fuse(traced)
         inp = torch.randn(1, 3, 64, 64, dtype=torch.bfloat16)
 
-        self.assertTrue(
-            all(not isinstance(m, torch.nn.BatchNorm2d) for m in fused.modules())
-        )
+        self.assertTrue(all(not isinstance(m, torch.nn.BatchNorm2d) for m in fused.modules()))
         self.assertEqual(fused(inp), model(inp))
 
     def test_call_to_assert_no_msg(self):
@@ -634,9 +624,7 @@ class TestFXExperimental(JitTestCase):
 
             def forward(self, x):
                 emb = self.emb(x)
-                emb = emb + torch.arange(
-                    emb.shape[-1], dtype=torch.float, device=emb.device
-                )
+                emb = emb + torch.arange(emb.shape[-1], dtype=torch.float, device=emb.device)
                 lol = self.layernorm(emb)
                 return torch.relu(lol) if lol.shape[0] < 30 else torch.sigmoid(lol)
 
@@ -644,9 +632,7 @@ class TestFXExperimental(JitTestCase):
         for BS in [15, 35]:
             x = torch.zeros(BS, dtype=torch.long).random_(42)
             meta_args = {"x": x.to(device="meta")}
-            gm = torch.fx.experimental.meta_tracer.symbolic_trace(
-                mttm, meta_args=meta_args
-            )
+            gm = torch.fx.experimental.meta_tracer.symbolic_trace(mttm, meta_args=meta_args)
             torch.testing.assert_close(gm(x), mttm(x))
 
             # Test serialization/deserialization
@@ -783,9 +769,7 @@ terrible spacing
             return partition
 
         # split module in module with submodules
-        module_with_submodules = split_module(
-            my_module_traced, my_module, mod_partition
-        )
+        module_with_submodules = split_module(my_module_traced, my_module, mod_partition)
 
         # Check that test_meta_info was still on all nodes.
         submodules = dict(module_with_submodules.named_modules())
@@ -1010,9 +994,7 @@ terrible spacing
             normalized = NormalizeOperators(traced).transform()
             x, y = torch.randn(3, 4), torch.randn(3, 4)
             torch.testing.assert_close(traced(x, y), normalized(x, y))
-            self.assertFalse(
-                any(n.target in ops_to_test for n in normalized.graph.nodes)
-            )
+            self.assertFalse(any(n.target in ops_to_test for n in normalized.graph.nodes))
 
         # Test Tensor/scalar callsite
         for op in ops_to_test:
@@ -1025,18 +1007,14 @@ terrible spacing
             normalized = NormalizeOperators(traced).transform()
             x = torch.randn(3, 4)
             torch.testing.assert_close(traced(x), normalized(x))
-            self.assertFalse(
-                any(n.target in ops_to_test for n in normalized.graph.nodes)
-            )
+            self.assertFalse(any(n.target in ops_to_test for n in normalized.graph.nodes))
 
     @skipIfNoTorchVision
     def test_normalize_args(self):
         m = resnet18()
 
         class FunctionalTracer(torch.fx.Tracer):
-            def is_leaf_module(
-                self, m: torch.nn.Module, module_qualified_name: str
-            ) -> bool:
+            def is_leaf_module(self, m: torch.nn.Module, module_qualified_name: str) -> bool:
                 # `leaves` contains the set of standard `nn.Modules` that are not
                 # currently symbolically traceable. Ideally this set would be empty
                 leaves = {torch.nn.BatchNorm2d}
@@ -1215,9 +1193,7 @@ class {test_classname}(torch.nn.Module):
         torch.jit.script(traced_modules_annotated)
 
         class FunctionalTracer(torch.fx.Tracer):
-            def is_leaf_module(
-                self, m: torch.nn.Module, module_qualified_name: str
-            ) -> bool:
+            def is_leaf_module(self, m: torch.nn.Module, module_qualified_name: str) -> bool:
                 # `leaves` contains the set of standard `nn.Modules` that are not
                 # currently symbolically traceable. Ideally this set would be empty
                 leaves = {torch.nn.BatchNorm2d}
@@ -1225,9 +1201,7 @@ class {test_classname}(torch.nn.Module):
 
         traced_functionals = torch.fx.GraphModule(m, FunctionalTracer().trace(m))
 
-        traced_functionals_annotated = AnnotateTypesWithSchema(
-            traced_functionals
-        ).transform()
+        traced_functionals_annotated = AnnotateTypesWithSchema(traced_functionals).transform()
         for node in traced_functionals_annotated.graph.nodes:
             if node.type is None:
                 check = (node.op, node.target)
@@ -1292,9 +1266,7 @@ class {test_classname}(torch.nn.Module):
 
         for node in my_module_traced.graph.nodes:
             if node.target == operator.getitem:
-                self.assertIsNotNone(
-                    node.type, f"Node {node} should be annotated but is not."
-                )
+                self.assertIsNotNone(node.type, f"Node {node} should be annotated but is not.")
 
         my_module = MyModule2()
         my_module_traced = torch.fx.symbolic_trace(my_module)
@@ -1308,9 +1280,7 @@ class {test_classname}(torch.nn.Module):
 
         for node in my_module_traced.graph.nodes:
             if node.target == operator.getitem:
-                self.assertIsNotNone(
-                    node.type, f"Node {node} should be annotated but is not."
-                )
+                self.assertIsNotNone(node.type, f"Node {node} should be annotated but is not.")
 
     def test_subgraph_uniquename(self):
         class MyModule(torch.nn.Module):
@@ -1397,9 +1367,7 @@ class {test_classname}(torch.nn.Module):
                 self.attr3 = torch.nn.Buffer(torch.ones(2, dtype=torch.int32))
 
             def forward(self, x):
-                return self.linear(
-                    self.seq(self.W + self.attr + self.attr2 + self.attr3 + x)
-                )
+                return self.linear(self.seq(self.W + self.attr + self.attr2 + self.attr3 + x))
 
         mod = symbolic_trace(Test())
         module_name = "Foo"
@@ -1413,9 +1381,7 @@ class {test_classname}(torch.nn.Module):
             # https://docs.python.org/3/library/importlib.html#importing-a-source-file-directly
             import importlib.util
 
-            spec = importlib.util.spec_from_file_location(
-                module_name, tmp_dir / "__init__.py"
-            )
+            spec = importlib.util.spec_from_file_location(module_name, tmp_dir / "__init__.py")
             module = importlib.util.module_from_spec(spec)
             sys.modules[module_name] = module
             spec.loader.exec_module(module)
@@ -1886,9 +1852,7 @@ class TestModule(torch.nn.Module):
 
             for node in traced.graph.nodes:
                 if node.op == "call_function":
-                    normalized_args = node.normalized_arguments(
-                        traced, arg_types, kwarg_types
-                    )
+                    normalized_args = node.normalized_arguments(traced, arg_types, kwarg_types)
                     assert normalized_args
                     node.args = normalized_args.args
                     node.kwargs = normalized_args.kwargs
@@ -1904,9 +1868,7 @@ class TestModule(torch.nn.Module):
             torch.empty((2,), dtype=torch.int64),
             torch.empty((2,), dtype=torch.int64),
         )
-        norm_args_and_kwargs = normalize_function(
-            target, args, normalize_to_only_use_kwargs=True
-        )
+        norm_args_and_kwargs = normalize_function(target, args, normalize_to_only_use_kwargs=True)
         self.assertTrue(norm_args_and_kwargs is not None)
         self.assertEqual(
             set(norm_args_and_kwargs.kwargs.keys()),
@@ -2033,9 +1995,7 @@ if TEST_Z3:
             toZ3 = SympyToZ3(validator)
             for sympy_expr, z3_expr in test_cases:
                 result = toZ3.run(sympy_expr)
-                self.assertTrue(
-                    z3_expr.eq(result), msg=f"expected: {z3_expr}. Got: {result}"
-                )
+                self.assertTrue(z3_expr.eq(result), msg=f"expected: {z3_expr}. Got: {result}")
 
         def test_sat(self):
             (
@@ -2060,9 +2020,7 @@ if TEST_Z3:
                 validator,
             ) = self._prepare_for_translation_validation()
 
-            validator.add_source_expr(
-                z3.BV2Int(z3.Int2BV(z0, 64) & z3.Int2BV(z1, 64)) == 5
-            )
+            validator.add_source_expr(z3.BV2Int(z3.Int2BV(z0, 64) & z3.Int2BV(z1, 64)) == 5)
             validator.add_source_expr(z0 == 0b110101)
 
             validator.validate()
@@ -2082,9 +2040,7 @@ if TEST_Z3:
             # This expression is less restrictive than its counterpart.
             validator.add_target_expr(s1 > s0 + 2)
 
-            with self.assertRaisesRegex(
-                ValidationException, "translation validation failed."
-            ):
+            with self.assertRaisesRegex(ValidationException, "translation validation failed."):
                 validator.validate()
 
         def test_z3str(self):

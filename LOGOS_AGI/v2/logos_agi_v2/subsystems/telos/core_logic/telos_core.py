@@ -2,16 +2,22 @@
 
 import logging
 import numpy as np
+
 # --- External Library Imports ---
 import pymc as pm
+
 # --- End Imports ---
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - TELOS_CORE - %(message)s')
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - TELOS_CORE - %(message)s"
+)
+
 
 class TelosCore:
     """
     Core logic for the Telos subsystem. Handles causal and probabilistic modeling.
     """
+
     def __init__(self):
         logging.info("Initializing TelosCore...")
         # PyMC models are often defined dynamically per-task, so init can be simple.
@@ -21,17 +27,19 @@ class TelosCore:
         """
         Executes a probabilistic modeling task based on the payload.
         """
-        action = payload.get('action')
+        action = payload.get("action")
         logging.info(f"Executing action: {action}")
 
-        if action == 'run_bayesian_regression':
+        if action == "run_bayesian_regression":
             logging.info("Running Bayesian linear regression model.")
             # Expects data in the payload, e.g., {'x': [1,2,3], 'y': [2,4,5]}
-            x_data = np.array(payload.get('x', []))
-            y_data = np.array(payload.get('y', []))
+            x_data = np.array(payload.get("x", []))
+            y_data = np.array(payload.get("y", []))
 
             if len(x_data) < 2 or len(x_data) != len(y_data):
-                raise ValueError("Invalid data for regression. Need at least 2 points and matching x/y lengths.")
+                raise ValueError(
+                    "Invalid data for regression. Need at least 2 points and matching x/y lengths."
+                )
 
             # <--- HERE PyMC is used to define a probabilistic model
             with pm.Model() as linear_model:

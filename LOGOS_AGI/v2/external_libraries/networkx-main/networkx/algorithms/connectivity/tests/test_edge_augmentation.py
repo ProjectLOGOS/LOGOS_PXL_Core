@@ -82,9 +82,7 @@ def test_is_k_edge_connected():
 
 
 def test_is_k_edge_connected_exceptions():
-    pytest.raises(
-        nx.NetworkXNotImplemented, is_locally_k_edge_connected, nx.DiGraph(), 1, 2, k=0
-    )
+    pytest.raises(nx.NetworkXNotImplemented, is_locally_k_edge_connected, nx.DiGraph(), 1, 2, k=0)
     pytest.raises(
         nx.NetworkXNotImplemented,
         is_locally_k_edge_connected,
@@ -148,9 +146,7 @@ def test_unfeasible():
 
     pytest.raises(nx.NetworkXUnfeasible, list, k_edge_augmentation(G, k=2, avail=[]))
 
-    pytest.raises(
-        nx.NetworkXUnfeasible, list, k_edge_augmentation(G, k=2, avail=[(7, 9)])
-    )
+    pytest.raises(nx.NetworkXUnfeasible, list, k_edge_augmentation(G, k=2, avail=[(7, 9)]))
 
     # partial solutions should not error if real solutions are infeasible
     aug_edges = list(k_edge_augmentation(G, k=2, avail=[(7, 9)], partial=True))
@@ -249,9 +245,7 @@ def test_gnp_augmentation():
     rng = random.Random(0)
     G = nx.gnp_random_graph(30, 0.005, seed=0)
     # Randomly make edges available
-    avail = {
-        (u, v): 1 + rng.random() for u, v in complement_edges(G) if rng.random() < 0.25
-    }
+    avail = {(u, v): 1 + rng.random() for u, v in complement_edges(G) if rng.random() < 0.25}
     _check_augmentations(G, avail)
 
 
@@ -273,9 +267,7 @@ def _assert_solution_properties(G, aug_edges, avail_dict=None):
     ), "aug edges and G.edges should be disjoint"
 
 
-def _augment_and_check(
-    G, k, avail=None, weight=None, verbose=False, orig_k=None, max_aug_k=None
-):
+def _augment_and_check(G, k, avail=None, weight=None, verbose=False, orig_k=None, max_aug_k=None):
     """
     Does one specific augmentation and checks for properties of the result
     """
@@ -346,9 +338,7 @@ def _augment_and_check(
 
                 # Full connectivity should be no better than our partial
                 # solution.
-                assert (
-                    partial_conn == full_conn
-                ), "adding more edges should not increase k-conn"
+                assert partial_conn == full_conn, "adding more edges should not increase k-conn"
 
             # Find the new edge-connectivity after adding the augmenting edges
             aug_edges = partial_edges
@@ -497,6 +487,4 @@ def _check_unconstrained_bridge_property(G, info1):
     if p + q > 1:
         size_target = math.ceil(p / 2) + q
         size_aug = info1["num_edges"]
-        assert (
-            size_aug == size_target
-        ), "augmentation size is different from what theory predicts"
+        assert size_aug == size_target, "augmentation size is different from what theory predicts"

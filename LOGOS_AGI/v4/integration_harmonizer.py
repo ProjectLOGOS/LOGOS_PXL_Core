@@ -31,17 +31,22 @@ from queue import Queue, Empty
 # Import core systems
 from core.logos_mathematical_core import Quaternion, TrinityFractalSystem, OrbitAnalysis
 from core.cognitive.transducer_math import (
-    FractalSemanticGlyph, CognitiveColor, SemanticDomain,
-    SemanticGlyphDatabase, TrinityOptimizationEngine
+    FractalSemanticGlyph,
+    CognitiveColor,
+    SemanticDomain,
+    SemanticGlyphDatabase,
+    TrinityOptimizationEngine,
 )
 
 # =========================================================================
 # I. TRINITY FRACTAL VALIDATOR (The Map of Truth)
 # =========================================================================
 
+
 @dataclass
 class TrinityQuaternion:
     """Quaternion representation for Trinity fractal coordinates"""
+
     w: float = 0.0  # Scalar part (often 0 for fractal generation)
     x: float = 0.0  # i component (Existence axis)
     y: float = 0.0  # j component (Goodness axis)
@@ -72,13 +77,14 @@ class TrinityQuaternion:
         """Calculate Trinity product: E × G × T"""
         return abs(self.x * self.y * self.z)
 
-    def multiply(self, other: 'TrinityQuaternion') -> 'TrinityQuaternion':
+    def multiply(self, other: "TrinityQuaternion") -> "TrinityQuaternion":
         """Quaternion multiplication for Trinity space"""
         w = self.w * other.w - self.x * other.x - self.y * other.y - self.z * other.z
         x = self.w * other.x + self.x * other.w + self.y * other.z - self.z * other.y
         y = self.w * other.y - self.x * other.z + self.y * other.w + self.z * other.x
         z = self.w * other.z + self.x * other.y - self.y * other.x + self.z * other.w
         return TrinityQuaternion(w, x, y, z)
+
 
 class TrinityFractalValidator:
     """The Map of Truth - validates semantic understanding against axiomatic Trinity fractals"""
@@ -90,10 +96,10 @@ class TrinityFractalValidator:
 
         # Trinity equilibrium points (attractors in the fractal space)
         self.trinity_attractors = [
-            TrinityQuaternion(0, 1/3, 1/3, 1/3),  # Perfect Trinity balance
-            TrinityQuaternion(0, 1, 0, 0),        # Pure Existence
-            TrinityQuaternion(0, 0, 1, 0),        # Pure Goodness
-            TrinityQuaternion(0, 0, 0, 1),        # Pure Truth
+            TrinityQuaternion(0, 1 / 3, 1 / 3, 1 / 3),  # Perfect Trinity balance
+            TrinityQuaternion(0, 1, 0, 0),  # Pure Existence
+            TrinityQuaternion(0, 0, 1, 0),  # Pure Goodness
+            TrinityQuaternion(0, 0, 0, 1),  # Pure Truth
         ]
 
     def validate_semantic_glyph(self, glyph: FractalSemanticGlyph) -> OrbitAnalysis:
@@ -108,7 +114,9 @@ class TrinityFractalValidator:
         # Calculate metaphysical coherence
         orbit_analysis.metaphysical_coherence = orbit_analysis.calculate_coherence_score()
 
-        self.logger.info(f"Validated glyph {glyph.glyph_id}: coherence = {orbit_analysis.metaphysical_coherence:.3f}")
+        self.logger.info(
+            f"Validated glyph {glyph.glyph_id}: coherence = {orbit_analysis.metaphysical_coherence:.3f}"
+        )
 
         return orbit_analysis
 
@@ -120,8 +128,8 @@ class TrinityFractalValidator:
 
         # Map to Trinity space using glyph's Trinity weights
         x = glyph.existence_weight  # Existence axis
-        y = glyph.goodness_weight   # Goodness axis
-        z = glyph.truth_weight      # Truth axis
+        y = glyph.goodness_weight  # Goodness axis
+        z = glyph.truth_weight  # Truth axis
 
         # Add geometric perturbation for fractal dynamics
         geometric_factor = abs(center_complex) / 1000.0  # Scale down ULP coordinates
@@ -130,7 +138,7 @@ class TrinityFractalValidator:
             w=0.0,  # Pure imaginary quaternion for fractal generation
             x=x + geometric_factor * 0.1,
             y=y + geometric_factor * 0.1,
-            z=z + geometric_factor * 0.1
+            z=z + geometric_factor * 0.1,
         )
 
     def _compute_trinity_orbit(self, q: TrinityQuaternion) -> OrbitAnalysis:
@@ -154,7 +162,7 @@ class TrinityFractalValidator:
 
             # Apply Trinity constraint: force convergence toward Trinity attractors
             trinity_influence = self._calculate_trinity_influence(z_new, q)
-            z = z_new * (1 - trinity_influence) + trinity_influence * complex(1/3, 1/3)
+            z = z_new * (1 - trinity_influence) + trinity_influence * complex(1 / 3, 1 / 3)
 
             magnitude = abs(z)
 
@@ -166,7 +174,7 @@ class TrinityFractalValidator:
                     iterations=i,
                     final_magnitude=magnitude,
                     orbit_points=orbit_points,
-                    fractal_dimension=self._calculate_fractal_dimension(orbit_points)
+                    fractal_dimension=self._calculate_fractal_dimension(orbit_points),
                 )
 
         # Check convergence to Trinity attractors
@@ -181,7 +189,7 @@ class TrinityFractalValidator:
             final_magnitude=final_magnitude,
             orbit_points=orbit_points,
             fractal_dimension=self._calculate_fractal_dimension(orbit_points),
-            trinity_coherence=1.0 - trinity_distance  # Higher coherence = closer to Trinity
+            trinity_coherence=1.0 - trinity_distance,  # Higher coherence = closer to Trinity
         )
 
     def _calculate_trinity_influence(self, z: complex, original_q: TrinityQuaternion) -> float:
@@ -191,7 +199,7 @@ class TrinityFractalValidator:
         trinity_product = original_q.trinity_product()
 
         # Distance from Trinity center (1/3, 1/3)
-        trinity_center = complex(1/3, 1/3)
+        trinity_center = complex(1 / 3, 1 / 3)
         distance_from_center = abs(z - trinity_center)
 
         # Influence increases with Trinity product and decreases with distance
@@ -203,10 +211,10 @@ class TrinityFractalValidator:
         """Calculate distance to nearest Trinity attractor"""
 
         attractor_positions = [
-            complex(1/3, 1/3),  # Trinity balance
-            complex(1, 0),      # Pure Existence
-            complex(0, 1),      # Pure Goodness
-            complex(0, 0),      # Origin (Pure Truth projection)
+            complex(1 / 3, 1 / 3),  # Trinity balance
+            complex(1, 0),  # Pure Existence
+            complex(0, 1),  # Pure Goodness
+            complex(0, 0),  # Origin (Pure Truth projection)
         ]
 
         distances = [abs(z - attractor) for attractor in attractor_positions]
@@ -218,7 +226,9 @@ class TrinityFractalValidator:
             return 1.0
 
         # Simple fractal dimension approximation
-        distances = [abs(orbit_points[i+1] - orbit_points[i]) for i in range(len(orbit_points)-1)]
+        distances = [
+            abs(orbit_points[i + 1] - orbit_points[i]) for i in range(len(orbit_points) - 1)
+        ]
 
         if not distances or max(distances) == 0:
             return 1.0
@@ -231,9 +241,11 @@ class TrinityFractalValidator:
         dimension = 1.0 + abs(avg_log_distance) / math.log(2.0)
         return min(dimension, 3.0)  # Cap at 3D for Trinity space
 
+
 # =========================================================================
 # II. META-BIJECTIVE COMMUTATOR
 # =========================================================================
+
 
 class MetaBijectiveCommutator:
     """Forces commutation between semantic fractals and Trinity fractals"""
@@ -243,8 +255,9 @@ class MetaBijectiveCommutator:
         self.commutation_tolerance = 0.1
         self.max_correction_iterations = 10
 
-    def enforce_commutation(self, semantic_glyph: FractalSemanticGlyph,
-                          trinity_validation: OrbitAnalysis) -> FractalSemanticGlyph:
+    def enforce_commutation(
+        self, semantic_glyph: FractalSemanticGlyph, trinity_validation: OrbitAnalysis
+    ) -> FractalSemanticGlyph:
         """Enforce commutation between semantic and Trinity fractals"""
 
         # Check if commutation is already satisfied
@@ -257,9 +270,13 @@ class MetaBijectiveCommutator:
 
         # Verify correction
         if self._check_commutation(corrected_glyph, trinity_validation):
-            self.logger.info(f"Successfully enforced commutation for glyph {corrected_glyph.glyph_id}")
+            self.logger.info(
+                f"Successfully enforced commutation for glyph {corrected_glyph.glyph_id}"
+            )
         else:
-            self.logger.warning(f"Failed to fully enforce commutation for glyph {corrected_glyph.glyph_id}")
+            self.logger.warning(
+                f"Failed to fully enforce commutation for glyph {corrected_glyph.glyph_id}"
+            )
 
         return corrected_glyph
 
@@ -276,14 +293,17 @@ class MetaBijectiveCommutator:
         trinity_coherence = validation.trinity_coherence or 0.0
 
         # Commutation criteria
-        dimension_commutes = abs(semantic_dimension - trinity_dimension) < self.commutation_tolerance
+        dimension_commutes = (
+            abs(semantic_dimension - trinity_dimension) < self.commutation_tolerance
+        )
         coherence_aligns = trinity_coherence > 0.5  # Minimum coherence threshold
         trinity_product_valid = semantic_trinity_product > 0.01  # Non-zero Trinity product
 
         return dimension_commutes and coherence_aligns and trinity_product_valid
 
-    def _perform_alignment(self, glyph: FractalSemanticGlyph,
-                          validation: OrbitAnalysis) -> FractalSemanticGlyph:
+    def _perform_alignment(
+        self, glyph: FractalSemanticGlyph, validation: OrbitAnalysis
+    ) -> FractalSemanticGlyph:
         """Perform corrective alignment between semantic and Trinity fractals"""
 
         corrected_glyph = FractalSemanticGlyph.from_dict(glyph.to_dict())  # Deep copy
@@ -294,15 +314,25 @@ class MetaBijectiveCommutator:
             coherence_factor = validation.trinity_coherence
 
             # Move toward Trinity balance (1/3, 1/3, 1/3)
-            target_balance = 1/3
+            target_balance = 1 / 3
             adjustment_rate = 0.1 * coherence_factor
 
-            corrected_glyph.existence_weight += adjustment_rate * (target_balance - corrected_glyph.existence_weight)
-            corrected_glyph.goodness_weight += adjustment_rate * (target_balance - corrected_glyph.goodness_weight)
-            corrected_glyph.truth_weight += adjustment_rate * (target_balance - corrected_glyph.truth_weight)
+            corrected_glyph.existence_weight += adjustment_rate * (
+                target_balance - corrected_glyph.existence_weight
+            )
+            corrected_glyph.goodness_weight += adjustment_rate * (
+                target_balance - corrected_glyph.goodness_weight
+            )
+            corrected_glyph.truth_weight += adjustment_rate * (
+                target_balance - corrected_glyph.truth_weight
+            )
 
             # Renormalize
-            total_weight = corrected_glyph.existence_weight + corrected_glyph.goodness_weight + corrected_glyph.truth_weight
+            total_weight = (
+                corrected_glyph.existence_weight
+                + corrected_glyph.goodness_weight
+                + corrected_glyph.truth_weight
+            )
             if total_weight > 0:
                 corrected_glyph.existence_weight /= total_weight
                 corrected_glyph.goodness_weight /= total_weight
@@ -314,13 +344,15 @@ class MetaBijectiveCommutator:
             corrected_glyph.fractal_dimension += 0.1 * dimension_difference
 
         # Update complexity score
-        corrected_glyph.complexity_score *= (1.0 + validation.trinity_coherence * 0.1)
+        corrected_glyph.complexity_score *= 1.0 + validation.trinity_coherence * 0.1
 
         return corrected_glyph
+
 
 # =========================================================================
 # III. LOGOS INTEGRATED SYSTEM
 # =========================================================================
+
 
 class LogosIntegratedSystem:
     """Complete integration system combining semantic and Trinity fractals"""
@@ -350,7 +382,9 @@ class LogosIntegratedSystem:
         """Start background harmonization service"""
         if not self.running:
             self.running = True
-            self.harmonization_thread = threading.Thread(target=self._harmonization_worker, daemon=True)
+            self.harmonization_thread = threading.Thread(
+                target=self._harmonization_worker, daemon=True
+            )
             self.harmonization_thread.start()
             self.logger.info("Harmonization service started")
 
@@ -379,8 +413,9 @@ class LogosIntegratedSystem:
             except Exception as e:
                 self.logger.error(f"Error in harmonization worker: {e}")
 
-    def harmonize_semantic_glyph(self, glyph: FractalSemanticGlyph,
-                                async_processing: bool = True) -> Optional[FractalSemanticGlyph]:
+    def harmonize_semantic_glyph(
+        self, glyph: FractalSemanticGlyph, async_processing: bool = True
+    ) -> Optional[FractalSemanticGlyph]:
         """Harmonize semantic glyph with Trinity fractals"""
 
         if async_processing:
@@ -405,8 +440,7 @@ class LogosIntegratedSystem:
 
             # 3. Final Trinity optimization
             optimized_glyph = self.trinity_optimizer.optimize_trinity_weights(
-                harmonized_glyph,
-                harmonized_glyph.domain
+                harmonized_glyph, harmonized_glyph.domain
             )
 
             # 4. Store harmonized result
@@ -418,7 +452,9 @@ class LogosIntegratedSystem:
             else:
                 self.failed_commutations += 1
 
-            self.logger.debug(f"Harmonized glyph {glyph.glyph_id}: Trinity coherence = {trinity_validation.trinity_coherence:.3f}")
+            self.logger.debug(
+                f"Harmonized glyph {glyph.glyph_id}: Trinity coherence = {trinity_validation.trinity_coherence:.3f}"
+            )
 
             return optimized_glyph
 
@@ -427,11 +463,14 @@ class LogosIntegratedSystem:
             self.failed_commutations += 1
             return glyph  # Return original on error
 
-    def validate_semantic_understanding(self, content: str, domain: SemanticDomain) -> Dict[str, Any]:
+    def validate_semantic_understanding(
+        self, content: str, domain: SemanticDomain
+    ) -> Dict[str, Any]:
         """Validate semantic understanding against Trinity axioms"""
 
         # Create temporary glyph for validation
         from core.cognitive.transducer_math import UniversalLanguagePlaneProjector
+
         projector = UniversalLanguagePlaneProjector()
         temp_glyph = projector.project_to_glyph(content, domain, CognitiveColor.LOGOS)
 
@@ -440,9 +479,9 @@ class LogosIntegratedSystem:
 
         # Determine validation result
         is_valid = (
-            trinity_validation.trinity_coherence and
-            trinity_validation.trinity_coherence > 0.5 and
-            temp_glyph.trinity_product() > 0.01
+            trinity_validation.trinity_coherence
+            and trinity_validation.trinity_coherence > 0.5
+            and temp_glyph.trinity_product() > 0.01
         )
 
         return {
@@ -453,10 +492,12 @@ class LogosIntegratedSystem:
             "trinity_product": temp_glyph.trinity_product(),
             "fractal_dimension": trinity_validation.fractal_dimension,
             "converged": trinity_validation.converged,
-            "validation_timestamp": time.time()
+            "validation_timestamp": time.time(),
         }
 
-    def search_harmonized_knowledge(self, query: str, max_results: int = 10) -> List[Dict[str, Any]]:
+    def search_harmonized_knowledge(
+        self, query: str, max_results: int = 10
+    ) -> List[Dict[str, Any]]:
         """Search for harmonized semantic knowledge"""
 
         # Use semantic database for search
@@ -468,15 +509,19 @@ class LogosIntegratedSystem:
             trinity_validation = self.trinity_validator.validate_semantic_glyph(glyph)
 
             result_dict = glyph.to_dict()
-            result_dict.update({
-                "trinity_coherence": trinity_validation.trinity_coherence,
-                "is_harmonized": trinity_validation.trinity_coherence > 0.5 if trinity_validation.trinity_coherence else False,
-                "fractal_validation": {
-                    "converged": trinity_validation.converged,
-                    "escaped": trinity_validation.escaped,
-                    "fractal_dimension": trinity_validation.fractal_dimension
+            result_dict.update(
+                {
+                    "trinity_coherence": trinity_validation.trinity_coherence,
+                    "is_harmonized": trinity_validation.trinity_coherence > 0.5
+                    if trinity_validation.trinity_coherence
+                    else False,
+                    "fractal_validation": {
+                        "converged": trinity_validation.converged,
+                        "escaped": trinity_validation.escaped,
+                        "fractal_dimension": trinity_validation.fractal_dimension,
+                    },
                 }
-            })
+            )
 
             enhanced_results.append(result_dict)
 
@@ -497,12 +542,14 @@ class LogosIntegratedSystem:
             "queue_size": self.harmonization_queue.qsize(),
             "service_running": self.running,
             "database_statistics": db_stats,
-            "last_update": time.time()
+            "last_update": time.time(),
         }
+
 
 # =========================================================================
 # IV. FACTORY FUNCTIONS
 # =========================================================================
+
 
 def create_integrated_logos_system(db_path: str = "logos_harmonized.db") -> LogosIntegratedSystem:
     """Factory function to create complete LOGOS integrated system"""
@@ -511,6 +558,7 @@ def create_integrated_logos_system(db_path: str = "logos_harmonized.db") -> Logo
     system.start_harmonization_service()
 
     return system
+
 
 def demonstration_example():
     """Demonstration of LOGOS harmonization system"""
@@ -524,7 +572,9 @@ def demonstration_example():
     try:
         # Test semantic understanding validation
         test_content = "Truth exists in the harmony of existence, goodness, and knowledge"
-        validation_result = system.validate_semantic_understanding(test_content, SemanticDomain.THEOLOGICAL)
+        validation_result = system.validate_semantic_understanding(
+            test_content, SemanticDomain.THEOLOGICAL
+        )
 
         print(f"Validation Result: {validation_result['is_valid']}")
         print(f"Trinity Coherence: {validation_result['trinity_coherence']:.3f}")
@@ -532,8 +582,11 @@ def demonstration_example():
 
         # Test harmonization
         from core.cognitive.transducer_math import UniversalLanguagePlaneProjector
+
         projector = UniversalLanguagePlaneProjector()
-        test_glyph = projector.project_to_glyph(test_content, SemanticDomain.THEOLOGICAL, CognitiveColor.LOGOS)
+        test_glyph = projector.project_to_glyph(
+            test_content, SemanticDomain.THEOLOGICAL, CognitiveColor.LOGOS
+        )
 
         harmonized = system.harmonize_semantic_glyph(test_glyph, async_processing=False)
         if harmonized:
@@ -547,20 +600,20 @@ def demonstration_example():
     finally:
         system.stop_harmonization_service()
 
+
 # =========================================================================
 # V. MODULE EXPORTS
 # =========================================================================
 
 __all__ = [
     # Core classes
-    'TrinityQuaternion',
-    'TrinityFractalValidator',
-    'MetaBijectiveCommutator',
-    'LogosIntegratedSystem',
-
+    "TrinityQuaternion",
+    "TrinityFractalValidator",
+    "MetaBijectiveCommutator",
+    "LogosIntegratedSystem",
     # Factory functions
-    'create_integrated_logos_system',
-    'demonstration_example'
+    "create_integrated_logos_system",
+    "demonstration_example",
 ]
 
 if __name__ == "__main__":

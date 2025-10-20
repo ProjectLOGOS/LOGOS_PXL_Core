@@ -14,8 +14,14 @@ from enum import Enum
 # Import from Lambda Logos core (adjust imports as needed)
 try:
     from lambda_logos_core import (
-        LogosExpr, Variable, Value, Abstraction, Application,
-        SufficientReason, Constant, OntologicalType
+        LogosExpr,
+        Variable,
+        Value,
+        Abstraction,
+        Application,
+        SufficientReason,
+        Constant,
+        OntologicalType,
     )
 except ImportError:
     # Mock classes for standalone development
@@ -60,8 +66,10 @@ except ImportError:
             self.target_type = target_type
             self.value = value
 
+
 class TokenType(Enum):
     """Token types for lexical analysis."""
+
     LAMBDA = "lambda"
     DOT = "dot"
     LPAREN = "lparen"
@@ -74,6 +82,7 @@ class TokenType(Enum):
     NUMBER = "number"
     SR = "sr"
     EOF = "eof"
+
 
 class Token:
     """Token for lexical analysis."""
@@ -93,6 +102,7 @@ class Token:
     def __str__(self) -> str:
         """Return string representation."""
         return f"{self.token_type.value}({self.value})"
+
 
 class Lexer:
     """Lexical analyzer for Lambda Logos."""
@@ -122,8 +132,11 @@ class Lexer:
                 continue
 
             # Check for lambda symbol
-            if self.input[self.position] == 'λ' or self.input[self.position:self.position+6] == "lambda":
-                if self.input[self.position] == 'λ':
+            if (
+                self.input[self.position] == "λ"
+                or self.input[self.position : self.position + 6] == "lambda"
+            ):
+                if self.input[self.position] == "λ":
                     self.tokens.append(Token(TokenType.LAMBDA, "λ", self.position))
                     self.position += 1
                 else:
@@ -132,38 +145,38 @@ class Lexer:
                 continue
 
             # Check for punctuation
-            if self.input[self.position] == '.':
+            if self.input[self.position] == ".":
                 self.tokens.append(Token(TokenType.DOT, ".", self.position))
                 self.position += 1
                 continue
 
-            if self.input[self.position] == '(':
+            if self.input[self.position] == "(":
                 self.tokens.append(Token(TokenType.LPAREN, "(", self.position))
                 self.position += 1
                 continue
 
-            if self.input[self.position] == ')':
+            if self.input[self.position] == ")":
                 self.tokens.append(Token(TokenType.RPAREN, ")", self.position))
                 self.position += 1
                 continue
 
-            if self.input[self.position] == ':':
+            if self.input[self.position] == ":":
                 self.tokens.append(Token(TokenType.COLON, ":", self.position))
                 self.position += 1
                 continue
 
-            if self.input[self.position] == ',':
+            if self.input[self.position] == ",":
                 self.tokens.append(Token(TokenType.COMMA, ",", self.position))
                 self.position += 1
                 continue
 
-            if self.input[self.position] == '=':
+            if self.input[self.position] == "=":
                 self.tokens.append(Token(TokenType.EQUALS, "=", self.position))
                 self.position += 1
                 continue
 
             # Check for SR operator
-            if self.input[self.position:self.position+2] == "SR":
+            if self.input[self.position : self.position + 2] == "SR":
                 self.tokens.append(Token(TokenType.SR, "SR", self.position))
                 self.position += 2
                 continue
@@ -175,7 +188,7 @@ class Lexer:
                 self.position += 1
                 continue
 
-            if self.input[self.position:self.position+4] == "Prop":
+            if self.input[self.position : self.position + 4] == "Prop":
                 self.tokens.append(Token(TokenType.TYPE, "Prop", self.position))
                 self.position += 4
                 continue
@@ -185,16 +198,18 @@ class Lexer:
                 start = self.position
                 while self.position < len(self.input) and self.input[self.position].isdigit():
                     self.position += 1
-                value = self.input[start:self.position]
+                value = self.input[start : self.position]
                 self.tokens.append(Token(TokenType.NUMBER, value, start))
                 continue
 
             # Check for identifier
-            if self.input[self.position].isalnum() or self.input[self.position] == '_':
+            if self.input[self.position].isalnum() or self.input[self.position] == "_":
                 start = self.position
-                while self.position < len(self.input) and (self.input[self.position].isalnum() or self.input[self.position] == '_'):
+                while self.position < len(self.input) and (
+                    self.input[self.position].isalnum() or self.input[self.position] == "_"
+                ):
                     self.position += 1
-                value = self.input[start:self.position]
+                value = self.input[start : self.position]
                 self.tokens.append(Token(TokenType.IDENTIFIER, value, start))
                 continue
 
@@ -205,6 +220,7 @@ class Lexer:
         self.tokens.append(Token(TokenType.EOF, "", self.position))
 
         return self.tokens
+
 
 class Parser:
     """Parser for Lambda Logos expressions."""
@@ -428,6 +444,7 @@ class Parser:
         """
         raise ValueError(f"Parser error at position {self.current_token.position}: {message}")
 
+
 def parse_expr(input_str: str, env: Optional[Dict[str, Any]] = None) -> LogosExpr:
     """Parse Lambda Logos expression from string.
 
@@ -445,16 +462,11 @@ def parse_expr(input_str: str, env: Optional[Dict[str, Any]] = None) -> LogosExp
     parser = Parser(lexer, env)
     return parser.parse()
 
+
 # Example usage
 if __name__ == "__main__":
     # Test basic parsing
-    expr_strs = [
-        "λx:𝔼.x",
-        "(λx:𝔼.x) ei",
-        "SR(𝔼,𝔾,3)",
-        "SR(𝔼,𝔾,3) ei",
-        "λp:Prop.λq:Prop.(p q)"
-    ]
+    expr_strs = ["λx:𝔼.x", "(λx:𝔼.x) ei", "SR(𝔼,𝔾,3)", "SR(𝔼,𝔾,3) ei", "λp:Prop.λq:Prop.(p q)"]
 
     for expr_str in expr_strs:
         try:

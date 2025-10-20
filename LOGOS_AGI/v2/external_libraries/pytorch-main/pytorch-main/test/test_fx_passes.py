@@ -374,9 +374,7 @@ class TestFXGraphPasses(JitTestCase):
         if bookend_non_compute_pass:
             partitioner.remove_bookend_non_compute_ops(partitions)
 
-        partitions_name = [
-            [node.name for node in partition.nodes] for partition in partitions
-        ]
+        partitions_name = [[node.name for node in partition.nodes] for partition in partitions]
         assert len(partitions_name) == len(expected_partition)
         for i in range(len(partitions_name)):
             assert set(partitions_name[i]) == set(expected_partition[i])
@@ -403,9 +401,7 @@ class TestFXGraphPasses(JitTestCase):
             traced, supported_ops, allows_single_node_partition=True
         )
         partitions = partitioner.propose_partitions()
-        partitions_name = [
-            [node.name for node in partition.nodes] for partition in partitions
-        ]
+        partitions_name = [[node.name for node in partition.nodes] for partition in partitions]
         assert len(partitions_name) == len(expected_partition)
         for i in range(len(partitions_name)):
             assert set(partitions_name[i]) == set(expected_partition[i])
@@ -441,9 +437,7 @@ class TestFXGraphPasses(JitTestCase):
             [["add_5", "linear2"]],  # includes call_function + call_module node
             [["add_6", "relu"]],  # includes call_function + call_module node
             [["param", "add_2"]],  # includes get_attr + call_module nodes
-            [
-                ["param", "add_1", "linear"]
-            ],  # includes get_attr + call_function + call_module nodes
+            [["param", "add_1", "linear"]],  # includes get_attr + call_function + call_module nodes
             [
                 [
                     "add",
@@ -469,9 +463,7 @@ class TestFXGraphPasses(JitTestCase):
 
         partitions = []
         for node_names in partition:
-            partitions.append(
-                dict.fromkeys([nodes_by_name[name] for name in node_names])
-            )
+            partitions.append(dict.fromkeys([nodes_by_name[name] for name in node_names]))
 
         fused_graph = fuse_by_partitions(gm, partitions)
 
@@ -502,9 +494,7 @@ class TestFXGraphPasses(JitTestCase):
 
         partitions = []
         for node_names in partition:
-            partitions.append(
-                dict.fromkeys([nodes_by_name[name] for name in node_names])
-            )
+            partitions.append(dict.fromkeys([nodes_by_name[name] for name in node_names]))
 
         with self.assertRaises(Exception):
             fuse_by_partitions(gm, partitions)
@@ -883,9 +873,7 @@ class MultiOutputWithWithInvalidMatches:
 class QuantizationFp8Pattern:
     @classmethod
     def setup(cls):
-        cls.quantization = torch.library.Library(
-            "fp8_quantization", "DEF"
-        )  # noqa: TOR901
+        cls.quantization = torch.library.Library("fp8_quantization", "DEF")  # noqa: TOR901
         cls.quantization.define(
             "quantize_per_tensor_affine_fp8(Tensor self, int dtype, float scale) -> Tensor"
         )
@@ -901,16 +889,12 @@ class QuantizationFp8Pattern:
     def forward(self, arg0_1, arg1_1):
         qt = torch.ops.fp8_quantization
         _scale_0 = self._scale_0
-        quantize_per_tensor_affine_fp8 = qt.quantize_per_tensor_affine_fp8(
-            arg0_1, 0, _scale_0
-        )
+        quantize_per_tensor_affine_fp8 = qt.quantize_per_tensor_affine_fp8(arg0_1, 0, _scale_0)
         dequantize_per_tensor_affine_fp8 = qt.dequantize_per_tensor_affine_fp8(
             quantize_per_tensor_affine_fp8, 0, _scale_0
         )
         _scale_1 = self._scale_0
-        quantize_per_tensor_affine_fp8_1 = qt.quantize_per_tensor_affine_fp8(
-            arg1_1, 0, _scale_1
-        )
+        quantize_per_tensor_affine_fp8_1 = qt.quantize_per_tensor_affine_fp8(arg1_1, 0, _scale_1)
         dequantize_per_tensor_affine_fp8_1 = qt.dequantize_per_tensor_affine_fp8(
             quantize_per_tensor_affine_fp8_1, 0, _scale_1
         )
@@ -918,9 +902,7 @@ class QuantizationFp8Pattern:
             dequantize_per_tensor_affine_fp8, dequantize_per_tensor_affine_fp8_1
         )
         _scale_2 = self._scale_0
-        quantize_per_tensor_affine_fp8_2 = qt.quantize_per_tensor_affine_fp8(
-            add, 0, _scale_2
-        )
+        quantize_per_tensor_affine_fp8_2 = qt.quantize_per_tensor_affine_fp8(add, 0, _scale_2)
         dequantize_per_tensor_affine_fp8_2 = qt.dequantize_per_tensor_affine_fp8(
             quantize_per_tensor_affine_fp8_2, 0, _scale_2
         )

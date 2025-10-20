@@ -83,9 +83,7 @@ class LoopbackBackendInterface:
             graph = new_graph
             G = LoopbackGraph()
         elif not isinstance(graph, Graph):
-            raise TypeError(
-                f"Bad type for graph argument {graph_name} in {name}: {type(graph)}"
-            )
+            raise TypeError(f"Bad type for graph argument {graph_name} in {name}: {type(graph)}")
         elif graph.__class__ in {Graph, LoopbackGraph}:
             G = LoopbackGraph()
         elif graph.__class__ in {DiGraph, LoopbackDiGraph}:
