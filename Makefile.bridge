@@ -1,0 +1,100 @@
+# LOGOS AGI Proof Bridge - Build System
+#
+# This Makefile orchestrates the build process for the proof-to-runtime bridge,
+# extracting Coq proofs to OCaml and interfacing with Python runtime.
+
+.PHONY: all build extract compile test clean help
+
+# Default target
+all: build test
+
+# Build the complete proof bridge
+build: extract compile
+
+# Extract Coq proofs to OCaml
+extract:
+	@echo "Extracting Coq proofs to OCaml..."
+	@if command -v coqc >/dev/null 2>&1; then \
+		cd coq && coq_makefile -f _CoqProject -o Makefile.coq && \
+		$(MAKE) -f Makefile.coq && \
+		coqc -I . ../bridge_validation.v; \
+	else \
+		echo "Warning: Coq not found, skipping extraction"; \
+	fi
+
+# Compile OCaml bridge
+compile:
+	@echo "Compiling OCaml bridge..."
+	@if command -v ocamlopt >/dev/null 2>&1; then \
+		ocamlopt -I +str str.cmxa -o proof_bridge proof_bridge.ml; \
+	else \
+		echo "Warning: OCaml compiler not found, skipping compilation"; \
+	fi
+
+# Run consistency tests
+test:
+	@echo "Running bridge consistency tests..."
+	@python test_bridge_consistency.py
+
+# Test OCaml bridge directly
+test-ocaml: compile
+	@echo "Testing OCaml bridge directly..."
+	@if [ -f proof_bridge ]; then \
+		echo '{"proposition": "p && q", "valuations": {"p": true, "q": false}}' | ./proof_bridge; \
+	else \
+		echo "OCaml bridge not compiled, skipping direct test"; \
+	fi
+
+# Test Python interface
+test-python:
+	@echo "Testing Python interface..."
+	@python -c "from iel_runtime_interface import ModalLogicEvaluator; eval = ModalLogicEvaluator(); print('Python interface loaded successfully')"
+
+# Clean build artifacts
+clean:
+	@echo "Cleaning build artifacts..."
+	@rm -f proof_bridge
+	@rm -f *.cmi *.cmx *.o
+	@rm -f coq/*.vo coq/*.vok coq/*.vos coq/*.glob
+	@if [ -f coq/Makefile.coq ]; then cd coq && $(MAKE) -f Makefile.coq clean; fi
+
+# Validate installation
+validate:
+	@echo "Validating installation..."
+	@echo "Checking dependencies:"
+	@echo -n "Python: "; python --version 2>/dev/null || echo "Not found"
+	@echo -n "Coq: "; coqc --version 2>/dev/null || echo "Not found"
+	@echo -n "OCaml: "; ocamlc -version 2>/dev/null || echo "Not found"
+	@echo -n "OPAM: "; opam --version 2>/dev/null || echo "Not found"
+
+# Install dependencies via OPAM
+install-deps:
+	@echo "Installing OCaml/Coq dependencies via OPAM..."
+	@if command -v opam >/dev/null 2>&1; then \
+		opam install -y coq coq-mathcomp-ssreflect; \
+	else \
+		echo "OPAM not found. Please install OPAM first."; \
+		exit 1; \
+	fi
+
+# Help target
+help:
+	@echo "LOGOS AGI Proof Bridge - Available targets:"
+	@echo ""
+	@echo "  all          - Build and test everything (default)"
+	@echo "  build        - Extract Coq proofs and compile OCaml bridge"
+	@echo "  extract      - Extract Coq proofs to OCaml code"
+	@echo "  compile      - Compile OCaml bridge to executable"
+	@echo "  test         - Run Python consistency tests"
+	@echo "  test-ocaml   - Test OCaml bridge directly"
+	@echo "  test-python  - Test Python interface loading"
+	@echo "  validate     - Check for required dependencies"
+	@echo "  install-deps - Install OCaml/Coq dependencies via OPAM"
+	@echo "  clean        - Remove build artifacts"
+	@echo "  help         - Show this help message"
+	@echo ""
+	@echo "Dependencies:"
+	@echo "  - Python 3.8+"
+	@echo "  - Coq 8.15+"
+	@echo "  - OCaml 4.13+"
+	@echo "  - OPAM 2.1+"
