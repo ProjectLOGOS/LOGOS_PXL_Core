@@ -1,0 +1,41 @@
+{
+  "verification_timestamp": "2025-10-20T01:30:59.235472",
+  "audit_completeness": {
+    "required_files": 5,
+    "existing_files": 5,
+    "missing_files": 0,
+    "completeness_percentage": 100.0
+  },
+  "proof_infrastructure": {
+    "total_coq_files": 190,
+    "categories_verified": 4
+  },
+  "file_integrity": {
+    "docs/audit/README.md": {
+      "hash": "13c48d40d2ee59f3f9c76b7238cf4158f46c6fac17d8a15a9d91b4030129bd1b",
+      "size": 6191,
+      "modified": "2025-10-20T01:29:43.674343"
+    },
+    "docs/audit/proof_index.md": {
+      "hash": "c8a77297cb38d678a11bcc10bba5667621b16535d7af432fe91ea0e355f714c3",
+      "size": 9197,
+      "modified": "2025-10-20T01:29:43.675342"
+    },
+    "docs/audit/FALSIFIABILITY.md": {
+      "hash": "c8a72511e1f8e459ba88601b7c53151476c0dd0429871823cdb6e0d4a4201eec",
+      "size": 12055,
+      "modified": "2025-10-20T01:29:43.671388"
+    },
+    "docs/audit/EXPERIMENT_GUIDE.md": {
+      "hash": "19f76cd5b43646e51549b4a4aaa8ab945e0da1e1d0566fcf7f33f2c3f8f989d0",
+      "size": 13653,
+      "modified": "2025-10-20T01:29:43.669221"
+    },
+    "scripts/reproduce_system.sh": {
+      "hash": "56f3a954f9d3cad3c497f2158c1997f51881b348fab198707605dda035ec16ab",
+      "size": 11455,
+      "modified": "2025-10-20T01:29:43.683723"
+    }
+  },
+  "verification_status": "COMPLETE"
+}

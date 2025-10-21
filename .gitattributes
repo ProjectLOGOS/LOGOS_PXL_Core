@@ -3,16 +3,43 @@
 # Protect critical directory structures from accidental deletion
 PXL_IEL_overlay_system/** linguist-vendored=false
 
-# Ensure line ending consistency
+# Default to LF line endings with auto-detection
+* text=auto eol=lf
+
+# Windows-specific files should keep CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Source code files - enforce LF
 *.v text eol=lf
 *.py text eol=lf
+*.ml text eol=lf
+*.mli text eol=lf
+*.sh text eol=lf
+*.c text eol=lf
+*.h text eol=lf
+
+# Configuration and documentation - enforce LF
 *.md text eol=lf
 *.yml text eol=lf
 *.yaml text eol=lf
 *.json text eol=lf
-*.sh text eol=lf
+*.txt text eol=lf
+*.cfg text eol=lf
+*.conf text eol=lf
+*.ini text eol=lf
 
-# Binary files
+# Build and project files - enforce LF
+Dockerfile text eol=lf
+docker-compose*.yml text eol=lf
+Makefile text eol=lf
+makefile text eol=lf
+*.mk text eol=lf
+_CoqProject text eol=lf
+dune-project text eol=lf
+
+# Binary files - no line ending conversion
 *.vo binary
 *.vos binary
 *.vok binary
@@ -20,8 +47,31 @@ PXL_IEL_overlay_system/** linguist-vendored=false
 *.aux binary
 *.pyc binary
 *.zip binary
+*.tar.gz binary
+*.tgz binary
 *.docx binary
+*.pdf binary
 *.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
 *.ico binary
 *.icns binary
 *.svg binary
+*.dll binary
+*.exe binary
+*.so binary
+*.o binary
+
+# Lock files - treat as binary to prevent merge conflicts
+*.lock binary
+manifest.lock.json binary
+requirements.lock.txt binary
+
+# IDE and editor files
+.vscode/* text eol=lf
+*.code-workspace text eol=lf
+
+# Git-specific files
+.gitignore text eol=lf
+.gitattributes text eol=lf

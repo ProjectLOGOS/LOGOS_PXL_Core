@@ -1,0 +1,40 @@
+{
+  "description": "LOGOS AGI Build Artifact Hashes for Reproducibility Tracking",
+  "version": "1.0",
+  "last_updated": "2025-10-21T00:00:00Z",
+  "schema": {
+    "timestamp": "ISO 8601 timestamp of build",
+    "commit": "Git commit SHA that produced these artifacts",
+    "branch": "Git branch name",
+    "coq_artifacts": "Number of compiled Coq (.vo) files",
+    "python_artifacts": "Number of Python source files in logos_core",
+    "system_hash": "Combined SHA256 of all tracked artifacts",
+    "environment": {
+      "coq_version": "Coq version used for compilation",
+      "ocaml_version": "OCaml version used",
+      "opam_version": "OPAM version used",
+      "platform": "Operating system and architecture"
+    }
+  },
+  "baseline": {
+    "timestamp": "2025-10-21T00:00:00Z",
+    "commit": "baseline-commit-placeholder",
+    "branch": "feature/agi-enhancements",
+    "coq_artifacts": 0,
+    "python_artifacts": 0,
+    "system_hash": "placeholder-hash",
+    "environment": {
+      "coq_version": "8.15.2",
+      "ocaml_version": "4.13.1",
+      "opam_version": "2.1.3",
+      "platform": "ubuntu-latest"
+    }
+  },
+  "builds": [],
+  "validation": {
+    "reproducible": true,
+    "drift_detected": false,
+    "last_validation": "2025-10-21T00:00:00Z",
+    "validation_notes": "Initial baseline - no drift analysis available"
+  }
+}

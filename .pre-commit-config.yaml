@@ -25,12 +25,29 @@ repos:
         files: 'LOGOS_AGI/.*\.py$'
         language_version: python3
 
-  # Coq-specific validation (basic syntax check)
+  # Coq-specific validation (conditional on Coq availability)
   - repo: local
     hooks:
       - id: coq-syntax
         name: Coq Syntax Check
-        entry: bash -c 'if command -v coqc >/dev/null 2>&1; then for file in "$@"; do coqc -q "$file" >/dev/null || exit 1; done; fi'
+        entry: bash
+        args:
+          - -c
+          - |
+            if command -v coqc >/dev/null 2>&1; then
+              echo "✓ Coq found, running syntax checks..."
+              for file in "$@"; do
+                echo "Checking: $file"
+                coqc -q "$file" >/dev/null || {
+                  echo "❌ Syntax error in $file"
+                  exit 1
+                }
+              done
+              echo "✓ All Coq files passed syntax check"
+            else
+              echo "⚠️ Coq not installed - skipping syntax check (install Coq 8.15+ for full validation)"
+            fi
         language: system
         files: '\.v$'
         pass_filenames: true
+        verbose: true
