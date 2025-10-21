@@ -1,0 +1,300 @@
+"""
+LOGOS Core Entry Point - Global Integration Hub
+
+This module provides the main entry point for the LOGOS AGI system,
+integrating the enhanced reference monitor with all reasoning operations.
+"""
+
+import os
+import sys
+import atexit
+import logging
+from pathlib import Path
+from typing import Dict, Any, Optional
+
+# Ensure logos_core is in path
+current_dir = Path(__file__).parent
+sys.path.insert(0, str(current_dir))
+
+from enhanced_reference_monitor import get_global_monitor, shutdown_monitor
+from runtime.iel_runtime_interface import ModalLogicEvaluator, IELEvaluator
+
+logger = logging.getLogger(__name__)
+
+class LOGOSCore:
+    """
+    Main LOGOS AGI Core System
+
+    Provides centralized access to all reasoning capabilities with
+    integrated reference monitoring and safety guarantees.
+    """
+
+    def __init__(self, config: Optional[Dict[str, Any]] = None):
+        """
+        Initialize LOGOS Core system
+
+        Args:
+            config: Optional configuration override
+        """
+        self.config = config or {}
+        self._monitor = None
+        self._initialized = False
+
+        # Setup logging
+        self._setup_logging()
+
+        # Initialize reference monitor
+        self._initialize_monitor()
+
+        # Register cleanup
+        atexit.register(self.shutdown)
+
+        logger.info("LOGOS Core system initialized")
+
+    def _setup_logging(self):
+        """Setup system logging"""
+        log_level = self.config.get('log_level', 'INFO')
+        logging.basicConfig(
+            level=getattr(logging, log_level),
+            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+        )
+
+    def _initialize_monitor(self):
+        """Initialize the enhanced reference monitor"""
+        try:
+            self._monitor = get_global_monitor()
+            self._initialized = True
+            logger.info("Enhanced Reference Monitor integration successful")
+        except Exception as e:
+            logger.error(f"Failed to initialize reference monitor: {e}")
+            raise
+
+    @property
+    def monitor(self):
+        """Access to the reference monitor"""
+        if not self._initialized:
+            raise RuntimeError("LOGOS Core not initialized")
+        return self._monitor
+
+    def evaluate_modal_logic(self, proposition: str, **kwargs) -> Dict[str, Any]:
+        """
+        Evaluate modal logic proposition with full monitoring
+
+        Args:
+            proposition: Modal logic formula to evaluate
+            **kwargs: Additional evaluation parameters
+
+        Returns:
+            Evaluation result with monitoring metadata
+        """
+        if not self._initialized:
+            raise RuntimeError("LOGOS Core not initialized")
+
+        logger.debug(f"Evaluating modal logic: {proposition}")
+        return self._monitor.evaluate_modal_proposition(proposition, **kwargs)
+
+    def evaluate_iel_logic(self, proposition: str, **kwargs) -> Dict[str, Any]:
+        """
+        Evaluate IEL proposition with full monitoring
+
+        Args:
+            proposition: IEL formula to evaluate
+            **kwargs: Additional evaluation parameters including identity/experience contexts
+
+        Returns:
+            Evaluation result with monitoring metadata
+        """
+        if not self._initialized:
+            raise RuntimeError("LOGOS Core not initialized")
+
+        logger.debug(f"Evaluating IEL logic: {proposition}")
+        return self._monitor.evaluate_iel_proposition(proposition, **kwargs)
+
+    def evaluate_batch(self, propositions: list, **kwargs) -> Dict[str, Any]:
+        """
+        Evaluate multiple propositions with monitoring
+
+        Args:
+            propositions: List of propositions to evaluate
+            **kwargs: Additional evaluation parameters
+
+        Returns:
+            Batch evaluation results with monitoring metadata
+        """
+        if not self._initialized:
+            raise RuntimeError("LOGOS Core not initialized")
+
+        logger.debug(f"Evaluating batch of {len(propositions)} propositions")
+        return self._monitor.evaluate_batch(propositions, **kwargs)
+
+    def get_system_status(self) -> Dict[str, Any]:
+        """
+        Get comprehensive system status
+
+        Returns:
+            System status including monitor state and health metrics
+        """
+        if not self._initialized:
+            return {"status": "not_initialized"}
+
+        monitor_status = self._monitor.get_monitor_status()
+
+        return {
+            "logos_core": {
+                "status": "operational" if self._initialized else "offline",
+                "version": "2.0.0",
+                "initialized": self._initialized
+            },
+            "reference_monitor": monitor_status,
+            "capabilities": {
+                "modal_logic": True,
+                "iel_logic": True,
+                "batch_processing": True,
+                "anomaly_detection": True,
+                "consistency_validation": True
+            }
+        }
+
+    def emergency_shutdown(self, reason: str = "Manual shutdown"):
+        """
+        Emergency shutdown with full state preservation
+
+        Args:
+            reason: Reason for emergency shutdown
+        """
+        logger.critical(f"EMERGENCY SHUTDOWN: {reason}")
+
+        if self._monitor:
+            # Block all operations
+            self._monitor.add_blocked_operation("*", f"Emergency shutdown: {reason}")
+            self._monitor.emergency_halt = True
+
+        self.shutdown()
+
+    def clear_emergency_state(self, authorization_code: str):
+        """
+        Clear emergency state (requires authorization)
+
+        Args:
+            authorization_code: Authorization code for emergency override
+        """
+        if not self._initialized:
+            return False
+
+        self._monitor.clear_emergency_halt(authorization_code)
+        return not self._monitor.emergency_halt
+
+    def shutdown(self):
+        """Clean shutdown of LOGOS Core system"""
+        if self._initialized:
+            logger.info("Shutting down LOGOS Core system")
+            shutdown_monitor()
+            self._initialized = False
+
+# Global LOGOS Core instance
+_global_core = None
+
+def initialize_logos_core(config: Optional[Dict[str, Any]] = None) -> LOGOSCore:
+    """
+    Initialize global LOGOS Core instance
+
+    Args:
+        config: Optional configuration
+
+    Returns:
+        LOGOS Core instance
+    """
+    global _global_core
+    if _global_core is None:
+        _global_core = LOGOSCore(config)
+    return _global_core
+
+def get_logos_core() -> LOGOSCore:
+    """
+    Get global LOGOS Core instance (initialize if needed)
+
+    Returns:
+        LOGOS Core instance
+    """
+    global _global_core
+    if _global_core is None:
+        _global_core = LOGOSCore()
+    return _global_core
+
+def shutdown_logos_core():
+    """Shutdown global LOGOS Core instance"""
+    global _global_core
+    if _global_core:
+        _global_core.shutdown()
+        _global_core = None
+
+# Convenience functions for direct access
+def evaluate_modal(proposition: str, **kwargs) -> Dict[str, Any]:
+    """Convenience function for modal logic evaluation"""
+    return get_logos_core().evaluate_modal_logic(proposition, **kwargs)
+
+def evaluate_iel(proposition: str, **kwargs) -> Dict[str, Any]:
+    """Convenience function for IEL evaluation"""
+    return get_logos_core().evaluate_iel_logic(proposition, **kwargs)
+
+def evaluate_batch(propositions: list, **kwargs) -> Dict[str, Any]:
+    """Convenience function for batch evaluation"""
+    return get_logos_core().evaluate_batch(propositions, **kwargs)
+
+def get_status() -> Dict[str, Any]:
+    """Convenience function for system status"""
+    return get_logos_core().get_system_status()
+
+# Module-level initialization for import-time setup
+def _module_init():
+    """Initialize module-level state"""
+    # Create necessary directories
+    logs_dir = Path("logs")
+    logs_dir.mkdir(exist_ok=True)
+
+    audit_dir = Path("audit")
+    audit_dir.mkdir(exist_ok=True)
+
+    # Set up basic logging if not already configured
+    if not logging.getLogger().handlers:
+        logging.basicConfig(
+            level=logging.INFO,
+            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+        )
+
+# Auto-initialize on import
+_module_init()
+
+if __name__ == "__main__":
+    # Command-line interface for testing
+    import argparse
+
+    parser = argparse.ArgumentParser(description="LOGOS Core System")
+    parser.add_argument('--test-modal', type=str, help="Test modal proposition")
+    parser.add_argument('--test-iel', type=str, help="Test IEL proposition")
+    parser.add_argument('--status', action='store_true', help="Show system status")
+    parser.add_argument('--shutdown', action='store_true', help="Shutdown system")
+
+    args = parser.parse_args()
+
+    core = initialize_logos_core()
+
+    try:
+        if args.status:
+            status = core.get_system_status()
+            print(json.dumps(status, indent=2))
+
+        if args.test_modal:
+            result = core.evaluate_modal_logic(args.test_modal)
+            print(f"Modal result: {result}")
+
+        if args.test_iel:
+            result = core.evaluate_iel_logic(args.test_iel)
+            print(f"IEL result: {result}")
+
+        if args.shutdown:
+            core.shutdown()
+
+    except Exception as e:
+        logger.error(f"Error: {e}")
+        sys.exit(1)
