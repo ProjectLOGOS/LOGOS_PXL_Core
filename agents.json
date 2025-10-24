@@ -1,0 +1,117 @@
+{
+  "agents": [
+    {
+      "agent_id": "logos-agent-alpha",
+      "host": "localhost",
+      "port": 8750,
+      "public_key": "",
+      "capabilities": {
+        "domains": ["modal_logic", "temporal_logic", "iel"],
+        "evaluators": ["ModalLogicEvaluator", "TemporalLogicEvaluator", "IELEvaluator"],
+        "generators": ["IELGenerator", "ModalLogicGenerator"],
+        "max_concurrent_requests": 10,
+        "specializations": ["autonomous_learning", "coherence_optimization"],
+        "version": "1.0.0"
+      },
+      "trust_metrics": {
+        "trust_score": 0.8,
+        "successful_exchanges": 25,
+        "failed_exchanges": 2,
+        "invalid_iels_sent": 0,
+        "response_time_avg": 0.5,
+        "last_successful_contact": "2025-10-21T17:00:00",
+        "reputation_decay_rate": 0.99
+      },
+      "status": "online",
+      "last_seen": "2025-10-21T17:00:00",
+      "metadata": {
+        "description": "Primary LOGOS reasoning agent",
+        "location": "local_network",
+        "administrator": "logos_system"
+      }
+    },
+    {
+      "agent_id": "logos-agent-beta",
+      "host": "localhost",
+      "port": 8751,
+      "public_key": "",
+      "capabilities": {
+        "domains": ["modal_logic", "deontic_logic"],
+        "evaluators": ["ModalLogicEvaluator", "DeonticLogicEvaluator"],
+        "generators": ["IELGenerator"],
+        "max_concurrent_requests": 8,
+        "specializations": ["modal_reasoning", "proof_verification"],
+        "version": "1.0.0"
+      },
+      "trust_metrics": {
+        "trust_score": 0.9,
+        "successful_exchanges": 45,
+        "failed_exchanges": 1,
+        "invalid_iels_sent": 0,
+        "response_time_avg": 0.3,
+        "last_successful_contact": "2025-10-21T16:55:00",
+        "reputation_decay_rate": 0.99
+      },
+      "status": "online",
+      "last_seen": "2025-10-21T16:55:00",
+      "metadata": {
+        "description": "Specialized modal logic reasoning agent",
+        "location": "local_network",
+        "administrator": "logos_system"
+      }
+    },
+    {
+      "agent_id": "logos-agent-gamma",
+      "host": "localhost",
+      "port": 8752,
+      "public_key": "",
+      "capabilities": {
+        "domains": ["temporal_logic", "epistemic_logic"],
+        "evaluators": ["TemporalLogicEvaluator", "EpistemicLogicEvaluator"],
+        "generators": ["TemporalIELGenerator"],
+        "max_concurrent_requests": 12,
+        "specializations": ["temporal_reasoning", "knowledge_integration"],
+        "version": "1.0.0"
+      },
+      "trust_metrics": {
+        "trust_score": 0.7,
+        "successful_exchanges": 15,
+        "failed_exchanges": 3,
+        "invalid_iels_sent": 1,
+        "response_time_avg": 0.8,
+        "last_successful_contact": "2025-10-21T16:45:00",
+        "reputation_decay_rate": 0.99
+      },
+      "status": "online",
+      "last_seen": "2025-10-21T16:45:00",
+      "metadata": {
+        "description": "Temporal and epistemic logic specialist",
+        "location": "local_network",
+        "administrator": "logos_system"
+      }
+    }
+  ],
+  "network_config": {
+    "discovery_interval": 30,
+    "health_check_interval": 60,
+    "trust_update_interval": 300,
+    "min_trust_threshold": 0.3,
+    "max_retry_attempts": 3,
+    "request_timeout": 10,
+    "auto_discovery": true,
+    "secure_communication": true
+  },
+  "sync_config": {
+    "auto_sync_interval": 300,
+    "max_concurrent_syncs": 5,
+    "conflict_resolution": "coherence_score",
+    "min_coherence_threshold": 0.6,
+    "trust_weight_factor": 0.3,
+    "consensus_threshold": 0.6,
+    "signature_required": true,
+    "enable_auto_push": true,
+    "enable_auto_pull": true,
+    "max_iel_age_days": 30,
+    "version_check_enabled": true
+  }
+}

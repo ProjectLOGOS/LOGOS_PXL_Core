@@ -1,7 +1,7 @@
 (* ChronoMappings.v - PXL Canonical Bijective Mappings *)
 
 From Coq Require Import Program.
-Require Import ChronoAxioms.
+From IEL.infra.ChronoPraxis.substrate Require Import ChronoAxioms.
 
 (* Define Bijection record locally since import is not available *)
 Record Bijection (A B : Type) : Type := {

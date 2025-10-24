@@ -1,33 +1,61 @@
-# LOGOS_PXL_Core v0.5 - Production Deployment Guide
+# LOGOS AGI Full Stack Deployment Guide
 
-**Version**: v0.5-rc1  
-**Last Updated**: October 19, 2025  
-**Target Environment**: Production-Ready Verified AGI System
+## Overview
 
----
+This guide provides comprehensive instructions for deploying the complete LOGOS AGI system with enhanced falsifiability framework support. The deployment supports both Docker containerization and local Python process management with automatic failover.
 
-## 🎯 **Overview**
+## Quick Start
 
-This guide provides comprehensive instructions for deploying LOGOS_PXL_Core v0.5 in production environments. The system achieves **94%+ verification ratio** with **sub-300ms P95 latency** and production-grade security hardening.
+### Prerequisites
 
----
+1. **Python 3.8+** with pip
+2. **Docker & Docker Compose** (recommended) or local Python environment
+3. **Git** for cloning repositories
+4. **PowerShell** (Windows) or **Bash** (Linux/macOS)
 
-## 📋 **Prerequisites**
+### Instant Deployment
 
-### **System Requirements**
-- **OS**: Linux (Ubuntu 20.04+ recommended), macOS, or Windows with WSL2
-- **CPU**: 4+ cores (8+ recommended for high throughput)
-- **Memory**: 8GB RAM minimum (16GB+ recommended)
-- **Storage**: 10GB available space
-- **Network**: Stable internet for dependency installation
+```powershell
+# Windows PowerShell
+.\start_logos_full_stack.ps1 -Action deploy -Mode auto
 
-### **Software Dependencies**
-- **Python**: 3.8+ (3.11+ recommended)
-- **Coq**: 8.15+ with SerAPI support
-- **Docker**: 20.10+ (for containerized deployment)
-- **Git**: For version control and updates
+# Or using Python directly
+python deploy_full_stack.py --mode auto
+```
 
-### **Required Python Packages**
+```bash
+# Linux/macOS
+./start_logos_full_stack.sh deploy auto
+
+# Or using Python directly  
+python deploy_full_stack.py --mode auto
+```
+
+## Architecture Overview
+
+The LOGOS AGI system consists of the following components:
+
+### Core Services
+- **PXL Prover** (Port 8088): Formal proof verification engine
+- **LOGOS Core** (Port 5000-5002): Main reasoning engine with falsifiability framework
+- **LOGOS API** (Port 8090): RESTful API gateway
+- **Archon** (Port 8075): Cognitive architecture orchestrator
+
+### Worker Services
+- **TELOS** (Port 8066): Causal prediction and temporal reasoning
+- **TETRAGNOS** (Port 8065): Natural language processing
+- **THONOC** (Port 8067): Theorem proving and formal verification
+
+### Infrastructure Services
+- **RabbitMQ** (Port 5672, 15672): Message broker
+- **Redis** (Port 6379): Caching and session storage  
+- **PostgreSQL** (Port 5432): Primary database
+- **Tool Router** (Port 8071): Service discovery and routing
+
+### User Interfaces
+- **Interactive Chat** (Port 8080): Web-based chat interface
+- **Probe Console** (Port 8081): System monitoring and debugging
+- **Documentation** (Port 8082): API documentation and guides
 ```bash
 pip install flask waitress requests hashlib threading
 ```

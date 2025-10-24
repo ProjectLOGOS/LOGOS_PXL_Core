@@ -168,7 +168,114 @@ Definition runtime_eval_iel (world : string) (accessible : list string)
   let ctx := make_context world accessible valuations in
   eval_iel_modal ctx prop.
 
-(** ========== OCaml Extraction ========== **)
+(** ========== Countermodel Generation for Falsifiability ========== **)
+
+(** Countermodel structure for falsified propositions **)
+Record countermodel : Type := {
+  cm_worlds : list string;
+  cm_accessibility : string -> list string;
+  cm_valuation : string -> string -> bool;
+  cm_falsifying_world : string;
+  cm_proposition : modal_prop;
+  cm_trace : list string
+}.
+
+(** Generate falsifying valuation for atomic proposition **)
+Definition falsify_atomic (p : string) : string -> bool :=
+  fun atom => if String.eqb atom p then false else true.
+
+(** Generate countermodel for failed Box proposition **)
+Definition countermodel_box (p : modal_prop) (world : string) : countermodel :=
+  let counter_world := String.append world "_counter" in
+  let worlds := cons world (cons counter_world nil) in
+  let accessibility := fun w =>
+    if String.eqb w world then cons counter_world nil else nil in
+  let valuation := fun w atom =>
+    if String.eqb w counter_world then false else true in
+  {| cm_worlds := worlds;
+     cm_accessibility := accessibility;
+     cm_valuation := valuation;
+     cm_falsifying_world := counter_world;
+     cm_proposition := MBox p;
+     cm_trace := cons "box_countermodel_generated" nil |}.
+
+(** Generate countermodel for failed Diamond proposition **)
+Definition countermodel_diamond (p : modal_prop) (world : string) : countermodel :=
+  let worlds := cons world nil in
+  let accessibility := fun w => nil in  (* No accessible worlds *)
+  let valuation := fun w atom => true in  (* Doesn't matter, no accessible worlds *)
+  {| cm_worlds := worlds;
+     cm_accessibility := accessibility;
+     cm_valuation := valuation;
+     cm_falsifying_world := world;
+     cm_proposition := MDia p;
+     cm_trace := cons "diamond_countermodel_generated" nil |}.
+
+(** Verify countermodel falsifies proposition **)
+Definition verify_countermodel (cm : countermodel) : bool :=
+  let ctx := {| mc_world := cm_falsifying_world cm;
+                mc_accessible := (cm_accessibility cm) (cm_falsifying_world cm);
+                mc_valuation := (cm_valuation cm) (cm_falsifying_world cm) |} in
+  negb (eval_modal ctx (cm_proposition cm)).
+
+(** Falsifiability theorem: if proposition is false, countermodel exists **)
+Theorem falsifiability_principle : forall ctx p,
+  eval_modal ctx p = false ->
+  exists cm, cm_proposition cm = p /\ verify_countermodel cm = true.
+Proof.
+  intros ctx p H_false.
+  (* Construct countermodel from context that makes p false *)
+  exists {| cm_worlds := cons (mc_world ctx) nil;
+            cm_accessibility := fun _ => (mc_accessible ctx);
+            cm_valuation := fun _ => (mc_valuation ctx);
+            cm_falsifying_world := (mc_world ctx);
+            cm_proposition := p;
+            cm_trace := cons "falsifiability_proof" nil |}.
+  split.
+  - reflexivity.
+  - simpl.
+    rewrite H_false.
+    simpl.
+    reflexivity.
+Qed.
+
+(** Box falsifiability: ¬□P ⇒ ◊¬P **)
+Theorem box_falsifiability : forall ctx p,
+  eval_modal ctx (MBox p) = false ->
+  eval_modal ctx (MDia (MNeg p)) = true.
+Proof.
+  intros ctx p H_box_false.
+  simpl.
+  (* If Box p is false, there exists an accessible world where p is false *)
+  (* This means Diamond not-p is true *)
+  (* For now, admit - requires detailed analysis of forall_worlds_check *)
+  admit.
+Admitted.
+
+(** Runtime countermodel generation interface **)
+Definition generate_countermodel_modal (world : string) (accessible : list string)
+                                      (valuations : list (string * bool))
+                                      (prop : modal_prop) : option countermodel :=
+  let ctx := make_context world accessible valuations in
+  if eval_modal ctx prop then
+    None  (* Proposition is true, no countermodel needed *)
+  else
+    match prop with
+    | MBox inner => Some (countermodel_box inner world)
+    | MDia inner => Some (countermodel_diamond inner world)
+    | _ =>
+      (* General countermodel using current context *)
+      Some {| cm_worlds := cons world nil;
+              cm_accessibility := fun _ => accessible;
+              cm_valuation := fun _ => fun s =>
+                match find (fun p => String.eqb (fst p) s) valuations with
+                | Some (_, b) => b
+                | None => false
+                end;
+              cm_falsifying_world := world;
+              cm_proposition := prop;
+              cm_trace := cons "general_countermodel" nil |}
+    end.
 
 (** Extract the core types for OCaml runtime **)
 Extract Inductive modal_prop => "modal_prop"
@@ -183,10 +290,13 @@ Extract Inductive iel_modal_prop => "iel_modal_prop"
 Extract Inductive bool => "bool" [ "true" "false" ].
 Extract Inductive list => "list" [ "[]" "(::)" ].
 Extract Inductive string => "string" [ "" ].
+Extract Inductive option => "option" [ "Some" "None" ].
 
 (** Extract the evaluation functions **)
 Extraction "proof_bridge.ml"
-  modal_prop iel_operator iel_modal_prop modal_context
+  modal_prop iel_operator iel_modal_prop modal_context countermodel
   eval_modal eval_iel_modal
   runtime_eval_modal runtime_eval_iel
-  make_context parse_atomic.
+  make_context parse_atomic
+  generate_countermodel_modal countermodel_box countermodel_diamond
+  verify_countermodel falsify_atomic.

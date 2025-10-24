@@ -1,0 +1,91 @@
+# LOGOS AGI Full Stack Deployment Configuration
+deployment:
+  mode: "auto"  # "docker", "local", or "auto" (try docker first, fallback to local)
+  health_check_interval: 30  # seconds
+  max_startup_time: 300  # seconds
+  enable_monitoring: true
+  log_level: "INFO"
+
+# Docker configuration
+docker:
+  compose_file: "docker-compose.yml"
+  project_name: "logos-agi"
+  build_timeout: 600  # seconds
+  cleanup_on_shutdown: true
+
+# Networking configuration
+networking:
+  base_port: 8000
+  health_timeout: 10  # seconds
+  startup_delay: 2  # seconds between service starts
+
+# Service-specific configurations
+services:
+  pxl-prover:
+    enable_coq_cache: true
+    max_proof_time: 120
+    memory_limit: "2g"
+
+  logos-core:
+    max_workers: 4
+    enable_telemetry: true
+    falsifiability_validation: true
+    modal_logic_cache_size: 10000
+
+  archon:
+    reasoning_depth: 50
+    enable_self_reflection: true
+    cognitive_load_threshold: 0.8
+
+  worker_services:
+    restart_policy: "on-failure"
+    max_restarts: 3
+    memory_limit: "1g"
+
+# Monitoring and observability
+monitoring:
+  metrics_port: 9090
+  dashboard_port: 3000
+  enable_telemetry: true
+  log_retention_days: 30
+  enable_performance_profiling: false
+
+# Security configuration
+security:
+  enable_authentication: false  # For development
+  api_key_required: false
+  cors_origins: ["http://localhost:*"]
+
+# Database configuration (when not using Docker)
+database:
+  type: "sqlite"  # "postgresql", "sqlite"
+  path: "data/logos.db"
+  connection_pool_size: 10
+
+# RabbitMQ configuration (when not using Docker)
+messaging:
+  enable_local_broker: true
+  broker_type: "memory"  # "rabbitmq", "memory"
+
+# Development and debugging
+development:
+  enable_debug_mode: false
+  hot_reload: false
+  enable_code_profiling: false
+  mock_external_services: false
+
+# Falsifiability framework configuration
+falsifiability:
+  enable_countermodel_generation: true
+  modal_logic_validation: true
+  kripke_model_cache_size: 1000
+  max_countermodel_search_depth: 10
+  enable_safety_integration: true
+  telemetry_reporting: true
+
+# Experimental features
+experimental:
+  enable_quantum_logic: false
+  enable_temporal_reasoning: true
+  enable_multi_modal_inference: true
+  enable_causal_intervention: true

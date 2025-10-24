@@ -1,0 +1,4 @@
+[0;34m[2025-10-23 17:42:46][0m LOGOS AGI System Reproduction Started
+[0;34m[2025-10-23 17:42:46][0m ================================================
+[0;34m[2025-10-23 17:42:46][0m Checking system requirements...
+[0;31m[ERROR][0m Coq is not installed. Please install Coq 8.15 or later.

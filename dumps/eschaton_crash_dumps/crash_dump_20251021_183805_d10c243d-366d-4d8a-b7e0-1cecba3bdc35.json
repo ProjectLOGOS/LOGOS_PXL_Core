@@ -1,0 +1,147 @@
+{
+  "violation": {
+    "violation_id": "d10c243d-366d-4d8a-b7e0-1cecba3bdc35",
+    "safeguard_state": "FORMAL_VERIFICATION_BREACH",
+    "timestamp": "2025-10-21T18:38:05.922895",
+    "triggering_operation": "integrity_check",
+    "triggering_data": {
+      "violations": [
+        "File modified: logos_core/eschaton_safety.py (hash mismatch)"
+      ]
+    },
+    "stack_trace": [
+      "  File \"C:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\\Lib\\threading.py\", line 1014, in _bootstrap\n    self._bootstrap_inner()\n",
+      "  File \"C:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\\Lib\\threading.py\", line 1043, in _bootstrap_inner\n    self.run()\n",
+      "  File \"C:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\\Lib\\threading.py\", line 994, in run\n    self._target(*self._args, **self._kwargs)\n",
+      "  File \"C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\logos_core\\eschaton_safety.py\", line 797, in _integrity_monitoring_loop\n    self._trigger_violation(\n",
+      "  File \"C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\logos_core\\eschaton_safety.py\", line 715, in _trigger_violation\n    stack_trace=self._get_stack_trace(),\n",
+      "  File \"C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core\\logos_core\\eschaton_safety.py\", line 976, in _get_stack_trace\n    return traceback.format_stack()\n"
+    ],
+    "system_state_hash": "9d17ff60bfe42e60ae45e64007293c928b96679d838847b67b0c7415b33fe725",
+    "severity_level": 9,
+    "reversible": false,
+    "containment_actions": [
+      "halt_evaluation"
+    ],
+    "metadata": {
+      "reason": "Integrity violations detected: ['File modified: logos_core/eschaton_safety.py (hash mismatch)']"
+    }
+  },
+  "system_info": {
+    "python_version": "3.13.9 (tags/v3.13.9:8183fa5, Oct 14 2025, 14:09:13) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "win32",
+    "process_id": 14904,
+    "working_directory": "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core",
+    "environment_variables": {
+      "ALLUSERSPROFILE": "C:\\ProgramData",
+      "APPDATA": "C:\\Users\\proje\\AppData\\Roaming",
+      "CHOCOLATEYINSTALL": "C:\\ProgramData\\chocolatey",
+      "CHOCOLATEYLASTPATHUPDATE": "133837903115995871",
+      "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_10524_BXQTHVZPEDNWKOIY",
+      "COMMONPROGRAMFILES": "C:\\Program Files\\Common Files",
+      "COMMONPROGRAMFILES(X86)": "C:\\Program Files (x86)\\Common Files",
+      "COMMONPROGRAMW6432": "C:\\Program Files\\Common Files",
+      "COMPUTERNAME": "DESKTOP-5P85G22",
+      "COMSPEC": "C:\\WINDOWS\\system32\\cmd.exe",
+      "DRIVERDATA": "C:\\Windows\\System32\\Drivers\\DriverData",
+      "EFC_2176_1262719628": "1",
+      "EFC_2176_1592913036": "1",
+      "EFC_2176_2283032206": "1",
+      "EFC_2176_2775293581": "1",
+      "EFC_2176_3789132940": "1",
+      "HOMEDRIVE": "C:",
+      "HOMEPATH": "\\Users\\proje",
+      "LOCALAPPDATA": "C:\\Users\\proje\\AppData\\Local",
+      "LOGONSERVER": "\\\\DESKTOP-5P85G22",
+      "NUMBER_OF_PROCESSORS": "4",
+      "ONEDRIVE": "C:\\Users\\proje\\OneDrive",
+      "ONEDRIVECONSUMER": "C:\\Users\\proje\\OneDrive",
+      "ORIGINAL_XDG_CURRENT_DESKTOP": "undefined",
+      "OS": "Windows_NT",
+      "PATH": "C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Users\\proje\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\proje\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\Scripts;C:\\Program Files\\nodejs\\;C:\\ProgramData\\chocolatey\\bin;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Program Files\\MiKTeX\\miktex\\bin\\x64\\;C:\\Program Files\\Pandoc\\;C:\\Program Files\\Git\\cmd;C:\\Users\\proje\\.elan\\bin;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Users\\proje\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\proje\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\Scripts;C:\\Program Files\\nodejs\\;C:\\ProgramData\\chocolatey\\bin;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Program Files\\MiKTeX\\miktex\\bin\\x64\\;C:\\Program Files\\Pandoc\\;C:\\Program Files\\Git\\cmd;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Users\\proje\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\proje\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\Scripts;C:\\Program Files\\nodejs\\;C:\\ProgramData\\chocolatey\\bin;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\Sy;C:\\Users\\proje\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Coq-Platform~8.20~2025.01\\bin;C:\\Users\\proje\\AppData\\Local\\Microsoft\\WinGet\\Links;c:\\Users\\proje\\.vscode\\extensions\\ms-python.debugpy-2025.14.1-win32-x64\\bundled\\scripts\\noConfigScripts;c:\\Users\\proje\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand",
+      "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL",
+      "PROCESSOR_ARCHITECTURE": "AMD64",
+      "PROCESSOR_IDENTIFIER": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+      "PROCESSOR_LEVEL": "6",
+      "PROCESSOR_REVISION": "8c01",
+      "PROGRAMDATA": "C:\\ProgramData",
+      "PROGRAMFILES": "C:\\Program Files",
+      "PROGRAMFILES(X86)": "C:\\Program Files (x86)",
+      "PROGRAMW6432": "C:\\Program Files",
+      "PSMODULEPATH": "C:\\Users\\proje\\OneDrive\\Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules",
+      "PUBLIC": "C:\\Users\\Public",
+      "SESSIONNAME": "Console",
+      "SYSTEMDRIVE": "C:",
+      "SYSTEMROOT": "C:\\WINDOWS",
+      "TEMP": "C:\\Users\\proje\\AppData\\Local\\Temp",
+      "TMP": "C:\\Users\\proje\\AppData\\Local\\Temp",
+      "USERDOMAIN": "DESKTOP-5P85G22",
+      "USERDOMAIN_ROAMINGPROFILE": "DESKTOP-5P85G22",
+      "USERNAME": "proje",
+      "USERPROFILE": "C:\\Users\\proje",
+      "VSCODE_PYTHON_AUTOACTIVATE_GUARD": "1",
+      "WINDIR": "C:\\WINDOWS",
+      "ZES_ENABLE_SYSMAN": "1",
+      "GIT_PAGER": "cat",
+      "TERM_PROGRAM": "vscode",
+      "TERM_PROGRAM_VERSION": "1.105.1",
+      "LANG": "en_US.UTF-8",
+      "COLORTERM": "truecolor",
+      "GIT_ASKPASS": "c:\\Users\\proje\\AppData\\Local\\Programs\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass.sh",
+      "VSCODE_GIT_ASKPASS_NODE": "C:\\Users\\proje\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
+      "VSCODE_GIT_ASKPASS_EXTRA_ARGS": "",
+      "VSCODE_GIT_ASKPASS_MAIN": "c:\\Users\\proje\\AppData\\Local\\Programs\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass-main.js",
+      "VSCODE_GIT_IPC_HANDLE": "\\\\.\\pipe\\vscode-git-0c7d6d0272-sock",
+      "PYDEVD_DISABLE_FILE_VALIDATION": "1",
+      "VSCODE_DEBUGPY_ADAPTER_ENDPOINTS": "c:\\Users\\proje\\.vscode\\extensions\\ms-python.debugpy-2025.14.1-win32-x64\\.noConfigDebugAdapterEndpoints\\endpoint-692437d06f0dc603.txt",
+      "BUNDLED_DEBUGPY_PATH": "c:\\Users\\proje\\.vscode\\extensions\\ms-python.debugpy-2025.14.1-win32-x64\\bundled\\libs\\debugpy",
+      "PYTHONSTARTUP": "c:\\Users\\proje\\AppData\\Roaming\\Code\\User\\workspaceStorage\\389aa4ae24c4cdcd9a649e3498f29d98\\ms-python.python\\pythonrc.py",
+      "PYTHON_BASIC_REPL": "1",
+      "VSCODE_INJECTION": "1",
+      "PYTHONUSERBASE": "C:\\Users\\proje\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages"
+    },
+    "command_line_args": [
+      "validate_eschaton_complete.py"
+    ]
+  },
+  "memory_state": {
+    "memory_usage": {
+      "rss": 37941248,
+      "vms": 18644992,
+      "num_page_faults": 9791,
+      "peak_wset": 38813696,
+      "wset": 37941248,
+      "peak_paged_pool": 243280,
+      "paged_pool": 243024,
+      "peak_nonpaged_pool": 20152,
+      "nonpaged_pool": 19992,
+      "pagefile": 18644992,
+      "peak_pagefile": 19673088,
+      "private": 18644992
+    },
+    "memory_percent": 0.45392310504377514,
+    "cpu_percent": 0.0
+  },
+  "thread_state": {
+    "active_threads": 5,
+    "current_thread": "EschatonIntegrityMonitor",
+    "thread_list": [
+      "MainThread",
+      "EschatonIntegrityMonitor",
+      "EschatonBoundaryMonitor",
+      "EschatonIntegrityMonitor",
+      "EschatonStatePersistence"
+    ]
+  },
+  "file_system_state": {
+    "current_directory": "C:\\Users\\proje\\OneDrive\\Desktop\\Project_Directory\\LOGOS_PXL_Core",
+    "critical_files_exist": {
+      "entry.py": false,
+      "logos_core/unified_formalisms.py": true,
+      "logos_core/eschaton_safety.py": true
+    }
+  },
+  "integrity_hashes": {
+    "logos_core/eschaton_safety.py": "71f07a813129f3d0133d4d512f3207a8ffd3027e7222026d080bf07e7fa58407"
+  }
+}

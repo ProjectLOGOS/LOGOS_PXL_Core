@@ -18,4 +18,3 @@ Global Instance Cap_ModalLogic_inst : Cap_ModalLogic := {|
   modal_consistency := ModalPraxis.modal_consistency;
   modal_distribution := ModalPraxis.modal_distribution
 |}.
-Export Cap_ModalLogic.
