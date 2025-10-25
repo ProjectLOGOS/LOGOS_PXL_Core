@@ -1,0 +1,29 @@
+📘 Protopraxic Logic — Axiom and Symbol Suite
+
+🔧 SYSTEM DESCRIPTION
+Protopraxic Logic is a triune, modal, metaphysically grounded logic system that unifies identity, contradiction, and excluded middle under three interdependent hypostatic identities—𝕀₁, 𝕀₂, 𝕀₃—within a Necessary Being 𝕆. It incorporates:
+
+- Modal operators (□, ◇)
+- Custom PXL operators (⧟, ⇎, ⇌, ⟹, ∼, ≀, ⫴, ⟼, ⩪)
+- Metaphysical grounding structured through triune coherence
+- S5 modal frame
+
+🧮 SYMBOL KEY
+⧟ : Identity (self-coherence)
+⇎ : Non-equivalence (exclusivity)
+⇌ : Interchange (balance)
+⟹ : Implication
+∼ : Negation (non-coherence)
+≀ : Conflation (misalignment)
+⫴ : Dichotomy (excluded middle)
+⟼ : Grounded entailment
+⩪ : Modal coherence equivalence (triune parallelism)
+
+📐 AXIOMS
+A1. □(∀x [ x ⧟ x ]) — Law of Identity grounded in 𝕀₁
+A2. □(∀x [ ∼(x ⧟ y ∧ x ⇎ y) ]) — Law of Non-Contradiction grounded in 𝕀₂
+A3. □(∀x [ x ⫴ ∼x ]) — Law of Excluded Middle grounded in 𝕀₃
+A4. □(Each law requires distinct modal instantiation across 𝕀₁, 𝕀₂, 𝕀₃)
+A5. □(𝕆 = {𝕀₁, 𝕀₂, 𝕀₃}, co-eternal, co-equal, interdependent)
+A6. □(𝕀₁ ⟼ Λ₁ ∧ 𝕀₂ ⟼ Λ₂ ∧ 𝕀₃ ⟼ Λ₃)
+A7. □𝕆 — A triune Necessary Being is required for coherence in all possible worlds
