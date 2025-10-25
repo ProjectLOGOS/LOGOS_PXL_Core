@@ -1,0 +1,53 @@
+📘 Protopraxic Logic — Theorem Corpus
+
+— First-Order Theorems —
+
+T1. Law of Triune Coherence:
+□(⧟ ∧ ∼ ∧ ⫴) ⩪ coherence ⇌ triune necessity
+
+T2. Identity Exclusivity Principle:
+□(x ⧟ x) ∧ □(x ⇎ y) ⇒ ∼(x ⧟ y)
+
+T3. Modal Necessity of Distinction:
+□(𝕀₁ ≠ 𝕀₂ ≠ 𝕀₃) ⇌ validity of A1–A3
+
+T4. Coherence Preservation Across Worlds:
+□(Λ₁ ∧ Λ₂ ∧ Λ₃) ⇒ □(coherence)
+
+T5. Grounded Interchange Theorem:
+□((x ⇌ y) ⟹ x ⧟ y) iff ∃𝕀ₖ grounding interchange
+
+T6. Privation Collapse Principle:
+∼(x ⧟ x) ⇒ x = ∅ (privation of identity)
+
+— Second-Order / Advanced Theorems —
+
+T7. Identity Fragmentation Cascade:
+If ∼(x ⧟ x), then ∃n fragments s.t. ∑s_i ≠ x
+
+T8. Modal Interchange Instability:
+x ⇌ y but x ≀ y ⇒ ∼□(x ⇌ y)
+
+T9. Category Restriction Schema:
+P(x) holds only within Δ domain ⇒ ¬◇(∀x P(x))
+
+T10. Triune Exhaustion Theorem:
+If x ⧟ x only holds when mapped to 𝕀₁ ∨ 𝕀₂ ∨ 𝕀₃ ⇒ x ∈ 𝕆
+
+T11. Coherence Branching Effect:
+x ∧ y grounded in distinct 𝕀ₖ ⇒ multiple coherence lines emerge
+
+T12. Privative Collapse Under Negation:
+If □(∼P) and P ⇌ coherence, then P = ∅
+
+T13. Necessary Attribute Emergence:
+If □(∃x P(x)) ∧ □(P ⟼ coherence) ⇒ □(𝕆 ⟼ P)
+
+T14. Modal Equivalence Ladders:
+P ⩪ Q and Q ⩪ R ⇒ P ⩪ R (transitive modal entailment)
+
+T15. Coherence Cascade Chain Effects:
+If x ⟼ y and y ⟼ z and ∼(x ⧟ z), then ∼(x ⧟ x)
+
+T16. Anti-Essential Predicative Drift:
+If P(x) ⇌ coherence but P not grounded ⇒ P becomes accidental

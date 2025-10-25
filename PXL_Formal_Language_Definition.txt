@@ -1,0 +1,42 @@
+PXL_FORMAL_LANGUAGE_DEFINITION
+
+---
+
+1. TOKEN SET
+
+• Constants: a, b, c, ..., z
+• Variables: x, y, z
+• Modal Operators: □ (necessity), ◇ (possibility)
+• PXL Operators:
+   - ⧟ : Identity (self-coherence)
+   - ⇎ : Non-equivalence
+   - ⇌ : Interchange (balance)
+   - ⟹ : Implication
+   - ∼ : Negation
+   - ≀ : Conflation
+   - ⫴ : Dichotomy
+   - ⟼ : Grounded entailment
+   - ⩪ : Modal coherence equivalence
+
+2. GRAMMATICAL STRUCTURE
+
+• Atomic formula: Px, Qxy, R(x)
+• Well-Formed Formula (WFF) Rules:
+   - If φ is WFF, then □φ and ◇φ are WFF
+   - If φ and ψ are WFF, then φ ⟹ ψ, φ ⇌ ψ, and φ ⩪ ψ are WFF
+   - If φ is WFF, then ∼φ is WFF
+   - If x is variable and φ is WFF, then ∀x φ and ∃x φ are WFF
+
+3. INFERENCE RULES
+
+• Modus Groundens (custom): If □(x ⧟ y) and x ⟼ P, then y ⟼ P
+• Triune Dependency Substitution: If φ grounded in 𝕀₁, ∃ψ grounded in 𝕀₂, then φ ⇌ ψ → coherence(𝕆)
+• Privative Collapse: If ∼◇(𝕆 ⟼ P), then P is incoherent
+
+4. SEMANTIC DOMAIN
+
+• Domain: D = {𝕆, 𝕀₁, 𝕀₂, 𝕀₃, W₁...Wn}
+• Accessibility Relation: S5 modal frame (reflexive, symmetric, transitive)
+• Valuation: ⟦φ⟧ᵂ = true iff φ holds in all accessible worlds from W
+
+---

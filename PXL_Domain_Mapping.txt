@@ -1,0 +1,43 @@
+PXL_DOMAIN_MAPPING
+
+---
+
+This document outlines cross-domain deployment applications for the Protopraxic Logic System.
+
+1. THEOLOGY
+
+• Coherent trinitarian metaphysics (𝕀₁, 𝕀₂, 𝕀₃)
+• Model divine attributes: truth, love, glory
+• Exclude incoherent theological models (strict monism, modalism)
+
+2. METAPHYSICS
+
+• Necessity grounded in interdependent identities
+• Filters contingent vs essential attributes
+• Eliminates brute facts via modal entailment and triune grounding
+
+3. EPISTEMOLOGY
+
+• Coherence theory of truth formalized via ⧟, ⇌, ⩪
+• Knowledge: □(Belief ∧ Grounded ∧ Coherent)
+• Rejects relativistic models lacking modal coherence
+
+4. ETHICS
+
+• Goodness = identity-preserving coherence (⧟)
+• Evil = ∼Coherence = Privation
+• Moral realism derivable via □(𝕆 ⟼ Good)
+
+5. AESTHETICS
+
+• Beauty = modal balance (⇌)
+• Fragmentation → aesthetic incoherence → evaluative decay
+• Groundable beauty defined as that which instantiates triune harmony
+
+6. LOGIC SYSTEMS
+
+• Completes gaps left in classical logic (LEM, contradiction scope)
+• Distinct symbol set prevents category bleed with Aristotelian/MF logics
+• Suitable as a coherence-checking overlay for any modal predicate domain
+
+---
