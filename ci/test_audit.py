@@ -3,9 +3,15 @@
 import os
 import sys
 
-sys.path.append("..")
+# Add the parent directory to the path to find the persistence module
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from persistence.persistence import AuditLog
+try:
+    from persistence import AuditLog
+except ImportError:
+    print("Error: persistence module not found")
+    print("Make sure the persistence module is installed or in the correct location")
+    sys.exit(1)
 
 # Create test audit directory
 os.makedirs("../audit", exist_ok=True)

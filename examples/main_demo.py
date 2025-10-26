@@ -183,34 +183,111 @@ def demo_proof_failure():
         return False
 
 
-def show_audit_summary():
-    """Show summary of audit log entries"""
-    print("\n=== Audit Summary ===")
+def demo_trinity_gui():
+    """Demo 6: LOGOS AGI Trinity Knot GUI - Simplified Dark Theme"""
+    print("=== Demo 6: LOGOS AGI Trinity GUI ===")
+    print("\nLaunching redesigned Trinity Knot interface...")
+    print("Features:")
+    print("  • Dark theme (#1a1a1a) with electric blue (#00bfff)")
+    print("  • Trinity Knot icon with 4 animation states")
+    print("  • Real-time WebSocket communication")
+    print("  • Text query interface")
+    print("  • Voice input toggle (push-to-talk)")
+    print("  • File upload (10MB max)")
+    print("  • Simplified interface (proof window removed)")
 
+    import subprocess
+    import webbrowser
+    import time
+
+    try:
+        # Launch gui.py directly
+        gui_path = os.path.join("..", "gui.py")
+
+        print("\nStarting LOGOS AGI server...")
+        server_process = subprocess.Popen(
+            [sys.executable, gui_path],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            cwd=os.path.dirname(__file__)
+        )
+
+        # Wait for server startup
+        time.sleep(4)
+
+        # Check if server is running
+        if server_process.poll() is None:
+            print("✓ LOGOS AGI server started on http://localhost:5000")
+            print("\nOpening browser...")
+            time.sleep(1)
+            webbrowser.open("http://localhost:5000")
+
+            print("\n" + "=" * 50)
+            print("LOGOS AGI Trinity Knot GUI is now running!")
+            print("=" * 50)
+            print("\nTest the interface:")
+            print("  1. Ask: 'How does LOGOS think?'")
+            print("  2. Click 🎤 for voice input")
+            print("  3. Upload a file with 📁")
+            print("\nTrinity Knot animations:")
+            print("  • Deep blue pulse: Listening")
+            print("  • Ice-to-white glow: Processing")
+            print("  • Electric blue pulse: Responding")
+            print("  • Spectrum fade: Stasis")
+            print("\nPress Enter to stop the server...")
+
+            input()
+
+            # Stop server
+            print("\nStopping LOGOS AGI server...")
+            server_process.terminate()
+            try:
+                server_process.wait(timeout=5)
+            except:
+                server_process.kill()
+
+            print("✓ Trinity GUI demo completed")
+            return True
+        else:
+            print("✗ Failed to start LOGOS AGI server")
+            stdout, stderr = server_process.communicate()
+            print(f"Error: {stderr.decode()[:500]}")
+            return False
+
+    except FileNotFoundError as e:
+        print(f"✗ Could not launch server: {e}")
+        print("Ensure gui.py exists in the project root")
+        return False
+    except Exception as e:
+        print(f"✗ Trinity GUI demo failed: {e}")
+        try:
+            server_process.terminate()
+        except:
+            pass
+        return False
+
+
+def show_audit_summary():
+    """Show a summary of audit events"""
+    print("\n=== Audit Log Summary ===")
     try:
         from persistence.persistence import AuditLog
 
-        # Use parent directory for audit path
-        audit_path = os.path.join(
-            os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "audit", "decisions.jsonl"
-        )
-        audit = AuditLog(audit_path)
-
-        stats = audit.get_stats()
-        print(f"Total audit records: {stats['total_records']}")
-        print(f"Allow decisions: {stats.get('allow_count', 0)}")
-        print(f"Deny decisions: {stats.get('deny_count', 0)}")
-
-        if stats["total_records"] > 0:
-            recent = audit.query_recent(3)
-            print("\nRecent decisions:")
-            for record in recent[-3:]:
-                decision = record.get("decision", "UNKNOWN")
-                obligation = record.get("obligation", "")[:50]
-                print(f"  {decision}: {obligation}...")
-
+        log = AuditLog()
+        events = log.query_recent(limit=5)
+        if events:
+            print(f"Recent audit events ({len(events)}):")
+            for event in events:
+                action = event.get("action", "unknown")
+                timestamp = event.get("timestamp", "unknown")
+                status = event.get("status", "unknown")
+                print(f"  • {timestamp}: {action} ({status})")
+        else:
+            print("No audit events found")
+    except ImportError:
+        print("⚠ Audit logging module not available")
     except Exception as e:
-        print(f"Could not load audit summary: {e}")
+        print(f"⚠ Could not retrieve audit log: {e}")
 
 
 def main():
@@ -243,6 +320,7 @@ def main():
         demo_obdc_bijection,
         demo_drift_reconciliation,
         demo_proof_failure,
+        demo_trinity_gui,  # Phase 2: Trinity Knot GUI
     ]
 
     results = []

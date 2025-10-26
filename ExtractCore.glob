@@ -1,0 +1,6 @@
+DIGEST 5435cbb94673c956a1f9d817638fb041
+FExtractCore
+R90:99 Coq.extraction.Extraction <> <> lib
+R195:204 PXLs.PXLv3 <> <> lib
+R214:218 PXLs.PXLv3 PXLv3 <> mod
+R281:284 PXLs.PXLv3 PXLv3 form ind

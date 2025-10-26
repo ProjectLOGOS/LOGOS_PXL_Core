@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGOS Trinity Knot - Advanced AI Interface</title>
+    <link rel="stylesheet" href="/static/trinity_knot.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="trinity-container">
+        <!-- Header -->
+        <header class="trinity-header">
+            <h1>LOGOS Trinity Knot</h1>
+            <div class="status-bar">
+                <span id="system-status" class="status-indicator stasis">Stasis</span>
+                <span id="library-count">Libraries: --/--</span>
+            </div>
+        </header>
+
+        <!-- Trinity Knot Visualization -->
+        <div class="knot-container">
+            <div id="trinity-knot" class="trinity-knot knot-stasis">
+                <div class="knot-center">
+                    <div class="knot-circle logic-circle">
+                        <span>Logic</span>
+                    </div>
+                    <div class="knot-circle proof-circle">
+                        <span>Proof</span>
+                    </div>
+                    <div class="knot-circle inference-circle">
+                        <span>Inference</span>
+                    </div>
+                </div>
+                <div class="state-label" id="state-label">Awaiting Input</div>
+            </div>
+        </div>
+
+        <!-- Main Interface -->
+        <div class="interface-grid">
+            <!-- Chat Interface -->
+            <div class="chat-panel">
+                <div class="chat-messages" id="chat-messages"></div>
+                <div class="chat-input-container">
+                    <textarea
+                        id="chat-input"
+                        placeholder="Ask about logic, proofs, or request graph visualizations..."
+                        rows="3"
+                    ></textarea>
+                    <div class="input-actions">
+                        <button id="send-btn" class="btn-primary">Send</button>
+                        <button id="voice-btn" class="btn-secondary">🎤 Voice</button>
+                        <button id="file-btn" class="btn-secondary">📁 Upload</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Graph Visualization Panel -->
+            <div class="graph-panel">
+                <h3>Proof Dependencies</h3>
+                <div id="graph-container" class="graph-viz"></div>
+                <div id="graph-analysis" class="graph-info"></div>
+            </div>
+        </div>
+
+        <!-- File Upload Dialog (Hidden) -->
+        <div id="file-dialog" class="modal hidden">
+            <div class="modal-content">
+                <h3>Upload File (10MB max)</h3>
+                <div class="file-drop-zone" id="file-drop-zone">
+                    <p>Drag & drop file here or click to browse</p>
+                    <input type="file" id="file-input" hidden>
+                </div>
+                <div class="modal-actions">
+                    <button id="upload-confirm-btn" class="btn-primary">Upload</button>
+                    <button id="upload-cancel-btn" class="btn-secondary">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Voice Input Dialog (Hidden) -->
+        <div id="voice-dialog" class="modal hidden">
+            <div class="modal-content">
+                <h3>Voice Input</h3>
+                <div class="voice-indicator">
+                    <div class="pulse-ring"></div>
+                    <p id="voice-status">Listening...</p>
+                </div>
+                <button id="voice-cancel-btn" class="btn-secondary">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="trinity-footer">
+            <div class="session-info">
+                Session ID: <span id="session-id">--</span>
+            </div>
+            <div class="audit-link">
+                <a href="#" id="view-audit">View Audit Log</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/static/trinity_knot.js"></script>
+</body>
+</html>

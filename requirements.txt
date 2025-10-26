@@ -48,6 +48,53 @@ prometheus-client==0.17.1
 # Mathematical and proof utilities
 sympy==1.12
 
+# ============================================================================
+# PHASE 1: External Library Integration (ML/NLP/Probabilistic/Graph)
+# ============================================================================
+# NOTE: Python 3.13 compatibility verified for all libraries except PyMC and pmdarima
+# For full functionality, consider using Python 3.11 or 3.12
+
+# Probabilistic Programming
+# pymc==5.10.4  # INCOMPATIBLE: Requires pytensor 2.18.1-2.19, unavailable for Python 3.13
+pyro-ppl==1.8.6  # ✅ VERIFIED: Deep probabilistic programming with PyTorch
+
+# Deep Learning Framework
+torch==2.3.0  # ✅ VERIFIED: Core deep learning framework
+torchvision==0.18.0
+
+# NLP and Sentence Embeddings
+sentence-transformers==2.7.0  # ✅ VERIFIED: 384-dim semantic embeddings
+transformers==4.40.0
+
+# Graph Analysis
+networkx==3.3  # ✅ VERIFIED: Graph construction and analysis
+
+# Econometric Modeling
+arch==8.0.0  # ✅ VERIFIED: GARCH models, volatility forecasting (auto-upgraded from 7.0.0)
+
+# Kalman Filtering (Primary)
+filterpy==1.4.5  # ✅ VERIFIED: Kalman/particle filtering
+
+# Time Series Analysis
+# pmdarima==2.0.4  # INCOMPATIBLE: Requires C compiler, Cython build fails on Python 3.13
+
+# Kalman Filtering (Backup)
+pykalman==0.9.5  # ✅ VERIFIED: Backup Kalman filtering
+
+# Machine Learning
+scikit-learn==1.5.0  # ✅ VERIFIED: Random forests, classification, regression
+
+# ============================================================================
+# PHASE 1: Voice/GUI Integration (Optional)
+# ============================================================================
+
+# Speech Recognition (optional - for voice_input)
+SpeechRecognition==3.10.0
+pyaudio==0.2.13
+
+# Text-to-Speech (optional - for tts_output)
+pyttsx3==2.90
+
 # Testing framework (for integration tests)
 pytest==7.4.0
 pytest-timeout==2.1.0

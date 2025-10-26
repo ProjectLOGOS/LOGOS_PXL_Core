@@ -3,7 +3,6 @@ Module ChronoPraxis.
   Definition V := PXLs.Internal Emergent Logics.Source.TheoPraxis.Props.ChronoPraxis.
 
   Theorem temporal_unification : forall A B C : Prop,
-  Theorem temporal_unification : forall A B C : Prop,
     A -> B -> exists unified_logic : Prop,
       unified_logic = (A /\ B /\ C).
   Proof.

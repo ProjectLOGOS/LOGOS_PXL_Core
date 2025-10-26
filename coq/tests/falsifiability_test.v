@@ -203,12 +203,12 @@ Proof.
 Qed.
 
 (** Test case 5: IEL identity operator falsifiability **)
+Notation "'falsifiable_in_iel' prop" :=
+  (exists ctx, eval_iel_modal ctx prop = false) (at level 70).
+
 Example iel_identity_falsifiable :
-  falsifiable_in_iel (IELOp (IIdentity "agent") (IELBase (MProp "goal")))
-where "falsifiable_in_iel prop" :=
-  (exists ctx, eval_iel_modal ctx prop = false).
+  falsifiable_in_iel (IELOp (IIdentity "agent") (IELBase (MProp "goal"))).
 Proof.
-  unfold falsifiable_in_iel.
   exists {| mc_world := "w0";
             mc_accessible := cons "w0" nil;
             mc_valuation := fun s => false |}.

@@ -1,7 +1,8 @@
 
-type __ = Obj.t
+type nat =
+| O
+| S of nat
 
-module TheoProps =
+module PXLv3 =
  struct
-  type coq_Truth = __
  end

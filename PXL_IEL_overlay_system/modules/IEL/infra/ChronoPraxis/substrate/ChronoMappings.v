@@ -1,7 +1,20 @@
 (* ChronoMappings.v - PXL Canonical Bijective Mappings *)
 
 From Coq Require Import Program.
-From IEL.infra.ChronoPraxis.substrate Require Import ChronoAxioms.
+(* Require Import ChronoAxioms. *)
+
+(* Temporary placeholder definitions until ChronoAxioms is available *)
+Parameter chi_A chi_B chi_C : Type.
+Parameter P_chi : Type -> Type.
+Parameter Eternal : Type.
+
+Module ChronoAxioms.
+  Definition chi_A := chi_A.
+  Definition chi_B := chi_B.
+  Definition chi_C := chi_C.
+  Definition P_chi := P_chi.
+  Definition Eternal := Eternal.
+End ChronoAxioms.
 
 (* Define Bijection record locally since import is not available *)
 Record Bijection (A B : Type) : Type := {

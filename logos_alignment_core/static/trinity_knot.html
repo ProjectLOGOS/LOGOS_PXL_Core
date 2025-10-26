@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGOS AGI</title>
+    <link rel="stylesheet" href="/static/trinity_knot.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>LOGOS AGI</h1>
+            <div class="status-bar">
+                <span id="library-count">Libraries: 0/13</span>
+                <span id="connection-status">Connecting...</span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Trinity Knot Visualization -->
+            <div class="trinity-section">
+                <canvas id="trinity-knot" width="150" height="150"></canvas>
+                <div id="state-label">Listening</div>
+            </div>
+
+            <!-- Chat Interface -->
+            <div class="chat-section">
+                <div id="chat-messages"></div>
+
+                <div class="input-section">
+                    <input
+                        type="text"
+                        id="query-input"
+                        placeholder="Ask LOGOS anything..."
+                        autocomplete="off"
+                    />
+                    <button id="send-btn">Send</button>
+                    <button id="voice-btn" class="voice-btn">
+                        <span class="voice-icon">🎤</span>
+                    </button>
+                    <label for="file-upload" class="file-btn">
+                        📁 Upload
+                    </label>
+                    <input type="file" id="file-upload" style="display: none;" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/trinity_knot.js"></script>
+</body>
+</html>
