@@ -1,0 +1,45 @@
+# logos_agi_v1/services/database/Dockerfile
+
+FROM python:3.11-slim
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    sqlite3 \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements first for better Docker layer caching
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY . .
+
+# Create data directory for database storage
+RUN mkdir -p /data && chmod 755 /data
+
+# Create non-root user for security
+RUN useradd --create-home --shell /bin/bash logos && \
+    chown -R logos:logos /app /data
+
+# Switch to non-root user
+USER logos
+
+# Set environment variables
+ENV PYTHONPATH=/app
+ENV PYTHONUNBUFFERED=1
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD python -c "import sqlite3; conn = sqlite3.connect('/data/logos_agi.db'); conn.execute('SELECT 1'); conn.close()" || exit 1
+
+# Expose port (not used for this service, but good practice)
+EXPOSE 8080
+
+# Default command
+CMD ["python", "db_service.py"]

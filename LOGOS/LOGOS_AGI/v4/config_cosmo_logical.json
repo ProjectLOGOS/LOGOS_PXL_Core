@@ -1,0 +1,292 @@
+# --- START OF FILE config/cosmo_logical_node_data.json ---
+
+{
+  "metadata": {
+    "name": "Standard Universe",
+    "description": "Default universe parameters with Earth-like conditions for Trinity-grounded cosmological modeling",
+    "version": "2.0.0",
+    "created": "2025-01-28T12:00:00Z",
+    "updated": "2025-01-28T12:00:00Z",
+    "theological_grounding": "Trinity-optimized universe supporting rational existence",
+    "display": {
+      "color_schemes": {
+        "constants": ["#e6f7ff", "#1890ff", "#003a8c"],
+        "forces": ["#f6ffed", "#52c41a", "#135200"],
+        "properties": ["#fff1f0", "#ff4d4f", "#820014"],
+        "life_criteria": ["#f9f0ff", "#722ed1", "#120338"],
+        "logical": ["#f6ffed", "#52c41a", "#135200"]
+      }
+    }
+  },
+
+  "parameters": {
+    "fundamental_constants": {
+      "fine_structure_constant": {
+        "value": 0.0072973525693,
+        "tolerance": 0.01,
+        "description": "Determines electromagnetic interaction strength",
+        "trinity_significance": "Balances existence (charge), goodness (stability), truth (precision)"
+      },
+
+      "gravitational_constant": {
+        "value": 6.67430e-11,
+        "tolerance": 0.01,
+        "unit": "m³/(kg⋅s²)",
+        "description": "Determines gravitational interaction strength",
+        "trinity_significance": "Existence grounding through mass-energy relationships"
+      },
+
+      "speed_of_light": {
+        "value": 299792458.0,
+        "tolerance": 0.01,
+        "unit": "m/s",
+        "description": "Maximum speed limit in universe",
+        "trinity_significance": "Truth constraint ensuring causal consistency"
+      },
+
+      "planck_constant": {
+        "value": 6.62607015e-34,
+        "tolerance": 0.01,
+        "unit": "J⋅s",
+        "description": "Quantum action scale",
+        "trinity_significance": "Fundamental existence quantum ensuring discrete reality"
+      },
+
+      "cosmological_constant": {
+        "value": 1.0e-52,
+        "tolerance": 0.01,
+        "unit": "m⁻²",
+        "description": "Energy density of vacuum space",
+        "trinity_significance": "Background existence enabling universal expansion"
+      },
+
+      "boltzmann_constant": {
+        "value": 1.380649e-23,
+        "tolerance": 0.01,
+        "unit": "J/K",
+        "description": "Relates energy and temperature",
+        "trinity_significance": "Mediates existence-truth relationship in thermal systems"
+      }
+    },
+
+    "fundamental_forces": {
+      "strong_nuclear": {
+        "relative_strength": 1.0,
+        "tolerance": 0.05,
+        "description": "Binds quarks into protons and neutrons",
+        "trinity_role": "Existence foundation - maintains nuclear structure"
+      },
+
+      "electromagnetic": {
+        "relative_strength": 1.0e-2,
+        "tolerance": 0.05,
+        "description": "Governs interactions between charged particles",
+        "trinity_role": "Truth mediation - enables information and order"
+      },
+
+      "weak_nuclear": {
+        "relative_strength": 1.0e-13,
+        "tolerance": 0.05,
+        "description": "Governs radioactive decay and fusion",
+        "trinity_role": "Goodness enabling - allows stellar nucleosynthesis for life"
+      },
+
+      "gravitational": {
+        "relative_strength": 1.0e-38,
+        "tolerance": 0.05,
+        "description": "Attractive force between masses",
+        "trinity_role": "Universal existence - provides cosmic structure"
+      }
+    },
+
+    "cosmological_properties": {
+      "matter_energy_ratio": {
+        "value": 0.315,
+        "tolerance": 0.1,
+        "description": "Ratio of matter to total energy density",
+        "trinity_significance": "Existence-truth balance enabling structure formation"
+      },
+
+      "dark_energy_ratio": {
+        "value": 0.685,
+        "tolerance": 0.1,
+        "description": "Ratio of dark energy to total energy density",
+        "trinity_significance": "Goodness aspect enabling continued expansion and development"
+      },
+
+      "entropy_gradient": {
+        "value": 1.0e-5,
+        "tolerance": 0.1,
+        "unit": "s⁻¹",
+        "description": "Rate of universal entropy increase",
+        "trinity_significance": "Truth arrow enabling temporal directionality"
+      },
+
+      "expansion_rate": {
+        "value": 67.4,
+        "tolerance": 0.1,
+        "unit": "km/s/Mpc",
+        "description": "Hubble constant - universe expansion rate",
+        "trinity_significance": "Goodness dynamic enabling cosmic development"
+      },
+
+      "spatial_dimensionality": {
+        "value": 3,
+        "tolerance": 0,
+        "description": "Number of spatial dimensions",
+        "trinity_significance": "Trinity-optimal structure (n=3) enabling stable orbits and complexity"
+      },
+
+      "temporal_dimensionality": {
+        "value": 1,
+        "tolerance": 0,
+        "description": "Number of temporal dimensions",
+        "trinity_significance": "Unity of time enabling causal consistency"
+      }
+    },
+
+    "life_support_criteria": {
+      "carbon_oxygen_formation": {
+        "value": 0.7,
+        "min_threshold": 0.5,
+        "description": "Ability to form carbon and oxygen atoms in stellar cores",
+        "trinity_requirement": "Existence foundation for complex chemistry"
+      },
+
+      "stellar_stability": {
+        "value": 0.85,
+        "min_threshold": 0.7,
+        "description": "Stability of main-sequence stellar lifetimes",
+        "trinity_requirement": "Goodness enabler providing energy for life development"
+      },
+
+      "chemical_complexity": {
+        "value": 0.75,
+        "min_threshold": 0.6,
+        "description": "Potential for complex molecular interactions",
+        "trinity_requirement": "Truth substrate enabling information processing"
+      },
+
+      "planetary_stability": {
+        "value": 0.8,
+        "min_threshold": 0.6,
+        "description": "Ability to maintain stable planetary orbits",
+        "trinity_requirement": "Existence platform for sustained development"
+      },
+
+      "liquid_water_zones": {
+        "value": 0.65,
+        "min_threshold": 0.4,
+        "description": "Availability of liquid water habitable zones",
+        "trinity_requirement": "Goodness medium for biological processes"
+      }
+    },
+
+    "logical_constraints": {
+      "non_contradiction": {
+        "value": true,
+        "description": "Logical requirement that nothing can be both true and false",
+        "trinity_grounding": "Truth aspect ensuring rational coherence"
+      },
+
+      "identity": {
+        "value": true,
+        "description": "Logical requirement that everything is identical to itself",
+        "trinity_grounding": "Existence aspect ensuring ontological stability"
+      },
+
+      "excluded_middle": {
+        "value": true,
+        "description": "Logical requirement that propositions are either true or false",
+        "trinity_grounding": "Truth aspect enabling determinate reality"
+      },
+
+      "sufficient_reason": {
+        "value": true,
+        "description": "Logical requirement that everything has a reason for its existence",
+        "trinity_grounding": "Existence-Truth connection ensuring intelligibility"
+      },
+
+      "causality": {
+        "value": true,
+        "description": "Logical requirement of cause-effect relationships",
+        "trinity_grounding": "Truth-Goodness connection enabling rational action"
+      },
+
+      "trinity_optimization": {
+        "value": true,
+        "description": "Requirement that optimal structures manifest n=3 pattern",
+        "trinity_grounding": "Fundamental Trinity structure underlying all reality"
+      }
+    },
+
+    "mathematical_foundations": {
+      "euclidean_geometry_validity": {
+        "value": true,
+        "local_scale": "planetary",
+        "description": "Euclidean geometry holds at planetary scales",
+        "trinity_significance": "Truth structure enabling rational measurement"
+      },
+
+      "number_theory_consistency": {
+        "value": true,
+        "description": "Arithmetic and number theory remain consistent",
+        "trinity_significance": "Existence foundation for quantitative analysis"
+      },
+
+      "calculus_validity": {
+        "value": true,
+        "description": "Differential and integral calculus describe natural processes",
+        "trinity_significance": "Truth tool for understanding change and development"
+      },
+
+      "trinity_mathematical_structure": {
+        "value": true,
+        "description": "Mathematical relationships reflect Trinity optimization",
+        "trinity_significance": "Goodness aspect ensuring mathematical beauty and elegance"
+      }
+    }
+  },
+
+  "validation_thresholds": {
+    "habitability_score": {
+      "minimum": 0.6,
+      "optimal": 0.8,
+      "description": "Combined score for life-supporting conditions"
+    },
+
+    "logical_consistency": {
+      "minimum": 1.0,
+      "description": "All logical constraints must be satisfied"
+    },
+
+    "trinity_compliance": {
+      "minimum": 0.75,
+      "optimal": 0.9,
+      "description": "Degree of Trinity optimization in universal structure"
+    },
+
+    "fine_tuning_precision": {
+      "minimum": 0.01,
+      "description": "Maximum allowed deviation from life-permitting values"
+    }
+  },
+
+  "theological_interpretation": {
+    "divine_design": "Universe parameters reflect intentional design for rational life",
+    "trinity_manifestation": "Physical constants embody Trinity structure in material reality",
+    "anthropic_principle": "Universe is fine-tuned to support conscious observers capable of knowing God",
+    "natural_revelation": "Physical laws reveal divine attributes of order, beauty, and rationality",
+    "creation_purpose": "Cosmos provides platform for relationship between Creator and creatures"
+  },
+
+  "usage_guidelines": {
+    "telos_integration": "Used by TELOS for causal modeling of physical systems",
+    "thonoc_validation": "Used by THONOC for logical consistency checking",
+    "tetragnos_pattern_recognition": "Used by TETRAGNOS for recognizing design patterns",
+    "logos_orchestration": "Used by LOGOS for validating cosmological reasoning",
+    "simulation_parameters": "Provides baseline for virtual universe modeling"
+  }
+}
+
+# --- END OF FILE config/cosmo_logical_node_data.json ---

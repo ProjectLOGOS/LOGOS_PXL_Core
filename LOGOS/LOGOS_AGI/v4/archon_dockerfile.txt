@@ -1,0 +1,55 @@
+# logos_agi_v1/services/archon_nexus/Dockerfile
+
+FROM python:3.11-slim
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies for graph processing and scientific computing
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    python3-dev \
+    libssl-dev \
+    libffi-dev \
+    libgraphviz-dev \
+    graphviz \
+    build-essential \
+    wget \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements first for better Docker layer caching
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Create necessary directories
+RUN mkdir -p /app/logs /app/data /app/workflows /app/cache
+
+# Copy core modules and application code
+COPY core/ ./core/
+COPY services/archon_nexus/ ./
+COPY shared/ ./shared/ 2>/dev/null || true
+
+# Create non-root user for security
+RUN useradd --create-home --shell /bin/bash archon && \
+    chown -R archon:archon /app
+
+# Switch to non-root user
+USER archon
+
+# Set environment variables
+ENV PYTHONPATH=/app
+ENV PYTHONUNBUFFERED=1
+ENV SERVICE_TYPE=archon_nexus
+ENV LOG_LEVEL=INFO
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
+    CMD python -c "import networkx; print('NetworkX available')" || exit 1
+
+# Default command
+CMD ["python", "archon_nexus.py"]
