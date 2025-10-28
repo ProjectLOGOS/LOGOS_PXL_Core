@@ -1,0 +1,94 @@
+{{- $component := "interactive-chat" -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "logos.interactiveChat.fullname" . }}
+  labels:
+    {{- include "logos.labels" . | nindent 4 }}
+    app.kubernetes.io/component: {{ $component }}
+spec:
+  replicas: {{ .Values.interactiveChat.replicaCount }}
+  selector:
+    matchLabels:
+      {{- $ctx := merge (dict "component" $component) . -}}
+      {{- include "logos.componentSelectorLabels" $ctx | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap-interactive-chat.yaml") . | sha256sum }}
+        {{- with .Values.interactiveChat.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      labels:
+        {{- $ctx := merge (dict "component" $component) . -}}
+        {{- include "logos.componentSelectorLabels" $ctx | nindent 8 }}
+        {{- with .Values.interactiveChat.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.interactiveChat.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "logos.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.interactiveChat.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}-interactive-chat
+          securityContext:
+            {{- toYaml .Values.interactiveChat.securityContext | nindent 12 }}
+          image: {{ include "logos.image" (dict "image" .Values.interactiveChat.image "tag" .Values.interactiveChat.imageTag "Chart" .Chart "Values" .Values) }}
+          imagePullPolicy: {{ .Values.interactiveChat.imagePullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.interactiveChat.service.targetPort }}
+              protocol: TCP
+          env:
+            - name: PORT
+              value: {{ .Values.interactiveChat.service.targetPort | quote }}
+            - name: TOOL_ROUTER_URL
+              value: "http://{{ include "logos.toolRouter.fullname" . }}:{{ .Values.toolRouter.service.port }}"
+            {{- with .Values.interactiveChat.env }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "logos.interactiveChat.fullname" . }}-config
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+          resources:
+            {{- toYaml .Values.interactiveChat.resources | nindent 12 }}
+          {{- with .Values.interactiveChat.volumeMounts }}
+          volumeMounts:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.interactiveChat.volumes }}
+      volumes:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.interactiveChat.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.interactiveChat.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.interactiveChat.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

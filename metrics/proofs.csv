@@ -1,0 +1,41 @@
+timestamp,obligation,duration_ms,result
+1759699552,BOX(Good(test_action)),43,ALLOW
+1759756417,BOX(Good(test_action) and TrueP(prop) and Coherent(state)),2039,DENY
+1759756419,BOX(Good(DENY_action) and not TrueP(prop) and Coherent(state)),2003,DENY
+1759756421,BOX(Good(test_action)),2011,DENY
+1759761326,BOX(Good(test_action) and TrueP(prop) and Coherent(state)),2007,DENY
+1759761328,BOX(Good(DENY_action) and not TrueP(prop) and Coherent(state)),2013,DENY
+1759761330,BOX(Good(test_action)),2015,DENY
+1759761406,BOX(Good(test_action) and TrueP(prop) and Coherent(state)),2013,DENY
+1759761408,BOX(Good(DENY_action) and not TrueP(prop) and Coherent(state)),2009,DENY
+1759761410,BOX(Good(test_action)),2003,DENY
+1759761880,BOX(Good(test_action) and TrueP(prop) and Coherent(state)),2006,DENY
+1759761882,BOX(Good(DENY_action) and not TrueP(prop) and Coherent(state)),2003,DENY
+1759761884,BOX(Good(test_action)),2002,DENY
+1759763121,BOX(Good(test_action) and TrueP(prop) and Coherent(state)),2010,DENY
+1759763123,BOX(Good(DENY_action) and not TrueP(prop) and Coherent(state)),2013,DENY
+1759763125,BOX(Good(test_action)),2013,DENY
+1759769049,BOX(Good(test_action) and TrueP(prop) and Coherent(state)),2016,DENY
+1759769051,BOX(Good(DENY_action) and not TrueP(prop) and Coherent(state)),2009,DENY
+1759769053,BOX(Good(test_action)),2016,DENY
+1759769117,BOX(Good(test_action) and TrueP(prop) and Coherent(state)),2010,DENY
+1759769119,BOX(Good(DENY_action) and not TrueP(prop) and Coherent(state)),2013,DENY
+1759769121,BOX(Good(test_action)),2004,DENY
+1759778624,BOX(Good(test_action) and TrueP(prop) and Coherent(state)),2019,DENY
+1759778626,BOX(Good(DENY_action) and not TrueP(prop) and Coherent(state)),2015,DENY
+1759778628,BOX(Good(test_action)),2016,DENY
+1759778998,BOX(Good(test_action) and TrueP(prop) and Coherent(state)),2014,DENY
+1759779001,BOX(Good(DENY_action) and not TrueP(prop) and Coherent(state)),2008,DENY
+1759779003,BOX(Good(test_action)),2001,DENY
+1759786507,BOX(Good(test_action) and TrueP(prop) and Coherent(state)),2022,DENY
+1759786509,BOX(Good(DENY_action) and not TrueP(prop) and Coherent(state)),2015,DENY
+1759786511,BOX(Good(test_action)),2018,DENY
+1759988475,BOX(Good(test_action) and TrueP(prop) and Coherent(state)),2021,DENY
+1759988477,BOX(Good(DENY_action) and not TrueP(prop) and Coherent(state)),2005,DENY
+1759988479,BOX(Good(test_action)),2003,DENY
+1759988509,BOX(Good(test_action) and TrueP(prop) and Coherent(state)),2008,DENY
+1759988511,BOX(Good(DENY_action) and not TrueP(prop) and Coherent(state)),2016,DENY
+1759988513,BOX(Good(test_action)),2006,DENY
+1760122461,BOX(Good(test_action) and TrueP(prop) and Coherent(state)),7,ALLOW
+1760122461,BOX(Good(DENY_action) and not TrueP(prop) and Coherent(state)),4,DENY
+1760122461,BOX(Good(test_action)),4,ALLOW

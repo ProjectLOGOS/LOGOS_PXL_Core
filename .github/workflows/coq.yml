@@ -1,0 +1,59 @@
+name: Coq Build & Policy
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: coqorg/coq:latest
+    defaults:
+      run:
+        shell: bash -euo pipefail {0}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Policy check (no Admitted., no Add LoadPath)
+        run: |
+          bash scripts/check_policy.sh
+
+      - name: Build (Bash make)
+        run: |
+          make clean
+          make -j
+
+      - name: Kernel verification
+        run: |
+          make check
+
+      - name: Domain builds
+        run: |
+          make domain-compatibilism
+          make domain-empiricism  
+          make domain-modal-ontology
+
+      - name: Property tests
+        run: |
+          coqc tests/DomainProperties.v
+
+      - name: Build coqdoc
+        run: |
+          make docs-html
+
+      - name: Upload docs
+        uses: actions/upload-artifact@v4
+        with:
+          name: coqdoc-html
+          path: docs/html
+
+      - name: Generate status report
+        run: |
+          bash scripts/gen_status.sh > docs/IEL_STATUS.md
+          sed -n '1,120p' docs/IEL_STATUS.md
+
+      - name: Upload status artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: IEL_STATUS
+          path: docs/IEL_STATUS.md

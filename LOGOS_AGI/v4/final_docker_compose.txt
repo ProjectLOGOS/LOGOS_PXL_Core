@@ -1,0 +1,102 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: "rabbitmq:3.9-management-alpine"
+    ports:
+      - "5672:5672"   # AMQP port
+      - "15672:15672" # Management UI
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+
+  keryx_api:
+    build: ./services/keryx_api
+    ports:
+      - "5000:5000"
+    env_file: .env
+    depends_on:
+      - rabbitmq
+    restart: unless-stopped
+
+  oracle_ui:
+    build: ./services/oracle_ui
+    ports:
+      - "7860:7860"
+    volumes:
+      - ./external_libraries:/app/external_libraries:ro
+    environment:
+      - API_BASE_URL=http://keryx_api:5000
+      - UI_PORT=7860
+      - PYTHONPATH=/app:/app/external_libraries/mandelbulb-main:/app/external_libraries/plotly-main:/app/external_libraries/numpy-main
+    depends_on:
+      - keryx_api
+    restart: unless-stopped
+
+  database:
+    build: ./services/database
+    volumes:
+      - db_data:/data
+    env_file: .env
+    depends_on:
+      - rabbitmq
+    restart: unless-stopped
+
+  logos_nexus:
+    build: ./services/logos_nexus
+    env_file: .env
+    volumes:
+      - ./config:/app/config:ro
+    depends_on:
+      - rabbitmq
+    restart: unless-stopped
+
+  archon_nexus:
+    build: ./services/archon_nexus
+    env_file: .env
+    volumes:
+      - ./config:/app/config:ro
+      - ./external_libraries:/app/external_libraries:ro
+    environment:
+      - PYTHONPATH=/app:/app/external_libraries/networkx-main:/app/external_libraries/numpy-main
+    depends_on:
+      - rabbitmq
+    restart: unless-stopped
+
+  tetragnos:
+    build: ./subsystems/tetragnos
+    env_file: .env
+    volumes:
+      - ./external_libraries:/app/external_libraries:ro
+    environment:
+      - PYTHONPATH=/app:/app/external_libraries/sentence-transformers-master:/app/external_libraries/scikit-learn-main:/app/external_libraries/torch-main:/app/external_libraries/numpy-main
+    depends_on:
+      - rabbitmq
+    restart: unless-stopped
+
+  telos:
+    build: ./subsystems/telos
+    env_file: .env
+    volumes:
+      - ./config:/app/config:ro
+      - ./external_libraries:/app/external_libraries:ro
+    environment:
+      - PYTHONPATH=/app:/app/external_libraries/pmdarima-main:/app/external_libraries/arch-main:/app/external_libraries/causal-learn-main:/app/external_libraries/pymc-main:/app/external_libraries/numpy-main:/app/external_libraries/scipy-main:/app/external_libraries/pandas-main
+    depends_on:
+      - rabbitmq
+    restart: unless-stopped
+
+  thonoc:
+    build: ./subsystems/thonoc
+    env_file: .env
+    volumes:
+      - ./config:/app/config:ro
+      - ./external_libraries:/app/external_libraries:ro
+    environment:
+      - PYTHONPATH=/app:/app/external_libraries/z3-main:/app/external_libraries/sympy-main:/app/external_libraries/networkx-main:/app/external_libraries/numpy-main
+    depends_on:
+      - rabbitmq
+    restart: unless-stopped
+
+volumes:
+  db_data:

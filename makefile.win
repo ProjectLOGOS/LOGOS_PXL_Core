@@ -1,0 +1,16 @@
+COQC = coqc
+COQCHK = coqchk
+
+# Collect .v files via PowerShell for Windows
+VFILES := $(shell powershell -NoProfile -Command ^
+  "Get-ChildItem -Recurse modules\\IEL -Filter *.v | %%{ $$_.FullName -replace '^.+modules','modules' }")
+
+all: build
+build:
+	$(COQC) -Q . PXLs $(VFILES)
+
+chk:
+	$(COQCHK) -R . PXLs
+
+hygiene:
+	@powershell -NoProfile -Command "if ((Select-String -Path modules\\IEL\\**\\*.v -Pattern '\\bAdmitted\\b' -AllMatches)) { exit 1 }"

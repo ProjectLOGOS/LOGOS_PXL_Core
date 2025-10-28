@@ -1,0 +1,1 @@
+{"pxl_prover_url": "http://127.0.0.1:8088", "expected_kernel_hash": "c54592b5bc637d1bdb650bcc614a3c5de09dda1eabef6cced2e74fd5c53ca49c", "audit_path": "audit/decisions.jsonl", "timeout_ms": 2000, "kernel_build_timestamp": 1759709147617, "kernel_source": "pxl-minimal-kernel-main"}

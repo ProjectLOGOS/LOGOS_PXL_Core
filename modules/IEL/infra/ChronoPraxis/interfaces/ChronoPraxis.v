@@ -1,0 +1,78 @@
+(* ChronoPraxis.v - Main Interface Module *)
+
+(* TODO: remove Admitted. — constructive only. No classical axioms. *)
+
+From PXLs.IEL.Infra.ChronoPraxis.Substrate Require Import ChronoAxioms.
+From PXLs.IEL.Infra.ChronoPraxis.Substrate Require Import Bijection.
+From PXLs.IEL.Infra.ChronoPraxis.Substrate Require Import ChronoMappings.
+
+Module ChronoPraxis.
+
+(* === Import Core Definitions === *)
+
+Import ChronoAxioms.
+Import ChronoMappings.
+
+(* === High-Level Temporal Reasoning Interface === *)
+
+(* Primary temporal reasoning function *)
+Definition chrono_reason (e : ChronoAxioms.Eternal) (target_mode : ChronoAxioms.chi) : ChronoAxioms.P_chi target_mode :=
+  match target_mode with
+  | ChronoAxioms.chi_A => ChronoMappings.project_to_A e
+  | ChronoAxioms.chi_B => ChronoMappings.project_to_B e
+  | ChronoAxioms.chi_C => ChronoMappings.project_to_C e
+  end.
+
+(* Verify temporal reasoning preserves truth *)
+Theorem chrono_reason_preserves_truth : 
+  forall (e : ChronoAxioms.Eternal) (m : ChronoAxioms.chi),
+    match m with
+    | ChronoAxioms.chi_A => ChronoMappings.lift_from_A (chrono_reason e ChronoAxioms.chi_A) = e
+    | ChronoAxioms.chi_B => ChronoMappings.lift_from_B (chrono_reason e ChronoAxioms.chi_B) = e
+    | ChronoAxioms.chi_C => ChronoMappings.lift_from_C (chrono_reason e ChronoAxioms.chi_C) = e
+    end.
+Proof. Admitted.
+
+(* === Cross-Modal Reasoning === *)
+
+(* Reason across temporal modes using constructive bijections *)
+Definition cross_modal_reason (p1 : ChronoAxioms.P_chi ChronoAxioms.chi_A) (target : ChronoAxioms.chi) : 
+  match target with
+  | ChronoAxioms.chi_A => ChronoAxioms.P_chi ChronoAxioms.chi_A
+  | ChronoAxioms.chi_B => ChronoAxioms.P_chi ChronoAxioms.chi_B
+  | ChronoAxioms.chi_C => ChronoAxioms.P_chi ChronoAxioms.chi_C
+  end :=
+  match target with
+  | ChronoAxioms.chi_A => p1
+  | ChronoAxioms.chi_B => ChronoMappings.A_to_B p1
+  | ChronoAxioms.chi_C => ChronoMappings.A_to_C p1
+  end.
+
+(* Cross-modal reasoning preserves eternal truth *)
+Theorem cross_modal_preservation : 
+  forall (p : ChronoAxioms.P_chi ChronoAxioms.chi_A),
+    ChronoMappings.lift_from_A p = ChronoMappings.lift_from_B (cross_modal_reason p ChronoAxioms.chi_B) /\
+    ChronoMappings.lift_from_A p = ChronoMappings.lift_from_C (cross_modal_reason p ChronoAxioms.chi_C).
+Proof. Admitted.
+
+(* === Main ChronoPraxis Theorem === *)
+
+Theorem chronopraxis_main_theorem : 
+  (* All temporal modes are distinct *)
+  (ChronoAxioms.chi_A <> ChronoAxioms.chi_B /\ ChronoAxioms.chi_B <> ChronoAxioms.chi_C /\ ChronoAxioms.chi_A <> ChronoAxioms.chi_C) /\
+  (* All temporal modes are compatible *)
+  (forall m1 m2 : ChronoAxioms.chi, ChronoAxioms.chi_compatible m1 m2) /\
+  (* All temporal modes converge on eternal truth *)
+  (forall (e : ChronoAxioms.Eternal), 
+     ChronoMappings.lift_from_A (ChronoMappings.project_to_A e) = e /\
+     ChronoMappings.lift_from_B (ChronoMappings.project_to_B e) = e /\
+     ChronoMappings.lift_from_C (ChronoMappings.project_to_C e) = e) /\
+  (* ChronoPraxis preserves PXL logical laws *)
+  (forall (m : ChronoAxioms.chi) (p : ChronoAxioms.P_chi m), p = p) /\
+  (forall (m : ChronoAxioms.chi) (p : ChronoAxioms.P_chi m), ~(p <> p)).
+Proof. Admitted.
+
+(* === Export Core Constructive Theorems === *)
+(* Note: These theorems are available from the ConstructiveCore section of ChronoProofs.v *)
+
+End ChronoPraxis.

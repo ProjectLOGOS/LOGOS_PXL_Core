@@ -1,0 +1,91 @@
+{
+  "properties": {
+    "Will": {
+      "group": "Volitional",
+      "description": "Attribute of will and choice",
+      "c_value": "0.5+0.3j",
+      "order": "Second-Order",
+      "_pillar": "Teleology",
+      "_iel": "TeloPraxis"
+    },
+    "Immanence": {
+      "group": "Spatial",
+      "description": "Presence within space",
+      "c_value": "0.2-0.1j",
+      "order": "Second-Order",
+      "_pillar": "Cosmology",
+      "_iel": "CosmoPraxis"
+    },
+    "Unity": {
+      "group": "Ontological",
+      "description": "Oneness and indivisibility",
+      "c_value": "1.0+0.0j",
+      "order": "First-Order",
+      "_pillar": "Theology",
+      "_iel": "TheoPraxis"
+    },
+    "Truth": {
+      "group": "Epistemological",
+      "description": "Correspondence to reality",
+      "c_value": "0.8+0.6j",
+      "order": "Second-Order",
+      "_pillar": "Epistemology",
+      "_iel": "GnosiPraxis"
+    },
+    "Goodness": {
+      "group": "Moral",
+      "description": "Moral excellence",
+      "c_value": "0.9+0.4j",
+      "order": "Second-Order",
+      "_pillar": "Axiology",
+      "_iel": "Axiopraxis"
+    },
+    "Beauty": {
+      "group": "Aesthetic",
+      "description": "Aesthetic perfection",
+      "c_value": "0.7+0.7j",
+      "order": "Second-Order",
+      "_pillar": "Axiology",
+      "_iel": "Axiopraxis"
+    }
+  },
+  "group_classifications": {
+    "Volitional": {
+      "properties": [
+        "Will"
+      ],
+      "description": "Attributes related to will, choice, and freedom",
+      "characteristic_goodness_weight": "high"
+    },
+    "Spatial": {
+      "properties": [
+        "Immanence"
+      ],
+      "description": "Spatial attributes"
+    },
+    "Ontological": {
+      "properties": [
+        "Unity"
+      ],
+      "description": "Fundamental being attributes"
+    },
+    "Epistemological": {
+      "properties": [
+        "Truth"
+      ],
+      "description": "Knowledge and truth attributes"
+    },
+    "Moral": {
+      "properties": [
+        "Goodness"
+      ],
+      "description": "Moral and ethical attributes"
+    },
+    "Aesthetic": {
+      "properties": [
+        "Beauty"
+      ],
+      "description": "Beauty and form attributes"
+    }
+  }
+}

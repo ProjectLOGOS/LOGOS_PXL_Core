@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "logos.toolRouter.fullname" . }}-config
+  labels:
+    {{- include "logos.labels" . | nindent 4 }}
+    app.kubernetes.io/component: tool-router
+data:
+  ENABLE_HMAC_SIGNING: {{ .Values.toolRouter.enableHmacSigning | quote }}
+  ENABLE_CIRCUIT_BREAKER: {{ .Values.toolRouter.enableCircuitBreaker | quote }}
+  CIRCUIT_BREAKER_FAILURE_THRESHOLD: {{ .Values.toolRouter.circuitBreakerFailureThreshold | quote }}
+  CIRCUIT_BREAKER_RECOVERY_TIMEOUT: {{ .Values.toolRouter.circuitBreakerRecoveryTimeout | quote }}
+  CIRCUIT_BREAKER_REQUEST_TIMEOUT_SECONDS: {{ .Values.toolRouter.circuitBreakerRequestTimeout | quote }}
+  MAX_RETRIES: {{ .Values.toolRouter.maxRetries | quote }}
+  RETRY_BASE_DELAY: {{ .Values.toolRouter.retryBaseDelay | quote }}
+  RETRY_MAX_DELAY: {{ .Values.toolRouter.retryMaxDelay | quote }}
+  REQUEST_TIMEOUT_SECONDS: {{ .Values.toolRouter.requestTimeout | quote }}
+  RATE_LIMIT_REQUESTS_PER_MINUTE: {{ .Values.toolRouter.rateLimitRequestsPerMinute | quote }}
+  {{- with .Values.toolRouter.configData }}
+  {{- toYaml . | nindent 2 }}
+  {{- end }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "logos.logosApi.fullname" . }}-config
+  labels:
+    {{- include "logos.labels" . | nindent 4 }}
+    app.kubernetes.io/component: logos-api
+data:
+  ENABLE_HMAC_SIGNING: {{ .Values.logosApi.enableHmacSigning | quote }}
+  {{- with .Values.logosApi.configData }}
+  {{- toYaml . | nindent 2 }}
+  {{- end }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "logos.interactiveChat.fullname" . }}-config
+  labels:
+    {{- include "logos.labels" . | nindent 4 }}
+    app.kubernetes.io/component: interactive-chat
+data:
+  {{- with .Values.interactiveChat.configData }}
+  {{- toYaml . | nindent 2 }}
+  {{- end }}

@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  pxl-core:
+    build:
+      context: .
+      dockerfile: Dockerfile.pxl-core
+    container_name: logos-pxl-core-verified
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+    networks:
+      - logos-network
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    labels:
+      - "org.logos.security.verified=true"
+      - "org.logos.proof.sha=40360dc"
+      - "org.logos.release=v3.0.0-verified"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  gateway:
+    # Assuming gateway service is defined elsewhere
+    # This would proxy requests to pxl-core
+    depends_on:
+      pxl-core:
+        condition: service_healthy
+    networks:
+      - logos-network
+
+networks:
+  logos-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

@@ -1,0 +1,6 @@
+{
+  "pxl_prover_url": "http://127.0.0.1:8088",
+  "expected_kernel_hash": "DEADBEEF",
+  "audit_path": "audit/decisions.jsonl",
+  "timeout_ms": 2000
+}

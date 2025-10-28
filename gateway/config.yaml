@@ -1,0 +1,101 @@
+# Gateway Configuration
+# API Gateway for LOGOS PXL Core with CORS, rate limiting, and JWT auth
+
+server:
+  host: 0.0.0.0
+  port: 8080
+
+# CORS configuration
+cors:
+  allow_origins:
+    - "http://localhost:3000"
+    - "http://localhost:5173"
+    - "https://gui.logos-pxl.org"
+  allow_methods:
+    - GET
+    - POST
+    - PUT
+    - DELETE
+    - OPTIONS
+  allow_headers:
+    - Content-Type
+    - Authorization
+    - X-Requested-With
+  allow_credentials: true
+
+# Rate limiting
+rate_limit:
+  window_seconds: 60
+  max_requests: 100
+  burst_limit: 20
+
+# JWT Authentication
+auth:
+  enabled: true
+  algorithm: HS256
+  secret_key_env: JWT_SECRET_KEY
+  issuer: "logos-pxl-core"
+  audience: "logos-pxl-api"
+  token_ttl_seconds: 3600
+
+# Provenance headers
+provenance:
+  coqchk_stamp: true
+  build_sha: true
+  v4_sha: true
+
+# Upstream services
+services:
+  pxl_core:
+    url: "http://pxl-core:8080"
+    health_check: "/health"
+    timeout_seconds: 30
+
+  overlay_chrono:
+    url: "http://overlay-chrono:8081"
+    health_check: "/health"
+    timeout_seconds: 30
+
+  overlay_v4:
+    url: "http://overlay-v4:8082"
+    health_check: "/health"
+    timeout_seconds: 30
+
+# Route mappings
+routes:
+  - path: "/v1/health"
+    service: pxl_core
+    methods: ["GET"]
+
+  - path: "/v1/proofs"
+    service: pxl_core
+    methods: ["POST"]
+
+  - path: "/v1/proofs/*"
+    service: pxl_core
+    methods: ["GET"]
+
+  - path: "/v1/overlays/chrono"
+    service: overlay_chrono
+    methods: ["POST"]
+
+  - path: "/v1/overlays/v4"
+    service: overlay_v4
+    methods: ["POST"]
+
+  - path: "/v1/metrics"
+    service: pxl_core
+    methods: ["GET"]
+
+# Monitoring
+monitoring:
+  metrics_enabled: true
+  tracing_enabled: true
+  log_level: "info"
+
+# Security
+security:
+  tls_enabled: false  # Enable in production
+  hsts_enabled: false
+  content_security_policy: "default-src 'self'; script-src 'self' 'unsafe-inline'"
+  x_frame_options: "DENY"

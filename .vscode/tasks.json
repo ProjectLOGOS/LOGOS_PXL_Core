@@ -1,0 +1,165 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "coq: build all",
+      "type": "shell",
+      "command": "bash -lc 'make -j'",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "coq: clean",
+      "type": "shell",
+      "command": "bash -lc 'make clean'",
+      "problemMatcher": []
+    },
+    {
+      "label": "coq: compatibilism",
+      "type": "shell",
+      "command": "bash -lc 'make domain-compatibilism'",
+      "problemMatcher": []
+    },
+    {
+      "label": "coq: empiricism",
+      "type": "shell",
+      "command": "bash -lc 'make domain-empiricism'",
+      "problemMatcher": []
+    },
+    {
+      "label": "coq: modal-ontology",
+      "type": "shell",
+      "command": "bash -lc 'make domain-modal-ontology'",
+      "problemMatcher": []
+    },
+    {
+      "label": "coq: examples",
+      "type": "shell",
+      "command": "bash -lc 'make examples'",
+      "problemMatcher": []
+    },
+    {
+      "label": "coq: docs-html",
+      "type": "shell",
+      "command": "bash -lc 'make docs-html'",
+      "problemMatcher": []
+    },
+    {
+      "label": "coq: properties",
+      "type": "shell",
+      "command": "bash -lc 'coqc tests/DomainProperties.v'",
+      "problemMatcher": []
+    },
+    {
+      "label": "coq: constructive-lindenbaum",
+      "type": "shell",
+      "command": "bash -lc 'coqc pxl-minimal-kernel-main/coq/Constructive_Lindenbaum_Simple.v'",
+      "problemMatcher": []
+    },
+    {
+      "label": "coq: relativity",
+      "type": "shell",
+      "command": "coqc modules/IEL/ChronoPraxis/domains/Empiricism/Relativity.v; coqc -I modules/IEL/ChronoPraxis/domains/Empiricism tests/RelativityTests.v",
+      "problemMatcher": []
+    },
+    {
+      "label": "coq: modal-praxis",
+      "type": "shell",
+      "command": "bash -lc 'coqc modules/IEL/ModalPraxis/modal/FrameSpec.v && coqc modules/IEL/ModalPraxis/theorems/NormalBase.v && coqc modules/IEL/ModalPraxis/theorems/DerivedAxioms.v && coqc modules/IEL/ModalPraxis/theorems/Systems.v && coqc modules/IEL/ModalPraxis/theorems/Conservativity.v && coqc tests/UMIEL_Tests.v'",
+      "problemMatcher": []
+    },
+    {
+      "label": "coq: gnosipraxis",
+      "type": "shell",
+      "command": "bash -lc 'coqc modules/IEL/GnosiPraxis/modal/AgentFrames.v && coqc modules/IEL/GnosiPraxis/systems/Systems.v && coqc modules/IEL/GnosiPraxis/theorems/Conservativity.v && coqc tests/GnosiPraxis/GnosiPraxis_AgentTests.v'",
+      "problemMatcher": []
+    },
+    {
+      "label": "coq: themipraxis",
+      "type": "shell",
+      "command": "bash -lc 'coqc modules/IEL/ThemiPraxis/modal/NormFrames.v && coqc modules/IEL/ThemiPraxis/theorems/Conservativity.v && coqc modules/IEL/ThemiPraxis/systems/Systems.v && coqc tests/ThemiPraxis/ThemiPraxis_Smoke.v'",
+      "problemMatcher": []
+    },
+    {
+      "label": "coq: dynapraxis",
+      "type": "shell",
+      "command": "bash -lc 'coqc modules/IEL/DynaPraxis/modal/FrameSpec.v && coqc modules/IEL/DynaPraxis/theorems/Conservativity.v && coqc modules/IEL/DynaPraxis/systems/Systems.v && coqc tests/DynaPraxis/DynaPraxis_Smoke.v'",
+      "problemMatcher": []
+    },
+    {
+      "label": "coq: hexipraxis",
+      "type": "shell",
+      "command": "bash -lc 'coqc modules/IEL/HexiPraxis/modal/FrameSpec.v && coqc modules/IEL/HexiPraxis/theorems/Conservativity.v && coqc modules/IEL/HexiPraxis/systems/Systems.v && coqc tests/HexiPraxis/HexiPraxis_Smoke.v'",
+      "problemMatcher": []
+    },
+    {
+      "label": "coq: chrema",
+      "type": "shell",
+      "command": "bash -lc 'coqc modules/IEL/ChremaPraxis/modal/PhaseSpec.v && coqc modules/IEL/ChremaPraxis/theorems/NormalBase.v && coqc modules/IEL/ChremaPraxis/theorems/Conservativity.v && coqc modules/IEL/ChremaPraxis/systems/Systems.v && coqc tests/ChremaPraxis/ChremaPraxis_Smoke.v'"
+    },
+    {
+      "label": "coq: mu",
+      "type": "shell",
+      "command": "bash -lc 'coqc modules/IEL/MuPraxis/modal/FixSpec.v && coqc modules/IEL/MuPraxis/theorems/NormalBase.v && coqc modules/IEL/MuPraxis/theorems/Conservativity.v && coqc modules/IEL/MuPraxis/systems/Systems.v && coqc tests/MuPraxis/MuPraxis_Smoke.v'"
+    },
+    {
+      "label": "coq: tyche",
+      "type": "shell",
+      "command": "bash -lc 'coqc modules/IEL/TychePraxis/modal/ProbSpec.v && coqc modules/IEL/TychePraxis/theorems/NormalBase.v && coqc modules/IEL/TychePraxis/theorems/Conservativity.v && coqc modules/IEL/TychePraxis/systems/Systems.v && coqc tests/TychePraxis/TychePraxis_Smoke.v'"
+    },
+    {
+      "label": "coq: iels-all",
+      "type": "shell",
+      "command": "bash -lc 'make iels-all'",
+      "problemMatcher": []
+    },
+    {
+      "label": "coq: axiopraxis",
+      "type": "shell",
+      "command": "bash -lc 'make -j && echo built axiopraxis'"
+    },
+    {
+      "label": "coq: ergopraxis",
+      "type": "shell",
+      "command": "bash -lc 'make -j && echo built ergopraxis'"
+    },
+    {
+      "label": "coq: anthropraxis",
+      "type": "shell",
+      "command": "bash -lc 'make -j && echo built anthropraxis'"
+    },
+    {
+      "label": "coq: telopraxis",
+      "type": "shell",
+      "command": "bash -lc 'make -j && echo built telopraxis'"
+    },
+    {
+      "label": "coq: topopraxis",
+      "type": "shell",
+      "command": "bash -lc 'make -j && echo built topopraxis'"
+    },
+    {
+      "label": "coq: cosmopraxis",
+      "type": "shell",
+      "command": "bash -lc 'make -j && echo built cosmopraxis'"
+    },
+    {
+      "label": "Coq: build (Windows-safe)",
+      "type": "shell",
+      "command": "pwsh -NoProfile -File scripts/build.ps1"
+    },
+    {
+      "label": "Scan V3 for targets",
+      "type": "shell",
+      "command": "pwsh",
+      "args": ["-NoLogo","-NoProfile","-Command",
+        "$root='C:\\\\Users\\\\proje\\\\OneDrive\\\\Desktop\\\\LOGOS SYSTEM\\\\v3'; $report='reports\\\\v3_scan_hits.tsv'; $pat=@('G(ö|o)delian.*Desire.*Driver','Trinitarian.*Axiom.*Choice','causal.*simulat','recursive.*goal','goal\\\\s*engine','planner','workflow','hyper[\\\\- ]node'); Get-ChildItem -Path $root -Recurse -File -Include *.v,*.ml,*.mli,*.py,*.ts,*.tsx,*.md,*.txt | Select-String -Pattern $pat -AllMatches -CaseSensitive:$false | Sort-Object Path,LineNumber | Select-Object @{n='Path';e={$_.Path}},@{n='Line';e={$_.LineNumber}},@{n='Text';e={$_.Line.Trim()}} | Tee-Object -FilePath $report | Format-Table -Auto"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    }
+  ]
+}

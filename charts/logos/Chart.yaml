@@ -1,0 +1,18 @@
+apiVersion: v2
+name: logos
+description: LOGOS PXL Core - AGI System with Enhanced Tool Router
+type: application
+version: 2.0.0
+appVersion: "2.0.0"
+keywords:
+  - agi
+  - ai
+  - tool-router
+  - prometheus
+  - hmac
+home: https://github.com/ProjectLOGOS/LOGOS_PXL_Core
+sources:
+  - https://github.com/ProjectLOGOS/LOGOS_PXL_Core
+maintainers:
+  - name: ProjectLOGOS Team
+    email: contact@projectlogos.org

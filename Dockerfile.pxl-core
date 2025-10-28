@@ -1,0 +1,47 @@
+# Dockerfile.pxl-core - Production Runtime for Verified PXL Core
+FROM ocaml/opam:alpine-ocaml-4.14
+
+# Security: Create non-root user
+RUN addgroup -g 1001 -S pxl && \
+    adduser -u 1001 -S pxl -G pxl
+
+# Install system dependencies
+RUN apk add --no-cache \
+    build-base \
+    dune \
+    opam \
+    git \
+    ca-certificates && \
+    opam install -y cohttp-lwt-unix lwt yojson
+
+# Set working directory
+WORKDIR /app
+
+# Copy source files
+COPY dune-project dune ./
+COPY pxl_core.ml pxl_core.mli pxl_runtime.ml ./
+
+# Build the verified core
+RUN dune build && \
+    dune install --prefix=/usr/local
+
+# Security: Switch to non-root user
+USER pxl
+
+# Runtime configuration
+EXPOSE 8080
+
+# Health check with proper timeout
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD wget --no-verbose --tries=1 --spider http://localhost:8080/health || exit 1
+
+# Security: Read-only filesystem, drop capabilities
+LABEL org.opencontainers.image.title="LOGOS PXL Core - Verified Runtime" \
+      org.opencontainers.image.description="Mathematically verified modal logic runtime extracted from Coq" \
+      org.opencontainers.image.version="v3.0.0-verified" \
+      org.opencontainers.image.source="https://github.com/ProjectLOGOS/LOGOS_PXL_Core" \
+      org.opencontainers.image.licenses="MIT" \
+      org.opencontainers.image.vendor="LOGOS Foundation"
+
+# Default command
+CMD ["/usr/local/bin/pxl-runtime"]

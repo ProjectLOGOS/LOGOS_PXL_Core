@@ -1,0 +1,22 @@
+📊 Protopraxic Logic — Derived Modal Attributes and Filters
+
+🧩 UNIVERSAL FILTER FOR CONCEPT ANALYSIS
+To extract or analyze abstract properties (e.g., truth, goodness, beauty, glory):
+
+1. Input Predicate: P(x)
+2. Apply modal form: □(P(x))
+3. Trace through laws:
+   - Is P(x) coherent (⧟)?
+   - Contradictory (⇎)?
+   - Dichotomous (⫴)?
+
+4. Test Groundability:
+   - If □(𝕆 ⟼ P): Fundamental attribute
+   - If ◇(𝕆 ⟼ P) ∧ ¬□(𝕆 ⟼ P): Derived property
+   - If ∼◇(𝕆 ⟼ P): Privation
+
+✅ SAMPLE ANALYSES
+
+Truth: Coheres across all laws ⇒ Fundamental attribute
+Evil: Violates coherence and balance ⇒ Privation of Good
+Beauty: Grounded through harmonic coherence ⇒ Essential

@@ -1,0 +1,218 @@
+openapi: 3.0.3
+info:
+  title: LOGOS PXL Core API
+  version: 1.0.0
+  description: Coq-verified proof and overlay services for LOGOS AGI
+
+servers:
+  - url: http://localhost:8080
+    description: Local development
+  - url: https://api.logos-pxl.org
+    description: Production
+
+security:
+  - bearerAuth: []
+
+paths:
+  /v1/health:
+    get:
+      summary: Health check
+      responses:
+        '200':
+          description: Service health status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [healthy, degraded, unhealthy]
+                  version:
+                    type: string
+                  coqchk_stamp:
+                    type: string
+                  build_sha:
+                    type: string
+                  v4_sha:
+                    type: string
+
+  /v1/proofs:
+    post:
+      summary: Submit proof request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - formula
+              properties:
+                formula:
+                  type: object
+                  description: JSON-serialized PXL formula
+                context:
+                  type: object
+                  description: Proof context
+                overlay:
+                  type: string
+                  enum: [chrono, v4, modal]
+                  default: chrono
+                timeout:
+                  type: integer
+                  minimum: 1
+                  maximum: 300
+                  default: 30
+      responses:
+        '200':
+          description: Proof result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  verdict:
+                    type: string
+                    enum: [valid, invalid, unknown]
+                  trace:
+                    type: array
+                    items:
+                      type: string
+                  certificate:
+                    type: string
+                    format: byte
+                  proof_id:
+                    type: string
+                  elapsed_ms:
+                    type: integer
+        '400':
+          description: Invalid request
+        '429':
+          description: Rate limited
+        '500':
+          description: Internal error
+
+  /v1/proofs/{proof_id}:
+    get:
+      summary: Get proof status
+      parameters:
+        - name: proof_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Proof status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [pending, running, completed, failed]
+                  result:
+                    $ref: '#/components/schemas/ProofResult'
+                  progress:
+                    type: number
+                    minimum: 0
+                    maximum: 1
+
+  /v1/overlays/chrono:
+    post:
+      summary: Chrono overlay operations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - operation
+              properties:
+                operation:
+                  type: string
+                  enum: [normalize, validate, transform]
+                formula:
+                  type: object
+      responses:
+        '200':
+          description: Overlay result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: object
+                  chrono_trace:
+                    type: array
+                    items:
+                      type: string
+
+  /v1/overlays/v4:
+    post:
+      summary: V4 overlay operations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - operation
+              properties:
+                operation:
+                  type: string
+                  enum: [translate, validate, adapt]
+                formula:
+                  type: object
+      responses:
+        '200':
+          description: Overlay result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: object
+                  v4_trace:
+                    type: array
+                    items:
+                      type: string
+
+  /v1/metrics:
+    get:
+      summary: Prometheus metrics
+      responses:
+        '200':
+          description: Metrics in Prometheus format
+          content:
+            text/plain:
+              schema:
+                type: string
+
+components:
+  schemas:
+    ProofResult:
+      type: object
+      properties:
+        verdict:
+          type: string
+          enum: [valid, invalid, unknown]
+        trace:
+          type: array
+          items:
+            type: string
+        certificate:
+          type: string
+          format: byte
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

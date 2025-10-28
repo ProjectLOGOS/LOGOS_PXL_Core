@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>Compatibilism_CoffeeTea</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Compatibilism_CoffeeTea</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Program.Program.html#"><span class="id" title="library">Program</span></a>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Module</span> <a id="CoffeeTea" class="idref" href="#CoffeeTea"><span class="id" title="module">CoffeeTea</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Parameter</span> <a id="CoffeeTea.PA" class="idref" href="#CoffeeTea.PA"><span class="id" title="axiom">PA</span></a> : <span class="id" title="keyword">Type</span>. <span class="id" title="keyword">Parameter</span> <a id="CoffeeTea.PC" class="idref" href="#CoffeeTea.PC"><span class="id" title="axiom">PC</span></a> : <span class="id" title="keyword">Type</span>. <span class="id" title="keyword">Parameter</span> <a id="CoffeeTea.A_to_C" class="idref" href="#CoffeeTea.A_to_C"><span class="id" title="axiom">A_to_C</span></a> : <a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.PA"><span class="id" title="axiom">PA</span></a> <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.PC"><span class="id" title="axiom">PC</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Record</span> <a id="CoffeeTea.Agent" class="idref" href="#CoffeeTea.Agent"><span class="id" title="record">Agent</span></a> := { <a id="CoffeeTea.agent_id" class="idref" href="#CoffeeTea.agent_id"><span class="id" title="projection">agent_id</span></a> : <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> }.<br/>
+<span class="id" title="keyword">Definition</span> <a id="CoffeeTea.alt" class="idref" href="#CoffeeTea.alt"><span class="id" title="definition">alt</span></a> (<a id="pA:9" class="idref" href="#pA:9"><span class="id" title="binder">pA</span></a> <a id="pA':10" class="idref" href="#pA':10"><span class="id" title="binder">pA'</span></a> : <a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.PA"><span class="id" title="axiom">PA</span></a>) : <span class="id" title="keyword">Prop</span> := <a class="idref" href="Compatibilism_CoffeeTea.html#pA:9"><span class="id" title="variable">pA</span></a> <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">≠</span></a> <a class="idref" href="Compatibilism_CoffeeTea.html#pA':10"><span class="id" title="variable">pA'</span></a> <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.A_to_C"><span class="id" title="axiom">A_to_C</span></a> <a class="idref" href="Compatibilism_CoffeeTea.html#pA:9"><span class="id" title="variable">pA</span></a> <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.A_to_C"><span class="id" title="axiom">A_to_C</span></a> <a class="idref" href="Compatibilism_CoffeeTea.html#pA':10"><span class="id" title="variable">pA'</span></a>.<br/>
+<span class="id" title="keyword">Definition</span> <a id="CoffeeTea.Free" class="idref" href="#CoffeeTea.Free"><span class="id" title="definition">Free</span></a> (<span class="id" title="var">_</span>:<a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.Agent"><span class="id" title="record">Agent</span></a>) (<a id="pA:11" class="idref" href="#pA:11"><span class="id" title="binder">pA</span></a>:<a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.PA"><span class="id" title="axiom">PA</span></a>) : <span class="id" title="keyword">Prop</span> := <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="pA':12" class="idref" href="#pA':12"><span class="id" title="binder">pA'</span></a><a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a> <a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.alt"><span class="id" title="definition">alt</span></a> <a class="idref" href="Compatibilism_CoffeeTea.html#pA:11"><span class="id" title="variable">pA</span></a> <a class="idref" href="Compatibilism_CoffeeTea.html#pA':12"><span class="id" title="variable">pA'</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Parameter</span> <a id="CoffeeTea.pA_coffee" class="idref" href="#CoffeeTea.pA_coffee"><span class="id" title="axiom">pA_coffee</span></a> <a id="CoffeeTea.pA_tea" class="idref" href="#CoffeeTea.pA_tea"><span class="id" title="axiom">pA_tea</span></a> : <a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.PA"><span class="id" title="axiom">PA</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Parameter</span> <a id="CoffeeTea.distinct_experiences" class="idref" href="#CoffeeTea.distinct_experiences"><span class="id" title="axiom">distinct_experiences</span></a> : <a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.pA_coffee"><span class="id" title="axiom">pA_coffee</span></a> <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">≠</span></a> <a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.pA_tea"><span class="id" title="axiom">pA_tea</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Parameter</span> <a id="CoffeeTea.same_cosmic_outcome" class="idref" href="#CoffeeTea.same_cosmic_outcome"><span class="id" title="axiom">same_cosmic_outcome</span></a> : <a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.A_to_C"><span class="id" title="axiom">A_to_C</span></a> <a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.pA_coffee"><span class="id" title="axiom">pA_coffee</span></a> <a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.A_to_C"><span class="id" title="axiom">A_to_C</span></a> <a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.pA_tea"><span class="id" title="axiom">pA_tea</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="CoffeeTea.agent" class="idref" href="#CoffeeTea.agent"><span class="id" title="definition">agent</span></a> := {| <a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.agent_id"><span class="id" title="projection">agent_id</span></a> := 1 |}.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a id="CoffeeTea.free_coffee_example" class="idref" href="#CoffeeTea.free_coffee_example"><span class="id" title="lemma">free_coffee_example</span></a> : <a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.Free"><span class="id" title="definition">Free</span></a> <a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.agent"><span class="id" title="definition">agent</span></a> <a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.pA_coffee"><span class="id" title="axiom">pA_coffee</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.pA_tea"><span class="id" title="axiom">pA_tea</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.distinct_experiences"><span class="id" title="axiom">distinct_experiences</span></a>. &nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.same_cosmic_outcome"><span class="id" title="axiom">same_cosmic_outcome</span></a>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a id="CoffeeTea.free_tea_example" class="idref" href="#CoffeeTea.free_tea_example"><span class="id" title="lemma">free_tea_example</span></a> : <a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.Free"><span class="id" title="definition">Free</span></a> <a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.agent"><span class="id" title="definition">agent</span></a> <a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.pA_tea"><span class="id" title="axiom">pA_tea</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.pA_coffee"><span class="id" title="axiom">pA_coffee</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intro</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">exact</span> (<a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.distinct_experiences"><span class="id" title="axiom">distinct_experiences</span></a> (<a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#eq_sym"><span class="id" title="lemma">eq_sym</span></a> <span class="id" title="var">H</span>)).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="http://coq.inria.fr/doc/V8.20.1/stdlib//Coq.Init.Logic.html#eq_sym"><span class="id" title="lemma">eq_sym</span></a> <a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea.same_cosmic_outcome"><span class="id" title="axiom">same_cosmic_outcome</span></a>).<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="Compatibilism_CoffeeTea.html#CoffeeTea"><span class="id" title="module">CoffeeTea</span></a>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="pxl-minimal-kernel-main/coq/Constructive_Lindenbaum_Simple.v.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

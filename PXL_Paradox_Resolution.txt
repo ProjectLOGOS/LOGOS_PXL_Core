@@ -1,0 +1,1238 @@
+1. Liar Paradox
+   • Type: Semantic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in semantic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+2. Russell’s Paradox
+   • Type: Set-Theoretic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in set-theoretic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+3. Sorites Paradox
+   • Type: Vagueness Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in vagueness structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+4. Grelling–Nelson Paradox
+   • Type: Self-Reference Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in self-reference structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+5. Buridan’s Bridge
+   • Type: Metaphysical Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in metaphysical structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+6. Ship of Theseus
+   • Type: Modal Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in modal structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+7. Zeno’s Paradoxes
+   • Type: Temporal Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in temporal structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+8. Omnipotence Paradox
+   • Type: Epistemic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in epistemic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+9. Unexpected Hanging
+   • Type: Physical Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in physical structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+10. Barber Paradox
+   • Type: Theological Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in theological structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+11. Curry's Paradox
+   • Type: Semantic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in semantic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+12. Epimenides Paradox
+   • Type: Set-Theoretic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in set-theoretic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+13. Banach–Tarski Paradox
+   • Type: Vagueness Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in vagueness structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+14. Newcomb’s Problem
+   • Type: Self-Reference Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in self-reference structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+15. Preface Paradox
+   • Type: Metaphysical Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in metaphysical structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+16. Twin Paradox
+   • Type: Modal Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in modal structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+17. Bootstrap Paradox
+   • Type: Temporal Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in temporal structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+18. Drinker Paradox
+   • Type: Epistemic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in epistemic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+19. Quine's Paradox
+   • Type: Physical Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in physical structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+20. Two Envelope Paradox
+   • Type: Theological Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in theological structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+21. Liar Paradox
+   • Type: Semantic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in semantic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+22. Russell’s Paradox
+   • Type: Set-Theoretic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in set-theoretic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+23. Sorites Paradox
+   • Type: Vagueness Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in vagueness structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+24. Grelling–Nelson Paradox
+   • Type: Self-Reference Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in self-reference structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+25. Buridan’s Bridge
+   • Type: Metaphysical Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in metaphysical structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+26. Ship of Theseus
+   • Type: Modal Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in modal structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+27. Zeno’s Paradoxes
+   • Type: Temporal Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in temporal structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+28. Omnipotence Paradox
+   • Type: Epistemic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in epistemic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+29. Unexpected Hanging
+   • Type: Physical Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in physical structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+30. Barber Paradox
+   • Type: Theological Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in theological structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+31. Curry's Paradox
+   • Type: Semantic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in semantic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+32. Epimenides Paradox
+   • Type: Set-Theoretic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in set-theoretic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+33. Banach–Tarski Paradox
+   • Type: Vagueness Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in vagueness structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+34. Newcomb’s Problem
+   • Type: Self-Reference Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in self-reference structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+35. Preface Paradox
+   • Type: Metaphysical Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in metaphysical structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+36. Twin Paradox
+   • Type: Modal Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in modal structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+37. Bootstrap Paradox
+   • Type: Temporal Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in temporal structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+38. Drinker Paradox
+   • Type: Epistemic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in epistemic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+39. Quine's Paradox
+   • Type: Physical Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in physical structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+40. Two Envelope Paradox
+   • Type: Theological Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in theological structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+41. Liar Paradox
+   • Type: Semantic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in semantic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+42. Russell’s Paradox
+   • Type: Set-Theoretic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in set-theoretic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+43. Sorites Paradox
+   • Type: Vagueness Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in vagueness structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+44. Grelling–Nelson Paradox
+   • Type: Self-Reference Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in self-reference structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+45. Buridan’s Bridge
+   • Type: Metaphysical Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in metaphysical structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+46. Ship of Theseus
+   • Type: Modal Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in modal structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+47. Zeno’s Paradoxes
+   • Type: Temporal Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in temporal structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+48. Omnipotence Paradox
+   • Type: Epistemic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in epistemic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+49. Unexpected Hanging
+   • Type: Physical Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in physical structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+50. Barber Paradox
+   • Type: Theological Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in theological structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+51. Curry's Paradox
+   • Type: Semantic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in semantic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+52. Epimenides Paradox
+   • Type: Set-Theoretic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in set-theoretic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+53. Banach–Tarski Paradox
+   • Type: Vagueness Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in vagueness structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+54. Newcomb’s Problem
+   • Type: Self-Reference Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in self-reference structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+55. Preface Paradox
+   • Type: Metaphysical Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in metaphysical structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+56. Twin Paradox
+   • Type: Modal Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in modal structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+57. Bootstrap Paradox
+   • Type: Temporal Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in temporal structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+58. Drinker Paradox
+   • Type: Epistemic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in epistemic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+59. Quine's Paradox
+   • Type: Physical Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in physical structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+60. Two Envelope Paradox
+   • Type: Theological Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in theological structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+61. Liar Paradox
+   • Type: Semantic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in semantic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+62. Russell’s Paradox
+   • Type: Set-Theoretic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in set-theoretic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+63. Sorites Paradox
+   • Type: Vagueness Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in vagueness structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+64. Grelling–Nelson Paradox
+   • Type: Self-Reference Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in self-reference structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+65. Buridan’s Bridge
+   • Type: Metaphysical Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in metaphysical structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+66. Ship of Theseus
+   • Type: Modal Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in modal structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+67. Zeno’s Paradoxes
+   • Type: Temporal Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in temporal structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+68. Omnipotence Paradox
+   • Type: Epistemic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in epistemic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+69. Unexpected Hanging
+   • Type: Physical Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in physical structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+70. Barber Paradox
+   • Type: Theological Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in theological structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+71. Curry's Paradox
+   • Type: Semantic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in semantic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+72. Epimenides Paradox
+   • Type: Set-Theoretic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in set-theoretic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+73. Banach–Tarski Paradox
+   • Type: Vagueness Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in vagueness structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+74. Newcomb’s Problem
+   • Type: Self-Reference Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in self-reference structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+75. Preface Paradox
+   • Type: Metaphysical Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in metaphysical structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+76. Twin Paradox
+   • Type: Modal Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in modal structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+77. Bootstrap Paradox
+   • Type: Temporal Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in temporal structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+78. Drinker Paradox
+   • Type: Epistemic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in epistemic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+79. Quine's Paradox
+   • Type: Physical Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in physical structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+80. Two Envelope Paradox
+   • Type: Theological Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in theological structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+81. Liar Paradox
+   • Type: Semantic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in semantic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+82. Russell’s Paradox
+   • Type: Set-Theoretic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in set-theoretic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+83. Sorites Paradox
+   • Type: Vagueness Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in vagueness structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+84. Grelling–Nelson Paradox
+   • Type: Self-Reference Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in self-reference structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+85. Buridan’s Bridge
+   • Type: Metaphysical Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in metaphysical structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+86. Ship of Theseus
+   • Type: Modal Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in modal structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+87. Zeno’s Paradoxes
+   • Type: Temporal Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in temporal structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+88. Omnipotence Paradox
+   • Type: Epistemic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in epistemic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+89. Unexpected Hanging
+   • Type: Physical Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in physical structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+90. Barber Paradox
+   • Type: Theological Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in theological structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+91. Curry's Paradox
+   • Type: Semantic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in semantic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+92. Epimenides Paradox
+   • Type: Set-Theoretic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in set-theoretic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+93. Banach–Tarski Paradox
+   • Type: Vagueness Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in vagueness structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+94. Newcomb’s Problem
+   • Type: Self-Reference Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in self-reference structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+95. Preface Paradox
+   • Type: Metaphysical Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in metaphysical structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+96. Twin Paradox
+   • Type: Modal Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in modal structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+97. Bootstrap Paradox
+   • Type: Temporal Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in temporal structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+98. Drinker Paradox
+   • Type: Epistemic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in epistemic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+99. Quine's Paradox
+   • Type: Physical Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in physical structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+100. Two Envelope Paradox
+   • Type: Theological Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in theological structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+101. Liar Paradox
+   • Type: Semantic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in semantic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+102. Russell’s Paradox
+   • Type: Set-Theoretic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in set-theoretic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+103. Sorites Paradox
+   • Type: Vagueness Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in vagueness structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+104. Grelling–Nelson Paradox
+   • Type: Self-Reference Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in self-reference structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+105. Buridan’s Bridge
+   • Type: Metaphysical Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in metaphysical structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+106. Ship of Theseus
+   • Type: Modal Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in modal structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+107. Zeno’s Paradoxes
+   • Type: Temporal Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in temporal structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+108. Omnipotence Paradox
+   • Type: Epistemic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in epistemic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+109. Unexpected Hanging
+   • Type: Physical Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in physical structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+110. Barber Paradox
+   • Type: Theological Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in theological structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+111. Curry's Paradox
+   • Type: Semantic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in semantic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+112. Epimenides Paradox
+   • Type: Set-Theoretic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in set-theoretic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+113. Banach–Tarski Paradox
+   • Type: Vagueness Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in vagueness structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+114. Newcomb’s Problem
+   • Type: Self-Reference Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in self-reference structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+115. Preface Paradox
+   • Type: Metaphysical Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in metaphysical structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+116. Twin Paradox
+   • Type: Modal Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in modal structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+117. Bootstrap Paradox
+   • Type: Temporal Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in temporal structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+118. Drinker Paradox
+   • Type: Epistemic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in epistemic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+119. Quine's Paradox
+   • Type: Physical Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in physical structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+120. Two Envelope Paradox
+   • Type: Theological Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in theological structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+121. Liar Paradox
+   • Type: Semantic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in semantic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+122. Russell’s Paradox
+   • Type: Set-Theoretic Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in set-theoretic structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+123. Sorites Paradox
+   • Type: Vagueness Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in vagueness structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
+
+
+124. Grelling–Nelson Paradox
+   • Type: Self-Reference Paradox
+   • Formalization (PXL):
+     □(Λ₁ ≀ Λ₂ ⟼ Ψ) where Ψ expresses conflict in self-reference structure
+     Resolved via triune grounding: 𝕀₁ (ID), 𝕀₂ (LNC), 𝕀₃ (LEM) within 𝕆
+   • Resolution Summary:
+     This paradox collapses under PXL when coherence across modal grounding axes fails. 
+     By isolating ontological dependency across the triune framework, contradiction is shown to be a false commutation of modal roles rather than a true logical inconsistency.
