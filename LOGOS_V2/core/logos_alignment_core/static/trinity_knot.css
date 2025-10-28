@@ -1,0 +1,332 @@
+/* LOGOS AGI - Dark Theme with Electric Blue */
+
+:root {
+    --bg-dark: #1a1a1a;
+    --electric-blue: #00bfff;
+    --deep-blue: #0066cc;
+    --ice-white: #e0f7ff;
+    --text-gray: #cccccc;
+    --border-color: #333333;
+    --success-green: #00ff00;
+    --error-red: #ff3333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    background: var(--bg-dark);
+    color: var(--electric-blue);
+    overflow: hidden;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+header {
+    padding: 15px 30px;
+    background: rgba(0, 191, 255, 0.05);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 24px;
+    color: var(--electric-blue);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.status-bar {
+    display: flex;
+    gap: 20px;
+    font-size: 12px;
+    color: var(--text-gray);
+}
+
+#connection-status.connected {
+    color: var(--success-green);
+}
+
+#connection-status.disconnected {
+    color: var(--error-red);
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    display: flex;
+    padding: 20px;
+    gap: 30px;
+    overflow: hidden;
+}
+
+/* Trinity Knot Section */
+.trinity-section {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+#trinity-knot {
+    border: 2px solid var(--electric-blue);
+    border-radius: 10px;
+    background: rgba(0, 191, 255, 0.05);
+}
+
+#state-label {
+    font-size: 14px;
+    color: var(--electric-blue);
+    text-align: center;
+    text-transform: capitalize;
+}
+
+/* Chat Section */
+.chat-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: rgba(0, 191, 255, 0.03);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#chat-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Custom Scrollbar */
+#chat-messages::-webkit-scrollbar {
+    width: 8px;
+}
+
+#chat-messages::-webkit-scrollbar-track {
+    background: rgba(0, 191, 255, 0.05);
+}
+
+#chat-messages::-webkit-scrollbar-thumb {
+    background: var(--electric-blue);
+    border-radius: 4px;
+}
+
+/* Message Styles */
+.message {
+    padding: 12px 16px;
+    border-radius: 8px;
+    max-width: 80%;
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message.user {
+    background: rgba(0, 191, 255, 0.15);
+    border-left: 3px solid var(--electric-blue);
+    align-self: flex-end;
+}
+
+.message.logos {
+    background: rgba(0, 102, 204, 0.15);
+    border-left: 3px solid var(--deep-blue);
+    align-self: flex-start;
+}
+
+.message.system {
+    background: rgba(204, 204, 204, 0.1);
+    border-left: 3px solid var(--text-gray);
+    align-self: center;
+    font-size: 12px;
+    color: var(--text-gray);
+}
+
+.message-header {
+    font-size: 11px;
+    color: var(--text-gray);
+    margin-bottom: 5px;
+}
+
+.message-content {
+    color: var(--electric-blue);
+    line-height: 1.5;
+}
+
+/* Input Section */
+.input-section {
+    display: flex;
+    gap: 10px;
+    padding: 15px;
+    background: rgba(0, 191, 255, 0.05);
+    border-top: 1px solid var(--border-color);
+}
+
+#query-input {
+    flex: 1;
+    padding: 12px 15px;
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    color: var(--electric-blue);
+    font-family: inherit;
+    font-size: 14px;
+}
+
+#query-input:focus {
+    outline: none;
+    border-color: var(--electric-blue);
+    box-shadow: 0 0 10px rgba(0, 191, 255, 0.3);
+}
+
+#query-input::placeholder {
+    color: var(--text-gray);
+    opacity: 0.5;
+}
+
+button {
+    padding: 12px 20px;
+    background: var(--electric-blue);
+    border: none;
+    border-radius: 5px;
+    color: var(--bg-dark);
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+button:hover {
+    background: var(--ice-white);
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.5);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+.voice-btn {
+    padding: 12px 15px;
+    background: rgba(0, 191, 255, 0.2);
+}
+
+.voice-btn.active {
+    background: var(--error-red);
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.file-btn {
+    padding: 12px 20px;
+    background: rgba(0, 191, 255, 0.2);
+    border-radius: 5px;
+    color: var(--electric-blue);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.file-btn:hover {
+    background: rgba(0, 191, 255, 0.4);
+}
+
+/* Trinity Knot Animations */
+#trinity-knot.listening {
+    animation: deepBluePulse 2s ease-in-out infinite;
+}
+
+@keyframes deepBluePulse {
+    0%, 100% {
+        box-shadow: 0 0 10px var(--deep-blue);
+    }
+    50% {
+        box-shadow: 0 0 25px var(--deep-blue);
+    }
+}
+
+#trinity-knot.processing {
+    animation: iceGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes iceGlow {
+    0%, 100% {
+        box-shadow: 0 0 15px var(--electric-blue);
+    }
+    50% {
+        box-shadow: 0 0 35px var(--ice-white);
+    }
+}
+
+#trinity-knot.responding {
+    animation: electricPulse 0.8s ease-in-out infinite;
+}
+
+@keyframes electricPulse {
+    0%, 100% {
+        box-shadow: 0 0 20px var(--electric-blue);
+    }
+    50% {
+        box-shadow: 0 0 40px var(--electric-blue);
+    }
+}
+
+#trinity-knot.stasis {
+    animation: spectrumFade 3s ease-in-out infinite;
+}
+
+@keyframes spectrumFade {
+    0% { box-shadow: 0 0 15px var(--deep-blue); }
+    33% { box-shadow: 0 0 15px var(--electric-blue); }
+    66% { box-shadow: 0 0 15px var(--ice-white); }
+    100% { box-shadow: 0 0 15px var(--deep-blue); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+    }
+
+    .trinity-section {
+        width: 100%;
+        flex-direction: row;
+        justify-content: center;
+    }
+}

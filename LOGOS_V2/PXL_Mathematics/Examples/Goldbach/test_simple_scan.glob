@@ -1,0 +1,8 @@
+DIGEST 83bf2c44b605ff564616278f12389115
+Ftest_simple_scan
+R128:139 test_simple_scan ScanFeatures <> mod
+R193:200 test_simple_scan <> is_prime def
+R223:238 test_simple_scan <> goldbach_witness def
+R261:267 test_simple_scan <> mk_feat def
+R327:339 test_simple_scan <> closure_score def
+R420:432 test_simple_scan <> closure_score def

@@ -1,0 +1,663 @@
+DIGEST beaead837882aa7494f9c2ae6e4aff95
+FModalAxiomsSound
+R24:30 Coq.Program.Program <> <> lib
+R32:45 Coq.Setoids.Setoid <> <> lib
+ax 59:62 <> form
+ax 82:90 <> can_world
+ax 110:114 <> can_R
+R127:130 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R118:126 ModalAxiomsSound <> can_world defax
+R140:143 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R131:139 ModalAxiomsSound <> can_world defax
+ax 160:165 <> forces
+R178:181 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R169:177 ModalAxiomsSound <> can_world defax
+R186:189 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R182:185 ModalAxiomsSound <> form defax
+ax 206:209 <> Prov
+R217:220 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R213:216 ModalAxiomsSound <> form defax
+ax 270:272 <> Box
+R280:283 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R276:279 ModalAxiomsSound <> form defax
+R284:287 ModalAxiomsSound <> form defax
+ax 300:302 <> Dia
+R310:313 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R306:309 ModalAxiomsSound <> form defax
+R314:317 ModalAxiomsSound <> form defax
+ax 330:333 <> Impl
+R341:344 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R337:340 ModalAxiomsSound <> form defax
+R349:352 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R345:348 ModalAxiomsSound <> form defax
+R353:356 ModalAxiomsSound <> form defax
+rec 400:412 <> Cap_ForcesBox
+proj 476:485 <> forces_box
+binder 415:415 <> W:17
+R427:428 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R426:426 ModalAxiomsSound <> W:17 var
+R430:431 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R429:429 ModalAxiomsSound <> W:17 var
+binder 424:424 <> R:18
+R448:449 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R447:447 ModalAxiomsSound <> W:17 var
+R454:455 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R450:453 ModalAxiomsSound <> form defax
+binder 439:444 <> forces:19
+binder 496:496 <> w:21
+binder 498:499 <> φ:22
+R519:524 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R555:555 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R502:507 ModalAxiomsSound <> forces:19 var
+R512:514 ModalAxiomsSound <> Box defax
+R516:517 ModalAxiomsSound <> φ:22 var
+R509:509 ModalAxiomsSound <> w:21 var
+binder 532:532 <> u:23
+R540:543 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R535:535 ModalAxiomsSound <> R:18 var
+R539:539 ModalAxiomsSound <> u:23 var
+R537:537 ModalAxiomsSound <> w:21 var
+R544:549 ModalAxiomsSound <> forces:19 var
+R553:554 ModalAxiomsSound <> φ:22 var
+R551:551 ModalAxiomsSound <> u:23 var
+rec 567:579 <> Cap_ForcesDia
+proj 643:652 <> forces_dia
+binder 582:582 <> W:25
+R594:595 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R593:593 ModalAxiomsSound <> W:25 var
+R597:598 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R596:596 ModalAxiomsSound <> W:25 var
+binder 591:591 <> R:26
+R615:616 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R614:614 ModalAxiomsSound <> W:25 var
+R621:622 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R617:620 ModalAxiomsSound <> form defax
+binder 606:611 <> forces:27
+binder 663:663 <> w:29
+binder 665:666 <> φ:30
+R686:691 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R722:722 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R669:674 ModalAxiomsSound <> forces:27 var
+R679:681 ModalAxiomsSound <> Dia defax
+R683:684 ModalAxiomsSound <> φ:30 var
+R676:676 ModalAxiomsSound <> w:29 var
+R692:698 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R700:701 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 699:699 <> u:31
+R707:710 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R702:702 ModalAxiomsSound <> R:26 var
+R706:706 ModalAxiomsSound <> u:31 var
+R704:704 ModalAxiomsSound <> w:29 var
+R711:716 ModalAxiomsSound <> forces:27 var
+R720:721 ModalAxiomsSound <> φ:30 var
+R718:718 ModalAxiomsSound <> u:31 var
+rec 734:747 <> Cap_ForcesImpl
+proj 811:821 <> forces_impl
+binder 750:750 <> W:33
+R762:763 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R761:761 ModalAxiomsSound <> W:33 var
+R765:766 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R764:764 ModalAxiomsSound <> W:33 var
+binder 759:759 <> R:34
+R783:784 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R782:782 ModalAxiomsSound <> W:33 var
+R789:790 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R785:788 ModalAxiomsSound <> form defax
+binder 774:779 <> forces:35
+binder 832:832 <> w:37
+binder 834:835 <> φ:38
+binder 837:838 <> ψ:39
+R862:867 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R894:894 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R841:846 ModalAxiomsSound <> forces:35 var
+R851:854 ModalAxiomsSound <> Impl defax
+R856:857 ModalAxiomsSound <> φ:38 var
+R859:860 ModalAxiomsSound <> ψ:39 var
+R848:848 ModalAxiomsSound <> w:37 var
+R879:882 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R868:873 ModalAxiomsSound <> forces:35 var
+R877:878 ModalAxiomsSound <> φ:38 var
+R875:875 ModalAxiomsSound <> w:37 var
+R883:888 ModalAxiomsSound <> forces:35 var
+R892:893 ModalAxiomsSound <> ψ:39 var
+R890:890 ModalAxiomsSound <> w:37 var
+ax 906:915 <> forces_Box
+binder 926:926 <> w:41
+binder 928:929 <> φ:42
+R949:954 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R989:989 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R932:937 ModalAxiomsSound <> forces defax
+R939:939 ModalAxiomsSound <> w:41 var
+R942:944 ModalAxiomsSound <> Box defax
+R946:947 ModalAxiomsSound <> φ:42 var
+binder 962:962 <> u:43
+R974:977 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R965:969 ModalAxiomsSound <> can_R defax
+R971:971 ModalAxiomsSound <> w:41 var
+R973:973 ModalAxiomsSound <> u:43 var
+R978:983 ModalAxiomsSound <> forces defax
+R985:985 ModalAxiomsSound <> u:43 var
+R987:988 ModalAxiomsSound <> φ:42 var
+ax 998:1007 <> forces_Dia
+binder 1018:1018 <> w:46
+binder 1020:1021 <> φ:47
+R1041:1046 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R1081:1081 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R1024:1029 ModalAxiomsSound <> forces defax
+R1031:1031 ModalAxiomsSound <> w:46 var
+R1034:1036 ModalAxiomsSound <> Dia defax
+R1038:1039 ModalAxiomsSound <> φ:47 var
+R1047:1053 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R1055:1056 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 1054:1054 <> u:48
+R1066:1069 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R1057:1061 ModalAxiomsSound <> can_R defax
+R1063:1063 ModalAxiomsSound <> w:46 var
+R1065:1065 ModalAxiomsSound <> u:48 var
+R1070:1075 ModalAxiomsSound <> forces defax
+R1077:1077 ModalAxiomsSound <> u:48 var
+R1079:1080 ModalAxiomsSound <> φ:47 var
+ax 1090:1100 <> forces_Impl
+binder 1111:1111 <> w:51
+binder 1113:1114 <> φ:52
+binder 1116:1117 <> ψ:53
+R1141:1146 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R1173:1173 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R1120:1125 ModalAxiomsSound <> forces defax
+R1127:1127 ModalAxiomsSound <> w:51 var
+R1130:1133 ModalAxiomsSound <> Impl defax
+R1135:1136 ModalAxiomsSound <> φ:52 var
+R1138:1139 ModalAxiomsSound <> ψ:53 var
+R1158:1161 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1147:1152 ModalAxiomsSound <> forces defax
+R1154:1154 ModalAxiomsSound <> w:51 var
+R1156:1157 ModalAxiomsSound <> φ:52 var
+R1162:1167 ModalAxiomsSound <> forces defax
+R1169:1169 ModalAxiomsSound <> w:51 var
+R1171:1172 ModalAxiomsSound <> ψ:53 var
+inst 1258:1275 <> CapForcesBox_param
+R1279:1291 ModalAxiomsSound <> Cap_ForcesBox class
+R1293:1301 ModalAxiomsSound <> can_world defax
+R1303:1307 ModalAxiomsSound <> can_R defax
+R1309:1314 ModalAxiomsSound <> forces defax
+R1323:1332 ModalAxiomsSound <> forces_box meth
+R1337:1346 ModalAxiomsSound <> forces_Box prfax
+inst 1368:1385 <> CapForcesDia_param
+R1389:1401 ModalAxiomsSound <> Cap_ForcesDia class
+R1403:1411 ModalAxiomsSound <> can_world defax
+R1413:1417 ModalAxiomsSound <> can_R defax
+R1419:1424 ModalAxiomsSound <> forces defax
+R1433:1442 ModalAxiomsSound <> forces_dia meth
+R1447:1456 ModalAxiomsSound <> forces_Dia prfax
+inst 1478:1496 <> CapForcesImpl_param
+R1500:1513 ModalAxiomsSound <> Cap_ForcesImpl class
+R1515:1523 ModalAxiomsSound <> can_world defax
+R1525:1529 ModalAxiomsSound <> can_R defax
+R1531:1536 ModalAxiomsSound <> forces defax
+R1545:1555 ModalAxiomsSound <> forces_impl meth
+R1560:1570 ModalAxiomsSound <> forces_Impl prfax
+ax 1586:1608 <> completeness_from_truth
+binder 1619:1620 <> φ:56
+R1623:1623 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1645:1649 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 1631:1631 <> w:57
+R1634:1639 ModalAxiomsSound <> forces defax
+R1641:1641 ModalAxiomsSound <> w:57 var
+R1643:1644 ModalAxiomsSound <> φ:56 var
+R1650:1653 ModalAxiomsSound <> Prov defax
+R1655:1656 ModalAxiomsSound <> φ:56 var
+mod 1707:1708 <> S4
+ind 1719:1727 S4 Reflexive
+constr 1739:1749 S4 reflexive_R
+rec 1719:1727 S4 Reflexive
+proj 1739:1749 S4 reflexive_R
+R1768:1776 ModalAxiomsSound <> can_world defax
+binder 1765:1765 <> w:61
+R1780:1784 ModalAxiomsSound <> can_R defax
+R1786:1786 ModalAxiomsSound <> w:61 var
+R1788:1788 ModalAxiomsSound <> w:61 var
+ind 1799:1808 S4 Transitive
+constr 1820:1831 S4 transitive_R
+rec 1799:1808 S4 Transitive
+proj 1820:1831 S4 transitive_R
+R1854:1862 ModalAxiomsSound <> can_world defax
+binder 1847:1847 <> w:64
+binder 1849:1849 <> u:65
+binder 1851:1851 <> v:66
+R1875:1878 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1866:1870 ModalAxiomsSound <> can_R defax
+R1872:1872 ModalAxiomsSound <> w:64 var
+R1874:1874 ModalAxiomsSound <> u:65 var
+R1888:1891 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1879:1883 ModalAxiomsSound <> can_R defax
+R1885:1885 ModalAxiomsSound <> u:65 var
+R1887:1887 ModalAxiomsSound <> v:66 var
+R1892:1896 ModalAxiomsSound <> can_R defax
+R1898:1898 ModalAxiomsSound <> w:64 var
+R1900:1900 ModalAxiomsSound <> v:66 var
+R1907:1908 ModalAxiomsSound S4 <> mod
+mod 1919:1920 <> S5
+ind 1931:1939 S5 Reflexive
+constr 1951:1961 S5 reflexive_R
+rec 1931:1939 S5 Reflexive
+proj 1951:1961 S5 reflexive_R
+R1980:1988 ModalAxiomsSound <> can_world defax
+binder 1977:1977 <> w:69
+R1992:1996 ModalAxiomsSound <> can_R defax
+R1998:1998 ModalAxiomsSound <> w:69 var
+R2000:2000 ModalAxiomsSound <> w:69 var
+ind 2011:2019 S5 Symmetric
+constr 2031:2041 S5 symmetric_R
+rec 2011:2019 S5 Symmetric
+proj 2031:2041 S5 symmetric_R
+R2062:2070 ModalAxiomsSound <> can_world defax
+binder 2057:2057 <> w:72
+binder 2059:2059 <> u:73
+R2083:2086 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2074:2078 ModalAxiomsSound <> can_R defax
+R2080:2080 ModalAxiomsSound <> w:72 var
+R2082:2082 ModalAxiomsSound <> u:73 var
+R2087:2091 ModalAxiomsSound <> can_R defax
+R2093:2093 ModalAxiomsSound <> u:73 var
+R2095:2095 ModalAxiomsSound <> w:72 var
+ind 2106:2115 S5 Transitive
+constr 2127:2138 S5 transitive_R
+rec 2106:2115 S5 Transitive
+proj 2127:2138 S5 transitive_R
+R2161:2169 ModalAxiomsSound <> can_world defax
+binder 2154:2154 <> w:76
+binder 2156:2156 <> u:77
+binder 2158:2158 <> v:78
+R2182:2185 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2173:2177 ModalAxiomsSound <> can_R defax
+R2179:2179 ModalAxiomsSound <> w:76 var
+R2181:2181 ModalAxiomsSound <> u:77 var
+R2195:2198 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2186:2190 ModalAxiomsSound <> can_R defax
+R2192:2192 ModalAxiomsSound <> u:77 var
+R2194:2194 ModalAxiomsSound <> v:78 var
+R2199:2203 ModalAxiomsSound <> can_R defax
+R2205:2205 ModalAxiomsSound <> w:76 var
+R2207:2207 ModalAxiomsSound <> v:78 var
+R2214:2215 ModalAxiomsSound S5 <> mod
+sec 2252:2258 <> S4Sound
+var  2272:2276 S4Sound Hrefl
+var  2295:2299 S4Sound Htran
+R2280:2291 ModalAxiomsSound <> Reflexive class
+R2303:2315 ModalAxiomsSound <> Transitive class
+prf 2381:2387 <> valid_T
+R2391:2403 ModalAxiomsSound <> Cap_ForcesBox class
+R2405:2413 ModalAxiomsSound <> can_world defax
+R2415:2419 ModalAxiomsSound <> can_R defax
+R2421:2426 ModalAxiomsSound <> forces defax
+binder 2391:2426 <> H:82
+R2431:2444 ModalAxiomsSound <> Cap_ForcesImpl class
+R2446:2454 ModalAxiomsSound <> can_world defax
+R2456:2460 ModalAxiomsSound <> can_R defax
+R2462:2467 ModalAxiomsSound <> forces defax
+binder 2431:2467 <> H0:83
+R2483:2486 ModalAxiomsSound <> form defax
+binder 2480:2481 <> φ:84
+R2492:2500 ModalAxiomsSound <> can_world defax
+binder 2490:2490 <> w:85
+R2504:2509 ModalAxiomsSound <> forces defax
+R2511:2511 ModalAxiomsSound <> w:85 var
+R2514:2517 ModalAxiomsSound <> Impl defax
+R2520:2522 ModalAxiomsSound <> Box defax
+R2524:2525 ModalAxiomsSound <> φ:84 var
+R2528:2529 ModalAxiomsSound <> φ:84 var
+R2567:2577 ModalAxiomsSound <> forces_impl meth
+R2567:2577 ModalAxiomsSound <> forces_impl meth
+R2567:2577 ModalAxiomsSound <> forces_impl meth
+R2604:2613 ModalAxiomsSound <> forces_box meth
+R2604:2613 ModalAxiomsSound <> forces_box meth
+R2604:2613 ModalAxiomsSound <> forces_box meth
+R2675:2679 ModalAxiomsSound <> can_R defax
+R2675:2679 ModalAxiomsSound <> can_R defax
+R2699:2712 ModalAxiomsSound <> reflexive_R def
+R2699:2712 ModalAxiomsSound <> reflexive_R def
+prf 2838:2844 <> valid_4
+R2848:2860 ModalAxiomsSound <> Cap_ForcesBox class
+R2862:2870 ModalAxiomsSound <> can_world defax
+R2872:2876 ModalAxiomsSound <> can_R defax
+R2878:2883 ModalAxiomsSound <> forces defax
+binder 2848:2883 <> H:86
+R2888:2901 ModalAxiomsSound <> Cap_ForcesImpl class
+R2903:2911 ModalAxiomsSound <> can_world defax
+R2913:2917 ModalAxiomsSound <> can_R defax
+R2919:2924 ModalAxiomsSound <> forces defax
+binder 2888:2924 <> H0:87
+R2940:2943 ModalAxiomsSound <> form defax
+binder 2937:2938 <> φ:88
+R2949:2957 ModalAxiomsSound <> can_world defax
+binder 2947:2947 <> w:89
+R2961:2966 ModalAxiomsSound <> forces defax
+R2968:2968 ModalAxiomsSound <> w:89 var
+R2971:2974 ModalAxiomsSound <> Impl defax
+R2977:2979 ModalAxiomsSound <> Box defax
+R2981:2982 ModalAxiomsSound <> φ:88 var
+R2986:2988 ModalAxiomsSound <> Box defax
+R2991:2993 ModalAxiomsSound <> Box defax
+R2995:2996 ModalAxiomsSound <> φ:88 var
+R3036:3046 ModalAxiomsSound <> forces_impl meth
+R3036:3046 ModalAxiomsSound <> forces_impl meth
+R3036:3046 ModalAxiomsSound <> forces_impl meth
+R3073:3082 ModalAxiomsSound <> forces_box meth
+R3073:3082 ModalAxiomsSound <> forces_box meth
+R3073:3082 ModalAxiomsSound <> forces_box meth
+R3101:3110 ModalAxiomsSound <> forces_box meth
+R3101:3110 ModalAxiomsSound <> forces_box meth
+R3101:3110 ModalAxiomsSound <> forces_box meth
+R3139:3148 ModalAxiomsSound <> forces_box meth
+R3139:3148 ModalAxiomsSound <> forces_box meth
+R3139:3148 ModalAxiomsSound <> forces_box meth
+R3274:3288 ModalAxiomsSound <> transitive_R def
+R3274:3288 ModalAxiomsSound <> transitive_R def
+prf 3365:3374 <> provable_T
+R3378:3390 ModalAxiomsSound <> Cap_ForcesBox class
+R3392:3400 ModalAxiomsSound <> can_world defax
+R3402:3406 ModalAxiomsSound <> can_R defax
+R3408:3413 ModalAxiomsSound <> forces defax
+binder 3378:3413 <> H:90
+R3418:3431 ModalAxiomsSound <> Cap_ForcesImpl class
+R3433:3441 ModalAxiomsSound <> can_world defax
+R3443:3447 ModalAxiomsSound <> can_R defax
+R3449:3454 ModalAxiomsSound <> forces defax
+binder 3418:3454 <> H0:91
+binder 3466:3467 <> φ:92
+R3470:3473 ModalAxiomsSound <> Prov defax
+R3476:3479 ModalAxiomsSound <> Impl defax
+R3482:3484 ModalAxiomsSound <> Box defax
+R3486:3487 ModalAxiomsSound <> φ:92 var
+R3490:3491 ModalAxiomsSound <> φ:92 var
+R3524:3546 ModalAxiomsSound <> completeness_from_truth defax
+R3524:3546 ModalAxiomsSound <> completeness_from_truth defax
+R3564:3570 ModalAxiomsSound <> valid_T thm
+R3564:3570 ModalAxiomsSound <> valid_T thm
+prf 3591:3600 <> provable_4
+R3604:3616 ModalAxiomsSound <> Cap_ForcesBox class
+R3618:3626 ModalAxiomsSound <> can_world defax
+R3628:3632 ModalAxiomsSound <> can_R defax
+R3634:3639 ModalAxiomsSound <> forces defax
+binder 3604:3639 <> H:93
+R3644:3657 ModalAxiomsSound <> Cap_ForcesImpl class
+R3659:3667 ModalAxiomsSound <> can_world defax
+R3669:3673 ModalAxiomsSound <> can_R defax
+R3675:3680 ModalAxiomsSound <> forces defax
+binder 3644:3680 <> H0:94
+binder 3692:3693 <> φ:95
+R3696:3699 ModalAxiomsSound <> Prov defax
+R3702:3705 ModalAxiomsSound <> Impl defax
+R3708:3710 ModalAxiomsSound <> Box defax
+R3712:3713 ModalAxiomsSound <> φ:95 var
+R3717:3719 ModalAxiomsSound <> Box defax
+R3722:3724 ModalAxiomsSound <> Box defax
+R3726:3727 ModalAxiomsSound <> φ:95 var
+R3762:3784 ModalAxiomsSound <> completeness_from_truth defax
+R3762:3784 ModalAxiomsSound <> completeness_from_truth defax
+R3802:3808 ModalAxiomsSound <> valid_4 thm
+R3802:3808 ModalAxiomsSound <> valid_4 thm
+R3822:3828 ModalAxiomsSound S4Sound <> sec
+sec 3840:3846 <> S5Sound
+var  3860:3864 S5Sound Hrefl
+var  3883:3886 S5Sound Hsym
+var  3905:3909 S5Sound Htran
+R3868:3879 ModalAxiomsSound <> Reflexive class
+R3890:3901 ModalAxiomsSound <> Symmetric class
+R3913:3925 ModalAxiomsSound <> Transitive class
+prf 3970:3979 <> valid_T_S5
+R3983:3995 ModalAxiomsSound <> Cap_ForcesBox class
+R3997:4005 ModalAxiomsSound <> can_world defax
+R4007:4011 ModalAxiomsSound <> can_R defax
+R4013:4018 ModalAxiomsSound <> forces defax
+binder 3983:4018 <> H:99
+R4023:4036 ModalAxiomsSound <> Cap_ForcesImpl class
+R4038:4046 ModalAxiomsSound <> can_world defax
+R4048:4052 ModalAxiomsSound <> can_R defax
+R4054:4059 ModalAxiomsSound <> forces defax
+binder 4023:4059 <> H0:100
+R4075:4078 ModalAxiomsSound <> form defax
+binder 4072:4073 <> φ:101
+R4084:4092 ModalAxiomsSound <> can_world defax
+binder 4082:4082 <> w:102
+R4096:4101 ModalAxiomsSound <> forces defax
+R4103:4103 ModalAxiomsSound <> w:102 var
+R4106:4109 ModalAxiomsSound <> Impl defax
+R4112:4114 ModalAxiomsSound <> Box defax
+R4116:4117 ModalAxiomsSound <> φ:101 var
+R4120:4121 ModalAxiomsSound <> φ:101 var
+R4159:4169 ModalAxiomsSound <> forces_impl meth
+R4159:4169 ModalAxiomsSound <> forces_impl meth
+R4159:4169 ModalAxiomsSound <> forces_impl meth
+R4196:4205 ModalAxiomsSound <> forces_box meth
+R4196:4205 ModalAxiomsSound <> forces_box meth
+R4196:4205 ModalAxiomsSound <> forces_box meth
+R4265:4278 ModalAxiomsSound <> reflexive_R def
+R4265:4278 ModalAxiomsSound <> reflexive_R def
+prf 4352:4361 <> valid_4_S5
+R4365:4377 ModalAxiomsSound <> Cap_ForcesBox class
+R4379:4387 ModalAxiomsSound <> can_world defax
+R4389:4393 ModalAxiomsSound <> can_R defax
+R4395:4400 ModalAxiomsSound <> forces defax
+binder 4365:4400 <> H:103
+R4405:4418 ModalAxiomsSound <> Cap_ForcesImpl class
+R4420:4428 ModalAxiomsSound <> can_world defax
+R4430:4434 ModalAxiomsSound <> can_R defax
+R4436:4441 ModalAxiomsSound <> forces defax
+binder 4405:4441 <> H0:104
+R4457:4460 ModalAxiomsSound <> form defax
+binder 4454:4455 <> φ:105
+R4466:4474 ModalAxiomsSound <> can_world defax
+binder 4464:4464 <> w:106
+R4478:4483 ModalAxiomsSound <> forces defax
+R4485:4485 ModalAxiomsSound <> w:106 var
+R4488:4491 ModalAxiomsSound <> Impl defax
+R4494:4496 ModalAxiomsSound <> Box defax
+R4498:4499 ModalAxiomsSound <> φ:105 var
+R4503:4505 ModalAxiomsSound <> Box defax
+R4508:4510 ModalAxiomsSound <> Box defax
+R4512:4513 ModalAxiomsSound <> φ:105 var
+R4553:4563 ModalAxiomsSound <> forces_impl meth
+R4553:4563 ModalAxiomsSound <> forces_impl meth
+R4553:4563 ModalAxiomsSound <> forces_impl meth
+R4590:4599 ModalAxiomsSound <> forces_box meth
+R4590:4599 ModalAxiomsSound <> forces_box meth
+R4590:4599 ModalAxiomsSound <> forces_box meth
+R4618:4627 ModalAxiomsSound <> forces_box meth
+R4618:4627 ModalAxiomsSound <> forces_box meth
+R4618:4627 ModalAxiomsSound <> forces_box meth
+R4656:4665 ModalAxiomsSound <> forces_box meth
+R4656:4665 ModalAxiomsSound <> forces_box meth
+R4656:4665 ModalAxiomsSound <> forces_box meth
+R4791:4805 ModalAxiomsSound <> transitive_R def
+R4791:4805 ModalAxiomsSound <> transitive_R def
+prf 4946:4952 <> valid_5
+R4956:4968 ModalAxiomsSound <> Cap_ForcesBox class
+R4970:4978 ModalAxiomsSound <> can_world defax
+R4980:4984 ModalAxiomsSound <> can_R defax
+R4986:4991 ModalAxiomsSound <> forces defax
+binder 4956:4991 <> H:107
+R4996:5008 ModalAxiomsSound <> Cap_ForcesDia class
+R5010:5018 ModalAxiomsSound <> can_world defax
+R5020:5024 ModalAxiomsSound <> can_R defax
+R5026:5031 ModalAxiomsSound <> forces defax
+binder 4996:5031 <> H0:108
+R5036:5049 ModalAxiomsSound <> Cap_ForcesImpl class
+R5051:5059 ModalAxiomsSound <> can_world defax
+R5061:5065 ModalAxiomsSound <> can_R defax
+R5067:5072 ModalAxiomsSound <> forces defax
+binder 5036:5072 <> H1:109
+R5088:5091 ModalAxiomsSound <> form defax
+binder 5085:5086 <> φ:110
+R5097:5105 ModalAxiomsSound <> can_world defax
+binder 5095:5095 <> w:111
+R5109:5114 ModalAxiomsSound <> forces defax
+R5116:5116 ModalAxiomsSound <> w:111 var
+R5119:5122 ModalAxiomsSound <> Impl defax
+R5125:5127 ModalAxiomsSound <> Dia defax
+R5129:5130 ModalAxiomsSound <> φ:110 var
+R5134:5136 ModalAxiomsSound <> Box defax
+R5139:5141 ModalAxiomsSound <> Dia defax
+R5143:5144 ModalAxiomsSound <> φ:110 var
+R5184:5194 ModalAxiomsSound <> forces_impl meth
+R5184:5194 ModalAxiomsSound <> forces_impl meth
+R5184:5194 ModalAxiomsSound <> forces_impl meth
+R5221:5230 ModalAxiomsSound <> forces_dia meth
+R5221:5230 ModalAxiomsSound <> forces_dia meth
+R5221:5230 ModalAxiomsSound <> forces_dia meth
+R5249:5258 ModalAxiomsSound <> forces_box meth
+R5249:5258 ModalAxiomsSound <> forces_box meth
+R5249:5258 ModalAxiomsSound <> forces_box meth
+R5287:5296 ModalAxiomsSound <> forces_dia meth
+R5287:5296 ModalAxiomsSound <> forces_dia meth
+R5287:5296 ModalAxiomsSound <> forces_dia meth
+R5507:5520 ModalAxiomsSound <> symmetric_R def
+R5507:5520 ModalAxiomsSound <> symmetric_R def
+R5555:5569 ModalAxiomsSound <> transitive_R def
+R5555:5569 ModalAxiomsSound <> transitive_R def
+prf 5659:5671 <> provable_T_S5
+R5675:5687 ModalAxiomsSound <> Cap_ForcesBox class
+R5689:5697 ModalAxiomsSound <> can_world defax
+R5699:5703 ModalAxiomsSound <> can_R defax
+R5705:5710 ModalAxiomsSound <> forces defax
+binder 5675:5710 <> H:112
+R5715:5728 ModalAxiomsSound <> Cap_ForcesImpl class
+R5730:5738 ModalAxiomsSound <> can_world defax
+R5740:5744 ModalAxiomsSound <> can_R defax
+R5746:5751 ModalAxiomsSound <> forces defax
+binder 5715:5751 <> H0:113
+binder 5763:5764 <> φ:114
+R5767:5770 ModalAxiomsSound <> Prov defax
+R5773:5776 ModalAxiomsSound <> Impl defax
+R5779:5781 ModalAxiomsSound <> Box defax
+R5783:5784 ModalAxiomsSound <> φ:114 var
+R5787:5788 ModalAxiomsSound <> φ:114 var
+R5821:5843 ModalAxiomsSound <> completeness_from_truth defax
+R5821:5843 ModalAxiomsSound <> completeness_from_truth defax
+R5861:5870 ModalAxiomsSound <> valid_T_S5 thm
+R5861:5870 ModalAxiomsSound <> valid_T_S5 thm
+prf 5891:5903 <> provable_4_S5
+R5907:5919 ModalAxiomsSound <> Cap_ForcesBox class
+R5921:5929 ModalAxiomsSound <> can_world defax
+R5931:5935 ModalAxiomsSound <> can_R defax
+R5937:5942 ModalAxiomsSound <> forces defax
+binder 5907:5942 <> H:115
+R5947:5960 ModalAxiomsSound <> Cap_ForcesImpl class
+R5962:5970 ModalAxiomsSound <> can_world defax
+R5972:5976 ModalAxiomsSound <> can_R defax
+R5978:5983 ModalAxiomsSound <> forces defax
+binder 5947:5983 <> H0:116
+binder 5995:5996 <> φ:117
+R5999:6002 ModalAxiomsSound <> Prov defax
+R6005:6008 ModalAxiomsSound <> Impl defax
+R6011:6013 ModalAxiomsSound <> Box defax
+R6015:6016 ModalAxiomsSound <> φ:117 var
+R6020:6022 ModalAxiomsSound <> Box defax
+R6025:6027 ModalAxiomsSound <> Box defax
+R6029:6030 ModalAxiomsSound <> φ:117 var
+R6065:6087 ModalAxiomsSound <> completeness_from_truth defax
+R6065:6087 ModalAxiomsSound <> completeness_from_truth defax
+R6105:6114 ModalAxiomsSound <> valid_4_S5 thm
+R6105:6114 ModalAxiomsSound <> valid_4_S5 thm
+prf 6135:6144 <> provable_5
+R6148:6160 ModalAxiomsSound <> Cap_ForcesBox class
+R6162:6170 ModalAxiomsSound <> can_world defax
+R6172:6176 ModalAxiomsSound <> can_R defax
+R6178:6183 ModalAxiomsSound <> forces defax
+binder 6148:6183 <> H:118
+R6188:6200 ModalAxiomsSound <> Cap_ForcesDia class
+R6202:6210 ModalAxiomsSound <> can_world defax
+R6212:6216 ModalAxiomsSound <> can_R defax
+R6218:6223 ModalAxiomsSound <> forces defax
+binder 6188:6223 <> H0:119
+R6228:6241 ModalAxiomsSound <> Cap_ForcesImpl class
+R6243:6251 ModalAxiomsSound <> can_world defax
+R6253:6257 ModalAxiomsSound <> can_R defax
+R6259:6264 ModalAxiomsSound <> forces defax
+binder 6228:6264 <> H1:120
+binder 6276:6277 <> φ:121
+R6280:6283 ModalAxiomsSound <> Prov defax
+R6286:6289 ModalAxiomsSound <> Impl defax
+R6292:6294 ModalAxiomsSound <> Dia defax
+R6296:6297 ModalAxiomsSound <> φ:121 var
+R6301:6303 ModalAxiomsSound <> Box defax
+R6306:6308 ModalAxiomsSound <> Dia defax
+R6310:6311 ModalAxiomsSound <> φ:121 var
+R6346:6368 ModalAxiomsSound <> completeness_from_truth defax
+R6346:6368 ModalAxiomsSound <> completeness_from_truth defax
+R6386:6392 ModalAxiomsSound <> valid_5 thm
+R6386:6392 ModalAxiomsSound <> valid_5 thm
+R6406:6412 ModalAxiomsSound S5Sound <> sec
+sec 6494:6505 <> BrouwerAxiom
+var  6519:6523 BrouwerAxiom Hrefl
+var  6542:6545 BrouwerAxiom Hsym
+var  6564:6568 BrouwerAxiom Htran
+R6527:6538 ModalAxiomsSound <> Reflexive class
+R6549:6560 ModalAxiomsSound <> Symmetric class
+R6572:6584 ModalAxiomsSound <> Transitive class
+prf 6597:6603 <> valid_B
+R6607:6619 ModalAxiomsSound <> Cap_ForcesBox class
+R6621:6629 ModalAxiomsSound <> can_world defax
+R6631:6635 ModalAxiomsSound <> can_R defax
+R6637:6642 ModalAxiomsSound <> forces defax
+binder 6607:6642 <> H:125
+R6647:6659 ModalAxiomsSound <> Cap_ForcesDia class
+R6661:6669 ModalAxiomsSound <> can_world defax
+R6671:6675 ModalAxiomsSound <> can_R defax
+R6677:6682 ModalAxiomsSound <> forces defax
+binder 6647:6682 <> H0:126
+R6687:6700 ModalAxiomsSound <> Cap_ForcesImpl class
+R6702:6710 ModalAxiomsSound <> can_world defax
+R6712:6716 ModalAxiomsSound <> can_R defax
+R6718:6723 ModalAxiomsSound <> forces defax
+binder 6687:6723 <> H1:127
+R6739:6742 ModalAxiomsSound <> form defax
+binder 6736:6737 <> φ:128
+R6748:6756 ModalAxiomsSound <> can_world defax
+binder 6746:6746 <> w:129
+R6760:6765 ModalAxiomsSound <> forces defax
+R6767:6767 ModalAxiomsSound <> w:129 var
+R6770:6773 ModalAxiomsSound <> Impl defax
+R6775:6776 ModalAxiomsSound <> φ:128 var
+R6779:6781 ModalAxiomsSound <> Box defax
+R6784:6786 ModalAxiomsSound <> Dia defax
+R6788:6789 ModalAxiomsSound <> φ:128 var
+R6829:6839 ModalAxiomsSound <> forces_impl meth
+R6829:6839 ModalAxiomsSound <> forces_impl meth
+R6829:6839 ModalAxiomsSound <> forces_impl meth
+R6865:6874 ModalAxiomsSound <> forces_box meth
+R6865:6874 ModalAxiomsSound <> forces_box meth
+R6865:6874 ModalAxiomsSound <> forces_box meth
+R6903:6912 ModalAxiomsSound <> forces_dia meth
+R6903:6912 ModalAxiomsSound <> forces_dia meth
+R6903:6912 ModalAxiomsSound <> forces_dia meth
+R6999:7012 ModalAxiomsSound <> symmetric_R def
+R6999:7012 ModalAxiomsSound <> symmetric_R def
+prf 7095:7104 <> provable_B
+R7108:7120 ModalAxiomsSound <> Cap_ForcesBox class
+R7122:7130 ModalAxiomsSound <> can_world defax
+R7132:7136 ModalAxiomsSound <> can_R defax
+R7138:7143 ModalAxiomsSound <> forces defax
+binder 7108:7143 <> H:130
+R7148:7160 ModalAxiomsSound <> Cap_ForcesDia class
+R7162:7170 ModalAxiomsSound <> can_world defax
+R7172:7176 ModalAxiomsSound <> can_R defax
+R7178:7183 ModalAxiomsSound <> forces defax
+binder 7148:7183 <> H0:131
+R7188:7201 ModalAxiomsSound <> Cap_ForcesImpl class
+R7203:7211 ModalAxiomsSound <> can_world defax
+R7213:7217 ModalAxiomsSound <> can_R defax
+R7219:7224 ModalAxiomsSound <> forces defax
+binder 7188:7224 <> H1:132
+binder 7236:7237 <> φ:133
+R7240:7243 ModalAxiomsSound <> Prov defax
+R7246:7249 ModalAxiomsSound <> Impl defax
+R7251:7252 ModalAxiomsSound <> φ:133 var
+R7255:7257 ModalAxiomsSound <> Box defax
+R7260:7262 ModalAxiomsSound <> Dia defax
+R7264:7265 ModalAxiomsSound <> φ:133 var
+R7300:7322 ModalAxiomsSound <> completeness_from_truth defax
+R7300:7322 ModalAxiomsSound <> completeness_from_truth defax
+R7340:7346 ModalAxiomsSound <> valid_B thm
+R7340:7346 ModalAxiomsSound <> valid_B thm
+R7360:7371 ModalAxiomsSound BrouwerAxiom <> sec

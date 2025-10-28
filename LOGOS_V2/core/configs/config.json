@@ -1,0 +1,17 @@
+{
+  "pxl_prover_url": "http://localhost:8088",
+  "timeout_ms": 5000,
+  "expected_kernel_hash": "DEADBEEF",
+  "audit_path": "logs/audit.jsonl",
+  "max_workers": 4,
+  "enable_telemetry": true,
+  "falsifiability_validation": true,
+  "modal_logic_cache_size": 10000,
+  "reasoning_depth": 50,
+  "enable_self_reflection": true,
+  "cognitive_load_threshold": 0.8,
+  "health_check_interval": 30,
+  "max_startup_time": 300,
+  "enable_monitoring": true,
+  "log_level": "INFO"
+}

@@ -1,0 +1,28 @@
+DIGEST 3045803eb55b184bb615f44a4acd62b2
+FModalProbabilistic
+R831:835 Coq.Reals.Reals <> <> lib
+R837:842 Coq.QArith.QArith <> <> lib
+R844:846 Coq.micromega.Lia <> <> lib
+R873:881 Coq.Logic.Classical <> <> lib
+R908:917 Coq.Lists.List <> <> lib
+R927:939 Coq.Lists.List ListNotations <> mod
+mod 990:1007 <> ModalProbabilistic
+def 1110:1120 ModalProbabilistic Probability
+R1125:1125 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R1127:1129 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R1131:1133 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R1145:1145 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R1130:1130 Coq.QArith.QArith_base <> Q rec
+binder 1126:1126 <> q:1
+R1135:1138 Coq.QArith.QArith_base <> ::Q_scope:x_'<='_x_'<='_x not
+R1140:1143 Coq.QArith.QArith_base <> ::Q_scope:x_'<='_x_'<='_x not
+R1139:1139 ModalProbabilistic <> q:1 var
+R1139:1139 ModalProbabilistic <> q:1 var
+def 1205:1212 ModalProbabilistic prob_val
+R1219:1229 ModalProbabilistic ModalProbabilistic Probability def
+binder 1215:1215 <> p:2
+R1234:1234 Coq.QArith.QArith_base <> Q rec
+R1239:1247 Coq.Init.Specif <> proj1_sig def
+R1249:1249 ModalProbabilistic <> p:2 var
+def 1292:1300 ModalProbabilistic Certainty
+R1304:1314 ModalProbabilistic ModalProbabilistic Probability def

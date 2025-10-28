@@ -1,0 +1,94 @@
+DIGEST 9dc3236251dbedb00be778812756a1a9
+FChronoZAgents
+mod 58:69 <> ChronoAgents
+ax 120:130 ChronoAgents ChronoState
+rec 204:214 ChronoAgents ChronoAgent
+proj 223:230 ChronoAgents agent_id
+proj 241:247 ChronoAgents beliefs
+proj 274:280 ChronoAgents desires
+proj 307:316 ChronoAgents intentions
+proj 343:351 ChronoAgents knowledge
+R234:236 Coq.Init.Datatypes <> nat ind
+R262:265 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R251:261 ChronoZAgents ChronoAgents ChronoState defax
+R295:298 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R284:294 ChronoZAgents ChronoAgents ChronoState defax
+R331:334 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R320:330 ChronoZAgents ChronoAgents ChronoState defax
+R366:369 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R355:365 ChronoZAgents ChronoAgents ChronoState defax
+def 432:442 ChronoAgents BeliefState
+R458:461 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R447:457 ChronoZAgents ChronoAgents ChronoAgent rec
+R473:476 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R462:472 ChronoZAgents ChronoAgents ChronoState defax
+def 1144:1152 ChronoAgents TelicGoal
+R1168:1171 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1157:1167 ChronoZAgents ChronoAgents ChronoState defax
+rec 1186:1195 ChronoAgents TelicAgent
+proj 1204:1213 ChronoAgents base_agent
+proj 1232:1236 ChronoAgents goals
+proj 1253:1257 ChronoAgents plans
+proj 1298:1307 ChronoAgents prediction
+R1217:1227 ChronoZAgents ChronoAgents ChronoAgent rec
+R1240:1248 ChronoZAgents ChronoAgents TelicGoal def
+R1272:1275 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1261:1271 ChronoZAgents ChronoAgents ChronoState defax
+R1276:1279 Coq.Init.Datatypes <> list ind
+R1282:1292 ChronoZAgents ChronoAgents ChronoState defax
+R1322:1325 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1311:1321 ChronoZAgents ChronoAgents ChronoState defax
+def 1386:1398 ChronoAgents BDI_coherence
+R1405:1415 ChronoZAgents ChronoAgents ChronoAgent rec
+binder 1401:1401 <> a:14
+R1430:1433 Coq.Init.Logic <> True ind
+ax 1522:1542 ChronoAgents BDI_rationality_axiom
+R1558:1568 ChronoZAgents ChronoAgents ChronoAgent rec
+binder 1554:1554 <> a:15
+R1576:1586 ChronoZAgents ChronoAgents ChronoState defax
+binder 1572:1572 <> s:16
+R1607:1610 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1592:1604 ChronoZAgents ChronoAgents BDI_coherence def
+R1606:1606 ChronoZAgents <> a:15 var
+R1625:1628 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1611:1620 ChronoZAgents ChronoAgents intentions proj
+R1622:1622 ChronoZAgents <> a:15 var
+R1624:1624 ChronoZAgents <> s:16 var
+R1629:1635 ChronoZAgents ChronoAgents beliefs proj
+R1637:1637 ChronoZAgents <> a:15 var
+R1639:1639 ChronoZAgents <> s:16 var
+def 1685:1699 ChronoAgents agent_evolution
+R1710:1720 ChronoZAgents ChronoAgents ChronoAgent rec
+binder 1702:1703 <> a1:19
+binder 1705:1706 <> a2:20
+R1735:1738 Coq.Init.Logic <> True ind
+prf 1944:1975 ChronoAgents telic_agent_forecast_consistency
+R1994:2003 ChronoZAgents ChronoAgents TelicAgent rec
+binder 1989:1990 <> ta:21
+R2011:2021 ChronoZAgents ChronoAgents ChronoState defax
+binder 2007:2007 <> s:22
+R2044:2047 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2029:2038 ChronoZAgents ChronoAgents prediction proj
+R2040:2041 ChronoZAgents <> ta:21 var
+R2043:2043 ChronoZAgents <> s:22 var
+R2048:2051 Coq.Init.Logic <> True ind
+R2181:2181 Coq.Init.Logic <> I constr
+R2181:2181 Coq.Init.Logic <> I constr
+prf 2226:2246 ChronoAgents agent_BDI_rationality
+R2264:2274 ChronoZAgents ChronoAgents ChronoAgent rec
+binder 2260:2260 <> a:23
+R2297:2304 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2282:2294 ChronoZAgents ChronoAgents BDI_coherence def
+R2296:2296 ChronoZAgents <> a:23 var
+R2316:2326 ChronoZAgents ChronoAgents ChronoState defax
+binder 2312:2312 <> s:24
+R2349:2352 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2335:2344 ChronoZAgents ChronoAgents intentions proj
+R2346:2346 ChronoZAgents <> a:23 var
+R2348:2348 ChronoZAgents <> s:24 var
+R2353:2359 ChronoZAgents ChronoAgents beliefs proj
+R2361:2361 ChronoZAgents <> a:23 var
+R2363:2363 ChronoZAgents <> s:24 var
+R2461:2481 ChronoZAgents ChronoAgents BDI_rationality_axiom prfax
+R2461:2481 ChronoZAgents ChronoAgents BDI_rationality_axiom prfax
+R2524:2535 ChronoZAgents ChronoAgents <> mod

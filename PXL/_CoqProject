@@ -1,0 +1,8 @@
+﻿# --- Updated paths for restructured repository ---
+-Q PXLs                                                PXLs
+-Q PXL_IEL/pxl/pxl-minimal-kernel-main/coq            PXLs_Original
+-Q PXL_IEL/iels                                        IEL
+-Q PXL_IEL/proofs                                      Proofs
+
+# --- IEL-ArithmoPraxis (Infrastructure Mathematics) ---
+-Q PXL_IEL/iels/infra/arithmo IEL.ArithmoPraxis
