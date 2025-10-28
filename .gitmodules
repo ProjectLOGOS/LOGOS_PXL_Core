@@ -1,0 +1,3 @@
+[submodule "MISC"]
+	path = MISC
+	url = https://github.com/ProjectLOGOS/LOGOS_PXL_Core
